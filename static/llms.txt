@@ -1,0 +1,697 @@
+# ONLYOFFICE DocSpace API
+
+> The ONLYOFFICE DocSpace HTTP API. Every page of the reference is available as Markdown at its own address, with `.md` appended.
+
+## Full references
+
+One document per service, each carrying every endpoint of that service and the models it uses.
+
+- [ONLYOFFICE DocSpace Backup API](https://api.onlyoffice.com/docspace/api-backend/backup.md)
+- [ONLYOFFICE DocSpace Files API](https://api.onlyoffice.com/docspace/api-backend/files.md)
+- [ONLYOFFICE DocSpace AI API](https://api.onlyoffice.com/docspace/api-backend/newai.md)
+- [ONLYOFFICE DocSpace OAuth 2.0 API](https://api.onlyoffice.com/docspace/api-backend/oauth.md)
+- [ONLYOFFICE DocSpace People API](https://api.onlyoffice.com/docspace/api-backend/people.md)
+- [ONLYOFFICE DocSpace Portal API](https://api.onlyoffice.com/docspace/api-backend/api.md)
+
+## Endpoints
+
+- [Cancel current backup](https://api.onlyoffice.com/docspace/api-backend/usage-api/cancel-backup.md): POST /api/2.0/backup/cancelbackup
+- [Create the backup schedule](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-backup-schedule.md): POST /api/2.0/backup/createbackupschedule
+- [Delete the backup](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-backup.md): DELETE /api/2.0/backup/deletebackup/{id}
+- [Delete the backup history](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-backup-history.md): DELETE /api/2.0/backup/deletebackuphistory
+- [Delete the backup schedule](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-backup-schedule.md): DELETE /api/2.0/backup/deletebackupschedule
+- [Get the backup history](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-backup-history.md): GET /api/2.0/backup/getbackuphistory
+- [Get the backup progress](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-backup-progress.md): GET /api/2.0/backup/getbackupprogress
+- [Get the backup schedule](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-backup-schedule.md): GET /api/2.0/backup/getbackupschedule
+- [Get the number of backups](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-backups-count.md): GET /api/2.0/backup/getbackupscount
+- [Get the number of free and paid backups](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-backups-counts.md): GET /api/2.0/backup/getbackupscountbypaid
+- [Get the backup service state](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-backups-service-state.md): GET /api/2.0/backup/getservicestate
+- [Get the restoring progress](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-restore-progress.md): GET /api/2.0/backup/getrestoreprogress
+- [Start the backup](https://api.onlyoffice.com/docspace/api-backend/usage-api/start-backup.md): POST /api/2.0/backup/startbackup
+- [Start the restoring process](https://api.onlyoffice.com/docspace/api-backend/usage-api/start-backup-restore.md): POST /api/2.0/backup/startrestore
+- [Add a file to the Recent section](https://api.onlyoffice.com/docspace/api-backend/usage-api/add-file-to-recent.md): POST /api/2.0/files/file/{fileId}/recent
+- [Add template files](https://api.onlyoffice.com/docspace/api-backend/usage-api/add-templates.md): POST /api/2.0/files/templates
+- [Change version history](https://api.onlyoffice.com/docspace/api-backend/usage-api/change-version-history.md): PUT /api/2.0/files/file/{fileId}/history
+- [Check the form draft filling](https://api.onlyoffice.com/docspace/api-backend/usage-api/check-fill-form-draft.md): POST /api/2.0/files/masterform/{fileId}/checkfillformdraft
+- [Copy a file](https://api.onlyoffice.com/docspace/api-backend/usage-api/copy-file-as.md): POST /api/2.0/files/file/{fileId}/copyas
+- [Create the editing session](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-edit-session.md): POST /api/2.0/files/file/{fileId}/edit_session
+- [Create a file](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-file.md): POST /api/2.0/files/{folderId}/file
+- [Create a file in the My documents section](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-file-in-my-documents.md): POST /api/2.0/files/@my/file
+- [Create primary external link](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-file-primary-external-link.md): POST /api/2.0/files/file/{id}/link
+- [Create an HTML file](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-html-file.md): POST /api/2.0/files/{folderId}/html
+- [Create an HTML file in the My documents section](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-html-file-in-my-documents.md): POST /api/2.0/files/@my/html
+- [Create a text file](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-text-file.md): POST /api/2.0/files/{folderId}/text
+- [Create a text file in the My documents section](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-text-file-in-my-documents.md): POST /api/2.0/files/@my/text
+- [Create file thumbnails](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-thumbnails.md): POST /api/2.0/files/thumbnails
+- [Delete a file](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-file.md): DELETE /api/2.0/files/file/{fileId}
+- [Delete recent files](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-recent.md): DELETE /api/2.0/files/recent
+- [Delete template files](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-templates.md): DELETE /api/2.0/files/templates
+- [Generate XLSX report](https://api.onlyoffice.com/docspace/api-backend/usage-api/generate-xlsx.md): POST /api/2.0/files/file/{fileId}/xlsx
+- [Get form roles](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-all-form-roles.md): GET /api/2.0/files/file/{fileId}/formroles
+- [Get changes URL](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-edit-diff-url.md): GET /api/2.0/files/file/{fileId}/edit/diff
+- [Get version history](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-edit-history.md): GET /api/2.0/files/file/{fileId}/edit/history
+- [Get file encryption information](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-encryption-info.md): GET /api/2.0/files/{fileId}/access
+- [Get file history](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-file-history.md): GET /api/2.0/files/file/{fileId}/log
+- [Get file information](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-file-info.md): GET /api/2.0/files/file/{fileId}
+- [Get file external links](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-file-links.md): GET /api/2.0/files/file/{id}/links
+- [Get primary external link](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-file-primary-external-link.md): GET /api/2.0/files/file/{id}/link
+- [Get file versions](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-file-version-info.md): GET /api/2.0/files/file/{fileId}/history
+- [Get form-filling result](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-fill-result.md): GET /api/2.0/files/file/fillresult
+- [Get form submission results](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-form-submissions.md): GET /api/2.0/files/file/{fileId}/submissions
+- [Get file download link asynchronously](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-presigned-file-uri.md): GET /api/2.0/files/file/{fileId}/presigned
+- [Get file download link](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-presigned-uri.md): GET /api/2.0/files/file/{fileId}/presigneduri
+- [Get users access rights to the protected file](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-protected-file-users.md): GET /api/2.0/files/file/{fileId}/protectusers
+- [Get reference data](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-reference-data.md): POST /api/2.0/files/file/referencedata
+- [Get XLSX report generation status](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-xlsx.md): GET /api/2.0/files/file/{fileId}/xlsx
+- [Check the PDF file](https://api.onlyoffice.com/docspace/api-backend/usage-api/is-form-pdf.md): GET /api/2.0/files/file/{fileId}/isformpdf
+- [Lock a file](https://api.onlyoffice.com/docspace/api-backend/usage-api/lock-file.md): PUT /api/2.0/files/file/{fileId}/lock
+- [Perform form filling action](https://api.onlyoffice.com/docspace/api-backend/usage-api/manage-form-filling.md): PUT /api/2.0/files/file/{fileId}/manageformfilling
+- [Open a file configuration](https://api.onlyoffice.com/docspace/api-backend/usage-api/open-edit-file.md): GET /api/2.0/files/file/{fileId}/openedit
+- [Restore a file version](https://api.onlyoffice.com/docspace/api-backend/usage-api/restore-file-version.md): POST /api/2.0/files/file/{fileId}/restoreversion
+- [Save file edits](https://api.onlyoffice.com/docspace/api-backend/usage-api/save-editing-file-from-form.md): PUT /api/2.0/files/file/{fileId}/saveediting
+- [Save a file as PDF](https://api.onlyoffice.com/docspace/api-backend/usage-api/save-file-as-pdf.md): POST /api/2.0/files/file/{id}/saveaspdf
+- [Save form role mapping](https://api.onlyoffice.com/docspace/api-backend/usage-api/save-form-role-mapping.md): POST /api/2.0/files/file/{fileId}/formrolemapping
+- [Set the Custom Filter editing mode](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-custom-filter-tag.md): PUT /api/2.0/files/file/{fileId}/customfilter
+- [Set file encryption information](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-encryption-info.md): PUT /api/2.0/files/{fileId}/access
+- [Set an external link](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-file-external-link.md): PUT /api/2.0/files/file/{id}/links
+- [Set file order](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-file-order.md): PUT /api/2.0/files/{fileId}/order
+- [Set order of files](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-files-order.md): PUT /api/2.0/files/order
+- [Start file editing](https://api.onlyoffice.com/docspace/api-backend/usage-api/start-edit-file.md): POST /api/2.0/files/file/{fileId}/startedit
+- [Start file filling](https://api.onlyoffice.com/docspace/api-backend/usage-api/start-filling-file.md): PUT /api/2.0/files/file/{fileId}/startfilling
+- [Change the file favorite status](https://api.onlyoffice.com/docspace/api-backend/usage-api/toggle-file-favorite.md): GET /api/2.0/files/favorites/{fileId}
+- [Track file editing](https://api.onlyoffice.com/docspace/api-backend/usage-api/track-edit-file.md): GET /api/2.0/files/file/{fileId}/trackeditfile
+- [Update a file](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-file.md): PUT /api/2.0/files/file/{fileId}
+- [Check file uploads](https://api.onlyoffice.com/docspace/api-backend/usage-api/check-upload.md): POST /api/2.0/files/{folderId}/upload/check
+- [Create a folder](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-folder.md): POST /api/2.0/files/folder/{folderId}
+- [Create primary external link](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-folder-primary-external-link.md): POST /api/2.0/files/folder/{id}/link
+- [Start the folder history report generation](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-report-folder-history.md): POST /api/2.0/files/folder/{folderId}/log/report
+- [Delete a folder](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-folder.md): DELETE /api/2.0/files/folder/{folderId}
+- [Generate XLSX report by folder](https://api.onlyoffice.com/docspace/api-backend/usage-api/generate-xlsx-by-folder.md): POST /api/2.0/files/folder/{folderId}/xlsx
+- [Get the Favorites section](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-favorites-folder.md): GET /api/2.0/files/@favorites
+- [Get used space of files](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-files-used-space.md): GET /api/2.0/files/filesusedspace
+- [Get folder form filter](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-folder.md): GET /api/2.0/files/{folderId}/formfilter
+- [Get a folder by ID](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-folder-by-folder-id.md): GET /api/2.0/files/{folderId}
+- [Get folder history](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-folder-history.md): GET /api/2.0/files/folder/{folderId}/log
+- [Get folder information](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-folder-info.md): GET /api/2.0/files/folder/{folderId}
+- [Get the folder links](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-folder-links.md): GET /api/2.0/files/folder/{id}/links
+- [Get the folder path](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-folder-path.md): GET /api/2.0/files/folder/{folderId}/path
+- [Get primary external link](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-folder-primary-external-link.md): GET /api/2.0/files/folder/{id}/link
+- [Get subfolders](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-folders.md): GET /api/2.0/files/{folderId}/subfolders
+- [Get the Forms section](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-forms-folder.md): GET /api/2.0/files/@forms
+- [Get the My documents section](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-my-folder.md): GET /api/2.0/files/@my
+- [Get new folder items](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-new-folder-items.md): GET /api/2.0/files/{folderId}/news
+- [Get the Recent section](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-recent-folder.md): GET /api/2.0/files/recent
+- [Get the folder history report generation status](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-report-folder-history.md): GET /api/2.0/files/folder/{folderId}/log/report
+- [Get filtered sections](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-root-folders.md): GET /api/2.0/files/@root
+- [Get the Trash section](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-trash-folder.md): GET /api/2.0/files/@trash
+- [Insert a file](https://api.onlyoffice.com/docspace/api-backend/usage-api/insert-file.md): POST /api/2.0/files/{folderId}/insert
+- [Insert a file to the My documents section](https://api.onlyoffice.com/docspace/api-backend/usage-api/insert-file-to-my-from-body.md): POST /api/2.0/files/@my/insert
+- [Rename a folder](https://api.onlyoffice.com/docspace/api-backend/usage-api/rename-folder.md): PUT /api/2.0/files/folder/{folderId}
+- [Set folder order](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-folder-order.md): PUT /api/2.0/files/folder/{folderId}/order
+- [Set the folder external link](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-folder-primary-external-link.md): PUT /api/2.0/files/folder/{id}/links
+- [Terminate the folder history report generation](https://api.onlyoffice.com/docspace/api-backend/usage-api/terminate-report-folder-history.md): DELETE /api/2.0/files/folder/{folderId}/log/report
+- [Upload a file](https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-file.md): POST /api/2.0/files/{folderId}/upload
+- [Upload a file to the My documents section](https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-file-to-my.md): POST /api/2.0/files/@my/upload
+- [Aborts an in-progress file upload session.](https://api.onlyoffice.com/docspace/api-backend/usage-api/abort-upload-session.md): DELETE /api/2.0/files/{folderId}/session/{sessionId}
+- [Add favorite files and folders](https://api.onlyoffice.com/docspace/api-backend/usage-api/add-favorites.md): POST /api/2.0/files/favorites
+- [Bulk download](https://api.onlyoffice.com/docspace/api-backend/usage-api/bulk-download.md): PUT /api/2.0/files/fileops/bulkdownload
+- [Get conversion status](https://api.onlyoffice.com/docspace/api-backend/usage-api/check-conversion-status.md): GET /api/2.0/files/file/{fileId}/checkconversion
+- [Move or copy files to a folder](https://api.onlyoffice.com/docspace/api-backend/usage-api/check-move-or-copy-batch-items.md): GET /api/2.0/files/fileops/move
+- [Check for moving or copying files to a folder](https://api.onlyoffice.com/docspace/api-backend/usage-api/check-move-or-copy-dest-folder.md): GET /api/2.0/files/fileops/checkdestfolder
+- [Copy to the folder](https://api.onlyoffice.com/docspace/api-backend/usage-api/copy-batch-items.md): PUT /api/2.0/files/fileops/copy
+- [Chunked upload](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-upload-session.md): POST /api/2.0/files/{folderId}/upload/create_session
+- [Creates a session for uploading a file to a specific folder in chunks.](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-upload-session-in-folder.md): POST /api/2.0/files/{folderId}/session
+- [Delete files and folders](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-batch-items.md): PUT /api/2.0/files/fileops/delete
+- [Delete favorite files and folders (using body parameters)](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-favorites-from-body.md): DELETE /api/2.0/files/favorites
+- [Delete file versions](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-file-versions.md): PUT /api/2.0/files/fileops/deleteversion
+- [Duplicate files and folders](https://api.onlyoffice.com/docspace/api-backend/usage-api/duplicate-batch-items.md): PUT /api/2.0/files/fileops/duplicate
+- [Empty the Trash folder](https://api.onlyoffice.com/docspace/api-backend/usage-api/empty-trash.md): PUT /api/2.0/files/fileops/emptytrash
+- [Finalize an upload session](https://api.onlyoffice.com/docspace/api-backend/usage-api/finalize-session.md): PUT /api/2.0/files/{folderId}/session/{sessionId}/finalize
+- [Get active file operations](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-operation-statuses.md): GET /api/2.0/files/fileops
+- [Get file operation statuses](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-operation-statuses-by-type.md): GET /api/2.0/files/fileops/{operationType}
+- [Mark as read](https://api.onlyoffice.com/docspace/api-backend/usage-api/mark-as-read.md): PUT /api/2.0/files/fileops/markasread
+- [Move or copy to a folder](https://api.onlyoffice.com/docspace/api-backend/usage-api/move-batch-items.md): PUT /api/2.0/files/fileops/move
+- [Start file conversion](https://api.onlyoffice.com/docspace/api-backend/usage-api/start-file-conversion.md): PUT /api/2.0/files/file/{fileId}/checkconversion
+- [Finish active operations](https://api.onlyoffice.com/docspace/api-backend/usage-api/terminate-tasks.md): PUT /api/2.0/files/fileops/terminate/{id}
+- [Update a comment](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-file-comment.md): PUT /api/2.0/files/file/{fileId}/comment
+- [Handles the upload of a chunk for an existing upload session.](https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-async-session.md): POST /api/2.0/files/{folderId}/session/{sessionId}/upload
+- [Resumes an ongoing file upload session for uploading additional chunks of data.](https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-session.md): POST /api/2.0/files/{folderId}/session/{sessionId}
+- [Reset the room quota limit](https://api.onlyoffice.com/docspace/api-backend/usage-api/reset-room-quota.md): PUT /api/2.0/files/rooms/resetquota
+- [Change the room quota limit](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-rooms-quota.md): PUT /api/2.0/files/rooms/roomquota
+- [Change the third-party settings access](https://api.onlyoffice.com/docspace/api-backend/usage-api/change-access-to-thirdparty.md): PUT /api/2.0/files/thirdparty
+- [Update the trash bin auto-clearing setting](https://api.onlyoffice.com/docspace/api-backend/usage-api/change-automatically-clean-up.md): PUT /api/2.0/files/settings/autocleanup
+- [Change the default access rights](https://api.onlyoffice.com/docspace/api-backend/usage-api/change-default-access-rights.md): PUT /api/2.0/files/settings/dafaultaccessrights
+- [Confirm the file deletion](https://api.onlyoffice.com/docspace/api-backend/usage-api/change-delete-confirm.md): PUT /api/2.0/files/changedeleteconfrim
+- [Change the archive format (using body parameters)](https://api.onlyoffice.com/docspace/api-backend/usage-api/change-download-zip.md): PUT /api/2.0/files/settings/downloadtargz
+- [Change the Access Control external sharing settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/change-external-sharing-settings.md): PUT /api/2.0/files/settings/externalsharingsettings
+- [Check the document service URL](https://api.onlyoffice.com/docspace/api-backend/usage-api/check-doc-service-url.md): PUT /api/2.0/files/docservice
+- [Display a file extension](https://api.onlyoffice.com/docspace/api-backend/usage-api/display-file-extension.md): PUT /api/2.0/files/displayfileextension
+- [Display the Recent folder](https://api.onlyoffice.com/docspace/api-backend/usage-api/display-recent.md): PUT /api/2.0/files/displayrecent
+- [Change the external sharing ability](https://api.onlyoffice.com/docspace/api-backend/usage-api/external-share.md): PUT /api/2.0/files/settings/external
+- [Change the external sharing ability on social networks](https://api.onlyoffice.com/docspace/api-backend/usage-api/external-share-social-media.md): PUT /api/2.0/files/settings/externalsocialmedia
+- [Change the forcesaving ability](https://api.onlyoffice.com/docspace/api-backend/usage-api/forcesave.md): PUT /api/2.0/files/forcesave
+- [Get the trash bin auto-clearing setting](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-automatically-clean-up.md): GET /api/2.0/files/settings/autocleanup
+- [Get the default template setting](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-default-templates.md): GET /api/2.0/files/settings/defaulttemplate
+- [Get the document service URL](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-doc-service-url.md): GET /api/2.0/files/docservice
+- [Get the Documents information](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-files-module.md): GET /api/2.0/files/info
+- [Get file settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-files-settings.md): GET /api/2.0/files/settings
+- [Hide confirmation dialog when canceling operations](https://api.onlyoffice.com/docspace/api-backend/usage-api/hide-confirm-cancel-operation.md): PUT /api/2.0/files/hideconfirmcanceloperation
+- [Hide the confirmation dialog when converting](https://api.onlyoffice.com/docspace/api-backend/usage-api/hide-confirm-convert.md): PUT /api/2.0/files/hideconfirmconvert
+- [Hide confirmation dialog when changing room lifetime settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/hide-confirm-room-lifetime.md): PUT /api/2.0/files/hideconfirmroomlifetime
+- [Ask a new file name](https://api.onlyoffice.com/docspace/api-backend/usage-api/keep-new-file-name.md): PUT /api/2.0/files/keepnewfilename
+- [Reset the default template setting](https://api.onlyoffice.com/docspace/api-backend/usage-api/reset-default-template.md): DELETE /api/2.0/files/settings/defaulttemplate
+- [Change the default template setting](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-default-template.md): PUT /api/2.0/files/settings/defaulttemplate
+- [Open document in the same browser tab](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-open-editor-in-same-tab.md): PUT /api/2.0/files/settings/openeditorinsametab
+- [Organize rooms grouping](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-organize-rooms-grouping.md): PUT /api/2.0/files/settings/organizegrouping
+- [Change the ability to store the forcesaved files](https://api.onlyoffice.com/docspace/api-backend/usage-api/store-forcesave.md): PUT /api/2.0/files/storeforcesave
+- [Change the ability to upload original formats](https://api.onlyoffice.com/docspace/api-backend/usage-api/store-original.md): PUT /api/2.0/files/storeoriginal
+- [Update a file version if it exists](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-file-if-exist.md): PUT /api/2.0/files/updateifexist
+- [Upload a file as the default template setting](https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-default-template.md): POST /api/2.0/files/settings/defaulttemplate
+- [Apply external data password](https://api.onlyoffice.com/docspace/api-backend/usage-api/apply-external-share-password.md): POST /api/2.0/files/share/{key}/password
+- [Change the file owner](https://api.onlyoffice.com/docspace/api-backend/usage-api/change-file-owner.md): POST /api/2.0/files/owner
+- [Get file encryption keys](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-encryption-access.md): GET /api/2.0/files/file/{fileId}/publickeys
+- [Get the external data](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-external-share-data.md): GET /api/2.0/files/share/{key}
+- [Get the shared file information](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-file-security-info.md): GET /api/2.0/files/file/{id}/share
+- [Get the shared folder information](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-folder-security-info.md): GET /api/2.0/files/folder/{id}/share
+- [Get file group members with security information](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-groups-members-with-file-security.md): GET /api/2.0/files/file/{fileId}/group/{groupId}/share
+- [Get folder group members with security information](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-groups-members-with-folder-security.md): GET /api/2.0/files/folder/{folderId}/group/{groupId}/share
+- [Get the sharing rights](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-security-info.md): POST /api/2.0/files/share
+- [Get user access rights by file ID](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-shared-users.md): GET /api/2.0/files/file/{fileId}/sharedusers
+- [Remove the sharing rights](https://api.onlyoffice.com/docspace/api-backend/usage-api/remove-security-info.md): DELETE /api/2.0/files/share
+- [Send the mention message](https://api.onlyoffice.com/docspace/api-backend/usage-api/send-editor-notify.md): POST /api/2.0/files/file/{fileId}/sendeditornotify
+- [Share a file](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-file-security-info.md): PUT /api/2.0/files/file/{fileId}/share
+- [Share a folder](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-folder-security-info.md): PUT /api/2.0/files/folder/{folderId}/share
+- [Set the sharing rights](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-security-info.md): PUT /api/2.0/files/share
+- [Remove a third-party account](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-third-party.md): DELETE /api/2.0/files/thirdparty/{providerId}
+- [Get all providers](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-all-providers.md): GET /api/2.0/files/thirdparty/providers
+- [Get a third-party account backup](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-backup-third-party-account.md): GET /api/2.0/files/thirdparty/backup
+- [Get providers](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-capabilities.md): GET /api/2.0/files/thirdparty/capabilities
+- [Get the common third-party services](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-common-third-party-folders.md): GET /api/2.0/files/thirdparty/common
+- [Get the third-party accounts](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-third-party-accounts.md): GET /api/2.0/files/thirdparty
+- [Save a third-party account](https://api.onlyoffice.com/docspace/api-backend/usage-api/save-third-party.md): POST /api/2.0/files/thirdparty
+- [Save a third-party account backup](https://api.onlyoffice.com/docspace/api-backend/usage-api/save-third-party-backup.md): POST /api/2.0/files/thirdparty/backup
+- [Deletes an encryption key and removes it from the system.](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-keys.md): DELETE /api/2.0/privacyroom/keys/{id}
+- [Retrieves encryption keys associated with the current user.](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-user-keys.md): GET /api/2.0/privacyroom/keys
+- [Retrieves the encryption keys associated with a specific privacy room.](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-user-keys-for-room.md): GET /api/2.0/privacyroom/{roomId}/access
+- [Replaces an existing encryption key with a new one for the user.](https://api.onlyoffice.com/docspace/api-backend/usage-api/replace-key.md): PUT /api/2.0/privacyroom/keys
+- [Creates and sets encryption keys for the user.](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-keys.md): POST /api/2.0/privacyroom/keys
+- [Add the room tags](https://api.onlyoffice.com/docspace/api-backend/usage-api/add-room-tags.md): PUT /api/2.0/files/rooms/{id}/tags
+- [Archive a room](https://api.onlyoffice.com/docspace/api-backend/usage-api/archive-room.md): PUT /api/2.0/files/rooms/{id}/archive
+- [Change the room cover](https://api.onlyoffice.com/docspace/api-backend/usage-api/change-room-cover.md): POST /api/2.0/files/rooms/{id}/cover
+- [Create a room](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-room.md): POST /api/2.0/files/rooms
+- [Create a room from the template](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-room-from-template.md): POST /api/2.0/files/rooms/fromtemplate
+- [Create a room logo](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-room-logo.md): POST /api/2.0/files/rooms/{id}/logo
+- [Create a room tag](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-room-tag.md): POST /api/2.0/files/tags
+- [Start creating room template](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-room-template.md): POST /api/2.0/files/roomtemplate
+- [Create a third-party room](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-room-third-party.md): POST /api/2.0/files/rooms/thirdparty/{id}
+- [Delete the custom room tags](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-custom-tags.md): DELETE /api/2.0/files/tags
+- [Remove a room](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-room.md): DELETE /api/2.0/files/rooms/{id}
+- [Remove a room logo](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-room-logo.md): DELETE /api/2.0/files/rooms/{id}/logo
+- [Remove the room tags](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-room-tags.md): DELETE /api/2.0/files/rooms/{id}/tags
+- [Get external DB sync status](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-external-db-sync-status.md): GET /api/2.0/files/rooms/{id}/externaldbsync
+- [Get the new room items](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-new-room-items.md): GET /api/2.0/files/rooms/{id}/news
+- [Get public settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-public-settings.md): GET /api/2.0/files/roomtemplate/{id}/public
+- [Get covers](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-covers.md): GET /api/2.0/files/rooms/covers
+- [Get the room creation progress](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-creating-status.md): GET /api/2.0/files/rooms/fromtemplate/status
+- [Get the room index export](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-index-export.md): GET /api/2.0/files/rooms/indexexport
+- [Get room information](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-info.md): GET /api/2.0/files/rooms/{id}
+- [Get the room links](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-links.md): GET /api/2.0/files/rooms/{id}/links
+- [Get the room access rights](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-security-info.md): GET /api/2.0/files/rooms/{id}/share
+- [Get the room tags](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-tags-info.md): GET /api/2.0/files/tags
+- [Get status of room template creation](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-template-creating-status.md): GET /api/2.0/files/roomtemplate/status
+- [Get rooms](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-rooms-folder.md): GET /api/2.0/files/rooms
+- [Get the room new items](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-rooms-new-items.md): GET /api/2.0/files/rooms/news
+- [Get the room primary external link](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-rooms-primary-external-link.md): GET /api/2.0/files/rooms/{id}/link
+- [Has tag links](https://api.onlyoffice.com/docspace/api-backend/usage-api/has-tag-links.md): GET /api/2.0/files/tags/{tagName}/haslinks
+- [Pin a room](https://api.onlyoffice.com/docspace/api-backend/usage-api/pin-room.md): PUT /api/2.0/files/rooms/{id}/pin
+- [Reorder the room](https://api.onlyoffice.com/docspace/api-backend/usage-api/reorder-room.md): PUT /api/2.0/files/rooms/{id}/reorder
+- [Resend the room invitations](https://api.onlyoffice.com/docspace/api-backend/usage-api/resend-email-invitations.md): POST /api/2.0/files/rooms/{id}/resend
+- [Set public settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-public-settings.md): PUT /api/2.0/files/roomtemplate/public
+- [Set the room external or invitation link](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-room-link.md): PUT /api/2.0/files/rooms/{id}/links
+- [Set the room access rights](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-room-security.md): PUT /api/2.0/files/rooms/{id}/share
+- [Start external DB sync](https://api.onlyoffice.com/docspace/api-backend/usage-api/start-external-db-sync.md): POST /api/2.0/files/rooms/{id}/externaldbsync
+- [Start the room index export](https://api.onlyoffice.com/docspace/api-backend/usage-api/start-room-index-export.md): POST /api/2.0/files/rooms/{id}/indexexport
+- [Terminate the room index export](https://api.onlyoffice.com/docspace/api-backend/usage-api/terminate-room-index-export.md): DELETE /api/2.0/files/rooms/indexexport
+- [Unarchive a room](https://api.onlyoffice.com/docspace/api-backend/usage-api/unarchive-room.md): PUT /api/2.0/files/rooms/{id}/unarchive
+- [Unpin a room](https://api.onlyoffice.com/docspace/api-backend/usage-api/unpin-room.md): PUT /api/2.0/files/rooms/{id}/unpin
+- [Update a room](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-room.md): PUT /api/2.0/files/rooms/{id}
+- [Update tag](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-room-tag.md): PUT /api/2.0/files/tags
+- [Upload a room logo image](https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-room-logo.md): POST /api/2.0/files/logos
+- [Add a new room group](https://api.onlyoffice.com/docspace/api-backend/usage-api/add-room-group.md): POST /api/2.0/files/group
+- [Change group icon](https://api.onlyoffice.com/docspace/api-backend/usage-api/change-room-group-icon.md): POST /api/2.0/files/group/{id}/icon
+- [Delete group](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-room-group.md): DELETE /api/2.0/files/group/{id}
+- [Get room group info](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-group-info.md): GET /api/2.0/files/group/{id}
+- [List room groups](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-groups.md): GET /api/2.0/files/group
+- [Update room group](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-room-group.md): PUT /api/2.0/files/group/{id}
+- [Approve tool call](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-ai-approve-tool-call.md): POST /api/2.0/ai/ai/approve-tool-call
+- [Deny tool call](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-ai-deny-tool-call.md): POST /api/2.0/ai/ai/deny-tool-call
+- [Regenerate stream](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-ai-regenerate-stream.md): POST /api/2.0/ai/ai/regenerate-stream
+- [Send](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-ai-send.md): POST /api/2.0/ai/ai/send
+- [Send custom](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-ai-send-custom.md): POST /api/2.0/ai/ai/send-custom
+- [Send with stream](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-ai-send-with-stream.md): POST /api/2.0/ai/ai/send-with-stream
+- [Send with stream open ai](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-ai-send-with-stream-open-ai.md): POST /api/2.0/ai/ai/send-with-stream-openai
+- [Create an agent](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-agents-create.md): POST /api/2.0/ai/agents
+- [Delete an agent](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-agents-delete.md): DELETE /api/2.0/ai/agents/{id}
+- [Get an agent](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-agents-get.md): GET /api/2.0/ai/agents/{id}
+- [List agents](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-agents-list.md): GET /api/2.0/ai/agents
+- [List agent news items](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-agents-news.md): GET /api/2.0/ai/agents/news
+- [Reset agents&#39; quota](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-agents-reset-quota.md): PUT /api/2.0/ai/agents/resetquota
+- [Update an agent](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-agents-update.md): PUT /api/2.0/ai/agents/{id}
+- [Update agents&#39; quota](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-agents-update-quota.md): PUT /api/2.0/ai/agents/agentquota
+- [Assign](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-assignments-assign.md): PUT /api/2.0/ai/assignments/assign
+- [Bulk assign](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-assignments-bulk-assign.md): PUT /api/2.0/ai/assignments/bulk-assign
+- [Cascade profile delete](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-assignments-cascade-profile-delete.md): DELETE /api/2.0/ai/assignments/cascade-profile-delete
+- [Get all assignments](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-assignments-get-all-assignments.md): GET /api/2.0/ai/assignments/get-all-assignments
+- [Get assignment](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-assignments-get-assignment.md): GET /api/2.0/ai/assignments/get-assignment
+- [Resolve for action](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-assignments-resolve-for-action.md): GET /api/2.0/ai/assignments/resolve-for-action
+- [Try resolve for action](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-assignments-try-resolve-for-action.md): GET /api/2.0/ai/assignments/try-resolve-for-action
+- [Unassign](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-assignments-unassign.md): DELETE /api/2.0/ai/assignments/unassign
+- [Delete](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-attachments-delete.md): DELETE /api/2.0/ai/attachments/delete
+- [Delete many](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-attachments-delete-many.md): DELETE /api/2.0/ai/attachments/delete-many
+- [Get](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-attachments-get.md): POST /api/2.0/ai/attachments/get
+- [Get many](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-attachments-get-many.md): POST /api/2.0/ai/attachments/get-many
+- [Link to message](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-attachments-link-to-message.md): POST /api/2.0/ai/attachments/link-to-message
+- [Save file](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-attachments-save-file.md): POST /api/2.0/ai/attachments/save-file
+- [Save files many](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-attachments-save-files-many.md): POST /api/2.0/ai/attachments/save-files-many
+- [Save image](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-attachments-save-image.md): POST /api/2.0/ai/attachments/save-image
+- [Save images many](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-attachments-save-images-many.md): POST /api/2.0/ai/attachments/save-images-many
+- [Start markdown → docx export](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-export-text-to-docx.md): POST /api/2.0/ai/text-to-docx
+- [Clear deep mode](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-preferences-clear-deep-mode.md): DELETE /api/2.0/ai/preferences/clear-deep-mode
+- [Get deep mode](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-preferences-get-deep-mode.md): GET /api/2.0/ai/preferences/get-deep-mode
+- [Is deep mode set](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-preferences-is-deep-mode-set.md): GET /api/2.0/ai/preferences/is-deep-mode-set
+- [Set deep mode](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-preferences-set-deep-mode.md): PUT /api/2.0/ai/preferences/set-deep-mode
+- [Create](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-profiles-create.md): POST /api/2.0/ai/profiles/create
+- [Delete](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-profiles-delete.md): DELETE /api/2.0/ai/profiles/delete
+- [Get by id](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-profiles-get-by-id.md): GET /api/2.0/ai/profiles/get-by-id
+- [List](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-profiles-list.md): GET /api/2.0/ai/profiles/list
+- [List models](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-profiles-list-models.md): GET /api/2.0/ai/profiles/list-models
+- [List provider models](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-profiles-list-provider-models.md): POST /api/2.0/ai/profiles/list-provider-models
+- [Test connection](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-profiles-test-connection.md): POST /api/2.0/ai/profiles/test-connection
+- [Update](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-profiles-update.md): PUT /api/2.0/ai/profiles/update
+- [Create](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-prompts-create.md): POST /api/2.0/ai/prompts/create
+- [Create folder](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-prompts-create-folder.md): POST /api/2.0/ai/prompts/create-folder
+- [Delete](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-prompts-delete.md): DELETE /api/2.0/ai/prompts/delete
+- [Delete folder](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-prompts-delete-folder.md): DELETE /api/2.0/ai/prompts/delete-folder
+- [Export](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-prompts-export.md): GET /api/2.0/ai/prompts/export
+- [Get by id](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-prompts-get-by-id.md): GET /api/2.0/ai/prompts/get-by-id
+- [Get folder by id](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-prompts-get-folder-by-id.md): GET /api/2.0/ai/prompts/get-folder-by-id
+- [Import bundle](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-prompts-import-bundle.md): POST /api/2.0/ai/prompts/import-bundle
+- [List](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-prompts-list.md): GET /api/2.0/ai/prompts/list
+- [List folders](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-prompts-list-folders.md): GET /api/2.0/ai/prompts/list-folders
+- [Move](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-prompts-move.md): PUT /api/2.0/ai/prompts/move
+- [Rename folder](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-prompts-rename-folder.md): PUT /api/2.0/ai/prompts/rename-folder
+- [Update](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-prompts-update.md): PUT /api/2.0/ai/prompts/update
+- [Get AI settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-settings-get.md): GET /api/2.0/ai/config
+- [Get user AI settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-settings-get-user.md): GET /api/2.0/ai/config/user
+- [Get vectorization settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-settings-get-vectorization.md): GET /api/2.0/ai/config/vectorization
+- [Update user AI settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-settings-set-user.md): PUT /api/2.0/ai/config/user
+- [Update vectorization settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-settings-set-vectorization.md): PUT /api/2.0/ai/config/vectorization
+- [Append user message](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-threads-append-user-message.md): POST /api/2.0/ai/threads/append-user-message
+- [Clear messages](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-threads-clear-messages.md): DELETE /api/2.0/ai/threads/clear-messages
+- [Create](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-threads-create.md): POST /api/2.0/ai/threads/create
+- [Delete](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-threads-delete.md): DELETE /api/2.0/ai/threads/delete
+- [Delete message](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-threads-delete-message.md): DELETE /api/2.0/ai/threads/delete-message
+- [Get by id](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-threads-get-by-id.md): GET /api/2.0/ai/threads/get-by-id
+- [Get message by id](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-threads-get-message-by-id.md): GET /api/2.0/ai/threads/get-message-by-id
+- [List](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-threads-list.md): GET /api/2.0/ai/threads/list
+- [Open or create](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-threads-open-or-create.md): POST /api/2.0/ai/threads/open-or-create
+- [Read messages](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-threads-read-messages.md): GET /api/2.0/ai/threads/read-messages
+- [Regenerate title](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-threads-regenerate-title.md): POST /api/2.0/ai/threads/regenerate-title
+- [Rename](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-threads-rename.md): PUT /api/2.0/ai/threads/rename
+- [Touch](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-threads-touch.md): POST /api/2.0/ai/threads/touch
+- [Update message](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-threads-update-message.md): PUT /api/2.0/ai/threads/update-message
+- [Add custom server](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-tools-add-custom-server.md): POST /api/2.0/ai/tools/add-custom-server
+- [Get allow always](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-tools-get-allow-always.md): GET /api/2.0/ai/tools/get-allow-always
+- [Get custom server](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-tools-get-custom-server.md): GET /api/2.0/ai/tools/get-custom-server
+- [Get disabled](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-tools-get-disabled.md): GET /api/2.0/ai/tools/get-disabled
+- [Is allow always](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-tools-is-allow-always.md): GET /api/2.0/ai/tools/is-allow-always
+- [Is tool disabled](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-tools-is-tool-disabled.md): GET /api/2.0/ai/tools/is-tool-disabled
+- [List custom servers](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-tools-list-custom-servers.md): GET /api/2.0/ai/tools/list-custom-servers
+- [List system tools](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-tools-list-system-tools.md): GET /api/2.0/ai/tools/list-system-tools
+- [Remove custom server](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-tools-remove-custom-server.md): DELETE /api/2.0/ai/tools/remove-custom-server
+- [Replace all custom servers](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-tools-replace-all-custom-servers.md): PUT /api/2.0/ai/tools/replace-all-custom-servers
+- [Set allow always](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-tools-set-allow-always.md): PUT /api/2.0/ai/tools/set-allow-always
+- [Set disabled](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-tools-set-disabled.md): PUT /api/2.0/ai/tools/set-disabled
+- [Update custom server](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-tools-update-custom-server.md): PUT /api/2.0/ai/tools/update-custom-server
+- [Start a vectorization task](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-vectorization-start-task.md): POST /api/2.0/ai/vectorization/tasks
+- [Clear](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-web-search-clear.md): DELETE /api/2.0/ai/web-search/clear
+- [Configure](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-web-search-configure.md): PUT /api/2.0/ai/web-search/configure
+- [Get active config](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-web-search-get-active-config.md): GET /api/2.0/ai/web-search/get-active-config
+- [Is configured](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-web-search-is-configured.md): GET /api/2.0/ai/web-search/is-configured
+- [Set active config](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-web-search-set-active-config.md): PUT /api/2.0/ai/web-search/set-active-config
+- [Test connection](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-web-search-test-connection.md): POST /api/2.0/ai/web-search/test-connection
+- [OAuth2 Authorization Endpoint](https://api.onlyoffice.com/docspace/api-backend/usage-api/authorize-o-auth.md): GET /oauth2/authorize
+- [OAuth2 Token Endpoint](https://api.onlyoffice.com/docspace/api-backend/usage-api/exchange-token.md): POST /oauth2/token
+- [OAuth2 consent endpoint](https://api.onlyoffice.com/docspace/api-backend/usage-api/submit-consent.md): POST /oauth2/authorize
+- [Change client activation status](https://api.onlyoffice.com/docspace/api-backend/usage-api/change-activation.md): PATCH /api/2.0/clients/{clientId}/activation
+- [Create a new OAuth2 client](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-client.md): POST /api/2.0/clients
+- [Delete an OAuth2 client](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-client.md): DELETE /api/2.0/clients/{clientId}
+- [Delete all tenant OAuth2 clients](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-tenant-clients.md): DELETE /api/2.0/clients/tenant
+- [Delete all user OAuth2 clients](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-user-clients.md): DELETE /api/2.0/clients
+- [Regenerate client secret](https://api.onlyoffice.com/docspace/api-backend/usage-api/regenerate-secret.md): PATCH /api/2.0/clients/{clientId}/regenerate
+- [Revoke client consent](https://api.onlyoffice.com/docspace/api-backend/usage-api/revoke-user-client.md): DELETE /api/2.0/clients/{clientId}/revoke
+- [Update an existing OAuth2 client](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-client.md): PUT /api/2.0/clients/{clientId}
+- [Get client details](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-client.md): GET /api/2.0/clients/{clientId}
+- [Retrieves detailed information for a specific client](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-client-info.md): GET /api/2.0/clients/{clientId}/info
+- [List clients](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-clients.md): GET /api/2.0/clients
+- [Retrieves a pageable list of client information](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-clients-info.md): GET /api/2.0/clients/info
+- [Retrieves a pageable list of consents](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-consents.md): GET /api/2.0/clients/consents
+- [Handles the GET request for public client information](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-public-client-info.md): GET /api/2.0/clients/{clientId}/public/info
+- [handleOptions](https://api.onlyoffice.com/docspace/api-backend/usage-api/handle-options.md): OPTIONS /.well-known/oauth-authorization-server
+- [List available OAuth2 scopes](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-scopes.md): GET /api/2.0/scopes
+- [Create a user API key](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-api-key.md): POST /api/2.0/keys
+- [Delete a user API key](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-api-key.md): DELETE /api/2.0/keys/{keyId}
+- [Get API key permissions](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-all-permissions.md): GET /api/2.0/keys/permissions
+- [Get current user&#39;s API key](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-api-key.md): GET /api/2.0/keys/@self
+- [Get current user&#39;s API keys](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-api-keys.md): GET /api/2.0/keys
+- [Update an API key](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-api-key.md): PUT /api/2.0/keys/{keyId}
+- [Add a new group](https://api.onlyoffice.com/docspace/api-backend/usage-api/add-group.md): POST /api/2.0/group
+- [Add group members](https://api.onlyoffice.com/docspace/api-backend/usage-api/add-members-to.md): PUT /api/2.0/group/{id}/members
+- [Delete a group](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-group.md): DELETE /api/2.0/group/{id}
+- [Get a group](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-group.md): GET /api/2.0/group/{id}
+- [Get user groups](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-group-by-user-id.md): GET /api/2.0/group/user/{userid}
+- [Get groups](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-groups.md): GET /api/2.0/group
+- [Move group members](https://api.onlyoffice.com/docspace/api-backend/usage-api/move-members-to.md): PUT /api/2.0/group/{fromId}/members/{toId}
+- [Remove group members](https://api.onlyoffice.com/docspace/api-backend/usage-api/remove-members-from.md): DELETE /api/2.0/group/{id}/members
+- [Set a group manager](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-group-manager.md): PUT /api/2.0/group/{id}/manager
+- [Replace group members](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-members-to.md): POST /api/2.0/group/{id}/members
+- [Update a group](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-group.md): PUT /api/2.0/group/{id}
+- [Get groups with file sharing settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-groups-with-files-shared.md): GET /api/2.0/group/file/{id}
+- [Get groups with folder sharing settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-groups-with-folders-shared.md): GET /api/2.0/group/folder/{id}
+- [Get groups with room sharing settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-groups-with-rooms-shared.md): GET /api/2.0/group/room/{id}
+- [Change a user email](https://api.onlyoffice.com/docspace/api-backend/usage-api/change-user-email.md): PUT /api/2.0/people/{userid}/email
+- [Send instructions to change email](https://api.onlyoffice.com/docspace/api-backend/usage-api/send-email-change-instructions.md): POST /api/2.0/people/email
+- [Approve a guest sharing link](https://api.onlyoffice.com/docspace/api-backend/usage-api/approve-guest-share-link.md): POST /api/2.0/people/guests/share/approve
+- [Delete guests](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-guests.md): DELETE /api/2.0/people/guests
+- [Change a user password](https://api.onlyoffice.com/docspace/api-backend/usage-api/change-user-password.md): PUT /api/2.0/people/{userid}/password
+- [Remind a user password](https://api.onlyoffice.com/docspace/api-backend/usage-api/send-user-password.md): POST /api/2.0/people/password
+- [Create photo thumbnails](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-member-photo-thumbnails.md): POST /api/2.0/people/{userid}/photo/thumbnails
+- [Delete a user photo](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-member-photo.md): DELETE /api/2.0/people/{userid}/photo
+- [Get a user photo](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-member-photo.md): GET /api/2.0/people/{userid}/photo
+- [Update a user photo](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-member-photo.md): PUT /api/2.0/people/{userid}/photo
+- [Upload a user photo](https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-member-photo.md): POST /api/2.0/people/{userid}/photo
+- [Add a user](https://api.onlyoffice.com/docspace/api-backend/usage-api/add-member.md): POST /api/2.0/people
+- [Check if a user exists by email](https://api.onlyoffice.com/docspace/api-backend/usage-api/check-user-exists-by-email.md): GET /api/2.0/people/exists
+- [Delete a user](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-member.md): DELETE /api/2.0/people/{userid}
+- [Delete my profile](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-profile.md): DELETE /api/2.0/people/@self
+- [Get profiles](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-all-profiles.md): GET /api/2.0/people
+- [Get user claims](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-claims.md): GET /api/2.0/people/tokendiagnostics
+- [Get a profile by user email](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-profile-by-email.md): GET /api/2.0/people/email
+- [Get a profile by user ID](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-profile-by-user-id.md): GET /api/2.0/people/{userid}
+- [Get my profile](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-self-profile.md): GET /api/2.0/people/@self
+- [Invite users](https://api.onlyoffice.com/docspace/api-backend/usage-api/invite-users.md): POST /api/2.0/people/invite
+- [Delete users](https://api.onlyoffice.com/docspace/api-backend/usage-api/remove-users.md): PUT /api/2.0/people/delete
+- [Resend activation emails](https://api.onlyoffice.com/docspace/api-backend/usage-api/resend-user-invites.md): PUT /api/2.0/people/invite
+- [Update a user](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-member.md): PUT /api/2.0/people/{userid}
+- [Update a user culture](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-member-culture.md): PUT /api/2.0/people/{userid}/culture
+- [Reset a user quota limit](https://api.onlyoffice.com/docspace/api-backend/usage-api/reset-users-quota.md): PUT /api/2.0/people/resetquota
+- [Change a user quota limit](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-user-quota.md): PUT /api/2.0/people/userquota
+- [Get account entries with file sharing settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-accounts-entries-with-files-shared.md): GET /api/2.0/accounts/file/{id}/search
+- [Get account entries with folder sharing settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-accounts-entries-with-folders-shared.md): GET /api/2.0/accounts/folder/{id}/search
+- [Get account entries](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-accounts-entries-with-rooms-shared.md): GET /api/2.0/accounts/room/{id}/search
+- [Search users](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-search.md): GET /api/2.0/people/@search/{query}
+- [Search users by extended filter](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-simple-by-filter.md): GET /api/2.0/people/simple/filter
+- [Get users with file sharing settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-users-with-files-shared.md): GET /api/2.0/people/file/{id}
+- [Get users with folder sharing settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-users-with-folders-shared.md): GET /api/2.0/people/folder/{id}
+- [Get users with room sharing settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-users-with-room-shared.md): GET /api/2.0/people/room/{id}
+- [Search users with detailed information by extended filter](https://api.onlyoffice.com/docspace/api-backend/usage-api/search-users-by-extended-filter.md): GET /api/2.0/people/filter
+- [Search users (using query parameters)](https://api.onlyoffice.com/docspace/api-backend/usage-api/search-users-by-query.md): GET /api/2.0/people/search
+- [Search users by status filter](https://api.onlyoffice.com/docspace/api-backend/usage-api/search-users-by-status.md): GET /api/2.0/people/status/{status}/search
+- [Change the portal theme](https://api.onlyoffice.com/docspace/api-backend/usage-api/change-portal-theme.md): PUT /api/2.0/people/theme
+- [Get the portal theme](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-portal-theme.md): GET /api/2.0/people/theme
+- [Get third-party accounts](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-third-party-auth-providers.md): GET /api/2.0/people/thirdparty/providers
+- [Link a third-pary account](https://api.onlyoffice.com/docspace/api-backend/usage-api/link-third-party-account.md): PUT /api/2.0/people/thirdparty/linkaccount
+- [Create a third-pary account](https://api.onlyoffice.com/docspace/api-backend/usage-api/signup-third-party-account.md): POST /api/2.0/people/thirdparty/signup
+- [Unlink a third-pary account](https://api.onlyoffice.com/docspace/api-backend/usage-api/unlink-third-party-account.md): DELETE /api/2.0/people/thirdparty/unlinkaccount
+- [Get the progress of deleting the personal folder](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-delete-personal-folder-progress.md): GET /api/2.0/people/delete/personal/progress
+- [Get the reassignment progress](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-reassign-progress.md): GET /api/2.0/people/reassign/progress/{userid}
+- [Get the deletion progress](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-remove-progress.md): GET /api/2.0/people/remove/progress/{userid}
+- [Check data for reassignment need](https://api.onlyoffice.com/docspace/api-backend/usage-api/necessary-reassign.md): GET /api/2.0/people/reassign/necessary
+- [Send the deletion instructions](https://api.onlyoffice.com/docspace/api-backend/usage-api/send-instructions-to-delete.md): PUT /api/2.0/people/self/delete
+- [Delete the personal folder](https://api.onlyoffice.com/docspace/api-backend/usage-api/start-delete-personal-folder.md): POST /api/2.0/people/delete/personal/start
+- [Start the data reassignment](https://api.onlyoffice.com/docspace/api-backend/usage-api/start-reassign.md): POST /api/2.0/people/reassign/start
+- [Start the data deletion](https://api.onlyoffice.com/docspace/api-backend/usage-api/start-remove.md): POST /api/2.0/people/remove/start
+- [Terminate the data reassignment](https://api.onlyoffice.com/docspace/api-backend/usage-api/terminate-reassign.md): PUT /api/2.0/people/reassign/terminate
+- [Terminate the data deletion](https://api.onlyoffice.com/docspace/api-backend/usage-api/terminate-remove.md): PUT /api/2.0/people/remove/terminate
+- [Get profiles by status](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-by-status.md): GET /api/2.0/people/status/{status}
+- [Set an activation status to the users](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-user-activation-status.md): PUT /api/2.0/people/activationstatus/{activationstatus}
+- [Change a user status](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-user-status.md): PUT /api/2.0/people/status/{status}
+- [Get the progress of updating user type](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-user-type-update-progress.md): GET /api/2.0/people/type/progress/{userid}
+- [Start updating user type](https://api.onlyoffice.com/docspace/api-backend/usage-api/start-user-type-update.md): POST /api/2.0/people/type
+- [Terminate updating user type](https://api.onlyoffice.com/docspace/api-backend/usage-api/terminate-user-type-update.md): PUT /api/2.0/people/type/terminate
+- [Change a user type](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-user-type.md): PUT /api/2.0/people/type/{type}
+- [Get a guest sharing link](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-guest-sharing-link.md): GET /api/2.0/people/guests/{userid}/share
+- [Get a single app](https://api.onlyoffice.com/docspace/api-backend/usage-api/get.md): GET /api/2.0/apps/{id}
+- [Get all apps](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-all.md): GET /api/2.0/apps
+- [Get app settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-settings.md): GET /api/2.0/apps/{id}/settings
+- [Enable or disable an app](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-enabled.md): PUT /api/2.0/apps/{id}/enabled
+- [Save app settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-settings.md): PUT /api/2.0/apps/{id}/settings
+- [Authenticate a user](https://api.onlyoffice.com/docspace/api-backend/usage-api/authenticate-me.md): POST /api/2.0/authentication
+- [Authenticate a user by code](https://api.onlyoffice.com/docspace/api-backend/usage-api/authenticate-me-from-body-with-code.md): POST /api/2.0/authentication/{code}
+- [Open confirmation email URL](https://api.onlyoffice.com/docspace/api-backend/usage-api/check-confirm.md): POST /api/2.0/authentication/confirm
+- [Check authentication](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-is-authentificated.md): GET /api/2.0/authentication
+- [Log out](https://api.onlyoffice.com/docspace/api-backend/usage-api/logout.md): POST /api/2.0/authentication/logout
+- [Set a mobile phone](https://api.onlyoffice.com/docspace/api-backend/usage-api/save-mobile-phone.md): POST /api/2.0/authentication/setphone
+- [Send SMS code](https://api.onlyoffice.com/docspace/api-backend/usage-api/send-sms-code.md): POST /api/2.0/authentication/sendsms
+- [Get portal capabilities](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-portal-capabilities.md): GET /api/2.0/capabilities
+- [Cancel migration](https://api.onlyoffice.com/docspace/api-backend/usage-api/cancel-migration.md): POST /api/2.0/migration/cancel
+- [Clear migration](https://api.onlyoffice.com/docspace/api-backend/usage-api/clear-migration.md): POST /api/2.0/migration/clear
+- [Finish migration](https://api.onlyoffice.com/docspace/api-backend/usage-api/finish-migration.md): POST /api/2.0/migration/finish
+- [Get migration logs](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-migration-logs.md): GET /api/2.0/migration/logs
+- [Get migration status](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-migration-status.md): GET /api/2.0/migration/status
+- [Get migrations](https://api.onlyoffice.com/docspace/api-backend/usage-api/list-migrations.md): GET /api/2.0/migration/list
+- [Start migration](https://api.onlyoffice.com/docspace/api-backend/usage-api/start-migration.md): POST /api/2.0/migration/migrate
+- [Upload and initialize migration](https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-and-initialize-migration.md): POST /api/2.0/migration/init/{migratorName}
+- [Calculate the wallet payment amount](https://api.onlyoffice.com/docspace/api-backend/usage-api/calculate-wallet-payment.md): PUT /api/2.0/portal/payment/calculatewallet
+- [Change tenant wallet service state](https://api.onlyoffice.com/docspace/api-backend/usage-api/change-tenant-wallet-service-state.md): POST /api/2.0/portal/payment/servicestate
+- [Start the customer monthly usage report generation](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-customer-monthly-usage-report.md): POST /api/2.0/portal/payment/customer/usage/monthly/report
+- [Start the customer operations report generation](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-customer-operations-report.md): POST /api/2.0/portal/payment/customer/operationsreport
+- [Start the customer service usage report generation](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-customer-service-usage-report.md): POST /api/2.0/portal/payment/customer/usage/report
+- [Get the active wallet services](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-active-services.md): GET /api/2.0/portal/payment/activeservices
+- [Get AI model prices](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-ai-prices.md): GET /api/2.0/portal/payment/ai-prices
+- [Get the checkout setup page URL](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-checkout-setup-url.md): GET /api/2.0/portal/payment/checkoutsetupurl
+- [Get the customer balance](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-customer-balance.md): GET /api/2.0/portal/payment/customer/balance
+- [Get the customer information](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-customer-info.md): GET /api/2.0/portal/payment/customerinfo
+- [Get the customer monthly usage](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-customer-monthly-usage.md): GET /api/2.0/portal/payment/customer/usage/monthly
+- [Get the status of the customer monthly usage report generation](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-customer-monthly-usage-report.md): GET /api/2.0/portal/payment/customer/usage/monthly/report
+- [Get the customer operations](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-customer-operations.md): GET /api/2.0/portal/payment/customer/operations
+- [Get the status of the customer operations report generation](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-customer-operations-report.md): GET /api/2.0/portal/payment/customer/operationsreport
+- [Get the customer service usage](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-customer-service-usage.md): GET /api/2.0/portal/payment/customer/usage
+- [Get the status of the customer service usage report generation](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-customer-service-usage-report.md): GET /api/2.0/portal/payment/customer/usage/report
+- [Get the payment account](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-payment-account.md): GET /api/2.0/portal/payment/account
+- [Get currencies](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-payment-currencies.md): GET /api/2.0/portal/payment/currencies
+- [Get quotas](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-payment-quotas.md): GET /api/2.0/portal/payment/quotas
+- [Get the payment page URL](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-payment-url.md): PUT /api/2.0/portal/payment/url
+- [Get prices](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-portal-prices.md): GET /api/2.0/portal/payment/prices
+- [Get quota payment information](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-quota-payment-information.md): GET /api/2.0/portal/payment/quota
+- [Get restricted AI models](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-restricted-ai-models.md): GET /api/2.0/portal/payment/ai-model/restrictions
+- [Get the subscription balance information](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-subscription-balance-info.md): GET /api/2.0/portal/payment/subscription/balance
+- [Gets the wallet service settings for the tenant.](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tenant-wallet-service-settings.md): GET /api/2.0/portal/payment/servicessettings
+- [Gets the tenant wallet auto top up settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tenant-wallet-settings.md): GET /api/2.0/portal/payment/topupsettings
+- [Get wallet service](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-wallet-service.md): GET /api/2.0/portal/payment/walletservice
+- [Get wallet services](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-wallet-services.md): GET /api/2.0/portal/payment/walletservices
+- [Move the subscription balance to the wallet and purchase admins](https://api.onlyoffice.com/docspace/api-backend/usage-api/move-subscription-to-wallet.md): POST /api/2.0/portal/payment/subscription/movetowallet
+- [Send a payment request](https://api.onlyoffice.com/docspace/api-backend/usage-api/send-payment-request.md): POST /api/2.0/portal/payment/request
+- [Set restricted AI models](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-restricted-ai-models.md): PUT /api/2.0/portal/payment/ai-model/restrictions
+- [Set the wallet auto top up settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-tenant-wallet-settings.md): POST /api/2.0/portal/payment/topupsettings
+- [Terminate the customer monthly usage report generation](https://api.onlyoffice.com/docspace/api-backend/usage-api/terminate-customer-monthly-usage-report.md): DELETE /api/2.0/portal/payment/customer/usage/monthly/report
+- [Terminate the customer operations report generation](https://api.onlyoffice.com/docspace/api-backend/usage-api/terminate-customer-operations-report.md): DELETE /api/2.0/portal/payment/customer/operationsreport
+- [Terminate the customer service usage report generation](https://api.onlyoffice.com/docspace/api-backend/usage-api/terminate-customer-service-usage-report.md): DELETE /api/2.0/portal/payment/customer/usage/report
+- [Put money on deposit](https://api.onlyoffice.com/docspace/api-backend/usage-api/top-up-deposit.md): POST /api/2.0/portal/payment/deposit
+- [Update the payment quantity](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-payment.md): PUT /api/2.0/portal/payment/update
+- [Update the wallet payment quantity](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-wallet-payment.md): PUT /api/2.0/portal/payment/updatewallet
+- [Get a portal quota](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-portal-quota.md): GET /api/2.0/portal/quota
+- [Get a portal tariff](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-portal-tariff.md): GET /api/2.0/portal/tariff
+- [Get the portal used space](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-portal-used-space.md): GET /api/2.0/portal/usedspace
+- [Get the recommended quota](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-right-quota.md): GET /api/2.0/portal/quota/right
+- [Get upcoming payments](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-upcoming-payments.md): GET /api/2.0/portal/tariff/upcoming
+- [Restore a portal](https://api.onlyoffice.com/docspace/api-backend/usage-api/continue-portal.md): PUT /api/2.0/portal/continue
+- [Delete a portal](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-portal.md): DELETE /api/2.0/portal/delete
+- [Get a portal](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-portal-information.md): GET /api/2.0/portal
+- [Get a path to the portal](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-portal-path.md): GET /api/2.0/portal/path
+- [Send removal instructions](https://api.onlyoffice.com/docspace/api-backend/usage-api/send-delete-instructions.md): POST /api/2.0/portal/delete
+- [Send suspension instructions](https://api.onlyoffice.com/docspace/api-backend/usage-api/send-suspend-instructions.md): POST /api/2.0/portal/suspend
+- [Deactivate a portal](https://api.onlyoffice.com/docspace/api-backend/usage-api/suspend-portal.md): PUT /api/2.0/portal/suspend
+- [Create an invitation link](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-invitation-link.md): POST /api/2.0/portal/users/invitationlink
+- [Deletes an invitation link.](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-invitation-link.md): DELETE /api/2.0/portal/users/invitationlink
+- [Get an invitation link](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-invitation-link.md): GET /api/2.0/portal/users/invite/{employeeType}
+- [Get an invitation link](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-invitation-link-by-employee-type.md): GET /api/2.0/portal/users/invitationlink/{employeeType}
+- [Get a number of portal users](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-portal-users-count.md): GET /api/2.0/portal/userscount
+- [Get a user by ID](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-user-by-id.md): GET /api/2.0/portal/users/{userID}
+- [Mark a gift message as read](https://api.onlyoffice.com/docspace/api-backend/usage-api/mark-gift-message-as-read.md): POST /api/2.0/portal/present/mark
+- [Send congratulations](https://api.onlyoffice.com/docspace/api-backend/usage-api/send-congratulations.md): POST /api/2.0/portal/sendcongratulations
+- [Update an invitation link](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-invitation-link.md): PUT /api/2.0/portal/users/invitationlink
+- [Set the Developer Tools access settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-tenant-dev-tools-access-settings.md): POST /api/2.0/settings/devtoolsaccess
+- [Get active connections](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-all-active-connections.md): GET /api/2.0/security/activeconnections
+- [Log out from the connection](https://api.onlyoffice.com/docspace/api-backend/usage-api/log-out-active-connection.md): PUT /api/2.0/security/activeconnections/logout/{loginEventId}
+- [Log out and change password](https://api.onlyoffice.com/docspace/api-backend/usage-api/log-out-all-active-connections-change-password.md): PUT /api/2.0/security/activeconnections/logoutallchangepassword
+- [Log out for the user by ID](https://api.onlyoffice.com/docspace/api-backend/usage-api/log-out-all-active-connections-for-user.md): PUT /api/2.0/security/activeconnections/logoutall/{userId}
+- [Log out from all connections except the current one](https://api.onlyoffice.com/docspace/api-backend/usage-api/log-out-all-except-this-connection.md): PUT /api/2.0/security/activeconnections/logoutallexceptthis
+- [Start the audit trail report generation](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-audit-trail-report.md): POST /api/2.0/security/audit/events/report
+- [Get filtered audit trail data](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-audit-events-by-filter.md): GET /api/2.0/security/audit/events/filter
+- [Get the audit trail settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-audit-settings.md): GET /api/2.0/security/audit/settings/lifetime
+- [Get audit trail mappers](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-audit-trail-mappers.md): GET /api/2.0/security/audit/mappers
+- [Get the audit trail report generation status](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-audit-trail-report.md): GET /api/2.0/security/audit/events/report
+- [Get audit trail types](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-audit-trail-types.md): GET /api/2.0/security/audit/types
+- [Get audit trail data](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-last-audit-events.md): GET /api/2.0/security/audit/events/last
+- [Set the audit trail settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-audit-settings.md): POST /api/2.0/security/audit/settings/lifetime
+- [Terminate the audit trail report generation](https://api.onlyoffice.com/docspace/api-backend/usage-api/terminate-audit-trail-report.md): DELETE /api/2.0/security/audit/events/report
+- [Set the banners visibility](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-tenant-banner-settings.md): POST /api/2.0/settings/banner
+- [Configure CSP settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/configure-csp.md): POST /api/2.0/security/csp
+- [Get CSP settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-csp-settings.md): GET /api/2.0/security/csp
+- [Save the Documents Firebase device token](https://api.onlyoffice.com/docspace/api-backend/usage-api/doc-register-pusn-notification-device.md): POST /api/2.0/settings/push/docregisterdevice
+- [Subscribe to Documents push notification](https://api.onlyoffice.com/docspace/api-backend/usage-api/subscribe-documents-push-notification.md): PUT /api/2.0/settings/push/docsubscribe
+- [Start the login history report generation](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-login-history-report.md): POST /api/2.0/security/audit/login/report
+- [Get login history](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-last-login-events.md): GET /api/2.0/security/audit/login/last
+- [Get filtered login events](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-login-events-by-filter.md): GET /api/2.0/security/audit/login/filter
+- [Get the login history report generation status](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-login-history-report.md): GET /api/2.0/security/audit/login/report
+- [Terminate the login history report generation](https://api.onlyoffice.com/docspace/api-backend/usage-api/terminate-login-history-report.md): DELETE /api/2.0/security/audit/login/report
+- [Generate JWT token](https://api.onlyoffice.com/docspace/api-backend/usage-api/generate-jwt-token.md): GET /api/2.0/security/oauth2/token
+- [Get the SMTP testing process status](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-smtp-operation-status.md): GET /api/2.0/smtpsettings/smtp/test/status
+- [Get the SMTP settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-smtp-settings.md): GET /api/2.0/smtpsettings/smtp
+- [Reset the SMTP settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/reset-smtp-settings.md): DELETE /api/2.0/smtpsettings/smtp
+- [Save the SMTP settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/save-smtp-settings.md): POST /api/2.0/smtpsettings/smtp
+- [Test the SMTP settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/test-smtp-settings.md): GET /api/2.0/smtpsettings/smtp/test
+- [Get the Developer Tools access settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tenant-access-dev-tools-settings.md): GET /api/2.0/settings/devtoolsaccess
+- [Get the authorization services](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-auth-services.md): GET /api/2.0/settings/authservice
+- [Save the authorization keys](https://api.onlyoffice.com/docspace/api-backend/usage-api/save-auth-keys.md): POST /api/2.0/settings/authservice
+- [Test external database connection](https://api.onlyoffice.com/docspace/api-backend/usage-api/test-external-database-connection.md): POST /api/2.0/settings/authservice/externaldb/test
+- [Get the banners visibility](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tenant-banner-settings.md): GET /api/2.0/settings/banner
+- [Close the admin helper](https://api.onlyoffice.com/docspace/api-backend/usage-api/close-admin-helper.md): PUT /api/2.0/settings/closeadminhelper
+- [Complete the Wizard settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/complete-wizard.md): PUT /api/2.0/settings/wizard/complete
+- [Configure the deep link settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/configure-deep-link.md): POST /api/2.0/settings/deeplink
+- [Delete a color theme](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-portal-color-theme.md): DELETE /api/2.0/settings/colortheme
+- [Get the deep link settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-deep-link-settings.md): GET /api/2.0/settings/deeplink
+- [Get the payment settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-payment-settings.md): GET /api/2.0/settings/payment
+- [Get a color theme](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-portal-color-theme.md): GET /api/2.0/settings/colortheme
+- [Get hostname](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-portal-hostname.md): GET /api/2.0/settings/machine
+- [Get a portal logo](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-portal-logo.md): GET /api/2.0/settings/logo
+- [Get the portal settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-portal-settings.md): GET /api/2.0/settings
+- [Get the socket settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-socket-settings.md): GET /api/2.0/settings/socket
+- [Get supported languages](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-supported-cultures.md): GET /api/2.0/settings/cultures
+- [Get the AI access settings for the portal](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tenant-ai-access-settings.md): GET /api/2.0/settings/ai-access
+- [Get the user invitation settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tenant-user-invitation-settings.md): GET /api/2.0/settings/invitationsettings
+- [Get time zones](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-time-zones.md): GET /api/2.0/settings/timezones
+- [Set the default folder](https://api.onlyoffice.com/docspace/api-backend/usage-api/save-default-folder.md): PUT /api/2.0/settings/defaultfolder
+- [Save the DNS settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/save-dns-settings.md): PUT /api/2.0/settings/dns
+- [Save the mail domain settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/save-mail-domain-settings.md): POST /api/2.0/settings/maildomainsettings
+- [Save a color theme](https://api.onlyoffice.com/docspace/api-backend/usage-api/save-portal-color-theme.md): PUT /api/2.0/settings/colortheme
+- [Set the AI access for the portal](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-tenant-ai-access-settings.md): POST /api/2.0/settings/ai-access
+- [Update the email activation settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-email-activation-settings.md): PUT /api/2.0/settings/emailactivation
+- [Update user invitation settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-invitation-settings.md): PUT /api/2.0/settings/invitationsettings
+- [Get cookies lifetime](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-cookie-settings.md): GET /api/2.0/settings/cookiesettings
+- [Update cookies lifetime](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-cookie-settings.md): PUT /api/2.0/settings/cookiesettings
+- [Calculate the DocsCloud subscription switch cost](https://api.onlyoffice.com/docspace/api-backend/usage-api/calculate-dev-pack.md): POST /api/2.0/settings/docscloud/calculatedevpack
+- [Check the DocsCloud server health](https://api.onlyoffice.com/docspace/api-backend/usage-api/check-health.md): GET /api/2.0/settings/docscloud/healthcheck
+- [Start the DocsCloud tenant quota report generation](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-tenant-quota-report.md): POST /api/2.0/settings/docscloud/tenant/quota/report
+- [Get the DocsCloud tenant](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tenant.md): GET /api/2.0/settings/docscloud/tenant
+- [Get the DocsCloud tenant configuration](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tenant-config.md): GET /api/2.0/settings/docscloud/tenant/config
+- [Get the DocsCloud tenant information](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tenant-info.md): GET /api/2.0/settings/docscloud/tenant/info
+- [Get the DocsCloud tenant quota](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tenant-quota.md): GET /api/2.0/settings/docscloud/tenant/quota
+- [Get the status of the DocsCloud tenant quota report generation](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tenant-quota-report.md): GET /api/2.0/settings/docscloud/tenant/quota/report
+- [Get the DocsCloud tenant usage](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tenant-usage.md): GET /api/2.0/settings/docscloud/tenant/usage
+- [Start the DocsCloud trial](https://api.onlyoffice.com/docspace/api-backend/usage-api/start-docs-cloud-trial.md): POST /api/2.0/settings/docscloud/trial
+- [Switch the DocsCloud subscription to DocsCloudDevPack](https://api.onlyoffice.com/docspace/api-backend/usage-api/switch-to-dev-pack.md): POST /api/2.0/settings/docscloud/switchtodevpack
+- [Terminate the DocsCloud tenant quota report generation](https://api.onlyoffice.com/docspace/api-backend/usage-api/terminate-tenant-quota-report.md): DELETE /api/2.0/settings/docscloud/tenant/quota/report
+- [Update the DocsCloud tenant configuration](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-tenant-config.md): PUT /api/2.0/settings/docscloud/tenant/config
+- [Get the storage encryption progress](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-storage-encryption-progress.md): GET /api/2.0/settings/encryption/progress
+- [Get the storage encryption settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-storage-encryption-settings.md): GET /api/2.0/settings/encryption/settings
+- [Start the storage encryption process](https://api.onlyoffice.com/docspace/api-backend/usage-api/start-storage-encryption.md): POST /api/2.0/settings/encryption/start
+- [Get greeting settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-greeting-settings.md): GET /api/2.0/settings/greetingsettings
+- [Check the default greeting settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-is-default-greeting-settings.md): GET /api/2.0/settings/greetingsettings/isdefault
+- [Restore the greeting settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/restore-greeting-settings.md): POST /api/2.0/settings/greetingsettings/restore
+- [Save the greeting settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/save-greeting-settings.md): POST /api/2.0/settings/greetingsettings
+- [Get the IP portal restrictions](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-ip-restrictions.md): GET /api/2.0/settings/iprestrictions
+- [Get the IP restriction settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/read-ip-restrictions-settings.md): GET /api/2.0/settings/iprestrictions/settings
+- [Update the IP restrictions](https://api.onlyoffice.com/docspace/api-backend/usage-api/save-ip-restrictions.md): PUT /api/2.0/settings/iprestrictions
+- [Update the IP restriction settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-ip-restrictions-settings.md): PUT /api/2.0/settings/iprestrictions/settings
+- [Activate a license](https://api.onlyoffice.com/docspace/api-backend/usage-api/accept-license.md): POST /api/2.0/settings/license/accept
+- [Request a license](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-is-license-required.md): GET /api/2.0/settings/license/required
+- [Refresh the license](https://api.onlyoffice.com/docspace/api-backend/usage-api/refresh-license.md): GET /api/2.0/settings/license/refresh
+- [Upload a license](https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-license.md): POST /api/2.0/settings/license
+- [Get the login settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-login-settings.md): GET /api/2.0/settings/security/loginsettings
+- [Reset the login settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-default-login-settings.md): DELETE /api/2.0/settings/security/loginsettings
+- [Update the login settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-login-settings.md): PUT /api/2.0/settings/security/loginsettings
+- [Enable the administrator message settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/enable-admin-message-settings.md): POST /api/2.0/settings/messagesettings
+- [Send a message to the administrator](https://api.onlyoffice.com/docspace/api-backend/usage-api/send-admin-mail.md): POST /api/2.0/settings/sendadmmail
+- [Sends an invitation email](https://api.onlyoffice.com/docspace/api-backend/usage-api/send-join-invite-mail.md): POST /api/2.0/settings/sendjoininvite
+- [Get notification channels](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-notification-channels.md): GET /api/2.0/settings/notification/channels
+- [Check notification availability](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-notification-settings.md): GET /api/2.0/settings/notification/{type}
+- [Get room notification settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-rooms-notification-settings.md): GET /api/2.0/settings/notification/rooms
+- [Enable notifications](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-notification-settings.md): POST /api/2.0/settings/notification
+- [Set room notification status](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-rooms-notification-status.md): POST /api/2.0/settings/notification/rooms
+- [Send the owner change instructions](https://api.onlyoffice.com/docspace/api-backend/usage-api/send-owner-change-instructions.md): POST /api/2.0/settings/owner
+- [Update the portal owner](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-portal-owner.md): PUT /api/2.0/settings/owner
+- [Get the user quota settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-user-quota-settings.md): GET /api/2.0/settings/userquotasettings
+- [Save the AI Agent quota settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/save-ai-agent-quota-settings.md): POST /api/2.0/settings/aiagentquotasettings
+- [Save the room quota settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/save-room-quota-settings.md): POST /api/2.0/settings/roomquotasettings
+- [Save the tenant quota settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-tenant-quota-settings.md): PUT /api/2.0/settings/tenantquotasettings
+- [Delete the additional white label settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-additional-white-label-settings.md): DELETE /api/2.0/settings/rebranding/additional
+- [Delete the company white label settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-company-white-label-settings.md): DELETE /api/2.0/settings/rebranding/company
+- [Get the additional white label settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-additional-white-label-settings.md): GET /api/2.0/settings/rebranding/additional
+- [Get the company white label settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-company-white-label-settings.md): GET /api/2.0/settings/rebranding/company
+- [Check the white label availability](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-enable-whitelabel.md): GET /api/2.0/settings/enablewhitelabel
+- [Check the default white label logo text](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-is-default-white-label-logo-text.md): GET /api/2.0/settings/whitelabel/logotext/isdefault
+- [Check the default white label logos](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-is-default-white-label-logos.md): GET /api/2.0/settings/whitelabel/logos/isdefault
+- [Get the licensor data](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-licensor-data.md): GET /api/2.0/settings/companywhitelabel
+- [Get the white label logo text](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-white-label-logo-text.md): GET /api/2.0/settings/whitelabel/logotext
+- [Get the white label logos](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-white-label-logos.md): GET /api/2.0/settings/whitelabel/logos
+- [Restore the white label logo text](https://api.onlyoffice.com/docspace/api-backend/usage-api/restore-white-label-logo-text.md): PUT /api/2.0/settings/whitelabel/logotext/restore
+- [Restore the white label logos](https://api.onlyoffice.com/docspace/api-backend/usage-api/restore-white-label-logos.md): PUT /api/2.0/settings/whitelabel/logos/restore
+- [Save the additional white label settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/save-additional-white-label-settings.md): POST /api/2.0/settings/rebranding/additional
+- [Save the company white label settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/save-company-white-label-settings.md): POST /api/2.0/settings/rebranding/company
+- [Save the white label logo text settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/save-white-label-logo-text.md): POST /api/2.0/settings/whitelabel/logotext/save
+- [Save the white label logos](https://api.onlyoffice.com/docspace/api-backend/usage-api/save-white-label-settings.md): POST /api/2.0/settings/whitelabel/logos/save
+- [Save the white label logos from files](https://api.onlyoffice.com/docspace/api-backend/usage-api/save-white-label-settings-from-files.md): POST /api/2.0/settings/whitelabel/logos/savefromfiles
+- [Get the default SSO settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-default-sso-settings-v-2.md): GET /api/2.0/settings/ssov2/default
+- [Get the SSO settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-sso-settings-v-2.md): GET /api/2.0/settings/ssov2
+- [Get the SSO settings constants](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-sso-settings-v-2-constants.md): GET /api/2.0/settings/ssov2/constants
+- [Reset the SSO settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/reset-sso-settings-v-2.md): DELETE /api/2.0/settings/ssov2
+- [Save the SSO settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/save-sso-settings-v-2.md): POST /api/2.0/settings/ssov2
+- [Get the enabled modules](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-enabled-modules.md): GET /api/2.0/settings/security/modules
+- [Check a product administrator](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-is-product-administrator.md): GET /api/2.0/settings/security/administrator
+- [Get the password settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-password-settings.md): GET /api/2.0/settings/security/password
+- [Get the product administrators](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-product-administrators.md): GET /api/2.0/settings/security/administrator/{productid}
+- [Get the module availability](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-web-item-security-info.md): GET /api/2.0/settings/security/{id}
+- [Get the security settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-web-item-settings-security-info.md): GET /api/2.0/settings/security
+- [Set the security settings to modules](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-access-to-web-items.md): PUT /api/2.0/settings/security/access
+- [Set a product administrator](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-product-administrator.md): PUT /api/2.0/settings/security/administrator
+- [Set the module security settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-web-item-security.md): PUT /api/2.0/settings/security
+- [Set the password settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-password-settings.md): PUT /api/2.0/settings/security/password
+- [Get the space usage statistics](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-space-usage-statistics.md): GET /api/2.0/settings/statistics/spaceusage/{id}
+- [Get the backup storages](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-all-backup-storages.md): GET /api/2.0/settings/storage/backup
+- [Get the CDN storages](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-all-cdn-storages.md): GET /api/2.0/settings/storage/cdn
+- [Get storages](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-all-storages.md): GET /api/2.0/settings/storage
+- [Get Amazon regions](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-amazon-s-3-regions.md): GET /api/2.0/settings/storage/s3/regions
+- [Get the storage progress](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-storage-progress.md): GET /api/2.0/settings/storage/progress
+- [Reset the CDN storage settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/reset-cdn-to-default.md): DELETE /api/2.0/settings/storage/cdn
+- [Reset the storage settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/reset-storage-to-default.md): DELETE /api/2.0/settings/storage
+- [Update the CDN storage](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-cdn-storage.md): PUT /api/2.0/settings/storage/cdn
+- [Update a storage](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-storage.md): PUT /api/2.0/settings/storage
+- [Get the TFA codes](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tfa-app-codes.md): GET /api/2.0/settings/tfaappcodes
+- [Get TFA confirmation data](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tfa-confirm-data.md): GET /api/2.0/settings/tfaapp/confirm
+- [Get the TFA settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tfa-settings.md): GET /api/2.0/settings/tfaapp
+- [Generate setup code](https://api.onlyoffice.com/docspace/api-backend/usage-api/tfa-app-generate-setup-code.md): GET /api/2.0/settings/tfaapp/setup
+- [Validate the TFA code](https://api.onlyoffice.com/docspace/api-backend/usage-api/tfa-validate-auth-code.md): POST /api/2.0/settings/tfaapp/validate
+- [Unlink the TFA application](https://api.onlyoffice.com/docspace/api-backend/usage-api/unlink-tfa-app.md): PUT /api/2.0/settings/tfaappnewapp
+- [Update the TFA codes](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-tfa-app-codes.md): PUT /api/2.0/settings/tfaappnewcodes
+- [Update the TFA settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-tfa-settings.md): PUT /api/2.0/settings/tfaapp
+- [Updates TFA settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-tfa-settings-link.md): PUT /api/2.0/settings/tfaappwithlink
+- [Check the Telegram connection](https://api.onlyoffice.com/docspace/api-backend/usage-api/check-telegram.md): GET /api/2.0/settings/telegram/check
+- [Get the Telegram link](https://api.onlyoffice.com/docspace/api-backend/usage-api/link-telegram.md): GET /api/2.0/settings/telegram/link
+- [Unlink Telegram](https://api.onlyoffice.com/docspace/api-backend/usage-api/unlink-telegram.md): DELETE /api/2.0/settings/telegram/link
+- [Create a webhook](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-webhook.md): POST /api/2.0/settings/webhook
+- [Enable a webhook](https://api.onlyoffice.com/docspace/api-backend/usage-api/enable-webhook.md): PUT /api/2.0/settings/webhook/enable
+- [Get webhooks](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tenant-webhooks.md): GET /api/2.0/settings/webhook
+- [Get webhook triggers](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-webhook-triggers.md): GET /api/2.0/settings/webhook/triggers
+- [Get webhook logs](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-webhooks-logs.md): GET /api/2.0/settings/webhooks/log
+- [Remove a webhook](https://api.onlyoffice.com/docspace/api-backend/usage-api/remove-webhook.md): DELETE /api/2.0/settings/webhook/{id}
+- [Retry a webhook](https://api.onlyoffice.com/docspace/api-backend/usage-api/retry-webhook.md): PUT /api/2.0/settings/webhook/{id}/retry
+- [Retry webhooks](https://api.onlyoffice.com/docspace/api-backend/usage-api/retry-webhooks.md): PUT /api/2.0/settings/webhook/retry
+- [Update a webhook](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-webhook.md): PUT /api/2.0/settings/webhook
+- [Add a web plugin](https://api.onlyoffice.com/docspace/api-backend/usage-api/add-web-plugin-from-file.md): POST /api/2.0/settings/webplugins
+- [Delete a web plugin](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-web-plugin.md): DELETE /api/2.0/settings/webplugins/{name}
+- [Get a web plugin by name](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-web-plugin.md): GET /api/2.0/settings/webplugins/{name}
+- [Get web plugins](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-web-plugins.md): GET /api/2.0/settings/webplugins
+- [Update a web plugin](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-web-plugin.md): PUT /api/2.0/settings/webplugins/{name}
+- [Get the code request](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-third-party-code.md): GET /api/2.0/thirdparty/{provider}

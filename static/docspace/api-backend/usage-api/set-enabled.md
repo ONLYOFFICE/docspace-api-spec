@@ -1,0 +1,43 @@
+# setEnabled
+
+Referenced types are defined in the [full reference](../api.md).
+
+> AppWrapper setEnabled(id, SetAppEnabledBody)
+
+`PUT /api/2.0/apps/{id}/enabled`
+
+Enable or disable an app
+
+Toggles the enabled state of the application for the current tenant. Requires portal administrator permissions.
+
+## Parameters
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **id** | path | **String** | The application identifier. | [required] [example: ai-room] |
+| **SetAppEnabledBody** | body | [**SetAppEnabledBody**](../api.md#model-setappenabledbody) | New enabled state. | [required] |
+
+## Responses
+
+| Status code | Description | Type | Response headers |
+|------------- | ------------- | ------------- | -------------|
+| **200** | Updated application info | [**AppWrapper**](../api.md#model-appwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **403** | You don&#39;t have enough permission to manage apps | - | - |
+| **404** | Application not found | - | - |
+| **401** | Unauthorized | - | - |
+| **429** | Too Many Requests. | - | `Retry-After` |
+| **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
+| **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
+
+## Return type
+
+[**AppWrapper**](../api.md#model-appwrapper)
+
+## Authorization
+
+[Basic](../api.md#basic), [OAuth2](../api.md#oauth2) (scopes: read, write), [ApiKeyBearer](../api.md#apikeybearer) (scopes: read, write), [asc_auth_key](../api.md#asc_auth_key) (scopes: read, write), [Bearer](../api.md#bearer), [OpenId](../api.md#openid)
+
+## HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
