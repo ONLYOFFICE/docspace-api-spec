@@ -9,7 +9,7 @@ info:
   license:
     name: AGPL-3.0-only
     url: https://www.gnu.org/licenses/agpl-3.0.html
-  version: 3.7.0
+  version: 4.0.0
   x-scalar-sdk-installation:
     - lang: Node
       description: 'Install our **ONLYOFFICE SDK** for Node.js from npm:'
@@ -59625,11 +59625,24 @@ components:
       additionalProperties: false
       description: The generic file entry information.
     AiApiDateTime:
-      examples:
-        - 2021-01-01T00:00:00.0000000Z
-      type: string
+      type: object
+      properties:
+        utcTime:
+          examples:
+            - 2018-01-01T00:00:00.0000000Z
+          type: string
+          description: The time in UTC format.
+          format: date-time
+          readOnly: true
+        timeZoneOffset:
+          examples:
+            - 00:00:00
+          type: string
+          description: The time zone offset.
+          format: date-span
+          readOnly: true
+      additionalProperties: false
       description: The API date and time parameters.
-      format: date-time
     AiFileEntryBaseDto:
       type: object
       properties:
