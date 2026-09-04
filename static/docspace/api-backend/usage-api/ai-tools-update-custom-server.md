@@ -8,6 +8,8 @@ Referenced types are defined in the [full reference](../newai.md).
 
 Update custom server
 
+Updates the configuration of a registered custom MCP server.
+
 ## Parameters
 
 |Name | In | Type | Description | Notes |

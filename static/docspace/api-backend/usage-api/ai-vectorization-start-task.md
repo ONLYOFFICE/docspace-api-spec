@@ -8,6 +8,8 @@ Referenced types are defined in the [full reference](../newai.md).
 
 Start a vectorization task
 
+Starts a vectorization task over the supplied portal files. The indexing itself runs asynchronously on the .NET side.
+
 ## Parameters
 
 |Name | In | Type | Description | Notes |

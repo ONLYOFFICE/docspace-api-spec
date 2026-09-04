@@ -8,6 +8,8 @@ Referenced types are defined in the [full reference](../newai.md).
 
 Update vectorization settings
 
+Updates the portal&#39;s vectorization settings.
+
 ## Parameters
 
 |Name | In | Type | Description | Notes |

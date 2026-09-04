@@ -24,7 +24,8 @@ Authenticates the current user by SMS, authenticator app, or without two-factor 
 | **400** | userName, password or passworHash is empty | - | - |
 | **401** | User authentication failed | - | - |
 | **404** | The user could not be found | - | - |
-| **429** | Too many login attempts. Please try again later | - | `Retry-After` |
+| **429** | Too many login attempts. Please try again later | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 

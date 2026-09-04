@@ -41,7 +41,9 @@ Returns the detailed list of files and folders located in the folder with the ID
 | **200** | Folder contents | [**FolderContentIntegerWrapper**](../files.md#model-foldercontentintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | You don&#39;t have enough permission to view the folder content | - | - |
 | **404** | The required folder was not found | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 

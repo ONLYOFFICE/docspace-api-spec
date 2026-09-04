@@ -8,11 +8,13 @@ Referenced types are defined in the [full reference](../newai.md).
 
 Get by id
 
+Returns one chat thread, or an empty result when the identifier is unknown.
+
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **threadId** | query | **String** |  | [required] |
+| **threadId** | query | **String** | The chat thread identifier. | [required] |
 
 ## Responses
 

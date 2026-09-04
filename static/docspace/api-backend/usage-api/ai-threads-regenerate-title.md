@@ -8,6 +8,8 @@ Referenced types are defined in the [full reference](../newai.md).
 
 Regenerate title
 
+Generates a fresh title from the thread&#39;s first user message and persists it. Fails when the thread has no user message yet.
+
 ## Parameters
 
 |Name | In | Type | Description | Notes |

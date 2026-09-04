@@ -8,6 +8,8 @@ Referenced types are defined in the [full reference](../newai.md).
 
 Export
 
+Builds a self-contained, versioned bundle of every saved prompt and folder, ready for &#x60;import-bundle&#x60;.
+
 ## Parameters
 This endpoint does not need any parameter.
 

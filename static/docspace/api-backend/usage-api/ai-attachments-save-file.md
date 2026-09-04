@@ -8,6 +8,8 @@ Referenced types are defined in the [full reference](../newai.md).
 
 Save file
 
+Stores one file attachment as a draft, carrying the host-extracted text of the file. Prefer &#x60;save-files-many&#x60; when adding several files at once so they land as one round trip.
+
 ## Parameters
 
 |Name | In | Type | Description | Notes |

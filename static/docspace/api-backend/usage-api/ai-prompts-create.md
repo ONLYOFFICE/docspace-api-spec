@@ -8,6 +8,8 @@ Referenced types are defined in the [full reference](../newai.md).
 
 Create
 
+Saves a new prompt. The name must be non-empty and unique inside its folder, and &#x60;folderId&#x60; must point at an existing folder - omit it for the root.
+
 ## Parameters
 
 |Name | In | Type | Description | Notes |

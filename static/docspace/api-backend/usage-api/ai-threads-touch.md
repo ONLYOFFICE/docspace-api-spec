@@ -8,6 +8,8 @@ Referenced types are defined in the [full reference](../newai.md).
 
 Touch
 
+Bumps a thread&#39;s last-edit date, and optionally rebinds it to another profile, when something other than a new message - a model switch, say - should resurface it.
+
 ## Parameters
 
 |Name | In | Type | Description | Notes |

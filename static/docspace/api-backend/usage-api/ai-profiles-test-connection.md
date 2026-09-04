@@ -8,6 +8,8 @@ Referenced types are defined in the [full reference](../newai.md).
 
 Test connection
 
+Checks a stored profile&#39;s credentials against its provider and reports the provider&#39;s own error when the call fails. Nothing is written.
+
 ## Parameters
 
 |Name | In | Type | Description | Notes |

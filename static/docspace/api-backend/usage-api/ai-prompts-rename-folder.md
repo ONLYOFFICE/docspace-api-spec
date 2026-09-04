@@ -8,6 +8,8 @@ Referenced types are defined in the [full reference](../newai.md).
 
 Rename folder
 
+Renames a prompt folder, validating the new name against the existing folders.
+
 ## Parameters
 
 |Name | In | Type | Description | Notes |

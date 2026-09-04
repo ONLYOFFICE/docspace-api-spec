@@ -8,6 +8,8 @@ Referenced types are defined in the [full reference](../newai.md).
 
 Add custom server
 
+Registers a custom MCP server in the scope under the given name.
+
 ## Parameters
 
 |Name | In | Type | Description | Notes |

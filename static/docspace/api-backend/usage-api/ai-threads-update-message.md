@@ -8,6 +8,8 @@ Referenced types are defined in the [full reference](../newai.md).
 
 Update message
 
+Replaces the content of a chat message - used by the edit and regenerate flows that change a message outside the streaming lifecycle.
+
 ## Parameters
 
 |Name | In | Type | Description | Notes |

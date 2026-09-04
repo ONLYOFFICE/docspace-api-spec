@@ -8,6 +8,8 @@ Referenced types are defined in the [full reference](../newai.md).
 
 Delete
 
+Deletes a saved prompt. Does nothing when it no longer exists.
+
 ## Parameters
 
 |Name | In | Type | Description | Notes |

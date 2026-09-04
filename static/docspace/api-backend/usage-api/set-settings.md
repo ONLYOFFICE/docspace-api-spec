@@ -25,8 +25,9 @@ Saves an arbitrary JSON settings document for the specified application for the 
 | **400** | Settings is not valid JSON | - | - |
 | **403** | You don&#39;t have enough permission to manage apps | - | - |
 | **404** | Application not found | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -36,7 +37,7 @@ Saves an arbitrary JSON settings document for the specified application for the 
 
 ## Authorization
 
-[Basic](../api.md#basic), [OAuth2](../api.md#oauth2) (scopes: read, write), [ApiKeyBearer](../api.md#apikeybearer) (scopes: read, write), [asc_auth_key](../api.md#asc_auth_key) (scopes: read, write), [Bearer](../api.md#bearer), [OpenId](../api.md#openid)
+[Basic](../api.md#basic), [OAuth2](../api.md#oauth2) (scopes: read, write), [ApiKeyBearer](../api.md#apikeybearer), [asc_auth_key](../api.md#asc_auth_key), [Bearer](../api.md#bearer), [OpenId](../api.md#openid)
 
 ## HTTP request headers
 

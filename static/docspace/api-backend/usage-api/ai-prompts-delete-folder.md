@@ -8,6 +8,8 @@ Referenced types are defined in the [full reference](../newai.md).
 
 Delete folder
 
+Deletes a prompt folder together with the prompts inside it.
+
 ## Parameters
 
 |Name | In | Type | Description | Notes |

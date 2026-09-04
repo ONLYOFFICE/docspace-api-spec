@@ -8,6 +8,8 @@ Referenced types are defined in the [full reference](../newai.md).
 
 Move
 
+Moves a saved prompt into another folder, or to the root. The name is re-validated in the target folder, so the move fails when a prompt of that name is already there.
+
 ## Parameters
 
 |Name | In | Type | Description | Notes |

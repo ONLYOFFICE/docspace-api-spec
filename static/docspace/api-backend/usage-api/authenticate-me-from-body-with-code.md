@@ -14,7 +14,7 @@ Authenticates the current user by SMS or two-factor authentication code.
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **code** | path | **String** |  | [required] |
+| **code** | path | **String** | The two-factor authentication code. Send the same value as the &#x60;code&#x60; of the request body, which is the one the handler reads. | [required] |
 | **AuthWithCodeRequestsDto** | body | [**AuthWithCodeRequestsDto**](../api.md#model-authwithcoderequestsdto) |  | [optional] |
 
 ## Responses
@@ -25,7 +25,8 @@ Authenticates the current user by SMS or two-factor authentication code.
 | **400** | userName, password or passworHash is empty | - | - |
 | **401** | User authentication failed | - | - |
 | **403** | Auth code is not available | - | - |
-| **429** | Too many login attempts. Please try again later | - | `Retry-After` |
+| **429** | Too many login attempts. Please try again later | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 

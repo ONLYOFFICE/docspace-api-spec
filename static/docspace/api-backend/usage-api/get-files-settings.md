@@ -18,7 +18,8 @@ This endpoint does not need any parameter.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | File settings | [**FilesSettingsWrapper**](../files.md#model-filessettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 

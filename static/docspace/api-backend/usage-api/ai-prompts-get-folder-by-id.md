@@ -8,11 +8,13 @@ Referenced types are defined in the [full reference](../newai.md).
 
 Get folder by id
 
+Returns one prompt folder, or an empty result when the identifier is unknown.
+
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | query | **String** |  | [required] |
+| **id** | query | **String** | The prompt folder identifier. | [required] |
 
 ## Responses
 

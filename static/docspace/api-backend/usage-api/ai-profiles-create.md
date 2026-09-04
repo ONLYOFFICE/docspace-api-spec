@@ -8,6 +8,8 @@ Referenced types are defined in the [full reference](../newai.md).
 
 Create
 
+Creates an AI provider profile. The name must be unique and the credentials are validated against the provider before the profile is stored; the portal&#39;s first profile also takes the &#x60;Default&#x60; assignment slot.
+
 ## Parameters
 
 |Name | In | Type | Description | Notes |

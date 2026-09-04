@@ -8,6 +8,8 @@ Referenced types are defined in the [full reference](../newai.md).
 
 Link to message
 
+Binds draft attachments to the chat message that owns them, once that message has been persisted, so deleting the message removes them too. Identifiers that no longer exist are skipped.
+
 ## Parameters
 
 |Name | In | Type | Description | Notes |

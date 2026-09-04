@@ -8,13 +8,15 @@ Referenced types are defined in the [full reference](../newai.md).
 
 Is allow always
 
+Tells whether one tool is on the always-allow list.
+
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **serverType** | query | **String** |  | [required] |
-| **toolName** | query | **String** |  | [required] |
-| **entityId** | query | **String** |  | [required] |
+| **serverType** | query | **String** | The MCP server type the tool belongs to. | [required] |
+| **toolName** | query | **String** | The tool name. | [required] |
+| **entityId** | query | **String** | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | [optional] |
 
 ## Responses
 

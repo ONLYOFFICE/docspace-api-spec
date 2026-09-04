@@ -23,7 +23,9 @@ Sends an invitation email with a link to the DocSpace.
 | **200** | Message about sending a link to confirm joining the DocSpace | [**StringWrapper**](../api.md#model-stringwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **400** | Incorrect email or email already exists | - | - |
 | **403** | No permissions to perform this action | - | - |
-| **429** | Request limit is exceeded | - | `Retry-After` |
+| **405** | Joining the portal is not available | - | - |
+| **429** | Request limit is exceeded | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 

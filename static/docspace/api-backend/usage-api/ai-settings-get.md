@@ -8,6 +8,8 @@ Referenced types are defined in the [full reference](../newai.md).
 
 Get AI settings
 
+Reports the portal&#39;s combined AI configuration and readiness.
+
 ## Parameters
 This endpoint does not need any parameter.
 

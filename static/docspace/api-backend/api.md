@@ -150,7 +150,6 @@ All URIs are relative to *https://yourportal.onlyoffice.com*, where the host is 
 | *SettingsCookiesApi* | [**getCookieSettings**](#getcookiesettings) | **GET** /api/2.0/settings/cookiesettings | Get cookies lifetime |
 | *SettingsCookiesApi* | [**updateCookieSettings**](#updatecookiesettings) | **PUT** /api/2.0/settings/cookiesettings | Update cookies lifetime |
 | *SettingsDocsCloudApi* | [**calculateDevPack**](#calculatedevpack) | **POST** /api/2.0/settings/docscloud/calculatedevpack | Calculate the DocsCloud subscription switch cost |
-| *SettingsDocsCloudApi* | [**checkHealth**](#checkhealth) | **GET** /api/2.0/settings/docscloud/healthcheck | Check the DocsCloud server health |
 | *SettingsDocsCloudApi* | [**createTenantQuotaReport**](#createtenantquotareport) | **POST** /api/2.0/settings/docscloud/tenant/quota/report | Start the DocsCloud tenant quota report generation |
 | *SettingsDocsCloudApi* | [**getTenant**](#gettenant) | **GET** /api/2.0/settings/docscloud/tenant | Get the DocsCloud tenant |
 | *SettingsDocsCloudApi* | [**getTenantConfig**](#gettenantconfig) | **GET** /api/2.0/settings/docscloud/tenant/config | Get the DocsCloud tenant configuration |
@@ -290,8 +289,10 @@ Returns a single application by id with the per-tenant enabled state and setting
 |------------- | ------------- | ------------- | -------------|
 | **200** | Application info | [**AppWrapper**](#model-appwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **404** | Application not found | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -301,7 +302,7 @@ Returns a single application by id with the per-tenant enabled state and setting
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -326,8 +327,9 @@ This endpoint does not need any parameter.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | List of applications | [**AppArrayWrapper**](#model-apparraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -337,7 +339,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -346,7 +348,7 @@ This endpoint does not need any parameter.
 
 ### getSettings
 
-> ObjectWrapper getSettings(id)
+> UnknownNullableWrapper getSettings(id)
 
 `GET /api/2.0/apps/{id}/settings`
 
@@ -364,20 +366,22 @@ Returns the JSON settings document saved for the specified application, or null 
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Application settings JSON | [**ObjectWrapper**](#model-objectwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | Application settings JSON | [**UnknownNullableWrapper**](#model-unknownnullablewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **404** | Application not found | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
 #### Return type
 
-[**ObjectWrapper**](#model-objectwrapper)
+[**UnknownNullableWrapper**](#model-unknownnullablewrapper)
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -408,8 +412,10 @@ Toggles the enabled state of the application for the current tenant. Requires po
 | **200** | Updated application info | [**AppWrapper**](#model-appwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | You don&#39;t have enough permission to manage apps | - | - |
 | **404** | Application not found | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -419,7 +425,7 @@ Toggles the enabled state of the application for the current tenant. Requires po
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -451,8 +457,9 @@ Saves an arbitrary JSON settings document for the specified application for the 
 | **400** | Settings is not valid JSON | - | - |
 | **403** | You don&#39;t have enough permission to manage apps | - | - |
 | **404** | Application not found | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -462,7 +469,7 @@ Saves an arbitrary JSON settings document for the specified application for the 
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -495,7 +502,8 @@ Authenticates the current user by SMS, authenticator app, or without two-factor 
 | **400** | userName, password or passworHash is empty | - | - |
 | **401** | User authentication failed | - | - |
 | **404** | The user could not be found | - | - |
-| **429** | Too many login attempts. Please try again later | - | `Retry-After` |
+| **429** | Too many login attempts. Please try again later | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -526,7 +534,7 @@ Authenticates the current user by SMS or two-factor authentication code.
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **code** | path | **String** |  | [required] |
+| **code** | path | **String** | The two-factor authentication code. Send the same value as the &#x60;code&#x60; of the request body, which is the one the handler reads. | [required] |
 | **AuthWithCodeRequestsDto** | body | [**AuthWithCodeRequestsDto**](#model-authwithcoderequestsdto) |  | [optional] |
 
 #### Responses
@@ -537,7 +545,8 @@ Authenticates the current user by SMS or two-factor authentication code.
 | **400** | userName, password or passworHash is empty | - | - |
 | **401** | User authentication failed | - | - |
 | **403** | Auth code is not available | - | - |
-| **429** | Too many login attempts. Please try again later | - | `Retry-After` |
+| **429** | Too many login attempts. Please try again later | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -575,7 +584,9 @@ Opens a confirmation email URL to validate a certain action (employee invitation
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Validation result: Ok, Invalid, or Expired | [**ConfirmWrapper**](#model-confirmwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -610,7 +621,8 @@ This endpoint does not need any parameter.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Boolean value: true if the current user is authenticated | [**BooleanWrapper**](#model-booleanwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -645,7 +657,8 @@ This endpoint does not need any parameter.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Ok | [**StringWrapper**](#model-stringwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -683,8 +696,10 @@ Sets a mobile phone for the current user.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Authentication data | [**AuthenticationTokenWrapper**](#model-authenticationtokenwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -694,7 +709,7 @@ Sets a mobile phone for the current user.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -723,7 +738,8 @@ Sends SMS with an authentication code.
 |------------- | ------------- | ------------- | -------------|
 | **200** | Authentication data | [**AuthenticationTokenWrapper**](#model-authenticationtokenwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **400** | userName, password or passworHash is empty | - | - |
-| **429** | Too many login attempts. Please try again later | - | `Retry-After` |
+| **429** | Too many login attempts. Please try again later | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -760,7 +776,8 @@ This endpoint does not need any parameter.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Portal capabilities | [**CapabilitiesWrapper**](#model-capabilitieswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -798,8 +815,9 @@ This endpoint does not need any parameter.
 |------------- | ------------- | ------------- | -------------|
 | **200** | Ok | - | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -809,12 +827,12 @@ null (empty response body)
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Accept**: application/json
 
 ### clearMigration
 
@@ -835,8 +853,9 @@ This endpoint does not need any parameter.
 |------------- | ------------- | ------------- | -------------|
 | **200** | Ok | - | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -846,12 +865,12 @@ null (empty response body)
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Accept**: application/json
 
 ### finishMigration
 
@@ -875,8 +894,10 @@ Finishes the migration process.
 |------------- | ------------- | ------------- | -------------|
 | **200** | Ok | - | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -886,12 +907,12 @@ null (empty response body)
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: Not defined
+- **Accept**: application/json
 
 ### getMigrationLogs
 
@@ -913,8 +934,9 @@ This endpoint does not need any parameter.
 | **200** | Ok | - | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
 | **404** | No migration is in progress | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -924,12 +946,12 @@ null (empty response body)
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Accept**: application/json
 
 ### getMigrationStatus
 
@@ -950,8 +972,9 @@ This endpoint does not need any parameter.
 |------------- | ------------- | ------------- | -------------|
 | **200** | Ok | [**MigrationStatusWrapper**](#model-migrationstatuswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -961,7 +984,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -987,8 +1010,9 @@ This endpoint does not need any parameter.
 |------------- | ------------- | ------------- | -------------|
 | **200** | Ok | [**STRINGArrayWrapper**](#model-stringarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -998,7 +1022,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -1027,8 +1051,10 @@ Starts the migration process.
 |------------- | ------------- | ------------- | -------------|
 | **200** | Ok | - | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -1038,12 +1064,12 @@ null (empty response body)
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: Not defined
+- **Accept**: application/json
 
 ### uploadAndInitializeMigration
 
@@ -1067,8 +1093,10 @@ Uploads and initializes a migration with a migrator name specified in the reques
 |------------- | ------------- | ------------- | -------------|
 | **200** | Ok | - | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -1078,12 +1106,12 @@ null (empty response body)
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Accept**: application/json
 
 ## PortalPaymentApi
 
@@ -1111,8 +1139,9 @@ Calculates an amount of the wallet payment with the parameters specified in the 
 | **400** | Invalid request parameters | - | - |
 | **403** | No permissions to perform this action | - | - |
 | **404** | Customer could not be found | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -1122,7 +1151,7 @@ Calculates an amount of the wallet payment with the parameters specified in the 
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -1152,8 +1181,10 @@ Changes the state of a wallet service for the current tenant.  Requires permissi
 | **200** | The updated tenant wallet service settings | [**TenantWalletServiceSettingsWrapper**](#model-tenantwalletservicesettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
 | **404** | Customer could not be found | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -1163,7 +1194,7 @@ Changes the state of a wallet service for the current tenant.  Requires permissi
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -1193,8 +1224,10 @@ Starts generating a customer monthly usage report as an xlsx file and saves it i
 | **200** | Operation execution status | [**DocumentBuilderTaskWrapper**](#model-documentbuildertaskwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
 | **404** | Customer could not be found | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -1204,7 +1237,7 @@ Starts generating a customer monthly usage report as an xlsx file and saves it i
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -1234,8 +1267,10 @@ Starts generating a customer operations report as an xlsx file and saves it in D
 | **200** | Operation execution status | [**DocumentBuilderTaskWrapper**](#model-documentbuildertaskwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
 | **404** | Customer or service could not be found | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -1245,7 +1280,7 @@ Starts generating a customer operations report as an xlsx file and saves it in D
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -1275,8 +1310,10 @@ Starts generating a customer service usage report as an xlsx file and saves it i
 | **200** | Operation execution status | [**DocumentBuilderTaskWrapper**](#model-documentbuildertaskwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
 | **404** | Customer or service could not be found | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -1286,7 +1323,7 @@ Starts generating a customer service usage report as an xlsx file and saves it i
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -1312,8 +1349,9 @@ This endpoint does not need any parameter.
 |------------- | ------------- | ------------- | -------------|
 | **200** | The list of active wallet services | [**ActiveServiceArrayWrapper**](#model-activeservicearraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -1323,7 +1361,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -1332,7 +1370,7 @@ This endpoint does not need any parameter.
 
 ### getAiPrices
 
-> AiPricesResponseWrapper getAiPrices()
+> AiPricesWrapper getAiPrices()
 
 `GET /api/2.0/portal/payment/ai-prices`
 
@@ -1347,20 +1385,21 @@ This endpoint does not need any parameter.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Prices for AI models | [**AiPricesResponseWrapper**](#model-aipricesresponsewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | Prices for AI models | [**AiPricesWrapper**](#model-aipriceswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
 #### Return type
 
-[**AiPricesResponseWrapper**](#model-aipricesresponsewrapper)
+[**AiPricesWrapper**](#model-aipriceswrapper)
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -1390,8 +1429,10 @@ Returns the URL to the checkout setup page.
 |------------- | ------------- | ------------- | -------------|
 | **200** | The URL to the checkout setup page | [**StringWrapper**](#model-stringwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -1401,7 +1442,7 @@ Returns the URL to the checkout setup page.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -1430,8 +1471,10 @@ Returns the customer balance from the accounting service.
 |------------- | ------------- | ------------- | -------------|
 | **200** | The customer balance | [**BalanceWrapper**](#model-balancewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -1441,7 +1484,7 @@ Returns the customer balance from the accounting service.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -1470,8 +1513,10 @@ Returns the customer information.
 |------------- | ------------- | ------------- | -------------|
 | **200** | The customer info | [**CustomerInfoWrapper**](#model-customerinfowrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -1481,7 +1526,7 @@ Returns the customer information.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -1511,8 +1556,10 @@ Returns the customer spending aggregated per calendar month from the accounting 
 |------------- | ------------- | ------------- | -------------|
 | **200** | The customer monthly usage | [**CustomerMonthlyUsageArrayWrapper**](#model-customermonthlyusagearraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -1522,7 +1569,7 @@ Returns the customer spending aggregated per calendar month from the accounting 
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -1549,8 +1596,9 @@ This endpoint does not need any parameter.
 | **200** | Operation execution status | [**DocumentBuilderTaskWrapper**](#model-documentbuildertaskwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
 | **404** | Customer could not be found | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -1560,7 +1608,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -1589,8 +1637,8 @@ Returns the report of customer operations from the accounting service.
 | **ParticipantName** | query | **String** | The participant name. | [optional] [example: My Own Corporation] |
 | **Credit** | query | **Boolean** | Specifies whether to include credit operations in the report. | [optional] [example: true] |
 | **Debit** | query | **Boolean** | Specifies whether to include debit operations in the report. | [optional] [example: false] |
-| **Type** | query | **OperationType** | The operation type to filter by. | [optional] [example: Any] [enum: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19] |
-| **Status** | query | **OperationStatus** | The operation status to filter by. | [optional] [example: Any] [enum: 0, 1, 2, 3] |
+| **Type** | query | **OperationType** | The operation type to filter by. | [optional] [example: ServicePayment] [enum: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19] |
+| **Status** | query | **OperationStatus** | The operation status to filter by. | [optional] [example: Completed] [enum: 0, 1, 2, 3] |
 | **OrderBy** | query | **String** | The field to order by. | [optional] [example: StartDate] |
 | **OrderType** | query | **OperationOrderType** | Order direction: Ascending or Descending. | [optional] [example: Descending] [enum: 0, 1] |
 
@@ -1601,8 +1649,10 @@ Returns the report of customer operations from the accounting service.
 | **200** | The customer operations | [**ReportWrapper**](#model-reportwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
 | **404** | Service could not be found | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -1612,7 +1662,7 @@ Returns the report of customer operations from the accounting service.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -1639,8 +1689,9 @@ This endpoint does not need any parameter.
 | **200** | Operation execution status | [**DocumentBuilderTaskWrapper**](#model-documentbuildertaskwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
 | **404** | Customer could not be found | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -1650,7 +1701,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -1689,8 +1740,10 @@ Returns the customer usage statistics aggregated per service from the accounting
 | **200** | The customer service usage | [**CustomerServiceUsageReportWrapper**](#model-customerserviceusagereportwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
 | **404** | Service could not be found | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -1700,7 +1753,7 @@ Returns the customer usage statistics aggregated per service from the accounting
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -1727,8 +1780,9 @@ This endpoint does not need any parameter.
 | **200** | Operation execution status | [**DocumentBuilderTaskWrapper**](#model-documentbuildertaskwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
 | **404** | Customer could not be found | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -1738,7 +1792,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -1767,8 +1821,10 @@ Returns the URL to the payment account.
 |------------- | ------------- | ------------- | -------------|
 | **200** | The URL to the payment account | [**StringWrapper**](#model-stringwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -1778,7 +1834,7 @@ Returns the URL to the payment account.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -1804,8 +1860,9 @@ This endpoint does not need any parameter.
 |------------- | ------------- | ------------- | -------------|
 | **200** | List of available portal currencies | [**CurrenciesArrayWrapper**](#model-currenciesarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -1815,7 +1872,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -1845,8 +1902,10 @@ Returns the available portal quotas.
 |------------- | ------------- | ------------- | -------------|
 | **200** | List of available portal quotas | [**QuotaArrayWrapper**](#model-quotaarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -1856,7 +1915,7 @@ Returns the available portal quotas.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -1886,8 +1945,9 @@ Returns the URL to the payment page.
 | **200** | The URL to the payment page | [**StringWrapper**](#model-stringwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **400** | Invalid request parameters | - | - |
 | **403** | No permissions to perform this action | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -1897,7 +1957,7 @@ Returns the URL to the payment page.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -1923,8 +1983,9 @@ This endpoint does not need any parameter.
 |------------- | ------------- | ------------- | -------------|
 | **200** | List of available portal prices | [**getPortalPrices_200_response**](#model-getportalprices-200-response) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -1934,7 +1995,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -1963,8 +2024,10 @@ Returns the payment information about the current portal quota.
 |------------- | ------------- | ------------- | -------------|
 | **200** | Payment information about the current portal quota | [**QuotaWrapper**](#model-quotawrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -1974,7 +2037,7 @@ Returns the payment information about the current portal quota.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -2000,8 +2063,9 @@ This endpoint does not need any parameter.
 |------------- | ------------- | ------------- | -------------|
 | **200** | The list of restricted AI model IDs | [**RestrictedModelsResponseWrapper**](#model-restrictedmodelsresponsewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -2011,7 +2075,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -2040,8 +2104,9 @@ This endpoint does not need any parameter.
 | **402** | Tariff is not paid | - | - |
 | **403** | No permissions to perform this action | - | - |
 | **404** | Customer or subscription could not be found | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -2051,7 +2116,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -2077,8 +2142,9 @@ This endpoint does not need any parameter.
 |------------- | ------------- | ------------- | -------------|
 | **200** | The wallet service settings for the tenant | [**TenantWalletServiceSettingsWrapper**](#model-tenantwalletservicesettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -2088,7 +2154,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -2097,7 +2163,7 @@ This endpoint does not need any parameter.
 
 ### getTenantWalletSettings
 
-> TenantWalletSettingsWrapper getTenantWalletSettings()
+> TenantWalletSettingsResponseWrapper getTenantWalletSettings()
 
 `GET /api/2.0/portal/payment/topupsettings`
 
@@ -2112,20 +2178,21 @@ This endpoint does not need any parameter.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The wallet auto top up settings | [**TenantWalletSettingsWrapper**](#model-tenantwalletsettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The wallet auto top up settings | [**TenantWalletSettingsResponseWrapper**](#model-tenantwalletsettingsresponsewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
 #### Return type
 
-[**TenantWalletSettingsWrapper**](#model-tenantwalletsettingswrapper)
+[**TenantWalletSettingsResponseWrapper**](#model-tenantwalletsettingsresponsewrapper)
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -2155,8 +2222,10 @@ Returns the specified wallet service.
 | **200** | Wallet service | [**WalletServiceWrapper**](#model-walletservicewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
 | **404** | Service could not be found | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -2166,7 +2235,7 @@ Returns the specified wallet service.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -2192,8 +2261,9 @@ This endpoint does not need any parameter.
 |------------- | ------------- | ------------- | -------------|
 | **200** | List of available wallet services | [**WalletServiceArrayWrapper**](#model-walletservicearraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -2203,7 +2273,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -2235,8 +2305,9 @@ Cancels the current subscription, moves its unused balance to the wallet, and pu
 | **402** | Tariff is not paid | - | - |
 | **403** | No permissions to perform this action | - | - |
 | **404** | Customer or subscription could not be found | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -2246,7 +2317,7 @@ Cancels the current subscription, moves its unused balance to the wallet, and pu
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -2276,8 +2347,9 @@ Sends a request for the portal payment.
 | **200** | Ok | - | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **400** | Incorrect email or message text is empty | - | - |
 | **403** | No permissions to perform this action | - | - |
-| **429** | Request limit is exceeded | - | `Retry-After` |
-| **401** | Unauthorized | - | - |
+| **429** | Request limit is exceeded | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -2287,12 +2359,12 @@ null (empty response body)
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: Not defined
+- **Accept**: application/json
 
 ### setRestrictedAiModels
 
@@ -2317,8 +2389,10 @@ Overwrites the entire set of restricted AI model IDs for the current tenant.  Th
 | **200** | The updated list of restricted AI model IDs | [**RestrictedModelsResponseWrapper**](#model-restrictedmodelsresponsewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
 | **404** | Customer could not be found | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -2328,7 +2402,7 @@ Overwrites the entire set of restricted AI model IDs for the current tenant.  Th
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -2337,7 +2411,7 @@ Overwrites the entire set of restricted AI model IDs for the current tenant.  Th
 
 ### setTenantWalletSettings
 
-> TenantWalletSettingsWrapper setTenantWalletSettings(TenantWalletSettingsWrapper)
+> TenantWalletSettingsResponseWrapper setTenantWalletSettings(TenantWalletSettingsWrapper)
 
 `POST /api/2.0/portal/payment/topupsettings`
 
@@ -2355,21 +2429,23 @@ Updates the wallet auto top up settings for the current tenant.  Requires the ta
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The wallet auto top up settings | [**TenantWalletSettingsWrapper**](#model-tenantwalletsettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The wallet auto top up settings | [**TenantWalletSettingsResponseWrapper**](#model-tenantwalletsettingsresponsewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
 | **404** | Customer could not be found | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
 #### Return type
 
-[**TenantWalletSettingsWrapper**](#model-tenantwalletsettingswrapper)
+[**TenantWalletSettingsResponseWrapper**](#model-tenantwalletsettingsresponsewrapper)
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -2396,8 +2472,9 @@ This endpoint does not need any parameter.
 | **200** | Ok | - | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
 | **404** | Customer could not be found | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -2407,12 +2484,12 @@ null (empty response body)
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Accept**: application/json
 
 ### terminateCustomerOperationsReport
 
@@ -2434,8 +2511,9 @@ This endpoint does not need any parameter.
 | **200** | Ok | - | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
 | **404** | Customer could not be found | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -2445,12 +2523,12 @@ null (empty response body)
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Accept**: application/json
 
 ### terminateCustomerServiceUsageReport
 
@@ -2472,8 +2550,9 @@ This endpoint does not need any parameter.
 | **200** | Ok | - | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
 | **404** | Customer could not be found | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -2483,12 +2562,12 @@ null (empty response body)
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Accept**: application/json
 
 ### topUpDeposit
 
@@ -2514,8 +2593,9 @@ Returns the result of putting money on deposit.
 | **400** | Invalid request parameters | - | - |
 | **403** | No permissions to perform this action | - | - |
 | **404** | Customer could not be found | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -2525,7 +2605,7 @@ Returns the result of putting money on deposit.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -2556,8 +2636,9 @@ Updates the payment quantity with the parameters specified in the request.
 | **400** | Invalid request parameters | - | - |
 | **403** | No permissions to perform this action | - | - |
 | **404** | Customer could not be found | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -2567,7 +2648,7 @@ Updates the payment quantity with the parameters specified in the request.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -2599,8 +2680,9 @@ Updates the wallet payment quantity with the parameters specified in the request
 | **402** | Payment required | - | - |
 | **403** | No permissions to perform this action | - | - |
 | **404** | Customer could not be found | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -2610,7 +2692,7 @@ Updates the wallet payment quantity with the parameters specified in the request
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -2638,8 +2720,9 @@ This endpoint does not need any parameter.
 |------------- | ------------- | ------------- | -------------|
 | **200** | Current portal quota | [**TenantQuotaWrapper**](#model-tenantquotawrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -2649,7 +2732,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -2677,8 +2760,10 @@ Returns the current portal tariff.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Current portal tariff | [**TariffWrapper**](#model-tariffwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -2688,7 +2773,7 @@ Returns the current portal tariff.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -2713,8 +2798,9 @@ This endpoint does not need any parameter.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Used portal space | [**DoubleWrapper**](#model-doublewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -2724,7 +2810,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -2750,8 +2836,9 @@ This endpoint does not need any parameter.
 |------------- | ------------- | ------------- | -------------|
 | **200** | Recommended portal quota | [**TenantQuotaWrapper**](#model-tenantquotawrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -2761,7 +2848,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -2790,8 +2877,10 @@ Returns the list of upcoming payments based on the active quotas of the current 
 |------------- | ------------- | ------------- | -------------|
 | **200** | List of upcoming payments | [**UpcomingPaymentArrayWrapper**](#model-upcomingpaymentarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -2801,7 +2890,7 @@ Returns the list of upcoming payments based on the active quotas of the current 
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -2828,8 +2917,9 @@ This endpoint does not need any parameter.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | OK | - | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -2839,12 +2929,12 @@ null (empty response body)
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Accept**: application/json
 
 ### deletePortal
 
@@ -2864,8 +2954,9 @@ This endpoint does not need any parameter.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | URL to the feedback form about removing a portal | [**StringWrapper**](#model-stringwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -2875,7 +2966,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -2900,8 +2991,9 @@ This endpoint does not need any parameter.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Current portal information | [**TenantWrapper**](#model-tenantwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -2911,7 +3003,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -2920,7 +3012,7 @@ This endpoint does not need any parameter.
 
 ### getPortalPath
 
-> ObjectWrapper getPortalPath(virtualPath)
+> StringWrapper getPortalPath(virtualPath)
 
 `GET /api/2.0/portal/path`
 
@@ -2938,19 +3030,21 @@ Returns the full absolute path to the current portal.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Portal path | [**ObjectWrapper**](#model-objectwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **200** | Portal path | [**StringWrapper**](#model-stringwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
 #### Return type
 
-[**ObjectWrapper**](#model-objectwrapper)
+[**StringWrapper**](#model-stringwrapper)
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -2975,8 +3069,9 @@ This endpoint does not need any parameter.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | OK | - | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -2986,12 +3081,12 @@ null (empty response body)
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Accept**: application/json
 
 ### sendSuspendInstructions
 
@@ -3011,8 +3106,9 @@ This endpoint does not need any parameter.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | OK | - | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -3022,12 +3118,12 @@ null (empty response body)
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Accept**: application/json
 
 ### suspendPortal
 
@@ -3047,8 +3143,9 @@ This endpoint does not need any parameter.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | OK | - | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -3058,12 +3155,12 @@ null (empty response body)
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Accept**: application/json
 
 ## PortalUsersApi
 
@@ -3088,8 +3185,10 @@ Returns an invitation link for joining the portal.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Invitation link | [**InvitationLinkWrapper**](#model-invitationlinkwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -3099,7 +3198,7 @@ Returns an invitation link for joining the portal.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -3127,8 +3226,10 @@ Ensures that the current user has permission to delete the specified invitation 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Invitation link | [**StringWrapper**](#model-stringwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -3138,7 +3239,7 @@ Ensures that the current user has permission to delete the specified invitation 
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -3166,8 +3267,10 @@ Returns an invitation link for joining the portal.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Invitation link | [**StringWrapper**](#model-stringwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -3177,7 +3280,7 @@ Returns an invitation link for joining the portal.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -3205,8 +3308,10 @@ Returns an invitation link for joining the portal.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Invitation link | [**InvitationLinkWrapper**](#model-invitationlinkwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -3216,7 +3321,7 @@ Returns an invitation link for joining the portal.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -3241,8 +3346,9 @@ This endpoint does not need any parameter.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Number of portal users | [**Int64Wrapper**](#model-int64wrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -3252,7 +3358,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -3281,8 +3387,10 @@ Returns a user with the ID specified in the request from the current portal.
 |------------- | ------------- | ------------- | -------------|
 | **200** | User information | [**UserInfoWrapper**](#model-userinfowrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **404** | The user could not be found | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -3292,7 +3400,7 @@ Returns a user with the ID specified in the request from the current portal.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -3317,8 +3425,9 @@ This endpoint does not need any parameter.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | OK | - | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -3328,12 +3437,12 @@ null (empty response body)
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Accept**: application/json
 
 ### sendCongratulations
 
@@ -3358,7 +3467,9 @@ Sends congratulations to the user after registering a portal.
 |------------- | ------------- | ------------- | -------------|
 | **200** | Ok | - | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -3373,7 +3484,7 @@ No authorization required
 #### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Accept**: application/json
 
 ### updateInvitationLink
 
@@ -3396,8 +3507,10 @@ Returns an invitation link for joining the portal.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Invitation link | [**InvitationLinkWrapper**](#model-invitationlinkwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -3407,7 +3520,7 @@ Returns an invitation link for joining the portal.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -3437,8 +3550,10 @@ Sets the Developer Tools access settings for the portal.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Developer Tools access settings | [**TenantDevToolsAccessSettingsWrapper**](#model-tenantdevtoolsaccesssettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -3448,7 +3563,7 @@ Sets the Developer Tools access settings for the portal.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -3475,8 +3590,9 @@ This endpoint does not need any parameter.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Active portal connections | [**ActiveConnectionsWrapper**](#model-activeconnectionswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -3486,7 +3602,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -3515,8 +3631,10 @@ Logs out from the connection with the ID specified in the request.
 |------------- | ------------- | ------------- | -------------|
 | **200** | Boolean value: true if the operation is successful | [**BooleanWrapper**](#model-booleanwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | Access denied | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -3526,7 +3644,7 @@ Logs out from the connection with the ID specified in the request.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -3551,8 +3669,9 @@ This endpoint does not need any parameter.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | URL to the confirmation message for changing a password | [**StringWrapper**](#model-stringwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -3562,7 +3681,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -3591,8 +3710,10 @@ Logs out from all the active connections for the user with the ID specified in t
 |------------- | ------------- | ------------- | -------------|
 | **200** | Ok | - | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | Access denied | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -3602,12 +3723,12 @@ null (empty response body)
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Accept**: application/json
 
 ### logOutAllExceptThisConnection
 
@@ -3627,8 +3748,9 @@ This endpoint does not need any parameter.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Current user name | [**StringWrapper**](#model-stringwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -3638,7 +3760,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -3670,8 +3792,10 @@ Starts generating the audit trail report (XLSX by default, or CSV) and saves it 
 | **200** | Operation execution status | [**DocumentBuilderTaskWrapper**](#model-documentbuildertaskwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **402** | Your pricing plan does not support this option | - | - |
 | **403** | You don&#39;t have enough permission to create | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -3681,7 +3805,7 @@ Starts generating the audit trail report (XLSX by default, or CSV) and saves it 
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -3705,11 +3829,11 @@ Returns a list of the audit events by the parameters specified in the request.
 | **userId** | query | **UUID** (uuid) | The ID of the user who triggered the audit event. | [optional] [example: 00000000-0000-0000-0000-000000000001] |
 | **moduleType** | query | **LocationType** | The location where the audit event occurred. | [optional] [example: Files] [enum: 0, 1, 2, 3, 27, 29, 30, 31] |
 | **actionType** | query | **ActionType** | The type of action performed in the audit event (e.g., Create, Update, Delete). | [optional] [example: Create] [enum: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19] |
-| **action** | query | **MessageAction** | The specific action that occurred within the audit event. | [optional] [example: FileCreated] [enum: 1000, 1001, 1002, 1003, 1004, 1005, 1006, 1007, 1008, 1009, 1010, 1011, 1012, 1013, 1014, 1015, 1016, 1017, 1018, 1019, 1020, 1021, 1022, 1023, 1024, 1025, 1026, 1027, 1028, 1029, 4000, 4001, 4002, 4003, 4004, 4005, 4006, 4007, 4008, 4009, 4010, 4011, 4012, 4013, 4014, 4015, 4016, 4017, 4018, 4019, 4020, 4021, 4022, 4023, 4024, 4025, 4026, 4027, 4028, 4029, 4030, 4031, 4032, 4033, 4034, 4035, 4036, 4037, 5000, 5001, 5002, 5003, 5004, 5005, 5006, 5007, 5008, 5009, 5010, 5011, 5012, 5013, 5014, 5015, 5016, 5017, 5018, 5019, 5020, 5021, 5022, 5023, 5024, 5025, 5026, 5027, 5028, 5029, 5030, 5031, 5032, 5033, 5034, 5035, 5036, 5037, 5038, 5039, 5040, 5041, 5042, 5043, 5044, 5045, 5046, 5047, 5048, 5049, 5050, 5053, 5054, 5055, 5056, 5057, 5058, 5059, 5060, 5061, 5062, 5063, 5064, 5065, 5066, 5068, 5069, 5070, 5071, 5072, 5073, 5074, 5075, 5076, 5077, 5078, 5079, 5080, 5081, 5082, 5083, 5084, 5085, 5086, 5087, 5088, 5089, 5090, 5091, 5092, 5093, 5094, 5095, 5096, 5097, 5098, 5099, 5100, 5101, 5102, 5103, 5104, 5105, 5106, 5107, 5108, 5109, 5110, 5111, 5112, 5113, 5114, 5115, 5116, 5117, 5118, 5119, 5120, 5121, 5122, 5123, 5124, 5125, 5126, 5127, 5128, 5129, 5130, 5131, 5132, 5133, 5150, 5151, 5152, 5153, 5154, 5155, 5156, 5157, 5158, 5159, 5160, 5201, 5202, 5203, 5204, 5205, 5206, 5501, 5502, 5503, 6000, 6001, 6002, 6003, 6004, 6005, 6006, 6007, 6008, 6009, 6010, 6011, 6012, 6013, 6014, 6015, 6016, 6017, 6018, 6019, 6020, 6021, 6022, 6023, 6024, 6025, 6026, 6027, 6028, 6029, 6030, 6031, 6032, 6033, 6034, 6035, 6036, 6037, 6038, 6039, 6040, 6041, 6042, 6043, 6044, 6045, 6046, 6047, 6048, 6049, 6050, 6051, 6052, 6053, 6054, 6055, 6056, 6057, 6058, 6059, 6060, 6061, 6062, 6063, 6064, 6065, 6066, 6067, 6068, 6069, 6070, 6071, 6072, 6073, 6074, 6075, 6076, 6077, 6078, 6079, 6080, 6081, 6082, 6083, 6084, 6085, 6086, 6087, 6088, 6089, 6090, 6091, 6092, 6093, 6094, 6095, 6096, 6097, 6098, 6099, 6100, 6101, 6102, 7000, 7001, 7002, 7003, 7004, 9901, 9902, 9903, 9904, 9905, 9906, 9907, 9908, 9909, -1] |
+| **action** | query | **MessageAction** | The specific action that occurred within the audit event. | [optional] [example: FileCreated] [enum: 1000, 1001, 1002, 1003, 1004, 1005, 1006, 1007, 1008, 1009, 1010, 1011, 1012, 1013, 1014, 1015, 1016, 1017, 1018, 1019, 1020, 1021, 1022, 1023, 1024, 1025, 1026, 1027, 1028, 1029, 4000, 4001, 4002, 4003, 4004, 4005, 4006, 4007, 4008, 4009, 4010, 4011, 4012, 4013, 4014, 4015, 4016, 4017, 4018, 4019, 4020, 4021, 4022, 4023, 4024, 4025, 4026, 4027, 4028, 4029, 4030, 4031, 4032, 4033, 4034, 4035, 4036, 4037, 5000, 5001, 5002, 5003, 5004, 5005, 5006, 5007, 5008, 5009, 5010, 5011, 5012, 5013, 5014, 5015, 5016, 5017, 5018, 5019, 5020, 5021, 5022, 5023, 5024, 5025, 5026, 5027, 5028, 5029, 5030, 5031, 5032, 5033, 5034, 5035, 5036, 5037, 5038, 5039, 5040, 5041, 5042, 5043, 5044, 5045, 5046, 5047, 5048, 5049, 5050, 5053, 5054, 5055, 5056, 5057, 5058, 5059, 5060, 5061, 5062, 5063, 5064, 5065, 5066, 5068, 5069, 5070, 5071, 5072, 5073, 5074, 5075, 5076, 5077, 5078, 5079, 5080, 5081, 5082, 5083, 5084, 5085, 5086, 5087, 5088, 5089, 5090, 5091, 5092, 5093, 5094, 5095, 5096, 5097, 5098, 5099, 5100, 5101, 5102, 5103, 5104, 5105, 5106, 5107, 5108, 5109, 5110, 5111, 5112, 5113, 5114, 5115, 5116, 5117, 5118, 5119, 5120, 5121, 5122, 5123, 5124, 5125, 5126, 5127, 5128, 5129, 5130, 5131, 5132, 5133, 5150, 5151, 5152, 5153, 5154, 5155, 5156, 5157, 5158, 5159, 5160, 5161, 5162, 5163, 5201, 5202, 5203, 5204, 5205, 5206, 5501, 5502, 5503, 6000, 6001, 6002, 6003, 6004, 6005, 6006, 6007, 6008, 6009, 6010, 6011, 6012, 6013, 6014, 6015, 6016, 6017, 6018, 6019, 6020, 6021, 6022, 6023, 6024, 6025, 6026, 6027, 6028, 6029, 6030, 6031, 6032, 6033, 6034, 6035, 6036, 6037, 6038, 6039, 6040, 6041, 6042, 6043, 6044, 6045, 6046, 6047, 6048, 6049, 6050, 6051, 6052, 6053, 6054, 6055, 6056, 6057, 6058, 6059, 6060, 6061, 6062, 6063, 6064, 6065, 6066, 6067, 6068, 6069, 6070, 6071, 6072, 6073, 6074, 6075, 6076, 6077, 6078, 6079, 6080, 6081, 6082, 6083, 6084, 6085, 6086, 6087, 6088, 6089, 6090, 6091, 6092, 6093, 6094, 6095, 6096, 6097, 6098, 6099, 6100, 6101, 6102, 6103, 6104, 6105, 6106, 6107, 6108, 6109, 7000, 7001, 7002, 7003, 7004, 9901, 9902, 9903, 9904, 9905, 9906, 9907, 9908, 9909, -1] |
 | **entryType** | query | **EntryType** | The type of audit entry (e.g., Folder, User, File). | [optional] [example: File] [enum: 0, 1, 2, 23, 24, 25, 26, 27] |
 | **target** | query | **String** | The target object affected by the audit event (e.g., document ID, user account). | [optional] [example: document.docx] |
-| **from** | query | **ApiDateTime** | The starting date and time for filtering audit events. | [optional] [example: 2024-01-01T00:00:00Z] |
-| **to** | query | **ApiDateTime** | The ending date and time for filtering audit events. | [optional] [example: 2024-01-31T23:59:59Z] |
+| **from** | query | **Date** (date-time) | The starting date and time for filtering audit events. | [optional] [example: 2024-01-01T00:00:00Z] |
+| **to** | query | **Date** (date-time) | The ending date and time for filtering audit events. | [optional] [example: 2024-01-31T23:59:59Z] |
 | **count** | query | **Integer** (int32) | The maximum number of audit event records to retrieve. | [optional] [example: 100] [min: 1] [max: 100] |
 | **startIndex** | query | **Integer** (int32) | The index of the first audit event record to retrieve in a paged query. | [optional] [example: 0] |
 
@@ -3720,8 +3844,10 @@ Returns a list of the audit events by the parameters specified in the request.
 | **200** | List of filtered audit trail data | [**AuditEventArrayWrapper**](#model-auditeventarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **402** | Your pricing plan does not support this option | - | - |
 | **403** | No permissions to perform this action | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -3731,7 +3857,7 @@ Returns a list of the audit events by the parameters specified in the request.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -3740,7 +3866,7 @@ Returns a list of the audit events by the parameters specified in the request.
 
 ### getAuditSettings
 
-> TenantAuditSettingsWrapper getAuditSettings()
+> TenantAuditSettingsResponseWrapper getAuditSettings()
 
 `GET /api/2.0/security/audit/settings/lifetime`
 
@@ -3755,21 +3881,22 @@ This endpoint does not need any parameter.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Audit settings | [**TenantAuditSettingsWrapper**](#model-tenantauditsettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | Audit settings | [**TenantAuditSettingsResponseWrapper**](#model-tenantauditsettingsresponsewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **402** | Your pricing plan does not support this option | - | - |
 | **403** | No permissions to perform this action | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
 #### Return type
 
-[**TenantAuditSettingsWrapper**](#model-tenantauditsettingswrapper)
+[**TenantAuditSettingsResponseWrapper**](#model-tenantauditsettingsresponsewrapper)
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -3778,7 +3905,7 @@ This endpoint does not need any parameter.
 
 ### getAuditTrailMappers
 
-> ObjectWrapper getAuditTrailMappers(productType, moduleType)
+> AuditTrailProductMapperArrayWrapper getAuditTrailMappers(productType, moduleType)
 
 `GET /api/2.0/security/audit/mappers`
 
@@ -3797,20 +3924,22 @@ Returns the mappers for the audit trail types.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Audit trail mappers | [**ObjectWrapper**](#model-objectwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | Audit trail mappers | [**AuditTrailProductMapperArrayWrapper**](#model-audittrailproductmapperarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
 #### Return type
 
-[**ObjectWrapper**](#model-objectwrapper)
+[**AuditTrailProductMapperArrayWrapper**](#model-audittrailproductmapperarraywrapper)
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -3837,8 +3966,9 @@ This endpoint does not need any parameter.
 | **200** | Operation execution status | [**DocumentBuilderTaskWrapper**](#model-documentbuildertaskwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **402** | Your pricing plan does not support this option | - | - |
 | **403** | No permissions to perform this action | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -3848,7 +3978,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -3857,7 +3987,7 @@ This endpoint does not need any parameter.
 
 ### getAuditTrailTypes
 
-> ObjectWrapper getAuditTrailTypes()
+> AuditTrailTypesWrapper getAuditTrailTypes()
 
 `GET /api/2.0/security/audit/types`
 
@@ -3872,20 +4002,21 @@ This endpoint does not need any parameter.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Audit trail types | [**ObjectWrapper**](#model-objectwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | Audit trail types | [**AuditTrailTypesWrapper**](#model-audittrailtypeswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
 #### Return type
 
-[**ObjectWrapper**](#model-objectwrapper)
+[**AuditTrailTypesWrapper**](#model-audittrailtypeswrapper)
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -3912,8 +4043,9 @@ This endpoint does not need any parameter.
 | **200** | List of audit trail data | [**AuditEventArrayWrapper**](#model-auditeventarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **402** | Your pricing plan does not support this option | - | - |
 | **403** | No permissions to perform this action | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -3923,7 +4055,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -3932,7 +4064,7 @@ This endpoint does not need any parameter.
 
 ### setAuditSettings
 
-> TenantAuditSettingsWrapper setAuditSettings(TenantAuditSettingsWrapper)
+> TenantAuditSettingsResponseWrapper setAuditSettings(TenantAuditSettingsWrapper)
 
 `POST /api/2.0/security/audit/settings/lifetime`
 
@@ -3950,22 +4082,23 @@ Sets the audit trail settings for the current portal.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Audit trail settings | [**TenantAuditSettingsWrapper**](#model-tenantauditsettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | Audit trail settings | [**TenantAuditSettingsResponseWrapper**](#model-tenantauditsettingsresponsewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **400** | Exception in LoginHistoryLifeTime or AuditTrailLifeTime | - | - |
 | **402** | Your pricing plan does not support this option | - | - |
 | **403** | No permissions to perform this action | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
 #### Return type
 
-[**TenantAuditSettingsWrapper**](#model-tenantauditsettingswrapper)
+[**TenantAuditSettingsResponseWrapper**](#model-tenantauditsettingsresponsewrapper)
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -3992,8 +4125,9 @@ This endpoint does not need any parameter.
 | **200** | Ok | - | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **402** | Your pricing plan does not support this option | - | - |
 | **403** | No permissions to perform this action | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -4003,12 +4137,12 @@ null (empty response body)
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Accept**: application/json
 
 ## SecurityBannersVisibilityApi
 
@@ -4033,8 +4167,10 @@ Sets the visibility settings of the promotional banners in the portal.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Promotional banners visibility settings | [**TenantBannerSettingsWrapper**](#model-tenantbannersettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -4044,7 +4180,7 @@ Sets the visibility settings of the promotional banners in the portal.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -4076,8 +4212,9 @@ Configures the CSP (Content Security Policy) settings for the current portal.
 | **200** | Ok | [**CspWrapper**](#model-cspwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **400** | Exception in Domains | - | - |
 | **403** | No permissions to perform this action | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -4087,7 +4224,7 @@ Configures the CSP (Content Security Policy) settings for the current portal.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -4112,7 +4249,8 @@ This endpoint does not need any parameter.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Ok | [**CspWrapper**](#model-cspwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -4152,8 +4290,10 @@ Saves the Firebase device token specified in the request for the Documents appli
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | FireBase user | [**FireBaseUserWrapper**](#model-firebaseuserwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -4163,7 +4303,7 @@ Saves the Firebase device token specified in the request for the Documents appli
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -4191,8 +4331,10 @@ Subscribes to the Documents push notification.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | FireBase user | [**FireBaseUserWrapper**](#model-firebaseuserwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -4202,7 +4344,7 @@ Subscribes to the Documents push notification.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -4234,8 +4376,10 @@ Starts generating the login history report (XLSX by default, or CSV) and saves i
 | **200** | Operation execution status | [**DocumentBuilderTaskWrapper**](#model-documentbuildertaskwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **402** | Your pricing plan does not support this option | - | - |
 | **403** | No permissions to perform this action | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -4245,7 +4389,7 @@ Starts generating the login history report (XLSX by default, or CSV) and saves i
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -4272,8 +4416,9 @@ This endpoint does not need any parameter.
 | **200** | List of login events | [**LoginEventArrayWrapper**](#model-logineventarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **402** | Your pricing plan does not support this option | - | - |
 | **403** | No permissions to perform this action | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -4283,7 +4428,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -4305,9 +4450,9 @@ Returns a list of the login events by the parameters specified in the request.
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
 | **userId** | query | **UUID** (uuid) | The ID of the user whose login events are being queried. | [optional] [example: 00000000-0000-0000-0000-000000000000] |
-| **action** | query | **MessageAction** | The login-related action to filter events by. | [optional] [example: FileCreated] [enum: 1000, 1001, 1002, 1003, 1004, 1005, 1006, 1007, 1008, 1009, 1010, 1011, 1012, 1013, 1014, 1015, 1016, 1017, 1018, 1019, 1020, 1021, 1022, 1023, 1024, 1025, 1026, 1027, 1028, 1029, 4000, 4001, 4002, 4003, 4004, 4005, 4006, 4007, 4008, 4009, 4010, 4011, 4012, 4013, 4014, 4015, 4016, 4017, 4018, 4019, 4020, 4021, 4022, 4023, 4024, 4025, 4026, 4027, 4028, 4029, 4030, 4031, 4032, 4033, 4034, 4035, 4036, 4037, 5000, 5001, 5002, 5003, 5004, 5005, 5006, 5007, 5008, 5009, 5010, 5011, 5012, 5013, 5014, 5015, 5016, 5017, 5018, 5019, 5020, 5021, 5022, 5023, 5024, 5025, 5026, 5027, 5028, 5029, 5030, 5031, 5032, 5033, 5034, 5035, 5036, 5037, 5038, 5039, 5040, 5041, 5042, 5043, 5044, 5045, 5046, 5047, 5048, 5049, 5050, 5053, 5054, 5055, 5056, 5057, 5058, 5059, 5060, 5061, 5062, 5063, 5064, 5065, 5066, 5068, 5069, 5070, 5071, 5072, 5073, 5074, 5075, 5076, 5077, 5078, 5079, 5080, 5081, 5082, 5083, 5084, 5085, 5086, 5087, 5088, 5089, 5090, 5091, 5092, 5093, 5094, 5095, 5096, 5097, 5098, 5099, 5100, 5101, 5102, 5103, 5104, 5105, 5106, 5107, 5108, 5109, 5110, 5111, 5112, 5113, 5114, 5115, 5116, 5117, 5118, 5119, 5120, 5121, 5122, 5123, 5124, 5125, 5126, 5127, 5128, 5129, 5130, 5131, 5132, 5133, 5150, 5151, 5152, 5153, 5154, 5155, 5156, 5157, 5158, 5159, 5160, 5201, 5202, 5203, 5204, 5205, 5206, 5501, 5502, 5503, 6000, 6001, 6002, 6003, 6004, 6005, 6006, 6007, 6008, 6009, 6010, 6011, 6012, 6013, 6014, 6015, 6016, 6017, 6018, 6019, 6020, 6021, 6022, 6023, 6024, 6025, 6026, 6027, 6028, 6029, 6030, 6031, 6032, 6033, 6034, 6035, 6036, 6037, 6038, 6039, 6040, 6041, 6042, 6043, 6044, 6045, 6046, 6047, 6048, 6049, 6050, 6051, 6052, 6053, 6054, 6055, 6056, 6057, 6058, 6059, 6060, 6061, 6062, 6063, 6064, 6065, 6066, 6067, 6068, 6069, 6070, 6071, 6072, 6073, 6074, 6075, 6076, 6077, 6078, 6079, 6080, 6081, 6082, 6083, 6084, 6085, 6086, 6087, 6088, 6089, 6090, 6091, 6092, 6093, 6094, 6095, 6096, 6097, 6098, 6099, 6100, 6101, 6102, 7000, 7001, 7002, 7003, 7004, 9901, 9902, 9903, 9904, 9905, 9906, 9907, 9908, 9909, -1] |
-| **from** | query | **ApiDateTime** | The starting date and time for filtering login events. | [optional] [example: 2024-01-15T10:30:00Z] |
-| **to** | query | **ApiDateTime** | The ending date and time for filtering login events. | [optional] [example: 2024-01-15T10:30:00Z] |
+| **action** | query | **MessageAction** | The login-related action to filter events by. | [optional] [example: FileCreated] [enum: 1000, 1001, 1002, 1003, 1004, 1005, 1006, 1007, 1008, 1009, 1010, 1011, 1012, 1013, 1014, 1015, 1016, 1017, 1018, 1019, 1020, 1021, 1022, 1023, 1024, 1025, 1026, 1027, 1028, 1029, 4000, 4001, 4002, 4003, 4004, 4005, 4006, 4007, 4008, 4009, 4010, 4011, 4012, 4013, 4014, 4015, 4016, 4017, 4018, 4019, 4020, 4021, 4022, 4023, 4024, 4025, 4026, 4027, 4028, 4029, 4030, 4031, 4032, 4033, 4034, 4035, 4036, 4037, 5000, 5001, 5002, 5003, 5004, 5005, 5006, 5007, 5008, 5009, 5010, 5011, 5012, 5013, 5014, 5015, 5016, 5017, 5018, 5019, 5020, 5021, 5022, 5023, 5024, 5025, 5026, 5027, 5028, 5029, 5030, 5031, 5032, 5033, 5034, 5035, 5036, 5037, 5038, 5039, 5040, 5041, 5042, 5043, 5044, 5045, 5046, 5047, 5048, 5049, 5050, 5053, 5054, 5055, 5056, 5057, 5058, 5059, 5060, 5061, 5062, 5063, 5064, 5065, 5066, 5068, 5069, 5070, 5071, 5072, 5073, 5074, 5075, 5076, 5077, 5078, 5079, 5080, 5081, 5082, 5083, 5084, 5085, 5086, 5087, 5088, 5089, 5090, 5091, 5092, 5093, 5094, 5095, 5096, 5097, 5098, 5099, 5100, 5101, 5102, 5103, 5104, 5105, 5106, 5107, 5108, 5109, 5110, 5111, 5112, 5113, 5114, 5115, 5116, 5117, 5118, 5119, 5120, 5121, 5122, 5123, 5124, 5125, 5126, 5127, 5128, 5129, 5130, 5131, 5132, 5133, 5150, 5151, 5152, 5153, 5154, 5155, 5156, 5157, 5158, 5159, 5160, 5161, 5162, 5163, 5201, 5202, 5203, 5204, 5205, 5206, 5501, 5502, 5503, 6000, 6001, 6002, 6003, 6004, 6005, 6006, 6007, 6008, 6009, 6010, 6011, 6012, 6013, 6014, 6015, 6016, 6017, 6018, 6019, 6020, 6021, 6022, 6023, 6024, 6025, 6026, 6027, 6028, 6029, 6030, 6031, 6032, 6033, 6034, 6035, 6036, 6037, 6038, 6039, 6040, 6041, 6042, 6043, 6044, 6045, 6046, 6047, 6048, 6049, 6050, 6051, 6052, 6053, 6054, 6055, 6056, 6057, 6058, 6059, 6060, 6061, 6062, 6063, 6064, 6065, 6066, 6067, 6068, 6069, 6070, 6071, 6072, 6073, 6074, 6075, 6076, 6077, 6078, 6079, 6080, 6081, 6082, 6083, 6084, 6085, 6086, 6087, 6088, 6089, 6090, 6091, 6092, 6093, 6094, 6095, 6096, 6097, 6098, 6099, 6100, 6101, 6102, 6103, 6104, 6105, 6106, 6107, 6108, 6109, 7000, 7001, 7002, 7003, 7004, 9901, 9902, 9903, 9904, 9905, 9906, 9907, 9908, 9909, -1] |
+| **from** | query | **Date** (date-time) | The starting date and time for filtering login events. | [optional] [example: 2024-01-15T10:30:00Z] |
+| **to** | query | **Date** (date-time) | The ending date and time for filtering login events. | [optional] [example: 2024-01-15T10:30:00Z] |
 | **count** | query | **Integer** (int32) | The number of login events to retrieve in the query. | [optional] [example: 1] [min: 1] [max: 100] |
 | **startIndex** | query | **Integer** (int32) | The starting index for fetching a subset of login events from the query results. | [optional] [example: 1] |
 
@@ -4318,8 +4463,10 @@ Returns a list of the login events by the parameters specified in the request.
 | **200** | List of filtered login events | [**LoginEventArrayWrapper**](#model-logineventarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **402** | Your pricing plan does not support this option | - | - |
 | **403** | No permissions to perform this action | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -4329,7 +4476,7 @@ Returns a list of the login events by the parameters specified in the request.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -4356,8 +4503,9 @@ This endpoint does not need any parameter.
 | **200** | Operation execution status | [**DocumentBuilderTaskWrapper**](#model-documentbuildertaskwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **402** | Your pricing plan does not support this option | - | - |
 | **403** | No permissions to perform this action | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -4367,7 +4515,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -4394,8 +4542,9 @@ This endpoint does not need any parameter.
 | **200** | Ok | - | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **402** | Your pricing plan does not support this option | - | - |
 | **403** | No permissions to perform this action | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -4405,12 +4554,12 @@ null (empty response body)
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Accept**: application/json
 
 ## SecurityOAuth2Api
 
@@ -4432,8 +4581,9 @@ This endpoint does not need any parameter.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Jwt Token | [**StringWrapper**](#model-stringwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -4443,7 +4593,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -4471,8 +4621,9 @@ This endpoint does not need any parameter.
 |------------- | ------------- | ------------- | -------------|
 | **200** | SMTP operation status | [**SmtpOperationStatusRequestsWrapper**](#model-smtpoperationstatusrequestswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **402** | Your pricing plan does not support this option | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -4482,7 +4633,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -4508,8 +4659,9 @@ This endpoint does not need any parameter.
 |------------- | ------------- | ------------- | -------------|
 | **200** | SMTP settings | [**SmtpSettingsWrapper**](#model-smtpsettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **402** | Your pricing plan does not support this option | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -4519,7 +4671,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -4545,8 +4697,9 @@ This endpoint does not need any parameter.
 |------------- | ------------- | ------------- | -------------|
 | **200** | Default SMTP settings | [**SmtpSettingsWrapper**](#model-smtpsettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **402** | Your pricing plan does not support this option | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -4556,7 +4709,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -4585,8 +4738,10 @@ Saves the SMTP settings for the current portal.
 |------------- | ------------- | ------------- | -------------|
 | **200** | SMTP settings | [**SmtpSettingsWrapper**](#model-smtpsettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **402** | Your pricing plan does not support this option | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -4596,7 +4751,7 @@ Saves the SMTP settings for the current portal.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -4622,8 +4777,9 @@ This endpoint does not need any parameter.
 |------------- | ------------- | ------------- | -------------|
 | **200** | SMTP operation status | [**SmtpOperationStatusRequestsWrapper**](#model-smtpoperationstatusrequestswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **402** | Your pricing plan does not support this option | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -4633,7 +4789,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -4660,8 +4816,9 @@ This endpoint does not need any parameter.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Developer Tools access settings | [**TenantDevToolsAccessSettingsWrapper**](#model-tenantdevtoolsaccesssettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -4671,7 +4828,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -4698,8 +4855,9 @@ This endpoint does not need any parameter.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Authorization services | [**AuthServiceRequestsArrayWrapper**](#model-authservicerequestsarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -4709,7 +4867,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -4739,8 +4897,9 @@ Saves the authorization keys.
 | **200** | Boolean value: true if the authorization keys are changed | [**BooleanWrapper**](#model-booleanwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **400** | Bad keys | - | - |
 | **402** | Your pricing plan does not support this option | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -4750,7 +4909,7 @@ Saves the authorization keys.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -4778,8 +4937,10 @@ Tests an external database connection with the provided settings without saving 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Connection test result with Success flag and optional Error message | [**ConnectionTestResultWrapper**](#model-connectiontestresultwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -4789,7 +4950,7 @@ Tests an external database connection with the provided settings without saving 
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -4816,8 +4977,9 @@ This endpoint does not need any parameter.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Promotional banners visibility settings | [**TenantBannerSettingsWrapper**](#model-tenantbannersettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -4827,7 +4989,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -4855,8 +5017,9 @@ This endpoint does not need any parameter.
 |------------- | ------------- | ------------- | -------------|
 | **200** | Ok | - | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **405** | Not available | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -4866,12 +5029,12 @@ null (empty response body)
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Accept**: application/json
 
 ### completeWizard
 
@@ -4896,8 +5059,9 @@ Completes the Wizard settings.
 | **200** | Wizard settings | [**WizardSettingsWrapper**](#model-wizardsettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **400** | Incorrect email address/The password is empty | - | - |
 | **402** | You must enter a license key or license key is not correct or license expired or user quota does not match the license | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -4907,7 +5071,7 @@ Completes the Wizard settings.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -4936,8 +5100,9 @@ Saves the deep link configuration settings for the portal.
 |------------- | ------------- | ------------- | -------------|
 | **200** | Deep link configuration updated | [**TenantDeepLinkSettingsWrapper**](#model-tenantdeeplinksettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **400** | Invalid deep link configuration | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -4947,7 +5112,7 @@ Saves the deep link configuration settings for the portal.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -4975,8 +5140,10 @@ Deletes the portal color theme with the ID specified in the request.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Portal theme settings: custom color theme settings, selected or not, limit | [**CustomColorThemesSettingsWrapper**](#model-customcolorthemessettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -4986,7 +5153,7 @@ Deletes the portal color theme with the ID specified in the request.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -5011,7 +5178,8 @@ This endpoint does not need any parameter.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Ok | [**TenantDeepLinkSettingsWrapper**](#model-tenantdeeplinksettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -5046,8 +5214,9 @@ This endpoint does not need any parameter.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Payment settings: sales email, feedback and support URL, link to pay for a portal, Standalone or not, current license, maximum quota quantity | [**PaymentSettingsWrapper**](#model-paymentsettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -5057,7 +5226,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -5082,7 +5251,8 @@ This endpoint does not need any parameter.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Settings of the portal themes | [**CustomColorThemesSettingsWrapper**](#model-customcolorthemessettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -5101,7 +5271,7 @@ No authorization required
 
 ### getPortalHostname
 
-> ObjectWrapper getPortalHostname()
+> StringWrapper getPortalHostname()
 
 `GET /api/2.0/settings/machine`
 
@@ -5116,19 +5286,20 @@ This endpoint does not need any parameter.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Portal hostname | [**ObjectWrapper**](#model-objectwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **200** | Portal hostname | [**StringWrapper**](#model-stringwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
 #### Return type
 
-[**ObjectWrapper**](#model-objectwrapper)
+[**StringWrapper**](#model-stringwrapper)
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -5153,8 +5324,9 @@ This endpoint does not need any parameter.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Portal logo image URL | [**StringWrapper**](#model-stringwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -5164,7 +5336,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -5192,7 +5364,9 @@ Returns a list of all the available portal settings with the current values for 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Settings | [**SettingsWrapper**](#model-settingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -5211,7 +5385,7 @@ No authorization required
 
 ### getSocketSettings
 
-> ObjectWrapper getSocketSettings()
+> SocketSettingsWrapper getSocketSettings()
 
 `GET /api/2.0/settings/socket`
 
@@ -5226,19 +5400,20 @@ This endpoint does not need any parameter.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Socket settings: hub URL | [**ObjectWrapper**](#model-objectwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **200** | Socket settings: hub URL | [**SocketSettingsWrapper**](#model-socketsettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
 #### Return type
 
-[**ObjectWrapper**](#model-objectwrapper)
+[**SocketSettingsWrapper**](#model-socketsettingswrapper)
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -5263,7 +5438,8 @@ This endpoint does not need any parameter.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | List of all the available portal languages | [**STRINGArrayWrapper**](#model-stringarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -5298,8 +5474,9 @@ This endpoint does not need any parameter.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | AI access settings | [**TenantAiAccessSettingsWrapper**](#model-tenantaiaccesssettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -5309,7 +5486,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -5334,7 +5511,8 @@ This endpoint does not need any parameter.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | portal user invitation settings | [**TenantUserInvitationSettingsWrapper**](#model-tenantuserinvitationsettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -5369,8 +5547,9 @@ This endpoint does not need any parameter.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | List of all the available time zones with their IDs and display names | [**TimezonesRequestsArrayWrapper**](#model-timezonesrequestsarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -5380,7 +5559,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -5408,8 +5587,10 @@ Sets the default folder.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Message about saving settings successfully | [**StudioDefaultPageSettingsWrapper**](#model-studiodefaultpagesettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -5419,7 +5600,7 @@ Sets the default folder.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -5450,8 +5631,9 @@ Saves the DNS settings specified in the request to the current portal.
 | **400** | Invalid domain name/incorrect length of doman name | - | - |
 | **402** | Your pricing plan does not support this option | - | - |
 | **405** | Method not allowed | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -5461,7 +5643,7 @@ Saves the DNS settings specified in the request to the current portal.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -5489,8 +5671,10 @@ Saves the mail domain settings specified in the request to the portal.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Message about the result of saving the mail domain settings | [**StringWrapper**](#model-stringwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -5500,7 +5684,7 @@ Saves the mail domain settings specified in the request to the portal.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -5528,8 +5712,10 @@ Saves the portal color theme specified in the request.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Portal theme settings | [**CustomColorThemesSettingsWrapper**](#model-customcolorthemessettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -5539,7 +5725,7 @@ Saves the portal color theme specified in the request.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -5568,8 +5754,10 @@ Updates the portal-level AI access settings. When AI is disabled, all AI feature
 |------------- | ------------- | ------------- | -------------|
 | **200** | Updated AI access settings | [**TenantAiAccessSettingsWrapper**](#model-tenantaiaccesssettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | You don&#39;t have enough permission to change the AI access settings | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -5579,7 +5767,7 @@ Updates the portal-level AI access settings. When AI is disabled, all AI feature
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -5607,8 +5795,10 @@ Updates the email activation settings.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Updated email activation settings | [**EmailActivationSettingsWrapper**](#model-emailactivationsettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -5618,7 +5808,7 @@ Updates the email activation settings.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -5646,8 +5836,10 @@ Updates the portal user invitation settings.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Updated user invitation settings | [**TenantUserInvitationSettingsWrapper**](#model-tenantuserinvitationsettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -5657,7 +5849,7 @@ Updates the portal user invitation settings.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -5684,8 +5876,9 @@ This endpoint does not need any parameter.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Lifetime value in minutes | [**CookieSettingsWrapper**](#model-cookiesettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -5695,7 +5888,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -5724,8 +5917,10 @@ Updates the cookies lifetime value in minutes.
 |------------- | ------------- | ------------- | -------------|
 | **200** | Message about the result of saving new settings | [**StringWrapper**](#model-stringwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **402** | Your pricing plan does not support this option | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -5735,7 +5930,7 @@ Updates the cookies lifetime value in minutes.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -5769,8 +5964,9 @@ Calculates the top-up cost of switching the current DocsCloud subscription to Do
 | **402** | Tariff is not paid | - | - |
 | **403** | No permissions to perform this action | - | - |
 | **404** | Customer or service could not be found | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -5780,48 +5976,12 @@ Calculates the top-up cost of switching the current DocsCloud subscription to Do
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
 - **Content-Type**: application/json
 - **Accept**: application/json
-
-### checkHealth
-
-> checkHealth()
-
-`GET /api/2.0/settings/docscloud/healthcheck`
-
-Check the DocsCloud server health
-
-Checks whether the DocsCloud server is reachable.
-
-#### Parameters
-This endpoint does not need any parameter.
-
-#### Responses
-
-| Status code | Description | Type | Response headers |
-|------------- | ------------- | ------------- | -------------|
-| **200** | DocsCloud server is reachable | - | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
-| **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
-| **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
-
-#### Return type
-
-null (empty response body)
-
-#### Authorization
-
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
-
-#### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: Not defined
 
 ### createTenantQuotaReport
 
@@ -5842,8 +6002,9 @@ This endpoint does not need any parameter.
 |------------- | ------------- | ------------- | -------------|
 | **200** | Operation execution status | [**DocumentBuilderTaskWrapper**](#model-documentbuildertaskwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -5853,7 +6014,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -5874,15 +6035,17 @@ Returns the DocsCloud tenant of the current portal.
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **refresh** | query | **Boolean** |  | [optional] [default to false] |
+| **refresh** | query | **Boolean** | Specifies whether to bypass the cache and request the tenant from DocsCloud again. | [optional] [default to false] |
 
 #### Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | DocsCloud tenant | [**DocsCloudTenantWrapper**](#model-docscloudtenantwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -5892,7 +6055,7 @@ Returns the DocsCloud tenant of the current portal.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -5913,15 +6076,17 @@ Returns the DocsCloud tenant configuration of the current portal.
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **refresh** | query | **Boolean** |  | [optional] [default to false] |
+| **refresh** | query | **Boolean** | Specifies whether to bypass the cache and request the tenant configuration from DocsCloud again. | [optional] [default to false] |
 
 #### Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | DocsCloud tenant configuration | [**DocsCloudConfigWrapper**](#model-docscloudconfigwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **400** | The DocsCloud tenant is not activated | - | - |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -5931,7 +6096,7 @@ Returns the DocsCloud tenant configuration of the current portal.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -5952,15 +6117,17 @@ Returns the DocsCloud license and server information with usage statistics of th
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **refresh** | query | **Boolean** |  | [optional] [default to false] |
+| **refresh** | query | **Boolean** | Specifies whether to bypass the cache and request the tenant information from DocsCloud again. | [optional] [default to false] |
 
 #### Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | DocsCloud tenant information | [**DocsCloudTenantInfoWrapper**](#model-docscloudtenantinfowrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **400** | The DocsCloud tenant is not activated | - | - |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -5970,7 +6137,7 @@ Returns the DocsCloud license and server information with usage statistics of th
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -5991,15 +6158,17 @@ Returns the DocsCloud user quota (active users) of the current portal.
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **refresh** | query | **Boolean** |  | [optional] [default to false] |
+| **refresh** | query | **Boolean** | Specifies whether to bypass the cache and request the user quota from DocsCloud again. | [optional] [default to false] |
 
 #### Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | DocsCloud user quota | [**DocsCloudQuotaWrapper**](#model-docscloudquotawrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **400** | The DocsCloud tenant is not activated | - | - |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -6009,7 +6178,7 @@ Returns the DocsCloud user quota (active users) of the current portal.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -6035,8 +6204,9 @@ This endpoint does not need any parameter.
 |------------- | ------------- | ------------- | -------------|
 | **200** | Operation execution status | [**DocumentBuilderTaskWrapper**](#model-documentbuildertaskwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -6046,7 +6216,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -6067,15 +6237,17 @@ Returns the DocsCloud usage statistics of the current portal.
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **refresh** | query | **Boolean** |  | [optional] [default to false] |
+| **refresh** | query | **Boolean** | Specifies whether to bypass the cache and request the usage statistics from DocsCloud again. | [optional] [default to false] |
 
 #### Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | DocsCloud tenant usage statistics | [**DocsCloudUsageWrapper**](#model-docscloudusagewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **400** | The DocsCloud tenant is not activated | - | - |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -6085,7 +6257,7 @@ Returns the DocsCloud usage statistics of the current portal.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -6114,8 +6286,9 @@ This endpoint does not need any parameter.
 | **402** | Tariff is not paid | - | - |
 | **403** | No permissions to perform this action | - | - |
 | **404** | Quota could not be found | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -6125,7 +6298,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -6157,8 +6330,9 @@ Switches the current DocsCloud subscription to DocsCloudDevPack: charges the pri
 | **402** | Tariff is not paid | - | - |
 | **403** | No permissions to perform this action | - | - |
 | **404** | Customer or service could not be found | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -6168,7 +6342,7 @@ Switches the current DocsCloud subscription to DocsCloudDevPack: charges the pri
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -6194,8 +6368,9 @@ This endpoint does not need any parameter.
 |------------- | ------------- | ------------- | -------------|
 | **200** | Ok | - | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -6205,12 +6380,12 @@ null (empty response body)
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Accept**: application/json
 
 ### updateTenantConfig
 
@@ -6233,8 +6408,10 @@ Updates the DocsCloud tenant configuration of the current portal with the parame
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Updated DocsCloud tenant configuration | [**DocsCloudConfigWrapper**](#model-docscloudconfigwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **400** | Invalid request parameters, or the DocsCloud tenant is not activated | - | - |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -6244,7 +6421,7 @@ Updates the DocsCloud tenant configuration of the current portal with the parame
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -6272,8 +6449,9 @@ This endpoint does not need any parameter.
 |------------- | ------------- | ------------- | -------------|
 | **200** | Storage encryption progress | [**DoubleNullableWrapper**](#model-doublenullablewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **405** | Method not allowed | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -6283,7 +6461,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -6310,8 +6488,9 @@ This endpoint does not need any parameter.
 | **200** | Storage encryption settings | [**EncryptionSettingsWrapper**](#model-encryptionsettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
 | **405** | Method not allowed | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -6321,7 +6500,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -6352,8 +6531,10 @@ Starts the storage encryption process.
 | **402** | Your pricing plan does not support this option | - | - |
 | **403** | No permissions to perform this action | - | - |
 | **405** | Method not allowed | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -6363,7 +6544,7 @@ Starts the storage encryption process.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -6374,7 +6555,7 @@ Starts the storage encryption process.
 
 ### getGreetingSettings
 
-> ObjectWrapper getGreetingSettings()
+> StringWrapper getGreetingSettings()
 
 `GET /api/2.0/settings/greetingsettings`
 
@@ -6389,19 +6570,20 @@ This endpoint does not need any parameter.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Greeting settings: tenant name | [**ObjectWrapper**](#model-objectwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **200** | Greeting settings: tenant name | [**StringWrapper**](#model-stringwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
 #### Return type
 
-[**ObjectWrapper**](#model-objectwrapper)
+[**StringWrapper**](#model-stringwrapper)
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -6426,8 +6608,9 @@ This endpoint does not need any parameter.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Boolean value: true if the greeting settings of the current portal are set to default | [**BooleanWrapper**](#model-booleanwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -6437,7 +6620,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -6462,8 +6645,9 @@ This endpoint does not need any parameter.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Greeting settings: tenant name | [**StringWrapper**](#model-stringwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -6473,7 +6657,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -6501,8 +6685,10 @@ Saves the greeting settings specified in the request to the current portal.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Message about saving greeting settings successfully | [**StringWrapper**](#model-stringwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -6512,7 +6698,7 @@ Saves the greeting settings specified in the request to the current portal.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -6539,8 +6725,9 @@ This endpoint does not need any parameter.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | List of IP restrictions parameters | [**IPRestrictionArrayWrapper**](#model-iprestrictionarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -6550,7 +6737,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -6575,8 +6762,9 @@ This endpoint does not need any parameter.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | IP restriction settings | [**IPRestrictionsSettingsWrapper**](#model-iprestrictionssettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -6586,7 +6774,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -6614,8 +6802,10 @@ Updates the IP restrictions with the parameters specified in the request.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Updated IP restriction settings | [**IpRestrictionsWrapper**](#model-iprestrictionswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -6625,7 +6815,7 @@ Updates the IP restrictions with the parameters specified in the request.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -6653,8 +6843,10 @@ Updates the IP restriction settings with the parameters specified in the request
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Updated IP restriction settings | [**IpRestrictionsWrapper**](#model-iprestrictionswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -6664,7 +6856,7 @@ Updates the IP restriction settings with the parameters specified in the request
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -6691,8 +6883,9 @@ This endpoint does not need any parameter.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Message about the result of activating license | [**StringWrapper**](#model-stringwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -6702,7 +6895,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -6727,7 +6920,8 @@ This endpoint does not need any parameter.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Boolean value: true if the license is required | [**BooleanWrapper**](#model-booleanwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -6762,8 +6956,9 @@ This endpoint does not need any parameter.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Boolean value: true if the operation is successful | [**BooleanWrapper**](#model-booleanwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -6773,7 +6968,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -6804,8 +6999,9 @@ Uploads a portal license specified in the request.
 | **400** | The uploaded file could not be found | - | - |
 | **403** | Portal Access | - | - |
 | **405** | Your pricing plan does not support this option | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -6815,7 +7011,7 @@ Uploads a portal license specified in the request.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -6842,8 +7038,9 @@ This endpoint does not need any parameter.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Login settings | [**LoginSettingsWrapper**](#model-loginsettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -6853,7 +7050,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -6878,8 +7075,9 @@ This endpoint does not need any parameter.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Login settings | [**LoginSettingsWrapper**](#model-loginsettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -6889,7 +7087,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -6917,8 +7115,10 @@ Updates the login settings with the parameters specified in the request.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Updated login settings | [**LoginSettingsWrapper**](#model-loginsettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -6928,7 +7128,7 @@ Updates the login settings with the parameters specified in the request.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -6958,8 +7158,10 @@ Displays the contact form on the Sign In page, allowing users to send a message 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Message about the result of saving new settings | [**StringWrapper**](#model-stringwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -6969,7 +7171,7 @@ Displays the contact form on the Sign In page, allowing users to send a message 
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -6998,7 +7200,8 @@ Sends a message to the administrator email when unauthorized users encounter iss
 |------------- | ------------- | ------------- | -------------|
 | **200** | Message about the result of sending a message | [**StringWrapper**](#model-stringwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **400** | Incorrect email or message text is empty | - | - |
-| **429** | Request limit is exceeded | - | `Retry-After` |
+| **429** | Request limit is exceeded | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -7038,7 +7241,9 @@ Sends an invitation email with a link to the DocSpace.
 | **200** | Message about sending a link to confirm joining the DocSpace | [**StringWrapper**](#model-stringwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **400** | Incorrect email or email already exists | - | - |
 | **403** | No permissions to perform this action | - | - |
-| **429** | Request limit is exceeded | - | `Retry-After` |
+| **405** | Joining the portal is not available | - | - |
+| **429** | Request limit is exceeded | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -7075,8 +7280,9 @@ This endpoint does not need any parameter.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Notification settings | [**NotificationChannelStatusWrapper**](#model-notificationchannelstatuswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -7086,7 +7292,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -7114,8 +7320,10 @@ Checks if the notification type specified in the request is enabled or not.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Notification settings | [**NotificationSettingsWrapper**](#model-notificationsettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -7125,7 +7333,7 @@ Checks if the notification type specified in the request is enabled or not.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -7150,8 +7358,9 @@ This endpoint does not need any parameter.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Room notification settings | [**RoomsNotificationSettingsWrapper**](#model-roomsnotificationsettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -7161,7 +7370,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -7189,8 +7398,10 @@ Enables the notification type specified in the request.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Notification settings | [**NotificationSettingsWrapper**](#model-notificationsettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -7200,7 +7411,7 @@ Enables the notification type specified in the request.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -7228,8 +7439,10 @@ Sets a notification status for a room with the ID specified in the request.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Room notification settings | [**RoomsNotificationSettingsWrapper**](#model-roomsnotificationsettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -7239,7 +7452,7 @@ Sets a notification status for a room with the ID specified in the request.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -7271,8 +7484,9 @@ Sends the instructions to change the DocSpace owner.
 | **200** | Message about changing the portal owner | [**OwnerChangeInstructionsWrapper**](#model-ownerchangeinstructionswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **400** | Owner&#39;s email is not activated | - | - |
 | **403** | Collaborator can not be an owner | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -7282,7 +7496,7 @@ Sends the instructions to change the DocSpace owner.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -7312,8 +7526,9 @@ Updates the current portal owner with a new one specified in the request.
 | **200** | Ok | - | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **400** | The user could not be found | - | - |
 | **409** |  | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -7323,12 +7538,12 @@ null (empty response body)
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: Not defined
+- **Accept**: application/json
 
 ## SettingsQuotaApi
 
@@ -7350,8 +7565,9 @@ This endpoint does not need any parameter.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Ok | [**TenantUserQuotaSettingsWrapper**](#model-tenantuserquotasettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -7361,7 +7577,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -7390,8 +7606,10 @@ Saves the AI Agent quota settings specified in the request to the current portal
 |------------- | ------------- | ------------- | -------------|
 | **200** | Tenant AI Agent quota settings | [**TenantAiAgentQuotaSettingsWrapper**](#model-tenantaiagentquotasettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **402** | Your pricing plan does not support this option | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -7401,7 +7619,7 @@ Saves the AI Agent quota settings specified in the request to the current portal
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -7430,8 +7648,10 @@ Saves the room quota settings specified in the request to the current portal.
 |------------- | ------------- | ------------- | -------------|
 | **200** | Tenant room quota settings | [**TenantRoomQuotaSettingsWrapper**](#model-tenantroomquotasettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **402** | Your pricing plan does not support this option | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -7441,7 +7661,7 @@ Saves the room quota settings specified in the request to the current portal.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -7471,8 +7691,10 @@ Saves the tenant quota settings specified in the request to the current portal.
 | **200** | Tenant quota settings | [**TenantQuotaSettingsWrapper**](#model-tenantquotasettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **402** | Your pricing plan does not support this option | - | - |
 | **405** | Not available | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -7482,7 +7704,7 @@ Saves the tenant quota settings specified in the request to the current portal.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -7493,7 +7715,7 @@ Saves the tenant quota settings specified in the request to the current portal.
 
 ### deleteAdditionalWhiteLabelSettings
 
-> AdditionalWhiteLabelSettingsWrapper deleteAdditionalWhiteLabelSettings()
+> AdditionalWhiteLabelSettingsResponseWrapper deleteAdditionalWhiteLabelSettings()
 
 `DELETE /api/2.0/settings/rebranding/additional`
 
@@ -7508,20 +7730,21 @@ This endpoint does not need any parameter.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Default additional white label settings | [**AdditionalWhiteLabelSettingsWrapper**](#model-additionalwhitelabelsettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | Default additional white label settings | [**AdditionalWhiteLabelSettingsResponseWrapper**](#model-additionalwhitelabelsettingsresponsewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
 #### Return type
 
-[**AdditionalWhiteLabelSettingsWrapper**](#model-additionalwhitelabelsettingswrapper)
+[**AdditionalWhiteLabelSettingsResponseWrapper**](#model-additionalwhitelabelsettingsresponsewrapper)
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -7530,7 +7753,7 @@ This endpoint does not need any parameter.
 
 ### deleteCompanyWhiteLabelSettings
 
-> CompanyWhiteLabelSettingsWrapper deleteCompanyWhiteLabelSettings()
+> CompanyWhiteLabelSettingsResponseWrapper deleteCompanyWhiteLabelSettings()
 
 `DELETE /api/2.0/settings/rebranding/company`
 
@@ -7545,20 +7768,21 @@ This endpoint does not need any parameter.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Default company white label settings | [**CompanyWhiteLabelSettingsWrapper**](#model-companywhitelabelsettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | Default company white label settings | [**CompanyWhiteLabelSettingsResponseWrapper**](#model-companywhitelabelsettingsresponsewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
 #### Return type
 
-[**CompanyWhiteLabelSettingsWrapper**](#model-companywhitelabelsettingswrapper)
+[**CompanyWhiteLabelSettingsResponseWrapper**](#model-companywhitelabelsettingsresponsewrapper)
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -7567,7 +7791,7 @@ This endpoint does not need any parameter.
 
 ### getAdditionalWhiteLabelSettings
 
-> AdditionalWhiteLabelSettingsWrapper getAdditionalWhiteLabelSettings()
+> AdditionalWhiteLabelSettingsDtoWrapper getAdditionalWhiteLabelSettings()
 
 `GET /api/2.0/settings/rebranding/additional`
 
@@ -7582,19 +7806,20 @@ This endpoint does not need any parameter.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Additional white label settings | [**AdditionalWhiteLabelSettingsWrapper**](#model-additionalwhitelabelsettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **200** | Additional white label settings | [**AdditionalWhiteLabelSettingsDtoWrapper**](#model-additionalwhitelabelsettingsdtowrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
 #### Return type
 
-[**AdditionalWhiteLabelSettingsWrapper**](#model-additionalwhitelabelsettingswrapper)
+[**AdditionalWhiteLabelSettingsDtoWrapper**](#model-additionalwhitelabelsettingsdtowrapper)
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -7603,7 +7828,7 @@ This endpoint does not need any parameter.
 
 ### getCompanyWhiteLabelSettings
 
-> CompanyWhiteLabelSettingsWrapper getCompanyWhiteLabelSettings()
+> CompanyWhiteLabelSettingsDtoWrapper getCompanyWhiteLabelSettings()
 
 `GET /api/2.0/settings/rebranding/company`
 
@@ -7618,19 +7843,20 @@ This endpoint does not need any parameter.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Company white label settings | [**CompanyWhiteLabelSettingsWrapper**](#model-companywhitelabelsettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **200** | Company white label settings | [**CompanyWhiteLabelSettingsDtoWrapper**](#model-companywhitelabelsettingsdtowrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
 #### Return type
 
-[**CompanyWhiteLabelSettingsWrapper**](#model-companywhitelabelsettingswrapper)
+[**CompanyWhiteLabelSettingsDtoWrapper**](#model-companywhitelabelsettingsdtowrapper)
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -7655,8 +7881,9 @@ This endpoint does not need any parameter.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Boolean value: true if the white label is enabled | [**BooleanWrapper**](#model-booleanwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -7666,7 +7893,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -7695,8 +7922,10 @@ Specifies if the white label logo text is default or not.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Request properties of white label logos | [**IsDefaultWhiteLabelLogosWrapper**](#model-isdefaultwhitelabellogoswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -7706,7 +7935,7 @@ Specifies if the white label logo text is default or not.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -7735,8 +7964,10 @@ Specifies if the white label logos are default or not.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Request properties of white label logos | [**IsDefaultWhiteLabelLogosArrayWrapper**](#model-isdefaultwhitelabellogosarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -7746,7 +7977,7 @@ Specifies if the white label logos are default or not.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -7771,8 +8002,9 @@ This endpoint does not need any parameter.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | List of company white label settings | [**CompanyWhiteLabelSettingsArrayWrapper**](#model-companywhitelabelsettingsarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -7782,7 +8014,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -7811,8 +8043,10 @@ Returns the white label logo text.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Logo text | [**StringWrapper**](#model-stringwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -7822,7 +8056,7 @@ Returns the white label logo text.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -7851,7 +8085,9 @@ Returns the white label logos.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | White label logos | [**WhiteLabelItemArrayWrapper**](#model-whitelabelitemarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -7891,8 +8127,10 @@ Restores the white label logo text.
 |------------- | ------------- | ------------- | -------------|
 | **200** | Boolean value: true if the operation is successful | [**BooleanWrapper**](#model-booleanwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -7902,7 +8140,7 @@ Restores the white label logo text.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -7932,8 +8170,10 @@ Restores the white label logos.
 |------------- | ------------- | ------------- | -------------|
 | **200** | Boolean value: true if the operation is successful | [**BooleanWrapper**](#model-booleanwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -7943,7 +8183,7 @@ Restores the white label logos.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -7973,8 +8213,9 @@ Saves the additional white label settings specified in the request.
 | **200** | Boolean value: true if the operation is successful | [**BooleanWrapper**](#model-booleanwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **400** | Settings is empty | - | - |
 | **403** | No permissions to perform this action | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -7984,7 +8225,7 @@ Saves the additional white label settings specified in the request.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -8014,8 +8255,9 @@ Saves the company white label settings specified in the request.
 | **200** | Boolean value: true if the operation is successful | [**BooleanWrapper**](#model-booleanwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **400** | Argument is empty or invalid | - | - |
 | **403** | No permissions to perform this action | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -8025,7 +8267,7 @@ Saves the company white label settings specified in the request.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -8056,8 +8298,10 @@ Saves the white label logo text specified in the request.
 |------------- | ------------- | ------------- | -------------|
 | **200** | Boolean value: true if the operation is sucessful | [**BooleanWrapper**](#model-booleanwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -8067,7 +8311,7 @@ Saves the white label logo text specified in the request.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -8098,8 +8342,10 @@ Saves the white label logos specified in the request.
 |------------- | ------------- | ------------- | -------------|
 | **200** | Boolean value: true if the operation is sucessful | [**BooleanWrapper**](#model-booleanwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -8109,7 +8355,7 @@ Saves the white label logos specified in the request.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -8140,8 +8386,10 @@ Saves the white label logos from files.
 | **200** | Boolean value: true if the operation is sucessful | [**BooleanWrapper**](#model-booleanwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
 | **409** | No input files | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -8151,7 +8399,7 @@ Saves the white label logos from files.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -8178,8 +8426,9 @@ This endpoint does not need any parameter.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Default SSO settings | [**SsoSettingsV2Wrapper**](#model-ssosettingsv2wrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -8189,7 +8438,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -8214,7 +8463,8 @@ This endpoint does not need any parameter.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | SSO settings | [**SsoSettingsV2Wrapper**](#model-ssosettingsv2wrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -8233,7 +8483,7 @@ No authorization required
 
 ### getSsoSettingsV2Constants
 
-> ObjectWrapper getSsoSettingsV2Constants()
+> SsoSettingsV2ConstantsWrapper getSsoSettingsV2Constants()
 
 `GET /api/2.0/settings/ssov2/constants`
 
@@ -8248,19 +8498,20 @@ This endpoint does not need any parameter.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The SSO settings constants: SSO name ID format type, SSO binding type, SSO signing algorithm type, SSO SP certificate action type, SSO IDP certificate action type | [**ObjectWrapper**](#model-objectwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **200** | The SSO settings constants: SSO name ID format type, SSO binding type, SSO signing algorithm type, SSO SP certificate action type, SSO IDP certificate action type | [**SsoSettingsV2ConstantsWrapper**](#model-ssosettingsv2constantswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
 #### Return type
 
-[**ObjectWrapper**](#model-objectwrapper)
+[**SsoSettingsV2ConstantsWrapper**](#model-ssosettingsv2constantswrapper)
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -8285,8 +8536,9 @@ This endpoint does not need any parameter.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Default SSO settings | [**SsoSettingsV2Wrapper**](#model-ssosettingsv2wrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -8296,7 +8548,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -8325,8 +8577,9 @@ Saves the SSO settings for the current portal.
 |------------- | ------------- | ------------- | -------------|
 | **200** | SSO settings | [**SsoSettingsV2Wrapper**](#model-ssosettingsv2wrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **400** | Settings could not be null | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -8336,7 +8589,7 @@ Saves the SSO settings for the current portal.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -8347,7 +8600,7 @@ Saves the SSO settings for the current portal.
 
 ### getEnabledModules
 
-> ObjectWrapper getEnabledModules()
+> EnabledModuleArrayWrapper getEnabledModules()
 
 `GET /api/2.0/settings/security/modules`
 
@@ -8362,19 +8615,20 @@ This endpoint does not need any parameter.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | List of enabled modules | [**ObjectWrapper**](#model-objectwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **200** | List of enabled modules | [**EnabledModuleArrayWrapper**](#model-enabledmodulearraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
 #### Return type
 
-[**ObjectWrapper**](#model-objectwrapper)
+[**EnabledModuleArrayWrapper**](#model-enabledmodulearraywrapper)
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -8403,8 +8657,10 @@ Checks if the selected user is an administrator of a product with the ID specifi
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Object with the user security information: product ID, user ID, administrator or not | [**ProductAdministratorWrapper**](#model-productadministratorwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -8414,7 +8670,7 @@ Checks if the selected user is an administrator of a product with the ID specifi
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -8439,8 +8695,9 @@ This endpoint does not need any parameter.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Password settings | [**PasswordSettingsWrapper**](#model-passwordsettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -8450,7 +8707,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -8478,8 +8735,10 @@ Returns a list of all the administrators of a product with the ID specified in t
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | List of product administrators with the following parameters | [**EmployeeArrayWrapper**](#model-employeearraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -8489,7 +8748,7 @@ Returns a list of all the administrators of a product with the ID specified in t
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -8517,8 +8776,10 @@ Returns the availability of the module with the ID specified in the request.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Boolean value: true - module is enabled, false - module is disabled | [**BooleanWrapper**](#model-booleanwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -8528,7 +8789,7 @@ Returns the availability of the module with the ID specified in the request.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -8549,15 +8810,17 @@ Returns the security settings for the modules specified in the request.
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **ids** | query | **List** | The list of module identifiers for which to retrieve the security settings. | [optional] [example: ["item1","item2"]] |
+| **ids** | query | **List** | The list of module identifiers for which to retrieve the security settings. | [optional] [example: ["00000000-0000-0000-0000-000000000000"]] |
 
 #### Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Security settings | [**SecurityArrayWrapper**](#model-securityarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -8567,7 +8830,7 @@ Returns the security settings for the modules specified in the request.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -8596,8 +8859,10 @@ Sets the security settings to the modules with the IDs specified in the request.
 |------------- | ------------- | ------------- | -------------|
 | **200** | Security settings | [**SecurityArrayWrapper**](#model-securityarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | Security settings are disabled for an open portal | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -8607,7 +8872,7 @@ Sets the security settings to the modules with the IDs specified in the request.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -8637,8 +8902,10 @@ Sets the selected user as an administrator of a product with the ID specified in
 | **200** | Object with the user security information: product ID, user ID, administrator or not | [**ProductAdministratorWrapper**](#model-productadministratorwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **402** | Your pricing plan does not support this option | - | - |
 | **403** | Only portal owner can set user as administrator | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -8648,7 +8915,7 @@ Sets the selected user as an administrator of a product with the ID specified in
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -8677,8 +8944,10 @@ Sets the security settings to the module with the ID specified in the request.
 |------------- | ------------- | ------------- | -------------|
 | **200** | Security settings | [**SecurityArrayWrapper**](#model-securityarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | Security settings are disabled for an open portal | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -8688,7 +8957,7 @@ Sets the security settings to the module with the ID specified in the request.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -8717,8 +8986,9 @@ Sets the portal password settings.
 |------------- | ------------- | ------------- | -------------|
 | **200** | Password settings | [**PasswordSettingsWrapper**](#model-passwordsettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **400** | MinLength | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -8728,7 +8998,7 @@ Sets the portal password settings.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -8758,8 +9028,10 @@ Returns the space usage statistics for the module with the ID specified in the r
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Module space usage statistics | [**UsageSpaceStatItemArrayWrapper**](#model-usagespacestatitemarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -8769,7 +9041,7 @@ Returns the space usage statistics for the module with the ID specified in the r
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -8800,8 +9072,10 @@ Returns a list of all the backup storages.
 |------------- | ------------- | ------------- | -------------|
 | **200** | List of the backup storages with the following parameters | [**StorageArrayWrapper**](#model-storagearraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | Access denied | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -8811,7 +9085,7 @@ Returns a list of all the backup storages.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -8837,8 +9111,9 @@ This endpoint does not need any parameter.
 |------------- | ------------- | ------------- | -------------|
 | **200** | List of the CDN storages with the following parameters | [**StorageArrayWrapper**](#model-storagearraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -8848,7 +9123,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -8874,8 +9149,9 @@ This endpoint does not need any parameter.
 |------------- | ------------- | ------------- | -------------|
 | **200** | List of storages with the following parameters | [**StorageArrayWrapper**](#model-storagearraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -8885,7 +9161,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -8894,7 +9170,7 @@ This endpoint does not need any parameter.
 
 ### getAmazonS3Regions
 
-> ObjectWrapper getAmazonS3Regions()
+> AmazonS3RegionArrayWrapper getAmazonS3Regions()
 
 `GET /api/2.0/settings/storage/s3/regions`
 
@@ -8909,19 +9185,20 @@ This endpoint does not need any parameter.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | List of the Amazon regions | [**ObjectWrapper**](#model-objectwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **200** | List of the Amazon regions | [**AmazonS3RegionArrayWrapper**](#model-amazons3regionarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
 #### Return type
 
-[**ObjectWrapper**](#model-objectwrapper)
+[**AmazonS3RegionArrayWrapper**](#model-amazons3regionarraywrapper)
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -8946,8 +9223,9 @@ This endpoint does not need any parameter.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Storage progress | [**DoubleWrapper**](#model-doublewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -8957,7 +9235,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -8983,8 +9261,9 @@ This endpoint does not need any parameter.
 |------------- | ------------- | ------------- | -------------|
 | **200** | Ok | - | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -8994,12 +9273,12 @@ null (empty response body)
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Accept**: application/json
 
 ### resetStorageToDefault
 
@@ -9020,8 +9299,9 @@ This endpoint does not need any parameter.
 |------------- | ------------- | ------------- | -------------|
 | **200** | Ok | - | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -9031,12 +9311,12 @@ null (empty response body)
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Accept**: application/json
 
 ### updateCdnStorage
 
@@ -9061,8 +9341,9 @@ Updates the CDN storage with the parameters specified in the request.
 | **200** | Updated CDN storage | [**CdnStorageSettingsWrapper**](#model-cdnstoragesettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **400** | Module | - | - |
 | **403** | No permissions to perform this action | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -9072,7 +9353,7 @@ Updates the CDN storage with the parameters specified in the request.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -9102,8 +9383,9 @@ Updates a storage with the parameters specified in the request.
 | **200** | Updated storage settings | [**StorageSettingsWrapper**](#model-storagesettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **400** | Module | - | - |
 | **403** | No permissions to perform this action | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -9113,7 +9395,7 @@ Updates a storage with the parameters specified in the request.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -9141,8 +9423,9 @@ This endpoint does not need any parameter.
 |------------- | ------------- | ------------- | -------------|
 | **200** | List of TFA application codes | [**TfaAppCodeArrayWrapper**](#model-tfaappcodearraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **405** | TFA application settings are not available | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -9152,7 +9435,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -9177,8 +9460,9 @@ This endpoint does not need any parameter.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | TFA confirmation data | [**TfaConfirmDataWrapper**](#model-tfaconfirmdatawrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -9188,7 +9472,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -9213,8 +9497,9 @@ This endpoint does not need any parameter.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | TFA settings | [**TfaSettingsArrayWrapper**](#model-tfasettingsarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -9224,7 +9509,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -9233,7 +9518,7 @@ This endpoint does not need any parameter.
 
 ### tfaAppGenerateSetupCode
 
-> SetupCodeWrapper tfaAppGenerateSetupCode()
+> TfaSetupCodeWrapper tfaAppGenerateSetupCode()
 
 `GET /api/2.0/settings/tfaapp/setup`
 
@@ -9248,20 +9533,21 @@ This endpoint does not need any parameter.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Setup code | [**SetupCodeWrapper**](#model-setupcodewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | Setup code | [**TfaSetupCodeWrapper**](#model-tfasetupcodewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **405** | TFA application settings are not available | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
 #### Return type
 
-[**SetupCodeWrapper**](#model-setupcodewrapper)
+[**TfaSetupCodeWrapper**](#model-tfasetupcodewrapper)
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -9289,8 +9575,10 @@ Validates the two-factor authentication code specified in the request.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | True if the code is valid | [**BooleanWrapper**](#model-booleanwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -9300,7 +9588,7 @@ Validates the two-factor authentication code specified in the request.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -9330,8 +9618,10 @@ Unlinks the current two-factor authentication application from the user account 
 | **200** | Login URL | [**StringWrapper**](#model-stringwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
 | **405** | TFA application settings are not available | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -9341,7 +9631,7 @@ Unlinks the current two-factor authentication application from the user account 
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -9367,8 +9657,9 @@ This endpoint does not need any parameter.
 |------------- | ------------- | ------------- | -------------|
 | **200** | New backup codes | [**TfaAppCodeArrayWrapper**](#model-tfaappcodearraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **405** | TFA application settings are not available | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -9378,7 +9669,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -9407,8 +9698,10 @@ Updates the two-factor authentication settings with the parameters specified in 
 |------------- | ------------- | ------------- | -------------|
 | **200** | True if the operation is successful | [**BooleanWrapper**](#model-booleanwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **405** | SMS settings are not available/TFA application settings are not available | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -9418,7 +9711,7 @@ Updates the two-factor authentication settings with the parameters specified in 
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -9448,8 +9741,10 @@ Updates TFA settings and returns the confirmation URL for authorization via SMS 
 | **200** | TFA confirmation URL | [**StringWrapper**](#model-stringwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
 | **405** | SMS settings are not available/TFA application settings are not available | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -9459,7 +9754,7 @@ Updates TFA settings and returns the confirmation URL for authorization via SMS 
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -9486,8 +9781,9 @@ This endpoint does not need any parameter.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Status if user is linked or not | [**TelegramStatusWrapper**](#model-telegramstatuswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -9497,7 +9793,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -9522,8 +9818,9 @@ This endpoint does not need any parameter.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | A link to connect Telegram account | [**StringWrapper**](#model-stringwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -9533,7 +9830,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -9558,8 +9855,9 @@ This endpoint does not need any parameter.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | True if success | [**BooleanWrapper**](#model-booleanwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -9569,7 +9867,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -9601,8 +9899,9 @@ Creates a new tenant webhook with the parameters specified in the request.
 | **200** | Tenant webhook with its config parameters | [**WebhooksConfigWrapper**](#model-webhooksconfigwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **400** | Invalid or empty parameters | - | - |
 | **403** | Access denied | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -9612,7 +9911,7 @@ Creates a new tenant webhook with the parameters specified in the request.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -9643,8 +9942,9 @@ Enables or disables a tenant webhook with the parameters specified in the reques
 | **400** | Invalid or empty parameters | - | - |
 | **403** | Access denied | - | - |
 | **404** | Item not found | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -9654,7 +9954,7 @@ Enables or disables a tenant webhook with the parameters specified in the reques
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -9680,8 +9980,9 @@ This endpoint does not need any parameter.
 |------------- | ------------- | ------------- | -------------|
 | **200** | List of tenant webhooks with their config parameters | [**WebhooksConfigWithStatusArrayWrapper**](#model-webhooksconfigwithstatusarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | Access denied | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -9691,7 +9992,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -9716,8 +10017,9 @@ This endpoint does not need any parameter.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | List of triggers with availability for the current user | [**WebhookTriggerArrayWrapper**](#model-webhooktriggerarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -9727,7 +10029,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -9765,8 +10067,10 @@ Returns the logs of the webhook activities.
 |------------- | ------------- | ------------- | -------------|
 | **200** | Logs of the webhook activities | [**WebhooksLogArrayWrapper**](#model-webhookslogarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | Access denied | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -9776,7 +10080,7 @@ Returns the logs of the webhook activities.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -9806,8 +10110,10 @@ Removes a tenant webhook with the ID specified in the request.
 | **200** | Tenant webhook with its config parameters | [**WebhooksConfigWrapper**](#model-webhooksconfigwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | Access denied | - | - |
 | **404** | Item not found | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -9817,7 +10123,7 @@ Removes a tenant webhook with the ID specified in the request.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -9848,8 +10154,9 @@ Retries a webhook with the ID specified in the request.
 | **400** | Id incorrect | - | - |
 | **403** | Access denied | - | - |
 | **404** | Item not found | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -9859,7 +10166,7 @@ Retries a webhook with the ID specified in the request.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -9888,8 +10195,10 @@ Retries all the webhooks with the IDs specified in the request.
 |------------- | ------------- | ------------- | -------------|
 | **200** | Logs of the webhook activities | [**WebhooksLogArrayWrapper**](#model-webhookslogarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | Access denied | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -9899,7 +10208,7 @@ Retries all the webhooks with the IDs specified in the request.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -9930,8 +10239,9 @@ Updates a tenant webhook with the parameters specified in the request.
 | **400** | Invalid or empty parameters | - | - |
 | **403** | Access denied | - | - |
 | **404** | Item not found | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -9941,7 +10251,7 @@ Updates a tenant webhook with the parameters specified in the request.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -9973,8 +10283,9 @@ Adds a web plugin from a file to the current portal.
 | **200** | Web plugin | [**WebPluginWrapper**](#model-webpluginwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **400** | bad request | - | - |
 | **403** | Plugins disabled | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -9984,7 +10295,7 @@ Adds a web plugin from a file to the current portal.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -10013,8 +10324,10 @@ Deletes a web plugin by the name specified in the request.
 |------------- | ------------- | ------------- | -------------|
 | **200** | Ok | - | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | Plugins disabled | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -10024,12 +10337,12 @@ null (empty response body)
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Accept**: application/json
 
 ### getWebPlugin
 
@@ -10053,8 +10366,10 @@ Returns a web plugin by the name specified in the request.
 |------------- | ------------- | ------------- | -------------|
 | **200** | Web plugin | [**WebPluginWrapper**](#model-webpluginwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | Plugins disabled | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -10064,7 +10379,7 @@ Returns a web plugin by the name specified in the request.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -10093,8 +10408,10 @@ Returns the portal web plugins.
 |------------- | ------------- | ------------- | -------------|
 | **200** | Web plugin | [**WebPluginArrayWrapper**](#model-webpluginarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | Plugins disabled | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -10104,7 +10421,7 @@ Returns the portal web plugins.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -10134,8 +10451,10 @@ Updates a web plugin with the parameters specified in the request.
 |------------- | ------------- | ------------- | -------------|
 | **200** | Ok | - | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | Plugins disabled | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -10145,18 +10464,18 @@ null (empty response body)
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: Not defined
+- **Accept**: application/json
 
 ## ThirdPartyApi
 
 ### getThirdPartyCode
 
-> ObjectWrapper getThirdPartyCode(provider)
+> StringWrapper getThirdPartyCode(provider)
 
 `GET /api/2.0/thirdparty/{provider}`
 
@@ -10174,19 +10493,21 @@ Returns a request to get the confirmation code from URL.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Code request | [**ObjectWrapper**](#model-objectwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **200** | Code request | [**StringWrapper**](#model-stringwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
 #### Return type
 
-[**ObjectWrapper**](#model-objectwrapper)
+[**StringWrapper**](#model-stringwrapper)
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -10246,15 +10567,16 @@ The active connection item parameters.
 | **city** | **String** | The active connection city. | [optional] [example: New York] [nullable] |
 | **browser** | **String** | The active connection browser. | [optional] [example: Chrome 120.0] [nullable] |
 | **platform** | **String** | The active connection platform. | [optional] [example: Windows] [nullable] |
-| **date** | [**ApiDateTime**](#model-apidatetime) | The API date and time parameters. | [optional] |
+| **date** | [**ApiDateTime**](#model-apidatetime) | The active connection date. | [optional] |
 | **page** | **String** | The active connection page. | [optional] [example: /rooms/shared] [nullable] |
 
 
 ### Model ActiveConnectionsWrapper
+The successful API response containing the ActiveConnectionsDto object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**ActiveConnectionsDto**](#model-activeconnectionsdto) |  | [optional] |
+| **response** | [**ActiveConnectionsDto**](#model-activeconnectionsdto) | The ActiveConnectionsDto object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -10262,10 +10584,11 @@ The active connection item parameters.
 
 
 ### Model ActiveServiceArrayWrapper
+The successful API response containing the list of ActiveServiceDto objects.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**List**](#model-activeservicedto) |  | [optional] |
+| **response** | [**List**](#model-activeservicedto) | The list of ActiveServiceDto objects returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -10299,6 +10622,44 @@ The additional white label settings.
 | **lastModified** | **Date** (date-time) | The timestamp indicating when the settings were last modified. | [optional] [example: 1990-01-01T00:00:00Z] |
 
 
+### Model AdditionalWhiteLabelSettingsDto
+The additional white label settings parameters.
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+| **startDocsEnabled** | **Boolean** | Specifies if the sample documents are displayed or hidden. | [required] [example: true] |
+| **helpCenterEnabled** | **Boolean** | Specifies if the Help Center link is available or not. | [required] [example: true] |
+| **feedbackAndSupportEnabled** | **Boolean** | Specifies if the Feedback &amp; Support link is available or not. | [required] [example: true] |
+| **userForumEnabled** | **Boolean** | Specifies if the user forum is available or not. | [required] [example: true] |
+| **videoGuidesEnabled** | **Boolean** | Specifies if the Video Guides link is available or not. | [required] [example: true] |
+| **licenseAgreementsEnabled** | **Boolean** | Specifies if the License Agreements link is available or not. | [required] [example: true] |
+| **isDefault** | **Boolean** | Specifies if the additional white label settings are default or not. | [required] [example: false] |
+
+
+### Model AdditionalWhiteLabelSettingsDtoWrapper
+The successful API response containing the AdditionalWhiteLabelSettingsDto object.
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+| **response** | [**AdditionalWhiteLabelSettingsDto**](#model-additionalwhitelabelsettingsdto) | The AdditionalWhiteLabelSettingsDto object returned by the operation. | [optional] |
+| **count** | **Integer** (int32) | The total number of items in the response | [optional] |
+| **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
+| **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
+| **statusCode** | **Integer** (int32) | HTTP status code of the response (duplicate of status) | [optional] |
+
+
+### Model AdditionalWhiteLabelSettingsResponseWrapper
+The successful API response containing the AdditionalWhiteLabelSettings object.
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+| **response** | [**AdditionalWhiteLabelSettings**](#model-additionalwhitelabelsettings) | The AdditionalWhiteLabelSettings object returned by the operation. | [optional] |
+| **count** | **Integer** (int32) | The total number of items in the response | [optional] |
+| **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
+| **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
+| **statusCode** | **Integer** (int32) | HTTP status code of the response (duplicate of status) | [optional] |
+
+
 ### Model AdditionalWhiteLabelSettingsWrapper
 The additional white label settings wrapper.
 
@@ -10328,95 +10689,132 @@ The request parameters for configuring the administrator message content.
 | **recaptchaResponse** | **String** | The user&#39;s response to the CAPTCHA challenge. | [optional] [example: 03AGdBq24PBCbwiDRaS...] [nullable] |
 
 
-### Model AiChatModelPricing
+### Model AiChatPriceDto
+Data transfer object that represents the pricing information for an AI chat interaction.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **id** | **String** |  | [required] [nullable] |
-| **alias** | **String** |  | [optional] [nullable] |
-| **ownedBy** | **String** |  | [optional] [nullable] |
-| **provider** | **String** |  | [optional] [nullable] |
-| **link** | **String** |  | [optional] [nullable] |
-| **price** | [**AiChatPrice**](#model-aichatprice) |  | [required] |
+| **prompt** | **Double** (double) | Gets the price per one million prompt tokens. | [optional] [example: 5.0] |
+| **completion** | **Double** (double) | Gets the price per one million completion tokens. | [optional] [example: 15.0] |
 
 
-### Model AiChatPrice
+### Model AiEmbeddingPriceDto
+Represents a data transfer object that encapsulates pricing information for AI embedding operations.  This DTO is used to transport cost-related details associated with generating embeddings through AI models.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **prompt** | **Double** (double) |  | [optional] |
-| **completion** | **Double** (double) |  | [optional] |
+| **prompt** | **Double** (double) | Gets the price per one million tokens for embedding generation. | [optional] [example: 0.13] |
 
 
-### Model AiEmbeddingModelPricing
-
-| Name | Type | Description | Notes |
-|------------ | ------------- | ------------- | -------------|
-| **id** | **String** |  | [required] [nullable] |
-| **alias** | **String** |  | [optional] [nullable] |
-| **ownedBy** | **String** |  | [optional] [nullable] |
-| **provider** | **String** |  | [optional] [nullable] |
-| **link** | **String** |  | [optional] [nullable] |
-| **price** | [**AiEmbeddingPrice**](#model-aiembeddingprice) |  | [required] |
-
-
-### Model AiEmbeddingPrice
+### Model AiEntryPricingDtoAiChatPriceDto
+Data transfer object that represents pricing information for a specific AI service entry.  Contains identification details, provider information, and associated pricing data of generic type T.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **prompt** | **Double** (double) |  | [optional] |
+| **id** | **String** | Gets the unique identifier for the AI pricing entry. | [required] [example: gpt-4o] [nullable] |
+| **alias** | **String** | Gets the display name (alias) for the AI model or service entry. | [required] [example: GPT-4o] [nullable] |
+| **provider** | **String** | Gets the provider name for the AI service or model. | [required] [example: openai] [nullable] |
+| **image** | **String** | Gets the image URL or identifier associated with the AI model entry. | [required] [example: https://cdn.example.com/providers/openai.png] [nullable] |
+| **price** | [**AiChatPriceDto**](#model-aichatpricedto) | Gets the pricing information for the AI entry. | [required] |
+| **link** | **String** | Gets the URL link to the AI model or service entry. | [required] [example: https://openai.com/pricing] [nullable] |
 
 
-### Model AiImageModelPricing
-
-| Name | Type | Description | Notes |
-|------------ | ------------- | ------------- | -------------|
-| **id** | **String** |  | [required] [nullable] |
-| **alias** | **String** |  | [optional] [nullable] |
-| **ownedBy** | **String** |  | [optional] [nullable] |
-| **provider** | **String** |  | [optional] [nullable] |
-| **link** | **String** |  | [optional] [nullable] |
-| **price** | [**AiImagePrice**](#model-aiimageprice) |  | [required] |
-
-
-### Model AiImagePrice
+### Model AiEntryPricingDtoAiEmbeddingPriceDto
+Data transfer object that represents pricing information for a specific AI service entry.  Contains identification details, provider information, and associated pricing data of generic type T.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **prompt** | **Double** (double) |  | [optional] |
-| **image** | **Double** (double) |  | [optional] |
+| **id** | **String** | Gets the unique identifier for the AI pricing entry. | [required] [example: gpt-4o] [nullable] |
+| **alias** | **String** | Gets the display name (alias) for the AI model or service entry. | [required] [example: GPT-4o] [nullable] |
+| **provider** | **String** | Gets the provider name for the AI service or model. | [required] [example: openai] [nullable] |
+| **image** | **String** | Gets the image URL or identifier associated with the AI model entry. | [required] [example: https://cdn.example.com/providers/openai.png] [nullable] |
+| **price** | [**AiEmbeddingPriceDto**](#model-aiembeddingpricedto) | Gets the pricing information for the AI entry. | [required] |
+| **link** | **String** | Gets the URL link to the AI model or service entry. | [required] [example: https://openai.com/pricing] [nullable] |
 
 
-### Model AiPricesResponse
-
-| Name | Type | Description | Notes |
-|------------ | ------------- | ------------- | -------------|
-| **chat** | [**List**](#model-aichatmodelpricing) |  | [required] [nullable] |
-| **embedding** | [**List**](#model-aiembeddingmodelpricing) |  | [required] [nullable] |
-| **image** | [**List**](#model-aiimagemodelpricing) |  | [required] [nullable] |
-| **search** | [**List**](#model-aiwebsearchpricing) |  | [required] [nullable] |
-| **currency** | [**CurrencyInfo**](#model-currencyinfo) |  | [required] |
-
-
-### Model AiPricesResponseWrapper
+### Model AiEntryPricingDtoAiImagePriceDto
+Data transfer object that represents pricing information for a specific AI service entry.  Contains identification details, provider information, and associated pricing data of generic type T.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**AiPricesResponse**](#model-aipricesresponse) |  | [optional] |
+| **id** | **String** | Gets the unique identifier for the AI pricing entry. | [required] [example: gpt-4o] [nullable] |
+| **alias** | **String** | Gets the display name (alias) for the AI model or service entry. | [required] [example: GPT-4o] [nullable] |
+| **provider** | **String** | Gets the provider name for the AI service or model. | [required] [example: openai] [nullable] |
+| **image** | **String** | Gets the image URL or identifier associated with the AI model entry. | [required] [example: https://cdn.example.com/providers/openai.png] [nullable] |
+| **price** | [**AiImagePriceDto**](#model-aiimagepricedto) | Gets the pricing information for the AI entry. | [required] |
+| **link** | **String** | Gets the URL link to the AI model or service entry. | [required] [example: https://openai.com/pricing] [nullable] |
+
+
+### Model AiEntryPricingDtoDecimal
+Data transfer object that represents pricing information for a specific AI service entry.  Contains identification details, provider information, and associated pricing data of generic type T.
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+| **id** | **String** | Gets the unique identifier for the AI pricing entry. | [required] [example: gpt-4o] [nullable] |
+| **alias** | **String** | Gets the display name (alias) for the AI model or service entry. | [required] [example: GPT-4o] [nullable] |
+| **provider** | **String** | Gets the provider name for the AI service or model. | [required] [example: openai] [nullable] |
+| **image** | **String** | Gets the image URL or identifier associated with the AI model entry. | [required] [example: https://cdn.example.com/providers/openai.png] [nullable] |
+| **price** | **Double** (double) | Gets the pricing information for the AI entry. | [required] [example: {prompt=5.0, completion=15.0}] |
+| **link** | **String** | Gets the URL link to the AI model or service entry. | [required] [example: https://openai.com/pricing] [nullable] |
+
+
+### Model AiImagePriceDto
+Data transfer object that represents the pricing information for an AI image generation.
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+| **prompt** | **Double** (double) | Gets the price per one million prompt tokens. | [optional] [example: 8.0] |
+| **completion** | **Double** (double) | Gets the price per one million completion tokens. | [optional] [example: 15.0] |
+| **image** | **Double** (double) | Gets the price per generated image. | [optional] [example: 30.0] |
+
+
+### Model AiPricesDto
+Data transfer object that encapsulates comprehensive pricing information for various AI services.  Provides organized collections of pricing details for chat models, embedding services, and web search functionality,  along with the currency in which prices are denominated.
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+| **chat** | [**List**](#model-aientrypricingdtoaichatpricedto) | Gets the list of pricing entries for AI chat models. | [required] [example: [{id=gpt-4o, alias=GPT-4o, provider=openai, image=https://cdn.example.com/providers/openai.png, price={prompt=5.0, completion=15.0}}]] [nullable] |
+| **embedding** | [**List**](#model-aientrypricingdtoaiembeddingpricedto) | Gets the list of pricing entries for AI embedding models. | [required] [example: [{id=text-embedding-3-large, alias=Text Embedding 3 Large, provider=openai, image=https://cdn.example.com/providers/openai.png, price={prompt=0.13}}]] [nullable] |
+| **image** | [**List**](#model-aientrypricingdtoaiimagepricedto) | Gets the list of pricing entries for AI image models. | [required] [example: [{id=gpt-5.4-image-2, alias=GPT 5.4 Image 2, provider=OpenRouter, image=https://cdn.example.com/providers/openai.png, price={prompt=8.0, completion=15.0, image=30.0}}]] [nullable] |
+| **webSearch** | [**List**](#model-aientrypricingdtodecimal) | Gets the list of pricing entries for AI web search operations. | [required] [example: [{id=web-search, alias=Web Search, provider=tavily, image=https://cdn.example.com/providers/tavily.png, price=0.01}]] [nullable] |
+| **currency** | [**CurrencyInfo**](#model-currencyinfo) | Gets the currency information for the AI pricing data. | [required] |
+
+
+### Model AiPricesWrapper
+The successful API response containing the AiPricesDto object.
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+| **response** | [**AiPricesDto**](#model-aipricesdto) | The AiPricesDto object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
 | **statusCode** | **Integer** (int32) | HTTP status code of the response (duplicate of status) | [optional] |
 
 
-### Model AiWebSearchPricing
+### Model AmazonS3RegionArrayWrapper
+The successful API response containing the list of AmazonS3RegionDto objects.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **id** | **String** |  | [optional] [nullable] |
-| **provider** | **String** |  | [optional] [nullable] |
-| **price** | **Double** (double) |  | [optional] |
-| **link** | **String** |  | [optional] [nullable] |
+| **response** | [**List**](#model-amazons3regiondto) | The list of AmazonS3RegionDto objects returned by the operation. | [optional] |
+| **count** | **Integer** (int32) | The total number of items in the response | [optional] |
+| **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
+| **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
+| **statusCode** | **Integer** (int32) | HTTP status code of the response (duplicate of status) | [optional] |
+
+
+### Model AmazonS3RegionDto
+An Amazon S3 region.
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+| **systemName** | **String** | The region system name. | [optional] [example: eu-west-1] [nullable] |
+| **displayName** | **String** | The human-readable region name. | [optional] [example: Europe (Ireland)] [nullable] |
+| **partitionName** | **String** | The name of the AWS partition the region belongs to. | [optional] [example: aws] [nullable] |
+| **partitionDnsSuffix** | **String** | The DNS suffix of the partition. | [optional] [example: amazonaws.com] [nullable] |
+| **partitionRegionRegex** | **String** | The pattern the region names of the partition match. | [optional] [example: ^(us\|eu\|ap\|sa\|ca\|me\|af\|il\|mx)\-\w+\-\d+$] [nullable] |
+| **hostnameTemplate** | **String** | The template the partition builds service endpoint hostnames from. | [optional] [example: {service}.{region}.{dnsSuffix}] [nullable] |
 
 
 ### Model ApiDateTime
@@ -10429,10 +10827,11 @@ The API date and time parameters.
 
 
 ### Model AppArrayWrapper
+The successful API response containing the list of AppDto objects.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**List**](#model-appdto) |  | [optional] |
+| **response** | [**List**](#model-appdto) | The list of AppDto objects returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -10454,10 +10853,11 @@ Application-specific settings as a JSON document, or null if no overrides exist.
 
 
 ### Model AppWrapper
+The successful API response containing the AppDto object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**AppDto**](#model-appdto) |  | [optional] |
+| **response** | [**AppDto**](#model-appdto) | The AppDto object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -10465,10 +10865,11 @@ Application-specific settings as a JSON document, or null if no overrides exist.
 
 
 ### Model AuditEventArrayWrapper
+The successful API response containing the list of AuditEventDto objects.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**List**](#model-auditeventdto) |  | [optional] |
+| **response** | [**List**](#model-auditeventdto) | The list of AuditEventDto objects returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -10481,11 +10882,11 @@ The audit event parameters.
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **id** | **Integer** (int32) | The audit event ID. | [optional] [example: 1] |
-| **date** | [**ApiDateTime**](#model-apidatetime) | The API date and time parameters. | [optional] |
+| **date** | [**ApiDateTime**](#model-apidatetime) | The audit event date. | [optional] |
 | **user** | **String** | The name of the user who triggered the audit event. | [optional] [example: John Doe] [nullable] |
 | **userId** | **UUID** (uuid) | The ID of the user who triggered the audit event. | [optional] [example: 00000000-0000-0000-0000-000000000001] |
 | **action** | **String** | The audit event action. | [optional] [example: User logged in] [nullable] |
-| **actionId** | [**MessageAction**](#model-messageaction) | The event action ID. | [optional] [enum: 1000, 1001, 1002, 1003, 1004, 1005, 1006, 1007, 1008, 1009, 1010, 1011, 1012, 1013, 1014, 1015, 1016, 1017, 1018, 1019, 1020, 1021, 1022, 1023, 1024, 1025, 1026, 1027, 1028, 1029, 4000, 4001, 4002, 4003, 4004, 4005, 4006, 4007, 4008, 4009, 4010, 4011, 4012, 4013, 4014, 4015, 4016, 4017, 4018, 4019, 4020, 4021, 4022, 4023, 4024, 4025, 4026, 4027, 4028, 4029, 4030, 4031, 4032, 4033, 4034, 4035, 4036, 4037, 5000, 5001, 5002, 5003, 5004, 5005, 5006, 5007, 5008, 5009, 5010, 5011, 5012, 5013, 5014, 5015, 5016, 5017, 5018, 5019, 5020, 5021, 5022, 5023, 5024, 5025, 5026, 5027, 5028, 5029, 5030, 5031, 5032, 5033, 5034, 5035, 5036, 5037, 5038, 5039, 5040, 5041, 5042, 5043, 5044, 5045, 5046, 5047, 5048, 5049, 5050, 5053, 5054, 5055, 5056, 5057, 5058, 5059, 5060, 5061, 5062, 5063, 5064, 5065, 5066, 5068, 5069, 5070, 5071, 5072, 5073, 5074, 5075, 5076, 5077, 5078, 5079, 5080, 5081, 5082, 5083, 5084, 5085, 5086, 5087, 5088, 5089, 5090, 5091, 5092, 5093, 5094, 5095, 5096, 5097, 5098, 5099, 5100, 5101, 5102, 5103, 5104, 5105, 5106, 5107, 5108, 5109, 5110, 5111, 5112, 5113, 5114, 5115, 5116, 5117, 5118, 5119, 5120, 5121, 5122, 5123, 5124, 5125, 5126, 5127, 5128, 5129, 5130, 5131, 5132, 5133, 5150, 5151, 5152, 5153, 5154, 5155, 5156, 5157, 5158, 5159, 5160, 5201, 5202, 5203, 5204, 5205, 5206, 5501, 5502, 5503, 6000, 6001, 6002, 6003, 6004, 6005, 6006, 6007, 6008, 6009, 6010, 6011, 6012, 6013, 6014, 6015, 6016, 6017, 6018, 6019, 6020, 6021, 6022, 6023, 6024, 6025, 6026, 6027, 6028, 6029, 6030, 6031, 6032, 6033, 6034, 6035, 6036, 6037, 6038, 6039, 6040, 6041, 6042, 6043, 6044, 6045, 6046, 6047, 6048, 6049, 6050, 6051, 6052, 6053, 6054, 6055, 6056, 6057, 6058, 6059, 6060, 6061, 6062, 6063, 6064, 6065, 6066, 6067, 6068, 6069, 6070, 6071, 6072, 6073, 6074, 6075, 6076, 6077, 6078, 6079, 6080, 6081, 6082, 6083, 6084, 6085, 6086, 6087, 6088, 6089, 6090, 6091, 6092, 6093, 6094, 6095, 6096, 6097, 6098, 6099, 6100, 6101, 6102, 7000, 7001, 7002, 7003, 7004, 9901, 9902, 9903, 9904, 9905, 9906, 9907, 9908, 9909, -1] |
+| **actionId** | [**MessageAction**](#model-messageaction) | The specific action that occurred within the audit event. | [optional] [enum: 1000, 1001, 1002, 1003, 1004, 1005, 1006, 1007, 1008, 1009, 1010, 1011, 1012, 1013, 1014, 1015, 1016, 1017, 1018, 1019, 1020, 1021, 1022, 1023, 1024, 1025, 1026, 1027, 1028, 1029, 4000, 4001, 4002, 4003, 4004, 4005, 4006, 4007, 4008, 4009, 4010, 4011, 4012, 4013, 4014, 4015, 4016, 4017, 4018, 4019, 4020, 4021, 4022, 4023, 4024, 4025, 4026, 4027, 4028, 4029, 4030, 4031, 4032, 4033, 4034, 4035, 4036, 4037, 5000, 5001, 5002, 5003, 5004, 5005, 5006, 5007, 5008, 5009, 5010, 5011, 5012, 5013, 5014, 5015, 5016, 5017, 5018, 5019, 5020, 5021, 5022, 5023, 5024, 5025, 5026, 5027, 5028, 5029, 5030, 5031, 5032, 5033, 5034, 5035, 5036, 5037, 5038, 5039, 5040, 5041, 5042, 5043, 5044, 5045, 5046, 5047, 5048, 5049, 5050, 5053, 5054, 5055, 5056, 5057, 5058, 5059, 5060, 5061, 5062, 5063, 5064, 5065, 5066, 5068, 5069, 5070, 5071, 5072, 5073, 5074, 5075, 5076, 5077, 5078, 5079, 5080, 5081, 5082, 5083, 5084, 5085, 5086, 5087, 5088, 5089, 5090, 5091, 5092, 5093, 5094, 5095, 5096, 5097, 5098, 5099, 5100, 5101, 5102, 5103, 5104, 5105, 5106, 5107, 5108, 5109, 5110, 5111, 5112, 5113, 5114, 5115, 5116, 5117, 5118, 5119, 5120, 5121, 5122, 5123, 5124, 5125, 5126, 5127, 5128, 5129, 5130, 5131, 5132, 5133, 5150, 5151, 5152, 5153, 5154, 5155, 5156, 5157, 5158, 5159, 5160, 5161, 5162, 5163, 5201, 5202, 5203, 5204, 5205, 5206, 5501, 5502, 5503, 6000, 6001, 6002, 6003, 6004, 6005, 6006, 6007, 6008, 6009, 6010, 6011, 6012, 6013, 6014, 6015, 6016, 6017, 6018, 6019, 6020, 6021, 6022, 6023, 6024, 6025, 6026, 6027, 6028, 6029, 6030, 6031, 6032, 6033, 6034, 6035, 6036, 6037, 6038, 6039, 6040, 6041, 6042, 6043, 6044, 6045, 6046, 6047, 6048, 6049, 6050, 6051, 6052, 6053, 6054, 6055, 6056, 6057, 6058, 6059, 6060, 6061, 6062, 6063, 6064, 6065, 6066, 6067, 6068, 6069, 6070, 6071, 6072, 6073, 6074, 6075, 6076, 6077, 6078, 6079, 6080, 6081, 6082, 6083, 6084, 6085, 6086, 6087, 6088, 6089, 6090, 6091, 6092, 6093, 6094, 6095, 6096, 6097, 6098, 6099, 6100, 6101, 6102, 6103, 6104, 6105, 6106, 6107, 6108, 6109, 7000, 7001, 7002, 7003, 7004, 9901, 9902, 9903, 9904, 9905, 9906, 9907, 9908, 9909, -1] |
 | **ip** | **String** | The audit event IP. | [optional] [example: 192.0.2.1] [nullable] |
 | **country** | **String** | The audit event country. | [optional] [example: United States] [nullable] |
 | **city** | **String** | The audit event city. | [optional] [example: New York] [nullable] |
@@ -10506,6 +10907,70 @@ Possible values:
 
 - `0` (`Xlsx`)
 - `1` (`Csv`)
+
+
+### Model AuditTrailActionMapperDto
+One audit trail action and what it does to what.
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+| **messageAction** | **String** | The audit event action name. | [optional] [example: FileCreated] [nullable] |
+| **actionType** | **String** | The action type name. | [optional] [example: Create] [nullable] |
+| **entity** | **String** | The name of the entry type the action targets. | [optional] [example: File] [nullable] |
+
+
+### Model AuditTrailModuleMapperDto
+The audit trail actions of one module.
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+| **moduleType** | **String** | The module name. | [optional] [example: Files] [nullable] |
+| **actions** | [**List**](#model-audittrailactionmapperdto) | The actions of the module. | [optional] [nullable] |
+
+
+### Model AuditTrailProductMapperArrayWrapper
+The successful API response containing the list of AuditTrailProductMapperDto objects.
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+| **response** | [**List**](#model-audittrailproductmapperdto) | The list of AuditTrailProductMapperDto objects returned by the operation. | [optional] |
+| **count** | **Integer** (int32) | The total number of items in the response | [optional] |
+| **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
+| **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
+| **statusCode** | **Integer** (int32) | HTTP status code of the response (duplicate of status) | [optional] |
+
+
+### Model AuditTrailProductMapperDto
+The audit trail actions of one product, grouped by module.
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+| **productType** | **String** | The product name. | [optional] [example: Documents] [nullable] |
+| **modules** | [**List**](#model-audittrailmodulemapperdto) | The modules of the product. | [optional] [nullable] |
+
+
+### Model AuditTrailTypesDto
+The names of every audit trail type, one array per dimension of an audit event.
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+| **actions** | **List** | The names of the audit event actions. | [optional] [example: [FileCreated]] [nullable] |
+| **actionTypes** | **List** | The names of the audit event action types. | [optional] [example: [Create]] [nullable] |
+| **productTypes** | **List** | The names of the products an audit event can belong to. | [optional] [example: [Documents]] [nullable] |
+| **moduleTypes** | **List** | The names of the modules an audit event can belong to. | [optional] [example: [Files]] [nullable] |
+| **entryTypes** | **List** | The names of the entry types an audit event can target. | [optional] [example: [File]] [nullable] |
+
+
+### Model AuditTrailTypesWrapper
+The successful API response containing the AuditTrailTypesDto object.
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+| **response** | [**AuditTrailTypesDto**](#model-audittrailtypesdto) | The AuditTrailTypesDto object returned by the operation. | [optional] |
+| **count** | **Integer** (int32) | The total number of items in the response | [optional] |
+| **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
+| **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
+| **statusCode** | **Integer** (int32) | HTTP status code of the response (duplicate of status) | [optional] |
 
 
 ### Model AuthKey
@@ -10542,10 +11007,11 @@ The parameters required for the user authentication requests.
 
 
 ### Model AuthServiceRequestsArrayWrapper
+The successful API response containing the list of AuthServiceRequestsDto objects.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**List**](#model-authservicerequestsdto) |  | [optional] |
+| **response** | [**List**](#model-authservicerequestsdto) | The list of AuthServiceRequestsDto objects returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -10601,10 +11067,11 @@ The authentication token parameters.
 
 
 ### Model AuthenticationTokenWrapper
+The successful API response containing the AuthenticationTokenDto object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**AuthenticationTokenDto**](#model-authenticationtokendto) |  | [optional] |
+| **response** | [**AuthenticationTokenDto**](#model-authenticationtokendto) | The AuthenticationTokenDto object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -10625,10 +11092,11 @@ Represents a balance with an account number and a list of sub-accounts.
 
 
 ### Model BalanceWrapper
+The successful API response containing the Balance object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**Balance**](#model-balance) |  | [optional] |
+| **response** | [**Balance**](#model-balance) | The Balance object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -10636,10 +11104,11 @@ Represents a balance with an account number and a list of sub-accounts.
 
 
 ### Model BooleanWrapper
+The successful API response containing the boolean value.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | **Boolean** |  | [optional] |
+| **response** | **Boolean** | The boolean value returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -10661,10 +11130,11 @@ The capabilities parameters.
 
 
 ### Model CapabilitiesWrapper
+The successful API response containing the CapabilitiesDto object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**CapabilitiesDto**](#model-capabilitiesdto) |  | [optional] |
+| **response** | [**CapabilitiesDto**](#model-capabilitiesdto) | The CapabilitiesDto object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -10672,19 +11142,21 @@ The capabilities parameters.
 
 
 ### Model CdnStorageSettings
+The CDN storage settings.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **module** | **String** |  | [optional] [nullable] |
-| **props** | **Map** |  | [optional] |
-| **lastModified** | **Date** (date-time) |  | [optional] |
+| **module** | **String** | The storage name. | [optional] [example: LocalStorage] [nullable] |
+| **props** | **Map** | The storage properties. | [optional] [example: {region=eu-central-1, bucket=tenant-files}] |
+| **lastModified** | **Date** (date-time) | The date and time when the storage settings were last modified. | [optional] [example: 2025-01-01T12:00:00Z] |
 
 
 ### Model CdnStorageSettingsWrapper
+The successful API response containing the CdnStorageSettings object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**CdnStorageSettings**](#model-cdnstoragesettings) |  | [optional] |
+| **response** | [**CdnStorageSettings**](#model-cdnstoragesettings) | The CdnStorageSettings object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -10716,10 +11188,50 @@ The company white label settings.
 
 
 ### Model CompanyWhiteLabelSettingsArrayWrapper
+The successful API response containing the list of CompanyWhiteLabelSettings objects.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**List**](#model-companywhitelabelsettings) |  | [optional] |
+| **response** | [**List**](#model-companywhitelabelsettings) | The list of CompanyWhiteLabelSettings objects returned by the operation. | [optional] |
+| **count** | **Integer** (int32) | The total number of items in the response | [optional] |
+| **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
+| **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
+| **statusCode** | **Integer** (int32) | HTTP status code of the response (duplicate of status) | [optional] |
+
+
+### Model CompanyWhiteLabelSettingsDto
+The company white label settings.
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+| **companyName** | **String** | The company name. | [required] [example: My Own Corporation] [nullable] |
+| **site** | **String** | The company site. | [required] [example: https://www.example.com] [nullable] |
+| **email** | **String** (email) | The company email address. | [required] [example: contact@example.com] [nullable] |
+| **address** | **String** | The company address. | [required] [example: 123 Business St, New York, NY 10001] [nullable] |
+| **phone** | **String** | The company phone number. | [required] [example: +1-800-555-0123] [nullable] |
+| **isLicensor** | **Boolean** | Specifies if a company is a licensor or not. | [required] [example: false] |
+| **hideAbout** | **Boolean** | Specifies if the About page is visible or not. | [required] [example: false] |
+| **isDefault** | **Boolean** | Specifies if these settings are default or not. | [required] [example: true] |
+
+
+### Model CompanyWhiteLabelSettingsDtoWrapper
+The successful API response containing the CompanyWhiteLabelSettingsDto object.
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+| **response** | [**CompanyWhiteLabelSettingsDto**](#model-companywhitelabelsettingsdto) | The CompanyWhiteLabelSettingsDto object returned by the operation. | [optional] |
+| **count** | **Integer** (int32) | The total number of items in the response | [optional] |
+| **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
+| **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
+| **statusCode** | **Integer** (int32) | HTTP status code of the response (duplicate of status) | [optional] |
+
+
+### Model CompanyWhiteLabelSettingsResponseWrapper
+The successful API response containing the CompanyWhiteLabelSettings object.
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+| **response** | [**CompanyWhiteLabelSettings**](#model-companywhitelabelsettings) | The CompanyWhiteLabelSettings object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -10782,10 +11294,11 @@ Possible values:
 
 
 ### Model ConfirmWrapper
+The successful API response containing the ConfirmDto object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**ConfirmDto**](#model-confirmdto) |  | [optional] |
+| **response** | [**ConfirmDto**](#model-confirmdto) | The ConfirmDto object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -10793,18 +11306,20 @@ Possible values:
 
 
 ### Model ConnectionTestResult
+The outcome of a connection test against an external database.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **success** | **Boolean** |  | [optional] |
-| **error** | **String** |  | [optional] [nullable] |
+| **success** | **Boolean** | Specifies whether the connection to the database succeeded. | [optional] |
+| **error** | **String** | The reason the connection failed, or null when it succeeded. | [optional] [nullable] |
 
 
 ### Model ConnectionTestResultWrapper
+The successful API response containing the ConnectionTestResult object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**ConnectionTestResult**](#model-connectiontestresult) |  | [optional] |
+| **response** | [**ConnectionTestResult**](#model-connectiontestresult) | The ConnectionTestResult object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -10830,10 +11345,11 @@ The request parameters for managing cookie settings.
 
 
 ### Model CookieSettingsWrapper
+The successful API response containing the CookieSettingsDto object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**CookieSettingsDto**](#model-cookiesettingsdto) |  | [optional] |
+| **response** | [**CookieSettingsDto**](#model-cookiesettingsdto) | The CookieSettingsDto object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -10850,7 +11366,7 @@ The request parameters for creating the webhook configuration.
 | **secretKey** | **String** | The webhook secret key used to sign the webhook payloads for the security verification. | [optional] [example: my-secret-key-123] [minLength: 0] [maxLength: 50] [nullable] |
 | **enabled** | **Boolean** | Specifies whether the webhook configuration is active or not. | [optional] [example: true] |
 | **ssl** | **Boolean** | Specifies whether the SSL certificate verification is required or not. | [optional] [example: true] |
-| **triggers** | [**WebhookTrigger**](#model-webhooktrigger) | The webhook trigger type. | [optional] [enum: 0, 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536, 131072, 262144, 524288, 1048576, 2097152, 4194304, 8388608, 16777216, 33554432, 67108864, 134217728, 268435456, 536870912, 1073741824] |
+| **triggers** | [**WebhookTrigger**](#model-webhooktrigger) | Defines which events will trigger webhook notifications. | [optional] [enum: 0, 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536, 131072, 262144, 524288, 1048576, 2097152, 4194304, 8388608, 16777216, 33554432, 67108864, 134217728, 268435456, 536870912, 1073741824] |
 | **targetId** | **String** | Target ID | [optional] [example: 00000000-0000-0000-0000-000000000001] [minLength: 0] [maxLength: 255] [nullable] |
 
 
@@ -10872,10 +11388,11 @@ The request parameters for configuring the Content Security Policy (CSP) setting
 
 
 ### Model CspWrapper
+The successful API response containing the CspDto object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**CspDto**](#model-cspdto) |  | [optional] |
+| **response** | [**CspDto**](#model-cspdto) | The CspDto object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -10908,10 +11425,11 @@ The external resources settings.
 
 
 ### Model CurrenciesArrayWrapper
+The successful API response containing the list of CurrenciesDto objects.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**List**](#model-currenciesdto) |  | [optional] |
+| **response** | [**List**](#model-currenciesdto) | The list of CurrenciesDto objects returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -10929,6 +11447,7 @@ The currencies parameters.
 
 
 ### Model CurrencyAmount
+An amount of money together with its currency.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
@@ -10937,6 +11456,7 @@ The currencies parameters.
 
 
 ### Model CurrencyCode
+The currency an amount is expressed in.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
@@ -10944,11 +11464,12 @@ The currencies parameters.
 
 
 ### Model CurrencyInfo
+The currency the AI prices are quoted in.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **code** | **String** |  | [required] [nullable] |
-| **symbol** | **String** |  | [required] [nullable] |
+| **code** | **String** | The ISO 4217 code of the currency the prices are quoted in. | [required] [example: USD] [nullable] |
+| **symbol** | **String** | The display symbol of the currency. | [required] [example: $] [nullable] |
 
 
 ### Model CurrentLicenseInfo
@@ -10995,15 +11516,16 @@ The request parameters for managing the portal theme settings.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **theme** | [**CustomColorThemesSettingsItem**](#model-customcolorthemessettingsitem) | The custom color theme settings. | [optional] |
+| **theme** | [**CustomColorThemesSettingsItem**](#model-customcolorthemessettingsitem) | The custom color theme configuration. | [optional] |
 | **selected** | **Integer** (int32) | Specifies the optional value indicating the selected custom color theme. | [optional] [example: 1] [nullable] |
 
 
 ### Model CustomColorThemesSettingsWrapper
+The successful API response containing the CustomColorThemesSettingsDto object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**CustomColorThemesSettingsDto**](#model-customcolorthemessettingsdto) |  | [optional] |
+| **response** | [**CustomColorThemesSettingsDto**](#model-customcolorthemessettingsdto) | The CustomColorThemesSettingsDto object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -11016,16 +11538,17 @@ The customer information.
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **portalId** | **String** | The portal ID. | [optional] [example: portal-001] [nullable] |
-| **paymentMethodStatus** | [**PaymentMethodStatus**](#model-paymentmethodstatus) | The payment method status. | [optional] [enum: 0, 1, 2] |
+| **paymentMethodStatus** | [**PaymentMethodStatus**](#model-paymentmethodstatus) | The customer&#39;s payment method. | [optional] [enum: 0, 1, 2] |
 | **email** | **String** | The customer email address. | [optional] [example: user@example.com] [nullable] |
-| **payer** | [**EmployeeDto**](#model-employeedto) | The user parameters. | [optional] |
+| **payer** | [**EmployeeDto**](#model-employeedto) | The paying user. | [optional] |
 
 
 ### Model CustomerInfoWrapper
+The successful API response containing the CustomerInfoDto object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**CustomerInfoDto**](#model-customerinfodto) |  | [optional] |
+| **response** | [**CustomerInfoDto**](#model-customerinfodto) | The CustomerInfoDto object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -11033,10 +11556,11 @@ The customer information.
 
 
 ### Model CustomerMonthlyUsageArrayWrapper
+The successful API response containing the list of CustomerMonthlyUsageDto objects.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**List**](#model-customermonthlyusagedto) |  | [optional] |
+| **response** | [**List**](#model-customermonthlyusagedto) | The list of CustomerMonthlyUsageDto objects returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -11126,10 +11650,11 @@ The request parameters for generating a customer service usage report.
 
 
 ### Model CustomerServiceUsageReportWrapper
+The successful API response containing the CustomerServiceUsageReportDto object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**CustomerServiceUsageReportDto**](#model-customerserviceusagereportdto) |  | [optional] |
+| **response** | [**CustomerServiceUsageReportDto**](#model-customerserviceusagereportdto) | The CustomerServiceUsageReportDto object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -11180,7 +11705,7 @@ The request parameters for managing the deep link configuration.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **deepLinkSettings** | [**TenantDeepLinkSettings**](#model-tenantdeeplinksettings) | The deep link settings. | [optional] |
+| **deepLinkSettings** | [**TenantDeepLinkSettings**](#model-tenantdeeplinksettings) | The deep link settings for the specified tenant. | [optional] |
 
 
 ### Model DeepLinkDto
@@ -11207,7 +11732,7 @@ The request parameters for setting the default product configuration.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **defaultFolderType** | [**FolderType**](#model-foldertype) | The folder type. | [required] [enum: 0, 1, 2, 3, 5, 6, 8, 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36] |
+| **defaultFolderType** | [**FolderType**](#model-foldertype) | The ID of the product to be set as default. | [required] [enum: 0, 1, 2, 3, 5, 6, 8, 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36] |
 
 
 ### Model DistributedTaskStatus
@@ -11235,7 +11760,7 @@ Represents the configuration of a DocsCloud tenant.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **tenantName** | **String** | The tenant name. | [optional] [example: My Portal] [nullable] |
+| **tenantName** | **String** | The tenant name. | [optional] [example: My Portal] [minLength: 0] [maxLength: 255] [nullable] |
 | **security** | [**DocsCloudSecurityConfig**](#model-docscloudsecurityconfig) | The security configuration. | [optional] |
 | **server** | [**DocsCloudServerConfig**](#model-docscloudserverconfig) | The server configuration. | [optional] |
 | **wopi** | [**DocsCloudWopiConfig**](#model-docscloudwopiconfig) | The WOPI configuration. | [optional] |
@@ -11243,10 +11768,11 @@ Represents the configuration of a DocsCloud tenant.
 
 
 ### Model DocsCloudConfigWrapper
+The successful API response containing the DocsCloudConfig object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**DocsCloudConfig**](#model-docscloudconfig) |  | [optional] |
+| **response** | [**DocsCloudConfig**](#model-docscloudconfig) | The DocsCloudConfig object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -11274,7 +11800,7 @@ Represents the IP filter rule of a DocsCloud tenant.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **address** | **String** | The IP address. | [optional] [example: 127.0.0.1] [nullable] |
+| **address** | **String** | The IP address. | [optional] [example: 127.0.0.1] [minLength: 0] [maxLength: 255] [nullable] |
 | **allowed** | **Boolean** | Whether the IP address is allowed. | [optional] [example: true] |
 
 
@@ -11322,10 +11848,11 @@ Represents a single user entry of a DocsCloud quota.
 
 
 ### Model DocsCloudQuotaWrapper
+The successful API response containing the DocsCloudQuota object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**DocsCloudQuota**](#model-docscloudquota) |  | [optional] |
+| **response** | [**DocsCloudQuota**](#model-docscloudquota) | The DocsCloudQuota object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -11337,8 +11864,8 @@ Represents the security configuration of a DocsCloud tenant.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **secret** | **String** | The security secret. | [optional] [example: abc123] [nullable] |
-| **header** | **String** | The security header name. | [optional] [example: Authorization] [nullable] |
+| **secret** | **String** | The security secret. | [optional] [example: abc123] [minLength: 0] [maxLength: 255] [nullable] |
+| **header** | **String** | The security header name. | [optional] [example: Authorization] [minLength: 0] [maxLength: 255] [nullable] |
 
 
 ### Model DocsCloudServerConfig
@@ -11400,10 +11927,11 @@ Represents the license and server information of a DocsCloud tenant, with usage 
 
 
 ### Model DocsCloudTenantInfoWrapper
+The successful API response containing the DocsCloudTenantInfo object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**DocsCloudTenantInfo**](#model-docscloudtenantinfo) |  | [optional] |
+| **response** | [**DocsCloudTenantInfo**](#model-docscloudtenantinfo) | The DocsCloudTenantInfo object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -11411,10 +11939,11 @@ Represents the license and server information of a DocsCloud tenant, with usage 
 
 
 ### Model DocsCloudTenantWrapper
+The successful API response containing the DocsCloudTenant object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**DocsCloudTenant**](#model-docscloudtenant) |  | [optional] |
+| **response** | [**DocsCloudTenant**](#model-docscloudtenant) | The DocsCloudTenant object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -11431,10 +11960,11 @@ Represents the usage statistics of a DocsCloud tenant.
 
 
 ### Model DocsCloudUsageWrapper
+The successful API response containing the DocsCloudUsage object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**DocsCloudUsage**](#model-docscloudusage) |  | [optional] |
+| **response** | [**DocsCloudUsage**](#model-docscloudusage) | The DocsCloudUsage object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -11486,10 +12016,11 @@ The Document Builder task parameters.
 
 
 ### Model DocumentBuilderTaskWrapper
+The successful API response containing the DocumentBuilderTaskDto object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**DocumentBuilderTaskDto**](#model-documentbuildertaskdto) |  | [optional] |
+| **response** | [**DocumentBuilderTaskDto**](#model-documentbuildertaskdto) | The DocumentBuilderTaskDto object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -11497,10 +12028,11 @@ The Document Builder task parameters.
 
 
 ### Model DoubleNullableWrapper
+The successful API response containing the double value.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | **BigDecimal** |  | [optional] [nullable] |
+| **response** | **BigDecimal** | The double value returned by the operation. | [optional] [nullable] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -11508,10 +12040,11 @@ The Document Builder task parameters.
 
 
 ### Model DoubleWrapper
+The successful API response containing the double value.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | **BigDecimal** |  | [optional] |
+| **response** | **BigDecimal** | The double value returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -11528,10 +12061,11 @@ The email activation settings.
 
 
 ### Model EmailActivationSettingsWrapper
+The successful API response containing the EmailActivationSettings object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**EmailActivationSettings**](#model-emailactivationsettings) |  | [optional] |
+| **response** | [**EmailActivationSettings**](#model-emailactivationsettings) | The EmailActivationSettings object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -11564,10 +12098,11 @@ Possible values:
 
 
 ### Model EmployeeArrayWrapper
+The successful API response containing the list of EmployeeDto objects.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**List**](#model-employeedto) |  | [optional] |
+| **response** | [**List**](#model-employeedto) | The list of EmployeeDto objects returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -11613,6 +12148,27 @@ Possible values:
 - `User` — User
 
 
+### Model EnabledModuleArrayWrapper
+The successful API response containing the list of EnabledModuleDto objects.
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+| **response** | [**List**](#model-enabledmoduledto) | The list of EnabledModuleDto objects returned by the operation. | [optional] |
+| **count** | **Integer** (int32) | The total number of items in the response | [optional] |
+| **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
+| **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
+| **statusCode** | **Integer** (int32) | HTTP status code of the response (duplicate of status) | [optional] |
+
+
+### Model EnabledModuleDto
+An enabled portal module.
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+| **id** | **String** | The module ID, which is the name of its product class. | [optional] [example: ASC.Web.Files.Configuration.FilesSpaceUsageStatManager] [nullable] |
+| **title** | **String** | The module title. | [optional] [example: Documents] [nullable] |
+
+
 ### Model EncryprtionStatus
 
 Possible values:
@@ -11634,10 +12190,11 @@ The encryption settings.
 
 
 ### Model EncryptionSettingsWrapper
+The successful API response containing the EncryptionSettings object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**EncryptionSettings**](#model-encryptionsettings) |  | [optional] |
+| **response** | [**EncryptionSettings**](#model-encryptionsettings) | The EncryptionSettings object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -11658,19 +12215,41 @@ Possible values:
 - `27` — Agent (`Agent`)
 
 
-### Model ExternalDatabaseSettings
+### Model ErrorApiResponse
+The error body returned with every failed request.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **databaseType** | **String** |  | [optional] [nullable] |
-| **databaseTypeEnum** | [**ExternalDatabaseType**](#model-externaldatabasetype) |  | [optional] [enum: 0, 1] |
-| **dbHost** | **String** |  | [optional] [nullable] |
-| **dbPort** | **Integer** (int32) |  | [optional] |
-| **dbName** | **String** |  | [optional] [nullable] |
-| **dbUser** | **String** |  | [optional] [nullable] |
-| **dbPassword** | **String** |  | [optional] [nullable] |
-| **dbSsl** | **Boolean** |  | [optional] |
-| **sqliteFilePath** | **String** |  | [optional] [nullable] |
+| **status** | **Integer** (int32) | The response status flag. Always 1 on an error, as opposed to 0 on success. | [optional] |
+| **statusCode** | **Integer** (int32) | The HTTP status code of the response, repeated in the body. | [optional] |
+| **error** | [**ErrorApiResponse_error**](#model-errorapiresponseerror) |  | [optional] |
+
+
+### Model ErrorApiResponse.error
+What went wrong.
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+| **message** | **String** | The human-readable error message. | [optional] |
+| **type** | **String** | The .NET type of the underlying exception. Only sent when stack traces are enabled. | [optional] |
+| **stack** | **String** | The stack trace of the underlying exception. Only sent when stack traces are enabled. | [optional] |
+| **hresult** | **Integer** (int32) | The HRESULT of the underlying exception. Only sent when stack traces are enabled. | [optional] |
+
+
+### Model ExternalDatabaseSettings
+The connection parameters of an external database.
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+| **databaseType** | **String** | The engine of the external database. | [optional] [example: mysql] [nullable] |
+| **databaseTypeEnum** | [**ExternalDatabaseType**](#model-externaldatabasetype) | The engine of an external database. | [optional] [enum: 0, 1] |
+| **dbHost** | **String** | The host name or the IP address of the database server. | [optional] [example: localhost] [nullable] |
+| **dbPort** | **Integer** (int32) | The port the database server listens on. | [optional] [example: 3306] |
+| **dbName** | **String** | The name of the database to connect to. | [optional] [example: docspace] [nullable] |
+| **dbUser** | **String** | The user name to connect with. | [optional] [example: root] [nullable] |
+| **dbPassword** | **String** | The password to connect with. | [optional] [example: my-secret-password] [nullable] |
+| **dbSsl** | **Boolean** | Specifies whether the connection to the database is secured with SSL. | [optional] [example: false] |
+| **sqliteFilePath** | **String** | The path to the database file, used by the SQLite engine only. | [optional] [example: /var/lib/docspace/external.db] [nullable] |
 
 
 ### Model ExternalDatabaseType
@@ -11713,10 +12292,11 @@ The Firebase user parameters.
 
 
 ### Model FireBaseUserWrapper
+The successful API response containing the FireBaseUser object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**FireBaseUser**](#model-firebaseuser) |  | [optional] |
+| **response** | [**FireBaseUser**](#model-firebaseuser) | The FireBaseUser object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -11816,38 +12396,23 @@ The group summary parameters.
 | **isSystem** | **Boolean** | Indicates whether the group is a system group. | [optional] [example: false] [nullable] |
 
 
-### Model IMagickGeometry
-
-| Name | Type | Description | Notes |
-|------------ | ------------- | ------------- | -------------|
-| **aspectRatio** | **Boolean** |  | [optional] |
-| **fillArea** | **Boolean** |  | [optional] |
-| **greater** | **Boolean** |  | [optional] |
-| **height** | **Integer** (int32) |  | [optional] |
-| **ignoreAspectRatio** | **Boolean** |  | [optional] |
-| **isPercentage** | **Boolean** |  | [optional] |
-| **less** | **Boolean** |  | [optional] |
-| **limitPixels** | **Boolean** |  | [optional] |
-| **width** | **Integer** (int32) |  | [optional] |
-| **x** | **Integer** (int32) |  | [optional] |
-| **y** | **Integer** (int32) |  | [optional] |
-
-
 ### Model IPRestriction
+The IP restiction parameters.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **ip** | **String** |  | [required] |
-| **forAdmin** | **Boolean** |  | [optional] |
-| **id** | **Integer** (int32) |  | [optional] |
-| **tenantId** | **Integer** (int32) |  | [optional] |
+| **ip** | **String** | The IP address. | [required] |
+| **forAdmin** | **Boolean** | Specifies if the IP address is for administrator users only or not. | [optional] |
+| **id** | **Integer** (int32) | The IP restiction ID. | [optional] |
+| **tenantId** | **Integer** (int32) | The tenant ID. | [optional] |
 
 
 ### Model IPRestrictionArrayWrapper
+The successful API response containing the list of IPRestriction objects.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**List**](#model-iprestriction) |  | [optional] |
+| **response** | [**List**](#model-iprestriction) | The list of IPRestriction objects returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -11855,18 +12420,20 @@ The group summary parameters.
 
 
 ### Model IPRestrictionsSettings
+The IP restriction settings.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **enable** | **Boolean** |  | [optional] |
-| **lastModified** | **Date** (date-time) |  | [optional] |
+| **enable** | **Boolean** | Specifies if the IP restrictions are enabled or not. | [optional] [example: true] |
+| **lastModified** | **Date** (date-time) | The date and time when the settings were last modified. | [optional] [example: 2024-01-01T00:00:00Z] |
 
 
 ### Model IPRestrictionsSettingsWrapper
+The successful API response containing the IPRestrictionsSettings object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**IPRestrictionsSettings**](#model-iprestrictionssettings) |  | [optional] |
+| **response** | [**IPRestrictionsSettings**](#model-iprestrictionssettings) | The IPRestrictionsSettings object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -11874,17 +12441,19 @@ The group summary parameters.
 
 
 ### Model ImportableApiEntity
+The parameters of an importable API entity.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **shouldImport** | **Boolean** |  | [optional] |
+| **shouldImport** | **Boolean** | Specifies whether the API entity should be imported. | [optional] [example: true] |
 
 
 ### Model Int64Wrapper
+The successful API response containing the int64 value.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | **Integer** |  | [optional] |
+| **response** | **Integer** | The int64 value returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -11896,7 +12465,7 @@ The request parameters for creating an invitation link.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **employeeType** | [**EmployeeType**](#model-employeetype) | The user type. | [required] [enum: All, RoomAdmin, Guest, DocSpaceAdmin, User] |
+| **employeeType** | [**EmployeeType**](#model-employeetype) | The type of employee role for the invitation link (DocSpaceAdmin, RoomAdmin or User). | [required] [enum: All, RoomAdmin, Guest, DocSpaceAdmin, User] |
 | **expiration** | **Date** (date-time) | The expiration date of the invitation link. | [optional] [example: 2025-06-15T10:30:00.0000000Z] [nullable] |
 | **maxUseCount** | **Integer** (int32) | The maximum number of times the invitation link can be used. | [optional] [example: 1] [min: 1] [max: 1000] [nullable] |
 
@@ -11915,8 +12484,8 @@ The invitation link parameters.
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **id** | **UUID** (uuid) | The ID of the invitation link. | [optional] [example: 00000000-0000-0000-0000-000000000000] |
-| **employeeType** | [**EmployeeType**](#model-employeetype) | The user type. | [required] [enum: All, RoomAdmin, Guest, DocSpaceAdmin, User] |
-| **expiration** | [**ApiDateTime**](#model-apidatetime) | The API date and time parameters. | [optional] |
+| **employeeType** | [**EmployeeType**](#model-employeetype) | The type of employee role for the invitation link. | [required] [enum: All, RoomAdmin, Guest, DocSpaceAdmin, User] |
+| **expiration** | [**ApiDateTime**](#model-apidatetime) | The expiration date of the invitation link. | [optional] |
 | **isExpired** | **Boolean** | Indicates whether the invitation link has expired. | [optional] [example: true] |
 | **maxUseCount** | **Integer** (int32) | The maximum number of times the invitation link can be used. | [optional] [example: 1] [nullable] |
 | **currentUseCount** | **Integer** (int32) | The current number of times the invitation link has been used. | [optional] [example: 1] |
@@ -11934,10 +12503,11 @@ The request parameters for updating an invitation link.
 
 
 ### Model InvitationLinkWrapper
+The successful API response containing the InvitationLinkDto object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**InvitationLinkDto**](#model-invitationlinkdto) |  | [optional] |
+| **response** | [**InvitationLinkDto**](#model-invitationlinkdto) | The InvitationLinkDto object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -11945,11 +12515,12 @@ The request parameters for updating an invitation link.
 
 
 ### Model IpRestrictionBase
+The IP restiction base parameters.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **ip** | **String** |  | [required] [nullable] |
-| **forAdmin** | **Boolean** |  | [optional] |
+| **ip** | **String** | The IP address. | [required] [example: 192.0.2.1] [nullable] |
+| **forAdmin** | **Boolean** | Specifies if the IP address is for administrator users only or not. | [optional] [example: false] |
 
 
 ### Model IpRestrictionsDto
@@ -11962,10 +12533,11 @@ The parameters for configuring new IP restriction settings.
 
 
 ### Model IpRestrictionsWrapper
+The successful API response containing the IpRestrictionsDto object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**IpRestrictionsDto**](#model-iprestrictionsdto) |  | [optional] |
+| **response** | [**IpRestrictionsDto**](#model-iprestrictionsdto) | The IpRestrictionsDto object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -11973,10 +12545,11 @@ The parameters for configuring new IP restriction settings.
 
 
 ### Model IsDefaultWhiteLabelLogosArrayWrapper
+The successful API response containing the list of IsDefaultWhiteLabelLogosDto objects.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**List**](#model-isdefaultwhitelabellogosdto) |  | [optional] |
+| **response** | [**List**](#model-isdefaultwhitelabellogosdto) | The list of IsDefaultWhiteLabelLogosDto objects returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -11993,10 +12566,11 @@ The default white label logo parameters.
 
 
 ### Model IsDefaultWhiteLabelLogosWrapper
+The successful API response containing the IsDefaultWhiteLabelLogosDto object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**IsDefaultWhiteLabelLogosDto**](#model-isdefaultwhitelabellogosdto) |  | [optional] |
+| **response** | [**IsDefaultWhiteLabelLogosDto**](#model-isdefaultwhitelabellogosdto) | The IsDefaultWhiteLabelLogosDto object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -12004,27 +12578,30 @@ The default white label logo parameters.
 
 
 ### Model ItemKeyValuePairStringBoolean
+A key-value pair of a list item.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **key** | **String** |  | [optional] [nullable] |
-| **value** | **Boolean** |  | [optional] |
+| **key** | **String** | The key that identifies the item within the list. | [optional] [nullable] |
+| **value** | **Boolean** | The value associated with the key. | [optional] |
 
 
 ### Model ItemKeyValuePairStringLogoRequestsDto
+A key-value pair of a list item.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **key** | **String** |  | [optional] [nullable] |
-| **value** | [**LogoRequestsDto**](#model-logorequestsdto) | The request parameters for the theme-specific logo configurations. | [optional] |
+| **key** | **String** | The key that identifies the item within the list. | [optional] [nullable] |
+| **value** | [**LogoRequestsDto**](#model-logorequestsdto) | The value associated with the key. | [optional] |
 
 
 ### Model ItemKeyValuePairStringString
+A key-value pair of a list item.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **key** | **String** |  | [optional] [nullable] |
-| **value** | **String** |  | [optional] [nullable] |
+| **key** | **String** | The key that identifies the item within the list. | [optional] [nullable] |
+| **value** | **String** | The value associated with the key. | [optional] [nullable] |
 
 
 ### Model LocationType
@@ -12042,10 +12619,11 @@ Possible values:
 
 
 ### Model LoginEventArrayWrapper
+The successful API response containing the list of LoginEventDto objects.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**List**](#model-logineventdto) |  | [optional] |
+| **response** | [**List**](#model-logineventdto) | The list of LoginEventDto objects returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -12058,12 +12636,12 @@ The login event parameters.
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **id** | **Integer** (int32) | The login event ID. | [optional] [example: 1] |
-| **date** | [**ApiDateTime**](#model-apidatetime) | The API date and time parameters. | [optional] |
+| **date** | [**ApiDateTime**](#model-apidatetime) | The login event date. | [optional] |
 | **user** | **String** | The user name of the login event. | [optional] [example: John Doe] [nullable] |
 | **userId** | **UUID** (uuid) | The user ID of the login event. | [optional] [example: {}] |
 | **login** | **String** | The user login of the login event. | [optional] [example: user@example.com] [nullable] |
 | **action** | **String** | The login event action. | [optional] [example: User logged in] [nullable] |
-| **actionId** | [**MessageAction**](#model-messageaction) | The event action ID. | [optional] [enum: 1000, 1001, 1002, 1003, 1004, 1005, 1006, 1007, 1008, 1009, 1010, 1011, 1012, 1013, 1014, 1015, 1016, 1017, 1018, 1019, 1020, 1021, 1022, 1023, 1024, 1025, 1026, 1027, 1028, 1029, 4000, 4001, 4002, 4003, 4004, 4005, 4006, 4007, 4008, 4009, 4010, 4011, 4012, 4013, 4014, 4015, 4016, 4017, 4018, 4019, 4020, 4021, 4022, 4023, 4024, 4025, 4026, 4027, 4028, 4029, 4030, 4031, 4032, 4033, 4034, 4035, 4036, 4037, 5000, 5001, 5002, 5003, 5004, 5005, 5006, 5007, 5008, 5009, 5010, 5011, 5012, 5013, 5014, 5015, 5016, 5017, 5018, 5019, 5020, 5021, 5022, 5023, 5024, 5025, 5026, 5027, 5028, 5029, 5030, 5031, 5032, 5033, 5034, 5035, 5036, 5037, 5038, 5039, 5040, 5041, 5042, 5043, 5044, 5045, 5046, 5047, 5048, 5049, 5050, 5053, 5054, 5055, 5056, 5057, 5058, 5059, 5060, 5061, 5062, 5063, 5064, 5065, 5066, 5068, 5069, 5070, 5071, 5072, 5073, 5074, 5075, 5076, 5077, 5078, 5079, 5080, 5081, 5082, 5083, 5084, 5085, 5086, 5087, 5088, 5089, 5090, 5091, 5092, 5093, 5094, 5095, 5096, 5097, 5098, 5099, 5100, 5101, 5102, 5103, 5104, 5105, 5106, 5107, 5108, 5109, 5110, 5111, 5112, 5113, 5114, 5115, 5116, 5117, 5118, 5119, 5120, 5121, 5122, 5123, 5124, 5125, 5126, 5127, 5128, 5129, 5130, 5131, 5132, 5133, 5150, 5151, 5152, 5153, 5154, 5155, 5156, 5157, 5158, 5159, 5160, 5201, 5202, 5203, 5204, 5205, 5206, 5501, 5502, 5503, 6000, 6001, 6002, 6003, 6004, 6005, 6006, 6007, 6008, 6009, 6010, 6011, 6012, 6013, 6014, 6015, 6016, 6017, 6018, 6019, 6020, 6021, 6022, 6023, 6024, 6025, 6026, 6027, 6028, 6029, 6030, 6031, 6032, 6033, 6034, 6035, 6036, 6037, 6038, 6039, 6040, 6041, 6042, 6043, 6044, 6045, 6046, 6047, 6048, 6049, 6050, 6051, 6052, 6053, 6054, 6055, 6056, 6057, 6058, 6059, 6060, 6061, 6062, 6063, 6064, 6065, 6066, 6067, 6068, 6069, 6070, 6071, 6072, 6073, 6074, 6075, 6076, 6077, 6078, 6079, 6080, 6081, 6082, 6083, 6084, 6085, 6086, 6087, 6088, 6089, 6090, 6091, 6092, 6093, 6094, 6095, 6096, 6097, 6098, 6099, 6100, 6101, 6102, 7000, 7001, 7002, 7003, 7004, 9901, 9902, 9903, 9904, 9905, 9906, 9907, 9908, 9909, -1] |
+| **actionId** | [**MessageAction**](#model-messageaction) | The login-related action to filter events by. | [optional] [enum: 1000, 1001, 1002, 1003, 1004, 1005, 1006, 1007, 1008, 1009, 1010, 1011, 1012, 1013, 1014, 1015, 1016, 1017, 1018, 1019, 1020, 1021, 1022, 1023, 1024, 1025, 1026, 1027, 1028, 1029, 4000, 4001, 4002, 4003, 4004, 4005, 4006, 4007, 4008, 4009, 4010, 4011, 4012, 4013, 4014, 4015, 4016, 4017, 4018, 4019, 4020, 4021, 4022, 4023, 4024, 4025, 4026, 4027, 4028, 4029, 4030, 4031, 4032, 4033, 4034, 4035, 4036, 4037, 5000, 5001, 5002, 5003, 5004, 5005, 5006, 5007, 5008, 5009, 5010, 5011, 5012, 5013, 5014, 5015, 5016, 5017, 5018, 5019, 5020, 5021, 5022, 5023, 5024, 5025, 5026, 5027, 5028, 5029, 5030, 5031, 5032, 5033, 5034, 5035, 5036, 5037, 5038, 5039, 5040, 5041, 5042, 5043, 5044, 5045, 5046, 5047, 5048, 5049, 5050, 5053, 5054, 5055, 5056, 5057, 5058, 5059, 5060, 5061, 5062, 5063, 5064, 5065, 5066, 5068, 5069, 5070, 5071, 5072, 5073, 5074, 5075, 5076, 5077, 5078, 5079, 5080, 5081, 5082, 5083, 5084, 5085, 5086, 5087, 5088, 5089, 5090, 5091, 5092, 5093, 5094, 5095, 5096, 5097, 5098, 5099, 5100, 5101, 5102, 5103, 5104, 5105, 5106, 5107, 5108, 5109, 5110, 5111, 5112, 5113, 5114, 5115, 5116, 5117, 5118, 5119, 5120, 5121, 5122, 5123, 5124, 5125, 5126, 5127, 5128, 5129, 5130, 5131, 5132, 5133, 5150, 5151, 5152, 5153, 5154, 5155, 5156, 5157, 5158, 5159, 5160, 5161, 5162, 5163, 5201, 5202, 5203, 5204, 5205, 5206, 5501, 5502, 5503, 6000, 6001, 6002, 6003, 6004, 6005, 6006, 6007, 6008, 6009, 6010, 6011, 6012, 6013, 6014, 6015, 6016, 6017, 6018, 6019, 6020, 6021, 6022, 6023, 6024, 6025, 6026, 6027, 6028, 6029, 6030, 6031, 6032, 6033, 6034, 6035, 6036, 6037, 6038, 6039, 6040, 6041, 6042, 6043, 6044, 6045, 6046, 6047, 6048, 6049, 6050, 6051, 6052, 6053, 6054, 6055, 6056, 6057, 6058, 6059, 6060, 6061, 6062, 6063, 6064, 6065, 6066, 6067, 6068, 6069, 6070, 6071, 6072, 6073, 6074, 6075, 6076, 6077, 6078, 6079, 6080, 6081, 6082, 6083, 6084, 6085, 6086, 6087, 6088, 6089, 6090, 6091, 6092, 6093, 6094, 6095, 6096, 6097, 6098, 6099, 6100, 6101, 6102, 6103, 6104, 6105, 6106, 6107, 6108, 6109, 7000, 7001, 7002, 7003, 7004, 9901, 9902, 9903, 9904, 9905, 9906, 9907, 9908, 9909, -1] |
 | **ip** | **String** | The login event IP. | [optional] [example: 192.0.2.1] [nullable] |
 | **country** | **String** | The login event country. | [optional] [example: United States] [nullable] |
 | **city** | **String** | The login event city. | [optional] [example: New York] [nullable] |
@@ -12115,10 +12693,11 @@ The request parameters for configuring login security and performance settings.
 
 
 ### Model LoginSettingsWrapper
+The successful API response containing the LoginSettingsDto object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**LoginSettingsDto**](#model-loginsettingsdto) |  | [optional] |
+| **response** | [**LoginSettingsDto**](#model-loginsettingsdto) | The LoginSettingsDto object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -12139,13 +12718,13 @@ The request parameters for configuring trusted mail domains and visitor invitati
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **type** | [**TenantTrustedDomainsType**](#model-tenanttrusteddomainstype) | The type of the tenant trusted domains. | [required] [enum: 0, 1, 2] |
+| **type** | [**TenantTrustedDomainsType**](#model-tenanttrusteddomainstype) | Defines how trusted domains are handled and validated. | [required] [enum: 0, 1, 2] |
 | **domains** | **List** | The list of authorized email domains that are considered trusted. | [required] [example: [example.com, company.com]] [nullable] |
 | **inviteUsersAsVisitors** | **Boolean** | Specifies the default permission level for the invited users (visitors or not). | [required] [example: false] |
 
 
 ### Model MessageAction
-[1000 - Login success, 1001 - Login success via social account, 1002 - Login fail invalid combination, 1003 - Login fail social account not found, 1004 - Login fail disabled profile, 1005 - Login fail, 1006 - Logout, 1007 - Login success via sms, 1008 - Login fail via sms, 1009 - Login fail ip security, 1010 - Login success via api, 1011 - Login success via social app, 1012 - Login success via api sms, 1013 - Login fail via api, 1014 - Login fail via api sms, 1015 - Login success via SSO, 1016 - Session started, 1017 - Session completed, 1018 - Login fail via SSO, 1019 - Login success via api social account, 1020 - Login fail via api social account, 1021 - Login succes via tfa app, 1022 - Login fail via Tfa app, 1023 - Login fail brute force, 1024 - Login success via api tfa, 1025 - Login fail via api tfa, 1026 - Login fail recaptcha, 1027 - Authorization link activated, 1028 - Login success via OAuth 2.0, 1029 - Login success via login and password, 4000 - User created, 4001 - Guest created, 4002 - User created via invite, 4003 - Guest created via invite, 4004 - User activated, 4005 - Guest activated, 4006 - User updated, 4007 - User updated language, 4008 - User added avatar, 4009 - User deleted avatar, 4010 - User updated avatar thumbnails, 4011 - User linked social account, 4012 - User unlinked social account, 4013 - User sent activation instructions, 4014 - User sent email change instructions, 4015 - User sent password change instructions, 4016 - User sent delete instructions, 4017 - User updated password, 4018 - User deleted, 4019 - Users updated type, 4020 - Users updated status, 4021 - Users sent activation instructions, 4022 - Users deleted, 4023 - Sent invite instructions, 4024 - User imported, 4025 - Guest imported, 4026 - Group created, 4027 - Group updated, 4028 - Group deleted, 4029 - User updated mobile number, 4030 - User data reassigns, 4031 - User data removing, 4032 - User connected tfa app, 4033 - User disconnected tfa app, 4034 - User logout active connections, 4035 - User logout active connection, 4036 - User logout active connections for user, 4037 - Send join invite, 5000 - File created, 5001 - File renamed, 5002 - File updated, 5003 - File created version, 5004 - File deleted version, 5005 - File updated revision comment, 5006 - File locked, 5007 - File unlocked, 5008 - File updated access, 5009 - File downloaded, 5010 - File downloaded as, 5011 - File uploaded, 5012 - File imported, 5013 - File copied, 5014 - File copied with overwriting, 5015 - File moved, 5016 - File moved with overwriting, 5017 - File moved to trash, 5018 - File deleted, 5019 - Folder created, 5020 - Folder renamed, 5021 - Folder updated access, 5022 - Folder copied, 5023 - Folder copied with overwriting, 5024 - Folder moved, 5025 - Folder moved with overwriting, 5026 - Folder moved to trash, 5027 - Folder deleted, 5028 - ThirdParty created, 5029 - ThirdParty updated, 5030 - ThirdParty deleted, 5031 - Documents ThirdParty settings updated, 5032 - Documents overwriting settings updated, 5033 - Documents uploading formats settings updated, 5034 - User file updated, 5035 - File converted, 5036 - File send access link, 5037 - Document service location setting, 5038 - Authorization keys setting, 5039 - Full text search setting, 5040 - Start transfer setting, 5041 - Backup started, 5042 - License key uploaded, 5043 - File change owner, 5044 - File restore version, 5045 - Document send to sign, 5046 - Document sign complete, 5047 - User updated email, 5048 - Documents store forcesave, 5049 - Documents forcesave, 5050 - Start storage encryption, 5053 - Start storage decryption, 5054 - File opened for change, 5055 - File marked as favorite, 5056 - File removed from favorite, 5057 - Folder downloaded, 5058 - File removed from list, 5059 - Folder removed from list, 5060 - File external link access updated, 5061 - Trash emptied, 5062 - File revision downloaded, 5063 - File marked as read, 5064 - File readed, 5065 - Folder marked as read, 5066 - Folder updated access for, 5068 - File updated access for, 5069 - Documents external share settings updated, 5070 - Room created, 5071 - Room renamed, 5072 - Room archived, 5073 - Room unarchived, 5074 - Room deleted, 5075 - Room update access for user, 5076 - Tag created, 5077 - Tags deleted, 5078 - Added room tags, 5079 - Deleted room tags, 5080 - Room logo created, 5081 - Room logo deleted, 5082 - Room invitation link updated, 5083 - Documents keep new file name settings updated, 5084 - Room remove user, 5085 - Room create user, 5086 - Room invitation link created, 5087 - Room invitation link deleted, 5088 - Room external link created, 5089 - Room external link updated, 5090 - Room external link deleted, 5091 - File external link created, 5092 - File external link updated, 5093 - File external link deleted, 5094 - Room group added, 5095 - Room update access for group, 5096 - Room group remove, 5097 - Room external link revoked, 5098 - Room external link renamed, 5099 - File uploaded with overwriting, 5100 - Room copied, 5101 - Documents display file extension updated, 5102 - Room color changed, 5103 - Room cover changed, 5104 - Room indexing changed, 5105 - Room deny download changed, 5106 - Room index export saved, 5107 - Folder index changed, 5108 - Folder index reordered, 5109 - Room deny download enabled, 5110 - Room deny download disabled, 5111 - File index changed, 5112 - Room watermark set, 5113 - Room watermark disabled, 5114 - Room index export saved, 5115 - Room indexing disabled, 5116 - Room life time set, 5117 - Room life time disabled, 5118 - Room invite resend, 5119 - File version deleted, 5120 - File custom filter enabled, 5121 - File custom filter disabled, 5122 - Folder external link created, 5123 - Folder external link updated, 5124 - Folder external link deleted, 5125 - Backup completed, 5126 - Backup failed, 5127 - Scheduled backup started, 5128 - Scheduled backup completed, 5129 - Scheduled backup failed, 5130 - Scheduled backup deleted, 5131 - Backup cancelled, 5132 - Restore started, 5133 - Restore cancelled, 5150 - Form started to fill, 5151 - Form partially filled, 5152 - Form completely filled, 5153 - Form stopped, 5154 - AI agent created, 5155 - AI agent renamed, 5156 - AI agent deleted, 5157 - MCP server added to AI agent, 5158 - MCP server deleted from AI agent, 5159 - Room change owner, 5160 - Documents default templates settings updated, 5201 - File saved, user quota exceeded, 5202 - File not saved due to user quota exceeded, 5203 - File saved, room quota exceeded, 5204 - File not saved due to room quota exceeded, 5205 - File saved, tenant quota exceeded, 5206 - File not saved due to tenant quota exceeded, 5501 - Ldap enabled, 5502 - Ldap disabled, 5503 - LDAP synchronization completed, 6000 - Language settings updated, 6001 - Time zone settings updated, 6002 - Dns settings updated, 6003 - Trusted mail domain settings updated, 6004 - Password strength settings updated, 6005 - Two factor authentication settings updated, 6006 - Administrator message settings updated, 6007 - Default start page settings updated, 6008 - Products list updated, 6009 - Administrator added, 6010 - Administrator opened full access, 6011 - Administrator deleted, 6012 - Users opened product access, 6013 - Groups opened product access, 6014 - Product access opened, 6015 - Product access restricted, 6016 - Product added administrator, 6017 - Product deleted administrator, 6018 - Greeting settings updated, 6019 - Team template changed, 6020 - Color theme changed, 6021 - Owner sent change owner instructions, 6022 - Owner updated, 6023 - Owner sent portal deactivation instructions, 6024 - Owner sent portal delete instructions, 6025 - Portal deactivated, 6026 - Portal deleted, 6027 - Login history report downloaded, 6028 - Audit trail report downloaded, 6029 - SSO enabled, 6030 - SSO disabled, 6031 - Portal access settings updated, 6032 - Cookie settings updated, 6033 - Mail service settings updated, 6034 - Custom navigation settings updated, 6035 - Audit settings updated, 6036 - Two factor authentication disabled, 6037 - Two factor authentication enabled by sms, 6038 - Two factor authentication enabled by tfa app, 6039 - Portal renamed, 6040 - Quota per room changed, 6041 - Quota per room disabled, 6042 - Quota per user changed, 6043 - Quota per user disabled, 6044 - Quota per portal changed, 6045 - Quota per portal disabled, 6046 - Form submit, 6047 - Form opened for filling, 6048 - Custom quota per room default, 6049 - Custom quota per room changed, 6050 - Custom quota per room disabled, 6051 - Custom quota per user default, 6052 - Custom quota per user changed, 6053 - Custom quota per user disabled, 6054 - DevTools access settings changed, 6055 - Webhook created, 6056 - Webhook updated, 6057 - Webhook deleted, 6058 - Created api key, 6059 - Update api key, 6060 - Deleted User api key, 6061 - Customer wallet topped up, 6062 - Customer operation performed, 6063 - Customer operations report downloaded, 6064 - Customer wallet top up settings updated, 6065 - Customer subscription updated, 6066 - Promotional banners visibility settings changed, 6067 - Customer wallet services settings updated, 6068 - Quota per AI agent changed, 6069 - Quota per AI agent disabled, 6070 - Custom quota per AI agent default, 6071 - Custom quota per AI agent changed, 6072 - Custom quota per AI agent disabled, 6073 - AI provider created, 6074 - AI provider updated, 6075 - AI provider deleted, 6076 - MCP server created, 6077 - MCP server updated, 6078 - MCP server enabled, 6079 - MCP server disabled, 6080 - MCP server deleted, 6081 - WebSearch settings configured, 6082 - WebSearch settings reset, 6083 - Vectorization settings configured, 6084 - Vectorization settings reset, 6085 - Webplugin uploaded, 6086 - Webplugin updated, 6087 - Webplugin deleted, 6088 - Whitelabel settings logo text updated, 6089 - Whitelabel settings logos updated, 6090 - Whitelabel company settings updated, 6091 - Whitelabel additional settings updated, 6092 - Whitelabel mail settings updated, 6093 - Invitation settings updated, 6094 - IP restrictions settings updated, 6095 - Login settings updated, 6096 - AI default provider set, 6097 - AI access enabled, 6098 - AI access disabled, 6099 - User AI settings updated, 6100 - Subscription balance moved to wallet, 6101 - Docs Cloud config updated, 6102 - Docs Cloud quota report downloaded, 7000 - Contact admin mail sent, 7001 - Room invite link used, 7002 - User created and added to room, 7003 - Guest created and added to room, 7004 - Contact sales mail sent, 9901 - Create client, 9902 - Update client, 9903 - Regenerate secret, 9904 - Delete client, 9905 - Change client activation, 9906 - Change client visibility, 9907 - Revoke user client, 9908 - Generate authorization code token, 9909 - Generate personal access token, -1 - None]
+[1000 - Login success, 1001 - Login success via social account, 1002 - Login fail invalid combination, 1003 - Login fail social account not found, 1004 - Login fail disabled profile, 1005 - Login fail, 1006 - Logout, 1007 - Login success via sms, 1008 - Login fail via sms, 1009 - Login fail ip security, 1010 - Login success via api, 1011 - Login success via social app, 1012 - Login success via api sms, 1013 - Login fail via api, 1014 - Login fail via api sms, 1015 - Login success via SSO, 1016 - Session started, 1017 - Session completed, 1018 - Login fail via SSO, 1019 - Login success via api social account, 1020 - Login fail via api social account, 1021 - Login succes via tfa app, 1022 - Login fail via Tfa app, 1023 - Login fail brute force, 1024 - Login success via api tfa, 1025 - Login fail via api tfa, 1026 - Login fail recaptcha, 1027 - Authorization link activated, 1028 - Login success via OAuth 2.0, 1029 - Login success via login and password, 4000 - User created, 4001 - Guest created, 4002 - User created via invite, 4003 - Guest created via invite, 4004 - User activated, 4005 - Guest activated, 4006 - User updated, 4007 - User updated language, 4008 - User added avatar, 4009 - User deleted avatar, 4010 - User updated avatar thumbnails, 4011 - User linked social account, 4012 - User unlinked social account, 4013 - User sent activation instructions, 4014 - User sent email change instructions, 4015 - User sent password change instructions, 4016 - User sent delete instructions, 4017 - User updated password, 4018 - User deleted, 4019 - Users updated type, 4020 - Users updated status, 4021 - Users sent activation instructions, 4022 - Users deleted, 4023 - Sent invite instructions, 4024 - User imported, 4025 - Guest imported, 4026 - Group created, 4027 - Group updated, 4028 - Group deleted, 4029 - User updated mobile number, 4030 - User data reassigns, 4031 - User data removing, 4032 - User connected tfa app, 4033 - User disconnected tfa app, 4034 - User logout active connections, 4035 - User logout active connection, 4036 - User logout active connections for user, 4037 - Send join invite, 5000 - File created, 5001 - File renamed, 5002 - File updated, 5003 - File created version, 5004 - File deleted version, 5005 - File updated revision comment, 5006 - File locked, 5007 - File unlocked, 5008 - File updated access, 5009 - File downloaded, 5010 - File downloaded as, 5011 - File uploaded, 5012 - File imported, 5013 - File copied, 5014 - File copied with overwriting, 5015 - File moved, 5016 - File moved with overwriting, 5017 - File moved to trash, 5018 - File deleted, 5019 - Folder created, 5020 - Folder renamed, 5021 - Folder updated access, 5022 - Folder copied, 5023 - Folder copied with overwriting, 5024 - Folder moved, 5025 - Folder moved with overwriting, 5026 - Folder moved to trash, 5027 - Folder deleted, 5028 - ThirdParty created, 5029 - ThirdParty updated, 5030 - ThirdParty deleted, 5031 - Documents ThirdParty settings updated, 5032 - Documents overwriting settings updated, 5033 - Documents uploading formats settings updated, 5034 - User file updated, 5035 - File converted, 5036 - File send access link, 5037 - Document service location setting, 5038 - Authorization keys setting, 5039 - Full text search setting, 5040 - Start transfer setting, 5041 - Backup started, 5042 - License key uploaded, 5043 - File change owner, 5044 - File restore version, 5045 - Document send to sign, 5046 - Document sign complete, 5047 - User updated email, 5048 - Documents store forcesave, 5049 - Documents forcesave, 5050 - Start storage encryption, 5053 - Start storage decryption, 5054 - File opened for change, 5055 - File marked as favorite, 5056 - File removed from favorite, 5057 - Folder downloaded, 5058 - File removed from list, 5059 - Folder removed from list, 5060 - File external link access updated, 5061 - Trash emptied, 5062 - File revision downloaded, 5063 - File marked as read, 5064 - File readed, 5065 - Folder marked as read, 5066 - Folder updated access for, 5068 - File updated access for, 5069 - Documents external share settings updated, 5070 - Room created, 5071 - Room renamed, 5072 - Room archived, 5073 - Room unarchived, 5074 - Room deleted, 5075 - Room update access for user, 5076 - Tag created, 5077 - Tags deleted, 5078 - Added room tags, 5079 - Deleted room tags, 5080 - Room logo created, 5081 - Room logo deleted, 5082 - Room invitation link updated, 5083 - Documents keep new file name settings updated, 5084 - Room remove user, 5085 - Room create user, 5086 - Room invitation link created, 5087 - Room invitation link deleted, 5088 - Room external link created, 5089 - Room external link updated, 5090 - Room external link deleted, 5091 - File external link created, 5092 - File external link updated, 5093 - File external link deleted, 5094 - Room group added, 5095 - Room update access for group, 5096 - Room group remove, 5097 - Room external link revoked, 5098 - Room external link renamed, 5099 - File uploaded with overwriting, 5100 - Room copied, 5101 - Documents display file extension updated, 5102 - Room color changed, 5103 - Room cover changed, 5104 - Room indexing changed, 5105 - Room deny download changed, 5106 - Room index export saved, 5107 - Folder index changed, 5108 - Folder index reordered, 5109 - Room deny download enabled, 5110 - Room deny download disabled, 5111 - File index changed, 5112 - Room watermark set, 5113 - Room watermark disabled, 5114 - Room index export saved, 5115 - Room indexing disabled, 5116 - Room life time set, 5117 - Room life time disabled, 5118 - Room invite resend, 5119 - File version deleted, 5120 - File custom filter enabled, 5121 - File custom filter disabled, 5122 - Folder external link created, 5123 - Folder external link updated, 5124 - Folder external link deleted, 5125 - Backup completed, 5126 - Backup failed, 5127 - Scheduled backup started, 5128 - Scheduled backup completed, 5129 - Scheduled backup failed, 5130 - Scheduled backup deleted, 5131 - Backup cancelled, 5132 - Restore started, 5133 - Restore cancelled, 5150 - Form started to fill, 5151 - Form partially filled, 5152 - Form completely filled, 5153 - Form stopped, 5154 - AI agent created, 5155 - AI agent renamed, 5156 - AI agent deleted, 5157 - MCP server added to AI agent, 5158 - MCP server deleted from AI agent, 5159 - Room change owner, 5160 - Documents default templates settings updated, 5161 - Private room encryption key created, 5162 - Private room encryption key updated, 5163 - Private room encryption key deleted, 5201 - File saved, user quota exceeded, 5202 - File not saved due to user quota exceeded, 5203 - File saved, room quota exceeded, 5204 - File not saved due to room quota exceeded, 5205 - File saved, tenant quota exceeded, 5206 - File not saved due to tenant quota exceeded, 5501 - Ldap enabled, 5502 - Ldap disabled, 5503 - LDAP synchronization completed, 6000 - Language settings updated, 6001 - Time zone settings updated, 6002 - Dns settings updated, 6003 - Trusted mail domain settings updated, 6004 - Password strength settings updated, 6005 - Two factor authentication settings updated, 6006 - Administrator message settings updated, 6007 - Default start page settings updated, 6008 - Products list updated, 6009 - Administrator added, 6010 - Administrator opened full access, 6011 - Administrator deleted, 6012 - Users opened product access, 6013 - Groups opened product access, 6014 - Product access opened, 6015 - Product access restricted, 6016 - Product added administrator, 6017 - Product deleted administrator, 6018 - Greeting settings updated, 6019 - Team template changed, 6020 - Color theme changed, 6021 - Owner sent change owner instructions, 6022 - Owner updated, 6023 - Owner sent portal deactivation instructions, 6024 - Owner sent portal delete instructions, 6025 - Portal deactivated, 6026 - Portal deleted, 6027 - Login history report downloaded, 6028 - Audit trail report downloaded, 6029 - SSO enabled, 6030 - SSO disabled, 6031 - Portal access settings updated, 6032 - Cookie settings updated, 6033 - Mail service settings updated, 6034 - Custom navigation settings updated, 6035 - Audit settings updated, 6036 - Two factor authentication disabled, 6037 - Two factor authentication enabled by sms, 6038 - Two factor authentication enabled by tfa app, 6039 - Portal renamed, 6040 - Quota per room changed, 6041 - Quota per room disabled, 6042 - Quota per user changed, 6043 - Quota per user disabled, 6044 - Quota per portal changed, 6045 - Quota per portal disabled, 6046 - Form submit, 6047 - Form opened for filling, 6048 - Custom quota per room default, 6049 - Custom quota per room changed, 6050 - Custom quota per room disabled, 6051 - Custom quota per user default, 6052 - Custom quota per user changed, 6053 - Custom quota per user disabled, 6054 - DevTools access settings changed, 6055 - Webhook created, 6056 - Webhook updated, 6057 - Webhook deleted, 6058 - Created api key, 6059 - Update api key, 6060 - Deleted User api key, 6061 - Customer wallet topped up, 6062 - Customer operation performed, 6063 - Customer operations report downloaded, 6064 - Customer wallet top up settings updated, 6065 - Customer subscription updated, 6066 - Promotional banners visibility settings changed, 6067 - Customer wallet services settings updated, 6068 - Quota per AI agent changed, 6069 - Quota per AI agent disabled, 6070 - Custom quota per AI agent default, 6071 - Custom quota per AI agent changed, 6072 - Custom quota per AI agent disabled, 6073 - AI provider created, 6074 - AI provider updated, 6075 - AI provider deleted, 6076 - MCP server created, 6077 - MCP server updated, 6078 - MCP server enabled, 6079 - MCP server disabled, 6080 - MCP server deleted, 6081 - WebSearch settings configured, 6082 - WebSearch settings reset, 6083 - Vectorization settings configured, 6084 - Vectorization settings reset, 6085 - Webplugin uploaded, 6086 - Webplugin updated, 6087 - Webplugin deleted, 6088 - Whitelabel settings logo text updated, 6089 - Whitelabel settings logos updated, 6090 - Whitelabel company settings updated, 6091 - Whitelabel additional settings updated, 6092 - Whitelabel mail settings updated, 6093 - Invitation settings updated, 6094 - IP restrictions settings updated, 6095 - Login settings updated, 6096 - AI default provider set, 6097 - AI access enabled, 6098 - AI access disabled, 6099 - User AI settings updated, 6100 - Subscription balance moved to wallet, 6101 - Docs Cloud config updated, 6102 - Docs Cloud quota report downloaded, 6103 - AI model profile created, 6104 - AI model profile updated, 6105 - AI model profile deleted, 6106 - AI model profile assigned to action, 6107 - AI model profile unassigned from action, 6108 - AI model profile assigned to AI agent action, 6109 - MCP server of AI agent updated, 7000 - Contact admin mail sent, 7001 - Room invite link used, 7002 - User created and added to room, 7003 - Guest created and added to room, 7004 - Contact sales mail sent, 9901 - Create client, 9902 - Update client, 9903 - Regenerate secret, 9904 - Delete client, 9905 - Change client activation, 9906 - Change client visibility, 9907 - Revoke user client, 9908 - Generate authorization code token, 9909 - Generate personal access token, -1 - None]
 
 Possible values:
 
@@ -12359,6 +12938,9 @@ Possible values:
 - `5158` (`DeletedServerFromAgent`)
 - `5159` (`RoomChangeOwner`)
 - `5160` (`DocumentsDefaultTemplatesSettingsUpdated`)
+- `5161` (`PrivacyRoomKeyCreated`)
+- `5162` (`PrivacyRoomKeyUpdated`)
+- `5163` (`PrivacyRoomKeyDeleted`)
 - `5201` (`FileSavedButUserQuotaExceeded`)
 - `5202` (`FileNotSavedDueToUserQuota`)
 - `5203` (`FileSavedButRoomQuotaExceeded`)
@@ -12471,6 +13053,13 @@ Possible values:
 - `6100` (`SubscriptionBalanceMovedToWallet`)
 - `6101` (`DocsCloudConfigUpdated`)
 - `6102` (`DocsCloudQuotaReportDownloaded`)
+- `6103` (`AiProfileCreated`)
+- `6104` (`AiProfileUpdated`)
+- `6105` (`AiProfileDeleted`)
+- `6106` (`AiProfileAssigned`)
+- `6107` (`AiProfileUnassigned`)
+- `6108` (`AiAgentProfileAssigned`)
+- `6109` (`UpdatedServerOfAgent`)
 - `7000` (`ContactAdminMailSent`)
 - `7001` (`RoomInviteLinkUsed`)
 - `7002` (`UserCreatedAndAddedToRoom`)
@@ -12489,59 +13078,63 @@ Possible values:
 
 
 ### Model MigratingApiFiles
+The parameters of the migrating files.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **foldersCount** | **Integer** (int32) |  | [optional] |
-| **filesCount** | **Integer** (int32) |  | [optional] |
-| **bytesTotal** | **Long** (int64) |  | [optional] |
+| **foldersCount** | **Integer** (int32) | The number of folders. | [optional] [example: 12] |
+| **filesCount** | **Integer** (int32) | The number of files. | [optional] [example: 48] |
+| **bytesTotal** | **Long** (int64) | The total number of bytes. | [optional] [example: 104857600] |
 
 
 ### Model MigratingApiGroup
+The migrating group parameters.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **shouldImport** | **Boolean** |  | [optional] |
-| **groupName** | **String** |  | [optional] [nullable] |
-| **moduleName** | **String** |  | [optional] [nullable] |
-| **userUidList** | **List** |  | [optional] [nullable] |
+| **shouldImport** | **Boolean** | Specifies whether the API entity should be imported. | [optional] |
+| **groupName** | **String** | The group name. | [optional] [nullable] |
+| **moduleName** | **String** | The group module name. | [optional] [nullable] |
+| **userUidList** | **List** | The list of group user UIDs. | [optional] [nullable] |
 
 
 ### Model MigratingApiUser
+The migrating user parameters.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **shouldImport** | **Boolean** |  | [optional] |
-| **key** | **String** |  | [optional] [nullable] |
-| **email** | **String** (email) |  | [optional] [nullable] |
-| **displayName** | **String** |  | [optional] [nullable] |
-| **firstName** | **String** |  | [optional] [nullable] |
-| **lastName** | **String** |  | [optional] [nullable] |
+| **shouldImport** | **Boolean** | Specifies whether the API entity should be imported. | [optional] |
+| **key** | **String** | The user key. | [optional] [nullable] |
+| **email** | **String** (email) | The user email. | [optional] [nullable] |
+| **displayName** | **String** | The user display name. | [optional] [nullable] |
+| **firstName** | **String** | The user first name. | [optional] [nullable] |
+| **lastName** | **String** | The user last name. | [optional] [nullable] |
 | **userType** | [**EmployeeType**](#model-employeetype) | The user type. | [optional] [enum: All, RoomAdmin, Guest, DocSpaceAdmin, User] |
-| **migratingFiles** | [**MigratingApiFiles**](#model-migratingapifiles) |  | [optional] |
+| **migratingFiles** | [**MigratingApiFiles**](#model-migratingapifiles) | The user&#39;s migrating files. | [optional] |
 
 
 ### Model MigrationApiInfo
+The migration API information.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **migratorName** | **String** |  | [optional] [nullable] |
-| **operation** | **String** |  | [optional] [nullable] |
-| **failedArchives** | **List** |  | [optional] [nullable] |
-| **users** | [**List**](#model-migratingapiuser) |  | [optional] [nullable] |
-| **withoutEmailUsers** | [**List**](#model-migratingapiuser) |  | [optional] [nullable] |
-| **existUsers** | [**List**](#model-migratingapiuser) |  | [optional] [nullable] |
-| **groups** | [**List**](#model-migratingapigroup) |  | [optional] [nullable] |
-| **importPersonalFiles** | **Boolean** |  | [optional] |
-| **importSharedFiles** | **Boolean** |  | [optional] |
-| **importSharedFolders** | **Boolean** |  | [optional] |
-| **importCommonFiles** | **Boolean** |  | [optional] |
-| **importProjectFiles** | **Boolean** |  | [optional] |
-| **importGroups** | **Boolean** |  | [optional] |
-| **successedUsers** | **Integer** (int32) |  | [optional] |
-| **failedUsers** | **Integer** (int32) |  | [optional] |
-| **files** | **List** |  | [optional] [nullable] |
-| **errors** | **List** |  | [optional] [nullable] |
+| **migratorName** | **String** | The migrator name. | [optional] [example: Nextcloud] [nullable] |
+| **operation** | **String** | The migration operation. | [optional] [example: parse] [nullable] |
+| **failedArchives** | **List** | The list of failed archives. | [optional] [example: [archive1.zip, archive2.zip]] [nullable] |
+| **users** | [**List**](#model-migratingapiuser) | The list of migrating users. | [optional] [example: [{id=9924256B-447C-4F19-9dbd-8ad8c39e8ff5, email=user@example.com, shouldImport=true}]] [nullable] |
+| **withoutEmailUsers** | [**List**](#model-migratingapiuser) | The list of migrating users without email. | [optional] [example: [{id=9924256B-447C-4F19-9dbd-8ad8c39e8ff5, shouldImport=false}]] [nullable] |
+| **existUsers** | [**List**](#model-migratingapiuser) | The list of existing migrating users. | [optional] [example: [{id=9924256B-447C-4F19-9dbd-8ad8c39e8ff5, email=existing@example.com, shouldImport=true}]] [nullable] |
+| **groups** | [**List**](#model-migratingapigroup) | The list of migrating groups. | [optional] [example: [{id=1, name=Group1, shouldImport=true}]] [nullable] |
+| **importPersonalFiles** | **Boolean** | Specifies whether to import personal files or not. | [optional] [example: true] |
+| **importSharedFiles** | **Boolean** | Specifies whether to import shared files or not. | [optional] [example: true] |
+| **importSharedFolders** | **Boolean** | Specifies whether to import shared folders or not. | [optional] [example: true] |
+| **importCommonFiles** | **Boolean** | Specifies whether to import common files or not. | [optional] [example: true] |
+| **importProjectFiles** | **Boolean** | Specifies whether to import project files or not. | [optional] [example: false] |
+| **importGroups** | **Boolean** | Specifies whether to import groups or not. | [optional] [example: true] |
+| **successedUsers** | **Integer** (int32) | The number of successfully migrated users. | [optional] [example: 50] |
+| **failedUsers** | **Integer** (int32) | The number of unsuccessfully migrated users. | [optional] [example: 2] |
+| **files** | **List** | The list of migrated files. | [optional] [example: [document.docx, spreadsheet.xlsx]] [nullable] |
+| **errors** | **List** | The list of migration errors. | [optional] [example: [User not found, File access denied]] [nullable] |
 
 
 ### Model MigrationStatusDto
@@ -12556,10 +13149,11 @@ The migration status parameters.
 
 
 ### Model MigrationStatusWrapper
+The successful API response containing the MigrationStatusDto object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**MigrationStatusDto**](#model-migrationstatusdto) |  | [optional] |
+| **response** | [**MigrationStatusDto**](#model-migrationstatusdto) | The MigrationStatusDto object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -12600,10 +13194,11 @@ The notification channel settings.
 
 
 ### Model NotificationChannelStatusWrapper
+The successful API response containing the NotificationChannelStatusDto object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**NotificationChannelStatusDto**](#model-notificationchannelstatusdto) |  | [optional] |
+| **response** | [**NotificationChannelStatusDto**](#model-notificationchannelstatusdto) | The NotificationChannelStatusDto object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -12624,15 +13219,16 @@ The request parameters for configuring notification settings.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **type** | [**NotificationType**](#model-notificationtype) | The notification type. | [required] [enum: 0, 1, 2, 3] |
+| **type** | [**NotificationType**](#model-notificationtype) | The notification to be configured. | [required] [enum: 0, 1, 2, 3] |
 | **isEnabled** | **Boolean** | Specifies if the specified notification type is enabled or not. | [optional] [example: true] |
 
 
 ### Model NotificationSettingsWrapper
+The successful API response containing the NotificationSettingsDto object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**NotificationSettingsDto**](#model-notificationsettingsdto) |  | [optional] |
+| **response** | [**NotificationSettingsDto**](#model-notificationsettingsdto) | The NotificationSettingsDto object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -12649,23 +13245,12 @@ Possible values:
 - `3` — Usefull tips (`UsefullTips`)
 
 
-### Model ObjectWrapper
-
-| Name | Type | Description | Notes |
-|------------ | ------------- | ------------- | -------------|
-| **response** | **Object** |  | [optional] |
-| **count** | **Integer** (int32) | The total number of items in the response | [optional] |
-| **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
-| **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
-| **statusCode** | **Integer** (int32) | HTTP status code of the response (duplicate of status) | [optional] |
-
-
 ### Model OperationDto
 Represents an operation.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **date** | [**ApiDateTime**](#model-apidatetime) | The API date and time parameters. | [optional] |
+| **date** | [**ApiDateTime**](#model-apidatetime) | The date when the operation took place. | [optional] |
 | **service** | **String** | The service related to the operation. | [optional] [example: Storage] [nullable] |
 | **description** | **String** | The brief operation description. | [optional] [example: Storage quota increase] [nullable] |
 | **details** | **String** | The detailed information about the operation. | [optional] [example: Increased storage from 50GB to 100GB] [nullable] |
@@ -12678,7 +13263,7 @@ Represents an operation.
 | **participantDisplayName** | **String** | The participant display name. | [optional] [example: Example Name] [nullable] |
 | **agentId** | **String** | AI Agent id. | [optional] [example: 123] [nullable] |
 | **agentTitle** | **String** | AI Agent name. | [optional] [example: My AI Agent] [nullable] |
-| **type** | [**OperationType**](#model-operationtype) | The operation type | [optional] [enum: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19] |
+| **type** | [**OperationType**](#model-operationtype) | Type of the operation | [optional] [enum: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19] |
 
 
 ### Model OperationOrderType
@@ -12735,10 +13320,11 @@ The owner change instructions parameters.
 
 
 ### Model OwnerChangeInstructionsWrapper
+The successful API response containing the OwnerChangeInstructionsDto object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**OwnerChangeInstructionsDto**](#model-ownerchangeinstructionsdto) |  | [optional] |
+| **response** | [**OwnerChangeInstructionsDto**](#model-ownerchangeinstructionsdto) | The OwnerChangeInstructionsDto object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -12754,12 +13340,13 @@ The request parameters for managing the owner-specific settings.
 
 
 ### Model PasswordHasher
+The password hash parameters.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **size** | **Integer** (int32) |  | [optional] |
-| **iterations** | **Integer** (int32) |  | [optional] |
-| **salt** | **String** |  | [optional] [nullable] |
+| **size** | **Integer** (int32) | The password hash size. | [optional] [example: 32] |
+| **iterations** | **Integer** (int32) | The number of iterations to generate the ppassword hash. | [optional] [example: 1000] |
+| **salt** | **String** | The salt to generate the ppassword hash. | [optional] [example: random_salt_value] [nullable] |
 
 
 ### Model PasswordSettingsDto
@@ -12789,10 +13376,11 @@ The request parameters for configuring the password complexity requirements.
 
 
 ### Model PasswordSettingsWrapper
+The successful API response containing the PasswordSettingsDto object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**PasswordSettingsDto**](#model-passwordsettingsdto) |  | [optional] |
+| **response** | [**PasswordSettingsDto**](#model-passwordsettingsdto) | The PasswordSettingsDto object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -12811,10 +13399,11 @@ The parameters of the calculated payment amount.
 
 
 ### Model PaymentCalculationWrapper
+The successful API response containing the PaymentCalculation object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**PaymentCalculation**](#model-paymentcalculation) |  | [optional] |
+| **response** | [**PaymentCalculation**](#model-paymentcalculation) | The PaymentCalculation object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -12844,10 +13433,11 @@ The payment settings parameters.
 
 
 ### Model PaymentSettingsWrapper
+The successful API response containing the PaymentSettingsDto object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**PaymentSettingsDto**](#model-paymentsettingsdto) |  | [optional] |
+| **response** | [**PaymentSettingsDto**](#model-paymentsettingsdto) | The PaymentSettingsDto object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -12895,10 +13485,11 @@ The product administrator parameters.
 
 
 ### Model ProductAdministratorWrapper
+The successful API response containing the ProductAdministratorDto object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**ProductAdministratorDto**](#model-productadministratordto) |  | [optional] |
+| **response** | [**ProductAdministratorDto**](#model-productadministratordto) | The ProductAdministratorDto object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -12933,26 +13524,12 @@ The request parameters for specifying payment quantity.
 | **quantity** | **Map** (int32) | The mapping of item identifiers to their respective quantities in the payment. | [required] [example: {admin=1}] |
 
 
-### Model Quota
-The quota parameters.  &lt;example&gt;  {    id: 1,    quantity: 50,    wallet: false,    additional: false,    dueDate: 2026-03-31T00:00:00Z,    nextQuantity: 100,    state: Active  }  &lt;/example&gt;
-
-| Name | Type | Description | Notes |
-|------------ | ------------- | ------------- | -------------|
-| **id** | **Integer** (int32) | The quota ID. | [optional] |
-| **quantity** | **Integer** (int32) | The quota quantity. | [optional] [example: 50] |
-| **wallet** | **Boolean** | The quota applies to the wallet or not | [optional] [example: false] |
-| **dueDate** | **Date** (date-time) | The quota due date. | [optional] [example: 2026-03-31T00:00:00Z] [nullable] |
-| **nextQuantity** | **Integer** (int32) | The quota next quantity. | [optional] [example: 100] [nullable] |
-| **additional** | **Boolean** | Indicates whether the quota is primary or additional. | [optional] [example: false] |
-| **nextQuota** | **Integer** (int32) | The quota ID to switch to at the next period. | [optional] [nullable] |
-| **state** | [**QuotaState**](#model-quotastate) | The quota state. | [optional] [enum: 0, 1] |
-
-
 ### Model QuotaArrayWrapper
+The successful API response containing the list of QuotaDto objects.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**List**](#model-quotadto) |  | [optional] |
+| **response** | [**List**](#model-quotadto) | The list of QuotaDto objects returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -12971,10 +13548,10 @@ The quota information.
 | **free** | **Boolean** | Specifies if the quota is free or not. | [required] [example: true] |
 | **trial** | **Boolean** | Specifies if the quota is trial or not. | [required] [example: false] |
 | **features** | [**List**](#model-tenantquotafeaturedto) | The list of tenant quota features. | [required] [example: [{id=00000000-0000-0000-0000-000000000001, title=Premium Storage}]] [nullable] |
-| **usersQuota** | [**TenantEntityQuotaSettings**](#model-tenantentityquotasettings) | The tenant entity quota settings. | [optional] |
-| **roomsQuota** | [**TenantEntityQuotaSettings**](#model-tenantentityquotasettings) | The tenant entity quota settings. | [optional] |
-| **aiAgentsQuota** | [**TenantEntityQuotaSettings**](#model-tenantentityquotasettings) | The tenant entity quota settings. | [optional] |
-| **tenantCustomQuota** | [**TenantQuotaSettings**](#model-tenantquotasettings) | The tenant quota settings. | [optional] |
+| **usersQuota** | [**TenantEntityQuotaSettings**](#model-tenantentityquotasettings) | The user quota. | [optional] |
+| **roomsQuota** | [**TenantEntityQuotaSettings**](#model-tenantentityquotasettings) | The room quota. | [optional] |
+| **aiAgentsQuota** | [**TenantEntityQuotaSettings**](#model-tenantentityquotasettings) | The ai agent quota. | [optional] |
+| **tenantCustomQuota** | [**TenantQuotaSettings**](#model-tenantquotasettings) | The tenant custom quota. | [optional] |
 | **dueDate** | **Date** (date-time) | The due date. | [optional] [example: 2024-01-15T10:30:00Z] [nullable] |
 
 
@@ -13000,10 +13577,11 @@ Possible values:
 
 
 ### Model QuotaWrapper
+The successful API response containing the QuotaDto object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**QuotaDto**](#model-quotadto) |  | [optional] |
+| **response** | [**QuotaDto**](#model-quotadto) | The QuotaDto object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -13043,10 +13621,11 @@ Represents a report containing a collection of operations.
 
 
 ### Model ReportWrapper
+The successful API response containing the ReportDto object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**ReportDto**](#model-reportdto) |  | [optional] |
+| **response** | [**ReportDto**](#model-reportdto) | The ReportDto object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -13054,17 +13633,19 @@ Represents a report containing a collection of operations.
 
 
 ### Model RestrictedModelsResponse
+The AI models the portal is not allowed to use.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **models** | **List** |  | [required] [nullable] |
+| **models** | **List** | The identifiers of the models the portal is not allowed to use. | [required] [example: [gpt-4o, claude-3-opus]] [nullable] |
 
 
 ### Model RestrictedModelsResponseWrapper
+The successful API response containing the RestrictedModelsResponse object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**RestrictedModelsResponse**](#model-restrictedmodelsresponse) |  | [optional] |
+| **response** | [**RestrictedModelsResponse**](#model-restrictedmodelsresponse) | The RestrictedModelsResponse object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -13080,10 +13661,11 @@ The rooms notification settings.
 
 
 ### Model RoomsNotificationSettingsWrapper
+The successful API response containing the RoomsNotificationSettingsDto object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**RoomsNotificationSettingsDto**](#model-roomsnotificationsettingsdto) |  | [optional] |
+| **response** | [**RoomsNotificationSettingsDto**](#model-roomsnotificationsettingsdto) | The RoomsNotificationSettingsDto object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -13100,10 +13682,11 @@ The request parameters for configuring notification settings for the chat or col
 
 
 ### Model STRINGArrayWrapper
+The successful API response.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | **List** |  | [optional] |
+| **response** | **List** | The response payload. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -13121,10 +13704,11 @@ The request parameters for handling sales and payment inquiries in the portal.
 
 
 ### Model SecurityArrayWrapper
+The successful API response containing the list of SecurityDto objects.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**List**](#model-securitydto) |  | [optional] |
+| **response** | [**List**](#model-securitydto) | The list of SecurityDto objects returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -13188,7 +13772,7 @@ The settings information.
 |------------ | ------------- | ------------- | -------------|
 | **timezone** | **String** | The time zone. | [optional] [example: UTC] [nullable] |
 | **trustedDomains** | **List** | The list of the trusted domains. | [optional] [example: [mydomain.com, mydomain1.com]] [nullable] |
-| **trustedDomainsType** | [**TenantTrustedDomainsType**](#model-tenanttrusteddomainstype) | The type of the tenant trusted domains. | [optional] [enum: 0, 1, 2] |
+| **trustedDomainsType** | [**TenantTrustedDomainsType**](#model-tenanttrusteddomainstype) | The type of the trusted domains. | [optional] [enum: 0, 1, 2] |
 | **culture** | **String** | The language. | [required] [example: en-US] [nullable] |
 | **utcOffset** | **String** (date-span) | The UTC offset in the TimeSpan format. | [optional] [example: -08:30:00] |
 | **utcHoursOffset** | **Double** (double) | The UTC offset in hours. | [optional] [example: -8.5] |
@@ -13230,35 +13814,16 @@ The settings information.
 | **maxImageUploadSize** | **Long** (int64) | The maximum image upload size. | [optional] [example: 10485760] |
 | **logoText** | **String** | The white label logo text. | [optional] [example: Company Name] [nullable] |
 | **externalResources** | [**CultureSpecificExternalResources**](#model-culturespecificexternalresources) | The external resources settings. | [optional] |
-| **defaultFolderType** | [**FolderType**](#model-foldertype) | The folder type. | [optional] [enum: 0, 1, 2, 3, 5, 6, 8, 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36] |
+| **defaultFolderType** | [**FolderType**](#model-foldertype) | Specifies the default folder type for the current settings. | [optional] [enum: 0, 1, 2, 3, 5, 6, 8, 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36] |
 | **externalDbEnabled** | **Boolean** | Specifies if an external database is connected for storing form results. | [optional] [example: true] |
 
 
 ### Model SettingsWrapper
+The successful API response containing the SettingsDto object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**SettingsDto**](#model-settingsdto) |  | [optional] |
-| **count** | **Integer** (int32) | The total number of items in the response | [optional] |
-| **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
-| **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
-| **statusCode** | **Integer** (int32) | HTTP status code of the response (duplicate of status) | [optional] |
-
-
-### Model SetupCode
-
-| Name | Type | Description | Notes |
-|------------ | ------------- | ------------- | -------------|
-| **account** | **String** |  | [optional] [nullable] |
-| **manualEntryKey** | **String** |  | [optional] [nullable] |
-| **qrCodeSetupImageUrl** | **String** |  | [optional] [nullable] |
-
-
-### Model SetupCodeWrapper
-
-| Name | Type | Description | Notes |
-|------------ | ------------- | ------------- | -------------|
-| **response** | [**SetupCode**](#model-setupcode) |  | [optional] |
+| **response** | [**SettingsDto**](#model-settingsdto) | The SettingsDto object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -13278,10 +13843,11 @@ The request parameters for tracking SMTP (Simple Mail Transfer Protocol) operati
 
 
 ### Model SmtpOperationStatusRequestsWrapper
+The successful API response containing the SmtpOperationStatusRequestsDto object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**SmtpOperationStatusRequestsDto**](#model-smtpoperationstatusrequestsdto) |  | [optional] |
+| **response** | [**SmtpOperationStatusRequestsDto**](#model-smtpoperationstatusrequestsdto) | The SmtpOperationStatusRequestsDto object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -13306,14 +13872,44 @@ The SMTP settings parameters.
 
 
 ### Model SmtpSettingsWrapper
+The successful API response containing the SmtpSettingsDto object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**SmtpSettingsDto**](#model-smtpsettingsdto) |  | [optional] |
+| **response** | [**SmtpSettingsDto**](#model-smtpsettingsdto) | The SmtpSettingsDto object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
 | **statusCode** | **Integer** (int32) | HTTP status code of the response (duplicate of status) | [optional] |
+
+
+### Model SocketSettingsDto
+The socket settings.
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+| **url** | **String** | The hub URL, with a trailing slash, or empty when no hub is configured. | [optional] [example: https://example.com/socket.io/] [nullable] |
+
+
+### Model SocketSettingsWrapper
+The successful API response containing the SocketSettingsDto object.
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+| **response** | [**SocketSettingsDto**](#model-socketsettingsdto) | The SocketSettingsDto object returned by the operation. | [optional] |
+| **count** | **Integer** (int32) | The total number of items in the response | [optional] |
+| **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
+| **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
+| **statusCode** | **Integer** (int32) | HTTP status code of the response (duplicate of status) | [optional] |
+
+
+### Model SsoBindingTypeDto
+The SAML bindings the SSO settings accept.
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+| **saml20HttpPost** | **String** | The SAML 2.0 HTTP POST binding. | [optional] [example: urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST] [nullable] |
+| **saml20HttpRedirect** | **String** | The SAML 2.0 HTTP redirect binding. | [optional] [example: urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect] [nullable] |
 
 
 ### Model SsoCertificate
@@ -13330,6 +13926,16 @@ The SSO certificate parameters.
 | **expiredDate** | **Date** (date-time) | The certificate expiration date. | [optional] [example: 2024-01-01T00:00:00Z] |
 
 
+### Model SsoEncryptAlgorithmTypeDto
+The encryption algorithms the SSO settings accept.
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+| **aes128** | **String** | The AES-128-CBC encryption algorithm. | [optional] [example: http://www.w3.org/2001/04/xmlenc#aes128-cbc] [nullable] |
+| **aes256** | **String** | The AES-256-CBC encryption algorithm. | [optional] [example: http://www.w3.org/2001/04/xmlenc#aes256-cbc] [nullable] |
+| **triDec** | **String** | The Triple DES CBC encryption algorithm. | [optional] [example: http://www.w3.org/2001/04/xmlenc#tripledes-cbc] [nullable] |
+
+
 ### Model SsoFieldMapping
 The SSO field mapping.
 
@@ -13341,6 +13947,16 @@ The SSO field mapping.
 | **title** | **String** | The title. | [optional] [example: SN] [nullable] |
 | **location** | **String** | The location. | [optional] [example: Location] [nullable] |
 | **phone** | **String** | The phone number. | [optional] [example: +14155552671] [nullable] |
+
+
+### Model SsoIdpCertificateActionTypeDto
+What an IDP certificate can be used for.
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+| **verification** | **String** | Verification only. | [optional] [example: verification] [nullable] |
+| **decrypt** | **String** | Decryption only. | [optional] [example: decrypt] [nullable] |
+| **verificationAndDecrypt** | **String** | Both verification and decryption. | [optional] [example: verification and decrypt] [nullable] |
 
 
 ### Model SsoIdpCertificateAdvanced
@@ -13367,6 +13983,23 @@ The SSO IdP settings.
 | **sloUrl** | **String** | The SLO URL. | [optional] [example: https://idp.example.com/slo] [nullable] |
 | **sloBinding** | **String** | The SLO binding. | [optional] [example: urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect] [nullable] |
 | **nameIdFormat** | **String** | The name ID format. | [optional] [example: urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress] [nullable] |
+
+
+### Model SsoNameIdFormatTypeDto
+The SAML name ID formats the SSO settings accept.
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+| **saml11Unspecified** | **String** | The SAML 1.1 unspecified name ID format. | [optional] [example: urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified] [nullable] |
+| **saml11EmailAddress** | **String** | The SAML 1.1 email address name ID format. | [optional] [example: urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress] [nullable] |
+| **saml20Entity** | **String** | The SAML 2.0 entity name ID format. | [optional] [example: urn:oasis:names:tc:SAML:2.0:nameid-format:entity] [nullable] |
+| **saml20Transient** | **String** | The SAML 2.0 transient name ID format. | [optional] [example: urn:oasis:names:tc:SAML:2.0:nameid-format:transient] [nullable] |
+| **saml20Persistent** | **String** | The SAML 2.0 persistent name ID format. | [optional] [example: urn:oasis:names:tc:SAML:2.0:nameid-format:persistent] [nullable] |
+| **saml20Encrypted** | **String** | The SAML 2.0 encrypted name ID format. | [optional] [example: urn:oasis:names:tc:SAML:2.0:nameid-format:encrypted] [nullable] |
+| **saml20Unspecified** | **String** | The SAML 2.0 unspecified name ID format. | [optional] [example: urn:oasis:names:tc:SAML:2.0:nameid-format:unspecified] [nullable] |
+| **saml11X509SubjectName** | **String** | The SAML 1.1 X.509 subject name name ID format. | [optional] [example: urn:oasis:names:tc:SAML:1.1:nameid-format:X509SubjectName] [nullable] |
+| **saml11WindowsDomainQualifiedName** | **String** | The SAML 1.1 Windows domain qualified name name ID format. | [optional] [example: urn:oasis:names:tc:SAML:1.1:nameid-format:WindowsDomainQualifiedName] [nullable] |
+| **saml20Kerberos** | **String** | The SAML 2.0 Kerberos name ID format. | [optional] [example: urn:oasis:names:tc:SAML:2.0:nameid-format:kerberos] [nullable] |
 
 
 ### Model SsoSettingsRequestsDto
@@ -13396,15 +14029,61 @@ The SSO portal settings.
 | **disableEmailVerification** | **Boolean** | Specifies if the email verification is disabled or not. | [optional] [example: false] |
 
 
-### Model SsoSettingsV2Wrapper
+### Model SsoSettingsV2ConstantsDto
+The SSO settings constants: every value the settings accept, by name.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**SsoSettingsV2**](#model-ssosettingsv2) |  | [optional] |
+| **ssoNameIdFormatType** | [**SsoNameIdFormatTypeDto**](#model-ssonameidformattypedto) | The SAML name ID formats the SSO settings accept. | [optional] |
+| **ssoBindingType** | [**SsoBindingTypeDto**](#model-ssobindingtypedto) | The SAML bindings the SSO settings accept. | [optional] |
+| **ssoSigningAlgorithmType** | [**SsoSigningAlgorithmTypeDto**](#model-ssosigningalgorithmtypedto) | The signing algorithms the SSO settings accept. | [optional] |
+| **ssoEncryptAlgorithmType** | [**SsoEncryptAlgorithmTypeDto**](#model-ssoencryptalgorithmtypedto) | The encryption algorithms the SSO settings accept. | [optional] |
+| **ssoSpCertificateActionType** | [**SsoSpCertificateActionTypeDto**](#model-ssospcertificateactiontypedto) | What an SP certificate can be used for. | [optional] |
+| **ssoIdpCertificateActionType** | [**SsoIdpCertificateActionTypeDto**](#model-ssoidpcertificateactiontypedto) | What an IDP certificate can be used for. | [optional] |
+
+
+### Model SsoSettingsV2ConstantsWrapper
+The successful API response containing the SsoSettingsV2ConstantsDto object.
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+| **response** | [**SsoSettingsV2ConstantsDto**](#model-ssosettingsv2constantsdto) | The SsoSettingsV2ConstantsDto object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
 | **statusCode** | **Integer** (int32) | HTTP status code of the response (duplicate of status) | [optional] |
+
+
+### Model SsoSettingsV2Wrapper
+The successful API response containing the SsoSettingsV2 object.
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+| **response** | [**SsoSettingsV2**](#model-ssosettingsv2) | The SsoSettingsV2 object returned by the operation. | [optional] |
+| **count** | **Integer** (int32) | The total number of items in the response | [optional] |
+| **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
+| **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
+| **statusCode** | **Integer** (int32) | HTTP status code of the response (duplicate of status) | [optional] |
+
+
+### Model SsoSigningAlgorithmTypeDto
+The signing algorithms the SSO settings accept.
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+| **rsaSha1** | **String** | The RSA-SHA1 signing algorithm. | [optional] [example: http://www.w3.org/2000/09/xmldsig#rsa-sha1] [nullable] |
+| **rsaSha256** | **String** | The RSA-SHA256 signing algorithm. | [optional] [example: http://www.w3.org/2001/04/xmldsig-more#rsa-sha256] [nullable] |
+| **rsaSha512** | **String** | The RSA-SHA512 signing algorithm. | [optional] [example: http://www.w3.org/2001/04/xmldsig-more#rsa-sha512] [nullable] |
+
+
+### Model SsoSpCertificateActionTypeDto
+What an SP certificate can be used for.
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+| **signing** | **String** | Signing only. | [optional] [example: signing] [nullable] |
+| **encrypt** | **String** | Encryption only. | [optional] [example: encrypt] [nullable] |
+| **signingAndEncrypt** | **String** | Both signing and encryption. | [optional] [example: signing and encrypt] [nullable] |
 
 
 ### Model SsoSpCertificateAdvanced
@@ -13422,10 +14101,11 @@ The SP advanced certificate parameters.
 
 
 ### Model StorageArrayWrapper
+The successful API response containing the list of StorageDto objects.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**List**](#model-storagedto) |  | [optional] |
+| **response** | [**List**](#model-storagedto) | The list of StorageDto objects returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -13462,19 +14142,21 @@ The request parameters for configuring the storage module settings.
 
 
 ### Model StorageSettings
+The storage settings.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **module** | **String** |  | [optional] [nullable] |
-| **props** | **Map** |  | [optional] |
-| **lastModified** | **Date** (date-time) |  | [optional] |
+| **module** | **String** | The storage name. | [optional] [example: LocalStorage] [nullable] |
+| **props** | **Map** | The storage properties. | [optional] [example: {region=eu-central-1, bucket=tenant-files}] |
+| **lastModified** | **Date** (date-time) | The date and time when the storage settings were last modified. | [optional] [example: 2025-01-01T12:00:00Z] |
 
 
 ### Model StorageSettingsWrapper
+The successful API response containing the StorageSettings object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**StorageSettings**](#model-storagesettings) |  | [optional] |
+| **response** | [**StorageSettings**](#model-storagesettings) | The StorageSettings object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -13482,10 +14164,11 @@ The request parameters for configuring the storage module settings.
 
 
 ### Model StringWrapper
+The successful API response containing the string value.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | **String** |  | [optional] |
+| **response** | **String** | The string value returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -13493,6 +14176,7 @@ The request parameters for configuring the storage module settings.
 
 
 ### Model StudioDefaultPageSettings
+The settings that define the folder opened by default after sign-in.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
@@ -13501,10 +14185,11 @@ The request parameters for configuring the storage module settings.
 
 
 ### Model StudioDefaultPageSettingsWrapper
+The successful API response containing the StudioDefaultPageSettings object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**StudioDefaultPageSettings**](#model-studiodefaultpagesettings) |  | [optional] |
+| **response** | [**StudioDefaultPageSettings**](#model-studiodefaultpagesettings) | The StudioDefaultPageSettings object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -13537,29 +14222,47 @@ The information about the current subscription and its unused balance.
 
 
 ### Model SubscriptionBalanceInfoWrapper
+The successful API response containing the SubscriptionBalanceInfo object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**SubscriptionBalanceInfo**](#model-subscriptionbalanceinfo) |  | [optional] |
+| **response** | [**SubscriptionBalanceInfo**](#model-subscriptionbalanceinfo) | The SubscriptionBalanceInfo object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
 | **statusCode** | **Integer** (int32) | HTTP status code of the response (duplicate of status) | [optional] |
 
 
-### Model Tariff
+### Model TariffDto
 The tariff parameters.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
+| **openSource** | **Boolean** | Specifies whether the tariff is Community or not. | [optional] [example: true] [nullable] |
+| **enterprise** | **Boolean** | Specifies whether the tariff is Enterprise or not. | [optional] [example: true] [nullable] |
+| **developer** | **Boolean** | Specifies whether the tariff is Developer or not. | [optional] [example: true] [nullable] |
 | **id** | **Integer** (int32) | The tariff ID. | [optional] [example: 1] |
 | **state** | [**TariffState**](#model-tariffstate) | The tariff state. | [optional] [enum: 0, 1, 2, 3] |
-| **dueDate** | **Date** (date-time) | The tariff due date. | [required] [example: 2026-03-31T00:00:00Z] |
-| **delayDueDate** | **Date** (date-time) | The tariff delay due date. | [optional] [example: 2026-04-07T00:00:00Z] |
-| **licenseDate** | **Date** (date-time) | The tariff license date. | [optional] [example: 2026-03-01T00:00:00Z] |
-| **customerId** | **String** | The tariff customer ID. | [optional] [example: cus_123] [nullable] |
-| **quotas** | [**List**](#model-quota) | The list of tariff quotas. | [required] [example: {quotas=[{id=1, quantity=50, wallet=false}]}] [nullable] |
-| **overdueQuotas** | [**List**](#model-quota) | The list of overdue tariff quotas. | [optional] [example: []] [nullable] |
+| **dueDate** | [**ApiDateTime**](#model-apidatetime) | The tariff due date. | [optional] |
+| **delayDueDate** | [**ApiDateTime**](#model-apidatetime) | The tariff delay due date. | [optional] |
+| **licenseDate** | [**ApiDateTime**](#model-apidatetime) | The tariff license date. | [optional] |
+| **customerId** | **String** | The customer ID. | [optional] [example: 00000000-0000-0000-0000-000000000001] [nullable] |
+| **quotas** | [**List**](#model-tariffquotadto) | The list of quotas. | [optional] [example: [{id=1, title=Basic Plan}]] [nullable] |
+
+
+### Model TariffQuotaDto
+The tariff quota parameters.
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+| **id** | **Integer** (int32) | The quota ID. | [optional] [example: -11] |
+| **quantity** | **Integer** (int32) | The quota quantity. | [optional] [example: 500] |
+| **wallet** | **Boolean** | The quota applies to the wallet or not. | [optional] [example: true] |
+| **additional** | **Boolean** | Indicates whether the quota is primary or additional. | [optional] [example: true] |
+| **dueDate** | [**ApiDateTime**](#model-apidatetime) | The quota due date in the portal time zone. Falls back to the tariff due date when the quota has none. | [optional] |
+| **nextQuantity** | **Integer** (int32) | The quota next quantity. | [optional] [example: 100] [nullable] |
+| **nextQuota** | **Integer** (int32) | The quota ID to switch to at the next period. | [optional] [nullable] |
+| **state** | [**QuotaState**](#model-quotastate) | The quota state. | [optional] [enum: 0, 1] |
 
 
 ### Model TariffState
@@ -13573,10 +14276,11 @@ Possible values:
 
 
 ### Model TariffWrapper
+The successful API response containing the TariffDto object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**Tariff**](#model-tariff) |  | [optional] |
+| **response** | [**TariffDto**](#model-tariffdto) | The TariffDto object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -13588,15 +14292,16 @@ The Telegram connection status parameters.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **status** | [**RegStatus**](#model-regstatus) | The registration Telegram status. | [required] [enum: 0, 1, 2] |
+| **status** | [**RegStatus**](#model-regstatus) | The Telegram registration status. | [required] [enum: 0, 1, 2] |
 | **username** | **String** | The Telegram username. | [optional] [example: john_doe] [nullable] |
 
 
 ### Model TelegramStatusWrapper
+The successful API response containing the TelegramStatusDto object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**TelegramStatusDto**](#model-telegramstatusdto) |  | [optional] |
+| **response** | [**TelegramStatusDto**](#model-telegramstatusdto) | The TelegramStatusDto object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -13621,10 +14326,11 @@ The request parameters for managing the tenant-level AI access settings.
 
 
 ### Model TenantAiAccessSettingsWrapper
+The successful API response containing the TenantAiAccessSettings object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**TenantAiAccessSettings**](#model-tenantaiaccesssettings) |  | [optional] |
+| **response** | [**TenantAiAccessSettings**](#model-tenantaiaccesssettings) | The TenantAiAccessSettings object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -13643,10 +14349,11 @@ The AI agent quota settings.
 
 
 ### Model TenantAiAgentQuotaSettingsWrapper
+The successful API response containing the TenantAiAgentQuotaSettings object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**TenantAiAgentQuotaSettings**](#model-tenantaiagentquotasettings) |  | [optional] |
+| **response** | [**TenantAiAgentQuotaSettings**](#model-tenantaiagentquotasettings) | The TenantAiAgentQuotaSettings object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -13661,6 +14368,18 @@ The tenant audit settings parameters.
 | **loginHistoryLifeTime** | **Integer** (int32) | The login history lifetime. | [optional] [example: 180] |
 | **auditTrailLifeTime** | **Integer** (int32) | The audit trail lifetime. | [optional] [example: 180] |
 | **lastModified** | **Date** (date-time) | The timestamp indicating when the settings were last modified. | [optional] [example: 1990-01-01T00:00:00Z] |
+
+
+### Model TenantAuditSettingsResponseWrapper
+The successful API response containing the TenantAuditSettings object.
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+| **response** | [**TenantAuditSettings**](#model-tenantauditsettings) | The TenantAuditSettings object returned by the operation. | [optional] |
+| **count** | **Integer** (int32) | The total number of items in the response | [optional] |
+| **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
+| **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
+| **statusCode** | **Integer** (int32) | HTTP status code of the response (duplicate of status) | [optional] |
 
 
 ### Model TenantAuditSettingsWrapper
@@ -13689,10 +14408,11 @@ The request parameters for managing the visibility settings of the promotional b
 
 
 ### Model TenantBannerSettingsWrapper
+The successful API response containing the TenantBannerSettings object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**TenantBannerSettings**](#model-tenantbannersettings) |  | [optional] |
+| **response** | [**TenantBannerSettings**](#model-tenantbannersettings) | The TenantBannerSettings object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -13709,10 +14429,11 @@ The deep link settings.
 
 
 ### Model TenantDeepLinkSettingsWrapper
+The successful API response containing the TenantDeepLinkSettings object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**TenantDeepLinkSettings**](#model-tenantdeeplinksettings) |  | [optional] |
+| **response** | [**TenantDeepLinkSettings**](#model-tenantdeeplinksettings) | The TenantDeepLinkSettings object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -13737,10 +14458,11 @@ The request parameters for managing the Developer Tools access settings for the 
 
 
 ### Model TenantDevToolsAccessSettingsWrapper
+The successful API response containing the TenantDevToolsAccessSettings object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**TenantDevToolsAccessSettings**](#model-tenantdevtoolsaccesssettings) |  | [optional] |
+| **response** | [**TenantDevToolsAccessSettings**](#model-tenantdevtoolsaccesssettings) | The TenantDevToolsAccessSettings object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -13909,10 +14631,11 @@ The request parameters for managing the tenant storage quota settings in a multi
 
 
 ### Model TenantQuotaSettingsWrapper
+The successful API response containing the TenantQuotaSettings object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**TenantQuotaSettings**](#model-tenantquotasettings) |  | [optional] |
+| **response** | [**TenantQuotaSettings**](#model-tenantquotasettings) | The TenantQuotaSettings object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -13920,10 +14643,11 @@ The request parameters for managing the tenant storage quota settings in a multi
 
 
 ### Model TenantQuotaWrapper
+The successful API response containing the TenantQuota object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**TenantQuota**](#model-tenantquota) |  | [optional] |
+| **response** | [**TenantQuota**](#model-tenantquota) | The TenantQuota object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -13942,10 +14666,11 @@ The room quota settings.
 
 
 ### Model TenantRoomQuotaSettingsWrapper
+The successful API response containing the TenantRoomQuotaSettings object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**TenantRoomQuotaSettings**](#model-tenantroomquotasettings) |  | [optional] |
+| **response** | [**TenantRoomQuotaSettings**](#model-tenantroomquotasettings) | The TenantRoomQuotaSettings object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -13993,10 +14718,11 @@ The request parameters for updating the user invitation settings.
 
 
 ### Model TenantUserInvitationSettingsWrapper
+The successful API response containing the TenantUserInvitationSettingsDto object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**TenantUserInvitationSettingsDto**](#model-tenantuserinvitationsettingsdto) |  | [optional] |
+| **response** | [**TenantUserInvitationSettingsDto**](#model-tenantuserinvitationsettingsdto) | The TenantUserInvitationSettingsDto object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -14015,10 +14741,11 @@ The user quota settings.
 
 
 ### Model TenantUserQuotaSettingsWrapper
+The successful API response containing the TenantUserQuotaSettings object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**TenantUserQuotaSettings**](#model-tenantuserquotasettings) |  | [optional] |
+| **response** | [**TenantUserQuotaSettings**](#model-tenantuserquotasettings) | The TenantUserQuotaSettings object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -14048,10 +14775,11 @@ The wallet services settings.
 
 
 ### Model TenantWalletServiceSettingsWrapper
+The successful API response containing the TenantWalletServiceSettings object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**TenantWalletServiceSettings**](#model-tenantwalletservicesettings) |  | [optional] |
+| **response** | [**TenantWalletServiceSettings**](#model-tenantwalletservicesettings) | The TenantWalletServiceSettings object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -14072,6 +14800,18 @@ The tenant wallet settings.
 | **lastModified** | **Date** (date-time) | The date and time when the tenant wallet settings were last modified. | [optional] [example: 1990-01-01T00:00:00Z] |
 
 
+### Model TenantWalletSettingsResponseWrapper
+The successful API response containing the TenantWalletSettings object.
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+| **response** | [**TenantWalletSettings**](#model-tenantwalletsettings) | The TenantWalletSettings object returned by the operation. | [optional] |
+| **count** | **Integer** (int32) | The total number of items in the response | [optional] |
+| **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
+| **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
+| **statusCode** | **Integer** (int32) | HTTP status code of the response (duplicate of status) | [optional] |
+
+
 ### Model TenantWalletSettingsWrapper
 The wrapper for the tenant wallet settings.
 
@@ -14081,10 +14821,11 @@ The wrapper for the tenant wallet settings.
 
 
 ### Model TenantWrapper
+The successful API response containing the TenantDto object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**TenantDto**](#model-tenantdto) |  | [optional] |
+| **response** | [**TenantDto**](#model-tenantdto) | The TenantDto object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -14092,10 +14833,11 @@ The wrapper for the tenant wallet settings.
 
 
 ### Model TfaAppCodeArrayWrapper
+The successful API response containing the list of TfaAppCodeDto objects.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**List**](#model-tfaappcodedto) |  | [optional] |
+| **response** | [**List**](#model-tfaappcodedto) | The list of TfaAppCodeDto objects returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -14122,10 +14864,11 @@ The TFA confirmation data.
 
 
 ### Model TfaConfirmDataWrapper
+The successful API response containing the TfaConfirmDataDto object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**TfaConfirmDataDto**](#model-tfaconfirmdatadto) |  | [optional] |
+| **response** | [**TfaConfirmDataDto**](#model-tfaconfirmdatadto) | The TfaConfirmDataDto object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -14139,7 +14882,7 @@ The request parameters for configuring the Two-Factor Authentication (TFA) setti
 |------------ | ------------- | ------------- | -------------|
 | **type** | [**TfaRequestsDtoType**](#model-tfarequestsdtotype) | The two-factor authentication type. | [optional] [enum: 0, 1, 2] |
 | **id** | **UUID** (uuid) | The ID of the user for whom the TFA settings are being configured. | [optional] [example: 00000000-0000-0000-0000-000000000000] |
-| **trustedIps** | **List** | The list of IP addresses that bypass TFA verification. | [optional] [example: [item1, item2]] [nullable] |
+| **trustedIps** | **List** | The list of IP addresses that bypass TFA verification. Each entry is a single address, an inclusive  from-to range or a CIDR block. | [optional] [example: [192.0.2.1, 198.51.100.1-198.51.100.20, 203.0.113.0/24]] [nullable] |
 | **mandatoryUsers** | **List** (uuid) | The list of user IDs for whom TFA is mandatory. | [optional] [example: [00000000-0000-0000-0000-000000000000]] [nullable] |
 | **mandatoryGroups** | **List** (uuid) | The list group IDs whose members must use TFA. | [optional] [example: [00000000-0000-0000-0000-000000000000]] [nullable] |
 
@@ -14154,10 +14897,11 @@ Possible values:
 
 
 ### Model TfaSettingsArrayWrapper
+The successful API response containing the list of TfaSettingsDto objects.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**List**](#model-tfasettingsdto) |  | [optional] |
+| **response** | [**List**](#model-tfasettingsdto) | The list of TfaSettingsDto objects returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -14178,6 +14922,28 @@ The parameters representing the Two-Factor Authentication (TFA) configuration se
 | **mandatoryGroups** | **List** (uuid) | The list of group IDs whose members are required to use TFA. | [optional] [example: [00000000-0000-0000-0000-000000000000]] [nullable] |
 
 
+### Model TfaSetupCodeDto
+The setup TFA code parameters.
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+| **account** | **String** | The account for which the setup code is generated. | [optional] [example: john.doe@onlyoffice.com] [nullable] |
+| **manualEntryKey** | **String** | The manual entry key. | [optional] [example: JBSWY3DPEHPK3PXP] [nullable] |
+| **qrCodeSetupImageUrl** | **String** | The QR-code setup image URL (base64-encoded PNG image). | [optional] [example: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAAAAAA6fptVAAAACklEQVR4nGMAAgAABAABiCEmiQAAAABJRU5ErkJggg==] [nullable] |
+
+
+### Model TfaSetupCodeWrapper
+The successful API response containing the TfaSetupCodeDto object.
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+| **response** | [**TfaSetupCodeDto**](#model-tfasetupcodedto) | The TfaSetupCodeDto object returned by the operation. | [optional] |
+| **count** | **Integer** (int32) | The total number of items in the response | [optional] |
+| **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
+| **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
+| **statusCode** | **Integer** (int32) | HTTP status code of the response (duplicate of status) | [optional] |
+
+
 ### Model TfaValidateRequestsDto
 The request parameters for validating the two-factor authentication codes.
 
@@ -14188,10 +14954,11 @@ The request parameters for validating the two-factor authentication codes.
 
 
 ### Model TimezonesRequestsArrayWrapper
+The successful API response containing the list of TimezonesRequestsDto objects.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**List**](#model-timezonesrequestsdto) |  | [optional] |
+| **response** | [**List**](#model-timezonesrequestsdto) | The list of TimezonesRequestsDto objects returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -14234,11 +15001,24 @@ The request parameters for enabling or disabling administrator messaging system.
 | **turnOn** | **Boolean** | The global switch for the administrator messaging functionality. | [optional] [example: true] |
 
 
-### Model UpcomingPaymentArrayWrapper
+### Model UnknownNullableWrapper
+The successful API response.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**List**](#model-upcomingpaymentdto) |  | [optional] |
+| **response** | **oas_any_type_not_mapped** |  | [optional] [nullable] |
+| **count** | **Integer** (int32) | The total number of items in the response | [optional] |
+| **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
+| **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
+| **statusCode** | **Integer** (int32) | HTTP status code of the response (duplicate of status) | [optional] |
+
+
+### Model UpcomingPaymentArrayWrapper
+The successful API response containing the list of UpcomingPaymentDto objects.
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+| **response** | [**List**](#model-upcomingpaymentdto) | The list of UpcomingPaymentDto objects returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -14256,7 +15036,7 @@ The upcoming payment parameters.
 | **unitOfMeasure** | **String** | The quota unit of measure. | [optional] [example: admins] [nullable] |
 | **quantity** | **Integer** (int32) | The quantity that will be charged (the next quantity if set, otherwise the current quantity). | [optional] [example: 100] |
 | **wallet** | **Boolean** | The quota applies to the wallet or not. | [optional] [example: true] |
-| **dueDate** | [**ApiDateTime**](#model-apidatetime) | The API date and time parameters. | [optional] |
+| **dueDate** | [**ApiDateTime**](#model-apidatetime) | The due date of the upcoming payment in the portal time zone. | [optional] |
 | **amount** | **Double** (double) | The amount that will be charged (unit price multiplied by the quantity). | [optional] [example: 14] |
 | **currency** | **String** | The three-character ISO 4217 currency symbol of the amount. | [optional] [example: USD] [nullable] |
 
@@ -14271,16 +15051,17 @@ The request parameters for updating the webhook configuration.
 | **secretKey** | **String** | The webhook secret key used to sign the webhook payloads for the security verification. | [optional] [minLength: 0] [maxLength: 50] |
 | **enabled** | **Boolean** | Specifies whether the webhook configuration is active or not. | [optional] |
 | **ssl** | **Boolean** | Specifies whether the SSL certificate verification is required or not. | [optional] |
-| **triggers** | [**WebhookTrigger**](#model-webhooktrigger) | The webhook trigger type. | [optional] [enum: 0, 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536, 131072, 262144, 524288, 1048576, 2097152, 4194304, 8388608, 16777216, 33554432, 67108864, 134217728, 268435456, 536870912, 1073741824] |
+| **triggers** | [**WebhookTrigger**](#model-webhooktrigger) | Defines which events will trigger webhook notifications. | [optional] [enum: 0, 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536, 131072, 262144, 524288, 1048576, 2097152, 4194304, 8388608, 16777216, 33554432, 67108864, 134217728, 268435456, 536870912, 1073741824] |
 | **targetId** | **String** | Target ID | [optional] [minLength: 0] [maxLength: 255] |
 | **id** | **Integer** (int32) | The webhook configuration ID. | [required] |
 
 
 ### Model UsageSpaceStatItemArrayWrapper
+The successful API response containing the list of UsageSpaceStatItemDto objects.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**List**](#model-usagespacestatitemdto) |  | [optional] |
+| **response** | [**List**](#model-usagespacestatitemdto) | The list of UsageSpaceStatItemDto objects returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -14338,10 +15119,11 @@ The user information.
 
 
 ### Model UserInfoWrapper
+The successful API response containing the UserInfo object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**UserInfo**](#model-userinfo) |  | [optional] |
+| **response** | [**UserInfo**](#model-userinfo) | The UserInfo object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -14371,10 +15153,11 @@ The request parameters for specifying wallet payment quantity.
 
 
 ### Model WalletServiceArrayWrapper
+The successful API response containing the list of WalletServiceDto objects.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**List**](#model-walletservicedto) |  | [optional] |
+| **response** | [**List**](#model-walletservicedto) | The list of WalletServiceDto objects returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -14393,20 +15176,21 @@ The wallet service information.
 | **free** | **Boolean** | Specifies if the quota is free or not. | [required] |
 | **trial** | **Boolean** | Specifies if the quota is trial or not. | [required] |
 | **features** | [**List**](#model-tenantquotafeaturedto) | The list of tenant quota features. | [required] |
-| **usersQuota** | [**TenantEntityQuotaSettings**](#model-tenantentityquotasettings) | The tenant entity quota settings. | [optional] |
-| **roomsQuota** | [**TenantEntityQuotaSettings**](#model-tenantentityquotasettings) | The tenant entity quota settings. | [optional] |
-| **aiAgentsQuota** | [**TenantEntityQuotaSettings**](#model-tenantentityquotasettings) | The tenant entity quota settings. | [optional] |
-| **tenantCustomQuota** | [**TenantQuotaSettings**](#model-tenantquotasettings) | The tenant quota settings. | [optional] |
+| **usersQuota** | [**TenantEntityQuotaSettings**](#model-tenantentityquotasettings) | The user quota. | [optional] |
+| **roomsQuota** | [**TenantEntityQuotaSettings**](#model-tenantentityquotasettings) | The room quota. | [optional] |
+| **aiAgentsQuota** | [**TenantEntityQuotaSettings**](#model-tenantentityquotasettings) | The ai agent quota. | [optional] |
+| **tenantCustomQuota** | [**TenantQuotaSettings**](#model-tenantquotasettings) | The tenant custom quota. | [optional] |
 | **dueDate** | **Date** (date-time) | The due date. | [optional] |
 | **innerServices** | [**List**](#model-walletservicedto) | The list of inner services. | [optional] [nullable] |
 | **serviceName** | **String** | The service name. | [optional] [nullable] |
 
 
 ### Model WalletServiceWrapper
+The successful API response containing the WalletServiceDto object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**WalletServiceDto**](#model-walletservicedto) |  | [optional] |
+| **response** | [**WalletServiceDto**](#model-walletservicedto) | The WalletServiceDto object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -14428,14 +15212,15 @@ The request parameters for configuring security settings across multiple web mod
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **items** | [**List**](#model-itemkeyvaluepairstringboolean) | The list of module security configurations. | [optional] [example: [item1, item2]] [nullable] |
+| **items** | [**List**](#model-itemkeyvaluepairstringboolean) | The list of module security configurations. | [optional] [example: [{key=00000000-0000-0000-0000-000000000000, value=true}]] [nullable] |
 
 
 ### Model WebPluginArrayWrapper
+The successful API response containing the list of WebPluginDto objects.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**List**](#model-webplugindto) |  | [optional] |
+| **response** | [**List**](#model-webplugindto) | The list of WebPluginDto objects returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -14457,7 +15242,7 @@ The web plugin information.
 | **pluginName** | **String** | The name by which the web plugin is registered in the window object. | [required] [example: examplePlugin] [nullable] |
 | **scopes** | **String** | The web plugin scopes. | [required] [example: Files,Rooms] [nullable] |
 | **image** | **String** | The web plugin image. | [required] [example: https://example.com/image.png] [nullable] |
-| **createBy** | [**EmployeeDto**](#model-employeedto) | The user parameters. | [required] |
+| **createBy** | [**EmployeeDto**](#model-employeedto) | The user who created the web plugin. | [required] |
 | **createOn** | **Date** (date-time) | The date and time when the web plugin was created. | [required] [example: 2024-01-15T10:30:00Z] |
 | **enabled** | **Boolean** | Specifies if the web plugin is enabled or not. | [required] [example: true] |
 | **system** | **Boolean** | Specifies if the web plugin is system or not. | [required] [example: false] |
@@ -14479,10 +15264,11 @@ The configuration settings for the web plugin instance.
 
 
 ### Model WebPluginWrapper
+The successful API response containing the WebPluginDto object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**WebPluginDto**](#model-webplugindto) |  | [optional] |
+| **response** | [**WebPluginDto**](#model-webplugindto) | The WebPluginDto object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -14548,10 +15334,11 @@ Possible values:
 
 
 ### Model WebhookTriggerArrayWrapper
+The successful API response containing the list of WebhookTriggerDto objects.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**List**](#model-webhooktriggerdto) |  | [optional] |
+| **response** | [**List**](#model-webhooktriggerdto) | The list of WebhookTriggerDto objects returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -14580,9 +15367,9 @@ The webhook configuration parameters.
 | **ssl** | **Boolean** | The webhook SSL verification (enabled or not). | [optional] [example: true] |
 | **triggers** | [**WebhookTrigger**](#model-webhooktrigger) | The webhook trigger type. | [optional] [enum: 0, 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536, 131072, 262144, 524288, 1048576, 2097152, 4194304, 8388608, 16777216, 33554432, 67108864, 134217728, 268435456, 536870912, 1073741824] |
 | **targetId** | **String** | The webhook target ID. | [optional] [example: 00000000-0000-0000-0000-000000000001] [nullable] |
-| **createdBy** | [**EmployeeDto**](#model-employeedto) | The user parameters. | [optional] |
+| **createdBy** | [**EmployeeDto**](#model-employeedto) | The user who created the webhook. | [optional] |
 | **createdOn** | **Date** (date-time) | The date and time when the webhook was created. | [optional] [example: 2024-01-15T10:30:00Z] [nullable] |
-| **modifiedBy** | [**EmployeeDto**](#model-employeedto) | The user parameters. | [optional] |
+| **modifiedBy** | [**EmployeeDto**](#model-employeedto) | The user who modified the webhook. | [optional] |
 | **modifiedOn** | **Date** (date-time) | The date and time when the webhook was modified. | [optional] [example: 2024-01-15T10:30:00Z] [nullable] |
 | **lastFailureOn** | **Date** (date-time) | The date and time of the webhook last failure. | [optional] [example: 2024-01-15T10:30:00Z] [nullable] |
 | **lastFailureContent** | **String** | The webhook last failure content. | [optional] [example: example value] [nullable] |
@@ -14590,10 +15377,11 @@ The webhook configuration parameters.
 
 
 ### Model WebhooksConfigWithStatusArrayWrapper
+The successful API response containing the list of WebhooksConfigWithStatusDto objects.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**List**](#model-webhooksconfigwithstatusdto) |  | [optional] |
+| **response** | [**List**](#model-webhooksconfigwithstatusdto) | The list of WebhooksConfigWithStatusDto objects returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -14610,10 +15398,11 @@ The webhook configuration with its status.
 
 
 ### Model WebhooksConfigWrapper
+The successful API response containing the WebhooksConfigDto object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**WebhooksConfigDto**](#model-webhooksconfigdto) |  | [optional] |
+| **response** | [**WebhooksConfigDto**](#model-webhooksconfigdto) | The WebhooksConfigDto object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -14621,10 +15410,11 @@ The webhook configuration with its status.
 
 
 ### Model WebhooksLogArrayWrapper
+The successful API response containing the list of WebhooksLogDto objects.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**List**](#model-webhookslogdto) |  | [optional] |
+| **response** | [**List**](#model-webhookslogdto) | The list of WebhooksLogDto objects returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -14651,10 +15441,11 @@ The webhook log parameters.
 
 
 ### Model WebhooksLogWrapper
+The successful API response containing the WebhooksLogDto object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**WebhooksLogDto**](#model-webhookslogdto) |  | [optional] |
+| **response** | [**WebhooksLogDto**](#model-webhookslogdto) | The WebhooksLogDto object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -14662,10 +15453,11 @@ The webhook log parameters.
 
 
 ### Model WhiteLabelItemArrayWrapper
+The successful API response containing the list of WhiteLabelItemDto objects.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**List**](#model-whitelabelitemdto) |  | [optional] |
+| **response** | [**List**](#model-whitelabelitemdto) | The list of WhiteLabelItemDto objects returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -14679,7 +15471,7 @@ The white label item parameters.
 |------------ | ------------- | ------------- | -------------|
 | **type** | [**WhiteLabelLogoType**](#model-whitelabellogotype) | The white label logo type. | [optional] [enum: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16] |
 | **name** | **String** | The white label file name. | [optional] [example: Example Name] [nullable] |
-| **size** | [**IMagickGeometry**](#model-imagickgeometry) | The white label file size. | [optional] |
+| **size** | [**WhiteLabelItemSizeDto**](#model-whitelabelitemsizedto) | The white label file size. | [optional] |
 | **path** | [**WhiteLabelItemPathDto**](#model-whitelabelitempathdto) | The white label file path. | [optional] |
 
 
@@ -14690,6 +15482,24 @@ The white label item path parameters.
 |------------ | ------------- | ------------- | -------------|
 | **light** | **String** | The path to the light theme logo. | [optional] [example: /images/logo-light.png] [nullable] |
 | **dark** | **String** | The path to the dark theme logo. | [optional] [example: /images/logo-dark.png] [nullable] |
+
+
+### Model WhiteLabelItemSizeDto
+The white label logo size parameters.
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+| **aspectRatio** | **Boolean** | Specifies whether the size is an aspect ratio. | [optional] [example: false] |
+| **fillArea** | **Boolean** | Specifies whether the logo is resized based on the smallest fitting dimension. | [optional] [example: false] |
+| **greater** | **Boolean** | Specifies whether the logo is resized only if it is greater than the size. | [optional] [example: false] |
+| **height** | **Integer** (int32) | The logo height, in pixels. | [optional] [example: 48] |
+| **ignoreAspectRatio** | **Boolean** | Specifies whether the logo is resized without preserving the aspect ratio. | [optional] [example: false] |
+| **isPercentage** | **Boolean** | Specifies whether the width and height are expressed as percentages. | [optional] [example: false] |
+| **less** | **Boolean** | Specifies whether the logo is resized only if it is less than the size. | [optional] [example: false] |
+| **limitPixels** | **Boolean** | Specifies whether the logo is resized using a pixel area count limit. | [optional] [example: false] |
+| **width** | **Integer** (int32) | The logo width, in pixels. | [optional] [example: 422] |
+| **x** | **Integer** (int32) | The X offset from the origin, in pixels. | [optional] [example: 0] |
+| **y** | **Integer** (int32) | The Y offset from the origin, in pixels. | [optional] [example: 0] |
 
 
 ### Model WhiteLabelLogoType
@@ -14746,10 +15556,11 @@ The Wizard settings.
 
 
 ### Model WizardSettingsWrapper
+The successful API response containing the WizardSettings object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**WizardSettings**](#model-wizardsettings) |  | [optional] |
+| **response** | [**WizardSettings**](#model-wizardsettings) | The WizardSettings object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -14757,10 +15568,11 @@ The Wizard settings.
 
 
 ### Model getPortalPrices 200 response
+The successful API response.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | **Map** (double) |  | [optional] |
+| **response** | **Map** (double) | The response payload. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-getportalprices-200-responselinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |

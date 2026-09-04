@@ -8,11 +8,13 @@ Referenced types are defined in the [full reference](../newai.md).
 
 List
 
+Lists saved prompts. Scope the answer to one folder, ask for the root-level prompts only, or omit the folder to get every prompt newest first.
+
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **folderId** | query | **String** |  | [required] |
+| **folderId** | query | **String** | The prompt folder identifier. Omit to list the prompts that sit outside any folder. | [optional] |
 
 ## Responses
 

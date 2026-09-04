@@ -8,6 +8,8 @@ Referenced types are defined in the [full reference](../newai.md).
 
 Clear deep mode
 
+Drops the persisted deep-mode toggle of the scope, so later reads fall back to the configured default.
+
 ## Parameters
 
 |Name | In | Type | Description | Notes |

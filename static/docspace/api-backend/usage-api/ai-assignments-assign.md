@@ -8,6 +8,8 @@ Referenced types are defined in the [full reference](../newai.md).
 
 Assign
 
+Binds a profile to an AI action, creating the assignment or updating it in place. The profile&#39;s declared capabilities are validated against the action, except for the &#x60;Default&#x60; slot.
+
 ## Parameters
 
 |Name | In | Type | Description | Notes |

@@ -8,6 +8,8 @@ Referenced types are defined in the [full reference](../newai.md).
 
 Create
 
+Creates a chat thread with a caller-supplied title. Use &#x60;open-or-create&#x60; instead when the title should be generated from the first user message.
+
 ## Parameters
 
 |Name | In | Type | Description | Notes |

@@ -8,11 +8,13 @@ Referenced types are defined in the [full reference](../newai.md).
 
 Get active config
 
+Returns the web-search configuration active in the scope, or an empty result when web search is not configured.
+
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **entityId** | query | **String** |  | [required] |
+| **entityId** | query | **String** | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | [optional] |
 
 ## Responses
 

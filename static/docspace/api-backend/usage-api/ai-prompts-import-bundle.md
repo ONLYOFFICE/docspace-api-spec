@@ -8,6 +8,8 @@ Referenced types are defined in the [full reference](../newai.md).
 
 Import bundle
 
+Restores a prompt bundle. &#x60;replace&#x60; wipes the current prompts and folders before writing the bundle, &#x60;merge&#x60; writes the bundle on top of what is already there; both validate the folder references inside the bundle before any write, so a corrupt bundle is rejected whole.
+
 ## Parameters
 
 |Name | In | Type | Description | Notes |

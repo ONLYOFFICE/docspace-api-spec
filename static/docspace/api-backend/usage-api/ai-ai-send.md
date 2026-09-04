@@ -8,6 +8,8 @@ Referenced types are defined in the [full reference](../newai.md).
 
 Send
 
+Runs one AI action: the profile bound to &#x60;actionType&#x60; (falling back to the &#x60;Default&#x60; slot) is dispatched against a single-message history. Nothing is persisted - no thread, no title generation, no storage writes.
+
 ## Parameters
 
 |Name | In | Type | Description | Notes |

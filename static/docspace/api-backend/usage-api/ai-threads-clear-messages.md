@@ -8,6 +8,8 @@ Referenced types are defined in the [full reference](../newai.md).
 
 Clear messages
 
+Drops every message of a thread while keeping the thread itself, and bumps its last-edit date.
+
 ## Parameters
 
 |Name | In | Type | Description | Notes |

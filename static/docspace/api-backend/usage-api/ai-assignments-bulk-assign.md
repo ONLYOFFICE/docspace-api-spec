@@ -8,6 +8,8 @@ Referenced types are defined in the [full reference](../newai.md).
 
 Bulk assign
 
+Applies many action-to-profile bindings at once. Every entry is validated first and nothing is written if any of them fails, so the assignment set is never left half-written.
+
 ## Parameters
 
 |Name | In | Type | Description | Notes |

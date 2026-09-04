@@ -8,11 +8,13 @@ Referenced types are defined in the [full reference](../newai.md).
 
 Get deep mode
 
+Returns the deep-mode toggle of the scope, falling back to the configured default when nothing has been persisted.
+
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **entityId** | query | **String** |  | [required] |
+| **entityId** | query | **String** | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | [optional] |
 
 ## Responses
 

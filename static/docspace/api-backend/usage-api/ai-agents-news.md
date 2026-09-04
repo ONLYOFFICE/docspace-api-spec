@@ -8,6 +8,8 @@ Referenced types are defined in the [full reference](../newai.md).
 
 List agent news items
 
+Lists the new items across the caller&#39;s AI agent rooms.
+
 ## Parameters
 This endpoint does not need any parameter.
 

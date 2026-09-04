@@ -19,8 +19,9 @@ This endpoint does not need any parameter.
 |------------- | ------------- | ------------- | -------------|
 | **200** | delete personal progress | [**TaskProgressResponseWrapper**](../people.md#model-taskprogressresponsewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **400** | Access denied | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -30,7 +31,7 @@ This endpoint does not need any parameter.
 
 ## Authorization
 
-[Basic](../people.md#basic), [OAuth2](../people.md#oauth2) (scopes: read, write), [ApiKeyBearer](../people.md#apikeybearer) (scopes: read, write), [asc_auth_key](../people.md#asc_auth_key) (scopes: read, write), [Bearer](../people.md#bearer), [OpenId](../people.md#openid)
+[Basic](../people.md#basic), [OAuth2](../people.md#oauth2) (scopes: read, write), [ApiKeyBearer](../people.md#apikeybearer), [asc_auth_key](../people.md#asc_auth_key), [Bearer](../people.md#bearer), [OpenId](../people.md#openid)
 
 ## HTTP request headers
 

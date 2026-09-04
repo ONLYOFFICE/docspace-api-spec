@@ -8,6 +8,8 @@ Referenced types are defined in the [full reference](../newai.md).
 
 Remove custom server
 
+Removes a custom MCP server from the registry.
+
 ## Parameters
 
 |Name | In | Type | Description | Notes |

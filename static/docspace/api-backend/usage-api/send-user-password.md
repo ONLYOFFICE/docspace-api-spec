@@ -22,7 +22,9 @@ Sends a password recovery email to the specified user address.  For unauthentica
 |------------- | ------------- | ------------- | -------------|
 | **200** | Email with the password | [**StringWrapper**](../people.md#model-stringwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 

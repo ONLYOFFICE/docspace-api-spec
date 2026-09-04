@@ -2,7 +2,7 @@
 
 Referenced types are defined in the [full reference](../files.md).
 
-> KeyValuePairBooleanStringWrapper trackEditFile(fileId, tabId, docKeyForTrack, isFinish)
+> ItemKeyValuePairBooleanStringWrapper trackEditFile(fileId, tabId, docKeyForTrack, isFinish)
 
 `GET /api/2.0/files/file/{fileId}/trackeditfile`
 
@@ -23,15 +23,17 @@ Tracks file changes when editing.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | File changes | [**KeyValuePairBooleanStringWrapper**](../files.md#model-keyvaluepairbooleanstringwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | File changes | [**ItemKeyValuePairBooleanStringWrapper**](../files.md#model-itemkeyvaluepairbooleanstringwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | You don&#39;t have enough permission to perform the operation | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
 ## Return type
 
-[**KeyValuePairBooleanStringWrapper**](../files.md#model-keyvaluepairbooleanstringwrapper)
+[**ItemKeyValuePairBooleanStringWrapper**](../files.md#model-itemkeyvaluepairbooleanstringwrapper)
 
 ## Authorization
 

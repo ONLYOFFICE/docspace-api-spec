@@ -8,6 +8,8 @@ Referenced types are defined in the [full reference](../newai.md).
 
 List
 
+Lists the portal&#39;s AI provider profiles.
+
 ## Parameters
 This endpoint does not need any parameter.
 

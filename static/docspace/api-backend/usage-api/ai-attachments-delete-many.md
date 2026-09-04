@@ -8,6 +8,8 @@ Referenced types are defined in the [full reference](../newai.md).
 
 Delete many
 
+Permanently deletes a batch of attachments in a single round trip.
+
 ## Parameters
 
 |Name | In | Type | Description | Notes |

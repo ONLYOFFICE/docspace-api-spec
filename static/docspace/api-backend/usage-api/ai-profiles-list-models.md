@@ -8,11 +8,13 @@ Referenced types are defined in the [full reference](../newai.md).
 
 List models
 
+Lists the models the given profile&#39;s provider offers, as reported by the provider itself.
+
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **profileId** | query | **String** |  | [required] |
+| **profileId** | query | **String** | The AI provider profile identifier. | [required] |
 
 ## Responses
 

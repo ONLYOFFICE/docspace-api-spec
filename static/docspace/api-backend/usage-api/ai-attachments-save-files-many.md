@@ -8,6 +8,8 @@ Referenced types are defined in the [full reference](../newai.md).
 
 Save files many
 
+Stores a batch of file attachments as drafts in a single round trip. The returned records keep the order of the input.
+
 ## Parameters
 
 |Name | In | Type | Description | Notes |
@@ -33,3 +35,5 @@ No authorization required
 
 - **Content-Type**: application/json
 - **Accept**: application/json
+
+## AIEditorToolsApi

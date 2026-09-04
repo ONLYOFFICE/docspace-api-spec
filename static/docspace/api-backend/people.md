@@ -117,8 +117,10 @@ Creates a user API key with the parameters specified in the request.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Create a user api key | [**ApiKeyResponseWrapper**](#model-apikeyresponsewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -128,7 +130,7 @@ Creates a user API key with the parameters specified in the request.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -156,8 +158,10 @@ Deletes a user API key by its ID.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Delete a user api key | [**BooleanWrapper**](#model-booleanwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -167,7 +171,7 @@ Deletes a user API key by its ID.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -192,8 +196,9 @@ This endpoint does not need any parameter.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | List of all available permissions for key | [**STRINGArrayWrapper**](#model-stringarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -203,7 +208,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -228,8 +233,9 @@ This endpoint does not need any parameter.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | List of api keys for user | [**ApiKeyResponseWrapper**](#model-apikeyresponsewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -239,7 +245,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -264,8 +270,9 @@ This endpoint does not need any parameter.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | List of api keys for user | [**ApiKeyResponseArrayWrapper**](#model-apikeyresponsearraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -275,7 +282,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -304,8 +311,10 @@ Updates an existing API key changing its name, permissions, and status.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Update optional params for user api keys | [**BooleanWrapper**](#model-booleanwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -315,7 +324,7 @@ Updates an existing API key changing its name, permissions, and status.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -345,8 +354,10 @@ Adds a new group with the group manager, name, and members specified in the requ
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Newly created group with the detailed information | [**GroupWrapper**](#model-groupwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -356,7 +367,7 @@ Adds a new group with the group manager, name, and members specified in the requ
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -386,8 +397,10 @@ Adds new group members to the group with the ID specified in the request.
 |------------- | ------------- | ------------- | -------------|
 | **200** | Group with the detailed information | [**GroupWrapper**](#model-groupwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **404** | Group not found | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -397,7 +410,7 @@ Adds new group members to the group with the ID specified in the request.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -406,7 +419,7 @@ Adds new group members to the group with the ID specified in the request.
 
 ### deleteGroup
 
-> NoContentResultWrapper deleteGroup(id)
+> deleteGroup(id)
 
 `DELETE /api/2.0/group/{id}`
 
@@ -424,20 +437,22 @@ Deletes a group with the ID specified in the request from the list of groups on 
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | No content | [**NoContentResultWrapper**](#model-nocontentresultwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | No content | - | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **404** | Group not found | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
 #### Return type
 
-[**NoContentResultWrapper**](#model-nocontentresultwrapper)
+null (empty response body)
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -467,8 +482,10 @@ Returns the detailed information about the selected group.
 |------------- | ------------- | ------------- | -------------|
 | **200** | Group with the detailed information | [**GroupWrapper**](#model-groupwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **404** | Group not found | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -478,7 +495,7 @@ Returns the detailed information about the selected group.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -506,8 +523,10 @@ Returns a list of groups for the user with the ID specified in the request.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | List of groups | [**GroupSummaryArrayWrapper**](#model-groupsummaryarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -517,7 +536,7 @@ Returns a list of groups for the user with the ID specified in the request.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -551,8 +570,10 @@ Returns the general information about all the groups, such as group ID and group
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | List of groups | [**GroupArrayWrapper**](#model-grouparraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -562,7 +583,7 @@ Returns the general information about all the groups, such as group ID and group
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -592,8 +613,10 @@ Moves all the members from the selected group to another one specified in the re
 |------------- | ------------- | ------------- | -------------|
 | **200** | Group with the detailed information | [**GroupWrapper**](#model-groupwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **404** | Group not found | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -603,7 +626,7 @@ Moves all the members from the selected group to another one specified in the re
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -633,8 +656,10 @@ Removes the group members specified in the request from the selected group.
 |------------- | ------------- | ------------- | -------------|
 | **200** | Group with the detailed information | [**GroupWrapper**](#model-groupwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **404** | Group not found | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -644,7 +669,7 @@ Removes the group members specified in the request from the selected group.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -674,8 +699,10 @@ Sets a user with the ID specified in the request as a group manager.
 |------------- | ------------- | ------------- | -------------|
 | **200** | Group with the detailed information | [**GroupWrapper**](#model-groupwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **404** | User not found | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -685,7 +712,7 @@ Sets a user with the ID specified in the request as a group manager.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -714,8 +741,10 @@ Replaces the group members with those specified in the request.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Group with the detailed information | [**GroupWrapper**](#model-groupwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -725,7 +754,7 @@ Replaces the group members with those specified in the request.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -755,8 +784,10 @@ Updates the existing group changing the group manager, name, and/or members.
 |------------- | ------------- | ------------- | -------------|
 | **200** | Updated group with the detailed information | [**GroupWrapper**](#model-groupwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **404** | Group not found | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -766,7 +797,7 @@ Updates the existing group changing the group manager, name, and/or members.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -801,8 +832,10 @@ Returns groups with their sharing settings for a file with the ID specified in r
 |------------- | ------------- | ------------- | -------------|
 | **200** | Ok | [**GroupArrayWrapper**](#model-grouparraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -812,7 +845,7 @@ Returns groups with their sharing settings for a file with the ID specified in r
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -845,8 +878,10 @@ Returns groups with their sharing settings in a folder with the ID specified in 
 |------------- | ------------- | ------------- | -------------|
 | **200** | Ok | [**GroupArrayWrapper**](#model-grouparraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -856,7 +891,7 @@ Returns groups with their sharing settings in a folder with the ID specified in 
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -889,8 +924,10 @@ Returns groups with their sharing settings in a room with the ID specified in re
 |------------- | ------------- | ------------- | -------------|
 | **200** | Ok | [**GroupArrayWrapper**](#model-grouparraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -900,7 +937,7 @@ Returns groups with their sharing settings in a room with the ID specified in re
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -934,8 +971,9 @@ Sets a new email to the user with the ID specified in the request.
 | **400** | Incorrect userId or email | - | - |
 | **403** | The link is invalid or no permissions to perform this action | - | - |
 | **404** | The user could not be found | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -945,7 +983,7 @@ Sets a new email to the user with the ID specified in the request.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -976,8 +1014,9 @@ Sends a message to the user email with the instructions to change the email addr
 | **400** | Incorrect userId or email | - | - |
 | **403** | No permissions to perform this action | - | - |
 | **404** | User not found | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -987,7 +1026,7 @@ Sends a message to the user email with the instructions to change the email addr
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -1019,8 +1058,10 @@ Approves a guest sharing link and returns the detailed information about a guest
 | **200** | Detailed profile information | [**EmployeeFullWrapper**](#model-employeefullwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **404** | User not found | - | - |
 | **403** | No permissions to perform this action | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -1030,7 +1071,7 @@ Approves a guest sharing link and returns the detailed information about a guest
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -1059,8 +1100,10 @@ Deletes guests from the list and excludes them from rooms to which they were inv
 |------------- | ------------- | ------------- | -------------|
 | **200** | Request parameters for deleting guests | - | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -1070,12 +1113,12 @@ null (empty response body)
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: Not defined
+- **Accept**: application/json
 
 ## PeoplePasswordApi
 
@@ -1104,8 +1147,9 @@ Sets a new password to the user with the ID specified in the request.
 | **400** | Incorrect userId or password | - | - |
 | **403** | The link is invalid or no permissions to perform this action | - | - |
 | **404** | The user could not be found | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -1115,7 +1159,7 @@ Sets a new password to the user with the ID specified in the request.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -1144,7 +1188,9 @@ Sends a password recovery email to the specified user address.  For unauthentica
 |------------- | ------------- | ------------- | -------------|
 | **200** | Email with the password | [**StringWrapper**](#model-stringwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -1187,8 +1233,10 @@ Creates the user photo thumbnails by coordinates of the original image specified
 | **200** | Thumbnail parameters | [**ThumbnailsDataWrapper**](#model-thumbnailsdatawrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
 | **404** | User not found | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -1198,7 +1246,7 @@ Creates the user photo thumbnails by coordinates of the original image specified
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -1228,8 +1276,10 @@ Deletes a photo of the user with the ID specified in the request.
 | **200** | Thumbnail parameters: original photo, retina, maximum size photo, big, medium, small | [**ThumbnailsDataWrapper**](#model-thumbnailsdatawrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
 | **404** | User not found | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -1239,7 +1289,7 @@ Deletes a photo of the user with the ID specified in the request.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -1269,8 +1319,10 @@ Returns a photo of the user with the ID specified in the request.
 | **200** | Thumbnail parameters: original photo, retina, maximum size photo, big, medium, small | [**ThumbnailsDataWrapper**](#model-thumbnailsdatawrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
 | **404** | User not found | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -1280,7 +1332,7 @@ Returns a photo of the user with the ID specified in the request.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -1311,8 +1363,10 @@ Updates a photo of the user with the ID specified in the request.
 | **200** | Updated thumbnail parameters: original photo, retina, maximum size photo, big, medium, small | [**ThumbnailsDataWrapper**](#model-thumbnailsdatawrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
 | **404** | User not found | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -1322,7 +1376,7 @@ Updates a photo of the user with the ID specified in the request.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -1356,8 +1410,9 @@ Uploads a photo of the user with the ID specified in the request.
 | **403** | No permissions to perform this action | - | - |
 | **413** | Image size is too large | - | - |
 | **415** | Unknown image file type | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -1367,7 +1422,7 @@ Uploads a photo of the user with the ID specified in the request.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -1398,8 +1453,10 @@ Adds a new portal user with the first name, last name, email address, and severa
 |------------- | ------------- | ------------- | -------------|
 | **200** | Newly added user with the detailed information | [**EmployeeFullWrapper**](#model-employeefullwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | The invitation link is invalid or its validity has expired | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -1409,7 +1466,7 @@ Adds a new portal user with the first name, last name, email address, and severa
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -1440,8 +1497,9 @@ Returns data indicating whether a user with the specified email exists on the po
 |------------- | ------------- | ------------- | -------------|
 | **200** | User existence result | [**UserExistsResponseWrapper**](#model-userexistsresponsewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **400** | Incorrect email | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -1451,7 +1509,7 @@ Returns data indicating whether a user with the specified email exists on the po
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -1481,8 +1539,10 @@ Deletes a user with the ID specified in the request from the portal.
 | **200** | Deleted user detailed information | [**EmployeeFullWrapper**](#model-employeefullwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | You don&#39;t have enough permission to perform the operation or user is not suspended | - | - |
 | **404** | User not found | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -1492,7 +1552,7 @@ Deletes a user with the ID specified in the request from the portal.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -1519,8 +1579,9 @@ This endpoint does not need any parameter.
 | **200** | Detailed information about my profile | [**EmployeeFullWrapper**](#model-employeefullwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | You don&#39;t have enough permission to perform the operation | - | - |
 | **404** | User not found | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -1530,7 +1591,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -1564,8 +1625,10 @@ Returns a list of profiles for all the portal users.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | List of users with the detailed information | [**EmployeeFullArrayWrapper**](#model-employeefullarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -1575,7 +1638,7 @@ Returns a list of profiles for all the portal users.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -1584,7 +1647,7 @@ Returns a list of profiles for all the portal users.
 
 ### getClaims
 
-> ObjectWrapper getClaims()
+> TokenDiagnosticsWrapper getClaims()
 
 `GET /api/2.0/people/tokendiagnostics`
 
@@ -1599,19 +1662,20 @@ This endpoint does not need any parameter.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Claims | [**ObjectWrapper**](#model-objectwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **200** | Claims | [**TokenDiagnosticsWrapper**](#model-tokendiagnosticswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
 #### Return type
 
-[**ObjectWrapper**](#model-objectwrapper)
+[**TokenDiagnosticsWrapper**](#model-tokendiagnosticswrapper)
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -1644,8 +1708,9 @@ Returns the detailed information about a profile of the user with the email spec
 | **400** | Incorrect email | - | - |
 | **403** | No permissions to perform this action | - | - |
 | **404** | User not found | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -1655,7 +1720,7 @@ Returns the detailed information about a profile of the user with the email spec
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -1685,8 +1750,9 @@ Returns the detailed information about a profile of the user with the ID specifi
 | **200** | Detailed profile information | [**EmployeeFullWrapper**](#model-employeefullwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **400** | Incorrect UserId | - | - |
 | **404** | User not found | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -1696,7 +1762,7 @@ Returns the detailed information about a profile of the user with the ID specifi
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -1721,8 +1787,9 @@ This endpoint does not need any parameter.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Detailed information about my profile | [**EmployeeFullWrapper**](#model-employeefullwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -1732,7 +1799,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -1763,7 +1830,8 @@ Invites users specified in the request to the current portal.
 | **400** | Incorrect email or User disabled | - | - |
 | **402** | The number of admins exceeds the limit | - | - |
 | **403** | No permissions to perform this action | - | - |
-| **401** | Unauthorized | - | - |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -1773,7 +1841,7 @@ Invites users specified in the request to the current portal.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -1804,8 +1872,9 @@ Deletes a list of the users with the IDs specified in the request.
 | **400** | Incorrect UserIds | - | - |
 | **403** | No permissions to perform this action or users are not suspended | - | - |
 | **409** | Data reassign process is not complete | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -1815,7 +1884,7 @@ Deletes a list of the users with the IDs specified in the request.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -1844,8 +1913,10 @@ Resends emails to the users who have not activated their emails.
 |------------- | ------------- | ------------- | -------------|
 | **200** | List of users with the detailed information | [**EmployeeFullArrayWrapper**](#model-employeefullarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -1855,7 +1926,7 @@ Resends emails to the users who have not activated their emails.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -1887,8 +1958,9 @@ Updates the data for the selected portal user with the first name, last name, em
 | **400** | Incorrect user name | - | - |
 | **403** | You don&#39;t have enough permission to perform the operation | - | - |
 | **404** | User not found | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -1898,7 +1970,7 @@ Updates the data for the selected portal user with the first name, last name, em
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -1930,8 +2002,9 @@ Updates the user culture with the parameters specified in the request.
 | **400** | The specified culture is not in the list of available ones | - | - |
 | **403** | You don&#39;t have enough permission to perform the operation | - | - |
 | **404** | User not found | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -1941,7 +2014,7 @@ Updates the user culture with the parameters specified in the request.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -1974,8 +2047,10 @@ Resets a quota limit of users with the IDs specified in the request.
 | **402** | Your pricing plan does not support this option | - | - |
 | **403** | The invitation link is invalid or its validity has expired | - | - |
 | **409** | Conflict - system user quota cannot be reset | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -1985,7 +2060,7 @@ Resets a quota limit of users with the IDs specified in the request.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -2015,8 +2090,9 @@ Changes a quota limit for the users with the IDs specified in the request.
 | **200** | List of users with the detailed information | [**EmployeeFullArrayWrapper**](#model-employeefullarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **400** | The entered quota value is invalid or greater than the total storage size | - | - |
 | **403** | No permissions to perform this action | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -2026,7 +2102,7 @@ Changes a quota limit for the users with the IDs specified in the request.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -2037,7 +2113,7 @@ Changes a quota limit for the users with the IDs specified in the request.
 
 ### getAccountsEntriesWithFilesShared
 
-> ObjectArrayWrapper getAccountsEntriesWithFilesShared(id, employeeStatus, activationStatus, excludeShared, includeShared, invitedByMe, inviterId, area, employeeTypes, count, startIndex, filterSeparator, filterValue)
+> IAccountEntryArrayWrapper getAccountsEntriesWithFilesShared(id, employeeStatus, activationStatus, excludeShared, includeShared, invitedByMe, inviterId, area, employeeTypes, count, startIndex, filterSeparator, filterValue)
 
 `GET /api/2.0/accounts/file/{id}/search`
 
@@ -2067,20 +2143,22 @@ Returns the account entries with their sharing settings for a file with the ID s
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Ok | [**ObjectArrayWrapper**](#model-objectarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | Ok | [**IAccountEntryArrayWrapper**](#model-iaccountentryarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
 #### Return type
 
-[**ObjectArrayWrapper**](#model-objectarraywrapper)
+[**IAccountEntryArrayWrapper**](#model-iaccountentryarraywrapper)
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -2089,7 +2167,7 @@ Returns the account entries with their sharing settings for a file with the ID s
 
 ### getAccountsEntriesWithFoldersShared
 
-> ObjectArrayWrapper getAccountsEntriesWithFoldersShared(id, employeeStatus, activationStatus, excludeShared, includeShared, invitedByMe, inviterId, area, employeeTypes, count, startIndex, filterSeparator, filterValue)
+> IAccountEntryArrayWrapper getAccountsEntriesWithFoldersShared(id, employeeStatus, activationStatus, excludeShared, includeShared, invitedByMe, inviterId, area, employeeTypes, count, startIndex, filterSeparator, filterValue)
 
 `GET /api/2.0/accounts/folder/{id}/search`
 
@@ -2119,20 +2197,22 @@ Returns the account entries with their sharing settings in a folder with the ID 
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Ok | [**ObjectArrayWrapper**](#model-objectarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | Ok | [**IAccountEntryArrayWrapper**](#model-iaccountentryarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
 #### Return type
 
-[**ObjectArrayWrapper**](#model-objectarraywrapper)
+[**IAccountEntryArrayWrapper**](#model-iaccountentryarraywrapper)
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -2141,7 +2221,7 @@ Returns the account entries with their sharing settings in a folder with the ID 
 
 ### getAccountsEntriesWithRoomsShared
 
-> ObjectArrayWrapper getAccountsEntriesWithRoomsShared(id, employeeStatus, activationStatus, excludeShared, includeShared, invitedByMe, inviterId, area, employeeTypes, count, startIndex, filterSeparator, filterValue)
+> IAccountEntryArrayWrapper getAccountsEntriesWithRoomsShared(id, employeeStatus, activationStatus, excludeShared, includeShared, invitedByMe, inviterId, area, employeeTypes, count, startIndex, filterSeparator, filterValue)
 
 `GET /api/2.0/accounts/room/{id}/search`
 
@@ -2171,20 +2251,22 @@ Returns the account entries with their sharing settings in a room with the ID sp
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Ok | [**ObjectArrayWrapper**](#model-objectarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | Ok | [**IAccountEntryArrayWrapper**](#model-iaccountentryarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
 #### Return type
 
-[**ObjectArrayWrapper**](#model-objectarraywrapper)
+[**IAccountEntryArrayWrapper**](#model-iaccountentryarraywrapper)
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -2215,8 +2297,10 @@ Returns a list of users matching the search query.
 |------------- | ------------- | ------------- | -------------|
 | **200** | List of users with the detailed information | [**EmployeeFullArrayWrapper**](#model-employeefullarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -2226,7 +2310,7 @@ Returns a list of users matching the search query.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -2274,8 +2358,10 @@ Returns a list of users matching the parameters specified in the request.
 |------------- | ------------- | ------------- | -------------|
 | **200** | List of users | [**EmployeeArrayWrapper**](#model-employeearraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -2285,7 +2371,7 @@ Returns a list of users matching the parameters specified in the request.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -2326,8 +2412,10 @@ Returns the users with the sharing settings in a file with the ID specified in r
 |------------- | ------------- | ------------- | -------------|
 | **200** | Ok | [**EmployeeFullArrayWrapper**](#model-employeefullarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -2337,7 +2425,7 @@ Returns the users with the sharing settings in a file with the ID specified in r
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -2378,8 +2466,10 @@ Returns the users with the sharing settings in a folder with the ID specified in
 |------------- | ------------- | ------------- | -------------|
 | **200** | Ok | [**EmployeeFullArrayWrapper**](#model-employeefullarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -2389,7 +2479,7 @@ Returns the users with the sharing settings in a folder with the ID specified in
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -2430,8 +2520,10 @@ Returns the users with the sharing settings in a room with the ID specified in r
 |------------- | ------------- | ------------- | -------------|
 | **200** | Ok | [**EmployeeFullArrayWrapper**](#model-employeefullarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -2441,7 +2533,7 @@ Returns the users with the sharing settings in a room with the ID specified in r
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -2489,8 +2581,10 @@ Returns a list of users with full information about them matching the parameters
 |------------- | ------------- | ------------- | -------------|
 | **200** | List of users with the detailed information | [**EmployeeFullArrayWrapper**](#model-employeefullarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -2500,7 +2594,7 @@ Returns a list of users with full information about them matching the parameters
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -2528,8 +2622,10 @@ Returns a list of users matching the search query. This method uses the query pa
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | List of users | [**EmployeeArrayWrapper**](#model-employeearraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -2539,7 +2635,7 @@ Returns a list of users matching the search query. This method uses the query pa
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -2571,8 +2667,10 @@ Returns a list of users matching the status filter and search query.
 |------------- | ------------- | ------------- | -------------|
 | **200** | List of users with the detailed information | [**EmployeeFullArrayWrapper**](#model-employeefullarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -2582,7 +2680,7 @@ Returns a list of users matching the status filter and search query.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -2612,8 +2710,10 @@ Changes the current portal theme.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Theme | [**DarkThemeSettingsWrapper**](#model-darkthemesettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -2623,7 +2723,7 @@ Changes the current portal theme.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -2648,8 +2748,9 @@ This endpoint does not need any parameter.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Theme | [**DarkThemeSettingsWrapper**](#model-darkthemesettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -2659,7 +2760,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -2692,7 +2793,9 @@ Returns a list of the available third-party accounts.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | List of third-party accounts | [**AccountInfoArrayWrapper**](#model-accountinfoarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -2731,8 +2834,10 @@ Links a third-party account specified in the request to the user profile.
 |------------- | ------------- | ------------- | -------------|
 | **200** | Ok | - | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **405** | Error not allowed option | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -2742,12 +2847,12 @@ null (empty response body)
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: Not defined
+- **Accept**: application/json
 
 ### signupThirdPartyAccount
 
@@ -2769,10 +2874,11 @@ Creates a third-party account with the parameters specified in the request.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Ok | [**EmployeeWrapper**](#model-employeewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The newly created user linked to the third-party account | [**EmployeeWrapper**](#model-employeewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **400** | Incorrect email | - | - |
 | **403** | The invitation link is invalid or its validity has expired | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -2810,8 +2916,10 @@ Unlinks a third-party account specified in the request from the user profile.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | OK | - | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -2821,12 +2929,12 @@ null (empty response body)
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Accept**: application/json
 
 ## PeopleUserDataApi
 
@@ -2848,8 +2956,9 @@ This endpoint does not need any parameter.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Deletion progress | [**TaskProgressResponseWrapper**](#model-taskprogressresponsewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -2859,7 +2968,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -2887,8 +2996,10 @@ Returns the progress of the started data reassignment for the user with the ID s
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Reassignment progress | [**TaskProgressResponseWrapper**](#model-taskprogressresponsewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -2898,7 +3009,7 @@ Returns the progress of the started data reassignment for the user with the ID s
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -2926,8 +3037,10 @@ Returns the progress of the started data deletion for the user with the ID speci
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Deletion progress | [**TaskProgressResponseWrapper**](#model-taskprogressresponsewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -2937,7 +3050,7 @@ Returns the progress of the started data deletion for the user with the ID speci
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -2966,8 +3079,10 @@ Checks whether the reassignment of rooms and shared files is required.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Boolean value: true if neccessary reassign | [**BooleanWrapper**](#model-booleanwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -2977,7 +3092,7 @@ Checks whether the reassignment of rooms and shared files is required.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -3003,8 +3118,9 @@ This endpoint does not need any parameter.
 |------------- | ------------- | ------------- | -------------|
 | **200** | Information message | [**StringWrapper**](#model-stringwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -3014,7 +3130,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -3040,8 +3156,9 @@ This endpoint does not need any parameter.
 |------------- | ------------- | ------------- | -------------|
 | **200** | delete personal progress | [**TaskProgressResponseWrapper**](#model-taskprogressresponsewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **400** | Access denied | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -3051,7 +3168,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -3080,8 +3197,9 @@ Starts the data reassignment for the user with the ID specified in the request.
 |------------- | ------------- | ------------- | -------------|
 | **200** | Reassignment progress | [**TaskProgressResponseWrapper**](#model-taskprogressresponsewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **400** | Can not reassign data to user or from user | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -3091,7 +3209,7 @@ Starts the data reassignment for the user with the ID specified in the request.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -3122,8 +3240,9 @@ Starts the data deletion for the user with the ID specified in the request.
 | **400** | User exception | - | - |
 | **403** | No permissions to perform this action | - | - |
 | **404** | User not found | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -3133,7 +3252,7 @@ Starts the data deletion for the user with the ID specified in the request.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -3161,8 +3280,10 @@ Terminates the data reassignment for the user with the ID specified in the reque
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Reassignment progress | [**TaskProgressResponseWrapper**](#model-taskprogressresponsewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -3172,7 +3293,7 @@ Terminates the data reassignment for the user with the ID specified in the reque
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -3200,8 +3321,10 @@ Terminates the data deletion for the user with the ID specified in the request.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | OK | - | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -3211,12 +3334,12 @@ null (empty response body)
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: Not defined
+- **Accept**: application/json
 
 ## PeopleUserStatusApi
 
@@ -3248,8 +3371,10 @@ Returns a list of profiles filtered by the user status.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | List of users with the detailed information | [**EmployeeFullArrayWrapper**](#model-employeefullarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -3259,7 +3384,7 @@ Returns a list of profiles filtered by the user status.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -3288,8 +3413,10 @@ Sets the required activation status to the list of users with the IDs specified 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | List of users with the detailed information | [**EmployeeFullArrayWrapper**](#model-employeefullarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -3299,7 +3426,7 @@ Sets the required activation status to the list of users with the IDs specified 
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -3330,8 +3457,9 @@ Changes a status of the users with the IDs specified in the request.
 | **200** | List of users with the detailed information | [**EmployeeFullArrayWrapper**](#model-employeefullarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **400** | Incorrect status | - | - |
 | **403** | No permissions to perform this action or cannot change status for a specific user (yourself, owner, LDAP ...) | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -3341,7 +3469,7 @@ Changes a status of the users with the IDs specified in the request.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -3371,8 +3499,10 @@ Returns the progress of updating the user type.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Update type progress | [**TaskProgressResponseWrapper**](#model-taskprogressresponsewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -3382,7 +3512,7 @@ Returns the progress of updating the user type.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -3412,8 +3542,9 @@ Starts updating the type of the user or guest when reassigning rooms and shared 
 | **200** | Update type progress | [**TaskProgressResponseWrapper**](#model-taskprogressresponsewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **400** | Can not update user type | - | - |
 | **403** | Access denied | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -3423,7 +3554,7 @@ Starts updating the type of the user or guest when reassigning rooms and shared 
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -3451,8 +3582,10 @@ Terminates the process of updating the type of the user or guest.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Update type progress | [**TaskProgressResponseWrapper**](#model-taskprogressresponsewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -3462,7 +3595,7 @@ Terminates the process of updating the type of the user or guest.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -3492,8 +3625,10 @@ Changes a type of the users with the IDs specified in the request.
 |------------- | ------------- | ------------- | -------------|
 | **200** | List of users with the detailed information | [**EmployeeFullArrayWrapper**](#model-employeefullarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -3503,7 +3638,7 @@ Changes a type of the users with the IDs specified in the request.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -3535,8 +3670,10 @@ Returns a link to share a guest with another user.
 | **200** | User share link | [**StringWrapper**](#model-stringwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **404** | User not found | - | - |
 | **403** | No permissions to perform this action | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -3546,7 +3683,7 @@ Returns a link to share a guest with another user.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -3558,10 +3695,11 @@ Returns a link to share a guest with another user.
 
 
 ### Model AccountInfoArrayWrapper
+The successful API response containing the list of AccountInfoDto objects.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**List**](#model-accountinfodto) |  | [optional] |
+| **response** | [**List**](#model-accountinfodto) | The list of AccountInfoDto objects returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-booleanwrapperlinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -3597,10 +3735,11 @@ The API date and time parameters.
 
 
 ### Model ApiKeyResponseArrayWrapper
+The successful API response containing the list of ApiKeyResponseDto objects.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**List**](#model-apikeyresponsedto) |  | [optional] |
+| **response** | [**List**](#model-apikeyresponsedto) | The list of ApiKeyResponseDto objects returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-booleanwrapperlinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -3617,18 +3756,19 @@ The response data for the API key operations.
 | **key** | **String** | The full API key value (only returned when creating a new key). | [required] [example: api_key_1234567890abcdef] [nullable] |
 | **keyPostfix** | **String** | The API key postfix (used for identification). | [optional] [example: ...cdef] [nullable] |
 | **permissions** | **List** | The list of permissions granted to the API key. | [required] [example: [read, write, delete]] [nullable] |
-| **lastUsed** | [**ApiDateTime**](#model-apidatetime) | The API date and time parameters. | [optional] |
-| **createOn** | [**ApiDateTime**](#model-apidatetime) | The API date and time parameters. | [optional] |
-| **createBy** | [**EmployeeDto**](#model-employeedto) | The user parameters. | [optional] |
-| **expiresAt** | [**ApiDateTime**](#model-apidatetime) | The API date and time parameters. | [optional] |
+| **lastUsed** | [**ApiDateTime**](#model-apidatetime) | The date and time when the API key was last used. | [optional] |
+| **createOn** | [**ApiDateTime**](#model-apidatetime) | The date and time when the API key was created. | [optional] |
+| **createBy** | [**EmployeeDto**](#model-employeedto) | The identifier of the user who created the API key. | [optional] |
+| **expiresAt** | [**ApiDateTime**](#model-apidatetime) | The date and time when the API key expires. | [optional] |
 | **isActive** | **Boolean** | Indicates whether the API key is active or not. | [required] [example: true] |
 
 
 ### Model ApiKeyResponseWrapper
+The successful API response containing the ApiKeyResponseDto object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**ApiKeyResponseDto**](#model-apikeyresponsedto) |  | [optional] |
+| **response** | [**ApiKeyResponseDto**](#model-apikeyresponsedto) | The ApiKeyResponseDto object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-booleanwrapperlinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -3645,10 +3785,11 @@ Possible values:
 
 
 ### Model BooleanWrapper
+The successful API response containing the boolean value.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | **Boolean** |  | [optional] |
+| **response** | **Boolean** | The boolean value returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-booleanwrapperlinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -3722,7 +3863,7 @@ The theme settings request parameters.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **theme** | [**DarkThemeSettingsType**](#model-darkthemesettingstype) | The theme type. | [required] [enum: Base, Dark, System] |
+| **theme** | [**DarkThemeSettingsType**](#model-darkthemesettingstype) | The portal theme settings type. | [required] [enum: Base, Dark, System] |
 
 
 ### Model DarkThemeSettingsType
@@ -3735,10 +3876,11 @@ Possible values:
 
 
 ### Model DarkThemeSettingsWrapper
+The successful API response containing the DarkThemeSettings object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**DarkThemeSettings**](#model-darkthemesettings) |  | [optional] |
+| **response** | [**DarkThemeSettings**](#model-darkthemesettings) | The DarkThemeSettings object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-booleanwrapperlinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -3785,10 +3927,11 @@ Possible values:
 
 
 ### Model EmployeeArrayWrapper
+The successful API response containing the list of EmployeeDto objects.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**List**](#model-employeedto) |  | [optional] |
+| **response** | [**List**](#model-employeedto) | The list of EmployeeDto objects returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-booleanwrapperlinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -3813,10 +3956,11 @@ The user parameters.
 
 
 ### Model EmployeeFullArrayWrapper
+The successful API response containing the list of EmployeeFullDto objects.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**List**](#model-employeefulldto) |  | [optional] |
+| **response** | [**List**](#model-employeefulldto) | The list of EmployeeFullDto objects returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-booleanwrapperlinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -3859,7 +4003,7 @@ The full list of user parameters.
 | **isCollaborator** | **Boolean** | Specifies if the user is a portal collaborator or not. | [optional] |
 | **cultureName** | **String** | The user culture code. | [optional] [nullable] |
 | **mobilePhone** | **String** | The user mobile phone number. | [optional] [nullable] |
-| **mobilePhoneActivationStatus** | [**MobilePhoneActivationStatus**](#model-mobilephoneactivationstatus) | The user mobile phone activation status. | [optional] [enum: 0, 1] |
+| **mobilePhoneActivationStatus** | [**MobilePhoneActivationStatus**](#model-mobilephoneactivationstatus) | The mobile phone activation status. | [optional] [enum: 0, 1] |
 | **isSSO** | **Boolean** | Specifies if the SSO settings are enabled for the user or not. | [optional] |
 | **theme** | [**DarkThemeSettingsType**](#model-darkthemesettingstype) | The user theme settings. | [optional] [enum: Base, Dark, System] |
 | **quotaLimit** | **Long** (int64) | The user quota limit. | [optional] [nullable] |
@@ -3875,10 +4019,11 @@ The full list of user parameters.
 
 
 ### Model EmployeeFullWrapper
+The successful API response containing the EmployeeFullDto object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**EmployeeFullDto**](#model-employeefulldto) |  | [optional] |
+| **response** | [**EmployeeFullDto**](#model-employeefulldto) | The EmployeeFullDto object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-booleanwrapperlinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -3908,14 +4053,36 @@ Possible values:
 
 
 ### Model EmployeeWrapper
+The successful API response containing the EmployeeDto object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**EmployeeDto**](#model-employeedto) |  | [optional] |
+| **response** | [**EmployeeDto**](#model-employeedto) | The EmployeeDto object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-booleanwrapperlinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
 | **statusCode** | **Integer** (int32) | HTTP status code of the response (duplicate of status) | [optional] |
+
+
+### Model ErrorApiResponse
+The error body returned with every failed request.
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+| **status** | **Integer** (int32) | The response status flag. Always 1 on an error, as opposed to 0 on success. | [optional] |
+| **statusCode** | **Integer** (int32) | The HTTP status code of the response, repeated in the body. | [optional] |
+| **error** | [**ErrorApiResponse_error**](#model-errorapiresponseerror) |  | [optional] |
+
+
+### Model ErrorApiResponse.error
+What went wrong.
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+| **message** | **String** | The human-readable error message. | [optional] |
+| **type** | **String** | The .NET type of the underlying exception. Only sent when stack traces are enabled. | [optional] |
+| **stack** | **String** | The stack trace of the underlying exception. Only sent when stack traces are enabled. | [optional] |
+| **hresult** | **Integer** (int32) | The HRESULT of the underlying exception. Only sent when stack traces are enabled. | [optional] |
 
 
 ### Model FileUploadResultDto
@@ -3929,10 +4096,11 @@ The file upload result.
 
 
 ### Model FileUploadResultWrapper
+The successful API response containing the FileUploadResultDto object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**FileUploadResultDto**](#model-fileuploadresultdto) |  | [optional] |
+| **response** | [**FileUploadResultDto**](#model-fileuploadresultdto) | The FileUploadResultDto object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-booleanwrapperlinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -3940,10 +4108,11 @@ The file upload result.
 
 
 ### Model GroupArrayWrapper
+The successful API response containing the list of GroupDto objects.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**List**](#model-groupdto) |  | [optional] |
+| **response** | [**List**](#model-groupdto) | The list of GroupDto objects returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-booleanwrapperlinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -3978,10 +4147,11 @@ The group request parameters.
 
 
 ### Model GroupSummaryArrayWrapper
+The successful API response containing the list of GroupSummaryDto objects.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**List**](#model-groupsummarydto) |  | [optional] |
+| **response** | [**List**](#model-groupsummarydto) | The list of GroupSummaryDto objects returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-booleanwrapperlinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -4000,14 +4170,85 @@ The group summary parameters.
 
 
 ### Model GroupWrapper
+The successful API response containing the GroupDto object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**GroupDto**](#model-groupdto) |  | [optional] |
+| **response** | [**GroupDto**](#model-groupdto) | The GroupDto object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-booleanwrapperlinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
 | **statusCode** | **Integer** (int32) | HTTP status code of the response (duplicate of status) | [optional] |
+
+
+### Model IAccountEntryArrayWrapper
+The successful API response containing the list of IAccountEntryDto objects.
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+| **response** | [**List**](#model-iaccountentrydto) | The list of IAccountEntryDto objects returned by the operation. | [optional] |
+| **count** | **Integer** (int32) | The total number of items in the response | [optional] |
+| **links** | [**List**](#model-booleanwrapperlinks-item) | List of links related to the response | [optional] |
+| **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
+| **statusCode** | **Integer** (int32) | HTTP status code of the response (duplicate of status) | [optional] |
+
+
+### Model IAccountEntryDto
+One entry of an account search: either a user or a group.
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+| **id** | **UUID** (uuid) | The group ID. | [required] |
+| **displayName** | **String** | The HTML-encoded user&#39;s display name formatted according to the default format for the current culture. | [optional] [nullable] |
+| **avatar** | **String** | The user avatar. | [optional] [nullable] |
+| **avatarOriginal** | **String** | The user original size avatar. | [optional] [nullable] |
+| **avatarMax** | **String** | The user maximum size avatar. | [optional] [nullable] |
+| **avatarMedium** | **String** | The user medium size avatar. | [optional] [nullable] |
+| **avatarSmall** | **String** | The user small size avatar. | [optional] [nullable] |
+| **profileUrl** | **String** | The user profile URL. | [optional] [nullable] |
+| **hasAvatar** | **Boolean** | Specifies if the user has an avatar or not. | [optional] |
+| **isAnonim** | **Boolean** | Specifies if the user is anonymous or not. | [optional] |
+| **firstName** | **String** | The user first name. | [optional] [nullable] |
+| **lastName** | **String** | The user last name. | [optional] [nullable] |
+| **userName** | **String** | The user username. | [optional] [nullable] |
+| **email** | **String** (email) | The user email. | [optional] [nullable] |
+| **contacts** | [**List**](#model-contact) | The list of user contacts. | [optional] [nullable] |
+| **status** | [**EmployeeStatus**](#model-employeestatus) | The user status. | [optional] [enum: 1, 2, 4, 5, 7] |
+| **activationStatus** | [**EmployeeActivationStatus**](#model-employeeactivationstatus) | The user activation status. | [optional] [enum: 0, 1, 2, 4] |
+| **terminated** | [**ApiDateTime**](#model-apidatetime) | The date when the user account was terminated. | [optional] |
+| **department** | **String** | The user department. | [optional] [nullable] |
+| **groups** | [**List**](#model-groupsummarydto) | The list of user groups. | [optional] [nullable] |
+| **location** | **String** | The user location. | [optional] [nullable] |
+| **notes** | **String** | The user notes. | [optional] [nullable] |
+| **isAdmin** | **Boolean** | Specifies if the user is an administrator or not. | [optional] |
+| **isRoomAdmin** | **Boolean** | Specifies if the user is a room administrator or not. | [optional] |
+| **isLDAP** | **Boolean** | Specifies if the LDAP settings are enabled for the group or not. | [required] |
+| **listAdminModules** | **List** | The list of the administrator modules. | [optional] [nullable] |
+| **isOwner** | **Boolean** | Specifies if the user is a portal owner or not. | [optional] |
+| **isVisitor** | **Boolean** | Specifies if the user is a portal visitor or not. | [optional] |
+| **isCollaborator** | **Boolean** | Specifies if the user is a portal collaborator or not. | [optional] |
+| **cultureName** | **String** | The user culture code. | [optional] [nullable] |
+| **mobilePhone** | **String** | The user mobile phone number. | [optional] [nullable] |
+| **mobilePhoneActivationStatus** | [**MobilePhoneActivationStatus**](#model-mobilephoneactivationstatus) | The mobile phone activation status. | [optional] [enum: 0, 1] |
+| **isSSO** | **Boolean** | Specifies if the SSO settings are enabled for the user or not. | [optional] |
+| **theme** | [**DarkThemeSettingsType**](#model-darkthemesettingstype) | The user theme settings. | [optional] [enum: Base, Dark, System] |
+| **quotaLimit** | **Long** (int64) | The user quota limit. | [optional] [nullable] |
+| **usedSpace** | **Double** (double) | The portal used space of the user. | [optional] [nullable] |
+| **shared** | **Boolean** | Specifies whether the group can be shared or not. | [optional] [nullable] |
+| **isCustomQuota** | **Boolean** | Specifies if the user has a custom quota or not. | [optional] [nullable] |
+| **loginEventId** | **Integer** (int32) | The current login event ID. | [optional] [nullable] |
+| **authCookieLifetime** | **Double** (double) | The auth cookie lifetime in seconds. | [optional] [nullable] |
+| **createdBy** | [**EmployeeDto**](#model-employeedto) | The user who created the current user. | [optional] |
+| **registrationDate** | [**ApiDateTime**](#model-apidatetime) | The user registration date. | [optional] |
+| **hasPersonalFolder** | **Boolean** | Specifies if the user has a personal folder or not. | [optional] [nullable] |
+| **tfaAppEnabled** | **Boolean** | Indicates whether the user has enabled two-factor authentication (TFA) using an authentication app. | [optional] [nullable] |
+| **name** | **String** | The group name. | [required] [nullable] |
+| **parent** | **UUID** (uuid) | The parent group ID. | [optional] [nullable] |
+| **category** | **UUID** (uuid) | The group category ID. | [required] |
+| **isSystem** | **Boolean** | Indicates whether the group is a system group. | [optional] [nullable] |
+| **manager** | [**EmployeeFullDto**](#model-employeefulldto) | The group manager full information. | [optional] |
+| **members** | [**List**](#model-employeefulldto) | The list of group members. | [optional] [nullable] |
+| **membersCount** | **Integer** (int32) | The number of group members. | [optional] |
 
 
 ### Model InviteUsersRequestDto
@@ -4067,46 +4308,6 @@ Possible values:
 - `1` — Activated (`Activated`)
 
 
-### Model NoContentResult
-
-| Name | Type | Description | Notes |
-|------------ | ------------- | ------------- | -------------|
-| **statusCode** | **Integer** (int32) |  | [optional] |
-
-
-### Model NoContentResultWrapper
-
-| Name | Type | Description | Notes |
-|------------ | ------------- | ------------- | -------------|
-| **response** | [**NoContentResult**](#model-nocontentresult) |  | [optional] |
-| **count** | **Integer** (int32) | The total number of items in the response | [optional] |
-| **links** | [**List**](#model-booleanwrapperlinks-item) | List of links related to the response | [optional] |
-| **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
-| **statusCode** | **Integer** (int32) | HTTP status code of the response (duplicate of status) | [optional] |
-
-
-### Model ObjectArrayWrapper
-
-| Name | Type | Description | Notes |
-|------------ | ------------- | ------------- | -------------|
-| **response** | **List** |  | [optional] |
-| **count** | **Integer** (int32) | The total number of items in the response | [optional] |
-| **links** | [**List**](#model-booleanwrapperlinks-item) | List of links related to the response | [optional] |
-| **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
-| **statusCode** | **Integer** (int32) | HTTP status code of the response (duplicate of status) | [optional] |
-
-
-### Model ObjectWrapper
-
-| Name | Type | Description | Notes |
-|------------ | ------------- | ------------- | -------------|
-| **response** | **Object** |  | [optional] |
-| **count** | **Integer** (int32) | The total number of items in the response | [optional] |
-| **links** | [**List**](#model-booleanwrapperlinks-item) | List of links related to the response | [optional] |
-| **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
-| **statusCode** | **Integer** (int32) | HTTP status code of the response (duplicate of status) | [optional] |
-
-
 ### Model Payments
 
 Possible values:
@@ -4135,10 +4336,11 @@ Possible values:
 
 
 ### Model STRINGArrayWrapper
+The successful API response.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | **List** |  | [optional] |
+| **response** | **List** | The response payload. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-booleanwrapperlinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -4187,16 +4389,17 @@ The parameters for updating the type of the user or guest when reassigning rooms
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **type** | [**EmployeeType**](#model-employeetype) | The user type. | [optional] [enum: All, RoomAdmin, Guest, DocSpaceAdmin, User] |
+| **type** | [**EmployeeType**](#model-employeetype) | The new user type. | [optional] [enum: All, RoomAdmin, Guest, DocSpaceAdmin, User] |
 | **userId** | **UUID** (uuid) | The user ID. | [optional] [example: 00000000-0000-0000-0000-000000000000] |
 | **reassignUserId** | **UUID** (uuid) | The user ID to reassign. | [optional] [example: 11111111-1111-1111-1111-111111111111] [nullable] |
 
 
 ### Model StringWrapper
+The successful API response containing the string value.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | **String** |  | [optional] |
+| **response** | **String** | The string value returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-booleanwrapperlinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -4216,10 +4419,11 @@ The task progress response parameters.
 
 
 ### Model TaskProgressResponseWrapper
+The successful API response containing the TaskProgressResponseDto object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**TaskProgressResponseDto**](#model-taskprogressresponsedto) |  | [optional] |
+| **response** | [**TaskProgressResponseDto**](#model-taskprogressresponsedto) | The TaskProgressResponseDto object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-booleanwrapperlinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -4248,10 +4452,11 @@ The thumbnails data parameters.
 
 
 ### Model ThumbnailsDataWrapper
+The successful API response containing the ThumbnailsDataDto object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**ThumbnailsDataDto**](#model-thumbnailsdatadto) |  | [optional] |
+| **response** | [**ThumbnailsDataDto**](#model-thumbnailsdatadto) | The ThumbnailsDataDto object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-booleanwrapperlinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -4268,6 +4473,27 @@ The thumbnail request.
 | **y** | **Integer** (int32) | The thumbnail vertical coordinate. | [optional] [example: 50] |
 | **width** | **Integer** (int32) | The thumbnail width. | [optional] [example: 200] |
 | **height** | **Integer** (int32) | The thumbnail height. | [optional] [example: 200] |
+
+
+### Model TokenDiagnosticsDto
+What the current token carries, for diagnostics.
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+| **name** | **String** | The name of the authenticated identity. | [optional] [example: user@example.com] [nullable] |
+| **claims** | **List** | The claims of the identity, each formatted as type:value. | [optional] [example: [http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name:user@example.com]] [nullable] |
+
+
+### Model TokenDiagnosticsWrapper
+The successful API response containing the TokenDiagnosticsDto object.
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+| **response** | [**TokenDiagnosticsDto**](#model-tokendiagnosticsdto) | The TokenDiagnosticsDto object returned by the operation. | [optional] |
+| **count** | **Integer** (int32) | The total number of items in the response | [optional] |
+| **links** | [**List**](#model-booleanwrapperlinks-item) | List of links related to the response | [optional] |
+| **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
+| **statusCode** | **Integer** (int32) | HTTP status code of the response (duplicate of status) | [optional] |
 
 
 ### Model UpdateApiKeyRequest
@@ -4350,10 +4576,11 @@ The user existence check response parameters.
 
 
 ### Model UserExistsResponseWrapper
+The successful API response containing the UserExistsResponseDto object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**UserExistsResponseDto**](#model-userexistsresponsedto) |  | [optional] |
+| **response** | [**UserExistsResponseDto**](#model-userexistsresponsedto) | The UserExistsResponseDto object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-booleanwrapperlinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |

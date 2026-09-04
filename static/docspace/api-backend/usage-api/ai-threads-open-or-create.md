@@ -2,17 +2,19 @@
 
 Referenced types are defined in the [full reference](../newai.md).
 
-> AiOpenOrCreateResult aiThreadsOpenOrCreate(AiOpenOrCreateInput)
+> AiOpenOrCreateResult aiThreadsOpenOrCreate(aiThreadsOpenOrCreate\_request)
 
 `POST /api/2.0/ai/threads/open-or-create`
 
 Open or create
 
+Opens a chat thread and returns its history, or creates one with a title generated from the supplied first message. That first message is not persisted - the caller decides whether to follow up with &#x60;append-user-message&#x60;.
+
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **AiOpenOrCreateInput** | body | [**AiOpenOrCreateInput**](../newai.md#model-aiopenorcreateinput) |  | [required] |
+| **aiThreadsOpenOrCreate\_request** | body | [**aiThreadsOpenOrCreate_request**](../newai.md#model-aithreadsopenorcreate-request-body) |  | [required] |
 
 ## Responses
 

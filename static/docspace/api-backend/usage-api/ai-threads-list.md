@@ -8,14 +8,16 @@ Referenced types are defined in the [full reference](../newai.md).
 
 List
 
+Lists the chat threads of the scope, most recently edited first. Supports cursor pagination and a server-side case-insensitive title search.
+
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **entityId** | query | **String** |  | [required] |
-| **count** | query | **String** |  | [required] |
-| **cursor** | query | **String** |  | [required] |
-| **query** | query | **String** |  | [required] |
+| **entityId** | query | **String** | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | [optional] |
+| **count** | query | **String** | The maximum number of items to return in one page. | [optional] |
+| **cursor** | query | **String** | The keyset pagination cursor: the JSON-encoded sort key of the last item already received. Omit for the first page. | [optional] |
+| **query** | query | **String** | The full-text query the thread list is filtered by. | [optional] |
 
 ## Responses
 

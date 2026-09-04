@@ -8,6 +8,8 @@ Referenced types are defined in the [full reference](../newai.md).
 
 Delete
 
+Deletes an AI provider profile and cleans up the assignments pointing at it - the &#x60;Default&#x60; slot moves to the first remaining profile, the other slots are unbound.
+
 ## Parameters
 
 |Name | In | Type | Description | Notes |

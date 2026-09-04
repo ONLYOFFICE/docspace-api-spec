@@ -8,6 +8,8 @@ Referenced types are defined in the [full reference](../newai.md).
 
 Reset agents&#39; quota
 
+Resets the storage quota of the given AI agent rooms.
+
 ## Parameters
 
 |Name | In | Type | Description | Notes |

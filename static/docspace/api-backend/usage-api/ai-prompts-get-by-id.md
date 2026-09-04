@@ -8,11 +8,13 @@ Referenced types are defined in the [full reference](../newai.md).
 
 Get by id
 
+Returns one saved prompt, or an empty result when the identifier is unknown.
+
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | query | **String** |  | [required] |
+| **id** | query | **String** | The saved prompt identifier. | [required] |
 
 ## Responses
 

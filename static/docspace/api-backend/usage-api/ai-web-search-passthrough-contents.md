@@ -1,29 +1,31 @@
-# aiAttachmentsSaveImage
+# aiWebSearchPassthroughContents
 
 Referenced types are defined in the [full reference](../newai.md).
 
-> AiAttachment aiAttachmentsSaveImage(aiAttachmentsSaveImage\_request)
+> AiSuccessResponse aiWebSearchPassthroughContents(request\_body)
 
-`POST /api/2.0/ai/attachments/save-image`
+`POST /api/2.0/ai/websearch/v1/contents`
 
-Save image
+Web page contents proxied to the portal&#39;s active web-search provider
+
+Fetches web page contents on behalf of the document editor&#39;s AI plugin, against the portal&#39;s active web-search provider, the same way as the search passthrough.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **aiAttachmentsSaveImage\_request** | body | [**aiAttachmentsSaveImage_request**](../newai.md#model-aiattachmentssaveimage-request-body) |  | [required] |
+| **request\_body** | body | **Map** |  | [required] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Success. | [**AiAttachment**](../newai.md#model-aiattachment) | - |
+| **200** | Success. | [**AiSuccessResponse**](../newai.md#model-aisuccessresponse) | - |
 | **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
 
 ## Return type
 
-[**AiAttachment**](../newai.md#model-aiattachment)
+[**AiSuccessResponse**](../newai.md#model-aisuccessresponse)
 
 ## Authorization
 

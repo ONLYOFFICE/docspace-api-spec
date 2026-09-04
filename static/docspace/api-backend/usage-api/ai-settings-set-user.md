@@ -8,6 +8,8 @@ Referenced types are defined in the [full reference](../newai.md).
 
 Update user AI settings
 
+Updates the current user&#39;s AI settings.
+
 ## Parameters
 
 |Name | In | Type | Description | Notes |

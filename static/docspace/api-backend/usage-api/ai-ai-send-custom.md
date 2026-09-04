@@ -8,6 +8,8 @@ Referenced types are defined in the [full reference](../newai.md).
 
 Send custom
 
+Runs a free-form one-turn call against a caller-supplied system prompt. No thread, no history and no persistence. The profile is the explicit &#x60;profileId&#x60; when it resolves, otherwise the &#x60;Default&#x60; assignment slot.
+
 ## Parameters
 
 |Name | In | Type | Description | Notes |

@@ -8,11 +8,13 @@ Referenced types are defined in the [full reference](../newai.md).
 
 Get message by id
 
+Returns one chat message by its globally unique identifier.
+
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **messageId** | query | **String** |  | [required] |
+| **messageId** | query | **String** | The globally unique chat message identifier. | [required] |
 
 ## Responses
 

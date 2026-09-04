@@ -8,6 +8,8 @@ Referenced types are defined in the [full reference](../newai.md).
 
 Update agents&#39; quota
 
+Changes the storage quota of the given AI agent rooms.
+
 ## Parameters
 
 |Name | In | Type | Description | Notes |

@@ -46,8 +46,9 @@ This endpoint does not need any parameter.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Boolean value: true if the operation is successful | [**BooleanWrapper**](#model-booleanwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -57,7 +58,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -89,8 +90,9 @@ Creates the backup schedule of the current portal with the parameters specified 
 | **402** | Your pricing plan does not support this option | - | - |
 | **403** | Access denied | - | - |
 | **404** | The required folder was not found | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -100,7 +102,7 @@ Creates the backup schedule of the current portal with the parameters specified 
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -129,8 +131,10 @@ Deletes the backup with the ID specified in the request.
 |------------- | ------------- | ------------- | -------------|
 | **200** | Boolean value: true if the operation is successful | [**BooleanWrapper**](#model-booleanwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | Access denied | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -140,7 +144,7 @@ Deletes the backup with the ID specified in the request.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -169,8 +173,10 @@ Deletes the backup history from the current portal.
 |------------- | ------------- | ------------- | -------------|
 | **200** | Boolean value: true if the operation is successful | [**BooleanWrapper**](#model-booleanwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | Access denied | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -180,7 +186,7 @@ Deletes the backup history from the current portal.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -209,8 +215,10 @@ Deletes the backup schedule of the current portal.
 |------------- | ------------- | ------------- | -------------|
 | **200** | Boolean value: true if the operation is successful | [**BooleanWrapper**](#model-booleanwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | Access denied | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -220,7 +228,7 @@ Deletes the backup schedule of the current portal.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -249,8 +257,10 @@ Returns the history of the started backup.
 |------------- | ------------- | ------------- | -------------|
 | **200** | List of backup history records | [**BackupHistoryRecordArrayWrapper**](#model-backuphistoryrecordarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | Access denied | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -260,7 +270,7 @@ Returns the history of the started backup.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -289,8 +299,10 @@ Returns the progress of the started backup.
 |------------- | ------------- | ------------- | -------------|
 | **200** | Backup progress: completed or not, progress percentage, error, tenant ID, backup progress item (Backup, Restore, Transfer), link | [**BackupProgressWrapper**](#model-backupprogresswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | Access denied | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -300,7 +312,7 @@ Returns the progress of the started backup.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -329,8 +341,10 @@ Returns the backup schedule of the current portal.
 |------------- | ------------- | ------------- | -------------|
 | **200** | Backup schedule | [**ScheduleWrapper**](#model-schedulewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | Access denied | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -340,7 +354,7 @@ Returns the backup schedule of the current portal.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -372,8 +386,9 @@ Returns the number of backups for a period of time. The default is the current c
 | **200** | Number of backups | [**Int32Wrapper**](#model-int32wrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **400** | From date must be less than to date | - | - |
 | **403** | Access denied | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -383,7 +398,7 @@ Returns the number of backups for a period of time. The default is the current c
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -415,8 +430,9 @@ Returns the number of free and paid backups for a period of time. The default is
 | **200** | Number of free and paid backups | [**BackupsCountResultWrapper**](#model-backupscountresultwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **400** | From date must be less than to date | - | - |
 | **403** | Access denied | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -426,7 +442,7 @@ Returns the number of free and paid backups for a period of time. The default is
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -452,8 +468,9 @@ This endpoint does not need any parameter.
 |------------- | ------------- | ------------- | -------------|
 | **200** | Backup service state | [**BackupServiceStateWrapper**](#model-backupservicestatewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | Access denied | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -463,7 +480,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -491,7 +508,9 @@ Returns the progress of the started restoring process.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Backup progress: completed or not, progress percentage, error, tenant ID, backup progress item (Backup, Restore, Transfer), link | [**BackupProgressWrapper**](#model-backupprogresswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -533,8 +552,9 @@ Starts the backup of the current portal with the parameters specified in the req
 | **402** | Your pricing plan does not support this option | - | - |
 | **403** | Access denied | - | - |
 | **404** | The required folder was not found | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -544,7 +564,7 @@ Starts the backup of the current portal with the parameters specified in the req
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -576,8 +596,9 @@ Starts the data restoring process of the current portal with the parameters spec
 | **402** | Your pricing plan does not support this option | - | - |
 | **403** | Access denied | - | - |
 | **404** | The required file or folder was not found | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -587,7 +608,7 @@ Starts the data restoring process of the current portal with the parameters spec
 
 #### Authorization
 
-[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer) (scopes: read, write), [asc_auth_key](#asc_auth_key) (scopes: read, write), [Bearer](#bearer), [OpenId](#openid)
+[Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
 
 #### HTTP request headers
 
@@ -621,10 +642,11 @@ The backup history parameters.
 
 
 ### Model BackupHistoryRecordArrayWrapper
+The successful API response containing the list of BackupHistoryRecord objects.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**List**](#model-backuphistoryrecord) |  | [optional] |
+| **response** | [**List**](#model-backuphistoryrecord) | The list of BackupHistoryRecord objects returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-backuphistoryrecordarraywrapperlinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -674,10 +696,11 @@ Possible values:
 
 
 ### Model BackupProgressWrapper
+The successful API response containing the BackupProgress object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**BackupProgress**](#model-backupprogress) |  | [optional] |
+| **response** | [**BackupProgress**](#model-backupprogress) | The BackupProgress object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-backuphistoryrecordarraywrapperlinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -717,10 +740,11 @@ Backup service state.
 
 
 ### Model BackupServiceStateWrapper
+The successful API response containing the BackupServiceStateDto object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**BackupServiceStateDto**](#model-backupservicestatedto) |  | [optional] |
+| **response** | [**BackupServiceStateDto**](#model-backupservicestatedto) | The BackupServiceStateDto object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-backuphistoryrecordarraywrapperlinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -749,10 +773,11 @@ The number of backups.
 
 
 ### Model BackupsCountResultWrapper
+The successful API response containing the BackupsCountResultDto object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**BackupsCountResultDto**](#model-backupscountresultdto) |  | [optional] |
+| **response** | [**BackupsCountResultDto**](#model-backupscountresultdto) | The BackupsCountResultDto object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-backuphistoryrecordarraywrapperlinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -760,10 +785,11 @@ The number of backups.
 
 
 ### Model BooleanWrapper
+The successful API response containing the boolean value.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | **Boolean** |  | [optional] |
+| **response** | **Boolean** | The boolean value returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-backuphistoryrecordarraywrapperlinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -801,11 +827,33 @@ Possible values:
 - `4` — Failted (`Failted`)
 
 
-### Model Int32Wrapper
+### Model ErrorApiResponse
+The error body returned with every failed request.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | **Integer** |  | [optional] |
+| **status** | **Integer** (int32) | The response status flag. Always 1 on an error, as opposed to 0 on success. | [optional] |
+| **statusCode** | **Integer** (int32) | The HTTP status code of the response, repeated in the body. | [optional] |
+| **error** | [**ErrorApiResponse_error**](#model-errorapiresponseerror) |  | [optional] |
+
+
+### Model ErrorApiResponse.error
+What went wrong.
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+| **message** | **String** | The human-readable error message. | [optional] |
+| **type** | **String** | The .NET type of the underlying exception. Only sent when stack traces are enabled. | [optional] |
+| **stack** | **String** | The stack trace of the underlying exception. Only sent when stack traces are enabled. | [optional] |
+| **hresult** | **Integer** (int32) | The HRESULT of the underlying exception. Only sent when stack traces are enabled. | [optional] |
+
+
+### Model Int32Wrapper
+The successful API response containing the int32 value.
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+| **response** | **Integer** | The int32 value returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-backuphistoryrecordarraywrapperlinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -813,6 +861,7 @@ Possible values:
 
 
 ### Model ItemKeyValuePairObjectObject
+A key-value pair of a list item.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
@@ -834,10 +883,11 @@ The backup schedule parameters.
 
 
 ### Model ScheduleWrapper
+The successful API response containing the ScheduleDto object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**ScheduleDto**](#model-scheduledto) |  | [optional] |
+| **response** | [**ScheduleDto**](#model-scheduledto) | The ScheduleDto object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-backuphistoryrecordarraywrapperlinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |

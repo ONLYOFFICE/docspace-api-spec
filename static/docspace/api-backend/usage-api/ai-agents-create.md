@@ -8,6 +8,8 @@ Referenced types are defined in the [full reference](../newai.md).
 
 Create an agent
 
+Creates an AI agent room in the .NET AI service and binds the supplied &#x60;profileId&#x60; to it as a &#x60;Chat&#x60; assignment. The instruction is stored on the room as a prompt-only chat setting; a failed binding is reported as an error even though the room already exists.
+
 ## Parameters
 
 |Name | In | Type | Description | Notes |

@@ -8,6 +8,8 @@ Referenced types are defined in the [full reference](../newai.md).
 
 Get vectorization settings
 
+Returns the portal&#39;s vectorization settings.
+
 ## Parameters
 This endpoint does not need any parameter.
 

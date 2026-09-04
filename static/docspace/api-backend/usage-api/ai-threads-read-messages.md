@@ -2,19 +2,22 @@
 
 Referenced types are defined in the [full reference](../newai.md).
 
-> List aiThreadsReadMessages(threadId, count, cursor)
+> List aiThreadsReadMessages(threadId, count, cursor, direction)
 
 `GET /api/2.0/ai/threads/read-messages`
 
 Read messages
 
+Reads the messages of a thread, with the same cursor pagination as the thread list.
+
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **threadId** | query | **String** |  | [required] |
-| **count** | query | **String** |  | [required] |
-| **cursor** | query | **String** |  | [required] |
+| **threadId** | query | **String** | The chat thread identifier. | [required] |
+| **count** | query | **String** | The maximum number of items to return in one page. | [optional] |
+| **cursor** | query | **String** | The keyset pagination cursor: the JSON-encoded sort key of the last item already received. Omit for the first page. | [optional] |
+| **direction** | query | **String** | The order the message page is read in. Only desc turns the read around and pages back from the newest message; omit for the forward read. | [optional] |
 
 ## Responses
 

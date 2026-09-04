@@ -8,6 +8,8 @@ Referenced types are defined in the [full reference](../newai.md).
 
 Delete
 
+Permanently deletes one attachment, whether it is still a draft or already linked to a message.
+
 ## Parameters
 
 |Name | In | Type | Description | Notes |

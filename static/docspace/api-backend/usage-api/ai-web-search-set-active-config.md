@@ -8,6 +8,8 @@ Referenced types are defined in the [full reference](../newai.md).
 
 Set active config
 
+Stores a web-search configuration without contacting the provider first, for forms that validate locally.
+
 ## Parameters
 
 |Name | In | Type | Description | Notes |

@@ -8,6 +8,8 @@ Referenced types are defined in the [full reference](../newai.md).
 
 Append user message
 
+Persists a user message in a thread and bumps the thread&#39;s last-edit date so it resurfaces in the sidebar. Optionally rebinds the thread to another profile when the model changed mid-conversation.
+
 ## Parameters
 
 |Name | In | Type | Description | Notes |

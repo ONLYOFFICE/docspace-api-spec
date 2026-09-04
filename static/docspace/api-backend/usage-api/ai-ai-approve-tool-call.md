@@ -8,6 +8,8 @@ Referenced types are defined in the [full reference](../newai.md).
 
 Approve tool call
 
+Resumes a chat round paused on a tool call. The supplied result is persisted onto the assistant message that issued the call and the stream continues with the augmented history.
+
 ## Parameters
 
 |Name | In | Type | Description | Notes |

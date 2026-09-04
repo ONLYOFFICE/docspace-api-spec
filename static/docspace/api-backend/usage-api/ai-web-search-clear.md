@@ -8,6 +8,8 @@ Referenced types are defined in the [full reference](../newai.md).
 
 Clear
 
+Removes the web-search configuration of the scope. Does nothing when web search was not configured there.
+
 ## Parameters
 
 |Name | In | Type | Description | Notes |

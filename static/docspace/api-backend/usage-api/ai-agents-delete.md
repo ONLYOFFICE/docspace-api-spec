@@ -8,11 +8,13 @@ Referenced types are defined in the [full reference](../newai.md).
 
 Delete an agent
 
+Deletes an AI agent room.
+
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **String** |  | [required] |
+| **id** | path | **String** | The agent identifier. | [required] |
 | **aiAgentsDelete\_request** | body | [**aiAgentsDelete_request**](../newai.md#model-aiagentsdelete-request-body) |  | [required] |
 
 ## Responses

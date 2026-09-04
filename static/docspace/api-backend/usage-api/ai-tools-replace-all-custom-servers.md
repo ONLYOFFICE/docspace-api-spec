@@ -8,6 +8,8 @@ Referenced types are defined in the [full reference](../newai.md).
 
 Replace all custom servers
 
+Replaces the whole custom MCP server registry of the scope with the supplied map.
+
 ## Parameters
 
 |Name | In | Type | Description | Notes |

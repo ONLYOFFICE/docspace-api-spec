@@ -22,7 +22,8 @@ Sends SMS with an authentication code.
 |------------- | ------------- | ------------- | -------------|
 | **200** | Authentication data | [**AuthenticationTokenWrapper**](../api.md#model-authenticationtokenwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **400** | userName, password or passworHash is empty | - | - |
-| **429** | Too many login attempts. Please try again later | - | `Retry-After` |
+| **429** | Too many login attempts. Please try again later | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 

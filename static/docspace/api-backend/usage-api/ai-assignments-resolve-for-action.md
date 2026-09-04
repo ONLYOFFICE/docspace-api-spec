@@ -8,12 +8,14 @@ Referenced types are defined in the [full reference](../newai.md).
 
 Resolve for action
 
+Resolves the profile bound to an AI action, falling back to the &#x60;Default&#x60; slot when the action itself has none. Fails when neither slot is set or the bound profile no longer exists - use &#x60;try-resolve-for-action&#x60; for an empty answer instead.
+
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **actionType** | query | **String** |  | [required] |
-| **entityId** | query | **String** |  | [required] |
+| **actionType** | query | **String** | The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision. | [required] |
+| **entityId** | query | **String** | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | [optional] |
 
 ## Responses
 

@@ -8,6 +8,8 @@ Referenced types are defined in the [full reference](../newai.md).
 
 Send with stream open ai
 
+The same chat round as &#x60;send-with-stream&#x60;, re-encoded as an OpenAI Chat Completions stream of &#x60;chat.completion.chunk&#x60; objects. Storage, title generation and tool-call pauses are identical - only the wire shape differs; a tool call ends the stream with &#x60;finish_reason: tool_calls&#x60;.
+
 ## Parameters
 
 |Name | In | Type | Description | Notes |

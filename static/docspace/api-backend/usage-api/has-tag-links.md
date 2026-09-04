@@ -14,7 +14,7 @@ Checks if a specific custom tag has linked items.
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **tagName2** | path | **String** |  | [required] |
+| **tagName2** | path | **String** | The tag being checked. Send the same value as the &#x60;tagName&#x60; query parameter, which is the one the handler reads. | [required] |
 | **tagName** | query | **String** | Represents the name of a tag | [optional] [example: tag1] |
 
 ## Responses
@@ -23,8 +23,10 @@ Checks if a specific custom tag has linked items.
 |------------- | ------------- | ------------- | -------------|
 | **200** | True if tag has links, false otherwise | [**BooleanWrapper**](../files.md#model-booleanwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **404** | Tag not found | - | - |
-| **401** | Unauthorized | - | - |
-| **429** | Too Many Requests. | - | `Retry-After` |
+| **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
+| **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 
@@ -34,7 +36,7 @@ Checks if a specific custom tag has linked items.
 
 ## Authorization
 
-[Basic](../files.md#basic), [OAuth2](../files.md#oauth2) (scopes: read, write), [ApiKeyBearer](../files.md#apikeybearer) (scopes: read, write), [asc_auth_key](../files.md#asc_auth_key) (scopes: read, write), [Bearer](../files.md#bearer), [OpenId](../files.md#openid)
+[Basic](../files.md#basic), [OAuth2](../files.md#oauth2) (scopes: read, write), [ApiKeyBearer](../files.md#apikeybearer), [asc_auth_key](../files.md#asc_auth_key), [Bearer](../files.md#bearer), [OpenId](../files.md#openid)
 
 ## HTTP request headers
 

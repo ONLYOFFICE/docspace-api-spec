@@ -8,6 +8,8 @@ Referenced types are defined in the [full reference](../newai.md).
 
 Deny tool call
 
+Denies the pending tool call and resumes the chat immediately, with &#x60;User deny tool call&#x60; standing in for the tool result.
+
 ## Parameters
 
 |Name | In | Type | Description | Notes |

@@ -8,6 +8,8 @@ Referenced types are defined in the [full reference](../newai.md).
 
 Set allow always
 
+Adds a tool to the always-allow list, or removes it - the tools on that list run without an approval dialog.
+
 ## Parameters
 
 |Name | In | Type | Description | Notes |

@@ -8,6 +8,8 @@ Referenced types are defined in the [full reference](../newai.md).
 
 Delete message
 
+Deletes one chat message, leaving the rest of the thread untouched.
+
 ## Parameters
 
 |Name | In | Type | Description | Notes |

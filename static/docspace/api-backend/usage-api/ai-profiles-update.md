@@ -8,6 +8,8 @@ Referenced types are defined in the [full reference](../newai.md).
 
 Update
 
+Updates an AI provider profile, re-checking name uniqueness and the provider credentials.
+
 ## Parameters
 
 |Name | In | Type | Description | Notes |

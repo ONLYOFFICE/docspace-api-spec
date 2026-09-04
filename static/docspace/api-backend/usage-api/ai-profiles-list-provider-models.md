@@ -8,6 +8,8 @@ Referenced types are defined in the [full reference](../newai.md).
 
 List provider models
 
+Lists the models a provider offers for the supplied endpoint and key, before any profile is created from them.
+
 ## Parameters
 
 |Name | In | Type | Description | Notes |

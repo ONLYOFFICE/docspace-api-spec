@@ -179,8 +179,8 @@ One document per service, each carrying every endpoint of that service and the m
 - [Get user access rights by file ID](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-shared-users.md): GET /api/2.0/files/file/{fileId}/sharedusers
 - [Remove the sharing rights](https://api.onlyoffice.com/docspace/api-backend/usage-api/remove-security-info.md): DELETE /api/2.0/files/share
 - [Send the mention message](https://api.onlyoffice.com/docspace/api-backend/usage-api/send-editor-notify.md): POST /api/2.0/files/file/{fileId}/sendeditornotify
-- [Share a file](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-file-security-info.md): PUT /api/2.0/files/file/{fileId}/share
-- [Share a folder](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-folder-security-info.md): PUT /api/2.0/files/folder/{folderId}/share
+- [Share a file](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-file-security-info.md): PUT /api/2.0/files/file/{id}/share
+- [Share a folder](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-folder-security-info.md): PUT /api/2.0/files/folder/{id}/share
 - [Set the sharing rights](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-security-info.md): PUT /api/2.0/files/share
 - [Remove a third-party account](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-third-party.md): DELETE /api/2.0/files/thirdparty/{providerId}
 - [Get all providers](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-all-providers.md): GET /api/2.0/files/thirdparty/providers
@@ -190,11 +190,6 @@ One document per service, each carrying every endpoint of that service and the m
 - [Get the third-party accounts](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-third-party-accounts.md): GET /api/2.0/files/thirdparty
 - [Save a third-party account](https://api.onlyoffice.com/docspace/api-backend/usage-api/save-third-party.md): POST /api/2.0/files/thirdparty
 - [Save a third-party account backup](https://api.onlyoffice.com/docspace/api-backend/usage-api/save-third-party-backup.md): POST /api/2.0/files/thirdparty/backup
-- [Deletes an encryption key and removes it from the system.](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-keys.md): DELETE /api/2.0/privacyroom/keys/{id}
-- [Retrieves encryption keys associated with the current user.](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-user-keys.md): GET /api/2.0/privacyroom/keys
-- [Retrieves the encryption keys associated with a specific privacy room.](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-user-keys-for-room.md): GET /api/2.0/privacyroom/{roomId}/access
-- [Replaces an existing encryption key with a new one for the user.](https://api.onlyoffice.com/docspace/api-backend/usage-api/replace-key.md): PUT /api/2.0/privacyroom/keys
-- [Creates and sets encryption keys for the user.](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-keys.md): POST /api/2.0/privacyroom/keys
 - [Add the room tags](https://api.onlyoffice.com/docspace/api-backend/usage-api/add-room-tags.md): PUT /api/2.0/files/rooms/{id}/tags
 - [Archive a room](https://api.onlyoffice.com/docspace/api-backend/usage-api/archive-room.md): PUT /api/2.0/files/rooms/{id}/archive
 - [Change the room cover](https://api.onlyoffice.com/docspace/api-backend/usage-api/change-room-cover.md): POST /api/2.0/files/rooms/{id}/cover
@@ -243,6 +238,11 @@ One document per service, each carrying every endpoint of that service and the m
 - [Get room group info](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-group-info.md): GET /api/2.0/files/group/{id}
 - [List room groups](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-groups.md): GET /api/2.0/files/group
 - [Update room group](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-room-group.md): PUT /api/2.0/files/group/{id}
+- [Deletes an encryption key and removes it from the system.](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-keys.md): DELETE /api/2.0/privacyroom/keys/{id}
+- [Retrieves encryption keys associated with the current user.](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-user-keys.md): GET /api/2.0/privacyroom/keys
+- [Retrieves the encryption keys associated with a specific privacy room.](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-user-keys-for-room.md): GET /api/2.0/privacyroom/{roomId}/access
+- [Replaces an existing encryption key with a new one for the user.](https://api.onlyoffice.com/docspace/api-backend/usage-api/replace-key.md): PUT /api/2.0/privacyroom/keys
+- [Creates and sets encryption keys for the user.](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-keys.md): POST /api/2.0/privacyroom/keys
 - [Approve tool call](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-ai-approve-tool-call.md): POST /api/2.0/ai/ai/approve-tool-call
 - [Deny tool call](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-ai-deny-tool-call.md): POST /api/2.0/ai/ai/deny-tool-call
 - [Regenerate stream](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-ai-regenerate-stream.md): POST /api/2.0/ai/ai/regenerate-stream
@@ -273,9 +273,11 @@ One document per service, each carrying every endpoint of that service and the m
 - [Link to message](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-attachments-link-to-message.md): POST /api/2.0/ai/attachments/link-to-message
 - [Save file](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-attachments-save-file.md): POST /api/2.0/ai/attachments/save-file
 - [Save files many](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-attachments-save-files-many.md): POST /api/2.0/ai/attachments/save-files-many
-- [Save image](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-attachments-save-image.md): POST /api/2.0/ai/attachments/save-image
-- [Save images many](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-attachments-save-images-many.md): POST /api/2.0/ai/attachments/save-images-many
+- [Execute a DocSpace tool on behalf of the editor AI plugin](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-editor-tools-call.md): POST /api/2.0/ai/editor-tools/call
+- [Sanitized DocSpace tool catalog for the editor AI plugin](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-editor-tools-list.md): GET /api/2.0/ai/editor-tools/list
 - [Start markdown → docx export](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-export-text-to-docx.md): POST /api/2.0/ai/text-to-docx
+- [OpenAI-compatible chat completions proxied to the profile&#39;s provider](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-openai-chat-completions.md): POST /api/2.0/ai/openai/{profileId}/v1/chat/completions
+- [OpenAI-compatible image generation proxied to the profile&#39;s provider](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-openai-images-generations.md): POST /api/2.0/ai/openai/{profileId}/v1/images/generations
 - [Clear deep mode](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-preferences-clear-deep-mode.md): DELETE /api/2.0/ai/preferences/clear-deep-mode
 - [Get deep mode](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-preferences-get-deep-mode.md): GET /api/2.0/ai/preferences/get-deep-mode
 - [Is deep mode set](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-preferences-is-deep-mode-set.md): GET /api/2.0/ai/preferences/is-deep-mode-set
@@ -338,6 +340,8 @@ One document per service, each carrying every endpoint of that service and the m
 - [Configure](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-web-search-configure.md): PUT /api/2.0/ai/web-search/configure
 - [Get active config](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-web-search-get-active-config.md): GET /api/2.0/ai/web-search/get-active-config
 - [Is configured](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-web-search-is-configured.md): GET /api/2.0/ai/web-search/is-configured
+- [Web page contents proxied to the portal&#39;s active web-search provider](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-web-search-passthrough-contents.md): POST /api/2.0/ai/websearch/v1/contents
+- [Web search proxied to the portal&#39;s active web-search provider](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-web-search-passthrough-search.md): POST /api/2.0/ai/websearch/v1/search
 - [Set active config](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-web-search-set-active-config.md): PUT /api/2.0/ai/web-search/set-active-config
 - [Test connection](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-web-search-test-connection.md): POST /api/2.0/ai/web-search/test-connection
 - [OAuth2 Authorization Endpoint](https://api.onlyoffice.com/docspace/api-backend/usage-api/authorize-o-auth.md): GET /oauth2/authorize
@@ -582,7 +586,6 @@ One document per service, each carrying every endpoint of that service and the m
 - [Get cookies lifetime](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-cookie-settings.md): GET /api/2.0/settings/cookiesettings
 - [Update cookies lifetime](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-cookie-settings.md): PUT /api/2.0/settings/cookiesettings
 - [Calculate the DocsCloud subscription switch cost](https://api.onlyoffice.com/docspace/api-backend/usage-api/calculate-dev-pack.md): POST /api/2.0/settings/docscloud/calculatedevpack
-- [Check the DocsCloud server health](https://api.onlyoffice.com/docspace/api-backend/usage-api/check-health.md): GET /api/2.0/settings/docscloud/healthcheck
 - [Start the DocsCloud tenant quota report generation](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-tenant-quota-report.md): POST /api/2.0/settings/docscloud/tenant/quota/report
 - [Get the DocsCloud tenant](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tenant.md): GET /api/2.0/settings/docscloud/tenant
 - [Get the DocsCloud tenant configuration](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tenant-config.md): GET /api/2.0/settings/docscloud/tenant/config

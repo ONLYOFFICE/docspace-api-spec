@@ -8,6 +8,8 @@ Referenced types are defined in the [full reference](../newai.md).
 
 Create folder
 
+Creates a prompt folder. The name must be non-empty and unique across the portal - prompt folders do not nest.
+
 ## Parameters
 
 |Name | In | Type | Description | Notes |

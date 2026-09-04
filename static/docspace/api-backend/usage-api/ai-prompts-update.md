@@ -8,6 +8,8 @@ Referenced types are defined in the [full reference](../newai.md).
 
 Update
 
+Updates a saved prompt. The name and the folder reference are re-validated whenever either of them changes.
+
 ## Parameters
 
 |Name | In | Type | Description | Notes |

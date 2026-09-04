@@ -8,6 +8,8 @@ Referenced types are defined in the [full reference](../newai.md).
 
 Set deep mode
 
+Persists the deep-mode toggle of the scope. Idempotent - there is no need to check whether a value already exists.
+
 ## Parameters
 
 |Name | In | Type | Description | Notes |

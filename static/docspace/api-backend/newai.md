@@ -39,9 +39,11 @@ All URIs are relative to *https://yourportal.onlyoffice.com*, where the host is 
 | *AIAttachmentsApi* | [**aiAttachmentsLinkToMessage**](#aiattachmentslinktomessage) | **POST** /api/2.0/ai/attachments/link-to-message | Link to message |
 | *AIAttachmentsApi* | [**aiAttachmentsSaveFile**](#aiattachmentssavefile) | **POST** /api/2.0/ai/attachments/save-file | Save file |
 | *AIAttachmentsApi* | [**aiAttachmentsSaveFilesMany**](#aiattachmentssavefilesmany) | **POST** /api/2.0/ai/attachments/save-files-many | Save files many |
-| *AIAttachmentsApi* | [**aiAttachmentsSaveImage**](#aiattachmentssaveimage) | **POST** /api/2.0/ai/attachments/save-image | Save image |
-| *AIAttachmentsApi* | [**aiAttachmentsSaveImagesMany**](#aiattachmentssaveimagesmany) | **POST** /api/2.0/ai/attachments/save-images-many | Save images many |
+| *AIEditorToolsApi* | [**aiEditorToolsCall**](#aieditortoolscall) | **POST** /api/2.0/ai/editor-tools/call | Execute a DocSpace tool on behalf of the editor AI plugin |
+| *AIEditorToolsApi* | [**aiEditorToolsList**](#aieditortoolslist) | **GET** /api/2.0/ai/editor-tools/list | Sanitized DocSpace tool catalog for the editor AI plugin |
 | *AIExportApi* | [**aiExportTextToDocx**](#aiexporttexttodocx) | **POST** /api/2.0/ai/text-to-docx | Start markdown → docx export |
+| *AIOpenAIPassthroughApi* | [**aiOpenaiChatCompletions**](#aiopenaichatcompletions) | **POST** /api/2.0/ai/openai/{profileId}/v1/chat/completions | OpenAI-compatible chat completions proxied to the profile's provider |
+| *AIOpenAIPassthroughApi* | [**aiOpenaiImagesGenerations**](#aiopenaiimagesgenerations) | **POST** /api/2.0/ai/openai/{profileId}/v1/images/generations | OpenAI-compatible image generation proxied to the profile's provider |
 | *AIPreferencesApi* | [**aiPreferencesClearDeepMode**](#aipreferencescleardeepmode) | **DELETE** /api/2.0/ai/preferences/clear-deep-mode | Clear deep mode |
 | *AIPreferencesApi* | [**aiPreferencesGetDeepMode**](#aipreferencesgetdeepmode) | **GET** /api/2.0/ai/preferences/get-deep-mode | Get deep mode |
 | *AIPreferencesApi* | [**aiPreferencesIsDeepModeSet**](#aipreferencesisdeepmodeset) | **GET** /api/2.0/ai/preferences/is-deep-mode-set | Is deep mode set |
@@ -104,6 +106,8 @@ All URIs are relative to *https://yourportal.onlyoffice.com*, where the host is 
 | *AIWebSearchApi* | [**aiWebSearchConfigure**](#aiwebsearchconfigure) | **PUT** /api/2.0/ai/web-search/configure | Configure |
 | *AIWebSearchApi* | [**aiWebSearchGetActiveConfig**](#aiwebsearchgetactiveconfig) | **GET** /api/2.0/ai/web-search/get-active-config | Get active config |
 | *AIWebSearchApi* | [**aiWebSearchIsConfigured**](#aiwebsearchisconfigured) | **GET** /api/2.0/ai/web-search/is-configured | Is configured |
+| *AIWebSearchApi* | [**aiWebSearchPassthroughContents**](#aiwebsearchpassthroughcontents) | **POST** /api/2.0/ai/websearch/v1/contents | Web page contents proxied to the portal's active web-search provider |
+| *AIWebSearchApi* | [**aiWebSearchPassthroughSearch**](#aiwebsearchpassthroughsearch) | **POST** /api/2.0/ai/websearch/v1/search | Web search proxied to the portal's active web-search provider |
 | *AIWebSearchApi* | [**aiWebSearchSetActiveConfig**](#aiwebsearchsetactiveconfig) | **PUT** /api/2.0/ai/web-search/set-active-config | Set active config |
 | *AIWebSearchApi* | [**aiWebSearchTestConnection**](#aiwebsearchtestconnection) | **POST** /api/2.0/ai/web-search/test-connection | Test connection |
 
@@ -118,6 +122,8 @@ All URIs are relative to *https://yourportal.onlyoffice.com*, where the host is 
 `POST /api/2.0/ai/ai/approve-tool-call`
 
 Approve tool call
+
+Resumes a chat round paused on a tool call. The supplied result is persisted onto the assistant message that issued the call and the stream continues with the augmented history.
 
 #### Parameters
 
@@ -153,6 +159,8 @@ No authorization required
 
 Deny tool call
 
+Denies the pending tool call and resumes the chat immediately, with &#x60;User deny tool call&#x60; standing in for the tool result.
+
 #### Parameters
 
 |Name | In | Type | Description | Notes |
@@ -186,6 +194,8 @@ No authorization required
 `POST /api/2.0/ai/ai/regenerate-stream`
 
 Regenerate stream
+
+Re-rolls the last assistant reply in an existing thread: every message after the last user message (the previous reply plus any tool-call hops) is dropped and a fresh reply is streamed against the unchanged prompt. The thread must already exist and no title is generated.
 
 #### Parameters
 
@@ -221,6 +231,8 @@ No authorization required
 
 Send
 
+Runs one AI action: the profile bound to &#x60;actionType&#x60; (falling back to the &#x60;Default&#x60; slot) is dispatched against a single-message history. Nothing is persisted - no thread, no title generation, no storage writes.
+
 #### Parameters
 
 |Name | In | Type | Description | Notes |
@@ -254,6 +266,8 @@ No authorization required
 `POST /api/2.0/ai/ai/send-custom`
 
 Send custom
+
+Runs a free-form one-turn call against a caller-supplied system prompt. No thread, no history and no persistence. The profile is the explicit &#x60;profileId&#x60; when it resolves, otherwise the &#x60;Default&#x60; assignment slot.
 
 #### Parameters
 
@@ -289,6 +303,8 @@ No authorization required
 
 Send with stream
 
+Starts a chat round and streams it back as newline-delimited &#x60;ChatEvent&#x60; objects. The thread is opened or created, the user message and the reply are persisted, a new thread gets a generated title, and a tool call pauses the round until it is approved or denied.
+
 #### Parameters
 
 |Name | In | Type | Description | Notes |
@@ -322,6 +338,8 @@ No authorization required
 `POST /api/2.0/ai/ai/send-with-stream-openai`
 
 Send with stream open ai
+
+The same chat round as &#x60;send-with-stream&#x60;, re-encoded as an OpenAI Chat Completions stream of &#x60;chat.completion.chunk&#x60; objects. Storage, title generation and tool-call pauses are identical - only the wire shape differs; a tool call ends the stream with &#x60;finish_reason: tool_calls&#x60;.
 
 #### Parameters
 
@@ -359,6 +377,8 @@ No authorization required
 
 Create an agent
 
+Creates an AI agent room in the .NET AI service and binds the supplied &#x60;profileId&#x60; to it as a &#x60;Chat&#x60; assignment. The instruction is stored on the room as a prompt-only chat setting; a failed binding is reported as an error even though the room already exists.
+
 #### Parameters
 
 |Name | In | Type | Description | Notes |
@@ -393,11 +413,13 @@ No authorization required
 
 Delete an agent
 
+Deletes an AI agent room.
+
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **String** |  | [required] |
+| **id** | path | **String** | The agent identifier. | [required] |
 | **aiAgentsDelete\_request** | body | [**aiAgentsDelete_request**](#model-aiagentsdelete-request-body) |  | [required] |
 
 #### Responses
@@ -428,11 +450,13 @@ No authorization required
 
 Get an agent
 
+Returns one AI agent room, enriched with the &#x60;profileId&#x60; bound to it so an edit form can prefill the profile selector. A missing assignment simply leaves &#x60;profileId&#x60; out.
+
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **String** |  | [required] |
+| **id** | path | **String** | The agent identifier. | [required] |
 
 #### Responses
 
@@ -461,6 +485,8 @@ No authorization required
 `GET /api/2.0/ai/agents`
 
 List agents
+
+Lists the portal&#39;s AI agent rooms. Query parameters are forwarded unchanged to the .NET AI service, which answers with its folder-content payload.
 
 #### Parameters
 This endpoint does not need any parameter.
@@ -493,6 +519,8 @@ No authorization required
 
 List agent news items
 
+Lists the new items across the caller&#39;s AI agent rooms.
+
 #### Parameters
 This endpoint does not need any parameter.
 
@@ -523,6 +551,8 @@ No authorization required
 `PUT /api/2.0/ai/agents/resetquota`
 
 Reset agents&#39; quota
+
+Resets the storage quota of the given AI agent rooms.
 
 #### Parameters
 
@@ -558,11 +588,13 @@ No authorization required
 
 Update an agent
 
+Updates an AI agent room - title, tags, instruction. &#x60;profileId&#x60; is not part of the room contract: it is stripped from the forwarded body and re-bound as the agent&#39;s assignment afterwards.
+
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **String** |  | [required] |
+| **id** | path | **String** | The agent identifier. | [required] |
 | **aiAgentsUpdate\_request** | body | [**aiAgentsUpdate_request**](#model-aiagentsupdate-request-body) |  | [required] |
 
 #### Responses
@@ -592,6 +624,8 @@ No authorization required
 `PUT /api/2.0/ai/agents/agentquota`
 
 Update agents&#39; quota
+
+Changes the storage quota of the given AI agent rooms.
 
 #### Parameters
 
@@ -629,6 +663,8 @@ No authorization required
 
 Assign
 
+Binds a profile to an AI action, creating the assignment or updating it in place. The profile&#39;s declared capabilities are validated against the action, except for the &#x60;Default&#x60; slot.
+
 #### Parameters
 
 |Name | In | Type | Description | Notes |
@@ -662,6 +698,8 @@ No authorization required
 `PUT /api/2.0/ai/assignments/bulk-assign`
 
 Bulk assign
+
+Applies many action-to-profile bindings at once. Every entry is validated first and nothing is written if any of them fails, so the assignment set is never left half-written.
 
 #### Parameters
 
@@ -697,6 +735,8 @@ No authorization required
 
 Cascade profile delete
 
+Cleans up the assignments pointing at a profile that is about to be deleted: the &#x60;Default&#x60; slot is promoted to the first remaining profile (or dropped when none is left), and every other slot holding that profile is unbound.
+
 #### Parameters
 
 |Name | In | Type | Description | Notes |
@@ -731,11 +771,13 @@ No authorization required
 
 Get all assignments
 
+Returns the full action-to-profile assignment map of the scope.
+
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **entityId** | query | **String** |  | [required] |
+| **entityId** | query | **String** | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | [optional] |
 
 #### Responses
 
@@ -765,11 +807,13 @@ No authorization required
 
 Get assignment
 
+Returns the profile bound to one AI action, without the &#x60;Default&#x60; fallback.
+
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **actionType** | query | **String** |  | [required] |
+| **actionType** | query | **String** | The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision. | [required] |
 
 #### Responses
 
@@ -799,12 +843,14 @@ No authorization required
 
 Resolve for action
 
+Resolves the profile bound to an AI action, falling back to the &#x60;Default&#x60; slot when the action itself has none. Fails when neither slot is set or the bound profile no longer exists - use &#x60;try-resolve-for-action&#x60; for an empty answer instead.
+
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **actionType** | query | **String** |  | [required] |
-| **entityId** | query | **String** |  | [required] |
+| **actionType** | query | **String** | The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision. | [required] |
+| **entityId** | query | **String** | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | [optional] |
 
 #### Responses
 
@@ -834,12 +880,14 @@ No authorization required
 
 Try resolve for action
 
+Resolves the profile bound to an AI action exactly like &#x60;resolve-for-action&#x60;, but answers with an empty result instead of failing when nothing is configured.
+
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **actionType** | query | **String** |  | [required] |
-| **entityId** | query | **String** |  | [required] |
+| **actionType** | query | **String** | The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision. | [required] |
+| **entityId** | query | **String** | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | [optional] |
 
 #### Responses
 
@@ -868,6 +916,8 @@ No authorization required
 `DELETE /api/2.0/ai/assignments/unassign`
 
 Unassign
+
+Removes the profile binding of an AI action. Does nothing when that slot is already empty.
 
 #### Parameters
 
@@ -905,6 +955,8 @@ No authorization required
 
 Delete
 
+Permanently deletes one attachment, whether it is still a draft or already linked to a message.
+
 #### Parameters
 
 |Name | In | Type | Description | Notes |
@@ -938,6 +990,8 @@ No authorization required
 `DELETE /api/2.0/ai/attachments/delete-many`
 
 Delete many
+
+Permanently deletes a batch of attachments in a single round trip.
 
 #### Parameters
 
@@ -973,6 +1027,8 @@ No authorization required
 
 Get
 
+Returns one attachment by identifier.
+
 #### Parameters
 
 |Name | In | Type | Description | Notes |
@@ -1006,6 +1062,8 @@ No authorization required
 `POST /api/2.0/ai/attachments/get-many`
 
 Get many
+
+Returns a batch of attachments, preserving the requested order; an identifier that no longer exists comes back empty.
 
 #### Parameters
 
@@ -1041,6 +1099,8 @@ No authorization required
 
 Link to message
 
+Binds draft attachments to the chat message that owns them, once that message has been persisted, so deleting the message removes them too. Identifiers that no longer exist are skipped.
+
 #### Parameters
 
 |Name | In | Type | Description | Notes |
@@ -1074,6 +1134,8 @@ No authorization required
 `POST /api/2.0/ai/attachments/save-file`
 
 Save file
+
+Stores one file attachment as a draft, carrying the host-extracted text of the file. Prefer &#x60;save-files-many&#x60; when adding several files at once so they land as one round trip.
 
 #### Parameters
 
@@ -1109,6 +1171,8 @@ No authorization required
 
 Save files many
 
+Stores a batch of file attachments as drafts in a single round trip. The returned records keep the order of the input.
+
 #### Parameters
 
 |Name | In | Type | Description | Notes |
@@ -1135,30 +1199,34 @@ No authorization required
 - **Content-Type**: application/json
 - **Accept**: application/json
 
-### aiAttachmentsSaveImage
+## AIEditorToolsApi
 
-> AiAttachment aiAttachmentsSaveImage(aiAttachmentsSaveImage\_request)
+### aiEditorToolsCall
 
-`POST /api/2.0/ai/attachments/save-image`
+> AiSuccessResponse aiEditorToolsCall(request\_body)
 
-Save image
+`POST /api/2.0/ai/editor-tools/call`
+
+Execute a DocSpace tool on behalf of the editor AI plugin
+
+Executes one DocSpace tool on behalf of the document editor&#39;s AI plugin, server-side and with the caller&#39;s forwarded credentials. Whatever the tool produced is returned for the plugin to relay to the model; a failure comes back as an error payload.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **aiAttachmentsSaveImage\_request** | body | [**aiAttachmentsSaveImage_request**](#model-aiattachmentssaveimage-request-body) |  | [required] |
+| **request\_body** | body | **Map** |  | [required] |
 
 #### Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Success. | [**AiAttachment**](#model-aiattachment) | - |
+| **200** | Success. | [**AiSuccessResponse**](#model-aisuccessresponse) | - |
 | **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
 #### Return type
 
-[**AiAttachment**](#model-aiattachment)
+[**AiSuccessResponse**](#model-aisuccessresponse)
 
 #### Authorization
 
@@ -1169,30 +1237,29 @@ No authorization required
 - **Content-Type**: application/json
 - **Accept**: application/json
 
-### aiAttachmentsSaveImagesMany
+### aiEditorToolsList
 
-> List aiAttachmentsSaveImagesMany(aiAttachmentsSaveImagesMany\_request)
+> AiSuccessResponse aiEditorToolsList()
 
-`POST /api/2.0/ai/attachments/save-images-many`
+`GET /api/2.0/ai/editor-tools/list`
 
-Save images many
+Sanitized DocSpace tool catalog for the editor AI plugin
+
+Returns the sanitized catalog of DocSpace tools available to the document editor&#39;s AI plugin - the same composed tool set the DocSpace chat sees, minus the web-search pair the editor already has through its own passthrough. Only the name, description, parameters and approval flag of each tool are exposed; transport details never reach the browser.
 
 #### Parameters
-
-|Name | In | Type | Description | Notes |
-|------------- | ------------- | ------------- | ------------- | -------------|
-| **aiAttachmentsSaveImagesMany\_request** | body | [**aiAttachmentsSaveImagesMany_request**](#model-aiattachmentssaveimagesmany-request-body) |  | [required] |
+This endpoint does not need any parameter.
 
 #### Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Success. | [**List**](#model-aiattachment) | - |
+| **200** | Success. | [**AiSuccessResponse**](#model-aisuccessresponse) | - |
 | **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
 #### Return type
 
-[**List**](#model-aiattachment)
+[**AiSuccessResponse**](#model-aisuccessresponse)
 
 #### Authorization
 
@@ -1200,7 +1267,7 @@ No authorization required
 
 #### HTTP request headers
 
-- **Content-Type**: application/json
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 ## AIExportApi
@@ -1212,6 +1279,8 @@ No authorization required
 `POST /api/2.0/ai/text-to-docx`
 
 Start markdown → docx export
+
+Starts an asynchronous markdown-to-docx export. The response only acknowledges the task: the AI Worker converts the content and saves the .docx into the target folder (an agent room resolves to its result-storage subfolder), and completion reaches the client as the usual folder-modified socket event.
 
 #### Parameters
 
@@ -1239,6 +1308,82 @@ No authorization required
 - **Content-Type**: application/json
 - **Accept**: application/json
 
+## AIOpenAIPassthroughApi
+
+### aiOpenaiChatCompletions
+
+> AiSuccessResponse aiOpenaiChatCompletions(profileId, request\_body)
+
+`POST /api/2.0/ai/openai/{profileId}/v1/chat/completions`
+
+OpenAI-compatible chat completions proxied to the profile&#39;s provider
+
+OpenAI-compatible chat completions for the document editor&#39;s AI plugin. The profile is resolved server-side, its credentials are attached, and the body is forwarded to the provider verbatim - the payload is owned by the plugin&#39;s SDK on one end and the provider on the other. A client disconnect cancels the provider call.
+
+#### Parameters
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **profileId** | path | **String** | The AI provider profile identifier. | [required] |
+| **request\_body** | body | **Map** |  | [required] |
+
+#### Responses
+
+| Status code | Description | Type | Response headers |
+|------------- | ------------- | ------------- | -------------|
+| **200** | Success. | [**AiSuccessResponse**](#model-aisuccessresponse) | - |
+| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+
+#### Return type
+
+[**AiSuccessResponse**](#model-aisuccessresponse)
+
+#### Authorization
+
+No authorization required
+
+#### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+### aiOpenaiImagesGenerations
+
+> AiSuccessResponse aiOpenaiImagesGenerations(profileId, request\_body)
+
+`POST /api/2.0/ai/openai/{profileId}/v1/images/generations`
+
+OpenAI-compatible image generation proxied to the profile&#39;s provider
+
+OpenAI-compatible image generation for the document editor&#39;s AI plugin. As with the chat-completions passthrough, the profile&#39;s credentials are attached server-side and the body reaches the provider unchanged.
+
+#### Parameters
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **profileId** | path | **String** | The AI provider profile identifier. | [required] |
+| **request\_body** | body | **Map** |  | [required] |
+
+#### Responses
+
+| Status code | Description | Type | Response headers |
+|------------- | ------------- | ------------- | -------------|
+| **200** | Success. | [**AiSuccessResponse**](#model-aisuccessresponse) | - |
+| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+
+#### Return type
+
+[**AiSuccessResponse**](#model-aisuccessresponse)
+
+#### Authorization
+
+No authorization required
+
+#### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
 ## AIPreferencesApi
 
 ### aiPreferencesClearDeepMode
@@ -1248,6 +1393,8 @@ No authorization required
 `DELETE /api/2.0/ai/preferences/clear-deep-mode`
 
 Clear deep mode
+
+Drops the persisted deep-mode toggle of the scope, so later reads fall back to the configured default.
 
 #### Parameters
 
@@ -1283,11 +1430,13 @@ No authorization required
 
 Get deep mode
 
+Returns the deep-mode toggle of the scope, falling back to the configured default when nothing has been persisted.
+
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **entityId** | query | **String** |  | [required] |
+| **entityId** | query | **String** | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | [optional] |
 
 #### Responses
 
@@ -1317,11 +1466,13 @@ No authorization required
 
 Is deep mode set
 
+Tells whether the scope has an explicitly persisted deep-mode value, whichever way that value is set.
+
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **entityId** | query | **String** |  | [required] |
+| **entityId** | query | **String** | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | [optional] |
 
 #### Responses
 
@@ -1350,6 +1501,8 @@ No authorization required
 `PUT /api/2.0/ai/preferences/set-deep-mode`
 
 Set deep mode
+
+Persists the deep-mode toggle of the scope. Idempotent - there is no need to check whether a value already exists.
 
 #### Parameters
 
@@ -1387,6 +1540,8 @@ No authorization required
 
 Create
 
+Creates an AI provider profile. The name must be unique and the credentials are validated against the provider before the profile is stored; the portal&#39;s first profile also takes the &#x60;Default&#x60; assignment slot.
+
 #### Parameters
 
 |Name | In | Type | Description | Notes |
@@ -1421,6 +1576,8 @@ No authorization required
 
 Delete
 
+Deletes an AI provider profile and cleans up the assignments pointing at it - the &#x60;Default&#x60; slot moves to the first remaining profile, the other slots are unbound.
+
 #### Parameters
 
 |Name | In | Type | Description | Notes |
@@ -1449,28 +1606,30 @@ No authorization required
 
 ### aiProfilesGetById
 
-> AiProfile aiProfilesGetById(id)
+> aiProfilesGetById_200_response aiProfilesGetById(id)
 
 `GET /api/2.0/ai/profiles/get-by-id`
 
 Get by id
 
+Returns one AI provider profile, or an empty result when the identifier is unknown.
+
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | query | **String** |  | [required] |
+| **id** | query | **String** | The AI provider profile identifier. | [required] |
 
 #### Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Success. | [**AiProfile**](#model-aiprofile) | - |
+| **200** | Success. | [**aiProfilesGetById_200_response**](#model-aiprofilesgetbyid-200-response) | - |
 | **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
 #### Return type
 
-[**AiProfile**](#model-aiprofile)
+[**aiProfilesGetById_200_response**](#model-aiprofilesgetbyid-200-response)
 
 #### Authorization
 
@@ -1488,6 +1647,8 @@ No authorization required
 `GET /api/2.0/ai/profiles/list`
 
 List
+
+Lists the portal&#39;s AI provider profiles.
 
 #### Parameters
 This endpoint does not need any parameter.
@@ -1520,11 +1681,13 @@ No authorization required
 
 List models
 
+Lists the models the given profile&#39;s provider offers, as reported by the provider itself.
+
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **profileId** | query | **String** |  | [required] |
+| **profileId** | query | **String** | The AI provider profile identifier. | [required] |
 
 #### Responses
 
@@ -1553,6 +1716,8 @@ No authorization required
 `POST /api/2.0/ai/profiles/list-provider-models`
 
 List provider models
+
+Lists the models a provider offers for the supplied endpoint and key, before any profile is created from them.
 
 #### Parameters
 
@@ -1588,6 +1753,8 @@ No authorization required
 
 Test connection
 
+Checks a stored profile&#39;s credentials against its provider and reports the provider&#39;s own error when the call fails. Nothing is written.
+
 #### Parameters
 
 |Name | In | Type | Description | Notes |
@@ -1621,6 +1788,8 @@ No authorization required
 `PUT /api/2.0/ai/profiles/update`
 
 Update
+
+Updates an AI provider profile, re-checking name uniqueness and the provider credentials.
 
 #### Parameters
 
@@ -1658,6 +1827,8 @@ No authorization required
 
 Create
 
+Saves a new prompt. The name must be non-empty and unique inside its folder, and &#x60;folderId&#x60; must point at an existing folder - omit it for the root.
+
 #### Parameters
 
 |Name | In | Type | Description | Notes |
@@ -1691,6 +1862,8 @@ No authorization required
 `POST /api/2.0/ai/prompts/create-folder`
 
 Create folder
+
+Creates a prompt folder. The name must be non-empty and unique across the portal - prompt folders do not nest.
 
 #### Parameters
 
@@ -1726,6 +1899,8 @@ No authorization required
 
 Delete
 
+Deletes a saved prompt. Does nothing when it no longer exists.
+
 #### Parameters
 
 |Name | In | Type | Description | Notes |
@@ -1759,6 +1934,8 @@ No authorization required
 `DELETE /api/2.0/ai/prompts/delete-folder`
 
 Delete folder
+
+Deletes a prompt folder together with the prompts inside it.
 
 #### Parameters
 
@@ -1794,6 +1971,8 @@ No authorization required
 
 Export
 
+Builds a self-contained, versioned bundle of every saved prompt and folder, ready for &#x60;import-bundle&#x60;.
+
 #### Parameters
 This endpoint does not need any parameter.
 
@@ -1825,11 +2004,13 @@ No authorization required
 
 Get by id
 
+Returns one saved prompt, or an empty result when the identifier is unknown.
+
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | query | **String** |  | [required] |
+| **id** | query | **String** | The saved prompt identifier. | [required] |
 
 #### Responses
 
@@ -1859,11 +2040,13 @@ No authorization required
 
 Get folder by id
 
+Returns one prompt folder, or an empty result when the identifier is unknown.
+
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | query | **String** |  | [required] |
+| **id** | query | **String** | The prompt folder identifier. | [required] |
 
 #### Responses
 
@@ -1892,6 +2075,8 @@ No authorization required
 `POST /api/2.0/ai/prompts/import-bundle`
 
 Import bundle
+
+Restores a prompt bundle. &#x60;replace&#x60; wipes the current prompts and folders before writing the bundle, &#x60;merge&#x60; writes the bundle on top of what is already there; both validate the folder references inside the bundle before any write, so a corrupt bundle is rejected whole.
 
 #### Parameters
 
@@ -1927,11 +2112,13 @@ No authorization required
 
 List
 
+Lists saved prompts. Scope the answer to one folder, ask for the root-level prompts only, or omit the folder to get every prompt newest first.
+
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **folderId** | query | **String** |  | [required] |
+| **folderId** | query | **String** | The prompt folder identifier. Omit to list the prompts that sit outside any folder. | [optional] |
 
 #### Responses
 
@@ -1960,6 +2147,8 @@ No authorization required
 `GET /api/2.0/ai/prompts/list-folders`
 
 List folders
+
+Lists the prompt folders, newest first.
 
 #### Parameters
 This endpoint does not need any parameter.
@@ -1991,6 +2180,8 @@ No authorization required
 `PUT /api/2.0/ai/prompts/move`
 
 Move
+
+Moves a saved prompt into another folder, or to the root. The name is re-validated in the target folder, so the move fails when a prompt of that name is already there.
 
 #### Parameters
 
@@ -2026,6 +2217,8 @@ No authorization required
 
 Rename folder
 
+Renames a prompt folder, validating the new name against the existing folders.
+
 #### Parameters
 
 |Name | In | Type | Description | Notes |
@@ -2059,6 +2252,8 @@ No authorization required
 `PUT /api/2.0/ai/prompts/update`
 
 Update
+
+Updates a saved prompt. The name and the folder reference are re-validated whenever either of them changes.
 
 #### Parameters
 
@@ -2096,6 +2291,8 @@ No authorization required
 
 Get AI settings
 
+Reports the portal&#39;s combined AI configuration and readiness.
+
 #### Parameters
 This endpoint does not need any parameter.
 
@@ -2126,6 +2323,8 @@ No authorization required
 `GET /api/2.0/ai/config/user`
 
 Get user AI settings
+
+Returns the current user&#39;s AI settings.
 
 #### Parameters
 This endpoint does not need any parameter.
@@ -2158,6 +2357,8 @@ No authorization required
 
 Get vectorization settings
 
+Returns the portal&#39;s vectorization settings.
+
 #### Parameters
 This endpoint does not need any parameter.
 
@@ -2188,6 +2389,8 @@ No authorization required
 `PUT /api/2.0/ai/config/user`
 
 Update user AI settings
+
+Updates the current user&#39;s AI settings.
 
 #### Parameters
 
@@ -2222,6 +2425,8 @@ No authorization required
 `PUT /api/2.0/ai/config/vectorization`
 
 Update vectorization settings
+
+Updates the portal&#39;s vectorization settings.
 
 #### Parameters
 
@@ -2259,6 +2464,8 @@ No authorization required
 
 Append user message
 
+Persists a user message in a thread and bumps the thread&#39;s last-edit date so it resurfaces in the sidebar. Optionally rebinds the thread to another profile when the model changed mid-conversation.
+
 #### Parameters
 
 |Name | In | Type | Description | Notes |
@@ -2292,6 +2499,8 @@ No authorization required
 `DELETE /api/2.0/ai/threads/clear-messages`
 
 Clear messages
+
+Drops every message of a thread while keeping the thread itself, and bumps its last-edit date.
 
 #### Parameters
 
@@ -2327,6 +2536,8 @@ No authorization required
 
 Create
 
+Creates a chat thread with a caller-supplied title. Use &#x60;open-or-create&#x60; instead when the title should be generated from the first user message.
+
 #### Parameters
 
 |Name | In | Type | Description | Notes |
@@ -2360,6 +2571,8 @@ No authorization required
 `DELETE /api/2.0/ai/threads/delete`
 
 Delete
+
+Deletes a chat thread together with its messages.
 
 #### Parameters
 
@@ -2395,6 +2608,8 @@ No authorization required
 
 Delete message
 
+Deletes one chat message, leaving the rest of the thread untouched.
+
 #### Parameters
 
 |Name | In | Type | Description | Notes |
@@ -2429,11 +2644,13 @@ No authorization required
 
 Get by id
 
+Returns one chat thread, or an empty result when the identifier is unknown.
+
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **threadId** | query | **String** |  | [required] |
+| **threadId** | query | **String** | The chat thread identifier. | [required] |
 
 #### Responses
 
@@ -2463,11 +2680,13 @@ No authorization required
 
 Get message by id
 
+Returns one chat message by its globally unique identifier.
+
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **messageId** | query | **String** |  | [required] |
+| **messageId** | query | **String** | The globally unique chat message identifier. | [required] |
 
 #### Responses
 
@@ -2497,14 +2716,16 @@ No authorization required
 
 List
 
+Lists the chat threads of the scope, most recently edited first. Supports cursor pagination and a server-side case-insensitive title search.
+
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **entityId** | query | **String** |  | [required] |
-| **count** | query | **String** |  | [required] |
-| **cursor** | query | **String** |  | [required] |
-| **query** | query | **String** |  | [required] |
+| **entityId** | query | **String** | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | [optional] |
+| **count** | query | **String** | The maximum number of items to return in one page. | [optional] |
+| **cursor** | query | **String** | The keyset pagination cursor: the JSON-encoded sort key of the last item already received. Omit for the first page. | [optional] |
+| **query** | query | **String** | The full-text query the thread list is filtered by. | [optional] |
 
 #### Responses
 
@@ -2528,17 +2749,19 @@ No authorization required
 
 ### aiThreadsOpenOrCreate
 
-> AiOpenOrCreateResult aiThreadsOpenOrCreate(AiOpenOrCreateInput)
+> AiOpenOrCreateResult aiThreadsOpenOrCreate(aiThreadsOpenOrCreate\_request)
 
 `POST /api/2.0/ai/threads/open-or-create`
 
 Open or create
 
+Opens a chat thread and returns its history, or creates one with a title generated from the supplied first message. That first message is not persisted - the caller decides whether to follow up with &#x60;append-user-message&#x60;.
+
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **AiOpenOrCreateInput** | body | [**AiOpenOrCreateInput**](#model-aiopenorcreateinput) |  | [required] |
+| **aiThreadsOpenOrCreate\_request** | body | [**aiThreadsOpenOrCreate_request**](#model-aithreadsopenorcreate-request-body) |  | [required] |
 
 #### Responses
 
@@ -2562,19 +2785,22 @@ No authorization required
 
 ### aiThreadsReadMessages
 
-> List aiThreadsReadMessages(threadId, count, cursor)
+> List aiThreadsReadMessages(threadId, count, cursor, direction)
 
 `GET /api/2.0/ai/threads/read-messages`
 
 Read messages
 
+Reads the messages of a thread, with the same cursor pagination as the thread list.
+
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **threadId** | query | **String** |  | [required] |
-| **count** | query | **String** |  | [required] |
-| **cursor** | query | **String** |  | [required] |
+| **threadId** | query | **String** | The chat thread identifier. | [required] |
+| **count** | query | **String** | The maximum number of items to return in one page. | [optional] |
+| **cursor** | query | **String** | The keyset pagination cursor: the JSON-encoded sort key of the last item already received. Omit for the first page. | [optional] |
+| **direction** | query | **String** | The order the message page is read in. Only desc turns the read around and pages back from the newest message; omit for the forward read. | [optional] |
 
 #### Responses
 
@@ -2603,6 +2829,8 @@ No authorization required
 `POST /api/2.0/ai/threads/regenerate-title`
 
 Regenerate title
+
+Generates a fresh title from the thread&#39;s first user message and persists it. Fails when the thread has no user message yet.
 
 #### Parameters
 
@@ -2638,6 +2866,8 @@ No authorization required
 
 Rename
 
+Renames a chat thread and bumps its last-edit date so the new title shows up in the sidebar.
+
 #### Parameters
 
 |Name | In | Type | Description | Notes |
@@ -2672,6 +2902,8 @@ No authorization required
 
 Touch
 
+Bumps a thread&#39;s last-edit date, and optionally rebinds it to another profile, when something other than a new message - a model switch, say - should resurface it.
+
 #### Parameters
 
 |Name | In | Type | Description | Notes |
@@ -2705,6 +2937,8 @@ No authorization required
 `PUT /api/2.0/ai/threads/update-message`
 
 Update message
+
+Replaces the content of a chat message - used by the edit and regenerate flows that change a message outside the streaming lifecycle.
 
 #### Parameters
 
@@ -2742,6 +2976,8 @@ No authorization required
 
 Add custom server
 
+Registers a custom MCP server in the scope under the given name.
+
 #### Parameters
 
 |Name | In | Type | Description | Notes |
@@ -2776,11 +3012,13 @@ No authorization required
 
 Get allow always
 
+Lists the tools on the always-allow list of the scope.
+
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **entityId** | query | **String** |  | [required] |
+| **entityId** | query | **String** | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | [optional] |
 
 #### Responses
 
@@ -2810,12 +3048,14 @@ No authorization required
 
 Get custom server
 
+Returns the configuration of one custom MCP server, or an empty result when it is not registered.
+
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **name** | query | **String** |  | [required] |
-| **entityId** | query | **String** |  | [required] |
+| **name** | query | **String** | The custom MCP server name. | [required] |
+| **entityId** | query | **String** | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | [optional] |
 
 #### Responses
 
@@ -2845,11 +3085,13 @@ No authorization required
 
 Get disabled
 
+Returns the switched-off tools of the scope, grouped by server type.
+
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **entityId** | query | **String** |  | [required] |
+| **entityId** | query | **String** | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | [optional] |
 
 #### Responses
 
@@ -2879,13 +3121,15 @@ No authorization required
 
 Is allow always
 
+Tells whether one tool is on the always-allow list.
+
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **serverType** | query | **String** |  | [required] |
-| **toolName** | query | **String** |  | [required] |
-| **entityId** | query | **String** |  | [required] |
+| **serverType** | query | **String** | The MCP server type the tool belongs to. | [required] |
+| **toolName** | query | **String** | The tool name. | [required] |
+| **entityId** | query | **String** | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | [optional] |
 
 #### Responses
 
@@ -2915,13 +3159,15 @@ No authorization required
 
 Is tool disabled
 
+Tells whether one tool of a server type is switched off.
+
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **serverType** | query | **String** |  | [required] |
-| **toolName** | query | **String** |  | [required] |
-| **entityId** | query | **String** |  | [required] |
+| **serverType** | query | **String** | The MCP server type the tool belongs to. | [required] |
+| **toolName** | query | **String** | The tool name. | [required] |
+| **entityId** | query | **String** | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | [optional] |
 
 #### Responses
 
@@ -2951,11 +3197,13 @@ No authorization required
 
 List custom servers
 
+Lists the custom MCP servers registered in the scope, keyed by name.
+
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **entityId** | query | **String** |  | [required] |
+| **entityId** | query | **String** | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | [optional] |
 
 #### Responses
 
@@ -2985,11 +3233,13 @@ No authorization required
 
 List system tools
 
+Lists the tools of the host-configured system MCP servers, grouped by server type. The servers are connected and listed server-side, so the client renders its permission cards from one request and never opens an MCP connection of its own.
+
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **entityId** | query | **String** |  | [required] |
+| **entityId** | query | **String** | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | [optional] |
 
 #### Responses
 
@@ -3018,6 +3268,8 @@ No authorization required
 `DELETE /api/2.0/ai/tools/remove-custom-server`
 
 Remove custom server
+
+Removes a custom MCP server from the registry.
 
 #### Parameters
 
@@ -3053,6 +3305,8 @@ No authorization required
 
 Replace all custom servers
 
+Replaces the whole custom MCP server registry of the scope with the supplied map.
+
 #### Parameters
 
 |Name | In | Type | Description | Notes |
@@ -3086,6 +3340,8 @@ No authorization required
 `PUT /api/2.0/ai/tools/set-allow-always`
 
 Set allow always
+
+Adds a tool to the always-allow list, or removes it - the tools on that list run without an approval dialog.
 
 #### Parameters
 
@@ -3121,6 +3377,8 @@ No authorization required
 
 Set disabled
 
+Marks the listed tools of one server type as switched off, so the model is no longer offered them.
+
 #### Parameters
 
 |Name | In | Type | Description | Notes |
@@ -3154,6 +3412,8 @@ No authorization required
 `PUT /api/2.0/ai/tools/update-custom-server`
 
 Update custom server
+
+Updates the configuration of a registered custom MCP server.
 
 #### Parameters
 
@@ -3191,6 +3451,8 @@ No authorization required
 
 Start a vectorization task
 
+Starts a vectorization task over the supplied portal files. The indexing itself runs asynchronously on the .NET side.
+
 #### Parameters
 
 |Name | In | Type | Description | Notes |
@@ -3227,6 +3489,8 @@ No authorization required
 
 Clear
 
+Removes the web-search configuration of the scope. Does nothing when web search was not configured there.
+
 #### Parameters
 
 |Name | In | Type | Description | Notes |
@@ -3260,6 +3524,8 @@ No authorization required
 `PUT /api/2.0/ai/web-search/configure`
 
 Configure
+
+Validates a web-search configuration against the live provider and stores it only when the provider answers, replacing the previous one in a single write.
 
 #### Parameters
 
@@ -3295,11 +3561,13 @@ No authorization required
 
 Get active config
 
+Returns the web-search configuration active in the scope, or an empty result when web search is not configured.
+
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **entityId** | query | **String** |  | [required] |
+| **entityId** | query | **String** | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | [optional] |
 
 #### Responses
 
@@ -3329,11 +3597,13 @@ No authorization required
 
 Is configured
 
+Tells whether web search is configured in the scope.
+
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **entityId** | query | **String** |  | [required] |
+| **entityId** | query | **String** | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | [optional] |
 
 #### Responses
 
@@ -3355,6 +3625,78 @@ No authorization required
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
+### aiWebSearchPassthroughContents
+
+> AiSuccessResponse aiWebSearchPassthroughContents(request\_body)
+
+`POST /api/2.0/ai/websearch/v1/contents`
+
+Web page contents proxied to the portal&#39;s active web-search provider
+
+Fetches web page contents on behalf of the document editor&#39;s AI plugin, against the portal&#39;s active web-search provider, the same way as the search passthrough.
+
+#### Parameters
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **request\_body** | body | **Map** |  | [required] |
+
+#### Responses
+
+| Status code | Description | Type | Response headers |
+|------------- | ------------- | ------------- | -------------|
+| **200** | Success. | [**AiSuccessResponse**](#model-aisuccessresponse) | - |
+| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+
+#### Return type
+
+[**AiSuccessResponse**](#model-aisuccessresponse)
+
+#### Authorization
+
+No authorization required
+
+#### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+### aiWebSearchPassthroughSearch
+
+> AiSuccessResponse aiWebSearchPassthroughSearch(request\_body)
+
+`POST /api/2.0/ai/websearch/v1/search`
+
+Web search proxied to the portal&#39;s active web-search provider
+
+Runs a web search on behalf of the document editor&#39;s AI plugin. The plugin only holds a placeholder configuration; the portal&#39;s active provider and its key are resolved here and never reach the browser.
+
+#### Parameters
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **request\_body** | body | **Map** |  | [required] |
+
+#### Responses
+
+| Status code | Description | Type | Response headers |
+|------------- | ------------- | ------------- | -------------|
+| **200** | Success. | [**AiSuccessResponse**](#model-aisuccessresponse) | - |
+| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+
+#### Return type
+
+[**AiSuccessResponse**](#model-aisuccessresponse)
+
+#### Authorization
+
+No authorization required
+
+#### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
 ### aiWebSearchSetActiveConfig
 
 > AiSuccessResponse aiWebSearchSetActiveConfig(aiWebSearchConfigure\_request)
@@ -3362,6 +3704,8 @@ No authorization required
 `PUT /api/2.0/ai/web-search/set-active-config`
 
 Set active config
+
+Stores a web-search configuration without contacting the provider first, for forms that validate locally.
 
 #### Parameters
 
@@ -3397,6 +3741,8 @@ No authorization required
 
 Test connection
 
+Checks a web-search configuration against the live provider without storing it - for a Test button that must not commit on success.
+
 #### Parameters
 
 |Name | In | Type | Description | Notes |
@@ -3428,6 +3774,7 @@ No authorization required
 
 
 ### Model AiActionType
+The AI action a request or an assignment applies to. Each action has its own assignment slot; &#x60;Default&#x60; is the profile used when an action&#39;s own slot is empty.
 
 Possible values:
 
@@ -3447,11 +3794,12 @@ The agent new item&#39;s information.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **agent** | [**AiFileEntryBaseDto**](#model-aifileentrybasedto) | The file entry information. | [required] |
+| **agent** | [**AiFileEntryBaseDto**](#model-aifileentrybasedto) | The agent file entry. | [required] |
 | **items** | [**List**](#model-aifileentrybasedto) | The list of file entry items. | [required] [nullable] |
 
 
 ### Model AiAiActionArgs
+Wire-serializable subset of the engine&#39;s &#x60;ActionArgs&#x60; — drops the engine-injected &#x60;signal&#x60;/&#x60;fetch&#x60;; &#x60;profile&#x60;/&#x60;messages&#x60; are owned by the engine and never sent by the caller.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
@@ -3470,12 +3818,13 @@ Override the action&#39;s baked-in system prompt (replace or append).
 
 
 ### Model AiAiSendStreamBody
+Shared body of the two streaming send endpoints (&#x60;sendWithStream&#x60; and its OpenAI-framed twin) — the &#x60;Chat&#x60; action is implied, so there is no &#x60;actionType&#x60;.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **threadId** | **String** | Target thread; a new one is created (with an auto title) when omitted. | [optional] |
 | **userMessage** | [**AiThreadMessageLike**](#model-aithreadmessagelike) | The user turn to send. | [required] |
-| **actionArgs** | [**AiAiActionArgs**](#model-aiaiactionargs) |  | [optional] |
+| **actionArgs** | [**AiAiActionArgs**](#model-aiaiactionargs) | Per-request engine options: extra tools, reasoning, prompt override. | [optional] |
 | **entityId** | **String** | Optional entity (room) scope for profile resolution. | [optional] |
 | **profileId** | **String** | Session-level profile override for this request only. | [optional] |
 
@@ -3494,10 +3843,11 @@ The AI module settings.
 
 
 ### Model AiAiSettingsWrapper
+The successful API response containing the AiSettingsDto object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**AiAiSettingsDto**](#model-aiaisettingsdto) |  | [optional] |
+| **response** | [**AiAiSettingsDto**](#model-aiaisettingsdto) | The AiSettingsDto object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-aiaiusersettingswrapperlinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -3505,6 +3855,7 @@ The AI module settings.
 
 
 ### Model AiAiToolCallData
+Identifies a pending tool call to resume — mirrors the library &#x60;ToolCallData&#x60; (its serializable fields).
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
@@ -3512,9 +3863,9 @@ The AI module settings.
 | **messageId** | **String** | Storage id of the assistant message holding the tool call. | [required] |
 | **idx** | **BigDecimal** | Index of the tool-call content part inside &#x60;message.content&#x60;. | [required] |
 | **message** | [**AiThreadMessageLike**](#model-aithreadmessagelike) | Snapshot of the assistant message at the time the tool call surfaced. | [required] |
-| **actionArgs** | [**AiAiActionArgs**](#model-aiaiactionargs) |  | [optional] |
-| **entityId** | **String** |  | [optional] |
-| **profileId** | **String** |  | [optional] |
+| **actionArgs** | [**AiAiActionArgs**](#model-aiaiactionargs) | Per-request engine options: extra tools, reasoning, prompt override. | [optional] |
+| **entityId** | **String** | Optional entity (room) scope for profile resolution. | [optional] |
+| **profileId** | **String** | Session-level profile override for this request only. | [optional] |
 
 
 ### Model AiAiUserSettingsDto
@@ -3526,10 +3877,11 @@ The per-user AI settings.
 
 
 ### Model AiAiUserSettingsWrapper
+The successful API response containing the AiUserSettingsDto object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**AiAiUserSettingsDto**](#model-aiaiusersettingsdto) |  | [optional] |
+| **response** | [**AiAiUserSettingsDto**](#model-aiaiusersettingsdto) | The AiUserSettingsDto object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-aiaiusersettingswrapperlinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -3554,12 +3906,12 @@ The API date and time parameters.
 
 
 ### Model AiAssignmentMutationResult
-Outcome of  {@link  AssignmentsEngine.assign }  /  {@link  AssignmentsEngine.unassign } . Either a success or a field-scoped error suitable for displaying in the profile editor.
+Outcome of &#x60;AssignmentsEngine.assign&#x60; / &#x60;AssignmentsEngine.unassign&#x60;. Either a success or a field-scoped error suitable for displaying in the profile editor.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **success** | **Boolean** |  | [required] |
-| **error** | [**AiTErrorData**](#model-aiterrordata) |  | [optional] |
+| **success** | **Boolean** | True when the assignment was persisted. | [required] |
+| **error** | [**AiTErrorData**](#model-aiterrordata) | Why the assignment was rejected. Present on failure. | [optional] |
 
 
 ### Model AiAttachment
@@ -3616,12 +3968,12 @@ Possible values:
 
 
 ### Model AiBulkAssignmentResult
-Outcome of  {@link  AssignmentsEngine.bulkAssign } . Either every entry persisted, or no entries persisted and a per-key error report. The engine validates first and writes second so a single bad entry never leaves the assignment table in a half-written state.
+Outcome of &#x60;AssignmentsEngine.bulkAssign&#x60;. Either every entry persisted, or no entries persisted and a per-key error report. The engine validates first and writes second so a single bad entry never leaves the assignment table in a half-written state.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **success** | **Boolean** |  | [required] |
-| **errors** | [**List**](#model-aibulkassignmentresulterrors-item) |  | [optional] |
+| **success** | **Boolean** | True when every entry was persisted. | [required] |
+| **errors** | [**List**](#model-aibulkassignmentresulterrors-item) | What was rejected, per action. Present on failure - and then no entry was persisted. | [optional] |
 
 
 ### Model AiBulkAssignmentResult.errors item
@@ -3633,19 +3985,19 @@ Outcome of  {@link  AssignmentsEngine.bulkAssign } . Either every entry persiste
 
 
 ### Model AiChatEvent
-Discriminated event emitted by the streaming methods of  {@link  AIEngine } . The engine never invokes user-supplied middleware or callbacks directly — every observable side-effect is encoded as a  {@link  ChatEvent }  so the same stream can be replayed over SSE, WebSocket, or in-process.  Pause point: &#x60;tool-call-pending&#x60; is the only stop. The UI must execute the tool itself (consulting &#x60;autoAllow&#x60; to decide between the silent path and the approve dialog) and resume via  {@link  AIEngine.approveToolCall }  or  {@link  AIEngine.denyToolCall } .  Other variants are pure data:  - &#x60;message-start&#x60; / &#x60;message-delta&#x60; / &#x60;message-end&#x60; — assistant   reply lifecycle. - &#x60;message-incomplete&#x60; — the provider returned an error or   incomplete status. - &#x60;thread-title&#x60; — auto-generated title ready for a new thread.
+Discriminated event emitted by the streaming methods of &#x60;AIEngine&#x60;. The engine never invokes user-supplied middleware or callbacks directly — every observable side-effect is encoded as a &#x60;ChatEvent&#x60; so the same stream can be replayed over SSE, WebSocket, or in-process.  Pause point: &#x60;tool-call-pending&#x60; is the only stop. The UI must execute the tool itself (consulting &#x60;autoAllow&#x60; to decide between the silent path and the approve dialog) and resume via &#x60;AIEngine.approveToolCall&#x60; or &#x60;AIEngine.denyToolCall&#x60;.  Other variants are pure data:  - &#x60;message-start&#x60; / &#x60;message-delta&#x60; / &#x60;message-end&#x60; — assistant reply lifecycle. - &#x60;message-incomplete&#x60; — the provider returned an error or incomplete status. - &#x60;thread-title&#x60; — auto-generated title ready for a new thread.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **type** | **String** | Emitted once per &#x60;sendWithStream&#x60; call, immediately after the user message has been persisted by storage and before the assistant stream starts. Carries the storage-assigned &#x60;id&#x60; and &#x60;createdAt&#x60;. The UI uses it to render the user bubble — no client-side optimistic placeholder is needed, which keeps the runtime tree free of phantom nodes from index-fallback ids. | [required] [enum: user-message-stored, message-start, message-delta, message-end, message-incomplete, tool-call-pending, thread-title] |
-| **message** | [**AiThreadMessageLike**](#model-aithreadmessagelike) |  | [optional] |
-| **messageId** | **String** |  | [optional] |
-| **idx** | **BigDecimal** |  | [optional] |
-| **threadId** | **String** |  | [optional] |
+| **message** | [**AiThreadMessageLike**](#model-aithreadmessagelike) | The message the event is about, in the state it has reached. | [optional] |
+| **messageId** | **String** | The storage identifier of that message. | [optional] |
+| **idx** | **BigDecimal** | The zero-based position of the pending tool call within the message. | [optional] |
+| **threadId** | **String** | The thread the event belongs to. | [optional] |
 | **autoAllow** | **Boolean** | The consumer should execute the tool without prompting the user. True when the tool is in the persisted always-allow list, or the tool itself opts in via &#x60;TMCPItem.requireApproval &#x3D;&#x3D;&#x3D; false&#x60; (host tools default to this). For a client-side tool with a server-side engine, this lets the engine return the pending call already flagged auto-allow so the client runs it and streams the result back without a dialog round-trip. | [optional] |
 | **serverExecuted** | **Boolean** | Set when the tool is served by a server-side system source: the consumer must NOT execute it locally — only show the approval UI (unless &#x60;autoAllow&#x60;) and resume via &#x60;approveToolCall&#x60; (no &#x60;result&#x60; needed) / &#x60;denyToolCall&#x60;. The engine runs it in-engine. | [optional] |
-| **title** | **String** |  | [optional] |
-| **profileId** | **String** |  | [optional] |
+| **title** | **String** | The generated thread title. | [optional] |
+| **profileId** | **String** | The profile that generated the title, when one was used. | [optional] |
 
 
 ### Model AiChatSettingsDto
@@ -3657,23 +4009,23 @@ The chat settings parameters.
 
 
 ### Model AiCreateProfileInput
-Input for creating a new profile — the same shape as  {@link  Profile }  without the engine-generated fields (&#x60;id&#x60;, &#x60;createdAt&#x60;).
+Input for creating a new profile — the same shape as &#x60;Profile&#x60; without the engine-generated fields (&#x60;id&#x60;, &#x60;createdAt&#x60;).
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **name** | **String** | User-defined profile display name. | [required] |
-| **providerType** | [**AiProviderType**](#model-aiprovidertype) | Provider type for this profile. Use &#x60;external&#x60; to delegate all HTTP transport to  {@link  PlatformAdapter.externalFetch  }  while reusing an existing provider&#39;s response parser — see  {@link  Profile.basedOn }  for the format selector. | [required] |
+| **providerType** | [**AiProviderType**](#model-aiprovidertype) | Provider type for this profile. Use &#x60;external&#x60; to delegate all HTTP transport to &#x60;PlatformAdapter.externalFetch&#x60; while reusing an existing provider&#39;s response parser — see &#x60;Profile.basedOn&#x60; for the format selector. | [required] |
 | **basedOn** | [**AiBuiltinProviderType**](#model-aibuiltinprovidertype) | Selects the response-format parser used by the &#x60;external&#x60; provider. Ignored for any other &#x60;providerType&#x60;.  Supported values are &#x60;openai&#x60;, &#x60;anthropic&#x60;, &#x60;mistral&#x60; and &#x60;openrouter&#x60;. Remaining values (&#x60;genai&#x60;, &#x60;stabilityai&#x60;, …) are accepted by the type but not yet implemented; passing one raises an error at request time. | [optional] [enum: anthropic, ollama, openai, openaicompatible, together, openrouter, genai, deepseek, xai, lm-studio, mistral, groq, zhipu, stabilityai, gpt4all, onlyoffice, external] |
 | **baseUrl** | **String** | Base URL of the provider API. | [required] |
 | **key** | **String** | API key or token. Optional for local providers. | [optional] |
-| **headers** | **Map** | Extra HTTP headers sent with every request to this provider. Merged into the SDK client&#39;s default headers; an explicit &#x60;Authorization&#x60; here wins over the one derived from  {@link  key  } . Honoured by the OpenAI-family providers. | [optional] |
+| **headers** | **Map** | Extra HTTP headers sent with every request to this provider. Merged into the SDK client&#39;s default headers; an explicit &#x60;Authorization&#x60; here wins over the one derived from &#x60;key&#x60;. Honoured by the OpenAI-family providers. | [optional] |
 | **modelId** | **String** | Selected model ID within this provider. | [required] |
 | **reasoning** | **Boolean** | Whether extended thinking is enabled for this profile&#39;s model. | [optional] |
 | **capabilities** | **BigDecimal** | Bitmask of capabilities supported by the selected model. | [optional] |
 | **canUseTool** | **Boolean** | Result of the live tool-capability probe performed at create time and on changes to &#x60;modelId&#x60; / &#x60;providerType&#x60; / &#x60;baseUrl&#x60;. &#x60;undefined&#x60; means the probe has never run for this profile (legacy record). | [optional] |
-| **useResponsesApi** | **Boolean** | Result of the live Responses-API probe (parallel to  {@link  canUseTool  } ). &#x60;true&#x60; means the model speaks &#x60;/v1/responses&#x60; and the OpenAI provider must route through &#x60;client.responses.create&#x60; — required for gpt-5+ reasoning models that reject &#x60;reasoning_effort&#x60; together with &#x60;tools&#x60; on &#x60;/v1/chat/completions&#x60;. Probed at create time and whenever &#x60;modelId&#x60; / &#x60;providerType&#x60; / &#x60;baseUrl&#x60; change. &#x60;undefined&#x60; means the probe never ran (legacy record) — readers treat that as &#x60;false&#x60;. | [optional] |
+| **useResponsesApi** | **Boolean** | Result of the live Responses-API probe (parallel to &#x60;canUseTool&#x60;). &#x60;true&#x60; means the model speaks &#x60;/v1/responses&#x60; and the OpenAI provider must route through &#x60;client.responses.create&#x60; — required for gpt-5+ reasoning models that reject &#x60;reasoning_effort&#x60; together with &#x60;tools&#x60; on &#x60;/v1/chat/completions&#x60;. Probed at create time and whenever &#x60;modelId&#x60; / &#x60;providerType&#x60; / &#x60;baseUrl&#x60; change. &#x60;undefined&#x60; means the probe never ran (legacy record) — readers treat that as &#x60;false&#x60;. | [optional] |
 | **isCloudProvider** | **Boolean** | Whether this profile uses a cloud-hosted provider (e.g. ONLYOFFICE DocSpace). | [optional] |
-| **useProxy** | **Boolean** | Route every provider request through the host&#39;s &#x60;fetchProxy&#x60; instead of the global &#x60;fetch&#x60;. Useful when the host runs the widget in a sandbox without direct network access (CORS, custom auth, etc.). Has no effect when the  {@link  PlatformAdapter.fetchProxy  }  is not configured. | [optional] |
+| **useProxy** | **Boolean** | Route every provider request through the host&#39;s &#x60;fetchProxy&#x60; instead of the global &#x60;fetch&#x60;. Useful when the host runs the widget in a sandbox without direct network access (CORS, custom auth, etc.). Has no effect when the &#x60;PlatformAdapter.fetchProxy&#x60; is not configured. | [optional] |
 
 
 ### Model AiCreatePromptInput
@@ -3681,9 +4033,9 @@ Input for creating a prompt — the engine generates &#x60;id&#x60;/&#x60;create
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **name** | **String** |  | [required] |
-| **text** | **String** |  | [required] |
-| **folderId** | **String** |  | [optional] [nullable] |
+| **name** | **String** | The prompt name. | [required] |
+| **text** | **String** | The prompt body. | [required] |
+| **folderId** | **String** | The folder to file the prompt under. Omit or send null to leave it outside any folder. | [optional] [nullable] |
 
 
 ### Model AiDistributedTaskStatus
@@ -3729,7 +4081,7 @@ Error body — a single human-readable message.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **error** | **String** |  | [required] |
+| **error** | **String** | The error message, ready to be shown to the caller. | [required] |
 
 
 ### Model AiFileEntryBaseDto
@@ -3922,10 +4274,11 @@ Possible values:
 
 
 ### Model AiFileOperationWrapper
+The successful API response containing the FileOperationDto object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**AiFileOperationDto**](#model-aifileoperationdto) |  | [optional] |
+| **response** | [**AiFileOperationDto**](#model-aifileoperationdto) | The FileOperationDto object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-aiaiusersettingswrapperlinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -3966,10 +4319,11 @@ The folder content information.
 
 
 ### Model AiFolderContentIntegerWrapper
+The successful API response containing the FolderContentDtoInteger object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**AiFolderContentDtoInteger**](#model-aifoldercontentdtointeger) |  | [optional] |
+| **response** | [**AiFolderContentDtoInteger**](#model-aifoldercontentdtointeger) | The FolderContentDtoInteger object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-aiaiusersettingswrapperlinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -4047,10 +4401,11 @@ The folder parameters.
 
 
 ### Model AiFolderIntegerArrayWrapper
+The successful API response containing the list of FolderDtoInteger objects.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**List**](#model-aifolderdtointeger) |  | [optional] |
+| **response** | [**List**](#model-aifolderdtointeger) | The list of FolderDtoInteger objects returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-aiaiusersettingswrapperlinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -4058,10 +4413,11 @@ The folder parameters.
 
 
 ### Model AiFolderIntegerWrapper
+The successful API response containing the FolderDtoInteger object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**AiFolderDtoInteger**](#model-aifolderdtointeger) |  | [optional] |
+| **response** | [**AiFolderDtoInteger**](#model-aifolderdtointeger) | The FolderDtoInteger object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-aiaiusersettingswrapperlinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -4073,9 +4429,9 @@ Outcome of &#x60;createFolder&#x60; / &#x60;renameFolder&#x60; — either the pe
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **success** | **Boolean** |  | [required] |
-| **folder** | [**AiPromptFolder**](#model-aipromptfolder) |  | [optional] |
-| **error** | [**AiTErrorData**](#model-aiterrordata) |  | [optional] |
+| **success** | **Boolean** | True when the folder was persisted. | [required] |
+| **folder** | [**AiPromptFolder**](#model-aipromptfolder) | The persisted folder. Present on success. | [optional] |
+| **error** | [**AiTErrorData**](#model-aiterrordata) | Why the folder was rejected. Present on failure. | [optional] |
 
 
 ### Model AiFolderType
@@ -4115,17 +4471,17 @@ Possible values:
 
 
 ### Model AiImportError
-Per-entry error reported by  {@link  PromptsEngine.importBundle } .
+Per-entry error reported by &#x60;PromptsEngine.importBundle&#x60;.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **kind** | **String** | &#x60;folder&#x60; or &#x60;prompt&#x60;, plus the offending name or id. | [required] [enum: folder, prompt] |
-| **ref** | **String** |  | [required] |
-| **error** | [**AiTErrorData**](#model-aiterrordata) |  | [required] |
+| **ref** | **String** | The offending entry - its name or its id. | [required] |
+| **error** | [**AiTErrorData**](#model-aiterrordata) | Why the entry was rejected. | [required] |
 
 
 ### Model AiImportMode
-Mode passed to  {@link  PromptsEngine.importBundle } .
+Mode passed to &#x60;PromptsEngine.importBundle&#x60;.
 
 Possible values:
 
@@ -4134,16 +4490,17 @@ Possible values:
 
 
 ### Model AiImportResult
-Outcome of  {@link  PromptsEngine.importBundle } . Either every entry persisted with counts, or no entries persisted plus a per-entry error report.
+Outcome of &#x60;PromptsEngine.importBundle&#x60;. Either every entry persisted with counts, or no entries persisted plus a per-entry error report.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **success** | **Boolean** |  | [required] |
+| **success** | **Boolean** | True when the whole bundle was imported. | [required] |
 | **imported** | [**AiImportResult_imported**](#model-aiimportresultimported) |  | [optional] |
-| **errors** | [**List**](#model-aiimporterror) |  | [optional] |
+| **errors** | [**List**](#model-aiimporterror) | What was rejected, per entry. Present on failure - and then nothing was imported. | [optional] |
 
 
 ### Model AiImportResult.imported
+How many folders and prompts were created. Present on success.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
@@ -4182,14 +4539,15 @@ AI model metadata. Describes a single model available from a provider.
 | **name** | **String** | Human-readable model name for display in the UI. | [required] |
 | **provider** | [**AiProviderType**](#model-aiprovidertype) | Provider that offers this model. | [required] |
 | **reasoning** | **Boolean** | Whether this model supports extended thinking / chain-of-thought reasoning. | [optional] |
-| **capabilities** | **BigDecimal** | Bitmask of model capabilities (Chat, Image, Vision, Tools, etc.). Used to filter models per  {@link  ActionType  } . | [optional] |
+| **capabilities** | **BigDecimal** | Bitmask of model capabilities (Chat, Image, Vision, Tools, etc.). Used to filter models per &#x60;ActionType&#x60;. | [optional] |
 
 
 ### Model AiNewItemsAgentNewItemsArrayWrapper
+The successful API response containing the list of NewItemsDtoAgentNewItemsDto objects.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**List**](#model-ainewitemsdtoagentnewitemsdto) |  | [optional] |
+| **response** | [**List**](#model-ainewitemsdtoagentnewitemsdto) | The list of NewItemsDtoAgentNewItemsDto objects returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-aiaiusersettingswrapperlinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -4206,36 +4564,39 @@ The new item parameters.
 
 
 ### Model AiOpenAIChatCompletionChunk
+One &#x60;chat.completion.chunk&#x60; of an OpenAI-compatible streaming response. Only the fields this service can populate are emitted - an OpenAI client tolerates the rest as absent.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **id** | **String** |  | [required] |
-| **object** | **String** |  | [required] [enum: chat.completion.chunk] |
-| **created** | **BigDecimal** |  | [required] |
-| **model** | **String** |  | [required] |
-| **choices** | [**List**](#model-aiopenaichunkchoice) |  | [required] |
+| **id** | **String** | The completion identifier, stable across every chunk of one response. | [required] |
+| **object** | **String** | Always &#x60;chat.completion.chunk&#x60;. | [required] [enum: chat.completion.chunk] |
+| **created** | **BigDecimal** | When the completion started, in Unix seconds. | [required] |
+| **model** | **String** | The model that produced the completion - the resolved profile&#39;s model. | [required] |
+| **choices** | [**List**](#model-aiopenaichunkchoice) | The choices carried by this chunk. This service emits exactly one. | [required] |
 
 
 ### Model AiOpenAIChoiceDelta
+The incremental part of one choice - what this chunk adds to the assistant message.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **role** | **String** |  | [optional] [enum: assistant] |
-| **content** | **String** |  | [optional] [nullable] |
-| **tool\_calls** | [**List**](#model-aiopenaitoolcalldelta) |  | [optional] |
+| **role** | **String** | Sent on the first chunk only, always &#x60;assistant&#x60;. | [optional] [enum: assistant] |
+| **content** | **String** | The text this chunk appends. Null when the chunk carries no text. | [optional] [nullable] |
+| **tool\_calls** | [**List**](#model-aiopenaitoolcalldelta) | The tool calls the model requested, emitted in place of text. | [optional] |
 
 
 ### Model AiOpenAIChunkChoice
+One choice of a streaming completion, carrying the part this chunk adds.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **index** | **BigDecimal** |  | [required] |
-| **delta** | [**AiOpenAIChoiceDelta**](#model-aiopenaichoicedelta) |  | [required] |
-| **finish\_reason** | [**AiOpenAIFinishReason**](#model-aiopenaifinishreason) |  | [required] [enum: stop, length, tool_calls, content_filter, null] [nullable] |
+| **index** | **BigDecimal** | The zero-based position of the choice. This service emits a single choice, so always 0. | [required] |
+| **delta** | [**AiOpenAIChoiceDelta**](#model-aiopenaichoicedelta) | What this chunk adds to the choice. | [required] |
+| **finish\_reason** | [**AiOpenAIFinishReason**](#model-aiopenaifinishreason) | Why the completion stopped, or null while it is still streaming. | [required] [enum: stop, length, tool_calls, content_filter, null] [nullable] |
 
 
 ### Model AiOpenAIFinishReason
-OpenAI Chat Completions streaming shapes.   {@link  toOpenAIChatCompletionStream }  maps the engine&#39;s transport-agnostic  {@link  ChatEvent }  stream onto these chunks so a host can expose an OpenAI-compatible &#x60;POST /v1/chat/completions&#x60; (&#x60;stream: true&#x60;) endpoint backed by the same chat pipeline as the in-app widget. Only the subset of fields the engine can populate is emitted; everything else an OpenAI client tolerates as absent.
+OpenAI Chat Completions streaming shapes.   &#x60;toOpenAIChatCompletionStream&#x60; maps the engine&#39;s transport-agnostic &#x60;ChatEvent&#x60; stream onto these chunks so a host can expose an OpenAI-compatible &#x60;POST /v1/chat/completions&#x60; (&#x60;stream: true&#x60;) endpoint backed by the same chat pipeline as the in-app widget. Only the subset of fields the engine can populate is emitted; everything else an OpenAI client tolerates as absent.
 
 Possible values:
 
@@ -4251,11 +4612,11 @@ A chunk or the terminal error envelope emitted on a failed stream.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **id** | **String** |  | [required] |
-| **object** | **String** |  | [required] [enum: chat.completion.chunk] |
-| **created** | **BigDecimal** |  | [required] |
-| **model** | **String** |  | [required] |
-| **choices** | [**List**](#model-aiopenaichunkchoice) |  | [required] |
+| **id** | **String** | The completion identifier, stable across every chunk of one response. | [required] |
+| **object** | **String** | Always &#x60;chat.completion.chunk&#x60;. | [required] [enum: chat.completion.chunk] |
+| **created** | **BigDecimal** | When the completion started, in Unix seconds. | [required] |
+| **model** | **String** | The model that produced the completion - the resolved profile&#39;s model. | [required] |
+| **choices** | [**List**](#model-aiopenaichunkchoice) | The choices carried by this chunk. This service emits exactly one. | [required] |
 | **error** | [**AiOpenAIStreamError_error**](#model-aiopenaistreamerrorerror) |  | [required] |
 
 
@@ -4268,6 +4629,7 @@ OpenAI streaming error envelope. When the upstream request fails mid-stream the 
 
 
 ### Model AiOpenAIStreamError.error
+The error that ended the stream: its message, type, code and the offending parameter.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
@@ -4278,16 +4640,18 @@ OpenAI streaming error envelope. When the upstream request fails mid-stream the 
 
 
 ### Model AiOpenAIToolCallDelta
+The incremental part of one tool call the model requested.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **index** | **BigDecimal** |  | [required] |
-| **id** | **String** |  | [optional] |
-| **type** | **String** |  | [optional] [enum: function] |
+| **index** | **BigDecimal** | The zero-based position of the tool call within the message. | [required] |
+| **id** | **String** | The tool call identifier, quoted back when its result is submitted. | [optional] |
+| **type** | **String** | Always &#x60;function&#x60; - the only tool kind the API defines. | [optional] [enum: function] |
 | **function** | [**AiOpenAIToolCallDelta_function**](#model-aiopenaitoolcalldeltafunction) |  | [optional] |
 
 
 ### Model AiOpenAIToolCallDelta.function
+The call itself: the function name and its JSON-encoded arguments.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
@@ -4295,26 +4659,14 @@ OpenAI streaming error envelope. When the upstream request fails mid-stream the 
 | **arguments** | **String** |  | [optional] |
 
 
-### Model AiOpenOrCreateInput
-Input for  {@link  ThreadsEngine.openOrCreate } : open an existing thread if &#x60;threadId&#x60; is given, otherwise create a new one with an auto-generated title derived from &#x60;firstMessage&#x60;.
-
-| Name | Type | Description | Notes |
-|------------ | ------------- | ------------- | -------------|
-| **threadId** | **String** |  | [optional] |
-| **profile** | [**AiProfile**](#model-aiprofile) |  | [required] |
-| **profileId** | **String** |  | [required] |
-| **firstMessage** | [**AiThreadMessageLike**](#model-aithreadmessagelike) |  | [required] |
-| **entityId** | **String** | Opaque scope token persisted on a freshly created thread. Ignored when &#x60;threadId&#x60; is provided (the existing thread keeps its scope). | [optional] |
-
-
 ### Model AiOpenOrCreateResult
-Resolved thread state returned by  {@link  ThreadsEngine.openOrCreate } .
+Resolved thread state returned by &#x60;ThreadsEngine.openOrCreate&#x60;.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **threadId** | **String** |  | [required] |
+| **threadId** | **String** | The thread that was opened, or the one just created. | [required] |
 | **title** | **String** | Empty string for existing threads — the engine doesn&#39;t re-fetch. | [required] |
-| **priorMessages** | [**List**](#model-aithreadmessagelike) |  | [required] |
+| **priorMessages** | [**List**](#model-aithreadmessagelike) | The messages already in the thread - empty for a thread that was just created. | [required] |
 
 
 ### Model AiProfile
@@ -4324,18 +4676,18 @@ Complete AI provider + model configuration saved by the user. Profiles are the p
 |------------ | ------------- | ------------- | -------------|
 | **id** | **String** | Unique profile identifier (UUID). | [required] |
 | **name** | **String** | User-defined profile display name. | [required] |
-| **providerType** | [**AiProviderType**](#model-aiprovidertype) | Provider type for this profile. Use &#x60;external&#x60; to delegate all HTTP transport to  {@link  PlatformAdapter.externalFetch  }  while reusing an existing provider&#39;s response parser — see  {@link  Profile.basedOn }  for the format selector. | [required] |
+| **providerType** | [**AiProviderType**](#model-aiprovidertype) | Provider type for this profile. Use &#x60;external&#x60; to delegate all HTTP transport to &#x60;PlatformAdapter.externalFetch&#x60; while reusing an existing provider&#39;s response parser — see &#x60;Profile.basedOn&#x60; for the format selector. | [required] |
 | **basedOn** | [**AiBuiltinProviderType**](#model-aibuiltinprovidertype) | Selects the response-format parser used by the &#x60;external&#x60; provider. Ignored for any other &#x60;providerType&#x60;.  Supported values are &#x60;openai&#x60;, &#x60;anthropic&#x60;, &#x60;mistral&#x60; and &#x60;openrouter&#x60;. Remaining values (&#x60;genai&#x60;, &#x60;stabilityai&#x60;, …) are accepted by the type but not yet implemented; passing one raises an error at request time. | [optional] [enum: anthropic, ollama, openai, openaicompatible, together, openrouter, genai, deepseek, xai, lm-studio, mistral, groq, zhipu, stabilityai, gpt4all, onlyoffice, external] |
 | **baseUrl** | **String** | Base URL of the provider API. | [required] |
 | **key** | **String** | API key or token. Optional for local providers. | [optional] |
-| **headers** | **Map** | Extra HTTP headers sent with every request to this provider. Merged into the SDK client&#39;s default headers; an explicit &#x60;Authorization&#x60; here wins over the one derived from  {@link  key  } . Honoured by the OpenAI-family providers. | [optional] |
+| **headers** | **Map** | Extra HTTP headers sent with every request to this provider. Merged into the SDK client&#39;s default headers; an explicit &#x60;Authorization&#x60; here wins over the one derived from &#x60;key&#x60;. Honoured by the OpenAI-family providers. | [optional] |
 | **modelId** | **String** | Selected model ID within this provider. | [required] |
 | **reasoning** | **Boolean** | Whether extended thinking is enabled for this profile&#39;s model. | [optional] |
 | **capabilities** | **BigDecimal** | Bitmask of capabilities supported by the selected model. | [optional] |
 | **canUseTool** | **Boolean** | Result of the live tool-capability probe performed at create time and on changes to &#x60;modelId&#x60; / &#x60;providerType&#x60; / &#x60;baseUrl&#x60;. &#x60;undefined&#x60; means the probe has never run for this profile (legacy record). | [optional] |
-| **useResponsesApi** | **Boolean** | Result of the live Responses-API probe (parallel to  {@link  canUseTool  } ). &#x60;true&#x60; means the model speaks &#x60;/v1/responses&#x60; and the OpenAI provider must route through &#x60;client.responses.create&#x60; — required for gpt-5+ reasoning models that reject &#x60;reasoning_effort&#x60; together with &#x60;tools&#x60; on &#x60;/v1/chat/completions&#x60;. Probed at create time and whenever &#x60;modelId&#x60; / &#x60;providerType&#x60; / &#x60;baseUrl&#x60; change. &#x60;undefined&#x60; means the probe never ran (legacy record) — readers treat that as &#x60;false&#x60;. | [optional] |
+| **useResponsesApi** | **Boolean** | Result of the live Responses-API probe (parallel to &#x60;canUseTool&#x60;). &#x60;true&#x60; means the model speaks &#x60;/v1/responses&#x60; and the OpenAI provider must route through &#x60;client.responses.create&#x60; — required for gpt-5+ reasoning models that reject &#x60;reasoning_effort&#x60; together with &#x60;tools&#x60; on &#x60;/v1/chat/completions&#x60;. Probed at create time and whenever &#x60;modelId&#x60; / &#x60;providerType&#x60; / &#x60;baseUrl&#x60; change. &#x60;undefined&#x60; means the probe never ran (legacy record) — readers treat that as &#x60;false&#x60;. | [optional] |
 | **isCloudProvider** | **Boolean** | Whether this profile uses a cloud-hosted provider (e.g. ONLYOFFICE DocSpace). | [optional] |
-| **useProxy** | **Boolean** | Route every provider request through the host&#39;s &#x60;fetchProxy&#x60; instead of the global &#x60;fetch&#x60;. Useful when the host runs the widget in a sandbox without direct network access (CORS, custom auth, etc.). Has no effect when the  {@link  PlatformAdapter.fetchProxy  }  is not configured. | [optional] |
+| **useProxy** | **Boolean** | Route every provider request through the host&#39;s &#x60;fetchProxy&#x60; instead of the global &#x60;fetch&#x60;. Useful when the host runs the widget in a sandbox without direct network access (CORS, custom auth, etc.). Has no effect when the &#x60;PlatformAdapter.fetchProxy&#x60; is not configured. | [optional] |
 | **createdAt** | **BigDecimal** | Creation timestamp (ms since epoch). Used to sort the AI models list newest-first. | [optional] |
 
 
@@ -4344,9 +4696,9 @@ Outcome of &#x60;create&#x60; / &#x60;update&#x60; — either a success carrying
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **success** | **Boolean** |  | [required] |
-| **profile** | [**AiProfile**](#model-aiprofile) |  | [optional] |
-| **error** | [**AiTErrorData**](#model-aiterrordata) |  | [optional] |
+| **success** | **Boolean** | True when the profile was persisted. | [required] |
+| **profile** | [**AiProfile**](#model-aiprofile) | The persisted profile. Present on success. | [optional] |
+| **error** | [**AiTErrorData**](#model-aiterrordata) | Why the profile was rejected - the name check or the provider credential check. Present on failure. | [optional] |
 
 
 ### Model AiPrompt
@@ -4367,9 +4719,9 @@ Versioned, self-contained bundle of every saved prompt and folder. Stable wire f
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **version** | **BigDecimal** |  | [required] [enum: 1] |
-| **folders** | [**List**](#model-aipromptfolder) |  | [required] |
-| **prompts** | [**List**](#model-aiprompt) |  | [required] |
+| **version** | **BigDecimal** | The bundle format version, so an import can migrate an older export. | [required] [enum: 1] |
+| **folders** | [**List**](#model-aipromptfolder) | Every exported prompt folder. | [required] |
+| **prompts** | [**List**](#model-aiprompt) | Every exported prompt. | [required] |
 
 
 ### Model AiPromptFolder
@@ -4388,9 +4740,9 @@ Outcome of &#x60;create&#x60; / &#x60;update&#x60; / &#x60;move&#x60; on a promp
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **success** | **Boolean** |  | [required] |
-| **prompt** | [**AiPrompt**](#model-aiprompt) |  | [optional] |
-| **error** | [**AiTErrorData**](#model-aiterrordata) |  | [optional] |
+| **success** | **Boolean** | True when the prompt was persisted. | [required] |
+| **prompt** | [**AiPrompt**](#model-aiprompt) | The persisted prompt. Present on success. | [optional] |
+| **error** | [**AiTErrorData**](#model-aiterrordata) | Why the prompt was rejected. Present on failure. | [optional] |
 
 
 ### Model AiProviderType
@@ -4402,8 +4754,8 @@ Resolved profile for an action — both the storage row and its ID.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **profileId** | **String** |  | [required] |
-| **profile** | [**AiProfile**](#model-aiprofile) |  | [required] |
+| **profileId** | **String** | The identifier of the resolved profile. | [required] |
+| **profile** | [**AiProfile**](#model-aiprofile) | The resolved profile itself. | [required] |
 
 
 ### Model AiRoomDataLifetimeDto
@@ -4443,15 +4795,16 @@ Generic success acknowledgement for mutations that return no data.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **success** | **Boolean** |  | [required] |
+| **success** | **Boolean** | Always true — the mutation completed. | [required] |
 
 
 ### Model AiTErrorData
+A field-scoped validation error: which form field was rejected, and why.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **field** | **String** |  | [required] [enum: key, url, name] |
-| **message** | **String** |  | [required] |
+| **field** | **String** | The rejected field. | [required] [enum: key, url, name] |
+| **message** | **String** | The human-readable reason the field was rejected. | [required] |
 
 
 ### Model AiTMCPItem
@@ -4463,6 +4816,7 @@ Descriptor for a tool exposed by an MCP server.
 | **description** | **String** | Human-readable description shown to the AI model and in the tools list UI. | [required] |
 | **inputSchema** | **Object** | JSON Schema describing the tool&#39;s input parameters. | [required] |
 | **enabled** | **Boolean** | Whether this tool is currently enabled. Disabled tools are hidden from the AI model. | [optional] |
+| **serverType** | **String** | Server type (MCP server name / host tool group id) this tool belongs to — the key the persisted disabled map is stored under. Set by the source that enumerated the tool, so a caller-supplied tool can still be attributed to its group after being flattened into a single list: that is what lets the engine apply the disabled map to &#x60;actionArgs.tools&#x60; instead of trusting the caller to pre-filter. Wire-serializable, so it survives a remote (server-side) engine. | [optional] |
 | **requireApproval** | **Boolean** | Whether the consumer must show an approval dialog before this tool runs. The engine reads it when deciding the &#x60;autoAllow&#x60; flag on a &#x60;tool-call-pending&#x60; event: &#x60;requireApproval &#x3D;&#x3D;&#x3D; false&#x60; auto-allows the call (no dialog), &#x60;true&#x60; always prompts. &#x60;undefined&#x60; leaves the decision to the persisted always-allow list alone — so MCP / custom-server tools (which never set it) keep prompting as before, while host tools opt into auto-allow by default. Wire-serializable, so it survives a remote (server-side) engine. | [optional] |
 
 
@@ -4487,10 +4841,11 @@ Chat conversation metadata. Represents a single chat session (thread).
 | **lastEditDate** | **BigDecimal** | Timestamp (ms since epoch) of the last message in this thread. Used for sorting. | [optional] |
 | **provider** | [**AiTProvider**](#model-aitprovider) | Provider configuration at the time of last message. Used for thread-level provider display. | [optional] |
 | **model** | [**AiModel**](#model-aimodel) | Model info at the time of last message. | [optional] |
-| **profileId** | **String** | ID of the profile used for this thread. Links to  {@link  Profile.id } . | [optional] |
+| **profileId** | **String** | ID of the profile used for this thread. Links to &#x60;Profile.id&#x60;. | [optional] |
 
 
 ### Model AiThreadMessageLike
+A single chat message as it travels on the wire.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
@@ -4524,12 +4879,12 @@ Delivery/generation status of the message.
 
 
 ### Model AiToolsBulkResult
-Outcome of  {@link  ToolsEngine.replaceAllCustomServers }  — either every entry persisted, or no entries persisted plus a per-key error report.
+Outcome of &#x60;ToolsEngine.replaceAllCustomServers&#x60; — either every entry persisted, or no entries persisted plus a per-key error report.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **success** | **Boolean** |  | [required] |
-| **errors** | [**List**](#model-aitoolsbulkresulterrors-item) |  | [optional] |
+| **success** | **Boolean** | True when every custom MCP server was persisted. | [required] |
+| **errors** | [**List**](#model-aitoolsbulkresulterrors-item) | What was rejected, per server. Present on failure - and then no server was persisted. | [optional] |
 
 
 ### Model AiToolsBulkResult.errors item
@@ -4545,8 +4900,8 @@ Outcome of an MCP-server CRUD call. Either success or a field-scoped error suita
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **success** | **Boolean** |  | [required] |
-| **error** | [**AiTErrorData**](#model-aiterrordata) |  | [optional] |
+| **success** | **Boolean** | True when the MCP server was persisted. | [required] |
+| **error** | [**AiTErrorData**](#model-aiterrordata) | Why the MCP server was rejected. Present on failure. | [optional] |
 
 
 ### Model AiVectorizationSettingsDto
@@ -4559,10 +4914,11 @@ The vectorization settings.
 
 
 ### Model AiVectorizationSettingsWrapper
+The successful API response containing the VectorizationSettingsDto object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**AiVectorizationSettingsDto**](#model-aivectorizationsettingsdto) |  | [optional] |
+| **response** | [**AiVectorizationSettingsDto**](#model-aivectorizationsettingsdto) | The VectorizationSettingsDto object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-aiaiusersettingswrapperlinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -4607,13 +4963,13 @@ Web-search provider configuration. Credentials and provider selection for the bu
 
 
 ### Model AiWebSearchMutationResult
-Outcome of  {@link  WebSearchEngine.configure }  — either the persisted config or a field-scoped error suitable for the settings form.
+Outcome of &#x60;WebSearchEngine.configure&#x60; — either the persisted config or a field-scoped error suitable for the settings form.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **success** | **Boolean** |  | [required] |
-| **config** | [**AiWebSearchConfig**](#model-aiwebsearchconfig) |  | [optional] |
-| **error** | [**AiTErrorData**](#model-aiterrordata) |  | [optional] |
+| **success** | **Boolean** | True when the configuration was persisted. | [required] |
+| **config** | [**AiWebSearchConfig**](#model-aiwebsearchconfig) | The persisted web-search configuration. Present on success. | [optional] |
+| **error** | [**AiTErrorData**](#model-aiterrordata) | Why the configuration was rejected. Present on failure. | [optional] |
 
 
 ### Model aiAgentsCreate request body
@@ -4693,9 +5049,9 @@ A DocSpace room id: an integer for native rooms, a string for third-party-backed
 | **messageId** | **String** | Storage id of the assistant message holding the tool call. | [required] |
 | **idx** | **BigDecimal** | Index of the tool-call content part inside &#x60;message.content&#x60;. | [required] |
 | **message** | [**AiThreadMessageLike**](#model-aithreadmessagelike) | Snapshot of the assistant message at the time the tool call surfaced. | [required] |
-| **actionArgs** | [**AiAiActionArgs**](#model-aiaiactionargs) |  | [optional] |
-| **entityId** | **String** |  | [optional] |
-| **profileId** | **String** |  | [optional] |
+| **actionArgs** | [**AiAiActionArgs**](#model-aiaiactionargs) | Per-request engine options: extra tools, reasoning, prompt override. | [optional] |
+| **entityId** | **String** | Optional entity (room) scope for profile resolution. | [optional] |
+| **profileId** | **String** | Session-level profile override for this request only. | [optional] |
 
 
 ### Model aiAiRegenerateStream request body
@@ -4703,9 +5059,9 @@ A DocSpace room id: an integer for native rooms, a string for third-party-backed
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **threadId** | **String** | Target thread (must already exist). | [required] |
-| **actionArgs** | [**AiAiActionArgs**](#model-aiaiactionargs) |  | [optional] |
-| **entityId** | **String** |  | [optional] |
-| **profileId** | **String** |  | [optional] |
+| **actionArgs** | [**AiAiActionArgs**](#model-aiaiactionargs) | Per-request engine options: extra tools, reasoning, prompt override. | [optional] |
+| **entityId** | **String** | Optional entity (room) scope for profile resolution. | [optional] |
+| **profileId** | **String** | Session-level profile override for this request only. | [optional] |
 
 
 ### Model aiAiSendCustom request body
@@ -4715,7 +5071,7 @@ A DocSpace room id: an integer for native rooms, a string for third-party-backed
 | **isStream** | **Boolean** | Stream the reply (ndjson) when true, else return a single message. | [required] |
 | **systemPrompt** | **String** | Caller-supplied system prompt for this one-turn call. | [required] |
 | **userMessage** | [**AiThreadMessageLike**](#model-aithreadmessagelike) |  | [required] |
-| **actionArgs** | [**AiAiActionArgs**](#model-aiaiactionargs) |  | [optional] |
+| **actionArgs** | [**AiAiActionArgs**](#model-aiaiactionargs) | Per-request engine options: extra tools, reasoning, prompt override. | [optional] |
 
 
 ### Model aiAiSend request body
@@ -4724,7 +5080,7 @@ A DocSpace room id: an integer for native rooms, a string for third-party-backed
 |------------ | ------------- | ------------- | -------------|
 | **actionType** | [**AiActionType**](#model-aiactiontype) | Which AI action to run — selects the assignment slot and action. | [required] [enum: Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision] |
 | **userMessage** | [**AiThreadMessageLike**](#model-aithreadmessagelike) | The user turn to send. | [required] |
-| **actionArgs** | [**AiAiActionArgs**](#model-aiaiactionargs) |  | [optional] |
+| **actionArgs** | [**AiAiActionArgs**](#model-aiaiactionargs) | Per-request engine options: extra tools, reasoning, prompt override. | [optional] |
 | **entityId** | **String** | Optional entity (room) scope for profile resolution. | [optional] |
 
 
@@ -4772,32 +5128,6 @@ A file attachment draft to persist.
 | **entityId** | **String** |  | [optional] |
 
 
-### Model aiAttachmentsSaveImage request body
-
-| Name | Type | Description | Notes |
-|------------ | ------------- | ------------- | -------------|
-| **input** | [**aiAttachmentsSaveImage_request_input**](#model-aiattachmentssaveimagerequestinput) |  | [required] |
-| **entityId** | **String** |  | [optional] |
-
-
-### Model aiAttachmentsSaveImage.request.input
-An image attachment draft to persist.
-
-| Name | Type | Description | Notes |
-|------------ | ------------- | ------------- | -------------|
-| **name** | **String** | Image name. | [required] |
-| **base64** | **String** | Full &#x60;data:image/...;base64,…&#x60; data URL. | [required] |
-| **title** | **String** | Optional display title. | [optional] |
-
-
-### Model aiAttachmentsSaveImagesMany request body
-
-| Name | Type | Description | Notes |
-|------------ | ------------- | ------------- | -------------|
-| **inputs** | [**List**](#model-aiattachmentssaveimagerequestinput) |  | [required] |
-| **entityId** | **String** |  | [optional] |
-
-
 ### Model aiExportTextToDocx 200 response
 Accepted-for-processing acknowledgement (conversion is asynchronous).
 
@@ -4825,6 +5155,25 @@ Target folder id (int or string).
 |------------ | ------------- | ------------- | -------------|
 | **value** | **Boolean** | New deep-mode value. | [required] |
 | **entityId** | **String** |  | [optional] |
+
+
+### Model aiProfilesGetById 200 response
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+| **id** | **String** | Unique profile identifier (UUID). | [required] |
+| **name** | **String** | User-defined profile display name. | [required] |
+| **providerType** | [**AiProviderType**](#model-aiprovidertype) | Provider type for this profile. Use &#x60;external&#x60; to delegate all HTTP transport to &#x60;PlatformAdapter.externalFetch&#x60; while reusing an existing provider&#39;s response parser — see &#x60;Profile.basedOn&#x60; for the format selector. | [required] |
+| **basedOn** | [**AiBuiltinProviderType**](#model-aibuiltinprovidertype) | Selects the response-format parser used by the &#x60;external&#x60; provider. Ignored for any other &#x60;providerType&#x60;.  Supported values are &#x60;openai&#x60;, &#x60;anthropic&#x60;, &#x60;mistral&#x60; and &#x60;openrouter&#x60;. Remaining values (&#x60;genai&#x60;, &#x60;stabilityai&#x60;, …) are accepted by the type but not yet implemented; passing one raises an error at request time. | [optional] [enum: anthropic, ollama, openai, openaicompatible, together, openrouter, genai, deepseek, xai, lm-studio, mistral, groq, zhipu, stabilityai, gpt4all, onlyoffice, external] |
+| **baseUrl** | **String** | Base URL of the provider API. | [required] |
+| **modelId** | **String** | Selected model ID within this provider. | [required] |
+| **reasoning** | **Boolean** | Whether extended thinking is enabled for this profile&#39;s model. | [optional] |
+| **capabilities** | **BigDecimal** | Bitmask of capabilities supported by the selected model. | [optional] |
+| **canUseTool** | **Boolean** | Result of the live tool-capability probe performed at create time and on changes to &#x60;modelId&#x60; / &#x60;providerType&#x60; / &#x60;baseUrl&#x60;. &#x60;undefined&#x60; means the probe has never run for this profile (legacy record). | [optional] |
+| **useResponsesApi** | **Boolean** | Result of the live Responses-API probe (parallel to &#x60;canUseTool&#x60;). &#x60;true&#x60; means the model speaks &#x60;/v1/responses&#x60; and the OpenAI provider must route through &#x60;client.responses.create&#x60; — required for gpt-5+ reasoning models that reject &#x60;reasoning_effort&#x60; together with &#x60;tools&#x60; on &#x60;/v1/chat/completions&#x60;. Probed at create time and whenever &#x60;modelId&#x60; / &#x60;providerType&#x60; / &#x60;baseUrl&#x60; change. &#x60;undefined&#x60; means the probe never ran (legacy record) — readers treat that as &#x60;false&#x60;. | [optional] |
+| **isCloudProvider** | **Boolean** | Whether this profile uses a cloud-hosted provider (e.g. ONLYOFFICE DocSpace). | [optional] |
+| **useProxy** | **Boolean** | Route every provider request through the host&#39;s &#x60;fetchProxy&#x60; instead of the global &#x60;fetch&#x60;. Useful when the host runs the widget in a sandbox without direct network access (CORS, custom auth, etc.). Has no effect when the &#x60;PlatformAdapter.fetchProxy&#x60; is not configured. | [optional] |
+| **createdAt** | **BigDecimal** | Creation timestamp (ms since epoch). Used to sort the AI models list newest-first. | [optional] |
 
 
 ### Model aiProfilesListProviderModels request body
@@ -4918,12 +5267,34 @@ Fields to change.
 | **entityId** | **String** | Optional entity (room) scope. | [optional] |
 
 
+### Model aiThreadsOpenOrCreate request body
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+| **threadId** | **String** |  | [optional] |
+| **profile** | [**AiProfile**](#model-aiprofile) | Profile the title generation runs on. | [required] |
+| **profileId** | **String** |  | [required] |
+| **firstMessage** | [**AiThreadMessageLike**](#model-aithreadmessagelike) | First user message a fresh thread derives its title from. | [required] |
+| **entityId** | **String** | Opaque scope token persisted on a freshly created thread. | [optional] |
+| **entityMeta** | [**aiThreadsOpenOrCreate_request_entityMeta**](#model-aithreadsopenorcreaterequestentitymeta) |  | [optional] |
+
+
+### Model aiThreadsOpenOrCreate.request.entityMeta
+Optional entity hint (lib 0.5.64): only &#x60;entityId&#x60; is read; the pair is re-resolved server-side before reaching the provider as metadata.
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+| **entityId** | **String** |  | [optional] |
+| **entityTitle** | **String** |  | [optional] |
+
+
 ### Model aiThreadsRegenerateTitle request body
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **threadId** | **String** |  | [required] |
 | **profile** | [**AiProfile**](#model-aiprofile) | Profile used to regenerate the title. | [required] |
+| **entityMeta** | [**aiThreadsOpenOrCreate_request_entityMeta**](#model-aithreadsopenorcreaterequestentitymeta) |  | [optional] |
 
 
 ### Model aiThreadsRename request body

@@ -8,6 +8,8 @@ Referenced types are defined in the [full reference](../newai.md).
 
 Cascade profile delete
 
+Cleans up the assignments pointing at a profile that is about to be deleted: the &#x60;Default&#x60; slot is promoted to the first remaining profile (or dropped when none is left), and every other slot holding that profile is unbound.
+
 ## Parameters
 
 |Name | In | Type | Description | Notes |

@@ -8,11 +8,13 @@ Referenced types are defined in the [full reference](../newai.md).
 
 Get an agent
 
+Returns one AI agent room, enriched with the &#x60;profileId&#x60; bound to it so an edit form can prefill the profile selector. A missing assignment simply leaves &#x60;profileId&#x60; out.
+
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **String** |  | [required] |
+| **id** | path | **String** | The agent identifier. | [required] |
 
 ## Responses
 

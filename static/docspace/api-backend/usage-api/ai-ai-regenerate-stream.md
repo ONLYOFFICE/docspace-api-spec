@@ -8,6 +8,8 @@ Referenced types are defined in the [full reference](../newai.md).
 
 Regenerate stream
 
+Re-rolls the last assistant reply in an existing thread: every message after the last user message (the previous reply plus any tool-call hops) is dropped and a fresh reply is streamed against the unchanged prompt. The thread must already exist and no title is generated.
+
 ## Parameters
 
 |Name | In | Type | Description | Notes |

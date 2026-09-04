@@ -8,6 +8,8 @@ Referenced types are defined in the [full reference](../newai.md).
 
 Send with stream
 
+Starts a chat round and streams it back as newline-delimited &#x60;ChatEvent&#x60; objects. The thread is opened or created, the user message and the reply are persisted, a new thread gets a generated title, and a tool call pauses the round until it is approved or denied.
+
 ## Parameters
 
 |Name | In | Type | Description | Notes |

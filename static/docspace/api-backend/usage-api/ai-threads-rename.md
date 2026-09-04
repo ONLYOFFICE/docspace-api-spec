@@ -8,6 +8,8 @@ Referenced types are defined in the [full reference](../newai.md).
 
 Rename
 
+Renames a chat thread and bumps its last-edit date so the new title shows up in the sidebar.
+
 ## Parameters
 
 |Name | In | Type | Description | Notes |

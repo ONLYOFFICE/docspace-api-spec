@@ -8,11 +8,13 @@ Referenced types are defined in the [full reference](../newai.md).
 
 Get assignment
 
+Returns the profile bound to one AI action, without the &#x60;Default&#x60; fallback.
+
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **actionType** | query | **String** |  | [required] |
+| **actionType** | query | **String** | The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision. | [required] |
 
 ## Responses
 

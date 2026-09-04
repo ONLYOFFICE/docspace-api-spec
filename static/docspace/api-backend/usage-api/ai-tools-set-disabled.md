@@ -8,6 +8,8 @@ Referenced types are defined in the [full reference](../newai.md).
 
 Set disabled
 
+Marks the listed tools of one server type as switched off, so the model is no longer offered them.
+
 ## Parameters
 
 |Name | In | Type | Description | Notes |

@@ -8,12 +8,14 @@ Referenced types are defined in the [full reference](../newai.md).
 
 Get custom server
 
+Returns the configuration of one custom MCP server, or an empty result when it is not registered.
+
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **name** | query | **String** |  | [required] |
-| **entityId** | query | **String** |  | [required] |
+| **name** | query | **String** | The custom MCP server name. | [required] |
+| **entityId** | query | **String** | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | [optional] |
 
 ## Responses
 

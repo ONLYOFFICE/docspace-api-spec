@@ -8,6 +8,8 @@ Referenced types are defined in the [full reference](../newai.md).
 
 List agents
 
+Lists the portal&#39;s AI agent rooms. Query parameters are forwarded unchanged to the .NET AI service, which answers with its folder-content payload.
+
 ## Parameters
 This endpoint does not need any parameter.
 

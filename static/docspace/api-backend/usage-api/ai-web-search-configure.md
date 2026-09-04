@@ -8,6 +8,8 @@ Referenced types are defined in the [full reference](../newai.md).
 
 Configure
 
+Validates a web-search configuration against the live provider and stores it only when the provider answers, replacing the previous one in a single write.
+
 ## Parameters
 
 |Name | In | Type | Description | Notes |

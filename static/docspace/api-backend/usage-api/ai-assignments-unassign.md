@@ -8,6 +8,8 @@ Referenced types are defined in the [full reference](../newai.md).
 
 Unassign
 
+Removes the profile binding of an AI action. Does nothing when that slot is already empty.
+
 ## Parameters
 
 |Name | In | Type | Description | Notes |

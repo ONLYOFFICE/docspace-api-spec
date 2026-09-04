@@ -8,6 +8,8 @@ Referenced types are defined in the [full reference](../newai.md).
 
 Test connection
 
+Checks a web-search configuration against the live provider without storing it - for a Test button that must not commit on success.
+
 ## Parameters
 
 |Name | In | Type | Description | Notes |

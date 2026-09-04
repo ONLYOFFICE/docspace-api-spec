@@ -8,6 +8,8 @@ Referenced types are defined in the [full reference](../newai.md).
 
 List folders
 
+Lists the prompt folders, newest first.
+
 ## Parameters
 This endpoint does not need any parameter.
 

@@ -8,6 +8,8 @@ Referenced types are defined in the [full reference](../newai.md).
 
 Get user AI settings
 
+Returns the current user&#39;s AI settings.
+
 ## Parameters
 This endpoint does not need any parameter.
 

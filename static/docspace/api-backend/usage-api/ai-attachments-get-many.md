@@ -8,6 +8,8 @@ Referenced types are defined in the [full reference](../newai.md).
 
 Get many
 
+Returns a batch of attachments, preserving the requested order; an identifier that no longer exists comes back empty.
+
 ## Parameters
 
 |Name | In | Type | Description | Notes |
