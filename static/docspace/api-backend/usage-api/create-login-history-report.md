@@ -6,23 +6,23 @@ Referenced types are defined in the [full reference](../api.md).
 
 `POST /api/2.0/security/audit/login/report`
 
-Start the login history report generation
+Start login history report
 
-Starts generating the login history report (XLSX by default, or CSV) and saves it to My documents.
+Queues a report of the portal&#39;s login history and returns the state of the background job that builds it. The  report covers the period reaching from now back by the login history lifetime that  &#x60;GET api/2.0/security/audit/settings/lifetime&#x60; reports and is never filtered: the query parameters of  &#x60;GET api/2.0/security/audit/login/filter&#x60; do not apply here. The caller needs the portal-settings right of a  DocSpace administrator plus the audit option of the portal&#39;s pricing plan, otherwise the call is answered with  402. The file is not ready when the response arrives - poll &#x60;GET api/2.0/security/audit/login/report&#x60; until  &#x60;isCompleted&#x60; is true, then take &#x60;resultFileUrl&#x60;, and treat a non-empty &#x60;error&#x60; as a failed build. The  finished file is saved to the caller&#39;s My documents section, as an XLSX workbook by default or as CSV when  &#x60;format&#x3D;Csv&#x60;, in which case &#x60;resultFileId&#x60; stays empty and only the name and the URL identify it. One job runs  per caller and kind: calling again while the previous one is still building returns that job instead of  starting a second, and &#x60;DELETE api/2.0/security/audit/login/report&#x60; cancels it.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **format** | query | **AuditReportFormat** | The output file format of the report. Defaults to XLSX. | [optional] [example: Xlsx] [enum: 0, 1] |
+| **format** | query | **AuditReportFormat** | The format the report file is written in. The workbook format is the default and is the only one that leaves  the finished file addressable by ID: a report asked for as CSV comes back with an empty &#x60;resultFileId&#x60;, so it  can only be reached through &#x60;resultFileName&#x60; and &#x60;resultFileUrl&#x60;. | [optional] [example: Xlsx] [enum: 0, 1] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Operation execution status | [**DocumentBuilderTaskWrapper**](../api.md#model-documentbuildertaskwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **402** | Your pricing plan does not support this option | - | - |
-| **403** | No permissions to perform this action | - | - |
+| **200** | The state of the queued job that builds the login history report | [**DocumentBuilderTaskWrapper**](../api.md#model-documentbuildertaskwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **402** | The portal&#39;s pricing plan has no audit option, or the login history and audit trail section is not enabled | - | - |
+| **403** | The caller does not have the portal-settings right of a DocSpace administrator | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |

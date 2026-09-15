@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../api.md).
 
 Get the storage encryption progress
 
-Returns the storage encryption progress.
+Returns how far the running encryption or decryption of the installation storage has got, as a percentage from  0 to 100. It reports the run started by &#x60;POST api/2.0/settings/encryption/start&#x60;, whose direction, encryption  or decryption, is told by &#x60;GET api/2.0/settings/encryption/settings&#x60;. An empty response means no run is in  flight and no recent result is remembered: the value of a finished run is kept for one minute after it  completes and then dropped, so poll often enough not to miss the end of the operation. A value of -1 means the  build does not offer storage encryption at all, and on an installation that is not a server one the call is  refused rather than answered. Unlike the other encryption operations, this one asks for no portal-settings  permission: any authenticated member of the portal may read the progress, which is intentional, because the  portals are unavailable while the run is on and their users need to see when it ends. Nothing is written and  the call is safe to repeat.
 
 ## Parameters
 This endpoint does not need any parameter.
@@ -17,8 +17,8 @@ This endpoint does not need any parameter.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Storage encryption progress | [**DoubleNullableWrapper**](../api.md#model-doublenullablewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **405** | Method not allowed | - | - |
+| **200** | Encryption or decryption progress as a percentage, or empty when no run is in flight | [**DoubleNullableWrapper**](../api.md#model-doublenullablewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **405** | Storage encryption is not available on this installation | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |

@@ -8,21 +8,21 @@ Referenced types are defined in the [full reference](../api.md).
 
 Remove a webhook
 
-Removes a tenant webhook with the ID specified in the request.
+Removes one webhook subscription from the current portal for good, addressed by &#x60;id&#x60; in the path. Deliveries  stop with it: matching events are no longer queued, and there is no undo, so a subscription dropped by mistake  has to be created again with &#x60;POST api/2.0/settings/webhook&#x60;, which gives it a new identifier and needs a new  secret key. To pause deliveries without losing the configuration, switch the subscription off with  &#x60;PUT api/2.0/settings/webhook/enable&#x60; instead. A &#x60;DocSpaceAdmin&#x60; may remove any subscription in the portal,  anyone else only the ones they created, and a &#x60;Guest&#x60; may not use webhooks at all. The response repeats the  subscription as it was just before the removal, so the caller can record what disappeared, again without the  secret key. An identifier that no longer exists gives 404, which is what a second removal of the same  subscription answers as well, so a repeated call is harmless but reports the state truthfully rather than  pretending to succeed.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The ID extracted from the route parameters. | [required] [example: 1] |
+| **id** | path | **Integer** (int32) | The identifier of the object the operation acts on, as the listing operation of that kind of object reports  it. It has to match the shape the route declares - a GUID where the route is typed as one - since a value of  another shape does not match the route at all and is answered as not found. | [required] [example: 1] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Tenant webhook with its config parameters | [**WebhooksConfigWrapper**](../api.md#model-webhooksconfigwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **403** | Access denied | - | - |
-| **404** | Item not found | - | - |
+| **200** | The removed webhook subscription, as it was just before the removal | [**WebhooksConfigWrapper**](../api.md#model-webhooksconfigwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **403** | The subscription belongs to another member, or the caller may not use webhooks at all | - | - |
+| **404** | No webhook subscription with this ID exists in the portal | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |

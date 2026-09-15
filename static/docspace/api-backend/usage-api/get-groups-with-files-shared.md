@@ -6,26 +6,27 @@ Referenced types are defined in the [full reference](../people.md).
 
 `GET /api/2.0/group/file/{id}`
 
-Get groups with file sharing settings
+Search groups for a file
 
-Returns groups with their sharing settings for a file with the ID specified in request.
+Returns the groups that can be given access to the file with the ID given in the route, and reports for each  of them whether it already has access to that file.  The caller has to be allowed to manage the access of that file, and the ID has to belong to an existing file,  so the operation answers 403 for a file the caller cannot share and 404 for an ID that matches nothing.  The call is read-only and, unlike the account search, works without a filter: leaving &#x60;filterValue&#x60; empty  returns every group instead of nothing, and a value narrows the result by group name.  The result is paged by &#x60;count&#x60; and &#x60;startIndex&#x60;, with the number of matching groups in the total count of the  response.  Pass &#x60;excludeShared&#x60; to keep only the groups that have no access to the file yet, which is the set to offer  when adding new ones; without it every matching group comes back and &#x60;shared&#x60; tells them apart.  To search users and groups together, use &#x60;GET api/2.0/accounts/file/{id}/search&#x60;.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The group ID. | [required] [example: 00000000-0000-0000-0000-000000000000] |
-| **excludeShared** | query | **Boolean** | Specifies whether to exclude the group sharing settings from the response. | [optional] [example: false] |
-| **count** | query | **Integer** (int32) | The number of groups to retrieve in the request. | [optional] [example: 25] [min: 1] [max: 100] |
-| **startIndex** | query | **Integer** (int32) | The starting index from which to begin retrieving groups with their sharing settings. | [optional] [example: 0] |
-| **filterValue** | query | **String** | The text used as a filter for retrieving groups with their sharing settings. | [optional] [example: John] |
+| **id** | path | **Integer** (int32) | The ID of the room, folder or file whose access the search is run against, taken from the route. It is an  integer for an entry stored in DocSpace and a provider-specific string for an entry in a connected  third-party storage. | [required] [example: 1234] |
+| **excludeShared** | query | **Boolean** | Keeps only the groups that do not have access to the entry yet, which is the set to offer when granting  access. Every returned entry then has &#x60;shared&#x60; set to false; without the flag every matching group comes back  and &#x60;shared&#x60; tells them apart. | [optional] [example: false] |
+| **count** | query | **Integer** (int32) | The size of the page. It defaults to 100, which is also the largest value the operation accepts. | [optional] [example: 25] [min: 1] [max: 100] |
+| **startIndex** | query | **Integer** (int32) | The number of matching groups to skip before the page starts. It defaults to 0, and the total number of  matches is reported in the total count of the response. | [optional] [example: 0] |
+| **filterValue** | query | **String** | The text to match against the group name. Omit it to get every group the caller may grant access to. | [optional] [example: Marketing] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Ok | [**GroupArrayWrapper**](../people.md#model-grouparraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The matching groups, each with its access state for the file | [**GroupArrayWrapper**](../people.md#model-grouparraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | No permissions to perform this action | - | - |
+| **404** | No file has the specified ID | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | - |

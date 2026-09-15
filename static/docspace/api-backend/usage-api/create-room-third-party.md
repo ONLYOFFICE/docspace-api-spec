@@ -8,20 +8,20 @@ Referenced types are defined in the [full reference](../files.md).
 
 Create a third-party room
 
-Creates a room in the Rooms section stored in a third-party storage.
+Turns a folder of a connected third-party storage account into a room of the &#x60;Rooms&#x60; section, so that the  files of the room keep living in that storage instead of the portal. Connect the account first with  &#x60;POST api/2.0/files/thirdparty&#x60; and take the path parameter from a folder listing of that account: it is the  identifier of a folder in the storage, not of a room. One connected account can back one room only, so a  second call over the same account is refused, and so is an account that was not connected for room storage.  The caller needs the right to create rooms, which a portal user and a guest do not have; a public room is  refused while the administrator restricts external access, and reaching the room limit of the tariff is  refused too. With &#x60;createAsNewFolder&#x60; the room is a new subfolder named after &#x60;title&#x60;, otherwise the folder  from the path becomes the room itself and &#x60;indexing&#x60;, &#x60;denyDownload&#x60;, &#x60;tags&#x60; and &#x60;logo&#x60; are then dropped. The  answer is the new room, whose identifiers are strings; a public or a form-filling room already has its primary  link, readable with &#x60;GET api/2.0/files/rooms/{id}/link&#x60;.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **String** | The ID of the folder in the third-party storage in which the contents of the room will be stored. | [required] [example: folder-123-abc] |
-| **CreateThirdPartyRoom** | body | [**CreateThirdPartyRoom**](../files.md#model-createthirdpartyroom) | The third-party room information. | [required] |
+| **id** | path | **String** | The identifier of the folder in the connected third-party storage that becomes the room, or receives it as a  subfolder. Folder identifiers of a connected account are strings and are returned by the folder listings of  that account. | [required] [example: box-12-\|280143035119] |
+| **CreateThirdPartyRoom** | body | [**CreateThirdPartyRoom**](../files.md#model-createthirdpartyroom) | The settings of the room to be created out of the folder. | [required] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Room information | [**FolderStringWrapper**](../files.md#model-folderstringwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The room created out of the third-party folder, with string identifiers | [**FolderStringWrapper**](../files.md#model-folderstringwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |

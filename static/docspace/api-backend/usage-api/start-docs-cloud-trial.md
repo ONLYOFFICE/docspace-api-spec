@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../api.md).
 
 Start the DocsCloud trial
 
-Starts the DocsCloud trial.
+Activates the free DocsCloud trial subscription for the current portal, and, once a DocsCloud server is  assigned to the portal, allows the address of that server in the Content Security Policy settings.  The portal tariff must be in the trial or paid state (not delayed and not unpaid), and the portal must not  already hold a DocsCloud trial, DocsCloud or DocsCloudDevPack subscription: the quotas of the current  tariff are listed by &#x60;GET api/2.0/portal/tariff&#x60;. The caller must be a portal administrator allowed to edit  the portal settings, on an installation where the billing service is configured. The operation changes the  portal subscription and is not idempotent: repeating it after a successful activation fails with 400.  It returns &#x60;true&#x60; when the trial has been granted, and &#x60;false&#x60; when the billing service declines it  (for example, when this portal has already used its trial), in which case nothing is changed. It never buys  a paid plan: an existing paid DocsCloud subscription is moved to DocsCloudDevPack by  &#x60;POST api/2.0/settings/docscloud/switchtodevpack&#x60; instead.
 
 ## Parameters
 This endpoint does not need any parameter.
@@ -17,11 +17,11 @@ This endpoint does not need any parameter.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Boolean value: true if the operation is successful | [**BooleanWrapper**](../api.md#model-booleanwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **400** | Quota is already set | - | - |
-| **402** | Tariff is not paid | - | - |
-| **403** | No permissions to perform this action | - | - |
-| **404** | Quota could not be found | - | - |
+| **200** | Boolean value: true if the trial subscription is activated, false if the billing service declines it | [**BooleanWrapper**](../api.md#model-booleanwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **400** | The portal already has a DocsCloud trial, DocsCloud or DocsCloudDevPack subscription | - | - |
+| **402** | The portal tariff is delayed or not paid, so the trial cannot be started | - | - |
+| **403** | The caller is not allowed to edit the portal settings, or the billing service is not configured | - | - |
+| **404** | The DocsCloud trial quota is not available on this installation | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |

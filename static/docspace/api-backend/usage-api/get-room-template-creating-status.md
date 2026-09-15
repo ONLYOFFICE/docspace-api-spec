@@ -6,9 +6,9 @@ Referenced types are defined in the [full reference](../files.md).
 
 `GET /api/2.0/files/roomtemplate/status`
 
-Get status of room template creation
+Get room template creation status
 
-Returns the progress status of the room template creation process.
+Reports the state of the room template creation the caller started with &#x60;POST api/2.0/files/roomtemplate&#x60;. The  record is private to the account that started the job: work started by another member is never reported, and a  caller who has started none gets an empty response instead of an object. Poll until &#x60;isCompleted&#x60; turns true,  then take the identifier of the finished template from &#x60;templateId&#x60;; a non-empty &#x60;error&#x60; means the job failed  and no template was kept. Treat &#x60;isCompleted&#x60; as the completion signal rather than &#x60;progress&#x60;, which the  background job only sets to 100 once the work is over. The record outlives the job, so a finished operation  can be read again and keeps returning the same identifier until the caller starts another template creation,  which replaces it. The call only reads state and needs no access to the source room or to the template, but it  does require an authenticated caller.
 
 ## Parameters
 This endpoint does not need any parameter.

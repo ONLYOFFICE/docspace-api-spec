@@ -8,21 +8,24 @@ Referenced types are defined in the [full reference](../newai.md).
 
 Try resolve for action
 
-Resolves the profile bound to an AI action exactly like &#x60;resolve-for-action&#x60;, but answers with an empty result instead of failing when nothing is configured.
+Returns the profile that will serve one AI action, exactly as &#x60;GET api/2.0/ai/assignments/resolve-for-action&#x60; does, but answers with an empty result rather than failing when nothing is configured. &#x60;actionType&#x60; is required and is validated the same way, and &#x60;entityId&#x60; narrows the lookup to a room. This is the operation to call when the absence of a profile is a normal state to render - a settings screen, or a feature that hides itself. Both operations are read-only.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **actionType** | query | **String** | The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision. | [required] |
-| **entityId** | query | **String** | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | [optional] |
+| **actionType** | query | **String** | The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision. | [required] [example: Chat] |
+| **entityId** | query | **String** | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | [optional] [example: 1234] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Success. | [**AiResolvedAssignment**](../newai.md#model-airesolvedassignment) | - |
+| **200** | The profile that will serve the action, or an empty result when none is configured. | [**AiResolvedAssignment**](../newai.md#model-airesolvedassignment) | - |
+| **400** | &#x60;actionType&#x60; is missing. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
 | **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
+| **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
+| **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
 
 ## Return type
 

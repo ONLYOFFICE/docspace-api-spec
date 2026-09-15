@@ -8,22 +8,22 @@ Referenced types are defined in the [full reference](../files.md).
 
 Set file encryption information
 
-Sets or updates the encryption keys for a file with the specified identifier. This allows updating the file&#39;s encryption configuration.
+Issues the file keys that let the named people open one file of an end-to-end encrypted private room. Each  entry of the body names the account the key is for, the public key it was encrypted with and the encrypted key  itself, so the plain key never reaches the portal: the client encrypts it once per recipient with the public  key that &#x60;GET api/2.0/files/file/{fileId}/publickeys&#x60; reports for them. The keys of the accounts named in the  request are replaced, and the keys of everybody else are left as they are, which makes the call idempotent for  a given set of recipients while remaining a mutating one; sending no entry for a person does not revoke that  person&#39;s key. The file has to lie in a private room, and every account named in the request has to have read  access to it. The caller needs read access to the file and the right to create content in that room, which its  members with editing rights and its admins have; a caller without those rights, a file outside a private room  and a file that does not exist are all refused with 403. Read the result back with  &#x60;GET api/2.0/files/{fileId}/access&#x60;.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **Integer** (int32) | File ID | [required] [example: 12345] |
-| **AccessRequestKeyDto** | body | [**List**](../files.md#model-accessrequestkeydto) | Collection of encryption key data for users with access to the file | [optional] |
+| **fileId** | path | **Integer** (int32) | The file the keys are issued for; it has to lie in a private room. | [required] [example: 12345] |
+| **AccessRequestKeyDto** | body | [**List**](../files.md#model-accessrequestkeydto) | One key per account that is to open the file. The keys of the accounts named here are replaced and the keys of  everybody else are left as they are, so sending no entry for a person does not revoke that person&#39;s key. | [optional] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Encryption information successfully updated | - | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **403** | You don&#39;t have enough permission to edit the file | - | - |
-| **404** | File not found | - | - |
+| **200** | The file keys were stored | - | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **403** | The caller may not issue keys for this file, or the file is not in a private room | - | - |
+| **404** | The file does not exist | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |

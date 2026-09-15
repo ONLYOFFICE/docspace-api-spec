@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../people.md).
 
 Start the data reassignment
 
-Starts the data reassignment for the user with the ID specified in the request.
+Queues an asynchronous job that transfers the rooms and the shared files owned by one portal user to another.  The source user must already have the &#x60;Terminated&#x60; status - disable the account through  &#x60;PUT api/2.0/people/status/{status}&#x60; before calling this - and the destination user must be an active room  admin or DocSpace admin, so a guest, a system account or a disabled account is rejected.  The caller needs the permission to edit users, cannot reassign their own data, and must be the portal owner to  reassign the data of another DocSpace administrator or of a People module administrator.  The transfer does not finish within this call: poll &#x60;GET api/2.0/people/reassign/progress/{userid}&#x60; with the  source user ID until &#x60;isCompleted&#x60; is true, and cancel it through &#x60;PUT api/2.0/people/reassign/terminate&#x60;.  Pass &#x60;deleteProfile&#x60; as true to delete the source profile once the transfer succeeds, otherwise the emptied  profile is kept.  Use &#x60;GET api/2.0/people/reassign/necessary&#x60; first to find out whether the user owns anything that has to be  reassigned at all.
 
 ## Parameters
 
@@ -20,8 +20,9 @@ Starts the data reassignment for the user with the ID specified in the request.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Reassignment progress | [**TaskProgressResponseWrapper**](../people.md#model-taskprogressresponsewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **400** | Can not reassign data to user or from user | - | - |
+| **200** | The state of the queued reassignment | [**TaskProgressResponseWrapper**](../people.md#model-taskprogressresponsewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **400** | The destination user is not an active room or DocSpace admin, or the source user is a system account, the portal owner, the caller, or is not disabled | - | - |
+| **403** | No permissions to perform this action | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | - |

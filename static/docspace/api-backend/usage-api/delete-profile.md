@@ -6,9 +6,9 @@ Referenced types are defined in the [full reference](../people.md).
 
 `DELETE /api/2.0/people/@self`
 
-Delete my profile
+Close my own profile
 
-Deletes the current user profile.
+Closes the calling account at its owner&#39;s request: it does not erase the profile, it disables it, ends every  session it has and tells the portal administrators that the account asked to be removed.  It is the second step of the self-service removal - the first is &#x60;PUT api/2.0/people/self/delete&#x60;, which mails  the confirmation link - so the request has to carry the confirmation token from that link rather than an  ordinary session.  It always acts on the calling account and takes no parameters; the portal owner and an account imported from  LDAP cannot close themselves and get 403.  After the call the account has the &#x60;Terminated&#x60; status and can no longer sign in, but its rooms, files and  group memberships are untouched, which is why an administrator still has to erase it through  &#x60;DELETE api/2.0/people/{userid}&#x60; - that operation requires exactly this disabled state.  The step is reversible until then: re-enabling the account through &#x60;PUT api/2.0/people/status/{status}&#x60;  restores it.  The call raises a &#x60;UserUpdated&#x60; webhook, not a delete one, and answers with the profile in its new state.
 
 ## Parameters
 This endpoint does not need any parameter.
@@ -17,9 +17,9 @@ This endpoint does not need any parameter.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Detailed information about my profile | [**EmployeeFullWrapper**](../people.md#model-employeefullwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **403** | You don&#39;t have enough permission to perform the operation | - | - |
-| **404** | User not found | - | - |
+| **200** | The profile of the caller with the Terminated status | [**EmployeeFullWrapper**](../people.md#model-employeefullwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **403** | The caller is the portal owner, an LDAP account or a system account | - | - |
+| **404** | The calling account no longer exists | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | - |

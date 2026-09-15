@@ -6,9 +6,9 @@ Referenced types are defined in the [full reference](../api.md).
 
 `GET /api/2.0/settings/security/modules`
 
-Get the enabled modules
+Get enabled modules
 
-Returns a list of all the enabled modules.
+Lists the portal modules the calling user can currently open, each as an &#x60;id&#x60; holding the module&#39;s product  class name and a &#x60;title&#x60; holding its display name, both HTML-encoded. Any signed-in member may call this;  anonymous callers are not admitted. The operation is read-only and takes no parameters, and the list is  specific to the caller: modules hidden for this portal, and modules whose access rules exclude the caller, are  left out, and sub-modules nested under another module are never listed. Entries follow the portal&#39;s own module  order rather than an alphabetical one. An empty list means the installation registers no such modules at all -  the case on DocSpace, where the classic modules do not exist - and is not a failure. The identifiers here are  display-oriented class names, not the GUIDs the access-settings operations work with, so do not feed them to  &#x60;GET api/2.0/settings/security/{id}&#x60;, which expects a module GUID.
 
 ## Parameters
 This endpoint does not need any parameter.
@@ -17,7 +17,7 @@ This endpoint does not need any parameter.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | List of enabled modules | [**EnabledModuleArrayWrapper**](../api.md#model-enabledmodulearraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The portal modules the calling user can open, each with its product class name and its display name, in the portal&#39;s own module order | [**EnabledModuleArrayWrapper**](../api.md#model-enabledmodulearraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |

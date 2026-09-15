@@ -6,9 +6,9 @@ Referenced types are defined in the [full reference](../files.md).
 
 `DELETE /api/2.0/files/share`
 
-Remove the sharing rights
+Remove sharing rights in batch
 
-Removes the sharing rights from all the files and folders specified in the request.
+Revokes the access of every account and group on the files and folders listed in the request, and clears the  entries from the caller&#39;s own favorites, recent and unread marks. The owner&#39;s own record is kept, since  removing it would take the entry away from the account that owns it, and external links survive untouched -  remove those through the link operations of the entry. The caller must be allowed to change the access of each  entry, which means the creator of the room, a portal administrator, or a member with the rights to manage it;  a caller whose only access came through an external link may use this call to drop the entry from its own  list, while a directly invited member or an unrelated account is refused. The answer is always &#x60;true&#x60; and  identifiers that match nothing are skipped silently, so a successful answer is not proof that anything was  revoked - read the rights back with &#x60;POST api/2.0/files/share&#x60;. The call is destructive and safe to repeat. To  take the rights of one account away instead of all of them, call &#x60;PUT api/2.0/files/share&#x60; with that account&#39;s  access set to &#x60;None&#x60;.
 
 ## Parameters
 
@@ -20,7 +20,7 @@ Removes the sharing rights from all the files and folders specified in the reque
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Boolean value: true if the operation is successful | [**BooleanWrapper**](../files.md#model-booleanwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | Always true: the accounts and groups that had access to the listed entries no longer have it | [**BooleanWrapper**](../files.md#model-booleanwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |

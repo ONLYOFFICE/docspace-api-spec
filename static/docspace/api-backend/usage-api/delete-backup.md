@@ -8,20 +8,21 @@ Referenced types are defined in the [full reference](../backup.md).
 
 Delete the backup
 
-Deletes the backup with the ID specified in the request.
+Deletes one backup: first its history record, then the archive in the storage the record points at.  The ID is the one listed by &#x60;GET api/2.0/backup/getbackuphistory&#x60;, which is also the &#x60;taskId&#x60; the  backup was started with.  Deleting a backup of the whole server rather than of one portal additionally requires the space  access permission. A record that belongs to another portal is left untouched and the call still  answers true, so the result confirms that the request was accepted rather than that anything was  deleted - check with &#x60;GET api/2.0/backup/getbackuphistory&#x60; if it matters.  The record is removed before the archive, so when the storage can no longer be reached the archive  stays behind with nothing pointing at it.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **UUID** (uuid) | The backup ID. | [required] [example: 00000000-0000-0000-0000-000000000000] |
+| **id** | path | **UUID** (uuid) | The ID of the backup to delete, taken from the route. It is the &#x60;id&#x60; of a record listed by  &#x60;GET api/2.0/backup/getbackuphistory&#x60;, which is also the &#x60;taskId&#x60; the backup was started with. | [required] [example: 11111111-1111-1111-1111-111111111111] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Boolean value: true if the operation is successful | [**BooleanWrapper**](../backup.md#model-booleanwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **403** | Access denied | - | - |
+| **200** | True once the request has been accepted, whether or not a backup was deleted | [**BooleanWrapper**](../backup.md#model-booleanwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **402** | The portal subscription has expired or has not been paid | - | - |
+| **403** | No permissions to perform this action | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../backup.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../backup.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../backup.md#model-errorapiresponse) | - |

@@ -8,20 +8,20 @@ Referenced types are defined in the [full reference](../api.md).
 
 Get upcoming payments
 
-Returns the list of upcoming payments based on the active quotas of the current portal tariff.
+Lists what this portal will be charged next for the quotas of its current tariff - one entry per quota that is  going to be billed, with the amount, the currency and the due date. The caller needs the portal-settings right  and gets 403 without it; the call is read-only and idempotent and keeps answering while the portal&#39;s payment  has lapsed. Only quotas that are really charged appear: an overdue quota is skipped, and so is a quota that  has no price of its own, such as a trial or a free plan - which is why the list can come back empty on a  portal that does have a tariff. When a switch to another quota is scheduled for the next period, the entry  describes that next quota and its quantity, so &#x60;id&#x60; and &#x60;name&#x60; may differ from what  &#x60;GET api/2.0/portal/tariff&#x60; reports for today. &#x60;amount&#x60; is the unit price multiplied by &#x60;quantity&#x60;, in the  currency named by &#x60;currency&#x60; as an ISO 4217 code, &#x60;dueDate&#x60; is in the portal time zone, and &#x60;wallet&#x60; marks a  service paid from the portal wallet instead of the subscription.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **refresh** | query | **Boolean** | The value indicating whether the current portal tariff information should be refreshed. | [optional] [example: true] |
+| **refresh** | query | **Boolean** | Whether the tariff is re-read from the billing system instead of the portal cache. The remote read is slower,  so ask for it right after a payment and leave it off for ordinary page loads. | [optional] [example: true] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | List of upcoming payments | [**UpcomingPaymentArrayWrapper**](../api.md#model-upcomingpaymentarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **403** | No permissions to perform this action | - | - |
+| **200** | The charges the portal is going to be billed next, one entry per quota, empty when nothing is due | [**UpcomingPaymentArrayWrapper**](../api.md#model-upcomingpaymentarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **403** | The caller has no portal-settings right | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |

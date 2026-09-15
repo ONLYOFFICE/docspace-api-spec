@@ -8,17 +8,17 @@ Referenced types are defined in the [full reference](../files.md).
 
 Insert a file
 
-Inserts a file specified in the request to the selected folder by single file uploading.
+Stores a file in the folder named by the path in a single request, taking its name from &#x60;title&#x60; rather than  from the uploaded part, which is what separates it from &#x60;POST api/2.0/files/{folderId}/upload&#x60;. The content  may arrive either as a multipart part or as the raw request body. The name is stripped of characters a title  cannot hold and truncated, and &#x60;createNewIfExist&#x60; settles the clash: false adds a new version to the file that  already carries the name, true keeps both by giving the new one a numeric suffix. The caller needs the right  to add content to the folder, so a reader, an editor and a guest get 403, a section root and an archived room  are refused as well, and an unknown folder gives 404. Formats the portal converts are converted afterwards in  the background; pass &#x60;keepConvertStatus&#x60; to keep the outcome readable through  &#x60;GET api/2.0/files/file/{fileId}/checkconversion&#x60;. The answer is the stored file. A large payload belongs in a  chunked session instead.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **folderId** | path | **Integer** (int32) | The folder ID for inserting a file. | [required] [example: 1] |
-| **InsertFile.File** | form | **File** (binary) | The file to be inserted. | [optional] |
-| **InsertFile.Title** | form | **String** | The file title to be inserted. | [optional] |
-| **InsertFile.CreateNewIfExist** | form | **Boolean** | Specifies whether to create a new file if it already exists or not. | [optional] |
-| **InsertFile.KeepConvertStatus** | form | **Boolean** | Specifies whether to keep the file converting status or not. | [optional] |
+| **folderId** | path | **Integer** (int32) | The folder that receives the file; take the id from a listing such as &#x60;GET api/2.0/files/@root&#x60;. A room or an  ordinary folder inside one is accepted, a section root is not. | [required] [example: 1] |
+| **InsertFile.File** | form | **File** (binary) | The content to store, sent as a &#x60;multipart/form-data&#x60; part. The same content may instead be sent as the raw  request body, which is what a client that cannot build a form does; when both are present the form part wins. | [optional] |
+| **InsertFile.Title** | form | **String** | The name to store the file under, extension included. It wins over the name of the uploaded part, which is the  reason to choose this operation over the plain upload, and it is the only name available when the content  arrives as a raw body. Characters a title cannot hold are replaced with underscores and the name is cut to 170  characters before the file is stored. | [optional] |
+| **InsertFile.CreateNewIfExist** | form | **Boolean** | Settles the clash with a file already carrying that title: left out, the content is written as the next  version of that file; set to true, both survive and the new one gets a numeric suffix in its title. | [optional] |
+| **InsertFile.KeepConvertStatus** | form | **Boolean** | Decides whether the outcome of the background conversion outlives the conversion itself. True keeps the queue  record, so &#x60;GET api/2.0/files/file/{fileId}/checkconversion&#x60; can still report the result or the error; left  out, the record is cleared the moment the conversion ends and that call finds nothing. | [optional] |
 | **InsertFile.Stream.CanRead** | form | **Boolean** |  | [optional] |
 | **InsertFile.Stream.CanWrite** | form | **Boolean** |  | [optional] |
 | **InsertFile.Stream.CanSeek** | form | **Boolean** |  | [optional] |
@@ -32,9 +32,9 @@ Inserts a file specified in the request to the selected folder by single file up
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Inserted file | [**FileIntegerWrapper**](../files.md#model-fileintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **403** | You don&#39;t have enough permission to create | - | - |
-| **404** | Folder not found | - | - |
+| **200** | The stored file | [**FileIntegerWrapper**](../files.md#model-fileintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **403** | The caller cannot add content to this folder | - | - |
+| **404** | No folder with the specified ID | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |

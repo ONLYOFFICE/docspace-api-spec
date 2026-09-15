@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../people.md).
 
 Terminate updating user type
 
-Terminates the process of updating the type of the user or guest.
+Cancels the user type change queued for the user with the ID specified in the request.  The caller needs the permission to add and remove users.  The operation is idempotent: when nothing is queued for that user it answers 200 with an empty body, and  repeating it on an already cancelled job changes nothing.  Cancelling removes the job from the queue and does not undo the type change or the transfers it has already  made, and a cancelled job cannot be resumed - start a new one through &#x60;POST api/2.0/people/type&#x60;.  The returned progress reports &#x60;status&#x60; as &#x60;Canceled&#x60; and &#x60;isCompleted&#x60; as true.
 
 ## Parameters
 
@@ -20,7 +20,8 @@ Terminates the process of updating the type of the user or guest.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Update type progress | [**TaskProgressResponseWrapper**](../people.md#model-taskprogressresponsewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The state of the cancelled user type change, or an empty body when nothing was queued for the user | [**TaskProgressResponseWrapper**](../people.md#model-taskprogressresponsewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **403** | No permissions to perform this action | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | - |

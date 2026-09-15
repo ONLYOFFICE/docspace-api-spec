@@ -8,21 +8,21 @@ Referenced types are defined in the [full reference](../api.md).
 
 Add a web plugin
 
-Adds a web plugin from a file to the current portal.
+Installs a web plugin into the current portal from an uploaded package, and switches the plugin on straight  away. The package is sent as &#x60;multipart/form-data&#x60; with exactly one file: a &#x60;.zip&#x60; archive holding a  &#x60;config.json&#x60; manifest and a &#x60;plugin.js&#x60; entry point, under the configured size cap of 5 MB by default.  Editing the portal settings is required, so a portal owner or administrator, and the installation has to have  web plugins and plugin uploading enabled in its configuration. Pass &#x60;system&#x3D;true&#x60; to install the plugin for  every portal of the installation, which is accepted on standalone installations only. The call is mutating and  not idempotent: a package whose manifest name is already installed replaces the stored files and keeps the  settings saved for that name, and the domains the manifest declares are added to the portal Content Security  Policy. It returns the freshly installed plugin, enabled, with the &#x60;url&#x60; its script is served from. A portal  holds up to 100 plugins by default, the manifest name has to be lower-case letters, digits, &#x60;_&#x60;, &#x60;.&#x60; or &#x60;-&#x60;,  and the package is rejected when another installed plugin registers the same JavaScript object under a  different name. List what is installed with &#x60;GET api/2.0/settings/webplugins&#x60;.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **system** | query | **Boolean** | Specifies whether to load the system plugins or not. | [optional] [example: false] |
+| **system** | query | **Boolean** | Whether the plugin is installed for every portal of the installation rather than only this one. It is  accepted on a self-hosted installation alone and refused with 403 elsewhere; an installation-wide plugin also  hides a portal plugin that carries the same name. | [optional] [example: false] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Web plugin | [**WebPluginWrapper**](../api.md#model-webpluginwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **400** | bad request | - | - |
-| **403** | Plugins disabled | - | - |
+| **200** | The installed web plugin, enabled, with the &#x60;url&#x60; its script is served from | [**WebPluginWrapper**](../api.md#model-webpluginwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **400** | The uploaded package is missing, of the wrong type, too large, or its manifest is rejected | - | - |
+| **403** | Web plugins or plugin uploads are switched off for the installation, or &#x60;system&#x60; was requested outside a standalone installation | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |

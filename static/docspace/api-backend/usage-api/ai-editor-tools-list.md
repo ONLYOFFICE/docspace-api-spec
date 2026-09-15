@@ -2,13 +2,13 @@
 
 Referenced types are defined in the [full reference](../newai.md).
 
-> AiSuccessResponse aiEditorToolsList()
+> aiEditorToolsList_200_response aiEditorToolsList()
 
 `GET /api/2.0/ai/editor-tools/list`
 
-Sanitized DocSpace tool catalog for the editor AI plugin
+List editor tools
 
-Returns the sanitized catalog of DocSpace tools available to the document editor&#39;s AI plugin - the same composed tool set the DocSpace chat sees, minus the web-search pair the editor already has through its own passthrough. Only the name, description, parameters and approval flag of each tool are exposed; transport details never reach the browser.
+Returns the catalogue of DocSpace tools the document editor&#39;s AI plugin may offer the model - the same composed set the DocSpace chat sees, minus the two web-search tools the editor already reaches through its own passthrough. &#x60;entityId&#x60; scopes the catalogue to a room, which decides the room-specific tools it contains. Each entry carries exactly four fields: the tool name, its description, its input schema, and whether calling it requires an approval dialog; nothing else is exposed, because the raw listings of system servers carry transport details that must not reach a browser. The approval flag follows the same policy the chat engine applies, and a read-only tool comes back needing none - execute a tool with &#x60;POST api/2.0/ai/editor-tools/call&#x60;, which accepts only the names this catalogue reports.
 
 ## Parameters
 This endpoint does not need any parameter.
@@ -17,12 +17,14 @@ This endpoint does not need any parameter.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Success. | [**AiSuccessResponse**](../newai.md#model-aisuccessresponse) | - |
+| **200** | The tools the editor plugin may offer the model, four fields each. | [**aiEditorToolsList_200_response**](../newai.md#model-aieditortoolslist-200-response) | - |
 | **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
+| **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
+| **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
 
 ## Return type
 
-[**AiSuccessResponse**](../newai.md#model-aisuccessresponse)
+[**aiEditorToolsList_200_response**](../newai.md#model-aieditortoolslist-200-response)
 
 ## Authorization
 

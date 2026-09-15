@@ -8,20 +8,20 @@ Referenced types are defined in the [full reference](../files.md).
 
 Set the room external or invitation link
 
-Sets the room external or invitation link with the ID specified in the request.
+Creates, updates or deletes one sharing link of a room and returns it. &#x60;linkType&#x60; chooses the kind: an  invitation link makes whoever opens it a member with the given access level, while an external link opens the  room without an account. Omitting &#x60;linkId&#x60; creates a link, passing the id of an existing one updates it, and  an unknown id is created with that id; the kind of an existing link cannot be changed afterwards. An access  level of 0 deletes the link, and deleting the primary external link of a public or form filling room  immediately replaces it with a fresh one, so such a room is never left without one. A room keeps at most one  invitation link, and a second one is refused; form filling rooms take no invitation links, and collaboration,  form filling and virtual data rooms take no external links. An expiration date in the past is dropped silently  for an external link and rejected for an invitation link. &#x60;password&#x60;, &#x60;denyDownload&#x60; and &#x60;internal&#x60; apply to  external links only.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The room ID. | [required] [example: 1] |
-| **RoomLinkRequest** | body | [**RoomLinkRequest**](../files.md#model-roomlinkrequest) | The room link parameters. | [required] |
+| **id** | path | **Integer** (int32) | The room the link belongs to, named by the identifier that &#x60;GET api/2.0/files/rooms&#x60; reports for it. | [required] [example: 1] |
+| **RoomLinkRequest** | body | [**RoomLinkRequest**](../files.md#model-roomlinkrequest) | The link to create, change or revoke. | [required] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Room security information | [**FileShareWrapper**](../files.md#model-filesharewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The link as it is after the change, or an empty body when nothing was created | [**FileShareWrapper**](../files.md#model-filesharewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |

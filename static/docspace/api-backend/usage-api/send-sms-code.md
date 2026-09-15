@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../api.md).
 
 Send SMS code
 
-Sends SMS with an authentication code.
+Sends a new SMS authentication code to the phone number stored for the user and reports when that code  expires. The credentials in the body are checked exactly as by &#x60;POST api/2.0/authentication&#x60;, so use this  operation to resend the code after that call answered with &#x60;sms&#x60;; the user needs SMS two-factor enabled and a  phone number already stored, which &#x60;POST api/2.0/authentication/setphone&#x60; registers. Open to unauthenticated  callers, mutating and not idempotent: every call sends a message, is counted in the portal&#39;s SMS usage and  spends one of the few codes a number is allowed within the code lifetime (ten minutes by default), after which  the call fails until those codes expire. Codes sent earlier stay valid, so a resent code does not invalidate  them, and the first one to be accepted invalidates all of them. The answer carries &#x60;sms&#x60;, the masked number  and &#x60;expires&#x60;, and no token - submit the code to &#x60;POST api/2.0/authentication/{code}&#x60;.
 
 ## Parameters
 
@@ -20,9 +20,12 @@ Sends SMS with an authentication code.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Authentication data | [**AuthenticationTokenWrapper**](../api.md#model-authenticationtokenwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **400** | userName, password or passworHash is empty | - | - |
-| **429** | Too many login attempts. Please try again later | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | `Retry-After` |
+| **200** | The masked phone number the code was sent to and the moment that code expires - no authentication token yet | [**AuthenticationTokenWrapper**](../api.md#model-authenticationtokenwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **400** | The request body could not be validated, for example &#x60;confirmData.email&#x60; is not an email address | - | - |
+| **401** | The password, the confirmation key or the third-party profile was rejected | - | - |
+| **403** | The user is disabled, or too many failed attempts have blocked further sign-ins for these credentials | - | - |
+| **404** | No user of this portal matches the credentials in the request body | - | - |
+| **429** | The portal rate limiter rejected the call - retry after the interval in the &#x60;Retry-After&#x60; header | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |

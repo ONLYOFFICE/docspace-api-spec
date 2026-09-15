@@ -2,13 +2,13 @@
 
 Referenced types are defined in the [full reference](../oauth.md).
 
-> Object changeActivation(clientId, ChangeClientActivationRequest)
+> changeActivation(clientId, ChangeClientActivationRequest)
 
-`PATCH /api/2.0/clients/{clientId}/activation`
+`PATCH /api/2.0/oauth2/clients/{clientId}/activation`
 
 Change client activation status
 
-Activates or deactivates an OAuth2 client. When deactivated, the client cannot request new access tokens, but existing tokens will remain valid until they expire.
+Enables or disables an existing client and answers 200 with an empty body. A disabled client can no longer obtain new tokens, but the tokens and consents it already holds stay valid until they expire on their own: disable a client to stop new authorizations, delete it to end the existing ones. An administrator may change any client of the tenant, a plain user only the clients they created. The body carries the single activation flag, and a client the caller may not see is reported as not found rather than as forbidden.
 
 ## Parameters
 
@@ -21,17 +21,19 @@ Activates or deactivates an OAuth2 client. When deactivated, the client cannot r
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Client activation status successfully changed | **Object** | - |
-| **400** | Invalid client ID format or activation status | [**ProblemDetail**](../oauth.md#model-problemdetail) | - |
+| **200** | Client activation status successfully changed | - | - |
+| **400** | The client ID is blank, or the activation status is missing | [**ProblemDetail**](../oauth.md#model-problemdetail) | - |
 | **403** | Insufficient permissions to change client activation | [**ProblemDetail**](../oauth.md#model-problemdetail) | - |
-| **404** | Client not found | [**ProblemDetail**](../oauth.md#model-problemdetail) | - |
-| **415** | Unsupported media type | [**ProblemDetail**](../oauth.md#model-problemdetail) | - |
+| **404** | No client with this ID is visible to the caller, or the ID cannot be parsed as a client ID | [**ProblemDetail**](../oauth.md#model-problemdetail) | - |
+| **415** | The Content-Type header is not application/json | [**ProblemDetail**](../oauth.md#model-problemdetail) | - |
 | **429** | Too many requests - rate limit exceeded | [**ProblemDetail**](../oauth.md#model-problemdetail) | - |
 | **500** | Internal server error occurred | [**ProblemDetail**](../oauth.md#model-problemdetail) | - |
+| **405** | The HTTP method is not allowed for this path | [**ProblemDetail**](../oauth.md#model-problemdetail) | - |
+| **406** | The Accept header does not allow application/json | [**ProblemDetail**](../oauth.md#model-problemdetail) | - |
 
 ## Return type
 
-**Object**
+null (empty response body)
 
 ## Authorization
 

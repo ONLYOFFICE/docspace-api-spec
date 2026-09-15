@@ -6,22 +6,22 @@ Referenced types are defined in the [full reference](../files.md).
 
 `GET /api/2.0/files/fileops/checkdestfolder`
 
-Check for moving or copying files to a folder
+Check the destination folder
 
-Checks if files can be moved or copied to the specified folder.
+Reports whether the destination folder accepts the listed files, before a move or a copy is started. Only  &#x60;fileIds&#x60; and &#x60;destFolderId&#x60; are read from the request: &#x60;result&#x60; says whether all of the files are accepted,  only some of them or none, and &#x60;files&#x60; names the ones that are. The check is about what the destination allows  to be stored in it rather than about name clashes — everywhere except a form-filling room every file is  accepted, while a form-filling room accepts only PDF forms, so a text document offered to one comes back as  none accepted. The caller needs create access to the destination, so a room the caller cannot write to and an  archived room are refused with 403, a destination that does not exist is answered as missing, and a request  without &#x60;destFolderId&#x60; is rejected as an invalid request. Folder ids and the copying options of the request  play no part here. The call changes nothing; for same-named entries at the destination use  &#x60;GET api/2.0/files/fileops/move&#x60;.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **inDto** | query | **BatchRequestDto** | The request parameters for copying/moving files. | [optional] |
+| **inDto** | query | **BatchRequestDto** | The files and folders to move or copy, the folder they go to, and the way name clashes are settled. | [optional] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Result | [**CheckDestFolderWrapper**](../files.md#model-checkdestfolderwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **403** | You don&#39;t have enough permission to create | - | - |
+| **200** | Whether the destination accepts all of the listed files, some of them or none, and which ones it accepts | [**CheckDestFolderWrapper**](../files.md#model-checkdestfolderwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **403** | The caller cannot create items in the destination folder | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |

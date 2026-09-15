@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../people.md).
 
 Start updating user type
 
-Starts updating the type of the user or guest when reassigning rooms and shared files.
+Queues an asynchronous job that converts one account to &#x60;Guest&#x60; or &#x60;User&#x60; and, in the same job, hands the  rooms and the shared files of that account over to another administrator.  Only &#x60;Guest&#x60; and &#x60;User&#x60; are accepted here, because they are the types that cannot own rooms; for any other  type use &#x60;PUT api/2.0/people/type/{type}&#x60;, which converts immediately and transfers nothing.  The caller needs the permission to add and remove users of the requested type, has to be the portal owner to  convert a DocSpace administrator, and converting to &#x60;Guest&#x60; also requires the portal to allow inviting guests.  The account being converted has to be active and cannot be the caller, and the recipient - &#x60;reassignUserId&#x60;,  or the caller when it is omitted - has to be an active room admin or DocSpace admin other than that account.  The conversion does not finish within this call: poll &#x60;GET api/2.0/people/type/progress/{userid}&#x60; with the  converted user ID until &#x60;isCompleted&#x60; is true, and cancel it through &#x60;PUT api/2.0/people/type/terminate&#x60;.  A failure inside the running job is reported in the &#x60;error&#x60; field of the progress, not as a status code here.
 
 ## Parameters
 
@@ -20,9 +20,9 @@ Starts updating the type of the user or guest when reassigning rooms and shared 
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Update type progress | [**TaskProgressResponseWrapper**](../people.md#model-taskprogressresponsewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **400** | Can not update user type | - | - |
-| **403** | Access denied | - | - |
+| **200** | The state of the queued user type change | [**TaskProgressResponseWrapper**](../people.md#model-taskprogressresponsewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **400** | The requested type is neither Guest nor User, the account is a system account, disabled or the caller, the recipient is the same account or is not an active admin, or a non-owner tried to convert a DocSpace admin | - | - |
+| **403** | No permissions to perform this action | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | - |

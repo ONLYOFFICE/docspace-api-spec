@@ -8,26 +8,26 @@ Referenced types are defined in the [full reference](../people.md).
 
 Update a user photo
 
-Updates a photo of the user with the ID specified in the request.
+Sets the avatar of a profile from an image the portal downloads itself from the URL given in &#x60;files&#x60;, which is  the way to reuse a picture that is already published somewhere.  A caller may only do this to their own profile - the ID in the route has to be the calling account, and an  administrator gets 403 for anybody else - and the account must be allowed to edit its own profile.  The URL has to be absolute or relative to the portal, and it has to use HTTPS unless the request itself came  over HTTP; an address the portal refuses to fetch, and a download that does not succeed, both answer 403.  Passing the URL the profile already uses is a no-op, and an empty &#x60;files&#x60; is rejected with 400, so use  &#x60;DELETE api/2.0/people/{userid}/photo&#x60; to remove an avatar rather than sending an empty value.  The downloaded image replaces the stored avatar and all of its sizes at once, raises a &#x60;UserUpdated&#x60; webhook,  and is subject to the portal limit on image size.  To send the bytes instead of a URL, upload the file through &#x60;POST api/2.0/people/{userid}/photo&#x60;.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **userid** | path | **String** | The user ID. | [required] [example: 00000000-0000-0000-0000-000000000000] |
-| **UpdatePhotoMemberRequest** | body | [**UpdatePhotoMemberRequest**](../people.md#model-updatephotomemberrequest) | The request parameters for updating a photo. | [required] |
+| **userid** | path | **String** | The profile whose avatar is replaced, taken from the route. Either the ID of the account or its user name is  accepted, and it has to be the calling account, because a profile photo can only be changed by its owner. | [required] [example: 00000000-0000-0000-0000-000000000000] |
+| **UpdatePhotoMemberRequest** | body | [**UpdatePhotoMemberRequest**](../people.md#model-updatephotomemberrequest) | The address of the image to use as the new avatar. | [required] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Updated thumbnail parameters: original photo, retina, maximum size photo, big, medium, small | [**ThumbnailsDataWrapper**](../people.md#model-thumbnailsdatawrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **403** | No permissions to perform this action | - | - |
-| **404** | User not found | - | - |
+| **200** | The URLs of the photo sizes built from the downloaded image | [**ThumbnailsDataWrapper**](../people.md#model-thumbnailsdatawrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **400** | The files field is empty | - | - |
+| **403** | The ID in the route is not the calling account, the account may not edit its own profile, or the URL was refused or could not be downloaded | - | - |
+| **404** | No user has the specified ID | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | - |
-| **400** | Bad Request. | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 

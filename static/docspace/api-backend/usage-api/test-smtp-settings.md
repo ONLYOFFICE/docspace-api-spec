@@ -6,9 +6,9 @@ Referenced types are defined in the [full reference](../api.md).
 
 `GET /api/2.0/smtpsettings/smtp/test`
 
-Test the SMTP settings
+Test SMTP settings
 
-Tests the SMTP settings for the current portal (sends test message to the user email).
+Queues a background job that sends a test message through the SMTP settings currently stored for the portal to  the email address of the calling user, and returns the state of that job. Save the settings with  &#x60;POST api/2.0/smtpsettings/smtp&#x60; first: the job always takes the stored settings and nothing can be passed to  it here. The caller needs the portal-settings right of a DocSpace administrator, and the SMTP settings section  has to be enabled for the portal, otherwise the call is answered with 402. The call is mutating, it sends  mail, and it is rate-limited to five requests per fifteen minutes per user and path by default, answering 429  above that; while a test is still running the same job is returned instead of a second one being started. The  message has not been sent when the answer arrives: poll &#x60;GET api/2.0/smtpsettings/smtp/test/status&#x60; until  &#x60;completed&#x60; is true, then read &#x60;error&#x60; - empty means the relay accepted the message, otherwise it carries the  reason. &#x60;percents&#x60; climbs to 100 and &#x60;status&#x60; names the step reached, such as &#x60;Connect to host&#x60; or  &#x60;Send test message&#x60;. An unreachable relay is reported in &#x60;error&#x60; after a 30-second connection timeout, not as  a failed request.
 
 ## Parameters
 This endpoint does not need any parameter.
@@ -17,8 +17,8 @@ This endpoint does not need any parameter.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | SMTP operation status | [**SmtpOperationStatusRequestsWrapper**](../api.md#model-smtpoperationstatusrequestswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **402** | Your pricing plan does not support this option | - | - |
+| **200** | The state of the queued test message, to be polled until &#x60;completed&#x60; is true | [**SmtpOperationStatusRequestsWrapper**](../api.md#model-smtpoperationstatusrequestswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **402** | The SMTP settings section is not enabled for this portal | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |

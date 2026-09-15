@@ -6,9 +6,9 @@ Referenced types are defined in the [full reference](../api.md).
 
 `GET /api/2.0/settings/notification/rooms`
 
-Get room notification settings
+Get muted rooms
 
-Returns a list of rooms with the disabled notifications.
+Returns the rooms the calling user has silenced, as the &#x60;disabledRooms&#x60; list of their identifiers. The list  describes the caller&#39;s own account only, the call is read-only, and an empty list means nothing is silenced.  Every signed-in member reads its own list, whatever its role - owner, administrator, user or guest - and no  permission is demanded. The identifiers come back the way &#x60;POST api/2.0/settings/notification/rooms&#x60; stored  them, in the order they were added and without paging; they are kept as opaque values, so both the numeric  identifier of a portal room and the string identifier of a room on a connected third-party account appear  here, and an identifier stays in the list after the room itself is deleted. While a room is on this list its  activity is left out of the hourly room digest and of the daily feed, the letters that room would send at once  are not sent, and its new-item counters are hidden from the Files responses. Silencing a room changes nothing  for its other members. The kinds of notification this list is applied to are switched with  &#x60;POST api/2.0/settings/notification&#x60;.
 
 ## Parameters
 This endpoint does not need any parameter.
@@ -17,7 +17,7 @@ This endpoint does not need any parameter.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Room notification settings | [**RoomsNotificationSettingsWrapper**](../api.md#model-roomsnotificationsettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The identifiers of the rooms the calling user has silenced | [**RoomsNotificationSettingsWrapper**](../api.md#model-roomsnotificationsettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |

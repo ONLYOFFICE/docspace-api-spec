@@ -6,9 +6,9 @@ Referenced types are defined in the [full reference](../api.md).
 
 `PUT /api/2.0/settings/invitationsettings`
 
-Update user invitation settings
+Update the user invitation settings
 
-Updates the portal user invitation settings.
+Sets whether the portal allows inviting new members and new guests. Requires Owner or DocSpaceAdmin (the  EditPortalSettings permission). Disabling member or guest invitations only blocks creating new invitations  going forward; it does not revoke links already issued or remove members already invited. This is a mutating,  idempotent, portal-wide call. It returns the saved setting; read the current value at any time, including  anonymously, from &#x60;GET api/2.0/settings/invitationsettings&#x60;.
 
 ## Parameters
 
@@ -20,7 +20,7 @@ Updates the portal user invitation settings.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Updated user invitation settings | [**TenantUserInvitationSettingsWrapper**](../api.md#model-tenantuserinvitationsettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | Saved user invitation settings | [**TenantUserInvitationSettingsWrapper**](../api.md#model-tenantuserinvitationsettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |

@@ -8,19 +8,19 @@ Referenced types are defined in the [full reference](../api.md).
 
 Get the portal settings
 
-Returns a list of all the available portal settings with the current values for each parameter.
+Returns the current portal&#39;s general configuration: branding, culture, feature flags, and DocSpace/Standalone  mode, everything the client needs to render its shell before or after login. No permission is required, but  the response shape depends on the caller&#39;s identity. An anonymous caller receives only the public subset  (culture, branding, DocSpace/Standalone flags, deep link data, setup-wizard and join-by-domain hints); once  authenticated, the response also includes tenant-specific fields such as the owner ID, time zone, invitation  limit, AI/banner/dev-tools flags, and, for a DocSpace administrator, the tenant wallet&#39;s low-balance flag.  This is a read-only, idempotent call. Pass &#x60;withPassword&#x3D;true&#x60; to also receive the parameters (&#x60;salt&#x60;,  iteration count, hash size) used to hash the password client-side before it is sent to the authentication  endpoints; these are only added for an anonymous caller or when explicitly requested, never as part of the  default authenticated response.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **withpassword** | query | **Boolean** | Specifies whether to include the password hashing configuration in the response. | [optional] [example: true] |
+| **withpassword** | query | **Boolean** | Whether the answer also carries the salt, iteration count and hash size a client needs to hash a password  before sending it to the authentication operations. They are included for an anonymous caller anyway; for a  signed-in one they are left out unless this is set. | [optional] [example: true] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Settings | [**SettingsWrapper**](../api.md#model-settingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | Current portal settings, tailored to the caller&#39;s authentication state | [**SettingsWrapper**](../api.md#model-settingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |
 | **400** | Bad Request. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |

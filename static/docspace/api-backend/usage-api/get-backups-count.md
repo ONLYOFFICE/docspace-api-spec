@@ -8,23 +8,23 @@ Referenced types are defined in the [full reference](../backup.md).
 
 Get the number of backups
 
-Returns the number of backups for a period of time. The default is the current calendar month.
+Counts the backups of the current portal that were created within a period, and &#x60;paid&#x60; chooses which  kind is counted: false, the default, counts the ones covered by the free monthly allowance, and true  counts the ones charged to the portal wallet.  The period defaults to the current calendar month - &#x60;from&#x60; becomes the first day of the month at  00:00 UTC and &#x60;to&#x60; becomes the moment of the call. Both bounds are UTC and inclusive, and a &#x60;from&#x60;  later than &#x60;to&#x60; is rejected. Called with no parameters at all, this returns exactly the figure the  free monthly allowance is measured against.  The count is over history records rather than over stored archives, so it includes backups that have  already been deleted; use &#x60;GET api/2.0/backup/getbackuphistory&#x60; to see what can still be restored.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **from** | query | **Date** (date-time) | The from date. | [optional] [example: 2025-01-01T00:00:00Z] |
-| **to** | query | **Date** (date-time) | The to date. | [optional] [example: 2025-12-31T23:59:59Z] |
-| **paid** | query | **Boolean** | Specifies if the backups are paid or not. | [optional] [example: false] |
+| **from** | query | **Date** (date-time) | The start of the period, in UTC and inclusive. It defaults to the first day of the current calendar  month at 00:00 UTC, and it has to be no later than &#x60;to&#x60;. | [optional] [example: 2026-03-01T00:00:00Z] |
+| **to** | query | **Date** (date-time) | The end of the period, in UTC and inclusive. It defaults to the moment of the call. | [optional] [example: 2026-03-31T23:59:59Z] |
+| **paid** | query | **Boolean** | Counts the backups charged to the portal wallet when true, and the ones covered by the free monthly  allowance when false, which is the default. It is read only by  &#x60;GET api/2.0/backup/getbackupscount&#x60; and is ignored by  &#x60;GET api/2.0/backup/getbackupscountbypaid&#x60;, which always reports both. | [optional] [example: false] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Number of backups | [**Int32Wrapper**](../backup.md#model-int32wrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **400** | From date must be less than to date | - | - |
-| **403** | Access denied | - | - |
+| **200** | The number of backups created within the period | [**Int32Wrapper**](../backup.md#model-int32wrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **400** | The start of the period is later than its end | - | - |
+| **403** | No permissions to perform this action | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../backup.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../backup.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../backup.md#model-errorapiresponse) | - |

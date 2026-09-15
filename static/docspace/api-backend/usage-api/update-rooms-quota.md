@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../files.md).
 
 Change the room quota limit
 
-Changes the quota limit for the rooms with the IDs specified in the request.
+Sets the same custom storage limit, in bytes, on every listed room and streams the updated rooms back in the  order they were given. The per-room quota feature has to be on for the portal, and the value must stay within  the portal own limit, otherwise the call is refused before anything is written. The caller must be a manager  of each listed room, and an archived room or a room in the trash is refused. The list is not transactional:  rooms processed before the offending one keep their new limit, so a failed call has to be checked room by  room. Only numeric room ids are processed, which means ids of rooms stored in a connected third-party account  are silently skipped. A room whose limit already equals the requested value is left untouched and still  returned. To go back to the portal default use &#x60;PUT api/2.0/files/rooms/resetquota&#x60;, and to drop the custom  limit entirely send a quota of -1 to &#x60;PUT api/2.0/files/rooms/{id}&#x60;.
 
 ## Parameters
 
@@ -20,7 +20,7 @@ Changes the quota limit for the rooms with the IDs specified in the request.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | List of rooms with the detailed information | [**FolderIntegerArrayWrapper**](../files.md#model-folderintegerarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The rooms as they are after the new limit was applied | [**FolderIntegerArrayWrapper**](../files.md#model-folderintegerarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |

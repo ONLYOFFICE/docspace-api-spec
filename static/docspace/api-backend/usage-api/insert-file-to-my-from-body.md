@@ -6,18 +6,18 @@ Referenced types are defined in the [full reference](../files.md).
 
 `POST /api/2.0/files/@my/insert`
 
-Insert a file to the My documents section
+Insert a file into My documents
 
-Inserts a file specified in the request to the My documents section by single file uploading.
+Stores one file in the caller&#39;s own My documents section, the personal storage every portal member has, and  returns the stored file. The destination takes no identifier: it is resolved from the calling account and  created on first use, while a guest account has none and is answered as missing (404). Send the content as a  &#x60;multipart/form-data&#x60; part or as the raw request body, and name it with &#x60;title&#x60;, which wins over the name of  the uploaded part and has invalid characters replaced before storing. The call is not idempotent: by default a  file of the same title is overwritten as a new version, while &#x60;createNewIfExist&#x3D;true&#x60; stores a separate copy  under a title made unique with a numeric suffix; a title held by a file that is locked or open in the editor  cannot be overwritten either, and a second file appears under the same title. Formats listed in  &#x60;extsMustConvert&#x60; of &#x60;GET api/2.0/files/settings&#x60; are converted after the response is sent;  &#x60;keepConvertStatus&#x3D;true&#x60; keeps that result readable through &#x60;GET api/2.0/files/file/{fileId}/checkconversion&#x60;,  which otherwise drops it. Files over the single-request size limit or the account&#39;s storage quota are refused:  send those through &#x60;POST api/2.0/files/{folderId}/upload/create_session&#x60;, and use  &#x60;POST api/2.0/files/{folderId}/insert&#x60; for any other destination.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **File** | form | **File** (binary) | The file to be inserted. | [optional] |
-| **Title** | form | **String** | The file title to be inserted. | [optional] |
-| **CreateNewIfExist** | form | **Boolean** | Specifies whether to create a new file if it already exists or not. | [optional] |
-| **KeepConvertStatus** | form | **Boolean** | Specifies whether to keep the file converting status or not. | [optional] |
+| **File** | form | **File** (binary) | The content to store, sent as a &#x60;multipart/form-data&#x60; part. The same content may instead be sent as the raw  request body, which is what a client that cannot build a form does; when both are present the form part wins. | [optional] |
+| **Title** | form | **String** | The name to store the file under, extension included. It wins over the name of the uploaded part, which is the  reason to choose this operation over the plain upload, and it is the only name available when the content  arrives as a raw body. Characters a title cannot hold are replaced with underscores and the name is cut to 170  characters before the file is stored. | [optional] |
+| **CreateNewIfExist** | form | **Boolean** | Settles the clash with a file already carrying that title: left out, the content is written as the next  version of that file; set to true, both survive and the new one gets a numeric suffix in its title. | [optional] |
+| **KeepConvertStatus** | form | **Boolean** | Decides whether the outcome of the background conversion outlives the conversion itself. True keeps the queue  record, so &#x60;GET api/2.0/files/file/{fileId}/checkconversion&#x60; can still report the result or the error; left  out, the record is cleared the moment the conversion ends and that call finds nothing. | [optional] |
 | **Stream.CanRead** | form | **Boolean** |  | [optional] |
 | **Stream.CanWrite** | form | **Boolean** |  | [optional] |
 | **Stream.CanSeek** | form | **Boolean** |  | [optional] |
@@ -31,9 +31,9 @@ Inserts a file specified in the request to the My documents section by single fi
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Inserted file | [**FileIntegerWrapper**](../files.md#model-fileintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **403** | You don&#39;t have enough permission to create | - | - |
-| **404** | Folder not found | - | - |
+| **200** | The stored file, with the identifier, version and title it was saved under | [**FileIntegerWrapper**](../files.md#model-fileintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **403** | Creating a file in the personal section is not allowed for this account | - | - |
+| **404** | The caller has no personal section, so there is nothing to store the file in | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |

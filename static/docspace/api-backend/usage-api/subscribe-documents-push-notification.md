@@ -6,9 +6,9 @@ Referenced types are defined in the [full reference](../api.md).
 
 `PUT /api/2.0/settings/push/docsubscribe`
 
-Subscribe to Documents push notification
+Set push subscription
 
-Subscribes to the Documents push notification.
+Switches the push notifications of the Documents application on or off for one already registered device of  the calling user: send that device&#39;s Firebase token together with &#x60;isSubscribed&#x60; true to let the messages  through or false to stop them. The device has to be registered first with  &#x60;POST api/2.0/settings/push/docregisterdevice&#x60;, and only the subscription state is written - the token is  matched, never changed. Every signed-in member manages its own devices, whatever its role - owner,  administrator, user or guest - and a token that belongs to another member or to another portal is not matched  at all, so nothing of theirs can be switched. Repeating the call with the same pair leaves the registration as  it is. What comes back is the updated registration, while an empty response means no registration of the  caller carries that token and nothing was stored - register the device and call again. A device switched off  keeps its token stored but is left out of the delivery, and the other devices of the same member are  unaffected. Which kinds of notification the account receives at all is a separate setting, read with  &#x60;GET api/2.0/settings/notification/{type}&#x60;.
 
 ## Parameters
 
@@ -20,7 +20,7 @@ Subscribes to the Documents push notification.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | FireBase user | [**FireBaseUserWrapper**](../api.md#model-firebaseuserwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The device registration as it stands after the change, or an empty response when no registration of the calling user carries the token that was sent | [**FireBaseUserWrapper**](../api.md#model-firebaseuserwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |

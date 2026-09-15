@@ -6,24 +6,24 @@ Referenced types are defined in the [full reference](../files.md).
 
 `POST /api/2.0/files/file/{id}/link`
 
-Create primary external link
+Create the file primary external link
 
-Creates a primary external link by the identifier specified in the request.
+Answers with the primary external link of a file, creating it on the first call and returning the one that  already exists afterwards, so the operation is idempotent in effect: a second call with other parameters does  not reconfigure the existing link, and changing one is the business of &#x60;PUT api/2.0/files/file/{id}/links&#x60;.  The parameters therefore only shape the link at the moment it is born - &#x60;access&#x60; its rights, &#x60;expirationDate&#x60;  its lifetime, which for a file in a personal section is unlimited here rather than the default of a few days,  &#x60;internal&#x60; whether only signed-in members may follow it, &#x60;denyDownload&#x60; whether the content may only be  viewed, and &#x60;password&#x60; a secret to be asked for. A PDF form gets the rights it needs for filling out whatever  was asked for, and a form in a form-filling room is answered with the link of the room instead. The caller  needs the right to share the file and is otherwise refused with 403; a link that was deliberately revoked is  not recreated but answered with 404. Read the address from &#x60;sharedTo.shareLink&#x60;.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The file ID. | [required] [example: 1] |
-| **FileLinkRequest** | body | [**FileLinkRequest**](../files.md#model-filelinkrequest) | The file external link parameters. | [required] |
+| **id** | path | **Integer** (int32) | The file the link points at. | [required] [example: 1] |
+| **FileLinkRequest** | body | [**FileLinkRequest**](../files.md#model-filelinkrequest) | The settings of the link. They are applied in full, so a field left out is reset rather than kept. | [required] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | File security information | [**FileShareWrapper**](../files.md#model-filesharewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **403** | You don&#39;t have enough permission to perform the operation | - | - |
-| **404** | Not Found | - | - |
+| **200** | The primary external link of the file | [**FileShareWrapper**](../files.md#model-filesharewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **403** | The caller may not share the file | - | - |
+| **404** | The file does not exist, or its primary link was revoked | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |

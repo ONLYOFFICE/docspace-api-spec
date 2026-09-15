@@ -8,25 +8,25 @@ Referenced types are defined in the [full reference](../files.md).
 
 Get file history
 
-Returns the list of actions performed on the file with the specified identifier.
+Returns the activity log of a single file - who renamed, moved, shared, converted, locked or edited it, and  when - as the portal recorded it in its audit trail. Entries arrive newest first, and the events that belong  to one action are folded into a single entry whose &#x60;related&#x60; list carries the rest of them. &#x60;fromDate&#x60; and  &#x60;toDate&#x60; are read in the portal&#39;s time zone and narrow the range; &#x60;startIndex&#x60; and &#x60;count&#x60; page through the  result, and the number of matching entries is reported in the response headers rather than in the body. The  caller needs read access to the file, so a member of the room it lies in, the admin of that room and a  DocSpace admin all see the same log, while a caller without access to the room is refused with 403 and an  unknown id is answered with 404. The operation is read-only. Only files stored in the portal itself have a log  here - a file kept in a connected third-party storage has none. For the log of a folder or a room use  &#x60;GET api/2.0/files/folder/{folderId}/log&#x60;.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **Integer** (int32) | The file ID of the history request. | [required] [example: 1] |
-| **fromDate** | query | **Date** (date-time) | The start date of the history. | [optional] [example: 2025-01-01T00:00:00.0000000Z] |
-| **toDate** | query | **Date** (date-time) | The end date of the history. | [optional] [example: 2025-12-31T23:59:59.0000000Z] |
-| **count** | query | **Integer** (int32) | The number of history entries to retrieve for the file log. | [optional] [example: 25] [min: 1] [max: 100] |
-| **startIndex** | query | **Integer** (int32) | The starting index for retrieving a subset of file history entries. | [optional] [example: 0] |
+| **fileId** | path | **Integer** (int32) | The file whose activity log is read; only files stored in the portal itself have one. | [required] [example: 1] |
+| **fromDate** | query | **Date** (date-time) | The earliest moment an entry may have, read in the time zone of the portal; left out, the log starts at the  oldest entry the portal still keeps. | [optional] [example: 2025-01-01T00:00:00.0000000Z] |
+| **toDate** | query | **Date** (date-time) | The latest moment an entry may have, read in the time zone of the portal; left out, the log ends at the newest  entry. | [optional] [example: 2025-12-31T23:59:59.0000000Z] |
+| **count** | query | **Integer** (int32) | How many entries one page holds. The number of entries that match the query is reported in the response  headers, not in the body. | [optional] [example: 25] [min: 1] [max: 100] |
+| **startIndex** | query | **Integer** (int32) | How many entries to skip before the page begins, counted from the newest one, so pages are taken by adding the  page size to it. | [optional] [example: 0] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | List of actions performed on the file | [**HistoryArrayWrapper**](../files.md#model-historyarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **403** | You don&#39;t have enough permission to perform the operation | - | - |
-| **404** | The required file was not found | - | - |
+| **200** | The activity entries of the file, newest first | [**HistoryArrayWrapper**](../files.md#model-historyarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **403** | The caller has no read access to the file | - | - |
+| **404** | No file with this identifier exists | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |

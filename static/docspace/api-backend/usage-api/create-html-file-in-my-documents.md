@@ -6,9 +6,9 @@ Referenced types are defined in the [full reference](../files.md).
 
 `POST /api/2.0/files/@my/html`
 
-Create an HTML file in the My documents section
+Create an HTML file in My documents
 
-Creates an HTML (.html) file in the My documents section with the title and contents specified in the request.
+Creates an HTML file in the caller&#39;s own My documents section out of the markup passed as the content, and  answers with the stored file. The &#x60;.html&#x60; extension is added to the title unless the title already ends with  it, and a request carrying no content is rejected as invalid. &#x60;createNewIfExist&#x60; acts the other way round than  its name reads: with &#x60;true&#x60; the file that already carries this title is updated, the markup replacing its  content and a version appearing in its history, while with &#x60;false&#x60;, which is also the default, another file is  created and its title made unique, as in Notes (1).html. Updating needs the existing file to be editable by  the caller, so one that is locked, open in an editing session, encrypted or in Trash is left alone and a new  file appears beside it instead. The call is mutating: repeating it with &#x60;true&#x60; keeps a single file and grows  its history, repeating it with &#x60;false&#x60; fills the section with numbered copies. A guest has no My documents  section and is refused. To create the file in a room or another folder use  &#x60;POST api/2.0/files/{folderId}/html&#x60;.
 
 ## Parameters
 
@@ -20,8 +20,8 @@ Creates an HTML (.html) file in the My documents section with the title and cont
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | New file information | [**FileIntegerWrapper**](../files.md#model-fileintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **403** | You don&#39;t have enough permission to create | - | - |
+| **200** | The created or updated HTML file | [**FileIntegerWrapper**](../files.md#model-fileintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **403** | The caller may not create a file in this section | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |

@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../people.md).
 
 Get the portal theme
 
-Returns a theme which is set to the current portal.
+Returns the interface theme the calling account has chosen: &#x60;Base&#x60; for the light theme, &#x60;Dark&#x60; for the dark  one, or &#x60;System&#x60; to follow whatever the operating system asks for.  The setting belongs to the account and not to the portal, despite the name of the route, so it describes the  caller alone and cannot be read for anybody else.  It needs no permission and is read-only.  A caller that has never chosen a theme gets the portal default rather than an empty answer.  The same value is also reported as &#x60;theme&#x60; by &#x60;GET api/2.0/people/@self&#x60;, so a client that reads the profile  on start-up does not need this operation as well.
 
 ## Parameters
 This endpoint does not need any parameter.
@@ -17,7 +17,7 @@ This endpoint does not need any parameter.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Theme | [**DarkThemeSettingsWrapper**](../people.md#model-darkthemesettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The interface theme of the calling account | [**DarkThemeSettingsWrapper**](../people.md#model-darkthemesettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | - |

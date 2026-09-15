@@ -6,25 +6,27 @@ Referenced types are defined in the [full reference](../newai.md).
 
 `GET /api/2.0/ai/threads/list`
 
-List
+List chat threads
 
-Lists the chat threads of the scope, most recently edited first. Supports cursor pagination and a server-side case-insensitive title search.
+Lists the threads of a scope, most recently edited first, and searches their titles case-insensitively when &#x60;query&#x60; is given. Every parameter is optional: omitting &#x60;entityId&#x60; lists the global scope, and omitting &#x60;count&#x60; lets the engine apply its own page size. Pagination is by cursor, and the cursor is a JSON object passed as a string in the query - &#x60;{id: &lt;last thread id&gt;, lastEditDate: &lt;its date&gt;}&#x60; - taken from the last entry of the previous page. A cursor that is not valid JSON, or that lacks an &#x60;id&#x60;, is ignored rather than rejected, and the read silently starts from the first page again.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **entityId** | query | **String** | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | [optional] |
-| **count** | query | **String** | The maximum number of items to return in one page. | [optional] |
-| **cursor** | query | **String** | The keyset pagination cursor: the JSON-encoded sort key of the last item already received. Omit for the first page. | [optional] |
-| **query** | query | **String** | The full-text query the thread list is filtered by. | [optional] |
+| **entityId** | query | **String** | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | [optional] [example: 1234] |
+| **count** | query | **Integer** | The maximum number of items to return in one page. | [optional] [example: 20] |
+| **cursor** | query | **String** | The keyset pagination cursor: the JSON-encoded sort key of the last item already received. Omit for the first page. | [optional] [example: {"id":"11111111-1111-1111-1111-111111111111","lastEditDate":1767225600000}] |
+| **query** | query | **String** | The full-text query the thread list is filtered by. | [optional] [example: contract] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Success. | [**List**](../newai.md#model-aithread) | - |
+| **200** | The threads of the scope, most recently edited first. | [**List**](../newai.md#model-aithread) | - |
 | **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
+| **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
+| **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
 
 ## Return type
 

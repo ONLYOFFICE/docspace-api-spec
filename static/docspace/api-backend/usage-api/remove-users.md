@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../people.md).
 
 Delete users
 
-Deletes a list of the users with the IDs specified in the request.
+Deletes several portal profiles in one call and queues the erasure of the data behind each of them.  Every listed account has to be disabled already - set the &#x60;Terminated&#x60; status through  &#x60;PUT api/2.0/people/status/{status}&#x60; first, because a single account that is still active rejects the whole  call with 403 - and the caller needs the permission to add and remove users.  System and LDAP accounts are dropped from the list without an error, and so are the accounts the caller may  not delete: a room admin when the caller is not a DocSpace admin, and a DocSpace admin when the caller is not  the portal owner.  The answer lists every account that was asked for, including the ones that were skipped, so it is not proof  that an account was deleted - read &#x60;GET api/2.0/people/{userid}&#x60; for that, which then answers 404.  The removal is permanent and cannot be undone, and each deleted account raises a &#x60;UserDeleted&#x60; webhook while  its data is erased by a queued job that can be watched through  &#x60;GET api/2.0/people/remove/progress/{userid}&#x60;.  Hand the rooms and the shared files over first through &#x60;POST api/2.0/people/reassign/start&#x60; - an account with  an unfinished reassignment cannot be deleted.
 
 ## Parameters
 
@@ -20,10 +20,9 @@ Deletes a list of the users with the IDs specified in the request.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | List of users with the detailed information | [**EmployeeFullArrayWrapper**](../people.md#model-employeefullarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **400** | Incorrect UserIds | - | - |
-| **403** | No permissions to perform this action or users are not suspended | - | - |
-| **409** | Data reassign process is not complete | - | - |
+| **200** | Every account that was asked for, including the ones that were skipped | [**EmployeeFullArrayWrapper**](../people.md#model-employeefullarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **400** | The userIds field is missing | - | - |
+| **403** | No permissions to perform this action, or one of the listed accounts is not disabled | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | - |

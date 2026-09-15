@@ -6,9 +6,9 @@ Referenced types are defined in the [full reference](../api.md).
 
 `GET /api/2.0/settings/storage`
 
-Get storages
+Get the portal storages
 
-Returns a list of all the portal storages.
+Returns the third-party storages the installation can keep portal data in, the providers the build ships with,  such as Amazon S3, Google Cloud Storage or Rackspace. The built-in local storage is not among them: when none  of the entries is &#x60;current&#x60;, the portal data sits in the local storage. Each entry carries the storage  identifier and title, the authentication keys the provider expects, &#x60;isSet&#x60; telling whether those keys are  already filled in on the server, and &#x60;current&#x60; marking the one the portal uses right now. Keys of the current  storage are read from the saved settings, keys of the others from the provider configuration, so a value that  was never configured comes back empty. The caller needs the permission to edit portal settings, which in  practice means the portal owner or a DocSpace admin, and the installation has to be a server one whose access  space is not restricted; otherwise the call is refused with 403. Nothing is written and the call is safe to  repeat. Use &#x60;PUT api/2.0/settings/storage&#x60; to switch the storage, &#x60;DELETE api/2.0/settings/storage&#x60; to go back  to the local one, and &#x60;GET api/2.0/settings/storage/cdn&#x60; or &#x60;GET api/2.0/settings/storage/backup&#x60; for the CDN  and backup targets.
 
 ## Parameters
 This endpoint does not need any parameter.
@@ -17,8 +17,8 @@ This endpoint does not need any parameter.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | List of storages with the following parameters | [**StorageArrayWrapper**](../api.md#model-storagearraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **403** | No permissions to perform this action | - | - |
+| **200** | The storages available to the portal, each marked as configured and as currently in use | [**StorageArrayWrapper**](../api.md#model-storagearraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **403** | The caller may not edit portal settings, or this installation does not allow changing the storage | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |

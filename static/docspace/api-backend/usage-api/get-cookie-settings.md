@@ -6,9 +6,9 @@ Referenced types are defined in the [full reference](../api.md).
 
 `GET /api/2.0/settings/cookiesettings`
 
-Get cookies lifetime
+Get the cookie lifetime settings
 
-Returns the cookies lifetime value in minutes.
+Returns how long an authentication session of this portal stays valid: &#x60;lifeTime&#x60; in minutes together with the  &#x60;enabled&#x60; flag that says whether that limit is applied at all. The caller needs the portal-settings right of a  DocSpace administrator - the portal owner and a DocSpace administrator qualify, any other member is refused -  and the call is read-only. The pair describes the whole portal rather than the calling user, and it is never  empty: a portal nobody has configured answers &#x60;lifeTime&#x60; 1440, one day, with &#x60;enabled&#x60; false. Read the two  fields together, because the number alone does not say how long a session lasts - while &#x60;enabled&#x60; is false the  stored number is ignored and an issued session is honoured for a year, and &#x60;lifeTime&#x60; 0 with &#x60;enabled&#x60; true  means a session that never expires on its own. On an installation whose configuration hides the cookie section  the built-in default pair comes back instead of the stored one. &#x60;GET api/2.0/settings&#x60; carries the same flag  as &#x60;cookieSettingsEnabled&#x60; without the number; change the pair with &#x60;PUT api/2.0/settings/cookiesettings&#x60;.
 
 ## Parameters
 This endpoint does not need any parameter.
@@ -17,7 +17,7 @@ This endpoint does not need any parameter.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Lifetime value in minutes | [**CookieSettingsWrapper**](../api.md#model-cookiesettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The authentication session lifetime of the portal in minutes together with the flag that says whether that limit is applied | [**CookieSettingsWrapper**](../api.md#model-cookiesettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |

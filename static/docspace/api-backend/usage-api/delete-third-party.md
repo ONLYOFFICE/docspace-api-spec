@@ -8,19 +8,19 @@ Referenced types are defined in the [full reference](../files.md).
 
 Remove a third-party account
 
-Removes the third-party storage service account with the ID specified in the request.
+Disconnects a third-party storage account from the portal and returns the ID of the folder that stood for it,  in the &#x60;provider-accountId&#x60; form the Files operations use for third-party entries. Take &#x60;providerId&#x60; from  &#x60;GET api/2.0/files/thirdparty&#x60;: it is the numeric account ID, not that composed folder ID. The member who  connected the account can remove it; another member&#39;s request is refused unless they hold delete rights on the  folder it stands for. Nothing is deleted at the storage service: the files stay with the provider, and what  goes away is the portal&#39;s link to them together with the stored credentials, the sharing records and the tags  kept for its entries. A room that was created on this account stops being available. When the account being  removed is the one connected for backups by &#x60;POST api/2.0/files/thirdparty/backup&#x60;, its backup schedule is  deleted as well. The removal cannot be repeated: once the account is gone the same ID is refused rather than  confirmed, so treat the first successful answer as the record of it.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **providerId** | path | **Integer** (int32) | The provider ID. | [required] [example: 1] |
+| **providerId** | path | **Integer** (int32) | The ID of the connected third-party storage account, as &#x60;providerId&#x60; of &#x60;GET api/2.0/files/thirdparty&#x60;. | [required] [example: 12] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Third-party folder ID | [**StringWrapper**](../files.md#model-stringwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The ID of the folder that stood for the removed account | [**StringWrapper**](../files.md#model-stringwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |

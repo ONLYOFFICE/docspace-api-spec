@@ -8,21 +8,21 @@ Referenced types are defined in the [full reference](../files.md).
 
 Get file external links
 
-Returns the external links of a file with the ID specified in the request.
+Lists the external links of a file, each with its identifier, title, address, rights, expiration date and  download restriction. &#x60;startIndex&#x60; and &#x60;count&#x60; page through the list, and the total number of links is  reported in the response headers rather than in the body. A file that has never been shared by link answers  with an empty list; the primary link is part of this list once it exists, and it is the only one that is  created on demand, by &#x60;GET api/2.0/files/file/{id}/link&#x60;. For a PDF form kept in a form-filling room the link  of the room is appended to the answer, because that is the address through which the form is filled out. The  caller needs the right to share the file, which its creator, the room admin and a DocSpace admin acting as  room manager have; a caller without access to the file is refused and an anonymous caller is rejected. The  operation is read-only. Take an identifier from here to &#x60;PUT api/2.0/files/file/{id}/links&#x60; to change or  remove that link.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The file unique identifier. | [required] [example: 10] |
-| **count** | query | **Integer** (int32) | The number of items to retrieve in the request. | [optional] [example: 25] [min: 1] [max: 100] |
-| **startIndex** | query | **Integer** (int32) | The starting index for the query results. | [optional] [example: 0] |
+| **id** | path | **Integer** (int32) | The file the operation addresses. Take the identifier from a listing such as &#x60;GET api/2.0/files/{folderId}&#x60;: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: 10] |
+| **count** | query | **Integer** (int32) | How many entries at most to answer with, in the operations of this file that return a list; an operation that  answers with a single object is not affected by it. | [optional] [example: 25] [min: 1] [max: 100] |
+| **startIndex** | query | **Integer** (int32) | How many entries of such a list to skip before answering, used together with &#x60;count&#x60; to walk through it page  by page. | [optional] [example: 0] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | File security information | [**FileShareArrayWrapper**](../files.md#model-filesharearraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The external links of the file | [**FileShareArrayWrapper**](../files.md#model-filesharearraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |

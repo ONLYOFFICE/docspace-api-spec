@@ -6,23 +6,23 @@ Referenced types are defined in the [full reference](../files.md).
 
 `GET /api/2.0/files/tags`
 
-Get the room tags
+Get available room tags
 
-Returns a list of custom tags.
+Returns the custom room tags available to the caller as a flat array of names, not of objects. What the array  holds depends on the account: a portal administrator gets the whole catalog, including tags that no room uses  yet, while every other account gets only the tags attached to rooms it can see, with duplicates removed. An  empty answer therefore means that this caller sees no tagged room, not that the portal has no tags.  &#x60;filterValue&#x60; keeps the names that contain the given text, ignoring case, while &#x60;count&#x60; and &#x60;startIndex&#x60; page  the result; no total is returned, so a page shorter than &#x60;count&#x60; is the signal that the list is exhausted. The  names are exactly the values accepted by the &#x60;tags&#x60; filter of &#x60;GET api/2.0/files/rooms&#x60; and by the room tag  calls, which makes this the call to fill a tag picker with. Add a tag with &#x60;POST api/2.0/files/tags&#x60; and check  whether one is still in use with &#x60;GET api/2.0/files/tags/{tagName}/haslinks&#x60;.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **count** | query | **Integer** (int32) | Gets or sets the number of tag results to retrieve.  This property specifies the maximum amount of tag data to be included in the result set. | [optional] [example: 25] [min: 1] [max: 100] |
-| **startIndex** | query | **Integer** (int32) | Represents the starting index from which the tags&#39; information will be retrieved.  This property is used to define the offset for pagination when retrieving a list of tags. It determines  the point in the data set from which the retrieval begins. | [optional] [example: 0] [min: 0] [max: 2147483647] |
-| **filterValue** | query | **String** | Gets or sets the text value used for searching tags.  This property is typically used as a filter value when retrieving tag information. | [optional] [example: My Document] |
+| **count** | query | **Integer** (int32) | How many tag names one page may carry. The answer reports no total, so a page shorter than this is the sign  that the list is exhausted. | [optional] [example: 25] [min: 1] [max: 100] |
+| **startIndex** | query | **Integer** (int32) | How many tag names to skip before the page begins. Raise it by the number of names already received to read  the next page. | [optional] [example: 0] [min: 0] [max: 2147483647] |
+| **filterValue** | query | **String** | Keeps only the tag names that contain this text, ignoring case. It is a substring match, so a fragment from  the middle of a name is enough. | [optional] [example: conf] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | List of tag names | [**STRINGArrayWrapper**](../files.md#model-stringarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The tag names available to the caller | [**STRINGArrayWrapper**](../files.md#model-stringarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |

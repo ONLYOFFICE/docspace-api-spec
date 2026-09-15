@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../api.md).
 
 Check the white label availability
 
-Checks if the white label is enabled or not.
+Reports whether branding may be configured for the current portal at all, which is the check to make before  offering the rebranding interface or calling any of the save operations under &#x60;api/2.0/settings/whitelabel&#x60;.  Requires a DocSpace administrator. The call is read-only and idempotent. The answer is &#x60;true&#x60; only when both  conditions hold: the branding section is not switched off in the installation configuration, and the portal&#39;s  current plan includes customization. It comes back as &#x60;false&#x60; on a plan without branding, which is exactly the  case in which &#x60;POST api/2.0/settings/whitelabel/logos/save&#x60;,  &#x60;POST api/2.0/settings/whitelabel/logos/savefromfiles&#x60; and &#x60;POST api/2.0/settings/whitelabel/logotext/save&#x60;  are refused as payment required. The restore operations do not depend on this flag and stay available, so a  portal that loses branding can still be reset to the built-in logos and wordmark. The flag says nothing about  the installation-wide default branding, which additionally needs a server installation with unrestricted space  access, and nothing about the company details and help links under &#x60;api/2.0/settings/rebranding&#x60;.
 
 ## Parameters
 This endpoint does not need any parameter.
@@ -17,7 +17,7 @@ This endpoint does not need any parameter.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Boolean value: true if the white label is enabled | [**BooleanWrapper**](../api.md#model-booleanwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | &#x60;true&#x60; when branding is enabled in this installation and included in the portal&#39;s plan | [**BooleanWrapper**](../api.md#model-booleanwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |

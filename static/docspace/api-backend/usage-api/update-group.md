@@ -8,21 +8,22 @@ Referenced types are defined in the [full reference](../people.md).
 
 Update a group
 
-Updates the existing group changing the group manager, name, and/or members.
+Changes the name and the manager of a group and adds or removes members, in one call.  The caller needs the permissions to edit groups and to add and remove users, and the ID has to belong to a  group that has not been deleted, otherwise the operation answers 404.  Every field is optional and the ones that are left out are kept: omitting &#x60;groupName&#x60; keeps the current name,  and omitting &#x60;groupManager&#x60; keeps the current manager rather than clearing it.  Accounts in &#x60;membersToAdd&#x60; that cannot be group members - a guest, a disabled account or an ID that matches  nobody - are silently skipped instead of failing the call, so compare the members in the answer with what was  sent to see what was actually applied.  Members are added first and removed afterwards, an account listed in both lists therefore ends up removed,  and removing an account that is not a member changes nothing.  The change raises a &#x60;GroupUpdated&#x60; webhook, and the answer holds the group as it is after the update.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **UUID** (uuid) | The group ID. | [required] [example: 00000000-0000-0000-0000-000000000000] |
-| **UpdateGroupRequest** | body | [**UpdateGroupRequest**](../people.md#model-updategrouprequest) | The request for updating a group. | [required] |
+| **id** | path | **UUID** (uuid) | The ID of the group to update, taken from the route. It has to be a group that has not been deleted,  otherwise the operation answers 404. | [required] [example: 00000000-0000-0000-0000-000000000000] |
+| **UpdateGroupRequest** | body | [**UpdateGroupRequest**](../people.md#model-updategrouprequest) | The fields to change. Every field is optional and the ones that are left out keep their current values, so an  empty object changes nothing. | [required] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Updated group with the detailed information | [**GroupWrapper**](../people.md#model-groupwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **404** | Group not found | - | - |
+| **200** | The group as it is after the update | [**GroupWrapper**](../people.md#model-groupwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **403** | No permissions to perform this action | - | - |
+| **404** | No group has the specified ID | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | - |

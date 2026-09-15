@@ -6,9 +6,9 @@ Referenced types are defined in the [full reference](../api.md).
 
 `DELETE /api/2.0/smtpsettings/smtp`
 
-Reset the SMTP settings
+Reset SMTP settings
 
-Resets the SMTP settings of the current portal.
+Deletes the SMTP settings of this portal and puts it back on the mail configuration of the installation, so  the portal stops using the relay saved by &#x60;POST api/2.0/smtpsettings/smtp&#x60;. Nothing has to be called first;  the caller needs the portal-settings right of a DocSpace administrator, and the SMTP settings section has to  be enabled for the portal, otherwise the call is answered with 402. The call is destructive and cannot be  undone - the host, the sender identity and the credentials are gone and have to be entered again - but it is  idempotent, and on a portal that has no settings of its own it changes nothing. Portal mail itself keeps  working as long as the installation has a relay of its own configured. The answer holds the settings that are  in force after the reset, always with &#x60;isDefaultSettings&#x60; true: the server-wide values in a standalone  installation, an empty settings object in a cloud portal, and an empty &#x60;credentialsUserPassword&#x60; in both. Read  them back at any time with &#x60;GET api/2.0/smtpsettings/smtp&#x60;.
 
 ## Parameters
 This endpoint does not need any parameter.
@@ -17,8 +17,8 @@ This endpoint does not need any parameter.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Default SMTP settings | [**SmtpSettingsWrapper**](../api.md#model-smtpsettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **402** | Your pricing plan does not support this option | - | - |
+| **200** | The settings in force after the reset - the configuration of the installation, or an empty settings object in a cloud portal | [**SmtpSettingsWrapper**](../api.md#model-smtpsettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **402** | The SMTP settings section is not enabled for this portal | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |

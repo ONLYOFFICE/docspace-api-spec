@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../backup.md).
 
 Create the backup schedule
 
-Creates the backup schedule of the current portal with the parameters specified in the request.
+Sets the backup schedule of the current portal. A portal keeps at most one schedule, so this replaces  the existing one rather than adding a second, and &#x60;dump&#x60; writes the schedule of the whole server  instead, which requires the space access permission and works on a standalone installation only.  Scheduled backups have to be allowed by the pricing plan of a portal that is not a standalone  installation.  &#x60;cronParams&#x60; is a period plus a time rather than a cron string: &#x60;hour&#x60; is the hour of the day from 0  to 23, and &#x60;day&#x60; has to be given for &#x60;EveryWeek&#x60;, where it is the day of the week from 1 to 7 with  Sunday as 1, and for &#x60;EveryMonth&#x60;, where it is the day of the month from 1 to 31. It is left out for  &#x60;EveryDay&#x60;, and because an omitted &#x60;day&#x60; is stored as 0, which neither period accepts, a weekly or  monthly schedule sent without it fails instead of falling back to a default.  &#x60;backupsStored&#x60; is the number of scheduled copies to keep, from 1 to 30, and it defaults to 1. Older  copies are removed by a background cleaner, and only the ones this schedule created: archives made by  &#x60;POST api/2.0/backup/startbackup&#x60; are not counted and not removed. A portal whose subscription stops  covering backups has its schedule deleted by the scheduler, not suspended, and its administrators are  notified that the scheduled backup failed.  The keys expected in &#x60;storageParams&#x60; are the same as for &#x60;POST api/2.0/backup/startbackup&#x60;, except  that they are sent as an array of key and value pairs here and returned as an object by  &#x60;GET api/2.0/backup/getbackupschedule&#x60;.
 
 ## Parameters
 
@@ -20,11 +20,11 @@ Creates the backup schedule of the current portal with the parameters specified 
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Boolean value: true if the operation is successful | [**BooleanWrapper**](../backup.md#model-booleanwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **400** | BackupStored must be 1 - 30 or backup can not start as dump | - | - |
-| **402** | Your pricing plan does not support this option | - | - |
-| **403** | Access denied | - | - |
-| **404** | The required folder was not found | - | - |
+| **200** | True if the schedule was saved | [**BooleanWrapper**](../backup.md#model-booleanwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **400** | The number of the stored copies is outside 1 - 30, or a dump was requested on a portal that is not a standalone installation | - | - |
+| **402** | The portal subscription does not cover scheduled backups, has expired or has not been paid | - | - |
+| **403** | No permissions to perform this action | - | - |
+| **404** | The target folder was not found | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../backup.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../backup.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../backup.md#model-errorapiresponse) | - |

@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../people.md).
 
 Get user claims
 
-Returns the user claims.
+Returns the identity the current request was authenticated with, as the portal sees it: the account name and  the full list of claims attached to the token or the cookie.  It is a diagnostics operation meant for working out why a call is rejected - which account a token really  belongs to, and which scopes and roles it carries - rather than a source of profile data.  It needs no permission of its own and reports on the caller only, so it cannot be used to inspect another  account.  The call is read-only, and every claim comes back as a single &#x60;type:value&#x60; string, in the order the  authentication produced them.  An account name of &#x60;Unknown Name&#x60; means the identity carries no name claim, not that the request is  unauthenticated.  For the profile behind the identity, read &#x60;GET api/2.0/people/@self&#x60;.
 
 ## Parameters
 This endpoint does not need any parameter.
@@ -17,7 +17,7 @@ This endpoint does not need any parameter.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Claims | [**TokenDiagnosticsWrapper**](../people.md#model-tokendiagnosticswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The account name and the claims of the current identity | [**TokenDiagnosticsWrapper**](../people.md#model-tokendiagnosticswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | - |

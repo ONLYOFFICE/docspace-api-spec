@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../api.md).
 
 Send removal instructions
 
-Sends the instructions to remove the current portal.
+Mails the portal owner the confirmation link that removes this portal; nothing about the portal changes until  that link is used. The caller has to be the portal owner and hold the portal-settings right, and on a server  installation the last remaining space cannot be removed - the call is refused when every other space has  limited access. The letter goes to the owner&#39;s own address whoever asked for it, and it warns about the  subscription that will stop renewing when the portal is on a paid plan. The operation keeps working while the  portal&#39;s payment has lapsed, is mutating only in that it sends a message, and is rate-limited to five requests  per fifteen minutes per user and path by default, answering 429 above that. Nothing is returned in the body.  The link in the letter authorizes &#x60;DELETE api/2.0/portal/delete&#x60;, which deletes the portal with all of its  rooms, files and accounts and cannot be undone. To pause the portal instead of deleting it, send the  deactivation letter with &#x60;POST api/2.0/portal/suspend&#x60;.
 
 ## Parameters
 This endpoint does not need any parameter.

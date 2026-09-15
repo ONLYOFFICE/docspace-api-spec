@@ -6,9 +6,9 @@ Referenced types are defined in the [full reference](../files.md).
 
 `POST /api/2.0/files/thirdparty/backup`
 
-Save a third-party account backup
+Connect the third-party backup storage
 
-Saves a backup of the connected third-party account.
+Connects the third-party storage account the portal writes its backups to, and returns the folder that stands  for its root. Only a portal administrator may call it, and the portal-wide third-party switch has to be on;  other callers are refused. The account is portal-wide and single: a second call does not add another one but  re-authenticates and retitles the existing one, which makes the operation safe to repeat with the same body.  The credentials follow the same rules as in &#x60;POST api/2.0/files/thirdparty&#x60; - an authorization code in &#x60;token&#x60;  for the OAuth services, &#x60;login&#x60; with &#x60;password&#x60; and, where the server address is not fixed, &#x60;url&#x60; for the  WebDAV family and SharePoint - and are verified against the service before anything is stored, so a wrong  password leaves the previous account untouched. The account is deliberately absent from  &#x60;GET api/2.0/files/thirdparty&#x60;; read it back with &#x60;GET api/2.0/files/thirdparty/backup&#x60; and remove it with  &#x60;DELETE api/2.0/files/thirdparty/{providerId}&#x60;.
 
 ## Parameters
 
@@ -20,7 +20,7 @@ Saves a backup of the connected third-party account.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Folder for the third-party account backup | [**FolderStringWrapper**](../files.md#model-folderstringwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The root folder of the backup storage account | [**FolderStringWrapper**](../files.md#model-folderstringwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |

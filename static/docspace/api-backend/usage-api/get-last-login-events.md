@@ -6,9 +6,9 @@ Referenced types are defined in the [full reference](../api.md).
 
 `GET /api/2.0/security/audit/login/last`
 
-Get login history
+Get recent login events
 
-Returns all the latest user login activity, including successful logins and error logs.
+Returns the twenty most recent login events of the whole portal - successful sign-ins, sign-outs and failed  attempts alike - as the short summary a settings page shows before anyone asks for the full history. The  caller needs the portal-settings right of a DocSpace administrator, and in a cloud installation the login  history and audit trail section must be enabled for the portal, otherwise the call is answered with 402. The  operation is read-only and takes no parameters: the number of events is fixed at twenty, nothing can be  filtered, and events are ordered newest first. &#x60;date&#x60; is given in the portal time zone, &#x60;actionText&#x60; is the  readable sentence describing the event with every substituted value shortened to fifty characters here, and  &#x60;country&#x60; and &#x60;city&#x60; are resolved from the IP address and stay empty when it cannot be located. An empty list  means the portal has recorded no login events yet. Use &#x60;GET api/2.0/security/audit/login/filter&#x60; to filter by  user, action or period and to page through the whole history.
 
 ## Parameters
 This endpoint does not need any parameter.
@@ -17,9 +17,9 @@ This endpoint does not need any parameter.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | List of login events | [**LoginEventArrayWrapper**](../api.md#model-logineventarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **402** | Your pricing plan does not support this option | - | - |
-| **403** | No permissions to perform this action | - | - |
+| **200** | The twenty most recent login events of the portal, newest first | [**LoginEventArrayWrapper**](../api.md#model-logineventarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **402** | The login history and audit trail section is not enabled for this portal | - | - |
+| **403** | The caller does not have the portal-settings right of a DocSpace administrator | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |

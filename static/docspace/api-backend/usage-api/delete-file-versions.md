@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../files.md).
 
 Delete file versions
 
-Deletes the file versions with the IDs specified in the request.
+Queues a background job that removes the listed versions from the history of one file, and answers with the  caller&#39;s delete operations, including the one just started. Poll &#x60;GET api/2.0/files/fileops&#x60; until the  operation reports &#x60;finished&#x60;; a failure met while the job runs is reported in its &#x60;error&#x60; rather than as a  status code. Removal is permanent — deleted versions do not travel through Trash and cannot be restored, while  the file itself stays in place with the versions that are left. Send the numbers that  &#x60;GET api/2.0/files/file/{fileId}/history&#x60; reports, and send at least one: an empty list is not an empty  request, it deletes the whole file instead. The number of the current version is refused before anything is  queued, while numbers that no longer exist are passed over without a complaint. The caller needs the rights  that deleting the file itself would need, so a member with read-only rights is refused, as are a file in an  archived room and a file that is already in Trash, and a file that does not exist is answered as missing. To  delete the file itself use &#x60;PUT api/2.0/files/fileops/delete&#x60;.
 
 ## Parameters
 
@@ -20,7 +20,7 @@ Deletes the file versions with the IDs specified in the request.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | List of file operations | [**FileOperationArrayWrapper**](../files.md#model-fileoperationarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The delete operations of the caller, the one just queued included | [**FileOperationArrayWrapper**](../files.md#model-fileoperationarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |

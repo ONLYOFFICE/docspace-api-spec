@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../files.md).
 
 Update the trash bin auto-clearing setting
 
-Updates the trash bin auto-clearing setting.
+Writes the trash auto-clearing setting of the calling account and returns the pair that is now stored. Both  fields are written together from the request, so a call that omits &#x60;gap&#x60; stores an interval outside the  published list rather than keeping the previous one - always send the interval, including when &#x60;set&#x60; is false.  While clearing is on, an item is removed from the caller&#39;s trash for good once it has been there longer than  the interval, and each trashed entry reports the moment it is due to disappear in its own &#x60;autoDelete&#x60; field;  switching clearing off stops that and leaves whatever is in the trash. The setting belongs to the calling  account alone: every authenticated role down to a guest may change its own, one member&#39;s choice never affects  another, and an unauthenticated caller is refused. Items already removed are not recoverable. Read the pair  back with &#x60;GET api/2.0/files/settings/autocleanup&#x60;.
 
 ## Parameters
 
@@ -20,7 +20,7 @@ Updates the trash bin auto-clearing setting.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The auto-clearing setting properties: auto-clearing or not, a time interval when the auto-clearing will be performed | [**AutoCleanUpDataWrapper**](../files.md#model-autocleanupdatawrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The trash auto-clearing setting that is now stored for the caller | [**AutoCleanUpDataWrapper**](../files.md#model-autocleanupdatawrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |

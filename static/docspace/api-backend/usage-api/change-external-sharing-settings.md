@@ -6,9 +6,9 @@ Referenced types are defined in the [full reference](../files.md).
 
 `PUT /api/2.0/files/settings/externalsharingsettings`
 
-Change the Access Control external sharing settings
+Configure external sharing
 
-Changes the Access Control external sharing settings.
+Writes the portal&#39;s whole external-sharing policy in one request and returns the set that is now in force.  Only the portal owner and a DocSpace administrator may call it; everyone else is refused, including an  unauthenticated caller. Every field of the request is applied, so send the complete set rather than the field  being changed - an omitted boolean is read as false. The portal keeps the set consistent: with &#x60;externalShare&#x60;  false the default link type is forced to users of this portal only and sharing on social networks is turned  off, and the three restriction fields only matter while external sharing is off.  &#x60;blockExistingLinksOnRestrict&#x60; decides what happens to links that already exist, so it is the field that  changes access to data already shared. The new set is pushed to the connected clients of the portal as well,  and is published field by field by &#x60;GET api/2.0/files/settings&#x60;. Sending the same set again is safe.
 
 ## Parameters
 
@@ -20,7 +20,7 @@ Changes the Access Control external sharing settings.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | External sharing settings | [**ExternalSharingSettingsWrapper**](../files.md#model-externalsharingsettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The external sharing policy that is now in force | [**ExternalSharingSettingsWrapper**](../files.md#model-externalsharingsettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |

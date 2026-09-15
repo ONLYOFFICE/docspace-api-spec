@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../newai.md).
 
 Approve tool call
 
-Resumes a chat round paused on a tool call. The supplied result is persisted onto the assistant message that issued the call and the stream continues with the augmented history.
+Resumes a chat round that a tool call has paused, and streams the continuation as newline-delimited &#x60;ChatEvent&#x60; objects. The result supplied in the request is persisted onto the assistant message that issued the call, so the tool is not executed here - the caller runs it and reports the outcome. The round continues against the augmented history and may pause again on a further tool call. Call &#x60;POST api/2.0/ai/ai/deny-tool-call&#x60; instead to refuse the call and let the model answer without it.
 
 ## Parameters
 
@@ -22,6 +22,9 @@ Resumes a chat round paused on a tool call. The supplied result is persisted ont
 |------------- | ------------- | ------------- | -------------|
 | **200** | Newline-delimited stream of chat events — one JSON &#x60;ChatEvent&#x60; object per line. | [**AiChatEvent**](../newai.md#model-aichatevent) | - |
 | **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
+| **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
+| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
+| **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
 
 ## Return type
 

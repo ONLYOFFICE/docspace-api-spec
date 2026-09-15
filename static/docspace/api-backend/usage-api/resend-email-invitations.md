@@ -8,20 +8,20 @@ Referenced types are defined in the [full reference](../files.md).
 
 Resend the room invitations
 
-Resends the email invitations to a room with the ID specified in the request to the selected users.
+Sends the room invitation email again to members who were invited but have not joined yet. &#x60;resendAll&#x60; covers  every pending invitation of the room and makes &#x60;usersIds&#x60; irrelevant, while an explicit list without that flag  is limited to the named accounts. An account that has already accepted the invitation, is not a member of the  room, or is invisible to the caller is skipped without an error, and a request that names nobody and does not  set the flag does nothing, so a successful answer never proves that a message went out. Nothing about the room  or its membership changes, and the operation can be repeated. The caller must be a manager of the room, an  archived room is refused, a room template is answered as missing, and a malformed account id is rejected as an  invalid request. The call is rate limited, so a client that loops over members should send one batch instead.  The response carries no body.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The room ID. | [required] [example: 1] |
-| **UserInvitation** | body | [**UserInvitation**](../files.md#model-userinvitation) | The user invitation parameters. | [required] |
+| **id** | path | **Integer** (int32) | The room whose invitations are resent, named by the identifier that &#x60;GET api/2.0/files/rooms&#x60; reports for it. | [required] [example: 1] |
+| **UserInvitation** | body | [**UserInvitation**](../files.md#model-userinvitation) | Which pending invitations to send again. | [required] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Ok | - | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The invitations that were still pending have been sent again | - | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |

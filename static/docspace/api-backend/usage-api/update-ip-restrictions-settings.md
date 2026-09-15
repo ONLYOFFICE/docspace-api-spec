@@ -6,9 +6,9 @@ Referenced types are defined in the [full reference](../api.md).
 
 `PUT /api/2.0/settings/iprestrictions/settings`
 
-Update the IP restriction settings
+Update IP restriction settings
 
-Updates the IP restriction settings with the parameters specified in the request.
+Stores the enforcement flag of the IP restrictions of the current portal together with the whole address list,  replacing the addresses saved before; this operation and &#x60;PUT api/2.0/settings/iprestrictions&#x60; are two routes  to the same handler and behave identically. The caller needs the portal-settings right of a DocSpace  administrator, otherwise the call is refused. Every entry must be a single IPv4 or IPv6 address: &#x60;from-to&#x60;  ranges and CIDR blocks are matched by the portal but cannot be stored here and are rejected as an invalid  request, as is &#x60;enable: true&#x60; with an empty list. An omitted &#x60;enable&#x60; follows the list - on when addresses are  sent, off when the list is empty - so the flag cannot be moved without resending the addresses that stay in  force. The new state applies to new requests without a restart, is recorded in the audit trail, and sending  the same body twice changes nothing further. Enforcement spares the portal owner and the installation&#39;s own  networks only, so a list without the caller&#39;s own address locks the remaining administrators out. The answer  echoes the request, so read the stored entries and their IDs with &#x60;GET api/2.0/settings/iprestrictions&#x60;.
 
 ## Parameters
 
@@ -20,7 +20,7 @@ Updates the IP restriction settings with the parameters specified in the request
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Updated IP restriction settings | [**IpRestrictionsWrapper**](../api.md#model-iprestrictionswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The stored enforcement flag and addresses echoed back exactly as sent, without the IDs of the stored entries | [**IpRestrictionsWrapper**](../api.md#model-iprestrictionswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |

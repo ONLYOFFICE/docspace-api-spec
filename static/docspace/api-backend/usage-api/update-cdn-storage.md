@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../api.md).
 
 Update the CDN storage
 
-Updates the CDN storage with the parameters specified in the request.
+Selects the content delivery network that serves the static content of the portal and saves the credentials it  needs: &#x60;module&#x60; is the identifier of one of the entries of &#x60;GET api/2.0/settings/storage/cdn&#x60;, and &#x60;props&#x60;  carries that provider&#39;s authentication keys as name and value pairs. The provider has to be available on the  server, which the &#x60;isSet&#x60; flag of the listing tells, otherwise the request is rejected as invalid. Sending the  module the portal already uses changes nothing and returns the saved settings as they are. Any other module is  saved and the upload of the static content is handed to the storage service; the settings come back only when  that hand-over succeeds, a failure being reported as a server error. Unlike the portal storage this has no  progress operation, so there is nothing to poll: the content appears on the CDN once the service has copied  it. Only static content is affected here, never documents; for those use &#x60;PUT api/2.0/settings/storage&#x60;. The  caller needs the permission to edit portal settings, which in practice means the portal owner or a DocSpace  admin, on a server installation with an unrestricted access space. The response is the stored CDN  configuration.
 
 ## Parameters
 
@@ -20,9 +20,9 @@ Updates the CDN storage with the parameters specified in the request.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Updated CDN storage | [**CdnStorageSettingsWrapper**](../api.md#model-cdnstoragesettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **400** | Module | - | - |
-| **403** | No permissions to perform this action | - | - |
+| **200** | The saved CDN configuration; the upload of the static content has been handed to the storage service | [**CdnStorageSettingsWrapper**](../api.md#model-cdnstoragesettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **400** | The requested CDN module is not configured on this installation | - | - |
+| **403** | The caller may not edit portal settings, or this installation does not allow changing the storage | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |

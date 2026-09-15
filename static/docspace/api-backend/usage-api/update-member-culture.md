@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../people.md).
 
 Update a user culture
 
-Updates the user culture with the parameters specified in the request.
+Changes the interface language of a profile, which decides the language of the portal for that account and of  the emails it receives.  The culture has to be one the portal has enabled, otherwise the operation answers 400; read the enabled list  from the portal settings rather than guessing a code.  A caller may only change their own language - the ID in the route has to be the calling account, and an  administrator gets 403 for anybody else - and the account must be allowed to edit its own profile.  The change takes effect immediately, raises a &#x60;UserUpdated&#x60; webhook, and answers with the profile carrying  the new &#x60;cultureName&#x60;.  Other profile fields are not touched here; use &#x60;PUT api/2.0/people/{userid}&#x60; for those.
 
 ## Parameters
 
@@ -21,10 +21,10 @@ Updates the user culture with the parameters specified in the request.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Detailed user information | [**EmployeeFullWrapper**](../people.md#model-employeefullwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **400** | The specified culture is not in the list of available ones | - | - |
-| **403** | You don&#39;t have enough permission to perform the operation | - | - |
-| **404** | User not found | - | - |
+| **200** | The profile with its new culture | [**EmployeeFullWrapper**](../people.md#model-employeefullwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **400** | The specified culture is not enabled on the portal | - | - |
+| **403** | The ID in the route is not the calling account, or the account may not edit its own profile | - | - |
+| **404** | No user has the specified ID | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | - |

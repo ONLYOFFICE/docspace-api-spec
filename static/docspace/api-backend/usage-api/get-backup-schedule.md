@@ -8,20 +8,21 @@ Referenced types are defined in the [full reference](../backup.md).
 
 Get the backup schedule
 
-Returns the backup schedule of the current portal.
+Returns the backup schedule of the current portal. A portal keeps at most one schedule, so no ID is  passed in, and when none is set the call still answers 200 with a body that carries no &#x60;response&#x60;  member at all. &#x60;dump&#x60; asks for the schedule of the whole server instead of the one of this portal and  requires the space access permission.  The answer cannot be sent back unchanged: &#x60;storageParams&#x60; is returned as an object keyed by parameter  name, while &#x60;POST api/2.0/backup/createbackupschedule&#x60; expects an array of key and value pairs. For  every storage type except &#x60;ThirdPartyConsumer&#x60; the &#x60;folderId&#x60; key of the answer is built from the  stored base path rather than read back from the saved parameters, and a schedule that keeps an  unlimited number of copies reports &#x60;backupsStored&#x60; as null instead of 0.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **Dump** | query | **Boolean** | Specifies if a dump will be created or not. | [optional] [example: true] |
+| **Dump** | query | **Boolean** | Applies the operation to the whole server rather than to the current portal, which requires the space  access permission and works on a standalone installation only. Server-wide backups and schedules are  kept apart from the ones of a portal, so the two values address different data. | [optional] [example: false] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Backup schedule | [**ScheduleWrapper**](../backup.md#model-schedulewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **403** | Access denied | - | - |
+| **200** | The backup schedule, or an empty payload when none is set | [**ScheduleWrapper**](../backup.md#model-schedulewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **402** | The portal subscription has expired or has not been paid | - | - |
+| **403** | No permissions to perform this action | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../backup.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../backup.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../backup.md#model-errorapiresponse) | - |

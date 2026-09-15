@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../files.md).
 
 Hide the confirmation dialog when converting
 
-Hides the confirmation dialog for saving the file copy in the original format when converting a file.
+Hides one of the two prompts the interface shows around file conversion, for the calling account only. The  &#x60;save&#x60; field chooses which prompt, and is not the value being written: &#x60;save&#x3D;true&#x60; hides the prompt that  offers to keep a copy in the original format when a file is converted, &#x60;save&#x3D;false&#x60; hides the prompt that  offers to open the conversion result. Both flags are one-way - the operation can only hide a prompt, and there  is no API to show it again - so the answer is always true and repeating the call changes nothing. The two  flags are independent: hiding one leaves the other as it was. Every authenticated role down to a guest may set  its own, and an unauthenticated caller is refused. The stored flags are published as &#x60;hideConfirmConvertSave&#x60;  and &#x60;hideConfirmConvertOpen&#x60; by &#x60;GET api/2.0/files/settings&#x60;. Conversion itself is started by  &#x60;PUT api/2.0/files/file/{fileId}/checkconversion&#x60; and is not affected by either flag.
 
 ## Parameters
 
@@ -20,7 +20,7 @@ Hides the confirmation dialog for saving the file copy in the original format wh
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Boolean value: true if the operation is successful | [**BooleanWrapper**](../files.md#model-booleanwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | Always true: the chosen conversion prompt is now hidden | [**BooleanWrapper**](../files.md#model-booleanwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |

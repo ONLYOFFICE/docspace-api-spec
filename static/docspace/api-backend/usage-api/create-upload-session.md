@@ -8,21 +8,21 @@ Referenced types are defined in the [full reference](../files.md).
 
 Chunked upload
 
-Creates the session to upload large files in multiple chunks to the folder with the ID specified in the request.
+Deprecated in favour of &#x60;POST api/2.0/files/{folderId}/session&#x60;, which opens the same session and returns it  without the success envelope used here; new callers should go there. Reserves a chunked upload of a file in  the folder named by the path: the title comes from &#x60;fileName&#x60;, the declared payload size from &#x60;fileSize&#x60;, and  the answer carries the session id every later call quotes, the address of the standalone chunk handler, the  moment an idle session is dropped and the reserved byte count. No content is stored yet. Send the payload as  multipart parts to &#x60;POST api/2.0/files/{folderId}/session/{sessionId}/upload&#x60;, keeping each part within  &#x60;chunkUploadSize&#x60; from &#x60;GET api/2.0/files/settings&#x60;, then close the session with  &#x60;PUT api/2.0/files/{folderId}/session/{sessionId}/finalize&#x60;. The caller needs the right to add content to the  target folder, which room managers and content creators have and readers, editors and guests do not: they get  403, as does a section root such as Rooms or Archive, while an unknown folder is answered as missing. A  payload above the portal limit for chunked uploads is refused before the session exists.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **folderId** | path | **Integer** (int32) | The session folder ID. | [required] [example: 1] |
-| **SessionRequest** | body | [**SessionRequest**](../files.md#model-sessionrequest) | The session parameters. | [required] |
+| **folderId** | path | **Integer** (int32) | The folder that receives the file; take the id from a listing such as &#x60;GET api/2.0/files/@root&#x60;. A room or an  ordinary folder inside one is accepted, a section root is not. | [required] [example: 1] |
+| **SessionRequest** | body | [**SessionRequest**](../files.md#model-sessionrequest) | The file the session is opened for, and how a clash with an existing name is settled. | [required] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Information about created session | [**ChunkedUploadSessionResponseWrapperIntegerWrapper**](../files.md#model-chunkeduploadsessionresponsewrapperintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **403** | You don&#39;t have enough permission to create | - | - |
+| **200** | The created session, wrapped in the success envelope | [**ChunkedUploadSessionResponseWrapperIntegerWrapper**](../files.md#model-chunkeduploadsessionresponsewrapperintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **403** | The caller cannot add content to the target folder | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |

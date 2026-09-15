@@ -6,9 +6,9 @@ Referenced types are defined in the [full reference](../api.md).
 
 `PUT /api/2.0/settings/security/access`
 
-Set the security settings to modules
+Set access to modules in bulk
 
-Sets the security settings to the modules with the IDs specified in the request.
+Switches several portal modules on or off in one call: &#x60;items&#x60; carries an entry per module, its &#x60;key&#x60; the  module GUID and its &#x60;value&#x60; the new enabled flag. The caller needs the portal-settings right of a DocSpace  administrator, and the call is answered with 403 on an open portal, where everyone is admitted and per-module  rules would mean nothing. Every key has to be a GUID; anything else is rejected as an invalid request, and a  module listed twice is applied once, from its first entry. This operation carries no subject list of its own:  switching a product module on restores the users and groups it was last restricted to, while every other case  is stored as a plain allow or deny for everyone, so use &#x60;PUT api/2.0/settings/security&#x60; when the allow-list  itself has to change. The batch is recorded in the audit trail as one list update rather than module by  module. The answer is the resulting configuration of every module listed, in the shape  &#x60;GET api/2.0/settings/security&#x60; returns.
 
 ## Parameters
 
@@ -20,8 +20,8 @@ Sets the security settings to the modules with the IDs specified in the request.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Security settings | [**SecurityArrayWrapper**](../api.md#model-securityarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **403** | Security settings are disabled for an open portal | - | - |
+| **200** | The resulting access configuration of every module listed in the request | [**SecurityArrayWrapper**](../api.md#model-securityarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **403** | Per-module access cannot be configured on an open portal, or the caller lacks the portal-settings right of a DocSpace administrator | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |

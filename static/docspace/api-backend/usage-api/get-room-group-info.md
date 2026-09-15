@@ -8,20 +8,20 @@ Referenced types are defined in the [full reference](../files.md).
 
 Get room group info
 
-Returns detailed information about a room group.
+Returns one room group of the calling account together with the rooms it gathers. Groups are personal: an  identifier that belongs to another member is answered the same way as one that was never created or has  already been deleted, and a portal administrator is no exception to that rule. Take the identifier from  &#x60;GET api/2.0/files/group&#x60;, which lists the groups the caller owns. Set &#x60;includeMembers&#x60; to false to get the  group without the &#x60;rooms&#x60; array, which is the cheaper form when only the name, the icon and the number of  rooms are needed; &#x60;totalRooms&#x60; is filled either way. A room moved to the archive is left out of both &#x60;rooms&#x60;  and &#x60;totalRooms&#x60; while its membership survives, so taking the room out of the archive brings it back into the  group. Rooms stored in the portal are listed before rooms on connected third-party accounts. The call is  read-only and changes nothing about the group or the rooms it refers to.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The group unique identifier. | [required] [example: 10] |
-| **includeMembers** | query | **Boolean** | Whether to include group members. | [optional] [example: true] |
+| **id** | path | **Integer** (int32) | The room group to act on, identified by the value &#x60;GET api/2.0/files/group&#x60; reports for it. A group of another  account cannot be addressed and reads as missing. | [required] [example: 42] |
+| **includeMembers** | query | **Boolean** | Whether the rooms of the group are listed in the answer: true fills the &#x60;rooms&#x60; array, false leaves it out and  reports only how many there are in &#x60;totalRooms&#x60;. | [optional] [example: true] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The room group with the detailed information | [**RoomGroupWrapper**](../files.md#model-roomgroupwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The room group with the rooms it gathers | [**RoomGroupWrapper**](../files.md#model-roomgroupwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |

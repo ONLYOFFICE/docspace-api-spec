@@ -6,9 +6,9 @@ Referenced types are defined in the [full reference](../newai.md).
 
 `POST /api/2.0/ai/threads/touch`
 
-Touch
+Bump a thread&#39;s activity
 
-Bumps a thread&#39;s last-edit date, and optionally rebinds it to another profile, when something other than a new message - a model switch, say - should resurface it.
+Bumps a thread&#39;s last-edit date without adding a message, which resurfaces it in the list. Passing &#x60;profileId&#x60; also rebinds the thread to another model, so this is the operation to call when a model switch alone should count as activity. Nothing else about the thread changes and the answer only confirms the write. It is idempotent: repeating it simply moves the date forward again.
 
 ## Parameters
 
@@ -20,8 +20,11 @@ Bumps a thread&#39;s last-edit date, and optionally rebinds it to another profil
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Success. | [**AiSuccessResponse**](../newai.md#model-aisuccessresponse) | - |
+| **200** | Confirms the thread&#39;s activity date moved forward. | [**AiSuccessResponse**](../newai.md#model-aisuccessresponse) | - |
 | **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
+| **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
+| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
+| **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
 
 ## Return type
 

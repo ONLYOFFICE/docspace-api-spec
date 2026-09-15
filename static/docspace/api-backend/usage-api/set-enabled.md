@@ -8,22 +8,22 @@ Referenced types are defined in the [full reference](../api.md).
 
 Enable or disable an app
 
-Toggles the enabled state of the application for the current tenant. Requires portal administrator permissions.
+Turns one portal application on or off for the current portal, and notifies the clients connected to the portal  so that they can show or hide it without being reloaded. The identifier must be an application declared in the  installation configuration, as listed by &#x60;GET api/2.0/apps&#x60;. The caller must be a portal administrator allowed  to edit the portal settings. The call is mutating and idempotent: it stores the flag for this portal, overriding  the default that the configuration gives the application, and repeating it with the same value changes nothing.  Disabling an application does not delete its settings document, which stays saved and applies again as soon as  the application is enabled. The response is the application in its new state, including that settings document.  Only the enabled flag is affected here: to change the settings document use &#x60;PUT api/2.0/apps/{id}/settings&#x60;.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **String** | The application identifier. | [required] [example: ai-room] |
-| **SetAppEnabledBody** | body | [**SetAppEnabledBody**](../api.md#model-setappenabledbody) | New enabled state. | [required] |
+| **id** | path | **String** | The application to switch, by the identifier &#x60;GET api/2.0/apps&#x60; reports. It has to be an application declared  in the installation configuration; an unknown identifier answers 404 rather than creating anything. | [required] [example: ai-room] |
+| **SetAppEnabledBody** | body | [**SetAppEnabledBody**](../api.md#model-setappenabledbody) | The new state of the application. Only the enabled flag travels here; the settings document is changed  through &#x60;PUT api/2.0/apps/{id}/settings&#x60;. | [required] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Updated application info | [**AppWrapper**](../api.md#model-appwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **403** | You don&#39;t have enough permission to manage apps | - | - |
-| **404** | Application not found | - | - |
+| **200** | The application in its new state, with the saved settings document left untouched | [**AppWrapper**](../api.md#model-appwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **403** | The caller is not allowed to edit the portal settings | - | - |
+| **404** | No application with this identifier is configured on this installation | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |

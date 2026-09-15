@@ -6,9 +6,9 @@ Referenced types are defined in the [full reference](../api.md).
 
 `PUT /api/2.0/portal/payment/updatewallet`
 
-Update the wallet payment quantity
+Change a wallet service quantity
 
-Updates the wallet payment quantity with the parameters specified in the request.
+Buys more units of a wallet service - extra administrators, disk storage, backup, AI tools, AI search or  DocsCloud - or writes down the quantity that service will have after the next renewal, depending on  &#x60;productQuantityType&#x60;. With &#x60;Add&#x60; (1) the units are bought at once and paid out of the portal wallet, so the  wallet needs a sub-account in the accounting currency and enough money on it; with &#x60;Set&#x60; (0) nothing is  charged now and the quantity only takes effect in the next period, where an empty or zero quantity cancels a  change scheduled earlier. &#x60;Renew&#x60; and &#x60;Sub&#x60; are not accepted here. The portal needs a billing customer and the  caller has to be a DocSpace administrator; a service that is an add-on to the plan also needs the plan itself  to be paid, otherwise the answer is 402. Minimum quantities apply - disk storage starts at 100 units, the  DocsCloud developer pack at 10, and the administrators may not be fewer than the portal already has - and in  the &#x60;Add&#x60; form they are checked only while the portal does not hold that service yet. Asking for the DocsCloud  plan in the &#x60;Set&#x60; form while the developer pack is active schedules the reversion to it at the next period,  while the upgrade in the other direction is not done here at all: use  &#x60;POST api/2.0/settings/docscloud/switchtodevpack&#x60;. The result is &#x60;true&#x60; when the change was accepted; the call  is mutating, spends money in its &#x60;Add&#x60; form and is limited to ten requests a minute per user by default. Price  the same purchase without paying for it with &#x60;PUT api/2.0/portal/payment/calculatewallet&#x60;.
 
 ## Parameters
 
@@ -20,11 +20,11 @@ Updates the wallet payment quantity with the parameters specified in the request
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Boolean value: true if the operation is successful | [**BooleanWrapper**](../api.md#model-booleanwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **400** | Invalid request parameters | - | - |
-| **402** | Payment required | - | - |
-| **403** | No permissions to perform this action | - | - |
-| **404** | Customer could not be found | - | - |
+| **200** | &#x60;true&#x60; when the purchase or the scheduled change was accepted, &#x60;false&#x60; when the provider declined it | [**BooleanWrapper**](../api.md#model-booleanwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **400** | The quantity type is not &#x60;Set&#x60; or &#x60;Add&#x60;, the product is not a wallet service, the quantity is below the minimum for it, or that service is already set | - | - |
+| **402** | The plan of the portal is not paid and the requested service is an add-on to it | - | - |
+| **403** | The caller is not a DocSpace administrator, or the portal has no billing service configured | - | - |
+| **404** | This portal has no billing customer, or its wallet has no sub-account in the accounting currency | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |

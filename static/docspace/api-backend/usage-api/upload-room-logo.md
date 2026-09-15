@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../files.md).
 
 Upload a room logo image
 
-Uploads a temporary image to create a room logo.
+Stores an image in temporary storage and answers with the path to it, which is the first half of setting a  room logo. No room changes here: pass the returned path as &#x60;tmpFile&#x60; to &#x60;POST api/2.0/files/rooms/{id}/logo&#x60;,  together with the crop rectangle, to make the image the logo of a room. The image travels as multipart form  data, and the first file part of the request is the one that is used while any other part is ignored. It is  re-encoded to PNG and scaled down to fit 1280 by 1280 pixels, so a larger picture is accepted and shrunk,  while a part that is not a readable image, or one over the portal limit for uploaded images, is refused with  400. Only a room manager or a portal administrator may upload, and everyone else gets 403. Every call produces  a new path, and an image that is never used stays in temporary storage until it is cleaned up, so uploading  twice is harmless.
 
 ## Parameters
 
@@ -20,9 +20,9 @@ Uploads a temporary image to create a room logo.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Upload result | [**UploadResultWrapper**](../files.md#model-uploadresultwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The path of the stored temporary image | [**UploadResultWrapper**](../files.md#model-uploadresultwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **400** | The request carries no image, or the image cannot be used as a logo | - | - |
-| **403** | No permissions to perform this action | - | - |
+| **403** | Only a room manager or a portal administrator can upload a logo | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |

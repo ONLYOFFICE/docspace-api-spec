@@ -2,25 +2,26 @@
 
 Referenced types are defined in the [full reference](../people.md).
 
-> EmployeeArrayWrapper searchUsersByQuery(query)
+> EmployeeFullArrayWrapper searchUsersByQuery(query)
 
 `GET /api/2.0/people/search`
 
-Search users (using query parameters)
+Search users by query
 
-Returns a list of users matching the search query. This method uses the query parameters.
+Searches the active accounts of the portal by a term passed in the query string, and is the same search as  &#x60;GET api/2.0/people/@search/{query}&#x60;, which takes the term in the path instead.  Only a DocSpace administrator may call it; every other account, including a room admin, gets 403.  Only accounts with the &#x60;Active&#x60; status are searched, so a pending invitation and a disabled account are never  found - use &#x60;GET api/2.0/people/filter&#x60; to search across states.  The call is read-only and is not paged: every match is streamed, without a total.  It takes the search term and nothing else - the group filter of  &#x60;GET api/2.0/people/@search/{query}&#x60; is not reachable here, because the handler forwards only &#x60;query&#x60; - so  use that operation when the result has to be narrowed to one group.  The answer holds full profiles, because the handler passes the request on to the operation that builds the  complete profile.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **query** | query | **String** | The search query. | [optional] [example: John] |
+| **query** | query | **String** | The term to look for. Only accounts with the &#x60;Active&#x60; status are searched, and this is the only parameter the  operation reads. | [optional] [example: John] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | List of users | [**EmployeeArrayWrapper**](../people.md#model-employeearraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The full profiles of the matching active accounts | [**EmployeeFullArrayWrapper**](../people.md#model-employeefullarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **403** | The caller is not a DocSpace administrator | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | - |
@@ -30,7 +31,7 @@ Returns a list of users matching the search query. This method uses the query pa
 
 ## Return type
 
-[**EmployeeArrayWrapper**](../people.md#model-employeearraywrapper)
+[**EmployeeFullArrayWrapper**](../people.md#model-employeefullarraywrapper)
 
 ## Authorization
 

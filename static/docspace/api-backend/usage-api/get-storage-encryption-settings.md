@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../api.md).
 
 Get the storage encryption settings
 
-Returns the storage encryption settings.
+Returns the encryption state of the installation storage: the status, which is one of decrypted, encryption  started, encrypted or decryption started, and the flag saying whether users are mailed when an encryption run  begins. The password is deliberately blanked out, so the field always comes back empty even on an encrypted  installation. The caller is expected to have the permission to edit portal settings, which in practice means  the portal owner or a DocSpace admin, on a server installation with an unrestricted access space; on any other  installation, and whenever the check fails, the operation answers with an empty body instead of an error. An  empty answer is therefore not proof that encryption is off, only that the settings cannot be read in this  context. Nothing is written and the call is safe to repeat. Use &#x60;GET api/2.0/settings/encryption/progress&#x60; to  follow a run that is in flight, and &#x60;POST api/2.0/settings/encryption/start&#x60; to encrypt or decrypt the  storage.
 
 ## Parameters
 This endpoint does not need any parameter.
@@ -17,9 +17,9 @@ This endpoint does not need any parameter.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Storage encryption settings | [**EncryptionSettingsWrapper**](../api.md#model-encryptionsettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **403** | No permissions to perform this action | - | - |
-| **405** | Method not allowed | - | - |
+| **200** | The encryption status and the notify-users flag, with the password blanked out; empty where encryption settings cannot be read | [**EncryptionSettingsWrapper**](../api.md#model-encryptionsettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **403** | The caller may not edit portal settings | - | - |
+| **405** | Storage encryption is not available on this installation | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |

@@ -8,22 +8,22 @@ Referenced types are defined in the [full reference](../files.md).
 
 Set file order
 
-Sets the order of the file with the ID specified in the request.
+Puts a file at a given position inside its folder and answers with the file, its &#x60;order&#x60; reporting where it  now stands. Positions count from 1, and the file that held the wanted position, together with everything after  it, is shifted to make room, so the numbering of a folder stays without gaps; a position beyond the end of the  folder places the file last. The value may also be sent as a dotted path, as in 1.2.3, in which case only  its last segment is read. Ordering is what the manual sorting of a room is built on, and it only means  something in rooms whose contents are indexed - elsewhere the value is stored and ignored. The caller needs  edit access to the file, which room managers, content creators and members with editing rights have; a member  acting on somebody else&#39;s file, a guest and an anonymous caller are refused with 403, and an unknown file is  answered with 404. The call is mutating and idempotent. To move several items in one go use  &#x60;PUT api/2.0/files/order&#x60;.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **Integer** (int32) | The file unique identifier. | [required] [example: 1] |
-| **OrderRequestDto** | body | [**OrderRequestDto**](../files.md#model-orderrequestdto) | The file order information. | [optional] |
+| **fileId** | path | **Integer** (int32) | The file to move. | [required] [example: 1] |
+| **OrderRequestDto** | body | [**OrderRequestDto**](../files.md#model-orderrequestdto) | The position the file is to take. | [optional] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Updated file information | [**FileIntegerWrapper**](../files.md#model-fileintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **403** | You don&#39;t have enough permission to perform the operation | - | - |
-| **404** | Not Found | - | - |
+| **200** | The file with the position it now holds | [**FileIntegerWrapper**](../files.md#model-fileintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **403** | The caller may not reorder this file | - | - |
+| **404** | The file does not exist | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |

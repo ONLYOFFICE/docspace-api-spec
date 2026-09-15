@@ -6,9 +6,9 @@ Referenced types are defined in the [full reference](../people.md).
 
 `PUT /api/2.0/people/thirdparty/linkaccount`
 
-Link a third-pary account
+Link a third-party account
 
-Links a third-party account specified in the request to the user profile.
+Connects a third-party identity to the calling profile, so that the account can afterwards sign in through  that provider.  The profile has to come from a completed provider authorization: pass the serialized &#x60;LoginProfile&#x60; the login  flow started from &#x60;GET api/2.0/people/thirdparty/providers&#x60; handed back, not a hand-written object.  It acts on the authenticated account only, and the portal has to be a standalone installation or have a  tariff that includes third-party authorization, otherwise the operation answers 403.  The call returns no body and is not idempotent: one third-party identity can be linked to a single portal  profile, so repeating it, or linking an identity somebody else already uses, answers 400.  A profile whose authorization was cancelled by the user is accepted and ignored, so a cancelled login also  answers 200 and links nothing - read &#x60;GET api/2.0/people/thirdparty/providers&#x60; afterwards and check &#x60;linked&#x60;  to find out whether the link exists.  Use &#x60;DELETE api/2.0/people/thirdparty/unlinkaccount&#x60; to remove a link.
 
 ## Parameters
 
@@ -20,12 +20,12 @@ Links a third-party account specified in the request to the user profile.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Ok | - | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **405** | Error not allowed option | - | - |
+| **200** | The third-party identity is linked to the calling profile. No content is returned | - | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **400** | The third-party identity is already linked to a portal profile | - | - |
+| **403** | The portal tariff does not include third-party authorization | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | - |
-| **400** | Bad Request. | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 

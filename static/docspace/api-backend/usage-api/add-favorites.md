@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../files.md).
 
 Add favorite files and folders
 
-Adds files and folders with the IDs specified in the request to the favorite list.
+Marks the listed files and folders as favorites for the calling account. The favorite list is personal:  nothing changes for other members, and the entries stay where they are stored. Read access to each item is  enough, so a room member with view-only rights and a guest may call it. Items the caller cannot read, ids that  do not exist and encrypted files of a private room are skipped without a word, and the answer is &#x60;true&#x60; even  when nothing was marked, so read the outcome back from &#x60;GET api/2.0/files/@favorites&#x60; instead of trusting it.  Numeric ids address entries stored in the portal itself, string ids entries on a connected third-party  account, and both kinds may be sent in one request. The call is mutating but safe to repeat: an item already  marked stays listed once. An entry moved to the Trash keeps its mark and is left out of the listing until it  is restored. &#x60;returnSingleOperation&#x60; arrives with the shared body and does nothing here. Use  &#x60;DELETE api/2.0/files/favorites&#x60; to undo, or &#x60;GET api/2.0/files/favorites/{fileId}&#x60; for a single file.
 
 ## Parameters
 
@@ -20,8 +20,8 @@ Adds files and folders with the IDs specified in the request to the favorite lis
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Boolean value: true if the operation is successful | [**BooleanWrapper**](../files.md#model-booleanwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **403** | You don&#39;t have enough permission to perform the operation | - | - |
+| **200** | Always true: the request was understood, which does not mean that anything was marked | [**BooleanWrapper**](../files.md#model-booleanwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **403** | Marking favorites is refused for the caller | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |

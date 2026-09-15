@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../people.md).
 
 Send instructions to change email
 
-Sends a message to the user email with the instructions to change the email address connected to the portal.
+Starts changing the email address of an account, and what it actually does depends on who calls it.  A caller acting on their own account only gets a confirmation letter sent to the new address, and the address  stays unchanged until that link is followed, which lands on &#x60;PUT api/2.0/people/{userid}/email&#x60;.  A DocSpace administrator acting on somebody else changes the address immediately instead: the account is  marked as not activated, every session of it is ended, and activation instructions are sent to the new  address - and passing the address the account already has is then rejected with 400.  A caller who is not an administrator may only address their own account, nobody but the owner may change the  owner&#39;s address, and only the owner may change the address of another DocSpace administrator.  The target has to be an account that is neither disabled nor a pending invitation, otherwise the operation  answers 404, and an address that already belongs to somebody answers 400.  The answer is a ready-to-display message naming the address the letter was sent to.
 
 ## Parameters
 
@@ -20,10 +20,10 @@ Sends a message to the user email with the instructions to change the email addr
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Message text | [**StringWrapper**](../people.md#model-stringwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **400** | Incorrect userId or email | - | - |
-| **403** | No permissions to perform this action | - | - |
-| **404** | User not found | - | - |
+| **200** | The message stating which address the letter was sent to | [**StringWrapper**](../people.md#model-stringwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **400** | The user ID is empty, the address is missing, malformed, already taken, or equal to the current one | - | - |
+| **403** | The caller may not change the address of that account | - | - |
+| **404** | The account does not exist, is disabled, or is a pending invitation | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | - |

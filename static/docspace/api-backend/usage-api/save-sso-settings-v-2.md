@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../api.md).
 
 Save the SSO settings
 
-Saves the SSO settings for the current portal.
+Replaces the whole SAML Single Sign-On configuration of the current portal with the one passed as a JSON  object in &#x60;serializeSettings&#x60;, and returns the configuration as it was stored. The payload is a complete  configuration rather than a patch: fields left out are stored empty, so send back a changed copy of  &#x60;GET api/2.0/settings/ssov2&#x60;, or start from &#x60;GET api/2.0/settings/ssov2/default&#x60;. The identity provider entity  ID and sign-in URL are required, the sign-in and sign-out URLs have to be absolute http or https addresses,  and the attribute mapping has to name the fields for first name, last name and email; otherwise nothing is  saved. The caller has to be allowed to edit portal settings (portal owner or DocSpace admin), and the portal  plan has to include Single Sign-On. Some values are normalised on the way in: a &#x60;usersType&#x60; other than 1 (room  admin), 3 (DocSpace admin) or 4 (user) becomes 4, an empty login label becomes &#x60;Single Sign-on&#x60;, and a longer  one is cut to 100 characters. Saving with SSO switched off unlinks every existing SSO account and turns it  into an ordinary one; switching SSO back on later does not restore those links. The change is recorded in the  audit trail.
 
 ## Parameters
 
@@ -20,8 +20,8 @@ Saves the SSO settings for the current portal.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | SSO settings | [**SsoSettingsV2Wrapper**](../api.md#model-ssosettingsv2wrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **400** | Settings could not be null | - | - |
+| **200** | The SSO settings as they were stored, with the login label and the user type normalised | [**SsoSettingsV2Wrapper**](../api.md#model-ssosettingsv2wrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **400** | The serialized settings are empty or do not contain an SSO configuration object | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |

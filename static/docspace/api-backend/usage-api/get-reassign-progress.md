@@ -8,19 +8,20 @@ Referenced types are defined in the [full reference](../people.md).
 
 Get the reassignment progress
 
-Returns the progress of the started data reassignment for the user with the ID specified in the request.
+Returns the current state of the data reassignment queued for the user with the ID specified in the request.  A reassignment must have been queued by &#x60;POST api/2.0/people/reassign/start&#x60; first: when nothing is queued for  that user the operation answers 200 with an empty body.  The caller needs the permission to edit users, and only the portal owner may track a reassignment whose source  user is a DocSpace administrator.  The call is read-only and is the polling operation of the reassignment flow - repeat it until &#x60;isCompleted&#x60; is  true, reading &#x60;percentage&#x60; for the 0 to 100 progress and &#x60;error&#x60; for the message left by a failed job.  Use &#x60;PUT api/2.0/people/reassign/terminate&#x60; to cancel a job that is still running.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **userid** | path | **UUID** (uuid) | The user ID. | [required] [example: 00000000-0000-0000-0000-000000000000] |
+| **userid** | path | **UUID** (uuid) | The ID of the user the operation applies to, taken from the route. For a progress operation it has to be the  same ID that was passed when the job was started. | [required] [example: 00000000-0000-0000-0000-000000000000] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Reassignment progress | [**TaskProgressResponseWrapper**](../people.md#model-taskprogressresponsewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The state of the queued reassignment, or an empty body when nothing is queued for the user | [**TaskProgressResponseWrapper**](../people.md#model-taskprogressresponsewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **403** | No permissions to perform this action | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | - |

@@ -8,20 +8,20 @@ Referenced types are defined in the [full reference](../files.md).
 
 Get conversion status
 
-Checks the conversion status of a file with the ID specified in the request.
+Reports how far the conversion of a file has got, as a list that holds one entry while the portal still knows  about that conversion and nothing once it is over. Read &#x60;progress&#x60;, which counts from 0 to 100, &#x60;error&#x60; for  the reason a conversion failed, and &#x60;file&#x60;, which carries the converted file as soon as it exists. Queue the  conversion with &#x60;PUT api/2.0/files/file/{fileId}/checkconversion&#x60; and poll this operation until the entry  reaches 100 or disappears: a finished entry is handed out once and then dropped, and an entry whose conversion  stopped is discarded a few minutes later, so an empty list means either already reported or never started  rather than an error. The same empty list is the answer for an identifier no file matches. Passing  &#x60;start&#x3D;true&#x60; starts the conversion as well, with the format from the portal settings and no password, which  makes that one flag mutating; without it the operation is read-only. The caller needs read access to the file,  and anyone else is refused.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **Integer** (int32) | The file ID to check conversion status. | [required] [example: 1] |
-| **start** | query | **Boolean** | Specifies whether a conversion operation is started or not. | [optional] [example: false] |
+| **fileId** | path | **Integer** (int32) | The file whose conversion is asked about. | [required] [example: 1] |
+| **start** | query | **Boolean** | Whether to start the conversion as well: &#x60;true&#x60; queues it with the default output format and no password,  &#x60;false&#x60; only reports what the portal already knows. | [optional] [example: false] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Conversion result | [**ConversationResultArrayWrapper**](../files.md#model-conversationresultarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The conversion entry of the file, or an empty list when the portal has none | [**ConversationResultArrayWrapper**](../files.md#model-conversationresultarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |

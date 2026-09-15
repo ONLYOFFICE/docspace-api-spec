@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../people.md).
 
 Delete a user
 
-Deletes a user with the ID specified in the request from the portal.
+Deletes a portal profile and queues the erasure of the data behind it.  The account has to be disabled first - set the &#x60;Terminated&#x60; status through  &#x60;PUT api/2.0/people/status/{status}&#x60;, otherwise the operation answers 403 - and it must not be a system  account or one imported from LDAP.  The caller needs the permission to add and remove users, and has to be the portal owner to delete a DocSpace  administrator.  The profile disappears at once, together with its avatar, its group memberships, its file shares and its  OAuth clients, while the data it owned is erased by a queued job afterwards, which can be watched through  &#x60;GET api/2.0/people/remove/progress/{userid}&#x60;.  The removal is permanent and cannot be undone, so hand the rooms and the shared files over first through  &#x60;POST api/2.0/people/reassign/start&#x60; - an account whose reassignment has not finished cannot be deleted.  The call raises a &#x60;UserDeleted&#x60; webhook and answers with the profile as it was just before it was removed.  To delete several accounts at once use &#x60;PUT api/2.0/people/delete&#x60;.
 
 ## Parameters
 
@@ -20,9 +20,9 @@ Deletes a user with the ID specified in the request from the portal.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Deleted user detailed information | [**EmployeeFullWrapper**](../people.md#model-employeefullwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **403** | You don&#39;t have enough permission to perform the operation or user is not suspended | - | - |
-| **404** | User not found | - | - |
+| **200** | The profile as it was just before it was deleted | [**EmployeeFullWrapper**](../people.md#model-employeefullwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **403** | The account is not disabled, is a system or an LDAP account, or the caller may not delete a DocSpace administrator | - | - |
+| **404** | No user has the specified ID | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | - |

@@ -6,9 +6,9 @@ Referenced types are defined in the [full reference](../files.md).
 
 `PUT /api/2.0/files/roomtemplate/public`
 
-Set public settings
+Set room template public access
 
-Sets the public settings for the room template with the ID specified in the request.
+Switches the room template named by &#x60;id&#x60; between shared with everyone and private, rewriting its whole  recipient list in the process. With &#x60;public&#x60; true the Everyone group is granted read access, so every member  allowed to create rooms can build one from the template with &#x60;POST api/2.0/files/rooms/fromtemplate&#x60;; with  false that access is taken away. In both cases every other account and group the template was shared with —  including the addresses passed as &#x60;share&#x60; when it was created — loses access, so this is not a way to add a  single recipient to an existing list. Only the account that owns the template may call it: a portal  administrator who does not own it is refused, and so is a member invited to the source room. The identifier  has to resolve to a room template; an ordinary room or an unknown value is answered as missing, and an  identifier below 1 is rejected as an invalid request. Repeating the call with the same value changes nothing,  and nothing is returned; read the current state with &#x60;GET api/2.0/files/roomtemplate/{id}/public&#x60;.
 
 ## Parameters
 

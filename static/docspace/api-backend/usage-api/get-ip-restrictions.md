@@ -6,9 +6,9 @@ Referenced types are defined in the [full reference](../api.md).
 
 `GET /api/2.0/settings/iprestrictions`
 
-Get the IP portal restrictions
+Get IP restrictions
 
-Returns the IP portal restrictions.
+Returns the IP restriction list of the current portal - the addresses allowed to reach it, each with its &#x60;id&#x60;  and the &#x60;forAdmin&#x60; flag that narrows the entry to DocSpace administrators. The caller needs the  portal-settings right of a DocSpace administrator, otherwise the call is refused. The call is read-only and  honours &#x60;If-None-Match&#x60;: send back the &#x60;ETag&#x60; of an earlier answer and an unchanged list comes back as an  empty not-modified response rather than a body. The list has no defined order and is empty on a portal where  nobody has configured restrictions - and an empty list blocks nobody, whatever the enforcement flag says.  Whether the restrictions are enforced at all is not part of this answer: read that flag with  &#x60;GET api/2.0/settings/iprestrictions/settings&#x60;. The entries listed here apply to every user of the portal  except its owner. Replace the whole list with &#x60;PUT api/2.0/settings/iprestrictions&#x60;; single entries cannot be  added or deleted, and that update takes plain addresses rather than the IDs returned here.
 
 ## Parameters
 This endpoint does not need any parameter.
@@ -17,7 +17,7 @@ This endpoint does not need any parameter.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | List of IP restrictions parameters | [**IPRestrictionArrayWrapper**](../api.md#model-iprestrictionarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The IP addresses allowed to reach the portal, each with its ID and administrators-only flag; an empty list when the portal has no restrictions | [**IPRestrictionArrayWrapper**](../api.md#model-iprestrictionarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |

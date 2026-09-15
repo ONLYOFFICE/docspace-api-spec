@@ -6,9 +6,9 @@ Referenced types are defined in the [full reference](../files.md).
 
 `DELETE /api/2.0/files/favorites`
 
-Delete favorite files and folders (using body parameters)
+Delete favorite files and folders
 
-Removes files and folders with the IDs specified in the request from the favorite list. This method uses the body parameters.
+Removes the favorite mark from the listed files and folders for the calling account. Nothing is deleted from  storage: the entries keep their place, their content and their sharing, and only disappear from  &#x60;GET api/2.0/files/@favorites&#x60;; to delete the entries themselves call &#x60;PUT api/2.0/files/fileops/delete&#x60;  instead. Marks of other members are untouched, and read access to each item is enough to call it. The ids go  into the JSON body documented here; the same route also accepts them as repeated &#x60;fileIds&#x60; and &#x60;folderIds&#x60;  query parameters, but only in a request that carries no JSON body at all. Numeric ids address entries stored  in the portal itself, string ids entries on a connected third-party account. The answer is &#x60;true&#x60; whenever the  request was understood, which an empty request, an id that does not exist and an item that was never marked  all achieve, so it does not report how many marks were dropped. &#x60;returnSingleOperation&#x60; arrives with the  shared body and does nothing here. Repeating the call is safe. Use &#x60;POST api/2.0/files/favorites&#x60; to mark  entries again.
 
 ## Parameters
 
@@ -20,7 +20,7 @@ Removes files and folders with the IDs specified in the request from the favorit
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Boolean value: true if the operation is successful | [**BooleanWrapper**](../files.md#model-booleanwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | Always true: the marks named in the request are gone or were never there | [**BooleanWrapper**](../files.md#model-booleanwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |

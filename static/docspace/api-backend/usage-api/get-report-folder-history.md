@@ -8,21 +8,21 @@ Referenced types are defined in the [full reference](../files.md).
 
 Get the folder history report generation status
 
-Returns the status of generating the folder history report.
+Reports how far the history report of a folder has got, and is the operation to poll after  &#x60;POST api/2.0/files/folder/{folderId}/log/report&#x60; has queued one. &#x60;percentage&#x60; climbs to 100, &#x60;isCompleted&#x60;  turns true when the job is over however it ended, &#x60;error&#x60; carries the reason when it failed, and  &#x60;resultFileId&#x60;, &#x60;resultFileName&#x60; and &#x60;resultFileUrl&#x60; name the file that was saved in the caller&#39;s My  documents - a CSV report leaving the identifier empty. An empty answer means there is no report for this  folder and caller, either because none was started or because a finished one has already been picked up by an  earlier poll. The caller needs read access to the folder and may not be a guest, and the portal plan has to  include the audit feature; a caller who fails the access rule is answered with 403 and a folder that does not  exist with 404. The call is read-only, and each caller sees only their own report.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **folderId** | path | **Integer** (int32) | The folder unique identifier. | [required] |
+| **folderId** | path | **Integer** (int32) | The folder whose history report is being polled. It is the folder that was              passed to the operation that started the report. | [required] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Operation execution status | [**DocumentBuilderTaskWrapper**](../files.md#model-documentbuildertaskwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **403** | You don&#39;t have enough permission to perform the operation | - | - |
-| **404** | The required folder was not found | - | - |
+| **200** | The state of the report task, or nothing when there is none | [**DocumentBuilderTaskWrapper**](../files.md#model-documentbuildertaskwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **403** | The caller may not export the history of this folder | - | - |
+| **404** | The folder does not exist | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |

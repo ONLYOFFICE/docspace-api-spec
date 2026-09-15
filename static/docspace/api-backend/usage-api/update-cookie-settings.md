@@ -6,9 +6,9 @@ Referenced types are defined in the [full reference](../api.md).
 
 `PUT /api/2.0/settings/cookiesettings`
 
-Update cookies lifetime
+Update the cookie lifetime settings
 
-Updates the cookies lifetime value in minutes.
+Stores how long an authentication session of this portal stays valid: &#x60;lifeTime&#x60; in minutes together with the  &#x60;enabled&#x60; flag that switches the limit on. The caller needs the portal-settings right of a DocSpace  administrator - the portal owner and a DocSpace administrator qualify, any other member is refused - and on an  installation whose configuration hides the cookie section nothing is stored and the call is answered with 402.  A &#x60;lifeTime&#x60; above 9999 minutes is not rejected but clamped to 9999, while 0 or less clears the number  instead, which with &#x60;enabled&#x60; true leaves sessions that never expire on their own. Any positive &#x60;lifeTime&#x60;  raises the session version of the portal: every session issued before the call stops being accepted, and with  &#x60;enabled&#x60; true the connections behind them are dropped as well. The caller is signed in again inside the same  call and gets a fresh session cookie in the response, so a client that keeps sending the token it held before  this call is the one locked out. The change is recorded in the audit trail. What comes back is a localized  confirmation message; read the stored pair with &#x60;GET api/2.0/settings/cookiesettings&#x60;.
 
 ## Parameters
 
@@ -20,8 +20,8 @@ Updates the cookies lifetime value in minutes.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Message about the result of saving new settings | [**StringWrapper**](../api.md#model-stringwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **402** | Your pricing plan does not support this option | - | - |
+| **200** | A localized message confirming that the session lifetime has been saved | [**StringWrapper**](../api.md#model-stringwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **402** | The installation hides the cookie lifetime section, or the portal&#39;s payment has lapsed | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |

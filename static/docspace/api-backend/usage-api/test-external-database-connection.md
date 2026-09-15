@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../api.md).
 
 Test external database connection
 
-Tests an external database connection with the provided settings without saving them.
+Probes connectivity to an external database using the settings supplied in the request, without saving them or  affecting the portal&#39;s own configuration. Requires Owner or DocSpaceAdmin (the EditPortalSettings permission).  SQLite is only accepted as a target on a Standalone (self-hosted) installation; requesting it on SaaS is  reported as a failed connection rather than an error. This is a read-only call, safe to retry. A failed  connection is not an HTTP error: the response always comes back as a normal success with &#x60;success&#x3D;false&#x60; and  an &#x60;error&#x60; message describing what went wrong.
 
 ## Parameters
 
@@ -20,7 +20,7 @@ Tests an external database connection with the provided settings without saving 
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Connection test result with Success flag and optional Error message | [**ConnectionTestResultWrapper**](../api.md#model-connectiontestresultwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | Connection test result: a success flag and, on failure, an error message | [**ConnectionTestResultWrapper**](../api.md#model-connectiontestresultwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |

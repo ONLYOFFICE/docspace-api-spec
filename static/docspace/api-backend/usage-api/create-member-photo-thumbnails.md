@@ -8,22 +8,22 @@ Referenced types are defined in the [full reference](../people.md).
 
 Create photo thumbnails
 
-Creates the user photo thumbnails by coordinates of the original image specified in the request.
+Crops the avatar of a profile to the rectangle given in the request and rebuilds all of its thumbnail sizes,  which is the second step of changing an avatar by hand.  It works in two modes: with &#x60;tmpFile&#x60; it takes the temporary image  &#x60;POST api/2.0/people/{userid}/photo&#x60; produced with &#x60;autosave&#x60; off, makes the cropped result the main photo and  then discards the temporary file, and without &#x60;tmpFile&#x60; it re-crops the photo the profile already has.  A caller may only do this to their own profile - the ID in the route has to be the calling account, and an  administrator gets 403 for anybody else - and the account must be allowed to edit its own profile.  The call replaces the stored photo, so the previous crop is lost, and it can be repeated with new coordinates  as often as needed.  Passing &#x60;width&#x60; and &#x60;height&#x60; as 0 together with &#x60;tmpFile&#x60; keeps the whole uploaded image instead of cropping  it.  The answer holds the URLs of every generated size, the same shape &#x60;GET api/2.0/people/{userid}/photo&#x60;  returns.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **userid** | path | **String** | The user ID. | [required] [example: 00000000-0000-0000-0000-000000000000] |
-| **ThumbnailsRequest** | body | [**ThumbnailsRequest**](../people.md#model-thumbnailsrequest) | The thumbnail request. | [required] |
+| **userid** | path | **String** | The profile whose avatar is cropped, taken from the route. Either the ID of the account or its user name is  accepted, and it has to be the calling account, because a profile photo can only be changed by its owner. | [required] [example: 00000000-0000-0000-0000-000000000000] |
+| **ThumbnailsRequest** | body | [**ThumbnailsRequest**](../people.md#model-thumbnailsrequest) | The crop rectangle, and optionally the temporary image to crop. | [required] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Thumbnail parameters | [**ThumbnailsDataWrapper**](../people.md#model-thumbnailsdatawrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **403** | No permissions to perform this action | - | - |
-| **404** | User not found | - | - |
+| **200** | The URLs of the rebuilt photo sizes | [**ThumbnailsDataWrapper**](../people.md#model-thumbnailsdatawrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **403** | The ID in the route is not the calling account, or the account may not edit its own profile | - | - |
+| **404** | No user has the specified ID | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | - |

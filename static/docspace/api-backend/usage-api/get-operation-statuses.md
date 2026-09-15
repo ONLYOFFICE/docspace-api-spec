@@ -8,19 +8,19 @@ Referenced types are defined in the [full reference](../files.md).
 
 Get active file operations
 
-Returns a list of all the active file operations.
+Returns the background file operations of the caller that are still running or whose finished result has not  been read yet, grouped by kind: duplications first, then moves and copies, deletions, downloads and  mark-as-read. This is the polling target for every operation in this section — an operation appears here as  soon as it is queued and carries &#x60;progress&#x60; from 0 to 100, &#x60;finished&#x60;, the &#x60;error&#x60; of a failed item and, for a  download, the address of the archive in &#x60;url&#x60;. A record is dropped once its finished state has been handed  out, so a completed operation is reported once and an empty array means there is nothing left to report rather  than that the work failed. Pass &#x60;id&#x60; to follow a single operation; an id that is not among the caller&#39;s  operations gives an empty array. Operations are private to the account that started them, an anonymous caller  being scoped to the session of the external link. The call changes nothing. To follow one kind only use  &#x60;GET api/2.0/files/fileops/{operationType}&#x60;.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | query | **String** | The ID of the file operation. | [optional] [example: operation-123-abc] |
+| **id** | query | **String** | The operation to report on, as returned in &#x60;id&#x60; when it was started; without it every operation of the caller  is reported. An id that is not among the caller&#39;s operations gives an empty answer rather than an error. | [optional] [example: b2f3e9a4-7c15-4d8e-9f60-3a1c5e7d0b42] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | List of file operations | [**FileOperationArrayWrapper**](../files.md#model-fileoperationarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The file operations of the caller that are still running or not yet read | [**FileOperationArrayWrapper**](../files.md#model-fileoperationarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **400** | Bad Request. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |

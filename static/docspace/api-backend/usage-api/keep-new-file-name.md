@@ -6,9 +6,9 @@ Referenced types are defined in the [full reference](../files.md).
 
 `PUT /api/2.0/files/keepnewfilename`
 
-Ask a new file name
+Keep the default file name
 
-Specifies whether to ask a user for a file name on creation or not.
+Stores whether the caller wants new documents created with the default name instead of being asked for one,  and returns the value that is now stored. It is a preference of the calling account: every authenticated role  down to a guest may change its own copy, one member&#39;s choice never affects another, and an unauthenticated  caller is refused. The portal only keeps the value and reports it - the creation operations,  &#x60;POST api/2.0/files/{folderId}/file&#x60; among them, always use the title they are given, so this setting changes  what an interface asks for rather than what the server does. Writing a value that is already stored is  accepted and leaves the setting and the audit trail untouched. The value is published as &#x60;keepNewFileName&#x60; by  &#x60;GET api/2.0/files/settings&#x60;, which is the only way to read it back. A new account starts with the prompt in  place. The title a created document actually gets, and how a clash with an existing title is resolved, are  decided by the creation request rather than here.
 
 ## Parameters
 
@@ -20,7 +20,7 @@ Specifies whether to ask a user for a file name on creation or not.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Boolean value: true if the operation is successful | [**BooleanWrapper**](../files.md#model-booleanwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | true if new documents are created with the default name | [**BooleanWrapper**](../files.md#model-booleanwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |

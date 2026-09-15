@@ -8,20 +8,20 @@ Referenced types are defined in the [full reference](../api.md).
 
 Get web plugins
 
-Returns the portal web plugins.
+Lists the web plugins available in the current portal: the plugins installed for the whole installation first,  then the portal&#39;s own, with a portal plugin dropped when an installation-wide plugin already uses its name.  Any authenticated portal member may call it, no settings permission needed, and the installation has to have  web plugins enabled in its configuration. The call is read-only and idempotent. Pass &#x60;enabled&#x3D;true&#x60; or  &#x60;enabled&#x3D;false&#x60; to keep only the plugins in that state, and leave the parameter out to get every plugin. Each  entry carries the manifest data together with the state the portal stored for that plugin: &#x60;enabled&#x60;, the  &#x60;settings&#x60; string, &#x60;system&#x60; for an installation-wide plugin, and the &#x60;url&#x60; and &#x60;cssUrl&#x60; a client loads the  plugin from. An empty list means nothing is installed for this portal, not that plugins are switched off,  which is refused with 403 instead. The list is capped at the configured maximum, 100 plugins by default, and  is not paginated. For one plugin by its manifest name use &#x60;GET api/2.0/settings/webplugins/{name}&#x60;.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **enabled** | query | **Boolean** | The optional filter for the plugin enabled state. | [optional] [example: true] |
+| **enabled** | query | **Boolean** | Which plugins are kept: &#x60;true&#x60; the ones switched on, &#x60;false&#x60; the ones switched off. Omitting it lists every  installed plugin whatever its state. | [optional] [example: true] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Web plugin | [**WebPluginArrayWrapper**](../api.md#model-webpluginarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **403** | Plugins disabled | - | - |
+| **200** | The web plugins available in the portal, the installation-wide ones first | [**WebPluginArrayWrapper**](../api.md#model-webpluginarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **403** | Web plugins are switched off for the installation | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |

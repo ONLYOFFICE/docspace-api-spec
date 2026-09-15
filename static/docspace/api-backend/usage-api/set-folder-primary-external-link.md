@@ -8,20 +8,20 @@ Referenced types are defined in the [full reference](../files.md).
 
 Set the folder external link
 
-Sets the folder external link with the ID specified in the request.
+Creates an external link to a folder or a room, or changes or revokes an existing one, and answers with the  link as it now stands. &#x60;linkId&#x60; decides which: an identifier that is not yet in use, the empty one included,  creates a link, while the identifier of an existing link rewrites it, so the whole set of parameters is  applied every time and a field left out is reset rather than kept. &#x60;access&#x60; carries the rights the link  grants, and &#x60;access&#x60; set to the value that denies everything revokes the link instead - the answer is then  empty, and a revoked primary link is not recreated by a later read. &#x60;title&#x60; names the link for the people who  manage it, &#x60;expirationDate&#x60; limits its lifetime and is ignored when it lies in the past, &#x60;password&#x60; asks  visitors for a secret, &#x60;denyDownload&#x60; leaves them with viewing only, &#x60;internal&#x60; admits signed-in members  alone, and &#x60;primary&#x3D;true&#x60; makes it the primary link of the folder. The caller needs the right to manage the  links of the room, which its manager and a portal administrator acting as room manager have; anyone else is  refused and an unknown folder is answered as not found. The call is mutating.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The folder ID. | [required] [example: 1] |
-| **FolderLinkRequest** | body | [**FolderLinkRequest**](../files.md#model-folderlinkrequest) | The folder link parameters. | [required] |
+| **id** | path | **Integer** (int32) | The folder or room the link belongs to. | [required] [example: 1] |
+| **FolderLinkRequest** | body | [**FolderLinkRequest**](../files.md#model-folderlinkrequest) | The link and the way it is to be shaped. | [required] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Folder information | [**FileShareWrapper**](../files.md#model-filesharewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The link as it now stands, or nothing when it was revoked | [**FileShareWrapper**](../files.md#model-filesharewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |

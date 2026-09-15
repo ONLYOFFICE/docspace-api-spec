@@ -6,9 +6,9 @@ Referenced types are defined in the [full reference](../newai.md).
 
 `PUT /api/2.0/ai/assignments/assign`
 
-Assign
+Bind a profile to an action
 
-Binds a profile to an AI action, creating the assignment or updating it in place. The profile&#39;s declared capabilities are validated against the action, except for the &#x60;Default&#x60; slot.
+Binds a profile to one AI action portal-wide, creating the assignment or replacing it in place, and returns the result. Both &#x60;actionType&#x60; and &#x60;profileId&#x60; are required. The profile&#39;s declared capabilities are checked against the action, so a model that cannot generate images cannot be bound to &#x60;ImageGeneration&#x60; - the &#x60;Default&#x60; slot is exempt, because it stands in for every action. There is no room-scoped form of this write: a room&#39;s own binding is created by the agent that owns it, while reads accept an &#x60;entityId&#x60;.
 
 ## Parameters
 
@@ -20,8 +20,12 @@ Binds a profile to an AI action, creating the assignment or updating it in place
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Success. | [**AiAssignmentMutationResult**](../newai.md#model-aiassignmentmutationresult) | - |
+| **200** | Whether the binding was stored. A failure is reported in &#x60;error&#x60; rather than as a status. | [**AiAssignmentMutationResult**](../newai.md#model-aiassignmentmutationresult) | - |
+| **400** | &#x60;actionType&#x60; or &#x60;profileId&#x60; is missing. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
 | **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
+| **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
+| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
+| **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
 
 ## Return type
 

@@ -2,13 +2,13 @@
 
 Referenced types are defined in the [full reference](../oauth.md).
 
-> Object revokeUserClient(clientId)
+> revokeUserClient(clientId)
 
-`DELETE /api/2.0/clients/{clientId}/revoke`
+`DELETE /api/2.0/oauth2/clients/{clientId}/revoke`
 
 Revoke client consent
 
-Revokes all user consents for the specified OAuth2 client. This will invalidate all access tokens and refresh tokens issued to this client for the current user. The user will need to re-authorize the client to access their resources.
+Revokes the calling user&#39;s own consent for one client and answers 200 with an empty body. It touches only the caller&#39;s grant: other users keep their consents and the client itself stays registered. Guests may call it as well as users and administrators, because it can never reach anyone else&#39;s data. The revocation is carried out by the authorization service over gRPC, so a service that reports nothing was revoked produces 400 and a service that cannot be reached produces 503. Once it succeeds the user has to authorize the client again before it can act on their behalf.
 
 ## Parameters
 
@@ -20,17 +20,18 @@ Revokes all user consents for the specified OAuth2 client. This will invalidate 
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Client consent successfully revoked | **Object** | - |
-| **400** | Invalid client ID format | [**ProblemDetail**](../oauth.md#model-problemdetail) | - |
+| **200** | Client consent successfully revoked | - | - |
+| **400** | The client ID is blank, or the authorization service reported that the consent was not revoked | [**ProblemDetail**](../oauth.md#model-problemdetail) | - |
 | **403** | Insufficient permissions to revoke consent | [**ProblemDetail**](../oauth.md#model-problemdetail) | - |
-| **404** | Client not found | [**ProblemDetail**](../oauth.md#model-problemdetail) | - |
 | **429** | Too many requests - rate limit exceeded | [**ProblemDetail**](../oauth.md#model-problemdetail) | - |
-| **500** | Internal server error occurred | [**ProblemDetail**](../oauth.md#model-problemdetail) | - |
 | **503** | Authorization service unavailable | [**ProblemDetail**](../oauth.md#model-problemdetail) | - |
+| **500** | Internal server error occurred | [**ProblemDetail**](../oauth.md#model-problemdetail) | - |
+| **405** | The HTTP method is not allowed for this path | [**ProblemDetail**](../oauth.md#model-problemdetail) | - |
+| **406** | The Accept header does not allow application/json | [**ProblemDetail**](../oauth.md#model-problemdetail) | - |
 
 ## Return type
 
-**Object**
+null (empty response body)
 
 ## Authorization
 

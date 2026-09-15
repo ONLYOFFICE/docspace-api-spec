@@ -6,22 +6,26 @@ Referenced types are defined in the [full reference](../newai.md).
 
 `POST /api/2.0/ai/attachments/get`
 
-Get
+Get one attachment
 
-Returns one attachment by identifier.
+Returns one attachment by its ID, whether it is still a draft or already bound to a message. The ID is required and has to be a non-empty string. An ID that no longer exists is not reported as 404: the answer is a null body with status 200, so treat a missing payload as no such attachment. Use &#x60;POST api/2.0/ai/attachments/get-many&#x60; to read several at once.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **body** | body | **String** |  | [required] |
+| **body** | body | **String** | The ID of the attachment to read, as a bare JSON string. | [required] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Success. | [**AiAttachment**](../newai.md#model-aiattachment) | - |
+| **200** | The attachment, or a null body when no attachment has that ID. | [**AiAttachment**](../newai.md#model-aiattachment) | - |
+| **400** | The attachment ID is missing. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
 | **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
+| **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
+| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
+| **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
 
 ## Return type
 

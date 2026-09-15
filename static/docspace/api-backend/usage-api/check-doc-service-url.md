@@ -6,9 +6,9 @@ Referenced types are defined in the [full reference](../files.md).
 
 `PUT /api/2.0/files/docservice`
 
-Check the document service URL
+Set the document service address
 
-Checks the document service location URL.
+Writes the portal-wide ONLYOFFICE Docs connection settings - the public Document Server address, its address  inside the private network, the address it calls this portal back on, the request signature secret and header,  and SSL verification - then verifies them against the running Document Server before keeping them. Every  address is optional: an empty value drops the portal&#39;s own setting so that the deployment default takes over  again. An address gets &#x60;http://&#x60; prepended when it carries no scheme, while an absolute address with a query  string is rejected with 400, as is a signature secret sent without its header. Only the portal owner and a  DocSpace administrator may call this; a room administrator, a user and a guest are refused with 403. The call  is mutating and safe to repeat with the same body. Verification is live - the editor api script, the  healthcheck, a test conversion, the command service and the document builder are all exercised - and when it  fails the previous settings are restored in full and nothing is changed. The answer is what  &#x60;GET api/2.0/files/docservice&#x60; returns with no version requested, so &#x60;version&#x60; comes back empty and the  signature secret is not echoed back.
 
 ## Parameters
 
@@ -20,9 +20,9 @@ Checks the document service location URL.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Document service information: the Document Server address, the Document Server address in the local private network, the Community Server address | [**DocServiceUrlWrapper**](../files.md#model-docserviceurlwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **400** | Invalid input urls/Mixed Active Content is not allowed. HTTPS address for Document Server is required | - | - |
-| **403** | You don&#39;t have enough permission to perform the operation | - | - |
+| **200** | The settings are stored and the Document Server answered the verification requests | [**DocServiceUrlWrapper**](../files.md#model-docserviceurlwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **400** | An address cannot be parsed or carries a query string, the signature secret is sent without its header, or an http address is given for a portal served over https | - | - |
+| **403** | The caller is not the portal owner or a DocSpace administrator | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |

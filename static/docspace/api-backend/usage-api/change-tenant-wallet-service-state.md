@@ -6,9 +6,9 @@ Referenced types are defined in the [full reference](../api.md).
 
 `POST /api/2.0/portal/payment/servicestate`
 
-Change tenant wallet service state
+Switch a wallet service
 
-Changes the state of a wallet service for the current tenant.  Requires permission to edit portal settings and a configured tariff service.  Adds or removes the specified service from the enabled services list based on the enabled flag.
+Switches one wallet service on or off for the portal: &#x60;service&#x60; names it and &#x60;enabled&#x60; says which way. The  portal needs a billing customer, and the caller needs both the permission to edit the portal settings and  DocSpace administrator rights. Order matters between the two AI services - AI tools has to be on before AI  search may be switched on, and switching AI tools off switches AI search off with it - so a request that  breaks that order is refused with 403. The call is mutating and idempotent: switching on a service that is  already on changes nothing. It is written to the portal audit trail, and switching AI tools notifies the  portal clients so the AI features appear or disappear for them without a reload. The whole updated set of  switched-on services comes back. Switching a service on does not buy it - its units are still bought with  &#x60;PUT api/2.0/portal/payment/updatewallet&#x60;.
 
 ## Parameters
 
@@ -20,9 +20,9 @@ Changes the state of a wallet service for the current tenant.  Requires permissi
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The updated tenant wallet service settings | [**TenantWalletServiceSettingsWrapper**](../api.md#model-tenantwalletservicesettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **403** | No permissions to perform this action | - | - |
-| **404** | Customer could not be found | - | - |
+| **200** | The whole set of wallet services switched on for the portal after the change | [**TenantWalletServiceSettingsWrapper**](../api.md#model-tenantwalletservicesettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **403** | The caller may not edit the portal settings or is not a DocSpace administrator, the portal has no billing service configured, or AI search was switched on while AI tools is off | - | - |
+| **404** | This portal has no billing customer yet | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |

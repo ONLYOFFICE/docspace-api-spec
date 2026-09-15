@@ -6,24 +6,24 @@ Referenced types are defined in the [full reference](../files.md).
 
 `POST /api/2.0/files/{folderId}/session/{sessionId}/upload`
 
-Handles the upload of a chunk for an existing upload session.
+Upload a numbered chunk
 
-This method allows the caller to upload a specific chunk of a file to an ongoing upload session.  The session is identified by the session ID provided in the request. The chunk can be of any size  within the limits allowed during the session initialization. Each chunk must be uploaded in the  correct order for the server to process it appropriately.  The server updates the upload session status and stores the progress information after processing  each chunk. The updated session details are returned in the response.
+Stores one part of a file under the number given in &#x60;chunkNumber&#x60;, which is what the ordinary chunked flow  uses: parts are kept by their number rather than by arrival, so a part that failed can be resent under the  same number without restarting the session. Numbering starts at 1, and leaving the number out makes the server  count the parts itself. The answer is always the session, never the file, and this call never completes the  upload: the file appears only after &#x60;PUT api/2.0/files/{folderId}/session/{sessionId}/finalize&#x60;. Use  &#x60;POST api/2.0/files/{folderId}/session/{sessionId}&#x60; instead when the parts go strictly in order and the upload  should complete by itself. A part bigger than &#x60;chunkUploadSize&#x60; from &#x60;GET api/2.0/files/settings&#x60; is refused,  so that value is also the size to split the payload by. The first part of a PDF is inspected, and a PDF that  is not a fillable form is refused when the session targets a form-filling room. The session is found by its id  alone.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **folderId** | path | **Integer** (int32) | The folder ID. | [required] [example: 1] |
-| **sessionId** | path | **String** | The upload session ID. | [required] [example: session_abc123] |
-| **ChunkNumber** | query | **Integer** (int32) | The chunk number. | [optional] [example: 1] |
-| **File** | form | **File** (binary) | The file chunk to be uploaded as part of the multipart/form-data request.  This property represents the uploaded file chunk content from the HTTP request form for chunked upload operations.  The file chunk is accessed via the IFormFile interface which provides access to the chunk content and length. | [optional] |
+| **folderId** | path | **Integer** (int32) | The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id. | [required] [example: 1] |
+| **sessionId** | path | **String** | The session this part belongs to, as returned in &#x60;id&#x60; when it was created; a 32-character hexadecimal string. | [required] [example: 9f1c7a2b4d3e4f5a8b6c0d1e2f3a4b5c] |
+| **ChunkNumber** | query | **Integer** (int32) | The position of this part in the file, counted from 1. Sending the same number again replaces that part  instead of adding one, which is how a failed part is retried; leaving the number out makes the server count  the parts itself. | [optional] [example: 1] |
+| **File** | form | **File** (binary) | The part of the file to store, sent as the multipart field of the same name. It is kept under the number given  beside it, and a part larger than the portal chunk size is refused. | [optional] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Updated information about the upload session, including the current progress | [**ChunkedUploadSessionResponseIntegerWrapper**](../files.md#model-chunkeduploadsessionresponseintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The session with its progress after the part was stored | [**ChunkedUploadSessionResponseIntegerWrapper**](../files.md#model-chunkeduploadsessionresponseintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |

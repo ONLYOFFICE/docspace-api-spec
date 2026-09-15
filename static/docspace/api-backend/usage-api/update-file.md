@@ -8,21 +8,21 @@ Referenced types are defined in the [full reference](../files.md).
 
 Update a file
 
-Updates the information of the selected file with the parameters specified in the request.
+Renames a file, restores one of its versions, or both at once, and answers with the file as it now stands. A  non-empty &#x60;title&#x60; renames the file, keeping the stored extension whatever the new title says, so a rename  cannot change the format; an empty or missing title leaves the name alone. A &#x60;lastVersion&#x60; above 0 restores  that version the way &#x60;POST api/2.0/files/file/{fileId}/restoreversion&#x60; does, storing its content again on top  of the history, while 0 or less leaves the versions untouched and answers with the file as it is - which makes  this operation a read of the file when both fields are left out. The caller needs edit access, and renaming  somebody else&#39;s file additionally needs room-manager rights: a member or room admin with plain editing access,  read-only access, a guest and a DocSpace admin who is not a member of the room are all refused with 403, while  a content creator may rename a file of their own. The call is mutating. Renaming marks the file as new for  everybody else who can read it.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **Integer** (int32) | The file ID to update. | [required] [example: 1] |
-| **UpdateFile** | body | [**UpdateFile**](../files.md#model-updatefile) | The parameters for updating a file. | [required] |
+| **fileId** | path | **Integer** (int32) | The file to update. | [required] [example: 1] |
+| **UpdateFile** | body | [**UpdateFile**](../files.md#model-updatefile) | The new title and the version to restore. | [required] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Updated file information | [**FileIntegerWrapper**](../files.md#model-fileintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **403** | You do not have enough permissions to edit the file | - | - |
+| **200** | The file after the rename, the restore, or both | [**FileIntegerWrapper**](../files.md#model-fileintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **403** | The caller may not rename the file or change its version | - | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **400** | Bad Request. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |

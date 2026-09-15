@@ -6,9 +6,9 @@ Referenced types are defined in the [full reference](../api.md).
 
 `POST /api/2.0/portal/payment/topupsettings`
 
-Set the wallet auto top up settings
+Set the auto top-up settings
 
-Updates the wallet auto top up settings for the current tenant.  Requires the tariff service to be configured and the user to be authorized as a payer.  Returns null if the tariff service is not configured or customer information/balance cannot be retrieved.
+Switches the portal&#39;s automatic wallet top-up on or off and sets its thresholds: while it is on, the payment  method on file is charged whenever the wallet balance falls below &#x60;minBalance&#x60;, enough to bring it up to  &#x60;upToBalance&#x60;, in &#x60;currency&#x60;. The portal needs a billing customer whose wallet balance exists - a portal that  has never had one answers 404, so top the wallet up once with &#x60;POST api/2.0/portal/payment/deposit&#x60; first -  and only the payer may change the settings. The body replaces the stored settings as a whole and an omitted  body resets them to the defaults; &#x60;minBalance&#x60; is accepted between 5 and 1000 and &#x60;upToBalance&#x60; between 6 and  5000, while &#x60;lowBalanceThreshold&#x60; and &#x60;lowBalanceNotified&#x60; are ignored on the way in and kept as the portal  had them. The call is mutating and idempotent, it charges nothing by itself, it is written to the portal audit  trail, and switching the top-up on also re-arms the low-balance warning. The settings as they were stored come  back in the answer.
 
 ## Parameters
 
@@ -20,9 +20,9 @@ Updates the wallet auto top up settings for the current tenant.  Requires the ta
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The wallet auto top up settings | [**TenantWalletSettingsResponseWrapper**](../api.md#model-tenantwalletsettingsresponsewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **403** | No permissions to perform this action | - | - |
-| **404** | Customer could not be found | - | - |
+| **200** | The automatic top-up settings as they were stored | [**TenantWalletSettingsResponseWrapper**](../api.md#model-tenantwalletsettingsresponsewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **403** | The caller is not the payer of this portal, or the portal has no billing service configured | - | - |
+| **404** | This portal has no billing customer, or its wallet has no balance yet | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |

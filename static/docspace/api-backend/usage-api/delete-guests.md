@@ -6,9 +6,9 @@ Referenced types are defined in the [full reference](../people.md).
 
 `DELETE /api/2.0/people/guests`
 
-Delete guests
+Remove guest relations
 
-Deletes guests from the list and excludes them from rooms to which they were invited.
+Removes the listed guests from the caller&#39;s own list of guests and withdraws the access the caller had  granted them.  It does not delete the accounts: each guest keeps its profile and any access other members gave it, and only  the link to the caller and the caller&#39;s own shares disappear.  The caller has to be a room admin or a DocSpace admin, and every listed account has to exist, be an active  guest and be one of the caller&#39;s own guests - a single entry that is not rejects the whole call with 403 and  changes nothing.  The call returns no body; read &#x60;GET api/2.0/people/filter&#x60; with &#x60;area&#x60; set to &#x60;Guests&#x60; to see what is left.  To delete a guest account for good, disable it and then use &#x60;DELETE api/2.0/people/{userid}&#x60;.
 
 ## Parameters
 
@@ -20,12 +20,12 @@ Deletes guests from the list and excludes them from rooms to which they were inv
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Request parameters for deleting guests | - | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **403** | No permissions to perform this action | - | - |
+| **200** | The guests are no longer linked to the caller. No content is returned | - | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **400** | The userIds field is missing | - | - |
+| **403** | The caller is not an admin, or an entry is not an active guest of the caller | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | - |
-| **400** | Bad Request. | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 

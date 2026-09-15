@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../people.md).
 
 Get a profile by user email
 
-Returns the detailed information about a profile of the user with the email specified in the request.
+Returns the full profile of the account that owns an email address.  Pass the address either in plain text as &#x60;email&#x60; or, when it arrived inside an invitation link, encrypted as  &#x60;encemail&#x60;; one of the two is required and a malformed or overlong address answers 400.  The caller has to be allowed to see that account - a guest, for instance, only sees the accounts it is  related to - and an address that belongs to nobody answers 404.  The call is read-only, and &#x60;culture&#x60; changes nothing about the profile: it only picks the language of the  error message when the lookup fails.  To find out whether an address is taken without the right to see its owner, use  &#x60;GET api/2.0/people/exists&#x60;, and to look an account up by its ID or user name use  &#x60;GET api/2.0/people/{userid}&#x60;.
 
 ## Parameters
 
@@ -22,10 +22,10 @@ Returns the detailed information about a profile of the user with the email spec
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Detailed profile information | [**EmployeeFullWrapper**](../people.md#model-employeefullwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **400** | Incorrect email | - | - |
-| **403** | No permissions to perform this action | - | - |
-| **404** | User not found | - | - |
+| **200** | The full profile of the account that owns the address | [**EmployeeFullWrapper**](../people.md#model-employeefullwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **400** | Both email and encemail are missing, or the address is malformed or longer than 255 characters | - | - |
+| **403** | The caller is not allowed to see that account | - | - |
+| **404** | No account owns the specified address | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | - |

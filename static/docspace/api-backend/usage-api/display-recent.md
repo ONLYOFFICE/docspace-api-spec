@@ -6,9 +6,9 @@ Referenced types are defined in the [full reference](../files.md).
 
 `PUT /api/2.0/files/displayrecent`
 
-Display the Recent folder
+Show the Recent section
 
-Displays the Recent folder.
+Stores whether the Recent section is offered to the calling account, and returns the value that is now  stored. The setting belongs to that account alone: every authenticated role down to a guest may change its own  copy, and an unauthenticated caller is refused. Hiding the section removes it from the list of section roots  returned by &#x60;GET api/2.0/files/@root&#x60;, and the document editor stops offering the recent-files entry; the  section itself keeps being maintained, and &#x60;GET api/2.0/files/recent&#x60; still returns its contents. Pass  &#x60;set&#x3D;true&#x60; to show it again. The same value is published as &#x60;recentSection&#x60; by &#x60;GET api/2.0/files/settings&#x60;,  which is the only way to read it back. Repeating the call with the same value writes it again and is safe. A  new account starts with the section shown. Hiding it neither clears the recent history nor stops it being  recorded, so showing the section again brings the same entries back.
 
 ## Parameters
 
@@ -20,8 +20,8 @@ Displays the Recent folder.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Boolean value: true if the parameter is enabled | [**BooleanWrapper**](../files.md#model-booleanwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **403** | You don&#39;t have enough permission to perform the operation | - | - |
+| **200** | true if the Recent section is offered to the caller | [**BooleanWrapper**](../files.md#model-booleanwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **403** | The caller is not allowed to change this setting | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |

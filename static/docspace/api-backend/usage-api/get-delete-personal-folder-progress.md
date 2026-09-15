@@ -6,9 +6,9 @@ Referenced types are defined in the [full reference](../people.md).
 
 `GET /api/2.0/people/delete/personal/progress`
 
-Get the progress of deleting the personal folder
+Get the personal folder deletion progress
 
-Returns the progress of deleting the personal folder.
+Returns the current state of the personal folder deletion queued for the authenticated account.  The job must have been queued by &#x60;POST api/2.0/people/delete/personal/start&#x60; first: when nothing is queued for  the caller the operation answers 200 with an empty body.  It takes no parameters and reports on the caller only, so an administrator cannot watch the folder deletion of  another user through it.  The call is read-only and is the polling operation of this flow - repeat it until &#x60;isCompleted&#x60; is true, and  read &#x60;error&#x60; for the message left by a failed job.  A queued personal folder deletion cannot be cancelled, so the only outcome to wait for is its completion.
 
 ## Parameters
 This endpoint does not need any parameter.
@@ -17,7 +17,7 @@ This endpoint does not need any parameter.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Deletion progress | [**TaskProgressResponseWrapper**](../people.md#model-taskprogressresponsewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The state of the queued personal folder deletion, or an empty body when nothing is queued for the caller | [**TaskProgressResponseWrapper**](../people.md#model-taskprogressresponsewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | - |

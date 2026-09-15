@@ -8,20 +8,21 @@ Referenced types are defined in the [full reference](../people.md).
 
 Delete a group
 
-Deletes a group with the ID specified in the request from the list of groups on the portal.
+Deletes a group and withdraws the access it had been granted to rooms, folders and files.  The caller needs the permissions to edit groups and to add and remove users, and the ID has to belong to a  group that has not been deleted, otherwise the operation answers 404.  The removal is permanent and cannot be undone, and it affects sharing: everything that was shared with the  group loses that share, so members who had access only through this group lose it too.  The accounts themselves are kept - only their membership disappears.  The call answers 204 with no body and raises a &#x60;GroupDeleted&#x60; webhook; a second call with the same ID answers  404 rather than succeeding again.  To empty a group without deleting it, move its members away with  &#x60;PUT api/2.0/group/{fromId}/members/{toId}&#x60; or remove them through &#x60;DELETE api/2.0/group/{id}/members&#x60;.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **UUID** (uuid) | The group ID. | [required] [example: 00000000-0000-0000-0000-000000000000] |
+| **id** | path | **UUID** (uuid) | The ID of the group to delete, taken from the route. It has to be a group that has not been deleted already,  otherwise the operation answers 404. | [required] [example: 00000000-0000-0000-0000-000000000000] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | No content | - | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **404** | Group not found | - | - |
+| **204** | The group is deleted. No content is returned | - | - |
+| **403** | No permissions to perform this action | - | - |
+| **404** | No group has the specified ID | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | - |

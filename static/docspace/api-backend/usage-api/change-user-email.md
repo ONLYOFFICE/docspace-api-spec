@@ -8,23 +8,23 @@ Referenced types are defined in the [full reference](../people.md).
 
 Change a user email
 
-Sets a new email to the user with the ID specified in the request.
+Sets a new email address on an account, which is the step that completes an email change.  The request has to carry the confirmation token from the emailed link rather than an ordinary session, and an  expired or already used token is answered with 401.  The account has to exist and be &#x60;Active&#x60;, and only the portal owner may change the owner&#39;s own address.  Pass the address either in plain text as &#x60;email&#x60; or, as it arrives inside the confirmation link, encrypted as  &#x60;encEmail&#x60;; an empty or malformed address answers 400.  An address equal to the current one is accepted and changes nothing, while a new one is stored in lowercase  and marks the account &#x60;Activated&#x60;, because following the link proves the address works.  The answer is the profile with its new address.  The change is requested through &#x60;POST api/2.0/people/email&#x60;, which is what sends the link.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **userid** | path | **UUID** (uuid) | The user ID. | [required] [example: 00000000-0000-0000-0000-000000000000] |
-| **ChangeEmailRequest** | body | [**ChangeEmailRequest**](../people.md#model-changeemailrequest) | The request parameters for updating a user email. | [required] |
+| **userid** | path | **UUID** (uuid) | The ID of the account whose address is set, taken from the route. It has to match the account the  confirmation token was issued for, and the account has to be active. | [required] [example: 00000000-0000-0000-0000-000000000000] |
+| **ChangeEmailRequest** | body | [**ChangeEmailRequest**](../people.md#model-changeemailrequest) | The new address, in plain text or in the encrypted form the confirmation link carries. | [required] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Detailed user information | [**EmployeeFullWrapper**](../people.md#model-employeefullwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **400** | Incorrect userId or email | - | - |
-| **403** | The link is invalid or no permissions to perform this action | - | - |
-| **404** | The user could not be found | - | - |
+| **200** | The profile with its new address | [**EmployeeFullWrapper**](../people.md#model-employeefullwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **400** | The user ID is empty, or the address is missing or malformed | - | - |
+| **403** | The account is not active, or only its owner may change this address | - | - |
+| **404** | No account has the specified ID | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | - |

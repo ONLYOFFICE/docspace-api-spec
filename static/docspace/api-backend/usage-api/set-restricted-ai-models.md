@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../api.md).
 
 Set restricted AI models
 
-Overwrites the entire set of restricted AI model IDs for the current tenant.  The request body must contain the complete desired set — to add a restriction, include the new model alongside existing ones;  to remove one, omit it. An empty set lifts all restrictions. Only portal administrators can perform this action.
+Replaces the whole set of AI chat models barred on this portal: the body is the complete set that is to hold,  so adding one restriction means sending the new model together with the ones already restricted, lifting one  means leaving it out, and an empty set lifts them all. Read the current set from  &#x60;GET api/2.0/portal/payment/ai-model/restrictions&#x60; and the model identifiers from  &#x60;GET api/2.0/portal/payment/ai-prices&#x60; before calling. The installation needs a billing service and the AI  gateway configured, the portal needs a billing customer, and the caller needs the permission to edit the  portal settings as well as DocSpace administrator rights. The call is mutating and idempotent - sending the  same set twice leaves the same state - and it is written to the portal audit trail. It takes effect on the  next AI request, so a conversation already open on a model that has just been barred cannot go on with it. The  stored set comes back in the answer.
 
 ## Parameters
 
@@ -20,9 +20,9 @@ Overwrites the entire set of restricted AI model IDs for the current tenant.  Th
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The updated list of restricted AI model IDs | [**RestrictedModelsResponseWrapper**](../api.md#model-restrictedmodelsresponsewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **403** | No permissions to perform this action | - | - |
-| **404** | Customer could not be found | - | - |
+| **200** | The set of barred AI chat models as it was stored | [**RestrictedModelsResponseWrapper**](../api.md#model-restrictedmodelsresponsewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **403** | The caller may not edit the portal settings or is not a DocSpace administrator, or the installation has no billing service or no AI gateway configured | - | - |
+| **404** | This portal has no billing customer yet | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |

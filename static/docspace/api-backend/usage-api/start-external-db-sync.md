@@ -8,22 +8,22 @@ Referenced types are defined in the [full reference](../files.md).
 
 Start external DB sync
 
-Triggers external DB synchronization for all form templates in the specified filling forms room.
+Queues a background job that re-exports the collected data of every original form of a form filling room into  the external database configured for the portal, and returns the job record. The room must be a form filling  room and the caller must be able to edit it, otherwise the call is refused with 403; an unknown room is  answered with 404. The export is not done when the response arrives: poll  &#x60;GET api/2.0/files/rooms/{id}/externaldbsync&#x60; until &#x60;isCompleted&#x60; is true, then read &#x60;forms&#x60; for the per-form  outcome, which stays empty while the job is running. Starting the job again while it is still running returns  the same record instead of a second job, so a retry is safe; a finished job is replaced by the new one. One  job is kept per room. A form whose data cannot be exported does not stop the others: it comes back in &#x60;forms&#x60;  with &#x60;success&#x60; false and its own &#x60;error&#x60;. When the portal has no external database configured the call fails  and nothing is queued.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The room ID. | [required] [example: 1] |
+| **id** | path | **Integer** (int32) | The room to act on, named by the identifier that &#x60;GET api/2.0/files/rooms&#x60; reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. | [required] [example: 1] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Synchronization task information | [**ExternalDbSyncTaskWrapper**](../files.md#model-externaldbsynctaskwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **400** | External DB is not configured | - | - |
-| **403** | You do not have enough permissions to perform this action | - | - |
-| **404** | Room not found | - | - |
+| **200** | The synchronization job record to poll | [**ExternalDbSyncTaskWrapper**](../files.md#model-externaldbsynctaskwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **400** | The portal has no external database configured | - | - |
+| **403** | The room is not a form filling room, or the caller cannot edit it | - | - |
+| **404** | No room with this ID is visible to the caller | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |

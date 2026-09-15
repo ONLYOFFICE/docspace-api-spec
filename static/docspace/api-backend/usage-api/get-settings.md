@@ -8,20 +8,20 @@ Referenced types are defined in the [full reference](../api.md).
 
 Get app settings
 
-Returns the JSON settings document saved for the specified application, or null if no overrides exist.
+Returns only the settings document of one portal application, such as &#x60;ai-rooms&#x60; or &#x60;docs-cloud&#x60;: the JSON  that the current portal has saved for it through &#x60;PUT api/2.0/apps/{id}/settings&#x60;, with no wrapper around it.  The identifier must be an application declared in the installation configuration, as listed by  &#x60;GET api/2.0/apps&#x60;. Any authenticated portal member  may read it. The call is read-only and idempotent. The document comes back exactly as it was saved: its shape  is defined by the application itself and is not validated by the portal, and an empty result means that the  portal has never saved settings for this application, so the application uses its own defaults. The enabled  state is not part of the answer: read it from &#x60;GET api/2.0/apps/{id}&#x60;.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **String** | The application identifier. | [required] [example: ai-room] |
+| **id** | path | **String** | The application to read, by the identifier &#x60;GET api/2.0/apps&#x60; reports - one of the feature modules the portal  can turn on, such as &#x60;ai-room&#x60; or &#x60;docs-cloud&#x60;. An identifier not declared in the installation configuration  answers 404, which is also how a caller learns that an application does not exist here. | [required] [example: ai-room] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Application settings JSON | [**UnknownNullableWrapper**](../api.md#model-unknownnullablewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **404** | Application not found | - | - |
+| **200** | The settings document saved for the application, or an empty result if the portal has never saved one | [**UnknownNullableWrapper**](../api.md#model-unknownnullablewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **404** | No application with this identifier is configured on this installation | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |

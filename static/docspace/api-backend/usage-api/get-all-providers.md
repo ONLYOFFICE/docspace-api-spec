@@ -6,21 +6,21 @@ Referenced types are defined in the [full reference](../files.md).
 
 `GET /api/2.0/files/thirdparty/providers`
 
-Get all providers
+Get all third-party providers
 
-Returns a list of all providers.
+Lists the third-party storage services this portal can connect, with everything a connection form needs: the  display name, the key to send as &#x60;providerKey&#x60;, whether the service authenticates through OAuth 2.0, the OAuth  client ID and redirect URL where it does, and whether the caller has to supply the server address. Several  WebDAV presets share the key &#x60;WebDav&#x60; and are told apart by their names, so keep the name the caller chose  next to the key when building the request. Pass &#x60;excludewebdav&#x3D;true&#x60; to drop the whole WebDAV family,  including the kDrive and Yandex presets, and keep only the OAuth services. The call is read-only. An empty  array is a normal answer: it is what a guest gets, and what everyone gets while the portal-wide third-party  switch is off (&#x60;PUT api/2.0/files/thirdparty&#x60;). The &#x60;connected&#x60; flag of an element says the service is  available on this portal, not that an account of it exists - the caller&#39;s own accounts are listed by  &#x60;GET api/2.0/files/thirdparty&#x60;.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **excludewebdav** | query | **Boolean** | Specifies whether WebDAV resources should be excluded from the result.. | [optional] [example: false] |
+| **excludewebdav** | query | **Boolean** | Set to true to leave out the whole WebDAV family, the kDrive and Yandex presets included, and keep only the  services that authenticate through OAuth 2.0; false lists all of them. | [optional] [example: false] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | List of provider | [**ProviderArrayWrapper**](../files.md#model-providerarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The storage services this portal can connect | [**ProviderArrayWrapper**](../files.md#model-providerarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |

@@ -8,20 +8,20 @@ Referenced types are defined in the [full reference](../files.md).
 
 Share a file
 
-Sets the sharing settings to a file with the ID specified in the request.
+Grants, changes or withdraws the rights of the listed accounts and groups on one file, and answers with the  rights those subjects hold afterwards. Every element of &#x60;share&#x60; names a subject and the level it is to get,  and the level that denies everything takes the access away instead; an empty &#x60;share&#x60; changes nothing and is  answered with an empty list. A subject the caller is not allowed to share with, such as a guest who belongs to  another member, is dropped without an error, so compare the answer with what was sent. With &#x60;notify&#x60; set, each  account named is emailed about the access it received and &#x60;sharingMessage&#x60; is put into that mail with its  markup stripped, while a message longer than the field allows is rejected as an invalid request. The caller  has to be allowed to change the sharing of the file, which its creator, the manager of the room it lies in and  a portal administrator acting as room manager are; anyone else, a guest and a member with read access  included, is refused. The call is mutating and safe to repeat. For several files and folders in one request  use &#x60;PUT api/2.0/files/share&#x60;.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The file ID. | [required] [example: 1] |
-| **SecurityInfoSimpleRequestDto** | body | [**SecurityInfoSimpleRequestDto**](../files.md#model-securityinfosimplerequestdto) | The parameters of the security information simple request. | [required] |
+| **id** | path | **Integer** (int32) | The file whose sharing is being changed. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string. | [required] [example: 10] |
+| **SecurityInfoSimpleRequestDto** | body | [**SecurityInfoSimpleRequestDto**](../files.md#model-securityinfosimplerequestdto) | The rights to apply to the file, and whether to announce them by mail. | [required] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | List of shared file information: sharing rights, a user who has the access to the specified file, the file is locked by this user or not, this user is an owner of the specified file or not, this user can edit the access to the specified file or not | [**FileShareArrayWrapper**](../files.md#model-filesharearraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The rights the listed subjects hold on the file after the change | [**FileShareArrayWrapper**](../files.md#model-filesharearraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |

@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../api.md).
 
 Delete the company white label settings
 
-Deletes the company white label settings.
+Discards the company details stored for the installation and brings back the built-in ONLYOFFICE name, site,  email, address and phone, so the About page and the notification letters print the original vendor again.  Requires a DocSpace administrator and a server installation with unrestricted space access; on a SaaS portal  the call is refused. Unlike &#x60;POST api/2.0/settings/rebranding/company&#x60; it does not need a plan that includes  branding, so an installation whose subscription no longer covers it can still be reset. The call is  destructive: the previous details are not kept anywhere and have to be entered again to come back. It is  idempotent, and instead of a flag it answers the details that are now in effect, so no follow-up read is  needed. The reset is installation-wide and reaches every portal. The help and support links are reset  separately by &#x60;DELETE api/2.0/settings/rebranding/additional&#x60;, and the logos and the wordmark of a single  portal by the restore operations under &#x60;api/2.0/settings/whitelabel&#x60;.
 
 ## Parameters
 This endpoint does not need any parameter.
@@ -17,8 +17,8 @@ This endpoint does not need any parameter.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Default company white label settings | [**CompanyWhiteLabelSettingsResponseWrapper**](../api.md#model-companywhitelabelsettingsresponsewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **403** | No permissions to perform this action | - | - |
+| **200** | The built-in company details that are now in effect | [**CompanyWhiteLabelSettingsResponseWrapper**](../api.md#model-companywhitelabelsettingsresponsewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **403** | The caller is not a DocSpace administrator, or the installation does not allow branding to be edited | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |

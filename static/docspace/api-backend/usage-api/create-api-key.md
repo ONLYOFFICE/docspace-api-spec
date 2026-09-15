@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../people.md).
 
 Create a user API key
 
-Creates a user API key with the parameters specified in the request.
+Creates an API key that authenticates requests as the calling account, and is the only operation that ever  returns the secret.  Any portal member except a guest may create one; when the portal limits developer tools to administrators,  only a DocSpace administrator may call it.  The call is not idempotent - every call issues a new key - and it is throttled, so a client that retries on a  timeout can end up with several keys.  The answer carries the full secret in &#x60;key&#x60;: it is shown here and never again, later reads expose only the  last four characters in &#x60;keyPostfix&#x60;, so store it now.  Pass the scopes the key may use in &#x60;permissions&#x60;, taking the values from  &#x60;GET api/2.0/keys/permissions&#x60;; pass &#x60;*&#x60; or omit the field to record a key without scope restrictions, and set  &#x60;expiresInDays&#x60; to make it expire, otherwise it stays valid until it is deleted.  An empty &#x60;permissions&#x60; array and an unknown scope are both rejected with 400.  Send the key in the &#x60;Authorization&#x60; header as &#x60;Bearer sk-...&#x60; to use it.
 
 ## Parameters
 
@@ -20,11 +20,12 @@ Creates a user API key with the parameters specified in the request.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Create a user api key | [**ApiKeyResponseWrapper**](../people.md#model-apikeyresponsewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The new API key, with the full secret in the key field | [**ApiKeyResponseWrapper**](../people.md#model-apikeyresponsewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **400** | The permissions array is empty or contains a scope the portal does not know | - | - |
+| **403** | The caller is a guest, or the portal limits developer tools to administrators | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | - |
-| **400** | Bad Request. | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 

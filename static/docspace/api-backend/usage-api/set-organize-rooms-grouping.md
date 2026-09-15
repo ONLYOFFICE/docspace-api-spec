@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../files.md).
 
 Organize rooms grouping
 
-Changes the setting that allows the user to organize the grouping of rooms.
+Stores whether the caller sees rooms arranged by the groups they belong to instead of one flat list, and  returns the value that is now stored. It is a preference of the calling account: every authenticated role down  to a guest may change its own copy, and an unauthenticated caller is refused. The groups themselves are the  room groups managed under &#x60;api/2.0/files/group&#x60;, and they exist whether or not this setting is on - the portal  only records the preference, while &#x60;GET api/2.0/files/rooms&#x60; keeps returning the same rooms either way, so the  arrangement is done by the client. Writing a value that is already stored is accepted and leaves the setting  untouched. The value is published as &#x60;organizeRoomsGrouping&#x60; by &#x60;GET api/2.0/files/settings&#x60;, which is the  only way to read it back. A new account starts with the grouping on. Turning it off changes no group: the  groups, the rooms in them and who may see them stay exactly as they were, and are still read through the room  group operations.
 
 ## Parameters
 
@@ -20,7 +20,7 @@ Changes the setting that allows the user to organize the grouping of rooms.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Boolean value: true if the parameter is enabled | [**BooleanWrapper**](../files.md#model-booleanwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | true if the caller sees rooms arranged by room groups | [**BooleanWrapper**](../files.md#model-booleanwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |

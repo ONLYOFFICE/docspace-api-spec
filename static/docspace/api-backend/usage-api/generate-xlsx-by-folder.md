@@ -8,21 +8,21 @@ Referenced types are defined in the [full reference](../files.md).
 
 Generate XLSX report by folder
 
-Triggers asynchronous XLSX report generation for the specified form results folder.
+Rebuilds the spreadsheet that gathers the answers submitted to a form, starting from the Complete folder  that holds the filled copies. The answer names the original form the results belong to, says in &#x60;isNewFile&#x60;  whether the spreadsheet is being created or an existing one rewritten in place, and carries the queued job in  &#x60;task&#x60;; the file itself is not ready yet, so poll &#x60;GET api/2.0/files/file/{fileId}/xlsx&#x60; with the identifier  of the form until the task reports completion. The folder has to be the Complete folder of a form-filling  room and has to hold at least one submitted copy whose original form still exists, and the caller needs the  right to maintain that form, which the room manager has. A folder that does not exist, or one that holds  nothing to report on, is answered with 404, and a folder of the wrong kind or a caller without those rights  with 403. The call is mutating: it writes the results file of the form.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **folderId** | path | **Integer** (int32) | The folder unique identifier. | [required] [example: 1] |
+| **folderId** | path | **Integer** (int32) | The folder the operation acts on. Take the identifier from a listing such as &#x60;GET api/2.0/files/@root&#x60; or  &#x60;GET api/2.0/files/{folderId}&#x60;: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string. | [required] [example: 1] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Ok | [**XlsxReportResponseWrapper**](../files.md#model-xlsxreportresponsewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **403** | You do not have enough permissions to perform this action | - | - |
-| **404** | The required folder was not found | - | - |
+| **200** | The queued report task together with the form the answers belong to | [**XlsxReportResponseWrapper**](../files.md#model-xlsxreportresponsewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **403** | The folder is not a completed-forms folder, or the caller may not maintain the form | - | - |
+| **404** | The folder, the submitted copy or the original form was not found | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |

@@ -6,9 +6,9 @@ Referenced types are defined in the [full reference](../files.md).
 
 `POST /api/2.0/files/share`
 
-Get the sharing rights
+Get sharing rights in batch
 
-Returns the sharing rights for all the files and folders specified in the request.
+Returns who has access to the files and folders listed in the request, merged into one list of subjects, and  is the batch counterpart of &#x60;GET api/2.0/files/file/{id}/share&#x60; and &#x60;GET api/2.0/files/rooms/{id}/share&#x60;.  Identifiers come from any listing operation, such as &#x60;GET api/2.0/files/{folderId}&#x60;. The caller needs read  access to every listed entry: a single entry it cannot read makes the whole call fail instead of dropping that  entry, so the list has to be filtered beforehand. Identifiers that match nothing are skipped without an error,  and an empty list of identifiers gives an empty answer. The call is read-only. Each account or group appears  once: the caller&#39;s own record comes first, the owner&#39;s record second, and the rest are ordered by display  name. When the same subject holds different rights on the listed entries, its access is reported as the  &#x60;Varies&#x60; value instead of a real level, which means the entries have to be inspected one by one to see the  difference. Records that describe external links are included only for a caller that is allowed to read the  links of the entry.
 
 ## Parameters
 
@@ -20,7 +20,7 @@ Returns the sharing rights for all the files and folders specified in the reques
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | List of shared files and folders information | [**FileShareArrayWrapper**](../files.md#model-filesharearraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The merged sharing rights of the listed files and folders, one record per account or group | [**FileShareArrayWrapper**](../files.md#model-filesharearraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |

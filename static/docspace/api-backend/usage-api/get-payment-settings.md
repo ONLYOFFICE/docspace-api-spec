@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../api.md).
 
 Get the payment settings
 
-Returns the portal payment settings.
+Returns the portal&#39;s payment-related configuration: the sales contact email, the URL to buy or extend a  subscription, whether the portal is Standalone, the current license&#39;s trial status and expiration date, and  the maximum quota quantity that can be purchased at once. Requires Owner or DocSpaceAdmin (the  EditPortalSettings permission). This is a read-only, idempotent call. It remains reachable even while the  portal&#39;s own subscription payment is overdue, since this is how the caller finds the link to resolve it.
 
 ## Parameters
 This endpoint does not need any parameter.
@@ -17,7 +17,7 @@ This endpoint does not need any parameter.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Payment settings: sales email, feedback and support URL, link to pay for a portal, Standalone or not, current license, maximum quota quantity | [**PaymentSettingsWrapper**](../api.md#model-paymentsettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | Payment-related settings: sales contact, buy URL, Standalone flag, license, and quota cap | [**PaymentSettingsWrapper**](../api.md#model-paymentsettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |

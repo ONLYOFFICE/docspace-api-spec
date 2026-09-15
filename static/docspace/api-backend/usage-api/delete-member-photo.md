@@ -8,21 +8,21 @@ Referenced types are defined in the [full reference](../people.md).
 
 Delete a user photo
 
-Deletes a photo of the user with the ID specified in the request.
+Removes the avatar of a profile, so that the profile falls back to the default placeholder image.  A caller may only do this to their own profile - the ID in the route has to be the calling account, and an  administrator gets 403 for anybody else - and the account must be allowed to edit its own profile.  The removal is permanent and cannot be undone: the stored image and all of its sizes are deleted, and a new  avatar has to be uploaded through &#x60;POST api/2.0/people/{userid}/photo&#x60; to replace it.  The call is idempotent, so removing an avatar from a profile that has none succeeds as well, and it raises a  &#x60;UserUpdated&#x60; webhook.  The answer still holds the URLs of every size, now pointing at the default image.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **userid** | path | **String** | The user ID. | [required] [example: 00000000-0000-0000-0000-000000000000] |
+| **userid** | path | **String** | The profile whose avatar the operation addresses, taken from the route. Either the ID of the account or its  user name is accepted. Reading a photo works for any account the caller may see, while deleting one only  works for the calling account itself. | [required] [example: 00000000-0000-0000-0000-000000000000] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Thumbnail parameters: original photo, retina, maximum size photo, big, medium, small | [**ThumbnailsDataWrapper**](../people.md#model-thumbnailsdatawrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **403** | No permissions to perform this action | - | - |
-| **404** | User not found | - | - |
+| **200** | The URLs of every photo size, now pointing at the default image | [**ThumbnailsDataWrapper**](../people.md#model-thumbnailsdatawrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **403** | The ID in the route is not the calling account, or the account may not edit its own profile | - | - |
+| **404** | No user has the specified ID | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | - |

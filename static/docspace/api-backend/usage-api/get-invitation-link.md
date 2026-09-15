@@ -6,21 +6,21 @@ Referenced types are defined in the [full reference](../api.md).
 
 `GET /api/2.0/portal/users/invite/{employeeType}`
 
-Get an invitation link
+Get a legacy invitation link
 
-Returns an invitation link for joining the portal.
+Deprecated - use &#x60;POST api/2.0/portal/users/invitationlink&#x60; and the neighbouring operations under that path,  which store the link and let it be read, changed and revoked. Builds a shortened URL that lets whoever opens  it join this portal with the role given in the path, and returns it as a bare string; nothing is stored, so  the link can afterwards be neither listed nor withdrawn. Inviting members has to be enabled for the portal -  &#x60;GET api/2.0/settings/invitationsettings&#x60; reports that - otherwise the call is refused. The caller needs the  right to add users of the requested role and only the portal owner may ask for a DocSpace administrator link;  a caller without that right gets an empty string instead of an error, so treat an empty answer as a refusal.  The call changes nothing on the portal and may be repeated, each time returning an equivalent link. The URL  carries a confirmation key bound to the calling account and the portal alias; it has no use limit and stops  being accepted once the portal&#39;s e-mail key lifetime has passed, seven days by default - neither of the two  can be set per link, which is what the replacement operations add.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **employeeType** | path | **EmployeeType** | The type of employee role for the invitation link (DocSpaceAdmin, RoomAdmin or User). | [required] [example: 1] [enum: All, RoomAdmin, Guest, DocSpaceAdmin, User] |
+| **employeeType** | path | **EmployeeType** | The role whoever follows the link joins with. Only &#x60;DocSpaceAdmin&#x60;, &#x60;RoomAdmin&#x60; and &#x60;User&#x60; have a link; any  other role is refused. The portal keeps at most one link per role, so this value alone identifies it. | [required] [example: 1] [enum: All, RoomAdmin, Guest, DocSpaceAdmin, User] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Invitation link | [**StringWrapper**](../api.md#model-stringwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The invitation URL to hand to the invited person, or an empty string when the caller may not invite that role | [**StringWrapper**](../api.md#model-stringwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |

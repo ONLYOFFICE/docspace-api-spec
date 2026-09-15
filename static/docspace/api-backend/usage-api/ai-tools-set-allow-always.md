@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../newai.md).
 
 Set allow always
 
-Adds a tool to the always-allow list, or removes it - the tools on that list run without an approval dialog.
+Adds one tool to the scope&#39;s always-allow list, or takes it off, which decides whether a call to it pauses the round for approval. &#x60;value&#x60; is coerced to a boolean, so any truthy value adds and any falsy one removes. Unlike the disable operation, &#x60;serverType&#x60; is not validated here: an unknown one is stored and then simply never matches, so a wrong value fails silently. &#x60;entityId&#x60; has to name a room the caller can open.
 
 ## Parameters
 
@@ -20,8 +20,12 @@ Adds a tool to the always-allow list, or removes it - the tools on that list run
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Success. | [**AiSuccessResponse**](../newai.md#model-aisuccessresponse) | - |
+| **200** | Confirms the always-allow list was updated. | [**AiSuccessResponse**](../newai.md#model-aisuccessresponse) | - |
 | **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
+| **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
+| **404** | The referenced object does not exist, or the caller cannot access it - the two are deliberately indistinguishable, so a room the caller may not open answers 404 rather than 403. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
+| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
+| **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
 
 ## Return type
 

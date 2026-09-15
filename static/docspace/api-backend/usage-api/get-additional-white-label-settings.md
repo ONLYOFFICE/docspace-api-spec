@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../api.md).
 
 Get the additional white label settings
 
-Returns the additional white label settings.
+Returns which of the ONLYOFFICE help and community resources the interface may offer - the sample documents,  the Help Center link, the Feedback and Support link, the user forum, the video guides and the license  agreements - so a client can hide the entries that are switched off. Any authenticated user may call it; no  administrator permission is required, and a portal whose payment has lapsed is served as well. The call is  read-only and idempotent. Each flag is &#x60;true&#x60; when the entry may be shown and &#x60;false&#x60; when it must be hidden,  and &#x60;isDefault&#x60; tells whether the whole set is still the built-in one. The flags are installation-wide, so  every portal of a server installation reports the same ones. They say nothing about the caller&#39;s own  permissions, and the addresses behind the entries are not part of the answer. Change the flags with  &#x60;POST api/2.0/settings/rebranding/additional&#x60; and reset them with  &#x60;DELETE api/2.0/settings/rebranding/additional&#x60;.
 
 ## Parameters
 This endpoint does not need any parameter.
@@ -17,7 +17,7 @@ This endpoint does not need any parameter.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Additional white label settings | [**AdditionalWhiteLabelSettingsDtoWrapper**](../api.md#model-additionalwhitelabelsettingsdtowrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The help and community resources the interface may offer, with the default flag | [**AdditionalWhiteLabelSettingsDtoWrapper**](../api.md#model-additionalwhitelabelsettingsdtowrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |

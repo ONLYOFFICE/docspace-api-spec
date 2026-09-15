@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../files.md).
 
 Create a room
 
-Creates a room in the Rooms section.
+Creates a room in the portal Rooms section and returns it. &#x60;roomType&#x60; decides which sharing links, member  roles and form features the room offers, and it cannot be changed afterwards, so a room of the wrong kind has  to be recreated. The caller must be the portal owner, a portal administrator or a room administrator; a user  or a guest is refused, and so is a public room while the portal forbids external sharing. &#x60;title&#x60; is required  and must not be blank: characters a folder name cannot hold are replaced with underscores and the rest is  truncated, so the stored title can differ from the one sent and two rooms can share it. &#x60;quota&#x60; is accepted  only while the per-room quota feature is on and must stay within the portal quota, &#x60;cover&#x60; only for an id  returned by &#x60;GET api/2.0/files/rooms/covers&#x60;, and &#x60;color&#x60; as six hexadecimal digits with no leading number  sign. Tag names the portal does not know yet are added to the tag catalogue. &#x60;share&#x60; is not implemented and  any non-empty value is rejected, so invite members afterwards with &#x60;PUT api/2.0/files/rooms/{id}/share&#x60;.  Passing the portal room limit ends the call as a billing refusal and creates nothing.
 
 ## Parameters
 
@@ -20,7 +20,7 @@ Creates a room in the Rooms section.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Room information | [**FolderIntegerWrapper**](../files.md#model-folderintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The created room with its id, type, settings, logo and tags | [**FolderIntegerWrapper**](../files.md#model-folderintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |

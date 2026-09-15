@@ -8,24 +8,25 @@ Referenced types are defined in the [full reference](../people.md).
 
 Update an API key
 
-Updates an existing API key changing its name, permissions, and status.
+Renames an API key, replaces the scopes it may use, or activates and deactivates it, without changing the  secret.  The caller may update a key they created themselves, and a DocSpace administrator may update any key of the  portal.  Take the values for &#x60;permissions&#x60; from &#x60;GET api/2.0/keys/permissions&#x60;; an unknown scope or an empty array is  rejected with 400, and the fields that are left out keep their current values.  The answer is a plain boolean: true when the key was changed, and false when it was not - which is also what  an already expired key returns, because such a key is left untouched instead of being reported as an error.  Deactivating a key through &#x60;isActive&#x60; stops it from authenticating while keeping it in the list, so use it  when the key may be needed again and &#x60;DELETE api/2.0/keys/{keyId}&#x60; when it may not.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **keyId** | path | **UUID** (uuid) | The unique identifier of the API key to update. | [required] [example: 00000000-0000-0000-0000-000000000000] |
-| **UpdateApiKeyRequest** | body | [**UpdateApiKeyRequest**](../people.md#model-updateapikeyrequest) | The request parameters for updating an existing API key. | [required] |
+| **keyId** | path | **UUID** (uuid) | The ID of the key to update, taken from the route. Read it from the &#x60;id&#x60; of an entry of  &#x60;GET api/2.0/keys&#x60; - it is not the secret and not the &#x60;keyPostfix&#x60;. | [required] [example: 00000000-0000-0000-0000-000000000000] |
+| **UpdateApiKeyRequest** | body | [**UpdateApiKeyRequest**](../people.md#model-updateapikeyrequest) | The fields to change. Every field is optional and the ones that are left out keep their current values, so an  empty object changes nothing. | [required] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Update optional params for user api keys | [**BooleanWrapper**](../people.md#model-booleanwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | True if the key was changed, false if it was left untouched because it has already expired | [**BooleanWrapper**](../people.md#model-booleanwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **400** | The permissions array is empty or contains a scope the portal does not know | - | - |
+| **403** | The key belongs to another member and the caller is not a DocSpace admin | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | - |
-| **400** | Bad Request. | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 

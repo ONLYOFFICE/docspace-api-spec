@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../api.md).
 
 Check the Telegram connection
 
-Checks if the current user is connected to the Telegram Bot or not.
+Reports whether the current user&#39;s account is linked to the portal&#39;s Telegram bot, and under which Telegram  username. The bot keys must be configured for the portal beforehand with &#x60;POST api/2.0/settings/authservice&#x60;;  until a bot is configured, linking cannot be completed and the status never reaches the linked state. Any  authenticated user may call it, and only for their own account: there is no way to read another member&#39;s  Telegram status. This is a read-only, idempotent call. The returned &#x60;status&#x60; is published as a number, where  &#x60;0&#x60; means the account is not linked, &#x60;1&#x60; means it is linked, and &#x60;2&#x60; means a registration link has been issued  and the portal is still waiting for the user to open it in Telegram. The &#x60;username&#x60; field is filled in only in  state &#x60;1&#x60; and comes back empty in the other two. Start or resume linking with  &#x60;GET api/2.0/settings/telegram/link&#x60;, and drop an established link with  &#x60;DELETE api/2.0/settings/telegram/link&#x60;.
 
 ## Parameters
 This endpoint does not need any parameter.
@@ -17,7 +17,7 @@ This endpoint does not need any parameter.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Status if user is linked or not | [**TelegramStatusWrapper**](../api.md#model-telegramstatuswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The current user&#39;s Telegram link state, with the username filled in only when linked | [**TelegramStatusWrapper**](../api.md#model-telegramstatuswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |

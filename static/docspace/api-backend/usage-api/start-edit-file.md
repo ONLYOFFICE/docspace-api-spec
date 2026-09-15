@@ -6,23 +6,23 @@ Referenced types are defined in the [full reference](../files.md).
 
 `POST /api/2.0/files/file/{fileId}/startedit`
 
-Start file editing
+Open an editing session
 
-Informs about opening a file with the ID specified in the request for editing, locking it from being deleted or moved (this method is called by the mobile editors).
+Opens an editing session on the file and answers with the document key that identifies it, the value an editor  client passes to the document service in order to join the co-editing session for that exact revision. The  file is marked as being edited for as long as the session lasts, which keeps it from being deleted or moved.  With &#x60;editingAlone&#x3D;false&#x60; the portal builds the editor configuration, requires write mode plus at least one of  the edit, review, comment, form-filling or filter permissions, and asks the document service to start tracking  the document. With &#x60;editingAlone&#x3D;true&#x60; the caller claims the file for itself, and the call is refused with 403  when anybody is already editing it. The caller needs edit access: a member with read access, a guest and an  anonymous caller whose external link does not grant editing are all refused. The call is mutating and not  idempotent. Keep the session alive with &#x60;GET api/2.0/files/file/{fileId}/trackeditfile&#x60;, and end it by calling  that operation with &#x60;isFinish&#x3D;true&#x60;.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **Integer** (int32) | The file ID to start editing. | [required] [example: 1] |
-| **StartEdit** | body | [**StartEdit**](../files.md#model-startedit) | The file parameters to start editing. | [required] |
+| **fileId** | path | **Integer** (int32) | The file to open the editing session on. The caller needs edit access to it. | [required] [example: 1] |
+| **StartEdit** | body | [**StartEdit**](../files.md#model-startedit) | The session options. The body is required even when it only carries the default, so send an empty object to  open an ordinary co-editing session. | [required] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | File key for Document Service | [**StringWrapper**](../files.md#model-stringwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **403** | You don&#39;t have enough permission to view the file | - | - |
+| **200** | The document key of the editing session | [**StringWrapper**](../files.md#model-stringwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **403** | The caller cannot edit the file, or the file is already being edited and the session was claimed alone | - | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **400** | Bad Request. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |

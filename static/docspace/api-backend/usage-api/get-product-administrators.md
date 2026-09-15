@@ -6,21 +6,21 @@ Referenced types are defined in the [full reference](../api.md).
 
 `GET /api/2.0/settings/security/administrator/{productid}`
 
-Get the product administrators
+Get product administrators
 
-Returns a list of all the administrators of a product with the ID specified in the request.
+Lists the users who administer the portal module identified by &#x60;productid&#x60; in the path. The all-zero GUID  stands for the portal itself: the answer then covers the DocSpace administrator group together with every  product group, and includes the portal owner, who administers everything by default. The caller needs the  portal-settings right of a DocSpace administrator, otherwise the call is refused. &#x60;productid&#x60; has to be a  GUID, and one that names no group is answered with an empty list rather than a failure. The operation is  read-only and returns whole user profiles, a heavier answer than a membership check, and a user who belongs to  more than one of the groups asked about is listed once per group. Entries arrive in group order, the DocSpace  administrator group first, the list is neither paged nor filterable, and a promotion made through the sibling  &#x60;PUT&#x60; shows up here at once. Use &#x60;GET api/2.0/settings/security/administrator&#x60; to test a single user against a  single module, and &#x60;PUT api/2.0/settings/security/administrator&#x60; to promote or demote somebody.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **productid** | path | **UUID** (uuid) | The ID of the product extracted from the route parameters. | [required] [example: 00000000-0000-0000-0000-000000000000] |
+| **productid** | path | **UUID** (uuid) | The module the operation acts on, by module GUID. The all-zero GUID stands for the portal itself rather than  for a single module, and a GUID that names no module group is answered with an empty result instead of a  failure. | [required] [example: 00000000-0000-0000-0000-000000000000] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | List of product administrators with the following parameters | [**EmployeeArrayWrapper**](../api.md#model-employeearraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The users who administer the module asked about, or the portal-wide administrators when the all-zero identifier is used | [**EmployeeArrayWrapper**](../api.md#model-employeearraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |

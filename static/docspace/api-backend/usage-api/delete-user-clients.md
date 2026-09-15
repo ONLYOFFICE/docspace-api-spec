@@ -2,13 +2,13 @@
 
 Referenced types are defined in the [full reference](../oauth.md).
 
-> Object deleteUserClients()
+> deleteUserClients()
 
-`DELETE /api/2.0/clients`
+`DELETE /api/2.0/oauth2/clients`
 
 Delete all user OAuth2 clients
 
-Permanently deletes user OAuth2 clients and all associated data. This will invalidate all access tokens and refresh tokens issued to this client. This operation cannot be undone.
+Deletes every client the calling user created in the current tenant and answers 200 with an empty body. The caller&#39;s own identity always selects the set, so this never reaches clients created by somebody else, not even for an administrator. The authorizations and consents of the deleted clients are cleaned up asynchronously on the authorization service, and the tenant&#39;s client cache is dropped as part of the call. Concurrent modification that survives the retries is reported as 400. The operation cannot be undone, and the response does not say how many clients were removed.
 
 ## Parameters
 This endpoint does not need any parameter.
@@ -17,14 +17,17 @@ This endpoint does not need any parameter.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Client successfully deleted | **Object** | - |
+| **200** | Client successfully deleted | - | - |
+| **400** | The clients could not be deleted because of concurrent modification | [**ProblemDetail**](../oauth.md#model-problemdetail) | - |
 | **403** | Insufficient permissions to delete user clients | [**ProblemDetail**](../oauth.md#model-problemdetail) | - |
 | **429** | Too many requests - rate limit exceeded | [**ProblemDetail**](../oauth.md#model-problemdetail) | - |
 | **500** | Internal server error occurred | [**ProblemDetail**](../oauth.md#model-problemdetail) | - |
+| **405** | The HTTP method is not allowed for this path | [**ProblemDetail**](../oauth.md#model-problemdetail) | - |
+| **406** | The Accept header does not allow application/json | [**ProblemDetail**](../oauth.md#model-problemdetail) | - |
 
 ## Return type
 
-**Object**
+null (empty response body)
 
 ## Authorization
 

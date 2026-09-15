@@ -6,9 +6,9 @@ Referenced types are defined in the [full reference](../api.md).
 
 `PUT /api/2.0/settings/security/administrator`
 
-Set a product administrator
+Set product administrator
 
-Sets the selected user as an administrator of a product with the ID specified in the request.
+Promotes a portal member to administrator of one module, or takes that role away, according to the  &#x60;administrator&#x60; flag; the all-zero product GUID targets the DocSpace administrator role, which covers the  whole portal. The caller needs the portal-settings right of a DocSpace administrator, and granting the  portal-wide role additionally requires being the portal owner - anyone else is refused with 403. A free cloud  plan does not offer the option at all and answers 402, as does a promotion for which no paid seat is left,  since promoting a guest or a plain member turns them into a paid one. Taking the portal-wide role away also  removes the member from every product group. The change is immediate, portal-wide, recorded in the audit  trail, and sending the same body twice changes nothing further; it never creates a user, so invite the member  first. The answer echoes the identifiers and the flag as stored - re-read membership with  &#x60;GET api/2.0/settings/security/administrator&#x60;.
 
 ## Parameters
 
@@ -20,9 +20,9 @@ Sets the selected user as an administrator of a product with the ID specified in
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Object with the user security information: product ID, user ID, administrator or not | [**ProductAdministratorWrapper**](../api.md#model-productadministratorwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **402** | Your pricing plan does not support this option | - | - |
-| **403** | Only portal owner can set user as administrator | - | - |
+| **200** | The module, the user and the administrator flag as they were stored | [**ProductAdministratorWrapper**](../api.md#model-productadministratorwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **402** | The portal plan does not offer product administrators, or no paid seat is left for the member being promoted | - | - |
+| **403** | Only the portal owner can grant or revoke the portal-wide administrator role | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |

@@ -6,9 +6,9 @@ Referenced types are defined in the [full reference](../api.md).
 
 `PUT /api/2.0/settings/owner`
 
-Update the portal owner
+Confirm the portal owner change
 
-Updates the current portal owner with a new one specified in the request.
+Completes the portal owner change that &#x60;POST api/2.0/settings/owner&#x60; started, making the user named in  &#x60;ownerId&#x60; the owner of this portal. Authorization comes from the confirmation link in that letter, not from an  ordinary session: pass the link&#39;s &#x60;type&#x60;, &#x60;key&#x60;, &#x60;uid&#x60; and &#x60;encemail&#x60; parameters in the &#x60;confirm&#x60; request  header, and check with &#x60;POST api/2.0/authentication/confirm&#x60; that it is still usable, because it expires after  a limited period, seven days by default. A caller without such a link is refused whatever role it holds, and  so is a link whose address is no longer the owner&#39;s, which is what replaying a used link looks like. The named  user has to be an active member of the portal and must not be a guest. The call is mutating: a named user who  is not a DocSpace administrator yet is promoted to one first, and a promotion needing a paid seat the portal  lacks is refused before ownership moves. The previous owner keeps their account and role but loses the owner&#39;s  rights, and the change reaches the audit trail. The answer carries no payload: read the new &#x60;ownerId&#x60; from  &#x60;GET api/2.0/settings&#x60;, which needs no token. Only the new owner can start another transfer.
 
 ## Parameters
 
@@ -20,9 +20,9 @@ Updates the current portal owner with a new one specified in the request.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Ok | - | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **400** | The user could not be found | - | - |
-| **409** |  | - | - |
+| **200** | The portal owner has been changed to the user named in the request | - | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **400** | The user named as the new owner cannot be found in this portal, is a guest, or is not active | - | - |
+| **409** | The new owner could not be given DocSpace administrator rights, so the transfer was not applied | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |

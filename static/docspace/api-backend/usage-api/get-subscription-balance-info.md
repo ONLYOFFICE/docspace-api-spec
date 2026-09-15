@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../api.md).
 
 Get the subscription balance information
 
-Returns the information about the current subscription and its unused (prorated) balance.
+Reports in money how much of the portal&#39;s paid subscription period is still unused - the credit that  &#x60;POST api/2.0/portal/payment/subscription/movetowallet&#x60; would carry over to the wallet if the subscription  were ended now. The portal must have a billing customer and a plan in the paid state; a plan that is not paid  answers 402, and a paid plan without a subscription row gives 404. Only the payer - the portal user whose  e-mail is the billing customer&#39;s e-mail - may read it, and the call is read-only. The answer states the total  cost of the current period with its currency, the start and the end of that period in UTC, the moment the  unused part is measured up to, the days already elapsed, and the remaining balance both in the subscription  currency and converted to the wallet currency. Every figure is computed for the instant of the request, so it  changes between calls.
 
 ## Parameters
 This endpoint does not need any parameter.
@@ -17,11 +17,11 @@ This endpoint does not need any parameter.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The subscription balance information | [**SubscriptionBalanceInfoWrapper**](../api.md#model-subscriptionbalanceinfowrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **400** | Invalid request parameters | - | - |
-| **402** | Tariff is not paid | - | - |
-| **403** | No permissions to perform this action | - | - |
-| **404** | Customer or subscription could not be found | - | - |
+| **200** | The unused balance of the current subscription period with its period boundaries and currencies | [**SubscriptionBalanceInfoWrapper**](../api.md#model-subscriptionbalanceinfowrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **400** | The plan currently paid is a wallet product or has no product identifier | - | - |
+| **402** | The plan of the portal is not in the paid state | - | - |
+| **403** | The caller is not the payer of this portal, or the portal has no billing service configured | - | - |
+| **404** | This portal has no billing customer, or its paid plan has no subscription | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |

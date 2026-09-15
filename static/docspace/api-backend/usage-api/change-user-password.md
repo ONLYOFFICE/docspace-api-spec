@@ -8,23 +8,23 @@ Referenced types are defined in the [full reference](../people.md).
 
 Change a user password
 
-Sets a new password to the user with the ID specified in the request.
+Sets a new password on an account, which is the step that completes a password change or a password  recovery.  The request has to carry the confirmation token from the emailed link rather than an ordinary session, and an  expired or already used token is answered with 401.  The account has to exist and be &#x60;Active&#x60;, so the password of a disabled account or of an open invitation  cannot be set, and only the portal owner may set the owner&#39;s own password.  Send either &#x60;passwordHash&#x60;, which is taken as it is, or a plain &#x60;password&#x60;, which is checked against the  portal password policy; sending neither, or a password the policy rejects, answers 400.  The change ends every other session of that account and emails it a notice that the password was changed.  The answer is the profile, which does not carry the password in any form.  To have the recovery link sent in the first place, use &#x60;POST api/2.0/people/password&#x60;.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **userid** | path | **UUID** (uuid) | The user ID. | [required] [example: 00000000-0000-0000-0000-000000000000] |
-| **ChangePasswordRequest** | body | [**ChangePasswordRequest**](../people.md#model-changepasswordrequest) | The request parameters for updating a user password. | [required] |
+| **userid** | path | **UUID** (uuid) | The ID of the account whose password is set, taken from the route. It has to match the account the  confirmation token was issued for, and the account has to be active. | [required] [example: 00000000-0000-0000-0000-000000000000] |
+| **ChangePasswordRequest** | body | [**ChangePasswordRequest**](../people.md#model-changepasswordrequest) | The new password, sent either in plain text or already hashed. Exactly one of the two fields is needed. | [required] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Detailed user information | [**EmployeeFullWrapper**](../people.md#model-employeefullwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **400** | Incorrect userId or password | - | - |
-| **403** | The link is invalid or no permissions to perform this action | - | - |
-| **404** | The user could not be found | - | - |
+| **200** | The profile whose password was changed | [**EmployeeFullWrapper**](../people.md#model-employeefullwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **400** | The user ID is empty, no password was sent, or the password does not meet the portal policy | - | - |
+| **403** | The account is not active, or only its owner may change this password | - | - |
+| **404** | No account has the specified ID | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | - |

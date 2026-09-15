@@ -6,9 +6,9 @@ Referenced types are defined in the [full reference](../people.md).
 
 `GET /api/2.0/keys`
 
-Get current user&#39;s API keys
+Get the API keys
 
-Returns a list of all API keys for the current user.
+Returns the API keys the caller is allowed to see, which is not the same set for everybody: a DocSpace  administrator gets every key of the portal, while any other member gets only the keys they created  themselves.  Any portal member except a guest may call it, and the call is read-only.  The secrets are not returned - each entry identifies its key by &#x60;id&#x60; and by the last four characters in  &#x60;keyPostfix&#x60;, and a secret can only be read once, at the moment &#x60;POST api/2.0/keys&#x60; creates it.  Expired and deactivated keys stay in the list, so check &#x60;expiresAt&#x60; against the current time and read  &#x60;isActive&#x60; before treating an entry as usable.  An empty list means the caller has created no keys, not that the portal has none.
 
 ## Parameters
 This endpoint does not need any parameter.
@@ -17,7 +17,8 @@ This endpoint does not need any parameter.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | List of api keys for user | [**ApiKeyResponseArrayWrapper**](../people.md#model-apikeyresponsearraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | Every key of the portal for a DocSpace admin, or the keys created by the caller for anybody else | [**ApiKeyResponseArrayWrapper**](../people.md#model-apikeyresponsearraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **403** | The caller is a guest | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | - |

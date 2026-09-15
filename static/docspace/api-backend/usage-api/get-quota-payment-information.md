@@ -6,22 +6,22 @@ Referenced types are defined in the [full reference](../api.md).
 
 `GET /api/2.0/portal/payment/quota`
 
-Get quota payment information
+Get the current plan and limits
 
-Returns the payment information about the current portal quota.
+Returns the quota the portal is on right now - its paid plan or the free one - with everything a client needs  to render itself: the price, the features that are switched on, the limits they grant (rooms, storage in  bytes, users, administrators, AI) and how much of each is already used. Every signed-in member of the portal  reads it, so it is not restricted to administrators; only guests are refused with 403. The call is read-only.  The plan is served from the cache by default, which is what a start-up needs; &#x60;refresh&#x3D;true&#x60; fetches it from  the billing service instead, so use that right after a purchase and not routinely, because it is a remote  call. The catalogue of the quotas that could be bought instead is &#x60;GET api/2.0/portal/payment/quotas&#x60;, and the  money side of the same portal - customer, wallet and balance - starts at  &#x60;GET api/2.0/portal/payment/customerinfo&#x60;.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **refresh** | query | **Boolean** | Specifies whether to refresh the payment information cache or not. | [optional] [example: true] |
+| **refresh** | query | **Boolean** | Whether the answer is fetched from the billing service instead of the portal cache. The cached copy is what a  start-up needs and costs nothing; asking for a fresh one makes a remote call, so use it right after a  purchase or a top-up and not on every read. | [optional] [example: true] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Payment information about the current portal quota | [**QuotaWrapper**](../api.md#model-quotawrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **403** | No permissions to perform this action | - | - |
+| **200** | The quota the portal is on, with its price, features, limits and current usage | [**QuotaWrapper**](../api.md#model-quotawrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **403** | The caller is a guest of this portal | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |

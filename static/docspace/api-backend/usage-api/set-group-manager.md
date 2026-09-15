@@ -8,21 +8,22 @@ Referenced types are defined in the [full reference](../people.md).
 
 Set a group manager
 
-Sets a user with the ID specified in the request as a group manager.
+Makes an account the manager of a group, replacing whoever managed it before.  The caller needs the permissions to edit groups and to add and remove users.  Both the group and the account have to exist: the operation answers 404 when the ID in the route matches no  live group and also when &#x60;userId&#x60; matches no account, so the message of the error says which of the two was  not found.  The account is added to the group at the same time, so a manager does not have to be a member beforehand, and  the previous manager stays in the group as an ordinary member.  A group has one manager, which makes the call idempotent when it names the account that manages it already.  The answer is the group with its new manager.  To change the members rather than the manager, use &#x60;PUT api/2.0/group/{id}/members&#x60;.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **UUID** (uuid) | The group ID. | [required] [example: 00000000-0000-0000-0000-000000000000] |
-| **SetManagerRequest** | body | [**SetManagerRequest**](../people.md#model-setmanagerrequest) | The request for setting a group manager. | [required] |
+| **id** | path | **UUID** (uuid) | The ID of the group whose manager is set, taken from the route. It has to be a group that has not been  deleted, otherwise the operation answers 404. | [required] [example: 00000000-0000-0000-0000-000000000000] |
+| **SetManagerRequest** | body | [**SetManagerRequest**](../people.md#model-setmanagerrequest) | The account to make the manager of the group. | [required] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Group with the detailed information | [**GroupWrapper**](../people.md#model-groupwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **404** | User not found | - | - |
+| **200** | The group with its new manager | [**GroupWrapper**](../people.md#model-groupwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **403** | No permissions to perform this action | - | - |
+| **404** | No group has the specified ID, or no account has the specified userId | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | - |

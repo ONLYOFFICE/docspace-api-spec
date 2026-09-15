@@ -6,9 +6,9 @@ Referenced types are defined in the [full reference](../newai.md).
 
 `PUT /api/2.0/ai/threads/rename`
 
-Rename
+Rename a chat thread
 
-Renames a chat thread and bumps its last-edit date so the new title shows up in the sidebar.
+Replaces a thread&#39;s title with the one supplied and bumps its last-edit date. Both &#x60;threadId&#x60; and a title with at least one non-whitespace character are required - a blank title is rejected rather than silently stored, so a thread cannot end up nameless. The answer only confirms the write. To have the model produce a title instead of supplying one, use &#x60;POST api/2.0/ai/threads/regenerate-title&#x60;.
 
 ## Parameters
 
@@ -20,8 +20,12 @@ Renames a chat thread and bumps its last-edit date so the new title shows up in 
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Success. | [**AiSuccessResponse**](../newai.md#model-aisuccessresponse) | - |
+| **200** | Confirms the new title was stored. | [**AiSuccessResponse**](../newai.md#model-aisuccessresponse) | - |
+| **400** | &#x60;threadId&#x60; or the new title is missing. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
 | **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
+| **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
+| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
+| **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
 
 ## Return type
 

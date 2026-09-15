@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../api.md).
 
 Save the greeting settings
 
-Saves the greeting settings specified in the request to the current portal.
+Replaces the greeting title of the current portal with the &#x60;title&#x60; from the request, storing it as the portal  name. The caller needs the portal-settings right of a DocSpace administrator, otherwise the call is refused.  The new caption takes effect at once for every user of the portal and the change is written to the audit  trail; repeating the call with the same title leaves the portal in the same state. A missing &#x60;title&#x60; or one  longer than 255 characters is rejected as an invalid request before the handler runs. On a cloud portal with a  free or trial plan the title is also matched against the character rule configured for the installation and a  title that breaks it is refused, while a paid cloud plan and a server installation apply no character check.  An empty &#x60;title&#x60; clears the greeting: the portal falls back to the built-in default caption and  &#x60;GET api/2.0/settings/greetingsettings/isdefault&#x60; starts answering &#x60;true&#x60;. What comes back is a localized  confirmation message, not the stored title - read the title with &#x60;GET api/2.0/settings/greetingsettings&#x60;.
 
 ## Parameters
 
@@ -20,7 +20,7 @@ Saves the greeting settings specified in the request to the current portal.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Message about saving greeting settings successfully | [**StringWrapper**](../api.md#model-stringwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | A localized message confirming that the greeting title has been saved | [**StringWrapper**](../api.md#model-stringwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |

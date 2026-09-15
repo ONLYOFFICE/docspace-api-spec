@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../newai.md).
 
 Update agents&#39; quota
 
-Changes the storage quota of the given AI agent rooms.
+Sets the storage quota of the listed AI agent rooms in one call, forwarding &#x60;roomIds&#x60; and &#x60;quota&#x60; to the DocSpace AI service unchanged. The answer is that service&#39;s payload, one updated room per entry. A quota applies to the room&#39;s stored files, not to the model usage of its chats. Use &#x60;PUT api/2.0/ai/agents/resetquota&#x60; to return rooms to the portal default instead of naming a number.
 
 ## Parameters
 
@@ -20,8 +20,11 @@ Changes the storage quota of the given AI agent rooms.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Success. | [**AiFolderIntegerArrayWrapper**](../newai.md#model-aifolderintegerarraywrapper) | - |
+| **200** | The updated agent rooms, one entry each. | [**AiFolderIntegerArrayWrapper**](../newai.md#model-aifolderintegerarraywrapper) | - |
 | **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
+| **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
+| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
+| **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
 
 ## Return type
 

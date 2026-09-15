@@ -8,21 +8,21 @@ Referenced types are defined in the [full reference](../files.md).
 
 Create an HTML file
 
-Creates an HTML (.html) file in the selected folder with the title and contents specified in the request.
+Creates an HTML file in the folder named in the route out of the markup passed as the content, and answers  with the stored file. The &#x60;.html&#x60; extension is added to the title unless the title already ends with it, and a  request carrying no content is rejected as an invalid request. &#x60;createNewIfExist&#x60; acts the other way round  than its name reads: with &#x60;true&#x60; the file that already carries this title is updated, the markup replacing its  content and a version appearing in its history, while with &#x60;false&#x60;, which is also the default, another file is  created and its title made unique, as in Notes (1).html. Updating needs the existing file to be editable by  the caller, so one that is locked, open in an editing session, encrypted or in Trash is left alone and a new  file appears beside it instead. The caller needs the right to create files in the folder and is otherwise  refused with 403. The call is mutating. To create the file in the caller&#39;s own section use  &#x60;POST api/2.0/files/@my/html&#x60;.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **folderId** | path | **Integer** (int32) | The folder ID to create the text or HTML file. | [required] [example: 1] |
-| **CreateTextOrHtmlFile** | body | [**CreateTextOrHtmlFile**](../files.md#model-createtextorhtmlfile) | The parameters for creating an HTML or text file. | [required] |
+| **folderId** | path | **Integer** (int32) | The folder the file is created in. | [required] [example: 1] |
+| **CreateTextOrHtmlFile** | body | [**CreateTextOrHtmlFile**](../files.md#model-createtextorhtmlfile) | The title, the content and the collision behaviour of the new file. | [required] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | New file information | [**FileIntegerWrapper**](../files.md#model-fileintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **403** | You don&#39;t have enough permission to create | - | - |
+| **200** | The created or updated HTML file | [**FileIntegerWrapper**](../files.md#model-fileintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **403** | The caller may not create files in this folder | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |

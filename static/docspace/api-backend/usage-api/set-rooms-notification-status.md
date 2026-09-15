@@ -6,9 +6,9 @@ Referenced types are defined in the [full reference](../api.md).
 
 `POST /api/2.0/settings/notification/rooms`
 
-Set room notification status
+Mute or unmute a room
 
-Sets a notification status for a room with the ID specified in the request.
+Adds one room to the calling user&#39;s silenced list or takes it off again: &#x60;mute&#x60; true silences the room, false  lets its notifications through. One call carries one room, so several rooms take several calls, and repeating  a call with the same pair changes nothing. The room is named by &#x60;roomsId&#x60; and kept as an opaque value: the  numeric identifier of a portal room and the string identifier of a room on a connected third-party account are  both accepted, and neither the room&#39;s existence nor the caller&#39;s access to it is checked, so a mistyped  identifier is stored as sent. Every signed-in member manages its own list, whatever its role, and the list of  another member cannot be touched. While a room is silenced its activity is left out of the hourly room digest  and of the daily feed, the letters it would send at once are not sent, and its new-item counters are hidden.  The Files responses stop offering the &#x60;mute&#x60; action on a room once badges, room activity and the daily feed  are all switched off, while this call keeps working. What comes back is the whole updated list, the same shape  &#x60;GET api/2.0/settings/notification/rooms&#x60; returns.
 
 ## Parameters
 
@@ -20,7 +20,7 @@ Sets a notification status for a room with the ID specified in the request.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Room notification settings | [**RoomsNotificationSettingsWrapper**](../api.md#model-roomsnotificationsettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The identifiers of the rooms the calling user has silenced, as the list stands after the change | [**RoomsNotificationSettingsWrapper**](../api.md#model-roomsnotificationsettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |

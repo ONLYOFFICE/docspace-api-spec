@@ -6,9 +6,9 @@ Referenced types are defined in the [full reference](../newai.md).
 
 `POST /api/2.0/ai/ai/send`
 
-Send
+Run an AI action
 
-Runs one AI action: the profile bound to &#x60;actionType&#x60; (falling back to the &#x60;Default&#x60; slot) is dispatched against a single-message history. Nothing is persisted - no thread, no title generation, no storage writes.
+Runs one AI action and returns the whole answer as a single JSON document. The model is the profile bound to &#x60;actionType&#x60;, falling back to the &#x60;Default&#x60; assignment slot, so this operation accepts no &#x60;profileId&#x60; of its own. Nothing is persisted - no thread is opened, no message is stored and no title is generated - which makes it the one to use for a stand-alone completion rather than for a conversation. &#x60;entityId&#x60; and &#x60;contextEntityId&#x60; set the scope of the round, which decides the workspace context and the custom MCP servers it may reach. For a conversation that keeps its history, use &#x60;POST api/2.0/ai/ai/send-with-stream&#x60; instead.
 
 ## Parameters
 
@@ -20,8 +20,11 @@ Runs one AI action: the profile bound to &#x60;actionType&#x60; (falling back to
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Success. | [**AiThreadMessageLike**](../newai.md#model-aithreadmessagelike) | - |
+| **200** | The assistant&#39;s reply as one message. Nothing was persisted. | [**AiThreadMessageLike**](../newai.md#model-aithreadmessagelike) | - |
 | **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
+| **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
+| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
+| **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
 
 ## Return type
 

@@ -6,15 +6,15 @@ Referenced types are defined in the [full reference](../files.md).
 
 `PUT /api/2.0/privacyroom/keys`
 
-Replaces an existing encryption key with a new one for the user.
+Rotate an encryption key
 
-Replaces an existing encryption key with a new one for the user.
+Rotates one encryption key pair of the calling user: the entry whose &#x60;id&#x60; matches is overwritten with the  submitted &#x60;publicKey&#x60; and &#x60;privateKeyEnc&#x60;, and the caller&#39;s other pairs are left untouched. The pair has to  exist already, an &#x60;id&#x60; that is not in the caller&#39;s set is answered with 404, and a first key is created with  &#x60;POST api/2.0/privacyroom/keys&#x60;. This is a full replacement rather than a merge: both halves are mandatory,  and a request that omits or blanks one of them is rejected as invalid with the stored pair surviving  unchanged, so a rotation that means to keep the private half has to send it again. Omitting &#x60;id&#x60; targets the  all-zero pair, the one a client that never sets an id keeps rotating. Every authenticated member rotates their  own keys and only their own, and a guest is refused. The call is mutating, and repeating it with the same body  leaves the same state. It answers with every key the caller holds afterwards, and from then on  &#x60;GET api/2.0/privacyroom/{roomId}/access&#x60; reports the new public half for this member.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **EncryptionKeyRequestDto** | body | [**EncryptionKeyRequestDto**](../files.md#model-encryptionkeyrequestdto) | The request object containing the public and private key information to replace the existing key. | [optional] |
+| **EncryptionKeyRequestDto** | body | [**EncryptionKeyRequestDto**](../files.md#model-encryptionkeyrequestdto) |  | [optional] |
 
 ## Responses
 

@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../api.md).
 
 Get the recommended quota
 
-Returns the recommended quota for the current portal.
+Recommends the cheapest quota this portal could run on and still fit: the lowest-priced quota that is not  billed yearly, whose user allowance is above the number of active accounts and whose storage allowance is  above the space already used. The caller needs the portal-settings right and gets 403 without it. The call is  read-only, idempotent and buys nothing - it only picks one quota out of those the portal may switch to,  comparing them with the figures that &#x60;GET api/2.0/portal/userscount&#x60; and &#x60;GET api/2.0/portal/usedspace&#x60;  report. The answer is a single quota in the same shape as &#x60;GET api/2.0/portal/quota&#x60;, with sizes in bytes;  when no quota is large enough the answer is an empty body with 200 and not an error, so handle the empty  result as nothing to recommend. Yearly quotas are left out by design, so the recommendation is always a  monthly one - the full list to choose from comes from &#x60;GET api/2.0/portal/payment/quotas&#x60;, and the purchase  itself is started with &#x60;PUT api/2.0/portal/payment/url&#x60;.
 
 ## Parameters
 This endpoint does not need any parameter.
@@ -17,8 +17,8 @@ This endpoint does not need any parameter.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Recommended portal quota | [**TenantQuotaWrapper**](../api.md#model-tenantquotawrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **403** | No permissions to perform this action | - | - |
+| **200** | The cheapest monthly quota that would still fit this portal, or an empty body when none does | [**TenantQuotaWrapper**](../api.md#model-tenantquotawrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **403** | The caller has no portal-settings right | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |

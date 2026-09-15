@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../files.md).
 
 Change the ability to upload original formats
 
-Changes the ability to upload documents in the original formats as well.
+Stores whether the caller&#39;s uploads keep the original file when the portal converts them into an editable  format, and returns the value that is now stored. With &#x60;set&#x3D;true&#x60; the converted document is saved as a new  file next to the upload, so both the original and the converted copy stay in the folder; with &#x60;set&#x3D;false&#x60; the  conversion replaces the uploaded file with a new version of it whenever the caller may edit that file. The  setting belongs to the calling account alone: every authenticated role down to a guest may change its own  copy, and an unauthenticated caller is refused. It applies to conversion on upload and to  &#x60;PUT api/2.0/files/file/{fileId}/checkconversion&#x60;, not to files already stored. The value is published as  &#x60;storeOriginalFiles&#x60; by &#x60;GET api/2.0/files/settings&#x60;, which is the only way to read it back. The change is  recorded in the portal audit trail.
 
 ## Parameters
 
@@ -20,7 +20,7 @@ Changes the ability to upload documents in the original formats as well.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Boolean value: true if the operation is successful | [**BooleanWrapper**](../files.md#model-booleanwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | true if the original file is kept when an upload is converted | [**BooleanWrapper**](../files.md#model-booleanwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |

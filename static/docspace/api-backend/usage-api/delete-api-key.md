@@ -6,21 +6,22 @@ Referenced types are defined in the [full reference](../people.md).
 
 `DELETE /api/2.0/keys/{keyId}`
 
-Delete a user API key
+Delete an API key
 
-Deletes a user API key by its ID.
+Deletes the API key with the ID given in the route, so that it stops authenticating requests immediately.  The caller may delete a key they created themselves, and a DocSpace administrator may delete any key of the  portal.  The removal is permanent and cannot be undone: the secret was only ever readable at creation time, so a  deleted key cannot be restored and a new one has to be issued through &#x60;POST api/2.0/keys&#x60;.  To stop a key temporarily instead, set &#x60;isActive&#x60; to false through &#x60;PUT api/2.0/keys/{keyId}&#x60;.  The answer is a plain boolean reporting whether the key was removed.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **keyId** | path | **UUID** (uuid) | The API key ID. | [required] [example: 00000000-0000-0000-0000-000000000000] |
+| **keyId** | path | **UUID** (uuid) | The ID of the key to delete, taken from the route. Read it from the &#x60;id&#x60; of an entry of  &#x60;GET api/2.0/keys&#x60; - it is not the secret and not the &#x60;keyPostfix&#x60;. | [required] [example: 00000000-0000-0000-0000-000000000000] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Delete a user api key | [**BooleanWrapper**](../people.md#model-booleanwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | True if the key was removed | [**BooleanWrapper**](../people.md#model-booleanwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **403** | The key belongs to another member and the caller is not a DocSpace admin | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | - |

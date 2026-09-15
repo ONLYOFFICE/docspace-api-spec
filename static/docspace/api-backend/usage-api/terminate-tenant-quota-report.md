@@ -6,9 +6,9 @@ Referenced types are defined in the [full reference](../api.md).
 
 `DELETE /api/2.0/settings/docscloud/tenant/quota/report`
 
-Terminate the DocsCloud tenant quota report generation
+Terminate the DocsCloud quota report
 
-Terminates generating the DocsCloud user quota report.
+Cancels the DocsCloud user quota report that the current user started with  &#x60;POST api/2.0/settings/docscloud/tenant/quota/report&#x60; and removes its job, so that a new report can be started  right away. There is no precondition: the call is accepted even when this user has no report job at all, and  it affects the caller&#39;s own job only, never one started by another administrator. The caller must be a portal  administrator allowed to edit the portal settings. The cancellation is asynchronous and idempotent: 200 means  the request has been queued for the report worker, not that the job has already stopped, so poll  &#x60;GET api/2.0/settings/docscloud/tenant/quota/report&#x60; until it returns an empty result. Nothing is returned in  the body. A report file that has already been saved in the My documents folder of the caller is left there  and has to be deleted through the file operations if it is no longer wanted.
 
 ## Parameters
 This endpoint does not need any parameter.
@@ -17,8 +17,8 @@ This endpoint does not need any parameter.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Ok | - | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **403** | No permissions to perform this action | - | - |
+| **200** | The termination request has been queued for the report worker; the response has no body | - | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **403** | The caller is not allowed to edit the portal settings | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |

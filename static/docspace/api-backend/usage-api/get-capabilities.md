@@ -6,9 +6,9 @@ Referenced types are defined in the [full reference](../files.md).
 
 `GET /api/2.0/files/thirdparty/capabilities`
 
-Get providers
+Get third-party provider capabilities
 
-Returns the list of the available providers.
+Lists the third-party storage services this portal is able to connect, in the compact form a connection dialog  needs. Every element is itself an array whose first item is the provider key accepted as &#x60;providerKey&#x60; by  &#x60;POST api/2.0/files/thirdparty&#x60;. For the services that authenticate through OAuth 2.0 (&#x60;Box&#x60;, &#x60;DropboxV2&#x60;,  &#x60;GoogleDrive&#x60;, &#x60;OneDrive&#x60;) the second and third items are the OAuth client ID and the redirect URL this portal  is registered with, so the caller can build the consent screen URL itself; the services that authenticate by  login and password (&#x60;SharePoint&#x60;, &#x60;WebDav&#x60;, &#x60;kDrive&#x60;, &#x60;Yandex&#x60;) contribute a single-item array. Only the  services enabled in the portal configuration are listed, and an OAuth service whose application is not  configured is left out. The call is read-only. An empty array is a normal answer rather than a failure: it is  what a guest gets, and what everyone gets while the portal-wide third-party switch is off  (&#x60;PUT api/2.0/files/thirdparty&#x60;). For display names, the WebDAV presets and the flags a connection form needs,  use &#x60;GET api/2.0/files/thirdparty/providers&#x60; instead.
 
 ## Parameters
 This endpoint does not need any parameter.
@@ -17,7 +17,7 @@ This endpoint does not need any parameter.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | List of provider keys | [**ArrayArrayWrapper**](../files.md#model-arrayarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The provider keys, each with the OAuth client ID and redirect URL where the service uses OAuth | [**ArrayArrayWrapper**](../files.md#model-arrayarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |

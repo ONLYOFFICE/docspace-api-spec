@@ -8,20 +8,20 @@ Referenced types are defined in the [full reference](../files.md).
 
 Delete a folder
 
-Deletes a folder with the ID specified in the request.
+Queues the deletion of one folder together with everything inside it, and answers with the file operations of  the caller, the one just created among them. The folder is not gone when the response arrives: poll  &#x60;GET api/2.0/files/fileops&#x60; until the operation reports &#x60;finished&#x60;, and read its &#x60;error&#x60; to learn whether the  deletion succeeded. By default the folder is moved to the Trash section, from where it can be restored;  &#x60;immediately&#x3D;true&#x60; discards it for good instead, and inside a room, where there is no Trash, deletion is  always final. &#x60;deleteAfter&#x3D;true&#x60; postpones the deletion until the editing sessions on the contents have ended,  so files somebody is working on are not pulled away. The caller needs the right to delete the folder, which  the room manager, a portal administrator acting as room manager and a content creator acting on a folder of  their own have; editing access alone, read access and a guest are refused. The call is destructive. To delete  several items at once use &#x60;PUT api/2.0/files/fileops/delete&#x60;.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **folderId** | path | **Integer** (int32) | The folder ID to delete. | [required] [example: 10] |
-| **DeleteFolder** | body | [**DeleteFolder**](../files.md#model-deletefolder) | The parameters for deleting a folder. | [required] |
+| **folderId** | path | **Integer** (int32) | The folder to delete, together with everything it holds. | [required] [example: 10] |
+| **DeleteFolder** | body | [**DeleteFolder**](../files.md#model-deletefolder) | How the deletion is to be carried out. | [required] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | List of file operations | [**FileOperationArrayWrapper**](../files.md#model-fileoperationarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The file operations of the caller, including the deletion just queued | [**FileOperationArrayWrapper**](../files.md#model-fileoperationarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |

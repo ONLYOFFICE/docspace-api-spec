@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../files.md).
 
 Create a room tag
 
-Creates a custom room tag with the parameters specified in the request.
+Adds a custom tag to the portal-wide catalog of room tags and answers with the stored name. Tags are shared by  the whole portal instead of belonging to the caller: once the tag exists, every room manager can attach it to  their own rooms with &#x60;PUT api/2.0/files/rooms/{id}/tags&#x60;, and that call also creates a tag it does not find.  Creating a name that is already in the catalog returns the existing tag unchanged rather than a duplicate or  an error, so repeating the call after a timeout is safe. A blank name, or one longer than the published limit,  is rejected as an invalid request. Only a room manager or a portal administrator may create a tag, and a user  or a guest is refused. The answer is the name as stored, and that name is the value to send in the &#x60;tags&#x60;  filter of &#x60;GET api/2.0/files/rooms&#x60; and in the room tag calls. The catalog itself is read with  &#x60;GET api/2.0/files/tags&#x60;.
 
 ## Parameters
 
@@ -20,8 +20,8 @@ Creates a custom room tag with the parameters specified in the request.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | New tag name | [**StringWrapper**](../files.md#model-stringwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **403** | You don&#39;t have enough permission to perform the operation | - | - |
+| **200** | The name of the created tag, or of the tag that already carried this name | [**StringWrapper**](../files.md#model-stringwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **403** | Only a room manager or a portal administrator can create tags | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |

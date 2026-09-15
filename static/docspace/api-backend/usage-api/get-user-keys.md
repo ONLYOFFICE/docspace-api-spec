@@ -6,9 +6,9 @@ Referenced types are defined in the [full reference](../files.md).
 
 `GET /api/2.0/privacyroom/keys`
 
-Retrieves encryption keys associated with the current user.
+Get own encryption keys
 
-Retrieves encryption keys associated with the current user.
+Returns every encryption key pair the calling user holds, the encrypted private half included, which is the  material a client needs in order to decrypt content in a private room. The set is personal and there is no  parameter for another user&#39;s keys: an authenticated caller reads only their own, and a guest, who cannot own  key material at all, always reads an empty set. The call is read-only. An empty answer, whether an empty list  or none at all, means no key has been created yet, and until &#x60;POST api/2.0/privacyroom/keys&#x60; creates one the  user cannot be invited to a private room. Each entry carries the pair&#39;s &#x60;id&#x60;, its owner in &#x60;userId&#x60;, the  moment the material was stored in &#x60;date&#x60;, the public half, the private half encrypted with the user&#39;s  password, and the portal-wide crypto engine in &#x60;cryptoEngineId&#x60;. For the keys that open a whole private room  use &#x60;GET api/2.0/privacyroom/{roomId}/access&#x60;, and for the keys a single file is shared with use  &#x60;GET api/2.0/files/file/{fileId}/publickeys&#x60;; this operation is about the caller alone.
 
 ## Parameters
 This endpoint does not need any parameter.

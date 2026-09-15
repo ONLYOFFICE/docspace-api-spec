@@ -6,22 +6,22 @@ Referenced types are defined in the [full reference](../files.md).
 
 `GET /api/2.0/files/fileops/move`
 
-Move or copy files to a folder
+Check move or copy conflicts
 
-Checks if files or folders can be moved or copied to the specified folder, moves or copies them, and returns their information.
+Reports which of the requested files and folders already have a same-named entry in &#x60;destFolderId&#x60;, so that  the clash can be settled before the move or the copy is started. Nothing is moved, copied or changed by the  call, although the address is shared with &#x60;PUT api/2.0/files/fileops/move&#x60;: the answer is the part of the  request that clashes, and an empty array means the batch would go through without one. The  &#x60;conflictResolveType&#x60; of the request is not taken into account — clashing items are reported whatever it says  — and encrypted files are left out of the report. A source id that resolves to nothing is not an error and is  passed over. The caller needs create access to the destination: an archived room and a room the caller cannot  write to are refused with 403, a destination that does not exist is answered as missing, and a request without  &#x60;destFolderId&#x60; is rejected as an invalid request. To learn whether the destination accepts the files at all  use &#x60;GET api/2.0/files/fileops/checkdestfolder&#x60;.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **inDto** | query | **BatchRequestDto** | The request parameters for copying/moving files. | [optional] |
+| **inDto** | query | **BatchRequestDto** | The files and folders to move or copy, the folder they go to, and the way name clashes are settled. | [optional] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | List of file entry information | [**FileEntryBaseArrayWrapper**](../files.md#model-fileentrybasearraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **403** | You don&#39;t have enough permission to create | - | - |
+| **200** | The listed items that already have a same-named entry in the destination folder | [**FileEntryBaseArrayWrapper**](../files.md#model-fileentrybasearraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **403** | The caller cannot create items in the destination folder | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |

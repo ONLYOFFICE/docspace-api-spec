@@ -6,21 +6,21 @@ Referenced types are defined in the [full reference](../people.md).
 
 `DELETE /api/2.0/people/thirdparty/unlinkaccount`
 
-Unlink a third-pary account
+Unlink a third-party account
 
-Unlinks a third-party account specified in the request from the user profile.
+Removes the link between the calling profile and the named third-party provider, so that the account can no  longer sign in through it.  It acts on the authenticated account only and takes the provider name in the query, using the same lowercase  values &#x60;GET api/2.0/people/thirdparty/providers&#x60; returns, such as &#x60;google&#x60; or &#x60;microsoft&#x60;.  The call returns no body and is idempotent: unlinking a provider that is not linked answers 200 and changes  nothing.  The portal profile itself is kept, together with its password, so the account stays usable through the  ordinary sign-in; only the third-party route is removed.  Link the provider again through &#x60;PUT api/2.0/people/thirdparty/linkaccount&#x60;.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **provider** | query | **String** | The provider name. | [optional] [example: Google] |
+| **provider** | query | **String** | The name of the provider to unlink, in the lowercase form &#x60;GET api/2.0/people/thirdparty/providers&#x60; returns,  such as &#x60;google&#x60; or &#x60;microsoft&#x60;. A name that is not linked to the calling profile is accepted and changes  nothing. | [optional] [example: google] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | OK | - | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The third-party identity is no longer linked to the calling profile. No content is returned | - | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | - |

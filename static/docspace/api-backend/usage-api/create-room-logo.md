@@ -6,23 +6,23 @@ Referenced types are defined in the [full reference](../files.md).
 
 `POST /api/2.0/files/rooms/{id}/logo`
 
-Create a room logo
+Set the room logo
 
-Creates a logo for a room with the ID specified in the request.
+Turns an image already uploaded to the portal into the logo of a room and returns the room with the addresses  of the four logo sizes. This is the second half of a two-step flow: upload the picture with  &#x60;POST api/2.0/files/logos&#x60; first and pass the path it returns as &#x60;tmpFile&#x60;, because the image itself is never  sent here. The temporary file belongs to the account that uploaded it and is consumed by this call, so it  cannot be reused for a second room and a path somebody else uploaded is refused. &#x60;x&#x60;, &#x60;y&#x60;, &#x60;width&#x60; and  &#x60;height&#x60; crop the picture; sending a position without a size is rejected as an invalid request, while a size  without a position is accepted. An empty &#x60;tmpFile&#x60; leaves the room as it is. A logo replaces the cover in the  interface without erasing it, and removing the logo brings the cover back. The caller must be a manager of the  room, an archived room is refused, and an unknown room is answered with 404.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The room ID. | [required] [example: 1] |
-| **LogoRequest** | body | [**LogoRequest**](../files.md#model-logorequest) | The logo request parameters. | [required] |
+| **id** | path | **Integer** (int32) | The room the logo is set on. | [required] [example: 1] |
+| **LogoRequest** | body | [**LogoRequest**](../files.md#model-logorequest) | The uploaded picture and the piece of it to use. | [required] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Room information | [**FolderIntegerWrapper**](../files.md#model-folderintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **404** | The required room was not found | - | - |
+| **200** | The room with the addresses of its new logo | [**FolderIntegerWrapper**](../files.md#model-folderintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **404** | No room with this ID is visible to the caller | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |

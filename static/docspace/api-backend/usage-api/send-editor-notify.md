@@ -6,25 +6,25 @@ Referenced types are defined in the [full reference](../files.md).
 
 `POST /api/2.0/files/file/{fileId}/sendeditornotify`
 
-Send the mention message
+Notify mentioned users
 
-Sends a message to the users who are mentioned in the file with the ID specified in the request.
+Emails the people named in &#x60;emails&#x60; that they were mentioned in a file, with a link that opens the file at the  place the mention sits when &#x60;actionLink&#x60; carries the anchor the editor produced. Only addresses that belong to  portal accounts are notified: an address that belongs to nobody is skipped, and the note is cut to its first  200 characters in the mail, while a &#x60;message&#x60; longer than the field allows is refused with 400. The answer is  usually empty: the access list of the file comes back when the file is encrypted, or when one of the addresses  belongs to nobody and the caller may share the file - that is then the cue to invite that person with  &#x60;PUT api/2.0/files/file/{id}/share&#x60;. The caller needs comment rights, which the creator of the file, the  manager of its room and a member invited to comment, review or edit have, while a guest or a member without  access is refused with 403; a file that does not exist answers with 404 and a file in the trash is refused.  The operation is rate-limited and answers 429 once the caller sends too many notifications. A delivery failure  is swallowed, so 200 does not prove that the mail left the portal.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **Integer** (int32) | The file ID with the mention message. | [required] [example: file-id] |
-| **MentionMessageWrapper** | body | [**MentionMessageWrapper**](../files.md#model-mentionmessagewrapper) | The mention message. | [optional] |
+| **fileId** | path | **Integer** (int32) | The file the mention was made in. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string. | [required] [example: 10] |
+| **MentionMessageWrapper** | body | [**MentionMessageWrapper**](../files.md#model-mentionmessagewrapper) | The notification to send. | [optional] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | List of access rights information | [**AceShortWrapperArrayWrapper**](../files.md#model-aceshortwrapperarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **400** | The list of email addresses is empty | - | - |
-| **403** | You don&#39;t have enough permission to perform the operation | - | - |
-| **404** | The required file was not found | - | - |
+| **200** | The people who currently have access to the file, when the caller still has to invite someone; empty otherwise | [**AceShortWrapperArrayWrapper**](../files.md#model-aceshortwrapperarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **400** | The address list is missing, or the message is longer than the field allows | - | - |
+| **403** | The caller may not comment on the file | - | - |
+| **404** | The file does not exist | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |

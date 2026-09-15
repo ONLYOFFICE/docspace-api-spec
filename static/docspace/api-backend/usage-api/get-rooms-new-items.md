@@ -6,9 +6,9 @@ Referenced types are defined in the [full reference](../files.md).
 
 `GET /api/2.0/files/rooms/news`
 
-Get the room new items
+Get new items in all rooms
 
-Returns the room new items.
+Collects everything that is marked as new for the caller across the active rooms into one answer, grouped  first by the day an entry changed and then by the room it belongs to. An entry becomes new when somebody else  creates or changes it in a room the caller has already opened, so the caller&#39;s own work never shows up here,  and neither does anything from a room they have never visited. Only files are listed: a new subfolder is not  an item, although files created inside it are, at any depth. The days come newest first, and inside a day the  rooms and their files follow the same order by change time. The archive is out of scope, only rooms of the  active section are covered. Reading the list clears nothing: the marks stay until the room itself is opened  with &#x60;GET api/2.0/files/rooms/{id}&#x60;. An empty array means that this account has nothing new. For one room, use  &#x60;GET api/2.0/files/rooms/{id}/news&#x60;.
 
 ## Parameters
 This endpoint does not need any parameter.
@@ -17,7 +17,7 @@ This endpoint does not need any parameter.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | List of new items | [**NewItemsRoomNewItemsArrayWrapper**](../files.md#model-newitemsroomnewitemsarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The new entries of every active room, grouped by day and by room | [**NewItemsRoomNewItemsArrayWrapper**](../files.md#model-newitemsroomnewitemsarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |

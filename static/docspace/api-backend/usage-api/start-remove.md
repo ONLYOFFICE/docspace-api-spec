@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../people.md).
 
 Start the data deletion
 
-Starts the data deletion for the user with the ID specified in the request.
+Queues an asynchronous job that erases the data of the user with the ID specified in the request.  The account must already have the &#x60;Terminated&#x60; status - disable it through  &#x60;PUT api/2.0/people/status/{status}&#x60; first - and it cannot be the portal owner or the caller.  The caller needs the permission to edit users, has to be a DocSpace admin to erase the data of a room admin,  and has to be the portal owner to erase the data of another DocSpace admin.  The erasure does not finish within this call: poll &#x60;GET api/2.0/people/remove/progress/{userid}&#x60; with the same  user ID until &#x60;isCompleted&#x60; is true, and cancel it through &#x60;PUT api/2.0/people/remove/terminate&#x60;.  This operation destroys the data and cannot be undone; to keep the rooms and the shared files of the account  instead, transfer them first through &#x60;POST api/2.0/people/reassign/start&#x60;.  An unknown ID and a rejected precondition both answer 400 and name the ID they rejected.
 
 ## Parameters
 
@@ -20,10 +20,9 @@ Starts the data deletion for the user with the ID specified in the request.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Deletion progress | [**TaskProgressResponseWrapper**](../people.md#model-taskprogressresponsewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **400** | User exception | - | - |
+| **200** | The state of the queued deletion | [**TaskProgressResponseWrapper**](../people.md#model-taskprogressresponsewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **400** | No user has the specified ID, or the account is the portal owner, the caller, or is not disabled | - | - |
 | **403** | No permissions to perform this action | - | - |
-| **404** | User not found | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | - |

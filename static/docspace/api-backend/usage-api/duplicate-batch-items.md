@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../files.md).
 
 Duplicate files and folders
 
-Duplicates all the selected files and folders.
+Queues a background job that copies each requested file and folder next to itself, into the folder where it  already is, and answers with the caller&#39;s duplicate operations, including the one just started. Poll  &#x60;GET api/2.0/files/fileops&#x60; until the operation reports &#x60;finished&#x60;. The copies keep the name of the original  with a numeric suffix, so nothing is overwritten and every repetition adds one more copy; duplicating a folder  duplicates its content as well. No destination is taken — to place a copy somewhere else use  &#x60;PUT api/2.0/files/fileops/copy&#x60;. The caller needs the rights that creating an item in that folder would need,  which inside a room means room manager or content-creator rights: read or editing rights, and an item the  caller has no access to at all, are refused with 403. An empty selection queues nothing and answers with the  operations that are already there.
 
 ## Parameters
 
@@ -20,8 +20,8 @@ Duplicates all the selected files and folders.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | List of file operations | [**FileOperationArrayWrapper**](../files.md#model-fileoperationarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **403** | You don&#39;t have enough permission to duplicate | - | - |
+| **200** | The duplicate operations of the caller, the one just queued included | [**FileOperationArrayWrapper**](../files.md#model-fileoperationarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **403** | The caller cannot create items in the folder that holds one of the listed items | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |

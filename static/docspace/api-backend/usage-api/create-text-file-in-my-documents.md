@@ -6,9 +6,9 @@ Referenced types are defined in the [full reference](../files.md).
 
 `POST /api/2.0/files/@my/text`
 
-Create a text file in the My documents section
+Create a text file in My documents
 
-Creates a text (.txt) file in the My documents section with the title and contents specified in the request.
+Creates a text file in the caller&#39;s own My documents section out of the text passed as the content, and  answers with the stored file. The extension follows the content rather than the request: &#x60;.txt&#x60; normally, but  &#x60;.html&#x60; as soon as the text contains something shaped like an HTML tag, so a snippet of markup sent here ends  up as an HTML file; the extension is added to the title unless the title already ends with it. A request  carrying no content is rejected as invalid. &#x60;createNewIfExist&#x60; acts the other way round than its name reads:  with &#x60;true&#x60; the file that already carries this title is updated and a version appears in its history, while  with &#x60;false&#x60;, which is also the default, another file is created and its title made unique, as in  Notes (1).txt. A file that is locked, open in an editing session, encrypted or in Trash is not updated - a  new file appears beside it instead. The call is mutating. A guest has no My documents section and is  refused. To create the file in a room or another folder use &#x60;POST api/2.0/files/{folderId}/text&#x60;.
 
 ## Parameters
 
@@ -20,7 +20,7 @@ Creates a text (.txt) file in the My documents section with the title and conten
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | New file information | [**FileIntegerWrapper**](../files.md#model-fileintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The created or updated text file | [**FileIntegerWrapper**](../files.md#model-fileintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |

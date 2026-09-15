@@ -6,9 +6,9 @@ Referenced types are defined in the [full reference](../files.md).
 
 `POST /api/2.0/files/file/referencedata`
 
-Get reference data
+Resolve a spreadsheet reference
 
-Returns the reference data to uniquely identify a file in its system and check the availability of insering data into the destination spreadsheet by the external link.
+Resolves a reference that a formula in one spreadsheet makes to another document, and answers with the  descriptor the document service needs in order to read it: the title, the download address, the file type, the  document key of the co-editing session, the web editor link and the signature token. Three ways of naming the  target are tried in order, and the first that resolves wins: &#x60;fileKey&#x60; as a file id inside the portal named by  &#x60;instanceId&#x60;, then &#x60;path&#x60; looked up among the files sitting next to &#x60;sourceFileId&#x60;, then &#x60;link&#x60;, short links  included, from which the file id is read out. A link that points outside this portal is not resolved at all  and comes back unchanged as the address to follow. The caller needs read access to the source file and to its  folder, otherwise the call is refused. The call only reads. A reference that resolves to nothing is still  answered with 200, with the error text filled in and the rest of the descriptor empty, so read the error  before using any other field.
 
 ## Parameters
 
@@ -20,7 +20,7 @@ Returns the reference data to uniquely identify a file in its system and check t
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | File reference data | [**FileReferenceWrapper**](../files.md#model-filereferencewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The reference descriptor, or the same object with the error text set when nothing resolved | [**FileReferenceWrapper**](../files.md#model-filereferencewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |

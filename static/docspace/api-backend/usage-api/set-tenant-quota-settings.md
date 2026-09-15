@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../api.md).
 
 Save the tenant quota settings
 
-Saves the tenant quota settings specified in the request to the current portal.
+Sets or removes the storage quota for a given tenant. Available only on a Standalone (self-hosted)  installation; on SaaS the call is always refused. Requires a DocSpace administrator, and the portal&#39;s plan  must include the statistics feature or the call is rejected as not covered by the plan. Pass a non-negative  &#x60;quota&#x60; in bytes to enable the limit for the tenant identified by &#x60;tenantId&#x60;, or a negative value to remove  any limit. This is a mutating, idempotent call: sending the same body again leaves the quota unchanged. It  returns the saved quota settings for that tenant, not its current usage.
 
 ## Parameters
 
@@ -20,9 +20,9 @@ Saves the tenant quota settings specified in the request to the current portal.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Tenant quota settings | [**TenantQuotaSettingsWrapper**](../api.md#model-tenantquotasettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **402** | Your pricing plan does not support this option | - | - |
-| **405** | Not available | - | - |
+| **200** | Saved tenant storage quota settings | [**TenantQuotaSettingsWrapper**](../api.md#model-tenantquotasettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **402** | The portal&#39;s pricing plan does not include the statistics feature required for tenant quotas | - | - |
+| **405** | The caller is not a DocSpace administrator, or the portal is not a Standalone installation | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |

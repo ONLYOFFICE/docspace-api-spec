@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../api.md).
 
 Set the banners visibility
 
-Sets the visibility settings of the promotional banners in the portal.
+Sets whether the portal&#39;s promotional banners are hidden for every user. Available only on an Enterprise  license; every other plan is refused regardless of the caller&#39;s role. Requires Owner or DocSpaceAdmin (the  EditPortalSettings permission). The flag only takes effect on a Standalone (self-hosted) installation; on  SaaS, banners are always shown no matter what is saved here. This is a mutating, idempotent, portal-wide call:  it applies to every user on the tenant immediately. It returns the saved setting; read the current value at  any time from &#x60;GET api/2.0/settings/banner&#x60;.
 
 ## Parameters
 
@@ -20,7 +20,7 @@ Sets the visibility settings of the promotional banners in the portal.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Promotional banners visibility settings | [**TenantBannerSettingsWrapper**](../api.md#model-tenantbannersettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | Saved promotional banners visibility setting | [**TenantBannerSettingsWrapper**](../api.md#model-tenantbannersettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |

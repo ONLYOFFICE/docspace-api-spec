@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../files.md).
 
 Change the default template setting
 
-Changes the default template setting.
+Makes an existing document the blank the portal creates for one extension, and returns the full set of  templates as it now stands. The file is copied into the portal&#39;s template storage, so later edits of the  original do not change the blank, and the file that served as the previous custom blank for that extension is  deleted. &#x60;selectedFile&#x60; takes the identifier of a file the caller may copy - a number for a document stored in  the portal, a string for one in a connected third-party storage - and its extension must be the one named in  &#x60;fileExtension&#x60;; a mismatch or an identifier of another kind answers 400, a file the caller may not copy  answers 403, and a file that is not there is answered as missing. An extension the built-in template set does  not cover is not an error: the call succeeds and changes nothing, so compare the answer with what was asked  for. Requires the portal settings permission.
 
 ## Parameters
 
@@ -20,9 +20,9 @@ Changes the default template setting.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | New default template settings | [**DefaultTemplateSettingsWrapper**](../files.md#model-defaulttemplatesettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **400** | Incorrect or missing file | - | - |
-| **403** | You don&#39;t have enough permission to perform the operation | - | - |
+| **200** | The blank document configured for each supported extension after the change | [**DefaultTemplateSettingsWrapper**](../files.md#model-defaulttemplatesettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **400** | The file identifier is of an unsupported kind, or its extension is not the one requested | - | - |
+| **403** | The caller may not read the portal settings, or may not copy the selected file | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |

@@ -6,23 +6,23 @@ Referenced types are defined in the [full reference](../files.md).
 
 `GET /api/2.0/files/tags/{tagName}/haslinks`
 
-Has tag links
+Check room tag usage
 
-Checks if a specific custom tag has linked items.
+Reports whether any room still carries the named tag, which is the check to run before the tag is deleted from  the catalog. Only a portal administrator may call it, and every other account is refused. The name is matched  exactly against the catalog, and a name that is not in it is answered with 404. That also tells the two ways a  tag stops being used apart: taking the tag off the last room that carried it leaves the tag in the catalog and  turns the answer to false, while deleting that last room removes the tag itself, after which the call answers  404. A true answer means at least one room, active or archived, still references the tag, so deleting it with  &#x60;DELETE api/2.0/files/tags&#x60; would strip it from those rooms. The handler reads the tag name from the query  string, so the value has to be sent twice: in the path segment and as the &#x60;tagName&#x60; query parameter.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
 | **tagName2** | path | **String** | The tag being checked. Send the same value as the &#x60;tagName&#x60; query parameter, which is the one the handler reads. | [required] |
-| **tagName** | query | **String** | Represents the name of a tag | [optional] [example: tag1] |
+| **tagName** | query | **String** | The tag to check, spelled exactly as it is stored in the catalog. This query value is the one the handler  reads, so the path segment of the same name has to repeat it. | [optional] [example: Important] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | True if tag has links, false otherwise | [**BooleanWrapper**](../files.md#model-booleanwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **404** | Tag not found | - | - |
+| **200** | True when at least one room still carries the tag | [**BooleanWrapper**](../files.md#model-booleanwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **404** | No tag with this name exists in the catalog | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |

@@ -6,9 +6,9 @@ Referenced types are defined in the [full reference](../api.md).
 
 `GET /api/2.0/settings/tfaapp/setup`
 
-Generate setup code
+Generate the TFA setup code
 
-Generates the setup TFA code for the current user.
+Issues the secret the current user has to enter in an authenticator application before the  authenticator-application method can be used, both as a scannable QR-code image and as a key for manual entry.  The call is reachable only with a confirmation token carrying the &#x60;TfaActivation&#x60; role, obtained from  &#x60;GET api/2.0/settings/tfaapp/confirm&#x60; or from the login flow; an ordinary bearer token is refused. The  authenticator method has to be enabled on the portal and be its current policy, and the account must have no  application linked yet: for an already-linked account the call answers 405, so reset the credential first with  &#x60;PUT api/2.0/settings/tfaappnewapp&#x60;. Accounts flagged as outsiders are refused. Repeating the call is safe and  hands back the same secret for the account, so the QR code and the manual key always describe one and the same  credential. &#x60;qrCodeSetupImageUrl&#x60; is a base64 &#x60;data:&#x60; URL of a PNG image, and &#x60;account&#x60; is the label the  application will show. Finish the setup by sending a code from the application to  &#x60;POST api/2.0/settings/tfaapp/validate&#x60;.
 
 ## Parameters
 This endpoint does not need any parameter.
@@ -17,8 +17,8 @@ This endpoint does not need any parameter.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Setup code | [**TfaSetupCodeWrapper**](../api.md#model-tfasetupcodewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **405** | TFA application settings are not available | - | - |
+| **200** | The account label, the manual entry key and the QR-code image for linking an authenticator application | [**TfaSetupCodeWrapper**](../api.md#model-tfasetupcodewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **405** | The authenticator method is not enabled on this portal, or the account already has an application linked | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |

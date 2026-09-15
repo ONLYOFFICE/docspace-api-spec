@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../files.md).
 
 Hide confirmation dialog when changing room lifetime settings
 
-Hides the confirmation dialog when changing the room lifetime settings.
+Stores whether the caller is warned before the lifetime settings of a room are changed, and returns the value  that is now stored. A room lifetime moves the files of the room to the trash once they reach the configured  age, which is why the interface confirms the change; this setting decides whether that confirmation is shown  to the calling account. It belongs to that account alone: every authenticated role down to a guest may change  its own copy, and an unauthenticated caller is refused. It works in both directions - &#x60;set&#x3D;true&#x60; hides the  warning, &#x60;set&#x3D;false&#x60; brings it back - and is a hint for the interface only, so changing a room lifetime  through &#x60;PUT api/2.0/files/rooms/{id}&#x60; is unaffected. The value is published as &#x60;hideConfirmRoomLifetime&#x60; by  &#x60;GET api/2.0/files/settings&#x60;, which is the only way to read it back. A new account starts with the warning  shown, and writing a value that is already stored is accepted and leaves the setting untouched. Hiding the  warning does not shorten or extend any lifetime: what a room does with ageing files is decided by the room  itself.
 
 ## Parameters
 
@@ -20,7 +20,7 @@ Hides the confirmation dialog when changing the room lifetime settings.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Boolean value: true if the parameter is enabled | [**BooleanWrapper**](../files.md#model-booleanwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | true if the room lifetime warning is now hidden for the caller | [**BooleanWrapper**](../files.md#model-booleanwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |

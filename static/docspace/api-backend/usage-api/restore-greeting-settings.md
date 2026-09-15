@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../api.md).
 
 Restore the greeting settings
 
-Restores the current portal greeting settings.
+Drops the custom greeting title of the current portal and puts back the title configured for the installation,  which is an empty value unless the installation defines a portal name of its own. The caller needs the  portal-settings right of a DocSpace administrator, otherwise the call is refused. The change is immediate for  every user of the portal and a second call changes nothing, so a retry after a failed attempt is safe. The  answer is the greeting in force afterwards: the configured title when there is one, and the localized default  caption when the stored title ends up empty - in that case &#x60;GET api/2.0/settings/greetingsettings/isdefault&#x60;  starts answering &#x60;true&#x60;. Only the caption is touched: the portal logos and the white-label logo text keep  their values and are reset separately by &#x60;PUT api/2.0/settings/whitelabel/logos/restore&#x60; and  &#x60;PUT api/2.0/settings/whitelabel/logotext/restore&#x60;. To set a title instead of the default one use  &#x60;POST api/2.0/settings/greetingsettings&#x60;.
 
 ## Parameters
 This endpoint does not need any parameter.
@@ -17,7 +17,7 @@ This endpoint does not need any parameter.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Greeting settings: tenant name | [**StringWrapper**](../api.md#model-stringwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The greeting title in force after the restore, or the localized default caption when the installation configures none | [**StringWrapper**](../api.md#model-stringwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |

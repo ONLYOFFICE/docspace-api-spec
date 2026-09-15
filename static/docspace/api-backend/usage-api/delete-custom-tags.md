@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../files.md).
 
 Delete the custom room tags
 
-Deletes a bunch of custom tags specified in the request.
+Deletes custom room tags from the portal catalog by name and detaches them from every room that carries them;  the rooms themselves and their content are untouched, and only the tag disappears from their tag lists. Only a  portal administrator may call it, and a room manager who is allowed to create tags is refused. The names are  matched exactly as they are stored: names that are not in the catalog are skipped in silence and an empty list  is accepted as a no-op, so a successful answer does not prove that anything was deleted; check a name with  &#x60;GET api/2.0/files/tags/{tagName}/haslinks&#x60; first when that matters. The call cannot be undone: creating the  name again with &#x60;POST api/2.0/files/tags&#x60; brings back the tag but not its links, which have to be attached to  each room once more. The answer carries no body. To take a tag off one room and leave it in the catalog for  the others, use &#x60;DELETE api/2.0/files/rooms/{id}/tags&#x60; instead.
 
 ## Parameters
 
@@ -20,8 +20,8 @@ Deletes a bunch of custom tags specified in the request.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Ok | - | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **403** | You don&#39;t have enough permission to perform the operation | - | - |
+| **200** | The tags were removed from the catalog and from every room | - | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **403** | Only a portal administrator can delete tags | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |

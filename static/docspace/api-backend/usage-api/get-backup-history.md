@@ -8,20 +8,21 @@ Referenced types are defined in the [full reference](../backup.md).
 
 Get the backup history
 
-Returns the history of the started backup.
+Lists the backups of the current portal whose archive is still present in the storage it was written  to. The records come back in no particular order, so sort them by &#x60;createdOn&#x60; if the newest one is  wanted. &#x60;dump&#x60; lists the backups of the whole server instead and requires the space access  permission.  Despite being a read operation, this prunes the history as it goes: a record whose archive is no  longer in its storage is deleted outright, so the list can shrink between two calls without anybody  deleting anything. A record whose storage can no longer be reached at all - a disconnected  third-party account, for instance - is neither returned nor deleted, so it stays invisible while  still occupying the history.  The &#x60;id&#x60; of a record is the same value as the &#x60;taskId&#x60; that  &#x60;POST api/2.0/backup/startbackup&#x60; returned for it, and it is what  &#x60;DELETE api/2.0/backup/deletebackup/{id}&#x60; and the &#x60;backupId&#x60; of  &#x60;POST api/2.0/backup/startrestore&#x60; expect.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **Dump** | query | **Boolean** | Specifies if a dump will be created or not. | [optional] [example: true] |
+| **Dump** | query | **Boolean** | Applies the operation to the whole server rather than to the current portal, which requires the space  access permission and works on a standalone installation only. Server-wide backups and schedules are  kept apart from the ones of a portal, so the two values address different data. | [optional] [example: false] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | List of backup history records | [**BackupHistoryRecordArrayWrapper**](../backup.md#model-backuphistoryrecordarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **403** | Access denied | - | - |
+| **200** | The backups whose archive is still stored | [**BackupHistoryRecordArrayWrapper**](../backup.md#model-backuphistoryrecordarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **402** | The portal subscription has expired or has not been paid | - | - |
+| **403** | No permissions to perform this action | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../backup.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../backup.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../backup.md#model-errorapiresponse) | - |

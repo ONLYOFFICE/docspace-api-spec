@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../api.md).
 
 Save the AI Agent quota settings
 
-Saves the AI Agent quota settings specified in the request to the current portal.
+Sets the portal&#39;s default storage quota for AI agents, applied as the starting limit for newly created agents.  Requires Owner or DocSpaceAdmin (the EditPortalSettings permission), and on a paid SaaS tenant the portal&#39;s  plan must include the statistics feature, or the call is rejected as not covered by the plan. The requested  size cannot exceed the portal&#39;s own total storage quota, nor, on a Standalone install with a portal-wide quota  enabled, that quota&#39;s size. Disable enforcement by passing &#x60;enableQuota&#x3D;false&#x60;; the size is then ignored for  new agents. This is a mutating, idempotent call: sending the same body again leaves the quota unchanged. It  returns the saved settings, not any agent&#39;s current usage.
 
 ## Parameters
 
@@ -20,8 +20,8 @@ Saves the AI Agent quota settings specified in the request to the current portal
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Tenant AI Agent quota settings | [**TenantAiAgentQuotaSettingsWrapper**](../api.md#model-tenantaiagentquotasettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **402** | Your pricing plan does not support this option | - | - |
+| **200** | Saved default AI agent storage quota settings | [**TenantAiAgentQuotaSettingsWrapper**](../api.md#model-tenantaiagentquotasettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **402** | The portal&#39;s pricing plan does not include the statistics feature required for AI agent quotas | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |

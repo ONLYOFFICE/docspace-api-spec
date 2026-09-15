@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../files.md).
 
 Bulk download
 
-Starts the download process of files and folders with the IDs specified in the request.
+Queues a background job that packs the requested files and folders into a single archive, and answers with the  caller&#39;s download operations, including the one just started. The archive is not ready when the response  arrives: poll &#x60;GET api/2.0/files/fileops&#x60; until the operation reports &#x60;finished&#x60;, then take the address of the  archive from its &#x60;url&#x60;. Items listed in &#x60;fileConvertIds&#x60; are converted to the format named there before they  are packed, while the items of &#x60;fileIds&#x60; are packed as they are. Read access to every listed item is required:  an item the caller may not read fails the whole call with 403, and an id that resolves to nothing is answered  as missing, so filter the selection beforehand. Only one download at a time is allowed per caller, and a  second call made while the first is still running is refused with 403 as well. An empty selection queues  nothing and simply answers with the operations that are already there. An anonymous caller may use the call  for the items covered by the external link they hold.
 
 ## Parameters
 
@@ -20,8 +20,8 @@ Starts the download process of files and folders with the IDs specified in the r
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | List of file operations | [**FileOperationArrayWrapper**](../files.md#model-fileoperationarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **403** | You don&#39;t have enough permission to download | - | - |
+| **200** | The download operations of the caller, the one just queued included | [**FileOperationArrayWrapper**](../files.md#model-fileoperationarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **403** | An item in the selection cannot be read by the caller, or another download of theirs is still running | - | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **400** | Bad Request. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |

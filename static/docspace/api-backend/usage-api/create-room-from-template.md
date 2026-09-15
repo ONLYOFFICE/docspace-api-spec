@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../files.md).
 
 Create a room from the template
 
-Creates a room in the Rooms section based on the template.
+Starts a background job that copies a room template into a new room of the Rooms section, and answers with the  same progress record that &#x60;GET api/2.0/files/rooms/fromtemplate/status&#x60; returns. The caller must be able to  read the template and to create rooms at all, so a user or a guest is refused, and the checks run before the  job is queued. The room does not exist when the response arrives: poll the status operation until  &#x60;isCompleted&#x60; is true, then take &#x60;roomId&#x60; from it, and treat a non-empty &#x60;error&#x60; as a failed job. Only one  such job is kept per account, and a finished one is discarded when the next is started, so a second creation  loses the record of the first. Anything not sent is inherited from the template, and &#x60;copyLogo&#x60; keeps the  template logo and makes &#x60;logo&#x60; pointless. &#x60;quota&#x60; is accepted only while the per-room quota feature is on, and  a template of a public room cannot be instantiated while the portal forbids external sharing. A template that  does not exist or cannot be read is answered as missing.
 
 ## Parameters
 
@@ -20,7 +20,7 @@ Creates a room in the Rooms section based on the template.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Status | [**RoomFromTemplateStatusWrapper**](../files.md#model-roomfromtemplatestatuswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The progress record of the room creation job | [**RoomFromTemplateStatusWrapper**](../files.md#model-roomfromtemplatestatuswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |

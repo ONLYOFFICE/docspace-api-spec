@@ -6,21 +6,22 @@ Referenced types are defined in the [full reference](../people.md).
 
 `GET /api/2.0/people/type/progress/{userid}`
 
-Get the progress of updating user type
+Get the user type change progress
 
-Returns the progress of updating the user type.
+Returns the current state of the user type change queued for the user with the ID specified in the request.  A conversion must have been queued by &#x60;POST api/2.0/people/type&#x60; first: when nothing is queued for that user  the operation answers 200 with an empty body.  The caller needs the permission to add and remove users.  The call is read-only and is the polling operation of this flow - repeat it until &#x60;isCompleted&#x60; is true,  reading &#x60;percentage&#x60; for the 0 to 100 progress and &#x60;error&#x60; for the message left by a failed job.  Use &#x60;PUT api/2.0/people/type/terminate&#x60; to cancel a conversion that is still running.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **userid** | path | **UUID** (uuid) | The user ID. | [required] [example: 00000000-0000-0000-0000-000000000000] |
+| **userid** | path | **UUID** (uuid) | The ID of the user the operation applies to, taken from the route. For a progress operation it has to be the  same ID that was passed when the job was started. | [required] [example: 00000000-0000-0000-0000-000000000000] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Update type progress | [**TaskProgressResponseWrapper**](../people.md#model-taskprogressresponsewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The state of the queued user type change, or an empty body when nothing is queued for the user | [**TaskProgressResponseWrapper**](../people.md#model-taskprogressresponsewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **403** | No permissions to perform this action | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../people.md#model-errorapiresponse) | - |

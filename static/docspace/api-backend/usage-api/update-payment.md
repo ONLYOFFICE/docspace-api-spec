@@ -6,9 +6,9 @@ Referenced types are defined in the [full reference](../api.md).
 
 `PUT /api/2.0/portal/payment/update`
 
-Update the payment quantity
+Change the subscription quantity
 
-Updates the payment quantity with the parameters specified in the request.
+Changes how many units of the plan the portal is paying for - the number of administrators it covers - and  lets the payment provider bill the difference against the payment method already on file. The portal must have  a billing customer and a plan bought through &#x60;PUT api/2.0/portal/payment/url&#x60;, and while the portal is on a  priced plan the product name in &#x60;quantity&#x60; has to be that same plan, which &#x60;GET api/2.0/portal/payment/quota&#x60;  reports, because a subscription is changed here and not swapped. Only the payer - the portal user whose e-mail  is the billing customer&#39;s e-mail - may call it. The call is mutating and charges money, and it is guarded  against a double submission: once the new quantity is in effect, repeating the same request fails with 400  because that quantity is already set. The result is &#x60;true&#x60; when the provider accepted the change and &#x60;false&#x60;  when it declined it without an error. Exactly one product per call is accepted, the operation is limited to  ten requests a minute per user by default and answers 429 above that, and wallet services are not bought here  - use &#x60;PUT api/2.0/portal/payment/updatewallet&#x60; for those.
 
 ## Parameters
 
@@ -20,10 +20,10 @@ Updates the payment quantity with the parameters specified in the request.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Boolean value: true if the operation is successful | [**BooleanWrapper**](../api.md#model-booleanwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **400** | Invalid request parameters | - | - |
-| **403** | No permissions to perform this action | - | - |
-| **404** | Customer could not be found | - | - |
+| **200** | &#x60;true&#x60; when the provider accepted the new quantity, &#x60;false&#x60; when it declined it | [**BooleanWrapper**](../api.md#model-booleanwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **400** | The product is not the plan currently paid, or the quantity is already the one in effect | - | - |
+| **403** | The caller is not the payer of this portal, or the portal has no billing service configured | - | - |
+| **404** | This portal has no billing customer yet | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |

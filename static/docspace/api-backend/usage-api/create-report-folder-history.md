@@ -8,24 +8,24 @@ Referenced types are defined in the [full reference](../files.md).
 
 Start the folder history report generation
 
-Starts generating the activity history report of a folder (XLSX by default, or CSV) and saves it to My documents.
+Queues a background job that renders the history of a folder into a spreadsheet, or into a CSV file when  &#x60;format&#x60; asks for one, and saves the result in the caller&#39;s My documents. The answer is the queued task, not  the report: poll &#x60;GET api/2.0/files/folder/{folderId}/log/report&#x60; until &#x60;isCompleted&#x60; is true, then take the  file from &#x60;resultFileId&#x60;, &#x60;resultFileName&#x60; and &#x60;resultFileUrl&#x60;, of which a CSV report fills only the last two.  &#x60;from&#x60; and &#x60;to&#x60; limit the exported period; leaving both out exports the whole history. While a report for the  same folder and caller is still running, this call joins it and answers with the running task instead of  starting a second one, so retrying is safe. The caller needs read access to the folder and may not be a guest,  and the portal plan has to include the audit feature - otherwise the call is refused, with 403 for the access  rule and 404 for a folder that does not exist. Only a portal administrator gets the address, browser and  platform columns. Give up a running report with &#x60;DELETE api/2.0/files/folder/{folderId}/log/report&#x60;.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **folderId** | path | **Integer** (int32) | The folder ID whose history is exported. | [required] [example: 1] |
-| **format** | query | **AuditReportFormat** | The output file format of the report. Defaults to XLSX. | [optional] [example: Xlsx] [enum: 0, 1] |
-| **from** | query | **Date** (date-time) | The start date of the history period to export. | [optional] [example: 2025-01-01T00:00:00] |
-| **to** | query | **Date** (date-time) | The end date of the history period to export. | [optional] [example: 2025-12-31T23:59:59] |
+| **folderId** | path | **Integer** (int32) | The folder whose history is exported; the report covers the folder itself and the entries inside it. | [required] [example: 1] |
+| **format** | query | **AuditReportFormat** | The shape the report is written in: &#x60;Xlsx&#x60; produces a spreadsheet that is saved as a file of the portal, while  &#x60;Csv&#x60; produces a comma-separated text file that is uploaded to My documents without being reported back with  a file identifier. | [optional] [example: Xlsx] [enum: 0, 1] |
+| **from** | query | **Date** (date-time) | The earliest moment an exported entry may have, read in the time zone of the portal; left out, the report  starts at the oldest entry the portal still keeps. | [optional] [example: 2025-01-01T00:00:00] |
+| **to** | query | **Date** (date-time) | The latest moment an exported entry may have, read in the time zone of the portal; left out, the report ends  at the newest entry. | [optional] [example: 2025-12-31T23:59:59] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Operation execution status | [**DocumentBuilderTaskWrapper**](../files.md#model-documentbuildertaskwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **403** | You don&#39;t have enough permission to perform the operation | - | - |
-| **404** | The required folder was not found | - | - |
+| **200** | The queued report task | [**DocumentBuilderTaskWrapper**](../files.md#model-documentbuildertaskwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **403** | The caller may not export the history of this folder | - | - |
+| **404** | The folder does not exist | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |

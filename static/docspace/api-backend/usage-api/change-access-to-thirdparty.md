@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../files.md).
 
 Change the third-party settings access
 
-Changes the access to the third-party settings.
+Turns the portal-wide permission to connect third-party storages such as Google Drive, Dropbox or Nextcloud on  or off, and returns the value that is now stored. Only the portal owner and a DocSpace administrator may  change it: a room administrator, a member or a guest is refused, and so is an unauthenticated caller. This is  a single setting for the whole portal rather than a preference of the caller, so it changes what every account  sees. While it is off, connecting an account through &#x60;POST api/2.0/files/thirdparty&#x60; is refused and the  contents of an already connected provider folder cannot be listed; the stored connections themselves survive  and work again once it is turned back on. The providers this portal can offer are listed by  &#x60;GET api/2.0/files/thirdparty/capabilities&#x60;. The same value is published as &#x60;enableThirdParty&#x60; by  &#x60;GET api/2.0/files/settings&#x60;. Sending the same value again is safe. The response is the value read back from  the portal, not a success flag.
 
 ## Parameters
 
@@ -20,7 +20,7 @@ Changes the access to the third-party settings.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Boolean value: true if the operation is successful | [**BooleanWrapper**](../files.md#model-booleanwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | true if third-party storages may be connected in this portal | [**BooleanWrapper**](../files.md#model-booleanwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |

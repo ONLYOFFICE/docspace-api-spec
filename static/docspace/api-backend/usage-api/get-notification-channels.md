@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../api.md).
 
 Get notification channels
 
-Returns a list of notification channels.
+Lists the ways this installation can deliver a notification, each as the internal name of the channel together  with &#x60;isEnabled&#x60;: &#x60;email.sender&#x60; for letters and &#x60;telegram.sender&#x60; for Telegram messages. The list describes  the installation and the portal rather than the calling user, so every member gets the same answer, and the  call is read-only. Any signed-in member may ask for it, whatever its role, and no permission is demanded. A  channel appears only when the notification service of the running installation is configured with a sender of  that name, so the list can be shorter than the two names above, and an empty list means that configuration  names no channel this build implements. &#x60;email.sender&#x60; is reported as enabled whenever it is listed, while  &#x60;telegram.sender&#x60; is reported as enabled only while the portal has a Telegram bot name and token stored, which  is what &#x60;POST api/2.0/settings/authservice&#x60; writes. An enabled channel says nothing about the caller: a member  also has to connect their own Telegram account, for which &#x60;GET api/2.0/settings/telegram/link&#x60; hands out the  link and &#x60;GET api/2.0/settings/telegram/check&#x60; reports the outcome. Which kinds of notification a member  receives is a separate setting, read with &#x60;GET api/2.0/settings/notification/{type}&#x60;.
 
 ## Parameters
 This endpoint does not need any parameter.
@@ -17,7 +17,7 @@ This endpoint does not need any parameter.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Notification settings | [**NotificationChannelStatusWrapper**](../api.md#model-notificationchannelstatuswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The notification channels this installation can deliver through, each with the flag that says whether it is enabled | [**NotificationChannelStatusWrapper**](../api.md#model-notificationchannelstatuswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |

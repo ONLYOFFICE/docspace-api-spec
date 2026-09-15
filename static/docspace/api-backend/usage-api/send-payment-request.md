@@ -6,9 +6,9 @@ Referenced types are defined in the [full reference](../api.md).
 
 `POST /api/2.0/portal/payment/request`
 
-Send a payment request
+Contact the sales team
 
-Sends a request for the portal payment.
+Sends the portal&#39;s message to the ONLYOFFICE sales team - the contact-sales form behind a request for a quote,  an invoice or a plan that cannot be bought online. &#x60;email&#x60; has to be a well-formed address and is where the  answer will go, while &#x60;userName&#x60; and &#x60;message&#x60; say who is asking and what for; all three are required and none  may be empty. Only a DocSpace administrator may call it. Nothing on the portal changes: no plan, no quota and  no payment is touched, a message is mailed out and the request is written to the portal audit trail. There is  no response body - status 200 means the message was handed to the mail service - and the call is not  idempotent, so a repeat sends a second message. It is limited to ten requests a minute per user by default and  answers 429 above that.
 
 ## Parameters
 
@@ -20,10 +20,10 @@ Sends a request for the portal payment.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Ok | - | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **400** | Incorrect email or message text is empty | - | - |
-| **403** | No permissions to perform this action | - | - |
-| **429** | Request limit is exceeded | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | `Retry-After` |
+| **200** | The message has been handed to the mail service; the response carries no content | - | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **400** | &#x60;email&#x60; is not a well-formed address, or one of the required fields is empty | - | - |
+| **403** | The caller is not a DocSpace administrator | - | - |
+| **429** | This user has made more than ten requests in a minute | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | `Retry-After` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |

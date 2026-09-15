@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../files.md).
 
 Update a file version if it exists
 
-Updates a file version if a file with such a name already exists.
+Reports that uploading a file under a name that already exists does not update the existing file. The  operation is a stub kept for compatibility: the request body is read but ignored, nothing is stored, and the  answer is always false, so calling it changes no behaviour and repeating it changes nothing. What actually  decides the outcome of a name clash is the parameter of the upload itself - see the &#x60;createNewIfExist&#x60; and  conflict-resolution parameters of the operations under &#x60;api/2.0/files/{folderId}/upload&#x60; and of  &#x60;PUT api/2.0/files/fileops/copy&#x60;. Any authenticated role down to a guest may call it; an unauthenticated  caller is refused. Because the value is a constant, there is nothing to read back afterwards, and  &#x60;GET api/2.0/files/settings&#x60; does not publish it. To add a version to a document that is already stored,  address the file directly through the update operations under &#x60;api/2.0/files/file/{fileId}&#x60; instead of  uploading under the same name and relying on this setting.
 
 ## Parameters
 
@@ -20,7 +20,7 @@ Updates a file version if a file with such a name already exists.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Boolean value: true if the operation is successful | [**BooleanWrapper**](../files.md#model-booleanwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | Always false: an upload does not update an existing file by name | [**BooleanWrapper**](../files.md#model-booleanwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |

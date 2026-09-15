@@ -8,23 +8,23 @@ Referenced types are defined in the [full reference](../files.md).
 
 Get the room access rights
 
-Returns the access rights of a room with the ID specified in the request.
+Returns one page of the access list of a room: the owner first, then the managers, the groups, the ordinary  members, the guests and finally the invitations nobody has accepted yet, with the total in the response  headers. &#x60;filterType&#x60; selects what is listed and defaults to accounts and groups, which leaves the sharing  links of the room out; those are read with &#x60;GET api/2.0/files/rooms/{id}/links&#x60;. &#x60;filterValue&#x60; matches the  displayed name of the subject, and an invitation that is still pending is listed under the email address it  was sent to. Paging is done with &#x60;count&#x60; and &#x60;startIndex&#x60;, and the order is stable between calls. Any member  who can read the room sees the accounts and the groups, so the list is not limited to the managers, and portal  administrators can read the list of a room they were never invited to; somebody who is not in the room at all  is refused. Asking for the link entries instead needs the right to see the links of the room, and a member  without it gets an empty page rather than an error.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The room ID. | [required] [example: 1] |
-| **filterType** | query | **ShareFilterType** | The filter type of the access rights. | [optional] [example: 1] [enum: 0, 1, 2, 4, 8, 15, 16, 32] |
-| **count** | query | **Integer** (int32) | The number of items to be retrieved or processed. | [optional] [example: 25] [min: 1] [max: 100] |
-| **startIndex** | query | **Integer** (int32) | The starting index of the items to retrieve in a paginated request. | [optional] [example: 0] |
-| **filterValue** | query | **String** | The text filter value used for filtering room security information. | [optional] [example: Sample filter] |
+| **id** | path | **Integer** (int32) | The room whose access list is read, named by the identifier that &#x60;GET api/2.0/files/rooms&#x60; reports for it. | [required] [example: 1] |
+| **filterType** | query | **ShareFilterType** | What kind of access entries to list. The default covers accounts and groups and leaves the sharing links of  the room out; those are read with &#x60;GET api/2.0/files/rooms/{id}/links&#x60;. | [optional] [example: 0] [enum: 0, 1, 2, 4, 8, 15, 16, 32] |
+| **count** | query | **Integer** (int32) | How many entries to return in one answer. The total number of matching entries comes back in the response  headers, so it is what tells the caller whether another page is needed. | [optional] [example: 25] [min: 1] [max: 100] |
+| **startIndex** | query | **Integer** (int32) | How many matching entries to skip before the page starts. Together with the page size it walks the list, which  is ordered by role and then by name and is therefore stable between calls. | [optional] [example: 0] |
+| **filterValue** | query | **String** | Keeps only the entries whose displayed name contains this text. An invitation that has not been accepted yet  is listed under the email address it was sent to, so that is what has to be searched for. | [optional] [example: Smith] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Security information of room files | [**FileShareArrayWrapper**](../files.md#model-filesharearraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | One page of the room access entries, ordered by role and then by name | [**FileShareArrayWrapper**](../files.md#model-filesharearraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |

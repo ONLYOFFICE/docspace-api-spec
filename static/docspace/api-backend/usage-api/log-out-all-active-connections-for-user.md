@@ -6,22 +6,22 @@ Referenced types are defined in the [full reference](../api.md).
 
 `PUT /api/2.0/security/activeconnections/logoutall/{userId}`
 
-Log out for the user by ID
+Log out a user everywhere
 
-Logs out from all the active connections for the user with the ID specified in the request.
+Closes every active connection of one portal user: the connections are marked inactive, every token and cookie  issued to that user before the call stops working, the clients holding them are disconnected and a logout  entry is written to the portal audit trail. Nothing has to be called first; &#x60;userId&#x60; is the portal user ID  that &#x60;GET api/2.0/people&#x60; returns. A user may pass their own ID, while ending somebody else&#39;s connections  requires a DocSpace administrator and any other caller is refused with 403. The call is mutating, destructive  for those sessions and idempotent - a user with nothing open is not an error - and it returns no content, so  the state afterwards is read from &#x60;GET api/2.0/security/activeconnections&#x60;. A caller who ends their own  connections is handed a fresh cookie in the response and stays signed in through a new connection. Nothing  else about the user changes: the account stays enabled and the password stays valid, and to keep the current  connection alive instead use &#x60;PUT api/2.0/security/activeconnections/logoutallexceptthis&#x60;.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **userId** | path | **UUID** (uuid) | The user ID extracted from the route parameters. | [required] [example: 00000000-0000-0000-0000-000000000000] |
+| **userId** | path | **UUID** (uuid) | The portal account the operation acts on, by user ID as &#x60;GET api/2.0/people&#x60; reports it. Acting on an account  other than the caller&#39;s own generally needs administrator rights. | [required] [example: 00000000-0000-0000-0000-000000000000] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Ok | - | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **403** | Access denied | - | - |
+| **200** | The connections of that user have been closed; the response carries no content | - | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **403** | The caller is not a DocSpace administrator and the ID in the path is not their own | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |

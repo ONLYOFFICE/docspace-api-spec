@@ -6,9 +6,9 @@ Referenced types are defined in the [full reference](../api.md).
 
 `GET /api/2.0/security/audit/events/report`
 
-Get the audit trail report generation status
+Get audit trail report status
 
-Returns the status of generating the audit trail report.
+Returns the state of the audit trail report the calling user has started, and is the operation to poll after  &#x60;POST api/2.0/security/audit/events/report&#x60;. The caller needs the portal-settings right of a DocSpace  administrator plus the audit option of the portal&#39;s pricing plan, otherwise the call is answered with 402.  Jobs are kept per user and per report kind: this operation never shows another administrator&#39;s report, nor the  login history report, which has its own status at &#x60;GET api/2.0/security/audit/login/report&#x60;. The answer is  empty when no report of this kind is known for the caller; otherwise &#x60;percentage&#x60; grows towards 100,  &#x60;isCompleted&#x60; turns true when the build has ended, &#x60;error&#x60; carries the failure message when it ended badly,  and &#x60;resultFileName&#x60; and &#x60;resultFileUrl&#x60; point at the file saved to the caller&#39;s My documents section, while  &#x60;resultFileId&#x60; is filled for an XLSX report only. The operation is read-only and safe to poll every few  seconds; a finished job is dropped as soon as the next report of this kind is started.
 
 ## Parameters
 This endpoint does not need any parameter.
@@ -17,9 +17,9 @@ This endpoint does not need any parameter.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Operation execution status | [**DocumentBuilderTaskWrapper**](../api.md#model-documentbuildertaskwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **402** | Your pricing plan does not support this option | - | - |
-| **403** | No permissions to perform this action | - | - |
+| **200** | The state of the caller&#39;s audit trail report, or an empty answer when none is known | [**DocumentBuilderTaskWrapper**](../api.md#model-documentbuildertaskwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **402** | The portal&#39;s pricing plan has no audit option, or the login history and audit trail section is not enabled | - | - |
+| **403** | The caller does not have the portal-settings right of a DocSpace administrator | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |

@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../files.md).
 
 Hide confirmation dialog when canceling operations
 
-Hides the confirmation dialog when canceling operations.
+Stores whether the caller is asked to confirm cancelling a running file operation, and returns the value that  is now stored. The setting belongs to the calling account alone: every authenticated role down to a guest may  change its own copy, and an unauthenticated caller is refused. Unlike the conversion prompt of  &#x60;PUT api/2.0/files/hideconfirmconvert&#x60;, this one works in both directions - &#x60;set&#x3D;true&#x60; hides the confirmation,  &#x60;set&#x3D;false&#x60; brings it back. It is a hint for the interface only: cancelling an operation through the API is  unaffected, and the operations themselves keep being reported by &#x60;GET api/2.0/files/fileops&#x60;. The value is  published as &#x60;hideConfirmCancelOperation&#x60; by &#x60;GET api/2.0/files/settings&#x60;, which is the only way to read it  back. Writing a value that is already stored is accepted and leaves the setting untouched. A new account  starts with the confirmation shown. The prompt it hides is the one raised when a running copy, move or  download is about to be abandoned, not the one raised before a deletion - that one is  &#x60;PUT api/2.0/files/changedeleteconfrim&#x60;.
 
 ## Parameters
 
@@ -20,7 +20,7 @@ Hides the confirmation dialog when canceling operations.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Boolean value: true if the parameter is enabled | [**BooleanWrapper**](../files.md#model-booleanwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | true if the cancel confirmation is now hidden for the caller | [**BooleanWrapper**](../files.md#model-booleanwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |

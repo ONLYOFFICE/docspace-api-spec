@@ -6,24 +6,24 @@ Referenced types are defined in the [full reference](../files.md).
 
 `POST /api/2.0/files/folder/{id}/link`
 
-Create primary external link
+Create the folder primary external link
 
-Creates a primary external link by the identifier specified in the request.
+Answers with the primary external link of a folder or a room, creating it on the first call and returning the  one that already exists afterwards, so the operation is idempotent in effect: a second call with other  parameters does not reconfigure the existing link, and changing one is the business of  &#x60;PUT api/2.0/files/folder/{id}/links&#x60;. The parameters therefore only shape the link at the moment it is born -  &#x60;access&#x60; its rights, &#x60;title&#x60; its name, &#x60;expirationDate&#x60; its lifetime, which is unlimited here unless one is  given, &#x60;internal&#x60; whether only signed-in members may follow it, &#x60;denyDownload&#x60; whether the contents may only  be viewed, and &#x60;password&#x60; a secret to be asked for. Sending &#x60;access&#x60; with the value that grants nothing  creates no link and answers with nothing. The caller needs the right to manage the links of the room the  folder belongs to, which its manager and a portal administrator acting as room manager have, and a member with  content-creator or read access is refused with 403; an unknown folder is answered with 404. Read the address  from &#x60;sharedTo.shareLink&#x60;.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The folder ID. | [required] [example: 1] |
-| **FolderLinkRequest** | body | [**FolderLinkRequest**](../files.md#model-folderlinkrequest) | The folder link parameters. | [required] |
+| **id** | path | **Integer** (int32) | The folder or room the link belongs to. | [required] [example: 1] |
+| **FolderLinkRequest** | body | [**FolderLinkRequest**](../files.md#model-folderlinkrequest) | The link and the way it is to be shaped. | [required] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Folders security information | [**FileShareWrapper**](../files.md#model-filesharewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **403** | You don&#39;t have enough permission to perform the operation | - | - |
-| **404** | Not Found | - | - |
+| **200** | The primary external link of the folder | [**FileShareWrapper**](../files.md#model-filesharewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **403** | The caller may not manage the links of this folder | - | - |
+| **404** | The folder does not exist | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |

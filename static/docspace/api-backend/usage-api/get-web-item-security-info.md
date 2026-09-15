@@ -6,21 +6,21 @@ Referenced types are defined in the [full reference](../api.md).
 
 `GET /api/2.0/settings/security/{id}`
 
-Get the module availability
+Check module availability
 
-Returns the availability of the module with the ID specified in the request.
+Answers whether the module with the given identifier is available to the calling user right now, as a single  boolean. &#x60;id&#x60; is the module GUID and travels in the path; a value that is not a GUID does not match the route  at all. Any signed-in member may call this; anonymous callers are not admitted. The operation is read-only and  its answer is specific to the caller: &#x60;true&#x60; means a module with that identifier is registered in this portal,  is visible, and the caller is allowed to read it, while &#x60;false&#x60; covers every other case - the module is not  registered here, it is hidden for this portal, or the caller is outside the users and groups allowed to open  it. A &#x60;false&#x60; therefore does not tell those apart, and an unknown identifier is reported as unavailable  instead of failing. Read the allow-list behind the decision with &#x60;GET api/2.0/settings/security&#x60;, list the  modules the caller can actually open with &#x60;GET api/2.0/settings/security/modules&#x60;, and change access with  &#x60;PUT api/2.0/settings/security&#x60;.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **UUID** (uuid) | The ID extracted from the route parameters. | [required] [example: 1] |
+| **id** | path | **UUID** (uuid) | The identifier of the object the operation acts on, as the listing operation of that kind of object reports  it. It has to match the shape the route declares - a GUID where the route is typed as one - since a value of  another shape does not match the route at all and is answered as not found. | [required] [example: 1] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Boolean value: true - module is enabled, false - module is disabled | [**BooleanWrapper**](../api.md#model-booleanwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | Whether the module is registered, visible and readable by the calling user - false covers a module that is not registered here as well as one the caller may not open | [**BooleanWrapper**](../api.md#model-booleanwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |

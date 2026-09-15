@@ -6,9 +6,9 @@ Referenced types are defined in the [full reference](../files.md).
 
 `POST /api/2.0/files/roomtemplate`
 
-Start creating room template
+Create a room template
 
-Starts creating the room template.
+Queues a background job that turns an existing room into a reusable room template, and returns the state of  that job right away. The template lands in the portal&#39;s Templates section, inherits the source room&#39;s type,  privacy, indexing, storage limit, lifetime, download and watermark settings, and receives copies of the room&#39;s  files together with its ordinary subfolders and everything inside them; the service subfolders a room keeps  for its own workflows are left out. The caller needs room-manager rights on the source room, and the room must  not be archived: a room that cannot be found under Rooms is answered as missing, and every other refusal comes  back as a rejection. The template is not ready when the response arrives, so poll  &#x60;GET api/2.0/files/roomtemplate/status&#x60; until &#x60;isCompleted&#x60; is true, then read &#x60;templateId&#x60;; a non-empty  &#x60;error&#x60; there means the job failed and the half-built template was removed. Only one template creation is  tracked per caller, and starting another replaces the previous record. Setting &#x60;public&#x60; to true discards  &#x60;share&#x60; and &#x60;groups&#x60; and shares the finished template with everyone instead, while &#x60;copyLogo&#x60; reuses the  source room&#39;s own picture and makes &#x60;logo&#x60; irrelevant.
 
 ## Parameters
 

@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../api.md).
 
 Get all apps
 
-Returns the full list of portal applications declared in configuration, merged with per-tenant overrides  (enabled state and JSON settings).
+Returns every portal application available on this installation, each with the state it has for the current  portal: the feature modules the portal can turn on and configure, such as &#x60;ai-rooms&#x60; or &#x60;docs-cloud&#x60;. The set  of applications and their initial enabled state come from the installation configuration and cannot be changed  through the API; only the enabled flag and the settings document are stored per portal, by  &#x60;PUT api/2.0/apps/{id}/enabled&#x60; and &#x60;PUT api/2.0/apps/{id}/settings&#x60;. Any authenticated portal member may read  the list. The call is read-only and idempotent. The list follows the order of the configuration, and every item  carries the application identifier, whether the application is enabled for the current portal, and the settings  JSON document saved for it, which is empty while the portal has never saved one. An empty list means that no  applications are configured on this installation, not that they are all disabled. There is neither paging nor  filtering here: to read a single application use &#x60;GET api/2.0/apps/{id}&#x60;.
 
 ## Parameters
 This endpoint does not need any parameter.
@@ -17,7 +17,7 @@ This endpoint does not need any parameter.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | List of applications | [**AppArrayWrapper**](../api.md#model-apparraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The portal applications configured on this installation, each with the enabled state and the settings of the current portal | [**AppArrayWrapper**](../api.md#model-apparraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |

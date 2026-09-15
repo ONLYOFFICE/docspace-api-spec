@@ -6,9 +6,9 @@ Referenced types are defined in the [full reference](../files.md).
 
 `PUT /api/2.0/files/fileops/markasread`
 
-Mark as read
+Mark files and folders as read
 
-Marks the files and folders with the IDs specified in the request as read.
+Queues a background job that clears the new-item badge from the requested files and folders for the calling  account, and answers with the caller&#39;s mark-as-read operations, including the one just started. Poll  &#x60;GET api/2.0/files/fileops&#x60; until the operation reports &#x60;finished&#x60;. Marking a folder clears the badges of  everything inside it as well. Items the caller cannot read are passed over in silence rather than refused, so  the call succeeds even when the whole selection is inaccessible, and an empty selection queues nothing and  answers with the operations that are already there. Repeating the call on items that are already read changes  nothing, and nothing is opened, moved or modified by it — only the caller&#39;s own badges are affected, while  other members keep theirs. To see what is currently marked as new use &#x60;GET api/2.0/files/{folderId}/news&#x60; for  one folder and &#x60;GET api/2.0/files/rooms/news&#x60; for the rooms of the caller.
 
 ## Parameters
 
@@ -20,7 +20,7 @@ Marks the files and folders with the IDs specified in the request as read.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | List of file operations | [**FileOperationArrayWrapper**](../files.md#model-fileoperationarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The mark-as-read operations of the caller, the one just queued included | [**FileOperationArrayWrapper**](../files.md#model-fileoperationarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |

@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../api.md).
 
 Get the portal used space
 
-Returns the used space of the current portal.
+Returns how much space the content of this portal occupies, in gigabytes rounded to two decimals, so a client  can show the storage bar next to the allowance. The caller needs the portal-settings right and is refused  without it; the call is read-only and idempotent. The number is added up from the storage counters the portal  keeps per owner, which means content that belongs to no account - system data - is not part of it, and it is a  plain number, not an object. The counters are maintained as files are written and removed, so the value is  current but may lag a large operation that is still running. The allowance to compare it with is  &#x60;maxTotalSize&#x60; from &#x60;GET api/2.0/portal/quota&#x60;, in bytes rather than gigabytes, and the smallest quota that  would still fit the portal is suggested by &#x60;GET api/2.0/portal/quota/right&#x60;. This operation says nothing about  which room or user the space belongs to - the per-user figures come from the People API.
 
 ## Parameters
 This endpoint does not need any parameter.
@@ -17,7 +17,7 @@ This endpoint does not need any parameter.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Used portal space | [**DoubleWrapper**](../api.md#model-doublewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The space the portal content occupies, in gigabytes rounded to two decimals | [**DoubleWrapper**](../api.md#model-doublewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |

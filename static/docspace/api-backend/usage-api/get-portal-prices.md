@@ -6,9 +6,9 @@ Referenced types are defined in the [full reference](../api.md).
 
 `GET /api/2.0/portal/payment/prices`
 
-Get prices
+Get the product prices
 
-Returns the available portal prices.
+Lists what one unit of every purchasable product costs, keyed by the product name that &#x60;quantity&#x60; takes in the  purchase operations, so a client can price a plan or a wallet service without reading the whole quota list.  Nothing has to be called first, and the caller needs the permission to edit the portal settings, which portal  administrators and the owner have. The call is read-only. Prices are given in the one currency resolved for  this request from the portal region, which &#x60;GET api/2.0/portal/payment/currencies&#x60; reports; a product with no  price in that currency comes back as &#x60;0&#x60; rather than being left out, so a zero means unpriced and not free.  The list covers the products on offer, not the portal&#39;s own plan - the plan in force, with its limits and its  usage, is &#x60;GET api/2.0/portal/payment/quota&#x60;.
 
 ## Parameters
 This endpoint does not need any parameter.
@@ -17,8 +17,8 @@ This endpoint does not need any parameter.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | List of available portal prices | [**getPortalPrices_200_response**](../api.md#model-getportalprices-200-response) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **403** | No permissions to perform this action | - | - |
+| **200** | Product name to the price of one unit in the currency of the request, &#x60;0&#x60; where the product has no price in it | [**getPortalPrices_200_response**](../api.md#model-getportalprices-200-response) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **403** | The caller may not edit the portal settings | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |

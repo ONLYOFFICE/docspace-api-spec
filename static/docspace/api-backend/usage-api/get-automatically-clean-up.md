@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../files.md).
 
 Get the trash bin auto-clearing setting
 
-Returns the trash bin auto-clearing setting.
+Returns the trash auto-clearing setting of the calling account: whether it is on, and after which interval an  item that sits in the trash is removed for good. The setting belongs to that account alone, so every  authenticated role down to a guest reads its own value and an unauthenticated caller is refused. The first  call for an account is not read-only: when nothing has been stored yet the portal writes the default -  clearing on, thirty days - and returns it, so the answer never comes back empty and a following call reports  the same pair. The interval is the age of an entry in the trash, not a schedule; each trashed entry also  reports the moment it is due to disappear in its own &#x60;autoDelete&#x60; field. Use  &#x60;PUT api/2.0/files/settings/autocleanup&#x60; to change the pair, or read it together with the rest of the  configuration from &#x60;GET api/2.0/files/settings&#x60;.
 
 ## Parameters
 This endpoint does not need any parameter.
@@ -17,7 +17,7 @@ This endpoint does not need any parameter.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The auto-clearing setting properties: auto-clearing or not, a time interval when the auto-clearing will be performed | [**AutoCleanUpDataWrapper**](../files.md#model-autocleanupdatawrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The trash auto-clearing setting of the caller: the on/off flag and the interval | [**AutoCleanUpDataWrapper**](../files.md#model-autocleanupdatawrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
