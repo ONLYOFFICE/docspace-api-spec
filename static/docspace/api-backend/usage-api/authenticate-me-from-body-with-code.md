@@ -37,7 +37,7 @@ Finishes a two-factor sign-in: checks the one-time code and, when it matches, is
 
 ## Authorization
 
-No authorization required
+[cookieAuth](../api.md#cookieauth), [bearerAuth](../api.md#bearerauth)
 
 ## HTTP request headers
 

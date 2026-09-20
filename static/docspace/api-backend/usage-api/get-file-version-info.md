@@ -2,7 +2,7 @@
 
 Referenced types are defined in the [full reference](../files.md).
 
-> FileIntegerArrayWrapper getFileVersionInfo(fileId)
+> FileArrayWrapper getFileVersionInfo(fileId)
 
 `GET /api/2.0/files/file/{fileId}/history`
 
@@ -20,7 +20,7 @@ Returns every stored version of a file, newest first, each of them shaped like t
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Every stored version of the file, newest first | [**FileIntegerArrayWrapper**](../files.md#model-fileintegerarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | Every stored version of the file, newest first | [**FileArrayWrapper**](../files.md#model-filearraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **400** | Bad Request. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
@@ -29,11 +29,21 @@ Returns every stored version of a file, newest first, each of them shaped like t
 
 ## Return type
 
-[**FileIntegerArrayWrapper**](../files.md#model-fileintegerarraywrapper)
+[**FileArrayWrapper**](../files.md#model-filearraywrapper)
+
+## Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **fileId** | path | **String** | The file the operation addresses. Take the identifier from a listing such as &#x60;GET api/2.0/files/{folderId}&#x60;: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: 10] |
+
+Return type: [**ThirdPartyFileArrayWrapper**](../files.md#model-thirdpartyfilearraywrapper)
 
 ## Authorization
 
-No authorization required
+[cookieAuth](../files.md#cookieauth), [bearerAuth](../files.md#bearerauth)
 
 ## HTTP request headers
 

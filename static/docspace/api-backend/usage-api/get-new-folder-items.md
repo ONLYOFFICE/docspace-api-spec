@@ -33,6 +33,15 @@ Lists the entries of a folder that are new for the calling member - the files an
 
 [**FileEntryBaseArrayWrapper**](../files.md#model-fileentrybasearraywrapper)
 
+## Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **folderId** | path | **String** | The folder the operation acts on. Take the identifier from a listing such as &#x60;GET api/2.0/files/@root&#x60; or  &#x60;GET api/2.0/files/{folderId}&#x60;: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string. | [required] [example: 1] |
+
+
 ## Authorization
 
 [Basic](../files.md#basic), [OAuth2](../files.md#oauth2) (scopes: read, write), [ApiKeyBearer](../files.md#apikeybearer), [asc_auth_key](../files.md#asc_auth_key), [Bearer](../files.md#bearer), [OpenId](../files.md#openid)

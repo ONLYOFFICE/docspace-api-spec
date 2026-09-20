@@ -1,8 +1,8 @@
 # aiAgentsList
 
-Referenced types are defined in the [full reference](../newai.md).
+Referenced types are defined in the [full reference](../aichat.md).
 
-> AiFolderContentIntegerWrapper aiAgentsList(subjectId, subjectOwnerId, excludeSubject, tags, withoutTags, quotaFilter, filterValue, sortBy, sortOrder, startIndex, count)
+> AiFolderContentWrapper aiAgentsList(subjectId, subjectOwnerId, excludeSubject, tags, withoutTags, quotaFilter, filterValue, sortBy, sortOrder, startIndex, count)
 
 `GET /api/2.0/ai/agents`
 
@@ -30,18 +30,18 @@ Lists the portal&#39;s AI agent rooms. The query is forwarded unchanged to the D
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The agent rooms, in the DocSpace AI service&#39;s folder-content envelope. | [**AiFolderContentIntegerWrapper**](../newai.md#model-aifoldercontentintegerwrapper) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
-| **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
-| **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
+| **200** | The agent rooms, in the DocSpace AI service&#39;s folder-content envelope. | [**AiFolderContentWrapper**](../aichat.md#model-aifoldercontentwrapper) | - |
+| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](../aichat.md#model-aierrorresponse) | - |
+| **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](../aichat.md#model-aierrorresponse) | - |
+| **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](../aichat.md#model-aierrorresponse) | - |
 
 ## Return type
 
-[**AiFolderContentIntegerWrapper**](../newai.md#model-aifoldercontentintegerwrapper)
+[**AiFolderContentWrapper**](../aichat.md#model-aifoldercontentwrapper)
 
 ## Authorization
 
-No authorization required
+[cookieAuth](../aichat.md#cookieauth), [bearerAuth](../aichat.md#bearerauth)
 
 ## HTTP request headers
 

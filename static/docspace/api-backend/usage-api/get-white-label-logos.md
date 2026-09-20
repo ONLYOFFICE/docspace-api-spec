@@ -34,7 +34,7 @@ Lists the branding logo slots of the current portal together with the image URLs
 
 ## Authorization
 
-No authorization required
+[cookieAuth](../api.md#cookieauth), [bearerAuth](../api.md#bearerauth)
 
 ## HTTP request headers
 

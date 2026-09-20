@@ -34,9 +34,18 @@ Brings an earlier version of a file back and answers with the editing revisions 
 
 [**EditHistoryArrayWrapper**](../files.md#model-edithistoryarraywrapper)
 
+## Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **fileId** | path | **String** | The file whose version is restored. | [required] [example: 1] |
+
+
 ## Authorization
 
-No authorization required
+[cookieAuth](../files.md#cookieauth), [bearerAuth](../files.md#bearerauth)
 
 ## HTTP request headers
 

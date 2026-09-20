@@ -36,7 +36,7 @@ Sends a new SMS authentication code to the phone number stored for the user and 
 
 ## Authorization
 
-No authorization required
+[cookieAuth](../api.md#cookieauth), [bearerAuth](../api.md#bearerauth)
 
 ## HTTP request headers
 

@@ -2,7 +2,7 @@
 
 Referenced types are defined in the [full reference](../files.md).
 
-> FolderContentIntegerWrapper getMyFolder(userIdOrGroupId, filterType, applyFilterOption, count, startIndex, sortBy, sortOrder, filterValue)
+> FolderContentWrapper getMyFolder(userIdOrGroupId, filterType, applyFilterOption, count, startIndex, sortBy, sortOrder, filterValue)
 
 `GET /api/2.0/files/@my`
 
@@ -27,7 +27,7 @@ Returns the contents of the caller&#39;s My documents section, the personal stor
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The My documents section with one page of its contents | [**FolderContentIntegerWrapper**](../files.md#model-foldercontentintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The My documents section with one page of its contents | [**FolderContentWrapper**](../files.md#model-foldercontentwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | The caller is not allowed to read the My documents section | - | - |
 | **404** | This account has no personal section | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
@@ -39,7 +39,7 @@ Returns the contents of the caller&#39;s My documents section, the personal stor
 
 ## Return type
 
-[**FolderContentIntegerWrapper**](../files.md#model-foldercontentintegerwrapper)
+[**FolderContentWrapper**](../files.md#model-foldercontentwrapper)
 
 ## Authorization
 

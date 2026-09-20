@@ -2,7 +2,7 @@
 
 Referenced types are defined in the [full reference](../files.md).
 
-> ChunkedUploadSessionResponseWrapperIntegerWrapper createEditSession(fileId, fileSize)
+> ChunkedUploadSessionResponseWrapperWrapper createEditSession(fileId, fileSize)
 
 `POST /api/2.0/files/file/{fileId}/edit_session`
 
@@ -21,7 +21,7 @@ Opens a chunked session that replaces the content of an existing file, which is 
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The created editing session, wrapped in the success envelope | [**ChunkedUploadSessionResponseWrapperIntegerWrapper**](../files.md#model-chunkeduploadsessionresponsewrapperintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The created editing session, wrapped in the success envelope | [**ChunkedUploadSessionResponseWrapperWrapper**](../files.md#model-chunkeduploadsessionresponsewrapperwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | The caller cannot edit this file | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
@@ -32,7 +32,17 @@ Opens a chunked session that replaces the content of an existing file, which is 
 
 ## Return type
 
-[**ChunkedUploadSessionResponseWrapperIntegerWrapper**](../files.md#model-chunkeduploadsessionresponsewrapperintegerwrapper)
+[**ChunkedUploadSessionResponseWrapperWrapper**](../files.md#model-chunkeduploadsessionresponsewrapperwrapper)
+
+## Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **fileId** | path | **String** | The file whose content the session will replace; take the id from a folder listing or from the file itself. | [required] [example: 1] |
+
+Return type: [**ThirdPartyChunkedUploadSessionResponseWrapperWrapper**](../files.md#model-thirdpartychunkeduploadsessionresponsewrapperwrapper)
 
 ## Authorization
 

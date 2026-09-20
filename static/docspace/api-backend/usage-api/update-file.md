@@ -2,7 +2,7 @@
 
 Referenced types are defined in the [full reference](../files.md).
 
-> FileIntegerWrapper updateFile(fileId, UpdateFile)
+> FileWrapper updateFile(fileId, UpdateFile)
 
 `PUT /api/2.0/files/file/{fileId}`
 
@@ -21,7 +21,7 @@ Renames a file, restores one of its versions, or both at once, and answers with 
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The file after the rename, the restore, or both | [**FileIntegerWrapper**](../files.md#model-fileintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The file after the rename, the restore, or both | [**FileWrapper**](../files.md#model-filewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | The caller may not rename the file or change its version | - | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
@@ -31,11 +31,21 @@ Renames a file, restores one of its versions, or both at once, and answers with 
 
 ## Return type
 
-[**FileIntegerWrapper**](../files.md#model-fileintegerwrapper)
+[**FileWrapper**](../files.md#model-filewrapper)
+
+## Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **fileId** | path | **String** | The file to update. | [required] [example: 1] |
+
+Return type: [**ThirdPartyFileWrapper**](../files.md#model-thirdpartyfilewrapper)
 
 ## Authorization
 
-No authorization required
+[cookieAuth](../files.md#cookieauth), [bearerAuth](../files.md#bearerauth)
 
 ## HTTP request headers
 

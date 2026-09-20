@@ -1,6 +1,6 @@
 # aiAttachmentsLinkToMessage
 
-Referenced types are defined in the [full reference](../newai.md).
+Referenced types are defined in the [full reference](../aichat.md).
 
 > AiSuccessResponse aiAttachmentsLinkToMessage(aiAttachmentsLinkToMessage\_request)
 
@@ -14,27 +14,27 @@ Binds draft attachments to the chat message that owns them, after that message h
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **aiAttachmentsLinkToMessage\_request** | body | [**aiAttachmentsLinkToMessage_request**](../newai.md#model-aiattachmentslinktomessage-request-body) |  | [required] |
+| **aiAttachmentsLinkToMessage\_request** | body | [**aiAttachmentsLinkToMessage_request**](../aichat.md#model-aiattachmentslinktomessage-request-body) |  | [required] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Confirms the attachments are now bound to the message. | [**AiSuccessResponse**](../newai.md#model-aisuccessresponse) | - |
-| **400** | The attachment or message reference is malformed. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
-| **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
-| **404** | The message or the attachment does not exist. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
-| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
-| **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
+| **200** | Confirms the attachments are now bound to the message. | [**AiSuccessResponse**](../aichat.md#model-aisuccessresponse) | - |
+| **400** | The attachment or message reference is malformed. | [**AiErrorResponse**](../aichat.md#model-aierrorresponse) | - |
+| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](../aichat.md#model-aierrorresponse) | - |
+| **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](../aichat.md#model-aierrorresponse) | - |
+| **404** | The message or the attachment does not exist. | [**AiErrorResponse**](../aichat.md#model-aierrorresponse) | - |
+| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](../aichat.md#model-aierrorresponse) | - |
+| **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](../aichat.md#model-aierrorresponse) | - |
 
 ## Return type
 
-[**AiSuccessResponse**](../newai.md#model-aisuccessresponse)
+[**AiSuccessResponse**](../aichat.md#model-aisuccessresponse)
 
 ## Authorization
 
-No authorization required
+[cookieAuth](../aichat.md#cookieauth), [bearerAuth](../aichat.md#bearerauth)
 
 ## HTTP request headers
 

@@ -2,7 +2,7 @@
 
 Referenced types are defined in the [full reference](../files.md).
 
-> FolderIntegerWrapper getFolderInfo(folderId)
+> FolderWrapper getFolderInfo(folderId)
 
 `GET /api/2.0/files/folder/{folderId}`
 
@@ -20,7 +20,7 @@ Returns one folder as an object - its title, its parent, the moments it was crea
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The folder | [**FolderIntegerWrapper**](../files.md#model-folderintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The folder | [**FolderWrapper**](../files.md#model-folderwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **400** | Bad Request. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
@@ -29,11 +29,21 @@ Returns one folder as an object - its title, its parent, the moments it was crea
 
 ## Return type
 
-[**FolderIntegerWrapper**](../files.md#model-folderintegerwrapper)
+[**FolderWrapper**](../files.md#model-folderwrapper)
+
+## Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **folderId** | path | **String** | The folder the operation acts on. Take the identifier from a listing such as &#x60;GET api/2.0/files/@root&#x60; or  &#x60;GET api/2.0/files/{folderId}&#x60;: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string. | [required] [example: 1] |
+
+Return type: [**ThirdPartyFolderWrapper**](../files.md#model-thirdpartyfolderwrapper)
 
 ## Authorization
 
-No authorization required
+[cookieAuth](../files.md#cookieauth), [bearerAuth](../files.md#bearerauth)
 
 ## HTTP request headers
 

@@ -33,6 +33,15 @@ Reports how far the conversion of a file has got, as a list that holds one entry
 
 [**ConversationResultArrayWrapper**](../files.md#model-conversationresultarraywrapper)
 
+## Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **fileId** | path | **String** | The file whose conversion is asked about. | [required] [example: 1] |
+
+
 ## Authorization
 
 [Basic](../files.md#basic), [OAuth2](../files.md#oauth2) (scopes: read, write), [ApiKeyBearer](../files.md#apikeybearer), [asc_auth_key](../files.md#asc_auth_key), [Bearer](../files.md#bearer), [OpenId](../files.md#openid)

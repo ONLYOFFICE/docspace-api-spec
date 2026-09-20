@@ -231,7 +231,7 @@ All URIs are relative to *https://yourportal.onlyoffice.com*, where the host is 
 
 ### addFileToRecent
 
-> FileIntegerWrapper addFileToRecent(fileId)
+> FileWrapper addFileToRecent(fileId)
 
 `POST /api/2.0/files/file/{fileId}/recent`
 
@@ -249,7 +249,7 @@ Stamps the file as just used by the calling account and puts it at the top of th
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The file as it stands after the entry was recorded | [**FileIntegerWrapper**](#model-fileintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The file as it stands after the entry was recorded | [**FileWrapper**](#model-filewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | The calling account cannot read this file | - | - |
 | **404** | No file answers to this identifier | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
@@ -261,7 +261,17 @@ Stamps the file as just used by the calling account and puts it at the top of th
 
 #### Return type
 
-[**FileIntegerWrapper**](#model-fileintegerwrapper)
+[**FileWrapper**](#model-filewrapper)
+
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **fileId** | path | **String** | The file the operation addresses. Take the identifier from a listing such as &#x60;GET api/2.0/files/{folderId}&#x60;: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: 10] |
+
+Return type: [**ThirdPartyFileWrapper**](#model-thirdpartyfilewrapper)
 
 #### Authorization
 
@@ -315,7 +325,7 @@ Adds the listed files to the personal template list of the calling account, the 
 
 ### changeVersionHistory
 
-> FileIntegerArrayWrapper changeVersionHistory(fileId, ChangeHistory)
+> FileArrayWrapper changeVersionHistory(fileId, ChangeHistory)
 
 `PUT /api/2.0/files/file/{fileId}/history`
 
@@ -334,7 +344,7 @@ Closes or reopens a revision group in the version history of a file and answers 
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The versions of the file after the change | [**FileIntegerArrayWrapper**](#model-fileintegerarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The versions of the file after the change | [**FileArrayWrapper**](#model-filearraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | The caller may not change the version history of the file | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
@@ -345,7 +355,17 @@ Closes or reopens a revision group in the version history of a file and answers 
 
 #### Return type
 
-[**FileIntegerArrayWrapper**](#model-fileintegerarraywrapper)
+[**FileArrayWrapper**](#model-filearraywrapper)
+
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **fileId** | path | **String** | The file whose version history is changed. | [required] [example: 1] |
+
+Return type: [**ThirdPartyFileArrayWrapper**](#model-thirdpartyfilearraywrapper)
 
 #### Authorization
 
@@ -389,9 +409,18 @@ Resolves the editor address the caller must open to fill out the given PDF form,
 
 [**StringWrapper**](#model-stringwrapper)
 
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **fileId** | path | **String** | The identifier of the PDF form to open, as it is returned by a room listing such as  &#x60;GET api/2.0/files/{folderId}&#x60;. The identifier of an already created draft is accepted here as well. | [required] [example: 1] |
+
+
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -433,6 +462,15 @@ Copies one file into another folder under a new title, converting its content wh
 
 [**FileEntryBaseWrapper**](#model-fileentrybasewrapper)
 
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **fileId** | path | **String** | The file to copy. | [required] [example: 1] |
+
+
 #### Authorization
 
 [Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
@@ -444,7 +482,7 @@ Copies one file into another folder under a new title, converting its content wh
 
 ### createEditSession
 
-> ChunkedUploadSessionResponseWrapperIntegerWrapper createEditSession(fileId, fileSize)
+> ChunkedUploadSessionResponseWrapperWrapper createEditSession(fileId, fileSize)
 
 `POST /api/2.0/files/file/{fileId}/edit_session`
 
@@ -463,7 +501,7 @@ Opens a chunked session that replaces the content of an existing file, which is 
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The created editing session, wrapped in the success envelope | [**ChunkedUploadSessionResponseWrapperIntegerWrapper**](#model-chunkeduploadsessionresponsewrapperintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The created editing session, wrapped in the success envelope | [**ChunkedUploadSessionResponseWrapperWrapper**](#model-chunkeduploadsessionresponsewrapperwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | The caller cannot edit this file | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
@@ -474,7 +512,17 @@ Opens a chunked session that replaces the content of an existing file, which is 
 
 #### Return type
 
-[**ChunkedUploadSessionResponseWrapperIntegerWrapper**](#model-chunkeduploadsessionresponsewrapperintegerwrapper)
+[**ChunkedUploadSessionResponseWrapperWrapper**](#model-chunkeduploadsessionresponsewrapperwrapper)
+
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **fileId** | path | **String** | The file whose content the session will replace; take the id from a folder listing or from the file itself. | [required] [example: 1] |
+
+Return type: [**ThirdPartyChunkedUploadSessionResponseWrapperWrapper**](#model-thirdpartychunkeduploadsessionresponsewrapperwrapper)
 
 #### Authorization
 
@@ -487,7 +535,7 @@ Opens a chunked session that replaces the content of an existing file, which is 
 
 ### createFile
 
-> FileIntegerWrapper createFile(folderId, CreateFileJsonElement)
+> FileWrapper createFile(folderId, CreateFileJsonElement)
 
 `POST /api/2.0/files/{folderId}/file`
 
@@ -506,7 +554,7 @@ Creates a file in the folder named in the route and answers with the stored file
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The created file | [**FileIntegerWrapper**](#model-fileintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The created file | [**FileWrapper**](#model-filewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
@@ -516,7 +564,17 @@ Creates a file in the folder named in the route and answers with the stored file
 
 #### Return type
 
-[**FileIntegerWrapper**](#model-fileintegerwrapper)
+[**FileWrapper**](#model-filewrapper)
+
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **folderId** | path | **String** | The folder the file is created in. | [required] [example: 1] |
+
+Return type: [**ThirdPartyFileWrapper**](#model-thirdpartyfilewrapper)
 
 #### Authorization
 
@@ -529,7 +587,7 @@ Creates a file in the folder named in the route and answers with the stored file
 
 ### createFileInMyDocuments
 
-> FileIntegerWrapper createFileInMyDocuments(CreateFileJsonElement)
+> FileWrapper createFileInMyDocuments(CreateFileJsonElement)
 
 `POST /api/2.0/files/@my/file`
 
@@ -547,7 +605,7 @@ Creates a file in the caller&#39;s own My documents section and answers with the
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The created file | [**FileIntegerWrapper**](#model-fileintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The created file | [**FileWrapper**](#model-filewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
@@ -557,7 +615,7 @@ Creates a file in the caller&#39;s own My documents section and answers with the
 
 #### Return type
 
-[**FileIntegerWrapper**](#model-fileintegerwrapper)
+[**FileWrapper**](#model-filewrapper)
 
 #### Authorization
 
@@ -603,6 +661,15 @@ Answers with the primary external link of a file, creating it on the first call 
 
 [**FileShareWrapper**](#model-filesharewrapper)
 
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **id** | path | **String** | The file the link points at. | [required] [example: 1] |
+
+
 #### Authorization
 
 [Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
@@ -614,7 +681,7 @@ Answers with the primary external link of a file, creating it on the first call 
 
 ### createHtmlFile
 
-> FileIntegerWrapper createHtmlFile(folderId, CreateTextOrHtmlFile)
+> FileWrapper createHtmlFile(folderId, CreateTextOrHtmlFile)
 
 `POST /api/2.0/files/{folderId}/html`
 
@@ -633,7 +700,7 @@ Creates an HTML file in the folder named in the route out of the markup passed a
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The created or updated HTML file | [**FileIntegerWrapper**](#model-fileintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The created or updated HTML file | [**FileWrapper**](#model-filewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | The caller may not create files in this folder | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
@@ -644,7 +711,17 @@ Creates an HTML file in the folder named in the route out of the markup passed a
 
 #### Return type
 
-[**FileIntegerWrapper**](#model-fileintegerwrapper)
+[**FileWrapper**](#model-filewrapper)
+
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **folderId** | path | **String** | The folder the file is created in. | [required] [example: 1] |
+
+Return type: [**ThirdPartyFileWrapper**](#model-thirdpartyfilewrapper)
 
 #### Authorization
 
@@ -657,7 +734,7 @@ Creates an HTML file in the folder named in the route out of the markup passed a
 
 ### createHtmlFileInMyDocuments
 
-> FileIntegerWrapper createHtmlFileInMyDocuments(CreateTextOrHtmlFile)
+> FileWrapper createHtmlFileInMyDocuments(CreateTextOrHtmlFile)
 
 `POST /api/2.0/files/@my/html`
 
@@ -675,7 +752,7 @@ Creates an HTML file in the caller&#39;s own My documents section out of the mar
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The created or updated HTML file | [**FileIntegerWrapper**](#model-fileintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The created or updated HTML file | [**FileWrapper**](#model-filewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | The caller may not create a file in this section | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
@@ -686,7 +763,7 @@ Creates an HTML file in the caller&#39;s own My documents section out of the mar
 
 #### Return type
 
-[**FileIntegerWrapper**](#model-fileintegerwrapper)
+[**FileWrapper**](#model-filewrapper)
 
 #### Authorization
 
@@ -699,7 +776,7 @@ Creates an HTML file in the caller&#39;s own My documents section out of the mar
 
 ### createTextFile
 
-> FileIntegerWrapper createTextFile(folderId, CreateTextOrHtmlFile)
+> FileWrapper createTextFile(folderId, CreateTextOrHtmlFile)
 
 `POST /api/2.0/files/{folderId}/text`
 
@@ -718,7 +795,7 @@ Creates a text file in the folder named in the route out of the text passed as t
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The created or updated text file | [**FileIntegerWrapper**](#model-fileintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The created or updated text file | [**FileWrapper**](#model-filewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
@@ -728,7 +805,17 @@ Creates a text file in the folder named in the route out of the text passed as t
 
 #### Return type
 
-[**FileIntegerWrapper**](#model-fileintegerwrapper)
+[**FileWrapper**](#model-filewrapper)
+
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **folderId** | path | **String** | The folder the file is created in. | [required] [example: 1] |
+
+Return type: [**ThirdPartyFileWrapper**](#model-thirdpartyfilewrapper)
 
 #### Authorization
 
@@ -741,7 +828,7 @@ Creates a text file in the folder named in the route out of the text passed as t
 
 ### createTextFileInMyDocuments
 
-> FileIntegerWrapper createTextFileInMyDocuments(CreateTextOrHtmlFile)
+> FileWrapper createTextFileInMyDocuments(CreateTextOrHtmlFile)
 
 `POST /api/2.0/files/@my/text`
 
@@ -759,7 +846,7 @@ Creates a text file in the caller&#39;s own My documents section out of the text
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The created or updated text file | [**FileIntegerWrapper**](#model-fileintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The created or updated text file | [**FileWrapper**](#model-filewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
@@ -769,7 +856,7 @@ Creates a text file in the caller&#39;s own My documents section out of the text
 
 #### Return type
 
-[**FileIntegerWrapper**](#model-fileintegerwrapper)
+[**FileWrapper**](#model-filewrapper)
 
 #### Authorization
 
@@ -813,7 +900,7 @@ Asks the portal to build preview thumbnails for the listed files, and answers at
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -853,6 +940,15 @@ Queues the deletion of one file and answers with the caller&#39;s file operation
 #### Return type
 
 [**FileOperationArrayWrapper**](#model-fileoperationarraywrapper)
+
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **fileId** | path | **String** | The file to delete. | [required] [example: 1] |
+
 
 #### Authorization
 
@@ -1022,6 +1118,15 @@ Returns the roles of a PDF form together with the state each of them is in, whic
 
 [**FormRoleArrayWrapper**](#model-formrolearraywrapper)
 
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **fileId** | path | **String** | The file the operation addresses. Take the identifier from a listing such as &#x60;GET api/2.0/files/{folderId}&#x60;: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: 10] |
+
+
 #### Authorization
 
 [Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
@@ -1063,9 +1168,18 @@ Answers with everything an editor needs in order to show what changed in one ver
 
 [**EditHistoryDataWrapper**](#model-edithistorydatawrapper)
 
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **fileId** | path | **String** | The file whose changes are read. | [required] [example: 1] |
+
+
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -1103,9 +1217,18 @@ Returns the editing revisions of a file, oldest first, as the document service u
 
 [**EditHistoryArrayWrapper**](#model-edithistoryarraywrapper)
 
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **fileId** | path | **String** | The file the operation addresses. Take the identifier from a listing such as &#x60;GET api/2.0/files/{folderId}&#x60;: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: 10] |
+
+
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -1145,6 +1268,15 @@ Returns what the caller needs in order to decrypt one file of an end-to-end encr
 #### Return type
 
 [**FileEncryptionInfoWrapper**](#model-fileencryptioninfowrapper)
+
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **fileId** | path | **String** | The file whose encryption keys are read. Only a file in an end-to-end encrypted              private room has any. | [required] |
+
 
 #### Authorization
 
@@ -1204,7 +1336,7 @@ Returns the activity log of a single file - who renamed, moved, shared, converte
 
 ### getFileInfo
 
-> FileIntegerWrapper getFileInfo(fileId, version)
+> FileWrapper getFileInfo(fileId, version)
 
 `GET /api/2.0/files/file/{fileId}`
 
@@ -1223,7 +1355,7 @@ Returns one file as the portal stores it, together with the state it has for the
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The file as it is stored, with the state it has for the caller | [**FileIntegerWrapper**](#model-fileintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The file as it is stored, with the state it has for the caller | [**FileWrapper**](#model-filewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
@@ -1232,11 +1364,21 @@ Returns one file as the portal stores it, together with the state it has for the
 
 #### Return type
 
-[**FileIntegerWrapper**](#model-fileintegerwrapper)
+[**FileWrapper**](#model-filewrapper)
+
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **fileId** | path | **String** | The file to read. | [required] [example: 1] |
+
+Return type: [**ThirdPartyFileWrapper**](#model-thirdpartyfilewrapper)
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -1276,6 +1418,15 @@ Lists the external links of a file, each with its identifier, title, address, ri
 #### Return type
 
 [**FileShareArrayWrapper**](#model-filesharearraywrapper)
+
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **id** | path | **String** | The file the operation addresses. Take the identifier from a listing such as &#x60;GET api/2.0/files/{folderId}&#x60;: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: 10] |
+
 
 #### Authorization
 
@@ -1321,9 +1472,18 @@ Answers with the primary external link of a file - the one the Copy link action 
 
 [**FileShareWrapper**](#model-filesharewrapper)
 
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **id** | path | **String** | The file the operation addresses. Take the identifier from a listing such as &#x60;GET api/2.0/files/{folderId}&#x60;: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: 10] |
+
+
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -1332,7 +1492,7 @@ No authorization required
 
 ### getFileVersionInfo
 
-> FileIntegerArrayWrapper getFileVersionInfo(fileId)
+> FileArrayWrapper getFileVersionInfo(fileId)
 
 `GET /api/2.0/files/file/{fileId}/history`
 
@@ -1350,7 +1510,7 @@ Returns every stored version of a file, newest first, each of them shaped like t
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Every stored version of the file, newest first | [**FileIntegerArrayWrapper**](#model-fileintegerarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | Every stored version of the file, newest first | [**FileArrayWrapper**](#model-filearraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
@@ -1359,11 +1519,21 @@ Returns every stored version of a file, newest first, each of them shaped like t
 
 #### Return type
 
-[**FileIntegerArrayWrapper**](#model-fileintegerarraywrapper)
+[**FileArrayWrapper**](#model-filearraywrapper)
+
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **fileId** | path | **String** | The file the operation addresses. Take the identifier from a listing such as &#x60;GET api/2.0/files/{folderId}&#x60;: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: 10] |
+
+Return type: [**ThirdPartyFileArrayWrapper**](#model-thirdpartyfilearraywrapper)
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -1372,7 +1542,7 @@ No authorization required
 
 ### getFillResult
 
-> FillingFormResultIntegerWrapper getFillResult(fillingSessionId)
+> FillingFormResultWrapper getFillResult(fillingSessionId)
 
 `GET /api/2.0/files/file/fillresult`
 
@@ -1390,7 +1560,7 @@ Answers with the outcome of one completed form-filling session: the filled copy 
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The result of the completed form-filling session | [**FillingFormResultIntegerWrapper**](#model-fillingformresultintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The result of the completed form-filling session | [**FillingFormResultWrapper**](#model-fillingformresultwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
@@ -1399,11 +1569,11 @@ Answers with the outcome of one completed form-filling session: the filled copy 
 
 #### Return type
 
-[**FillingFormResultIntegerWrapper**](#model-fillingformresultintegerwrapper)
+[**FillingFormResultWrapper**](#model-fillingformresultwrapper)
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -1484,6 +1654,15 @@ Returns a direct download address for the current content of the file together w
 
 [**FileLinkWrapper**](#model-filelinkwrapper)
 
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **fileId** | path | **String** | The file the operation addresses. Take the identifier from a listing such as &#x60;GET api/2.0/files/{folderId}&#x60;: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: 10] |
+
+
 #### Authorization
 
 [Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
@@ -1524,6 +1703,15 @@ Builds a download address for the current version of a file and answers with it 
 #### Return type
 
 [**StringWrapper**](#model-stringwrapper)
+
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **fileId** | path | **String** | The file the operation addresses. Take the identifier from a listing such as &#x60;GET api/2.0/files/{folderId}&#x60;: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: 10] |
+
 
 #### Authorization
 
@@ -1566,6 +1754,15 @@ Lists the users the file is shared with, which is what a client offers when the 
 
 [**MentionWrapperArrayWrapper**](#model-mentionwrapperarraywrapper)
 
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **fileId** | path | **String** | The file the operation addresses. Take the identifier from a listing such as &#x60;GET api/2.0/files/{folderId}&#x60;: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: 10] |
+
+
 #### Authorization
 
 [Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
@@ -1577,7 +1774,7 @@ Lists the users the file is shared with, which is what a client offers when the 
 
 ### getReferenceData
 
-> FileReferenceWrapper getReferenceData(GetReferenceDataDtoInteger)
+> FileReferenceWrapper getReferenceData(GetReferenceDataDto)
 
 `POST /api/2.0/files/file/referencedata`
 
@@ -1589,7 +1786,7 @@ Resolves a reference that a formula in one spreadsheet makes to another document
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **GetReferenceDataDtoInteger** | body | [**GetReferenceDataDtoInteger**](#model-getreferencedatadtointeger) |  | [optional] |
+| **GetReferenceDataDto** | body | [**GetReferenceDataDto**](#model-getreferencedatadto) |  | [optional] |
 
 #### Responses
 
@@ -1689,6 +1886,15 @@ Tells whether a file is a PDF form that can be filled out in the portal, and ans
 
 [**BooleanWrapper**](#model-booleanwrapper)
 
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **fileId** | path | **String** | The file the operation addresses. Take the identifier from a listing such as &#x60;GET api/2.0/files/{folderId}&#x60;: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: 10] |
+
+
 #### Authorization
 
 [Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
@@ -1700,7 +1906,7 @@ Tells whether a file is a PDF form that can be filled out in the portal, and ans
 
 ### lockFile
 
-> FileIntegerWrapper lockFile(fileId, LockFileParameters)
+> FileWrapper lockFile(fileId, LockFileParameters)
 
 `PUT /api/2.0/files/file/{fileId}/lock`
 
@@ -1719,7 +1925,7 @@ Locks a file so that nobody else can change it, or releases that lock, and answe
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The file with its lock state as it now stands | [**FileIntegerWrapper**](#model-fileintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The file with its lock state as it now stands | [**FileWrapper**](#model-filewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
@@ -1729,7 +1935,17 @@ Locks a file so that nobody else can change it, or releases that lock, and answe
 
 #### Return type
 
-[**FileIntegerWrapper**](#model-fileintegerwrapper)
+[**FileWrapper**](#model-filewrapper)
+
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **fileId** | path | **String** | The file to lock or unlock. | [required] [example: 1] |
+
+Return type: [**ThirdPartyFileWrapper**](#model-thirdpartyfilewrapper)
 
 #### Authorization
 
@@ -1742,7 +1958,7 @@ Locks a file so that nobody else can change it, or releases that lock, and answe
 
 ### manageFormFilling
 
-> manageFormFilling(fileId, ManageFormFillingDtoInteger)
+> manageFormFilling(fileId, ManageFormFillingDto)
 
 `PUT /api/2.0/files/file/{fileId}/manageformfilling`
 
@@ -1755,7 +1971,7 @@ Drives the filling of a PDF form through its states, the action deciding which w
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
 | **fileId** | path | **String** | The form the action applies to. Send the same value as the &#x60;formId&#x60; of the request body, which is the one the handler reads. | [required] |
-| **ManageFormFillingDtoInteger** | body | [**ManageFormFillingDtoInteger**](#model-manageformfillingdtointeger) |  | [optional] |
+| **ManageFormFillingDto** | body | [**ManageFormFillingDto**](#model-manageformfillingdto) |  | [optional] |
 
 #### Responses
 
@@ -1785,7 +2001,7 @@ null (empty response body)
 
 ### openEditFile
 
-> ConfigurationIntegerWrapper openEditFile(fileId, version, view, editorType, edit, fill)
+> ConfigurationWrapper openEditFile(fileId, version, view, editorType, edit, fill)
 
 `GET /api/2.0/files/file/{fileId}/openedit`
 
@@ -1808,7 +2024,7 @@ Builds everything an editor client needs to open the file: the document descript
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The editor configuration for the requested file and mode | [**ConfigurationIntegerWrapper**](#model-configurationintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The editor configuration for the requested file and mode | [**ConfigurationWrapper**](#model-configurationwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | The caller cannot read the file, or asked for a past version without access to the file history | - | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
@@ -1818,11 +2034,21 @@ Builds everything an editor client needs to open the file: the document descript
 
 #### Return type
 
-[**ConfigurationIntegerWrapper**](#model-configurationintegerwrapper)
+[**ConfigurationWrapper**](#model-configurationwrapper)
+
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **fileId** | path | **String** | The file the editor configuration is built for. Take the id from a folder listing such as  &#x60;GET api/2.0/files/{folderId}&#x60;. | [required] [example: 1] |
+
+Return type: [**ThirdPartyConfigurationWrapper**](#model-thirdpartyconfigurationwrapper)
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -1863,9 +2089,18 @@ Brings an earlier version of a file back and answers with the editing revisions 
 
 [**EditHistoryArrayWrapper**](#model-edithistoryarraywrapper)
 
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **fileId** | path | **String** | The file whose version is restored. | [required] [example: 1] |
+
+
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -1874,7 +2109,7 @@ No authorization required
 
 ### saveEditingFileFromForm
 
-> FileIntegerWrapper saveEditingFileFromForm(fileId, DownloadUri, FileExtension, File, Forcesave)
+> FileWrapper saveEditingFileFromForm(fileId, DownloadUri, FileExtension, File, Forcesave)
 
 `PUT /api/2.0/files/file/{fileId}/saveediting`
 
@@ -1896,7 +2131,7 @@ Replaces the content of an existing file with an edited copy and answers with th
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The file is saved and the stored version is returned | [**FileIntegerWrapper**](#model-fileintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The file is saved and the stored version is returned | [**FileWrapper**](#model-filewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **400** | The file id cannot be resolved to a storage that could accept the content | - | - |
 | **403** | The caller cannot edit the file, or it is locked, in Trash, or open in somebody else&#39;s editing session | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
@@ -1907,7 +2142,17 @@ Replaces the content of an existing file with an edited copy and answers with th
 
 #### Return type
 
-[**FileIntegerWrapper**](#model-fileintegerwrapper)
+[**FileWrapper**](#model-filewrapper)
+
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **fileId** | path | **String** | The file whose content is replaced. The submitted content is written onto this file, so it has to be the file  the editing session was opened on rather than a copy of it. | [required] [example: 1] |
+
+Return type: [**ThirdPartyFileWrapper**](#model-thirdpartyfilewrapper)
 
 #### Authorization
 
@@ -1920,7 +2165,7 @@ Replaces the content of an existing file with an edited copy and answers with th
 
 ### saveFileAsPdf
 
-> FileIntegerWrapper saveFileAsPdf(id, SaveAsPdfInteger)
+> FileWrapper saveFileAsPdf(id, SaveAsPdf)
 
 `POST /api/2.0/files/file/{id}/saveaspdf`
 
@@ -1933,13 +2178,13 @@ Converts a file into a PDF, stores that PDF as a new file in the folder named in
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
 | **id** | path | **Integer** (int32) | The file to convert; it is left untouched. | [required] [example: 1] |
-| **SaveAsPdfInteger** | body | [**SaveAsPdfInteger**](#model-saveaspdfinteger) | The destination folder and the name of the PDF. | [required] |
+| **SaveAsPdf** | body | [**SaveAsPdf**](#model-saveaspdf) | The destination folder and the name of the PDF. | [required] |
 
 #### Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The PDF file that was created | [**FileIntegerWrapper**](#model-fileintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The PDF file that was created | [**FileWrapper**](#model-filewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **404** | The source file or the destination folder does not exist | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
@@ -1950,7 +2195,18 @@ Converts a file into a PDF, stores that PDF as a new file in the folder named in
 
 #### Return type
 
-[**FileIntegerWrapper**](#model-fileintegerwrapper)
+[**FileWrapper**](#model-filewrapper)
+
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **id** | path | **String** | The file to convert; it is left untouched. | [required] [example: 1] |
+| **ThirdPartySaveAsPdf** | body | [**ThirdPartySaveAsPdf**](#model-thirdpartysaveaspdf) | The destination folder and the name of the PDF. | [required] |
+
+Return type: [**ThirdPartyFileWrapper**](#model-thirdpartyfilewrapper)
 
 #### Authorization
 
@@ -1963,7 +2219,7 @@ Converts a file into a PDF, stores that PDF as a new file in the folder named in
 
 ### saveFormRoleMapping
 
-> saveFormRoleMapping(fileId, SaveFormRoleMappingDtoInteger)
+> saveFormRoleMapping(fileId, SaveFormRoleMappingDto)
 
 `POST /api/2.0/files/file/{fileId}/formrolemapping`
 
@@ -1976,7 +2232,7 @@ Assigns the roles of a PDF form to the people who are to fill them in, and start
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
 | **fileId** | path | **String** | The form the role mapping belongs to. Send the same value as the &#x60;formId&#x60; of the request body, which is the one the handler reads. | [required] |
-| **SaveFormRoleMappingDtoInteger** | body | [**SaveFormRoleMappingDtoInteger**](#model-saveformrolemappingdtointeger) |  | [optional] |
+| **SaveFormRoleMappingDto** | body | [**SaveFormRoleMappingDto**](#model-saveformrolemappingdto) |  | [optional] |
 
 #### Responses
 
@@ -2006,7 +2262,7 @@ null (empty response body)
 
 ### setCustomFilterTag
 
-> FileIntegerWrapper setCustomFilterTag(fileId, CustomFilterParameters)
+> FileWrapper setCustomFilterTag(fileId, CustomFilterParameters)
 
 `PUT /api/2.0/files/file/{fileId}/customfilter`
 
@@ -2025,7 +2281,7 @@ Turns the Custom Filter editing mode of a spreadsheet on or off and answers with
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The spreadsheet with its Custom Filter state as it now stands | [**FileIntegerWrapper**](#model-fileintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The spreadsheet with its Custom Filter state as it now stands | [**FileWrapper**](#model-filewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
@@ -2035,7 +2291,17 @@ Turns the Custom Filter editing mode of a spreadsheet on or off and answers with
 
 #### Return type
 
-[**FileIntegerWrapper**](#model-fileintegerwrapper)
+[**FileWrapper**](#model-filewrapper)
+
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **fileId** | path | **String** | The spreadsheet whose Custom Filter mode is switched. | [required] [example: 1] |
+
+Return type: [**ThirdPartyFileWrapper**](#model-thirdpartyfilewrapper)
 
 #### Authorization
 
@@ -2081,6 +2347,15 @@ Issues the file keys that let the named people open one file of an end-to-end en
 
 null (empty response body)
 
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **fileId** | path | **String** | The file the keys are issued for; it has to lie in a private room. | [required] [example: 12345] |
+
+
 #### Authorization
 
 [Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
@@ -2123,6 +2398,15 @@ Creates an external link to a file, or changes or revokes an existing one, and a
 
 [**FileShareWrapper**](#model-filesharewrapper)
 
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **id** | path | **String** | The file the link points at. | [required] [example: 1] |
+
+
 #### Authorization
 
 [Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
@@ -2134,7 +2418,7 @@ Creates an external link to a file, or changes or revokes an existing one, and a
 
 ### setFileOrder
 
-> FileIntegerWrapper setFileOrder(fileId, OrderRequestDto)
+> FileWrapper setFileOrder(fileId, OrderRequestDto)
 
 `PUT /api/2.0/files/{fileId}/order`
 
@@ -2153,7 +2437,7 @@ Puts a file at a given position inside its folder and answers with the file, its
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The file with the position it now holds | [**FileIntegerWrapper**](#model-fileintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The file with the position it now holds | [**FileWrapper**](#model-filewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | The caller may not reorder this file | - | - |
 | **404** | The file does not exist | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
@@ -2165,7 +2449,17 @@ Puts a file at a given position inside its folder and answers with the file, its
 
 #### Return type
 
-[**FileIntegerWrapper**](#model-fileintegerwrapper)
+[**FileWrapper**](#model-filewrapper)
+
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **fileId** | path | **String** | The file to move. | [required] [example: 1] |
+
+Return type: [**ThirdPartyFileWrapper**](#model-thirdpartyfilewrapper)
 
 #### Authorization
 
@@ -2178,7 +2472,7 @@ Puts a file at a given position inside its folder and answers with the file, its
 
 ### setFilesOrder
 
-> FileEntryIntegerArrayWrapper setFilesOrder(OrdersRequestDtoInteger)
+> FileEntryArrayWrapper setFilesOrder(OrdersRequestDto)
 
 `PUT /api/2.0/files/order`
 
@@ -2190,13 +2484,13 @@ Puts several files and folders at given positions in one go and answers with the
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **OrdersRequestDtoInteger** | body | [**OrdersRequestDtoInteger**](#model-ordersrequestdtointeger) |  | [optional] |
+| **OrdersRequestDto** | body | [**OrdersRequestDto**](#model-ordersrequestdto) |  | [optional] |
 
 #### Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The files and folders that were moved, with the positions they now hold | [**FileEntryIntegerArrayWrapper**](#model-fileentryintegerarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The files and folders that were moved, with the positions they now hold | [**FileEntryArrayWrapper**](#model-fileentryarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
@@ -2206,7 +2500,7 @@ Puts several files and folders at given positions in one go and answers with the
 
 #### Return type
 
-[**FileEntryIntegerArrayWrapper**](#model-fileentryintegerarraywrapper)
+[**FileEntryArrayWrapper**](#model-fileentryarraywrapper)
 
 #### Authorization
 
@@ -2250,9 +2544,18 @@ Opens an editing session on the file and answers with the document key that iden
 
 [**StringWrapper**](#model-stringwrapper)
 
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **fileId** | path | **String** | The file to open the editing session on. The caller needs edit access to it. | [required] [example: 1] |
+
+
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -2261,7 +2564,7 @@ No authorization required
 
 ### startFillingFile
 
-> FileIntegerWrapper startFillingFile(fileId)
+> FileWrapper startFillingFile(fileId)
 
 `PUT /api/2.0/files/file/{fileId}/startfilling`
 
@@ -2279,7 +2582,7 @@ Marks a PDF form in a form-filling room as open for filling out and answers with
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The form file, with the filling properties now stored on it | [**FileIntegerWrapper**](#model-fileintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The form file, with the filling properties now stored on it | [**FileWrapper**](#model-filewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | The caller holds only form-filling access on the room, or no access to it at all | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
@@ -2290,7 +2593,17 @@ Marks a PDF form in a form-filling room as open for filling out and answers with
 
 #### Return type
 
-[**FileIntegerWrapper**](#model-fileintegerwrapper)
+[**FileWrapper**](#model-filewrapper)
+
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **fileId** | path | **String** | The PDF form to open for filling. It has to be the form as it lies in the form-filling room itself, not a copy  kept elsewhere and not a submitted result. | [required] [example: 1] |
+
+Return type: [**ThirdPartyFileWrapper**](#model-thirdpartyfilewrapper)
 
 #### Authorization
 
@@ -2334,6 +2647,15 @@ Sets or clears the favorite mark of one file for the calling account: &#x60;true
 #### Return type
 
 [**BooleanWrapper**](#model-booleanwrapper)
+
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **fileId** | path | **String** | The file the operation addresses. Take the identifier from a listing such as &#x60;GET api/2.0/files/{folderId}&#x60;: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: 10] |
+
 
 #### Authorization
 
@@ -2379,9 +2701,18 @@ Keeps an editing session on the file alive, or ends it; an editor client calls i
 
 [**ItemKeyValuePairBooleanStringWrapper**](#model-itemkeyvaluepairbooleanstringwrapper)
 
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **fileId** | path | **String** | The file whose editing session is being tracked. | [required] [example: 1] |
+
+
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -2390,7 +2721,7 @@ No authorization required
 
 ### updateFile
 
-> FileIntegerWrapper updateFile(fileId, UpdateFile)
+> FileWrapper updateFile(fileId, UpdateFile)
 
 `PUT /api/2.0/files/file/{fileId}`
 
@@ -2409,7 +2740,7 @@ Renames a file, restores one of its versions, or both at once, and answers with 
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The file after the rename, the restore, or both | [**FileIntegerWrapper**](#model-fileintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The file after the rename, the restore, or both | [**FileWrapper**](#model-filewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | The caller may not rename the file or change its version | - | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
@@ -2419,11 +2750,21 @@ Renames a file, restores one of its versions, or both at once, and answers with 
 
 #### Return type
 
-[**FileIntegerWrapper**](#model-fileintegerwrapper)
+[**FileWrapper**](#model-filewrapper)
+
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **fileId** | path | **String** | The file to update. | [required] [example: 1] |
+
+Return type: [**ThirdPartyFileWrapper**](#model-thirdpartyfilewrapper)
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -2465,6 +2806,15 @@ Reports which of the submitted titles already belong to a file in the folder, so
 
 [**STRINGArrayWrapper**](#model-stringarraywrapper)
 
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **folderId** | path | **String** | The folder whose contents the names are tested against; take the id from a listing such as  &#x60;GET api/2.0/files/@root&#x60;. | [required] [example: 1] |
+
+
 #### Authorization
 
 [Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
@@ -2476,7 +2826,7 @@ Reports which of the submitted titles already belong to a file in the folder, so
 
 ### createFolder
 
-> FolderIntegerWrapper createFolder(folderId, CreateFolder)
+> FolderWrapper createFolder(folderId, CreateFolder)
 
 `POST /api/2.0/files/folder/{folderId}`
 
@@ -2495,7 +2845,7 @@ Creates a folder inside the folder named in the path and answers with the folder
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The folder that was created | [**FolderIntegerWrapper**](#model-folderintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The folder that was created | [**FolderWrapper**](#model-folderwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
@@ -2505,7 +2855,17 @@ Creates a folder inside the folder named in the path and answers with the folder
 
 #### Return type
 
-[**FolderIntegerWrapper**](#model-folderintegerwrapper)
+[**FolderWrapper**](#model-folderwrapper)
+
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **folderId** | path | **String** | The folder the request is addressed to: when a folder is created it is the parent that receives the new  folder, and when a folder is renamed it is the folder that gets the new title. | [required] [example: 1] |
+
+Return type: [**ThirdPartyFolderWrapper**](#model-thirdpartyfolderwrapper)
 
 #### Authorization
 
@@ -2550,6 +2910,15 @@ Answers with the primary external link of a folder or a room, creating it on the
 #### Return type
 
 [**FileShareWrapper**](#model-filesharewrapper)
+
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **id** | path | **String** | The folder or room the link belongs to. | [required] [example: 1] |
+
 
 #### Authorization
 
@@ -2639,6 +3008,15 @@ Queues the deletion of one folder together with everything inside it, and answer
 
 [**FileOperationArrayWrapper**](#model-fileoperationarraywrapper)
 
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **folderId** | path | **String** | The folder to delete, together with everything it holds. | [required] [example: 10] |
+
+
 #### Authorization
 
 [Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
@@ -2693,7 +3071,7 @@ Rebuilds the spreadsheet that gathers the answers submitted to a form, starting 
 
 ### getFavoritesFolder
 
-> FolderContentIntegerWrapper getFavoritesFolder(userIdOrGroupId, filterType, count, startIndex, sortBy, sortOrder, filterValue)
+> FolderContentWrapper getFavoritesFolder(userIdOrGroupId, filterType, count, startIndex, sortBy, sortOrder, filterValue)
 
 `GET /api/2.0/files/@favorites`
 
@@ -2717,7 +3095,7 @@ Returns the caller&#39;s own Favorites section: the files and folders this accou
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The Favorites section with one page of the entries the caller marked as favorite | [**FolderContentIntegerWrapper**](#model-foldercontentintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The Favorites section with one page of the entries the caller marked as favorite | [**FolderContentWrapper**](#model-foldercontentwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | The caller is not allowed to read the Favorites section | - | - |
 | **404** | The Favorites section could not be resolved for this account | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
@@ -2729,7 +3107,7 @@ Returns the caller&#39;s own Favorites section: the files and folders this accou
 
 #### Return type
 
-[**FolderContentIntegerWrapper**](#model-foldercontentintegerwrapper)
+[**FolderContentWrapper**](#model-foldercontentwrapper)
 
 #### Authorization
 
@@ -2810,7 +3188,7 @@ Lists the fields the completed forms of a form-filling room carry, each of them 
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -2819,7 +3197,7 @@ No authorization required
 
 ### getFolderByFolderId
 
-> FolderContentIntegerWrapper getFolderByFolderId(folderId, userIdOrGroupId, sharedBy, filterType, roomId, folderType, excludeSubject, applyFilterOption, withSubFolders, extension, searchArea, formsItemKey, formsItemType, count, startIndex, sortBy, sortOrder, filterValue, Location)
+> FolderContentWrapper getFolderByFolderId(folderId, userIdOrGroupId, sharedBy, filterType, roomId, folderType, excludeSubject, applyFilterOption, withSubFolders, extension, searchArea, formsItemKey, formsItemType, count, startIndex, sortBy, sortOrder, filterValue, Location)
 
 `GET /api/2.0/files/{folderId}`
 
@@ -2855,7 +3233,7 @@ Returns one page of the contents of a folder - its subfolders in &#x60;folders&#
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | One page of the folder contents, with the folder itself and the chain of its parents | [**FolderContentIntegerWrapper**](#model-foldercontentintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | One page of the folder contents, with the folder itself and the chain of its parents | [**FolderContentWrapper**](#model-foldercontentwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | The caller may not read this folder | - | - |
 | **404** | The folder does not exist | - | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
@@ -2866,11 +3244,22 @@ Returns one page of the contents of a folder - its subfolders in &#x60;folders&#
 
 #### Return type
 
-[**FolderContentIntegerWrapper**](#model-foldercontentintegerwrapper)
+[**FolderContentWrapper**](#model-foldercontentwrapper)
+
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **folderId** | path | **String** | The folder whose contents are listed. Each section root has an operation of its own, such as  &#x60;GET api/2.0/files/@my&#x60;, and every other folder is opened by the identifier a listing gave for it. | [required] [example: 1] |
+| **roomId** | query | **String** | Keeps only the entries that lie in this room, which matters when the listing being read gathers entries from  more than one of them. | [optional] [example: 1] |
+
+Return type: [**ThirdPartyFolderContentWrapper**](#model-thirdpartyfoldercontentwrapper)
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -2926,7 +3315,7 @@ Lists what has happened to a folder and to the entries inside it - creations, re
 
 ### getFolderInfo
 
-> FolderIntegerWrapper getFolderInfo(folderId)
+> FolderWrapper getFolderInfo(folderId)
 
 `GET /api/2.0/files/folder/{folderId}`
 
@@ -2944,7 +3333,7 @@ Returns one folder as an object - its title, its parent, the moments it was crea
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The folder | [**FolderIntegerWrapper**](#model-folderintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The folder | [**FolderWrapper**](#model-folderwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
@@ -2953,11 +3342,21 @@ Returns one folder as an object - its title, its parent, the moments it was crea
 
 #### Return type
 
-[**FolderIntegerWrapper**](#model-folderintegerwrapper)
+[**FolderWrapper**](#model-folderwrapper)
+
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **folderId** | path | **String** | The folder the operation acts on. Take the identifier from a listing such as &#x60;GET api/2.0/files/@root&#x60; or  &#x60;GET api/2.0/files/{folderId}&#x60;: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string. | [required] [example: 1] |
+
+Return type: [**ThirdPartyFolderWrapper**](#model-thirdpartyfolderwrapper)
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -2995,6 +3394,15 @@ Lists the external links of a folder or a room, each with its identifier, title,
 #### Return type
 
 [**FileShareArrayWrapper**](#model-filesharearraywrapper)
+
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **id** | path | **String** | The folder or room whose external links are listed. | [required] [example: 1] |
+
 
 #### Authorization
 
@@ -3037,6 +3445,15 @@ Returns the chain of folders that leads to the folder named in the path, ordered
 #### Return type
 
 [**FileEntryBaseArrayWrapper**](#model-fileentrybasearraywrapper)
+
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **folderId** | path | **String** | The folder the operation acts on. Take the identifier from a listing such as &#x60;GET api/2.0/files/@root&#x60; or  &#x60;GET api/2.0/files/{folderId}&#x60;: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string. | [required] [example: 1] |
+
 
 #### Authorization
 
@@ -3082,9 +3499,18 @@ Answers with the primary external link of a folder or a room - the one the Copy 
 
 [**FileShareWrapper**](#model-filesharewrapper)
 
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **id** | path | **String** | The folder or room the operation addresses. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string. | [required] [example: 10] |
+
+
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -3124,6 +3550,15 @@ Lists the folders that sit directly inside the folder named in the path, ordered
 
 [**FileEntryBaseArrayWrapper**](#model-fileentrybasearraywrapper)
 
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **folderId** | path | **String** | The folder the operation acts on. Take the identifier from a listing such as &#x60;GET api/2.0/files/@root&#x60; or  &#x60;GET api/2.0/files/{folderId}&#x60;: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string. | [required] [example: 1] |
+
+
 #### Authorization
 
 [Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
@@ -3135,7 +3570,7 @@ Lists the folders that sit directly inside the folder named in the path, ordered
 
 ### getFormsFolder
 
-> FolderContentIntegerWrapper getFormsFolder(userIdOrGroupId, filterType, count, startIndex, sortBy, sortOrder, filterValue)
+> FolderContentWrapper getFormsFolder(userIdOrGroupId, filterType, count, startIndex, sortBy, sortOrder, filterValue)
 
 `GET /api/2.0/files/@forms`
 
@@ -3159,7 +3594,7 @@ Returns the Forms section: the flat list of form-filling rooms the caller may re
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The Forms section with one page of the form-filling rooms available to the caller | [**FolderContentIntegerWrapper**](#model-foldercontentintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The Forms section with one page of the form-filling rooms available to the caller | [**FolderContentWrapper**](#model-foldercontentwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | The caller is not allowed to read the Forms section | - | - |
 | **404** | The Forms section could not be resolved for this account | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
@@ -3171,7 +3606,7 @@ Returns the Forms section: the flat list of form-filling rooms the caller may re
 
 #### Return type
 
-[**FolderContentIntegerWrapper**](#model-foldercontentintegerwrapper)
+[**FolderContentWrapper**](#model-foldercontentwrapper)
 
 #### Authorization
 
@@ -3184,7 +3619,7 @@ Returns the Forms section: the flat list of form-filling rooms the caller may re
 
 ### getMyFolder
 
-> FolderContentIntegerWrapper getMyFolder(userIdOrGroupId, filterType, applyFilterOption, count, startIndex, sortBy, sortOrder, filterValue)
+> FolderContentWrapper getMyFolder(userIdOrGroupId, filterType, applyFilterOption, count, startIndex, sortBy, sortOrder, filterValue)
 
 `GET /api/2.0/files/@my`
 
@@ -3209,7 +3644,7 @@ Returns the contents of the caller&#39;s My documents section, the personal stor
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The My documents section with one page of its contents | [**FolderContentIntegerWrapper**](#model-foldercontentintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The My documents section with one page of its contents | [**FolderContentWrapper**](#model-foldercontentwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | The caller is not allowed to read the My documents section | - | - |
 | **404** | This account has no personal section | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
@@ -3221,7 +3656,7 @@ Returns the contents of the caller&#39;s My documents section, the personal stor
 
 #### Return type
 
-[**FolderContentIntegerWrapper**](#model-foldercontentintegerwrapper)
+[**FolderContentWrapper**](#model-foldercontentwrapper)
 
 #### Authorization
 
@@ -3265,6 +3700,15 @@ Lists the entries of a folder that are new for the calling member - the files an
 
 [**FileEntryBaseArrayWrapper**](#model-fileentrybasearraywrapper)
 
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **folderId** | path | **String** | The folder the operation acts on. Take the identifier from a listing such as &#x60;GET api/2.0/files/@root&#x60; or  &#x60;GET api/2.0/files/{folderId}&#x60;: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string. | [required] [example: 1] |
+
+
 #### Authorization
 
 [Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
@@ -3276,7 +3720,7 @@ Lists the entries of a folder that are new for the calling member - the files an
 
 ### getRecentFolder
 
-> FolderContentIntegerWrapper getRecentFolder(userIdOrGroupId, filterType, excludeSubject, applyFilterOption, searchArea, extension, count, startIndex, sortBy, sortOrder, filterValue)
+> FolderContentWrapper getRecentFolder(userIdOrGroupId, filterType, excludeSubject, applyFilterOption, searchArea, extension, count, startIndex, sortBy, sortOrder, filterValue)
 
 `GET /api/2.0/files/recent`
 
@@ -3304,7 +3748,7 @@ Returns the Recent section: the files the calling account has opened lately. The
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The Recent section with one page of the files the caller opened lately | [**FolderContentIntegerWrapper**](#model-foldercontentintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The Recent section with one page of the files the caller opened lately | [**FolderContentWrapper**](#model-foldercontentwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | The caller is not allowed to read the Recent section | - | - |
 | **404** | The Recent section could not be resolved for this account | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
@@ -3316,7 +3760,7 @@ Returns the Recent section: the files the calling account has opened lately. The
 
 #### Return type
 
-[**FolderContentIntegerWrapper**](#model-foldercontentintegerwrapper)
+[**FolderContentWrapper**](#model-foldercontentwrapper)
 
 #### Authorization
 
@@ -3372,7 +3816,7 @@ Reports how far the history report of a folder has got, and is the operation to 
 
 ### getRootFolders
 
-> FolderContentIntegerArrayWrapper getRootFolders(userIdOrGroupId, filterType, withoutTrash, count, startIndex, sortBy, sortOrder, filterValue)
+> FolderContentArrayWrapper getRootFolders(userIdOrGroupId, filterType, withoutTrash, count, startIndex, sortBy, sortOrder, filterValue)
 
 `GET /api/2.0/files/@root`
 
@@ -3397,7 +3841,7 @@ Returns every top-level section the calling account can see in one response, eac
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The sections available to the caller, each with one page of its content | [**FolderContentIntegerArrayWrapper**](#model-foldercontentintegerarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The sections available to the caller, each with one page of its content | [**FolderContentArrayWrapper**](#model-foldercontentarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | The caller is not allowed to read one of the sections | - | - |
 | **404** | One of the sections could not be resolved for this account | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
@@ -3409,7 +3853,7 @@ Returns every top-level section the calling account can see in one response, eac
 
 #### Return type
 
-[**FolderContentIntegerArrayWrapper**](#model-foldercontentintegerarraywrapper)
+[**FolderContentArrayWrapper**](#model-foldercontentarraywrapper)
 
 #### Authorization
 
@@ -3422,7 +3866,7 @@ Returns every top-level section the calling account can see in one response, eac
 
 ### getTrashFolder
 
-> FolderContentIntegerWrapper getTrashFolder(userIdOrGroupId, filterType, applyFilterOption, count, startIndex, sortBy, sortOrder, filterValue)
+> FolderContentWrapper getTrashFolder(userIdOrGroupId, filterType, applyFilterOption, count, startIndex, sortBy, sortOrder, filterValue)
 
 `GET /api/2.0/files/@trash`
 
@@ -3447,7 +3891,7 @@ Returns the caller&#39;s Trash section: the files and folders this account has d
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The Trash section with one page of the entries the caller deleted | [**FolderContentIntegerWrapper**](#model-foldercontentintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The Trash section with one page of the entries the caller deleted | [**FolderContentWrapper**](#model-foldercontentwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | The caller is not allowed to read the Trash section | - | - |
 | **404** | This account has no Trash section | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
@@ -3459,7 +3903,7 @@ Returns the caller&#39;s Trash section: the files and folders this account has d
 
 #### Return type
 
-[**FolderContentIntegerWrapper**](#model-foldercontentintegerwrapper)
+[**FolderContentWrapper**](#model-foldercontentwrapper)
 
 #### Authorization
 
@@ -3472,7 +3916,7 @@ Returns the caller&#39;s Trash section: the files and folders this account has d
 
 ### insertFile
 
-> FileIntegerWrapper insertFile(folderId, InsertFile.File, InsertFile.Title, InsertFile.CreateNewIfExist, InsertFile.KeepConvertStatus, InsertFile.Stream.CanRead, InsertFile.Stream.CanWrite, InsertFile.Stream.CanSeek, InsertFile.Stream.CanTimeout, InsertFile.Stream.Length, InsertFile.Stream.Position, InsertFile.Stream.ReadTimeout, InsertFile.Stream.WriteTimeout)
+> FileWrapper insertFile(folderId, InsertFile.File, InsertFile.Title, InsertFile.CreateNewIfExist, InsertFile.KeepConvertStatus, InsertFile.Stream.CanRead, InsertFile.Stream.CanWrite, InsertFile.Stream.CanSeek, InsertFile.Stream.CanTimeout, InsertFile.Stream.Length, InsertFile.Stream.Position, InsertFile.Stream.ReadTimeout, InsertFile.Stream.WriteTimeout)
 
 `POST /api/2.0/files/{folderId}/insert`
 
@@ -3502,7 +3946,7 @@ Stores a file in the folder named by the path in a single request, taking its na
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The stored file | [**FileIntegerWrapper**](#model-fileintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The stored file | [**FileWrapper**](#model-filewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | The caller cannot add content to this folder | - | - |
 | **404** | No folder with the specified ID | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
@@ -3514,7 +3958,17 @@ Stores a file in the folder named by the path in a single request, taking its na
 
 #### Return type
 
-[**FileIntegerWrapper**](#model-fileintegerwrapper)
+[**FileWrapper**](#model-filewrapper)
+
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **folderId** | path | **String** | The folder that receives the file; take the id from a listing such as &#x60;GET api/2.0/files/@root&#x60;. A room or an  ordinary folder inside one is accepted, a section root is not. | [required] [example: 1] |
+
+Return type: [**ThirdPartyFileWrapper**](#model-thirdpartyfilewrapper)
 
 #### Authorization
 
@@ -3527,7 +3981,7 @@ Stores a file in the folder named by the path in a single request, taking its na
 
 ### insertFileToMyFromBody
 
-> FileIntegerWrapper insertFileToMyFromBody(File, Title, CreateNewIfExist, KeepConvertStatus, Stream.CanRead, Stream.CanWrite, Stream.CanSeek, Stream.CanTimeout, Stream.Length, Stream.Position, Stream.ReadTimeout, Stream.WriteTimeout)
+> FileWrapper insertFileToMyFromBody(File, Title, CreateNewIfExist, KeepConvertStatus, Stream.CanRead, Stream.CanWrite, Stream.CanSeek, Stream.CanTimeout, Stream.Length, Stream.Position, Stream.ReadTimeout, Stream.WriteTimeout)
 
 `POST /api/2.0/files/@my/insert`
 
@@ -3556,7 +4010,7 @@ Stores one file in the caller&#39;s own My documents section, the personal stora
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The stored file, with the identifier, version and title it was saved under | [**FileIntegerWrapper**](#model-fileintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The stored file, with the identifier, version and title it was saved under | [**FileWrapper**](#model-filewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | Creating a file in the personal section is not allowed for this account | - | - |
 | **404** | The caller has no personal section, so there is nothing to store the file in | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
@@ -3568,7 +4022,7 @@ Stores one file in the caller&#39;s own My documents section, the personal stora
 
 #### Return type
 
-[**FileIntegerWrapper**](#model-fileintegerwrapper)
+[**FileWrapper**](#model-filewrapper)
 
 #### Authorization
 
@@ -3581,7 +4035,7 @@ Stores one file in the caller&#39;s own My documents section, the personal stora
 
 ### renameFolder
 
-> FolderIntegerWrapper renameFolder(folderId, CreateFolder)
+> FolderWrapper renameFolder(folderId, CreateFolder)
 
 `PUT /api/2.0/files/folder/{folderId}`
 
@@ -3600,7 +4054,7 @@ Gives a folder a new title and answers with the folder as it now stands. The tit
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The folder with its new title | [**FolderIntegerWrapper**](#model-folderintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The folder with its new title | [**FolderWrapper**](#model-folderwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | The caller may not rename this folder | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
@@ -3611,7 +4065,17 @@ Gives a folder a new title and answers with the folder as it now stands. The tit
 
 #### Return type
 
-[**FolderIntegerWrapper**](#model-folderintegerwrapper)
+[**FolderWrapper**](#model-folderwrapper)
+
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **folderId** | path | **String** | The folder the request is addressed to: when a folder is created it is the parent that receives the new  folder, and when a folder is renamed it is the folder that gets the new title. | [required] [example: 1] |
+
+Return type: [**ThirdPartyFolderWrapper**](#model-thirdpartyfolderwrapper)
 
 #### Authorization
 
@@ -3624,7 +4088,7 @@ Gives a folder a new title and answers with the folder as it now stands. The tit
 
 ### setFolderOrder
 
-> FolderIntegerWrapper setFolderOrder(folderId, OrderRequestDto)
+> FolderWrapper setFolderOrder(folderId, OrderRequestDto)
 
 `PUT /api/2.0/files/folder/{folderId}/order`
 
@@ -3643,7 +4107,7 @@ Puts a folder at a given position among the entries of its parent and answers wi
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The folder with the position it now holds | [**FolderIntegerWrapper**](#model-folderintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The folder with the position it now holds | [**FolderWrapper**](#model-folderwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
@@ -3653,7 +4117,17 @@ Puts a folder at a given position among the entries of its parent and answers wi
 
 #### Return type
 
-[**FolderIntegerWrapper**](#model-folderintegerwrapper)
+[**FolderWrapper**](#model-folderwrapper)
+
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **folderId** | path | **String** | The folder to move. | [required] [example: 1] |
+
+Return type: [**ThirdPartyFolderWrapper**](#model-thirdpartyfolderwrapper)
 
 #### Authorization
 
@@ -3696,6 +4170,15 @@ Creates an external link to a folder or a room, or changes or revokes an existin
 #### Return type
 
 [**FileShareWrapper**](#model-filesharewrapper)
+
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **id** | path | **String** | The folder or room the link belongs to. | [required] [example: 1] |
+
 
 #### Authorization
 
@@ -3751,7 +4234,7 @@ null (empty response body)
 
 ### uploadFile
 
-> FileIntegerArrayWrapper uploadFile(folderId, createNewIfExist, storeOriginalFile, keepConvertStatus, File)
+> FileArrayWrapper uploadFile(folderId, createNewIfExist, storeOriginalFile, keepConvertStatus, File)
 
 `POST /api/2.0/files/{folderId}/upload`
 
@@ -3773,7 +4256,7 @@ Stores a file in the folder named by the path in a single multipart request, tak
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The stored file, as a list with one element | [**FileIntegerArrayWrapper**](#model-fileintegerarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The stored file, as a list with one element | [**FileArrayWrapper**](#model-filearraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | The caller cannot add content to this folder | - | - |
 | **404** | No folder with the specified ID | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
@@ -3785,7 +4268,17 @@ Stores a file in the folder named by the path in a single multipart request, tak
 
 #### Return type
 
-[**FileIntegerArrayWrapper**](#model-fileintegerarraywrapper)
+[**FileArrayWrapper**](#model-filearraywrapper)
+
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **folderId** | path | **String** | The folder that receives the file; take the id from a listing such as &#x60;GET api/2.0/files/@root&#x60;. A room or an  ordinary folder inside one is accepted, a section root is not. | [required] [example: 1] |
+
+Return type: [**ThirdPartyFileArrayWrapper**](#model-thirdpartyfilearraywrapper)
 
 #### Authorization
 
@@ -3798,7 +4291,7 @@ Stores a file in the folder named by the path in a single multipart request, tak
 
 ### uploadFileToMy
 
-> FileIntegerArrayWrapper uploadFileToMy(createNewIfExist, storeOriginalFile, keepConvertStatus, File)
+> FileArrayWrapper uploadFileToMy(createNewIfExist, storeOriginalFile, keepConvertStatus, File)
 
 `POST /api/2.0/files/@my/upload`
 
@@ -3819,7 +4312,7 @@ Uploads one file into the caller&#39;s own My documents section and returns it i
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | An array holding the single uploaded file | [**FileIntegerArrayWrapper**](#model-fileintegerarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | An array holding the single uploaded file | [**FileArrayWrapper**](#model-filearraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | Uploading a file to the personal section is not allowed for this account | - | - |
 | **404** | The caller has no personal section, so there is nothing to store the file in | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
@@ -3831,7 +4324,7 @@ Uploads one file into the caller&#39;s own My documents section and returns it i
 
 #### Return type
 
-[**FileIntegerArrayWrapper**](#model-fileintegerarraywrapper)
+[**FileArrayWrapper**](#model-filearraywrapper)
 
 #### Authorization
 
@@ -3876,6 +4369,15 @@ Cancels a chunked upload opened with &#x60;POST api/2.0/files/{folderId}/session
 #### Return type
 
 null (empty response body)
+
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **folderId** | path | **String** | The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id. | [required] [example: 1] |
+
 
 #### Authorization
 
@@ -3962,7 +4464,7 @@ Queues a background job that packs the requested files and folders into a single
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -4001,6 +4503,15 @@ Reports how far the conversion of a file has got, as a list that holds one entry
 #### Return type
 
 [**ConversationResultArrayWrapper**](#model-conversationresultarraywrapper)
+
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **fileId** | path | **String** | The file whose conversion is asked about. | [required] [example: 1] |
+
 
 #### Authorization
 
@@ -4139,7 +4650,7 @@ Queues a background job that copies the requested files and folders into &#x60;d
 
 ### createUploadSession
 
-> ChunkedUploadSessionResponseWrapperIntegerWrapper createUploadSession(folderId, SessionRequest)
+> ChunkedUploadSessionResponseWrapperWrapper createUploadSession(folderId, SessionRequest)
 
 `POST /api/2.0/files/{folderId}/upload/create_session`
 
@@ -4158,7 +4669,7 @@ Deprecated in favour of &#x60;POST api/2.0/files/{folderId}/session&#x60;, which
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The created session, wrapped in the success envelope | [**ChunkedUploadSessionResponseWrapperIntegerWrapper**](#model-chunkeduploadsessionresponsewrapperintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The created session, wrapped in the success envelope | [**ChunkedUploadSessionResponseWrapperWrapper**](#model-chunkeduploadsessionresponsewrapperwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | The caller cannot add content to the target folder | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
@@ -4169,7 +4680,17 @@ Deprecated in favour of &#x60;POST api/2.0/files/{folderId}/session&#x60;, which
 
 #### Return type
 
-[**ChunkedUploadSessionResponseWrapperIntegerWrapper**](#model-chunkeduploadsessionresponsewrapperintegerwrapper)
+[**ChunkedUploadSessionResponseWrapperWrapper**](#model-chunkeduploadsessionresponsewrapperwrapper)
+
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **folderId** | path | **String** | The folder that receives the file; take the id from a listing such as &#x60;GET api/2.0/files/@root&#x60;. A room or an  ordinary folder inside one is accepted, a section root is not. | [required] [example: 1] |
+
+Return type: [**ThirdPartyChunkedUploadSessionResponseWrapperWrapper**](#model-thirdpartychunkeduploadsessionresponsewrapperwrapper)
 
 #### Authorization
 
@@ -4182,7 +4703,7 @@ Deprecated in favour of &#x60;POST api/2.0/files/{folderId}/session&#x60;, which
 
 ### createUploadSessionInFolder
 
-> ChunkedUploadSessionResponseIntegerWrapper createUploadSessionInFolder(folderId, SessionRequest)
+> ChunkedUploadSessionResponseResponseWrapper createUploadSessionInFolder(folderId, SessionRequest)
 
 `POST /api/2.0/files/{folderId}/session`
 
@@ -4201,7 +4722,7 @@ Opens a chunked upload session for a file in the folder named by the path and re
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The created upload session | [**ChunkedUploadSessionResponseIntegerWrapper**](#model-chunkeduploadsessionresponseintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The created upload session | [**ChunkedUploadSessionResponseResponseWrapper**](#model-chunkeduploadsessionresponseresponsewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
@@ -4211,7 +4732,17 @@ Opens a chunked upload session for a file in the folder named by the path and re
 
 #### Return type
 
-[**ChunkedUploadSessionResponseIntegerWrapper**](#model-chunkeduploadsessionresponseintegerwrapper)
+[**ChunkedUploadSessionResponseResponseWrapper**](#model-chunkeduploadsessionresponseresponsewrapper)
+
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **folderId** | path | **String** | The folder that receives the file; take the id from a listing such as &#x60;GET api/2.0/files/@root&#x60;. A room or an  ordinary folder inside one is accepted, a section root is not. | [required] [example: 1] |
+
+Return type: [**ThirdPartyChunkedUploadSessionResponseResponseWrapper**](#model-thirdpartychunkeduploadsessionresponseresponsewrapper)
 
 #### Authorization
 
@@ -4432,7 +4963,7 @@ Queues a background job that permanently removes the content of the caller&#39;s
 
 ### finalizeSession
 
-> UploadSessionResponseIntegerWrapper finalizeSession(folderId, sessionId)
+> UploadSessionResponseWrapper finalizeSession(folderId, sessionId)
 
 `PUT /api/2.0/files/{folderId}/session/{sessionId}/finalize`
 
@@ -4451,7 +4982,7 @@ Assembles the parts received so far into the file the session was opened for and
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The assembled file and the identifiers of the closed session | [**UploadSessionResponseIntegerWrapper**](#model-uploadsessionresponseintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The assembled file and the identifiers of the closed session | [**UploadSessionResponseWrapper**](#model-uploadsessionresponsewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
@@ -4461,7 +4992,17 @@ Assembles the parts received so far into the file the session was opened for and
 
 #### Return type
 
-[**UploadSessionResponseIntegerWrapper**](#model-uploadsessionresponseintegerwrapper)
+[**UploadSessionResponseWrapper**](#model-uploadsessionresponsewrapper)
+
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **folderId** | path | **String** | The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id. | [required] [example: 1] |
+
+Return type: [**ThirdPartyUploadSessionResponseWrapper**](#model-thirdpartyuploadsessionresponsewrapper)
 
 #### Authorization
 
@@ -4505,7 +5046,7 @@ Returns the background file operations of the caller that are still running or w
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -4546,7 +5087,7 @@ Returns the background file operations of the caller that are of one kind, named
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -4638,7 +5179,7 @@ Queues a background job that moves the requested files and folders into &#x60;de
 
 ### startFileConversion
 
-> ConversationResultArrayWrapper startFileConversion(fileId, CheckConversionRequestDtoInteger)
+> ConversationResultArrayWrapper startFileConversion(fileId, CheckConversionRequestDto)
 
 `PUT /api/2.0/files/file/{fileId}/checkconversion`
 
@@ -4651,7 +5192,7 @@ Queues the conversion of a file into the portal&#39;s own editable format and an
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
 | **fileId** | path | **Integer** (int32) | The file to convert. | [required] [example: 1] |
-| **CheckConversionRequestDtoInteger** | body | [**CheckConversionRequestDtoInteger**](#model-checkconversionrequestdtointeger) | The parameters of the conversion. The whole body may be omitted, in which case the defaults of the portal  apply. | [optional] |
+| **CheckConversionRequestDto** | body | [**CheckConversionRequestDto**](#model-checkconversionrequestdto) | The parameters of the conversion. The whole body may be omitted, in which case the defaults of the portal  apply. | [optional] |
 
 #### Responses
 
@@ -4668,6 +5209,16 @@ Queues the conversion of a file into the portal&#39;s own editable format and an
 #### Return type
 
 [**ConversationResultArrayWrapper**](#model-conversationresultarraywrapper)
+
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **fileId** | path | **String** | The file to convert. | [required] [example: 1] |
+| **ThirdPartyCheckConversionRequestDto** | body | [**ThirdPartyCheckConversionRequestDto**](#model-thirdpartycheckconversionrequestdto) | The parameters of the conversion. The whole body may be omitted, in which case the defaults of the portal  apply. | [optional] |
+
 
 #### Authorization
 
@@ -4711,7 +5262,7 @@ Cancels a background file operation of the caller and answers with the operation
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -4751,6 +5302,15 @@ Replaces the comment stored on one version of a file - the note that explains wh
 
 [**StringWrapper**](#model-stringwrapper)
 
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **fileId** | path | **String** | The file whose version comment is replaced. | [required] [example: 1] |
+
+
 #### Authorization
 
 [Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
@@ -4762,7 +5322,7 @@ Replaces the comment stored on one version of a file - the note that explains wh
 
 ### uploadAsyncSession
 
-> ChunkedUploadSessionResponseIntegerWrapper uploadAsyncSession(folderId, sessionId, ChunkNumber, File)
+> ChunkedUploadSessionResponseResponseWrapper uploadAsyncSession(folderId, sessionId, ChunkNumber, File)
 
 `POST /api/2.0/files/{folderId}/session/{sessionId}/upload`
 
@@ -4783,7 +5343,7 @@ Stores one part of a file under the number given in &#x60;chunkNumber&#x60;, whi
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The session with its progress after the part was stored | [**ChunkedUploadSessionResponseIntegerWrapper**](#model-chunkeduploadsessionresponseintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The session with its progress after the part was stored | [**ChunkedUploadSessionResponseResponseWrapper**](#model-chunkeduploadsessionresponseresponsewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
@@ -4793,7 +5353,17 @@ Stores one part of a file under the number given in &#x60;chunkNumber&#x60;, whi
 
 #### Return type
 
-[**ChunkedUploadSessionResponseIntegerWrapper**](#model-chunkeduploadsessionresponseintegerwrapper)
+[**ChunkedUploadSessionResponseResponseWrapper**](#model-chunkeduploadsessionresponseresponsewrapper)
+
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **folderId** | path | **String** | The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id. | [required] [example: 1] |
+
+Return type: [**ThirdPartyChunkedUploadSessionResponseResponseWrapper**](#model-thirdpartychunkeduploadsessionresponseresponsewrapper)
 
 #### Authorization
 
@@ -4806,7 +5376,7 @@ Stores one part of a file under the number given in &#x60;chunkNumber&#x60;, whi
 
 ### uploadSession
 
-> UploadSessionResponseIntegerWrapper uploadSession(folderId, sessionId, File)
+> UploadSessionResponseWrapper uploadSession(folderId, sessionId, File)
 
 `POST /api/2.0/files/{folderId}/session/{sessionId}`
 
@@ -4826,7 +5396,7 @@ Sends the next part of a file into the session opened for it, as the multipart &
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The progress of the session, or the stored file once the last part has arrived | [**UploadSessionResponseIntegerWrapper**](#model-uploadsessionresponseintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The progress of the session, or the stored file once the last part has arrived | [**UploadSessionResponseWrapper**](#model-uploadsessionresponsewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
@@ -4836,7 +5406,17 @@ Sends the next part of a file into the session opened for it, as the multipart &
 
 #### Return type
 
-[**UploadSessionResponseIntegerWrapper**](#model-uploadsessionresponseintegerwrapper)
+[**UploadSessionResponseWrapper**](#model-uploadsessionresponsewrapper)
+
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **folderId** | path | **String** | The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id. | [required] [example: 1] |
+
+Return type: [**ThirdPartyUploadSessionResponseWrapper**](#model-thirdpartyuploadsessionresponsewrapper)
 
 #### Authorization
 
@@ -4851,7 +5431,7 @@ Sends the next part of a file into the session opened for it, as the multipart &
 
 ### resetRoomQuota
 
-> FolderIntegerArrayWrapper resetRoomQuota(UpdateRoomsRoomIdsRequestDtoInteger)
+> FolderArrayWrapper resetRoomQuota(UpdateRoomsRoomIdsRequestDto)
 
 `PUT /api/2.0/files/rooms/resetquota`
 
@@ -4863,13 +5443,13 @@ Returns every listed room to the default room quota of the portal and streams th
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **UpdateRoomsRoomIdsRequestDtoInteger** | body | [**UpdateRoomsRoomIdsRequestDtoInteger**](#model-updateroomsroomidsrequestdtointeger) |  | [optional] |
+| **UpdateRoomsRoomIdsRequestDto** | body | [**UpdateRoomsRoomIdsRequestDto**](#model-updateroomsroomidsrequestdto) |  | [optional] |
 
 #### Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The rooms as they are after the default limit was restored | [**FolderIntegerArrayWrapper**](#model-folderintegerarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The rooms as they are after the default limit was restored | [**FolderArrayWrapper**](#model-folderarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
@@ -4879,7 +5459,7 @@ Returns every listed room to the default room quota of the portal and streams th
 
 #### Return type
 
-[**FolderIntegerArrayWrapper**](#model-folderintegerarraywrapper)
+[**FolderArrayWrapper**](#model-folderarraywrapper)
 
 #### Authorization
 
@@ -4892,7 +5472,7 @@ Returns every listed room to the default room quota of the portal and streams th
 
 ### updateRoomsQuota
 
-> FolderIntegerArrayWrapper updateRoomsQuota(UpdateRoomsQuotaRequestDtoInteger)
+> FolderArrayWrapper updateRoomsQuota(UpdateRoomsQuotaRequestDto)
 
 `PUT /api/2.0/files/rooms/roomquota`
 
@@ -4904,13 +5484,13 @@ Sets the same custom storage limit, in bytes, on every listed room and streams t
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **UpdateRoomsQuotaRequestDtoInteger** | body | [**UpdateRoomsQuotaRequestDtoInteger**](#model-updateroomsquotarequestdtointeger) |  | [optional] |
+| **UpdateRoomsQuotaRequestDto** | body | [**UpdateRoomsQuotaRequestDto**](#model-updateroomsquotarequestdto) |  | [optional] |
 
 #### Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The rooms as they are after the new limit was applied | [**FolderIntegerArrayWrapper**](#model-folderintegerarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The rooms as they are after the new limit was applied | [**FolderArrayWrapper**](#model-folderarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
@@ -4920,7 +5500,7 @@ Sets the same custom storage limit, in bytes, on every listed room and streams t
 
 #### Return type
 
-[**FolderIntegerArrayWrapper**](#model-folderintegerarraywrapper)
+[**FolderArrayWrapper**](#model-folderarraywrapper)
 
 #### Authorization
 
@@ -5531,7 +6111,7 @@ Reports where this portal expects ONLYOFFICE Docs to be: the public Document Ser
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -5604,7 +6184,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -5949,7 +6529,7 @@ Stores whether the caller sees rooms arranged by the groups they belong to inste
 
 Display quick actions
 
-Specifies whether to display quick action buttons or not.
+Turns the quick action buttons shown next to a file name on or off, and answers with the value that was  sent. This is a preference of the calling account rather than a portal setting, so it changes what the  caller sees and nothing for anybody else; any authenticated role down to a guest may set it, while an  unauthenticated caller is refused. The value is written only when it differs from the one already stored,  and only then is the change recorded in the audit trail, so repeating the same call is harmless and leaves  no trace. An account that has never set it is treated as having the buttons on. The answer echoes the  request instead of re-reading what was stored, so read the setting back through  &#x60;GET api/2.0/files/settings&#x60;, which publishes it as &#x60;showQuickActions&#x60;.
 
 #### Parameters
 
@@ -5961,7 +6541,7 @@ Specifies whether to display quick action buttons or not.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Boolean value: true if the parameter is enabled | [**BooleanWrapper**](#model-booleanwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | true if quick action buttons are now shown to the caller next to a file name | [**BooleanWrapper**](#model-booleanwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
@@ -6180,7 +6760,7 @@ Submits the password of a protected external share link and answers with the sam
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -6261,6 +6841,15 @@ Answers with the encryption keys that open one file kept in a private room: one 
 
 [**EncryptionKeyArrayWrapper**](#model-encryptionkeyarraywrapper)
 
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **fileId** | path | **String** | The file the operation addresses. Take the identifier from a listing such as &#x60;GET api/2.0/files/{folderId}&#x60;: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: 10] |
+
+
 #### Authorization
 
 [Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
@@ -6305,7 +6894,7 @@ Resolves the token of an external share link into the room or file it points at,
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -6345,6 +6934,15 @@ Lists the accounts and groups that hold rights on one file, one entry per subjec
 #### Return type
 
 [**FileShareArrayWrapper**](#model-filesharearraywrapper)
+
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **id** | path | **String** | The file the operation addresses. Take the identifier from a listing such as &#x60;GET api/2.0/files/{folderId}&#x60;: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: 10] |
+
 
 #### Authorization
 
@@ -6388,6 +6986,15 @@ Lists the accounts and groups that hold rights on one folder or room, one entry 
 #### Return type
 
 [**FileShareArrayWrapper**](#model-filesharearraywrapper)
+
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **id** | path | **String** | The folder or room the operation addresses. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string. | [required] [example: 10] |
+
 
 #### Authorization
 
@@ -6434,6 +7041,15 @@ Lists the members of one portal group together with the access each of them has 
 
 [**GroupMemberSecurityRequestArrayWrapper**](#model-groupmembersecurityrequestarraywrapper)
 
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **fileId** | path | **String** | The file whose access is being read. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string. | [required] [example: 10] |
+
+
 #### Authorization
 
 [Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
@@ -6478,6 +7094,15 @@ Lists the members of one portal group together with the access each of them has 
 #### Return type
 
 [**GroupMemberSecurityRequestArrayWrapper**](#model-groupmembersecurityrequestarraywrapper)
+
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **folderId** | path | **String** | The folder or room whose access is being read. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string. | [required] [example: 10] |
+
 
 #### Authorization
 
@@ -6560,6 +7185,15 @@ Lists the portal members who can read the file, which is what an editor client o
 #### Return type
 
 [**MentionWrapperArrayWrapper**](#model-mentionwrapperarraywrapper)
+
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **fileId** | path | **String** | The file the operation addresses. Take the identifier from a listing such as &#x60;GET api/2.0/files/{folderId}&#x60;: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: 10] |
+
 
 #### Authorization
 
@@ -6646,6 +7280,15 @@ Emails the people named in &#x60;emails&#x60; that they were mentioned in a file
 
 [**AceShortWrapperArrayWrapper**](#model-aceshortwrapperarraywrapper)
 
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **fileId** | path | **String** | The file the mention was made in. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string. | [required] [example: 10] |
+
+
 #### Authorization
 
 [Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
@@ -6688,6 +7331,15 @@ Grants, changes or withdraws the rights of the listed accounts and groups on one
 
 [**FileShareArrayWrapper**](#model-filesharearraywrapper)
 
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **id** | path | **String** | The file whose sharing is being changed. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string. | [required] [example: 10] |
+
+
 #### Authorization
 
 [Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
@@ -6729,6 +7381,15 @@ Grants, changes or withdraws the rights of the listed accounts and groups on one
 #### Return type
 
 [**FileShareArrayWrapper**](#model-filesharearraywrapper)
+
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **id** | path | **String** | The folder whose sharing is being changed. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string. | [required] [example: 10] |
+
 
 #### Authorization
 
@@ -6866,7 +7527,7 @@ Lists the third-party storage services this portal can connect, with everything 
 
 ### getBackupThirdPartyAccount
 
-> FolderStringWrapper getBackupThirdPartyAccount()
+> ThirdPartyFolderWrapper getBackupThirdPartyAccount()
 
 `GET /api/2.0/files/thirdparty/backup`
 
@@ -6881,7 +7542,7 @@ This endpoint does not need any parameter.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The root folder of the backup storage account, or null when none is connected | [**FolderStringWrapper**](#model-folderstringwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The root folder of the backup storage account, or null when none is connected | [**ThirdPartyFolderWrapper**](#model-thirdpartyfolderwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
@@ -6890,7 +7551,7 @@ This endpoint does not need any parameter.
 
 #### Return type
 
-[**FolderStringWrapper**](#model-folderstringwrapper)
+[**ThirdPartyFolderWrapper**](#model-thirdpartyfolderwrapper)
 
 #### Authorization
 
@@ -6940,7 +7601,7 @@ This endpoint does not need any parameter.
 
 ### getCommonThirdPartyFolders
 
-> FolderStringArrayWrapper getCommonThirdPartyFolders()
+> ThirdPartyFolderArrayWrapper getCommonThirdPartyFolders()
 
 `GET /api/2.0/files/thirdparty/common`
 
@@ -6955,7 +7616,7 @@ This endpoint does not need any parameter.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The third-party accounts attached to the Common section, as folder entries | [**FolderStringArrayWrapper**](#model-folderstringarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The third-party accounts attached to the Common section, as folder entries | [**ThirdPartyFolderArrayWrapper**](#model-thirdpartyfolderarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
@@ -6964,7 +7625,7 @@ This endpoint does not need any parameter.
 
 #### Return type
 
-[**FolderStringArrayWrapper**](#model-folderstringarraywrapper)
+[**ThirdPartyFolderArrayWrapper**](#model-thirdpartyfolderarraywrapper)
 
 #### Authorization
 
@@ -7014,7 +7675,7 @@ This endpoint does not need any parameter.
 
 ### saveThirdParty
 
-> FolderStringWrapper saveThirdParty(ThirdPartyRequestDto)
+> ThirdPartyFolderWrapper saveThirdParty(ThirdPartyRequestDto)
 
 `POST /api/2.0/files/thirdparty`
 
@@ -7032,7 +7693,7 @@ Connects an account at a third-party storage service to the portal, or re-authen
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The root folder of the connected account | [**FolderStringWrapper**](#model-folderstringwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The root folder of the connected account | [**ThirdPartyFolderWrapper**](#model-thirdpartyfolderwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
@@ -7042,7 +7703,7 @@ Connects an account at a third-party storage service to the portal, or re-authen
 
 #### Return type
 
-[**FolderStringWrapper**](#model-folderstringwrapper)
+[**ThirdPartyFolderWrapper**](#model-thirdpartyfolderwrapper)
 
 #### Authorization
 
@@ -7055,7 +7716,7 @@ Connects an account at a third-party storage service to the portal, or re-authen
 
 ### saveThirdPartyBackup
 
-> FolderStringWrapper saveThirdPartyBackup(ThirdPartyBackupRequestDto)
+> ThirdPartyFolderWrapper saveThirdPartyBackup(ThirdPartyBackupRequestDto)
 
 `POST /api/2.0/files/thirdparty/backup`
 
@@ -7073,7 +7734,7 @@ Connects the third-party storage account the portal writes its backups to, and r
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The root folder of the backup storage account | [**FolderStringWrapper**](#model-folderstringwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The root folder of the backup storage account | [**ThirdPartyFolderWrapper**](#model-thirdpartyfolderwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
@@ -7083,7 +7744,7 @@ Connects the third-party storage account the portal writes its backups to, and r
 
 #### Return type
 
-[**FolderStringWrapper**](#model-folderstringwrapper)
+[**ThirdPartyFolderWrapper**](#model-thirdpartyfolderwrapper)
 
 #### Authorization
 
@@ -7098,7 +7759,7 @@ Connects the third-party storage account the portal writes its backups to, and r
 
 ### addRoomTags
 
-> FolderIntegerWrapper addRoomTags(id, BatchTagsRequestDto)
+> FolderWrapper addRoomTags(id, BatchTagsRequestDto)
 
 `PUT /api/2.0/files/rooms/{id}/tags`
 
@@ -7117,7 +7778,7 @@ Attaches the named tags to a room and returns the room with its whole tag set. T
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The room with its tag set after the change | [**FolderIntegerWrapper**](#model-folderintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The room with its tag set after the change | [**FolderWrapper**](#model-folderwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | The caller may not edit this room, or the room is archived | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
@@ -7128,7 +7789,17 @@ Attaches the named tags to a room and returns the room with its whole tag set. T
 
 #### Return type
 
-[**FolderIntegerWrapper**](#model-folderintegerwrapper)
+[**FolderWrapper**](#model-folderwrapper)
+
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **id** | path | **String** | The room whose tags are changed, named by the identifier that &#x60;GET api/2.0/files/rooms&#x60; reports for it. | [required] [example: 1] |
+
+Return type: [**ThirdPartyFolderWrapper**](#model-thirdpartyfolderwrapper)
 
 #### Authorization
 
@@ -7172,6 +7843,15 @@ Queues a background job that moves one room from the Rooms section to the Archiv
 
 [**FileOperationWrapper**](#model-fileoperationwrapper)
 
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **id** | path | **String** | The room to move, named by the identifier that &#x60;GET api/2.0/files/rooms&#x60; reports for it. | [required] [example: 1] |
+
+
 #### Authorization
 
 [Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
@@ -7183,7 +7863,7 @@ Queues a background job that moves one room from the Rooms section to the Archiv
 
 ### changeRoomCover
 
-> FolderIntegerWrapper changeRoomCover(id, CoverRequestDto)
+> FolderWrapper changeRoomCover(id, CoverRequestDto)
 
 `POST /api/2.0/files/rooms/{id}/cover`
 
@@ -7202,7 +7882,7 @@ Sets the cover picture and the background colour a room is shown with, and retur
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The room as it is after the cover change | [**FolderIntegerWrapper**](#model-folderintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The room as it is after the cover change | [**FolderWrapper**](#model-folderwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | The caller may not edit this room, or the room is archived | - | - |
 | **404** | No room with this ID is visible to the caller | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
@@ -7214,7 +7894,17 @@ Sets the cover picture and the background colour a room is shown with, and retur
 
 #### Return type
 
-[**FolderIntegerWrapper**](#model-folderintegerwrapper)
+[**FolderWrapper**](#model-folderwrapper)
+
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **id** | path | **String** | The room to change, named by the identifier that &#x60;GET api/2.0/files/rooms&#x60; reports for it. | [required] [example: 1] |
+
+Return type: [**ThirdPartyFolderWrapper**](#model-thirdpartyfolderwrapper)
 
 #### Authorization
 
@@ -7227,7 +7917,7 @@ Sets the cover picture and the background colour a room is shown with, and retur
 
 ### createRoom
 
-> FolderIntegerWrapper createRoom(CreateRoomRequestDto)
+> FolderWrapper createRoom(CreateRoomRequestDto)
 
 `POST /api/2.0/files/rooms`
 
@@ -7245,7 +7935,7 @@ Creates a room in the portal Rooms section and returns it. &#x60;roomType&#x60; 
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The created room with its id, type, settings, logo and tags | [**FolderIntegerWrapper**](#model-folderintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The created room with its id, type, settings, logo and tags | [**FolderWrapper**](#model-folderwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
@@ -7255,7 +7945,7 @@ Creates a room in the portal Rooms section and returns it. &#x60;roomType&#x60; 
 
 #### Return type
 
-[**FolderIntegerWrapper**](#model-folderintegerwrapper)
+[**FolderWrapper**](#model-folderwrapper)
 
 #### Authorization
 
@@ -7309,7 +7999,7 @@ Starts a background job that copies a room template into a new room of the Rooms
 
 ### createRoomLogo
 
-> FolderIntegerWrapper createRoomLogo(id, LogoRequest)
+> FolderWrapper createRoomLogo(id, LogoRequest)
 
 `POST /api/2.0/files/rooms/{id}/logo`
 
@@ -7328,7 +8018,7 @@ Turns an image already uploaded to the portal into the logo of a room and return
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The room with the addresses of its new logo | [**FolderIntegerWrapper**](#model-folderintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The room with the addresses of its new logo | [**FolderWrapper**](#model-folderwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **404** | No room with this ID is visible to the caller | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
@@ -7339,7 +8029,17 @@ Turns an image already uploaded to the portal into the logo of a room and return
 
 #### Return type
 
-[**FolderIntegerWrapper**](#model-folderintegerwrapper)
+[**FolderWrapper**](#model-folderwrapper)
+
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **id** | path | **String** | The room the logo is set on. | [required] [example: 1] |
+
+Return type: [**ThirdPartyFolderWrapper**](#model-thirdpartyfolderwrapper)
 
 #### Authorization
 
@@ -7435,7 +8135,7 @@ Queues a background job that turns an existing room into a reusable room templat
 
 ### createRoomThirdParty
 
-> FolderStringWrapper createRoomThirdParty(id, CreateThirdPartyRoom)
+> ThirdPartyFolderWrapper createRoomThirdParty(id, CreateThirdPartyRoom)
 
 `POST /api/2.0/files/rooms/thirdparty/{id}`
 
@@ -7454,7 +8154,7 @@ Turns a folder of a connected third-party storage account into a room of the &#x
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The room created out of the third-party folder, with string identifiers | [**FolderStringWrapper**](#model-folderstringwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The room created out of the third-party folder, with string identifiers | [**ThirdPartyFolderWrapper**](#model-thirdpartyfolderwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
@@ -7464,7 +8164,7 @@ Turns a folder of a connected third-party storage account into a room of the &#x
 
 #### Return type
 
-[**FolderStringWrapper**](#model-folderstringwrapper)
+[**ThirdPartyFolderWrapper**](#model-thirdpartyfolderwrapper)
 
 #### Authorization
 
@@ -7550,6 +8250,15 @@ Queues a background job that deletes one room with everything inside it, and ret
 
 [**FileOperationWrapper**](#model-fileoperationwrapper)
 
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **id** | path | **String** | The room to delete, named by the identifier that &#x60;GET api/2.0/files/rooms&#x60; reports for it. | [required] [example: 10] |
+
+
 #### Authorization
 
 [Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
@@ -7561,7 +8270,7 @@ Queues a background job that deletes one room with everything inside it, and ret
 
 ### deleteRoomLogo
 
-> FolderIntegerWrapper deleteRoomLogo(id)
+> FolderWrapper deleteRoomLogo(id)
 
 `DELETE /api/2.0/files/rooms/{id}/logo`
 
@@ -7579,7 +8288,7 @@ Removes the uploaded logo of a room and returns the room with empty logo address
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The room with its logo removed | [**FolderIntegerWrapper**](#model-folderintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The room with its logo removed | [**FolderWrapper**](#model-folderwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
@@ -7589,7 +8298,17 @@ Removes the uploaded logo of a room and returns the room with empty logo address
 
 #### Return type
 
-[**FolderIntegerWrapper**](#model-folderintegerwrapper)
+[**FolderWrapper**](#model-folderwrapper)
+
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **id** | path | **String** | The room to act on, named by the identifier that &#x60;GET api/2.0/files/rooms&#x60; reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. | [required] [example: 1] |
+
+Return type: [**ThirdPartyFolderWrapper**](#model-thirdpartyfolderwrapper)
 
 #### Authorization
 
@@ -7602,7 +8321,7 @@ Removes the uploaded logo of a room and returns the room with empty logo address
 
 ### deleteRoomTags
 
-> FolderIntegerWrapper deleteRoomTags(id, BatchTagsRequestDto)
+> FolderWrapper deleteRoomTags(id, BatchTagsRequestDto)
 
 `DELETE /api/2.0/files/rooms/{id}/tags`
 
@@ -7621,7 +8340,7 @@ Detaches the named tags from a room and returns the room with its remaining tag 
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The room with its tag set after the change | [**FolderIntegerWrapper**](#model-folderintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The room with its tag set after the change | [**FolderWrapper**](#model-folderwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | The caller may not edit this room, or the room is archived | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
@@ -7632,7 +8351,17 @@ Detaches the named tags from a room and returns the room with its remaining tag 
 
 #### Return type
 
-[**FolderIntegerWrapper**](#model-folderintegerwrapper)
+[**FolderWrapper**](#model-folderwrapper)
+
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **id** | path | **String** | The room whose tags are changed, named by the identifier that &#x60;GET api/2.0/files/rooms&#x60; reports for it. | [required] [example: 1] |
+
+Return type: [**ThirdPartyFolderWrapper**](#model-thirdpartyfolderwrapper)
 
 #### Authorization
 
@@ -7716,6 +8445,15 @@ Returns what is new for the calling account in one room, grouped by the day the 
 #### Return type
 
 [**NewItemsFileEntryBaseArrayWrapper**](#model-newitemsfileentrybasearraywrapper)
+
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **id** | path | **String** | The room to act on, named by the identifier that &#x60;GET api/2.0/files/rooms&#x60; reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. | [required] [example: 1] |
+
 
 #### Authorization
 
@@ -7880,7 +8618,7 @@ This endpoint does not need any parameter.
 
 ### getRoomInfo
 
-> FolderIntegerWrapper getRoomInfo(id)
+> FolderWrapper getRoomInfo(id)
 
 `GET /api/2.0/files/rooms/{id}`
 
@@ -7898,7 +8636,7 @@ Returns one room with its type, title, tags, logo, cover, colour, quota and virt
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The room with its settings and the access level of the caller | [**FolderIntegerWrapper**](#model-folderintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The room with its settings and the access level of the caller | [**FolderWrapper**](#model-folderwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **400** | Bad Request. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
@@ -7907,11 +8645,21 @@ Returns one room with its type, title, tags, logo, cover, colour, quota and virt
 
 #### Return type
 
-[**FolderIntegerWrapper**](#model-folderintegerwrapper)
+[**FolderWrapper**](#model-folderwrapper)
+
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **id** | path | **String** | The room to act on, named by the identifier that &#x60;GET api/2.0/files/rooms&#x60; reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. | [required] [example: 1] |
+
+Return type: [**ThirdPartyFolderWrapper**](#model-thirdpartyfolderwrapper)
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -7950,6 +8698,15 @@ Returns the sharing links of a room, with the invitation and the external links 
 #### Return type
 
 [**FileShareArrayWrapper**](#model-filesharearraywrapper)
+
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **id** | path | **String** | The room whose links are listed, named by the identifier that &#x60;GET api/2.0/files/rooms&#x60; reports for it. | [required] [example: 1] |
+
 
 #### Authorization
 
@@ -7995,6 +8752,15 @@ Returns one page of the access list of a room: the owner first, then the manager
 #### Return type
 
 [**FileShareArrayWrapper**](#model-filesharearraywrapper)
+
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **id** | path | **String** | The room whose access list is read, named by the identifier that &#x60;GET api/2.0/files/rooms&#x60; reports for it. | [required] [example: 1] |
+
 
 #### Authorization
 
@@ -8087,7 +8853,7 @@ This endpoint does not need any parameter.
 
 ### getRoomsFolder
 
-> FolderContentIntegerWrapper getRoomsFolder(type, subjectId, subjectOwnerId, searchArea, withoutTags, tags, excludeSubject, provider, quotaFilter, storageFilter, privacyFilter, count, startIndex, sortBy, sortOrder, filterValue, groupId)
+> FolderContentWrapper getRoomsFolder(type, subjectId, subjectOwnerId, searchArea, withoutTags, tags, excludeSubject, provider, quotaFilter, storageFilter, privacyFilter, count, startIndex, sortBy, sortOrder, filterValue, groupId)
 
 `GET /api/2.0/files/rooms`
 
@@ -8121,7 +8887,7 @@ Lists the rooms of one section of the portal: the active rooms by default, or th
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The rooms of the selected section with the paging counters | [**FolderContentIntegerWrapper**](#model-foldercontentintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The rooms of the selected section with the paging counters | [**FolderContentWrapper**](#model-foldercontentwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | The caller cannot read the selected section | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
@@ -8132,7 +8898,7 @@ Lists the rooms of one section of the portal: the active rooms by default, or th
 
 #### Return type
 
-[**FolderContentIntegerWrapper**](#model-foldercontentintegerwrapper)
+[**FolderContentWrapper**](#model-foldercontentwrapper)
 
 #### Authorization
 
@@ -8214,6 +8980,15 @@ Returns the primary external link of a room, which is the one address meant to b
 
 [**FileShareWrapper**](#model-filesharewrapper)
 
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **id** | path | **String** | The room to act on, named by the identifier that &#x60;GET api/2.0/files/rooms&#x60; reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. | [required] [example: 1] |
+
+
 #### Authorization
 
 [Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
@@ -8268,7 +9043,7 @@ Reports whether any room still carries the named tag, which is the check to run 
 
 ### pinRoom
 
-> FolderIntegerWrapper pinRoom(id)
+> FolderWrapper pinRoom(id)
 
 `PUT /api/2.0/files/rooms/{id}/pin`
 
@@ -8286,7 +9061,7 @@ Pins a room to the top of the room list of the calling account and returns the r
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The room with its pinned flag set for the caller | [**FolderIntegerWrapper**](#model-folderintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The room with its pinned flag set for the caller | [**FolderWrapper**](#model-folderwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
@@ -8296,7 +9071,17 @@ Pins a room to the top of the room list of the calling account and returns the r
 
 #### Return type
 
-[**FolderIntegerWrapper**](#model-folderintegerwrapper)
+[**FolderWrapper**](#model-folderwrapper)
+
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **id** | path | **String** | The room to act on, named by the identifier that &#x60;GET api/2.0/files/rooms&#x60; reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. | [required] [example: 1] |
+
+Return type: [**ThirdPartyFolderWrapper**](#model-thirdpartyfolderwrapper)
 
 #### Authorization
 
@@ -8309,7 +9094,7 @@ Pins a room to the top of the room list of the calling account and returns the r
 
 ### reorderRoom
 
-> FolderIntegerWrapper reorderRoom(id)
+> FolderWrapper reorderRoom(id)
 
 `PUT /api/2.0/files/rooms/{id}/reorder`
 
@@ -8327,7 +9112,7 @@ Renumbers the manual order of the items lying directly in a room so that they ru
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The room whose contents were renumbered | [**FolderIntegerWrapper**](#model-folderintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The room whose contents were renumbered | [**FolderWrapper**](#model-folderwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
@@ -8337,7 +9122,17 @@ Renumbers the manual order of the items lying directly in a room so that they ru
 
 #### Return type
 
-[**FolderIntegerWrapper**](#model-folderintegerwrapper)
+[**FolderWrapper**](#model-folderwrapper)
+
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **id** | path | **String** | The room to act on, named by the identifier that &#x60;GET api/2.0/files/rooms&#x60; reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. | [required] [example: 1] |
+
+Return type: [**ThirdPartyFolderWrapper**](#model-thirdpartyfolderwrapper)
 
 #### Authorization
 
@@ -8380,6 +9175,15 @@ Sends the room invitation email again to members who were invited but have not j
 #### Return type
 
 null (empty response body)
+
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **id** | path | **String** | The room whose invitations are resent, named by the identifier that &#x60;GET api/2.0/files/rooms&#x60; reports for it. | [required] [example: 1] |
+
 
 #### Authorization
 
@@ -8464,6 +9268,15 @@ Creates, updates or deletes one sharing link of a room and returns it. &#x60;lin
 
 [**FileShareWrapper**](#model-filesharewrapper)
 
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **id** | path | **String** | The room the link belongs to, named by the identifier that &#x60;GET api/2.0/files/rooms&#x60; reports for it. | [required] [example: 1] |
+
+
 #### Authorization
 
 [Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
@@ -8504,6 +9317,15 @@ Adds, changes and removes room members in one batch, and returns the resulting a
 #### Return type
 
 [**RoomSecurityWrapper**](#model-roomsecuritywrapper)
+
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **id** | path | **String** | The room whose membership changes, named by the identifier that &#x60;GET api/2.0/files/rooms&#x60; reports for it. | [required] [example: 1] |
+
 
 #### Authorization
 
@@ -8669,6 +9491,15 @@ Queues a background job that moves one room from the Archive section back to the
 
 [**FileOperationWrapper**](#model-fileoperationwrapper)
 
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **id** | path | **String** | The room to move, named by the identifier that &#x60;GET api/2.0/files/rooms&#x60; reports for it. | [required] [example: 1] |
+
+
 #### Authorization
 
 [Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
@@ -8680,7 +9511,7 @@ Queues a background job that moves one room from the Archive section back to the
 
 ### unpinRoom
 
-> FolderIntegerWrapper unpinRoom(id)
+> FolderWrapper unpinRoom(id)
 
 `PUT /api/2.0/files/rooms/{id}/unpin`
 
@@ -8698,7 +9529,7 @@ Removes a room from the pinned group of the calling account and returns the room
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The room with its pinned flag cleared for the caller | [**FolderIntegerWrapper**](#model-folderintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The room with its pinned flag cleared for the caller | [**FolderWrapper**](#model-folderwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
@@ -8708,7 +9539,17 @@ Removes a room from the pinned group of the calling account and returns the room
 
 #### Return type
 
-[**FolderIntegerWrapper**](#model-folderintegerwrapper)
+[**FolderWrapper**](#model-folderwrapper)
+
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **id** | path | **String** | The room to act on, named by the identifier that &#x60;GET api/2.0/files/rooms&#x60; reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. | [required] [example: 1] |
+
+Return type: [**ThirdPartyFolderWrapper**](#model-thirdpartyfolderwrapper)
 
 #### Authorization
 
@@ -8721,7 +9562,7 @@ Removes a room from the pinned group of the calling account and returns the room
 
 ### updateRoom
 
-> FolderIntegerWrapper updateRoom(id, UpdateRoomRequest)
+> FolderWrapper updateRoom(id, UpdateRoomRequest)
 
 `PUT /api/2.0/files/rooms/{id}`
 
@@ -8740,7 +9581,7 @@ Applies a partial change to one room and returns the whole room as it is after i
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The room as it is after the update | [**FolderIntegerWrapper**](#model-folderintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The room as it is after the update | [**FolderWrapper**](#model-folderwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
@@ -8750,7 +9591,17 @@ Applies a partial change to one room and returns the whole room as it is after i
 
 #### Return type
 
-[**FolderIntegerWrapper**](#model-folderintegerwrapper)
+[**FolderWrapper**](#model-folderwrapper)
+
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **id** | path | **String** | The room to update, named by the identifier that &#x60;GET api/2.0/files/rooms&#x60; reports for it. | [required] [example: 1] |
+
+Return type: [**ThirdPartyFolderWrapper**](#model-thirdpartyfolderwrapper)
 
 #### Authorization
 
@@ -9567,7 +10418,7 @@ The chat configuration of an AI room.
 | **prompt** | **String** | The instruction put in front of every conversation held in the room, which sets the role the assistant takes  and the way it answers. Empty when the room was left on the behaviour the portal provides by default. | [optional] [example: You are a helpful assistant for project documentation.] [nullable] |
 
 
-### Model CheckConversionRequestDtoInteger
+### Model CheckConversionRequestDto
 The parameters of one file conversion.
 
 | Name | Type | Description | Notes |
@@ -9643,7 +10494,7 @@ The names to test against the files the folder already holds.
 | **filesTitle** | **List** | The names to test, extensions included, spelled as they would be sent to the upload. Matching ignores case,  and a name repeated in the list is answered once. | [optional] [example: [file1.docx, file2.pdf, file3.xlsx]] [nullable] |
 
 
-### Model ChunkedUploadSessionResponseInteger
+### Model ChunkedUploadSessionResponse
 The reserved chunked upload: where the parts are sent, how much was declared and when the reservation lapses. No  content of the file is described here.
 
 | Name | Type | Description | Notes |
@@ -9656,33 +10507,33 @@ The reserved chunked upload: where the parts are sent, how much was declared and
 | **bytes\_total** | **Long** (int64) | The size in bytes that was declared when the upload was reserved, echoed back. It is what the arriving parts  are counted against to decide the file is complete, not the amount received so far. | [optional] [example: 10485760] |
 
 
-### Model ChunkedUploadSessionResponseIntegerWrapper
-The successful API response containing the ChunkedUploadSessionResponseInteger object.
+### Model ChunkedUploadSessionResponseResponseWrapper
+The successful API response containing the ChunkedUploadSessionResponse object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**ChunkedUploadSessionResponseInteger**](#model-chunkeduploadsessionresponseinteger) | The ChunkedUploadSessionResponseInteger object returned by the operation. | [optional] |
+| **response** | [**ChunkedUploadSessionResponse**](#model-chunkeduploadsessionresponse) | The ChunkedUploadSessionResponse object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-booleanwrapperlinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
 | **statusCode** | **Integer** (int32) | HTTP status code of the response (duplicate of status) | [optional] |
 
 
-### Model ChunkedUploadSessionResponseWrapperInteger
+### Model ChunkedUploadSessionResponseWrapper
 The reserved chunked upload wrapped in the envelope the two older session operations answer with.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **success** | **Boolean** | Always true in a body that reaches the caller, because a call that does not succeed answers with an error  status and no body at all. It cannot be used to tell a refusal from a success. | [optional] [example: true] |
-| **data** | [**ChunkedUploadSessionResponseInteger**](#model-chunkeduploadsessionresponseinteger) | The reserved upload itself, in the same shape the newer session operations answer with directly. | [optional] |
+| **data** | [**ChunkedUploadSessionResponse**](#model-chunkeduploadsessionresponse) | The reserved upload itself, in the same shape the newer session operations answer with directly. | [optional] |
 
 
-### Model ChunkedUploadSessionResponseWrapperIntegerWrapper
-The successful API response containing the ChunkedUploadSessionResponseWrapperInteger object.
+### Model ChunkedUploadSessionResponseWrapperWrapper
+The successful API response containing the ChunkedUploadSessionResponseWrapper object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**ChunkedUploadSessionResponseWrapperInteger**](#model-chunkeduploadsessionresponsewrapperinteger) | The ChunkedUploadSessionResponseWrapperInteger object returned by the operation. | [optional] |
+| **response** | [**ChunkedUploadSessionResponseWrapper**](#model-chunkeduploadsessionresponsewrapper) | The ChunkedUploadSessionResponseWrapper object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-booleanwrapperlinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -9707,7 +10558,7 @@ Possible values:
 - `1` — Strict (`Strict`)
 
 
-### Model ConfigurationDtoInteger
+### Model ConfigurationDto
 Everything an editor client needs in order to open one document: the document itself, the editor setup for this  caller, and the signature that lets the editors trust both.
 
 | Name | Type | Description | Notes |
@@ -9719,7 +10570,7 @@ Everything an editor client needs in order to open one document: the document it
 | **editorUrl** | **URI** (uri) | The address of the editor api script the client has to load, with the shard key of this document already  appended. Load it as it is given rather than assembling it by hand. | [required] [example: https://portal.example.com/web-apps/apps/api/documents/api.js?shardkey=1_512_3] [nullable] |
 | **token** | **String** | Signs this whole configuration so that the editors can trust it; anything a client changes in the  configuration invalidates it. It stays empty on a portal that has no signature secret configured for the  document service. | [optional] [example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...] [nullable] |
 | **type** | **String** | The layout spelled as a lowercase word - &#x60;desktop&#x60;, &#x60;mobile&#x60; or &#x60;embedded&#x60; - the same value the editor type  carries as a number. | [optional] [example: desktop] [nullable] |
-| **file** | [**FileDtoInteger**](#model-filedtointeger) | The file the configuration was built for, in the same shape the file listings report it. | [required] |
+| **file** | [**FileDto**](#model-filedto) | The file the configuration was built for, in the same shape the file listings report it. | [required] |
 | **errorMessage** | **String** | Filled in when the document could not be prepared for opening; the rest of the configuration should then not  be handed to the editors. | [optional] [example: The file is being converted] [nullable] |
 | **startFilling** | **Boolean** | Whether this caller may start a filling session on the form from inside the editor. It stays empty when the  file is not a form opened where starting is possible at all. | [optional] [example: false] [nullable] |
 | **fillingStatus** | **Boolean** | True once the caller holds a role in the running filling session of this form. It stays empty outside a  virtual data room, where roles are the only place it is set. | [optional] [example: false] [nullable] |
@@ -9729,12 +10580,12 @@ Everything an editor client needs in order to open one document: the document it
 | **generationToolCallState** | [**EditorToolCallStateDto**](#model-editortoolcallstatedto) | The generation the editor should run as soon as the document opens. It is set only for a document an AI agent  produced and left waiting for its content, and is empty for every other file. | [optional] |
 
 
-### Model ConfigurationIntegerWrapper
-The successful API response containing the ConfigurationDtoInteger object.
+### Model ConfigurationWrapper
+The successful API response containing the ConfigurationDto object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**ConfigurationDtoInteger**](#model-configurationdtointeger) | The ConfigurationDtoInteger object returned by the operation. | [optional] |
+| **response** | [**ConfigurationDto**](#model-configurationdto) | The ConfigurationDto object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-booleanwrapperlinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -10217,7 +11068,7 @@ One file of a bulk download, together with the format it is converted to.
 The file to convert and pack, by id — a number for a file stored in the portal itself, a string for a file on  a connected third-party account.
 
 
-### Model DraftLocationInteger
+### Model DraftLocation
 Where the caller&#39;s own filling draft of a form is kept.
 
 | Name | Type | Description | Notes |
@@ -10672,6 +11523,18 @@ Field specific validation error
 | **message** | **String** | Human readable error message | [optional] [example: policy url is expected to be passed as url] |
 
 
+### Model FileArrayWrapper
+The successful API response containing the list of FileDto objects.
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+| **response** | [**List**](#model-filedto) | The list of FileDto objects returned by the operation. | [optional] |
+| **count** | **Integer** (int32) | The total number of items in the response | [optional] |
+| **links** | [**List**](#model-booleanwrapperlinks-item) | List of links related to the response | [optional] |
+| **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
+| **statusCode** | **Integer** (int32) | HTTP status code of the response (duplicate of status) | [optional] |
+
+
 ### Model FileConflictResolveType
 
 Possible values:
@@ -10681,7 +11544,7 @@ Possible values:
 - `Duplicate` — Duplicate
 
 
-### Model FileDtoInteger
+### Model FileDto
 A stored file as the calling account sees it: where it lives, which revision this is, how it can be opened and  what the portal is currently doing with it.
 
 | Name | Type | Description | Notes |
@@ -10715,9 +11578,9 @@ A stored file as the calling account sees it: where it lives, which revision thi
 | **originTitle** | **String** | The name of the folder the entry was deleted from, for showing where it would be restored to. It is null for  an entry that is not in the trash. | [optional] |
 | **originRoomTitle** | **String** | The name of the room the entry was deleted from, null for anything that was not deleted out of a room. | [optional] |
 | **canShare** | **Boolean** | Whether the calling account may change who has access to the entry, and so whether offering a sharing dialog  for it makes sense. It is false in rooms whose access is fixed by the room itself, such as a private one, even  for its manager. | [optional] |
-| **shareSettings** | [**FileEntryDtoInteger_allOf_shareSettings**](#model-fileentrydtointegersharesettings) |  | [optional] [nullable] |
-| **security** | [**FileEntryDtoInteger_allOf_security**](#model-fileentrydtointegersecurity) |  | [optional] [nullable] |
-| **availableShareRights** | [**FileEntryDtoInteger_allOf_availableShareRights**](#model-fileentrydtointegeravailablesharerights) |  | [optional] [nullable] |
+| **shareSettings** | [**FileEntryDto_allOf_shareSettings**](#model-fileentrydtosharesettings) |  | [optional] [nullable] |
+| **security** | [**FileEntryDto_allOf_security**](#model-fileentrydtosecurity) |  | [optional] [nullable] |
+| **availableShareRights** | [**FileEntryDto_allOf_availableShareRights**](#model-fileentrydtoavailablesharerights) |  | [optional] [nullable] |
 | **requestToken** | **String** | The token of the link the entry is being read through, which is the value the external-share operations expect  and which also has to be carried by the download and preview addresses. It is null whenever the entry is not  being read through a link. | [optional] |
 | **external** | **Boolean** | Set when the link being used was made for this very entry, and false when the entry is reached through a link  to the room around it. It is null when no link is involved. | [optional] |
 | **expirationDate** | [**ApiDateTime**](#model-apidatetime) | When the link being used stops working, written with the offset of the portal&#39;s time zone. It is null for a  link that never expires and whenever no link is involved. | [optional] |
@@ -10750,8 +11613,8 @@ A stored file as the calling account sees it: where it lives, which revision thi
 | **inProcessFolderId** | **Integer** (int32) | Left empty by the portal: the folder holding the caller&#39;s draft is reported in &#x60;draftLocation&#x60; instead. | [optional] [nullable] |
 | **inProcessFolderTitle** | **String** | Left empty by the portal, like the identifier beside it; the draft&#39;s folder is named in &#x60;draftLocation&#x60;. | [optional] [nullable] |
 | **resultsFolderId** | **Integer** (int32) | The folder that collects the completed copies of this form. It is filled in only for the original form of a  room for filling, and only for a caller allowed to work with that form; null everywhere else. | [optional] [nullable] |
-| **draftLocation** | [**DraftLocationInteger**](#model-draftlocationinteger) | Where the caller&#39;s own filling draft of this form is kept. Null when there is no draft yet, which is the same  thing &#x60;hasDraft&#x60; reports. | [optional] |
-| **viewAccessibility** | [**FileDtoInteger_allOf_viewAccessibility**](#model-filedtointegerviewaccessibility) |  | [optional] [nullable] |
+| **draftLocation** | [**DraftLocation**](#model-draftlocation) | Where the caller&#39;s own filling draft of this form is kept. Null when there is no draft yet, which is the same  thing &#x60;hasDraft&#x60; reports. | [optional] |
+| **viewAccessibility** | [**FileDto_allOf_viewAccessibility**](#model-filedtoviewaccessibility) |  | [optional] [nullable] |
 | **lastOpened** | [**ApiDateTime**](#model-apidatetime) | The moment the caller last opened the file. It is kept per account and is what orders the Recent section, so  it is null for a file this account has never opened. Written with the offset of the portal&#39;s time zone. | [optional] |
 | **expired** | [**ApiDateTime**](#model-apidatetime) | The moment the file falls under the lifetime rule of the room holding it and is removed. It is counted from  the first revision rather than the latest one, so editing a file does not postpone it, and it is null when the  room sets no lifetime. Written with the offset of the portal&#39;s time zone. | [optional] |
 | **vectorizationStatus** | [**VectorizationStatus**](#model-vectorizationstatus) | How far the indexing of the file&#39;s content for AI search has got. It is null for a file that has never been  queued for indexing, which is every file while the feature is off for the portal. | [optional] [enum: 0, 1, 2] |
@@ -10759,7 +11622,7 @@ A stored file as the calling account sees it: where it lives, which revision thi
 | **dimensions** | [**Size**](#model-size) | The pixel size of the picture, measured by reading the stored file rather than taken from any stored metadata.  Null for anything that is not a picture the portal can show, and also when the file could not be read. | [optional] |
 
 
-### Model FileDtoInteger.viewAccessibility
+### Model FileDto.viewAccessibility
 Which ways of opening this format the portal supports at all - its own editor, the picture viewer, the media  player and so on. It answers whether the format can be shown, not whether this account may do it; rights are  reported in &#x60;security&#x60;.
 
 | Name | Type | Description | Notes |
@@ -10791,6 +11654,18 @@ The successful API response containing the FileEncryptionInfoDto object.
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **response** | [**FileEncryptionInfoDto**](#model-fileencryptioninfodto) | The FileEncryptionInfoDto object returned by the operation. | [optional] |
+| **count** | **Integer** (int32) | The total number of items in the response | [optional] |
+| **links** | [**List**](#model-booleanwrapperlinks-item) | List of links related to the response | [optional] |
+| **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
+| **statusCode** | **Integer** (int32) | HTTP status code of the response (duplicate of status) | [optional] |
+
+
+### Model FileEntryArrayWrapper
+The successful API response containing the list of FileEntryDto objects.
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+| **response** | [**List**](#model-fileentrydto) | The list of FileEntryDto objects returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-booleanwrapperlinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -10850,7 +11725,7 @@ The successful API response containing the FileEntryBaseDto object.
 | **statusCode** | **Integer** (int32) | HTTP status code of the response (duplicate of status) | [optional] |
 
 
-### Model FileEntryDtoInteger
+### Model FileEntryDto
 The part of a file or folder that depends on how the entry is identified: by a number on the portal, or by a  string on a connected third-party account.
 
 | Name | Type | Description | Notes |
@@ -10884,16 +11759,16 @@ The part of a file or folder that depends on how the entry is identified: by a n
 | **originTitle** | **String** | The name of the folder the entry was deleted from, for showing where it would be restored to. It is null for  an entry that is not in the trash. | [optional] [nullable] |
 | **originRoomTitle** | **String** | The name of the room the entry was deleted from, null for anything that was not deleted out of a room. | [optional] [nullable] |
 | **canShare** | **Boolean** | Whether the calling account may change who has access to the entry, and so whether offering a sharing dialog  for it makes sense. It is false in rooms whose access is fixed by the room itself, such as a private one, even  for its manager. | [optional] |
-| **shareSettings** | [**FileEntryDtoInteger_allOf_shareSettings**](#model-fileentrydtointegersharesettings) |  | [optional] [nullable] |
-| **security** | [**FileEntryDtoInteger_allOf_security**](#model-fileentrydtointegersecurity) |  | [optional] [nullable] |
-| **availableShareRights** | [**FileEntryDtoInteger_allOf_availableShareRights**](#model-fileentrydtointegeravailablesharerights) |  | [optional] [nullable] |
+| **shareSettings** | [**FileEntryDto_allOf_shareSettings**](#model-fileentrydtosharesettings) |  | [optional] [nullable] |
+| **security** | [**FileEntryDto_allOf_security**](#model-fileentrydtosecurity) |  | [optional] [nullable] |
+| **availableShareRights** | [**FileEntryDto_allOf_availableShareRights**](#model-fileentrydtoavailablesharerights) |  | [optional] [nullable] |
 | **requestToken** | **String** | The token of the link the entry is being read through, which is the value the external-share operations expect  and which also has to be carried by the download and preview addresses. It is null whenever the entry is not  being read through a link. | [optional] [nullable] |
 | **external** | **Boolean** | Set when the link being used was made for this very entry, and false when the entry is reached through a link  to the room around it. It is null when no link is involved. | [optional] [nullable] |
 | **expirationDate** | [**ApiDateTime**](#model-apidatetime) | When the link being used stops working, written with the offset of the portal&#39;s time zone. It is null for a  link that never expires and whenever no link is involved. | [optional] |
 | **isLinkExpired** | **Boolean** | Set when the link being used has already passed its expiration date, which is why the entry cannot be opened  even though it is described here. It is null when no link is involved. | [optional] [nullable] |
 
 
-### Model FileEntryDtoInteger.availableShareRights
+### Model FileEntryDto.availableShareRights
 Which access levels may be handed out on this entry, listed per kind of recipient, so that a client offers  only levels the entry actually supports - a room for filling forms and a plain folder do not accept the same  ones.
 
 | Name | Type | Description | Notes |
@@ -10905,7 +11780,7 @@ Which access levels may be handed out on this entry, listed per kind of recipien
 | **PrimaryExternalLink** | **List** |  | [optional] |
 
 
-### Model FileEntryDtoInteger.security
+### Model FileEntryDto.security
 What the calling account may do with this entry, one flag per action, and the cheapest way to decide which  operations to offer without trying them. The flags already take the room&#39;s settings and the account&#39;s role  into account.
 
 | Name | Type | Description | Notes |
@@ -10959,7 +11834,7 @@ What the calling account may do with this entry, one flag per action, and the ch
 | **HistoryExport** | **Boolean** |  | [optional] |
 
 
-### Model FileEntryDtoInteger.shareSettings
+### Model FileEntryDto.shareSettings
 How many links of each kind currently exist for the entry, counted separately for the primary link and the  additional ones. Kinds with no links are left out, and the whole field is null when the caller may not change  the access or no link exists at all.
 
 | Name | Type | Description | Notes |
@@ -10971,91 +11846,12 @@ How many links of each kind currently exist for the entry, counted separately fo
 | **PrimaryExternalLink** | **Integer** (int32) |  | [optional] |
 
 
-### Model FileEntryDtoString
-The part of a file or folder that depends on how the entry is identified: by a number on the portal, or by a  string on a connected third-party account.
-
-| Name | Type | Description | Notes |
-|------------ | ------------- | ------------- | -------------|
-| **title** | **String** | The name shown for the entry. For a file it carries the extension, which is how the format is recognised, and  for a room it is the room name. | [optional] |
-| **access** | [**FileShare**](#model-fileshare) | The level the calling account holds on this entry, resolved from its own rights, the groups it belongs to and  any link it came in through. It is the level itself, not what the account may do with it - the action flags  below answer that. | [optional] [enum: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] |
-| **sharedBy** | [**EmployeeDto**](#model-employeedto) | Who gave the calling account the access it is using. It is filled in only while the entry is being read  through a share, and never for a caller without an account. | [optional] |
-| **ownedBy** | [**EmployeeDto**](#model-employeedto) | Who owns the place the entry is shared from - the creator of the room it lies in, or of the personal section  that holds it. It is filled in only while the entry is being read through a share, and never for a caller  without an account. | [optional] |
-| **shared** | **Boolean** | Whether at least one external link exists for the entry, whichever kind. It says nothing about accounts and  groups - those are counted by the flag for members below. | [optional] |
-| **sharedForUser** | **Boolean** | Whether at least one account or group has been given rights on the entry directly, as opposed to reaching it  through a link or through the room around it. | [optional] |
-| **sharedExternal** | **Boolean** | Whether one of the entry&#39;s links is open to people outside the portal, as opposed to a link that only its own  members can follow. This is the flag to watch when the concern is who can reach the content from outside. | [optional] |
-| **parentShared** | **Boolean** | Whether the entry is reachable because the room or folder around it is shared, rather than through rights of  its own. A copy or a move takes the entry out of that scope. | [optional] |
-| **shortWebUrl** | **URI** (uri) | A shortened address that opens the entry through the link it is being read with. It is an empty string  whenever no link applies, which is the usual case for a member browsing their own rooms. | [optional] |
-| **created** | [**ApiDateTime**](#model-apidatetime) | When the entry was created, written with the offset of the portal&#39;s time zone. For a file restored from an  older version this is still the moment the file first appeared. | [optional] |
-| **createdBy** | [**EmployeeDto**](#model-employeedto) | Who created the entry. It is null for a caller without an account, who is told nothing about the portal&#39;s  members. | [optional] |
-| **updated** | [**ApiDateTime**](#model-apidatetime) | When the entry last changed, written with the offset of the portal&#39;s time zone. It is never reported as  earlier than the creation moment, so the two can be compared safely. | [optional] |
-| **autoDelete** | [**ApiDateTime**](#model-apidatetime) | When the entry will disappear on its own, written with the offset of the portal&#39;s time zone. It is filled in  only where a removal is actually scheduled - something in the trash while the portal cleans it up  automatically, or a guest&#39;s own documents - so a null means nothing is scheduled rather than that the entry is  permanent. | [optional] |
-| **rootFolderType** | [**FolderType**](#model-foldertype) | The section the entry ultimately belongs to, which is what tells a personal document from one inside a room,  from a template and from something in the trash or the archive. | [optional] [enum: 0, 1, 2, 3, 5, 6, 8, 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36] |
-| **parentRoomType** | [**FolderType**](#model-foldertype) | The kind of room the entry lies in, which decides what the room allows - filling forms, public links,  indexing. It is null for an entry that is not inside a room at all. | [optional] [enum: 0, 1, 2, 3, 5, 6, 8, 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36] |
-| **updatedBy** | [**EmployeeDto**](#model-employeedto) | Who changed the entry last. It is null for a caller without an account. | [optional] |
-| **providerItem** | **Boolean** | Set when the entry is stored on a connected third-party account rather than on the portal, and null when it is  stored on the portal. Such an entry is identified by a string rather than a number, and some operations skip  it. | [optional] |
-| **providerKey** | **String** | Which third-party service holds the entry, matching the keys accepted by the third-party operations. It is  null for an entry stored on the portal. | [optional] |
-| **providerId** | **Integer** (int32) | The connected account the entry comes from, for telling apart two connections to the same service. It is null  for an entry stored on the portal. | [optional] |
-| **order** | **String** | The place of the entry in a room where the members arrange the content themselves, given as the position of  the entry preceded by the positions of the folders leading to it, separated by dots. It is empty when nothing  has been arranged. | [optional] |
-| **isFavorite** | **Boolean** | Set when the calling account has marked the entry as a favorite, which is what puts it into the favorites  listing. For a file that is not marked it is null rather than false. | [optional] |
-| **fileEntryType** | [**FileEntryType**](#model-fileentrytype) | Tells a folder from a file, and so which of the two shapes the rest of the object has. A room is reported as a  folder here. | [optional] [enum: 1, 2] |
-| **id** | **String** | The identifier to pass back to the other operations of this entry. It is a number for storage on the portal  and a string for a connected third-party account, and it is unique only within its own kind, so files and  folders may carry the same value. | [optional] [nullable] |
-| **rootFolderId** | **String** | The section the entry ultimately lies in, as an identifier that can be listed like any other folder. For an  entry inside a room this is the rooms section, not the room. | [optional] [nullable] |
-| **originId** | **String** | The folder the entry was deleted from, which is where restoring it puts it back. It is left out of the answer  unless the entry is in the trash. | [optional] [nullable] |
-| **originRoomId** | **String** | The room the entry was deleted from, left out of the answer for anything that was not deleted out of a room. | [optional] [nullable] |
-| **originTitle** | **String** | The name of the folder the entry was deleted from, for showing where it would be restored to. It is null for  an entry that is not in the trash. | [optional] [nullable] |
-| **originRoomTitle** | **String** | The name of the room the entry was deleted from, null for anything that was not deleted out of a room. | [optional] [nullable] |
-| **canShare** | **Boolean** | Whether the calling account may change who has access to the entry, and so whether offering a sharing dialog  for it makes sense. It is false in rooms whose access is fixed by the room itself, such as a private one, even  for its manager. | [optional] |
-| **shareSettings** | [**FileEntryDtoInteger_allOf_shareSettings**](#model-fileentrydtointegersharesettings) |  | [optional] [nullable] |
-| **security** | [**FileEntryDtoInteger_allOf_security**](#model-fileentrydtointegersecurity) |  | [optional] [nullable] |
-| **availableShareRights** | [**FileEntryDtoInteger_allOf_availableShareRights**](#model-fileentrydtointegeravailablesharerights) |  | [optional] [nullable] |
-| **requestToken** | **String** | The token of the link the entry is being read through, which is the value the external-share operations expect  and which also has to be carried by the download and preview addresses. It is null whenever the entry is not  being read through a link. | [optional] [nullable] |
-| **external** | **Boolean** | Set when the link being used was made for this very entry, and false when the entry is reached through a link  to the room around it. It is null when no link is involved. | [optional] [nullable] |
-| **expirationDate** | [**ApiDateTime**](#model-apidatetime) | When the link being used stops working, written with the offset of the portal&#39;s time zone. It is null for a  link that never expires and whenever no link is involved. | [optional] |
-| **isLinkExpired** | **Boolean** | Set when the link being used has already passed its expiration date, which is why the entry cannot be opened  even though it is described here. It is null when no link is involved. | [optional] [nullable] |
-
-
-### Model FileEntryIntegerArrayWrapper
-The successful API response containing the list of FileEntryDtoInteger objects.
-
-| Name | Type | Description | Notes |
-|------------ | ------------- | ------------- | -------------|
-| **response** | [**List**](#model-fileentrydtointeger) | The list of FileEntryDtoInteger objects returned by the operation. | [optional] |
-| **count** | **Integer** (int32) | The total number of items in the response | [optional] |
-| **links** | [**List**](#model-booleanwrapperlinks-item) | List of links related to the response | [optional] |
-| **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
-| **statusCode** | **Integer** (int32) | HTTP status code of the response (duplicate of status) | [optional] |
-
-
 ### Model FileEntryType
 
 Possible values:
 
 - `1` — Folder (`Folder`)
 - `2` — File (`File`)
-
-
-### Model FileIntegerArrayWrapper
-The successful API response containing the list of FileDtoInteger objects.
-
-| Name | Type | Description | Notes |
-|------------ | ------------- | ------------- | -------------|
-| **response** | [**List**](#model-filedtointeger) | The list of FileDtoInteger objects returned by the operation. | [optional] |
-| **count** | **Integer** (int32) | The total number of items in the response | [optional] |
-| **links** | [**List**](#model-booleanwrapperlinks-item) | List of links related to the response | [optional] |
-| **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
-| **statusCode** | **Integer** (int32) | HTTP status code of the response (duplicate of status) | [optional] |
-
-
-### Model FileIntegerWrapper
-The successful API response containing the FileDtoInteger object.
-
-| Name | Type | Description | Notes |
-|------------ | ------------- | ------------- | -------------|
-| **response** | [**FileDtoInteger**](#model-filedtointeger) | The FileDtoInteger object returned by the operation. | [optional] |
-| **count** | **Integer** (int32) | The total number of items in the response | [optional] |
-| **links** | [**List**](#model-booleanwrapperlinks-item) | List of links related to the response | [optional] |
-| **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
-| **statusCode** | **Integer** (int32) | HTTP status code of the response (duplicate of status) | [optional] |
 
 
 ### Model FileKeys
@@ -11345,6 +12141,18 @@ Possible values:
 - `11` — Diagram (`Diagram`)
 
 
+### Model FileWrapper
+The successful API response containing the FileDto object.
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+| **response** | [**FileDto**](#model-filedto) | The FileDto object returned by the operation. | [optional] |
+| **count** | **Integer** (int32) | The total number of items in the response | [optional] |
+| **links** | [**List**](#model-booleanwrapperlinks-item) | List of links related to the response | [optional] |
+| **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
+| **statusCode** | **Integer** (int32) | HTTP status code of the response (duplicate of status) | [optional] |
+
+
 ### Model FilesSettingsDto
 Everything a client needs to work with documents in this portal: the format tables, the address templates, the  upload limits, the portal-wide switches and the preferences of the calling account.
 
@@ -11480,25 +12288,25 @@ The successful API response containing the FilesStatisticsResultDto object.
 | **statusCode** | **Integer** (int32) | HTTP status code of the response (duplicate of status) | [optional] |
 
 
-### Model FillingFormResultDtoInteger
+### Model FillingFormResultDto
 The outcome of one completed form-filling session, as the person who has just filled the form sees it.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **formNumber** | **Integer** (int32) | The number this copy was given among the copies made of the same form, counting up from 1. It is the number  the results of the form are ordered by and the one the title of the copy carries. | [required] [example: 1] |
-| **completedForm** | [**FileDtoInteger**](#model-filedtointeger) | The filled copy that the session produced, as an ordinary file: it can be read and downloaded with the file  operations of this API. | [optional] |
-| **originalForm** | [**FileDtoInteger**](#model-filedtointeger) | The form the copy was made from, so that a client can offer filling it once more. | [optional] |
+| **completedForm** | [**FileDto**](#model-filedto) | The filled copy that the session produced, as an ordinary file: it can be read and downloaded with the file  operations of this API. | [optional] |
+| **originalForm** | [**FileDto**](#model-filedto) | The form the copy was made from, so that a client can offer filling it once more. | [optional] |
 | **manager** | [**EmployeeFullDto**](#model-employeefulldto) | The account that owns the original form, reported with its email address, so that the person who has just  filled the form knows who receives it and whom to ask about it. | [optional] |
 | **roomId** | **Integer** (int32) | The room the form was filled in. It comes back as 0 when the session was reached through a link shared for  that single form rather than for its room, in which case there is no room the caller could be sent to. | [required] [example: 123] |
 | **isRoomMember** | **Boolean** | Tells whether the calling account may open that room: true for a member of the room and for a portal  administrator, in which case a client can offer going to the room; false for the anonymous caller who filled  the form through a link and can only be shown the copy itself. | [optional] [example: true] |
 
 
-### Model FillingFormResultIntegerWrapper
-The successful API response containing the FillingFormResultDtoInteger object.
+### Model FillingFormResultWrapper
+The successful API response containing the FillingFormResultDto object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**FillingFormResultDtoInteger**](#model-fillingformresultdtointeger) | The FillingFormResultDtoInteger object returned by the operation. | [optional] |
+| **response** | [**FillingFormResultDto**](#model-fillingformresultdto) | The FillingFormResultDto object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-booleanwrapperlinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -11532,14 +12340,38 @@ Possible values:
 - `26` — Ai rooms (`AiRooms`)
 
 
-### Model FolderContentDtoInteger
+### Model FolderArrayWrapper
+The successful API response containing the list of FolderDto objects.
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+| **response** | [**List**](#model-folderdto) | The list of FolderDto objects returned by the operation. | [optional] |
+| **count** | **Integer** (int32) | The total number of items in the response | [optional] |
+| **links** | [**List**](#model-booleanwrapperlinks-item) | List of links related to the response | [optional] |
+| **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
+| **statusCode** | **Integer** (int32) | HTTP status code of the response (duplicate of status) | [optional] |
+
+
+### Model FolderContentArrayWrapper
+The successful API response containing the list of FolderContentDto objects.
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+| **response** | [**List**](#model-foldercontentdto) | The list of FolderContentDto objects returned by the operation. | [optional] |
+| **count** | **Integer** (int32) | The total number of items in the response | [optional] |
+| **links** | [**List**](#model-booleanwrapperlinks-item) | List of links related to the response | [optional] |
+| **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
+| **statusCode** | **Integer** (int32) | HTTP status code of the response (duplicate of status) | [optional] |
+
+
+### Model FolderContentDto
 One page of the contents of a folder or of a section: its entries split into files and folders, the folder itself,  and the counters needed to page through the rest.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **files** | [**List**](#model-fileentrybasedto) | The file entries of this page. It is empty when the folder holds no files, when the filters matched none of  them, and in the sections that list rooms only. | [optional] [example: [{id=10, title=document.docx}]] [nullable] |
 | **folders** | [**List**](#model-fileentrybasedto) | The folder entries of this page. In a section of rooms these entries are the rooms themselves, which is where  their type, tags, logo and quota are read from. | [optional] [example: [{id=20, title=My Folder}]] [nullable] |
-| **current** | [**FolderDtoInteger**](#model-folderdtointeger) | The folder or section the page was read from, with its own title, type and access rights. It describes the  container, not the entries, and is filled in even when the page is empty. | [optional] |
+| **current** | [**FolderDto**](#model-folderdto) | The folder or section the page was read from, with its own title, type and access rights. It describes the  container, not the entries, and is filled in even when the page is empty. | [optional] |
 | **pathParts** | **oas_any_type_not_mapped** |  | [required] [nullable] |
 | **startIndex** | **Integer** (int32) | The position of the first entry of this page in the whole result, echoing the requested start index. Add the  number of entries received to it to ask for the next page. | [optional] [example: 0] |
 | **count** | **Integer** (int32) | How many entries this page carries, files and folders together. A page shorter than the requested size means  the result is exhausted. | [optional] [example: 4] |
@@ -11547,31 +12379,19 @@ One page of the contents of a folder or of a section: its entries split into fil
 | **new** | **Integer** (int32) | How many entries of this folder are marked as new for the caller. It is 0 for every listing when the account  has switched the new-item badges off, so a zero here does not prove that nothing has changed. | [optional] [example: 0] |
 
 
-### Model FolderContentIntegerArrayWrapper
-The successful API response containing the list of FolderContentDtoInteger objects.
+### Model FolderContentWrapper
+The successful API response containing the FolderContentDto object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**List**](#model-foldercontentdtointeger) | The list of FolderContentDtoInteger objects returned by the operation. | [optional] |
+| **response** | [**FolderContentDto**](#model-foldercontentdto) | The FolderContentDto object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-booleanwrapperlinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
 | **statusCode** | **Integer** (int32) | HTTP status code of the response (duplicate of status) | [optional] |
 
 
-### Model FolderContentIntegerWrapper
-The successful API response containing the FolderContentDtoInteger object.
-
-| Name | Type | Description | Notes |
-|------------ | ------------- | ------------- | -------------|
-| **response** | [**FolderContentDtoInteger**](#model-foldercontentdtointeger) | The FolderContentDtoInteger object returned by the operation. | [optional] |
-| **count** | **Integer** (int32) | The total number of items in the response | [optional] |
-| **links** | [**List**](#model-booleanwrapperlinks-item) | List of links related to the response | [optional] |
-| **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
-| **statusCode** | **Integer** (int32) | HTTP status code of the response (duplicate of status) | [optional] |
-
-
-### Model FolderDtoInteger
+### Model FolderDto
 The folder, with the fields that only a room carries filled in when the folder is a room.
 
 | Name | Type | Description | Notes |
@@ -11605,9 +12425,9 @@ The folder, with the fields that only a room carries filled in when the folder i
 | **originTitle** | **String** | The name of the folder the entry was deleted from, for showing where it would be restored to. It is null for  an entry that is not in the trash. | [optional] |
 | **originRoomTitle** | **String** | The name of the room the entry was deleted from, null for anything that was not deleted out of a room. | [optional] |
 | **canShare** | **Boolean** | Whether the calling account may change who has access to the entry, and so whether offering a sharing dialog  for it makes sense. It is false in rooms whose access is fixed by the room itself, such as a private one, even  for its manager. | [optional] |
-| **shareSettings** | [**FileEntryDtoInteger_allOf_shareSettings**](#model-fileentrydtointegersharesettings) |  | [optional] [nullable] |
-| **security** | [**FileEntryDtoInteger_allOf_security**](#model-fileentrydtointegersecurity) |  | [optional] [nullable] |
-| **availableShareRights** | [**FileEntryDtoInteger_allOf_availableShareRights**](#model-fileentrydtointegeravailablesharerights) |  | [optional] [nullable] |
+| **shareSettings** | [**FileEntryDto_allOf_shareSettings**](#model-fileentrydtosharesettings) |  | [optional] [nullable] |
+| **security** | [**FileEntryDto_allOf_security**](#model-fileentrydtosecurity) |  | [optional] [nullable] |
+| **availableShareRights** | [**FileEntryDto_allOf_availableShareRights**](#model-fileentrydtoavailablesharerights) |  | [optional] [nullable] |
 | **requestToken** | **String** | The token of the link the entry is being read through, which is the value the external-share operations expect  and which also has to be carried by the download and preview addresses. It is null whenever the entry is not  being read through a link. | [optional] |
 | **external** | **Boolean** | Set when the link being used was made for this very entry, and false when the entry is reached through a link  to the room around it. It is null when no link is involved. | [optional] |
 | **expirationDate** | [**ApiDateTime**](#model-apidatetime) | When the link being used stops working, written with the offset of the portal&#39;s time zone. It is null for a  link that never expires and whenever no link is involved. | [optional] |
@@ -11641,100 +12461,6 @@ The folder, with the fields that only a room carries filled in when the folder i
 | **originalFormId** | **Integer** (int32) | The form the completed copies in this folder were filled from, taken from the copy submitted last. Null while  the folder holds no completed copy, and for every folder that does not collect them. | [optional] [nullable] |
 
 
-### Model FolderDtoString
-The folder, with the fields that only a room carries filled in when the folder is a room.
-
-| Name | Type | Description | Notes |
-|------------ | ------------- | ------------- | -------------|
-| **title** | **String** | The name shown for the entry. For a file it carries the extension, which is how the format is recognised, and  for a room it is the room name. | [optional] |
-| **access** | [**FileShare**](#model-fileshare) | The level the calling account holds on this entry, resolved from its own rights, the groups it belongs to and  any link it came in through. It is the level itself, not what the account may do with it - the action flags  below answer that. | [optional] [enum: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] |
-| **sharedBy** | [**EmployeeDto**](#model-employeedto) | Who gave the calling account the access it is using. It is filled in only while the entry is being read  through a share, and never for a caller without an account. | [optional] |
-| **ownedBy** | [**EmployeeDto**](#model-employeedto) | Who owns the place the entry is shared from - the creator of the room it lies in, or of the personal section  that holds it. It is filled in only while the entry is being read through a share, and never for a caller  without an account. | [optional] |
-| **shared** | **Boolean** | Whether at least one external link exists for the entry, whichever kind. It says nothing about accounts and  groups - those are counted by the flag for members below. | [optional] |
-| **sharedForUser** | **Boolean** | Whether at least one account or group has been given rights on the entry directly, as opposed to reaching it  through a link or through the room around it. | [optional] |
-| **sharedExternal** | **Boolean** | Whether one of the entry&#39;s links is open to people outside the portal, as opposed to a link that only its own  members can follow. This is the flag to watch when the concern is who can reach the content from outside. | [optional] |
-| **parentShared** | **Boolean** | Whether the entry is reachable because the room or folder around it is shared, rather than through rights of  its own. A copy or a move takes the entry out of that scope. | [optional] |
-| **shortWebUrl** | **URI** (uri) | A shortened address that opens the entry through the link it is being read with. It is an empty string  whenever no link applies, which is the usual case for a member browsing their own rooms. | [optional] |
-| **created** | [**ApiDateTime**](#model-apidatetime) | When the entry was created, written with the offset of the portal&#39;s time zone. For a file restored from an  older version this is still the moment the file first appeared. | [optional] |
-| **createdBy** | [**EmployeeDto**](#model-employeedto) | Who created the entry. It is null for a caller without an account, who is told nothing about the portal&#39;s  members. | [optional] |
-| **updated** | [**ApiDateTime**](#model-apidatetime) | When the entry last changed, written with the offset of the portal&#39;s time zone. It is never reported as  earlier than the creation moment, so the two can be compared safely. | [optional] |
-| **autoDelete** | [**ApiDateTime**](#model-apidatetime) | When the entry will disappear on its own, written with the offset of the portal&#39;s time zone. It is filled in  only where a removal is actually scheduled - something in the trash while the portal cleans it up  automatically, or a guest&#39;s own documents - so a null means nothing is scheduled rather than that the entry is  permanent. | [optional] |
-| **rootFolderType** | [**FolderType**](#model-foldertype) | The section the entry ultimately belongs to, which is what tells a personal document from one inside a room,  from a template and from something in the trash or the archive. | [optional] [enum: 0, 1, 2, 3, 5, 6, 8, 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36] |
-| **parentRoomType** | [**FolderType**](#model-foldertype) | The kind of room the entry lies in, which decides what the room allows - filling forms, public links,  indexing. It is null for an entry that is not inside a room at all. | [optional] [enum: 0, 1, 2, 3, 5, 6, 8, 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36] |
-| **updatedBy** | [**EmployeeDto**](#model-employeedto) | Who changed the entry last. It is null for a caller without an account. | [optional] |
-| **providerItem** | **Boolean** | Set when the entry is stored on a connected third-party account rather than on the portal, and null when it is  stored on the portal. Such an entry is identified by a string rather than a number, and some operations skip  it. | [optional] |
-| **providerKey** | **String** | Which third-party service holds the entry, matching the keys accepted by the third-party operations. It is  null for an entry stored on the portal. | [optional] |
-| **providerId** | **Integer** (int32) | The connected account the entry comes from, for telling apart two connections to the same service. It is null  for an entry stored on the portal. | [optional] |
-| **order** | **String** | The place of the entry in a room where the members arrange the content themselves, given as the position of  the entry preceded by the positions of the folders leading to it, separated by dots. It is empty when nothing  has been arranged. | [optional] |
-| **isFavorite** | **Boolean** | Set when the calling account has marked the entry as a favorite, which is what puts it into the favorites  listing. For a file that is not marked it is null rather than false. | [optional] |
-| **fileEntryType** | [**FileEntryType**](#model-fileentrytype) | Tells a folder from a file, and so which of the two shapes the rest of the object has. A room is reported as a  folder here. | [optional] [enum: 1, 2] |
-| **id** | **String** | The identifier to pass back to the other operations of this entry. It is a number for storage on the portal  and a string for a connected third-party account, and it is unique only within its own kind, so files and  folders may carry the same value. | [optional] |
-| **rootFolderId** | **String** | The section the entry ultimately lies in, as an identifier that can be listed like any other folder. For an  entry inside a room this is the rooms section, not the room. | [optional] |
-| **originId** | **String** | The folder the entry was deleted from, which is where restoring it puts it back. It is left out of the answer  unless the entry is in the trash. | [optional] |
-| **originRoomId** | **String** | The room the entry was deleted from, left out of the answer for anything that was not deleted out of a room. | [optional] |
-| **originTitle** | **String** | The name of the folder the entry was deleted from, for showing where it would be restored to. It is null for  an entry that is not in the trash. | [optional] |
-| **originRoomTitle** | **String** | The name of the room the entry was deleted from, null for anything that was not deleted out of a room. | [optional] |
-| **canShare** | **Boolean** | Whether the calling account may change who has access to the entry, and so whether offering a sharing dialog  for it makes sense. It is false in rooms whose access is fixed by the room itself, such as a private one, even  for its manager. | [optional] |
-| **shareSettings** | [**FileEntryDtoInteger_allOf_shareSettings**](#model-fileentrydtointegersharesettings) |  | [optional] [nullable] |
-| **security** | [**FileEntryDtoInteger_allOf_security**](#model-fileentrydtointegersecurity) |  | [optional] [nullable] |
-| **availableShareRights** | [**FileEntryDtoInteger_allOf_availableShareRights**](#model-fileentrydtointegeravailablesharerights) |  | [optional] [nullable] |
-| **requestToken** | **String** | The token of the link the entry is being read through, which is the value the external-share operations expect  and which also has to be carried by the download and preview addresses. It is null whenever the entry is not  being read through a link. | [optional] |
-| **external** | **Boolean** | Set when the link being used was made for this very entry, and false when the entry is reached through a link  to the room around it. It is null when no link is involved. | [optional] |
-| **expirationDate** | [**ApiDateTime**](#model-apidatetime) | When the link being used stops working, written with the offset of the portal&#39;s time zone. It is null for a  link that never expires and whenever no link is involved. | [optional] |
-| **isLinkExpired** | **Boolean** | Set when the link being used has already passed its expiration date, which is why the entry cannot be opened  even though it is described here. It is null when no link is involved. | [optional] |
-| **parentId** | **String** | The folder this one is listed in. For a room it is the root of the section the room lives in, and for an entry  opened through a sharing link whose real parent the caller may not read it is the root of the section with the  entries shared with them. | [optional] [nullable] |
-| **filesCount** | **Integer** (int32) | How many files lie directly in the folder, without counting the subfolders. The roots of the &#x60;Rooms&#x60;, room  templates and default templates sections always report 0, because the number is not collected for them. | [optional] |
-| **foldersCount** | **Integer** (int32) | How many subfolders lie directly in the folder. For an AI room the two service subfolders it always holds are  subtracted, so the number matches what a listing of it shows, and the roots of the &#x60;Rooms&#x60; and templates  sections report 0. | [optional] |
-| **isShareable** | **Boolean** | Whether the caller may hand out access to the folder. It is filled in only for the folder a folder-contents  answer is about, and is null in every other answer, so null says nothing about the sharing rights. | [optional] [nullable] |
-| **new** | **Integer** (int32) | How many entries inside the folder the caller has not opened yet, the number drawn as the badge on it. An  account that turned the badges off in its own settings always reads 0 here, so 0 alone does not prove that  everything has been seen. | [optional] |
-| **mute** | **Boolean** | Whether the caller silenced the notifications of this room: true means no message about its activity reaches  them. The choice belongs to the reading account rather than to the room, so two members of one room read  different values. | [optional] |
-| **tags** | **List** | The names of the tags attached to the room. Empty for a folder that is not a room, since only rooms carry  tags, and the names are the ones from the portal tag catalogue. | [optional] [nullable] |
-| **logo** | [**Logo**](#model-logo) | The addresses of the room logo in four sizes, together with the colour and the built-in cover that are drawn  when no logo was uploaded. A room without a logo answers with four empty addresses rather than with null, and  the field is null for a folder that is not a room. | [optional] |
-| **pinned** | **Boolean** | Whether the caller pinned the room to the top of their own room list. Pinning is personal and is lost when the  room is archived. | [optional] |
-| **roomType** | [**RoomType**](#model-roomtype) | The kind of the room, which decides the default access rules of its members. Null for a folder that is not a  room. | [optional] [enum: 1, 2, 5, 6, 8, 9] |
-| **private** | **Boolean** | Whether the room is a private one, which limits it to the accounts invited into it and needs encryption keys  set up for each of them. | [optional] |
-| **indexing** | **Boolean** | Whether the contents of the room are kept in an explicit numbered order, the one reported as &#x60;order&#x60; on each  entry, instead of being left to the sorting the reader asks for. | [optional] |
-| **denyDownload** | **Boolean** | Whether downloading and printing the contents of the room is forbidden, which leaves its members with viewing  and editing in the editor. | [optional] |
-| **lifetime** | [**RoomDataLifetimeDto**](#model-roomdatalifetimedto) | The rule by which the files of the room are removed once they grow old. Null when the room has no such rule,  which is also what is reported after the rule is switched off, because switching it off erases it. | [optional] |
-| **watermark** | [**WatermarkDto**](#model-watermarkdto) | The watermark stamped over the documents of the room while they are viewed and printed. Null when the room has  no watermark, and for every folder that is not a room. | [optional] |
-| **type** | [**FolderType**](#model-foldertype) | The part the folder plays inside its room: one of the service folders of the form-filling flow, or the  knowledge and result storages of an AI room. It stays null for an ordinary folder and for the room itself, so  it does not describe folders in general. | [optional] [enum: 0, 1, 2, 3, 5, 6, 8, 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36] |
-| **inRoom** | **Boolean** | Whether the caller holds the room through an invitation of their own: true for the account that created it and  for a member invited personally, false when the access comes from a group they belong to, and null for a  folder that is not a room. | [optional] [nullable] |
-| **quotaLimit** | **Long** (int64) | How much space the files of the room may take, in bytes. It is the limit set on this room, or the portal  default for rooms when none was set. Null when the tariff of the portal does not count room statistics, when  room quotas are switched off, when the room lies in the archive or the trash, or when the caller may only read  it. | [optional] [nullable] |
-| **isCustomQuota** | **Boolean** | Whether &#x60;quotaLimit&#x60; is a limit set on this room (true) or the portal default for rooms (false). Null exactly  when &#x60;quotaLimit&#x60; is null. | [optional] [nullable] |
-| **usedSpace** | **Long** (int64) | How much the files of the room take, in bytes, as of the last time the counter was recomputed. The counter is  refreshed when a file operation finishes, so a read right after an upload or a deletion can still report the  previous figure. Null for a folder that is not a room. | [optional] [nullable] |
-| **passwordProtected** | **Boolean** | Whether the sharing link the folder was opened through asks for a password that has not been entered yet.  While it is true the contents stay unreadable; send the password to &#x60;POST api/2.0/files/share/{key}/password&#x60;  first. Null when the folder was not reached through a link. | [optional] [nullable] |
-| **expired** | **Boolean** | Deprecated, read &#x60;isLinkExpired&#x60; instead: whether the sharing link the folder was opened through has run out  of its lifetime. | [optional] [nullable] |
-| **chatSettings** | [**ChatSettingsDto**](#model-chatsettingsdto) | The chat configuration of an AI room. Only the system prompt is reported here, whatever else the room stores,  and the field is null for every folder that is not an AI room. | [optional] |
-| **rootRoomType** | [**RoomType**](#model-roomtype) | The kind of the room the folder lies in. It is filled in only for the folder a folder-contents answer is  about, and only when that room is an AI room, so it is null in every other answer and for every other room  kind. | [optional] [enum: 1, 2, 5, 6, 8, 9] |
-| **saveFormAsXLSX** | **Boolean** | Whether the answers collected in this form-filling room are also gathered into a spreadsheet next to the  completed copies. Filled in for form-filling rooms only. | [optional] [nullable] |
-| **sendFormToExternalDB** | **Boolean** | Whether the answers collected in this form-filling room are also pushed into the external database configured  for the portal. Filled in for form-filling rooms only. | [optional] [nullable] |
-| **originalFormId** | **Integer** (int32) | The form the completed copies in this folder were filled from, taken from the copy submitted last. Null while  the folder holds no completed copy, and for every folder that does not collect them. | [optional] [nullable] |
-
-
-### Model FolderIntegerArrayWrapper
-The successful API response containing the list of FolderDtoInteger objects.
-
-| Name | Type | Description | Notes |
-|------------ | ------------- | ------------- | -------------|
-| **response** | [**List**](#model-folderdtointeger) | The list of FolderDtoInteger objects returned by the operation. | [optional] |
-| **count** | **Integer** (int32) | The total number of items in the response | [optional] |
-| **links** | [**List**](#model-booleanwrapperlinks-item) | List of links related to the response | [optional] |
-| **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
-| **statusCode** | **Integer** (int32) | HTTP status code of the response (duplicate of status) | [optional] |
-
-
-### Model FolderIntegerWrapper
-The successful API response containing the FolderDtoInteger object.
-
-| Name | Type | Description | Notes |
-|------------ | ------------- | ------------- | -------------|
-| **response** | [**FolderDtoInteger**](#model-folderdtointeger) | The FolderDtoInteger object returned by the operation. | [optional] |
-| **count** | **Integer** (int32) | The total number of items in the response | [optional] |
-| **links** | [**List**](#model-booleanwrapperlinks-item) | List of links related to the response | [optional] |
-| **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
-| **statusCode** | **Integer** (int32) | HTTP status code of the response (duplicate of status) | [optional] |
-
-
 ### Model FolderLinkRequest
 The external link of a folder, as it is to be created or rewritten.
 
@@ -11748,30 +12474,6 @@ The external link of a folder, as it is to be created or rewritten.
 | **denyDownload** | **Boolean** | Whether visitors are left with viewing alone: with true downloading and copying through the link are blocked,  with false they are allowed. | [optional] [example: false] |
 | **internal** | **Boolean** | Whether the link admits signed-in portal members only: with true a visitor has to sign in before the link  opens, with false anyone holding the address may follow it. | [optional] [example: false] |
 | **primary** | **Boolean** | Whether this link becomes the primary link of the folder, the one the Copy link action of a client hands  out; a folder has one primary link at a time. | [optional] [example: true] |
-
-
-### Model FolderStringArrayWrapper
-The successful API response containing the list of FolderDtoString objects.
-
-| Name | Type | Description | Notes |
-|------------ | ------------- | ------------- | -------------|
-| **response** | [**List**](#model-folderdtostring) | The list of FolderDtoString objects returned by the operation. | [optional] |
-| **count** | **Integer** (int32) | The total number of items in the response | [optional] |
-| **links** | [**List**](#model-booleanwrapperlinks-item) | List of links related to the response | [optional] |
-| **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
-| **statusCode** | **Integer** (int32) | HTTP status code of the response (duplicate of status) | [optional] |
-
-
-### Model FolderStringWrapper
-The successful API response containing the FolderDtoString object.
-
-| Name | Type | Description | Notes |
-|------------ | ------------- | ------------- | -------------|
-| **response** | [**FolderDtoString**](#model-folderdtostring) | The FolderDtoString object returned by the operation. | [optional] |
-| **count** | **Integer** (int32) | The total number of items in the response | [optional] |
-| **links** | [**List**](#model-booleanwrapperlinks-item) | List of links related to the response | [optional] |
-| **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
-| **statusCode** | **Integer** (int32) | HTTP status code of the response (duplicate of status) | [optional] |
 
 
 ### Model FolderType
@@ -11808,6 +12510,18 @@ Possible values:
 - `34` — AI Agents (`AiAgents`)
 - `35` — Default Templates (`DefaultTemplates`)
 - `36` — Forms (`Forms`)
+
+
+### Model FolderWrapper
+The successful API response containing the FolderDto object.
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+| **response** | [**FolderDto**](#model-folderdto) | The FolderDto object returned by the operation. | [optional] |
+| **count** | **Integer** (int32) | The total number of items in the response | [optional] |
+| **links** | [**List**](#model-booleanwrapperlinks-item) | List of links related to the response | [optional] |
+| **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
+| **statusCode** | **Integer** (int32) | HTTP status code of the response (duplicate of status) | [optional] |
 
 
 ### Model FormFillingManageAction
@@ -11973,7 +12687,7 @@ The generate presentation tool call parameters.
 | **style** | **String** | The visual style the slides should be generated in. | [optional] [example: minimal] [nullable] |
 
 
-### Model GetReferenceDataDtoInteger
+### Model GetReferenceDataDto
 The body of a spreadsheet reference request: the source spreadsheet, and the three ways of naming the document it  refers to, which are tried in the order they are described.
 
 | Name | Type | Description | Notes |
@@ -12205,7 +12919,7 @@ The part of an uploaded picture to use as the logo.
 | **height** | **Integer** (int32) | How tall a piece of the uploaded picture to cut out, in pixels. It has to be sent together with the width. | [optional] [example: 300] [min: 1] [max: 1280] |
 
 
-### Model ManageFormFillingDtoInteger
+### Model ManageFormFillingDto
 The action to apply to the filling of a PDF form.
 
 | Name | Type | Description | Notes |
@@ -12744,7 +13458,7 @@ The position an entry is to take inside its folder.
 | **order** | **Integer** (int32) | The position the entry is to take, counting from 1. The entry that held it, and everything after it, is  shifted to make room. A dotted path such as 1.2.3 is accepted as well, of which only the last segment is  read. | [optional] [example: 1] [min: 1] [max: 2147483647] |
 
 
-### Model OrdersItemRequestDtoInteger
+### Model OrdersItemRequestDto
 One entry to move to a given position inside its folder.
 
 | Name | Type | Description | Notes |
@@ -12754,12 +13468,12 @@ One entry to move to a given position inside its folder.
 | **order** | **Integer** (int32) | The position the entry is to take, counting from 1. The entry that held it, and everything after it, is  shifted to make room. A dotted path such as 1.2.3 is accepted as well, of which only the last segment is  read. | [required] [example: 1] [min: 1] [max: 2147483647] |
 
 
-### Model OrdersRequestDtoInteger
+### Model OrdersRequestDto
 The request that moves several files and folders to given positions.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **items** | [**List**](#model-ordersitemrequestdtointeger) | The entries to move, applied one after another in the order they are sent, so each of them shifts the  neighbours the ones before it left behind. | [required] [example: [{entryId=1, entryType=2, order=1}, {entryId=4, entryType=1, order=2}]] [nullable] |
+| **items** | [**List**](#model-ordersitemrequestdto) | The entries to move, applied one after another in the order they are sent, so each of them shifts the  neighbours the ones before it left behind. | [required] [example: [{entryId=1, entryType=2, order=1}, {entryId=4, entryType=1, order=2}]] [nullable] |
 
 
 ### Model Paragraph
@@ -13140,7 +13854,7 @@ The successful API response.
 | **statusCode** | **Integer** (int32) | HTTP status code of the response (duplicate of status) | [optional] |
 
 
-### Model SaveAsPdfInteger
+### Model SaveAsPdf
 The place and the name the PDF copy of a file is stored under.
 
 | Name | Type | Description | Notes |
@@ -13149,7 +13863,7 @@ The place and the name the PDF copy of a file is stored under.
 | **title** | **String** | The name of the PDF, without an extension - &#x60;.pdf&#x60; is appended. Left empty, the name of the source file is  reused with its extension replaced. | [required] [example: My Document] [nullable] |
 
 
-### Model SaveFormRoleMappingDtoInteger
+### Model SaveFormRoleMappingDto
 The people who are to fill in the roles of a PDF form.
 
 | Name | Type | Description | Notes |
@@ -13387,6 +14101,377 @@ The credentials and the title of the third-party storage account the portal writ
 | **providerKey** | **String** | The storage service to connect, as the &#x60;key&#x60; of &#x60;GET api/2.0/files/thirdparty/providers&#x60;; the value is matched  case-insensitively. &#x60;Nextcloud&#x60; and &#x60;ownCloud&#x60; are presets over WebDAV and are stored and reported back as  &#x60;WebDav&#x60;. | [optional] [example: Nextcloud] [nullable] |
 
 
+### Model ThirdPartyCheckConversionRequestDto
+The parameters of one file conversion.
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+| **fileId** | **String** | The file to convert. It is taken from the route of the operation, so a value sent in the body is overwritten. | [optional] [example: 1] [nullable] |
+| **sync** | **Boolean** | How to wait for the result: &#x60;true&#x60; converts inside the request and answers with the finished result, which is  only sensible for small documents, while &#x60;false&#x60; queues the conversion and answers with an entry to poll. | [optional] [example: false] |
+| **startConvert** | **Boolean** | Whether the conversion is to be started. It is set by the operation itself, so a value sent in the body is  overwritten. | [optional] [example: true] |
+| **version** | **Integer** (int32) | The version to convert; 0 or less means the current version. | [optional] [example: 1] |
+| **password** | **String** | The password that opens the source document, for a file that is protected by one; anything else may be left  out. | [optional] [example: password123] [nullable] |
+| **outputType** | **String** | The extension of the format to convert into, without the dot, and one the portal can produce from that  source format; left out, the default of the portal for that kind of document is used. | [optional] [example: pdf] [nullable] |
+| **createNewIfExist** | **Boolean** | Where the result goes when the file has been converted before: &#x60;true&#x60; creates another file beside the source,  &#x60;false&#x60; replaces the converted file that already exists. | [optional] [example: false] |
+
+
+### Model ThirdPartyChunkedUploadSessionResponse
+The reserved chunked upload: where the parts are sent, how much was declared and when the reservation lapses. No  content of the file is described here.
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+| **id** | **String** | The identifier of the reserved upload, repeated in the path of every call that follows it - the chunk uploads,  the finalize and the abort. It is thirty-two hexadecimal characters without separators, and it is the only  thing the server checks, so anyone holding it can write into this upload. | [optional] [example: 1b6a2ee1f2a04c6f9bd2cbf0e0f23a54] [nullable] |
+| **path** | **List** | The chain of folders leading to the destination, outermost first and the destination itself last, with folders  the caller cannot read left out. An answer that reports a stored part carries the destination folder alone  instead of the whole chain. | [optional] [example: [1, 5, 12]] [nullable] |
+| **created** | **Date** (date-time) | The moment the upload was reserved, in UTC. | [optional] [example: 2026-09-11T10:30:00Z] |
+| **expired** | **Date** (date-time) | The moment the reservation lapses and the parts buffered for it are dropped, in UTC. It is a gap rather than a  deadline for the whole transfer: every accepted part pushes it twelve hours past that part, so only a long  silence loses the upload. | [optional] [example: 2026-09-11T22:30:00Z] |
+| **location** | **String** | The absolute address of the separate chunk handler that also accepts the parts of this upload, kept for  clients written against it. A caller working through this API does not need it and sends the parts to the  session operations instead. | [optional] [example: https://example.com/ChunkedUploader.ashx?uid=1b6a2ee1f2a04c6f9bd2cbf0e0f23a54] [nullable] |
+| **bytes\_total** | **Long** (int64) | The size in bytes that was declared when the upload was reserved, echoed back. It is what the arriving parts  are counted against to decide the file is complete, not the amount received so far. | [optional] [example: 10485760] |
+
+
+### Model ThirdPartyChunkedUploadSessionResponseResponseWrapper
+The successful API response containing the ThirdPartyChunkedUploadSessionResponse object.
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+| **response** | [**ThirdPartyChunkedUploadSessionResponse**](#model-thirdpartychunkeduploadsessionresponse) | The ThirdPartyChunkedUploadSessionResponse object returned by the operation. | [optional] |
+| **count** | **Integer** (int32) | The total number of items in the response | [optional] |
+| **links** | [**List**](#model-booleanwrapperlinks-item) | List of links related to the response | [optional] |
+| **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
+| **statusCode** | **Integer** (int32) | HTTP status code of the response (duplicate of status) | [optional] |
+
+
+### Model ThirdPartyChunkedUploadSessionResponseWrapper
+The reserved chunked upload wrapped in the envelope the two older session operations answer with.
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+| **success** | **Boolean** | Always true in a body that reaches the caller, because a call that does not succeed answers with an error  status and no body at all. It cannot be used to tell a refusal from a success. | [optional] [example: true] |
+| **data** | [**ThirdPartyChunkedUploadSessionResponse**](#model-thirdpartychunkeduploadsessionresponse) | The reserved upload itself, in the same shape the newer session operations answer with directly. | [optional] |
+
+
+### Model ThirdPartyChunkedUploadSessionResponseWrapperWrapper
+The successful API response containing the ThirdPartyChunkedUploadSessionResponseWrapper object.
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+| **response** | [**ThirdPartyChunkedUploadSessionResponseWrapper**](#model-thirdpartychunkeduploadsessionresponsewrapper) | The ThirdPartyChunkedUploadSessionResponseWrapper object returned by the operation. | [optional] |
+| **count** | **Integer** (int32) | The total number of items in the response | [optional] |
+| **links** | [**List**](#model-booleanwrapperlinks-item) | List of links related to the response | [optional] |
+| **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
+| **statusCode** | **Integer** (int32) | HTTP status code of the response (duplicate of status) | [optional] |
+
+
+### Model ThirdPartyConfigurationDto
+Everything an editor client needs in order to open one document: the document itself, the editor setup for this  caller, and the signature that lets the editors trust both.
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+| **document** | [**DocumentConfigDto**](#model-documentconfigdto) | The document as the editors address it: its revision key, title, type, download address and the permissions of  this caller on it. | [required] |
+| **documentType** | **String** | The editor family the file opens in - &#x60;word&#x60;, &#x60;cell&#x60;, &#x60;slide&#x60;, &#x60;pdf&#x60; or &#x60;diagram&#x60;. It comes back empty for a  format no editor handles. | [required] [example: word] [nullable] |
+| **editorConfig** | [**EditorConfigurationDto**](#model-editorconfigurationdto) | How the editor is set up for this opening: the mode, the language, the interface customization, the callback  the editors save through, and the account they attribute changes to. | [required] |
+| **editorType** | [**EditorType**](#model-editortype) | The layout the configuration was actually built for. It echoes the requested one except where the room  overruled it, as the templates folder does by forcing the embedded viewer. | [required] [enum: 0, 1, 2] |
+| **editorUrl** | **URI** (uri) | The address of the editor api script the client has to load, with the shard key of this document already  appended. Load it as it is given rather than assembling it by hand. | [required] [example: https://portal.example.com/web-apps/apps/api/documents/api.js?shardkey=1_512_3] [nullable] |
+| **token** | **String** | Signs this whole configuration so that the editors can trust it; anything a client changes in the  configuration invalidates it. It stays empty on a portal that has no signature secret configured for the  document service. | [optional] [example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...] [nullable] |
+| **type** | **String** | The layout spelled as a lowercase word - &#x60;desktop&#x60;, &#x60;mobile&#x60; or &#x60;embedded&#x60; - the same value the editor type  carries as a number. | [optional] [example: desktop] [nullable] |
+| **file** | [**ThirdPartyFileDto**](#model-thirdpartyfiledto) | The file the configuration was built for, in the same shape the file listings report it. | [required] |
+| **errorMessage** | **String** | Filled in when the document could not be prepared for opening; the rest of the configuration should then not  be handed to the editors. | [optional] [example: The file is being converted] [nullable] |
+| **startFilling** | **Boolean** | Whether this caller may start a filling session on the form from inside the editor. It stays empty when the  file is not a form opened where starting is possible at all. | [optional] [example: false] [nullable] |
+| **fillingStatus** | **Boolean** | True once the caller holds a role in the running filling session of this form. It stays empty outside a  virtual data room, where roles are the only place it is set. | [optional] [example: false] [nullable] |
+| **startFillingMode** | [**StartFillingMode**](#model-startfillingmode) | Which filling button the editor offers: none at all, sharing the form out for others to fill, starting a  filling session, or starting one inside the form-filling room. | [optional] [enum: 0, 1, 2, 3] |
+| **fillingSessionId** | **String** | Identifies the filling session this opening belongs to, and is empty when the document is not opened as part  of one. Submissions made in the editor are collected under it. | [optional] [example: a1b2c3d4-0000-0000-0000-000000000000] [nullable] |
+| **quotaExceededScope** | [**QuotaScope**](#model-quotascope) | Names the quota that ran out - the user, the room or the portal - and is set only when the document had to be  opened read-only because of it. | [optional] [enum: 0, 1, 2] |
+| **generationToolCallState** | [**EditorToolCallStateDto**](#model-editortoolcallstatedto) | The generation the editor should run as soon as the document opens. It is set only for a document an AI agent  produced and left waiting for its content, and is empty for every other file. | [optional] |
+
+
+### Model ThirdPartyConfigurationWrapper
+The successful API response containing the ThirdPartyConfigurationDto object.
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+| **response** | [**ThirdPartyConfigurationDto**](#model-thirdpartyconfigurationdto) | The ThirdPartyConfigurationDto object returned by the operation. | [optional] |
+| **count** | **Integer** (int32) | The total number of items in the response | [optional] |
+| **links** | [**List**](#model-booleanwrapperlinks-item) | List of links related to the response | [optional] |
+| **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
+| **statusCode** | **Integer** (int32) | HTTP status code of the response (duplicate of status) | [optional] |
+
+
+### Model ThirdPartyDraftLocation
+Where the caller&#39;s own filling draft of a form is kept.
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+| **folderId** | **String** | The folder holding the draft: the sub-folder that the room for filling keeps for drafts of this particular  form. | [optional] [example: 10] [nullable] |
+| **folderTitle** | **String** | The title of that folder, which the portal takes from the form itself when the form is released for filling. | [optional] [example: Application] [nullable] |
+| **fileId** | **String** | The draft itself - the copy the caller fills in, not the original form, and the identifier to pass to the file  operations while filling. | [optional] [example: 123] [nullable] |
+| **fileTitle** | **String** | The title of the draft, which the portal builds from the name of the person filling it and the name of the  form. Null when the draft the record points at no longer exists. | [optional] [example: John Doe - Application.pdf] [nullable] |
+
+
+### Model ThirdPartyFileArrayWrapper
+The successful API response containing the list of ThirdPartyFileDto objects.
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+| **response** | [**List**](#model-thirdpartyfiledto) | The list of ThirdPartyFileDto objects returned by the operation. | [optional] |
+| **count** | **Integer** (int32) | The total number of items in the response | [optional] |
+| **links** | [**List**](#model-booleanwrapperlinks-item) | List of links related to the response | [optional] |
+| **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
+| **statusCode** | **Integer** (int32) | HTTP status code of the response (duplicate of status) | [optional] |
+
+
+### Model ThirdPartyFileDto
+A stored file as the calling account sees it: where it lives, which revision this is, how it can be opened and  what the portal is currently doing with it.
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+| **title** | **String** | The name shown for the entry. For a file it carries the extension, which is how the format is recognised, and  for a room it is the room name. | [optional] |
+| **access** | [**FileShare**](#model-fileshare) | The level the calling account holds on this entry, resolved from its own rights, the groups it belongs to and  any link it came in through. It is the level itself, not what the account may do with it - the action flags  below answer that. | [optional] [enum: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] |
+| **sharedBy** | [**EmployeeDto**](#model-employeedto) | Who gave the calling account the access it is using. It is filled in only while the entry is being read  through a share, and never for a caller without an account. | [optional] |
+| **ownedBy** | [**EmployeeDto**](#model-employeedto) | Who owns the place the entry is shared from - the creator of the room it lies in, or of the personal section  that holds it. It is filled in only while the entry is being read through a share, and never for a caller  without an account. | [optional] |
+| **shared** | **Boolean** | Whether at least one external link exists for the entry, whichever kind. It says nothing about accounts and  groups - those are counted by the flag for members below. | [optional] |
+| **sharedForUser** | **Boolean** | Whether at least one account or group has been given rights on the entry directly, as opposed to reaching it  through a link or through the room around it. | [optional] |
+| **sharedExternal** | **Boolean** | Whether one of the entry&#39;s links is open to people outside the portal, as opposed to a link that only its own  members can follow. This is the flag to watch when the concern is who can reach the content from outside. | [optional] |
+| **parentShared** | **Boolean** | Whether the entry is reachable because the room or folder around it is shared, rather than through rights of  its own. A copy or a move takes the entry out of that scope. | [optional] |
+| **shortWebUrl** | **URI** (uri) | A shortened address that opens the entry through the link it is being read with. It is an empty string  whenever no link applies, which is the usual case for a member browsing their own rooms. | [optional] |
+| **created** | [**ApiDateTime**](#model-apidatetime) | When the entry was created, written with the offset of the portal&#39;s time zone. For a file restored from an  older version this is still the moment the file first appeared. | [optional] |
+| **createdBy** | [**EmployeeDto**](#model-employeedto) | Who created the entry. It is null for a caller without an account, who is told nothing about the portal&#39;s  members. | [optional] |
+| **updated** | [**ApiDateTime**](#model-apidatetime) | When the entry last changed, written with the offset of the portal&#39;s time zone. It is never reported as  earlier than the creation moment, so the two can be compared safely. | [optional] |
+| **autoDelete** | [**ApiDateTime**](#model-apidatetime) | When the entry will disappear on its own, written with the offset of the portal&#39;s time zone. It is filled in  only where a removal is actually scheduled - something in the trash while the portal cleans it up  automatically, or a guest&#39;s own documents - so a null means nothing is scheduled rather than that the entry is  permanent. | [optional] |
+| **rootFolderType** | [**FolderType**](#model-foldertype) | The section the entry ultimately belongs to, which is what tells a personal document from one inside a room,  from a template and from something in the trash or the archive. | [optional] [enum: 0, 1, 2, 3, 5, 6, 8, 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36] |
+| **parentRoomType** | [**FolderType**](#model-foldertype) | The kind of room the entry lies in, which decides what the room allows - filling forms, public links,  indexing. It is null for an entry that is not inside a room at all. | [optional] [enum: 0, 1, 2, 3, 5, 6, 8, 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36] |
+| **updatedBy** | [**EmployeeDto**](#model-employeedto) | Who changed the entry last. It is null for a caller without an account. | [optional] |
+| **providerItem** | **Boolean** | Set when the entry is stored on a connected third-party account rather than on the portal, and null when it is  stored on the portal. Such an entry is identified by a string rather than a number, and some operations skip  it. | [optional] |
+| **providerKey** | **String** | Which third-party service holds the entry, matching the keys accepted by the third-party operations. It is  null for an entry stored on the portal. | [optional] |
+| **providerId** | **Integer** (int32) | The connected account the entry comes from, for telling apart two connections to the same service. It is null  for an entry stored on the portal. | [optional] |
+| **order** | **String** | The place of the entry in a room where the members arrange the content themselves, given as the position of  the entry preceded by the positions of the folders leading to it, separated by dots. It is empty when nothing  has been arranged. | [optional] |
+| **isFavorite** | **Boolean** | Set when the calling account has marked the entry as a favorite, which is what puts it into the favorites  listing. For a file that is not marked it is null rather than false. | [optional] |
+| **fileEntryType** | [**FileEntryType**](#model-fileentrytype) | Tells a folder from a file, and so which of the two shapes the rest of the object has. A room is reported as a  folder here. | [optional] [enum: 1, 2] |
+| **id** | **String** | The identifier to pass back to the other operations of this entry. It is a number for storage on the portal  and a string for a connected third-party account, and it is unique only within its own kind, so files and  folders may carry the same value. | [optional] |
+| **rootFolderId** | **String** | The section the entry ultimately lies in, as an identifier that can be listed like any other folder. For an  entry inside a room this is the rooms section, not the room. | [optional] |
+| **originId** | **String** | The folder the entry was deleted from, which is where restoring it puts it back. It is left out of the answer  unless the entry is in the trash. | [optional] |
+| **originRoomId** | **String** | The room the entry was deleted from, left out of the answer for anything that was not deleted out of a room. | [optional] |
+| **originTitle** | **String** | The name of the folder the entry was deleted from, for showing where it would be restored to. It is null for  an entry that is not in the trash. | [optional] |
+| **originRoomTitle** | **String** | The name of the room the entry was deleted from, null for anything that was not deleted out of a room. | [optional] |
+| **canShare** | **Boolean** | Whether the calling account may change who has access to the entry, and so whether offering a sharing dialog  for it makes sense. It is false in rooms whose access is fixed by the room itself, such as a private one, even  for its manager. | [optional] |
+| **shareSettings** | [**FileEntryDto_allOf_shareSettings**](#model-fileentrydtosharesettings) |  | [optional] [nullable] |
+| **security** | [**FileEntryDto_allOf_security**](#model-fileentrydtosecurity) |  | [optional] [nullable] |
+| **availableShareRights** | [**FileEntryDto_allOf_availableShareRights**](#model-fileentrydtoavailablesharerights) |  | [optional] [nullable] |
+| **requestToken** | **String** | The token of the link the entry is being read through, which is the value the external-share operations expect  and which also has to be carried by the download and preview addresses. It is null whenever the entry is not  being read through a link. | [optional] |
+| **external** | **Boolean** | Set when the link being used was made for this very entry, and false when the entry is reached through a link  to the room around it. It is null when no link is involved. | [optional] |
+| **expirationDate** | [**ApiDateTime**](#model-apidatetime) | When the link being used stops working, written with the offset of the portal&#39;s time zone. It is null for a  link that never expires and whenever no link is involved. | [optional] |
+| **isLinkExpired** | **Boolean** | Set when the link being used has already passed its expiration date, which is why the entry cannot be opened  even though it is described here. It is null when no link is involved. | [optional] |
+| **folderId** | **String** | The folder the file is stored in. When the file was reached through a share and the caller cannot open its  real parent, the identifier of the Shared with me section is reported instead, so this is where the file is  visible rather than where it physically sits. | [optional] [nullable] |
+| **version** | **Integer** (int32) | The revision this entry describes. It starts at 1 and moves to the next number each time new content is stored  over the file, except for an editing session opened against the file itself, which replaces the content and  keeps the number. &#x60;GET api/2.0/files/file/{fileId}/history&#x60; lists them all. | [optional] |
+| **versionGroup** | **Integer** (int32) | Groups revisions that belong together, which is how a history can fold a long editing session into one entry:  versions saved inside one session share this number, and an upload over the file starts a new group. | [optional] |
+| **contentLength** | **String** | The size already formatted for display, with a unit and the separators of the caller&#39;s language. Read  &#x60;pureContentLength&#x60; for a number to calculate with. | [optional] [nullable] |
+| **pureContentLength** | **Long** (int64) | The size of the stored content in bytes, and null for an empty file. | [optional] [nullable] |
+| **fileStatus** | [**FileStatus**](#model-filestatus) | What the portal is currently doing with the file and how the caller stands towards it - open in the editor,  unread, being converted, and so on. The value is a bit mask that combines those states, so a file can report a  number that matches none of the published members on its own. | [optional] [enum: 0, 1, 2, 4, 8, 16, 32, 64, 128, 256] |
+| **editingBy** | **Map** | The accounts that have the file open in the editor at this moment, as account identifier to display name, and  empty when nobody has. The all-zero identifier stands for people who came in through an external link without  signing in, and its name carries their number in brackets when there is more than one. | [optional] |
+| **mute** | **Boolean** | Not a property of the file at all: it repeats, inverted, the calling account&#39;s own switch for new-item badges,  so it is the same in every entry of one answer. True means that account has badges turned off. | [optional] |
+| **viewUrl** | **URI** (uri) | The address that returns the bytes of the file - a download, in spite of the name; &#x60;webUrl&#x60; is the address a  person opens. When the file was reached through an external link the address carries the key of that link, so  it keeps working without signing in. | [optional] [nullable] |
+| **webUrl** | **URI** (uri) | The page that opens the file in a browser: the editor for a format the portal edits, the media viewer for  pictures, audio and video, and the download address for a format it cannot show at all. | [optional] [nullable] |
+| **fileType** | [**FileType**](#model-filetype) | The broad kind of content, worked out from the extension, which is what a client uses to pick an icon or a  viewer without parsing &#x60;fileExst&#x60; itself. | [optional] [enum: 0, 1, 2, 3, 4, 5, 6, 7, 10, 11] |
+| **fileExst** | **String** | The extension of the stored file, leading dot included and always lower case. For a format the portal keeps in  a converted shape this is the extension it is served under, not the one it was uploaded with. | [optional] [nullable] |
+| **comment** | **String** | The note kept with this revision. The portal writes it itself for revisions it creates, an upload over an  existing file among them, and an editor stores the note a person typed when saving a version. | [optional] [nullable] |
+| **encrypted** | **Boolean** | True for a file in a private room, whose content the server never sees and which therefore cannot be converted  or taken over by an upload. Null, rather than false, for an ordinary file. | [optional] [nullable] |
+| **thumbnailUrl** | **URI** (uri) | The address of the generated preview image. It is filled in only while &#x60;thumbnailStatus&#x60; says the preview has  been created, and it carries a suffix that changes with the file, so an image cached for an earlier revision  is not reused. | [optional] [nullable] |
+| **thumbnailStatus** | [**Thumbnail**](#model-thumbnail) | How far the preview image has got. Only the created state means &#x60;thumbnailUrl&#x60; holds an address; the others  mean there is none, either because it is still being produced or because this format has no preview. | [optional] [enum: 0, 1, 2, 3, 4] |
+| **locked** | **Boolean** | True while the file is held under a lock that stops anyone but its holder from editing it, and null rather  than false when there is no lock. &#x60;lockedBy&#x60; names the holder unless the caller is the holder. | [optional] [nullable] |
+| **lockedBy** | **String** | The display name of the account holding the lock, and null when the caller holds it - so &#x60;locked&#x60; true  together with no name here means the lock is the caller&#39;s own. | [optional] [nullable] |
+| **hasDraft** | **Boolean** | For a fillable PDF form, whether the caller already has a filling draft of it, in which case &#x60;draftLocation&#x60;  says where that draft lives. Null for anything that is not a form. | [optional] [nullable] |
+| **formFillingStatus** | [**FormFillingStatus**](#model-formfillingstatus) | How far the filling of this form has got for the calling account, and whose turn it is now. It is worked out  only inside a virtual data room, where filling runs in steps; everywhere else it stays at the none value. | [optional] [enum: 0, 1, 2, 3, 4, 5] |
+| **isForm** | **Boolean** | Whether the PDF is a fillable form rather than a plain document. When the stored classification does not say,  the portal opens the file to find out, so the answer is reliable for a PDF and null for anything else. | [optional] [nullable] |
+| **customFilterEnabled** | **Boolean** | True while a spreadsheet is in the mode where each person sorts and filters their own view without changing  what the others see, and null rather than false when it is not. | [optional] [nullable] |
+| **customFilterEnabledBy** | **String** | The display name of the account that turned that mode on, and null when the caller turned it on themselves. | [optional] [nullable] |
+| **startFilling** | **Boolean** | For a form in a room for filling, whether it has been released for filling; until then it is still being  prepared and only the people running the room work with it. Null for a file this does not apply to. | [optional] [nullable] |
+| **isFillingPreparing** | **Boolean** | True during the short window in which a released form is still being written out by the editor. Neither  filling nor editing is accepted while it lasts, so a client should wait and read the file again. | [optional] [nullable] |
+| **inProcessFolderId** | **Integer** (int32) | Left empty by the portal: the folder holding the caller&#39;s draft is reported in &#x60;draftLocation&#x60; instead. | [optional] [nullable] |
+| **inProcessFolderTitle** | **String** | Left empty by the portal, like the identifier beside it; the draft&#39;s folder is named in &#x60;draftLocation&#x60;. | [optional] [nullable] |
+| **resultsFolderId** | **Integer** (int32) | The folder that collects the completed copies of this form. It is filled in only for the original form of a  room for filling, and only for a caller allowed to work with that form; null everywhere else. | [optional] [nullable] |
+| **draftLocation** | [**ThirdPartyDraftLocation**](#model-thirdpartydraftlocation) | Where the caller&#39;s own filling draft of this form is kept. Null when there is no draft yet, which is the same  thing &#x60;hasDraft&#x60; reports. | [optional] |
+| **viewAccessibility** | [**FileDto_allOf_viewAccessibility**](#model-filedtoviewaccessibility) |  | [optional] [nullable] |
+| **lastOpened** | [**ApiDateTime**](#model-apidatetime) | The moment the caller last opened the file. It is kept per account and is what orders the Recent section, so  it is null for a file this account has never opened. Written with the offset of the portal&#39;s time zone. | [optional] |
+| **expired** | [**ApiDateTime**](#model-apidatetime) | The moment the file falls under the lifetime rule of the room holding it and is removed. It is counted from  the first revision rather than the latest one, so editing a file does not postpone it, and it is null when the  room sets no lifetime. Written with the offset of the portal&#39;s time zone. | [optional] |
+| **vectorizationStatus** | [**VectorizationStatus**](#model-vectorizationstatus) | How far the indexing of the file&#39;s content for AI search has got. It is null for a file that has never been  queued for indexing, which is every file while the feature is off for the portal. | [optional] [enum: 0, 1, 2] |
+| **externalDbTableName** | **String** | The table collecting the submitted values of this form in the external database configured for its room. The  field is left out of the answer entirely when the form has no such table. | [optional] [nullable] |
+| **dimensions** | [**Size**](#model-size) | The pixel size of the picture, measured by reading the stored file rather than taken from any stored metadata.  Null for anything that is not a picture the portal can show, and also when the file could not be read. | [optional] |
+
+
+### Model ThirdPartyFileEntryDto
+The part of a file or folder that depends on how the entry is identified: by a number on the portal, or by a  string on a connected third-party account.
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+| **title** | **String** | The name shown for the entry. For a file it carries the extension, which is how the format is recognised, and  for a room it is the room name. | [optional] |
+| **access** | [**FileShare**](#model-fileshare) | The level the calling account holds on this entry, resolved from its own rights, the groups it belongs to and  any link it came in through. It is the level itself, not what the account may do with it - the action flags  below answer that. | [optional] [enum: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] |
+| **sharedBy** | [**EmployeeDto**](#model-employeedto) | Who gave the calling account the access it is using. It is filled in only while the entry is being read  through a share, and never for a caller without an account. | [optional] |
+| **ownedBy** | [**EmployeeDto**](#model-employeedto) | Who owns the place the entry is shared from - the creator of the room it lies in, or of the personal section  that holds it. It is filled in only while the entry is being read through a share, and never for a caller  without an account. | [optional] |
+| **shared** | **Boolean** | Whether at least one external link exists for the entry, whichever kind. It says nothing about accounts and  groups - those are counted by the flag for members below. | [optional] |
+| **sharedForUser** | **Boolean** | Whether at least one account or group has been given rights on the entry directly, as opposed to reaching it  through a link or through the room around it. | [optional] |
+| **sharedExternal** | **Boolean** | Whether one of the entry&#39;s links is open to people outside the portal, as opposed to a link that only its own  members can follow. This is the flag to watch when the concern is who can reach the content from outside. | [optional] |
+| **parentShared** | **Boolean** | Whether the entry is reachable because the room or folder around it is shared, rather than through rights of  its own. A copy or a move takes the entry out of that scope. | [optional] |
+| **shortWebUrl** | **URI** (uri) | A shortened address that opens the entry through the link it is being read with. It is an empty string  whenever no link applies, which is the usual case for a member browsing their own rooms. | [optional] |
+| **created** | [**ApiDateTime**](#model-apidatetime) | When the entry was created, written with the offset of the portal&#39;s time zone. For a file restored from an  older version this is still the moment the file first appeared. | [optional] |
+| **createdBy** | [**EmployeeDto**](#model-employeedto) | Who created the entry. It is null for a caller without an account, who is told nothing about the portal&#39;s  members. | [optional] |
+| **updated** | [**ApiDateTime**](#model-apidatetime) | When the entry last changed, written with the offset of the portal&#39;s time zone. It is never reported as  earlier than the creation moment, so the two can be compared safely. | [optional] |
+| **autoDelete** | [**ApiDateTime**](#model-apidatetime) | When the entry will disappear on its own, written with the offset of the portal&#39;s time zone. It is filled in  only where a removal is actually scheduled - something in the trash while the portal cleans it up  automatically, or a guest&#39;s own documents - so a null means nothing is scheduled rather than that the entry is  permanent. | [optional] |
+| **rootFolderType** | [**FolderType**](#model-foldertype) | The section the entry ultimately belongs to, which is what tells a personal document from one inside a room,  from a template and from something in the trash or the archive. | [optional] [enum: 0, 1, 2, 3, 5, 6, 8, 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36] |
+| **parentRoomType** | [**FolderType**](#model-foldertype) | The kind of room the entry lies in, which decides what the room allows - filling forms, public links,  indexing. It is null for an entry that is not inside a room at all. | [optional] [enum: 0, 1, 2, 3, 5, 6, 8, 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36] |
+| **updatedBy** | [**EmployeeDto**](#model-employeedto) | Who changed the entry last. It is null for a caller without an account. | [optional] |
+| **providerItem** | **Boolean** | Set when the entry is stored on a connected third-party account rather than on the portal, and null when it is  stored on the portal. Such an entry is identified by a string rather than a number, and some operations skip  it. | [optional] |
+| **providerKey** | **String** | Which third-party service holds the entry, matching the keys accepted by the third-party operations. It is  null for an entry stored on the portal. | [optional] |
+| **providerId** | **Integer** (int32) | The connected account the entry comes from, for telling apart two connections to the same service. It is null  for an entry stored on the portal. | [optional] |
+| **order** | **String** | The place of the entry in a room where the members arrange the content themselves, given as the position of  the entry preceded by the positions of the folders leading to it, separated by dots. It is empty when nothing  has been arranged. | [optional] |
+| **isFavorite** | **Boolean** | Set when the calling account has marked the entry as a favorite, which is what puts it into the favorites  listing. For a file that is not marked it is null rather than false. | [optional] |
+| **fileEntryType** | [**FileEntryType**](#model-fileentrytype) | Tells a folder from a file, and so which of the two shapes the rest of the object has. A room is reported as a  folder here. | [optional] [enum: 1, 2] |
+| **id** | **String** | The identifier to pass back to the other operations of this entry. It is a number for storage on the portal  and a string for a connected third-party account, and it is unique only within its own kind, so files and  folders may carry the same value. | [optional] [nullable] |
+| **rootFolderId** | **String** | The section the entry ultimately lies in, as an identifier that can be listed like any other folder. For an  entry inside a room this is the rooms section, not the room. | [optional] [nullable] |
+| **originId** | **String** | The folder the entry was deleted from, which is where restoring it puts it back. It is left out of the answer  unless the entry is in the trash. | [optional] [nullable] |
+| **originRoomId** | **String** | The room the entry was deleted from, left out of the answer for anything that was not deleted out of a room. | [optional] [nullable] |
+| **originTitle** | **String** | The name of the folder the entry was deleted from, for showing where it would be restored to. It is null for  an entry that is not in the trash. | [optional] [nullable] |
+| **originRoomTitle** | **String** | The name of the room the entry was deleted from, null for anything that was not deleted out of a room. | [optional] [nullable] |
+| **canShare** | **Boolean** | Whether the calling account may change who has access to the entry, and so whether offering a sharing dialog  for it makes sense. It is false in rooms whose access is fixed by the room itself, such as a private one, even  for its manager. | [optional] |
+| **shareSettings** | [**FileEntryDto_allOf_shareSettings**](#model-fileentrydtosharesettings) |  | [optional] [nullable] |
+| **security** | [**FileEntryDto_allOf_security**](#model-fileentrydtosecurity) |  | [optional] [nullable] |
+| **availableShareRights** | [**FileEntryDto_allOf_availableShareRights**](#model-fileentrydtoavailablesharerights) |  | [optional] [nullable] |
+| **requestToken** | **String** | The token of the link the entry is being read through, which is the value the external-share operations expect  and which also has to be carried by the download and preview addresses. It is null whenever the entry is not  being read through a link. | [optional] [nullable] |
+| **external** | **Boolean** | Set when the link being used was made for this very entry, and false when the entry is reached through a link  to the room around it. It is null when no link is involved. | [optional] [nullable] |
+| **expirationDate** | [**ApiDateTime**](#model-apidatetime) | When the link being used stops working, written with the offset of the portal&#39;s time zone. It is null for a  link that never expires and whenever no link is involved. | [optional] |
+| **isLinkExpired** | **Boolean** | Set when the link being used has already passed its expiration date, which is why the entry cannot be opened  even though it is described here. It is null when no link is involved. | [optional] [nullable] |
+
+
+### Model ThirdPartyFileWrapper
+The successful API response containing the ThirdPartyFileDto object.
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+| **response** | [**ThirdPartyFileDto**](#model-thirdpartyfiledto) | The ThirdPartyFileDto object returned by the operation. | [optional] |
+| **count** | **Integer** (int32) | The total number of items in the response | [optional] |
+| **links** | [**List**](#model-booleanwrapperlinks-item) | List of links related to the response | [optional] |
+| **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
+| **statusCode** | **Integer** (int32) | HTTP status code of the response (duplicate of status) | [optional] |
+
+
+### Model ThirdPartyFolderArrayWrapper
+The successful API response containing the list of ThirdPartyFolderDto objects.
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+| **response** | [**List**](#model-thirdpartyfolderdto) | The list of ThirdPartyFolderDto objects returned by the operation. | [optional] |
+| **count** | **Integer** (int32) | The total number of items in the response | [optional] |
+| **links** | [**List**](#model-booleanwrapperlinks-item) | List of links related to the response | [optional] |
+| **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
+| **statusCode** | **Integer** (int32) | HTTP status code of the response (duplicate of status) | [optional] |
+
+
+### Model ThirdPartyFolderContentDto
+One page of the contents of a folder or of a section: its entries split into files and folders, the folder itself,  and the counters needed to page through the rest.
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+| **files** | [**List**](#model-fileentrybasedto) | The file entries of this page. It is empty when the folder holds no files, when the filters matched none of  them, and in the sections that list rooms only. | [optional] [example: [{id=10, title=document.docx}]] [nullable] |
+| **folders** | [**List**](#model-fileentrybasedto) | The folder entries of this page. In a section of rooms these entries are the rooms themselves, which is where  their type, tags, logo and quota are read from. | [optional] [example: [{id=20, title=My Folder}]] [nullable] |
+| **current** | [**ThirdPartyFolderDto**](#model-thirdpartyfolderdto) | The folder or section the page was read from, with its own title, type and access rights. It describes the  container, not the entries, and is filled in even when the page is empty. | [optional] |
+| **pathParts** | **oas_any_type_not_mapped** |  | [required] [nullable] |
+| **startIndex** | **Integer** (int32) | The position of the first entry of this page in the whole result, echoing the requested start index. Add the  number of entries received to it to ask for the next page. | [optional] [example: 0] |
+| **count** | **Integer** (int32) | How many entries this page carries, files and folders together. A page shorter than the requested size means  the result is exhausted. | [optional] [example: 4] |
+| **total** | **Integer** (int32) | How many entries matched before paging was applied, across the whole folder. Page until the start index plus  the entries received reaches it. | [required] [example: 4] |
+| **new** | **Integer** (int32) | How many entries of this folder are marked as new for the caller. It is 0 for every listing when the account  has switched the new-item badges off, so a zero here does not prove that nothing has changed. | [optional] [example: 0] |
+
+
+### Model ThirdPartyFolderContentWrapper
+The successful API response containing the ThirdPartyFolderContentDto object.
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+| **response** | [**ThirdPartyFolderContentDto**](#model-thirdpartyfoldercontentdto) | The ThirdPartyFolderContentDto object returned by the operation. | [optional] |
+| **count** | **Integer** (int32) | The total number of items in the response | [optional] |
+| **links** | [**List**](#model-booleanwrapperlinks-item) | List of links related to the response | [optional] |
+| **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
+| **statusCode** | **Integer** (int32) | HTTP status code of the response (duplicate of status) | [optional] |
+
+
+### Model ThirdPartyFolderDto
+The folder, with the fields that only a room carries filled in when the folder is a room.
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+| **title** | **String** | The name shown for the entry. For a file it carries the extension, which is how the format is recognised, and  for a room it is the room name. | [optional] |
+| **access** | [**FileShare**](#model-fileshare) | The level the calling account holds on this entry, resolved from its own rights, the groups it belongs to and  any link it came in through. It is the level itself, not what the account may do with it - the action flags  below answer that. | [optional] [enum: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] |
+| **sharedBy** | [**EmployeeDto**](#model-employeedto) | Who gave the calling account the access it is using. It is filled in only while the entry is being read  through a share, and never for a caller without an account. | [optional] |
+| **ownedBy** | [**EmployeeDto**](#model-employeedto) | Who owns the place the entry is shared from - the creator of the room it lies in, or of the personal section  that holds it. It is filled in only while the entry is being read through a share, and never for a caller  without an account. | [optional] |
+| **shared** | **Boolean** | Whether at least one external link exists for the entry, whichever kind. It says nothing about accounts and  groups - those are counted by the flag for members below. | [optional] |
+| **sharedForUser** | **Boolean** | Whether at least one account or group has been given rights on the entry directly, as opposed to reaching it  through a link or through the room around it. | [optional] |
+| **sharedExternal** | **Boolean** | Whether one of the entry&#39;s links is open to people outside the portal, as opposed to a link that only its own  members can follow. This is the flag to watch when the concern is who can reach the content from outside. | [optional] |
+| **parentShared** | **Boolean** | Whether the entry is reachable because the room or folder around it is shared, rather than through rights of  its own. A copy or a move takes the entry out of that scope. | [optional] |
+| **shortWebUrl** | **URI** (uri) | A shortened address that opens the entry through the link it is being read with. It is an empty string  whenever no link applies, which is the usual case for a member browsing their own rooms. | [optional] |
+| **created** | [**ApiDateTime**](#model-apidatetime) | When the entry was created, written with the offset of the portal&#39;s time zone. For a file restored from an  older version this is still the moment the file first appeared. | [optional] |
+| **createdBy** | [**EmployeeDto**](#model-employeedto) | Who created the entry. It is null for a caller without an account, who is told nothing about the portal&#39;s  members. | [optional] |
+| **updated** | [**ApiDateTime**](#model-apidatetime) | When the entry last changed, written with the offset of the portal&#39;s time zone. It is never reported as  earlier than the creation moment, so the two can be compared safely. | [optional] |
+| **autoDelete** | [**ApiDateTime**](#model-apidatetime) | When the entry will disappear on its own, written with the offset of the portal&#39;s time zone. It is filled in  only where a removal is actually scheduled - something in the trash while the portal cleans it up  automatically, or a guest&#39;s own documents - so a null means nothing is scheduled rather than that the entry is  permanent. | [optional] |
+| **rootFolderType** | [**FolderType**](#model-foldertype) | The section the entry ultimately belongs to, which is what tells a personal document from one inside a room,  from a template and from something in the trash or the archive. | [optional] [enum: 0, 1, 2, 3, 5, 6, 8, 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36] |
+| **parentRoomType** | [**FolderType**](#model-foldertype) | The kind of room the entry lies in, which decides what the room allows - filling forms, public links,  indexing. It is null for an entry that is not inside a room at all. | [optional] [enum: 0, 1, 2, 3, 5, 6, 8, 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36] |
+| **updatedBy** | [**EmployeeDto**](#model-employeedto) | Who changed the entry last. It is null for a caller without an account. | [optional] |
+| **providerItem** | **Boolean** | Set when the entry is stored on a connected third-party account rather than on the portal, and null when it is  stored on the portal. Such an entry is identified by a string rather than a number, and some operations skip  it. | [optional] |
+| **providerKey** | **String** | Which third-party service holds the entry, matching the keys accepted by the third-party operations. It is  null for an entry stored on the portal. | [optional] |
+| **providerId** | **Integer** (int32) | The connected account the entry comes from, for telling apart two connections to the same service. It is null  for an entry stored on the portal. | [optional] |
+| **order** | **String** | The place of the entry in a room where the members arrange the content themselves, given as the position of  the entry preceded by the positions of the folders leading to it, separated by dots. It is empty when nothing  has been arranged. | [optional] |
+| **isFavorite** | **Boolean** | Set when the calling account has marked the entry as a favorite, which is what puts it into the favorites  listing. For a file that is not marked it is null rather than false. | [optional] |
+| **fileEntryType** | [**FileEntryType**](#model-fileentrytype) | Tells a folder from a file, and so which of the two shapes the rest of the object has. A room is reported as a  folder here. | [optional] [enum: 1, 2] |
+| **id** | **String** | The identifier to pass back to the other operations of this entry. It is a number for storage on the portal  and a string for a connected third-party account, and it is unique only within its own kind, so files and  folders may carry the same value. | [optional] |
+| **rootFolderId** | **String** | The section the entry ultimately lies in, as an identifier that can be listed like any other folder. For an  entry inside a room this is the rooms section, not the room. | [optional] |
+| **originId** | **String** | The folder the entry was deleted from, which is where restoring it puts it back. It is left out of the answer  unless the entry is in the trash. | [optional] |
+| **originRoomId** | **String** | The room the entry was deleted from, left out of the answer for anything that was not deleted out of a room. | [optional] |
+| **originTitle** | **String** | The name of the folder the entry was deleted from, for showing where it would be restored to. It is null for  an entry that is not in the trash. | [optional] |
+| **originRoomTitle** | **String** | The name of the room the entry was deleted from, null for anything that was not deleted out of a room. | [optional] |
+| **canShare** | **Boolean** | Whether the calling account may change who has access to the entry, and so whether offering a sharing dialog  for it makes sense. It is false in rooms whose access is fixed by the room itself, such as a private one, even  for its manager. | [optional] |
+| **shareSettings** | [**FileEntryDto_allOf_shareSettings**](#model-fileentrydtosharesettings) |  | [optional] [nullable] |
+| **security** | [**FileEntryDto_allOf_security**](#model-fileentrydtosecurity) |  | [optional] [nullable] |
+| **availableShareRights** | [**FileEntryDto_allOf_availableShareRights**](#model-fileentrydtoavailablesharerights) |  | [optional] [nullable] |
+| **requestToken** | **String** | The token of the link the entry is being read through, which is the value the external-share operations expect  and which also has to be carried by the download and preview addresses. It is null whenever the entry is not  being read through a link. | [optional] |
+| **external** | **Boolean** | Set when the link being used was made for this very entry, and false when the entry is reached through a link  to the room around it. It is null when no link is involved. | [optional] |
+| **expirationDate** | [**ApiDateTime**](#model-apidatetime) | When the link being used stops working, written with the offset of the portal&#39;s time zone. It is null for a  link that never expires and whenever no link is involved. | [optional] |
+| **isLinkExpired** | **Boolean** | Set when the link being used has already passed its expiration date, which is why the entry cannot be opened  even though it is described here. It is null when no link is involved. | [optional] |
+| **parentId** | **String** | The folder this one is listed in. For a room it is the root of the section the room lives in, and for an entry  opened through a sharing link whose real parent the caller may not read it is the root of the section with the  entries shared with them. | [optional] [nullable] |
+| **filesCount** | **Integer** (int32) | How many files lie directly in the folder, without counting the subfolders. The roots of the &#x60;Rooms&#x60;, room  templates and default templates sections always report 0, because the number is not collected for them. | [optional] |
+| **foldersCount** | **Integer** (int32) | How many subfolders lie directly in the folder. For an AI room the two service subfolders it always holds are  subtracted, so the number matches what a listing of it shows, and the roots of the &#x60;Rooms&#x60; and templates  sections report 0. | [optional] |
+| **isShareable** | **Boolean** | Whether the caller may hand out access to the folder. It is filled in only for the folder a folder-contents  answer is about, and is null in every other answer, so null says nothing about the sharing rights. | [optional] [nullable] |
+| **new** | **Integer** (int32) | How many entries inside the folder the caller has not opened yet, the number drawn as the badge on it. An  account that turned the badges off in its own settings always reads 0 here, so 0 alone does not prove that  everything has been seen. | [optional] |
+| **mute** | **Boolean** | Whether the caller silenced the notifications of this room: true means no message about its activity reaches  them. The choice belongs to the reading account rather than to the room, so two members of one room read  different values. | [optional] |
+| **tags** | **List** | The names of the tags attached to the room. Empty for a folder that is not a room, since only rooms carry  tags, and the names are the ones from the portal tag catalogue. | [optional] [nullable] |
+| **logo** | [**Logo**](#model-logo) | The addresses of the room logo in four sizes, together with the colour and the built-in cover that are drawn  when no logo was uploaded. A room without a logo answers with four empty addresses rather than with null, and  the field is null for a folder that is not a room. | [optional] |
+| **pinned** | **Boolean** | Whether the caller pinned the room to the top of their own room list. Pinning is personal and is lost when the  room is archived. | [optional] |
+| **roomType** | [**RoomType**](#model-roomtype) | The kind of the room, which decides the default access rules of its members. Null for a folder that is not a  room. | [optional] [enum: 1, 2, 5, 6, 8, 9] |
+| **private** | **Boolean** | Whether the room is a private one, which limits it to the accounts invited into it and needs encryption keys  set up for each of them. | [optional] |
+| **indexing** | **Boolean** | Whether the contents of the room are kept in an explicit numbered order, the one reported as &#x60;order&#x60; on each  entry, instead of being left to the sorting the reader asks for. | [optional] |
+| **denyDownload** | **Boolean** | Whether downloading and printing the contents of the room is forbidden, which leaves its members with viewing  and editing in the editor. | [optional] |
+| **lifetime** | [**RoomDataLifetimeDto**](#model-roomdatalifetimedto) | The rule by which the files of the room are removed once they grow old. Null when the room has no such rule,  which is also what is reported after the rule is switched off, because switching it off erases it. | [optional] |
+| **watermark** | [**WatermarkDto**](#model-watermarkdto) | The watermark stamped over the documents of the room while they are viewed and printed. Null when the room has  no watermark, and for every folder that is not a room. | [optional] |
+| **type** | [**FolderType**](#model-foldertype) | The part the folder plays inside its room: one of the service folders of the form-filling flow, or the  knowledge and result storages of an AI room. It stays null for an ordinary folder and for the room itself, so  it does not describe folders in general. | [optional] [enum: 0, 1, 2, 3, 5, 6, 8, 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36] |
+| **inRoom** | **Boolean** | Whether the caller holds the room through an invitation of their own: true for the account that created it and  for a member invited personally, false when the access comes from a group they belong to, and null for a  folder that is not a room. | [optional] [nullable] |
+| **quotaLimit** | **Long** (int64) | How much space the files of the room may take, in bytes. It is the limit set on this room, or the portal  default for rooms when none was set. Null when the tariff of the portal does not count room statistics, when  room quotas are switched off, when the room lies in the archive or the trash, or when the caller may only read  it. | [optional] [nullable] |
+| **isCustomQuota** | **Boolean** | Whether &#x60;quotaLimit&#x60; is a limit set on this room (true) or the portal default for rooms (false). Null exactly  when &#x60;quotaLimit&#x60; is null. | [optional] [nullable] |
+| **usedSpace** | **Long** (int64) | How much the files of the room take, in bytes, as of the last time the counter was recomputed. The counter is  refreshed when a file operation finishes, so a read right after an upload or a deletion can still report the  previous figure. Null for a folder that is not a room. | [optional] [nullable] |
+| **passwordProtected** | **Boolean** | Whether the sharing link the folder was opened through asks for a password that has not been entered yet.  While it is true the contents stay unreadable; send the password to &#x60;POST api/2.0/files/share/{key}/password&#x60;  first. Null when the folder was not reached through a link. | [optional] [nullable] |
+| **expired** | **Boolean** | Deprecated, read &#x60;isLinkExpired&#x60; instead: whether the sharing link the folder was opened through has run out  of its lifetime. | [optional] [nullable] |
+| **chatSettings** | [**ChatSettingsDto**](#model-chatsettingsdto) | The chat configuration of an AI room. Only the system prompt is reported here, whatever else the room stores,  and the field is null for every folder that is not an AI room. | [optional] |
+| **rootRoomType** | [**RoomType**](#model-roomtype) | The kind of the room the folder lies in. It is filled in only for the folder a folder-contents answer is  about, and only when that room is an AI room, so it is null in every other answer and for every other room  kind. | [optional] [enum: 1, 2, 5, 6, 8, 9] |
+| **saveFormAsXLSX** | **Boolean** | Whether the answers collected in this form-filling room are also gathered into a spreadsheet next to the  completed copies. Filled in for form-filling rooms only. | [optional] [nullable] |
+| **sendFormToExternalDB** | **Boolean** | Whether the answers collected in this form-filling room are also pushed into the external database configured  for the portal. Filled in for form-filling rooms only. | [optional] [nullable] |
+| **originalFormId** | **Integer** (int32) | The form the completed copies in this folder were filled from, taken from the copy submitted last. Null while  the folder holds no completed copy, and for every folder that does not collect them. | [optional] [nullable] |
+
+
+### Model ThirdPartyFolderWrapper
+The successful API response containing the ThirdPartyFolderDto object.
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+| **response** | [**ThirdPartyFolderDto**](#model-thirdpartyfolderdto) | The ThirdPartyFolderDto object returned by the operation. | [optional] |
+| **count** | **Integer** (int32) | The total number of items in the response | [optional] |
+| **links** | [**List**](#model-booleanwrapperlinks-item) | List of links related to the response | [optional] |
+| **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
+| **statusCode** | **Integer** (int32) | HTTP status code of the response (duplicate of status) | [optional] |
+
+
 ### Model ThirdPartyParams
 A third-party storage account connected to the portal.
 
@@ -13424,6 +14509,41 @@ The credentials and the title of a third-party storage account to connect or to 
 | **customerTitle** | **String** | The name the connected account is shown under in the portal. Characters that a folder title cannot hold are  replaced and the value is truncated, and a title that comes out of that empty is refused. | [required] [example: Nextcloud storage] [nullable] |
 | **providerKey** | **String** | The storage service to connect, as the &#x60;key&#x60; of &#x60;GET api/2.0/files/thirdparty/providers&#x60;; the value is matched  case-insensitively. &#x60;Nextcloud&#x60; and &#x60;ownCloud&#x60; are presets over WebDAV and are stored and reported back as  &#x60;WebDav&#x60;. | [required] [example: Nextcloud] [nullable] |
 | **providerId** | **Integer** (int32) | The account to re-authenticate instead of connecting a new one, as &#x60;providerId&#x60; of  &#x60;GET api/2.0/files/thirdparty&#x60;; both a number and its decimal string form are accepted. For an account  attached to the Rooms section only the credentials are applied, and its title and server address are kept. | [optional] [example: 12] [nullable] |
+
+
+### Model ThirdPartySaveAsPdf
+The place and the name the PDF copy of a file is stored under.
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+| **folderId** | **String** | The folder the PDF is created in; the caller has to be allowed to create files there. | [required] [example: 1] [nullable] |
+| **title** | **String** | The name of the PDF, without an extension - &#x60;.pdf&#x60; is appended. Left empty, the name of the source file is  reused with its extension replaced. | [required] [example: My Document] [nullable] |
+
+
+### Model ThirdPartyUploadSessionResponseDto
+How far a chunked upload has got, and the file it produced once the last byte has arrived.
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+| **id** | **String** | The file the parts are being written into. An upload that took over a file of the same title carries it from  the start, while an upload that creates a new file has nothing to name yet and reports 0 until the answer that  sets &#x60;uploaded&#x60; to true. | [optional] [example: 1234] [nullable] |
+| **folderId** | **String** | The folder receiving the file. It is the folder the upload was reserved against, or the sub-folder created for  it when the reservation declared a relative path. | [optional] [example: 10] [nullable] |
+| **version** | **Integer** (int32) | The revision the content is being written as: 1 for a file that did not exist, the next number when the upload  took over a file of the same title, and the unchanged current number for an upload opened over an existing  file, which replaces its content in place. | [optional] [example: 1] |
+| **title** | **String** | The title the file is stored under, after characters a title cannot hold were replaced and, where a second  copy was asked for, a numeric suffix was added - so it can differ from the name that was sent. | [optional] [example: Quarterly report.docx] [nullable] |
+| **providerKey** | **String** | The third-party service holding the destination, such as &#x60;GoogleDrive&#x60; or &#x60;OneDrive&#x60;, and null for a folder  stored on the portal itself. | [optional] [example: GoogleDrive] [nullable] |
+| **uploaded** | **Boolean** | False while bytes are still missing, when the answer only reports progress; true in the answer that reports  the stored file, which is also the answer that arrives with 201. | [optional] [example: false] |
+| **file** | [**ThirdPartyFileDto**](#model-thirdpartyfiledto) | The file as it stands. It is filled in both answers, but while &#x60;uploaded&#x60; is false it describes a file that  has not been written yet, so its identifier, size and links are only worth reading once that flag turns true. | [optional] |
+
+
+### Model ThirdPartyUploadSessionResponseWrapper
+The successful API response containing the ThirdPartyUploadSessionResponseDto object.
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+| **response** | [**ThirdPartyUploadSessionResponseDto**](#model-thirdpartyuploadsessionresponsedto) | The ThirdPartyUploadSessionResponseDto object returned by the operation. | [optional] |
+| **count** | **Integer** (int32) | The total number of items in the response | [optional] |
+| **links** | [**List**](#model-booleanwrapperlinks-item) | List of links related to the response | [optional] |
+| **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
+| **statusCode** | **Integer** (int32) | HTTP status code of the response (duplicate of status) | [optional] |
 
 
 ### Model Thumbnail
@@ -13485,7 +14605,7 @@ The fields of a room that a partial update changes.
 | **saveFormAsXLSX** | **Boolean** | For a form filling room, whether the collected submissions are also gathered into a spreadsheet stored next to  the completed forms. With it off the submissions are kept only as the filled documents themselves. | [optional] [example: false] [nullable] |
 
 
-### Model UpdateRoomsQuotaRequestDtoInteger
+### Model UpdateRoomsQuotaRequestDto
 The rooms whose storage limit is to be changed, and the limit to give them.
 
 | Name | Type | Description | Notes |
@@ -13494,7 +14614,7 @@ The rooms whose storage limit is to be changed, and the limit to give them.
 | **quota** | **Long** (int64) | The storage each of the listed rooms may take, in bytes. It has to stay inside the portal own limit, and the  per-room quota feature has to be on, otherwise nothing is changed. | [optional] [example: 10737418240] |
 
 
-### Model UpdateRoomsRoomIdsRequestDtoInteger
+### Model UpdateRoomsRoomIdsRequestDto
 The rooms that are to go back to the default storage limit of the portal.
 
 | Name | Type | Description | Notes |
@@ -13533,7 +14653,7 @@ The successful API response containing the UploadResultDto object.
 | **statusCode** | **Integer** (int32) | HTTP status code of the response (duplicate of status) | [optional] |
 
 
-### Model UploadSessionResponseDtoInteger
+### Model UploadSessionResponseDto
 How far a chunked upload has got, and the file it produced once the last byte has arrived.
 
 | Name | Type | Description | Notes |
@@ -13544,15 +14664,15 @@ How far a chunked upload has got, and the file it produced once the last byte ha
 | **title** | **String** | The title the file is stored under, after characters a title cannot hold were replaced and, where a second  copy was asked for, a numeric suffix was added - so it can differ from the name that was sent. | [optional] [example: Quarterly report.docx] [nullable] |
 | **providerKey** | **String** | The third-party service holding the destination, such as &#x60;GoogleDrive&#x60; or &#x60;OneDrive&#x60;, and null for a folder  stored on the portal itself. | [optional] [example: GoogleDrive] [nullable] |
 | **uploaded** | **Boolean** | False while bytes are still missing, when the answer only reports progress; true in the answer that reports  the stored file, which is also the answer that arrives with 201. | [optional] [example: false] |
-| **file** | [**FileDtoInteger**](#model-filedtointeger) | The file as it stands. It is filled in both answers, but while &#x60;uploaded&#x60; is false it describes a file that  has not been written yet, so its identifier, size and links are only worth reading once that flag turns true. | [optional] |
+| **file** | [**FileDto**](#model-filedto) | The file as it stands. It is filled in both answers, but while &#x60;uploaded&#x60; is false it describes a file that  has not been written yet, so its identifier, size and links are only worth reading once that flag turns true. | [optional] |
 
 
-### Model UploadSessionResponseIntegerWrapper
-The successful API response containing the UploadSessionResponseDtoInteger object.
+### Model UploadSessionResponseWrapper
+The successful API response containing the UploadSessionResponseDto object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **response** | [**UploadSessionResponseDtoInteger**](#model-uploadsessionresponsedtointeger) | The UploadSessionResponseDtoInteger object returned by the operation. | [optional] |
+| **response** | [**UploadSessionResponseDto**](#model-uploadsessionresponsedto) | The UploadSessionResponseDto object returned by the operation. | [optional] |
 | **count** | **Integer** (int32) | The total number of items in the response | [optional] |
 | **links** | [**List**](#model-booleanwrapperlinks-item) | List of links related to the response | [optional] |
 | **status** | **Integer** (int32) | HTTP status code of the response | [optional] |
@@ -13686,7 +14806,7 @@ The answer to a report generation request: the queued task, the form whose answe
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **form** | [**FileDtoInteger**](#model-filedtointeger) | The original form the answers are collected from. It is not the produced spreadsheet - that one arrives with  the task, once the task reports completion. | [optional] |
+| **form** | [**FileDto**](#model-filedto) | The original form the answers are collected from. It is not the produced spreadsheet - that one arrives with  the task, once the task reports completion. | [optional] |
 | **task** | [**DocumentBuilderTaskDto**](#model-documentbuildertaskdto) | The queued generation. Poll it with &#x60;GET api/2.0/files/file/{fileId}/xlsx&#x60; until it reports completion, and  take the produced file from it then. | [optional] |
 | **isNewFile** | **Boolean** | True when this run creates the report file, false when an existing report is rewritten in place, which means  it keeps its id and the links already shared for it. | [optional] [example: true] |
 
@@ -13704,6 +14824,17 @@ The successful API response containing the XlsxReportResponseDto object.
 
 
 ## Authorization
+
+
+### cookieAuth
+- **Type**: API key
+- **API key parameter name**: asc_auth_key
+- **Location**: 
+
+
+### bearerAuth
+
+- **Type**: HTTP Bearer Token authentication
 
 
 ### asc_auth_key
@@ -13739,17 +14870,6 @@ The successful API response containing the XlsxReportResponseDto object.
 
 
 ### OpenId
-
-
-### cookieAuth
-- **Type**: API key
-- **API key parameter name**: asc_auth_key
-- **Location**: 
-
-
-### bearerAuth
-
-- **Type**: HTTP Bearer Token authentication
 
 
 ### x-signature

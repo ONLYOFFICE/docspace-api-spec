@@ -2,7 +2,7 @@
 
 Referenced types are defined in the [full reference](../files.md).
 
-> FileIntegerWrapper startFillingFile(fileId)
+> FileWrapper startFillingFile(fileId)
 
 `PUT /api/2.0/files/file/{fileId}/startfilling`
 
@@ -20,7 +20,7 @@ Marks a PDF form in a form-filling room as open for filling out and answers with
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The form file, with the filling properties now stored on it | [**FileIntegerWrapper**](../files.md#model-fileintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The form file, with the filling properties now stored on it | [**FileWrapper**](../files.md#model-filewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | The caller holds only form-filling access on the room, or no access to it at all | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
@@ -31,7 +31,17 @@ Marks a PDF form in a form-filling room as open for filling out and answers with
 
 ## Return type
 
-[**FileIntegerWrapper**](../files.md#model-fileintegerwrapper)
+[**FileWrapper**](../files.md#model-filewrapper)
+
+## Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **fileId** | path | **String** | The PDF form to open for filling. It has to be the form as it lies in the form-filling room itself, not a copy  kept elsewhere and not a submitted result. | [required] [example: 1] |
+
+Return type: [**ThirdPartyFileWrapper**](../files.md#model-thirdpartyfilewrapper)
 
 ## Authorization
 

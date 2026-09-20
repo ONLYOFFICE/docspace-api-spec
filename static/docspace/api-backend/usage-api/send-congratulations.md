@@ -35,7 +35,7 @@ null (empty response body)
 
 ## Authorization
 
-No authorization required
+[cookieAuth](../api.md#cookieauth), [bearerAuth](../api.md#bearerauth)
 
 ## HTTP request headers
 

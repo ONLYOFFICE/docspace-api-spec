@@ -2,7 +2,7 @@
 
 Referenced types are defined in the [full reference](../files.md).
 
-> FolderContentIntegerArrayWrapper getRootFolders(userIdOrGroupId, filterType, withoutTrash, count, startIndex, sortBy, sortOrder, filterValue)
+> FolderContentArrayWrapper getRootFolders(userIdOrGroupId, filterType, withoutTrash, count, startIndex, sortBy, sortOrder, filterValue)
 
 `GET /api/2.0/files/@root`
 
@@ -27,7 +27,7 @@ Returns every top-level section the calling account can see in one response, eac
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The sections available to the caller, each with one page of its content | [**FolderContentIntegerArrayWrapper**](../files.md#model-foldercontentintegerarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The sections available to the caller, each with one page of its content | [**FolderContentArrayWrapper**](../files.md#model-foldercontentarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | The caller is not allowed to read one of the sections | - | - |
 | **404** | One of the sections could not be resolved for this account | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
@@ -39,7 +39,7 @@ Returns every top-level section the calling account can see in one response, eac
 
 ## Return type
 
-[**FolderContentIntegerArrayWrapper**](../files.md#model-foldercontentintegerarraywrapper)
+[**FolderContentArrayWrapper**](../files.md#model-foldercontentarraywrapper)
 
 ## Authorization
 

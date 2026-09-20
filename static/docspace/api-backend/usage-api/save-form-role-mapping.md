@@ -2,7 +2,7 @@
 
 Referenced types are defined in the [full reference](../files.md).
 
-> saveFormRoleMapping(fileId, SaveFormRoleMappingDtoInteger)
+> saveFormRoleMapping(fileId, SaveFormRoleMappingDto)
 
 `POST /api/2.0/files/file/{fileId}/formrolemapping`
 
@@ -15,7 +15,7 @@ Assigns the roles of a PDF form to the people who are to fill them in, and start
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
 | **fileId** | path | **String** | The form the role mapping belongs to. Send the same value as the &#x60;formId&#x60; of the request body, which is the one the handler reads. | [required] |
-| **SaveFormRoleMappingDtoInteger** | body | [**SaveFormRoleMappingDtoInteger**](../files.md#model-saveformrolemappingdtointeger) |  | [optional] |
+| **SaveFormRoleMappingDto** | body | [**SaveFormRoleMappingDto**](../files.md#model-saveformrolemappingdto) |  | [optional] |
 
 ## Responses
 

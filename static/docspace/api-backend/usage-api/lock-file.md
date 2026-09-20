@@ -2,7 +2,7 @@
 
 Referenced types are defined in the [full reference](../files.md).
 
-> FileIntegerWrapper lockFile(fileId, LockFileParameters)
+> FileWrapper lockFile(fileId, LockFileParameters)
 
 `PUT /api/2.0/files/file/{fileId}/lock`
 
@@ -21,7 +21,7 @@ Locks a file so that nobody else can change it, or releases that lock, and answe
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The file with its lock state as it now stands | [**FileIntegerWrapper**](../files.md#model-fileintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The file with its lock state as it now stands | [**FileWrapper**](../files.md#model-filewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
@@ -31,7 +31,17 @@ Locks a file so that nobody else can change it, or releases that lock, and answe
 
 ## Return type
 
-[**FileIntegerWrapper**](../files.md#model-fileintegerwrapper)
+[**FileWrapper**](../files.md#model-filewrapper)
+
+## Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **fileId** | path | **String** | The file to lock or unlock. | [required] [example: 1] |
+
+Return type: [**ThirdPartyFileWrapper**](../files.md#model-thirdpartyfilewrapper)
 
 ## Authorization
 

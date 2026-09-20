@@ -1,6 +1,6 @@
 # aiOpenaiImagesGenerations
 
-Referenced types are defined in the [full reference](../newai.md).
+Referenced types are defined in the [full reference](../aichat.md).
 
 > Map aiOpenaiImagesGenerations(profileId, request\_body)
 
@@ -22,13 +22,13 @@ OpenAI-compatible image generation for the document editor&#39;s AI plugin, work
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | The provider&#39;s own response, relayed verbatim with its status and content type. | **Map** | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
-| **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**aiOpenaiChatCompletions_403_response**](../newai.md#model-aiopenaichatcompletions-403-response) | - |
-| **404** | No profile with this identifier exists for the caller. | [**aiOpenaiChatCompletions_403_response**](../newai.md#model-aiopenaichatcompletions-403-response) | - |
-| **413** | The request body is larger than this route accepts. | [**aiOpenaiChatCompletions_403_response**](../newai.md#model-aiopenaichatcompletions-403-response) | - |
-| **429** | Relayed verbatim from the AI provider, which is rate-limiting this portal&#39;s key. | [**aiOpenaiChatCompletions_403_response**](../newai.md#model-aiopenaichatcompletions-403-response) | - |
-| **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**aiOpenaiChatCompletions_403_response**](../newai.md#model-aiopenaichatcompletions-403-response) | - |
-| **502** | The AI provider could not be reached, or answered with a failure of its own. | [**aiOpenaiChatCompletions_403_response**](../newai.md#model-aiopenaichatcompletions-403-response) | - |
+| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](../aichat.md#model-aierrorresponse) | - |
+| **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**aiOpenaiChatCompletions_403_response**](../aichat.md#model-aiopenaichatcompletions-403-response) | - |
+| **404** | No profile with this identifier exists for the caller. | [**aiOpenaiChatCompletions_403_response**](../aichat.md#model-aiopenaichatcompletions-403-response) | - |
+| **413** | The request body is larger than this route accepts. | [**aiOpenaiChatCompletions_403_response**](../aichat.md#model-aiopenaichatcompletions-403-response) | - |
+| **429** | Relayed verbatim from the AI provider, which is rate-limiting this portal&#39;s key. | [**aiOpenaiChatCompletions_403_response**](../aichat.md#model-aiopenaichatcompletions-403-response) | - |
+| **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**aiOpenaiChatCompletions_403_response**](../aichat.md#model-aiopenaichatcompletions-403-response) | - |
+| **502** | The AI provider could not be reached, or answered with a failure of its own. | [**aiOpenaiChatCompletions_403_response**](../aichat.md#model-aiopenaichatcompletions-403-response) | - |
 
 ## Return type
 
@@ -36,7 +36,7 @@ OpenAI-compatible image generation for the document editor&#39;s AI plugin, work
 
 ## Authorization
 
-No authorization required
+[cookieAuth](../aichat.md#cookieauth), [bearerAuth](../aichat.md#bearerauth)
 
 ## HTTP request headers
 

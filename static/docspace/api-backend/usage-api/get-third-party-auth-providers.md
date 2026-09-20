@@ -36,7 +36,7 @@ Returns the third-party identity providers this portal has enabled, each with th
 
 ## Authorization
 
-No authorization required
+[cookieAuth](../people.md#cookieauth), [bearerAuth](../people.md#bearerauth)
 
 ## HTTP request headers
 

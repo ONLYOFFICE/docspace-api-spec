@@ -33,7 +33,7 @@ Lists the fields the completed forms of a form-filling room carry, each of them 
 
 ## Authorization
 
-No authorization required
+[cookieAuth](../files.md#cookieauth), [bearerAuth](../files.md#bearerauth)
 
 ## HTTP request headers
 

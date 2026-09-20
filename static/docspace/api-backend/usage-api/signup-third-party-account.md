@@ -34,7 +34,7 @@ Creates a portal profile from a third-party identity and joins the invitation th
 
 ## Authorization
 
-No authorization required
+[cookieAuth](../people.md#cookieauth), [bearerAuth](../people.md#bearerauth)
 
 ## HTTP request headers
 

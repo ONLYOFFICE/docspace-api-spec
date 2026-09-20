@@ -2,7 +2,7 @@
 
 Referenced types are defined in the [full reference](../files.md).
 
-> FileIntegerArrayWrapper changeVersionHistory(fileId, ChangeHistory)
+> FileArrayWrapper changeVersionHistory(fileId, ChangeHistory)
 
 `PUT /api/2.0/files/file/{fileId}/history`
 
@@ -21,7 +21,7 @@ Closes or reopens a revision group in the version history of a file and answers 
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The versions of the file after the change | [**FileIntegerArrayWrapper**](../files.md#model-fileintegerarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The versions of the file after the change | [**FileArrayWrapper**](../files.md#model-filearraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | The caller may not change the version history of the file | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
@@ -32,7 +32,17 @@ Closes or reopens a revision group in the version history of a file and answers 
 
 ## Return type
 
-[**FileIntegerArrayWrapper**](../files.md#model-fileintegerarraywrapper)
+[**FileArrayWrapper**](../files.md#model-filearraywrapper)
+
+## Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **fileId** | path | **String** | The file whose version history is changed. | [required] [example: 1] |
+
+Return type: [**ThirdPartyFileArrayWrapper**](../files.md#model-thirdpartyfilearraywrapper)
 
 ## Authorization
 

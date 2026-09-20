@@ -33,7 +33,7 @@ Asks the portal to build preview thumbnails for the listed files, and answers at
 
 ## Authorization
 
-No authorization required
+[cookieAuth](../files.md#cookieauth), [bearerAuth](../files.md#bearerauth)
 
 ## HTTP request headers
 

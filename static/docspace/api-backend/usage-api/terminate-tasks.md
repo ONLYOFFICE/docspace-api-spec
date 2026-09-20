@@ -33,7 +33,7 @@ Cancels a background file operation of the caller and answers with the operation
 
 ## Authorization
 
-No authorization required
+[cookieAuth](../files.md#cookieauth), [bearerAuth](../files.md#bearerauth)
 
 ## HTTP request headers
 

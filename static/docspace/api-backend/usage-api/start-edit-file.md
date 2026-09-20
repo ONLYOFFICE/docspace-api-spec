@@ -33,9 +33,18 @@ Opens an editing session on the file and answers with the document key that iden
 
 [**StringWrapper**](../files.md#model-stringwrapper)
 
+## Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **fileId** | path | **String** | The file to open the editing session on. The caller needs edit access to it. | [required] [example: 1] |
+
+
 ## Authorization
 
-No authorization required
+[cookieAuth](../files.md#cookieauth), [bearerAuth](../files.md#bearerauth)
 
 ## HTTP request headers
 

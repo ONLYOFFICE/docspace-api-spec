@@ -2,7 +2,7 @@
 
 Referenced types are defined in the [full reference](../files.md).
 
-> FolderStringWrapper saveThirdParty(ThirdPartyRequestDto)
+> ThirdPartyFolderWrapper saveThirdParty(ThirdPartyRequestDto)
 
 `POST /api/2.0/files/thirdparty`
 
@@ -20,7 +20,7 @@ Connects an account at a third-party storage service to the portal, or re-authen
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The root folder of the connected account | [**FolderStringWrapper**](../files.md#model-folderstringwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The root folder of the connected account | [**ThirdPartyFolderWrapper**](../files.md#model-thirdpartyfolderwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
@@ -30,7 +30,7 @@ Connects an account at a third-party storage service to the portal, or re-authen
 
 ## Return type
 
-[**FolderStringWrapper**](../files.md#model-folderstringwrapper)
+[**ThirdPartyFolderWrapper**](../files.md#model-thirdpartyfolderwrapper)
 
 ## Authorization
 

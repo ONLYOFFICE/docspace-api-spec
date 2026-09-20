@@ -2,7 +2,7 @@
 
 Referenced types are defined in the [full reference](../files.md).
 
-> FolderStringWrapper getBackupThirdPartyAccount()
+> ThirdPartyFolderWrapper getBackupThirdPartyAccount()
 
 `GET /api/2.0/files/thirdparty/backup`
 
@@ -17,7 +17,7 @@ This endpoint does not need any parameter.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The root folder of the backup storage account, or null when none is connected | [**FolderStringWrapper**](../files.md#model-folderstringwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The root folder of the backup storage account, or null when none is connected | [**ThirdPartyFolderWrapper**](../files.md#model-thirdpartyfolderwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
@@ -26,7 +26,7 @@ This endpoint does not need any parameter.
 
 ## Return type
 
-[**FolderStringWrapper**](../files.md#model-folderstringwrapper)
+[**ThirdPartyFolderWrapper**](../files.md#model-thirdpartyfolderwrapper)
 
 ## Authorization
 

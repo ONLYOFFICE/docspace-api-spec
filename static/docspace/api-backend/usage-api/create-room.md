@@ -2,7 +2,7 @@
 
 Referenced types are defined in the [full reference](../files.md).
 
-> FolderIntegerWrapper createRoom(CreateRoomRequestDto)
+> FolderWrapper createRoom(CreateRoomRequestDto)
 
 `POST /api/2.0/files/rooms`
 
@@ -20,7 +20,7 @@ Creates a room in the portal Rooms section and returns it. &#x60;roomType&#x60; 
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The created room with its id, type, settings, logo and tags | [**FolderIntegerWrapper**](../files.md#model-folderintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The created room with its id, type, settings, logo and tags | [**FolderWrapper**](../files.md#model-folderwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
@@ -30,7 +30,7 @@ Creates a room in the portal Rooms section and returns it. &#x60;roomType&#x60; 
 
 ## Return type
 
-[**FolderIntegerWrapper**](../files.md#model-folderintegerwrapper)
+[**FolderWrapper**](../files.md#model-folderwrapper)
 
 ## Authorization
 

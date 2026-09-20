@@ -34,7 +34,7 @@ Queues a background job that packs the requested files and folders into a single
 
 ## Authorization
 
-No authorization required
+[cookieAuth](../files.md#cookieauth), [bearerAuth](../files.md#bearerauth)
 
 ## HTTP request headers
 

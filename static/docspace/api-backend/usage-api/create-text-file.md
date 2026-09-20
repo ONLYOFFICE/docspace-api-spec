@@ -2,7 +2,7 @@
 
 Referenced types are defined in the [full reference](../files.md).
 
-> FileIntegerWrapper createTextFile(folderId, CreateTextOrHtmlFile)
+> FileWrapper createTextFile(folderId, CreateTextOrHtmlFile)
 
 `POST /api/2.0/files/{folderId}/text`
 
@@ -21,7 +21,7 @@ Creates a text file in the folder named in the route out of the text passed as t
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The created or updated text file | [**FileIntegerWrapper**](../files.md#model-fileintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The created or updated text file | [**FileWrapper**](../files.md#model-filewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
@@ -31,7 +31,17 @@ Creates a text file in the folder named in the route out of the text passed as t
 
 ## Return type
 
-[**FileIntegerWrapper**](../files.md#model-fileintegerwrapper)
+[**FileWrapper**](../files.md#model-filewrapper)
+
+## Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **folderId** | path | **String** | The folder the file is created in. | [required] [example: 1] |
+
+Return type: [**ThirdPartyFileWrapper**](../files.md#model-thirdpartyfilewrapper)
 
 ## Authorization
 

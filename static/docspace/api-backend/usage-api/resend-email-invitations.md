@@ -33,6 +33,15 @@ Sends the room invitation email again to members who were invited but have not j
 
 null (empty response body)
 
+## Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **id** | path | **String** | The room whose invitations are resent, named by the identifier that &#x60;GET api/2.0/files/rooms&#x60; reports for it. | [required] [example: 1] |
+
+
 ## Authorization
 
 [Basic](../files.md#basic), [OAuth2](../files.md#oauth2) (scopes: read, write), [ApiKeyBearer](../files.md#apikeybearer), [asc_auth_key](../files.md#asc_auth_key), [Bearer](../files.md#bearer), [OpenId](../files.md#openid)

@@ -2,7 +2,7 @@
 
 Referenced types are defined in the [full reference](../files.md).
 
-> FillingFormResultIntegerWrapper getFillResult(fillingSessionId)
+> FillingFormResultWrapper getFillResult(fillingSessionId)
 
 `GET /api/2.0/files/file/fillresult`
 
@@ -20,7 +20,7 @@ Answers with the outcome of one completed form-filling session: the filled copy 
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The result of the completed form-filling session | [**FillingFormResultIntegerWrapper**](../files.md#model-fillingformresultintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The result of the completed form-filling session | [**FillingFormResultWrapper**](../files.md#model-fillingformresultwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **400** | Bad Request. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
@@ -29,11 +29,11 @@ Answers with the outcome of one completed form-filling session: the filled copy 
 
 ## Return type
 
-[**FillingFormResultIntegerWrapper**](../files.md#model-fillingformresultintegerwrapper)
+[**FillingFormResultWrapper**](../files.md#model-fillingformresultwrapper)
 
 ## Authorization
 
-No authorization required
+[cookieAuth](../files.md#cookieauth), [bearerAuth](../files.md#bearerauth)
 
 ## HTTP request headers
 

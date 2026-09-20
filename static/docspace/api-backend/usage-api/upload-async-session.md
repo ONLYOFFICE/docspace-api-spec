@@ -2,7 +2,7 @@
 
 Referenced types are defined in the [full reference](../files.md).
 
-> ChunkedUploadSessionResponseIntegerWrapper uploadAsyncSession(folderId, sessionId, ChunkNumber, File)
+> ChunkedUploadSessionResponseResponseWrapper uploadAsyncSession(folderId, sessionId, ChunkNumber, File)
 
 `POST /api/2.0/files/{folderId}/session/{sessionId}/upload`
 
@@ -23,7 +23,7 @@ Stores one part of a file under the number given in &#x60;chunkNumber&#x60;, whi
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The session with its progress after the part was stored | [**ChunkedUploadSessionResponseIntegerWrapper**](../files.md#model-chunkeduploadsessionresponseintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The session with its progress after the part was stored | [**ChunkedUploadSessionResponseResponseWrapper**](../files.md#model-chunkeduploadsessionresponseresponsewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
@@ -33,7 +33,17 @@ Stores one part of a file under the number given in &#x60;chunkNumber&#x60;, whi
 
 ## Return type
 
-[**ChunkedUploadSessionResponseIntegerWrapper**](../files.md#model-chunkeduploadsessionresponseintegerwrapper)
+[**ChunkedUploadSessionResponseResponseWrapper**](../files.md#model-chunkeduploadsessionresponseresponsewrapper)
+
+## Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **folderId** | path | **String** | The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id. | [required] [example: 1] |
+
+Return type: [**ThirdPartyChunkedUploadSessionResponseResponseWrapper**](../files.md#model-thirdpartychunkeduploadsessionresponseresponsewrapper)
 
 ## Authorization
 

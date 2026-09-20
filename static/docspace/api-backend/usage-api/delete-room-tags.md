@@ -2,7 +2,7 @@
 
 Referenced types are defined in the [full reference](../files.md).
 
-> FolderIntegerWrapper deleteRoomTags(id, BatchTagsRequestDto)
+> FolderWrapper deleteRoomTags(id, BatchTagsRequestDto)
 
 `DELETE /api/2.0/files/rooms/{id}/tags`
 
@@ -21,7 +21,7 @@ Detaches the named tags from a room and returns the room with its remaining tag 
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The room with its tag set after the change | [**FolderIntegerWrapper**](../files.md#model-folderintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The room with its tag set after the change | [**FolderWrapper**](../files.md#model-folderwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | The caller may not edit this room, or the room is archived | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
@@ -32,7 +32,17 @@ Detaches the named tags from a room and returns the room with its remaining tag 
 
 ## Return type
 
-[**FolderIntegerWrapper**](../files.md#model-folderintegerwrapper)
+[**FolderWrapper**](../files.md#model-folderwrapper)
+
+## Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **id** | path | **String** | The room whose tags are changed, named by the identifier that &#x60;GET api/2.0/files/rooms&#x60; reports for it. | [required] [example: 1] |
+
+Return type: [**ThirdPartyFolderWrapper**](../files.md#model-thirdpartyfolderwrapper)
 
 ## Authorization
 

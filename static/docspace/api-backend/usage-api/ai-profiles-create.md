@@ -1,6 +1,6 @@
 # aiProfilesCreate
 
-Referenced types are defined in the [full reference](../newai.md).
+Referenced types are defined in the [full reference](../aichat.md).
 
 > AiProfileMutationResult aiProfilesCreate(AiCreateProfileInput)
 
@@ -14,26 +14,26 @@ Creates an AI provider profile - the endpoint, credentials and model that a chat
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **AiCreateProfileInput** | body | [**AiCreateProfileInput**](../newai.md#model-aicreateprofileinput) |  | [required] |
+| **AiCreateProfileInput** | body | [**AiCreateProfileInput**](../aichat.md#model-aicreateprofileinput) |  | [required] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Whether the profile was created, with it in &#x60;profile&#x60;. A refusal is reported in &#x60;error&#x60; rather than as a status. | [**AiProfileMutationResult**](../newai.md#model-aiprofilemutationresult) | - |
-| **400** | The provider URL is missing, malformed, or points at a private network address. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
-| **403** | AI profiles are read-only on this portal because they are managed by the AI gateway. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
-| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
-| **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
+| **200** | Whether the profile was created, with it in &#x60;profile&#x60;. A refusal is reported in &#x60;error&#x60; rather than as a status. | [**AiProfileMutationResult**](../aichat.md#model-aiprofilemutationresult) | - |
+| **400** | The provider URL is missing, malformed, or points at a private network address. | [**AiErrorResponse**](../aichat.md#model-aierrorresponse) | - |
+| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](../aichat.md#model-aierrorresponse) | - |
+| **403** | AI profiles are read-only on this portal because they are managed by the AI gateway. | [**AiErrorResponse**](../aichat.md#model-aierrorresponse) | - |
+| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](../aichat.md#model-aierrorresponse) | - |
+| **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](../aichat.md#model-aierrorresponse) | - |
 
 ## Return type
 
-[**AiProfileMutationResult**](../newai.md#model-aiprofilemutationresult)
+[**AiProfileMutationResult**](../aichat.md#model-aiprofilemutationresult)
 
 ## Authorization
 
-No authorization required
+[cookieAuth](../aichat.md#cookieauth), [bearerAuth](../aichat.md#bearerauth)
 
 ## HTTP request headers
 

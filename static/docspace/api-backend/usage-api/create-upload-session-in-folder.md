@@ -2,7 +2,7 @@
 
 Referenced types are defined in the [full reference](../files.md).
 
-> ChunkedUploadSessionResponseIntegerWrapper createUploadSessionInFolder(folderId, SessionRequest)
+> ChunkedUploadSessionResponseResponseWrapper createUploadSessionInFolder(folderId, SessionRequest)
 
 `POST /api/2.0/files/{folderId}/session`
 
@@ -21,7 +21,7 @@ Opens a chunked upload session for a file in the folder named by the path and re
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The created upload session | [**ChunkedUploadSessionResponseIntegerWrapper**](../files.md#model-chunkeduploadsessionresponseintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The created upload session | [**ChunkedUploadSessionResponseResponseWrapper**](../files.md#model-chunkeduploadsessionresponseresponsewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
@@ -31,7 +31,17 @@ Opens a chunked upload session for a file in the folder named by the path and re
 
 ## Return type
 
-[**ChunkedUploadSessionResponseIntegerWrapper**](../files.md#model-chunkeduploadsessionresponseintegerwrapper)
+[**ChunkedUploadSessionResponseResponseWrapper**](../files.md#model-chunkeduploadsessionresponseresponsewrapper)
+
+## Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **folderId** | path | **String** | The folder that receives the file; take the id from a listing such as &#x60;GET api/2.0/files/@root&#x60;. A room or an  ordinary folder inside one is accepted, a section root is not. | [required] [example: 1] |
+
+Return type: [**ThirdPartyChunkedUploadSessionResponseResponseWrapper**](../files.md#model-thirdpartychunkeduploadsessionresponseresponsewrapper)
 
 ## Authorization
 

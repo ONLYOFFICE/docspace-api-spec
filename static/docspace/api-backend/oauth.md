@@ -107,7 +107,7 @@ Exchanges an authorization code for an access token. The request is form-encoded
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -736,7 +736,7 @@ Returns the same consent-facing client information as the signed read, but witho
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -770,7 +770,7 @@ null (empty response body)
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -997,6 +997,17 @@ Client update request containing modified client details
 ## Authorization
 
 
+### cookieAuth
+- **Type**: API key
+- **API key parameter name**: asc_auth_key
+- **Location**: 
+
+
+### bearerAuth
+
+- **Type**: HTTP Bearer Token authentication
+
+
 ### asc_auth_key
 - **Type**: API key
 - **API key parameter name**: asc_auth_key
@@ -1030,17 +1041,6 @@ Client update request containing modified client details
 
 
 ### OpenId
-
-
-### cookieAuth
-- **Type**: API key
-- **API key parameter name**: asc_auth_key
-- **Location**: 
-
-
-### bearerAuth
-
-- **Type**: HTTP Bearer Token authentication
 
 
 ### x-signature

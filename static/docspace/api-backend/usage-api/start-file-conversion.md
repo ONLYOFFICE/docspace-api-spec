@@ -2,7 +2,7 @@
 
 Referenced types are defined in the [full reference](../files.md).
 
-> ConversationResultArrayWrapper startFileConversion(fileId, CheckConversionRequestDtoInteger)
+> ConversationResultArrayWrapper startFileConversion(fileId, CheckConversionRequestDto)
 
 `PUT /api/2.0/files/file/{fileId}/checkconversion`
 
@@ -15,7 +15,7 @@ Queues the conversion of a file into the portal&#39;s own editable format and an
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
 | **fileId** | path | **Integer** (int32) | The file to convert. | [required] [example: 1] |
-| **CheckConversionRequestDtoInteger** | body | [**CheckConversionRequestDtoInteger**](../files.md#model-checkconversionrequestdtointeger) | The parameters of the conversion. The whole body may be omitted, in which case the defaults of the portal  apply. | [optional] |
+| **CheckConversionRequestDto** | body | [**CheckConversionRequestDto**](../files.md#model-checkconversionrequestdto) | The parameters of the conversion. The whole body may be omitted, in which case the defaults of the portal  apply. | [optional] |
 
 ## Responses
 
@@ -32,6 +32,16 @@ Queues the conversion of a file into the portal&#39;s own editable format and an
 ## Return type
 
 [**ConversationResultArrayWrapper**](../files.md#model-conversationresultarraywrapper)
+
+## Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **fileId** | path | **String** | The file to convert. | [required] [example: 1] |
+| **ThirdPartyCheckConversionRequestDto** | body | [**ThirdPartyCheckConversionRequestDto**](../files.md#model-thirdpartycheckconversionrequestdto) | The parameters of the conversion. The whole body may be omitted, in which case the defaults of the portal  apply. | [optional] |
+
 
 ## Authorization
 

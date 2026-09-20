@@ -2,7 +2,7 @@
 
 Referenced types are defined in the [full reference](../files.md).
 
-> FolderIntegerWrapper unpinRoom(id)
+> FolderWrapper unpinRoom(id)
 
 `PUT /api/2.0/files/rooms/{id}/unpin`
 
@@ -20,7 +20,7 @@ Removes a room from the pinned group of the calling account and returns the room
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The room with its pinned flag cleared for the caller | [**FolderIntegerWrapper**](../files.md#model-folderintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The room with its pinned flag cleared for the caller | [**FolderWrapper**](../files.md#model-folderwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
@@ -30,7 +30,17 @@ Removes a room from the pinned group of the calling account and returns the room
 
 ## Return type
 
-[**FolderIntegerWrapper**](../files.md#model-folderintegerwrapper)
+[**FolderWrapper**](../files.md#model-folderwrapper)
+
+## Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **id** | path | **String** | The room to act on, named by the identifier that &#x60;GET api/2.0/files/rooms&#x60; reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. | [required] [example: 1] |
+
+Return type: [**ThirdPartyFolderWrapper**](../files.md#model-thirdpartyfolderwrapper)
 
 ## Authorization
 

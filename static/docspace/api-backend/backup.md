@@ -526,7 +526,7 @@ Reports the state of the restoring job, and is the operation to poll after  &#x6
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -927,6 +927,17 @@ The successful API response containing the ScheduleDto object.
 ## Authorization
 
 
+### cookieAuth
+- **Type**: API key
+- **API key parameter name**: asc_auth_key
+- **Location**: 
+
+
+### bearerAuth
+
+- **Type**: HTTP Bearer Token authentication
+
+
 ### asc_auth_key
 - **Type**: API key
 - **API key parameter name**: asc_auth_key
@@ -960,17 +971,6 @@ The successful API response containing the ScheduleDto object.
 
 
 ### OpenId
-
-
-### cookieAuth
-- **Type**: API key
-- **API key parameter name**: asc_auth_key
-- **Location**: 
-
-
-### bearerAuth
-
-- **Type**: HTTP Bearer Token authentication
 
 
 ### x-signature

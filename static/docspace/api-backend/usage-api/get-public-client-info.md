@@ -34,7 +34,7 @@ Returns the same consent-facing client information as the signed read, but witho
 
 ## Authorization
 
-No authorization required
+[cookieAuth](../oauth.md#cookieauth), [bearerAuth](../oauth.md#bearerauth)
 
 ## HTTP request headers
 

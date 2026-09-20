@@ -33,7 +33,7 @@ Returns the background file operations of the caller that are still running or w
 
 ## Authorization
 
-No authorization required
+[cookieAuth](../files.md#cookieauth), [bearerAuth](../files.md#bearerauth)
 
 ## HTTP request headers
 

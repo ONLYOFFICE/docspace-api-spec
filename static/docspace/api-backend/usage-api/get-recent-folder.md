@@ -2,7 +2,7 @@
 
 Referenced types are defined in the [full reference](../files.md).
 
-> FolderContentIntegerWrapper getRecentFolder(userIdOrGroupId, filterType, excludeSubject, applyFilterOption, searchArea, extension, count, startIndex, sortBy, sortOrder, filterValue)
+> FolderContentWrapper getRecentFolder(userIdOrGroupId, filterType, excludeSubject, applyFilterOption, searchArea, extension, count, startIndex, sortBy, sortOrder, filterValue)
 
 `GET /api/2.0/files/recent`
 
@@ -30,7 +30,7 @@ Returns the Recent section: the files the calling account has opened lately. The
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The Recent section with one page of the files the caller opened lately | [**FolderContentIntegerWrapper**](../files.md#model-foldercontentintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The Recent section with one page of the files the caller opened lately | [**FolderContentWrapper**](../files.md#model-foldercontentwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | The caller is not allowed to read the Recent section | - | - |
 | **404** | The Recent section could not be resolved for this account | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
@@ -42,7 +42,7 @@ Returns the Recent section: the files the calling account has opened lately. The
 
 ## Return type
 
-[**FolderContentIntegerWrapper**](../files.md#model-foldercontentintegerwrapper)
+[**FolderContentWrapper**](../files.md#model-foldercontentwrapper)
 
 ## Authorization
 

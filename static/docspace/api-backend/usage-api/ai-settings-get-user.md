@@ -1,6 +1,6 @@
 # aiSettingsGetUser
 
-Referenced types are defined in the [full reference](../newai.md).
+Referenced types are defined in the [full reference](../aichat.md).
 
 > AiAiUserSettingsWrapper aiSettingsGetUser()
 
@@ -17,18 +17,18 @@ This endpoint does not need any parameter.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The calling user&#39;s AI settings. | [**AiAiUserSettingsWrapper**](../newai.md#model-aiaiusersettingswrapper) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
-| **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
-| **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
+| **200** | The calling user&#39;s AI settings. | [**AiAiUserSettingsWrapper**](../aichat.md#model-aiaiusersettingswrapper) | - |
+| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](../aichat.md#model-aierrorresponse) | - |
+| **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](../aichat.md#model-aierrorresponse) | - |
+| **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](../aichat.md#model-aierrorresponse) | - |
 
 ## Return type
 
-[**AiAiUserSettingsWrapper**](../newai.md#model-aiaiusersettingswrapper)
+[**AiAiUserSettingsWrapper**](../aichat.md#model-aiaiusersettingswrapper)
 
 ## Authorization
 
-No authorization required
+[cookieAuth](../aichat.md#cookieauth), [bearerAuth](../aichat.md#bearerauth)
 
 ## HTTP request headers
 

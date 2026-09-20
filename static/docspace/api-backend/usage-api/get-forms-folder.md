@@ -2,7 +2,7 @@
 
 Referenced types are defined in the [full reference](../files.md).
 
-> FolderContentIntegerWrapper getFormsFolder(userIdOrGroupId, filterType, count, startIndex, sortBy, sortOrder, filterValue)
+> FolderContentWrapper getFormsFolder(userIdOrGroupId, filterType, count, startIndex, sortBy, sortOrder, filterValue)
 
 `GET /api/2.0/files/@forms`
 
@@ -26,7 +26,7 @@ Returns the Forms section: the flat list of form-filling rooms the caller may re
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The Forms section with one page of the form-filling rooms available to the caller | [**FolderContentIntegerWrapper**](../files.md#model-foldercontentintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The Forms section with one page of the form-filling rooms available to the caller | [**FolderContentWrapper**](../files.md#model-foldercontentwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | The caller is not allowed to read the Forms section | - | - |
 | **404** | The Forms section could not be resolved for this account | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
@@ -38,7 +38,7 @@ Returns the Forms section: the flat list of form-filling rooms the caller may re
 
 ## Return type
 
-[**FolderContentIntegerWrapper**](../files.md#model-foldercontentintegerwrapper)
+[**FolderContentWrapper**](../files.md#model-foldercontentwrapper)
 
 ## Authorization
 

@@ -2,7 +2,7 @@
 
 Referenced types are defined in the [full reference](../files.md).
 
-> FileReferenceWrapper getReferenceData(GetReferenceDataDtoInteger)
+> FileReferenceWrapper getReferenceData(GetReferenceDataDto)
 
 `POST /api/2.0/files/file/referencedata`
 
@@ -14,7 +14,7 @@ Resolves a reference that a formula in one spreadsheet makes to another document
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **GetReferenceDataDtoInteger** | body | [**GetReferenceDataDtoInteger**](../files.md#model-getreferencedatadtointeger) |  | [optional] |
+| **GetReferenceDataDto** | body | [**GetReferenceDataDto**](../files.md#model-getreferencedatadto) |  | [optional] |
 
 ## Responses
 

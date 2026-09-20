@@ -2,7 +2,7 @@
 
 Referenced types are defined in the [full reference](../files.md).
 
-> FolderIntegerArrayWrapper resetRoomQuota(UpdateRoomsRoomIdsRequestDtoInteger)
+> FolderArrayWrapper resetRoomQuota(UpdateRoomsRoomIdsRequestDto)
 
 `PUT /api/2.0/files/rooms/resetquota`
 
@@ -14,13 +14,13 @@ Returns every listed room to the default room quota of the portal and streams th
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **UpdateRoomsRoomIdsRequestDtoInteger** | body | [**UpdateRoomsRoomIdsRequestDtoInteger**](../files.md#model-updateroomsroomidsrequestdtointeger) |  | [optional] |
+| **UpdateRoomsRoomIdsRequestDto** | body | [**UpdateRoomsRoomIdsRequestDto**](../files.md#model-updateroomsroomidsrequestdto) |  | [optional] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The rooms as they are after the default limit was restored | [**FolderIntegerArrayWrapper**](../files.md#model-folderintegerarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The rooms as they are after the default limit was restored | [**FolderArrayWrapper**](../files.md#model-folderarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
@@ -30,7 +30,7 @@ Returns every listed room to the default room quota of the portal and streams th
 
 ## Return type
 
-[**FolderIntegerArrayWrapper**](../files.md#model-folderintegerarraywrapper)
+[**FolderArrayWrapper**](../files.md#model-folderarraywrapper)
 
 ## Authorization
 

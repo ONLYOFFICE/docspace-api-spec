@@ -1,8 +1,8 @@
 # aiAgentsCreate
 
-Referenced types are defined in the [full reference](../newai.md).
+Referenced types are defined in the [full reference](../aichat.md).
 
-> AiFolderIntegerWrapper aiAgentsCreate(aiAgentsCreate\_request)
+> AiFolderWrapper aiAgentsCreate(aiAgentsCreate\_request)
 
 `POST /api/2.0/ai/agents`
 
@@ -14,26 +14,26 @@ Creates an AI agent room and binds a model to it, in that order. &#x60;profileId
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **aiAgentsCreate\_request** | body | [**aiAgentsCreate_request**](../newai.md#model-aiagentscreate-request-body) |  | [required] |
+| **aiAgentsCreate\_request** | body | [**aiAgentsCreate_request**](../aichat.md#model-aiagentscreate-request-body) |  | [required] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The created agent room, with the model already bound to it. | [**AiFolderIntegerWrapper**](../newai.md#model-aifolderintegerwrapper) | - |
-| **400** | &#x60;profileId&#x60; is missing, is not a UUID, names no existing profile, or names one that does not support chat; or &#x60;prompt&#x60; is missing. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
-| **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
-| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
-| **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
+| **200** | The created agent room, with the model already bound to it. | [**AiFolderWrapper**](../aichat.md#model-aifolderwrapper) | - |
+| **400** | &#x60;profileId&#x60; is missing, is not a UUID, names no existing profile, or names one that does not support chat; or &#x60;prompt&#x60; is missing. | [**AiErrorResponse**](../aichat.md#model-aierrorresponse) | - |
+| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](../aichat.md#model-aierrorresponse) | - |
+| **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](../aichat.md#model-aierrorresponse) | - |
+| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](../aichat.md#model-aierrorresponse) | - |
+| **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](../aichat.md#model-aierrorresponse) | - |
 
 ## Return type
 
-[**AiFolderIntegerWrapper**](../newai.md#model-aifolderintegerwrapper)
+[**AiFolderWrapper**](../aichat.md#model-aifolderwrapper)
 
 ## Authorization
 
-No authorization required
+[cookieAuth](../aichat.md#cookieauth), [bearerAuth](../aichat.md#bearerauth)
 
 ## HTTP request headers
 

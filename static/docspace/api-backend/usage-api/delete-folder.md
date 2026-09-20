@@ -33,6 +33,15 @@ Queues the deletion of one folder together with everything inside it, and answer
 
 [**FileOperationArrayWrapper**](../files.md#model-fileoperationarraywrapper)
 
+## Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **folderId** | path | **String** | The folder to delete, together with everything it holds. | [required] [example: 10] |
+
+
 ## Authorization
 
 [Basic](../files.md#basic), [OAuth2](../files.md#oauth2) (scopes: read, write), [ApiKeyBearer](../files.md#apikeybearer), [asc_auth_key](../files.md#asc_auth_key), [Bearer](../files.md#bearer), [OpenId](../files.md#openid)

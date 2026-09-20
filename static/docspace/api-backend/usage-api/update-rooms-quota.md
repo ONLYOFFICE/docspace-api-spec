@@ -2,7 +2,7 @@
 
 Referenced types are defined in the [full reference](../files.md).
 
-> FolderIntegerArrayWrapper updateRoomsQuota(UpdateRoomsQuotaRequestDtoInteger)
+> FolderArrayWrapper updateRoomsQuota(UpdateRoomsQuotaRequestDto)
 
 `PUT /api/2.0/files/rooms/roomquota`
 
@@ -14,13 +14,13 @@ Sets the same custom storage limit, in bytes, on every listed room and streams t
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **UpdateRoomsQuotaRequestDtoInteger** | body | [**UpdateRoomsQuotaRequestDtoInteger**](../files.md#model-updateroomsquotarequestdtointeger) |  | [optional] |
+| **UpdateRoomsQuotaRequestDto** | body | [**UpdateRoomsQuotaRequestDto**](../files.md#model-updateroomsquotarequestdto) |  | [optional] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The rooms as they are after the new limit was applied | [**FolderIntegerArrayWrapper**](../files.md#model-folderintegerarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The rooms as they are after the new limit was applied | [**FolderArrayWrapper**](../files.md#model-folderarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
@@ -30,7 +30,7 @@ Sets the same custom storage limit, in bytes, on every listed room and streams t
 
 ## Return type
 
-[**FolderIntegerArrayWrapper**](../files.md#model-folderintegerarraywrapper)
+[**FolderArrayWrapper**](../files.md#model-folderarraywrapper)
 
 ## Authorization
 

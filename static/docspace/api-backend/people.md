@@ -861,6 +861,15 @@ Returns the groups that can be given access to the file with the ID given in the
 
 [**GroupArrayWrapper**](#model-grouparraywrapper)
 
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **id** | path | **String** | The ID of the room, folder or file whose access the search is run against, taken from the route. It is an  integer for an entry stored in DocSpace and a provider-specific string for an entry in a connected  third-party storage. | [required] [example: 1234] |
+
+
 #### Authorization
 
 [Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
@@ -908,6 +917,15 @@ Returns the groups that can be given access to the folder with the ID given in t
 
 [**GroupArrayWrapper**](#model-grouparraywrapper)
 
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **id** | path | **String** | The ID of the room, folder or file whose access the search is run against, taken from the route. It is an  integer for an entry stored in DocSpace and a provider-specific string for an entry in a connected  third-party storage. | [required] [example: 1234] |
+
+
 #### Authorization
 
 [Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
@@ -954,6 +972,15 @@ Returns the groups that can be given access to the room with the ID given in the
 #### Return type
 
 [**GroupArrayWrapper**](#model-grouparraywrapper)
+
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **id** | path | **String** | The ID of the room, folder or file whose access the search is run against, taken from the route. It is an  integer for an entry stored in DocSpace and a provider-specific string for an entry in a connected  third-party storage. | [required] [example: 1234] |
+
 
 #### Authorization
 
@@ -1220,7 +1247,7 @@ Emails a password recovery link to an address, and is the entry point of the rec
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -2175,6 +2202,15 @@ Searches the portal users and groups that can be given access to the file with t
 
 [**IAccountEntryArrayWrapper**](#model-iaccountentryarraywrapper)
 
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **id** | path | **String** | The ID of the room, folder or file whose access the search is run against, taken from the route. It is an  integer for an entry stored in DocSpace and a provider-specific string for an entry in a connected  third-party storage. | [required] [example: 1234] |
+
+
 #### Authorization
 
 [Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
@@ -2230,6 +2266,15 @@ Searches the portal users and groups that can be given access to the folder with
 
 [**IAccountEntryArrayWrapper**](#model-iaccountentryarraywrapper)
 
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **id** | path | **String** | The ID of the room, folder or file whose access the search is run against, taken from the route. It is an  integer for an entry stored in DocSpace and a provider-specific string for an entry in a connected  third-party storage. | [required] [example: 1234] |
+
+
 #### Authorization
 
 [Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
@@ -2284,6 +2329,15 @@ Searches the portal users and groups that can be given access to the room with t
 #### Return type
 
 [**IAccountEntryArrayWrapper**](#model-iaccountentryarraywrapper)
+
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **id** | path | **String** | The ID of the room, folder or file whose access the search is run against, taken from the route. It is an  integer for an entry stored in DocSpace and a provider-specific string for an entry in a connected  third-party storage. | [required] [example: 1234] |
+
 
 #### Authorization
 
@@ -2445,6 +2499,15 @@ Returns the accounts that are relevant to the file with the ID given in the rout
 
 [**EmployeeFullArrayWrapper**](#model-employeefullarraywrapper)
 
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **id** | path | **String** | The ID of the room, folder or file the search is run against, taken from the route. It is an integer for an  entry stored in DocSpace and a provider-specific string for an entry in a connected third-party storage. | [required] [example: 1234] |
+
+
 #### Authorization
 
 [Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
@@ -2500,6 +2563,15 @@ Returns the accounts that are relevant to the folder with the ID given in the ro
 
 [**EmployeeFullArrayWrapper**](#model-employeefullarraywrapper)
 
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **id** | path | **String** | The ID of the room, folder or file the search is run against, taken from the route. It is an integer for an  entry stored in DocSpace and a provider-specific string for an entry in a connected third-party storage. | [required] [example: 1234] |
+
+
 #### Authorization
 
 [Basic](#basic), [OAuth2](#oauth2) (scopes: read, write), [ApiKeyBearer](#apikeybearer), [asc_auth_key](#asc_auth_key), [Bearer](#bearer), [OpenId](#openid)
@@ -2554,6 +2626,15 @@ Returns the accounts that are relevant to the room with the ID given in the rout
 #### Return type
 
 [**EmployeeFullArrayWrapper**](#model-employeefullarraywrapper)
+
+#### Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **id** | path | **String** | The ID of the room, folder or file the search is run against, taken from the route. It is an integer for an  entry stored in DocSpace and a provider-specific string for an entry in a connected third-party storage. | [required] [example: 1234] |
+
 
 #### Authorization
 
@@ -2830,7 +2911,7 @@ Returns the third-party identity providers this portal has enabled, each with th
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -2913,7 +2994,7 @@ Creates a portal profile from a third-party identity and joins the invitation th
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -4659,6 +4740,17 @@ The user invitation parameters.
 ## Authorization
 
 
+### cookieAuth
+- **Type**: API key
+- **API key parameter name**: asc_auth_key
+- **Location**: 
+
+
+### bearerAuth
+
+- **Type**: HTTP Bearer Token authentication
+
+
 ### asc_auth_key
 - **Type**: API key
 - **API key parameter name**: asc_auth_key
@@ -4692,17 +4784,6 @@ The user invitation parameters.
 
 
 ### OpenId
-
-
-### cookieAuth
-- **Type**: API key
-- **API key parameter name**: asc_auth_key
-- **Location**: 
-
-
-### bearerAuth
-
-- **Type**: HTTP Bearer Token authentication
 
 
 ### x-signature

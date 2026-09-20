@@ -2,7 +2,7 @@
 
 Referenced types are defined in the [full reference](../files.md).
 
-> FileIntegerWrapper insertFile(folderId, InsertFile.File, InsertFile.Title, InsertFile.CreateNewIfExist, InsertFile.KeepConvertStatus, InsertFile.Stream.CanRead, InsertFile.Stream.CanWrite, InsertFile.Stream.CanSeek, InsertFile.Stream.CanTimeout, InsertFile.Stream.Length, InsertFile.Stream.Position, InsertFile.Stream.ReadTimeout, InsertFile.Stream.WriteTimeout)
+> FileWrapper insertFile(folderId, InsertFile.File, InsertFile.Title, InsertFile.CreateNewIfExist, InsertFile.KeepConvertStatus, InsertFile.Stream.CanRead, InsertFile.Stream.CanWrite, InsertFile.Stream.CanSeek, InsertFile.Stream.CanTimeout, InsertFile.Stream.Length, InsertFile.Stream.Position, InsertFile.Stream.ReadTimeout, InsertFile.Stream.WriteTimeout)
 
 `POST /api/2.0/files/{folderId}/insert`
 
@@ -32,7 +32,7 @@ Stores a file in the folder named by the path in a single request, taking its na
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The stored file | [**FileIntegerWrapper**](../files.md#model-fileintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The stored file | [**FileWrapper**](../files.md#model-filewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | The caller cannot add content to this folder | - | - |
 | **404** | No folder with the specified ID | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
@@ -44,7 +44,17 @@ Stores a file in the folder named by the path in a single request, taking its na
 
 ## Return type
 
-[**FileIntegerWrapper**](../files.md#model-fileintegerwrapper)
+[**FileWrapper**](../files.md#model-filewrapper)
+
+## Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **folderId** | path | **String** | The folder that receives the file; take the id from a listing such as &#x60;GET api/2.0/files/@root&#x60;. A room or an  ordinary folder inside one is accepted, a section root is not. | [required] [example: 1] |
+
+Return type: [**ThirdPartyFileWrapper**](../files.md#model-thirdpartyfilewrapper)
 
 ## Authorization
 

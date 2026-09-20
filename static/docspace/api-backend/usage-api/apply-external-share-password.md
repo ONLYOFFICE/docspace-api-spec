@@ -34,7 +34,7 @@ Submits the password of a protected external share link and answers with the sam
 
 ## Authorization
 
-No authorization required
+[cookieAuth](../files.md#cookieauth), [bearerAuth](../files.md#bearerauth)
 
 ## HTTP request headers
 

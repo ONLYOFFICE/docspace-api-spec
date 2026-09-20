@@ -34,7 +34,7 @@ Emails a password recovery link to an address, and is the entry point of the rec
 
 ## Authorization
 
-No authorization required
+[cookieAuth](../people.md#cookieauth), [bearerAuth](../people.md#bearerauth)
 
 ## HTTP request headers
 

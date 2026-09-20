@@ -2,7 +2,7 @@
 
 Referenced types are defined in the [full reference](../files.md).
 
-> FileIntegerWrapper insertFileToMyFromBody(File, Title, CreateNewIfExist, KeepConvertStatus, Stream.CanRead, Stream.CanWrite, Stream.CanSeek, Stream.CanTimeout, Stream.Length, Stream.Position, Stream.ReadTimeout, Stream.WriteTimeout)
+> FileWrapper insertFileToMyFromBody(File, Title, CreateNewIfExist, KeepConvertStatus, Stream.CanRead, Stream.CanWrite, Stream.CanSeek, Stream.CanTimeout, Stream.Length, Stream.Position, Stream.ReadTimeout, Stream.WriteTimeout)
 
 `POST /api/2.0/files/@my/insert`
 
@@ -31,7 +31,7 @@ Stores one file in the caller&#39;s own My documents section, the personal stora
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The stored file, with the identifier, version and title it was saved under | [**FileIntegerWrapper**](../files.md#model-fileintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The stored file, with the identifier, version and title it was saved under | [**FileWrapper**](../files.md#model-filewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | Creating a file in the personal section is not allowed for this account | - | - |
 | **404** | The caller has no personal section, so there is nothing to store the file in | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
@@ -43,7 +43,7 @@ Stores one file in the caller&#39;s own My documents section, the personal stora
 
 ## Return type
 
-[**FileIntegerWrapper**](../files.md#model-fileintegerwrapper)
+[**FileWrapper**](../files.md#model-filewrapper)
 
 ## Authorization
 

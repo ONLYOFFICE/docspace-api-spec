@@ -35,9 +35,18 @@ Keeps an editing session on the file alive, or ends it; an editor client calls i
 
 [**ItemKeyValuePairBooleanStringWrapper**](../files.md#model-itemkeyvaluepairbooleanstringwrapper)
 
+## Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **fileId** | path | **String** | The file whose editing session is being tracked. | [required] [example: 1] |
+
+
 ## Authorization
 
-No authorization required
+[cookieAuth](../files.md#cookieauth), [bearerAuth](../files.md#bearerauth)
 
 ## HTTP request headers
 

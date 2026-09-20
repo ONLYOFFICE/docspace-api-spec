@@ -1,6 +1,6 @@
 # aiToolsRemoveCustomServer
 
-Referenced types are defined in the [full reference](../newai.md).
+Referenced types are defined in the [full reference](../aichat.md).
 
 > AiSuccessResponse aiToolsRemoveCustomServer(aiToolsRemoveCustomServer\_request)
 
@@ -14,27 +14,27 @@ Unregisters a custom MCP server from the scope, so the model is no longer offere
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **aiToolsRemoveCustomServer\_request** | body | [**aiToolsRemoveCustomServer_request**](../newai.md#model-aitoolsremovecustomserver-request-body) |  | [required] |
+| **aiToolsRemoveCustomServer\_request** | body | [**aiToolsRemoveCustomServer_request**](../aichat.md#model-aitoolsremovecustomserver-request-body) |  | [required] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Confirms the request was accepted, whether or not a registration was removed. | [**AiSuccessResponse**](../newai.md#model-aisuccessresponse) | - |
-| **400** | The server name is missing. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
-| **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
-| **404** | The referenced object does not exist, or the caller cannot access it - the two are deliberately indistinguishable, so a room the caller may not open answers 404 rather than 403. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
-| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
-| **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
+| **200** | Confirms the request was accepted, whether or not a registration was removed. | [**AiSuccessResponse**](../aichat.md#model-aisuccessresponse) | - |
+| **400** | The server name is missing. | [**AiErrorResponse**](../aichat.md#model-aierrorresponse) | - |
+| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](../aichat.md#model-aierrorresponse) | - |
+| **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](../aichat.md#model-aierrorresponse) | - |
+| **404** | The referenced object does not exist, or the caller cannot access it - the two are deliberately indistinguishable, so a room the caller may not open answers 404 rather than 403. | [**AiErrorResponse**](../aichat.md#model-aierrorresponse) | - |
+| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](../aichat.md#model-aierrorresponse) | - |
+| **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](../aichat.md#model-aierrorresponse) | - |
 
 ## Return type
 
-[**AiSuccessResponse**](../newai.md#model-aisuccessresponse)
+[**AiSuccessResponse**](../aichat.md#model-aisuccessresponse)
 
 ## Authorization
 
-No authorization required
+[cookieAuth](../aichat.md#cookieauth), [bearerAuth](../aichat.md#bearerauth)
 
 ## HTTP request headers
 

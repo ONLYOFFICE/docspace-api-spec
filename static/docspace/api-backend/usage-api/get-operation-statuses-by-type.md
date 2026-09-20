@@ -34,7 +34,7 @@ Returns the background file operations of the caller that are of one kind, named
 
 ## Authorization
 
-No authorization required
+[cookieAuth](../files.md#cookieauth), [bearerAuth](../files.md#bearerauth)
 
 ## HTTP request headers
 

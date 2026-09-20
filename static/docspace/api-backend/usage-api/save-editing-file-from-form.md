@@ -2,7 +2,7 @@
 
 Referenced types are defined in the [full reference](../files.md).
 
-> FileIntegerWrapper saveEditingFileFromForm(fileId, DownloadUri, FileExtension, File, Forcesave)
+> FileWrapper saveEditingFileFromForm(fileId, DownloadUri, FileExtension, File, Forcesave)
 
 `PUT /api/2.0/files/file/{fileId}/saveediting`
 
@@ -24,7 +24,7 @@ Replaces the content of an existing file with an edited copy and answers with th
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The file is saved and the stored version is returned | [**FileIntegerWrapper**](../files.md#model-fileintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The file is saved and the stored version is returned | [**FileWrapper**](../files.md#model-filewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **400** | The file id cannot be resolved to a storage that could accept the content | - | - |
 | **403** | The caller cannot edit the file, or it is locked, in Trash, or open in somebody else&#39;s editing session | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
@@ -35,7 +35,17 @@ Replaces the content of an existing file with an edited copy and answers with th
 
 ## Return type
 
-[**FileIntegerWrapper**](../files.md#model-fileintegerwrapper)
+[**FileWrapper**](../files.md#model-filewrapper)
+
+## Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **fileId** | path | **String** | The file whose content is replaced. The submitted content is written onto this file, so it has to be the file  the editing session was opened on rather than a copy of it. | [required] [example: 1] |
+
+Return type: [**ThirdPartyFileWrapper**](../files.md#model-thirdpartyfilewrapper)
 
 ## Authorization
 

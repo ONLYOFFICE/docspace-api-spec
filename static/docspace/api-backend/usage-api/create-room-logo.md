@@ -2,7 +2,7 @@
 
 Referenced types are defined in the [full reference](../files.md).
 
-> FolderIntegerWrapper createRoomLogo(id, LogoRequest)
+> FolderWrapper createRoomLogo(id, LogoRequest)
 
 `POST /api/2.0/files/rooms/{id}/logo`
 
@@ -21,7 +21,7 @@ Turns an image already uploaded to the portal into the logo of a room and return
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The room with the addresses of its new logo | [**FolderIntegerWrapper**](../files.md#model-folderintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The room with the addresses of its new logo | [**FolderWrapper**](../files.md#model-folderwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **404** | No room with this ID is visible to the caller | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
@@ -32,7 +32,17 @@ Turns an image already uploaded to the portal into the logo of a room and return
 
 ## Return type
 
-[**FolderIntegerWrapper**](../files.md#model-folderintegerwrapper)
+[**FolderWrapper**](../files.md#model-folderwrapper)
+
+## Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **id** | path | **String** | The room the logo is set on. | [required] [example: 1] |
+
+Return type: [**ThirdPartyFolderWrapper**](../files.md#model-thirdpartyfolderwrapper)
 
 ## Authorization
 

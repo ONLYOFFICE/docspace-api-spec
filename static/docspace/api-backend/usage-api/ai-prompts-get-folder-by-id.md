@@ -1,6 +1,6 @@
 # aiPromptsGetFolderById
 
-Referenced types are defined in the [full reference](../newai.md).
+Referenced types are defined in the [full reference](../aichat.md).
 
 > AiPromptFolder aiPromptsGetFolderById(id)
 
@@ -20,19 +20,19 @@ Returns one folder of the caller&#39;s prompt library by its ID, without the pro
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The folder, or an empty body when no folder of the caller&#39;s has that ID. | [**AiPromptFolder**](../newai.md#model-aipromptfolder) | - |
-| **400** | The folder ID is missing. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
-| **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
-| **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
+| **200** | The folder, or an empty body when no folder of the caller&#39;s has that ID. | [**AiPromptFolder**](../aichat.md#model-aipromptfolder) | - |
+| **400** | The folder ID is missing. | [**AiErrorResponse**](../aichat.md#model-aierrorresponse) | - |
+| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](../aichat.md#model-aierrorresponse) | - |
+| **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](../aichat.md#model-aierrorresponse) | - |
+| **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](../aichat.md#model-aierrorresponse) | - |
 
 ## Return type
 
-[**AiPromptFolder**](../newai.md#model-aipromptfolder)
+[**AiPromptFolder**](../aichat.md#model-aipromptfolder)
 
 ## Authorization
 
-No authorization required
+[cookieAuth](../aichat.md#cookieauth), [bearerAuth](../aichat.md#bearerauth)
 
 ## HTTP request headers
 

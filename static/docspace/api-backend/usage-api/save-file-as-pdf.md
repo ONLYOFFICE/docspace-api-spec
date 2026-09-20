@@ -2,7 +2,7 @@
 
 Referenced types are defined in the [full reference](../files.md).
 
-> FileIntegerWrapper saveFileAsPdf(id, SaveAsPdfInteger)
+> FileWrapper saveFileAsPdf(id, SaveAsPdf)
 
 `POST /api/2.0/files/file/{id}/saveaspdf`
 
@@ -15,13 +15,13 @@ Converts a file into a PDF, stores that PDF as a new file in the folder named in
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
 | **id** | path | **Integer** (int32) | The file to convert; it is left untouched. | [required] [example: 1] |
-| **SaveAsPdfInteger** | body | [**SaveAsPdfInteger**](../files.md#model-saveaspdfinteger) | The destination folder and the name of the PDF. | [required] |
+| **SaveAsPdf** | body | [**SaveAsPdf**](../files.md#model-saveaspdf) | The destination folder and the name of the PDF. | [required] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The PDF file that was created | [**FileIntegerWrapper**](../files.md#model-fileintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The PDF file that was created | [**FileWrapper**](../files.md#model-filewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **404** | The source file or the destination folder does not exist | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
@@ -32,7 +32,18 @@ Converts a file into a PDF, stores that PDF as a new file in the folder named in
 
 ## Return type
 
-[**FileIntegerWrapper**](../files.md#model-fileintegerwrapper)
+[**FileWrapper**](../files.md#model-filewrapper)
+
+## Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **id** | path | **String** | The file to convert; it is left untouched. | [required] [example: 1] |
+| **ThirdPartySaveAsPdf** | body | [**ThirdPartySaveAsPdf**](../files.md#model-thirdpartysaveaspdf) | The destination folder and the name of the PDF. | [required] |
+
+Return type: [**ThirdPartyFileWrapper**](../files.md#model-thirdpartyfilewrapper)
 
 ## Authorization
 

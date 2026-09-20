@@ -34,7 +34,7 @@ Checks the key of a confirmation link that the portal sent by email and reports 
 
 ## Authorization
 
-No authorization required
+[cookieAuth](../api.md#cookieauth), [bearerAuth](../api.md#bearerauth)
 
 ## HTTP request headers
 

@@ -35,7 +35,7 @@ Resolves the token of an external share link into the room or file it points at,
 
 ## Authorization
 
-No authorization required
+[cookieAuth](../files.md#cookieauth), [bearerAuth](../files.md#bearerauth)
 
 ## HTTP request headers
 

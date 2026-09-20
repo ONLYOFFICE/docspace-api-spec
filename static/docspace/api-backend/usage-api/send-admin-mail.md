@@ -33,7 +33,7 @@ Sends a message from someone who cannot get into the portal to its administrator
 
 ## Authorization
 
-No authorization required
+[cookieAuth](../api.md#cookieauth), [bearerAuth](../api.md#bearerauth)
 
 ## HTTP request headers
 

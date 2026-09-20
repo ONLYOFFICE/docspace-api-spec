@@ -1,8 +1,8 @@
 # aiAgentsUpdateQuota
 
-Referenced types are defined in the [full reference](../newai.md).
+Referenced types are defined in the [full reference](../aichat.md).
 
-> AiFolderIntegerArrayWrapper aiAgentsUpdateQuota(aiAgentsUpdateQuota\_request)
+> AiFolderArrayWrapper aiAgentsUpdateQuota(aiAgentsUpdateQuota\_request)
 
 `PUT /api/2.0/ai/agents/agentquota`
 
@@ -14,25 +14,25 @@ Sets the storage quota of the listed AI agent rooms in one call, forwarding &#x6
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **aiAgentsUpdateQuota\_request** | body | [**aiAgentsUpdateQuota_request**](../newai.md#model-aiagentsupdatequota-request-body) |  | [required] |
+| **aiAgentsUpdateQuota\_request** | body | [**aiAgentsUpdateQuota_request**](../aichat.md#model-aiagentsupdatequota-request-body) |  | [required] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The updated agent rooms, one entry each. | [**AiFolderIntegerArrayWrapper**](../newai.md#model-aifolderintegerarraywrapper) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
-| **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
-| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
-| **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
+| **200** | The updated agent rooms, one entry each. | [**AiFolderArrayWrapper**](../aichat.md#model-aifolderarraywrapper) | - |
+| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](../aichat.md#model-aierrorresponse) | - |
+| **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](../aichat.md#model-aierrorresponse) | - |
+| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](../aichat.md#model-aierrorresponse) | - |
+| **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](../aichat.md#model-aierrorresponse) | - |
 
 ## Return type
 
-[**AiFolderIntegerArrayWrapper**](../newai.md#model-aifolderintegerarraywrapper)
+[**AiFolderArrayWrapper**](../aichat.md#model-aifolderarraywrapper)
 
 ## Authorization
 
-No authorization required
+[cookieAuth](../aichat.md#cookieauth), [bearerAuth](../aichat.md#bearerauth)
 
 ## HTTP request headers
 

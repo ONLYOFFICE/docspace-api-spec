@@ -2,7 +2,7 @@
 
 Referenced types are defined in the [full reference](../files.md).
 
-> FileEntryIntegerArrayWrapper setFilesOrder(OrdersRequestDtoInteger)
+> FileEntryArrayWrapper setFilesOrder(OrdersRequestDto)
 
 `PUT /api/2.0/files/order`
 
@@ -14,13 +14,13 @@ Puts several files and folders at given positions in one go and answers with the
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **OrdersRequestDtoInteger** | body | [**OrdersRequestDtoInteger**](../files.md#model-ordersrequestdtointeger) |  | [optional] |
+| **OrdersRequestDto** | body | [**OrdersRequestDto**](../files.md#model-ordersrequestdto) |  | [optional] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The files and folders that were moved, with the positions they now hold | [**FileEntryIntegerArrayWrapper**](../files.md#model-fileentryintegerarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The files and folders that were moved, with the positions they now hold | [**FileEntryArrayWrapper**](../files.md#model-fileentryarraywrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | - |
@@ -30,7 +30,7 @@ Puts several files and folders at given positions in one go and answers with the
 
 ## Return type
 
-[**FileEntryIntegerArrayWrapper**](../files.md#model-fileentryintegerarraywrapper)
+[**FileEntryArrayWrapper**](../files.md#model-fileentryarraywrapper)
 
 ## Authorization
 

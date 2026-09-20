@@ -36,7 +36,7 @@ Signs a user in to the current portal and either issues the authentication token
 
 ## Authorization
 
-No authorization required
+[cookieAuth](../api.md#cookieauth), [bearerAuth](../api.md#bearerauth)
 
 ## HTTP request headers
 

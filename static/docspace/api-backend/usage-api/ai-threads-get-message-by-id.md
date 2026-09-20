@@ -1,6 +1,6 @@
 # aiThreadsGetMessageById
 
-Referenced types are defined in the [full reference](../newai.md).
+Referenced types are defined in the [full reference](../aichat.md).
 
 > AiThreadMessageLike aiThreadsGetMessageById(messageId)
 
@@ -20,19 +20,19 @@ Returns one message by its ID, wherever it sits, without needing the thread it b
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The message, or an empty body when no message has that ID. | [**AiThreadMessageLike**](../newai.md#model-aithreadmessagelike) | - |
-| **400** | &#x60;messageId&#x60; is missing. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
-| **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
-| **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
+| **200** | The message, or an empty body when no message has that ID. | [**AiThreadMessageLike**](../aichat.md#model-aithreadmessagelike) | - |
+| **400** | &#x60;messageId&#x60; is missing. | [**AiErrorResponse**](../aichat.md#model-aierrorresponse) | - |
+| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](../aichat.md#model-aierrorresponse) | - |
+| **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](../aichat.md#model-aierrorresponse) | - |
+| **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](../aichat.md#model-aierrorresponse) | - |
 
 ## Return type
 
-[**AiThreadMessageLike**](../newai.md#model-aithreadmessagelike)
+[**AiThreadMessageLike**](../aichat.md#model-aithreadmessagelike)
 
 ## Authorization
 
-No authorization required
+[cookieAuth](../aichat.md#cookieauth), [bearerAuth](../aichat.md#bearerauth)
 
 ## HTTP request headers
 

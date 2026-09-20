@@ -1,6 +1,6 @@
 # aiProfilesListProviderModels
 
-Referenced types are defined in the [full reference](../newai.md).
+Referenced types are defined in the [full reference](../aichat.md).
 
 > List aiProfilesListProviderModels(aiProfilesListProviderModels\_request)
 
@@ -14,27 +14,27 @@ Lists the models an endpoint offers for credentials supplied in the request, bef
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **aiProfilesListProviderModels\_request** | body | [**aiProfilesListProviderModels_request**](../newai.md#model-aiprofileslistprovidermodels-request-body) |  | [required] |
+| **aiProfilesListProviderModels\_request** | body | [**aiProfilesListProviderModels_request**](../aichat.md#model-aiprofileslistprovidermodels-request-body) |  | [required] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The models the endpoint offers for the supplied credentials. | [**List**](../newai.md#model-aimodel) | - |
-| **400** | &#x60;baseUrl&#x60; is missing, points at a private network address, or the provider rejected the supplied API key. | [**aiProfilesListProviderModels_400_response**](../newai.md#model-aiprofileslistprovidermodels-400-response) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
-| **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
-| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
-| **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
-| **502** | The AI provider could not be reached, or answered with a failure of its own. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
+| **200** | The models the endpoint offers for the supplied credentials. | [**List**](../aichat.md#model-aimodel) | - |
+| **400** | &#x60;baseUrl&#x60; is missing, points at a private network address, or the provider rejected the supplied API key. | [**aiProfilesListProviderModels_400_response**](../aichat.md#model-aiprofileslistprovidermodels-400-response) | - |
+| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](../aichat.md#model-aierrorresponse) | - |
+| **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](../aichat.md#model-aierrorresponse) | - |
+| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](../aichat.md#model-aierrorresponse) | - |
+| **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](../aichat.md#model-aierrorresponse) | - |
+| **502** | The AI provider could not be reached, or answered with a failure of its own. | [**AiErrorResponse**](../aichat.md#model-aierrorresponse) | - |
 
 ## Return type
 
-[**List**](../newai.md#model-aimodel)
+[**List**](../aichat.md#model-aimodel)
 
 ## Authorization
 
-No authorization required
+[cookieAuth](../aichat.md#cookieauth), [bearerAuth](../aichat.md#bearerauth)
 
 ## HTTP request headers
 

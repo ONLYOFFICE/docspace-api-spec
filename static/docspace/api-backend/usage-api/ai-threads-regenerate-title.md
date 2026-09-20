@@ -1,6 +1,6 @@
 # aiThreadsRegenerateTitle
 
-Referenced types are defined in the [full reference](../newai.md).
+Referenced types are defined in the [full reference](../aichat.md).
 
 > aiThreadsRegenerateTitle_200_response aiThreadsRegenerateTitle(aiThreadsRegenerateTitle\_request)
 
@@ -14,26 +14,26 @@ Asks the model to produce a title from the thread&#39;s first user message, stor
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **aiThreadsRegenerateTitle\_request** | body | [**aiThreadsRegenerateTitle_request**](../newai.md#model-aithreadsregeneratetitle-request-body) |  | [required] |
+| **aiThreadsRegenerateTitle\_request** | body | [**aiThreadsRegenerateTitle_request**](../aichat.md#model-aithreadsregeneratetitle-request-body) |  | [required] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The newly generated title, already stored on the thread. | [**aiThreadsRegenerateTitle_200_response**](../newai.md#model-aithreadsregeneratetitle-200-response) | - |
-| **400** | &#x60;threadId&#x60; is missing. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
-| **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
-| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
-| **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
+| **200** | The newly generated title, already stored on the thread. | [**aiThreadsRegenerateTitle_200_response**](../aichat.md#model-aithreadsregeneratetitle-200-response) | - |
+| **400** | &#x60;threadId&#x60; is missing. | [**AiErrorResponse**](../aichat.md#model-aierrorresponse) | - |
+| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](../aichat.md#model-aierrorresponse) | - |
+| **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](../aichat.md#model-aierrorresponse) | - |
+| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](../aichat.md#model-aierrorresponse) | - |
+| **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](../aichat.md#model-aierrorresponse) | - |
 
 ## Return type
 
-[**aiThreadsRegenerateTitle_200_response**](../newai.md#model-aithreadsregeneratetitle-200-response)
+[**aiThreadsRegenerateTitle_200_response**](../aichat.md#model-aithreadsregeneratetitle-200-response)
 
 ## Authorization
 
-No authorization required
+[cookieAuth](../aichat.md#cookieauth), [bearerAuth](../aichat.md#bearerauth)
 
 ## HTTP request headers
 

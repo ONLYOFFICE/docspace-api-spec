@@ -2,7 +2,7 @@
 
 Referenced types are defined in the [full reference](../files.md).
 
-> FolderContentIntegerWrapper getFolderByFolderId(folderId, userIdOrGroupId, sharedBy, filterType, roomId, folderType, excludeSubject, applyFilterOption, withSubFolders, extension, searchArea, formsItemKey, formsItemType, count, startIndex, sortBy, sortOrder, filterValue, Location)
+> FolderContentWrapper getFolderByFolderId(folderId, userIdOrGroupId, sharedBy, filterType, roomId, folderType, excludeSubject, applyFilterOption, withSubFolders, extension, searchArea, formsItemKey, formsItemType, count, startIndex, sortBy, sortOrder, filterValue, Location)
 
 `GET /api/2.0/files/{folderId}`
 
@@ -38,7 +38,7 @@ Returns one page of the contents of a folder - its subfolders in &#x60;folders&#
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | One page of the folder contents, with the folder itself and the chain of its parents | [**FolderContentIntegerWrapper**](../files.md#model-foldercontentintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | One page of the folder contents, with the folder itself and the chain of its parents | [**FolderContentWrapper**](../files.md#model-foldercontentwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | The caller may not read this folder | - | - |
 | **404** | The folder does not exist | - | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../files.md#model-errorapiresponse) | `Retry-After` |
@@ -49,11 +49,22 @@ Returns one page of the contents of a folder - its subfolders in &#x60;folders&#
 
 ## Return type
 
-[**FolderContentIntegerWrapper**](../files.md#model-foldercontentintegerwrapper)
+[**FolderContentWrapper**](../files.md#model-foldercontentwrapper)
+
+## Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **folderId** | path | **String** | The folder whose contents are listed. Each section root has an operation of its own, such as  &#x60;GET api/2.0/files/@my&#x60;, and every other folder is opened by the identifier a listing gave for it. | [required] [example: 1] |
+| **roomId** | query | **String** | Keeps only the entries that lie in this room, which matters when the listing being read gathers entries from  more than one of them. | [optional] [example: 1] |
+
+Return type: [**ThirdPartyFolderContentWrapper**](../files.md#model-thirdpartyfoldercontentwrapper)
 
 ## Authorization
 
-No authorization required
+[cookieAuth](../files.md#cookieauth), [bearerAuth](../files.md#bearerauth)
 
 ## HTTP request headers
 

@@ -515,7 +515,7 @@ Signs a user in to the current portal and either issues the authentication token
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -559,7 +559,7 @@ Finishes a two-factor sign-in: checks the one-time code and, when it matches, is
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -600,7 +600,7 @@ Checks the key of a confirmation link that the portal sent by email and reports 
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -636,7 +636,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -672,7 +672,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -756,7 +756,7 @@ Sends a new SMS authentication code to the phone number stored for the user and 
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -794,7 +794,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -3529,7 +3529,7 @@ null (empty response body)
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -4310,7 +4310,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -5239,7 +5239,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -5312,7 +5312,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -5426,7 +5426,7 @@ Returns the current portal&#39;s general configuration: branding, culture, featu
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -5499,7 +5499,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -5572,7 +5572,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -6987,7 +6987,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -7267,7 +7267,7 @@ Sends a message from someone who cannot get into the portal to its administrator
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -7309,7 +7309,7 @@ Sends an invitation email with a join link to the address in the request - the s
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -8153,7 +8153,7 @@ Lists the branding logo slots of the current portal together with the image URLs
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -8530,7 +8530,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -15749,6 +15749,17 @@ The successful API response.
 ## Authorization
 
 
+### cookieAuth
+- **Type**: API key
+- **API key parameter name**: asc_auth_key
+- **Location**: 
+
+
+### bearerAuth
+
+- **Type**: HTTP Bearer Token authentication
+
+
 ### asc_auth_key
 - **Type**: API key
 - **API key parameter name**: asc_auth_key
@@ -15782,17 +15793,6 @@ The successful API response.
 
 
 ### OpenId
-
-
-### cookieAuth
-- **Type**: API key
-- **API key parameter name**: asc_auth_key
-- **Location**: 
-
-
-### bearerAuth
-
-- **Type**: HTTP Bearer Token authentication
 
 
 ### x-signature

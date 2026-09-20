@@ -1,5 +1,7 @@
 # handleOptions
 
+Referenced types are defined in the [full reference](../oauth.md).
+
 > handleOptions()
 
 `OPTIONS /.well-known/oauth-authorization-server`
@@ -23,7 +25,7 @@ null (empty response body)
 
 ## Authorization
 
-No authorization required
+[cookieAuth](../oauth.md#cookieauth), [bearerAuth](../oauth.md#bearerauth)
 
 ## HTTP request headers
 

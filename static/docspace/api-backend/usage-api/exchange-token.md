@@ -34,7 +34,7 @@ Exchanges an authorization code for an access token. The request is form-encoded
 
 ## Authorization
 
-No authorization required
+[cookieAuth](../oauth.md#cookieauth), [bearerAuth](../oauth.md#bearerauth)
 
 ## HTTP request headers
 

@@ -2,7 +2,7 @@
 
 Referenced types are defined in the [full reference](../files.md).
 
-> manageFormFilling(fileId, ManageFormFillingDtoInteger)
+> manageFormFilling(fileId, ManageFormFillingDto)
 
 `PUT /api/2.0/files/file/{fileId}/manageformfilling`
 
@@ -15,7 +15,7 @@ Drives the filling of a PDF form through its states, the action deciding which w
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
 | **fileId** | path | **String** | The form the action applies to. Send the same value as the &#x60;formId&#x60; of the request body, which is the one the handler reads. | [required] |
-| **ManageFormFillingDtoInteger** | body | [**ManageFormFillingDtoInteger**](../files.md#model-manageformfillingdtointeger) |  | [optional] |
+| **ManageFormFillingDto** | body | [**ManageFormFillingDto**](../files.md#model-manageformfillingdto) |  | [optional] |
 
 ## Responses
 

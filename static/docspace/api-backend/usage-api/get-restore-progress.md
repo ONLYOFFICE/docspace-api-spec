@@ -33,7 +33,7 @@ Reports the state of the restoring job, and is the operation to poll after  &#x6
 
 ## Authorization
 
-No authorization required
+[cookieAuth](../backup.md#cookieauth), [bearerAuth](../backup.md#bearerauth)
 
 ## HTTP request headers
 

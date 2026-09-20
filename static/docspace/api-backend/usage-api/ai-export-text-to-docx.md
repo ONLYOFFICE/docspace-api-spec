@@ -1,6 +1,6 @@
 # aiExportTextToDocx
 
-Referenced types are defined in the [full reference](../newai.md).
+Referenced types are defined in the [full reference](../aichat.md).
 
 > aiExportTextToDocx_202_response aiExportTextToDocx(aiExportTextToDocx\_request)
 
@@ -14,26 +14,26 @@ Queues a markdown-to-docx export and answers 202 as soon as the job is accepted,
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **aiExportTextToDocx\_request** | body | [**aiExportTextToDocx_request**](../newai.md#model-aiexporttexttodocx-request-body) |  | [required] |
+| **aiExportTextToDocx\_request** | body | [**aiExportTextToDocx_request**](../aichat.md#model-aiexporttexttodocx-request-body) |  | [required] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **202** | Confirms the export was queued. The .docx arrives in the target folder later, announced by a folder-modified socket event. | [**aiExportTextToDocx_202_response**](../newai.md#model-aiexporttexttodocx-202-response) | - |
-| **400** | &#x60;title&#x60;, &#x60;content&#x60; or &#x60;folderId&#x60; is missing. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
-| **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
-| **413** | The transcript is larger than 15 MB, this route&#39;s own parser limit. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
-| **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
+| **202** | Confirms the export was queued. The .docx arrives in the target folder later, announced by a folder-modified socket event. | [**aiExportTextToDocx_202_response**](../aichat.md#model-aiexporttexttodocx-202-response) | - |
+| **400** | &#x60;title&#x60;, &#x60;content&#x60; or &#x60;folderId&#x60; is missing. | [**AiErrorResponse**](../aichat.md#model-aierrorresponse) | - |
+| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](../aichat.md#model-aierrorresponse) | - |
+| **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](../aichat.md#model-aierrorresponse) | - |
+| **413** | The transcript is larger than 15 MB, this route&#39;s own parser limit. | [**AiErrorResponse**](../aichat.md#model-aierrorresponse) | - |
+| **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](../aichat.md#model-aierrorresponse) | - |
 
 ## Return type
 
-[**aiExportTextToDocx_202_response**](../newai.md#model-aiexporttexttodocx-202-response)
+[**aiExportTextToDocx_202_response**](../aichat.md#model-aiexporttexttodocx-202-response)
 
 ## Authorization
 
-No authorization required
+[cookieAuth](../aichat.md#cookieauth), [bearerAuth](../aichat.md#bearerauth)
 
 ## HTTP request headers
 

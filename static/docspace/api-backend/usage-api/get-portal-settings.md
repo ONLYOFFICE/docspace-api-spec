@@ -33,7 +33,7 @@ Returns the current portal&#39;s general configuration: branding, culture, featu
 
 ## Authorization
 
-No authorization required
+[cookieAuth](../api.md#cookieauth), [bearerAuth](../api.md#bearerauth)
 
 ## HTTP request headers
 

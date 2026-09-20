@@ -33,7 +33,7 @@ Reports where this portal expects ONLYOFFICE Docs to be: the public Document Ser
 
 ## Authorization
 
-No authorization required
+[cookieAuth](../files.md#cookieauth), [bearerAuth](../files.md#bearerauth)
 
 ## HTTP request headers
 
