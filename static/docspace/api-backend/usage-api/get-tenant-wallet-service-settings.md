@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../api.md).
 
 Get the wallet service settings
 
-Returns which wallet services an administrator has switched on for this portal by hand, as opposed to the ones  its plan pays for. Only a DocSpace administrator may read it, an installation without a billing service  answers 403, no billing customer is needed, and the call is read-only. &#x60;enabledServices&#x60; holds the names of  those services and is empty when none was switched on. This is the stored setting and not the state of the  portal: a service the plan brings with it is active without appearing here, so the honest answer to what is  running is &#x60;GET api/2.0/portal/payment/activeservices&#x60;. One entry is changed with  &#x60;POST api/2.0/portal/payment/servicestate&#x60;.
+Returns which wallet services an administrator has switched on for this portal by hand, as opposed to the ones  its plan pays for. Only a DocSpace administrator may read it, an installation without a billing service  answers 403, no billing customer is needed, and the call is read-only. `enabledServices` holds the names of  those services and is empty when none was switched on. This is the stored setting and not the state of the  portal: a service the plan brings with it is active without appearing here, so the honest answer to what is  running is `GET api/2.0/portal/payment/activeservices`. One entry is changed with  `POST api/2.0/portal/payment/servicestate`.
 
 ## Parameters
 This endpoint does not need any parameter.

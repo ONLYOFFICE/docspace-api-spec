@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../api.md).
 
 Get the user invitation settings
 
-Returns whether the portal currently allows inviting new members and new guests at all. No permission is  required; anonymous callers can read it too, since the invitation flow itself may run before the caller has  signed in. This is a read-only, idempotent call. The response supports conditional requests: send the standard  If-Modified-Since header with the previous &#x60;lastModified&#x60; value, and an unchanged response comes back empty  instead of resending the same settings.
+Returns whether the portal currently allows inviting new members and new guests at all. No permission is  required; anonymous callers can read it too, since the invitation flow itself may run before the caller has  signed in. This is a read-only, idempotent call. The response supports conditional requests: send the standard  If-Modified-Since header with the previous `lastModified` value, and an unchanged response comes back empty  instead of resending the same settings.
 
 ## Parameters
 This endpoint does not need any parameter.
@@ -29,7 +29,7 @@ This endpoint does not need any parameter.
 
 ## Authorization
 
-No authorization required
+[cookieAuth](../api.md#cookieauth), [bearerAuth](../api.md#bearerauth)
 
 ## HTTP request headers
 

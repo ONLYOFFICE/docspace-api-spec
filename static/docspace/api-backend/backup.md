@@ -36,7 +36,7 @@ All URIs are relative to *https://yourportal.onlyoffice.com*, where the host is 
 
 Cancel the running backup
 
-Drops the backup job of the current portal from the queue, which cancels it if it is still running.  The caller needs the portal settings permission. It answers false, not an error, when there is nothing  to cancel, so the result says whether a job was actually dropped rather than whether the call  succeeded.  This affects backup jobs only: a restoring job cannot be cancelled through the API. The cancelled job  leaves the queue, so a following &#x60;GET api/2.0/backup/getbackupprogress&#x60; reports no job at all rather  than a job with the &#x60;Canceled&#x60; status.
+Drops the backup job of the current portal from the queue, which cancels it if it is still running.  The caller needs the portal settings permission. It answers false, not an error, when there is nothing  to cancel, so the result says whether a job was actually dropped rather than whether the call  succeeded.  This affects backup jobs only: a restoring job cannot be cancelled through the API. The cancelled job  leaves the queue, so a following `GET api/2.0/backup/getbackupprogress` reports no job at all rather  than a job with the `Canceled` status.
 
 #### Parameters
 This endpoint does not need any parameter.
@@ -74,7 +74,7 @@ This endpoint does not need any parameter.
 
 Create the backup schedule
 
-Sets the backup schedule of the current portal. A portal keeps at most one schedule, so this replaces  the existing one rather than adding a second, and &#x60;dump&#x60; writes the schedule of the whole server  instead, which requires the space access permission and works on a standalone installation only.  Scheduled backups have to be allowed by the pricing plan of a portal that is not a standalone  installation.  &#x60;cronParams&#x60; is a period plus a time rather than a cron string: &#x60;hour&#x60; is the hour of the day from 0  to 23, and &#x60;day&#x60; has to be given for &#x60;EveryWeek&#x60;, where it is the day of the week from 1 to 7 with  Sunday as 1, and for &#x60;EveryMonth&#x60;, where it is the day of the month from 1 to 31. It is left out for  &#x60;EveryDay&#x60;, and because an omitted &#x60;day&#x60; is stored as 0, which neither period accepts, a weekly or  monthly schedule sent without it fails instead of falling back to a default.  &#x60;backupsStored&#x60; is the number of scheduled copies to keep, from 1 to 30, and it defaults to 1. Older  copies are removed by a background cleaner, and only the ones this schedule created: archives made by  &#x60;POST api/2.0/backup/startbackup&#x60; are not counted and not removed. A portal whose subscription stops  covering backups has its schedule deleted by the scheduler, not suspended, and its administrators are  notified that the scheduled backup failed.  The keys expected in &#x60;storageParams&#x60; are the same as for &#x60;POST api/2.0/backup/startbackup&#x60;, except  that they are sent as an array of key and value pairs here and returned as an object by  &#x60;GET api/2.0/backup/getbackupschedule&#x60;.
+Sets the backup schedule of the current portal. A portal keeps at most one schedule, so this replaces  the existing one rather than adding a second, and `dump` writes the schedule of the whole server  instead, which requires the space access permission and works on a standalone installation only.  Scheduled backups have to be allowed by the pricing plan of a portal that is not a standalone  installation.  `cronParams` is a period plus a time rather than a cron string: `hour` is the hour of the day from 0  to 23, and `day` has to be given for `EveryWeek`, where it is the day of the week from 1 to 7 with  Sunday as 1, and for `EveryMonth`, where it is the day of the month from 1 to 31. It is left out for  `EveryDay`, and because an omitted `day` is stored as 0, which neither period accepts, a weekly or  monthly schedule sent without it fails instead of falling back to a default.  `backupsStored` is the number of scheduled copies to keep, from 1 to 30, and it defaults to 1. Older  copies are removed by a background cleaner, and only the ones this schedule created: archives made by  `POST api/2.0/backup/startbackup` are not counted and not removed. A portal whose subscription stops  covering backups has its schedule deleted by the scheduler, not suspended, and its administrators are  notified that the scheduled backup failed.  The keys expected in `storageParams` are the same as for `POST api/2.0/backup/startbackup`, except  that they are sent as an array of key and value pairs here and returned as an object by  `GET api/2.0/backup/getbackupschedule`.
 
 #### Parameters
 
@@ -118,13 +118,13 @@ Sets the backup schedule of the current portal. A portal keeps at most one sched
 
 Delete the backup
 
-Deletes one backup: first its history record, then the archive in the storage the record points at.  The ID is the one listed by &#x60;GET api/2.0/backup/getbackuphistory&#x60;, which is also the &#x60;taskId&#x60; the  backup was started with.  Deleting a backup of the whole server rather than of one portal additionally requires the space  access permission. A record that belongs to another portal is left untouched and the call still  answers true, so the result confirms that the request was accepted rather than that anything was  deleted - check with &#x60;GET api/2.0/backup/getbackuphistory&#x60; if it matters.  The record is removed before the archive, so when the storage can no longer be reached the archive  stays behind with nothing pointing at it.
+Deletes one backup: first its history record, then the archive in the storage the record points at.  The ID is the one listed by `GET api/2.0/backup/getbackuphistory`, which is also the `taskId` the  backup was started with.  Deleting a backup of the whole server rather than of one portal additionally requires the space  access permission. A record that belongs to another portal is left untouched and the call still  answers true, so the result confirms that the request was accepted rather than that anything was  deleted - check with `GET api/2.0/backup/getbackuphistory` if it matters.  The record is removed before the archive, so when the storage can no longer be reached the archive  stays behind with nothing pointing at it.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **UUID** (uuid) | The ID of the backup to delete, taken from the route. It is the &#x60;id&#x60; of a record listed by  &#x60;GET api/2.0/backup/getbackuphistory&#x60;, which is also the &#x60;taskId&#x60; the backup was started with. | [required] [example: 11111111-1111-1111-1111-111111111111] |
+| **id** | path | **UUID** (uuid) | The ID of the backup to delete, taken from the route. It is the `id` of a record listed by  `GET api/2.0/backup/getbackuphistory`, which is also the `taskId` the backup was started with. | [required] [example: 11111111-1111-1111-1111-111111111111] |
 
 #### Responses
 
@@ -161,7 +161,7 @@ Deletes one backup: first its history record, then the archive in the storage th
 
 Delete the backup history
 
-Deletes every backup of the current portal, both the history records and the archives themselves, and  leaves the backup schedule alone. &#x60;dump&#x60; clears the backups of the whole server instead and requires  the space access permission.  The records are walked one by one and a failure on any of them is swallowed, so the result is always  true even when some archives could not be deleted: it does not mean the history is now empty. Call  &#x60;GET api/2.0/backup/getbackuphistory&#x60; afterwards to see what is left.  Each record is removed before its archive, so an archive whose deletion fails stays in the storage  with nothing pointing at it.
+Deletes every backup of the current portal, both the history records and the archives themselves, and  leaves the backup schedule alone. `dump` clears the backups of the whole server instead and requires  the space access permission.  The records are walked one by one and a failure on any of them is swallowed, so the result is always  true even when some archives could not be deleted: it does not mean the history is now empty. Call  `GET api/2.0/backup/getbackuphistory` afterwards to see what is left.  Each record is removed before its archive, so an archive whose deletion fails stays in the storage  with nothing pointing at it.
 
 #### Parameters
 
@@ -204,7 +204,7 @@ Deletes every backup of the current portal, both the history records and the arc
 
 Delete the backup schedule
 
-Deletes the backup schedule of the current portal, which stops the scheduled backups; &#x60;dump&#x60; deletes  the schedule of the whole server instead and requires the space access permission. The archives the  schedule has already produced are kept and stay listed by  &#x60;GET api/2.0/backup/getbackuphistory&#x60; - delete them through  &#x60;DELETE api/2.0/backup/deletebackup/{id}&#x60; if they are no longer wanted.  The result is always true, including when there was no schedule to delete, so it confirms that the  portal now has none rather than that anything was removed. The deletion is written to the audit trail  either way.
+Deletes the backup schedule of the current portal, which stops the scheduled backups; `dump` deletes  the schedule of the whole server instead and requires the space access permission. The archives the  schedule has already produced are kept and stay listed by  `GET api/2.0/backup/getbackuphistory` - delete them through  `DELETE api/2.0/backup/deletebackup/{id}` if they are no longer wanted.  The result is always true, including when there was no schedule to delete, so it confirms that the  portal now has none rather than that anything was removed. The deletion is written to the audit trail  either way.
 
 #### Parameters
 
@@ -247,7 +247,7 @@ Deletes the backup schedule of the current portal, which stops the scheduled bac
 
 Get the backup history
 
-Lists the backups of the current portal whose archive is still present in the storage it was written  to. The records come back in no particular order, so sort them by &#x60;createdOn&#x60; if the newest one is  wanted. &#x60;dump&#x60; lists the backups of the whole server instead and requires the space access  permission.  Despite being a read operation, this prunes the history as it goes: a record whose archive is no  longer in its storage is deleted outright, so the list can shrink between two calls without anybody  deleting anything. A record whose storage can no longer be reached at all - a disconnected  third-party account, for instance - is neither returned nor deleted, so it stays invisible while  still occupying the history.  The &#x60;id&#x60; of a record is the same value as the &#x60;taskId&#x60; that  &#x60;POST api/2.0/backup/startbackup&#x60; returned for it, and it is what  &#x60;DELETE api/2.0/backup/deletebackup/{id}&#x60; and the &#x60;backupId&#x60; of  &#x60;POST api/2.0/backup/startrestore&#x60; expect.
+Lists the backups of the current portal whose archive is still present in the storage it was written  to. The records come back in no particular order, so sort them by `createdOn` if the newest one is  wanted. `dump` lists the backups of the whole server instead and requires the space access  permission.  Despite being a read operation, this prunes the history as it goes: a record whose archive is no  longer in its storage is deleted outright, so the list can shrink between two calls without anybody  deleting anything. A record whose storage can no longer be reached at all - a disconnected  third-party account, for instance - is neither returned nor deleted, so it stays invisible while  still occupying the history.  The `id` of a record is the same value as the `taskId` that  `POST api/2.0/backup/startbackup` returned for it, and it is what  `DELETE api/2.0/backup/deletebackup/{id}` and the `backupId` of  `POST api/2.0/backup/startrestore` expect.
 
 #### Parameters
 
@@ -290,7 +290,7 @@ Lists the backups of the current portal whose archive is still present in the st
 
 Get the backup progress
 
-Reports the state of the backup job of the current portal, and is the operation to poll after  &#x60;POST api/2.0/backup/startbackup&#x60;. The queue holds one job per portal, so no job ID is passed in;  &#x60;dump&#x60; asks for the state of the server-wide job instead and requires the space access permission.  When there is no such job - none was ever started, or the finished one has already been dropped from  the queue - the call still answers 200, but the body carries no &#x60;response&#x60; member at all, so a client  has to treat the payload as optional rather than expect an empty object.  While the job runs, &#x60;isCompleted&#x60; is false, &#x60;error&#x60; and &#x60;link&#x60; are empty strings and &#x60;progress&#x60; grows  from 0 to 100. Once it stops, &#x60;isCompleted&#x60; turns true and &#x60;status&#x60; says how it ended: a non-empty  &#x60;error&#x60; is the only report of a failure, &#x60;warning&#x60; is set when the archive was written but some files  could not be read or when the job was cancelled, and &#x60;link&#x60; becomes the download link to the stored  archive.
+Reports the state of the backup job of the current portal, and is the operation to poll after  `POST api/2.0/backup/startbackup`. The queue holds one job per portal, so no job ID is passed in;  `dump` asks for the state of the server-wide job instead and requires the space access permission.  When there is no such job - none was ever started, or the finished one has already been dropped from  the queue - the call still answers 200, but the body carries no `response` member at all, so a client  has to treat the payload as optional rather than expect an empty object.  While the job runs, `isCompleted` is false, `error` and `link` are empty strings and `progress` grows  from 0 to 100. Once it stops, `isCompleted` turns true and `status` says how it ended: a non-empty  `error` is the only report of a failure, `warning` is set when the archive was written but some files  could not be read or when the job was cancelled, and `link` becomes the download link to the stored  archive.
 
 #### Parameters
 
@@ -332,7 +332,7 @@ Reports the state of the backup job of the current portal, and is the operation 
 
 Get the backup schedule
 
-Returns the backup schedule of the current portal. A portal keeps at most one schedule, so no ID is  passed in, and when none is set the call still answers 200 with a body that carries no &#x60;response&#x60;  member at all. &#x60;dump&#x60; asks for the schedule of the whole server instead of the one of this portal and  requires the space access permission.  The answer cannot be sent back unchanged: &#x60;storageParams&#x60; is returned as an object keyed by parameter  name, while &#x60;POST api/2.0/backup/createbackupschedule&#x60; expects an array of key and value pairs. For  every storage type except &#x60;ThirdPartyConsumer&#x60; the &#x60;folderId&#x60; key of the answer is built from the  stored base path rather than read back from the saved parameters, and a schedule that keeps an  unlimited number of copies reports &#x60;backupsStored&#x60; as null instead of 0.
+Returns the backup schedule of the current portal. A portal keeps at most one schedule, so no ID is  passed in, and when none is set the call still answers 200 with a body that carries no `response`  member at all. `dump` asks for the schedule of the whole server instead of the one of this portal and  requires the space access permission.  The answer cannot be sent back unchanged: `storageParams` is returned as an object keyed by parameter  name, while `POST api/2.0/backup/createbackupschedule` expects an array of key and value pairs. For  every storage type except `ThirdPartyConsumer` the `folderId` key of the answer is built from the  stored base path rather than read back from the saved parameters, and a schedule that keeps an  unlimited number of copies reports `backupsStored` as null instead of 0.
 
 #### Parameters
 
@@ -375,15 +375,15 @@ Returns the backup schedule of the current portal. A portal keeps at most one sc
 
 Get the number of backups
 
-Counts the backups of the current portal that were created within a period, and &#x60;paid&#x60; chooses which  kind is counted: false, the default, counts the ones covered by the free monthly allowance, and true  counts the ones charged to the portal wallet.  The period defaults to the current calendar month - &#x60;from&#x60; becomes the first day of the month at  00:00 UTC and &#x60;to&#x60; becomes the moment of the call. Both bounds are UTC and inclusive, and a &#x60;from&#x60;  later than &#x60;to&#x60; is rejected. Called with no parameters at all, this returns exactly the figure the  free monthly allowance is measured against.  The count is over history records rather than over stored archives, so it includes backups that have  already been deleted; use &#x60;GET api/2.0/backup/getbackuphistory&#x60; to see what can still be restored.
+Counts the backups of the current portal that were created within a period, and `paid` chooses which  kind is counted: false, the default, counts the ones covered by the free monthly allowance, and true  counts the ones charged to the portal wallet.  The period defaults to the current calendar month - `from` becomes the first day of the month at  00:00 UTC and `to` becomes the moment of the call. Both bounds are UTC and inclusive, and a `from`  later than `to` is rejected. Called with no parameters at all, this returns exactly the figure the  free monthly allowance is measured against.  The count is over history records rather than over stored archives, so it includes backups that have  already been deleted; use `GET api/2.0/backup/getbackuphistory` to see what can still be restored.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **from** | query | **Date** (date-time) | The start of the period, in UTC and inclusive. It defaults to the first day of the current calendar  month at 00:00 UTC, and it has to be no later than &#x60;to&#x60;. | [optional] [example: 2026-03-01T00:00:00Z] |
+| **from** | query | **Date** (date-time) | The start of the period, in UTC and inclusive. It defaults to the first day of the current calendar  month at 00:00 UTC, and it has to be no later than `to`. | [optional] [example: 2026-03-01T00:00:00Z] |
 | **to** | query | **Date** (date-time) | The end of the period, in UTC and inclusive. It defaults to the moment of the call. | [optional] [example: 2026-03-31T23:59:59Z] |
-| **paid** | query | **Boolean** | Counts the backups charged to the portal wallet when true, and the ones covered by the free monthly  allowance when false, which is the default. It is read only by  &#x60;GET api/2.0/backup/getbackupscount&#x60; and is ignored by  &#x60;GET api/2.0/backup/getbackupscountbypaid&#x60;, which always reports both. | [optional] [example: false] |
+| **paid** | query | **Boolean** | Counts the backups charged to the portal wallet when true, and the ones covered by the free monthly  allowance when false, which is the default. It is read only by  `GET api/2.0/backup/getbackupscount` and is ignored by  `GET api/2.0/backup/getbackupscountbypaid`, which always reports both. | [optional] [example: false] |
 
 #### Responses
 
@@ -419,15 +419,15 @@ Counts the backups of the current portal that were created within a period, and 
 
 Get free and paid backup counts
 
-Counts the backups of the current portal created within a period and splits the result into the ones  covered by the free monthly allowance and the ones charged to the portal wallet, which saves calling  &#x60;GET api/2.0/backup/getbackupscount&#x60; twice.  The &#x60;paid&#x60; query parameter is accepted but not read here: the answer always carries both figures. The  period behaves as it does for &#x60;GET api/2.0/backup/getbackupscount&#x60; - it defaults to the current  calendar month, both bounds are UTC and inclusive, and a &#x60;from&#x60; later than &#x60;to&#x60; is rejected.  The counts are over history records rather than over stored archives, so they include backups that  have already been deleted.
+Counts the backups of the current portal created within a period and splits the result into the ones  covered by the free monthly allowance and the ones charged to the portal wallet, which saves calling  `GET api/2.0/backup/getbackupscount` twice.  The `paid` query parameter is accepted but not read here: the answer always carries both figures. The  period behaves as it does for `GET api/2.0/backup/getbackupscount` - it defaults to the current  calendar month, both bounds are UTC and inclusive, and a `from` later than `to` is rejected.  The counts are over history records rather than over stored archives, so they include backups that  have already been deleted.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **from** | query | **Date** (date-time) | The start of the period, in UTC and inclusive. It defaults to the first day of the current calendar  month at 00:00 UTC, and it has to be no later than &#x60;to&#x60;. | [optional] [example: 2026-03-01T00:00:00Z] |
+| **from** | query | **Date** (date-time) | The start of the period, in UTC and inclusive. It defaults to the first day of the current calendar  month at 00:00 UTC, and it has to be no later than `to`. | [optional] [example: 2026-03-01T00:00:00Z] |
 | **to** | query | **Date** (date-time) | The end of the period, in UTC and inclusive. It defaults to the moment of the call. | [optional] [example: 2026-03-31T23:59:59Z] |
-| **paid** | query | **Boolean** | Counts the backups charged to the portal wallet when true, and the ones covered by the free monthly  allowance when false, which is the default. It is read only by  &#x60;GET api/2.0/backup/getbackupscount&#x60; and is ignored by  &#x60;GET api/2.0/backup/getbackupscountbypaid&#x60;, which always reports both. | [optional] [example: false] |
+| **paid** | query | **Boolean** | Counts the backups charged to the portal wallet when true, and the ones covered by the free monthly  allowance when false, which is the default. It is read only by  `GET api/2.0/backup/getbackupscount` and is ignored by  `GET api/2.0/backup/getbackupscountbypaid`, which always reports both. | [optional] [example: false] |
 
 #### Responses
 
@@ -463,7 +463,7 @@ Counts the backups of the current portal created within a period and splits the 
 
 Check whether backups are enabled
 
-Reports whether the paid backup service is switched on for the current portal. This is a wallet  setting of the portal, not the health of the backup service or of the worker that runs the jobs, so a  false answer does not mean backups are unavailable and a true one does not mean they are working.  While it is on, backups beyond the free monthly allowance are charged to the portal wallet. While it  is off and that allowance is used up, &#x60;POST api/2.0/backup/startbackup&#x60; and  &#x60;POST api/2.0/backup/createbackupschedule&#x60; answer 402.  Starting a backup once the allowance is used up switches the service on by itself, as soon as a  billing session opens for the portal, so this flag can change without anybody editing the portal  settings.
+Reports whether the paid backup service is switched on for the current portal. This is a wallet  setting of the portal, not the health of the backup service or of the worker that runs the jobs, so a  false answer does not mean backups are unavailable and a true one does not mean they are working.  While it is on, backups beyond the free monthly allowance are charged to the portal wallet. While it  is off and that allowance is used up, `POST api/2.0/backup/startbackup` and  `POST api/2.0/backup/createbackupschedule` answer 402.  Starting a backup once the allowance is used up switches the service on by itself, as soon as a  billing session opens for the portal, so this flag can change without anybody editing the portal  settings.
 
 #### Parameters
 This endpoint does not need any parameter.
@@ -501,7 +501,7 @@ This endpoint does not need any parameter.
 
 Get the restoring progress
 
-Reports the state of the restoring job, and is the operation to poll after  &#x60;POST api/2.0/backup/startrestore&#x60;. It is the only operation of this service that needs no  authorization and the only one that stays reachable while the portal is being restored, which is  exactly the state a client polls it in - every other operation of the service answers 403 then.  &#x60;dump&#x60; is read as three states rather than as a flag: omit it to get whichever restoring job concerns  this portal, including a server-wide one, pass false to get the job of this portal only, and pass true  to get the server-wide job; on a portal that is not a standalone installation the value is forced to  false. When there is no matching job the call still answers 200, but the body carries no &#x60;response&#x60;  member at all.  &#x60;isCompleted&#x60; is the field to poll, a non-empty &#x60;error&#x60; is the only report of a failure, and neither  &#x60;link&#x60; nor &#x60;warning&#x60; is ever filled in for a restoring job.
+Reports the state of the restoring job, and is the operation to poll after  `POST api/2.0/backup/startrestore`. It is the only operation of this service that needs no  authorization and the only one that stays reachable while the portal is being restored, which is  exactly the state a client polls it in - every other operation of the service answers 403 then.  `dump` is read as three states rather than as a flag: omit it to get whichever restoring job concerns  this portal, including a server-wide one, pass false to get the job of this portal only, and pass true  to get the server-wide job; on a portal that is not a standalone installation the value is forced to  false. When there is no matching job the call still answers 200, but the body carries no `response`  member at all.  `isCompleted` is the field to poll, a non-empty `error` is the only report of a failure, and neither  `link` nor `warning` is ever filled in for a restoring job.
 
 #### Parameters
 
@@ -526,7 +526,7 @@ Reports the state of the restoring job, and is the operation to poll after  &#x6
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -541,7 +541,7 @@ No authorization required
 
 Start the backup
 
-Queues a backup of the current portal and returns straight away: the archive itself is written by the  separate backup worker service, which picks the job up from an integration event, so the response  reports a progress of 0 and the &#x60;Created&#x60; status, and its &#x60;taskId&#x60; is the handle to poll with  &#x60;GET api/2.0/backup/getbackupprogress&#x60;. The caller needs the portal settings permission, and  &#x60;dump&#x60; - a backup of the whole server instead of this one portal - additionally requires the space  access permission and is rejected outside a standalone installation.  The keys expected in &#x60;storageParams&#x60; depend on &#x60;storageType&#x60;: &#x60;Documents&#x60; takes an integer &#x60;folderId&#x60;,  &#x60;ThridpartyDocuments&#x60; takes a provider-specific non-integer &#x60;folderId&#x60;, &#x60;Local&#x60; takes &#x60;filePath&#x60; and  works on a standalone installation only, &#x60;ThirdPartyConsumer&#x60; takes &#x60;module&#x60; together with the settings  of that consumer, and &#x60;DataStore&#x60; takes no keys at all; the &#x60;subdir&#x60; key is added by the operation  itself and must not be sent.  A portal that has already used up the free backups of the current calendar month is charged through the  paid backup service instead, and the call is rejected with 402 when that service is not available to it.
+Queues a backup of the current portal and returns straight away: the archive itself is written by the  separate backup worker service, which picks the job up from an integration event, so the response  reports a progress of 0 and the `Created` status, and its `taskId` is the handle to poll with  `GET api/2.0/backup/getbackupprogress`. The caller needs the portal settings permission, and  `dump` - a backup of the whole server instead of this one portal - additionally requires the space  access permission and is rejected outside a standalone installation.  The keys expected in `storageParams` depend on `storageType`: `Documents` takes an integer `folderId`,  `ThridpartyDocuments` takes a provider-specific non-integer `folderId`, `Local` takes `filePath` and  works on a standalone installation only, `ThirdPartyConsumer` takes `module` together with the settings  of that consumer, and `DataStore` takes no keys at all; the `subdir` key is added by the operation  itself and must not be sent.  A portal that has already used up the free backups of the current calendar month is charged through the  paid backup service instead, and the call is rejected with 402 when that service is not available to it.
 
 #### Parameters
 
@@ -585,7 +585,7 @@ Queues a backup of the current portal and returns straight away: the archive its
 
 Start the restoring process
 
-Queues the restoring of the current portal from a backup and returns straight away: the work itself is  done by the separate backup worker service, which picks the job up from an integration event, so the  response reports a progress of 0 and the &#x60;Created&#x60; status, and the returned &#x60;taskId&#x60; is the handle to  poll with &#x60;GET api/2.0/backup/getrestoreprogress&#x60; - the one operation of this service that stays  reachable while the portal is being restored, because every other one answers 403 in that state.  The source is given either by &#x60;backupId&#x60;, which is the ID of a record from  &#x60;GET api/2.0/backup/getbackuphistory&#x60;, or, when &#x60;backupId&#x60; is not a GUID, by the &#x60;filePath&#x60; key of  &#x60;storageParams&#x60; together with the matching &#x60;storageType&#x60;; an all-zero GUID is parsed as a GUID and  therefore reaches neither branch.  The caller needs the portal settings permission, restoring has to be allowed by the pricing plan of a  portal that is not a standalone installation, and &#x60;dump&#x60; - restoring the whole server rather than this  one portal - additionally requires the space access permission.
+Queues the restoring of the current portal from a backup and returns straight away: the work itself is  done by the separate backup worker service, which picks the job up from an integration event, so the  response reports a progress of 0 and the `Created` status, and the returned `taskId` is the handle to  poll with `GET api/2.0/backup/getrestoreprogress` - the one operation of this service that stays  reachable while the portal is being restored, because every other one answers 403 in that state.  The source is given either by `backupId`, which is the ID of a record from  `GET api/2.0/backup/getbackuphistory`, or, when `backupId` is not a GUID, by the `filePath` key of  `storageParams` together with the matching `storageType`; an all-zero GUID is parsed as a GUID and  therefore reaches neither branch.  The caller needs the portal settings permission, restoring has to be allowed by the pricing plan of a  portal that is not a standalone installation, and `dump` - restoring the whole server rather than this  one portal - additionally requires the space access permission.
 
 #### Parameters
 
@@ -630,8 +630,8 @@ The request parameters for starting a backup.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **storageType** | [**BackupStorageType**](#model-backupstoragetype) | The storage the archive is written to. It defaults to &#x60;Documents&#x60;, and it decides which keys  &#x60;storageParams&#x60; has to carry. | [optional] [enum: 0, 1, 2, 3, 4, 5] |
-| **storageParams** | [**List**](#model-itemkeyvaluepairobjectobject) | The settings of the chosen storage, as an array of key and value pairs. &#x60;Documents&#x60; needs an integer  &#x60;folderId&#x60;, &#x60;ThridpartyDocuments&#x60; a provider-specific non-integer &#x60;folderId&#x60;, &#x60;Local&#x60; a &#x60;filePath&#x60;,  &#x60;ThirdPartyConsumer&#x60; a &#x60;module&#x60; plus the settings of that consumer, and &#x60;DataStore&#x60; none. The  &#x60;subdir&#x60; key is added by the operation itself and must not be sent. | [optional] [example: [{key=folderId, value=1234}]] [nullable] |
+| **storageType** | [**BackupStorageType**](#model-backupstoragetype) | The storage the archive is written to. It defaults to `Documents`, and it decides which keys  `storageParams` has to carry. | [optional] [enum: 0, 1, 2, 3, 4, 5] |
+| **storageParams** | [**List**](#model-itemkeyvaluepairobjectobject) | The settings of the chosen storage, as an array of key and value pairs. `Documents` needs an integer  `folderId`, `ThridpartyDocuments` a provider-specific non-integer `folderId`, `Local` a `filePath`,  `ThirdPartyConsumer` a `module` plus the settings of that consumer, and `DataStore` none. The  `subdir` key is added by the operation itself and must not be sent. | [optional] [example: [{key=folderId, value=1234}]] [nullable] |
 | **dump** | **Boolean** | Backs up the whole server rather than this one portal. It requires the space access permission and  works on a standalone installation only. | [optional] [example: false] |
 
 
@@ -640,11 +640,11 @@ One stored backup of a portal.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **id** | **UUID** (uuid) | The ID of the backup, which is the same value as the &#x60;taskId&#x60; the backup was started with. Pass it to  &#x60;DELETE api/2.0/backup/deletebackup/{id}&#x60; or as the &#x60;backupId&#x60; of  &#x60;POST api/2.0/backup/startrestore&#x60;. | [required] [example: 11111111-1111-1111-1111-111111111111] |
-| **fileName** | **String** | The name of the stored archive. It is built from the portal alias and the moment the backup started,  or from &#x60;workspace&#x60; instead of the alias for a backup of the whole server. | [required] [example: myportal_2026-03-01_02-15-00.tar.gz] [nullable] |
+| **id** | **UUID** (uuid) | The ID of the backup, which is the same value as the `taskId` the backup was started with. Pass it to  `DELETE api/2.0/backup/deletebackup/{id}` or as the `backupId` of  `POST api/2.0/backup/startrestore`. | [required] [example: 11111111-1111-1111-1111-111111111111] |
+| **fileName** | **String** | The name of the stored archive. It is built from the portal alias and the moment the backup started,  or from `workspace` instead of the alias for a backup of the whole server. | [required] [example: myportal_2026-03-01_02-15-00.tar.gz] [nullable] |
 | **storageType** | [**BackupStorageType**](#model-backupstoragetype) | The storage the archive was written to, reported as a number rather than as a name. | [required] [enum: 0, 1, 2, 3, 4, 5] |
 | **createdOn** | **Date** (date-time) | The date and time the backup was stored at, in UTC. | [required] [example: 2026-03-01T02:15:00Z] |
-| **expiresOn** | **Date** (date-time) | The date and time a background cleaner removes this backup at. Only a backup written to &#x60;DataStore&#x60;  expires, one day after it was stored; for every other storage type this is &#x60;0001-01-01T00:00:00&#x60;,  which means the backup is kept until it is deleted by hand or pushed out by the stored-copies limit  of a schedule. | [required] [example: 0001-01-01T00:00:00Z] |
+| **expiresOn** | **Date** (date-time) | The date and time a background cleaner removes this backup at. Only a backup written to `DataStore`  expires, one day after it was stored; for every other storage type this is `0001-01-01T00:00:00`,  which means the backup is kept until it is deleted by hand or pushed out by the stored-copies limit  of a schedule. | [required] [example: 0001-01-01T00:00:00Z] |
 
 
 ### Model BackupHistoryRecordArrayWrapper
@@ -681,15 +681,15 @@ The state of one backup or restoring job.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **isCompleted** | **Boolean** | Specifies whether the job has stopped running. This is the field to poll: true means the job will not  change any more, whether it succeeded, failed or was cancelled, and &#x60;status&#x60; tells which of the three  it is. | [optional] [example: false] |
+| **isCompleted** | **Boolean** | Specifies whether the job has stopped running. This is the field to poll: true means the job will not  change any more, whether it succeeded, failed or was cancelled, and `status` tells which of the three  it is. | [optional] [example: false] |
 | **progress** | **Integer** (int32) | The share of the job that is already done, from 0 to 100. A job that has only been queued reports 0,  because the work starts when a separate worker service picks it up. | [optional] [example: 50] |
 | **error** | **String** | The message of the error that stopped the job. It is an empty string, not null, while the job runs  and after a job that succeeded, so the sign of a failure is a non-empty value - and this is the only  place where the reason is reported. | [optional] [example: An error occurred during processing] [nullable] |
 | **warning** | **String** | A message about a job that stopped without failing: it names the entry inside the archive that lists  the files which could not be read, when a backup finished without some of them, and it says so when  the job was cancelled. It is an empty string otherwise, and it is only ever filled in for a backup  job - a cancelled restoring job leaves it empty. | [optional] [example: Some files were not included in the backup. For more details, please check storage/missing_info] [nullable] |
 | **link** | **String** | The link to download the stored archive. It is an empty string until the archive has been uploaded,  and it is only ever filled in for a backup job, never for a restoring one. | [optional] [example: https://example.com/products/files/httphandlers/filehandler.ashx?action=download&fileid=1234] [nullable] |
 | **tenantId** | **Integer** (int32) | The ID of the portal the job belongs to, or -1 for a job that covers the whole server. | [optional] [example: 1] |
 | **backupProgressEnum** | [**BackupProgressEnum**](#model-backupprogressenum) | Whether this is a backup or a restoring job, reported as a number rather than as a name. | [optional] [enum: 0, 1, 2] |
-| **status** | [**DistributedTaskStatus**](#model-distributedtaskstatus) | The state of the job: &#x60;Created&#x60; while it waits for a worker to pick it up, &#x60;Running&#x60; while it works,  &#x60;Completed&#x60; once it has finished on its own, &#x60;Canceled&#x60; after it was cancelled, and &#x60;Failted&#x60; when it  stopped on an error, in which case &#x60;error&#x60; carries the reason. Reported as a number rather than as a  name. | [optional] [enum: 0, 1, 2, 3, 4] |
-| **taskId** | **String** | The ID of the job. It is the handle to poll this operation with, and for a backup job it also becomes  the &#x60;id&#x60; of the record in &#x60;GET api/2.0/backup/getbackuphistory&#x60;. | [optional] [example: 11111111-1111-1111-1111-111111111111] [nullable] |
+| **status** | [**DistributedTaskStatus**](#model-distributedtaskstatus) | The state of the job: `Created` while it waits for a worker to pick it up, `Running` while it works,  `Completed` once it has finished on its own, `Canceled` after it was cancelled, and `Failted` when it  stopped on an error, in which case `error` carries the reason. Reported as a number rather than as a  name. | [optional] [enum: 0, 1, 2, 3, 4] |
+| **taskId** | **String** | The ID of the job. It is the handle to poll this operation with, and for a backup job it also becomes  the `id` of the record in `GET api/2.0/backup/getbackuphistory`. | [optional] [example: 11111111-1111-1111-1111-111111111111] [nullable] |
 
 
 ### Model BackupProgressEnum
@@ -718,9 +718,9 @@ The request parameters for restoring a portal from a backup.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **backupId** | **String** | The ID of the backup to restore from, as listed by &#x60;GET api/2.0/backup/getbackuphistory&#x60;. Send  anything that is not a GUID to restore from a file given by &#x60;storageParams&#x60; instead; an all-zero GUID  selects neither, because it parses as a GUID and then matches no record. | [required] [example: 11111111-1111-1111-1111-111111111111] [nullable] |
-| **storageType** | [**BackupStorageType**](#model-backupstoragetype) | The storage the archive is read from. It defaults to &#x60;Documents&#x60; and is only used when &#x60;backupId&#x60; is  not a GUID, because a known backup carries the storage of its own record. | [optional] [enum: 0, 1, 2, 3, 4, 5] |
-| **storageParams** | [**List**](#model-itemkeyvaluepairobjectobject) | The location of the archive, as an array of key and value pairs. The key read here is &#x60;filePath&#x60; -  not the &#x60;folderId&#x60; a backup is started with - and it holds a file ID for &#x60;Documents&#x60;, a  provider-specific file ID for &#x60;ThridpartyDocuments&#x60; and a path on the server for &#x60;Local&#x60;. It is only  used when &#x60;backupId&#x60; is not a GUID. | [optional] [example: [{key=filePath, value=1234}]] [nullable] |
+| **backupId** | **String** | The ID of the backup to restore from, as listed by `GET api/2.0/backup/getbackuphistory`. Send  anything that is not a GUID to restore from a file given by `storageParams` instead; an all-zero GUID  selects neither, because it parses as a GUID and then matches no record. | [required] [example: 11111111-1111-1111-1111-111111111111] [nullable] |
+| **storageType** | [**BackupStorageType**](#model-backupstoragetype) | The storage the archive is read from. It defaults to `Documents` and is only used when `backupId` is  not a GUID, because a known backup carries the storage of its own record. | [optional] [enum: 0, 1, 2, 3, 4, 5] |
+| **storageParams** | [**List**](#model-itemkeyvaluepairobjectobject) | The location of the archive, as an array of key and value pairs. The key read here is `filePath` -  not the `folderId` a backup is started with - and it holds a file ID for `Documents`, a  provider-specific file ID for `ThridpartyDocuments` and a path on the server for `Local`. It is only  used when `backupId` is not a GUID. | [optional] [example: [{key=filePath, value=1234}]] [nullable] |
 | **notify** | **Boolean** | Chooses who is emailed when the restoring starts and when it finishes: every active user of the  portal when true, and its owner alone when false. Mail goes only to accounts that have been  activated, so this decides the audience rather than whether anybody is notified at all. | [optional] [example: true] |
 | **dump** | **Boolean** | Restores the whole server rather than this one portal. It requires the space access permission. | [optional] [example: false] |
 
@@ -730,8 +730,8 @@ The request parameters for setting the backup schedule.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **storageType** | [**BackupStorageType**](#model-backupstoragetype) | The storage the scheduled archives are written to. It defaults to &#x60;Documents&#x60;, and it decides which  keys &#x60;storageParams&#x60; has to carry. | [optional] [enum: 0, 1, 2, 3, 4, 5] |
-| **storageParams** | [**List**](#model-itemkeyvaluepairobjectobject) | The settings of the chosen storage, as an array of key and value pairs. &#x60;Documents&#x60; and  &#x60;ThridpartyDocuments&#x60; need &#x60;folderId&#x60;, &#x60;Local&#x60; needs &#x60;filePath&#x60;, &#x60;ThirdPartyConsumer&#x60; needs &#x60;module&#x60;  plus the settings of that consumer, and &#x60;DataStore&#x60; needs none. | [optional] [example: [{key=folderId, value=1234}]] [nullable] |
+| **storageType** | [**BackupStorageType**](#model-backupstoragetype) | The storage the scheduled archives are written to. It defaults to `Documents`, and it decides which  keys `storageParams` has to carry. | [optional] [enum: 0, 1, 2, 3, 4, 5] |
+| **storageParams** | [**List**](#model-itemkeyvaluepairobjectobject) | The settings of the chosen storage, as an array of key and value pairs. `Documents` and  `ThridpartyDocuments` need `folderId`, `Local` needs `filePath`, `ThirdPartyConsumer` needs `module`  plus the settings of that consumer, and `DataStore` needs none. | [optional] [example: [{key=folderId, value=1234}]] [nullable] |
 | **backupsStored** | **Integer** (int32) | The number of scheduled copies to keep, from 1 to 30. It defaults to 1, and only the copies this  schedule creates are counted and removed - archives started by hand are left alone. | [optional] [example: 5] [nullable] |
 | **cronParams** | [**Cron**](#model-cron) | When the backup runs. It is required: a request without it fails rather than falling back to a  default. | [optional] |
 | **dump** | **Boolean** | Schedules a backup of the whole server rather than of this one portal. It requires the space access  permission and works on a standalone installation only. | [optional] [example: false] |
@@ -807,9 +807,9 @@ The request parameters for the time the scheduled backup runs.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **period** | [**BackupPeriod**](#model-backupperiod) | How often the backup runs: &#x60;EveryDay&#x60;, &#x60;EveryWeek&#x60; or &#x60;EveryMonth&#x60;. It defaults to &#x60;EveryDay&#x60;. | [optional] [enum: 0, 1, 2] |
+| **period** | [**BackupPeriod**](#model-backupperiod) | How often the backup runs: `EveryDay`, `EveryWeek` or `EveryMonth`. It defaults to `EveryDay`. | [optional] [enum: 0, 1, 2] |
 | **hour** | **Integer** (int32) | The hour of the day the backup starts at, from 0 to 23. Minutes cannot be chosen - it always starts  on the hour. | [optional] [example: 2] |
-| **day** | **Integer** (int32) | The day the backup runs on: the day of the week from 1 to 7, Sunday being 1, for &#x60;EveryWeek&#x60;, and the  day of the month from 1 to 31 for &#x60;EveryMonth&#x60;. Leave it out for &#x60;EveryDay&#x60; only - an omitted value is  stored as 0, which neither of the other two periods accepts, so a weekly or monthly schedule sent  without it fails. | [optional] [example: 1] [nullable] |
+| **day** | **Integer** (int32) | The day the backup runs on: the day of the week from 1 to 7, Sunday being 1, for `EveryWeek`, and the  day of the month from 1 to 31 for `EveryMonth`. Leave it out for `EveryDay` only - an omitted value is  stored as 0, which neither of the other two periods accepts, so a weekly or monthly schedule sent  without it fails. | [optional] [example: 1] [nullable] |
 
 
 ### Model CronParams
@@ -877,7 +877,7 @@ The successful API response containing the int32 value.
 
 
 ### Model ItemKeyValuePairObjectObject
-One entry of a keyed collection, carried as an explicit pair of &#x60;key&#x60; and &#x60;value&#x60; fields instead of as a member  of a JSON object, so that the key is not restricted to a string and the entries keep the order they are sent in.
+One entry of a keyed collection, carried as an explicit pair of `key` and `value` fields instead of as a member  of a JSON object, so that the key is not restricted to a string and the entries keep the order they are sent in.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
@@ -905,10 +905,10 @@ The backup schedule of a portal.
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **storageType** | [**BackupStorageType**](#model-backupstoragetype) | The storage the scheduled archives are written to, reported as a number rather than as the name the  schedule was created with. | [required] [enum: 0, 1, 2, 3, 4, 5] |
-| **storageParams** | **Map** | The settings of the storage, as an object keyed by parameter name - not as the array of key and value  pairs the schedule was created with, so it cannot be sent back unchanged. For every storage type  except &#x60;ThirdPartyConsumer&#x60; the &#x60;folderId&#x60; key is built from the stored base path. | [required] [example: {folderId=1234}] |
-| **cronParams** | [**CronParams**](#model-cronparams) | When the backup runs, read back from the stored cron expression. &#x60;day&#x60; is 0 for a daily schedule,  because a daily one has no day. | [required] |
+| **storageParams** | **Map** | The settings of the storage, as an object keyed by parameter name - not as the array of key and value  pairs the schedule was created with, so it cannot be sent back unchanged. For every storage type  except `ThirdPartyConsumer` the `folderId` key is built from the stored base path. | [required] [example: {folderId=1234}] |
+| **cronParams** | [**CronParams**](#model-cronparams) | When the backup runs, read back from the stored cron expression. `day` is 0 for a daily schedule,  because a daily one has no day. | [required] |
 | **backupsStored** | **Integer** (int32) | The number of scheduled copies kept. It is null, not 0, when the schedule keeps an unlimited number. | [optional] [example: 5] [nullable] |
-| **lastBackupTime** | **Date** (date-time) | The date and time the schedule last ran at. It is &#x60;0001-01-01T00:00:00&#x60; until the schedule has run  for the first time. | [required] [example: 2026-01-01T00:00:00Z] |
+| **lastBackupTime** | **Date** (date-time) | The date and time the schedule last ran at. It is `0001-01-01T00:00:00` until the schedule has run  for the first time. | [required] [example: 2026-01-01T00:00:00Z] |
 | **dump** | **Boolean** | Specifies whether this schedule backs up the whole server instead of one portal. | [required] [example: false] |
 
 
@@ -925,6 +925,17 @@ The successful API response containing the ScheduleDto object.
 
 
 ## Authorization
+
+
+### cookieAuth
+- **Type**: API key
+- **API key parameter name**: asc_auth_key
+- **Location**: 
+
+
+### bearerAuth
+
+- **Type**: HTTP Bearer Token authentication
 
 
 ### asc_auth_key
@@ -960,17 +971,6 @@ The successful API response containing the ScheduleDto object.
 
 
 ### OpenId
-
-
-### cookieAuth
-- **Type**: API key
-- **API key parameter name**: asc_auth_key
-- **Location**: 
-
-
-### bearerAuth
-
-- **Type**: HTTP Bearer Token authentication
 
 
 ### x-signature

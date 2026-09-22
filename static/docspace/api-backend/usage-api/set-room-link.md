@@ -8,13 +8,13 @@ Referenced types are defined in the [full reference](../files.md).
 
 Set the room external or invitation link
 
-Creates, updates or deletes one sharing link of a room and returns it. &#x60;linkType&#x60; chooses the kind: an  invitation link makes whoever opens it a member with the given access level, while an external link opens the  room without an account. Omitting &#x60;linkId&#x60; creates a link, passing the id of an existing one updates it, and  an unknown id is created with that id; the kind of an existing link cannot be changed afterwards. An access  level of 0 deletes the link, and deleting the primary external link of a public or form filling room  immediately replaces it with a fresh one, so such a room is never left without one. A room keeps at most one  invitation link, and a second one is refused; form filling rooms take no invitation links, and collaboration,  form filling and virtual data rooms take no external links. An expiration date in the past is dropped silently  for an external link and rejected for an invitation link. &#x60;password&#x60;, &#x60;denyDownload&#x60; and &#x60;internal&#x60; apply to  external links only.
+Creates, updates or deletes one sharing link of a room and returns it. `linkType` chooses the kind: an  invitation link makes whoever opens it a member with the given access level, while an external link opens the  room without an account. Omitting `linkId` creates a link, passing the id of an existing one updates it, and  an unknown id is created with that id; the kind of an existing link cannot be changed afterwards. An access  level of 0 deletes the link, and deleting the primary external link of a public or form filling room  immediately replaces it with a fresh one, so such a room is never left without one. A room keeps at most one  invitation link, and a second one is refused; form filling rooms take no invitation links, and collaboration,  form filling and virtual data rooms take no external links. An expiration date in the past is dropped silently  for an external link and rejected for an invitation link. `password`, `denyDownload` and `internal` apply to  external links only.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The room the link belongs to, named by the identifier that &#x60;GET api/2.0/files/rooms&#x60; reports for it. | [required] [example: 1] |
+| **id** | path | **Integer** (int32) | The room the link belongs to, named by the identifier that `GET api/2.0/files/rooms` reports for it. | [required] [example: 1] |
 | **RoomLinkRequest** | body | [**RoomLinkRequest**](../files.md#model-roomlinkrequest) | The link to create, change or revoke. | [required] |
 
 ## Responses

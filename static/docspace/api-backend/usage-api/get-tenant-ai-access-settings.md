@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../api.md).
 
 Get the AI access settings
 
-Returns whether AI functionality (chat, agents, vectorization) is currently available on the portal at all; AI  is enabled by default. Requires an authenticated session; every role can read it. This is a read-only,  idempotent call. When the setting is disabled, every AI-specific endpoint and folder is unavailable regardless  of the caller&#39;s own permissions; this call only reports the portal-wide switch, not any per-user entitlement.
+Returns whether AI functionality (chat, agents, vectorization) is currently available on the portal at all; AI  is enabled by default. Requires an authenticated session; every role can read it. This is a read-only,  idempotent call. When the setting is disabled, every AI-specific endpoint and folder is unavailable regardless  of the caller's own permissions; this call only reports the portal-wide switch, not any per-user entitlement.
 
 ## Parameters
 This endpoint does not need any parameter.

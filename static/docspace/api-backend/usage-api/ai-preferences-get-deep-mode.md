@@ -1,6 +1,6 @@
 # aiPreferencesGetDeepMode
 
-Referenced types are defined in the [full reference](../newai.md).
+Referenced types are defined in the [full reference](../aichat.md).
 
 > Boolean aiPreferencesGetDeepMode(entityId)
 
@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../newai.md).
 
 Get deep mode
 
-Returns the deep-mode toggle of a scope, as a bare boolean: whether the stored extended-thinking depth is above &#x60;off&#x60;. &#x60;entityId&#x60; picks a room and omitting it reads the portal-wide preference. A scope that has never had a value stored falls back to the configured default, so the answer never distinguishes off from unset - ask &#x60;GET api/2.0/ai/preferences/is-deep-mode-set&#x60; for that. This is a read-only operation.
+Returns the deep-mode toggle of a scope, as a bare boolean: whether the stored extended-thinking depth is above `off`. `entityId` picks a room and omitting it reads the portal-wide preference. A scope that has never had a value stored falls back to the configured default, so the answer never distinguishes off from unset - ask `GET api/2.0/ai/preferences/is-deep-mode-set` for that. This is a read-only operation.
 
 ## Parameters
 
@@ -21,9 +21,9 @@ Returns the deep-mode toggle of a scope, as a bare boolean: whether the stored e
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Whether deep mode is on, falling back to the configured default when the scope has no value of its own. | **Boolean** | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
-| **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
-| **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](../aichat.md#model-aierrorresponse) | - |
+| **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](../aichat.md#model-aierrorresponse) | - |
+| **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](../aichat.md#model-aierrorresponse) | - |
 
 ## Return type
 
@@ -31,7 +31,7 @@ Returns the deep-mode toggle of a scope, as a bare boolean: whether the stored e
 
 ## Authorization
 
-No authorization required
+[cookieAuth](../aichat.md#cookieauth), [bearerAuth](../aichat.md#bearerauth)
 
 ## HTTP request headers
 

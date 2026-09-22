@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../people.md).
 
 Get a group
 
-Returns one group by its ID, with its name, its manager and - when asked for - the accounts that belong to  it.  The caller needs the permission to read groups, and the ID has to belong to a group that has not been  deleted, otherwise the operation answers 404.  The call is read-only, and the member list is left out unless &#x60;includeMembers&#x60; is set to true, so ask for it  only when the members are actually needed.  Use &#x60;GET api/2.0/group&#x60; to look a group up by name or to page through them all.
+Returns one group by its ID, with its name, its manager and - when asked for - the accounts that belong to  it.  The caller needs the permission to read groups, and the ID has to belong to a group that has not been  deleted, otherwise the operation answers 404.  The call is read-only, and the member list is left out unless `includeMembers` is set to true, so ask for it  only when the members are actually needed.  Use `GET api/2.0/group` to look a group up by name or to page through them all.
 
 ## Parameters
 

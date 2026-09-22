@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../api.md).
 
 Update the email activation settings
 
-Updates the current user&#39;s own preference for whether the email confirmation prompt is displayed on their  account. Requires an authenticated session; every role may change its own setting, and the change never  affects any other user. This is a mutating, idempotent call. It returns the settings exactly as submitted,  without validating them against the account&#39;s actual email confirmation state, so &#x60;show&#x60; can be set to &#x60;true&#x60;  even after the address is already confirmed.
+Updates the current user's own preference for whether the email confirmation prompt is displayed on their  account. Requires an authenticated session; every role may change its own setting, and the change never  affects any other user. This is a mutating, idempotent call. It returns the settings exactly as submitted,  without validating them against the account's actual email confirmation state, so `show` can be set to `true`  even after the address is already confirmed.
 
 ## Parameters
 

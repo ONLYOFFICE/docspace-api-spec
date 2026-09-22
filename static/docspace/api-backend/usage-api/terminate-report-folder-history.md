@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../files.md).
 
 Terminate the folder history report generation
 
-Gives up the history report the caller has started for a folder with  &#x60;POST api/2.0/files/folder/{folderId}/log/report&#x60;. The request only asks the background worker to stop, and  the answer carries no body, so a following &#x60;GET api/2.0/files/folder/{folderId}/log/report&#x60; is what shows the  task ending as cancelled. Asking to terminate when nothing is running is accepted and changes nothing, which  makes the call safe to repeat. A report that has already finished is not undone by this call and its file  stays in My documents. The caller needs read access to the folder and may not be a guest, and the portal  plan has to include the audit feature; a caller who fails the access rule is answered with 403 and a folder  that does not exist with 404. Each caller can only terminate their own report.
+Gives up the history report the caller has started for a folder with  `POST api/2.0/files/folder/{folderId}/log/report`. The request only asks the background worker to stop, and  the answer carries no body, so a following `GET api/2.0/files/folder/{folderId}/log/report` is what shows the  task ending as cancelled. Asking to terminate when nothing is running is accepted and changes nothing, which  makes the call safe to repeat. A report that has already finished is not undone by this call and its file  stays in My documents. The caller needs read access to the folder and may not be a guest, and the portal  plan has to include the audit feature; a caller who fails the access rule is answered with 403 and a folder  that does not exist with 404. Each caller can only terminate their own report.
 
 ## Parameters
 

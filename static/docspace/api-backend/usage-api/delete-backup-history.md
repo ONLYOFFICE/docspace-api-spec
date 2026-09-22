@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../backup.md).
 
 Delete the backup history
 
-Deletes every backup of the current portal, both the history records and the archives themselves, and  leaves the backup schedule alone. &#x60;dump&#x60; clears the backups of the whole server instead and requires  the space access permission.  The records are walked one by one and a failure on any of them is swallowed, so the result is always  true even when some archives could not be deleted: it does not mean the history is now empty. Call  &#x60;GET api/2.0/backup/getbackuphistory&#x60; afterwards to see what is left.  Each record is removed before its archive, so an archive whose deletion fails stays in the storage  with nothing pointing at it.
+Deletes every backup of the current portal, both the history records and the archives themselves, and  leaves the backup schedule alone. `dump` clears the backups of the whole server instead and requires  the space access permission.  The records are walked one by one and a failure on any of them is swallowed, so the result is always  true even when some archives could not be deleted: it does not mean the history is now empty. Call  `GET api/2.0/backup/getbackuphistory` afterwards to see what is left.  Each record is removed before its archive, so an archive whose deletion fails stays in the storage  with nothing pointing at it.
 
 ## Parameters
 

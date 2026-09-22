@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../api.md).
 
 Get portal capabilities
 
-Returns the sign-in methods this portal offers, which a login client needs before anyone has signed in: LDAP  authentication and its domain, the external identity providers to show, the SAML single sign-on URL and its  label, and whether the built-in identity server is available. No token is needed and nothing has to be called  first - the operation is open to unauthenticated callers, answers even while the portal&#39;s payment has lapsed,  and is read-only and idempotent. &#x60;providers&#x60; holds provider keys such as &#x60;google&#x60; or &#x60;facebook&#x60;, ordered for  the country detected from the caller&#39;s IP address and reduced to the ones this installation has configured;  pass one of them as &#x60;provider&#x60; to &#x60;POST api/2.0/authentication&#x60;. An empty &#x60;providers&#x60; means external sign-in  is off and an empty &#x60;ssoUrl&#x60; means single sign-on is off; a capability whose settings cannot be read is  reported as disabled rather than failing the call, so a false flag means the method is not offered, not that  it is unknown. The answer describes the portal and never a user, and carries none of the configuration behind  these methods: an administrator reads that from &#x60;GET api/2.0/settings/ssov2&#x60; and  &#x60;GET api/2.0/settings/authservice&#x60;.
+Returns the sign-in methods this portal offers, which a login client needs before anyone has signed in: LDAP  authentication and its domain, the external identity providers to show, the SAML single sign-on URL and its  label, and whether the built-in identity server is available. No token is needed and nothing has to be called  first - the operation is open to unauthenticated callers, answers even while the portal's payment has lapsed,  and is read-only and idempotent. `providers` holds provider keys such as `google` or `facebook`, ordered for  the country detected from the caller's IP address and reduced to the ones this installation has configured;  pass one of them as `provider` to `POST api/2.0/authentication`. An empty `providers` means external sign-in  is off and an empty `ssoUrl` means single sign-on is off; a capability whose settings cannot be read is  reported as disabled rather than failing the call, so a false flag means the method is not offered, not that  it is unknown. The answer describes the portal and never a user, and carries none of the configuration behind  these methods: an administrator reads that from `GET api/2.0/settings/ssov2` and  `GET api/2.0/settings/authservice`.
 
 ## Parameters
 This endpoint does not need any parameter.
@@ -29,7 +29,7 @@ This endpoint does not need any parameter.
 
 ## Authorization
 
-No authorization required
+[cookieAuth](../api.md#cookieauth), [bearerAuth](../api.md#bearerauth)
 
 ## HTTP request headers
 

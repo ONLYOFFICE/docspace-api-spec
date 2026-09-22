@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../people.md).
 
 Get the deletion progress
 
-Returns the current state of the data deletion queued for the user with the ID specified in the request.  A deletion must have been queued by &#x60;POST api/2.0/people/remove/start&#x60; first: when nothing is queued for that  user the operation answers 200 with an empty body.  The caller needs the permission to edit users.  The call is read-only and is the polling operation of the deletion flow - repeat it until &#x60;isCompleted&#x60; is  true, reading &#x60;percentage&#x60; for the 0 to 100 progress and &#x60;error&#x60; for the message left by a failed job.  Use &#x60;PUT api/2.0/people/remove/terminate&#x60; to cancel a job that is still running.
+Returns the current state of the data deletion queued for the user with the ID specified in the request.  A deletion must have been queued by `POST api/2.0/people/remove/start` first: when nothing is queued for that  user the operation answers 200 with an empty body.  The caller needs the permission to edit users.  The call is read-only and is the polling operation of the deletion flow - repeat it until `isCompleted` is  true, reading `percentage` for the 0 to 100 progress and `error` for the message left by a failed job.  Use `PUT api/2.0/people/remove/terminate` to cancel a job that is still running.
 
 ## Parameters
 

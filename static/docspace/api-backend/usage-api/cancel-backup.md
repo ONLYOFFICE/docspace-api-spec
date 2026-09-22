@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../backup.md).
 
 Cancel the running backup
 
-Drops the backup job of the current portal from the queue, which cancels it if it is still running.  The caller needs the portal settings permission. It answers false, not an error, when there is nothing  to cancel, so the result says whether a job was actually dropped rather than whether the call  succeeded.  This affects backup jobs only: a restoring job cannot be cancelled through the API. The cancelled job  leaves the queue, so a following &#x60;GET api/2.0/backup/getbackupprogress&#x60; reports no job at all rather  than a job with the &#x60;Canceled&#x60; status.
+Drops the backup job of the current portal from the queue, which cancels it if it is still running.  The caller needs the portal settings permission. It answers false, not an error, when there is nothing  to cancel, so the result says whether a job was actually dropped rather than whether the call  succeeded.  This affects backup jobs only: a restoring job cannot be cancelled through the API. The cancelled job  leaves the queue, so a following `GET api/2.0/backup/getbackupprogress` reports no job at all rather  than a job with the `Canceled` status.
 
 ## Parameters
 This endpoint does not need any parameter.

@@ -8,14 +8,14 @@ Referenced types are defined in the [full reference](../api.md).
 
 Get the checkout setup page URL
 
-Hands back the hosted page on which a payment method is attached to the portal&#39;s billing account, for the case  where money has to be taken later - a wallet top-up or an automatic one - rather than a plan bought now. A  portal that already has a payment method on file answers with an empty result; a DocSpace administrator may  ask for the page, but once the portal has a billing customer with an e-mail, only its payer may. The call  itself changes nothing and may be repeated: the payment method is stored by the payment provider when the  returned page is completed, after which &#x60;GET api/2.0/portal/payment/customerinfo&#x60; reports it as set. The URL  is absolute, carries the caller&#39;s e-mail, the language of the request and the currency of the region, and  redirects to &#x60;successUrl&#x60; or &#x60;backUrl&#x60; when the user finishes or cancels. It buys nothing - a plan is bought  with &#x60;PUT api/2.0/portal/payment/url&#x60;.
+Hands back the hosted page on which a payment method is attached to the portal's billing account, for the case  where money has to be taken later - a wallet top-up or an automatic one - rather than a plan bought now. A  portal that already has a payment method on file answers with an empty result; a DocSpace administrator may  ask for the page, but once the portal has a billing customer with an e-mail, only its payer may. The call  itself changes nothing and may be repeated: the payment method is stored by the payment provider when the  returned page is completed, after which `GET api/2.0/portal/payment/customerinfo` reports it as set. The URL  is absolute, carries the caller's e-mail, the language of the request and the currency of the region, and  redirects to `successUrl` or `backUrl` when the user finishes or cancels. It buys nothing - a plan is bought  with `PUT api/2.0/portal/payment/url`.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
 | **BackUrl** | query | **URI** (uri) | The absolute address the setup page sends the user back to when attaching a payment method is abandoned. It  has to be a well-formed URL and must be reachable by that user rather than by the portal. | [required] [example: https://example.com/payment/back] [minLength: 0] [maxLength: 255] |
-| **SuccessUrl** | query | **URI** (uri) | The absolute address the setup page sends the user to once the payment provider has stored the payment  method. Reaching it means a method is now on file, which &#x60;GET api/2.0/portal/payment/customerinfo&#x60; confirms;  nothing has been charged. | [required] [example: https://example.com/payment/success] [minLength: 0] [maxLength: 255] |
+| **SuccessUrl** | query | **URI** (uri) | The absolute address the setup page sends the user to once the payment provider has stored the payment  method. Reaching it means a method is now on file, which `GET api/2.0/portal/payment/customerinfo` confirms;  nothing has been charged. | [required] [example: https://example.com/payment/success] [minLength: 0] [maxLength: 255] |
 
 ## Responses
 

@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../api.md).
 
 Get CSP settings
 
-Returns the Content Security Policy this portal serves: &#x60;domains&#x60;, the external hosts an administrator has  allowed, and &#x60;header&#x60;, the whole policy value built from them together with the portal&#39;s own defaults and the  integrations it has switched on. The operation is anonymous and reachable cross-origin - no token is needed -  because the login and editor front-ends read it before anyone has signed in. It is read-only for the caller,  but it does repair the portal&#39;s cached policy when the cache has lost it, so a call can rebuild the header  instead of only reading it. The answer honours &#x60;If-Modified-Since&#x60;: send back the &#x60;Last-Modified&#x60; value of an  earlier answer and an unchanged policy comes back as an empty not-modified response rather than a body.  &#x60;domains&#x60; is an empty list on a portal nobody has configured, while &#x60;header&#x60; is filled from the defaults even  then. Change the allowed domains with &#x60;POST api/2.0/security/csp&#x60;, which does need a DocSpace administrator.
+Returns the Content Security Policy this portal serves: `domains`, the external hosts an administrator has  allowed, and `header`, the whole policy value built from them together with the portal's own defaults and the  integrations it has switched on. The operation is anonymous and reachable cross-origin - no token is needed -  because the login and editor front-ends read it before anyone has signed in. It is read-only for the caller,  but it does repair the portal's cached policy when the cache has lost it, so a call can rebuild the header  instead of only reading it. The answer honours `If-Modified-Since`: send back the `Last-Modified` value of an  earlier answer and an unchanged policy comes back as an empty not-modified response rather than a body.  `domains` is an empty list on a portal nobody has configured, while `header` is filled from the defaults even  then. Change the allowed domains with `POST api/2.0/security/csp`, which does need a DocSpace administrator.
 
 ## Parameters
 This endpoint does not need any parameter.
@@ -29,7 +29,7 @@ This endpoint does not need any parameter.
 
 ## Authorization
 
-No authorization required
+[cookieAuth](../api.md#cookieauth), [bearerAuth](../api.md#bearerauth)
 
 ## HTTP request headers
 

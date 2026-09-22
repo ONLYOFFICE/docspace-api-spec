@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../oauth.md).
 
 Get public client info
 
-Returns the same consent-facing client information as the signed read, but without requiring a portal signature. It is meant for a login or consent page that has to render the client before the user is known, so it resolves the client by ID alone: there is no authentication, no tenant scoping and no creator check, and any caller who knows a client ID can read that client&#39;s public details. It still exposes no secret, no redirect URIs and no allowed origins. Being unauthenticated it is rate-limited on a separate, tighter budget than the signed endpoints. An unknown client ID, and an identifier that is not a client ID at all, are both reported as 404.
+Returns the same consent-facing client information as the signed read, but without requiring a portal signature. It is meant for a login or consent page that has to render the client before the user is known, so it resolves the client by ID alone: there is no authentication, no tenant scoping and no creator check, and any caller who knows a client ID can read that client's public details. It still exposes no secret, no redirect URIs and no allowed origins. Being unauthenticated it is rate-limited on a separate, tighter budget than the signed endpoints. An unknown client ID, and an identifier that is not a client ID at all, are both reported as 404.
 
 ## Parameters
 
@@ -34,7 +34,7 @@ Returns the same consent-facing client information as the signed read, but witho
 
 ## Authorization
 
-No authorization required
+[cookieAuth](../oauth.md#cookieauth), [bearerAuth](../oauth.md#bearerauth)
 
 ## HTTP request headers
 

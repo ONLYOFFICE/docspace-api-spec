@@ -8,13 +8,13 @@ Referenced types are defined in the [full reference](../files.md).
 
 Update a room
 
-Applies a partial change to one room and returns the whole room as it is after it. Only the fields present in  the body are touched, an empty body changes nothing, and a property the body does not define is rejected as an  invalid request instead of being ignored. The caller must be a manager of this room: portal administrators do  not get in without an invitation, and an archived room is refused. &#x60;title&#x60; is trimmed, sanitised the way a  room title is sanitised at creation, and a blank value is treated as no change. &#x60;tags&#x60; replaces the whole tag  set and an empty array clears it, an empty &#x60;color&#x60; restores the default and an empty &#x60;cover&#x60; removes the  cover. A &#x60;quota&#x60; of -1 switches the room back to no custom limit, any other negative value restores the portal  default, and a positive one is accepted only while the per-room quota feature is on. Turning &#x60;indexing&#x60; on  renumbers the room contents. &#x60;chatSettings&#x60; belongs to an AI room and is rejected anywhere else. Use  &#x60;POST api/2.0/files/rooms/{id}/logo&#x60; for logo cropping.
+Applies a partial change to one room and returns the whole room as it is after it. Only the fields present in  the body are touched, an empty body changes nothing, and a property the body does not define is rejected as an  invalid request instead of being ignored. The caller must be a manager of this room: portal administrators do  not get in without an invitation, and an archived room is refused. `title` is trimmed, sanitised the way a  room title is sanitised at creation, and a blank value is treated as no change. `tags` replaces the whole tag  set and an empty array clears it, an empty `color` restores the default and an empty `cover` removes the  cover. A `quota` of -1 switches the room back to no custom limit, any other negative value restores the portal  default, and a positive one is accepted only while the per-room quota feature is on. Turning `indexing` on  renumbers the room contents. `chatSettings` belongs to an AI room and is rejected anywhere else. Use  `POST api/2.0/files/rooms/{id}/logo` for logo cropping.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The room to update, named by the identifier that &#x60;GET api/2.0/files/rooms&#x60; reports for it. | [required] [example: 1] |
+| **id** | path | **Integer** (int32) | The room to update, named by the identifier that `GET api/2.0/files/rooms` reports for it. | [required] [example: 1] |
 | **UpdateRoomRequest** | body | [**UpdateRoomRequest**](../files.md#model-updateroomrequest) | The fields to change. Only the properties present in the object are applied, and a property that the object  does not define is rejected instead of being ignored. | [required] |
 
 ## Responses

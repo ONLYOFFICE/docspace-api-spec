@@ -1,6 +1,6 @@
 # aiAssignmentsTryResolveForAction
 
-Referenced types are defined in the [full reference](../newai.md).
+Referenced types are defined in the [full reference](../aichat.md).
 
 > AiResolvedAssignment aiAssignmentsTryResolveForAction(actionType, entityId)
 
@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../newai.md).
 
 Try resolve for action
 
-Returns the profile that will serve one AI action, exactly as &#x60;GET api/2.0/ai/assignments/resolve-for-action&#x60; does, but answers with an empty result rather than failing when nothing is configured. &#x60;actionType&#x60; is required and is validated the same way, and &#x60;entityId&#x60; narrows the lookup to a room. This is the operation to call when the absence of a profile is a normal state to render - a settings screen, or a feature that hides itself. Both operations are read-only.
+Returns the profile that will serve one AI action, exactly as `GET api/2.0/ai/assignments/resolve-for-action` does, but answers with an empty result rather than failing when nothing is configured. `actionType` is required and is validated the same way, and `entityId` narrows the lookup to a room. This is the operation to call when the absence of a profile is a normal state to render - a settings screen, or a feature that hides itself. Both operations are read-only.
 
 ## Parameters
 
@@ -21,19 +21,19 @@ Returns the profile that will serve one AI action, exactly as &#x60;GET api/2.0/
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The profile that will serve the action, or an empty result when none is configured. | [**AiResolvedAssignment**](../newai.md#model-airesolvedassignment) | - |
-| **400** | &#x60;actionType&#x60; is missing. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
-| **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
-| **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
+| **200** | The profile that will serve the action, or an empty result when none is configured. | [**AiResolvedAssignment**](../aichat.md#model-airesolvedassignment) | - |
+| **400** | `actionType` is missing. | [**AiErrorResponse**](../aichat.md#model-aierrorresponse) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](../aichat.md#model-aierrorresponse) | - |
+| **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](../aichat.md#model-aierrorresponse) | - |
+| **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](../aichat.md#model-aierrorresponse) | - |
 
 ## Return type
 
-[**AiResolvedAssignment**](../newai.md#model-airesolvedassignment)
+[**AiResolvedAssignment**](../aichat.md#model-airesolvedassignment)
 
 ## Authorization
 
-No authorization required
+[cookieAuth](../aichat.md#cookieauth), [bearerAuth](../aichat.md#bearerauth)
 
 ## HTTP request headers
 

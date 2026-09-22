@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../oauth.md).
 
 Submit the consent decision
 
-Submits the user&#39;s consent decision for the scopes an authorization request asked for. It is the form post the consent page makes, so it carries the client ID, the state and the agreed scopes as multipart form data, along with the same portal signature cookie the authorization request needed. On success the browser is redirected to the client&#39;s redirect URI with an authorization code, or, when the request carries the X-Disable-Redirect header, answered 200 with that URL in the X-Redirect-URI header. The consent is stored per user and client, so a later authorization request for the same scopes no longer stops at the consent page.
+Submits the user's consent decision for the scopes an authorization request asked for. It is the form post the consent page makes, so it carries the client ID, the state and the agreed scopes as multipart form data, along with the same portal signature cookie the authorization request needed. On success the browser is redirected to the client's redirect URI with an authorization code, or, when the request carries the X-Disable-Redirect header, answered 200 with that URL in the X-Redirect-URI header. The consent is stored per user and client, so a later authorization request for the same scopes no longer stops at the consent page.
 
 ## Parameters
 
@@ -22,7 +22,7 @@ Submits the user&#39;s consent decision for the scopes an authorization request 
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **302** | Redirect to the client&#39;s redirect URI with authorization code | - | - |
+| **302** | Redirect to the client's redirect URI with authorization code | - | - |
 | **200** | Returned instead of the redirect when the request carries the X-Disable-Redirect header: the target URL is sent in the X-Redirect-URI response header and the body is empty | - | - |
 | **400** | Invalid request parameters | - | - |
 

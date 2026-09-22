@@ -8,14 +8,14 @@ Referenced types are defined in the [full reference](../files.md).
 
 Upload the next chunk
 
-Sends the next part of a file into the session opened for it, as the multipart &#x60;File&#x60; field, and lets the  server keep count: parts are appended in the order they arrive, so two of these calls must never run in  parallel on one session. While bytes are still missing the answer describes the session and &#x60;uploaded&#x60; is  false; when the last part completes the declared size the file is written, its upload links are cleared, it is  marked as new for the room, and the answer comes back with 201, &#x60;uploaded&#x60; true and the whole file in &#x60;file&#x60;.  A session created for a payload smaller than &#x60;chunkUploadSize&#x60; from &#x60;GET api/2.0/files/settings&#x60; finishes on  the first such call and needs no separate finalize step. A part larger than that limit is refused. The first  part of a PDF is inspected, and a PDF that is not a fillable form is refused when the session targets a  form-filling room. The session is addressed by its id, and the folder in the path is not matched against it.
+Sends the next part of a file into the session opened for it, as the multipart `File` field, and lets the  server keep count: parts are appended in the order they arrive, so two of these calls must never run in  parallel on one session. While bytes are still missing the answer describes the session and `uploaded` is  false; when the last part completes the declared size the file is written, its upload links are cleared, it is  marked as new for the room, and the answer comes back with 201, `uploaded` true and the whole file in `file`.  A session created for a payload smaller than `chunkUploadSize` from `GET api/2.0/files/settings` finishes on  the first such call and needs no separate finalize step. A part larger than that limit is refused. The first  part of a PDF is inspected, and a PDF that is not a fillable form is refused when the session targets a  form-filling room. The session is addressed by its id, and the folder in the path is not matched against it.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
 | **folderId** | path | **Integer** (int32) | The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id. | [required] [example: 1] |
-| **sessionId** | path | **String** | The session this part belongs to, as returned in &#x60;id&#x60; when it was created; the parts of one session must be  sent one after another, not in parallel. | [required] [example: 9f1c7a2b4d3e4f5a8b6c0d1e2f3a4b5c] |
+| **sessionId** | path | **String** | The session this part belongs to, as returned in `id` when it was created; the parts of one session must be  sent one after another, not in parallel. | [required] [example: 9f1c7a2b4d3e4f5a8b6c0d1e2f3a4b5c] |
 | **File** | form | **File** (binary) | The next part of the file, sent as the multipart field of the same name. Parts are appended in the order they  arrive, and a part larger than the portal chunk size is refused. | [optional] |
 
 ## Responses

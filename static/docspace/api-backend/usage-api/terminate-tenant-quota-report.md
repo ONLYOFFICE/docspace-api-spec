@@ -6,9 +6,9 @@ Referenced types are defined in the [full reference](../api.md).
 
 `DELETE /api/2.0/settings/docscloud/tenant/quota/report`
 
-Terminate the DocsCloud quota report
+Terminate the Docs Connect quota report
 
-Cancels the DocsCloud user quota report that the current user started with  &#x60;POST api/2.0/settings/docscloud/tenant/quota/report&#x60; and removes its job, so that a new report can be started  right away. There is no precondition: the call is accepted even when this user has no report job at all, and  it affects the caller&#39;s own job only, never one started by another administrator. The caller must be a portal  administrator allowed to edit the portal settings. The cancellation is asynchronous and idempotent: 200 means  the request has been queued for the report worker, not that the job has already stopped, so poll  &#x60;GET api/2.0/settings/docscloud/tenant/quota/report&#x60; until it returns an empty result. Nothing is returned in  the body. A report file that has already been saved in the My documents folder of the caller is left there  and has to be deleted through the file operations if it is no longer wanted.
+Cancels the Docs Connect user quota report that the current user started with  `POST api/2.0/settings/docscloud/tenant/quota/report` and removes its job, so that a new report can be started  right away. There is no precondition: the call is accepted even when this user has no report job at all, and  it affects the caller's own job only, never one started by another administrator. The caller must be a portal  administrator allowed to edit the portal settings. The cancellation is asynchronous and idempotent: 200 means  the request has been queued for the report worker, not that the job has already stopped, so poll  `GET api/2.0/settings/docscloud/tenant/quota/report` until it returns an empty result. Nothing is returned in  the body. A report file that has already been saved in the My documents folder of the caller is left there  and has to be deleted through the file operations if it is no longer wanted.
 
 ## Parameters
 This endpoint does not need any parameter.

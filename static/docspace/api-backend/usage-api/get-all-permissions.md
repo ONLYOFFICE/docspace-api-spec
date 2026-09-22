@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../people.md).
 
 Get API key permissions
 
-Returns every scope value the portal accepts in the &#x60;permissions&#x60; array of an API key.  Read it before &#x60;POST api/2.0/keys&#x60; or &#x60;PUT api/2.0/keys/{keyId}&#x60;, because any other value is rejected with  400.  Any portal member except a guest may call it, and the call is read-only.  The answer is a flat list sorted alphabetically, holding the per-area scopes such as &#x60;accounts:read&#x60;,  &#x60;files:write&#x60; and &#x60;rooms:write&#x60;, the portal-wide &#x60;*:read&#x60; and &#x60;*:write&#x60;, and &#x60;*&#x60; which stands for a key  without scope restrictions.  The list is fixed for the portal and identical for every caller, so it can be cached by the client.
+Returns every scope value the portal accepts in the `permissions` array of an API key.  Read it before `POST api/2.0/keys` or `PUT api/2.0/keys/{keyId}`, because any other value is rejected with  400.  Any portal member except a guest may call it, and the call is read-only.  The answer is a flat list sorted alphabetically, holding the per-area scopes such as `accounts:read`,  `files:write` and `rooms:write`, the portal-wide `*:read` and `*:write`, and `*` which stands for a key  without scope restrictions.  The list is fixed for the portal and identical for every caller, so it can be cached by the client.
 
 ## Parameters
 This endpoint does not need any parameter.

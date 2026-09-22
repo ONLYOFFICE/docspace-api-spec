@@ -8,13 +8,13 @@ Referenced types are defined in the [full reference](../backup.md).
 
 Delete the backup
 
-Deletes one backup: first its history record, then the archive in the storage the record points at.  The ID is the one listed by &#x60;GET api/2.0/backup/getbackuphistory&#x60;, which is also the &#x60;taskId&#x60; the  backup was started with.  Deleting a backup of the whole server rather than of one portal additionally requires the space  access permission. A record that belongs to another portal is left untouched and the call still  answers true, so the result confirms that the request was accepted rather than that anything was  deleted - check with &#x60;GET api/2.0/backup/getbackuphistory&#x60; if it matters.  The record is removed before the archive, so when the storage can no longer be reached the archive  stays behind with nothing pointing at it.
+Deletes one backup: first its history record, then the archive in the storage the record points at.  The ID is the one listed by `GET api/2.0/backup/getbackuphistory`, which is also the `taskId` the  backup was started with.  Deleting a backup of the whole server rather than of one portal additionally requires the space  access permission. A record that belongs to another portal is left untouched and the call still  answers true, so the result confirms that the request was accepted rather than that anything was  deleted - check with `GET api/2.0/backup/getbackuphistory` if it matters.  The record is removed before the archive, so when the storage can no longer be reached the archive  stays behind with nothing pointing at it.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **UUID** (uuid) | The ID of the backup to delete, taken from the route. It is the &#x60;id&#x60; of a record listed by  &#x60;GET api/2.0/backup/getbackuphistory&#x60;, which is also the &#x60;taskId&#x60; the backup was started with. | [required] [example: 11111111-1111-1111-1111-111111111111] |
+| **id** | path | **UUID** (uuid) | The ID of the backup to delete, taken from the route. It is the `id` of a record listed by  `GET api/2.0/backup/getbackuphistory`, which is also the `taskId` the backup was started with. | [required] [example: 11111111-1111-1111-1111-111111111111] |
 
 ## Responses
 

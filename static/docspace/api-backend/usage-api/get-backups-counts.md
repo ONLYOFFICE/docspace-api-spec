@@ -8,15 +8,15 @@ Referenced types are defined in the [full reference](../backup.md).
 
 Get free and paid backup counts
 
-Counts the backups of the current portal created within a period and splits the result into the ones  covered by the free monthly allowance and the ones charged to the portal wallet, which saves calling  &#x60;GET api/2.0/backup/getbackupscount&#x60; twice.  The &#x60;paid&#x60; query parameter is accepted but not read here: the answer always carries both figures. The  period behaves as it does for &#x60;GET api/2.0/backup/getbackupscount&#x60; - it defaults to the current  calendar month, both bounds are UTC and inclusive, and a &#x60;from&#x60; later than &#x60;to&#x60; is rejected.  The counts are over history records rather than over stored archives, so they include backups that  have already been deleted.
+Counts the backups of the current portal created within a period and splits the result into the ones  covered by the free monthly allowance and the ones charged to the portal wallet, which saves calling  `GET api/2.0/backup/getbackupscount` twice.  The `paid` query parameter is accepted but not read here: the answer always carries both figures. The  period behaves as it does for `GET api/2.0/backup/getbackupscount` - it defaults to the current  calendar month, both bounds are UTC and inclusive, and a `from` later than `to` is rejected.  The counts are over history records rather than over stored archives, so they include backups that  have already been deleted.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **from** | query | **Date** (date-time) | The start of the period, in UTC and inclusive. It defaults to the first day of the current calendar  month at 00:00 UTC, and it has to be no later than &#x60;to&#x60;. | [optional] [example: 2026-03-01T00:00:00Z] |
+| **from** | query | **Date** (date-time) | The start of the period, in UTC and inclusive. It defaults to the first day of the current calendar  month at 00:00 UTC, and it has to be no later than `to`. | [optional] [example: 2026-03-01T00:00:00Z] |
 | **to** | query | **Date** (date-time) | The end of the period, in UTC and inclusive. It defaults to the moment of the call. | [optional] [example: 2026-03-31T23:59:59Z] |
-| **paid** | query | **Boolean** | Counts the backups charged to the portal wallet when true, and the ones covered by the free monthly  allowance when false, which is the default. It is read only by  &#x60;GET api/2.0/backup/getbackupscount&#x60; and is ignored by  &#x60;GET api/2.0/backup/getbackupscountbypaid&#x60;, which always reports both. | [optional] [example: false] |
+| **paid** | query | **Boolean** | Counts the backups charged to the portal wallet when true, and the ones covered by the free monthly  allowance when false, which is the default. It is read only by  `GET api/2.0/backup/getbackupscount` and is ignored by  `GET api/2.0/backup/getbackupscountbypaid`, which always reports both. | [optional] [example: false] |
 
 ## Responses
 

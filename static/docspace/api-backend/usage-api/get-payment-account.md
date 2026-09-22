@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../api.md).
 
 Get the billing account page
 
-Hands back the address of the portal page on which the billing account is managed - the payment method on  file, the invoices and the receipts - so a client can link to it instead of assembling the address itself. The  portal must already have a billing customer: one that has never had it gets an empty result, and an  installation without a billing service answers 403. Only the payer or the portal owner may read it, and the  call changes nothing. The value is relative to the portal root (&#x60;payment.ashx&#x60;), and the optional &#x60;backUrl&#x60; is  appended to it as a query parameter so the page can send the user back where they came from. It is not a  checkout page: a plan is bought with &#x60;PUT api/2.0/portal/payment/url&#x60; and a payment method is attached with  &#x60;GET api/2.0/portal/payment/checkoutsetupurl&#x60;.
+Hands back the address of the portal page on which the billing account is managed - the payment method on  file, the invoices and the receipts - so a client can link to it instead of assembling the address itself. The  portal must already have a billing customer: one that has never had it gets an empty result, and an  installation without a billing service answers 403. Only the payer or the portal owner may read it, and the  call changes nothing. The value is relative to the portal root (`payment.ashx`), and the optional `backUrl` is  appended to it as a query parameter so the page can send the user back where they came from. It is not a  checkout page: a plan is bought with `PUT api/2.0/portal/payment/url` and a payment method is attached with  `GET api/2.0/portal/payment/checkoutsetupurl`.
 
 ## Parameters
 

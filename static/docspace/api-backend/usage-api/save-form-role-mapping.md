@@ -8,13 +8,13 @@ Referenced types are defined in the [full reference](../files.md).
 
 Save form role mapping
 
-Assigns the roles of a PDF form to the people who are to fill them in, and starts the filling: the form is  marked as being filled out, the account that called is recorded as the one who started it, everybody named in  a role is notified, and the form becomes visible to the members whose room rights are limited to filling  forms. Each role carries its name, the account that takes it and the sequence number that decides the turn, so  the same sequence means the roles may be filled in parallel and different ones make a queue. Sending an empty  role list resets the filling instead, dropping the assignment altogether. The whole set is replaced on every  call, so the call is idempotent for a given set of roles but not additive. The file has to be a PDF form lying  in a room; the caller needs the right to start the filling of that form, which the room admin and a member  with content-creator rights have, and is otherwise refused with 403. Read back what was stored with  &#x60;GET api/2.0/files/file/{fileId}/formroles&#x60;.
+Assigns the roles of a PDF form to the people who are to fill them in, and starts the filling: the form is  marked as being filled out, the account that called is recorded as the one who started it, everybody named in  a role is notified, and the form becomes visible to the members whose room rights are limited to filling  forms. Each role carries its name, the account that takes it and the sequence number that decides the turn, so  the same sequence means the roles may be filled in parallel and different ones make a queue. Sending an empty  role list resets the filling instead, dropping the assignment altogether. The whole set is replaced on every  call, so the call is idempotent for a given set of roles but not additive. The file has to be a PDF form lying  in a room; the caller needs the right to start the filling of that form, which the room admin and a member  with content-creator rights have, and is otherwise refused with 403. Read back what was stored with  `GET api/2.0/files/file/{fileId}/formroles`.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **String** | The form the role mapping belongs to. Send the same value as the &#x60;formId&#x60; of the request body, which is the one the handler reads. | [required] |
+| **fileId** | path | **String** | The form the role mapping belongs to. Send the same value as the `formId` of the request body, which is the one the handler reads. | [required] |
 | **SaveFormRoleMappingDtoInteger** | body | [**SaveFormRoleMappingDtoInteger**](../files.md#model-saveformrolemappingdtointeger) |  | [optional] |
 
 ## Responses

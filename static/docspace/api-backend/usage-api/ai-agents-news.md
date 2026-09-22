@@ -1,6 +1,6 @@
 # aiAgentsNews
 
-Referenced types are defined in the [full reference](../newai.md).
+Referenced types are defined in the [full reference](../aichat.md).
 
 > AiNewItemsAgentNewItemsArrayWrapper aiAgentsNews()
 
@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../newai.md).
 
 List agent news items
 
-Lists the unread items across the caller&#39;s AI agent rooms, so a badge can be rendered without walking each room. It takes no parameters and is scoped to the caller by the DocSpace AI service. The answer is that service&#39;s new-items payload. This is a read-only operation and does not mark anything as seen.
+Lists the unread items across the caller's AI agent rooms, so a badge can be rendered without walking each room. It takes no parameters and is scoped to the caller by the DocSpace AI service. The answer is that service's new-items payload. This is a read-only operation and does not mark anything as seen.
 
 ## Parameters
 This endpoint does not need any parameter.
@@ -17,18 +17,18 @@ This endpoint does not need any parameter.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The unread items of the caller&#39;s agent rooms. | [**AiNewItemsAgentNewItemsArrayWrapper**](../newai.md#model-ainewitemsagentnewitemsarraywrapper) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
-| **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
-| **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
+| **200** | The unread items of the caller's agent rooms. | [**AiNewItemsAgentNewItemsArrayWrapper**](../aichat.md#model-ainewitemsagentnewitemsarraywrapper) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](../aichat.md#model-aierrorresponse) | - |
+| **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](../aichat.md#model-aierrorresponse) | - |
+| **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](../aichat.md#model-aierrorresponse) | - |
 
 ## Return type
 
-[**AiNewItemsAgentNewItemsArrayWrapper**](../newai.md#model-ainewitemsagentnewitemsarraywrapper)
+[**AiNewItemsAgentNewItemsArrayWrapper**](../aichat.md#model-ainewitemsagentnewitemsarraywrapper)
 
 ## Authorization
 
-No authorization required
+[cookieAuth](../aichat.md#cookieauth), [bearerAuth](../aichat.md#bearerauth)
 
 ## HTTP request headers
 

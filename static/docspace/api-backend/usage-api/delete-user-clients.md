@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../oauth.md).
 
 Delete all user OAuth2 clients
 
-Deletes every client the calling user created in the current tenant and answers 200 with an empty body. The caller&#39;s own identity always selects the set, so this never reaches clients created by somebody else, not even for an administrator. The authorizations and consents of the deleted clients are cleaned up asynchronously on the authorization service, and the tenant&#39;s client cache is dropped as part of the call. Concurrent modification that survives the retries is reported as 400. The operation cannot be undone, and the response does not say how many clients were removed.
+Deletes every client the calling user created in the current tenant and answers 200 with an empty body. The caller's own identity always selects the set, so this never reaches clients created by somebody else, not even for an administrator. The authorizations and consents of the deleted clients are cleaned up asynchronously on the authorization service, and the tenant's client cache is dropped as part of the call. Concurrent modification that survives the retries is reported as 400. The operation cannot be undone, and the response does not say how many clients were removed.
 
 ## Parameters
 This endpoint does not need any parameter.

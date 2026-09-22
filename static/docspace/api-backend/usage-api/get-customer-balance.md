@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../api.md).
 
 Get the customer balance
 
-Returns the money the portal has in its wallet as the accounting service holds it: the account with its own  currency, one sub-account per currency with the amount on it, and the most recent credit movement. Only a  DocSpace administrator may read it, an installation without a billing service answers 403, and a portal that  has never been a customer gets an empty result. The call is read-only. This balance is what the wallet  services are charged against, so it falls as they are used and rises with  &#x60;POST api/2.0/portal/payment/deposit&#x60;; the movements behind a change are listed by  &#x60;GET api/2.0/portal/payment/customer/operations&#x60;. Pass &#x60;refresh&#x3D;true&#x60; to re-read it from the accounting  service rather than the cache - right after a top-up the cached figure is still the old one.
+Returns the money the portal has in its wallet as the accounting service holds it: the account with its own  currency, one sub-account per currency with the amount on it, and the most recent credit movement. Only a  DocSpace administrator may read it, an installation without a billing service answers 403, and a portal that  has never been a customer gets an empty result. The call is read-only. This balance is what the wallet  services are charged against, so it falls as they are used and rises with  `POST api/2.0/portal/payment/deposit`; the movements behind a change are listed by  `GET api/2.0/portal/payment/customer/operations`. Pass `refresh=true` to re-read it from the accounting  service rather than the cache - right after a top-up the cached figure is still the old one.
 
 ## Parameters
 

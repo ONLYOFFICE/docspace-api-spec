@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../api.md).
 
 Get a color theme
 
-Returns the portal&#39;s color theme configuration: every saved custom theme, which one is currently selected, and  how many custom themes the plan still allows. No permission is required; anonymous callers can read it too.  This is a read-only, idempotent call. The response supports conditional requests: send the standard  If-Modified-Since header with the previous &#x60;lastModified&#x60; value, and an unchanged response comes back empty  instead of resending the same settings. A &#x60;limit&#x60; of &#x60;0&#x60; means the plan does not cap the number of custom  themes.
+Returns the portal's color theme configuration: every saved custom theme, which one is currently selected, and  how many custom themes the plan still allows. No permission is required; anonymous callers can read it too.  This is a read-only, idempotent call. The response supports conditional requests: send the standard  If-Modified-Since header with the previous `lastModified` value, and an unchanged response comes back empty  instead of resending the same settings. A `limit` of `0` means the plan does not cap the number of custom  themes.
 
 ## Parameters
 This endpoint does not need any parameter.
@@ -29,7 +29,7 @@ This endpoint does not need any parameter.
 
 ## Authorization
 
-No authorization required
+[cookieAuth](../api.md#cookieauth), [bearerAuth](../api.md#bearerauth)
 
 ## HTTP request headers
 

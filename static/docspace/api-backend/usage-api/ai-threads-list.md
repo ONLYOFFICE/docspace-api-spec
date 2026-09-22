@@ -1,6 +1,6 @@
 # aiThreadsList
 
-Referenced types are defined in the [full reference](../newai.md).
+Referenced types are defined in the [full reference](../aichat.md).
 
 > List aiThreadsList(entityId, count, cursor, query)
 
@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../newai.md).
 
 List chat threads
 
-Lists the threads of a scope, most recently edited first, and searches their titles case-insensitively when &#x60;query&#x60; is given. Every parameter is optional: omitting &#x60;entityId&#x60; lists the global scope, and omitting &#x60;count&#x60; lets the engine apply its own page size. Pagination is by cursor, and the cursor is a JSON object passed as a string in the query - &#x60;{id: &lt;last thread id&gt;, lastEditDate: &lt;its date&gt;}&#x60; - taken from the last entry of the previous page. A cursor that is not valid JSON, or that lacks an &#x60;id&#x60;, is ignored rather than rejected, and the read silently starts from the first page again.
+Lists the threads of a scope, most recently edited first, and searches their titles case-insensitively when `query` is given. Every parameter is optional: omitting `entityId` lists the global scope, and omitting `count` lets the engine apply its own page size. Pagination is by cursor, and the cursor is a JSON object passed as a string in the query - `{id: &lt;last thread id&gt;, lastEditDate: &lt;its date&gt;}` - taken from the last entry of the previous page. A cursor that is not valid JSON, or that lacks an `id`, is ignored rather than rejected, and the read silently starts from the first page again.
 
 ## Parameters
 
@@ -23,18 +23,18 @@ Lists the threads of a scope, most recently edited first, and searches their tit
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The threads of the scope, most recently edited first. | [**List**](../newai.md#model-aithread) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
-| **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
-| **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](../newai.md#model-aierrorresponse) | - |
+| **200** | The threads of the scope, most recently edited first. | [**List**](../aichat.md#model-aithread) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](../aichat.md#model-aierrorresponse) | - |
+| **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](../aichat.md#model-aierrorresponse) | - |
+| **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](../aichat.md#model-aierrorresponse) | - |
 
 ## Return type
 
-[**List**](../newai.md#model-aithread)
+[**List**](../aichat.md#model-aithread)
 
 ## Authorization
 
-No authorization required
+[cookieAuth](../aichat.md#cookieauth), [bearerAuth](../aichat.md#bearerauth)
 
 ## HTTP request headers
 

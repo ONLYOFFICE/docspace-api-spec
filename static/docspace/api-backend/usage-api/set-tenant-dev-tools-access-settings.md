@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../api.md).
 
 Set the Developer Tools access settings
 
-Sets whether the portal restricts the &#x60;User&#x60; role from using the developer tools (API keys, OAuth apps,  webhooks); &#x60;RoomAdmin&#x60; and &#x60;DocSpaceAdmin&#x60; are never affected by this setting. Requires Owner or DocSpaceAdmin  (the EditPortalSettings permission). This is a mutating, idempotent, portal-wide call: it applies to every  &#x60;User&#x60; on the tenant immediately. It returns the saved setting; read the current value at any time from  &#x60;GET api/2.0/settings/devtoolsaccess&#x60;.
+Sets whether the portal restricts the `User` role from using the developer tools (API keys, OAuth apps,  webhooks); `RoomAdmin` and `DocSpaceAdmin` are never affected by this setting. Requires Owner or DocSpaceAdmin  (the EditPortalSettings permission). This is a mutating, idempotent, portal-wide call: it applies to every  `User` on the tenant immediately. It returns the saved setting; read the current value at any time from  `GET api/2.0/settings/devtoolsaccess`.
 
 ## Parameters
 
@@ -20,7 +20,7 @@ Sets whether the portal restricts the &#x60;User&#x60; role from using the devel
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Saved developer tools access restriction for the &#x60;User&#x60; role | [**TenantDevToolsAccessSettingsWrapper**](../api.md#model-tenantdevtoolsaccesssettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | Saved developer tools access restriction for the `User` role | [**TenantDevToolsAccessSettingsWrapper**](../api.md#model-tenantdevtoolsaccesssettingswrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |

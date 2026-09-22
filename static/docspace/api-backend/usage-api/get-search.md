@@ -8,15 +8,15 @@ Referenced types are defined in the [full reference](../people.md).
 
 Search users
 
-Searches the active accounts of the portal by a term taken from the path, and is the same search as  &#x60;GET api/2.0/people/search&#x60;, which takes the term in the query string instead.  Only a DocSpace administrator may call it; every other account, including a room admin, gets 403.  Only accounts with the &#x60;Active&#x60; status are searched, so a pending invitation and a disabled account are never  found - use &#x60;GET api/2.0/people/filter&#x60; to search across states.  The call is read-only and is not paged: every match is streamed, without a total.  &#x60;filterBy&#x60; set to &#x60;group&#x60; turns &#x60;text&#x60; into a group ID and keeps only the members of that group, so &#x60;text&#x60;  then has to be a valid identifier.  The answer holds full profiles.
+Searches the active accounts of the portal by a term taken from the path, and is the same search as  `GET api/2.0/people/search`, which takes the term in the query string instead.  Only a DocSpace administrator may call it; every other account, including a room admin, gets 403.  Only accounts with the `Active` status are searched, so a pending invitation and a disabled account are never  found - use `GET api/2.0/people/filter` to search across states.  The call is read-only and is not paged: every match is streamed, without a total.  `filterBy` set to `group` turns `text` into a group ID and keeps only the members of that group, so `text`  then has to be a valid identifier.  The answer holds full profiles.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **query** | path | **String** | The term to look for, taken from the route. Only accounts with the &#x60;Active&#x60; status are searched. | [required] [example: John] |
-| **filterBy** | query | **String** | The only recognised value is &#x60;group&#x60;, which turns &#x60;filterValue&#x60; into a group ID and keeps only the members of  that group. Any other value, and omitting the field, applies no group filter. | [optional] [example: group] |
-| **filterValue** | query | **String** | The group ID to keep the members of, used only when &#x60;filterBy&#x60; is &#x60;group&#x60;. It has to be a valid identifier -  a group name is not accepted. | [optional] [example: 00000000-0000-0000-0000-000000000000] |
+| **query** | path | **String** | The term to look for, taken from the route. Only accounts with the `Active` status are searched. | [required] [example: John] |
+| **filterBy** | query | **String** | The only recognised value is `group`, which turns `filterValue` into a group ID and keeps only the members of  that group. Any other value, and omitting the field, applies no group filter. | [optional] [example: group] |
+| **filterValue** | query | **String** | The group ID to keep the members of, used only when `filterBy` is `group`. It has to be a valid identifier -  a group name is not accepted. | [optional] [example: 00000000-0000-0000-0000-000000000000] |
 
 ## Responses
 

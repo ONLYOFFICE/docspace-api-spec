@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../api.md).
 
 Send an invitation email
 
-Sends an invitation email with a join link to the address in the request - the self-registration the sign-in  page&#39;s register link performs. No token is needed. The portal has to publish a trusted-domain policy first,  saved with &#x60;POST api/2.0/settings/maildomainsettings&#x60;: without one there is nothing to join and every caller  alike is answered with 405 - the same condition &#x60;GET api/2.0/settings&#x60; reports as &#x60;enabledJoin&#x60;. &#x60;email&#x60; has  to be a real address written in ASCII rather than an internationalized one, must not already belong to a  portal member, and, when the policy names domains rather than accepting all of them, has to end with one of  them - each of those faults is refused with 400. &#x60;culture&#x60; picks the language of the letter. The invitation is  not an account: the invitee becomes a member only after following the link, and the role it grants, user or  room administrator, follows the trusted-domain settings and drops to user once the portal&#39;s paid places are  taken. Where the installation caps invitations, an accepted call spends one of those counted by  &#x60;invitationLimit&#x60;, and only about a dozen calls from one address in two minutes are accepted. What comes back  is a localized confirmation.
+Sends an invitation email with a join link to the address in the request - the self-registration the sign-in  page's register link performs. No token is needed. The portal has to publish a trusted-domain policy first,  saved with `POST api/2.0/settings/maildomainsettings`: without one there is nothing to join and every caller  alike is answered with 405 - the same condition `GET api/2.0/settings` reports as `enabledJoin`. `email` has  to be a real address written in ASCII rather than an internationalized one, must not already belong to a  portal member, and, when the policy names domains rather than accepting all of them, has to end with one of  them - each of those faults is refused with 400. `culture` picks the language of the letter. The invitation is  not an account: the invitee becomes a member only after following the link, and the role it grants, user or  room administrator, follows the trusted-domain settings and drops to user once the portal's paid places are  taken. Where the installation caps invitations, an accepted call spends one of those counted by  `invitationLimit`, and only about a dozen calls from one address in two minutes are accepted. What comes back  is a localized confirmation.
 
 ## Parameters
 
@@ -35,7 +35,7 @@ Sends an invitation email with a join link to the address in the request - the s
 
 ## Authorization
 
-No authorization required
+[cookieAuth](../api.md#cookieauth), [bearerAuth](../api.md#bearerauth)
 
 ## HTTP request headers
 

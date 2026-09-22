@@ -8,13 +8,13 @@ Referenced types are defined in the [full reference](../api.md).
 
 Get a wallet service
 
-Returns one wallet service by name, for a client that already knows which service it needs and does not want  the whole catalogue. &#x60;service&#x60; is the name of the service - &#x60;Storage&#x60;, &#x60;Backup&#x60;, &#x60;AITools&#x60;, &#x60;Admin&#x60;,  &#x60;DocsCloud&#x60;, &#x60;DocsCloudDevPack&#x60; or &#x60;AISearch&#x60; - and a name this installation does not sell answers 404.  Nothing has to be called first, the caller needs the permission to edit the portal settings, and the call is  read-only. The answer has the same shape as one item of &#x60;GET api/2.0/portal/payment/walletservices&#x60; - the  price of a unit, the unit, the limits the service grants and its service name - except that the variants of a  service are not grouped into &#x60;innerServices&#x60; here, because a single service is looked up directly. The price  is in the currency resolved for the request.
+Returns one wallet service by name, for a client that already knows which service it needs and does not want  the whole catalogue. `service` is the name of the service - `Storage`, `Backup`, `AITools`, `Admin`,  `DocsCloud`, `DocsCloudDevPack` or `AISearch` - and a name this installation does not sell answers 404.  Nothing has to be called first, the caller needs the permission to edit the portal settings, and the call is  read-only. The answer has the same shape as one item of `GET api/2.0/portal/payment/walletservices` - the  price of a unit, the unit, the limits the service grants and its service name - except that the variants of a  service are not grouped into `innerServices` here, because a single service is looked up directly. The price  is in the currency resolved for the request.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **service** | query | **TenantWalletService** | The service to look up, given by its catalogue name. A service this installation does not sell answers 404,  and the whole catalogue is &#x60;GET api/2.0/portal/payment/walletservices&#x60;. | [required] [example: Storage] [enum: -18, -16, -15, -14, -13, -12, -11] |
+| **service** | query | **TenantWalletService** | The service to look up, given by its catalogue name. A service this installation does not sell answers 404,  and the whole catalogue is `GET api/2.0/portal/payment/walletservices`. | [required] [example: Storage] [enum: -18, -16, -15, -14, -13, -12, -11] |
 
 ## Responses
 

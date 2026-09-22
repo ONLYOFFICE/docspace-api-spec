@@ -8,13 +8,13 @@ Referenced types are defined in the [full reference](../api.md).
 
 Get app settings
 
-Returns only the settings document of one portal application, such as &#x60;ai-rooms&#x60; or &#x60;docs-cloud&#x60;: the JSON  that the current portal has saved for it through &#x60;PUT api/2.0/apps/{id}/settings&#x60;, with no wrapper around it.  The identifier must be an application declared in the installation configuration, as listed by  &#x60;GET api/2.0/apps&#x60;. Any authenticated portal member  may read it. The call is read-only and idempotent. The document comes back exactly as it was saved: its shape  is defined by the application itself and is not validated by the portal, and an empty result means that the  portal has never saved settings for this application, so the application uses its own defaults. The enabled  state is not part of the answer: read it from &#x60;GET api/2.0/apps/{id}&#x60;.
+Returns only the settings document of one portal application, such as `ai-rooms` or `docs-cloud`: the JSON  that the current portal has saved for it through `PUT api/2.0/apps/{id}/settings`, with no wrapper around it.  The identifier must be an application declared in the installation configuration, as listed by  `GET api/2.0/apps`. Any authenticated portal member  may read it. The call is read-only and idempotent. The document comes back exactly as it was saved: its shape  is defined by the application itself and is not validated by the portal, and an empty result means that the  portal has never saved settings for this application, so the application uses its own defaults. The enabled  state is not part of the answer: read it from `GET api/2.0/apps/{id}`.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **String** | The application to read, by the identifier &#x60;GET api/2.0/apps&#x60; reports - one of the feature modules the portal  can turn on, such as &#x60;ai-room&#x60; or &#x60;docs-cloud&#x60;. An identifier not declared in the installation configuration  answers 404, which is also how a caller learns that an application does not exist here. | [required] [example: ai-room] |
+| **id** | path | **String** | The application to read, by the identifier `GET api/2.0/apps` reports - one of the feature modules the portal  can turn on, such as `ai-room` or `docs-cloud`. An identifier not declared in the installation configuration  answers 404, which is also how a caller learns that an application does not exist here. | [required] [example: ai-room] |
 
 ## Responses
 

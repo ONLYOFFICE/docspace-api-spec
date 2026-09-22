@@ -8,13 +8,13 @@ Referenced types are defined in the [full reference](../people.md).
 
 Unlink a third-party account
 
-Removes the link between the calling profile and the named third-party provider, so that the account can no  longer sign in through it.  It acts on the authenticated account only and takes the provider name in the query, using the same lowercase  values &#x60;GET api/2.0/people/thirdparty/providers&#x60; returns, such as &#x60;google&#x60; or &#x60;microsoft&#x60;.  The call returns no body and is idempotent: unlinking a provider that is not linked answers 200 and changes  nothing.  The portal profile itself is kept, together with its password, so the account stays usable through the  ordinary sign-in; only the third-party route is removed.  Link the provider again through &#x60;PUT api/2.0/people/thirdparty/linkaccount&#x60;.
+Removes the link between the calling profile and the named third-party provider, so that the account can no  longer sign in through it.  It acts on the authenticated account only and takes the provider name in the query, using the same lowercase  values `GET api/2.0/people/thirdparty/providers` returns, such as `google` or `microsoft`.  The call returns no body and is idempotent: unlinking a provider that is not linked answers 200 and changes  nothing.  The portal profile itself is kept, together with its password, so the account stays usable through the  ordinary sign-in; only the third-party route is removed.  Link the provider again through `PUT api/2.0/people/thirdparty/linkaccount`.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **provider** | query | **String** | The name of the provider to unlink, in the lowercase form &#x60;GET api/2.0/people/thirdparty/providers&#x60; returns,  such as &#x60;google&#x60; or &#x60;microsoft&#x60;. A name that is not linked to the calling profile is accepted and changes  nothing. | [optional] [example: google] |
+| **provider** | query | **String** | The name of the provider to unlink, in the lowercase form `GET api/2.0/people/thirdparty/providers` returns,  such as `google` or `microsoft`. A name that is not linked to the calling profile is accepted and changes  nothing. | [optional] [example: google] |
 
 ## Responses
 

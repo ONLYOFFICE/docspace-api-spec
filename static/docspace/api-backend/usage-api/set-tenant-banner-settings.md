@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../api.md).
 
 Set the banners visibility
 
-Sets whether the portal&#39;s promotional banners are hidden for every user. Available only on an Enterprise  license; every other plan is refused regardless of the caller&#39;s role. Requires Owner or DocSpaceAdmin (the  EditPortalSettings permission). The flag only takes effect on a Standalone (self-hosted) installation; on  SaaS, banners are always shown no matter what is saved here. This is a mutating, idempotent, portal-wide call:  it applies to every user on the tenant immediately. It returns the saved setting; read the current value at  any time from &#x60;GET api/2.0/settings/banner&#x60;.
+Sets whether the portal's promotional banners are hidden for every user. Available only on an Enterprise  license; every other plan is refused regardless of the caller's role. Requires Owner or DocSpaceAdmin (the  EditPortalSettings permission). The flag only takes effect on a Standalone (self-hosted) installation; on  SaaS, banners are always shown no matter what is saved here. This is a mutating, idempotent, portal-wide call:  it applies to every user on the tenant immediately. It returns the saved setting; read the current value at  any time from `GET api/2.0/settings/banner`.
 
 ## Parameters
 

@@ -8,14 +8,14 @@ Referenced types are defined in the [full reference](../people.md).
 
 Check data for reassignment need
 
-Reports whether the rooms and the shared files of a user have to be reassigned before that user can be removed  or changed to the type passed in &#x60;type&#x60;.  Call it before &#x60;DELETE api/2.0/people/{userid}&#x60; or before a type change to find out whether  &#x60;POST api/2.0/people/reassign/start&#x60; has to run first.  The caller needs the permission to add and remove users of the requested type, and must be the portal owner  when the checked user is a DocSpace administrator.  The call is read-only and answers true when the user owns at least one room, or - when &#x60;type&#x60; is &#x60;Guest&#x60; -  when the user still has shared files.  A false answer means the user can be removed or converted without a reassignment.
+Reports whether the rooms and the shared files of a user have to be reassigned before that user can be removed  or changed to the type passed in `type`.  Call it before `DELETE api/2.0/people/{userid}` or before a type change to find out whether  `POST api/2.0/people/reassign/start` has to run first.  The caller needs the permission to add and remove users of the requested type, and must be the portal owner  when the checked user is a DocSpace administrator.  The call is read-only and answers true when the user owns at least one room, or - when `type` is `Guest` -  when the user still has shared files.  A false answer means the user can be removed or converted without a reassignment.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
 | **UserId** | query | **UUID** (uuid) | The ID of the user whose rooms and shared files are checked. | [optional] [example: 00000000-0000-0000-0000-000000000000] |
-| **Type** | query | **EmployeeType** | The type the user is about to be changed to, which decides what counts as data that has to be reassigned:  &#x60;RoomAdmin&#x60;, &#x60;DocSpaceAdmin&#x60; and &#x60;User&#x60; are checked for owned rooms only, while &#x60;Guest&#x60; is also checked for  files that are still shared. The default is &#x60;All&#x60;, which checks owned rooms only. | [optional] [example: RoomAdmin] [enum: All, RoomAdmin, Guest, DocSpaceAdmin, User] |
+| **Type** | query | **EmployeeType** | The type the user is about to be changed to, which decides what counts as data that has to be reassigned:  `RoomAdmin`, `DocSpaceAdmin` and `User` are checked for owned rooms only, while `Guest` is also checked for  files that are still shared. The default is `All`, which checks owned rooms only. | [optional] [example: RoomAdmin] [enum: All, RoomAdmin, Guest, DocSpaceAdmin, User] |
 
 ## Responses
 

@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../backup.md).
 
 Delete the backup schedule
 
-Deletes the backup schedule of the current portal, which stops the scheduled backups; &#x60;dump&#x60; deletes  the schedule of the whole server instead and requires the space access permission. The archives the  schedule has already produced are kept and stay listed by  &#x60;GET api/2.0/backup/getbackuphistory&#x60; - delete them through  &#x60;DELETE api/2.0/backup/deletebackup/{id}&#x60; if they are no longer wanted.  The result is always true, including when there was no schedule to delete, so it confirms that the  portal now has none rather than that anything was removed. The deletion is written to the audit trail  either way.
+Deletes the backup schedule of the current portal, which stops the scheduled backups; `dump` deletes  the schedule of the whole server instead and requires the space access permission. The archives the  schedule has already produced are kept and stay listed by  `GET api/2.0/backup/getbackuphistory` - delete them through  `DELETE api/2.0/backup/deletebackup/{id}` if they are no longer wanted.  The result is always true, including when there was no schedule to delete, so it confirms that the  portal now has none rather than that anything was removed. The deletion is written to the audit trail  either way.
 
 ## Parameters
 

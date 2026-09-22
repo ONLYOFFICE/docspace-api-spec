@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../api.md).
 
 Get restricted AI models
 
-Returns the AI chat models that are barred on this portal - the ones no user of it may pick for a  conversation, whatever the price list offers. Only a DocSpace administrator may read it, and the call is  read-only. When the installation has no billing service or AI is not enabled for the portal, the answer is an  empty set instead of an error, which is indistinguishable from a portal that restricts nothing. An empty  &#x60;models&#x60; therefore means every model in &#x60;GET api/2.0/portal/payment/ai-prices&#x60; may be used. The set names the  barred models and not the allowed ones; replace it with &#x60;PUT api/2.0/portal/payment/ai-model/restrictions&#x60;.
+Returns the AI chat models that are barred on this portal - the ones no user of it may pick for a  conversation, whatever the price list offers. Only a DocSpace administrator may read it, and the call is  read-only. When the installation has no billing service or AI is not enabled for the portal, the answer is an  empty set instead of an error, which is indistinguishable from a portal that restricts nothing. An empty  `models` therefore means every model in `GET api/2.0/portal/payment/ai-prices` may be used. The set names the  barred models and not the allowed ones; replace it with `PUT api/2.0/portal/payment/ai-model/restrictions`.
 
 ## Parameters
 This endpoint does not need any parameter.

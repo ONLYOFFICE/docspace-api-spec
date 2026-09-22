@@ -8,13 +8,13 @@ Referenced types are defined in the [full reference](../files.md).
 
 Remove a room
 
-Queues a background job that deletes one room with everything inside it, and returns the operation record of  that job. Deleting a room is destructive and has no trash step: the room and its files are gone once the job  finishes, unlike a file or a folder, which is moved to the trash first. The right to delete is checked before  the job is queued, so a caller who may not delete the room is refused straight away and an unknown room is  answered as missing; the same checks run again when the job starts, which is why the &#x60;error&#x60; of the finished  operation still has to be read. Poll &#x60;GET api/2.0/files/fileops&#x60; until &#x60;finished&#x60; is true, or read the  returned record again by its &#x60;id&#x60;. The record is kept until it is read once, so one poll after completion  still sees it. &#x60;deleteAfter&#x60; in the body is required by the contract but has no effect on the job. An archived  room is deleted the same way, and a second delete of the same id reports that the room is missing.
+Queues a background job that deletes one room with everything inside it, and returns the operation record of  that job. Deleting a room is destructive and has no trash step: the room and its files are gone once the job  finishes, unlike a file or a folder, which is moved to the trash first. The right to delete is checked before  the job is queued, so a caller who may not delete the room is refused straight away and an unknown room is  answered as missing; the same checks run again when the job starts, which is why the `error` of the finished  operation still has to be read. Poll `GET api/2.0/files/fileops` until `finished` is true, or read the  returned record again by its `id`. The record is kept until it is read once, so one poll after completion  still sees it. `deleteAfter` in the body is required by the contract but has no effect on the job. An archived  room is deleted the same way, and a second delete of the same id reports that the room is missing.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The room to delete, named by the identifier that &#x60;GET api/2.0/files/rooms&#x60; reports for it. | [required] [example: 10] |
+| **id** | path | **Integer** (int32) | The room to delete, named by the identifier that `GET api/2.0/files/rooms` reports for it. | [required] [example: 10] |
 | **DeleteRoomRequest** | body | [**DeleteRoomRequest**](../files.md#model-deleteroomrequest) | The body of the request. It is required even though the deletion does not depend on what it holds. | [required] |
 
 ## Responses

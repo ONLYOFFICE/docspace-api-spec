@@ -8,14 +8,14 @@ Referenced types are defined in the [full reference](../api.md).
 
 Enable or disable an app
 
-Turns one portal application on or off for the current portal, and notifies the clients connected to the portal  so that they can show or hide it without being reloaded. The identifier must be an application declared in the  installation configuration, as listed by &#x60;GET api/2.0/apps&#x60;. The caller must be a portal administrator allowed  to edit the portal settings. The call is mutating and idempotent: it stores the flag for this portal, overriding  the default that the configuration gives the application, and repeating it with the same value changes nothing.  Disabling an application does not delete its settings document, which stays saved and applies again as soon as  the application is enabled. The response is the application in its new state, including that settings document.  Only the enabled flag is affected here: to change the settings document use &#x60;PUT api/2.0/apps/{id}/settings&#x60;.
+Turns one portal application on or off for the current portal, and notifies the clients connected to the portal  so that they can show or hide it without being reloaded. The identifier must be an application declared in the  installation configuration, as listed by `GET api/2.0/apps`. The caller must be a portal administrator allowed  to edit the portal settings. The call is mutating and idempotent: it stores the flag for this portal, overriding  the default that the configuration gives the application, and repeating it with the same value changes nothing.  Disabling an application does not delete its settings document, which stays saved and applies again as soon as  the application is enabled. The response is the application in its new state, including that settings document.  Only the enabled flag is affected here: to change the settings document use `PUT api/2.0/apps/{id}/settings`.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **String** | The application to switch, by the identifier &#x60;GET api/2.0/apps&#x60; reports. It has to be an application declared  in the installation configuration; an unknown identifier answers 404 rather than creating anything. | [required] [example: ai-room] |
-| **SetAppEnabledBody** | body | [**SetAppEnabledBody**](../api.md#model-setappenabledbody) | The new state of the application. Only the enabled flag travels here; the settings document is changed  through &#x60;PUT api/2.0/apps/{id}/settings&#x60;. | [required] |
+| **id** | path | **String** | The application to switch, by the identifier `GET api/2.0/apps` reports. It has to be an application declared  in the installation configuration; an unknown identifier answers 404 rather than creating anything. | [required] [example: ai-room] |
+| **SetAppEnabledBody** | body | [**SetAppEnabledBody**](../api.md#model-setappenabledbody) | The new state of the application. Only the enabled flag travels here; the settings document is changed  through `PUT api/2.0/apps/{id}/settings`. | [required] |
 
 ## Responses
 

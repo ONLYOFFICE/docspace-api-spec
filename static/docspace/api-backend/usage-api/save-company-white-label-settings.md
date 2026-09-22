@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../api.md).
 
 Save the company white label settings
 
-Stores the company details - name, site, support email, postal address and phone - that the About page and the  notification letters print as the vendor. The whole set is replaced by the &#x60;settings&#x60; object of the request,  so send every field, not only the changed ones; a request without that object, or with an email or a site that  is not a valid value, is rejected as an invalid request. Requires a DocSpace administrator, a server  installation with unrestricted space access and a plan that includes branding, which  &#x60;GET api/2.0/settings/enablewhitelabel&#x60; reports; on a SaaS portal the call is refused. The values are  installation-wide, so the change reaches every portal of that installation. Two fields are not taken from the  request: the licensor flag is always stored as &#x60;false&#x60;, and hiding the About page is silently kept off unless  the plan allows it. The call is mutating and idempotent, and answers &#x60;true&#x60;. Read the result back with  &#x60;GET api/2.0/settings/rebranding/company&#x60; and undo it with &#x60;DELETE api/2.0/settings/rebranding/company&#x60;.
+Stores the company details - name, site, support email, postal address and phone - that the About page and the  notification letters print as the vendor. The whole set is replaced by the `settings` object of the request,  so send every field, not only the changed ones; a request without that object, or with an email or a site that  is not a valid value, is rejected as an invalid request. Requires a DocSpace administrator, a server  installation with unrestricted space access and a plan that includes branding, which  `GET api/2.0/settings/enablewhitelabel` reports; on a SaaS portal the call is refused. The values are  installation-wide, so the change reaches every portal of that installation. Two fields are not taken from the  request: the licensor flag is always stored as `false`, and hiding the About page is silently kept off unless  the plan allows it. The call is mutating and idempotent, and answers `true`. Read the result back with  `GET api/2.0/settings/rebranding/company` and undo it with `DELETE api/2.0/settings/rebranding/company`.
 
 ## Parameters
 
@@ -20,7 +20,7 @@ Stores the company details - name, site, support email, postal address and phone
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Always &#x60;true&#x60; once the company details have been stored for the installation | [**BooleanWrapper**](../api.md#model-booleanwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | Always `true` once the company details have been stored for the installation | [**BooleanWrapper**](../api.md#model-booleanwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **400** | The request carries no settings object, or the email or the site is not a valid value | - | - |
 | **403** | The caller is not a DocSpace administrator, or the installation does not allow branding to be edited | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |

@@ -8,13 +8,13 @@ Referenced types are defined in the [full reference](../files.md).
 
 Delete an encryption key
 
-Removes one encryption key pair from the calling user&#39;s own key set and answers 204 with no body. The pair is  named by the &#x60;id&#x60; of an entry of &#x60;GET api/2.0/privacyroom/keys&#x60;; the caller&#39;s other pairs stay as they are.  The call is destructive and cannot be repeated: the key material is gone for good, a second delete of the same  &#x60;id&#x60;, like an &#x60;id&#x60; that was never stored, is answered with 404, and there is no parameter for another user&#39;s  keys, so an authenticated member only ever deletes their own while a guest is refused. Deleting the last key  the caller holds locks them out of the private rooms they belong to, their own rooms included: the rooms and  their content survive untouched and stay listed as private, but &#x60;GET api/2.0/privacyroom/{roomId}/access&#x60; then  refuses the caller until a new key is stored with &#x60;POST api/2.0/privacyroom/keys&#x60;. Before DocSpace 4.0 the  call answered 200 with the caller&#39;s remaining keys, so a client that read that list has to call  &#x60;GET api/2.0/privacyroom/keys&#x60; instead.
+Removes one encryption key pair from the calling user's own key set and answers 204 with no body. The pair is  named by the `id` of an entry of `GET api/2.0/privacyroom/keys`; the caller's other pairs stay as they are.  The call is destructive and cannot be repeated: the key material is gone for good, a second delete of the same  `id`, like an `id` that was never stored, is answered with 404, and there is no parameter for another user's  keys, so an authenticated member only ever deletes their own while a guest is refused. Deleting the last key  the caller holds locks them out of the private rooms they belong to, their own rooms included: the rooms and  their content survive untouched and stay listed as private, but `GET api/2.0/privacyroom/{roomId}/access` then  refuses the caller until a new key is stored with `POST api/2.0/privacyroom/keys`. Before DocSpace 4.0 the  call answered 200 with the caller's remaining keys, so a client that read that list has to call  `GET api/2.0/privacyroom/keys` instead.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **UUID** (uuid) | The pair to delete, taken from the &#x60;id&#x60; of an entry of &#x60;GET api/2.0/privacyroom/keys&#x60;. Only the caller&#39;s own  pairs can be named here. | [required] [example: 9924256B-447C-4F19-9dbd-8ad8c39e8ff5] |
+| **id** | path | **UUID** (uuid) | The pair to delete, taken from the `id` of an entry of `GET api/2.0/privacyroom/keys`. Only the caller's own  pairs can be named here. | [required] [example: 9924256B-447C-4F19-9dbd-8ad8c39e8ff5] |
 
 ## Responses
 

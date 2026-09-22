@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../people.md).
 
 Get the current API key
 
-Returns the API key that authenticated this very request, letting the holder of a key find out what it is  allowed to do without knowing its ID.  The key is identified by the &#x60;Authorization&#x60; header of the call itself, so the request has to be sent as  &#x60;Bearer sk-...&#x60;; a session authenticated in any other way has no key to report and this operation is not  usable for it.  The call is read-only and returns one entry, with the same fields as &#x60;GET api/2.0/keys&#x60; and without the  secret - read &#x60;permissions&#x60; for the granted scopes, &#x60;expiresAt&#x60; for the expiry and &#x60;isActive&#x60; for the state.  To look at a key other than the one in use, call &#x60;GET api/2.0/keys&#x60; instead.
+Returns the API key that authenticated this very request, letting the holder of a key find out what it is  allowed to do without knowing its ID.  The key is identified by the `Authorization` header of the call itself, so the request has to be sent as  `Bearer sk-...`; a session authenticated in any other way has no key to report and this operation is not  usable for it.  The call is read-only and returns one entry, with the same fields as `GET api/2.0/keys` and without the  secret - read `permissions` for the granted scopes, `expiresAt` for the expiry and `isActive` for the state.  To look at a key other than the one in use, call `GET api/2.0/keys` instead.
 
 ## Parameters
 This endpoint does not need any parameter.

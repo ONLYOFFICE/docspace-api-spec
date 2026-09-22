@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../people.md).
 
 Get the personal folder deletion progress
 
-Returns the current state of the personal folder deletion queued for the authenticated account.  The job must have been queued by &#x60;POST api/2.0/people/delete/personal/start&#x60; first: when nothing is queued for  the caller the operation answers 200 with an empty body.  It takes no parameters and reports on the caller only, so an administrator cannot watch the folder deletion of  another user through it.  The call is read-only and is the polling operation of this flow - repeat it until &#x60;isCompleted&#x60; is true, and  read &#x60;error&#x60; for the message left by a failed job.  A queued personal folder deletion cannot be cancelled, so the only outcome to wait for is its completion.
+Returns the current state of the personal folder deletion queued for the authenticated account.  The job must have been queued by `POST api/2.0/people/delete/personal/start` first: when nothing is queued for  the caller the operation answers 200 with an empty body.  It takes no parameters and reports on the caller only, so an administrator cannot watch the folder deletion of  another user through it.  The call is read-only and is the polling operation of this flow - repeat it until `isCompleted` is true, and  read `error` for the message left by a failed job.  A queued personal folder deletion cannot be cancelled, so the only outcome to wait for is its completion.
 
 ## Parameters
 This endpoint does not need any parameter.

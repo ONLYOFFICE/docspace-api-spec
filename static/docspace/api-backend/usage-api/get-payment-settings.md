@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../api.md).
 
 Get the payment settings
 
-Returns the portal&#39;s payment-related configuration: the sales contact email, the URL to buy or extend a  subscription, whether the portal is Standalone, the current license&#39;s trial status and expiration date, and  the maximum quota quantity that can be purchased at once. Requires Owner or DocSpaceAdmin (the  EditPortalSettings permission). This is a read-only, idempotent call. It remains reachable even while the  portal&#39;s own subscription payment is overdue, since this is how the caller finds the link to resolve it.
+Returns the portal's payment-related configuration: the sales contact email, the URL to buy or extend a  subscription, whether the portal is Standalone, the current license's trial status and expiration date, and  the maximum quota quantity that can be purchased at once. Requires Owner or DocSpaceAdmin (the  EditPortalSettings permission). This is a read-only, idempotent call. It remains reachable even while the  portal's own subscription payment is overdue, since this is how the caller finds the link to resolve it.
 
 ## Parameters
 This endpoint does not need any parameter.

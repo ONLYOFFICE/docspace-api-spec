@@ -8,13 +8,13 @@ Referenced types are defined in the [full reference](../files.md).
 
 Abort an upload session
 
-Cancels a chunked upload opened with &#x60;POST api/2.0/files/{folderId}/session&#x60; and discards the parts already  received, so nothing of it reaches the folder. The session is found by the id in the path alone: the folder  segment is not matched against it, and neither is the account that opened it, which makes the id the only  secret protecting the transfer. The call is destructive and is not safe to repeat, because the record is gone  afterwards: a second attempt, a session already closed by  &#x60;PUT api/2.0/files/{folderId}/session/{sessionId}/finalize&#x60; and a session that expired after twelve hours of  silence all fail rather than answer as missing. Finalizing removes the session too, so there is nothing left  to abort once the file exists. The answer carries no body. An upload that is simply abandoned needs no call at  all, since the session and its buffered parts are dropped when it expires.
+Cancels a chunked upload opened with `POST api/2.0/files/{folderId}/session` and discards the parts already  received, so nothing of it reaches the folder. The session is found by the id in the path alone: the folder  segment is not matched against it, and neither is the account that opened it, which makes the id the only  secret protecting the transfer. The call is destructive and is not safe to repeat, because the record is gone  afterwards: a second attempt, a session already closed by  `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize` and a session that expired after twelve hours of  silence all fail rather than answer as missing. Finalizing removes the session too, so there is nothing left  to abort once the file exists. The answer carries no body. An upload that is simply abandoned needs no call at  all, since the session and its buffered parts are dropped when it expires.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **sessionId** | path | **String** | The session to cancel, as returned in &#x60;id&#x60; when it was created: a 32-character hexadecimal string that  identifies the session on its own. | [required] [example: 9f1c7a2b4d3e4f5a8b6c0d1e2f3a4b5c] |
+| **sessionId** | path | **String** | The session to cancel, as returned in `id` when it was created: a 32-character hexadecimal string that  identifies the session on its own. | [required] [example: 9f1c7a2b4d3e4f5a8b6c0d1e2f3a4b5c] |
 | **folderId** | path | **Integer** (int32) | The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id. | [required] [example: 1] |
 
 ## Responses

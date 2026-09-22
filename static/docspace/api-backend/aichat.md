@@ -125,7 +125,7 @@ All URIs are relative to *https://yourportal.onlyoffice.com*, where the host is 
 
 Approve tool call
 
-Resumes a chat round that a tool call has paused, and streams the continuation as newline-delimited &#x60;ChatEvent&#x60; objects. The result supplied in the request is persisted onto the assistant message that issued the call, so the tool is not executed here - the caller runs it and reports the outcome. The round continues against the augmented history and may pause again on a further tool call. Call &#x60;POST api/2.0/ai/ai/deny-tool-call&#x60; instead to refuse the call and let the model answer without it.
+Resumes a chat round that a tool call has paused, and streams the continuation as newline-delimited `ChatEvent` objects. The result supplied in the request is persisted onto the assistant message that issued the call, so the tool is not executed here - the caller runs it and reports the outcome. The round continues against the augmented history and may pause again on a further tool call. Call `POST api/2.0/ai/ai/deny-tool-call` instead to refuse the call and let the model answer without it.
 
 #### Parameters
 
@@ -137,10 +137,10 @@ Resumes a chat round that a tool call has paused, and streams the continuation a
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Newline-delimited stream of chat events — one JSON &#x60;ChatEvent&#x60; object per line. | [**AiChatEvent**](#model-aichatevent) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **200** | Newline-delimited stream of chat events — one JSON `ChatEvent` object per line. | [**AiChatEvent**](#model-aichatevent) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **413** | The request body is larger than 100 KB, the JSON parser's limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
 #### Return type
@@ -149,7 +149,7 @@ Resumes a chat round that a tool call has paused, and streams the continuation a
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -164,7 +164,7 @@ No authorization required
 
 Deny tool call
 
-Refuses the tool call a chat round is paused on and resumes it immediately, streaming the continuation as newline-delimited &#x60;ChatEvent&#x60; objects. The literal &#x60;User deny tool call&#x60; is persisted in place of the tool result, so the model sees an explicit refusal rather than a missing answer and may reply without the tool or ask for something else. Nothing is executed and no result is accepted from the caller. Use &#x60;POST api/2.0/ai/ai/approve-tool-call&#x60; to supply a result instead.
+Refuses the tool call a chat round is paused on and resumes it immediately, streaming the continuation as newline-delimited `ChatEvent` objects. The literal `User deny tool call` is persisted in place of the tool result, so the model sees an explicit refusal rather than a missing answer and may reply without the tool or ask for something else. Nothing is executed and no result is accepted from the caller. Use `POST api/2.0/ai/ai/approve-tool-call` to supply a result instead.
 
 #### Parameters
 
@@ -176,10 +176,10 @@ Refuses the tool call a chat round is paused on and resumes it immediately, stre
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Newline-delimited stream of chat events — one JSON &#x60;ChatEvent&#x60; object per line. | [**AiChatEvent**](#model-aichatevent) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **200** | Newline-delimited stream of chat events — one JSON `ChatEvent` object per line. | [**AiChatEvent**](#model-aichatevent) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **413** | The request body is larger than 100 KB, the JSON parser's limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
 #### Return type
@@ -188,7 +188,7 @@ Refuses the tool call a chat round is paused on and resumes it immediately, stre
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -203,7 +203,7 @@ No authorization required
 
 Regenerate stream
 
-Re-rolls the last assistant reply of an existing thread: every message after the last user message - the previous reply and any tool-call hops - is dropped, and a fresh reply is streamed as newline-delimited &#x60;ChatEvent&#x60; objects against the unchanged prompt. The thread has to exist already, &#x60;threadId&#x60; is required, and no title is generated. The dropped messages are gone for good, so this is a destructive operation on the thread&#39;s tail rather than a retry that keeps both answers. Unlike &#x60;send-with-stream&#x60; the profile is not verified before the stream opens, so an unusable model surfaces as an error frame inside the 200 rather than as a 4xx.
+Re-rolls the last assistant reply of an existing thread: every message after the last user message - the previous reply and any tool-call hops - is dropped, and a fresh reply is streamed as newline-delimited `ChatEvent` objects against the unchanged prompt. The thread has to exist already, `threadId` is required, and no title is generated. The dropped messages are gone for good, so this is a destructive operation on the thread's tail rather than a retry that keeps both answers. Unlike `send-with-stream` the profile is not verified before the stream opens, so an unusable model surfaces as an error frame inside the 200 rather than as a 4xx.
 
 #### Parameters
 
@@ -215,10 +215,10 @@ Re-rolls the last assistant reply of an existing thread: every message after the
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Newline-delimited stream of chat events — one JSON &#x60;ChatEvent&#x60; object per line. | [**AiChatEvent**](#model-aichatevent) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **200** | Newline-delimited stream of chat events — one JSON `ChatEvent` object per line. | [**AiChatEvent**](#model-aichatevent) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **413** | The request body is larger than 100 KB, the JSON parser's limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
 #### Return type
@@ -227,7 +227,7 @@ Re-rolls the last assistant reply of an existing thread: every message after the
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -242,7 +242,7 @@ No authorization required
 
 Run an AI action
 
-Runs one AI action and returns the whole answer as a single JSON document. The model is the profile bound to &#x60;actionType&#x60;, falling back to the &#x60;Default&#x60; assignment slot, so this operation accepts no &#x60;profileId&#x60; of its own. Nothing is persisted - no thread is opened, no message is stored and no title is generated - which makes it the one to use for a stand-alone completion rather than for a conversation. &#x60;entityId&#x60; and &#x60;contextEntityId&#x60; set the scope of the round, which decides the workspace context and the custom MCP servers it may reach. For a conversation that keeps its history, use &#x60;POST api/2.0/ai/ai/send-with-stream&#x60; instead.
+Runs one AI action and returns the whole answer as a single JSON document. The model is the profile bound to `actionType`, falling back to the `Default` assignment slot, so this operation accepts no `profileId` of its own. Nothing is persisted - no thread is opened, no message is stored and no title is generated - which makes it the one to use for a stand-alone completion rather than for a conversation. `entityId` and `contextEntityId` set the scope of the round, which decides the workspace context and the custom MCP servers it may reach. For a conversation that keeps its history, use `POST api/2.0/ai/ai/send-with-stream` instead.
 
 #### Parameters
 
@@ -254,10 +254,10 @@ Runs one AI action and returns the whole answer as a single JSON document. The m
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The assistant&#39;s reply as one message. Nothing was persisted. | [**AiThreadMessageLike**](#model-aithreadmessagelike) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **200** | The assistant's reply as one message. Nothing was persisted. | [**AiThreadMessageLike**](#model-aithreadmessagelike) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **413** | The request body is larger than 100 KB, the JSON parser's limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
 #### Return type
@@ -266,7 +266,7 @@ Runs one AI action and returns the whole answer as a single JSON document. The m
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -281,7 +281,7 @@ No authorization required
 
 Send custom
 
-Runs a free-form one-turn call against a system prompt supplied in the request, with no thread, no history and nothing persisted. The model is the explicit &#x60;profileId&#x60; when it resolves, otherwise the &#x60;Default&#x60; assignment slot. The shape of the answer depends on the body rather than on the route: with &#x60;isStream&#x60; set it arrives as a newline-delimited stream of chat events, and without it as a single JSON document, so a client has to handle both. Use &#x60;POST api/2.0/ai/ai/send&#x60; when the prompt should come from the portal&#39;s own action configuration instead of from the caller.
+Runs a free-form one-turn call against a system prompt supplied in the request, with no thread, no history and nothing persisted. The model is the explicit `profileId` when it resolves, otherwise the `Default` assignment slot. The shape of the answer depends on the body rather than on the route: with `isStream` set it arrives as a newline-delimited stream of chat events, and without it as a single JSON document, so a client has to handle both. Use `POST api/2.0/ai/ai/send` when the prompt should come from the portal's own action configuration instead of from the caller.
 
 #### Parameters
 
@@ -293,10 +293,10 @@ Runs a free-form one-turn call against a system prompt supplied in the request, 
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The assistant&#39;s reply as one message, or a newline-delimited stream of chat events when &#x60;isStream&#x60; was set. Nothing was persisted. | [**AiThreadMessageLike**](#model-aithreadmessagelike) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **200** | The assistant's reply as one message, or a newline-delimited stream of chat events when `isStream` was set. Nothing was persisted. | [**AiThreadMessageLike**](#model-aithreadmessagelike) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **413** | The request body is larger than 100 KB, the JSON parser's limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
 #### Return type
@@ -305,7 +305,7 @@ Runs a free-form one-turn call against a system prompt supplied in the request, 
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -320,7 +320,7 @@ No authorization required
 
 Send with stream
 
-Runs one chat round and streams it back as newline-delimited &#x60;ChatEvent&#x60; objects. Omitting &#x60;threadId&#x60; opens a new thread, which requires that &#x60;entityId&#x60; names a room the caller can open and that a profile resolves for it; the user message and the reply are persisted either way, and a new thread also gets a generated title. The model is settled in a fixed order - an agent&#39;s assignment in scope overrides everything, then the explicit &#x60;profileId&#x60;, then the one stored on the thread, then the &#x60;Chat&#x60; assignment - and the effective profile is checked before the stream opens, so an unknown one fails with 400 rather than as an error buried in a 200. A tool call pauses the round and ends the stream; resume it with &#x60;POST api/2.0/ai/ai/approve-tool-call&#x60; or &#x60;POST api/2.0/ai/ai/deny-tool-call&#x60;.
+Runs one chat round and streams it back as newline-delimited `ChatEvent` objects. Omitting `threadId` opens a new thread, which requires that `entityId` names a room the caller can open and that a profile resolves for it; the user message and the reply are persisted either way, and a new thread also gets a generated title. The model is settled in a fixed order - an agent's assignment in scope overrides everything, then the explicit `profileId`, then the one stored on the thread, then the `Chat` assignment - and the effective profile is checked before the stream opens, so an unknown one fails with 400 rather than as an error buried in a 200. A tool call pauses the round and ends the stream; resume it with `POST api/2.0/ai/ai/approve-tool-call` or `POST api/2.0/ai/ai/deny-tool-call`.
 
 #### Parameters
 
@@ -332,13 +332,13 @@ Runs one chat round and streams it back as newline-delimited &#x60;ChatEvent&#x6
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Newline-delimited stream of chat events — one JSON &#x60;ChatEvent&#x60; object per line. | [**AiChatEvent**](#model-aichatevent) | - |
+| **200** | Newline-delimited stream of chat events — one JSON `ChatEvent` object per line. | [**AiChatEvent**](#model-aichatevent) | - |
 | **400** | The prompt is empty, more attachments were sent than the limit allows, or no AI profile could be resolved for the requested action. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **402** | The portal has no paid AI quota left, so the profile bound to this action cannot be dispatched. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **404** | The &#x60;entityId&#x60; names a room the caller cannot open, or no live profile is bound to it. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **404** | The `entityId` names a room the caller cannot open, or no live profile is bound to it. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **413** | The request body is larger than 100 KB, the JSON parser's limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
 #### Return type
@@ -347,7 +347,7 @@ Runs one chat round and streams it back as newline-delimited &#x60;ChatEvent&#x6
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -362,7 +362,7 @@ No authorization required
 
 Stream a chat in OpenAI format
 
-The same chat round as &#x60;send-with-stream&#x60;, re-encoded as a server-sent-events stream of OpenAI &#x60;chat.completion.chunk&#x60; objects terminated by a &#x60;[DONE]&#x60; sentinel. Thread handling, persistence, title generation and the profile pre-flight are identical, and a tool call ends the stream with &#x60;finish_reason: tool_calls&#x60; instead of a pause event - resume it through the same approve and deny operations. Unlike &#x60;send-with-stream&#x60; it does not reject an empty user message and does not enforce the per-kind attachment cap, so validate both before calling. Choose this route only for a client that already speaks the OpenAI wire format; &#x60;POST api/2.0/ai/ai/send-with-stream&#x60; is the native one.
+The same chat round as `send-with-stream`, re-encoded as a server-sent-events stream of OpenAI `chat.completion.chunk` objects terminated by a `[DONE]` sentinel. Thread handling, persistence, title generation and the profile pre-flight are identical, and a tool call ends the stream with `finish_reason: tool_calls` instead of a pause event - resume it through the same approve and deny operations. Unlike `send-with-stream` it does not reject an empty user message and does not enforce the per-kind attachment cap, so validate both before calling. Choose this route only for a client that already speaks the OpenAI wire format; `POST api/2.0/ai/ai/send-with-stream` is the native one.
 
 #### Parameters
 
@@ -374,12 +374,12 @@ The same chat round as &#x60;send-with-stream&#x60;, re-encoded as a server-sent
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Server-sent events stream of OpenAI &#x60;chat.completion.chunk&#x60; objects, terminated by a &#x60;[DONE]&#x60; sentinel. | [**AiOpenAIStreamChunk**](#model-aiopenaistreamchunk) | - |
+| **200** | Server-sent events stream of OpenAI `chat.completion.chunk` objects, terminated by a `[DONE]` sentinel. | [**AiOpenAIStreamChunk**](#model-aiopenaistreamchunk) | - |
 | **400** | The prompt is empty, or no AI profile could be resolved for the requested action. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **402** | The portal has no paid AI quota left, so the profile bound to this action cannot be dispatched. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **413** | The request body is larger than 100 KB, the JSON parser's limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
 #### Return type
@@ -388,7 +388,7 @@ The same chat round as &#x60;send-with-stream&#x60;, re-encoded as a server-sent
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -405,7 +405,7 @@ No authorization required
 
 Create an agent
 
-Creates an AI agent room and binds a model to it, in that order. &#x60;profileId&#x60; is required, has to be a UUID, has to name an existing profile, and that profile has to support chat - an image-only model is refused here rather than failing on every later request. &#x60;prompt&#x60; is required and is stored on the room as its standing instruction with any markup stripped, so it cannot round-trip HTML into another user&#39;s reply. The two steps are not atomic: when the room is created but the model binding fails, the call reports an error and the room is left behind, so re-bind it with &#x60;PUT api/2.0/ai/agents/{id}&#x60; rather than creating a second one.
+Creates an AI agent room and binds a model to it, in that order. `profileId` is required, has to be a UUID, has to name an existing profile, and that profile has to support chat - an image-only model is refused here rather than failing on every later request. `prompt` is required and is stored on the room as its standing instruction with any markup stripped, so it cannot round-trip HTML into another user's reply. The two steps are not atomic: when the room is created but the model binding fails, the call reports an error and the room is left behind, so re-bind it with `PUT api/2.0/ai/agents/{id}` rather than creating a second one.
 
 #### Parameters
 
@@ -418,10 +418,10 @@ Creates an AI agent room and binds a model to it, in that order. &#x60;profileId
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | The created agent room, with the model already bound to it. | [**AiFolderIntegerWrapper**](#model-aifolderintegerwrapper) | - |
-| **400** | &#x60;profileId&#x60; is missing, is not a UUID, names no existing profile, or names one that does not support chat; or &#x60;prompt&#x60; is missing. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **400** | `profileId` is missing, is not a UUID, names no existing profile, or names one that does not support chat; or `prompt` is missing. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **413** | The request body is larger than 100 KB, the JSON parser's limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
 #### Return type
@@ -430,7 +430,7 @@ Creates an AI agent room and binds a model to it, in that order. &#x60;profileId
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -445,7 +445,7 @@ No authorization required
 
 Delete an agent
 
-Deletes an AI agent room. The ID has to be the room&#39;s integer identifier, and the body is forwarded to the DocSpace AI service unchanged, so it accepts the same options as deleting an ordinary room - &#x60;deleteAfter&#x60; among them. Deletion is asynchronous there: the answer is a file-operation payload to poll, not a completed result. The agent&#39;s model binding is deliberately left behind, because the upstream assignment API has no per-entry delete, so an orphaned assignment row survives the room.
+Deletes an AI agent room. The ID has to be the room's integer identifier, and the body is forwarded to the DocSpace AI service unchanged, so it accepts the same options as deleting an ordinary room - `deleteAfter` among them. Deletion is asynchronous there: the answer is a file-operation payload to poll, not a completed result. The agent's model binding is deliberately left behind, because the upstream assignment API has no per-entry delete, so an orphaned assignment row survives the room.
 
 #### Parameters
 
@@ -460,9 +460,9 @@ Deletes an AI agent room. The ID has to be the room&#39;s integer identifier, an
 |------------- | ------------- | ------------- | -------------|
 | **200** | The queued file operation. Deletion runs asynchronously, so poll DocSpace for its outcome. | [**AiFileOperationWrapper**](#model-aifileoperationwrapper) | - |
 | **400** | The agent ID is not a positive integer. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **413** | The request body is larger than 100 KB, the JSON parser's limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
 #### Return type
@@ -471,7 +471,7 @@ Deletes an AI agent room. The ID has to be the room&#39;s integer identifier, an
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -486,7 +486,7 @@ No authorization required
 
 Get an agent
 
-Returns one AI agent room, enriched with the &#x60;profileId&#x60; currently bound to it so an edit form can prefill its model selector. The ID is the room&#39;s integer identifier, and a non-integer value is refused rather than passed on to fail opaquely upstream. The binding lives in an assignment rather than on the room, so it is looked up separately: a missing or unreadable assignment simply leaves &#x60;profileId&#x60; out of the answer instead of failing the call. The standing instruction comes back on the room as &#x60;chatSettings.prompt&#x60;.
+Returns one AI agent room, enriched with the `profileId` currently bound to it so an edit form can prefill its model selector. The ID is the room's integer identifier, and a non-integer value is refused rather than passed on to fail opaquely upstream. The binding lives in an assignment rather than on the room, so it is looked up separately: a missing or unreadable assignment simply leaves `profileId` out of the answer instead of failing the call. The standing instruction comes back on the room as `chatSettings.prompt`.
 
 #### Parameters
 
@@ -498,9 +498,9 @@ Returns one AI agent room, enriched with the &#x60;profileId&#x60; currently bou
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The agent room, with &#x60;profileId&#x60; added when a model is bound to it. | [**aiAgentsGet_200_response**](#model-aiagentsget-200-response) | - |
+| **200** | The agent room, with `profileId` added when a model is bound to it. | [**aiAgentsGet_200_response**](#model-aiagentsget-200-response) | - |
 | **400** | The agent ID is not a positive integer. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
@@ -510,7 +510,7 @@ Returns one AI agent room, enriched with the &#x60;profileId&#x60; currently bou
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -525,7 +525,7 @@ No authorization required
 
 List agents
 
-Lists the portal&#39;s AI agent rooms. The query is forwarded unchanged to the DocSpace AI service, so it takes the same paging, sorting and filtering parameters as an ordinary room listing, and the answer is that service&#39;s folder-content payload rather than a shape of this API&#39;s own. Array and object query values are dropped rather than guessed at, so send flat strings. The profile bound to each agent is not included here - read one agent with &#x60;GET api/2.0/ai/agents/{id}&#x60; for that.
+Lists the portal's AI agent rooms. The query is forwarded unchanged to the DocSpace AI service, so it takes the same paging, sorting and filtering parameters as an ordinary room listing, and the answer is that service's folder-content payload rather than a shape of this API's own. Array and object query values are dropped rather than guessed at, so send flat strings. The profile bound to each agent is not included here - read one agent with `GET api/2.0/ai/agents/{id}` for that.
 
 #### Parameters
 
@@ -533,13 +533,13 @@ Lists the portal&#39;s AI agent rooms. The query is forwarded unchanged to the D
 |------------- | ------------- | ------------- | ------------- | -------------|
 | **subjectId** | query | **String** | Show only the agent rooms this user takes part in. | [optional] [example: 00000000-0000-0000-0000-000000000000] |
 | **subjectOwnerId** | query | **String** | Show only the agent rooms owned by this user. | [optional] [example: 00000000-0000-0000-0000-000000000000] |
-| **excludeSubject** | query | **Boolean** | Invert the user filter: leave out what &#x60;subjectId&#x60; selects instead of keeping it. | [optional] [example: false] |
+| **excludeSubject** | query | **Boolean** | Invert the user filter: leave out what `subjectId` selects instead of keeping it. | [optional] [example: false] |
 | **tags** | query | **String** | Show only the agent rooms carrying these tags, comma-separated. | [optional] [example: ai,assistant] |
 | **withoutTags** | query | **Boolean** | Show only the agent rooms that carry no tags at all. | [optional] [example: false] |
 | **quotaFilter** | query | **Integer** | Filter by quota kind: 0 for all, 1 for the default quota, 2 for a custom one. | [optional] [example: 0] |
 | **filterValue** | query | **String** | Show only the agent rooms whose title matches this text. | [optional] [example: assistant] |
-| **sortBy** | query | **String** | Field to sort by, for example &#x60;DateAndTime&#x60;. | [optional] [example: DateAndTime] |
-| **sortOrder** | query | **String** | Sort direction, &#x60;ascending&#x60; or &#x60;descending&#x60;. | [optional] [example: descending] |
+| **sortBy** | query | **String** | Field to sort by, for example `DateAndTime`. | [optional] [example: DateAndTime] |
+| **sortOrder** | query | **String** | Sort direction, `ascending` or `descending`. | [optional] [example: descending] |
 | **startIndex** | query | **Integer** | Index of the first entry to return; 0 starts at the beginning. | [optional] [example: 0] |
 | **count** | query | **Integer** | How many entries to return. The internal service applies its own default. | [optional] [example: 25] |
 
@@ -547,8 +547,8 @@ Lists the portal&#39;s AI agent rooms. The query is forwarded unchanged to the D
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The agent rooms, in the DocSpace AI service&#39;s folder-content envelope. | [**AiFolderContentIntegerWrapper**](#model-aifoldercontentintegerwrapper) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **200** | The agent rooms, in the DocSpace AI service's folder-content envelope. | [**AiFolderContentIntegerWrapper**](#model-aifoldercontentintegerwrapper) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
@@ -558,7 +558,7 @@ Lists the portal&#39;s AI agent rooms. The query is forwarded unchanged to the D
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -573,7 +573,7 @@ No authorization required
 
 List agent news items
 
-Lists the unread items across the caller&#39;s AI agent rooms, so a badge can be rendered without walking each room. It takes no parameters and is scoped to the caller by the DocSpace AI service. The answer is that service&#39;s new-items payload. This is a read-only operation and does not mark anything as seen.
+Lists the unread items across the caller's AI agent rooms, so a badge can be rendered without walking each room. It takes no parameters and is scoped to the caller by the DocSpace AI service. The answer is that service's new-items payload. This is a read-only operation and does not mark anything as seen.
 
 #### Parameters
 This endpoint does not need any parameter.
@@ -582,8 +582,8 @@ This endpoint does not need any parameter.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The unread items of the caller&#39;s agent rooms. | [**AiNewItemsAgentNewItemsArrayWrapper**](#model-ainewitemsagentnewitemsarraywrapper) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **200** | The unread items of the caller's agent rooms. | [**AiNewItemsAgentNewItemsArrayWrapper**](#model-ainewitemsagentnewitemsarraywrapper) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
@@ -593,7 +593,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -606,9 +606,9 @@ No authorization required
 
 `PUT /api/2.0/ai/agents/resetquota`
 
-Reset agents&#39; quota
+Reset agents' quota
 
-Returns the listed AI agent rooms to the portal&#39;s default storage quota, forwarding &#x60;roomIds&#x60; to the DocSpace AI service unchanged. The answer is that service&#39;s payload, one updated room per entry. This is the counterpart of &#x60;PUT api/2.0/ai/agents/agentquota&#x60; and takes no quota value of its own. Rooms already on the default are unaffected.
+Returns the listed AI agent rooms to the portal's default storage quota, forwarding `roomIds` to the DocSpace AI service unchanged. The answer is that service's payload, one updated room per entry. This is the counterpart of `PUT api/2.0/ai/agents/agentquota` and takes no quota value of its own. Rooms already on the default are unaffected.
 
 #### Parameters
 
@@ -621,9 +621,9 @@ Returns the listed AI agent rooms to the portal&#39;s default storage quota, for
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | The updated agent rooms, one entry each. | [**AiFolderIntegerArrayWrapper**](#model-aifolderintegerarraywrapper) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **413** | The request body is larger than 100 KB, the JSON parser's limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
 #### Return type
@@ -632,7 +632,7 @@ Returns the listed AI agent rooms to the portal&#39;s default storage quota, for
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -647,7 +647,7 @@ No authorization required
 
 Update an agent
 
-Changes an AI agent room - its title, tags or standing instruction - and optionally rebinds its model. The ID has to be the room&#39;s integer identifier. &#x60;profileId&#x60; is not part of the room contract: it is taken out of the forwarded body and applied afterwards as the agent&#39;s assignment, and it has to be a UUID naming an existing chat-capable profile. An instruction sent as &#x60;chatSettings.prompt&#x60; has its markup stripped, as on create; note that when &#x60;chatSettings&#x60; is present the upstream service still requires the rest of that object to be valid, so send it whole.
+Changes an AI agent room - its title, tags or standing instruction - and optionally rebinds its model. The ID has to be the room's integer identifier. `profileId` is not part of the room contract: it is taken out of the forwarded body and applied afterwards as the agent's assignment, and it has to be a UUID naming an existing chat-capable profile. An instruction sent as `chatSettings.prompt` has its markup stripped, as on create; note that when `chatSettings` is present the upstream service still requires the rest of that object to be valid, so send it whole.
 
 #### Parameters
 
@@ -661,10 +661,10 @@ Changes an AI agent room - its title, tags or standing instruction - and optiona
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | The updated agent room. | [**AiFolderIntegerWrapper**](#model-aifolderintegerwrapper) | - |
-| **400** | The agent ID is not a positive integer, or &#x60;profileId&#x60; is not a UUID, names no existing profile, or names one that does not support chat. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **400** | The agent ID is not a positive integer, or `profileId` is not a UUID, names no existing profile, or names one that does not support chat. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **413** | The request body is larger than 100 KB, the JSON parser's limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
 #### Return type
@@ -673,7 +673,7 @@ Changes an AI agent room - its title, tags or standing instruction - and optiona
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -686,9 +686,9 @@ No authorization required
 
 `PUT /api/2.0/ai/agents/agentquota`
 
-Update agents&#39; quota
+Update agents' quota
 
-Sets the storage quota of the listed AI agent rooms in one call, forwarding &#x60;roomIds&#x60; and &#x60;quota&#x60; to the DocSpace AI service unchanged. The answer is that service&#39;s payload, one updated room per entry. A quota applies to the room&#39;s stored files, not to the model usage of its chats. Use &#x60;PUT api/2.0/ai/agents/resetquota&#x60; to return rooms to the portal default instead of naming a number.
+Sets the storage quota of the listed AI agent rooms in one call, forwarding `roomIds` and `quota` to the DocSpace AI service unchanged. The answer is that service's payload, one updated room per entry. A quota applies to the room's stored files, not to the model usage of its chats. Use `PUT api/2.0/ai/agents/resetquota` to return rooms to the portal default instead of naming a number.
 
 #### Parameters
 
@@ -701,9 +701,9 @@ Sets the storage quota of the listed AI agent rooms in one call, forwarding &#x6
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | The updated agent rooms, one entry each. | [**AiFolderIntegerArrayWrapper**](#model-aifolderintegerarraywrapper) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **413** | The request body is larger than 100 KB, the JSON parser's limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
 #### Return type
@@ -712,7 +712,7 @@ Sets the storage quota of the listed AI agent rooms in one call, forwarding &#x6
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -729,7 +729,7 @@ No authorization required
 
 Bind a profile to an action
 
-Binds a profile to one AI action portal-wide, creating the assignment or replacing it in place, and returns the result. Both &#x60;actionType&#x60; and &#x60;profileId&#x60; are required. The profile&#39;s declared capabilities are checked against the action, so a model that cannot generate images cannot be bound to &#x60;ImageGeneration&#x60; - the &#x60;Default&#x60; slot is exempt, because it stands in for every action. There is no room-scoped form of this write: a room&#39;s own binding is created by the agent that owns it, while reads accept an &#x60;entityId&#x60;.
+Binds a profile to one AI action portal-wide, creating the assignment or replacing it in place, and returns the result. Both `actionType` and `profileId` are required. The profile's declared capabilities are checked against the action, so a model that cannot generate images cannot be bound to `ImageGeneration` - the `Default` slot is exempt, because it stands in for every action. There is no room-scoped form of this write: a room's own binding is created by the agent that owns it, while reads accept an `entityId`.
 
 #### Parameters
 
@@ -741,11 +741,11 @@ Binds a profile to one AI action portal-wide, creating the assignment or replaci
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Whether the binding was stored. A failure is reported in &#x60;error&#x60; rather than as a status. | [**AiAssignmentMutationResult**](#model-aiassignmentmutationresult) | - |
-| **400** | &#x60;actionType&#x60; or &#x60;profileId&#x60; is missing. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **200** | Whether the binding was stored. A failure is reported in `error` rather than as a status. | [**AiAssignmentMutationResult**](#model-aiassignmentmutationresult) | - |
+| **400** | `actionType` or `profileId` is missing. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **413** | The request body is larger than 100 KB, the JSON parser's limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
 #### Return type
@@ -754,7 +754,7 @@ Binds a profile to one AI action portal-wide, creating the assignment or replaci
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -781,11 +781,11 @@ Applies many action-to-profile bindings in one write, which is how a settings sc
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Whether the set was stored, with &#x60;errors&#x60; listing the entries that were refused. | [**AiBulkAssignmentResult**](#model-aibulkassignmentresult) | - |
+| **200** | Whether the set was stored, with `errors` listing the entries that were refused. | [**AiBulkAssignmentResult**](#model-aibulkassignmentresult) | - |
 | **400** | The body is not a map of action type to profile ID, or one of its keys is not a known action type. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **413** | The request body is larger than 100 KB, the JSON parser's limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
 #### Return type
@@ -794,7 +794,7 @@ Applies many action-to-profile bindings in one write, which is how a settings sc
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -809,23 +809,23 @@ No authorization required
 
 Cascade profile delete
 
-Detaches a profile from every assignment that points at it, which is the cleanup step before the profile itself is removed. The &#x60;Default&#x60; slot is promoted to the first remaining profile, or dropped when none is left, and every other slot holding the profile is cleared. &#x60;profileId&#x60; is required and may be sent in the body or as a query parameter. &#x60;DELETE api/2.0/ai/profiles/delete&#x60; already does this, so call it directly only when the profile is being removed by some other means.
+Detaches a profile from every assignment that points at it, which is the cleanup step before the profile itself is removed. The `Default` slot is promoted to the first remaining profile, or dropped when none is left, and every other slot holding the profile is cleared. `profileId` is required and may be sent in the body or as a query parameter. `DELETE api/2.0/ai/profiles/delete` already does this, so call it directly only when the profile is being removed by some other means.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **aiAssignmentsCascadeProfileDelete\_request** | body | [**aiAssignmentsCascadeProfileDelete_request**](#model-aiassignmentscascadeprofiledelete-request-body) | The profile to detach from every assignment. May be sent as the &#x60;profileId&#x60; query parameter instead of in the body. | [required] |
+| **aiAssignmentsCascadeProfileDelete\_request** | body | [**aiAssignmentsCascadeProfileDelete_request**](#model-aiassignmentscascadeprofiledelete-request-body) | The profile to detach from every assignment. May be sent as the `profileId` query parameter instead of in the body. | [required] |
 
 #### Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Confirms no assignment points at the profile any more. | [**AiSuccessResponse**](#model-aisuccessresponse) | - |
-| **400** | &#x60;profileId&#x60; is missing. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **400** | `profileId` is missing. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **413** | The request body is larger than 100 KB, the JSON parser's limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
 #### Return type
@@ -834,7 +834,7 @@ Detaches a profile from every assignment that points at it, which is the cleanup
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -849,7 +849,7 @@ No authorization required
 
 Get all assignments
 
-Returns every action-to-profile binding of a scope as one map, which is what a settings screen loads. &#x60;entityId&#x60; narrows it to a room and has to name one the caller can open; a room that is not an agent room degrades to the portal-wide set rather than answering empty, and omitting the parameter reads the portal-wide set directly. Actions with no binding are simply absent from the map. The &#x60;Default&#x60; slot is reported as an entry of its own rather than being folded into the others.
+Returns every action-to-profile binding of a scope as one map, which is what a settings screen loads. `entityId` narrows it to a room and has to name one the caller can open; a room that is not an agent room degrades to the portal-wide set rather than answering empty, and omitting the parameter reads the portal-wide set directly. Actions with no binding are simply absent from the map. The `Default` slot is reported as an entry of its own rather than being folded into the others.
 
 #### Parameters
 
@@ -861,8 +861,8 @@ Returns every action-to-profile binding of a scope as one map, which is what a s
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The scope&#39;s bindings as a map of action type to profile ID. An action with no binding is absent. | **Map** | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **200** | The scope's bindings as a map of action type to profile ID. An action with no binding is absent. | **Map** | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **404** | The referenced object does not exist, or the caller cannot access it - the two are deliberately indistinguishable, so a room the caller may not open answers 404 rather than 403. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
@@ -873,7 +873,7 @@ Returns every action-to-profile binding of a scope as one map, which is what a s
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -888,7 +888,7 @@ No authorization required
 
 Get assignment
 
-Returns the profile bound to one AI action, without applying the &#x60;Default&#x60; fallback - an empty answer means this action has no profile of its own, not that nothing is configured. &#x60;actionType&#x60; is required and is read from the query. Use &#x60;GET api/2.0/ai/assignments/resolve-for-action&#x60; to learn which profile would actually serve the action. This reads the portal-wide binding and accepts no &#x60;entityId&#x60;.
+Returns the profile bound to one AI action, without applying the `Default` fallback - an empty answer means this action has no profile of its own, not that nothing is configured. `actionType` is required and is read from the query. Use `GET api/2.0/ai/assignments/resolve-for-action` to learn which profile would actually serve the action. This reads the portal-wide binding and accepts no `entityId`.
 
 #### Parameters
 
@@ -901,8 +901,8 @@ Returns the profile bound to one AI action, without applying the &#x60;Default&#
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | The profile bound to the action, or an empty result when it has none of its own. | **String** | - |
-| **400** | &#x60;actionType&#x60; is missing. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **400** | `actionType` is missing. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
@@ -912,7 +912,7 @@ Returns the profile bound to one AI action, without applying the &#x60;Default&#
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -927,7 +927,7 @@ No authorization required
 
 Resolve for action
 
-Returns the profile that will serve one AI action, falling back to the &#x60;Default&#x60; slot when the action has no profile of its own. &#x60;actionType&#x60; is required and has to be one of the known actions - an unknown or misspelled value is rejected rather than resolved to the default. &#x60;entityId&#x60; narrows the lookup to a room, and a room with no assignment of its own degrades to the portal-wide one. This fails when neither slot is set or the bound profile is gone, so use &#x60;GET api/2.0/ai/assignments/try-resolve-for-action&#x60; when an unconfigured portal should answer empty instead.
+Returns the profile that will serve one AI action, falling back to the `Default` slot when the action has no profile of its own. `actionType` is required and has to be one of the known actions - an unknown or misspelled value is rejected rather than resolved to the default. `entityId` narrows the lookup to a room, and a room with no assignment of its own degrades to the portal-wide one. This fails when neither slot is set or the bound profile is gone, so use `GET api/2.0/ai/assignments/try-resolve-for-action` when an unconfigured portal should answer empty instead.
 
 #### Parameters
 
@@ -941,8 +941,8 @@ Returns the profile that will serve one AI action, falling back to the &#x60;Def
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | The profile that will serve the action. | [**AiResolvedAssignment**](#model-airesolvedassignment) | - |
-| **400** | &#x60;actionType&#x60; is missing. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **400** | `actionType` is missing. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
@@ -952,7 +952,7 @@ Returns the profile that will serve one AI action, falling back to the &#x60;Def
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -967,7 +967,7 @@ No authorization required
 
 Try resolve for action
 
-Returns the profile that will serve one AI action, exactly as &#x60;GET api/2.0/ai/assignments/resolve-for-action&#x60; does, but answers with an empty result rather than failing when nothing is configured. &#x60;actionType&#x60; is required and is validated the same way, and &#x60;entityId&#x60; narrows the lookup to a room. This is the operation to call when the absence of a profile is a normal state to render - a settings screen, or a feature that hides itself. Both operations are read-only.
+Returns the profile that will serve one AI action, exactly as `GET api/2.0/ai/assignments/resolve-for-action` does, but answers with an empty result rather than failing when nothing is configured. `actionType` is required and is validated the same way, and `entityId` narrows the lookup to a room. This is the operation to call when the absence of a profile is a normal state to render - a settings screen, or a feature that hides itself. Both operations are read-only.
 
 #### Parameters
 
@@ -981,8 +981,8 @@ Returns the profile that will serve one AI action, exactly as &#x60;GET api/2.0/
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | The profile that will serve the action, or an empty result when none is configured. | [**AiResolvedAssignment**](#model-airesolvedassignment) | - |
-| **400** | &#x60;actionType&#x60; is missing. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **400** | `actionType` is missing. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
@@ -992,7 +992,7 @@ Returns the profile that will serve one AI action, exactly as &#x60;GET api/2.0/
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -1005,9 +1005,9 @@ No authorization required
 
 `DELETE /api/2.0/ai/assignments/unassign`
 
-Clear an action&#39;s profile
+Clear an action's profile
 
-Clears the portal-wide binding of one AI action, after which the action falls back to the &#x60;Default&#x60; slot. &#x60;actionType&#x60; is required and may be sent in the body or as a query parameter. An action whose slot is already empty is not reported as an error - the call answers success either way, so it is safe to repeat. Clearing &#x60;Default&#x60; itself leaves the actions that relied on it unresolvable.
+Clears the portal-wide binding of one AI action, after which the action falls back to the `Default` slot. `actionType` is required and may be sent in the body or as a query parameter. An action whose slot is already empty is not reported as an error - the call answers success either way, so it is safe to repeat. Clearing `Default` itself leaves the actions that relied on it unresolvable.
 
 #### Parameters
 
@@ -1020,10 +1020,10 @@ Clears the portal-wide binding of one AI action, after which the action falls ba
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Confirms the action now has no profile of its own. | [**AiSuccessResponse**](#model-aisuccessresponse) | - |
-| **400** | &#x60;actionType&#x60; is missing. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **400** | `actionType` is missing. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **413** | The request body is larger than 100 KB, the JSON parser's limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
 #### Return type
@@ -1032,7 +1032,7 @@ Clears the portal-wide binding of one AI action, after which the action falls ba
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -1062,9 +1062,9 @@ Permanently deletes one attachment, whether it is still a draft or already bound
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Confirms the request was accepted, whether or not anything was deleted. | [**AiSuccessResponse**](#model-aisuccessresponse) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **413** | The request body is larger than 100 KB, the JSON parser's limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
 #### Return type
@@ -1073,7 +1073,7 @@ Permanently deletes one attachment, whether it is still a draft or already bound
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -1088,7 +1088,7 @@ No authorization required
 
 Delete many
 
-Permanently deletes several attachments in one round trip. &#x60;ids&#x60; is optional and an absent value is treated as an empty list, so a malformed request quietly deletes nothing instead of failing. IDs that do not exist are skipped without being reported, so the answer confirms only that the call was accepted. The deletions cannot be undone.
+Permanently deletes several attachments in one round trip. `ids` is optional and an absent value is treated as an empty list, so a malformed request quietly deletes nothing instead of failing. IDs that do not exist are skipped without being reported, so the answer confirms only that the call was accepted. The deletions cannot be undone.
 
 #### Parameters
 
@@ -1101,9 +1101,9 @@ Permanently deletes several attachments in one round trip. &#x60;ids&#x60; is op
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Confirms the request was accepted, whether or not anything was deleted. | [**AiSuccessResponse**](#model-aisuccessresponse) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **413** | The request body is larger than 100 KB, the JSON parser's limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
 #### Return type
@@ -1112,7 +1112,7 @@ Permanently deletes several attachments in one round trip. &#x60;ids&#x60; is op
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -1127,7 +1127,7 @@ No authorization required
 
 Get one attachment
 
-Returns one attachment by its ID, whether it is still a draft or already bound to a message. The ID is required and has to be a non-empty string. An ID that no longer exists is not reported as 404: the answer is a null body with status 200, so treat a missing payload as no such attachment. Use &#x60;POST api/2.0/ai/attachments/get-many&#x60; to read several at once.
+Returns one attachment by its ID, whether it is still a draft or already bound to a message. The ID is required and has to be a non-empty string. An ID that no longer exists is not reported as 404: the answer is a null body with status 200, so treat a missing payload as no such attachment. Use `POST api/2.0/ai/attachments/get-many` to read several at once.
 
 #### Parameters
 
@@ -1141,9 +1141,9 @@ Returns one attachment by its ID, whether it is still a draft or already bound t
 |------------- | ------------- | ------------- | -------------|
 | **200** | The attachment, or a null body when no attachment has that ID. | [**AiAttachment**](#model-aiattachment) | - |
 | **400** | The attachment ID is missing. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **413** | The request body is larger than 100 KB, the JSON parser's limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
 #### Return type
@@ -1152,7 +1152,7 @@ Returns one attachment by its ID, whether it is still a draft or already bound t
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -1167,7 +1167,7 @@ No authorization required
 
 Get many
 
-Returns several attachments in one call, aligned by position with the &#x60;ids&#x60; that were sent, so the answer can be zipped straight onto the request. An ID that no longer exists leaves its slot empty rather than shortening the list, which is how a caller tells which of them are gone. &#x60;ids&#x60; has to be present and non-empty - an empty batch is rejected rather than answered with an empty list. Nothing is changed by the call.
+Returns several attachments in one call, aligned by position with the `ids` that were sent, so the answer can be zipped straight onto the request. An ID that no longer exists leaves its slot empty rather than shortening the list, which is how a caller tells which of them are gone. `ids` has to be present and non-empty - an empty batch is rejected rather than answered with an empty list. Nothing is changed by the call.
 
 #### Parameters
 
@@ -1181,9 +1181,9 @@ Returns several attachments in one call, aligned by position with the &#x60;ids&
 |------------- | ------------- | ------------- | -------------|
 | **200** | The attachments, aligned by position with the IDs that were sent. A missing one leaves its slot empty. | [**List**](#model-aiattachment) | - |
 | **400** | The list of attachment IDs is malformed. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **413** | The request body is larger than 100 KB, the JSON parser's limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
 #### Return type
@@ -1192,7 +1192,7 @@ Returns several attachments in one call, aligned by position with the &#x60;ids&
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -1207,7 +1207,7 @@ No authorization required
 
 Link to message
 
-Binds draft attachments to the chat message that owns them, after that message has been persisted, so that deleting the message removes them too. All three of &#x60;ids&#x60;, &#x60;messageId&#x60; and &#x60;threadId&#x60; are required, and the references are verified rather than trusted: an unknown message answers 404, a message that belongs to a different thread answers 400, and attachments that no longer exist answer 404 naming each missing ID. That verification exists because the underlying binding call skips unknown IDs silently, which used to report success for a link that had not happened. Drafts stay unbound until this succeeds.
+Binds draft attachments to the chat message that owns them, after that message has been persisted, so that deleting the message removes them too. All three of `ids`, `messageId` and `threadId` are required, and the references are verified rather than trusted: an unknown message answers 404, a message that belongs to a different thread answers 400, and attachments that no longer exist answer 404 naming each missing ID. That verification exists because the underlying binding call skips unknown IDs silently, which used to report success for a link that had not happened. Drafts stay unbound until this succeeds.
 
 #### Parameters
 
@@ -1221,10 +1221,10 @@ Binds draft attachments to the chat message that owns them, after that message h
 |------------- | ------------- | ------------- | -------------|
 | **200** | Confirms the attachments are now bound to the message. | [**AiSuccessResponse**](#model-aisuccessresponse) | - |
 | **400** | The attachment or message reference is malformed. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **404** | The message or the attachment does not exist. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **413** | The request body is larger than 100 KB, the JSON parser's limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
 #### Return type
@@ -1233,7 +1233,7 @@ Binds draft attachments to the chat message that owns them, after that message h
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -1248,7 +1248,7 @@ No authorization required
 
 Save file
 
-Stores one file attachment as a draft and returns it, so its ID can be attached to a message later. &#x60;input&#x60; carries the host &#x60;path&#x60; - the DocSpace entry ID the AI backend resolves server-side - the text &#x60;content&#x60; already extracted from that file, the ONLYOFFICE numeric file &#x60;type&#x60;, and optionally a &#x60;title&#x60;; the text is what the model reads, so this operation does not open the file itself. Archives are refused outright, whatever their declared name says. Drafts are not bound to a conversation until &#x60;POST api/2.0/ai/attachments/link-to-message&#x60; is called, so an unlinked draft outlives the round that created it.
+Stores one file attachment as a draft and returns it, so its ID can be attached to a message later. `input` carries the host `path` - the DocSpace entry ID the AI backend resolves server-side - the text `content` already extracted from that file, the ONLYOFFICE numeric file `type`, and optionally a `title`; the text is what the model reads, so this operation does not open the file itself. Archives are refused outright, whatever their declared name says. Drafts are not bound to a conversation until `POST api/2.0/ai/attachments/link-to-message` is called, so an unlinked draft outlives the round that created it.
 
 #### Parameters
 
@@ -1262,9 +1262,9 @@ Stores one file attachment as a draft and returns it, so its ID can be attached 
 |------------- | ------------- | ------------- | -------------|
 | **200** | The stored draft, whose ID links it to a message later. | [**AiAttachment**](#model-aiattachment) | - |
 | **400** | The attachment payload is malformed. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **413** | The request body is larger than 100 KB, the JSON parser's limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
 #### Return type
@@ -1273,7 +1273,7 @@ Stores one file attachment as a draft and returns it, so its ID can be attached 
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -1288,7 +1288,7 @@ No authorization required
 
 Save files many
 
-Stores several file attachments as drafts in one round trip and returns them in the order they were sent. Each entry is validated exactly as the single-file operation validates its &#x60;input&#x60;, and the first bad one rejects the whole batch with its index named in the message - nothing is stored. &#x60;inputs&#x60; has to be present and an array: an absent or null value is a malformed request rather than an empty batch, and only an explicit empty array means no files. Follow up with &#x60;POST api/2.0/ai/attachments/link-to-message&#x60; to bind the drafts to a message.
+Stores several file attachments as drafts in one round trip and returns them in the order they were sent. Each entry is validated exactly as the single-file operation validates its `input`, and the first bad one rejects the whole batch with its index named in the message - nothing is stored. `inputs` has to be present and an array: an absent or null value is a malformed request rather than an empty batch, and only an explicit empty array means no files. Follow up with `POST api/2.0/ai/attachments/link-to-message` to bind the drafts to a message.
 
 #### Parameters
 
@@ -1301,10 +1301,10 @@ Stores several file attachments as drafts in one round trip and returns them in 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | The stored drafts, in the order they were sent. | [**List**](#model-aiattachment) | - |
-| **400** | &#x60;inputs&#x60; is not an array, or one of its entries is malformed. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **400** | `inputs` is not an array, or one of its entries is malformed. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **413** | The request body is larger than 100 KB, the JSON parser's limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
 #### Return type
@@ -1313,7 +1313,7 @@ Stores several file attachments as drafts in one round trip and returns them in 
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -1330,23 +1330,23 @@ No authorization required
 
 Call an editor tool
 
-Executes one DocSpace tool on behalf of the document editor&#39;s AI plugin, server-side and under the caller&#39;s own credentials, so the browser never holds the transport. &#x60;name&#x60; has to be one of the tools &#x60;GET api/2.0/ai/editor-tools/list&#x60; reports; anything else, including a tool the editor is not allowed to reach, is refused. The result is always returned as a string - a structured result is serialised - because the plugin relays it to the model verbatim. A tool that fails does so inside that string as an error payload rather than as an HTTP status, so check the content before trusting it.
+Executes one DocSpace tool on behalf of the document editor's AI plugin, server-side and under the caller's own credentials, so the browser never holds the transport. `name` has to be one of the tools `GET api/2.0/ai/editor-tools/list` reports; anything else, including a tool the editor is not allowed to reach, is refused. The result is always returned as a string - a structured result is serialised - because the plugin relays it to the model verbatim. A tool that fails does so inside that string as an error payload rather than as an HTTP status, so check the content before trusting it.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **aiEditorToolsCall\_request** | body | [**aiEditorToolsCall_request**](#model-aieditortoolscall-request-body) | The tool to run: &#x60;name&#x60; from &#x60;GET api/2.0/ai/editor-tools/list&#x60;, &#x60;arguments&#x60; matching that tool&#39;s input schema, and an optional &#x60;entityId&#x60; for the room to run it in. | [required] |
+| **aiEditorToolsCall\_request** | body | [**aiEditorToolsCall_request**](#model-aieditortoolscall-request-body) | The tool to run: `name` from `GET api/2.0/ai/editor-tools/list`, `arguments` matching that tool's input schema, and an optional `entityId` for the room to run it in. | [required] |
 
 #### Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The tool&#39;s output as a string. A tool that failed reports it inside that string. | [**aiEditorToolsCall_200_response**](#model-aieditortoolscall-200-response) | - |
+| **200** | The tool's output as a string. A tool that failed reports it inside that string. | [**aiEditorToolsCall_200_response**](#model-aieditortoolscall-200-response) | - |
 | **400** | The tool name is not one this portal exposes. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **413** | The request body is larger than 100 KB, the JSON parser's limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
 #### Return type
@@ -1355,7 +1355,7 @@ Executes one DocSpace tool on behalf of the document editor&#39;s AI plugin, ser
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -1370,7 +1370,7 @@ No authorization required
 
 List editor tools
 
-Returns the catalogue of DocSpace tools the document editor&#39;s AI plugin may offer the model - the same composed set the DocSpace chat sees, minus the two web-search tools the editor already reaches through its own passthrough. &#x60;entityId&#x60; scopes the catalogue to a room, which decides the room-specific tools it contains. Each entry carries exactly four fields: the tool name, its description, its input schema, and whether calling it requires an approval dialog; nothing else is exposed, because the raw listings of system servers carry transport details that must not reach a browser. The approval flag follows the same policy the chat engine applies, and a read-only tool comes back needing none - execute a tool with &#x60;POST api/2.0/ai/editor-tools/call&#x60;, which accepts only the names this catalogue reports.
+Returns the catalogue of DocSpace tools the document editor's AI plugin may offer the model - the same composed set the DocSpace chat sees, minus the two web-search tools the editor already reaches through its own passthrough. `entityId` scopes the catalogue to a room, which decides the room-specific tools it contains. Each entry carries exactly four fields: the tool name, its description, its input schema, and whether calling it requires an approval dialog; nothing else is exposed, because the raw listings of system servers carry transport details that must not reach a browser. The approval flag follows the same policy the chat engine applies, and a read-only tool comes back needing none - execute a tool with `POST api/2.0/ai/editor-tools/call`, which accepts only the names this catalogue reports.
 
 #### Parameters
 This endpoint does not need any parameter.
@@ -1380,7 +1380,7 @@ This endpoint does not need any parameter.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | The tools the editor plugin may offer the model, four fields each. | [**aiEditorToolsList_200_response**](#model-aieditortoolslist-200-response) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
@@ -1390,7 +1390,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -1407,7 +1407,7 @@ No authorization required
 
 Start markdown → docx export
 
-Queues a markdown-to-docx export and answers 202 as soon as the job is accepted, without waiting for it. &#x60;title&#x60;, &#x60;content&#x60; and &#x60;folderId&#x60; are all required, and a &#x60;content&#x60; of only whitespace counts as missing even though it is not empty. The conversion runs in the AI worker, which saves the .docx into the target folder - an agent room resolves to its own result-storage subfolder - so there is nothing to poll here: completion arrives as the ordinary folder-modified socket event. This route accepts a body of up to 15 MB rather than the 100 KB the rest of the API allows, because a whole thread transcript is sent in one request.
+Queues a markdown-to-docx export and answers 202 as soon as the job is accepted, without waiting for it. `title`, `content` and `folderId` are all required, and a `content` of only whitespace counts as missing even though it is not empty. The conversion runs in the AI worker, which saves the .docx into the target folder - an agent room resolves to its own result-storage subfolder - so there is nothing to poll here: completion arrives as the ordinary folder-modified socket event. This route accepts a body of up to 15 MB rather than the 100 KB the rest of the API allows, because a whole thread transcript is sent in one request.
 
 #### Parameters
 
@@ -1420,10 +1420,10 @@ Queues a markdown-to-docx export and answers 202 as soon as the job is accepted,
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **202** | Confirms the export was queued. The .docx arrives in the target folder later, announced by a folder-modified socket event. | [**aiExportTextToDocx_202_response**](#model-aiexporttexttodocx-202-response) | - |
-| **400** | &#x60;title&#x60;, &#x60;content&#x60; or &#x60;folderId&#x60; is missing. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **400** | `title`, `content` or `folderId` is missing. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **413** | The transcript is larger than 15 MB, this route&#39;s own parser limit. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **413** | The transcript is larger than 15 MB, this route's own parser limit. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
 #### Return type
@@ -1432,7 +1432,7 @@ Queues a markdown-to-docx export and answers 202 as soon as the job is accepted,
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -1449,25 +1449,25 @@ No authorization required
 
 OpenAI chat completions passthrough
 
-OpenAI-compatible chat completions for the document editor&#39;s AI plugin. The profile is resolved server-side, its credentials are attached, and the body is forwarded to the provider verbatim - the payload is owned by the plugin&#39;s SDK on one end and the provider on the other. A client disconnect cancels the provider call.
+OpenAI-compatible chat completions for the document editor's AI plugin. The profile is resolved server-side, its credentials are attached, and the body is forwarded to the provider verbatim - the payload is owned by the plugin's SDK on one end and the provider on the other. A client disconnect cancels the provider call.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
 | **profileId** | path | **String** | The AI provider profile identifier. | [required] [example: 00000000-0000-0000-0000-000000000000] |
-| **request\_body** | body | **Map** | An OpenAI Chat Completions request, forwarded to the provider byte for byte. The shape is the provider&#39;s, not this API&#39;s, so consult the provider&#39;s own reference; the model and the credentials come from the profile in the path and must not be sent here. | [required] |
+| **request\_body** | body | **Map** | An OpenAI Chat Completions request, forwarded to the provider byte for byte. The shape is the provider's, not this API's, so consult the provider's own reference; the model and the credentials come from the profile in the path and must not be sent here. | [required] |
 
 #### Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The provider&#39;s own response, relayed verbatim with its status and content type. | **Map** | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **200** | The provider's own response, relayed verbatim with its status and content type. | **Map** | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**aiOpenaiChatCompletions_403_response**](#model-aiopenaichatcompletions-403-response) | - |
 | **404** | No profile with this identifier exists for the caller. | [**aiOpenaiChatCompletions_403_response**](#model-aiopenaichatcompletions-403-response) | - |
 | **413** | The request body is larger than this route accepts. | [**aiOpenaiChatCompletions_403_response**](#model-aiopenaichatcompletions-403-response) | - |
-| **429** | Relayed verbatim from the AI provider, which is rate-limiting this portal&#39;s key. | [**aiOpenaiChatCompletions_403_response**](#model-aiopenaichatcompletions-403-response) | - |
+| **429** | Relayed verbatim from the AI provider, which is rate-limiting this portal's key. | [**aiOpenaiChatCompletions_403_response**](#model-aiopenaichatcompletions-403-response) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**aiOpenaiChatCompletions_403_response**](#model-aiopenaichatcompletions-403-response) | - |
 | **502** | The AI provider could not be reached, or answered with a failure of its own. | [**aiOpenaiChatCompletions_403_response**](#model-aiopenaichatcompletions-403-response) | - |
 
@@ -1477,7 +1477,7 @@ OpenAI-compatible chat completions for the document editor&#39;s AI plugin. The 
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -1492,25 +1492,25 @@ No authorization required
 
 OpenAI image generation passthrough
 
-OpenAI-compatible image generation for the document editor&#39;s AI plugin, working exactly as the chat-completions passthrough does: the profile named by &#x60;profileId&#x60; is resolved server-side, its credentials are attached, and the body reaches the provider unchanged. The provider&#39;s status and body are relayed verbatim, so its 429 and its own error envelope surface as they stand. A body larger than this route accepts is refused before it is forwarded. A client disconnect aborts the provider call.
+OpenAI-compatible image generation for the document editor's AI plugin, working exactly as the chat-completions passthrough does: the profile named by `profileId` is resolved server-side, its credentials are attached, and the body reaches the provider unchanged. The provider's status and body are relayed verbatim, so its 429 and its own error envelope surface as they stand. A body larger than this route accepts is refused before it is forwarded. A client disconnect aborts the provider call.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
 | **profileId** | path | **String** | The AI provider profile identifier. | [required] [example: 00000000-0000-0000-0000-000000000000] |
-| **request\_body** | body | **Map** | An OpenAI image-generation request, forwarded to the provider byte for byte. The shape is the provider&#39;s, not this API&#39;s, and the credentials come from the profile in the path. | [required] |
+| **request\_body** | body | **Map** | An OpenAI image-generation request, forwarded to the provider byte for byte. The shape is the provider's, not this API's, and the credentials come from the profile in the path. | [required] |
 
 #### Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The provider&#39;s own response, relayed verbatim with its status and content type. | **Map** | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **200** | The provider's own response, relayed verbatim with its status and content type. | **Map** | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**aiOpenaiChatCompletions_403_response**](#model-aiopenaichatcompletions-403-response) | - |
 | **404** | No profile with this identifier exists for the caller. | [**aiOpenaiChatCompletions_403_response**](#model-aiopenaichatcompletions-403-response) | - |
 | **413** | The request body is larger than this route accepts. | [**aiOpenaiChatCompletions_403_response**](#model-aiopenaichatcompletions-403-response) | - |
-| **429** | Relayed verbatim from the AI provider, which is rate-limiting this portal&#39;s key. | [**aiOpenaiChatCompletions_403_response**](#model-aiopenaichatcompletions-403-response) | - |
+| **429** | Relayed verbatim from the AI provider, which is rate-limiting this portal's key. | [**aiOpenaiChatCompletions_403_response**](#model-aiopenaichatcompletions-403-response) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**aiOpenaiChatCompletions_403_response**](#model-aiopenaichatcompletions-403-response) | - |
 | **502** | The AI provider could not be reached, or answered with a failure of its own. | [**aiOpenaiChatCompletions_403_response**](#model-aiopenaichatcompletions-403-response) | - |
 
@@ -1520,7 +1520,7 @@ OpenAI-compatible image generation for the document editor&#39;s AI plugin, work
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -1537,7 +1537,7 @@ No authorization required
 
 Clear deep mode
 
-Removes the stored extended-thinking setting of a scope (the depth and, with it, the deep-mode toggle), after which reads fall back to the configured default rather than to false. &#x60;entityId&#x60; picks a room and omitting it clears the portal-wide preference. Clearing a scope that has no stored value is not an error. This differs from storing false, which is an explicit choice a later read reports as set.
+Removes the stored extended-thinking setting of a scope (the depth and, with it, the deep-mode toggle), after which reads fall back to the configured default rather than to false. `entityId` picks a room and omitting it clears the portal-wide preference. Clearing a scope that has no stored value is not an error. This differs from storing false, which is an explicit choice a later read reports as set.
 
 #### Parameters
 
@@ -1550,9 +1550,9 @@ Removes the stored extended-thinking setting of a scope (the depth and, with it,
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Confirms the scope has no preference of its own and now inherits the default. | [**AiSuccessResponse**](#model-aisuccessresponse) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **413** | The request body is larger than 100 KB, the JSON parser's limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
 #### Return type
@@ -1561,7 +1561,7 @@ Removes the stored extended-thinking setting of a scope (the depth and, with it,
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -1576,7 +1576,7 @@ No authorization required
 
 Get deep mode
 
-Returns the deep-mode toggle of a scope, as a bare boolean: whether the stored extended-thinking depth is above &#x60;off&#x60;. &#x60;entityId&#x60; picks a room and omitting it reads the portal-wide preference. A scope that has never had a value stored falls back to the configured default, so the answer never distinguishes off from unset - ask &#x60;GET api/2.0/ai/preferences/is-deep-mode-set&#x60; for that. This is a read-only operation.
+Returns the deep-mode toggle of a scope, as a bare boolean: whether the stored extended-thinking depth is above `off`. `entityId` picks a room and omitting it reads the portal-wide preference. A scope that has never had a value stored falls back to the configured default, so the answer never distinguishes off from unset - ask `GET api/2.0/ai/preferences/is-deep-mode-set` for that. This is a read-only operation.
 
 #### Parameters
 
@@ -1589,7 +1589,7 @@ Returns the deep-mode toggle of a scope, as a bare boolean: whether the stored e
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Whether deep mode is on, falling back to the configured default when the scope has no value of its own. | **Boolean** | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
@@ -1599,7 +1599,7 @@ Returns the deep-mode toggle of a scope, as a bare boolean: whether the stored e
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -1614,7 +1614,7 @@ No authorization required
 
 Get reasoning level
 
-Returns the effective extended-thinking depth of the scope: &#x60;off&#x60; while deep mode is off, otherwise the persisted depth (&#x60;low&#x60;, &#x60;medium&#x60;, &#x60;high&#x60;, &#x60;max&#x60;), falling back to the default depth (&#x60;medium&#x60;) when none has been stored. &#x60;entityId&#x60; picks a room and omitting it reads the portal-wide preference. Providers clamp the depth to what the model accepts.
+Returns the effective extended-thinking depth of the scope: `off` while deep mode is off, otherwise the persisted depth (`low`, `medium`, `high`, `max`), falling back to the default depth (`medium`) when none has been stored. `entityId` picks a room and omitting it reads the portal-wide preference. Providers clamp the depth to what the model accepts.
 
 #### Parameters
 
@@ -1627,7 +1627,7 @@ Returns the effective extended-thinking depth of the scope: &#x60;off&#x60; whil
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Success. | [**AiAiReasoningLevel**](#model-aiaireasoninglevel) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
@@ -1637,7 +1637,7 @@ Returns the effective extended-thinking depth of the scope: &#x60;off&#x60; whil
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -1652,7 +1652,7 @@ No authorization required
 
 Is deep mode set
 
-Tells whether a scope has an explicitly persisted extended-thinking setting of its own, as opposed to inheriting the configured default. &#x60;entityId&#x60; picks a room and omitting it asks about the portal-wide preference. A true answer means a value was stored, whether that value is on or off - read the value itself with &#x60;GET api/2.0/ai/preferences/get-deep-mode&#x60;. This is the check a settings screen uses to show an explicit override rather than an inherited state.
+Tells whether a scope has an explicitly persisted extended-thinking setting of its own, as opposed to inheriting the configured default. `entityId` picks a room and omitting it asks about the portal-wide preference. A true answer means a value was stored, whether that value is on or off - read the value itself with `GET api/2.0/ai/preferences/get-deep-mode`. This is the check a settings screen uses to show an explicit override rather than an inherited state.
 
 #### Parameters
 
@@ -1665,7 +1665,7 @@ Tells whether a scope has an explicitly persisted extended-thinking setting of i
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Whether the scope has a preference of its own, whichever way that preference is set. | **Boolean** | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
@@ -1675,7 +1675,7 @@ Tells whether a scope has an explicitly persisted extended-thinking setting of i
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -1690,7 +1690,7 @@ No authorization required
 
 Set deep mode
 
-Stores the deep-mode toggle of a scope. &#x60;false&#x60; stores the &#x60;off&#x60; depth; &#x60;true&#x60; keeps the depth already stored and falls back to the default depth (&#x60;medium&#x60;) when none is. &#x60;value&#x60; has to be a real boolean: a string, a number or an absent value is rejected rather than coerced, so the string false cannot silently switch the setting on and an empty request cannot silently switch it off. &#x60;entityId&#x60; picks a room and omitting it writes the portal-wide preference. It is idempotent, so there is no need to read the current value first.
+Stores the deep-mode toggle of a scope. `false` stores the `off` depth; `true` keeps the depth already stored and falls back to the default depth (`medium`) when none is. `value` has to be a real boolean: a string, a number or an absent value is rejected rather than coerced, so the string false cannot silently switch the setting on and an empty request cannot silently switch it off. `entityId` picks a room and omitting it writes the portal-wide preference. It is idempotent, so there is no need to read the current value first.
 
 #### Parameters
 
@@ -1703,10 +1703,10 @@ Stores the deep-mode toggle of a scope. &#x60;false&#x60; stores the &#x60;off&#
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Confirms the preference was stored. | [**AiSuccessResponse**](#model-aisuccessresponse) | - |
-| **400** | &#x60;value&#x60; is missing or is not a boolean. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **400** | `value` is missing or is not a boolean. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **413** | The request body is larger than 100 KB, the JSON parser's limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
 #### Return type
@@ -1715,7 +1715,7 @@ Stores the deep-mode toggle of a scope. &#x60;false&#x60; stores the &#x60;off&#
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -1730,7 +1730,7 @@ No authorization required
 
 Set reasoning level
 
-Persists the extended-thinking depth of the scope as its single stored value: a depth turns deep mode on at that depth, &#x60;off&#x60; turns it off and replaces the stored depth (a later deep-mode &#x60;true&#x60; without a depth lands on &#x60;medium&#x60;). &#x60;entityId&#x60; picks a room and omitting it writes the portal-wide preference. Idempotent.
+Persists the extended-thinking depth of the scope as its single stored value: a depth turns deep mode on at that depth, `off` turns it off and replaces the stored depth (a later deep-mode `true` without a depth lands on `medium`). `entityId` picks a room and omitting it writes the portal-wide preference. Idempotent.
 
 #### Parameters
 
@@ -1743,9 +1743,9 @@ Persists the extended-thinking depth of the scope as its single stored value: a 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Success. | [**AiSuccessResponse**](#model-aisuccessresponse) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **413** | The request body is larger than 100 KB, the JSON parser's limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
 #### Return type
@@ -1754,7 +1754,7 @@ Persists the extended-thinking depth of the scope as its single stored value: a 
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -1771,7 +1771,7 @@ No authorization required
 
 Create a provider profile
 
-Creates an AI provider profile - the endpoint, credentials and model that a chat round runs on - and returns it. The name has to be unique, the credentials are probed against the live provider before anything is stored, and the portal&#39;s first profile also takes the &#x60;Default&#x60; assignment slot. Two inputs are refused outright: a &#x60;baseUrl&#x60; pointing at a private network address, and &#x60;providerType: external&#x60;, which delegates transport to the host application and therefore cannot work for a profile the server manages. On a portal running the AI gateway, profiles are managed centrally and this operation answers 403.
+Creates an AI provider profile - the endpoint, credentials and model that a chat round runs on - and returns it. The name has to be unique, the credentials are probed against the live provider before anything is stored, and the portal's first profile also takes the `Default` assignment slot. Two inputs are refused outright: a `baseUrl` pointing at a private network address, and `providerType: external`, which delegates transport to the host application and therefore cannot work for a profile the server manages. On a portal running the AI gateway, profiles are managed centrally and this operation answers 403.
 
 #### Parameters
 
@@ -1783,11 +1783,11 @@ Creates an AI provider profile - the endpoint, credentials and model that a chat
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Whether the profile was created, with it in &#x60;profile&#x60;. A refusal is reported in &#x60;error&#x60; rather than as a status. | [**AiProfileMutationResult**](#model-aiprofilemutationresult) | - |
+| **200** | Whether the profile was created, with it in `profile`. A refusal is reported in `error` rather than as a status. | [**AiProfileMutationResult**](#model-aiprofilemutationresult) | - |
 | **400** | The provider URL is missing, malformed, or points at a private network address. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI profiles are read-only on this portal because they are managed by the AI gateway. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **413** | The request body is larger than 100 KB, the JSON parser's limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
 #### Return type
@@ -1796,7 +1796,7 @@ Creates an AI provider profile - the endpoint, credentials and model that a chat
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -1811,7 +1811,7 @@ No authorization required
 
 Delete a provider profile
 
-Deletes an AI provider profile and cleans up every assignment pointing at it: the &#x60;Default&#x60; slot moves to the first remaining profile and the other slots are left unbound. The ID is required and may be sent in the body or as a query parameter. An unknown ID is not reported - the call answers success without deleting anything. Threads already bound to the profile keep the stored reference, so a round on such a thread falls back to whatever the scope resolves to.
+Deletes an AI provider profile and cleans up every assignment pointing at it: the `Default` slot moves to the first remaining profile and the other slots are left unbound. The ID is required and may be sent in the body or as a query parameter. An unknown ID is not reported - the call answers success without deleting anything. Threads already bound to the profile keep the stored reference, so a round on such a thread falls back to whatever the scope resolves to.
 
 #### Parameters
 
@@ -1825,9 +1825,9 @@ Deletes an AI provider profile and cleans up every assignment pointing at it: th
 |------------- | ------------- | ------------- | -------------|
 | **200** | Confirms the request was accepted, whether or not a profile was deleted. | [**AiSuccessResponse**](#model-aisuccessresponse) | - |
 | **400** | The profile ID is missing. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **413** | The request body is larger than 100 KB, the JSON parser's limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
 #### Return type
@@ -1836,7 +1836,7 @@ Deletes an AI provider profile and cleans up every assignment pointing at it: th
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -1851,7 +1851,7 @@ No authorization required
 
 Get a provider profile
 
-Returns one AI provider profile by its ID, with its secrets stripped: neither the API key nor the custom headers are ever sent back, on any portal. The ID is required and is read from the query, and an unknown one answers 404. The &#x60;baseUrl&#x60; in the answer is the one that was stored, not the internal gateway address a round actually dials, so it cannot be used to reach the provider directly. Use &#x60;GET api/2.0/ai/profiles/list&#x60; to enumerate profiles instead of reading them one by one.
+Returns one AI provider profile by its ID, with its secrets stripped: neither the API key nor the custom headers are ever sent back, on any portal. The ID is required and is read from the query, and an unknown one answers 404. The `baseUrl` in the answer is the one that was stored, not the internal gateway address a round actually dials, so it cannot be used to reach the provider directly. Use `GET api/2.0/ai/profiles/list` to enumerate profiles instead of reading them one by one.
 
 #### Parameters
 
@@ -1865,7 +1865,7 @@ Returns one AI provider profile by its ID, with its secrets stripped: neither th
 |------------- | ------------- | ------------- | -------------|
 | **200** | The profile, with its key and headers stripped. | [**aiProfilesGetById_200_response**](#model-aiprofilesgetbyid-200-response) | - |
 | **400** | The profile ID is missing. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **404** | No profile has this ID. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
@@ -1876,7 +1876,7 @@ Returns one AI provider profile by its ID, with its secrets stripped: neither th
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -1891,7 +1891,7 @@ No authorization required
 
 List provider profiles
 
-Lists the portal&#39;s AI provider profiles with their secrets stripped, the same way the single-profile read does. It takes no parameters and is not paginated, because a portal holds few profiles. On a portal running the AI gateway the answer is synthesised from the gateway&#39;s own catalogue rather than from stored records. The IDs in the answer are what the assignment operations and every round&#39;s &#x60;profileId&#x60; accept.
+Lists the portal's AI provider profiles with their secrets stripped, the same way the single-profile read does. It takes no parameters and is not paginated, because a portal holds few profiles. On a portal running the AI gateway the answer is synthesised from the gateway's own catalogue rather than from stored records. The IDs in the answer are what the assignment operations and every round's `profileId` accept.
 
 #### Parameters
 This endpoint does not need any parameter.
@@ -1900,8 +1900,8 @@ This endpoint does not need any parameter.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The portal&#39;s profiles, with their keys and headers stripped. | [**List**](#model-aiprofile) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **200** | The portal's profiles, with their keys and headers stripped. | [**List**](#model-aiprofile) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
@@ -1911,7 +1911,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -1926,7 +1926,7 @@ No authorization required
 
 List models
 
-Lists the models a stored profile&#39;s provider currently offers, asking the provider itself rather than reading a cached list. &#x60;profileId&#x60; is required and is read from the query. A failure is reported with the provider&#39;s own verdict: an unusable key comes back as 400 and a provider that is unreachable or broken as 502, while a missing profile or a caller without access keeps the status the portal gave it. Use &#x60;POST api/2.0/ai/profiles/list-provider-models&#x60; to probe an endpoint that has no profile yet.
+Lists the models a stored profile's provider currently offers, asking the provider itself rather than reading a cached list. `profileId` is required and is read from the query. A failure is reported with the provider's own verdict: an unusable key comes back as 400 and a provider that is unreachable or broken as 502, while a missing profile or a caller without access keeps the status the portal gave it. Use `POST api/2.0/ai/profiles/list-provider-models` to probe an endpoint that has no profile yet.
 
 #### Parameters
 
@@ -1938,9 +1938,9 @@ Lists the models a stored profile&#39;s provider currently offers, asking the pr
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The models the profile&#39;s provider currently offers. | [**List**](#model-aimodel) | - |
-| **400** | &#x60;profileId&#x60; is missing, or the provider rejected the profile&#39;s API key. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **200** | The models the profile's provider currently offers. | [**List**](#model-aimodel) | - |
+| **400** | `profileId` is missing, or the provider rejected the profile's API key. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **502** | The AI provider could not be reached, or answered with a failure of its own. | [**AiErrorResponse**](#model-aierrorresponse) | - |
@@ -1951,7 +1951,7 @@ Lists the models a stored profile&#39;s provider currently offers, asking the pr
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -1966,7 +1966,7 @@ No authorization required
 
 List provider models
 
-Lists the models an endpoint offers for credentials supplied in the request, before any profile exists - this is what a provider-setup form calls to fill its model picker. &#x60;providerType&#x60; and &#x60;baseUrl&#x60; are both required, and a 400 for either names the offending input in a &#x60;field&#x60; member so the form can highlight it; a &#x60;baseUrl&#x60; pointing at a private network address is refused as well. For &#x60;providerType: onlyoffice&#x60; the answer comes from the portal gateway&#39;s catalogue, which carries richer capability data than the provider&#39;s own listing and matches what &#x60;GET api/2.0/ai/profiles/list&#x60; reports; a portal without that gateway falls back to asking the provider. A provider that is unreachable or broken is reported as 502, and one that rejects the key as 400.
+Lists the models an endpoint offers for credentials supplied in the request, before any profile exists - this is what a provider-setup form calls to fill its model picker. `providerType` and `baseUrl` are both required, and a 400 for either names the offending input in a `field` member so the form can highlight it; a `baseUrl` pointing at a private network address is refused as well. For `providerType: onlyoffice` the answer comes from the portal gateway's catalogue, which carries richer capability data than the provider's own listing and matches what `GET api/2.0/ai/profiles/list` reports; a portal without that gateway falls back to asking the provider. A provider that is unreachable or broken is reported as 502, and one that rejects the key as 400.
 
 #### Parameters
 
@@ -1979,10 +1979,10 @@ Lists the models an endpoint offers for credentials supplied in the request, bef
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | The models the endpoint offers for the supplied credentials. | [**List**](#model-aimodel) | - |
-| **400** | &#x60;baseUrl&#x60; is missing, points at a private network address, or the provider rejected the supplied API key. | [**aiProfilesListProviderModels_400_response**](#model-aiprofileslistprovidermodels-400-response) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **400** | `baseUrl` is missing, points at a private network address, or the provider rejected the supplied API key. | [**aiProfilesListProviderModels_400_response**](#model-aiprofileslistprovidermodels-400-response) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **413** | The request body is larger than 100 KB, the JSON parser's limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **502** | The AI provider could not be reached, or answered with a failure of its own. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
@@ -1992,7 +1992,7 @@ Lists the models an endpoint offers for credentials supplied in the request, bef
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -2005,9 +2005,9 @@ No authorization required
 
 `POST /api/2.0/ai/profiles/test-connection`
 
-Test a profile&#39;s provider
+Test a profile's provider
 
-Probes a stored profile&#39;s credentials against its provider and reports the outcome in the answer, writing nothing - this is what a Test button calls so that a failure does not commit anything. &#x60;profileId&#x60; is required and may be sent in the body or as a query parameter. The result is carried in the body rather than in the status, so a failed probe still answers 200 and the caller has to read the payload. To validate credentials that are not stored yet, use &#x60;POST api/2.0/ai/profiles/list-provider-models&#x60;.
+Probes a stored profile's credentials against its provider and reports the outcome in the answer, writing nothing - this is what a Test button calls so that a failure does not commit anything. `profileId` is required and may be sent in the body or as a query parameter. The result is carried in the body rather than in the status, so a failed probe still answers 200 and the caller has to read the payload. To validate credentials that are not stored yet, use `POST api/2.0/ai/profiles/list-provider-models`.
 
 #### Parameters
 
@@ -2020,10 +2020,10 @@ Probes a stored profile&#39;s credentials against its provider and reports the o
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | The outcome of the probe. A failed probe is reported here, not as a status. | [**aiProfilesTestConnection_200_response**](#model-aiprofilestestconnection-200-response) | - |
-| **400** | &#x60;profileId&#x60; is missing. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **400** | `profileId` is missing. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **413** | The request body is larger than 100 KB, the JSON parser's limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
 #### Return type
@@ -2032,7 +2032,7 @@ Probes a stored profile&#39;s credentials against its provider and reports the o
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -2047,7 +2047,7 @@ No authorization required
 
 Update a provider profile
 
-Replaces a stored AI provider profile and returns it, re-checking name uniqueness and probing the credentials against the live provider again. The same two inputs are refused as on create - a private-network &#x60;baseUrl&#x60; and &#x60;providerType: external&#x60; - and the whole profile is overwritten by the one supplied rather than merged. On a portal running the AI gateway this answers 403, because profiles are managed centrally there. A profile that is bound to an action or an agent keeps those bindings.
+Replaces a stored AI provider profile and returns it, re-checking name uniqueness and probing the credentials against the live provider again. The same two inputs are refused as on create - a private-network `baseUrl` and `providerType: external` - and the whole profile is overwritten by the one supplied rather than merged. On a portal running the AI gateway this answers 403, because profiles are managed centrally there. A profile that is bound to an action or an agent keeps those bindings.
 
 #### Parameters
 
@@ -2059,11 +2059,11 @@ Replaces a stored AI provider profile and returns it, re-checking name uniquenes
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Whether the profile was updated, with the stored profile in &#x60;profile&#x60;. | [**AiProfileMutationResult**](#model-aiprofilemutationresult) | - |
+| **200** | Whether the profile was updated, with the stored profile in `profile`. | [**AiProfileMutationResult**](#model-aiprofilemutationresult) | - |
 | **400** | The provider URL is missing, malformed, or points at a private network address. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI profiles are read-only on this portal because they are managed by the AI gateway. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **413** | The request body is larger than 100 KB, the JSON parser's limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
 #### Return type
@@ -2072,7 +2072,7 @@ Replaces a stored AI provider profile and returns it, re-checking name uniquenes
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -2089,7 +2089,7 @@ No authorization required
 
 Save a prompt
 
-Saves a new prompt in the caller&#39;s own prompt library and returns it. The name has to be non-empty and unique inside its folder, and &#x60;folderId&#x60; has to name an existing folder - omit it to save the prompt at the root. Prompts are per-user: another user&#39;s library is never visible here, and no permission beyond having AI enabled is needed. The answer carries the stored prompt including the ID to use with the update, move and delete operations.
+Saves a new prompt in the caller's own prompt library and returns it. The name has to be non-empty and unique inside its folder, and `folderId` has to name an existing folder - omit it to save the prompt at the root. Prompts are per-user: another user's library is never visible here, and no permission beyond having AI enabled is needed. The answer carries the stored prompt including the ID to use with the update, move and delete operations.
 
 #### Parameters
 
@@ -2101,10 +2101,10 @@ Saves a new prompt in the caller&#39;s own prompt library and returns it. The na
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Whether the prompt was saved, with it in &#x60;prompt&#x60;. | [**AiPromptMutationResult**](#model-aipromptmutationresult) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **200** | Whether the prompt was saved, with it in `prompt`. | [**AiPromptMutationResult**](#model-aipromptmutationresult) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **413** | The request body is larger than 100 KB, the JSON parser's limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
 #### Return type
@@ -2113,7 +2113,7 @@ Saves a new prompt in the caller&#39;s own prompt library and returns it. The na
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -2128,7 +2128,7 @@ No authorization required
 
 Create folder
 
-Creates a folder in the caller&#39;s prompt library and returns it. The name has to be non-empty and unique across that library. Folders do not nest: there is one flat level, so a folder cannot be created inside another. The answer carries the folder ID to use as &#x60;folderId&#x60; when saving or moving prompts.
+Creates a folder in the caller's prompt library and returns it. The name has to be non-empty and unique across that library. Folders do not nest: there is one flat level, so a folder cannot be created inside another. The answer carries the folder ID to use as `folderId` when saving or moving prompts.
 
 #### Parameters
 
@@ -2140,10 +2140,10 @@ Creates a folder in the caller&#39;s prompt library and returns it. The name has
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Whether the folder was created, with it in &#x60;folder&#x60;. | [**AiFolderMutationResult**](#model-aifoldermutationresult) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **200** | Whether the folder was created, with it in `folder`. | [**AiFolderMutationResult**](#model-aifoldermutationresult) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **413** | The request body is larger than 100 KB, the JSON parser's limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
 #### Return type
@@ -2152,7 +2152,7 @@ Creates a folder in the caller&#39;s prompt library and returns it. The name has
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -2167,7 +2167,7 @@ No authorization required
 
 Delete a saved prompt
 
-Deletes one saved prompt from the caller&#39;s library. The ID may be sent in the body or as a query parameter, and it is required. An ID that does not exist, or that belongs to another user, is not reported: the call answers success without deleting anything. The deletion is permanent.
+Deletes one saved prompt from the caller's library. The ID may be sent in the body or as a query parameter, and it is required. An ID that does not exist, or that belongs to another user, is not reported: the call answers success without deleting anything. The deletion is permanent.
 
 #### Parameters
 
@@ -2181,9 +2181,9 @@ Deletes one saved prompt from the caller&#39;s library. The ID may be sent in th
 |------------- | ------------- | ------------- | -------------|
 | **200** | Confirms the request was accepted, whether or not a prompt was deleted. | [**AiSuccessResponse**](#model-aisuccessresponse) | - |
 | **400** | The prompt ID is missing. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **413** | The request body is larger than 100 KB, the JSON parser's limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
 #### Return type
@@ -2192,7 +2192,7 @@ Deletes one saved prompt from the caller&#39;s library. The ID may be sent in th
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -2207,7 +2207,7 @@ No authorization required
 
 Delete folder
 
-Deletes a folder together with every prompt inside it, permanently. The ID is required and may be sent in the body or as a query parameter. Unlike deleting a prompt, this checks first: a folder that does not exist, and one that belongs to another user, both answer 404 - the two cases are deliberately indistinguishable, so a foreign folder cannot be probed. Move the prompts out with &#x60;PUT api/2.0/ai/prompts/move&#x60; first if they should survive.
+Deletes a folder together with every prompt inside it, permanently. The ID is required and may be sent in the body or as a query parameter. Unlike deleting a prompt, this checks first: a folder that does not exist, and one that belongs to another user, both answer 404 - the two cases are deliberately indistinguishable, so a foreign folder cannot be probed. Move the prompts out with `PUT api/2.0/ai/prompts/move` first if they should survive.
 
 #### Parameters
 
@@ -2221,10 +2221,10 @@ Deletes a folder together with every prompt inside it, permanently. The ID is re
 |------------- | ------------- | ------------- | -------------|
 | **200** | Confirms the folder and the prompts inside it are gone. | [**AiSuccessResponse**](#model-aisuccessresponse) | - |
 | **400** | The folder ID is missing. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **404** | No prompt folder has this ID. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **413** | The request body is larger than 100 KB, the JSON parser's limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
 #### Return type
@@ -2233,7 +2233,7 @@ Deletes a folder together with every prompt inside it, permanently. The ID is re
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -2248,7 +2248,7 @@ No authorization required
 
 Export the prompt library
 
-Builds a versioned bundle of every prompt and folder in the caller&#39;s library and returns it, with no parameters. The bundle is self-contained: it carries its own format version so an older export can still be read back, and it is the input &#x60;POST api/2.0/ai/prompts/import-bundle&#x60; expects. This is also the only way to read the whole library at once, since listing is folder-scoped. Nothing is changed by the call.
+Builds a versioned bundle of every prompt and folder in the caller's library and returns it, with no parameters. The bundle is self-contained: it carries its own format version so an older export can still be read back, and it is the input `POST api/2.0/ai/prompts/import-bundle` expects. This is also the only way to read the whole library at once, since listing is folder-scoped. Nothing is changed by the call.
 
 #### Parameters
 This endpoint does not need any parameter.
@@ -2258,7 +2258,7 @@ This endpoint does not need any parameter.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | The whole library as a versioned bundle, ready to import. | [**AiPromptBundle**](#model-aipromptbundle) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
@@ -2268,7 +2268,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -2283,7 +2283,7 @@ No authorization required
 
 Get a saved prompt
 
-Returns one saved prompt by its ID. The ID is required and is read from the query. An ID that is unknown, or that belongs to another user, is not reported as 404: the answer is an empty body with status 200, so treat a missing payload as no such prompt. Prompt IDs come from &#x60;GET api/2.0/ai/prompts/list&#x60; or from the answer of the create operation.
+Returns one saved prompt by its ID. The ID is required and is read from the query. An ID that is unknown, or that belongs to another user, is not reported as 404: the answer is an empty body with status 200, so treat a missing payload as no such prompt. Prompt IDs come from `GET api/2.0/ai/prompts/list` or from the answer of the create operation.
 
 #### Parameters
 
@@ -2295,9 +2295,9 @@ Returns one saved prompt by its ID. The ID is required and is read from the quer
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The prompt, or an empty body when no prompt of the caller&#39;s has that ID. | [**AiPrompt**](#model-aiprompt) | - |
+| **200** | The prompt, or an empty body when no prompt of the caller's has that ID. | [**AiPrompt**](#model-aiprompt) | - |
 | **400** | The prompt ID is missing. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
@@ -2307,7 +2307,7 @@ Returns one saved prompt by its ID. The ID is required and is read from the quer
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -2322,7 +2322,7 @@ No authorization required
 
 Get a prompt folder
 
-Returns one folder of the caller&#39;s prompt library by its ID, without the prompts inside it. The ID is required and is read from the query. An unknown or foreign ID is not reported as 404: the answer is an empty body with status 200. This differs from the delete operation on the same ID, which does answer 404.
+Returns one folder of the caller's prompt library by its ID, without the prompts inside it. The ID is required and is read from the query. An unknown or foreign ID is not reported as 404: the answer is an empty body with status 200. This differs from the delete operation on the same ID, which does answer 404.
 
 #### Parameters
 
@@ -2334,9 +2334,9 @@ Returns one folder of the caller&#39;s prompt library by its ID, without the pro
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The folder, or an empty body when no folder of the caller&#39;s has that ID. | [**AiPromptFolder**](#model-aipromptfolder) | - |
+| **200** | The folder, or an empty body when no folder of the caller's has that ID. | [**AiPromptFolder**](#model-aipromptfolder) | - |
 | **400** | The folder ID is missing. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
@@ -2346,7 +2346,7 @@ Returns one folder of the caller&#39;s prompt library by its ID, without the pro
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -2361,7 +2361,7 @@ No authorization required
 
 Import bundle
 
-Writes a bundle produced by &#x60;GET api/2.0/ai/prompts/export&#x60; back into the caller&#39;s library. &#x60;mode&#x60; decides how: &#x60;replace&#x60; deletes the current prompts and folders before writing, and &#x60;merge&#x60; writes the bundle on top of what is already there. The folder references inside the bundle are validated before anything is written, so a corrupt bundle is rejected whole rather than applied halfway. &#x60;replace&#x60; is destructive and cannot be undone - export first if the current library matters.
+Writes a bundle produced by `GET api/2.0/ai/prompts/export` back into the caller's library. `mode` decides how: `replace` deletes the current prompts and folders before writing, and `merge` writes the bundle on top of what is already there. The folder references inside the bundle are validated before anything is written, so a corrupt bundle is rejected whole rather than applied halfway. `replace` is destructive and cannot be undone - export first if the current library matters.
 
 #### Parameters
 
@@ -2374,9 +2374,9 @@ Writes a bundle produced by &#x60;GET api/2.0/ai/prompts/export&#x60; back into 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Whether the bundle was written, how many prompts it imported, and what was refused. | [**AiImportResult**](#model-aiimportresult) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **413** | The request body is larger than 100 KB, the JSON parser's limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
 #### Return type
@@ -2385,7 +2385,7 @@ Writes a bundle produced by &#x60;GET api/2.0/ai/prompts/export&#x60; back into 
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -2400,7 +2400,7 @@ No authorization required
 
 List saved prompts
 
-Lists the caller&#39;s saved prompts, newest first. &#x60;folderId&#x60; scopes the answer to one folder, and omitting it - or sending it empty - lists the prompts that sit at the root rather than every prompt, because the client fetcher cannot tell an absent value from a null one. There is therefore no way to ask for the whole library in one call: walk the folders from &#x60;GET api/2.0/ai/prompts/list-folders&#x60;, or take everything at once with &#x60;GET api/2.0/ai/prompts/export&#x60;. The prompts of other users are never included.
+Lists the caller's saved prompts, newest first. `folderId` scopes the answer to one folder, and omitting it - or sending it empty - lists the prompts that sit at the root rather than every prompt, because the client fetcher cannot tell an absent value from a null one. There is therefore no way to ask for the whole library in one call: walk the folders from `GET api/2.0/ai/prompts/list-folders`, or take everything at once with `GET api/2.0/ai/prompts/export`. The prompts of other users are never included.
 
 #### Parameters
 
@@ -2413,7 +2413,7 @@ Lists the caller&#39;s saved prompts, newest first. &#x60;folderId&#x60; scopes 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | The prompts of the scope, newest first. | [**List**](#model-aiprompt) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
@@ -2423,7 +2423,7 @@ Lists the caller&#39;s saved prompts, newest first. &#x60;folderId&#x60; scopes 
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -2438,7 +2438,7 @@ No authorization required
 
 List folders
 
-Lists every folder of the caller&#39;s prompt library, newest first, with no parameters and no pagination. Folders are flat, so the answer is a single list rather than a tree. The prompts inside them are not included - read those with &#x60;GET api/2.0/ai/prompts/list&#x60; per folder. Another user&#39;s folders are never listed.
+Lists every folder of the caller's prompt library, newest first, with no parameters and no pagination. Folders are flat, so the answer is a single list rather than a tree. The prompts inside them are not included - read those with `GET api/2.0/ai/prompts/list` per folder. Another user's folders are never listed.
 
 #### Parameters
 This endpoint does not need any parameter.
@@ -2447,8 +2447,8 @@ This endpoint does not need any parameter.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Every folder of the caller&#39;s library, newest first. | [**List**](#model-aipromptfolder) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **200** | Every folder of the caller's library, newest first. | [**List**](#model-aipromptfolder) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
@@ -2458,7 +2458,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -2473,7 +2473,7 @@ No authorization required
 
 Move a prompt to a folder
 
-Moves a saved prompt into another folder, or to the root when &#x60;folderId&#x60; is omitted or null. The name is re-validated in the target folder, so the move fails when a prompt of that name already sits there - rename it first with &#x60;PUT api/2.0/ai/prompts/update&#x60;. Nothing about the prompt other than its folder changes. The answer carries the moved prompt.
+Moves a saved prompt into another folder, or to the root when `folderId` is omitted or null. The name is re-validated in the target folder, so the move fails when a prompt of that name already sits there - rename it first with `PUT api/2.0/ai/prompts/update`. Nothing about the prompt other than its folder changes. The answer carries the moved prompt.
 
 #### Parameters
 
@@ -2485,10 +2485,10 @@ Moves a saved prompt into another folder, or to the root when &#x60;folderId&#x6
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Whether the prompt was moved, with the moved prompt in &#x60;prompt&#x60;. | [**AiPromptMutationResult**](#model-aipromptmutationresult) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **200** | Whether the prompt was moved, with the moved prompt in `prompt`. | [**AiPromptMutationResult**](#model-aipromptmutationresult) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **413** | The request body is larger than 100 KB, the JSON parser's limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
 #### Return type
@@ -2497,7 +2497,7 @@ Moves a saved prompt into another folder, or to the root when &#x60;folderId&#x6
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -2512,7 +2512,7 @@ No authorization required
 
 Rename folder
 
-Renames a folder in the caller&#39;s prompt library, validating the new name against the folders already there. The prompts inside it are untouched and keep their IDs. The answer carries the renamed folder. A name that another folder already uses is rejected.
+Renames a folder in the caller's prompt library, validating the new name against the folders already there. The prompts inside it are untouched and keep their IDs. The answer carries the renamed folder. A name that another folder already uses is rejected.
 
 #### Parameters
 
@@ -2524,10 +2524,10 @@ Renames a folder in the caller&#39;s prompt library, validating the new name aga
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Whether the folder was renamed, with the stored folder in &#x60;folder&#x60;. | [**AiFolderMutationResult**](#model-aifoldermutationresult) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **200** | Whether the folder was renamed, with the stored folder in `folder`. | [**AiFolderMutationResult**](#model-aifoldermutationresult) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **413** | The request body is larger than 100 KB, the JSON parser's limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
 #### Return type
@@ -2536,7 +2536,7 @@ Renames a folder in the caller&#39;s prompt library, validating the new name aga
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -2551,7 +2551,7 @@ No authorization required
 
 Update a saved prompt
 
-Changes a saved prompt and returns the stored result. Only the fields present in &#x60;updates&#x60; are written, so a partial object leaves the rest of the prompt alone. The name and the folder reference are re-validated whenever either changes, which means an update can fail on a name another prompt in the same folder already uses. Use &#x60;PUT api/2.0/ai/prompts/move&#x60; to change only the folder.
+Changes a saved prompt and returns the stored result. Only the fields present in `updates` are written, so a partial object leaves the rest of the prompt alone. The name and the folder reference are re-validated whenever either changes, which means an update can fail on a name another prompt in the same folder already uses. Use `PUT api/2.0/ai/prompts/move` to change only the folder.
 
 #### Parameters
 
@@ -2563,10 +2563,10 @@ Changes a saved prompt and returns the stored result. Only the fields present in
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Whether the prompt was updated, with the stored prompt in &#x60;prompt&#x60;. | [**AiPromptMutationResult**](#model-aipromptmutationresult) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **200** | Whether the prompt was updated, with the stored prompt in `prompt`. | [**AiPromptMutationResult**](#model-aipromptmutationresult) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **413** | The request body is larger than 100 KB, the JSON parser's limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
 #### Return type
@@ -2575,7 +2575,7 @@ Changes a saved prompt and returns the stored result. Only the fields present in
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -2592,7 +2592,7 @@ No authorization required
 
 Get AI settings
 
-Reports the portal&#39;s AI configuration and whether AI is usable at all, which is the first call a client makes before offering any AI feature. It takes no parameters and is proxied unchanged to the DocSpace AI service, so the answer is that service&#39;s settings payload. Among other things it says whether the portal runs on the central AI gateway, which decides whether provider profiles can be edited here at all. This is a read-only operation.
+Reports the portal's AI configuration and whether AI is usable at all, which is the first call a client makes before offering any AI feature. It takes no parameters and is proxied unchanged to the DocSpace AI service, so the answer is that service's settings payload. Among other things it says whether the portal runs on the central AI gateway, which decides whether provider profiles can be edited here at all. This is a read-only operation.
 
 #### Parameters
 This endpoint does not need any parameter.
@@ -2601,8 +2601,8 @@ This endpoint does not need any parameter.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The portal&#39;s AI configuration and whether AI is usable at all. | [**AiAiSettingsWrapper**](#model-aiaisettingswrapper) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **200** | The portal's AI configuration and whether AI is usable at all. | [**AiAiSettingsWrapper**](#model-aiaisettingswrapper) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
@@ -2612,7 +2612,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -2627,7 +2627,7 @@ No authorization required
 
 Get user AI settings
 
-Returns the AI settings of the calling user, as opposed to the portal-wide ones. It takes no parameters - the user is the authenticated caller, and there is no way to read somebody else&#39;s settings - and is proxied unchanged to the DocSpace AI service. Use &#x60;GET api/2.0/ai/config&#x60; for the portal-wide configuration. This is a read-only operation.
+Returns the AI settings of the calling user, as opposed to the portal-wide ones. It takes no parameters - the user is the authenticated caller, and there is no way to read somebody else's settings - and is proxied unchanged to the DocSpace AI service. Use `GET api/2.0/ai/config` for the portal-wide configuration. This is a read-only operation.
 
 #### Parameters
 This endpoint does not need any parameter.
@@ -2636,8 +2636,8 @@ This endpoint does not need any parameter.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The calling user&#39;s AI settings. | [**AiAiUserSettingsWrapper**](#model-aiaiusersettingswrapper) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **200** | The calling user's AI settings. | [**AiAiUserSettingsWrapper**](#model-aiaiusersettingswrapper) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
@@ -2647,7 +2647,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -2662,7 +2662,7 @@ No authorization required
 
 Get vectorization settings
 
-Returns the portal&#39;s vectorization settings - the embedding provider and the options used when portal content is indexed for retrieval. It takes no parameters and is proxied unchanged to the DocSpace AI service. Vectorization is a portal-wide setting, so there is no room-scoped form of it. Change it with &#x60;PUT api/2.0/ai/config/vectorization&#x60;.
+Returns the portal's vectorization settings - the embedding provider and the options used when portal content is indexed for retrieval. It takes no parameters and is proxied unchanged to the DocSpace AI service. Vectorization is a portal-wide setting, so there is no room-scoped form of it. Change it with `PUT api/2.0/ai/config/vectorization`.
 
 #### Parameters
 This endpoint does not need any parameter.
@@ -2671,8 +2671,8 @@ This endpoint does not need any parameter.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The portal&#39;s vectorization settings. | [**AiVectorizationSettingsWrapper**](#model-aivectorizationsettingswrapper) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **200** | The portal's vectorization settings. | [**AiVectorizationSettingsWrapper**](#model-aivectorizationsettingswrapper) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
@@ -2682,7 +2682,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -2697,22 +2697,22 @@ No authorization required
 
 Update user AI settings
 
-Replaces the AI settings of the calling user and returns the stored result. The body is proxied unchanged to the DocSpace AI service, which validates it, so a rejected value comes back with that service&#39;s verdict. Only the caller&#39;s own settings can be written. Portal-wide configuration is not touched by this operation.
+Replaces the AI settings of the calling user and returns the stored result. The body is proxied unchanged to the DocSpace AI service, which validates it, so a rejected value comes back with that service's verdict. Only the caller's own settings can be written. Portal-wide configuration is not touched by this operation.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **request\_body** | body | **Map** | The user&#39;s AI settings, proxied unchanged to the DocSpace AI service, which owns and validates the shape. Read the current one with &#x60;GET api/2.0/ai/config/user&#x60; and send it back changed. | [required] |
+| **request\_body** | body | **Map** | The user's AI settings, proxied unchanged to the DocSpace AI service, which owns and validates the shape. Read the current one with `GET api/2.0/ai/config/user` and send it back changed. | [required] |
 
 #### Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The calling user&#39;s stored AI settings. | [**AiAiUserSettingsWrapper**](#model-aiaiusersettingswrapper) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **200** | The calling user's stored AI settings. | [**AiAiUserSettingsWrapper**](#model-aiaiusersettingswrapper) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **413** | The request body is larger than 100 KB, the JSON parser's limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
 #### Return type
@@ -2721,7 +2721,7 @@ Replaces the AI settings of the calling user and returns the stored result. The 
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -2736,22 +2736,22 @@ No authorization required
 
 Update vectorization settings
 
-Replaces the portal&#39;s vectorization settings and returns the stored result. The body is proxied unchanged to the DocSpace AI service, which validates it, so a rejected value is reported with that service&#39;s own verdict rather than being checked here. Changing the embedding provider does not re-index anything already indexed - start that separately with &#x60;POST api/2.0/ai/vectorization/tasks&#x60;. This is a portal-wide setting and requires the permissions the AI service demands for it.
+Replaces the portal's vectorization settings and returns the stored result. The body is proxied unchanged to the DocSpace AI service, which validates it, so a rejected value is reported with that service's own verdict rather than being checked here. Changing the embedding provider does not re-index anything already indexed - start that separately with `POST api/2.0/ai/vectorization/tasks`. This is a portal-wide setting and requires the permissions the AI service demands for it.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **request\_body** | body | **Map** | The portal&#39;s vectorization settings, proxied unchanged to the DocSpace AI service, which owns and validates the shape. Read the current one with &#x60;GET api/2.0/ai/config/vectorization&#x60; and send it back changed. | [required] |
+| **request\_body** | body | **Map** | The portal's vectorization settings, proxied unchanged to the DocSpace AI service, which owns and validates the shape. Read the current one with `GET api/2.0/ai/config/vectorization` and send it back changed. | [required] |
 
 #### Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | The stored vectorization settings. | [**AiVectorizationSettingsWrapper**](#model-aivectorizationsettingswrapper) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **413** | The request body is larger than 100 KB, the JSON parser's limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
 #### Return type
@@ -2760,7 +2760,7 @@ Replaces the portal&#39;s vectorization settings and returns the stored result. 
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -2777,7 +2777,7 @@ No authorization required
 
 Append user message
 
-Stores a user message in a thread and bumps its last-edit date so the thread resurfaces at the top of the list. The per-kind attachment cap of the composer is enforced here as well, so a direct API call cannot exceed what the UI allows. Passing &#x60;profileId&#x60; rebinds the thread to another model, which is how a mid-conversation model switch is recorded. The answer carries the new message&#39;s ID; the message is stored as sent and no reply is generated - run a round with &#x60;POST api/2.0/ai/ai/send-with-stream&#x60; for that.
+Stores a user message in a thread and bumps its last-edit date so the thread resurfaces at the top of the list. The per-kind attachment cap of the composer is enforced here as well, so a direct API call cannot exceed what the UI allows. Passing `profileId` rebinds the thread to another model, which is how a mid-conversation model switch is recorded. The answer carries the new message's ID; the message is stored as sent and no reply is generated - run a round with `POST api/2.0/ai/ai/send-with-stream` for that.
 
 #### Parameters
 
@@ -2791,9 +2791,9 @@ Stores a user message in a thread and bumps its last-edit date so the thread res
 |------------- | ------------- | ------------- | -------------|
 | **200** | The stored message, with the ID storage assigned to it. | [**aiThreadsAppendUserMessage_200_response**](#model-aithreadsappendusermessage-200-response) | - |
 | **400** | The message is longer than the limit allows. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **413** | The request body is larger than 100 KB, the JSON parser's limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
 #### Return type
@@ -2802,7 +2802,7 @@ Stores a user message in a thread and bumps its last-edit date so the thread res
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -2817,7 +2817,7 @@ No authorization required
 
 Clear messages
 
-Removes every message of a thread while keeping the thread, its title and its model binding, and bumps its last-edit date. The messages are gone for good. Unlike &#x60;delete&#x60; this does not verify that the thread exists, so clearing an unknown &#x60;threadId&#x60; reports success rather than 404. The answer only confirms the write.
+Removes every message of a thread while keeping the thread, its title and its model binding, and bumps its last-edit date. The messages are gone for good. Unlike `delete` this does not verify that the thread exists, so clearing an unknown `threadId` reports success rather than 404. The answer only confirms the write.
 
 #### Parameters
 
@@ -2830,10 +2830,10 @@ Removes every message of a thread while keeping the thread, its title and its mo
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Confirms the request was accepted. It does not mean the thread existed. | [**AiSuccessResponse**](#model-aisuccessresponse) | - |
-| **400** | &#x60;threadId&#x60; is missing. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **400** | `threadId` is missing. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **413** | The request body is larger than 100 KB, the JSON parser's limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
 #### Return type
@@ -2842,7 +2842,7 @@ Removes every message of a thread while keeping the thread, its title and its mo
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -2857,7 +2857,7 @@ No authorization required
 
 Create a chat thread
 
-Creates a chat thread with a title supplied by the caller and returns it. A scoped thread requires that &#x60;entityId&#x60; names a room the caller can open, and a model has to resolve for the scope - an explicit &#x60;profileId&#x60;, or the room&#39;s &#x60;Chat&#x60; assignment - otherwise there is nothing to run the thread against and the call answers 404. In an agent room the agent&#39;s own assignment overrides any &#x60;profileId&#x60; sent with the request, so a thread there always starts on the agent&#39;s model. Use &#x60;POST api/2.0/ai/threads/open-or-create&#x60; instead when the title should be generated from the first user message.
+Creates a chat thread with a title supplied by the caller and returns it. A scoped thread requires that `entityId` names a room the caller can open, and a model has to resolve for the scope - an explicit `profileId`, or the room's `Chat` assignment - otherwise there is nothing to run the thread against and the call answers 404. In an agent room the agent's own assignment overrides any `profileId` sent with the request, so a thread there always starts on the agent's model. Use `POST api/2.0/ai/threads/open-or-create` instead when the title should be generated from the first user message.
 
 #### Parameters
 
@@ -2870,10 +2870,10 @@ Creates a chat thread with a title supplied by the caller and returns it. A scop
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | The created thread. | [**AiThread**](#model-aithread) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **404** | The &#x60;entityId&#x60; names a room the caller cannot open, or no live AI profile is bound to it, so there is no model to run the thread against. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **404** | The `entityId` names a room the caller cannot open, or no live AI profile is bound to it, so there is no model to run the thread against. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **413** | The request body is larger than 100 KB, the JSON parser's limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
 #### Return type
@@ -2882,7 +2882,7 @@ Creates a chat thread with a title supplied by the caller and returns it. A scop
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -2897,7 +2897,7 @@ No authorization required
 
 Delete a chat thread
 
-Deletes a thread together with every message in it. The thread has to exist: unlike the other operations that take a &#x60;threadId&#x60;, this one checks first and answers 404 for an unknown or already-deleted thread rather than reporting success. The deletion is permanent and the messages cannot be recovered. To empty a thread but keep it, use &#x60;DELETE api/2.0/ai/threads/clear-messages&#x60;.
+Deletes a thread together with every message in it. The thread has to exist: unlike the other operations that take a `threadId`, this one checks first and answers 404 for an unknown or already-deleted thread rather than reporting success. The deletion is permanent and the messages cannot be recovered. To empty a thread but keep it, use `DELETE api/2.0/ai/threads/clear-messages`.
 
 #### Parameters
 
@@ -2910,11 +2910,11 @@ Deletes a thread together with every message in it. The thread has to exist: unl
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Confirms the thread and its messages are gone. | [**AiSuccessResponse**](#model-aisuccessresponse) | - |
-| **400** | &#x60;threadId&#x60; is missing. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **400** | `threadId` is missing. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **404** | No thread has this ID. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **413** | The request body is larger than 100 KB, the JSON parser's limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
 #### Return type
@@ -2923,7 +2923,7 @@ Deletes a thread together with every message in it. The thread has to exist: unl
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -2938,7 +2938,7 @@ No authorization required
 
 Delete message
 
-Deletes one message and leaves the rest of the thread untouched. &#x60;messageId&#x60; is required and may be sent either in the body or as a query parameter. An unknown ID is not reported: the call answers success without having deleted anything, so verify with &#x60;GET api/2.0/ai/threads/read-messages&#x60; when it matters. The deletion is permanent.
+Deletes one message and leaves the rest of the thread untouched. `messageId` is required and may be sent either in the body or as a query parameter. An unknown ID is not reported: the call answers success without having deleted anything, so verify with `GET api/2.0/ai/threads/read-messages` when it matters. The deletion is permanent.
 
 #### Parameters
 
@@ -2951,10 +2951,10 @@ Deletes one message and leaves the rest of the thread untouched. &#x60;messageId
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Confirms the request was accepted, whether or not a message was deleted. | [**AiSuccessResponse**](#model-aisuccessresponse) | - |
-| **400** | &#x60;messageId&#x60; is missing. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **400** | `messageId` is missing. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **413** | The request body is larger than 100 KB, the JSON parser's limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
 #### Return type
@@ -2963,7 +2963,7 @@ Deletes one message and leaves the rest of the thread untouched. &#x60;messageId
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -2978,7 +2978,7 @@ No authorization required
 
 Get a chat thread
 
-Returns one thread by its ID, without its messages - read those with &#x60;GET api/2.0/ai/threads/read-messages&#x60;. &#x60;threadId&#x60; is required and an unknown one answers 404, so the result is never an empty body. The answer carries the thread&#39;s title, its model binding and its last-edit date. This is a read-only operation and does not bump that date.
+Returns one thread by its ID, without its messages - read those with `GET api/2.0/ai/threads/read-messages`. `threadId` is required and an unknown one answers 404, so the result is never an empty body. The answer carries the thread's title, its model binding and its last-edit date. This is a read-only operation and does not bump that date.
 
 #### Parameters
 
@@ -2991,8 +2991,8 @@ Returns one thread by its ID, without its messages - read those with &#x60;GET a
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | The thread, without its messages. | [**AiThread**](#model-aithread) | - |
-| **400** | &#x60;threadId&#x60; is missing. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **400** | `threadId` is missing. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **404** | No thread has this ID. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
@@ -3003,7 +3003,7 @@ Returns one thread by its ID, without its messages - read those with &#x60;GET a
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -3018,7 +3018,7 @@ No authorization required
 
 Get one chat message
 
-Returns one message by its ID, wherever it sits, without needing the thread it belongs to. &#x60;messageId&#x60; is required. Unlike &#x60;GET api/2.0/ai/threads/get-by-id&#x60; an unknown ID is not reported as 404: the answer is an empty body with status 200, so a client has to treat a missing payload as no such message. Message IDs come from the thread history or from the answer of &#x60;POST api/2.0/ai/threads/append-user-message&#x60;.
+Returns one message by its ID, wherever it sits, without needing the thread it belongs to. `messageId` is required. Unlike `GET api/2.0/ai/threads/get-by-id` an unknown ID is not reported as 404: the answer is an empty body with status 200, so a client has to treat a missing payload as no such message. Message IDs come from the thread history or from the answer of `POST api/2.0/ai/threads/append-user-message`.
 
 #### Parameters
 
@@ -3031,8 +3031,8 @@ Returns one message by its ID, wherever it sits, without needing the thread it b
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | The message, or an empty body when no message has that ID. | [**AiThreadMessageLike**](#model-aithreadmessagelike) | - |
-| **400** | &#x60;messageId&#x60; is missing. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **400** | `messageId` is missing. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
@@ -3042,7 +3042,7 @@ Returns one message by its ID, wherever it sits, without needing the thread it b
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -3057,7 +3057,7 @@ No authorization required
 
 List chat threads
 
-Lists the threads of a scope, most recently edited first, and searches their titles case-insensitively when &#x60;query&#x60; is given. Every parameter is optional: omitting &#x60;entityId&#x60; lists the global scope, and omitting &#x60;count&#x60; lets the engine apply its own page size. Pagination is by cursor, and the cursor is a JSON object passed as a string in the query - &#x60;{id: &lt;last thread id&gt;, lastEditDate: &lt;its date&gt;}&#x60; - taken from the last entry of the previous page. A cursor that is not valid JSON, or that lacks an &#x60;id&#x60;, is ignored rather than rejected, and the read silently starts from the first page again.
+Lists the threads of a scope, most recently edited first, and searches their titles case-insensitively when `query` is given. Every parameter is optional: omitting `entityId` lists the global scope, and omitting `count` lets the engine apply its own page size. Pagination is by cursor, and the cursor is a JSON object passed as a string in the query - `{id: &lt;last thread id&gt;, lastEditDate: &lt;its date&gt;}` - taken from the last entry of the previous page. A cursor that is not valid JSON, or that lacks an `id`, is ignored rather than rejected, and the read silently starts from the first page again.
 
 #### Parameters
 
@@ -3073,7 +3073,7 @@ Lists the threads of a scope, most recently edited first, and searches their tit
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | The threads of the scope, most recently edited first. | [**List**](#model-aithread) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
@@ -3083,7 +3083,7 @@ Lists the threads of a scope, most recently edited first, and searches their tit
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -3098,7 +3098,7 @@ No authorization required
 
 Open or create
 
-Opens a chat thread and returns it with its history, or creates one whose title is generated from the first message supplied in the request. That first message is not persisted: follow up with &#x60;POST api/2.0/ai/threads/append-user-message&#x60; to store it, or start the round directly with &#x60;POST api/2.0/ai/ai/send-with-stream&#x60;. Unlike &#x60;create&#x60; this takes a whole resolved &#x60;profile&#x60; object rather than an ID, and a request without one answers 404 because no model could be bound. A supplied &#x60;entityId&#x60; has to be a room the caller can open; anything that is not an agent room folds to the global scope instead of being rejected.
+Opens a chat thread and returns it with its history, or creates one whose title is generated from the first message supplied in the request. That first message is not persisted: follow up with `POST api/2.0/ai/threads/append-user-message` to store it, or start the round directly with `POST api/2.0/ai/ai/send-with-stream`. Unlike `create` this takes a whole resolved `profile` object rather than an ID, and a request without one answers 404 because no model could be bound. A supplied `entityId` has to be a room the caller can open; anything that is not an agent room folds to the global scope instead of being rejected.
 
 #### Parameters
 
@@ -3111,10 +3111,10 @@ Opens a chat thread and returns it with its history, or creates one whose title 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | The thread that was opened or created, with its prior messages. A created one carries the generated title. | [**AiOpenOrCreateResult**](#model-aiopenorcreateresult) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **404** | The &#x60;entityId&#x60; names a room the caller cannot open, or no live AI profile is bound to it. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **404** | The `entityId` names a room the caller cannot open, or no live AI profile is bound to it. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **413** | The request body is larger than 100 KB, the JSON parser's limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
 #### Return type
@@ -3123,7 +3123,7 @@ Opens a chat thread and returns it with its history, or creates one whose title 
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -3138,7 +3138,7 @@ No authorization required
 
 Read messages
 
-Reads the messages of one thread, oldest first, with the same string-encoded JSON cursor as the thread list. &#x60;direction&#x60; turns the read around, and only the exact value &#x60;desc&#x60; does so - anything else, including a misspelling, reads forward. Omitting &#x60;threadId&#x60; is not an error: the call answers 200 with an empty list, so an empty result does not distinguish a thread with no messages from a request that forgot the ID. A malformed cursor is ignored and the read starts from the beginning.
+Reads the messages of one thread, oldest first, with the same string-encoded JSON cursor as the thread list. `direction` turns the read around, and only the exact value `desc` does so - anything else, including a misspelling, reads forward. Omitting `threadId` is not an error: the call answers 200 with an empty list, so an empty result does not distinguish a thread with no messages from a request that forgot the ID. A malformed cursor is ignored and the read starts from the beginning.
 
 #### Parameters
 
@@ -3153,8 +3153,8 @@ Reads the messages of one thread, oldest first, with the same string-encoded JSO
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The thread&#39;s messages, oldest first unless &#x60;direction&#x60; reversed them. An empty list also means the request carried no thread ID. | [**List**](#model-aithreadmessagelike) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **200** | The thread's messages, oldest first unless `direction` reversed them. An empty list also means the request carried no thread ID. | [**List**](#model-aithreadmessagelike) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
@@ -3164,7 +3164,7 @@ Reads the messages of one thread, oldest first, with the same string-encoded JSO
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -3179,7 +3179,7 @@ No authorization required
 
 Regenerate title
 
-Asks the model to produce a title from the thread&#39;s first user message, stores it, and returns the new title. Both &#x60;threadId&#x60; and a resolved &#x60;profile&#x60; object are required; a thread with no user message yet has nothing to title and fails. This costs a model call, unlike &#x60;POST api/2.0/ai/threads/rename&#x60;, which just stores the string it is given. An &#x60;entityMeta&#x60; sent with the request is only read for its &#x60;entityId&#x60; hint - the source itself is resolved server-side under the caller&#39;s credentials, so a client cannot attribute the call to somebody else&#39;s room.
+Asks the model to produce a title from the thread's first user message, stores it, and returns the new title. Both `threadId` and a resolved `profile` object are required; a thread with no user message yet has nothing to title and fails. This costs a model call, unlike `POST api/2.0/ai/threads/rename`, which just stores the string it is given. An `entityMeta` sent with the request is only read for its `entityId` hint - the source itself is resolved server-side under the caller's credentials, so a client cannot attribute the call to somebody else's room.
 
 #### Parameters
 
@@ -3192,10 +3192,10 @@ Asks the model to produce a title from the thread&#39;s first user message, stor
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | The newly generated title, already stored on the thread. | [**aiThreadsRegenerateTitle_200_response**](#model-aithreadsregeneratetitle-200-response) | - |
-| **400** | &#x60;threadId&#x60; is missing. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **400** | `threadId` is missing. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **413** | The request body is larger than 100 KB, the JSON parser's limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
 #### Return type
@@ -3204,7 +3204,7 @@ Asks the model to produce a title from the thread&#39;s first user message, stor
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -3219,7 +3219,7 @@ No authorization required
 
 Rename a chat thread
 
-Replaces a thread&#39;s title with the one supplied and bumps its last-edit date. Both &#x60;threadId&#x60; and a title with at least one non-whitespace character are required - a blank title is rejected rather than silently stored, so a thread cannot end up nameless. The answer only confirms the write. To have the model produce a title instead of supplying one, use &#x60;POST api/2.0/ai/threads/regenerate-title&#x60;.
+Replaces a thread's title with the one supplied and bumps its last-edit date. Both `threadId` and a title with at least one non-whitespace character are required - a blank title is rejected rather than silently stored, so a thread cannot end up nameless. The answer only confirms the write. To have the model produce a title instead of supplying one, use `POST api/2.0/ai/threads/regenerate-title`.
 
 #### Parameters
 
@@ -3232,10 +3232,10 @@ Replaces a thread&#39;s title with the one supplied and bumps its last-edit date
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Confirms the new title was stored. | [**AiSuccessResponse**](#model-aisuccessresponse) | - |
-| **400** | &#x60;threadId&#x60; or the new title is missing. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **400** | `threadId` or the new title is missing. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **413** | The request body is larger than 100 KB, the JSON parser's limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
 #### Return type
@@ -3244,7 +3244,7 @@ Replaces a thread&#39;s title with the one supplied and bumps its last-edit date
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -3257,9 +3257,9 @@ No authorization required
 
 `POST /api/2.0/ai/threads/touch`
 
-Bump a thread&#39;s activity
+Bump a thread's activity
 
-Bumps a thread&#39;s last-edit date without adding a message, which resurfaces it in the list. Passing &#x60;profileId&#x60; also rebinds the thread to another model, so this is the operation to call when a model switch alone should count as activity. Nothing else about the thread changes and the answer only confirms the write. It is idempotent: repeating it simply moves the date forward again.
+Bumps a thread's last-edit date without adding a message, which resurfaces it in the list. Passing `profileId` also rebinds the thread to another model, so this is the operation to call when a model switch alone should count as activity. Nothing else about the thread changes and the answer only confirms the write. It is idempotent: repeating it simply moves the date forward again.
 
 #### Parameters
 
@@ -3271,10 +3271,10 @@ Bumps a thread&#39;s last-edit date without adding a message, which resurfaces i
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Confirms the thread&#39;s activity date moved forward. | [**AiSuccessResponse**](#model-aisuccessresponse) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **200** | Confirms the thread's activity date moved forward. | [**AiSuccessResponse**](#model-aisuccessresponse) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **413** | The request body is larger than 100 KB, the JSON parser's limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
 #### Return type
@@ -3283,7 +3283,7 @@ Bumps a thread&#39;s last-edit date without adding a message, which resurfaces i
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -3311,9 +3311,9 @@ Replaces the content of one stored message, which is how the edit and regenerate
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Confirms the replacement was stored. | [**AiSuccessResponse**](#model-aisuccessresponse) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **413** | The request body is larger than 100 KB, the JSON parser's limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
 #### Return type
@@ -3322,7 +3322,7 @@ Replaces the content of one stored message, which is how the edit and regenerate
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -3339,7 +3339,7 @@ No authorization required
 
 Add custom server
 
-Registers a custom MCP server under the given name so the model may call its tools. The name becomes a URL path segment, so it may not be &#x60;.&#x60;, &#x60;..&#x60;, or contain a path separator or a control character. &#x60;config&#x60; may be omitted in two cases: a name matching a host-configured system server pins the entry to that server&#39;s canonical settings as a whitelist marker, and a name already registered portal-wide copies the portal-level configuration into this scope; anything else without a config is rejected. &#x60;entityId&#x60; scopes the registration and has to name a room the caller can open - a room that is not an agent room folds to the portal-wide scope, while an unreachable one is refused so it cannot silently rewrite the portal&#39;s own registry.
+Registers a custom MCP server under the given name so the model may call its tools. The name becomes a URL path segment, so it may not be `.`, `..`, or contain a path separator or a control character. `config` may be omitted in two cases: a name matching a host-configured system server pins the entry to that server's canonical settings as a whitelist marker, and a name already registered portal-wide copies the portal-level configuration into this scope; anything else without a config is rejected. `entityId` scopes the registration and has to name a room the caller can open - a room that is not an agent room folds to the portal-wide scope, while an unreachable one is refused so it cannot silently rewrite the portal's own registry.
 
 #### Parameters
 
@@ -3353,10 +3353,10 @@ Registers a custom MCP server under the given name so the model may call its too
 |------------- | ------------- | ------------- | -------------|
 | **200** | Whether the server was registered, with the stored entry. | [**AiToolsMutationResult**](#model-aitoolsmutationresult) | - |
 | **400** | The server name is missing or is not routable. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **404** | The referenced object does not exist, or the caller cannot access it - the two are deliberately indistinguishable, so a room the caller may not open answers 404 rather than 403. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **413** | The request body is larger than 100 KB, the JSON parser's limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
 #### Return type
@@ -3365,7 +3365,7 @@ Registers a custom MCP server under the given name so the model may call its too
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -3380,7 +3380,7 @@ No authorization required
 
 Get allow always
 
-Returns the always-allow list of the scope - the tools whose calls run without pausing the round for approval. &#x60;entityId&#x60; picks the scope and omitting it reads the portal-wide setting. An empty answer means every tool call has to be approved through &#x60;POST api/2.0/ai/ai/approve-tool-call&#x60;. Use &#x60;GET api/2.0/ai/tools/is-allow-always&#x60; to ask about a single tool.
+Returns the always-allow list of the scope - the tools whose calls run without pausing the round for approval. `entityId` picks the scope and omitting it reads the portal-wide setting. An empty answer means every tool call has to be approved through `POST api/2.0/ai/ai/approve-tool-call`. Use `GET api/2.0/ai/tools/is-allow-always` to ask about a single tool.
 
 #### Parameters
 
@@ -3393,7 +3393,7 @@ Returns the always-allow list of the scope - the tools whose calls run without p
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | The tools that run without an approval pause. An empty list means every call needs approval. | **List** | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
@@ -3403,7 +3403,7 @@ Returns the always-allow list of the scope - the tools whose calls run without p
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -3418,7 +3418,7 @@ No authorization required
 
 Get custom server
 
-Returns the stored configuration of one registered custom MCP server. The name is required and is read from the query; &#x60;entityId&#x60; picks the scope, and omitting it reads the portal-wide registry. A name that is not registered answers a null body with status 200 rather than 404. The configuration of a system server is returned empty on purpose: those run server-side only, so neither their endpoint nor their credentials are handed to a browser.
+Returns the stored configuration of one registered custom MCP server. The name is required and is read from the query; `entityId` picks the scope, and omitting it reads the portal-wide registry. A name that is not registered answers a null body with status 200 rather than 404. The configuration of a system server is returned empty on purpose: those run server-side only, so neither their endpoint nor their credentials are handed to a browser.
 
 #### Parameters
 
@@ -3433,7 +3433,7 @@ Returns the stored configuration of one registered custom MCP server. The name i
 |------------- | ------------- | ------------- | -------------|
 | **200** | The stored configuration, empty for a system server and null when the name is not registered. | **Object** | - |
 | **400** | The server name is missing. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
@@ -3443,7 +3443,7 @@ Returns the stored configuration of one registered custom MCP server. The name i
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -3458,7 +3458,7 @@ No authorization required
 
 Get disabled
 
-Returns the tools switched off in the scope, as a map of server type to tool names. &#x60;entityId&#x60; picks the scope and omitting it reads the portal-wide setting. An absent server type means nothing is switched off for it, so an empty answer means every tool is on offer. Use &#x60;GET api/2.0/ai/tools/is-tool-disabled&#x60; to ask about one tool instead of reading the whole map.
+Returns the tools switched off in the scope, as a map of server type to tool names. `entityId` picks the scope and omitting it reads the portal-wide setting. An absent server type means nothing is switched off for it, so an empty answer means every tool is on offer. Use `GET api/2.0/ai/tools/is-tool-disabled` to ask about one tool instead of reading the whole map.
 
 #### Parameters
 
@@ -3471,7 +3471,7 @@ Returns the tools switched off in the scope, as a map of server type to tool nam
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | The switched-off tools as a map of server type to tool names. An absent type means nothing is switched off for it. | **Map** | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
@@ -3481,7 +3481,7 @@ Returns the tools switched off in the scope, as a map of server type to tool nam
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -3496,7 +3496,7 @@ No authorization required
 
 Is allow always
 
-Tells whether one named tool runs without an approval pause in the scope. Both &#x60;serverType&#x60; and &#x60;toolName&#x60; are required and are read from the query; &#x60;entityId&#x60; picks the scope. The answer is a bare boolean. A false answer means a call to that tool pauses the round, and the caller resumes it with the approve or deny operation.
+Tells whether one named tool runs without an approval pause in the scope. Both `serverType` and `toolName` are required and are read from the query; `entityId` picks the scope. The answer is a bare boolean. A false answer means a call to that tool pauses the round, and the caller resumes it with the approve or deny operation.
 
 #### Parameters
 
@@ -3511,8 +3511,8 @@ Tells whether one named tool runs without an approval pause in the scope. Both &
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Whether that one tool runs without an approval pause. | **Boolean** | - |
-| **400** | &#x60;serverType&#x60; or &#x60;toolName&#x60; is missing. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **400** | `serverType` or `toolName` is missing. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
@@ -3522,7 +3522,7 @@ Tells whether one named tool runs without an approval pause in the scope. Both &
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -3537,7 +3537,7 @@ No authorization required
 
 Is tool disabled
 
-Tells whether one named tool of one server type is switched off in the scope. Both &#x60;serverType&#x60; and &#x60;toolName&#x60; are required and are read from the query; &#x60;entityId&#x60; picks the scope. The answer is a bare boolean. It reflects only the disable list - a tool that is on offer may still require approval, which &#x60;GET api/2.0/ai/tools/is-allow-always&#x60; reports.
+Tells whether one named tool of one server type is switched off in the scope. Both `serverType` and `toolName` are required and are read from the query; `entityId` picks the scope. The answer is a bare boolean. It reflects only the disable list - a tool that is on offer may still require approval, which `GET api/2.0/ai/tools/is-allow-always` reports.
 
 #### Parameters
 
@@ -3552,8 +3552,8 @@ Tells whether one named tool of one server type is switched off in the scope. Bo
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Whether that one tool is switched off in the scope. | **Boolean** | - |
-| **400** | &#x60;serverType&#x60; or &#x60;toolName&#x60; is missing. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **400** | `serverType` or `toolName` is missing. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
@@ -3563,7 +3563,7 @@ Tells whether one named tool of one server type is switched off in the scope. Bo
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -3578,7 +3578,7 @@ No authorization required
 
 List custom servers
 
-Lists the custom MCP servers registered in the scope as a map of name to configuration. &#x60;entityId&#x60; picks the scope and omitting it lists the portal-wide registry. The configuration of any entry that names a host-configured system server comes back empty, for the same reason as in the single-server read, and the portal&#39;s own built-in MCP server is left out of the list entirely because it is always enabled and cannot be configured. The names in the answer are what the disable and always-allow operations accept as &#x60;serverType&#x60;.
+Lists the custom MCP servers registered in the scope as a map of name to configuration. `entityId` picks the scope and omitting it lists the portal-wide registry. The configuration of any entry that names a host-configured system server comes back empty, for the same reason as in the single-server read, and the portal's own built-in MCP server is left out of the list entirely because it is always enabled and cannot be configured. The names in the answer are what the disable and always-allow operations accept as `serverType`.
 
 #### Parameters
 
@@ -3590,8 +3590,8 @@ Lists the custom MCP servers registered in the scope as a map of name to configu
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The scope&#39;s registrations as a map of name to configuration, system entries emptied and the portal&#39;s built-in server left out. | **Map** | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **200** | The scope's registrations as a map of name to configuration, system entries emptied and the portal's built-in server left out. | **Map** | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
@@ -3601,7 +3601,7 @@ Lists the custom MCP servers registered in the scope as a map of name to configu
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -3616,7 +3616,7 @@ No authorization required
 
 List system tools
 
-Lists every tool the scope can offer the model, as a map of server type to tool group. The answer merges two sources - the host-configured system servers and the live tools of the scope&#39;s registered custom MCP servers - and names the system ones separately in &#x60;system&#x60;, so a client can tell the two apart. &#x60;errors&#x60; carries the reason a registered server delivered no tools, which is the text to show on a permission card, because the browser cannot reach a server-executed MCP server to find out for itself. The connections are opened server-side, so one request is enough and the client never speaks MCP itself; the portal&#39;s own built-in server is left out because it is always enabled.
+Lists every tool the scope can offer the model, as a map of server type to tool group. The answer merges two sources - the host-configured system servers and the live tools of the scope's registered custom MCP servers - and names the system ones separately in `system`, so a client can tell the two apart. `errors` carries the reason a registered server delivered no tools, which is the text to show on a permission card, because the browser cannot reach a server-executed MCP server to find out for itself. The connections are opened server-side, so one request is enough and the client never speaks MCP itself; the portal's own built-in server is left out because it is always enabled.
 
 #### Parameters
 
@@ -3628,8 +3628,8 @@ Lists every tool the scope can offer the model, as a map of server type to tool 
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The scope&#39;s tools grouped by server type, the system group keys named in &#x60;system&#x60;, and the reason a registered server delivered none in &#x60;errors&#x60;. | [**aiToolsListSystemTools_200_response**](#model-aitoolslistsystemtools-200-response) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **200** | The scope's tools grouped by server type, the system group keys named in `system`, and the reason a registered server delivered none in `errors`. | [**aiToolsListSystemTools_200_response**](#model-aitoolslistsystemtools-200-response) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
@@ -3639,7 +3639,7 @@ Lists every tool the scope can offer the model, as a map of server type to tool 
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -3654,7 +3654,7 @@ No authorization required
 
 Remove custom server
 
-Unregisters a custom MCP server from the scope, so the model is no longer offered its tools. The name is required and may be sent in the body or as a query parameter, and &#x60;entityId&#x60; has to name a room the caller can open. A name that is not registered is not reported: the call answers success without removing anything. The server itself is untouched - only this portal&#39;s registration is dropped.
+Unregisters a custom MCP server from the scope, so the model is no longer offered its tools. The name is required and may be sent in the body or as a query parameter, and `entityId` has to name a room the caller can open. A name that is not registered is not reported: the call answers success without removing anything. The server itself is untouched - only this portal's registration is dropped.
 
 #### Parameters
 
@@ -3668,10 +3668,10 @@ Unregisters a custom MCP server from the scope, so the model is no longer offere
 |------------- | ------------- | ------------- | -------------|
 | **200** | Confirms the request was accepted, whether or not a registration was removed. | [**AiSuccessResponse**](#model-aisuccessresponse) | - |
 | **400** | The server name is missing. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **404** | The referenced object does not exist, or the caller cannot access it - the two are deliberately indistinguishable, so a room the caller may not open answers 404 rather than 403. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **413** | The request body is larger than 100 KB, the JSON parser's limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
 #### Return type
@@ -3680,7 +3680,7 @@ Unregisters a custom MCP server from the scope, so the model is no longer offere
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -3695,7 +3695,7 @@ No authorization required
 
 Replace all custom servers
 
-Replaces the whole custom MCP server registry of the scope with the supplied map in one write, which makes it the operation a settings screen saves with. &#x60;map&#x60; is required: without it the registry would be emptied, so a missing or non-object value is rejected rather than treated as none. Every name in the map is validated as a routable path segment and every configuration is resolved before anything is written, so a map with one bad entry changes nothing. &#x60;entityId&#x60; has to name a room the caller can open - this is the operation where an unreachable one would otherwise have wiped the portal-wide registry.
+Replaces the whole custom MCP server registry of the scope with the supplied map in one write, which makes it the operation a settings screen saves with. `map` is required: without it the registry would be emptied, so a missing or non-object value is rejected rather than treated as none. Every name in the map is validated as a routable path segment and every configuration is resolved before anything is written, so a map with one bad entry changes nothing. `entityId` has to name a room the caller can open - this is the operation where an unreachable one would otherwise have wiped the portal-wide registry.
 
 #### Parameters
 
@@ -3707,12 +3707,12 @@ Replaces the whole custom MCP server registry of the scope with the supplied map
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Whether the registry was replaced, with &#x60;errors&#x60; listing what was refused. | [**AiToolsBulkResult**](#model-aitoolsbulkresult) | - |
+| **200** | Whether the registry was replaced, with `errors` listing what was refused. | [**AiToolsBulkResult**](#model-aitoolsbulkresult) | - |
 | **400** | The body is not a map of server name to configuration, or a name is not routable. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **404** | The referenced object does not exist, or the caller cannot access it - the two are deliberately indistinguishable, so a room the caller may not open answers 404 rather than 403. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **413** | The request body is larger than 100 KB, the JSON parser's limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
 #### Return type
@@ -3721,7 +3721,7 @@ Replaces the whole custom MCP server registry of the scope with the supplied map
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -3736,7 +3736,7 @@ No authorization required
 
 Set allow always
 
-Adds one tool to the scope&#39;s always-allow list, or takes it off, which decides whether a call to it pauses the round for approval. &#x60;value&#x60; is coerced to a boolean, so any truthy value adds and any falsy one removes. Unlike the disable operation, &#x60;serverType&#x60; is not validated here: an unknown one is stored and then simply never matches, so a wrong value fails silently. &#x60;entityId&#x60; has to name a room the caller can open.
+Adds one tool to the scope's always-allow list, or takes it off, which decides whether a call to it pauses the round for approval. `value` is coerced to a boolean, so any truthy value adds and any falsy one removes. Unlike the disable operation, `serverType` is not validated here: an unknown one is stored and then simply never matches, so a wrong value fails silently. `entityId` has to name a room the caller can open.
 
 #### Parameters
 
@@ -3749,10 +3749,10 @@ Adds one tool to the scope&#39;s always-allow list, or takes it off, which decid
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Confirms the always-allow list was updated. | [**AiSuccessResponse**](#model-aisuccessresponse) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **404** | The referenced object does not exist, or the caller cannot access it - the two are deliberately indistinguishable, so a room the caller may not open answers 404 rather than 403. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **413** | The request body is larger than 100 KB, the JSON parser's limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
 #### Return type
@@ -3761,7 +3761,7 @@ Adds one tool to the scope&#39;s always-allow list, or takes it off, which decid
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -3776,7 +3776,7 @@ No authorization required
 
 Set disabled
 
-Switches off the listed tools of one server type in the scope, so the model is no longer offered them. &#x60;serverType&#x60; has to be a key the round&#39;s tool filter actually matches - a host-configured system server, one of the two DocSpace integration groups, web search, image generation, or one of the scope&#39;s registered custom servers - and an unknown value is rejected with the list of valid ones in the message, rather than stored and silently ignored. &#x60;toolNames&#x60; replaces the previous selection for that server type, so send the full list and pass an empty one to switch everything back on. &#x60;entityId&#x60; has to name a room the caller can open.
+Switches off the listed tools of one server type in the scope, so the model is no longer offered them. `serverType` has to be a key the round's tool filter actually matches - a host-configured system server, one of the two DocSpace integration groups, web search, image generation, or one of the scope's registered custom servers - and an unknown value is rejected with the list of valid ones in the message, rather than stored and silently ignored. `toolNames` replaces the previous selection for that server type, so send the full list and pass an empty one to switch everything back on. `entityId` has to name a room the caller can open.
 
 #### Parameters
 
@@ -3790,10 +3790,10 @@ Switches off the listed tools of one server type in the scope, so the model is n
 |------------- | ------------- | ------------- | -------------|
 | **200** | Confirms the new disable list was stored for that server type. | [**AiSuccessResponse**](#model-aisuccessresponse) | - |
 | **400** | The list of tools to disable is malformed. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **404** | The referenced object does not exist, or the caller cannot access it - the two are deliberately indistinguishable, so a room the caller may not open answers 404 rather than 403. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **413** | The request body is larger than 100 KB, the JSON parser's limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
 #### Return type
@@ -3802,7 +3802,7 @@ Switches off the listed tools of one server type in the scope, so the model is n
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -3817,7 +3817,7 @@ No authorization required
 
 Update custom server
 
-Replaces the stored configuration of a registered custom MCP server, under the same name and scope rules as the add operation. The name is re-validated as a routable path segment, and an omitted &#x60;config&#x60; resolves the same way - to a system server&#39;s canonical settings, or to the portal-level entry of that name. &#x60;entityId&#x60; has to name a room the caller can open. The answer carries the stored registry entry.
+Replaces the stored configuration of a registered custom MCP server, under the same name and scope rules as the add operation. The name is re-validated as a routable path segment, and an omitted `config` resolves the same way - to a system server's canonical settings, or to the portal-level entry of that name. `entityId` has to name a room the caller can open. The answer carries the stored registry entry.
 
 #### Parameters
 
@@ -3831,10 +3831,10 @@ Replaces the stored configuration of a registered custom MCP server, under the s
 |------------- | ------------- | ------------- | -------------|
 | **200** | Whether the server was updated, with the stored entry. | [**AiToolsMutationResult**](#model-aitoolsmutationresult) | - |
 | **400** | The server name is missing or is not routable. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **404** | The referenced object does not exist, or the caller cannot access it - the two are deliberately indistinguishable, so a room the caller may not open answers 404 rather than 403. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **413** | The request body is larger than 100 KB, the JSON parser's limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
 #### Return type
@@ -3843,7 +3843,7 @@ Replaces the stored configuration of a registered custom MCP server, under the s
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -3860,7 +3860,7 @@ No authorization required
 
 Start a vectorization task
 
-Queues the indexing of the portal files named in the body so their contents can be retrieved during a chat round. The body is proxied unchanged to the DocSpace AI service, which validates it and owns the job. Indexing is asynchronous and fire-and-forget: the answer acknowledges the request without carrying a job handle, so there is nothing to poll and progress is not reported here. The embedding provider used is the one in &#x60;GET api/2.0/ai/config/vectorization&#x60;, and changing that setting does not re-index anything already indexed - queue it again for that.
+Queues the indexing of the portal files named in the body so their contents can be retrieved during a chat round. The body is proxied unchanged to the DocSpace AI service, which validates it and owns the job. Indexing is asynchronous and fire-and-forget: the answer acknowledges the request without carrying a job handle, so there is nothing to poll and progress is not reported here. The embedding provider used is the one in `GET api/2.0/ai/config/vectorization`, and changing that setting does not re-index anything already indexed - queue it again for that.
 
 #### Parameters
 
@@ -3873,9 +3873,9 @@ Queues the indexing of the portal files named in the body so their contents can 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Confirms the indexing was queued. It carries no job handle, so there is nothing to poll. | [**aiVectorizationStartTask_200_response**](#model-aivectorizationstarttask-200-response) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **413** | The request body is larger than 100 KB, the JSON parser's limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
 #### Return type
@@ -3884,7 +3884,7 @@ Queues the indexing of the portal files named in the body so their contents can 
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -3901,7 +3901,7 @@ No authorization required
 
 Clear the web-search configuration
 
-Removes the portal&#39;s web-search configuration, after which web search is unavailable everywhere it was not configured separately. This is not scoped: it takes no &#x60;entityId&#x60; and any body sent with it is ignored, so it cannot be used to clear one room&#39;s configuration. Clearing an already-unconfigured portal is not an error and the call answers success either way. The stored provider key is destroyed with the configuration and has to be entered again.
+Removes the portal's web-search configuration, after which web search is unavailable everywhere it was not configured separately. This is not scoped: it takes no `entityId` and any body sent with it is ignored, so it cannot be used to clear one room's configuration. Clearing an already-unconfigured portal is not an error and the call answers success either way. The stored provider key is destroyed with the configuration and has to be entered again.
 
 #### Parameters
 
@@ -3914,9 +3914,9 @@ Removes the portal&#39;s web-search configuration, after which web search is una
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Confirms the portal has no web-search configuration any more. | [**AiSuccessResponse**](#model-aisuccessresponse) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **413** | The request body is larger than 100 KB, the JSON parser's limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
 #### Return type
@@ -3925,7 +3925,7 @@ Removes the portal&#39;s web-search configuration, after which web search is una
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -3940,7 +3940,7 @@ No authorization required
 
 Configure and verify web search
 
-Validates a web-search configuration against the live provider and stores it only if the provider answers, which makes it the safe way to save a form in one step. &#x60;entityId&#x60; scopes the configuration to a room and has to name one the caller can open; omitting it configures the portal. A &#x60;baseUrl&#x60; pointing at a private network address is refused. Use &#x60;PUT api/2.0/ai/web-search/set-active-config&#x60; when the configuration should be stored without a provider round trip.
+Validates a web-search configuration against the live provider and stores it only if the provider answers, which makes it the safe way to save a form in one step. `entityId` scopes the configuration to a room and has to name one the caller can open; omitting it configures the portal. A `baseUrl` pointing at a private network address is refused. Use `PUT api/2.0/ai/web-search/set-active-config` when the configuration should be stored without a provider round trip.
 
 #### Parameters
 
@@ -3954,10 +3954,10 @@ Validates a web-search configuration against the live provider and stores it onl
 |------------- | ------------- | ------------- | -------------|
 | **200** | Whether the configuration was stored, after the provider answered. | [**AiWebSearchMutationResult**](#model-aiwebsearchmutationresult) | - |
 | **400** | The provider URL is missing, malformed, or points at a private network address. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **404** | The referenced object does not exist, or the caller cannot access it - the two are deliberately indistinguishable, so a room the caller may not open answers 404 rather than 403. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **413** | The request body is larger than 100 KB, the JSON parser's limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
 #### Return type
@@ -3966,7 +3966,7 @@ Validates a web-search configuration against the live provider and stores it onl
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -3981,7 +3981,7 @@ No authorization required
 
 Get active config
 
-Returns the web-search configuration in force for a scope - the provider, its endpoint and its settings. &#x60;entityId&#x60; picks a room and has to name one the caller can open; omitting it reads the portal-wide configuration, and a room with none of its own falls back to that. An unconfigured scope answers an empty result rather than 404. The provider key is not part of the answer, so a client cannot read it back after storing it.
+Returns the web-search configuration in force for a scope - the provider, its endpoint and its settings. `entityId` picks a room and has to name one the caller can open; omitting it reads the portal-wide configuration, and a room with none of its own falls back to that. An unconfigured scope answers an empty result rather than 404. The provider key is not part of the answer, so a client cannot read it back after storing it.
 
 #### Parameters
 
@@ -3994,7 +3994,7 @@ Returns the web-search configuration in force for a scope - the provider, its en
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | The configuration in force for the scope, without the provider key, or an empty result when web search is not configured. | [**AiWebSearchConfig**](#model-aiwebsearchconfig) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **404** | The referenced object does not exist, or the caller cannot access it - the two are deliberately indistinguishable, so a room the caller may not open answers 404 rather than 403. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
@@ -4005,7 +4005,7 @@ Returns the web-search configuration in force for a scope - the provider, its en
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -4020,7 +4020,7 @@ No authorization required
 
 Is configured
 
-Tells whether web search is available in a scope, as a bare boolean, which is the cheap check for hiding or showing the feature. &#x60;entityId&#x60; picks a room and has to name one the caller can open. It reports the same state as &#x60;GET api/2.0/ai/web-search/get-active-config&#x60; without transferring the configuration itself. A true answer means a provider is stored, not that the provider is currently reachable - probe that with &#x60;POST api/2.0/ai/web-search/test-connection&#x60;.
+Tells whether web search is available in a scope, as a bare boolean, which is the cheap check for hiding or showing the feature. `entityId` picks a room and has to name one the caller can open. It reports the same state as `GET api/2.0/ai/web-search/get-active-config` without transferring the configuration itself. A true answer means a provider is stored, not that the provider is currently reachable - probe that with `POST api/2.0/ai/web-search/test-connection`.
 
 #### Parameters
 
@@ -4033,7 +4033,7 @@ Tells whether web search is available in a scope, as a bare boolean, which is th
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Whether a web-search provider is stored for the scope. | **Boolean** | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **404** | The referenced object does not exist, or the caller cannot access it - the two are deliberately indistinguishable, so a room the caller may not open answers 404 rather than 403. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
@@ -4044,7 +4044,7 @@ Tells whether web search is available in a scope, as a bare boolean, which is th
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -4059,24 +4059,24 @@ No authorization required
 
 Web page contents passthrough
 
-Fetches the contents of web pages on behalf of the document editor&#39;s AI plugin, against the portal&#39;s active web-search provider, exactly as the search passthrough does — including the &#x60;entityId&#x60; / &#x60;entityKind&#x60; billing attribution. The portal-wide configuration is used and a portal without one answers 404. The provider&#39;s status, body and content type are relayed verbatim, so its 429 and its failures surface unchanged. This is the follow-up to &#x60;POST api/2.0/ai/websearch/v1/search&#x60;, which returns the results whose contents this operation retrieves.
+Fetches the contents of web pages on behalf of the document editor's AI plugin, against the portal's active web-search provider, exactly as the search passthrough does — including the `entityId` / `entityKind` billing attribution. The portal-wide configuration is used and a portal without one answers 404. The provider's status, body and content type are relayed verbatim, so its 429 and its failures surface unchanged. This is the follow-up to `POST api/2.0/ai/websearch/v1/search`, which returns the results whose contents this operation retrieves.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **request\_body** | body | **Map** | A page-contents request in the shape the portal&#39;s active web-search provider expects, forwarded to it unchanged. The endpoint and the key come from the stored configuration. | [required] |
+| **request\_body** | body | **Map** | A page-contents request in the shape the portal's active web-search provider expects, forwarded to it unchanged. The endpoint and the key come from the stored configuration. | [required] |
 
 #### Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The provider&#39;s own response, relayed verbatim with its status and content type. | **Map** | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **200** | The provider's own response, relayed verbatim with its status and content type. | **Map** | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **404** | Web search is not configured for this portal. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **429** | Relayed verbatim from the AI provider, which is rate-limiting this portal&#39;s key. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **413** | The request body is larger than 100 KB, the JSON parser's limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **429** | Relayed verbatim from the AI provider, which is rate-limiting this portal's key. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **502** | The AI provider could not be reached, or answered with a failure of its own. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
@@ -4086,7 +4086,7 @@ Fetches the contents of web pages on behalf of the document editor&#39;s AI plug
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -4101,24 +4101,24 @@ No authorization required
 
 Web search passthrough
 
-Runs a web search on behalf of the document editor&#39;s AI plugin, which holds only a placeholder configuration - the portal&#39;s active provider and its key are resolved here, so neither ever reaches the browser. The portal-wide configuration is used, and a portal without one answers 404. The &#x60;entityId&#x60; and &#x60;entityKind&#x60; query parameters name the document the search is billed to; with the ONLYOFFICE provider the entry is resolved under the caller&#39;s credentials and sent to the gateway as the request &#x60;metadata&#x60; (&#x60;source_id&#x60; / &#x60;source_type&#x60; / &#x60;source_title&#x60;), and an entry the caller cannot open sends none. The provider&#39;s own status, body and content type are relayed as they stand, so a provider that rate-limits answers 429 and one that is unreachable answers 502. Closing the connection aborts the upstream request.
+Runs a web search on behalf of the document editor's AI plugin, which holds only a placeholder configuration - the portal's active provider and its key are resolved here, so neither ever reaches the browser. The portal-wide configuration is used, and a portal without one answers 404. The `entityId` and `entityKind` query parameters name the document the search is billed to; with the ONLYOFFICE provider the entry is resolved under the caller's credentials and sent to the gateway as the request `metadata` (`source_id` / `source_type` / `source_title`), and an entry the caller cannot open sends none. The provider's own status, body and content type are relayed as they stand, so a provider that rate-limits answers 429 and one that is unreachable answers 502. Closing the connection aborts the upstream request.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **request\_body** | body | **Map** | A search request in the shape the portal&#39;s active web-search provider expects, forwarded to it unchanged. The endpoint and the key come from the stored configuration and must not be sent here. | [required] |
+| **request\_body** | body | **Map** | A search request in the shape the portal's active web-search provider expects, forwarded to it unchanged. The endpoint and the key come from the stored configuration and must not be sent here. | [required] |
 
 #### Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The provider&#39;s own response, relayed verbatim with its status and content type. | **Map** | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **200** | The provider's own response, relayed verbatim with its status and content type. | **Map** | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **404** | Web search is not configured for this portal. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **429** | Relayed verbatim from the AI provider, which is rate-limiting this portal&#39;s key. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **413** | The request body is larger than 100 KB, the JSON parser's limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **429** | Relayed verbatim from the AI provider, which is rate-limiting this portal's key. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **502** | The AI provider could not be reached, or answered with a failure of its own. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
@@ -4128,7 +4128,7 @@ Runs a web search on behalf of the document editor&#39;s AI plugin, which holds 
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -4143,7 +4143,7 @@ No authorization required
 
 Set active config
 
-Stores a web-search configuration without contacting the provider first, for a form that has already validated its input or for restoring a known-good configuration. &#x60;entityId&#x60; scopes it to a room and has to name one the caller can open. A &#x60;baseUrl&#x60; pointing at a private network address is still refused, because that check is local. Nothing guarantees the stored provider works: follow up with &#x60;POST api/2.0/ai/web-search/test-connection&#x60;, or use &#x60;PUT api/2.0/ai/web-search/configure&#x60; to have the store gated on a live probe.
+Stores a web-search configuration without contacting the provider first, for a form that has already validated its input or for restoring a known-good configuration. `entityId` scopes it to a room and has to name one the caller can open. A `baseUrl` pointing at a private network address is still refused, because that check is local. Nothing guarantees the stored provider works: follow up with `POST api/2.0/ai/web-search/test-connection`, or use `PUT api/2.0/ai/web-search/configure` to have the store gated on a live probe.
 
 #### Parameters
 
@@ -4157,10 +4157,10 @@ Stores a web-search configuration without contacting the provider first, for a f
 |------------- | ------------- | ------------- | -------------|
 | **200** | Confirms the configuration was stored, unverified. | [**AiSuccessResponse**](#model-aisuccessresponse) | - |
 | **400** | The provider URL is missing, malformed, or points at a private network address. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **404** | The referenced object does not exist, or the caller cannot access it - the two are deliberately indistinguishable, so a room the caller may not open answers 404 rather than 403. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **413** | The request body is larger than 100 KB, the JSON parser's limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
 #### Return type
@@ -4169,7 +4169,7 @@ Stores a web-search configuration without contacting the provider first, for a f
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -4184,7 +4184,7 @@ No authorization required
 
 Test a web-search provider
 
-Probes a web-search configuration against the live provider and reports the outcome, storing nothing - this is what a Test button calls so that a failure commits no state. The configuration is taken from the request rather than from storage, so credentials that were never saved can be checked. A &#x60;baseUrl&#x60; pointing at a private network address is refused before any request leaves the portal. The verdict is carried in the body rather than in the status, so a failed probe still answers 200 and the caller has to read the payload.
+Probes a web-search configuration against the live provider and reports the outcome, storing nothing - this is what a Test button calls so that a failure commits no state. The configuration is taken from the request rather than from storage, so credentials that were never saved can be checked. A `baseUrl` pointing at a private network address is refused before any request leaves the portal. The verdict is carried in the body rather than in the status, so a failed probe still answers 200 and the caller has to read the payload.
 
 #### Parameters
 
@@ -4198,9 +4198,9 @@ Probes a web-search configuration against the live provider and reports the outc
 |------------- | ------------- | ------------- | -------------|
 | **200** | The outcome of the probe. A failed probe is reported here, not as a status. | [**aiProfilesTestConnection_200_response**](#model-aiprofilestestconnection-200-response) | - |
 | **400** | The provider URL is missing, malformed, or points at a private network address. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **401** | Missing &#x60;asc_auth_key&#x60; cookie or &#x60;Authorization&#x60; header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](#model-aierrorresponse) | - |
-| **413** | The request body is larger than 100 KB, the JSON parser&#39;s limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
+| **413** | The request body is larger than 100 KB, the JSON parser's limit on this route. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 | **500** | Unhandled failure. The reason is logged server-side and never echoed back. | [**AiErrorResponse**](#model-aierrorresponse) | - |
 
 #### Return type
@@ -4209,7 +4209,7 @@ Probes a web-search configuration against the live provider and reports the outc
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -4221,7 +4221,7 @@ No authorization required
 
 
 ### Model AiActionType
-The AI action a request or an assignment applies to. Each action has its own assignment slot; &#x60;Default&#x60; is the profile used when an action&#39;s own slot is empty.
+The AI action a request or an assignment applies to. Each action has its own assignment slot; `Default` is the profile used when an action's own slot is empty.
 
 Possible values:
 
@@ -4237,7 +4237,7 @@ Possible values:
 
 
 ### Model AiAgentNewItemsDto
-The agent new item&#39;s information.
+The agent new item's information.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
@@ -4250,13 +4250,13 @@ The agent new item&#39;s information.
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **tools** | [**List**](#model-aitmcpitem) | Extra tools offered to the model for this request. | [optional] [example: []] |
-| **isReasoning** | **Boolean** | Legacy extended-thinking switch; stands for &#x60;medium&#x60;. &#x60;reasoningLevel&#x60; wins when both are set. | [optional] [example: false] |
+| **isReasoning** | **Boolean** | Legacy extended-thinking switch; stands for `medium`. `reasoningLevel` wins when both are set. | [optional] [example: false] |
 | **reasoningLevel** | [**AiAiReasoningLevel**](#model-aiaireasoninglevel) | Depth of extended thinking for the round; providers clamp it to what the model accepts. | [optional] [enum: off, low, medium, high, max] |
 | **prompt** | [**AiAiActionArgs_prompt**](#model-aiaiactionargsprompt) |  | [optional] |
 
 
 ### Model AiAiActionArgs.prompt
-Override the action&#39;s baked-in system prompt (replace or append).
+Override the action's baked-in system prompt (replace or append).
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
@@ -4265,7 +4265,7 @@ Override the action&#39;s baked-in system prompt (replace or append).
 
 
 ### Model AiAiReasoningLevel
-Provider-neutral extended-thinking depth. &#x60;off&#x60; disables thinking where the model allows it.
+Provider-neutral extended-thinking depth. `off` disables thinking where the model allows it.
 
 Possible values:
 
@@ -4277,7 +4277,7 @@ Possible values:
 
 
 ### Model AiAiSendStreamBody
-Shared body of the two streaming send endpoints (&#x60;sendWithStream&#x60; and its OpenAI-framed twin) — the &#x60;Chat&#x60; action is implied, so there is no &#x60;actionType&#x60;.
+Shared body of the two streaming send endpoints (`sendWithStream` and its OpenAI-framed twin) — the `Chat` action is implied, so there is no `actionType`.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
@@ -4314,13 +4314,13 @@ The successful API response containing the AiSettingsDto object.
 
 
 ### Model AiAiToolCallData
-Identifies a pending tool call to resume — mirrors the library &#x60;ToolCallData&#x60; (its serializable fields).
+Identifies a pending tool call to resume — mirrors the library `ToolCallData` (its serializable fields).
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **threadId** | **String** | Thread the assistant message belongs to. | [required] [example: 11111111-1111-1111-1111-111111111111] |
 | **messageId** | **String** | Storage id of the assistant message holding the tool call. | [required] [example: 22222222-2222-2222-2222-222222222222] |
-| **idx** | **BigDecimal** | Index of the tool-call content part inside &#x60;message.content&#x60;. | [required] [example: 0] |
+| **idx** | **BigDecimal** | Index of the tool-call content part inside `message.content`. | [required] [example: 0] |
 | **message** | [**AiThreadMessageLike**](#model-aithreadmessagelike) | Snapshot of the assistant message at the time the tool call surfaced. | [required] [example: {role=assistant, content=}] |
 | **actionArgs** | [**AiAiActionArgs**](#model-aiaiactionargs) | Per-request engine options: extra tools, reasoning, prompt override. | [optional] [example: {isReasoning=false}] |
 | **entityId** | **String** | Optional entity (room) scope for profile resolution. | [optional] [example: 1234] |
@@ -4365,7 +4365,7 @@ The API date and time parameters.
 
 
 ### Model AiAssignmentMutationResult
-Outcome of &#x60;AssignmentsEngine.assign&#x60; / &#x60;AssignmentsEngine.unassign&#x60;. Either a success or a field-scoped error suitable for displaying in the profile editor.
+Outcome of `AssignmentsEngine.assign` / `AssignmentsEngine.unassign`. Either a success or a field-scoped error suitable for displaying in the profile editor.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
@@ -4374,13 +4374,13 @@ Outcome of &#x60;AssignmentsEngine.assign&#x60; / &#x60;AssignmentsEngine.unassi
 
 
 ### Model AiAttachment
-Persistent record for a single attachment (file or image) referenced from a user message. Files carry extracted text in &#x60;content&#x60;; images carry base64 data in &#x60;base64&#x60;. Metadata (&#x60;title&#x60;, &#x60;path&#x60;, &#x60;type&#x60;) is always present for display purposes regardless of whether the heavy payload is loaded.
+Persistent record for a single attachment (file or image) referenced from a user message. Files carry extracted text in `content`; images carry base64 data in `base64`. Metadata (`title`, `path`, `type`) is always present for display purposes regardless of whether the heavy payload is loaded.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **id** | **String** | Storage-assigned UUID. | [required] [example: 55555555-5555-5555-5555-555555555555] |
 | **kind** | **String** | file \| image. | [required] [example: file] [enum: file, image] |
-| **source** | **String** | Origin of the attachment. &#x60;user&#x60; — uploaded by the user in the composer (the default when unset, for backward compatibility). &#x60;tool&#x60; — produced by a tool call (e.g. &#x60;generate_image&#x60;). Lets the integrator&#39;s adapter route or apply policies (separate bucket, quotas, TTL, CDN) per source. | [optional] [example: user] [enum: user, tool] |
+| **source** | **String** | Origin of the attachment. `user` — uploaded by the user in the composer (the default when unset, for backward compatibility). `tool` — produced by a tool call (e.g. `generate_image`). Lets the integrator's adapter route or apply policies (separate bucket, quotas, TTL, CDN) per source. | [optional] [example: user] [enum: user, tool] |
 | **title** | **String** | Display label (filename or user-visible title). | [required] [example: contract.docx] |
 | **content** | **String** | Extracted text for files. | [optional] [example: This agreement is made on 1 January 2026 between …] |
 | **base64** | **String** | Base64 data URL for images. | [optional] |
@@ -4388,10 +4388,10 @@ Persistent record for a single attachment (file or image) referenced from a user
 | **type** | **BigDecimal** | ONLYOFFICE file type code (for files). | [optional] [example: 7] |
 | **messageId** | **String** | Owning message id once linked. Unset while the attachment is a draft. | [optional] [example: 22222222-2222-2222-2222-222222222222] |
 | **threadId** | **String** | Owning thread id once linked. Unset while the attachment is a draft. | [optional] [example: 11111111-1111-1111-1111-111111111111] |
-| **entityId** | **String** | Opaque scope token (entity / room) the attachment was created in. Drafts carry it so an entity switch keeps in-flight composer state isolated; once linked to a message the field is redundant with the thread&#39;s own entity binding. | [optional] [example: 1234] |
+| **entityId** | **String** | Opaque scope token (entity / room) the attachment was created in. Drafts carry it so an entity switch keeps in-flight composer state isolated; once linked to a message the field is redundant with the thread's own entity binding. | [optional] [example: 1234] |
 | **createdAt** | **BigDecimal** | Storage-assigned creation timestamp. | [required] [example: 1767225600000] |
 | **canAnalyze** | **Boolean** | Whether the attached form can be analyzed. | [optional] [example: false] |
-| **formKeys** | [**List**](#model-aiattachmentformkeys-item) | Keys of the fields inside the form. &#x60;key&#x60; is the field identifier, &#x60;text&#x60; its human-readable label. | [optional] [example: []] |
+| **formKeys** | [**List**](#model-aiattachmentformkeys-item) | Keys of the fields inside the form. `key` is the field identifier, `text` its human-readable label. | [optional] [example: []] |
 
 
 ### Model AiAttachment.formKeys item
@@ -4403,7 +4403,7 @@ Persistent record for a single attachment (file or image) referenced from a user
 
 
 ### Model AiBuiltinProviderType
-Union of all 17 built-in AI provider type identifiers.  The &#x60;external&#x60; provider has no built-in transport — it delegates every HTTP request to &#x60;PlatformAdapter.externalFetch&#x60; and parses the response with the inner provider selected by &#x60;Profile.basedOn&#x60;.
+Union of all 17 built-in AI provider type identifiers.  The `external` provider has no built-in transport — it delegates every HTTP request to `PlatformAdapter.externalFetch` and parses the response with the inner provider selected by `Profile.basedOn`.
 
 Possible values:
 
@@ -4427,7 +4427,7 @@ Possible values:
 
 
 ### Model AiBulkAssignmentResult
-Outcome of &#x60;AssignmentsEngine.bulkAssign&#x60;. Either every entry persisted, or no entries persisted and a per-key error report. The engine validates first and writes second so a single bad entry never leaves the assignment table in a half-written state.
+Outcome of `AssignmentsEngine.bulkAssign`. Either every entry persisted, or no entries persisted and a per-key error report. The engine validates first and writes second so a single bad entry never leaves the assignment table in a half-written state.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
@@ -4444,17 +4444,17 @@ Outcome of &#x60;AssignmentsEngine.bulkAssign&#x60;. Either every entry persiste
 
 
 ### Model AiChatEvent
-Discriminated event emitted by the streaming methods of &#x60;AIEngine&#x60;. The engine never invokes user-supplied middleware or callbacks directly — every observable side-effect is encoded as a &#x60;ChatEvent&#x60; so the same stream can be replayed over SSE, WebSocket, or in-process.  Pause point: &#x60;tool-call-pending&#x60; is the only stop. The UI must execute the tool itself (consulting &#x60;autoAllow&#x60; to decide between the silent path and the approve dialog) and resume via &#x60;AIEngine.approveToolCall&#x60; or &#x60;AIEngine.denyToolCall&#x60;.  Other variants are pure data:  - &#x60;message-start&#x60; / &#x60;message-delta&#x60; / &#x60;message-end&#x60; — assistant reply lifecycle. - &#x60;message-incomplete&#x60; — the provider returned an error or incomplete status. - &#x60;thread-title&#x60; — auto-generated title ready for a new thread.
+Discriminated event emitted by the streaming methods of `AIEngine`. The engine never invokes user-supplied middleware or callbacks directly — every observable side-effect is encoded as a `ChatEvent` so the same stream can be replayed over SSE, WebSocket, or in-process.  Pause point: `tool-call-pending` is the only stop. The UI must execute the tool itself (consulting `autoAllow` to decide between the silent path and the approve dialog) and resume via `AIEngine.approveToolCall` or `AIEngine.denyToolCall`.  Other variants are pure data:  - `message-start` / `message-delta` / `message-end` — assistant reply lifecycle. - `message-incomplete` — the provider returned an error or incomplete status. - `thread-title` — auto-generated title ready for a new thread.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **type** | **String** | Emitted once per &#x60;sendWithStream&#x60; call, immediately after the user message has been persisted by storage and before the assistant stream starts. Carries the storage-assigned &#x60;id&#x60; and &#x60;createdAt&#x60;. The UI uses it to render the user bubble — no client-side optimistic placeholder is needed, which keeps the runtime tree free of phantom nodes from index-fallback ids. | [required] [example: message-delta] [enum: user-message-stored, message-start, message-delta, message-end, message-incomplete, tool-call-pending, thread-title] |
+| **type** | **String** | Emitted once per `sendWithStream` call, immediately after the user message has been persisted by storage and before the assistant stream starts. Carries the storage-assigned `id` and `createdAt`. The UI uses it to render the user bubble — no client-side optimistic placeholder is needed, which keeps the runtime tree free of phantom nodes from index-fallback ids. | [required] [example: message-delta] [enum: user-message-stored, message-start, message-delta, message-end, message-incomplete, tool-call-pending, thread-title] |
 | **message** | [**AiThreadMessageLike**](#model-aithreadmessagelike) | The message the event is about, in the state it has reached. | [optional] |
 | **messageId** | **String** | The storage identifier of that message. | [optional] [example: 22222222-2222-2222-2222-222222222222] |
 | **idx** | **BigDecimal** | The zero-based position of the pending tool call within the message. | [optional] |
 | **threadId** | **String** | The thread the event belongs to. | [optional] [example: 11111111-1111-1111-1111-111111111111] |
-| **autoAllow** | **Boolean** | The consumer should execute the tool without prompting the user. True when the tool is in the persisted always-allow list, or the tool itself opts in via &#x60;TMCPItem.requireApproval &#x3D;&#x3D;&#x3D; false&#x60; (host tools default to this). For a client-side tool with a server-side engine, this lets the engine return the pending call already flagged auto-allow so the client runs it and streams the result back without a dialog round-trip. | [optional] |
-| **serverExecuted** | **Boolean** | Set when the tool is served by a server-side system source: the consumer must NOT execute it locally — only show the approval UI (unless &#x60;autoAllow&#x60;) and resume via &#x60;approveToolCall&#x60; (no &#x60;result&#x60; needed) / &#x60;denyToolCall&#x60;. The engine runs it in-engine. | [optional] |
+| **autoAllow** | **Boolean** | The consumer should execute the tool without prompting the user. True when the tool is in the persisted always-allow list, or the tool itself opts in via `TMCPItem.requireApproval === false` (host tools default to this). For a client-side tool with a server-side engine, this lets the engine return the pending call already flagged auto-allow so the client runs it and streams the result back without a dialog round-trip. | [optional] |
+| **serverExecuted** | **Boolean** | Set when the tool is served by a server-side system source: the consumer must NOT execute it locally — only show the approval UI (unless `autoAllow`) and resume via `approveToolCall` (no `result` needed) / `denyToolCall`. The engine runs it in-engine. | [optional] |
 | **title** | **String** | The generated thread title. | [optional] |
 | **profileId** | **String** | The profile that generated the title, when one was used. | [optional] |
 
@@ -4468,28 +4468,28 @@ The chat configuration of an AI room.
 
 
 ### Model AiCreateProfileInput
-Input for creating a new profile — the same shape as &#x60;Profile&#x60; without the engine-generated fields (&#x60;id&#x60;, &#x60;createdAt&#x60;).
+Input for creating a new profile — the same shape as `Profile` without the engine-generated fields (`id`, `createdAt`).
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **name** | **String** | User-defined profile display name. | [required] [example: OpenAI GPT-4o] |
-| **providerType** | [**AiProviderType**](#model-aiprovidertype) | Provider type for this profile. Use &#x60;external&#x60; to delegate all HTTP transport to &#x60;PlatformAdapter.externalFetch&#x60; while reusing an existing provider&#39;s response parser — see &#x60;Profile.basedOn&#x60; for the format selector. | [required] [example: openai] |
-| **basedOn** | [**AiBuiltinProviderType**](#model-aibuiltinprovidertype) | Selects the response-format parser used by the &#x60;external&#x60; provider. Ignored for any other &#x60;providerType&#x60;.  Supported values are &#x60;openai&#x60;, &#x60;anthropic&#x60;, &#x60;mistral&#x60; and &#x60;openrouter&#x60;. Remaining values (&#x60;genai&#x60;, &#x60;stabilityai&#x60;, …) are accepted by the type but not yet implemented; passing one raises an error at request time. | [optional] [example: openai] [enum: anthropic, ollama, openai, openaicompatible, together, openrouter, genai, deepseek, xai, lm-studio, mistral, groq, zhipu, stabilityai, gpt4all, onlyoffice, external] |
+| **providerType** | [**AiProviderType**](#model-aiprovidertype) | Provider type for this profile. Use `external` to delegate all HTTP transport to `PlatformAdapter.externalFetch` while reusing an existing provider's response parser — see `Profile.basedOn` for the format selector. | [required] [example: openai] |
+| **basedOn** | [**AiBuiltinProviderType**](#model-aibuiltinprovidertype) | Selects the response-format parser used by the `external` provider. Ignored for any other `providerType`.  Supported values are `openai`, `anthropic`, `mistral` and `openrouter`. Remaining values (`genai`, `stabilityai`, …) are accepted by the type but not yet implemented; passing one raises an error at request time. | [optional] [example: openai] [enum: anthropic, ollama, openai, openaicompatible, together, openrouter, genai, deepseek, xai, lm-studio, mistral, groq, zhipu, stabilityai, gpt4all, onlyoffice, external] |
 | **baseUrl** | **String** | Base URL of the provider API. | [required] [example: https://api.openai.com/v1] |
 | **key** | **String** | API key or token. Optional for local providers. | [optional] [example: sk-your-provider-api-key] |
-| **headers** | **Map** | Extra HTTP headers sent with every request to this provider. Merged into the SDK client&#39;s default headers; an explicit &#x60;Authorization&#x60; here wins over the one derived from &#x60;key&#x60;. Honoured by the OpenAI-family providers. | [optional] [example: {X-Organization=acme}] |
+| **headers** | **Map** | Extra HTTP headers sent with every request to this provider. Merged into the SDK client's default headers; an explicit `Authorization` here wins over the one derived from `key`. Honoured by the OpenAI-family providers. | [optional] [example: {X-Organization=acme}] |
 | **modelId** | **String** | Selected model ID within this provider. | [required] [example: gpt-4o] |
-| **reasoning** | **Boolean** | Whether extended thinking is enabled for this profile&#39;s model. | [optional] [example: false] |
-| **reasoningSupport** | [**AiReasoningSupport**](#model-aireasoningsupport) | Extended-thinking capabilities of the selected model as reported by the provider&#39;s catalogue at save time (see &#x60;Model.reasoningSupport&#x60;). When present the composer&#39;s Effort row follows it exactly; when absent the provider&#39;s id-based table answers. Hosts persist it with the rest of the profile. | [optional] |
+| **reasoning** | **Boolean** | Whether extended thinking is enabled for this profile's model. | [optional] [example: false] |
+| **reasoningSupport** | [**AiReasoningSupport**](#model-aireasoningsupport) | Extended-thinking capabilities of the selected model as reported by the provider's catalogue at save time (see `Model.reasoningSupport`). When present the composer's Effort row follows it exactly; when absent the provider's id-based table answers. Hosts persist it with the rest of the profile. | [optional] |
 | **capabilities** | **BigDecimal** | Bitmask of capabilities supported by the selected model. | [optional] [example: 7] |
-| **canUseTool** | **Boolean** | Result of the live tool-capability probe performed at create time and on changes to &#x60;modelId&#x60; / &#x60;providerType&#x60; / &#x60;baseUrl&#x60;. &#x60;undefined&#x60; means the probe has never run for this profile (legacy record). | [optional] [example: true] |
-| **useResponsesApi** | **Boolean** | Result of the live Responses-API probe (parallel to &#x60;canUseTool&#x60;). &#x60;true&#x60; means the model speaks &#x60;/v1/responses&#x60; and the OpenAI provider must route through &#x60;client.responses.create&#x60; — required for gpt-5+ reasoning models that reject &#x60;reasoning_effort&#x60; together with &#x60;tools&#x60; on &#x60;/v1/chat/completions&#x60;. Probed at create time and whenever &#x60;modelId&#x60; / &#x60;providerType&#x60; / &#x60;baseUrl&#x60; change. &#x60;undefined&#x60; means the probe never ran (legacy record) — readers treat that as &#x60;false&#x60;. | [optional] [example: false] |
+| **canUseTool** | **Boolean** | Result of the live tool-capability probe performed at create time and on changes to `modelId` / `providerType` / `baseUrl`. `undefined` means the probe has never run for this profile (legacy record). | [optional] [example: true] |
+| **useResponsesApi** | **Boolean** | Result of the live Responses-API probe (parallel to `canUseTool`). `true` means the model speaks `/v1/responses` and the OpenAI provider must route through `client.responses.create` — required for gpt-5+ reasoning models that reject `reasoning_effort` together with `tools` on `/v1/chat/completions`. Probed at create time and whenever `modelId` / `providerType` / `baseUrl` change. `undefined` means the probe never ran (legacy record) — readers treat that as `false`. | [optional] [example: false] |
 | **isCloudProvider** | **Boolean** | Whether this profile uses a cloud-hosted provider (e.g. ONLYOFFICE DocSpace). | [optional] [example: true] |
-| **useProxy** | **Boolean** | Route every provider request through the host&#39;s &#x60;fetchProxy&#x60; instead of the global &#x60;fetch&#x60;. Useful when the host runs the widget in a sandbox without direct network access (CORS, custom auth, etc.). Has no effect when the &#x60;PlatformAdapter.fetchProxy&#x60; is not configured. | [optional] [example: false] |
+| **useProxy** | **Boolean** | Route every provider request through the host's `fetchProxy` instead of the global `fetch`. Useful when the host runs the widget in a sandbox without direct network access (CORS, custom auth, etc.). Has no effect when the `PlatformAdapter.fetchProxy` is not configured. | [optional] [example: false] |
 
 
 ### Model AiCreatePromptInput
-Input for creating a prompt — the engine generates &#x60;id&#x60;/&#x60;createdAt&#x60;/&#x60;updatedAt&#x60;.
+Input for creating a prompt — the engine generates `id`/`createdAt`/`updatedAt`.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
@@ -4525,7 +4525,7 @@ The user parameters.
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **id** | **UUID** (uuid) | The user ID. | [optional] [example: 00000000-0000-0000-0000-000000000000] |
-| **displayName** | **String** | The HTML-encoded user&#39;s display name formatted according to the default format for the current culture. | [optional] [example: Mike Zanyatski] [nullable] |
+| **displayName** | **String** | The HTML-encoded user's display name formatted according to the default format for the current culture. | [optional] [example: Mike Zanyatski] [nullable] |
 | **avatar** | **String** | The user avatar. | [optional] [example: https://example.com/avatar.jpg] [nullable] |
 | **avatarOriginal** | **String** | The user original size avatar. | [optional] [example: https://example.com/avatar_original.jpg] [nullable] |
 | **avatarMax** | **String** | The user maximum size avatar. | [optional] [example: https://example.com/avatar_max.jpg] [nullable] |
@@ -4555,13 +4555,13 @@ What every file and folder in an answer has in common; the concrete shape is a f
 | **ownedBy** | [**AiEmployeeDto**](#model-aiemployeedto) | Who owns the place the entry is shared from - the creator of the room it lies in, or of the personal section  that holds it. It is filled in only while the entry is being read through a share, and never for a caller  without an account. | [optional] |
 | **shared** | **Boolean** | Whether at least one external link exists for the entry, whichever kind. It says nothing about accounts and  groups - those are counted by the flag for members below. | [optional] [example: false] |
 | **sharedForUser** | **Boolean** | Whether at least one account or group has been given rights on the entry directly, as opposed to reaching it  through a link or through the room around it. | [optional] [example: false] |
-| **sharedExternal** | **Boolean** | Whether one of the entry&#39;s links is open to people outside the portal, as opposed to a link that only its own  members can follow. This is the flag to watch when the concern is who can reach the content from outside. | [optional] [example: false] |
+| **sharedExternal** | **Boolean** | Whether one of the entry's links is open to people outside the portal, as opposed to a link that only its own  members can follow. This is the flag to watch when the concern is who can reach the content from outside. | [optional] [example: false] |
 | **parentShared** | **Boolean** | Whether the entry is reachable because the room or folder around it is shared, rather than through rights of  its own. A copy or a move takes the entry out of that scope. | [optional] [example: false] |
 | **shortWebUrl** | **URI** (uri) | A shortened address that opens the entry through the link it is being read with. It is an empty string  whenever no link applies, which is the usual case for a member browsing their own rooms. | [optional] [example: http://localhost/s/abc123] [nullable] |
-| **created** | [**AiApiDateTime**](#model-aiapidatetime) | When the entry was created, written with the offset of the portal&#39;s time zone. For a file restored from an  older version this is still the moment the file first appeared. | [optional] |
-| **createdBy** | [**AiEmployeeDto**](#model-aiemployeedto) | Who created the entry. It is null for a caller without an account, who is told nothing about the portal&#39;s  members. | [optional] |
-| **updated** | [**AiApiDateTime**](#model-aiapidatetime) | When the entry last changed, written with the offset of the portal&#39;s time zone. It is never reported as  earlier than the creation moment, so the two can be compared safely. | [optional] |
-| **autoDelete** | [**AiApiDateTime**](#model-aiapidatetime) | When the entry will disappear on its own, written with the offset of the portal&#39;s time zone. It is filled in  only where a removal is actually scheduled - something in the trash while the portal cleans it up  automatically, or a guest&#39;s own documents - so a null means nothing is scheduled rather than that the entry is  permanent. | [optional] |
+| **created** | [**AiApiDateTime**](#model-aiapidatetime) | When the entry was created, written with the offset of the portal's time zone. For a file restored from an  older version this is still the moment the file first appeared. | [optional] |
+| **createdBy** | [**AiEmployeeDto**](#model-aiemployeedto) | Who created the entry. It is null for a caller without an account, who is told nothing about the portal's  members. | [optional] |
+| **updated** | [**AiApiDateTime**](#model-aiapidatetime) | When the entry last changed, written with the offset of the portal's time zone. It is never reported as  earlier than the creation moment, so the two can be compared safely. | [optional] |
+| **autoDelete** | [**AiApiDateTime**](#model-aiapidatetime) | When the entry will disappear on its own, written with the offset of the portal's time zone. It is filled in  only where a removal is actually scheduled - something in the trash while the portal cleans it up  automatically, or a guest's own documents - so a null means nothing is scheduled rather than that the entry is  permanent. | [optional] |
 | **rootFolderType** | [**AiFolderType**](#model-aifoldertype) | The section the entry ultimately belongs to, which is what tells a personal document from one inside a room,  from a template and from something in the trash or the archive. | [optional] [enum: 0, 1, 2, 3, 5, 6, 8, 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36] |
 | **parentRoomType** | [**AiFolderType**](#model-aifoldertype) | The kind of room the entry lies in, which decides what the room allows - filling forms, public links,  indexing. It is null for an entry that is not inside a room at all. | [optional] [enum: 0, 1, 2, 3, 5, 6, 8, 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36] |
 | **updatedBy** | [**AiEmployeeDto**](#model-aiemployeedto) | Who changed the entry last. It is null for a caller without an account. | [optional] |
@@ -4584,13 +4584,13 @@ The part of a file or folder that depends on how the entry is identified: by a n
 | **ownedBy** | [**AiEmployeeDto**](#model-aiemployeedto) | Who owns the place the entry is shared from - the creator of the room it lies in, or of the personal section  that holds it. It is filled in only while the entry is being read through a share, and never for a caller  without an account. | [optional] |
 | **shared** | **Boolean** | Whether at least one external link exists for the entry, whichever kind. It says nothing about accounts and  groups - those are counted by the flag for members below. | [optional] |
 | **sharedForUser** | **Boolean** | Whether at least one account or group has been given rights on the entry directly, as opposed to reaching it  through a link or through the room around it. | [optional] |
-| **sharedExternal** | **Boolean** | Whether one of the entry&#39;s links is open to people outside the portal, as opposed to a link that only its own  members can follow. This is the flag to watch when the concern is who can reach the content from outside. | [optional] |
+| **sharedExternal** | **Boolean** | Whether one of the entry's links is open to people outside the portal, as opposed to a link that only its own  members can follow. This is the flag to watch when the concern is who can reach the content from outside. | [optional] |
 | **parentShared** | **Boolean** | Whether the entry is reachable because the room or folder around it is shared, rather than through rights of  its own. A copy or a move takes the entry out of that scope. | [optional] |
 | **shortWebUrl** | **URI** (uri) | A shortened address that opens the entry through the link it is being read with. It is an empty string  whenever no link applies, which is the usual case for a member browsing their own rooms. | [optional] |
-| **created** | [**AiApiDateTime**](#model-aiapidatetime) | When the entry was created, written with the offset of the portal&#39;s time zone. For a file restored from an  older version this is still the moment the file first appeared. | [optional] |
-| **createdBy** | [**AiEmployeeDto**](#model-aiemployeedto) | Who created the entry. It is null for a caller without an account, who is told nothing about the portal&#39;s  members. | [optional] |
-| **updated** | [**AiApiDateTime**](#model-aiapidatetime) | When the entry last changed, written with the offset of the portal&#39;s time zone. It is never reported as  earlier than the creation moment, so the two can be compared safely. | [optional] |
-| **autoDelete** | [**AiApiDateTime**](#model-aiapidatetime) | When the entry will disappear on its own, written with the offset of the portal&#39;s time zone. It is filled in  only where a removal is actually scheduled - something in the trash while the portal cleans it up  automatically, or a guest&#39;s own documents - so a null means nothing is scheduled rather than that the entry is  permanent. | [optional] |
+| **created** | [**AiApiDateTime**](#model-aiapidatetime) | When the entry was created, written with the offset of the portal's time zone. For a file restored from an  older version this is still the moment the file first appeared. | [optional] |
+| **createdBy** | [**AiEmployeeDto**](#model-aiemployeedto) | Who created the entry. It is null for a caller without an account, who is told nothing about the portal's  members. | [optional] |
+| **updated** | [**AiApiDateTime**](#model-aiapidatetime) | When the entry last changed, written with the offset of the portal's time zone. It is never reported as  earlier than the creation moment, so the two can be compared safely. | [optional] |
+| **autoDelete** | [**AiApiDateTime**](#model-aiapidatetime) | When the entry will disappear on its own, written with the offset of the portal's time zone. It is filled in  only where a removal is actually scheduled - something in the trash while the portal cleans it up  automatically, or a guest's own documents - so a null means nothing is scheduled rather than that the entry is  permanent. | [optional] |
 | **rootFolderType** | [**AiFolderType**](#model-aifoldertype) | The section the entry ultimately belongs to, which is what tells a personal document from one inside a room,  from a template and from something in the trash or the archive. | [optional] [enum: 0, 1, 2, 3, 5, 6, 8, 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36] |
 | **parentRoomType** | [**AiFolderType**](#model-aifoldertype) | The kind of room the entry lies in, which decides what the room allows - filling forms, public links,  indexing. It is null for an entry that is not inside a room at all. | [optional] [enum: 0, 1, 2, 3, 5, 6, 8, 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36] |
 | **updatedBy** | [**AiEmployeeDto**](#model-aiemployeedto) | Who changed the entry last. It is null for a caller without an account. | [optional] |
@@ -4612,7 +4612,7 @@ The part of a file or folder that depends on how the entry is identified: by a n
 | **availableShareRights** | [**AiFileEntryDtoInteger_allOf_availableShareRights**](#model-aifileentrydtointegeravailablesharerights) |  | [optional] [nullable] |
 | **requestToken** | **String** | The token of the link the entry is being read through, which is the value the external-share operations expect  and which also has to be carried by the download and preview addresses. It is null whenever the entry is not  being read through a link. | [optional] [nullable] |
 | **external** | **Boolean** | Set when the link being used was made for this very entry, and false when the entry is reached through a link  to the room around it. It is null when no link is involved. | [optional] [nullable] |
-| **expirationDate** | [**AiApiDateTime**](#model-aiapidatetime) | When the link being used stops working, written with the offset of the portal&#39;s time zone. It is null for a  link that never expires and whenever no link is involved. | [optional] |
+| **expirationDate** | [**AiApiDateTime**](#model-aiapidatetime) | When the link being used stops working, written with the offset of the portal's time zone. It is null for a  link that never expires and whenever no link is involved. | [optional] |
 | **isLinkExpired** | **Boolean** | Set when the link being used has already passed its expiration date, which is why the entry cannot be opened  even though it is described here. It is null when no link is involved. | [optional] [nullable] |
 
 
@@ -4629,7 +4629,7 @@ Which access levels may be handed out on this entry, listed per kind of recipien
 
 
 ### Model AiFileEntryDtoInteger.security
-What the calling account may do with this entry, one flag per action, and the cheapest way to decide which  operations to offer without trying them. The flags already take the room&#39;s settings and the account&#39;s role  into account.
+What the calling account may do with this entry, one flag per action, and the cheapest way to decide which  operations to offer without trying them. The flags already take the room's settings and the account's role  into account.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
@@ -4707,11 +4707,11 @@ One background file operation of the caller, as it stood when the answer was bui
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **id** | **String** | The identifier of the operation, the one to pass to &#x60;PUT api/2.0/files/fileops/terminate/{id}&#x60; to stop it.  Operations belong to the account that started them, so an identifier of somebody else is never listed here. | [required] [example: a1f4c9b2-3d8e-4f77-9b16-2c5de8f0a913] [nullable] |
-| **Operation** | [**AiFileOperationType**](#model-aifileoperationtype) | What the operation does with the entries, which also decides what else is reported: only a download fills  &#x60;url&#x60;, and a deletion leaves &#x60;files&#x60; and &#x60;folders&#x60; empty. | [required] [enum: 0, 1, 2, 3, 4, 5, 6, 7] |
-| **progress** | **Integer** (int32) | How far the operation has come, from 0 to 100. Reaching 100 only means it stopped; whether it did what it was  asked for is told by &#x60;error&#x60;. | [required] [example: 100] |
+| **id** | **String** | The identifier of the operation, the one to pass to `PUT api/2.0/files/fileops/terminate/{id}` to stop it.  Operations belong to the account that started them, so an identifier of somebody else is never listed here. | [required] [example: a1f4c9b2-3d8e-4f77-9b16-2c5de8f0a913] [nullable] |
+| **Operation** | [**AiFileOperationType**](#model-aifileoperationtype) | What the operation does with the entries, which also decides what else is reported: only a download fills  `url`, and a deletion leaves `files` and `folders` empty. | [required] [enum: 0, 1, 2, 3, 4, 5, 6, 7] |
+| **progress** | **Integer** (int32) | How far the operation has come, from 0 to 100. Reaching 100 only means it stopped; whether it did what it was  asked for is told by `error`. | [required] [example: 100] |
 | **error** | **String** | The reason the operation could not finish its work, in the language of the request. Empty when nothing went  wrong, which is the only way to tell a successful operation from a failed one. | [required] [example: Folder not found.] [nullable] |
-| **processed** | **String** | How many entries the operation has handled so far, written as a decimal number in a string. It counts items,  not percent, and stays behind &#x60;progress&#x60; on operations that walk into subfolders. | [required] [example: 12] [nullable] |
+| **processed** | **String** | How many entries the operation has handled so far, written as a decimal number in a string. It counts items,  not percent, and stays behind `progress` on operations that walk into subfolders. | [required] [example: 12] [nullable] |
 | **finished** | **Boolean** | Whether the operation has stopped running. A finished operation is reported once and then dropped, so the next  read of the operation list no longer contains it. | [required] [example: true] |
 | **url** | **URI** (uri) | The address the packed archive can be downloaded from once a bulk download has finished. Empty for every other  kind of operation. | [optional] [example: https://portal.example.com/filehandler.ashx?action=bulk] [nullable] |
 | **files** | [**List**](#model-aifileentrybasedto) | The files the operation produced or moved, in the order it wrote them down. Empty while nothing has been  written yet and for a deletion, which reports no entries at all. | [optional] [example: [{id=10, title=document.docx}]] [nullable] |
@@ -4801,13 +4801,13 @@ The folder, with the fields that only a room carries filled in when the folder i
 | **ownedBy** | [**AiEmployeeDto**](#model-aiemployeedto) | Who owns the place the entry is shared from - the creator of the room it lies in, or of the personal section  that holds it. It is filled in only while the entry is being read through a share, and never for a caller  without an account. | [optional] |
 | **shared** | **Boolean** | Whether at least one external link exists for the entry, whichever kind. It says nothing about accounts and  groups - those are counted by the flag for members below. | [optional] |
 | **sharedForUser** | **Boolean** | Whether at least one account or group has been given rights on the entry directly, as opposed to reaching it  through a link or through the room around it. | [optional] |
-| **sharedExternal** | **Boolean** | Whether one of the entry&#39;s links is open to people outside the portal, as opposed to a link that only its own  members can follow. This is the flag to watch when the concern is who can reach the content from outside. | [optional] |
+| **sharedExternal** | **Boolean** | Whether one of the entry's links is open to people outside the portal, as opposed to a link that only its own  members can follow. This is the flag to watch when the concern is who can reach the content from outside. | [optional] |
 | **parentShared** | **Boolean** | Whether the entry is reachable because the room or folder around it is shared, rather than through rights of  its own. A copy or a move takes the entry out of that scope. | [optional] |
 | **shortWebUrl** | **URI** (uri) | A shortened address that opens the entry through the link it is being read with. It is an empty string  whenever no link applies, which is the usual case for a member browsing their own rooms. | [optional] |
-| **created** | [**AiApiDateTime**](#model-aiapidatetime) | When the entry was created, written with the offset of the portal&#39;s time zone. For a file restored from an  older version this is still the moment the file first appeared. | [optional] |
-| **createdBy** | [**AiEmployeeDto**](#model-aiemployeedto) | Who created the entry. It is null for a caller without an account, who is told nothing about the portal&#39;s  members. | [optional] |
-| **updated** | [**AiApiDateTime**](#model-aiapidatetime) | When the entry last changed, written with the offset of the portal&#39;s time zone. It is never reported as  earlier than the creation moment, so the two can be compared safely. | [optional] |
-| **autoDelete** | [**AiApiDateTime**](#model-aiapidatetime) | When the entry will disappear on its own, written with the offset of the portal&#39;s time zone. It is filled in  only where a removal is actually scheduled - something in the trash while the portal cleans it up  automatically, or a guest&#39;s own documents - so a null means nothing is scheduled rather than that the entry is  permanent. | [optional] |
+| **created** | [**AiApiDateTime**](#model-aiapidatetime) | When the entry was created, written with the offset of the portal's time zone. For a file restored from an  older version this is still the moment the file first appeared. | [optional] |
+| **createdBy** | [**AiEmployeeDto**](#model-aiemployeedto) | Who created the entry. It is null for a caller without an account, who is told nothing about the portal's  members. | [optional] |
+| **updated** | [**AiApiDateTime**](#model-aiapidatetime) | When the entry last changed, written with the offset of the portal's time zone. It is never reported as  earlier than the creation moment, so the two can be compared safely. | [optional] |
+| **autoDelete** | [**AiApiDateTime**](#model-aiapidatetime) | When the entry will disappear on its own, written with the offset of the portal's time zone. It is filled in  only where a removal is actually scheduled - something in the trash while the portal cleans it up  automatically, or a guest's own documents - so a null means nothing is scheduled rather than that the entry is  permanent. | [optional] |
 | **rootFolderType** | [**AiFolderType**](#model-aifoldertype) | The section the entry ultimately belongs to, which is what tells a personal document from one inside a room,  from a template and from something in the trash or the archive. | [optional] [enum: 0, 1, 2, 3, 5, 6, 8, 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36] |
 | **parentRoomType** | [**AiFolderType**](#model-aifoldertype) | The kind of room the entry lies in, which decides what the room allows - filling forms, public links,  indexing. It is null for an entry that is not inside a room at all. | [optional] [enum: 0, 1, 2, 3, 5, 6, 8, 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36] |
 | **updatedBy** | [**AiEmployeeDto**](#model-aiemployeedto) | Who changed the entry last. It is null for a caller without an account. | [optional] |
@@ -4829,11 +4829,11 @@ The folder, with the fields that only a room carries filled in when the folder i
 | **availableShareRights** | [**AiFileEntryDtoInteger_allOf_availableShareRights**](#model-aifileentrydtointegeravailablesharerights) |  | [optional] [nullable] |
 | **requestToken** | **String** | The token of the link the entry is being read through, which is the value the external-share operations expect  and which also has to be carried by the download and preview addresses. It is null whenever the entry is not  being read through a link. | [optional] |
 | **external** | **Boolean** | Set when the link being used was made for this very entry, and false when the entry is reached through a link  to the room around it. It is null when no link is involved. | [optional] |
-| **expirationDate** | [**AiApiDateTime**](#model-aiapidatetime) | When the link being used stops working, written with the offset of the portal&#39;s time zone. It is null for a  link that never expires and whenever no link is involved. | [optional] |
+| **expirationDate** | [**AiApiDateTime**](#model-aiapidatetime) | When the link being used stops working, written with the offset of the portal's time zone. It is null for a  link that never expires and whenever no link is involved. | [optional] |
 | **isLinkExpired** | **Boolean** | Set when the link being used has already passed its expiration date, which is why the entry cannot be opened  even though it is described here. It is null when no link is involved. | [optional] |
 | **parentId** | **Integer** (int32) | The folder this one is listed in. For a room it is the root of the section the room lives in, and for an entry  opened through a sharing link whose real parent the caller may not read it is the root of the section with the  entries shared with them. | [optional] |
-| **filesCount** | **Integer** (int32) | How many files lie directly in the folder, without counting the subfolders. The roots of the &#x60;Rooms&#x60;, room  templates and default templates sections always report 0, because the number is not collected for them. | [optional] |
-| **foldersCount** | **Integer** (int32) | How many subfolders lie directly in the folder. For an AI room the two service subfolders it always holds are  subtracted, so the number matches what a listing of it shows, and the roots of the &#x60;Rooms&#x60; and templates  sections report 0. | [optional] |
+| **filesCount** | **Integer** (int32) | How many files lie directly in the folder, without counting the subfolders. The roots of the `Rooms`, room  templates and default templates sections always report 0, because the number is not collected for them. | [optional] |
+| **foldersCount** | **Integer** (int32) | How many subfolders lie directly in the folder. For an AI room the two service subfolders it always holds are  subtracted, so the number matches what a listing of it shows, and the roots of the `Rooms` and templates  sections report 0. | [optional] |
 | **isShareable** | **Boolean** | Whether the caller may hand out access to the folder. It is filled in only for the folder a folder-contents  answer is about, and is null in every other answer, so null says nothing about the sharing rights. | [optional] [nullable] |
 | **new** | **Integer** (int32) | How many entries inside the folder the caller has not opened yet, the number drawn as the badge on it. An  account that turned the badges off in its own settings always reads 0 here, so 0 alone does not prove that  everything has been seen. | [optional] |
 | **mute** | **Boolean** | Whether the caller silenced the notifications of this room: true means no message about its activity reaches  them. The choice belongs to the reading account rather than to the room, so two members of one room read  different values. | [optional] |
@@ -4842,17 +4842,17 @@ The folder, with the fields that only a room carries filled in when the folder i
 | **pinned** | **Boolean** | Whether the caller pinned the room to the top of their own room list. Pinning is personal and is lost when the  room is archived. | [optional] |
 | **roomType** | [**AiRoomType**](#model-airoomtype) | The kind of the room, which decides the default access rules of its members. Null for a folder that is not a  room. | [optional] [enum: 1, 2, 5, 6, 8, 9] |
 | **private** | **Boolean** | Whether the room is a private one, which limits it to the accounts invited into it and needs encryption keys  set up for each of them. | [optional] |
-| **indexing** | **Boolean** | Whether the contents of the room are kept in an explicit numbered order, the one reported as &#x60;order&#x60; on each  entry, instead of being left to the sorting the reader asks for. | [optional] |
+| **indexing** | **Boolean** | Whether the contents of the room are kept in an explicit numbered order, the one reported as `order` on each  entry, instead of being left to the sorting the reader asks for. | [optional] |
 | **denyDownload** | **Boolean** | Whether downloading and printing the contents of the room is forbidden, which leaves its members with viewing  and editing in the editor. | [optional] |
 | **lifetime** | [**AiRoomDataLifetimeDto**](#model-airoomdatalifetimedto) | The rule by which the files of the room are removed once they grow old. Null when the room has no such rule,  which is also what is reported after the rule is switched off, because switching it off erases it. | [optional] |
 | **watermark** | [**AiWatermarkDto**](#model-aiwatermarkdto) | The watermark stamped over the documents of the room while they are viewed and printed. Null when the room has  no watermark, and for every folder that is not a room. | [optional] |
 | **type** | [**AiFolderType**](#model-aifoldertype) | The part the folder plays inside its room: one of the service folders of the form-filling flow, or the  knowledge and result storages of an AI room. It stays null for an ordinary folder and for the room itself, so  it does not describe folders in general. | [optional] [enum: 0, 1, 2, 3, 5, 6, 8, 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36] |
 | **inRoom** | **Boolean** | Whether the caller holds the room through an invitation of their own: true for the account that created it and  for a member invited personally, false when the access comes from a group they belong to, and null for a  folder that is not a room. | [optional] [nullable] |
 | **quotaLimit** | **Long** (int64) | How much space the files of the room may take, in bytes. It is the limit set on this room, or the portal  default for rooms when none was set. Null when the tariff of the portal does not count room statistics, when  room quotas are switched off, when the room lies in the archive or the trash, or when the caller may only read  it. | [optional] [nullable] |
-| **isCustomQuota** | **Boolean** | Whether &#x60;quotaLimit&#x60; is a limit set on this room (true) or the portal default for rooms (false). Null exactly  when &#x60;quotaLimit&#x60; is null. | [optional] [nullable] |
+| **isCustomQuota** | **Boolean** | Whether `quotaLimit` is a limit set on this room (true) or the portal default for rooms (false). Null exactly  when `quotaLimit` is null. | [optional] [nullable] |
 | **usedSpace** | **Long** (int64) | How much the files of the room take, in bytes, as of the last time the counter was recomputed. The counter is  refreshed when a file operation finishes, so a read right after an upload or a deletion can still report the  previous figure. Null for a folder that is not a room. | [optional] [nullable] |
-| **passwordProtected** | **Boolean** | Whether the sharing link the folder was opened through asks for a password that has not been entered yet.  While it is true the contents stay unreadable; send the password to &#x60;POST api/2.0/files/share/{key}/password&#x60;  first. Null when the folder was not reached through a link. | [optional] [nullable] |
-| **expired** | **Boolean** | Deprecated, read &#x60;isLinkExpired&#x60; instead: whether the sharing link the folder was opened through has run out  of its lifetime. | [optional] [nullable] |
+| **passwordProtected** | **Boolean** | Whether the sharing link the folder was opened through asks for a password that has not been entered yet.  While it is true the contents stay unreadable; send the password to `POST api/2.0/files/share/{key}/password`  first. Null when the folder was not reached through a link. | [optional] [nullable] |
+| **expired** | **Boolean** | Deprecated, read `isLinkExpired` instead: whether the sharing link the folder was opened through has run out  of its lifetime. | [optional] [nullable] |
 | **chatSettings** | [**AiChatSettingsDto**](#model-aichatsettingsdto) | The chat configuration of an AI room. Only the system prompt is reported here, whatever else the room stores,  and the field is null for every folder that is not an AI room. | [optional] |
 | **rootRoomType** | [**AiRoomType**](#model-airoomtype) | The kind of the room the folder lies in. It is filled in only for the folder a folder-contents answer is  about, and only when that room is an AI room, so it is null in every other answer and for every other room  kind. | [optional] [enum: 1, 2, 5, 6, 8, 9] |
 | **saveFormAsXLSX** | **Boolean** | Whether the answers collected in this form-filling room are also gathered into a spreadsheet next to the  completed copies. Filled in for form-filling rooms only. | [optional] [nullable] |
@@ -4885,7 +4885,7 @@ The successful API response containing the FolderDtoInteger object.
 
 
 ### Model AiFolderMutationResult
-Outcome of &#x60;createFolder&#x60; / &#x60;renameFolder&#x60; — either the persisted folder or a field-scoped error.
+Outcome of `createFolder` / `renameFolder` — either the persisted folder or a field-scoped error.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
@@ -4931,17 +4931,17 @@ Possible values:
 
 
 ### Model AiImportError
-Per-entry error reported by &#x60;PromptsEngine.importBundle&#x60;.
+Per-entry error reported by `PromptsEngine.importBundle`.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **kind** | **String** | &#x60;folder&#x60; or &#x60;prompt&#x60;, plus the offending name or id. | [required] [example: prompt] [enum: folder, prompt] |
+| **kind** | **String** | `folder` or `prompt`, plus the offending name or id. | [required] [example: prompt] [enum: folder, prompt] |
 | **ref** | **String** | The offending entry - its name or its id. | [required] [example: 33333333-3333-3333-3333-333333333333] |
 | **error** | [**AiTErrorData**](#model-aiterrordata) | Why the entry was rejected. | [required] [example: a prompt of that name already exists] |
 
 
 ### Model AiImportMode
-Mode passed to &#x60;PromptsEngine.importBundle&#x60;.
+Mode passed to `PromptsEngine.importBundle`.
 
 Possible values:
 
@@ -4950,7 +4950,7 @@ Possible values:
 
 
 ### Model AiImportResult
-Outcome of &#x60;PromptsEngine.importBundle&#x60;. Either every entry persisted with counts, or no entries persisted plus a per-entry error report.
+Outcome of `PromptsEngine.importBundle`. Either every entry persisted with counts, or no entries persisted plus a per-entry error report.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
@@ -4995,12 +4995,12 @@ AI model metadata. Describes a single model available from a provider.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **id** | **String** | Model identifier as used by the provider API (e.g. &#x60;gpt-4o&#x60;, &#x60;claude-sonnet-4-20250514&#x60;). | [required] [example: gpt-4o] |
+| **id** | **String** | Model identifier as used by the provider API (e.g. `gpt-4o`, `claude-sonnet-4-20250514`). | [required] [example: gpt-4o] |
 | **name** | **String** | Human-readable model name for display in the UI. | [required] [example: GPT-4o] |
 | **provider** | [**AiProviderType**](#model-aiprovidertype) | Provider that offers this model. | [required] [example: openai] |
 | **reasoning** | **Boolean** | Whether this model supports extended thinking / chain-of-thought reasoning. | [optional] [example: false] |
-| **reasoningSupport** | [**AiReasoningSupport**](#model-aireasoningsupport) | What the model can do with extended thinking, when the provider&#39;s catalogue says so (OpenRouter and the ONLYOFFICE route report a per-model &#x60;reasoning&#x60; object). Copied onto the profile at save time; absent, the widget falls back to the provider&#39;s id-based table. | [optional] |
-| **capabilities** | **BigDecimal** | Bitmask of model capabilities (Chat, Image, Vision, Tools, etc.). Used to filter models per &#x60;ActionType&#x60;. | [optional] [example: 7] |
+| **reasoningSupport** | [**AiReasoningSupport**](#model-aireasoningsupport) | What the model can do with extended thinking, when the provider's catalogue says so (OpenRouter and the ONLYOFFICE route report a per-model `reasoning` object). Copied onto the profile at save time; absent, the widget falls back to the provider's id-based table. | [optional] |
+| **capabilities** | **BigDecimal** | Bitmask of model capabilities (Chat, Image, Vision, Tools, etc.). Used to filter models per `ActionType`. | [optional] [example: 7] |
 
 
 ### Model AiNewItemsAgentNewItemsArrayWrapper
@@ -5025,14 +5025,14 @@ One day of the entries the caller has not opened yet, the groups running from th
 
 
 ### Model AiOpenAIChatCompletionChunk
-One &#x60;chat.completion.chunk&#x60; of an OpenAI-compatible streaming response. Only the fields this service can populate are emitted - an OpenAI client tolerates the rest as absent.
+One `chat.completion.chunk` of an OpenAI-compatible streaming response. Only the fields this service can populate are emitted - an OpenAI client tolerates the rest as absent.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **id** | **String** | The completion identifier, stable across every chunk of one response. | [required] |
-| **object** | **String** | Always &#x60;chat.completion.chunk&#x60;. | [required] [enum: chat.completion.chunk] |
+| **object** | **String** | Always `chat.completion.chunk`. | [required] [enum: chat.completion.chunk] |
 | **created** | **BigDecimal** | When the completion started, in Unix seconds. | [required] |
-| **model** | **String** | The model that produced the completion - the resolved profile&#39;s model. | [required] |
+| **model** | **String** | The model that produced the completion - the resolved profile's model. | [required] |
 | **choices** | [**List**](#model-aiopenaichunkchoice) | The choices carried by this chunk. This service emits exactly one. | [required] |
 
 
@@ -5041,7 +5041,7 @@ The incremental part of one choice - what this chunk adds to the assistant messa
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **role** | **String** | Sent on the first chunk only, always &#x60;assistant&#x60;. | [optional] [enum: assistant] |
+| **role** | **String** | Sent on the first chunk only, always `assistant`. | [optional] [enum: assistant] |
 | **content** | **String** | The text this chunk appends. Null when the chunk carries no text. | [optional] [nullable] |
 | **tool\_calls** | [**List**](#model-aiopenaitoolcalldelta) | The tool calls the model requested, emitted in place of text. | [optional] |
 
@@ -5057,7 +5057,7 @@ One choice of a streaming completion, carrying the part this chunk adds.
 
 
 ### Model AiOpenAIFinishReason
-OpenAI Chat Completions streaming shapes.   &#x60;toOpenAIChatCompletionStream&#x60; maps the engine&#39;s transport-agnostic &#x60;ChatEvent&#x60; stream onto these chunks so a host can expose an OpenAI-compatible &#x60;POST /v1/chat/completions&#x60; (&#x60;stream: true&#x60;) endpoint backed by the same chat pipeline as the in-app widget. Only the subset of fields the engine can populate is emitted; everything else an OpenAI client tolerates as absent.
+OpenAI Chat Completions streaming shapes.   `toOpenAIChatCompletionStream` maps the engine's transport-agnostic `ChatEvent` stream onto these chunks so a host can expose an OpenAI-compatible `POST /v1/chat/completions` (`stream: true`) endpoint backed by the same chat pipeline as the in-app widget. Only the subset of fields the engine can populate is emitted; everything else an OpenAI client tolerates as absent.
 
 Possible values:
 
@@ -5074,15 +5074,15 @@ A chunk or the terminal error envelope emitted on a failed stream.
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **id** | **String** | The completion identifier, stable across every chunk of one response. | [required] |
-| **object** | **String** | Always &#x60;chat.completion.chunk&#x60;. | [required] [enum: chat.completion.chunk] |
+| **object** | **String** | Always `chat.completion.chunk`. | [required] [enum: chat.completion.chunk] |
 | **created** | **BigDecimal** | When the completion started, in Unix seconds. | [required] |
-| **model** | **String** | The model that produced the completion - the resolved profile&#39;s model. | [required] |
+| **model** | **String** | The model that produced the completion - the resolved profile's model. | [required] |
 | **choices** | [**List**](#model-aiopenaichunkchoice) | The choices carried by this chunk. This service emits exactly one. | [required] |
 | **error** | [**AiOpenAIStreamError_error**](#model-aiopenaistreamerrorerror) |  | [required] |
 
 
 ### Model AiOpenAIStreamError
-OpenAI streaming error envelope. When the upstream request fails mid-stream the OpenAI API emits a single &#x60;data:&#x60; line carrying an &#x60;error&#x60; object (no &#x60;choices&#x60;), then closes the stream — the official SDK turns this into a thrown &#x60;APIError&#x60;. Mirrors that shape so a host exposing an OpenAI-compatible endpoint stays wire-compatible.
+OpenAI streaming error envelope. When the upstream request fails mid-stream the OpenAI API emits a single `data:` line carrying an `error` object (no `choices`), then closes the stream — the official SDK turns this into a thrown `APIError`. Mirrors that shape so a host exposing an OpenAI-compatible endpoint stays wire-compatible.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
@@ -5107,7 +5107,7 @@ The incremental part of one tool call the model requested.
 |------------ | ------------- | ------------- | -------------|
 | **index** | **BigDecimal** | The zero-based position of the tool call within the message. | [required] |
 | **id** | **String** | The tool call identifier, quoted back when its result is submitted. | [optional] |
-| **type** | **String** | Always &#x60;function&#x60; - the only tool kind the API defines. | [optional] [enum: function] |
+| **type** | **String** | Always `function` - the only tool kind the API defines. | [optional] [enum: function] |
 | **function** | [**AiOpenAIToolCallDelta_function**](#model-aiopenaitoolcalldeltafunction) |  | [optional] |
 
 
@@ -5121,12 +5121,12 @@ The call itself: the function name and its JSON-encoded arguments.
 
 
 ### Model AiOpenOrCreateResult
-Resolved thread state returned by &#x60;ThreadsEngine.openOrCreate&#x60;.
+Resolved thread state returned by `ThreadsEngine.openOrCreate`.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **threadId** | **String** | The thread that was opened, or the one just created. | [required] |
-| **title** | **String** | Empty string for existing threads — the engine doesn&#39;t re-fetch. | [required] |
+| **title** | **String** | Empty string for existing threads — the engine doesn't re-fetch. | [required] |
 | **priorMessages** | [**List**](#model-aithreadmessagelike) | The messages already in the thread - empty for a thread that was just created. | [required] |
 
 
@@ -5137,24 +5137,24 @@ Complete AI provider + model configuration saved by the user. Profiles are the p
 |------------ | ------------- | ------------- | -------------|
 | **id** | **String** | Unique profile identifier (UUID). | [required] [example: 00000000-0000-0000-0000-000000000000] |
 | **name** | **String** | User-defined profile display name. | [required] [example: OpenAI GPT-4o] |
-| **providerType** | [**AiProviderType**](#model-aiprovidertype) | Provider type for this profile. Use &#x60;external&#x60; to delegate all HTTP transport to &#x60;PlatformAdapter.externalFetch&#x60; while reusing an existing provider&#39;s response parser — see &#x60;Profile.basedOn&#x60; for the format selector. | [required] [example: openai] |
-| **basedOn** | [**AiBuiltinProviderType**](#model-aibuiltinprovidertype) | Selects the response-format parser used by the &#x60;external&#x60; provider. Ignored for any other &#x60;providerType&#x60;.  Supported values are &#x60;openai&#x60;, &#x60;anthropic&#x60;, &#x60;mistral&#x60; and &#x60;openrouter&#x60;. Remaining values (&#x60;genai&#x60;, &#x60;stabilityai&#x60;, …) are accepted by the type but not yet implemented; passing one raises an error at request time. | [optional] [example: openai] [enum: anthropic, ollama, openai, openaicompatible, together, openrouter, genai, deepseek, xai, lm-studio, mistral, groq, zhipu, stabilityai, gpt4all, onlyoffice, external] |
+| **providerType** | [**AiProviderType**](#model-aiprovidertype) | Provider type for this profile. Use `external` to delegate all HTTP transport to `PlatformAdapter.externalFetch` while reusing an existing provider's response parser — see `Profile.basedOn` for the format selector. | [required] [example: openai] |
+| **basedOn** | [**AiBuiltinProviderType**](#model-aibuiltinprovidertype) | Selects the response-format parser used by the `external` provider. Ignored for any other `providerType`.  Supported values are `openai`, `anthropic`, `mistral` and `openrouter`. Remaining values (`genai`, `stabilityai`, …) are accepted by the type but not yet implemented; passing one raises an error at request time. | [optional] [example: openai] [enum: anthropic, ollama, openai, openaicompatible, together, openrouter, genai, deepseek, xai, lm-studio, mistral, groq, zhipu, stabilityai, gpt4all, onlyoffice, external] |
 | **baseUrl** | **String** | Base URL of the provider API. | [required] [example: https://api.openai.com/v1] |
 | **key** | **String** | API key or token. Optional for local providers. | [optional] [example: sk-your-provider-api-key] |
-| **headers** | **Map** | Extra HTTP headers sent with every request to this provider. Merged into the SDK client&#39;s default headers; an explicit &#x60;Authorization&#x60; here wins over the one derived from &#x60;key&#x60;. Honoured by the OpenAI-family providers. | [optional] [example: {X-Organization=acme}] |
+| **headers** | **Map** | Extra HTTP headers sent with every request to this provider. Merged into the SDK client's default headers; an explicit `Authorization` here wins over the one derived from `key`. Honoured by the OpenAI-family providers. | [optional] [example: {X-Organization=acme}] |
 | **modelId** | **String** | Selected model ID within this provider. | [required] [example: gpt-4o] |
-| **reasoning** | **Boolean** | Whether extended thinking is enabled for this profile&#39;s model. | [optional] [example: false] |
-| **reasoningSupport** | [**AiReasoningSupport**](#model-aireasoningsupport) | Extended-thinking capabilities of the selected model as reported by the provider&#39;s catalogue at save time (see &#x60;Model.reasoningSupport&#x60;). When present the composer&#39;s Effort row follows it exactly; when absent the provider&#39;s id-based table answers. Hosts persist it with the rest of the profile. | [optional] |
+| **reasoning** | **Boolean** | Whether extended thinking is enabled for this profile's model. | [optional] [example: false] |
+| **reasoningSupport** | [**AiReasoningSupport**](#model-aireasoningsupport) | Extended-thinking capabilities of the selected model as reported by the provider's catalogue at save time (see `Model.reasoningSupport`). When present the composer's Effort row follows it exactly; when absent the provider's id-based table answers. Hosts persist it with the rest of the profile. | [optional] |
 | **capabilities** | **BigDecimal** | Bitmask of capabilities supported by the selected model. | [optional] [example: 7] |
-| **canUseTool** | **Boolean** | Result of the live tool-capability probe performed at create time and on changes to &#x60;modelId&#x60; / &#x60;providerType&#x60; / &#x60;baseUrl&#x60;. &#x60;undefined&#x60; means the probe has never run for this profile (legacy record). | [optional] [example: true] |
-| **useResponsesApi** | **Boolean** | Result of the live Responses-API probe (parallel to &#x60;canUseTool&#x60;). &#x60;true&#x60; means the model speaks &#x60;/v1/responses&#x60; and the OpenAI provider must route through &#x60;client.responses.create&#x60; — required for gpt-5+ reasoning models that reject &#x60;reasoning_effort&#x60; together with &#x60;tools&#x60; on &#x60;/v1/chat/completions&#x60;. Probed at create time and whenever &#x60;modelId&#x60; / &#x60;providerType&#x60; / &#x60;baseUrl&#x60; change. &#x60;undefined&#x60; means the probe never ran (legacy record) — readers treat that as &#x60;false&#x60;. | [optional] [example: false] |
+| **canUseTool** | **Boolean** | Result of the live tool-capability probe performed at create time and on changes to `modelId` / `providerType` / `baseUrl`. `undefined` means the probe has never run for this profile (legacy record). | [optional] [example: true] |
+| **useResponsesApi** | **Boolean** | Result of the live Responses-API probe (parallel to `canUseTool`). `true` means the model speaks `/v1/responses` and the OpenAI provider must route through `client.responses.create` — required for gpt-5+ reasoning models that reject `reasoning_effort` together with `tools` on `/v1/chat/completions`. Probed at create time and whenever `modelId` / `providerType` / `baseUrl` change. `undefined` means the probe never ran (legacy record) — readers treat that as `false`. | [optional] [example: false] |
 | **isCloudProvider** | **Boolean** | Whether this profile uses a cloud-hosted provider (e.g. ONLYOFFICE DocSpace). | [optional] [example: true] |
-| **useProxy** | **Boolean** | Route every provider request through the host&#39;s &#x60;fetchProxy&#x60; instead of the global &#x60;fetch&#x60;. Useful when the host runs the widget in a sandbox without direct network access (CORS, custom auth, etc.). Has no effect when the &#x60;PlatformAdapter.fetchProxy&#x60; is not configured. | [optional] [example: false] |
+| **useProxy** | **Boolean** | Route every provider request through the host's `fetchProxy` instead of the global `fetch`. Useful when the host runs the widget in a sandbox without direct network access (CORS, custom auth, etc.). Has no effect when the `PlatformAdapter.fetchProxy` is not configured. | [optional] [example: false] |
 | **createdAt** | **BigDecimal** | Creation timestamp (ms since epoch). Used to sort the AI models list newest-first. | [optional] [example: 1767225600000] |
 
 
 ### Model AiProfileMutationResult
-Outcome of &#x60;create&#x60; / &#x60;update&#x60; — either a success carrying the persisted profile, or a failure with a field-level error description from the name check or the provider credential check.
+Outcome of `create` / `update` — either a success carrying the persisted profile, or a failure with a field-level error description from the name check or the provider credential check.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
@@ -5171,13 +5171,13 @@ Saved prompt template that users can quickly insert into the chat.
 | **id** | **String** | Unique prompt identifier (UUID). | [required] [example: 33333333-3333-3333-3333-333333333333] |
 | **name** | **String** | Prompt display name shown in the prompt picker. | [required] [example: Contract summary] |
 | **text** | **String** | Prompt template text. May contain placeholder tokens. | [required] [example: Summarise the key obligations and dates in the attached contract.] |
-| **folderId** | **String** | Optional parent folder ID. &#x60;undefined&#x60; means the prompt is at the root level. | [optional] [example: 44444444-4444-4444-4444-444444444444] |
+| **folderId** | **String** | Optional parent folder ID. `undefined` means the prompt is at the root level. | [optional] [example: 44444444-4444-4444-4444-444444444444] |
 | **createdAt** | **BigDecimal** | Timestamp (ms since epoch) when the prompt was created. | [required] [example: 1767225600000] |
 | **updatedAt** | **BigDecimal** | Timestamp (ms since epoch) of the last prompt modification. | [required] [example: 1767225600000] |
 
 
 ### Model AiPromptBundle
-Versioned, self-contained bundle of every saved prompt and folder. Stable wire format — &#x60;version&#x60; lets the import path migrate older shapes if the schema ever changes.
+Versioned, self-contained bundle of every saved prompt and folder. Stable wire format — `version` lets the import path migrate older shapes if the schema ever changes.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
@@ -5198,7 +5198,7 @@ Folder for organizing saved prompts.
 
 
 ### Model AiPromptMutationResult
-Outcome of &#x60;create&#x60; / &#x60;update&#x60; / &#x60;move&#x60; on a prompt — either the persisted prompt or a field-scoped error.
+Outcome of `create` / `update` / `move` on a prompt — either the persisted prompt or a field-scoped error.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
@@ -5208,11 +5208,11 @@ Outcome of &#x60;create&#x60; / &#x60;update&#x60; / &#x60;move&#x60; on a promp
 
 
 ### Model AiProviderType
-Provider type identifier. Accepts all 17 built-in types with autocomplete, plus any custom &#x60;string&#x60; for dynamically registered providers.
+Provider type identifier. Accepts all 17 built-in types with autocomplete, plus any custom `string` for dynamically registered providers.
 
 
 ### Model AiReasoningDepth
-A &#x60;ReasoningLevel&#x60; above off — a depth the model can think at.
+A `ReasoningLevel` above off — a depth the model can think at.
 
 Possible values:
 
@@ -5228,9 +5228,9 @@ What one model can do with extended thinking. Providers describe each model thro
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **thinks** | **Boolean** | Whether the model can think at all. False hides the whole control. | [required] |
-| **canDisable** | **Boolean** | Whether &#x60;off&#x60; really turns thinking off. False means the model thinks always and off only drops to its lowest depth (or leaves the default depth, where there is no knob). | [required] |
-| **depths** | [**List**](#model-aireasoningdepth) | Depths the model distinguishes, lowest first. Empty when thinking is an on/off switch with no depth (or the model doesn&#39;t think). A level not listed is clamped to the nearest one — see &#x60;clampReasoningLevel&#x60;. | [required] |
-| **defaultDepth** | [**AiReasoningDepth**](#model-aireasoningdepth) | The depth the model runs at when nothing asks for one — what a stored &#x60;off&#x60; means on a model that cannot be switched off. Known only where a catalogue reports it (OpenRouter&#39;s &#x60;default_effort&#x60;); otherwise &#x60;DEFAULT_REASONING_LEVEL&#x60; clamped to &#x60;depths&#x60; is assumed. | [optional] [enum: low, medium, high, max] |
+| **canDisable** | **Boolean** | Whether `off` really turns thinking off. False means the model thinks always and off only drops to its lowest depth (or leaves the default depth, where there is no knob). | [required] |
+| **depths** | [**List**](#model-aireasoningdepth) | Depths the model distinguishes, lowest first. Empty when thinking is an on/off switch with no depth (or the model doesn't think). A level not listed is clamped to the nearest one — see `clampReasoningLevel`. | [required] |
+| **defaultDepth** | [**AiReasoningDepth**](#model-aireasoningdepth) | The depth the model runs at when nothing asks for one — what a stored `off` means on a model that cannot be switched off. Known only where a catalogue reports it (OpenRouter's `default_effort`); otherwise `DEFAULT_REASONING_LEVEL` clamped to `depths` is assumed. | [optional] [enum: low, medium, high, max] |
 
 
 ### Model AiResolvedAssignment
@@ -5296,12 +5296,12 @@ Descriptor for a tool exposed by an MCP server.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **name** | **String** | Tool name as registered on the MCP server (e.g. &#x60;web_search&#x60;, &#x60;insert_text&#x60;). | [required] [example: docspace_get_folder] |
+| **name** | **String** | Tool name as registered on the MCP server (e.g. `web_search`, `insert_text`). | [required] [example: docspace_get_folder] |
 | **description** | **String** | Human-readable description shown to the AI model and in the tools list UI. | [required] [example: Read the contents of a DocSpace folder.] |
-| **inputSchema** | **Object** | JSON Schema describing the tool&#39;s input parameters. | [required] [example: {type=object, properties={folderId={type=string}}, required=[folderId]}] |
+| **inputSchema** | **Object** | JSON Schema describing the tool's input parameters. | [required] [example: {type=object, properties={folderId={type=string}}, required=[folderId]}] |
 | **enabled** | **Boolean** | Whether this tool is currently enabled. Disabled tools are hidden from the AI model. | [optional] [example: true] |
-| **serverType** | **String** | Server type (MCP server name / host tool group id) this tool belongs to — the key the persisted disabled map is stored under. Set by the source that enumerated the tool, so a caller-supplied tool can still be attributed to its group after being flattened into a single list: that is what lets the engine apply the disabled map to &#x60;actionArgs.tools&#x60; instead of trusting the caller to pre-filter. Wire-serializable, so it survives a remote (server-side) engine. | [optional] [example: docspace] |
-| **requireApproval** | **Boolean** | Whether the consumer must show an approval dialog before this tool runs. The engine reads it when deciding the &#x60;autoAllow&#x60; flag on a &#x60;tool-call-pending&#x60; event: &#x60;requireApproval &#x3D;&#x3D;&#x3D; false&#x60; auto-allows the call (no dialog), &#x60;true&#x60; always prompts. &#x60;undefined&#x60; leaves the decision to the persisted always-allow list alone — so MCP / custom-server tools (which never set it) keep prompting as before, while host tools opt into auto-allow by default. Wire-serializable, so it survives a remote (server-side) engine. | [optional] [example: false] |
+| **serverType** | **String** | Server type (MCP server name / host tool group id) this tool belongs to — the key the persisted disabled map is stored under. Set by the source that enumerated the tool, so a caller-supplied tool can still be attributed to its group after being flattened into a single list: that is what lets the engine apply the disabled map to `actionArgs.tools` instead of trusting the caller to pre-filter. Wire-serializable, so it survives a remote (server-side) engine. | [optional] [example: docspace] |
+| **requireApproval** | **Boolean** | Whether the consumer must show an approval dialog before this tool runs. The engine reads it when deciding the `autoAllow` flag on a `tool-call-pending` event: `requireApproval === false` auto-allows the call (no dialog), `true` always prompts. `undefined` leaves the decision to the persisted always-allow list alone — so MCP / custom-server tools (which never set it) keep prompting as before, while host tools opt into auto-allow by default. Wire-serializable, so it survives a remote (server-side) engine. | [optional] [example: false] |
 
 
 ### Model AiTProvider
@@ -5325,7 +5325,7 @@ Chat conversation metadata. Represents a single chat session (thread).
 | **lastEditDate** | **BigDecimal** | Timestamp (ms since epoch) of the last message in this thread. Used for sorting. | [optional] [example: 1767225600000] |
 | **provider** | [**AiTProvider**](#model-aitprovider) | Provider configuration at the time of last message. Used for thread-level provider display. | [optional] |
 | **model** | [**AiModel**](#model-aimodel) | Model info at the time of last message. | [optional] |
-| **profileId** | **String** | ID of the profile used for this thread. Links to &#x60;Profile.id&#x60;. | [optional] [example: 00000000-0000-0000-0000-000000000000] |
+| **profileId** | **String** | ID of the profile used for this thread. Links to `Profile.id`. | [optional] [example: 00000000-0000-0000-0000-000000000000] |
 
 
 ### Model AiThreadMessageLike
@@ -5363,7 +5363,7 @@ Delivery/generation status of the message.
 
 
 ### Model AiToolsBulkResult
-Outcome of &#x60;ToolsEngine.replaceAllCustomServers&#x60; — either every entry persisted, or no entries persisted plus a per-key error report.
+Outcome of `ToolsEngine.replaceAllCustomServers` — either every entry persisted, or no entries persisted plus a per-key error report.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
@@ -5439,15 +5439,15 @@ Web-search provider configuration. Credentials and provider selection for the bu
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **provider** | **String** | Provider identifier (e.g. &#x60;exa&#x60;). | [required] [example: exa] |
+| **provider** | **String** | Provider identifier (e.g. `exa`). | [required] [example: exa] |
 | **key** | **String** | API key for the provider. Optional for self-hosted or keyless setups. | [optional] [example: your-web-search-api-key] |
-| **baseUrl** | **String** | Optional override for the provider&#39;s base URL. | [optional] [example: https://api.exa.ai] |
+| **baseUrl** | **String** | Optional override for the provider's base URL. | [optional] [example: https://api.exa.ai] |
 | **isCloudProvider** | **Boolean** | Whether this provider is cloud-hosted (vs. self-hosted). | [optional] [example: true] |
-| **headers** | **Map** | Extra HTTP headers sent with each request to the ONLYOFFICE / cloud backend (e.g. &#x60;X-Tenant&#x60;). Merged after the derived &#x60;Authorization&#x60; header, so a custom header of the same name wins. | [optional] [example: {}] |
+| **headers** | **Map** | Extra HTTP headers sent with each request to the ONLYOFFICE / cloud backend (e.g. `X-Tenant`). Merged after the derived `Authorization` header, so a custom header of the same name wins. | [optional] [example: {}] |
 
 
 ### Model AiWebSearchMutationResult
-Outcome of &#x60;WebSearchEngine.configure&#x60; — either the persisted config or a field-scoped error suitable for the settings form.
+Outcome of `WebSearchEngine.configure` — either the persisted config or a field-scoped error suitable for the settings form.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
@@ -5485,17 +5485,17 @@ RFC 7807 problem details returned by the registration API for failed requests.
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **profileId** | **String** | Profile id bound to the agent. | [required] |
-| **prompt** | **String** | Agent system prompt; stored as the room&#39;s &#x60;chatSettings.prompt&#x60;. | [required] |
+| **prompt** | **String** | Agent system prompt; stored as the room's `chatSettings.prompt`. | [required] |
 | **private** | **Boolean** | Whether the agent room is private. | [optional] |
-| **share** | **List** | Initial share entries (&#x60;FileShareParams&#x60;). | [optional] |
+| **share** | **List** | Initial share entries (`FileShareParams`). | [optional] |
 | **attachDefaultTools** | **Boolean** | Whether to attach the default DocSpace MCP tool server. | [optional] |
 | **title** | **String** | Agent (room) title. | [optional] |
 | **quota** | **BigDecimal** | Room quota in bytes. | [optional] |
 | **indexing** | **Boolean** | Whether room content is indexed for search. | [optional] |
 | **denyDownload** | **Boolean** | Whether downloading room content is denied. | [optional] |
-| **lifetime** | **Object** | Room data lifetime policy (&#x60;RoomDataLifetimeDto&#x60;). | [optional] |
-| **watermark** | **Object** | Watermark settings (&#x60;WatermarkRequestDto&#x60;). | [optional] |
-| **logo** | **Object** | Room logo (&#x60;LogoRequest&#x60;). | [optional] |
+| **lifetime** | **Object** | Room data lifetime policy (`RoomDataLifetimeDto`). | [optional] |
+| **watermark** | **Object** | Watermark settings (`WatermarkRequestDto`). | [optional] |
+| **logo** | **Object** | Room logo (`LogoRequest`). | [optional] |
 | **tags** | **List** | Room tags. | [optional] |
 | **color** | **String** | Room accent color. | [optional] |
 | **cover** | **String** | Room cover image id. | [optional] |
@@ -5550,16 +5550,16 @@ A DocSpace room id: an integer for native rooms, a string for third-party-backed
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **profileId** | **String** | Profile id to rebind (optional). | [optional] |
-| **chatSettings** | **Object** | Chat settings (&#x60;ChatSettings&#x60;); requires a valid provider/model. | [optional] |
+| **chatSettings** | **Object** | Chat settings (`ChatSettings`); requires a valid provider/model. | [optional] |
 | **sendFormToExternalDB** | **Boolean** | Whether form results are sent to an external DB. | [optional] |
 | **saveFormAsXLSX** | **Boolean** | Whether forms are saved as XLSX. | [optional] |
 | **title** | **String** | Agent (room) title. | [optional] |
 | **quota** | **BigDecimal** | Room quota in bytes. | [optional] |
 | **indexing** | **Boolean** | Whether room content is indexed for search. | [optional] |
 | **denyDownload** | **Boolean** | Whether downloading room content is denied. | [optional] |
-| **lifetime** | **Object** | Room data lifetime policy (&#x60;RoomDataLifetimeDto&#x60;). | [optional] |
-| **watermark** | **Object** | Watermark settings (&#x60;WatermarkRequestDto&#x60;). | [optional] |
-| **logo** | **Object** | Room logo (&#x60;LogoRequest&#x60;). | [optional] |
+| **lifetime** | **Object** | Room data lifetime policy (`RoomDataLifetimeDto`). | [optional] |
+| **watermark** | **Object** | Watermark settings (`WatermarkRequestDto`). | [optional] |
+| **logo** | **Object** | Room logo (`LogoRequest`). | [optional] |
 | **tags** | **List** | Room tags. | [optional] |
 | **color** | **String** | Room accent color. | [optional] |
 | **cover** | **String** | Room cover image id. | [optional] |
@@ -5570,10 +5570,10 @@ A DocSpace room id: an integer for native rooms, a string for third-party-backed
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **result** | **oas_any_type_not_mapped** |  | [required] [nullable] |
-| **allowAlways** | **Boolean** | Persist auto-approve for this tool&#39;s name. | [optional] |
+| **allowAlways** | **Boolean** | Persist auto-approve for this tool's name. | [optional] |
 | **threadId** | **String** | Thread the assistant message belongs to. | [required] |
 | **messageId** | **String** | Storage id of the assistant message holding the tool call. | [required] |
-| **idx** | **BigDecimal** | Index of the tool-call content part inside &#x60;message.content&#x60;. | [required] |
+| **idx** | **BigDecimal** | Index of the tool-call content part inside `message.content`. | [required] |
 | **message** | [**AiThreadMessageLike**](#model-aithreadmessagelike) | Snapshot of the assistant message at the time the tool call surfaced. | [required] |
 | **actionArgs** | [**AiAiActionArgs**](#model-aiaiactionargs) | Per-request engine options: extra tools, reasoning, prompt override. | [optional] |
 | **entityId** | **String** | Optional entity (room) scope for profile resolution. | [optional] |
@@ -5622,7 +5622,7 @@ A DocSpace room id: an integer for native rooms, a string for third-party-backed
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **profileId** | **String** | The profile whose assignments are removed. May be sent as the &#x60;profileId&#x60; query parameter instead of in the body. | [required] [example: 00000000-0000-0000-0000-000000000000] |
+| **profileId** | **String** | The profile whose assignments are removed. May be sent as the `profileId` query parameter instead of in the body. | [required] [example: 00000000-0000-0000-0000-000000000000] |
 
 
 ### Model aiAttachmentsLinkToMessage request body
@@ -5673,7 +5673,7 @@ A file attachment draft to persist.
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **name** | **String** | Name of the tool to run, as listed by the tools endpoint. A name that is unknown or excluded from the editor is rejected with 400. | [required] [example: docspace_get_folder] |
-| **arguments** | **Map** | Arguments for the tool, shaped by that tool&#39;s own input schema. Treated as empty when it is not an object. | [optional] [example: {"folderId":"1234"}] |
+| **arguments** | **Map** | Arguments for the tool, shaped by that tool's own input schema. Treated as empty when it is not an object. | [optional] [example: {"folderId":"1234"}] |
 | **entityId** | **String** | Room the call is scoped to. Left out for a portal-wide call. | [optional] [example: 1234] |
 
 
@@ -5727,7 +5727,7 @@ Target folder id (int or string).
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **message** | **String** | Human-readable description of the failure. | [required] |
-| **type** | **String** | OpenAI error class, for example &#x60;invalid_request_error&#x60;. | [required] [example: invalid_request_error] |
+| **type** | **String** | OpenAI error class, for example `invalid_request_error`. | [required] [example: invalid_request_error] |
 | **code** | **String** | Machine-readable code, when the provider supplies one. | [optional] [nullable] |
 | **param** | **String** | The request parameter at fault, when the failure names one. | [optional] [nullable] |
 
@@ -5744,7 +5744,7 @@ Target folder id (int or string).
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **value** | [**AiAiReasoningLevel**](#model-aiaireasoninglevel) | New extended-thinking depth; &#x60;off&#x60; turns deep mode off. | [required] [enum: off, low, medium, high, max] |
+| **value** | [**AiAiReasoningLevel**](#model-aiaireasoninglevel) | New extended-thinking depth; `off` turns deep mode off. | [required] [enum: off, low, medium, high, max] |
 | **entityId** | **String** |  | [optional] |
 
 
@@ -5754,17 +5754,17 @@ Target folder id (int or string).
 |------------ | ------------- | ------------- | -------------|
 | **id** | **String** | Unique profile identifier (UUID). | [required] |
 | **name** | **String** | User-defined profile display name. | [required] |
-| **providerType** | [**AiProviderType**](#model-aiprovidertype) | Provider type for this profile. Use &#x60;external&#x60; to delegate all HTTP transport to &#x60;PlatformAdapter.externalFetch&#x60; while reusing an existing provider&#39;s response parser — see &#x60;Profile.basedOn&#x60; for the format selector. | [required] |
-| **basedOn** | [**AiBuiltinProviderType**](#model-aibuiltinprovidertype) | Selects the response-format parser used by the &#x60;external&#x60; provider. Ignored for any other &#x60;providerType&#x60;.  Supported values are &#x60;openai&#x60;, &#x60;anthropic&#x60;, &#x60;mistral&#x60; and &#x60;openrouter&#x60;. Remaining values (&#x60;genai&#x60;, &#x60;stabilityai&#x60;, …) are accepted by the type but not yet implemented; passing one raises an error at request time. | [optional] [enum: anthropic, ollama, openai, openaicompatible, together, openrouter, genai, deepseek, xai, lm-studio, mistral, groq, zhipu, stabilityai, gpt4all, onlyoffice, external] |
+| **providerType** | [**AiProviderType**](#model-aiprovidertype) | Provider type for this profile. Use `external` to delegate all HTTP transport to `PlatformAdapter.externalFetch` while reusing an existing provider's response parser — see `Profile.basedOn` for the format selector. | [required] |
+| **basedOn** | [**AiBuiltinProviderType**](#model-aibuiltinprovidertype) | Selects the response-format parser used by the `external` provider. Ignored for any other `providerType`.  Supported values are `openai`, `anthropic`, `mistral` and `openrouter`. Remaining values (`genai`, `stabilityai`, …) are accepted by the type but not yet implemented; passing one raises an error at request time. | [optional] [enum: anthropic, ollama, openai, openaicompatible, together, openrouter, genai, deepseek, xai, lm-studio, mistral, groq, zhipu, stabilityai, gpt4all, onlyoffice, external] |
 | **baseUrl** | **String** | Base URL of the provider API. | [required] |
 | **modelId** | **String** | Selected model ID within this provider. | [required] |
-| **reasoning** | **Boolean** | Whether extended thinking is enabled for this profile&#39;s model. | [optional] |
-| **reasoningSupport** | [**AiReasoningSupport**](#model-aireasoningsupport) | Extended-thinking capabilities of the selected model as reported by the provider&#39;s catalogue at save time (see &#x60;Model.reasoningSupport&#x60;). When present the composer&#39;s Effort row follows it exactly; when absent the provider&#39;s id-based table answers. Hosts persist it with the rest of the profile. | [optional] |
+| **reasoning** | **Boolean** | Whether extended thinking is enabled for this profile's model. | [optional] |
+| **reasoningSupport** | [**AiReasoningSupport**](#model-aireasoningsupport) | Extended-thinking capabilities of the selected model as reported by the provider's catalogue at save time (see `Model.reasoningSupport`). When present the composer's Effort row follows it exactly; when absent the provider's id-based table answers. Hosts persist it with the rest of the profile. | [optional] |
 | **capabilities** | **BigDecimal** | Bitmask of capabilities supported by the selected model. | [optional] |
-| **canUseTool** | **Boolean** | Result of the live tool-capability probe performed at create time and on changes to &#x60;modelId&#x60; / &#x60;providerType&#x60; / &#x60;baseUrl&#x60;. &#x60;undefined&#x60; means the probe has never run for this profile (legacy record). | [optional] |
-| **useResponsesApi** | **Boolean** | Result of the live Responses-API probe (parallel to &#x60;canUseTool&#x60;). &#x60;true&#x60; means the model speaks &#x60;/v1/responses&#x60; and the OpenAI provider must route through &#x60;client.responses.create&#x60; — required for gpt-5+ reasoning models that reject &#x60;reasoning_effort&#x60; together with &#x60;tools&#x60; on &#x60;/v1/chat/completions&#x60;. Probed at create time and whenever &#x60;modelId&#x60; / &#x60;providerType&#x60; / &#x60;baseUrl&#x60; change. &#x60;undefined&#x60; means the probe never ran (legacy record) — readers treat that as &#x60;false&#x60;. | [optional] |
+| **canUseTool** | **Boolean** | Result of the live tool-capability probe performed at create time and on changes to `modelId` / `providerType` / `baseUrl`. `undefined` means the probe has never run for this profile (legacy record). | [optional] |
+| **useResponsesApi** | **Boolean** | Result of the live Responses-API probe (parallel to `canUseTool`). `true` means the model speaks `/v1/responses` and the OpenAI provider must route through `client.responses.create` — required for gpt-5+ reasoning models that reject `reasoning_effort` together with `tools` on `/v1/chat/completions`. Probed at create time and whenever `modelId` / `providerType` / `baseUrl` change. `undefined` means the probe never ran (legacy record) — readers treat that as `false`. | [optional] |
 | **isCloudProvider** | **Boolean** | Whether this profile uses a cloud-hosted provider (e.g. ONLYOFFICE DocSpace). | [optional] |
-| **useProxy** | **Boolean** | Route every provider request through the host&#39;s &#x60;fetchProxy&#x60; instead of the global &#x60;fetch&#x60;. Useful when the host runs the widget in a sandbox without direct network access (CORS, custom auth, etc.). Has no effect when the &#x60;PlatformAdapter.fetchProxy&#x60; is not configured. | [optional] |
+| **useProxy** | **Boolean** | Route every provider request through the host's `fetchProxy` instead of the global `fetch`. Useful when the host runs the widget in a sandbox without direct network access (CORS, custom auth, etc.). Has no effect when the `PlatformAdapter.fetchProxy` is not configured. | [optional] |
 | **createdAt** | **BigDecimal** | Creation timestamp (ms since epoch). Used to sort the AI models list newest-first. | [optional] |
 
 
@@ -5828,7 +5828,7 @@ Import options.
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **id** | **String** | Prompt id to move. | [required] |
-| **folderId** | **String** | Target folder id, or &#x60;null&#x60; for root. | [required] [nullable] |
+| **folderId** | **String** | Target folder id, or `null` for root. | [required] [nullable] |
 
 
 ### Model aiPromptsRenameFolder request body
@@ -5895,7 +5895,7 @@ Fields to change.
 
 
 ### Model aiThreadsOpenOrCreate.request.entityMeta
-Optional entity hint (lib 0.5.64): only &#x60;entityId&#x60; is read; the source (&#x60;source_id&#x60; / &#x60;source_type&#x60; / &#x60;source_title&#x60;) is re-resolved server-side before reaching the provider as metadata.
+Optional entity hint (lib 0.5.64): only `entityId` is read; the source (`source_id` / `source_type` / `source_title`) is re-resolved server-side before reaching the provider as metadata.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
@@ -5958,7 +5958,7 @@ Optional entity hint (lib 0.5.64): only &#x60;entityId&#x60; is read; the source
 |------------ | ------------- | ------------- | -------------|
 | **groups** | **Map** | Tools by server name, covering both the host-configured system servers and the custom MCP servers registered for this scope. | [required] |
 | **errors** | **Map** | Why a registered custom server could not be reached, keyed by server name. A server that answered is absent from this map. | [required] |
-| **system** | **List** | Names of the host-configured system servers among the keys of &#x60;groups&#x60;; everything else there was registered as a custom server. | [required] |
+| **system** | **List** | Names of the host-configured system servers among the keys of `groups`; everything else there was registered as a custom server. | [required] |
 
 
 ### Model aiToolsRemoveCustomServer request body
@@ -6001,7 +6001,7 @@ Optional entity hint (lib 0.5.64): only &#x60;entityId&#x60; is read; the source
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **name** | **String** |  | [required] |
-| **config** | **Object** | One MCP server configuration. The shape is intentionally open — MCP allows per-transport fields (&#x60;command&#x60;/&#x60;args&#x60; for stdio, &#x60;url&#x60; for HTTP, plus env, headers, etc.) and the storage layer stays agnostic to which transport is in use. | [required] |
+| **config** | **Object** | One MCP server configuration. The shape is intentionally open — MCP allows per-transport fields (`command`/`args` for stdio, `url` for HTTP, plus env, headers, etc.) and the storage layer stays agnostic to which transport is in use. | [required] |
 | **entityId** | **String** |  | [optional] |
 
 
@@ -6030,6 +6030,17 @@ Optional entity hint (lib 0.5.64): only &#x60;entityId&#x60; is read; the source
 
 
 ## Authorization
+
+
+### cookieAuth
+- **Type**: API key
+- **API key parameter name**: asc_auth_key
+- **Location**: 
+
+
+### bearerAuth
+
+- **Type**: HTTP Bearer Token authentication
 
 
 ### asc_auth_key
@@ -6065,17 +6076,6 @@ Optional entity hint (lib 0.5.64): only &#x60;entityId&#x60; is read; the source
 
 
 ### OpenId
-
-
-### cookieAuth
-- **Type**: API key
-- **API key parameter name**: asc_auth_key
-- **Location**: 
-
-
-### bearerAuth
-
-- **Type**: HTTP Bearer Token authentication
 
 
 ### x-signature

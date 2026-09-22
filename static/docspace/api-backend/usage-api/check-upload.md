@@ -8,13 +8,13 @@ Referenced types are defined in the [full reference](../files.md).
 
 Check for upload conflicts
 
-Reports which of the submitted titles already belong to a file in the folder, so an upload can decide in  advance whether to overwrite or to ask for another name. Only the clashing titles come back, unordered and  without repetitions, and an empty array means every name is free. Matching is by title and ignores case, so a  name that differs only in capitalisation is still reported; an existing file that is encrypted is left out,  because an upload cannot take it over. The call changes nothing. It needs the same right as the upload itself,  the right to add content to the folder, which room managers and content creators have and readers, editors and  guests do not; an archived room, a section root and a folder the caller cannot write to are all refused, while  an unknown folder is answered as missing. A request without &#x60;filesTitle&#x60; is rejected as an invalid request, an  empty list is accepted and answers with an empty array.
+Reports which of the submitted titles already belong to a file in the folder, so an upload can decide in  advance whether to overwrite or to ask for another name. Only the clashing titles come back, unordered and  without repetitions, and an empty array means every name is free. Matching is by title and ignores case, so a  name that differs only in capitalisation is still reported; an existing file that is encrypted is left out,  because an upload cannot take it over. The call changes nothing. It needs the same right as the upload itself,  the right to add content to the folder, which room managers and content creators have and readers, editors and  guests do not; an archived room, a section root and a folder the caller cannot write to are all refused, while  an unknown folder is answered as missing. A request without `filesTitle` is rejected as an invalid request, an  empty list is accepted and answers with an empty array.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **folderId** | path | **Integer** (int32) | The folder whose contents the names are tested against; take the id from a listing such as  &#x60;GET api/2.0/files/@root&#x60;. | [required] [example: 1] |
+| **folderId** | path | **Integer** (int32) | The folder whose contents the names are tested against; take the id from a listing such as  `GET api/2.0/files/@root`. | [required] [example: 1] |
 | **CheckUploadRequest** | body | [**CheckUploadRequest**](../files.md#model-checkuploadrequest) | The names to test against the files the folder already holds. | [required] |
 
 ## Responses

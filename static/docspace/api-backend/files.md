@@ -237,13 +237,13 @@ All URIs are relative to *https://yourportal.onlyoffice.com*, where the host is 
 
 Add a file to Recent
 
-Stamps the file as just used by the calling account and puts it at the top of that account&#39;s Recent section,  then answers with the file as it stands now. The list is personal: no other member sees the change, and the  file itself is untouched. Read access is enough, so a room member with view-only rights and an invited guest  may call it, and a visitor who reaches the file through an external link is recorded against that link. A  caller without read access is refused with 403, and an identifier that resolves to nothing answers 404.  Repeating the call is safe: the file keeps a single entry and only moves back to the top. The section holds  the 1000 newest entries of an account and drops the oldest beyond that on its own; folders never enter it, and  an encrypted file of a private room is answered normally but never recorded. Read the section back with  &#x60;GET api/2.0/files/recent&#x60; and drop entries with &#x60;DELETE api/2.0/files/recent&#x60;; whether it is offered among  the sections of &#x60;GET api/2.0/files/@root&#x60; is decided by &#x60;PUT api/2.0/files/displayrecent&#x60;.
+Stamps the file as just used by the calling account and puts it at the top of that account's Recent section,  then answers with the file as it stands now. The list is personal: no other member sees the change, and the  file itself is untouched. Read access is enough, so a room member with view-only rights and an invited guest  may call it, and a visitor who reaches the file through an external link is recorded against that link. A  caller without read access is refused with 403, and an identifier that resolves to nothing answers 404.  Repeating the call is safe: the file keeps a single entry and only moves back to the top. The section holds  the 1000 newest entries of an account and drops the oldest beyond that on its own; folders never enter it, and  an encrypted file of a private room is answered normally but never recorded. Read the section back with  `GET api/2.0/files/recent` and drop entries with `DELETE api/2.0/files/recent`; whether it is offered among  the sections of `GET api/2.0/files/@root` is decided by `PUT api/2.0/files/displayrecent`.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **Integer** (int32) | The file the operation addresses. Take the identifier from a listing such as &#x60;GET api/2.0/files/{folderId}&#x60;: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: 10] |
+| **fileId** | path | **Integer** (int32) | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: 10] |
 
 #### Responses
 
@@ -280,7 +280,7 @@ Stamps the file as just used by the calling account and puts it at the top of th
 
 Add template files
 
-Adds the listed files to the personal template list of the calling account, the set the portal offers when a  new document is started from an existing one. The list belongs to the account and no other member sees it.  Every authenticated member type may manage their own list, a guest is refused, and read access to each file is  required. Only formats the portal treats as template documents survive: the accepted extensions arrive in  &#x60;extsWebTemplate&#x60; of &#x60;GET api/2.0/files/settings&#x60;, and a file of any other format is dropped silently. Only  numeric ids are accepted, so a file on a connected third-party account cannot become a template. The answer is  &#x60;true&#x60; whenever the request was understood, which an empty list, an id that does not exist and an unreadable  file all achieve, so it confirms nothing about what was added; no operation of this document reads the list  back. Repeating the call is safe. Use &#x60;DELETE api/2.0/files/templates&#x60; to drop a file again.
+Adds the listed files to the personal template list of the calling account, the set the portal offers when a  new document is started from an existing one. The list belongs to the account and no other member sees it.  Every authenticated member type may manage their own list, a guest is refused, and read access to each file is  required. Only formats the portal treats as template documents survive: the accepted extensions arrive in  `extsWebTemplate` of `GET api/2.0/files/settings`, and a file of any other format is dropped silently. Only  numeric ids are accepted, so a file on a connected third-party account cannot become a template. The answer is  `true` whenever the request was understood, which an empty list, an id that does not exist and an unreadable  file all achieve, so it confirms nothing about what was added; no operation of this document reads the list  back. Repeating the call is safe. Use `DELETE api/2.0/files/templates` to drop a file again.
 
 #### Parameters
 
@@ -321,7 +321,7 @@ Adds the listed files to the personal template list of the calling account, the 
 
 Change version history
 
-Closes or reopens a revision group in the version history of a file and answers with every stored version of  that file, newest first. With &#x60;continueVersion&#x3D;false&#x60; the named version is completed: its content is stored  again as a fresh version that opens a new revision group, so the editing that follows no longer extends the  previous one. With &#x60;continueVersion&#x3D;true&#x60; the last revision group is folded back into the group before it, so  the next save continues that revision instead of becoming a version of its own; a file that has only one group  is left as it is. A &#x60;version&#x60; of 0 means the current version. The caller needs the right to edit the history  of the file, which the room admin, a DocSpace admin acting as room manager and a member with content-creator  rights have; plain editing access is refused with 403, as are a guest and a member without access to the room.  The call is mutating and not idempotent. A file that is locked, lies in Trash, is open in an editing session  or is kept in a connected third-party storage is refused.
+Closes or reopens a revision group in the version history of a file and answers with every stored version of  that file, newest first. With `continueVersion=false` the named version is completed: its content is stored  again as a fresh version that opens a new revision group, so the editing that follows no longer extends the  previous one. With `continueVersion=true` the last revision group is folded back into the group before it, so  the next save continues that revision instead of becoming a version of its own; a file that has only one group  is left as it is. A `version` of 0 means the current version. The caller needs the right to edit the history  of the file, which the room admin, a DocSpace admin acting as room manager and a member with content-creator  rights have; plain editing access is refused with 403, as are a guest and a member without access to the room.  The call is mutating and not idempotent. A file that is locked, lies in Trash, is open in an editing session  or is kept in a connected third-party storage is refused.
 
 #### Parameters
 
@@ -364,13 +364,13 @@ Closes or reopens a revision group in the version history of a file and answers 
 
 Open a form draft for filling
 
-Resolves the editor address the caller must open to fill out the given PDF form, and provisions the personal  draft that filling needs. The form has to live in a form-filling room and filling has to be started for it  with &#x60;PUT api/2.0/files/file/{fileId}/manageformfilling&#x60;; a caller who may edit the form, a form whose filling  has not started, and a request naming &#x60;view&#x60; or &#x60;embedded&#x60; as the action are all sent straight to the form  itself. Read access to the form is enough to get an address, fill-forms access is what puts the caller into  the filling flow, and a holder of an external link may call it without signing in, while a caller with neither  a session nor a link key is rejected. In the filling case the call is not read-only: it copies the form into  the room&#39;s in-progress folder under the caller&#39;s name, clears the new-item badge, closes the editing session  of the original, and answers with the address of that copy. A repeated call reuses that copy, and a call  naming an existing draft adds a discard notice when that draft is no longer valid. The answer is one URL  string that may carry a &#x60;#message/...&#x60; fragment the editor renders as a notice. For the full editor  configuration use &#x60;GET api/2.0/files/file/{fileId}/openedit&#x60;. A form the caller cannot open is refused with  403, and one that does not exist is answered as missing.
+Resolves the editor address the caller must open to fill out the given PDF form, and provisions the personal  draft that filling needs. The form has to live in a form-filling room and filling has to be started for it  with `PUT api/2.0/files/file/{fileId}/manageformfilling`; a caller who may edit the form, a form whose filling  has not started, and a request naming `view` or `embedded` as the action are all sent straight to the form  itself. Read access to the form is enough to get an address, fill-forms access is what puts the caller into  the filling flow, and a holder of an external link may call it without signing in, while a caller with neither  a session nor a link key is rejected. In the filling case the call is not read-only: it copies the form into  the room's in-progress folder under the caller's name, clears the new-item badge, closes the editing session  of the original, and answers with the address of that copy. A repeated call reuses that copy, and a call  naming an existing draft adds a discard notice when that draft is no longer valid. The answer is one URL  string that may carry a `#message/...` fragment the editor renders as a notice. For the full editor  configuration use `GET api/2.0/files/file/{fileId}/openedit`. A form the caller cannot open is refused with  403, and one that does not exist is answered as missing.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **Integer** (int32) | The identifier of the PDF form to open, as it is returned by a room listing such as  &#x60;GET api/2.0/files/{folderId}&#x60;. The identifier of an already created draft is accepted here as well. | [required] [example: 1] |
+| **fileId** | path | **Integer** (int32) | The identifier of the PDF form to open, as it is returned by a room listing such as  `GET api/2.0/files/{folderId}`. The identifier of an already created draft is accepted here as well. | [required] [example: 1] |
 | **CheckFillFormDraft** | body | [**CheckFillFormDraft**](#model-checkfillformdraft) | The revision of the form to open and what the caller intends to do with it. | [required] |
 
 #### Responses
@@ -391,7 +391,7 @@ Resolves the editor address the caller must open to fill out the given PDF form,
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -406,7 +406,7 @@ No authorization required
 
 Copy a file
 
-Copies one file into another folder under a new title, converting its content when the new title names a  different format, and answers with the copy that was created. The extension of &#x60;destTitle&#x60; decides what  happens: the same extension as the source copies the bytes as they are, a different one has the document  service convert them first, and &#x60;toForm&#x3D;true&#x60; converts a document into a PDF form. &#x60;password&#x60; unlocks a source  file that is protected by one. &#x60;destFolderId&#x60; is read as a number for a folder inside the portal and as a  string for a folder in a connected third-party storage; anything else is answered with an empty body and  nothing is copied. The caller needs read access to the source file and the right to create files in the  destination folder, and is otherwise refused with 403; a missing file or folder is answered with 404, and a  format that cannot be converted with 400. The call is mutating and not idempotent - each call adds another  copy. To copy many items at once, and without converting, use &#x60;PUT api/2.0/files/fileops/copy&#x60;.
+Copies one file into another folder under a new title, converting its content when the new title names a  different format, and answers with the copy that was created. The extension of `destTitle` decides what  happens: the same extension as the source copies the bytes as they are, a different one has the document  service convert them first, and `toForm=true` converts a document into a PDF form. `password` unlocks a source  file that is protected by one. `destFolderId` is read as a number for a folder inside the portal and as a  string for a folder in a connected third-party storage; anything else is answered with an empty body and  nothing is copied. The caller needs read access to the source file and the right to create files in the  destination folder, and is otherwise refused with 403; a missing file or folder is answered with 404, and a  format that cannot be converted with 400. The call is mutating and not idempotent - each call adds another  copy. To copy many items at once, and without converting, use `PUT api/2.0/files/fileops/copy`.
 
 #### Parameters
 
@@ -450,7 +450,7 @@ Copies one file into another folder under a new title, converting its content wh
 
 Create the editing session
 
-Opens a chunked session that replaces the content of an existing file, which is how WebDAV clients save over a  document. The answer carries the session id the later calls quote, the address of the standalone chunk  handler, the expiry and the reserved size, and nothing is written until the parts reach  &#x60;POST api/2.0/files/{folderId}/session/{sessionId}/upload&#x60; and the session is closed with  &#x60;PUT api/2.0/files/{folderId}/session/{sessionId}/finalize&#x60;, where &#x60;folderId&#x60; is the folder the file lives in.  Unlike an upload into a folder, the finished content does not become a new version: it overwrites the current  one, and the file loses its encrypted flag and its stored conversion result in the process. The caller must be  allowed to edit the file, as the owner, a room manager and a member invited with editing rights are; a reader  and a guest get 403. A file that does not exist is answered as missing, and a payload above the portal limit  for chunked uploads is refused before the session is created.
+Opens a chunked session that replaces the content of an existing file, which is how WebDAV clients save over a  document. The answer carries the session id the later calls quote, the address of the standalone chunk  handler, the expiry and the reserved size, and nothing is written until the parts reach  `POST api/2.0/files/{folderId}/session/{sessionId}/upload` and the session is closed with  `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize`, where `folderId` is the folder the file lives in.  Unlike an upload into a folder, the finished content does not become a new version: it overwrites the current  one, and the file loses its encrypted flag and its stored conversion result in the process. The caller must be  allowed to edit the file, as the owner, a room manager and a member invited with editing rights are; a reader  and a guest get 403. A file that does not exist is answered as missing, and a payload above the portal limit  for chunked uploads is refused before the session is created.
 
 #### Parameters
 
@@ -493,7 +493,7 @@ Opens a chunked session that replaces the content of an existing file, which is 
 
 Create a file
 
-Creates a file in the folder named in the route and answers with the stored file. The extension in the title  decides the format: an extension of a known text, spreadsheet or presentation format is rewritten to the  portal&#39;s own DOCX, XLSX or PPTX, a title with no extension at all gets DOCX added, while an unknown extension  and the few formats the portal keeps as they are stay untouched; &#x60;enableExternalExt&#x3D;true&#x60; stores the title  verbatim and skips that rewriting. The content comes from one of three sources, tried in this order: &#x60;formId&#x60;  copies a ready form out of the form gallery, &#x60;templateId&#x60; copies an existing file the caller can read - a  number for a file in the portal, a string for one in a connected third-party storage - and with neither of  them the portal&#39;s blank template for that format and the caller&#39;s language is used. The caller needs the right  to create files in the folder, and the room roots, Archive and the template sections are refused even to an  admin. The call is mutating and not idempotent. To create the file in the caller&#39;s own section use  &#x60;POST api/2.0/files/@my/file&#x60;.
+Creates a file in the folder named in the route and answers with the stored file. The extension in the title  decides the format: an extension of a known text, spreadsheet or presentation format is rewritten to the  portal's own DOCX, XLSX or PPTX, a title with no extension at all gets DOCX added, while an unknown extension  and the few formats the portal keeps as they are stay untouched; `enableExternalExt=true` stores the title  verbatim and skips that rewriting. The content comes from one of three sources, tried in this order: `formId`  copies a ready form out of the form gallery, `templateId` copies an existing file the caller can read - a  number for a file in the portal, a string for one in a connected third-party storage - and with neither of  them the portal's blank template for that format and the caller's language is used. The caller needs the right  to create files in the folder, and the room roots, Archive and the template sections are refused even to an  admin. The call is mutating and not idempotent. To create the file in the caller's own section use  `POST api/2.0/files/@my/file`.
 
 #### Parameters
 
@@ -535,7 +535,7 @@ Creates a file in the folder named in the route and answers with the stored file
 
 Create a file in My documents
 
-Creates a file in the caller&#39;s own My documents section and answers with the stored file. The extension in  the title decides the format: an extension of a known text, spreadsheet or presentation format is rewritten to  the portal&#39;s own DOCX, XLSX or PPTX, a title with no extension at all gets DOCX added, while an unknown  extension and the few formats the portal keeps as they are stay untouched; &#x60;enableExternalExt&#x3D;true&#x60; stores the  title verbatim and skips that rewriting. The content comes from one of three sources, tried in this order:  &#x60;formId&#x60; copies a ready form out of the form gallery, &#x60;templateId&#x60; copies an existing file the caller can read  - a number for a file in the portal, a string for one in a connected third-party storage - and with neither of  them the portal&#39;s blank template for that format and the caller&#39;s language is used. The call is mutating and  not idempotent: each call adds another file. A guest has no My documents section of their own, so a guest  cannot use this operation at all, and a template the caller cannot read is refused. To create a file in a  room or any other folder use  &#x60;POST api/2.0/files/{folderId}/file&#x60;.
+Creates a file in the caller's own My documents section and answers with the stored file. The extension in  the title decides the format: an extension of a known text, spreadsheet or presentation format is rewritten to  the portal's own DOCX, XLSX or PPTX, a title with no extension at all gets DOCX added, while an unknown  extension and the few formats the portal keeps as they are stay untouched; `enableExternalExt=true` stores the  title verbatim and skips that rewriting. The content comes from one of three sources, tried in this order:  `formId` copies a ready form out of the form gallery, `templateId` copies an existing file the caller can read  - a number for a file in the portal, a string for one in a connected third-party storage - and with neither of  them the portal's blank template for that format and the caller's language is used. The call is mutating and  not idempotent: each call adds another file. A guest has no My documents section of their own, so a guest  cannot use this operation at all, and a template the caller cannot read is refused. To create a file in a  room or any other folder use  `POST api/2.0/files/{folderId}/file`.
 
 #### Parameters
 
@@ -576,7 +576,7 @@ Creates a file in the caller&#39;s own My documents section and answers with the
 
 Create the file primary external link
 
-Answers with the primary external link of a file, creating it on the first call and returning the one that  already exists afterwards, so the operation is idempotent in effect: a second call with other parameters does  not reconfigure the existing link, and changing one is the business of &#x60;PUT api/2.0/files/file/{id}/links&#x60;.  The parameters therefore only shape the link at the moment it is born - &#x60;access&#x60; its rights, &#x60;expirationDate&#x60;  its lifetime, which for a file in a personal section is unlimited here rather than the default of a few days,  &#x60;internal&#x60; whether only signed-in members may follow it, &#x60;denyDownload&#x60; whether the content may only be  viewed, and &#x60;password&#x60; a secret to be asked for. A PDF form gets the rights it needs for filling out whatever  was asked for, and a form in a form-filling room is answered with the link of the room instead. The caller  needs the right to share the file and is otherwise refused with 403; a link that was deliberately revoked is  not recreated but answered with 404. Read the address from &#x60;sharedTo.shareLink&#x60;.
+Answers with the primary external link of a file, creating it on the first call and returning the one that  already exists afterwards, so the operation is idempotent in effect: a second call with other parameters does  not reconfigure the existing link, and changing one is the business of `PUT api/2.0/files/file/{id}/links`.  The parameters therefore only shape the link at the moment it is born - `access` its rights, `expirationDate`  its lifetime, which for a file in a personal section is unlimited here rather than the default of a few days,  `internal` whether only signed-in members may follow it, `denyDownload` whether the content may only be  viewed, and `password` a secret to be asked for. A PDF form gets the rights it needs for filling out whatever  was asked for, and a form in a form-filling room is answered with the link of the room instead. The caller  needs the right to share the file and is otherwise refused with 403; a link that was deliberately revoked is  not recreated but answered with 404. Read the address from `sharedTo.shareLink`.
 
 #### Parameters
 
@@ -620,7 +620,7 @@ Answers with the primary external link of a file, creating it on the first call 
 
 Create an HTML file
 
-Creates an HTML file in the folder named in the route out of the markup passed as the content, and answers  with the stored file. The &#x60;.html&#x60; extension is added to the title unless the title already ends with it, and a  request carrying no content is rejected as an invalid request. &#x60;createNewIfExist&#x60; acts the other way round  than its name reads: with &#x60;true&#x60; the file that already carries this title is updated, the markup replacing its  content and a version appearing in its history, while with &#x60;false&#x60;, which is also the default, another file is  created and its title made unique, as in Notes (1).html. Updating needs the existing file to be editable by  the caller, so one that is locked, open in an editing session, encrypted or in Trash is left alone and a new  file appears beside it instead. The caller needs the right to create files in the folder and is otherwise  refused with 403. The call is mutating. To create the file in the caller&#39;s own section use  &#x60;POST api/2.0/files/@my/html&#x60;.
+Creates an HTML file in the folder named in the route out of the markup passed as the content, and answers  with the stored file. The `.html` extension is added to the title unless the title already ends with it, and a  request carrying no content is rejected as an invalid request. `createNewIfExist` acts the other way round  than its name reads: with `true` the file that already carries this title is updated, the markup replacing its  content and a version appearing in its history, while with `false`, which is also the default, another file is  created and its title made unique, as in Notes (1).html. Updating needs the existing file to be editable by  the caller, so one that is locked, open in an editing session, encrypted or in Trash is left alone and a new  file appears beside it instead. The caller needs the right to create files in the folder and is otherwise  refused with 403. The call is mutating. To create the file in the caller's own section use  `POST api/2.0/files/@my/html`.
 
 #### Parameters
 
@@ -663,7 +663,7 @@ Creates an HTML file in the folder named in the route out of the markup passed a
 
 Create an HTML file in My documents
 
-Creates an HTML file in the caller&#39;s own My documents section out of the markup passed as the content, and  answers with the stored file. The &#x60;.html&#x60; extension is added to the title unless the title already ends with  it, and a request carrying no content is rejected as invalid. &#x60;createNewIfExist&#x60; acts the other way round than  its name reads: with &#x60;true&#x60; the file that already carries this title is updated, the markup replacing its  content and a version appearing in its history, while with &#x60;false&#x60;, which is also the default, another file is  created and its title made unique, as in Notes (1).html. Updating needs the existing file to be editable by  the caller, so one that is locked, open in an editing session, encrypted or in Trash is left alone and a new  file appears beside it instead. The call is mutating: repeating it with &#x60;true&#x60; keeps a single file and grows  its history, repeating it with &#x60;false&#x60; fills the section with numbered copies. A guest has no My documents  section and is refused. To create the file in a room or another folder use  &#x60;POST api/2.0/files/{folderId}/html&#x60;.
+Creates an HTML file in the caller's own My documents section out of the markup passed as the content, and  answers with the stored file. The `.html` extension is added to the title unless the title already ends with  it, and a request carrying no content is rejected as invalid. `createNewIfExist` acts the other way round than  its name reads: with `true` the file that already carries this title is updated, the markup replacing its  content and a version appearing in its history, while with `false`, which is also the default, another file is  created and its title made unique, as in Notes (1).html. Updating needs the existing file to be editable by  the caller, so one that is locked, open in an editing session, encrypted or in Trash is left alone and a new  file appears beside it instead. The call is mutating: repeating it with `true` keeps a single file and grows  its history, repeating it with `false` fills the section with numbered copies. A guest has no My documents  section and is refused. To create the file in a room or another folder use  `POST api/2.0/files/{folderId}/html`.
 
 #### Parameters
 
@@ -705,7 +705,7 @@ Creates an HTML file in the caller&#39;s own My documents section out of the mar
 
 Create a text file
 
-Creates a text file in the folder named in the route out of the text passed as the content, and answers with  the stored file. The extension follows the content rather than the request: &#x60;.txt&#x60; normally, but &#x60;.html&#x60; as  soon as the text contains something shaped like an HTML tag, so a snippet of markup sent here ends up as an  HTML file; the extension is added to the title unless the title already ends with it. A request carrying no  content is rejected as an invalid request. &#x60;createNewIfExist&#x60; acts the other way round than its name reads:  with &#x60;true&#x60; the file that already carries this title is updated and a version appears in its history, while  with &#x60;false&#x60;, which is also the default, another file is created and its title made unique, as in Notes  (1).txt. A file that is locked, open in an editing session, encrypted or in Trash is not updated - a new file  appears beside it instead. The caller needs the right to create files in the folder. The call is mutating. To  create the file in the caller&#39;s own section use &#x60;POST api/2.0/files/@my/text&#x60;.
+Creates a text file in the folder named in the route out of the text passed as the content, and answers with  the stored file. The extension follows the content rather than the request: `.txt` normally, but `.html` as  soon as the text contains something shaped like an HTML tag, so a snippet of markup sent here ends up as an  HTML file; the extension is added to the title unless the title already ends with it. A request carrying no  content is rejected as an invalid request. `createNewIfExist` acts the other way round than its name reads:  with `true` the file that already carries this title is updated and a version appears in its history, while  with `false`, which is also the default, another file is created and its title made unique, as in Notes  (1).txt. A file that is locked, open in an editing session, encrypted or in Trash is not updated - a new file  appears beside it instead. The caller needs the right to create files in the folder. The call is mutating. To  create the file in the caller's own section use `POST api/2.0/files/@my/text`.
 
 #### Parameters
 
@@ -747,7 +747,7 @@ Creates a text file in the folder named in the route out of the text passed as t
 
 Create a text file in My documents
 
-Creates a text file in the caller&#39;s own My documents section out of the text passed as the content, and  answers with the stored file. The extension follows the content rather than the request: &#x60;.txt&#x60; normally, but  &#x60;.html&#x60; as soon as the text contains something shaped like an HTML tag, so a snippet of markup sent here ends  up as an HTML file; the extension is added to the title unless the title already ends with it. A request  carrying no content is rejected as invalid. &#x60;createNewIfExist&#x60; acts the other way round than its name reads:  with &#x60;true&#x60; the file that already carries this title is updated and a version appears in its history, while  with &#x60;false&#x60;, which is also the default, another file is created and its title made unique, as in  Notes (1).txt. A file that is locked, open in an editing session, encrypted or in Trash is not updated - a  new file appears beside it instead. The call is mutating. A guest has no My documents section and is  refused. To create the file in a room or another folder use &#x60;POST api/2.0/files/{folderId}/text&#x60;.
+Creates a text file in the caller's own My documents section out of the text passed as the content, and  answers with the stored file. The extension follows the content rather than the request: `.txt` normally, but  `.html` as soon as the text contains something shaped like an HTML tag, so a snippet of markup sent here ends  up as an HTML file; the extension is added to the title unless the title already ends with it. A request  carrying no content is rejected as invalid. `createNewIfExist` acts the other way round than its name reads:  with `true` the file that already carries this title is updated and a version appears in its history, while  with `false`, which is also the default, another file is created and its title made unique, as in  Notes (1).txt. A file that is locked, open in an editing session, encrypted or in Trash is not updated - a  new file appears beside it instead. The call is mutating. A guest has no My documents section and is  refused. To create the file in a room or another folder use `POST api/2.0/files/{folderId}/text`.
 
 #### Parameters
 
@@ -788,7 +788,7 @@ Creates a text file in the caller&#39;s own My documents section out of the text
 
 Queue file thumbnails
 
-Asks the portal to build preview thumbnails for the listed files, and answers at once with the same file ids  that were sent. That answer echoes the request and does not confirm that anything was queued: the work is  handed over to a background worker, and a failure on the way there is written to the log rather than reported  to the caller. Only the file ids of the body are read - the folder ids are ignored, and a request naming no  files at all is answered with an empty list. Ids of files kept in a connected third-party storage are dropped  as well, because the worker handles portal storage only. Access to the individual files is not checked here;  the caller has to be signed in or to reach the portal through an external share link, and an anonymous caller  without such a link is refused. The call is asynchronous and safe to repeat. The thumbnails themselves are not  in the answer: read &#x60;thumbnailStatus&#x60; and &#x60;thumbnailUrl&#x60; of the file, for instance with  &#x60;GET api/2.0/files/file/{fileId}&#x60;, until the status reports the thumbnail as created.
+Asks the portal to build preview thumbnails for the listed files, and answers at once with the same file ids  that were sent. That answer echoes the request and does not confirm that anything was queued: the work is  handed over to a background worker, and a failure on the way there is written to the log rather than reported  to the caller. Only the file ids of the body are read - the folder ids are ignored, and a request naming no  files at all is answered with an empty list. Ids of files kept in a connected third-party storage are dropped  as well, because the worker handles portal storage only. Access to the individual files is not checked here;  the caller has to be signed in or to reach the portal through an external share link, and an anonymous caller  without such a link is refused. The call is asynchronous and safe to repeat. The thumbnails themselves are not  in the answer: read `thumbnailStatus` and `thumbnailUrl` of the file, for instance with  `GET api/2.0/files/file/{fileId}`, until the status reports the thumbnail as created.
 
 #### Parameters
 
@@ -813,7 +813,7 @@ Asks the portal to build preview thumbnails for the listed files, and answers at
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -828,7 +828,7 @@ No authorization required
 
 Delete a file
 
-Queues the deletion of one file and answers with the caller&#39;s file operations, the one just created among  them. The file is not gone when the response arrives: poll &#x60;GET api/2.0/files/fileops&#x60; until the operation  reports &#x60;finished&#x60;, and read its &#x60;error&#x60; to learn whether the deletion succeeded. By default the file is moved  to Trash, from where it can be restored; &#x60;immediately&#x3D;true&#x60; deletes it for good instead, and inside a room,  where there is no Trash, deletion is always final. &#x60;deleteAfter&#x3D;true&#x60; postpones the deletion until the editing  session on the file has ended, so a file somebody is working on is not pulled away.  &#x60;returnSingleOperation&#x3D;true&#x60; narrows the answer to this deletion instead of listing every active operation of  the caller. The caller needs the right to delete the file, which the room admin, a DocSpace admin acting as  room manager and a content creator acting on their own file have; editing access alone, read access, a guest  and a member without access to the room are all refused. The call is destructive. To delete several items at  once use &#x60;PUT api/2.0/files/fileops/delete&#x60;.
+Queues the deletion of one file and answers with the caller's file operations, the one just created among  them. The file is not gone when the response arrives: poll `GET api/2.0/files/fileops` until the operation  reports `finished`, and read its `error` to learn whether the deletion succeeded. By default the file is moved  to Trash, from where it can be restored; `immediately=true` deletes it for good instead, and inside a room,  where there is no Trash, deletion is always final. `deleteAfter=true` postpones the deletion until the editing  session on the file has ended, so a file somebody is working on is not pulled away.  `returnSingleOperation=true` narrows the answer to this deletion instead of listing every active operation of  the caller. The caller needs the right to delete the file, which the room admin, a DocSpace admin acting as  room manager and a content creator acting on their own file have; editing access alone, read access, a guest  and a member without access to the room are all refused. The call is destructive. To delete several items at  once use `PUT api/2.0/files/fileops/delete`.
 
 #### Parameters
 
@@ -836,7 +836,7 @@ Queues the deletion of one file and answers with the caller&#39;s file operation
 |------------- | ------------- | ------------- | ------------- | -------------|
 | **fileId** | path | **Integer** (int32) | The file to delete. | [required] [example: 1] |
 | **Delete** | body | [**Delete**](#model-delete) | When and how the file is deleted. | [required] |
-| **ReturnSingleOperation** | query | **Boolean** | Which operations the answer carries: &#x60;true&#x60; returns the operation this call started and nothing else, &#x60;false&#x60;  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, &#x60;true&#x60; falls back to the full list. | [optional] [example: false] |
+| **ReturnSingleOperation** | query | **Boolean** | Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list. | [optional] [example: false] |
 
 #### Responses
 
@@ -871,7 +871,7 @@ Queues the deletion of one file and answers with the caller&#39;s file operation
 
 Delete recent files
 
-Removes the listed entries from the Recent section of the calling account, the history of opened files that  &#x60;GET api/2.0/files/recent&#x60; returns. Nothing is deleted from storage and no other member&#39;s history is touched;  access to the entries is not checked at all, so a file the caller can no longer read can still be cleared from  their own history. Only numeric file ids are honoured, so a file on a connected third-party account cannot be  cleared this way, and folder ids are accepted but change nothing because the section lists files only. The  answer carries no body and reports nothing about how many entries were found: an empty request and an id that  was never in the section are accepted alike. Repeating the call is safe, but an entry returns the next time  the file is opened or &#x60;POST api/2.0/files/file/{fileId}/recent&#x60; is called for it. To hide the whole section  instead, call &#x60;PUT api/2.0/files/displayrecent&#x60;.
+Removes the listed entries from the Recent section of the calling account, the history of opened files that  `GET api/2.0/files/recent` returns. Nothing is deleted from storage and no other member's history is touched;  access to the entries is not checked at all, so a file the caller can no longer read can still be cleared from  their own history. Only numeric file ids are honoured, so a file on a connected third-party account cannot be  cleared this way, and folder ids are accepted but change nothing because the section lists files only. The  answer carries no body and reports nothing about how many entries were found: an empty request and an id that  was never in the section are accepted alike. Repeating the call is safe, but an entry returns the next time  the file is opened or `POST api/2.0/files/file/{fileId}/recent` is called for it. To hide the whole section  instead, call `PUT api/2.0/files/displayrecent`.
 
 #### Parameters
 
@@ -912,7 +912,7 @@ null (empty response body)
 
 Delete template files
 
-Takes the listed files off the personal template list of the calling account, leaving the files themselves  untouched: only the template mark is dropped. The body of this request is a bare JSON array of numeric file  ids rather than an object with a field, and a request that carries no array at all is rejected as an invalid  request. Every authenticated member type may manage their own list, a guest is refused, and read access to a  file is required for its mark to be dropped. The answer is &#x60;true&#x60; whenever the array was understood, which an  empty array, an id that does not exist and a file that was never a template all achieve, so it confirms  nothing about what was removed. Repeating the call is safe. Use &#x60;POST api/2.0/files/templates&#x60; to put a file  back on the list; that operation expects an object with a &#x60;fileIds&#x60; field, so the two bodies are not  interchangeable.
+Takes the listed files off the personal template list of the calling account, leaving the files themselves  untouched: only the template mark is dropped. The body of this request is a bare JSON array of numeric file  ids rather than an object with a field, and a request that carries no array at all is rejected as an invalid  request. Every authenticated member type may manage their own list, a guest is refused, and read access to a  file is required for its mark to be dropped. The answer is `true` whenever the array was understood, which an  empty array, an id that does not exist and a file that was never a template all achieve, so it confirms  nothing about what was removed. Repeating the call is safe. Use `POST api/2.0/files/templates` to put a file  back on the list; that operation expects an object with a `fileIds` field, so the two bodies are not  interchangeable.
 
 #### Parameters
 
@@ -953,13 +953,13 @@ Takes the listed files off the personal template list of the calling account, le
 
 Generate a form answers report
 
-Queues generation of the spreadsheet that collects every answer submitted for a PDF form in a form-filling  room, and answers at once with the queued task, the original form and a flag telling whether the report file  is being created now or an existing one refreshed in place. Either identifier works: the id of the original  form, or the id of an XLSX or CSV result file inside the room&#39;s Complete folder, from which the portal  resolves the form behind it. The form must already have been opened for filling with  &#x60;PUT api/2.0/files/file/{fileId}/startfilling&#x60; and must still live in the form-filling room that started it.  The caller must be allowed to update that form&#39;s report. The call is mutating and asynchronous: the  spreadsheet is not ready when the response arrives, so poll &#x60;GET api/2.0/files/file/{fileId}/xlsx&#x60; with the  original form&#39;s id until the task reports completion, then take the produced file from the task. Calling it  again while a run is still going answers with that run instead of starting a second one.
+Queues generation of the spreadsheet that collects every answer submitted for a PDF form in a form-filling  room, and answers at once with the queued task, the original form and a flag telling whether the report file  is being created now or an existing one refreshed in place. Either identifier works: the id of the original  form, or the id of an XLSX or CSV result file inside the room's Complete folder, from which the portal  resolves the form behind it. The form must already have been opened for filling with  `PUT api/2.0/files/file/{fileId}/startfilling` and must still live in the form-filling room that started it.  The caller must be allowed to update that form's report. The call is mutating and asynchronous: the  spreadsheet is not ready when the response arrives, so poll `GET api/2.0/files/file/{fileId}/xlsx` with the  original form's id until the task reports completion, then take the produced file from the task. Calling it  again while a run is still going answers with that run instead of starting a second one.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **Integer** (int32) | The file the operation addresses. Take the identifier from a listing such as &#x60;GET api/2.0/files/{folderId}&#x60;: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: 10] |
+| **fileId** | path | **Integer** (int32) | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: 10] |
 
 #### Responses
 
@@ -996,13 +996,13 @@ Queues generation of the spreadsheet that collects every answer submitted for a 
 
 Get form roles
 
-Returns the roles of a PDF form together with the state each of them is in, which is how a client shows who is  expected to fill the form next. Every entry carries the name of the role, the account holding it, the sequence  number that decides the turn and a status: the roles of earlier turns are reported as complete, those of later  turns as waiting, and the role whose turn it is as either yours to fill or already in progress, depending on  whether that person has opened the form; when the filling has been stopped, the role it was interrupted at is  reported as stopped instead. A form whose filling was never started answers with an empty list. The file has  to be a PDF form, or the completed copy of one, and anything else is refused. Read access to the form is  enough, so every member of the room sees the roles, while a caller without access to the room and a guest  outside it are refused with 403 and an unknown file is answered with 404. The operation is read-only. The  assignment itself is written by &#x60;POST api/2.0/files/file/{fileId}/formrolemapping&#x60;.
+Returns the roles of a PDF form together with the state each of them is in, which is how a client shows who is  expected to fill the form next. Every entry carries the name of the role, the account holding it, the sequence  number that decides the turn and a status: the roles of earlier turns are reported as complete, those of later  turns as waiting, and the role whose turn it is as either yours to fill or already in progress, depending on  whether that person has opened the form; when the filling has been stopped, the role it was interrupted at is  reported as stopped instead. A form whose filling was never started answers with an empty list. The file has  to be a PDF form, or the completed copy of one, and anything else is refused. Read access to the form is  enough, so every member of the room sees the roles, while a caller without access to the room and a guest  outside it are refused with 403 and an unknown file is answered with 404. The operation is read-only. The  assignment itself is written by `POST api/2.0/files/file/{fileId}/formrolemapping`.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **Integer** (int32) | The file the operation addresses. Take the identifier from a listing such as &#x60;GET api/2.0/files/{folderId}&#x60;: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: 10] |
+| **fileId** | path | **Integer** (int32) | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: 10] |
 
 #### Responses
 
@@ -1039,14 +1039,14 @@ Returns the roles of a PDF form together with the state each of them is in, whic
 
 Get changes URL
 
-Answers with everything an editor needs in order to show what changed in one version of a file: the address of  the version itself, its document key and format, the address of the recorded changes, the same trio for the  version it is compared against, and a token that signs the whole answer for the document service. &#x60;version&#x60;  picks the version, and 0, the default, means the current one. &#x60;changesUrl&#x60; and &#x60;previous&#x60; are filled in only  when the portal has stored the changes of that version, which is the case for versions written by an editing  session; for a version uploaded as a whole they stay empty and only the file itself can be shown. The  addresses are meant for the document service and carry their own time-limited keys. The caller needs the right  to read the history of the file, which editing access and above grant: read-only access, commenting access, a  guest and an anonymous caller are all refused, as is a file kept in a connected third-party storage. The  operation is read-only. For the list of versions themselves use  &#x60;GET api/2.0/files/file/{fileId}/edit/history&#x60;.
+Answers with everything an editor needs in order to show what changed in one version of a file: the address of  the version itself, its document key and format, the address of the recorded changes, the same trio for the  version it is compared against, and a token that signs the whole answer for the document service. `version`  picks the version, and 0, the default, means the current one. `changesUrl` and `previous` are filled in only  when the portal has stored the changes of that version, which is the case for versions written by an editing  session; for a version uploaded as a whole they stay empty and only the file itself can be shown. The  addresses are meant for the document service and carry their own time-limited keys. The caller needs the right  to read the history of the file, which editing access and above grant: read-only access, commenting access, a  guest and an anonymous caller are all refused, as is a file kept in a connected third-party storage. The  operation is read-only. For the list of versions themselves use  `GET api/2.0/files/file/{fileId}/edit/history`.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
 | **fileId** | path | **Integer** (int32) | The file whose changes are read. | [required] [example: 1] |
-| **version** | query | **Integer** (int32) | The version to show the changes of, as reported by &#x60;GET api/2.0/files/file/{fileId}/edit/history&#x60;; 0 means the  current version. | [optional] [example: 1] |
+| **version** | query | **Integer** (int32) | The version to show the changes of, as reported by `GET api/2.0/files/file/{fileId}/edit/history`; 0 means the  current version. | [optional] [example: 1] |
 
 #### Responses
 
@@ -1065,7 +1065,7 @@ Answers with everything an editor needs in order to show what changed in one ver
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -1080,13 +1080,13 @@ No authorization required
 
 Get version history
 
-Returns the editing revisions of a file, oldest first, as the document service understands them: each entry  carries the version and the revision group it belongs to, the account that saved it, when it was saved, the  comment left on it, the document key of that revision and, where the portal stored them, the changes it  introduced. Only the revisions a person saved are listed - the autosaves an editing session writes in between  are left out, which is what separates this list from the plain version list of  &#x60;GET api/2.0/files/file/{fileId}/history&#x60;. The caller needs the right to read the history of the file, which  editing access and above grant: commenting access, read-only access, a guest, a member without access to the  room and an anonymous caller are all refused, and so is a file kept in a connected third-party storage, which  keeps no history in the portal. The operation is read-only. Take one entry to  &#x60;GET api/2.0/files/file/{fileId}/edit/diff&#x60; to show its changes, or to  &#x60;POST api/2.0/files/file/{fileId}/restoreversion&#x60; to bring it back.
+Returns the editing revisions of a file, oldest first, as the document service understands them: each entry  carries the version and the revision group it belongs to, the account that saved it, when it was saved, the  comment left on it, the document key of that revision and, where the portal stored them, the changes it  introduced. Only the revisions a person saved are listed - the autosaves an editing session writes in between  are left out, which is what separates this list from the plain version list of  `GET api/2.0/files/file/{fileId}/history`. The caller needs the right to read the history of the file, which  editing access and above grant: commenting access, read-only access, a guest, a member without access to the  room and an anonymous caller are all refused, and so is a file kept in a connected third-party storage, which  keeps no history in the portal. The operation is read-only. Take one entry to  `GET api/2.0/files/file/{fileId}/edit/diff` to show its changes, or to  `POST api/2.0/files/file/{fileId}/restoreversion` to bring it back.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **Integer** (int32) | The file the operation addresses. Take the identifier from a listing such as &#x60;GET api/2.0/files/{folderId}&#x60;: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: 10] |
+| **fileId** | path | **Integer** (int32) | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: 10] |
 
 #### Responses
 
@@ -1105,7 +1105,7 @@ Returns the editing revisions of a file, oldest first, as the document service u
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -1120,7 +1120,7 @@ No authorization required
 
 Get file encryption information
 
-Returns what the caller needs in order to decrypt one file of an end-to-end encrypted private room: &#x60;userKeys&#x60;  holds the key pairs of the calling account, the private half of each of them encrypted with that person&#39;s own  password, and &#x60;fileKeys&#x60; holds the file keys that were issued to this account for this file, each naming the  public key it was encrypted for. Only the keys of the calling account are ever returned, never those of the  other people in the room. An account that holds no key pair yet, and a file no key was issued for, answer with  empty lists rather than with an error, so an empty &#x60;fileKeys&#x60; means the caller cannot open that file rather  than that the file is unencrypted. The caller needs read access to the file; a caller without it, and a file  that does not exist, are both refused with 403. The operation is read-only. Keys are issued by  &#x60;PUT api/2.0/files/{fileId}/access&#x60;, and the personal key pairs are managed under &#x60;api/2.0/privacyroom/keys&#x60;.
+Returns what the caller needs in order to decrypt one file of an end-to-end encrypted private room: `userKeys`  holds the key pairs of the calling account, the private half of each of them encrypted with that person's own  password, and `fileKeys` holds the file keys that were issued to this account for this file, each naming the  public key it was encrypted for. Only the keys of the calling account are ever returned, never those of the  other people in the room. An account that holds no key pair yet, and a file no key was issued for, answer with  empty lists rather than with an error, so an empty `fileKeys` means the caller cannot open that file rather  than that the file is unencrypted. The caller needs read access to the file; a caller without it, and a file  that does not exist, are both refused with 403. The operation is read-only. Keys are issued by  `PUT api/2.0/files/{fileId}/access`, and the personal key pairs are managed under `api/2.0/privacyroom/keys`.
 
 #### Parameters
 
@@ -1163,7 +1163,7 @@ Returns what the caller needs in order to decrypt one file of an end-to-end encr
 
 Get file history
 
-Returns the activity log of a single file - who renamed, moved, shared, converted, locked or edited it, and  when - as the portal recorded it in its audit trail. Entries arrive newest first, and the events that belong  to one action are folded into a single entry whose &#x60;related&#x60; list carries the rest of them. &#x60;fromDate&#x60; and  &#x60;toDate&#x60; are read in the portal&#39;s time zone and narrow the range; &#x60;startIndex&#x60; and &#x60;count&#x60; page through the  result, and the number of matching entries is reported in the response headers rather than in the body. The  caller needs read access to the file, so a member of the room it lies in, the admin of that room and a  DocSpace admin all see the same log, while a caller without access to the room is refused with 403 and an  unknown id is answered with 404. The operation is read-only. Only files stored in the portal itself have a log  here - a file kept in a connected third-party storage has none. For the log of a folder or a room use  &#x60;GET api/2.0/files/folder/{folderId}/log&#x60;.
+Returns the activity log of a single file - who renamed, moved, shared, converted, locked or edited it, and  when - as the portal recorded it in its audit trail. Entries arrive newest first, and the events that belong  to one action are folded into a single entry whose `related` list carries the rest of them. `fromDate` and  `toDate` are read in the portal's time zone and narrow the range; `startIndex` and `count` page through the  result, and the number of matching entries is reported in the response headers rather than in the body. The  caller needs read access to the file, so a member of the room it lies in, the admin of that room and a  DocSpace admin all see the same log, while a caller without access to the room is refused with 403 and an  unknown id is answered with 404. The operation is read-only. Only files stored in the portal itself have a log  here - a file kept in a connected third-party storage has none. For the log of a folder or a room use  `GET api/2.0/files/folder/{folderId}/log`.
 
 #### Parameters
 
@@ -1210,14 +1210,14 @@ Returns the activity log of a single file - who renamed, moved, shared, converte
 
 Get file information
 
-Returns one file as the portal stores it, together with the state it has for the caller: the title, the folder  it lies in, the size, the current version and revision group, the addresses for viewing and editing it, the  actions the caller is allowed to perform on it, the sharing rights it was reached through, and the thumbnail  state. &#x60;version&#x60; picks an older version instead of the current one; the default of -1 means the current  version. When the file belongs to another person&#39;s own section and the caller cannot read the folder holding  it, the answer reports the Shared with me section as its folder, so that a client can show it in a place the  caller can actually open. The caller needs read access to the file, which any member of the room it lies in  has; a caller without access to the room is refused and an anonymous caller without an external share link is  rejected. The operation is read-only. For every version at once use &#x60;GET api/2.0/files/file/{fileId}/history&#x60;.
+Returns one file as the portal stores it, together with the state it has for the caller: the title, the folder  it lies in, the size, the current version and revision group, the addresses for viewing and editing it, the  actions the caller is allowed to perform on it, the sharing rights it was reached through, and the thumbnail  state. `version` picks an older version instead of the current one; the default of -1 means the current  version. When the file belongs to another person's own section and the caller cannot read the folder holding  it, the answer reports the Shared with me section as its folder, so that a client can show it in a place the  caller can actually open. The caller needs read access to the file, which any member of the room it lies in  has; a caller without access to the room is refused and an anonymous caller without an external share link is  rejected. The operation is read-only. For every version at once use `GET api/2.0/files/file/{fileId}/history`.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
 | **fileId** | path | **Integer** (int32) | The file to read. | [required] [example: 1] |
-| **version** | query | **Integer** (int32) | The version to read, as reported by &#x60;GET api/2.0/files/file/{fileId}/history&#x60;; -1, the default, reads the  current version. | [optional] [example: 1] |
+| **version** | query | **Integer** (int32) | The version to read, as reported by `GET api/2.0/files/file/{fileId}/history`; -1, the default, reads the  current version. | [optional] [example: 1] |
 
 #### Responses
 
@@ -1236,7 +1236,7 @@ Returns one file as the portal stores it, together with the state it has for the
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -1251,15 +1251,15 @@ No authorization required
 
 Get file external links
 
-Lists the external links of a file, each with its identifier, title, address, rights, expiration date and  download restriction. &#x60;startIndex&#x60; and &#x60;count&#x60; page through the list, and the total number of links is  reported in the response headers rather than in the body. A file that has never been shared by link answers  with an empty list; the primary link is part of this list once it exists, and it is the only one that is  created on demand, by &#x60;GET api/2.0/files/file/{id}/link&#x60;. For a PDF form kept in a form-filling room the link  of the room is appended to the answer, because that is the address through which the form is filled out. The  caller needs the right to share the file, which its creator, the room admin and a DocSpace admin acting as  room manager have; a caller without access to the file is refused and an anonymous caller is rejected. The  operation is read-only. Take an identifier from here to &#x60;PUT api/2.0/files/file/{id}/links&#x60; to change or  remove that link.
+Lists the external links of a file, each with its identifier, title, address, rights, expiration date and  download restriction. `startIndex` and `count` page through the list, and the total number of links is  reported in the response headers rather than in the body. A file that has never been shared by link answers  with an empty list; the primary link is part of this list once it exists, and it is the only one that is  created on demand, by `GET api/2.0/files/file/{id}/link`. For a PDF form kept in a form-filling room the link  of the room is appended to the answer, because that is the address through which the form is filled out. The  caller needs the right to share the file, which its creator, the room admin and a DocSpace admin acting as  room manager have; a caller without access to the file is refused and an anonymous caller is rejected. The  operation is read-only. Take an identifier from here to `PUT api/2.0/files/file/{id}/links` to change or  remove that link.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The file the operation addresses. Take the identifier from a listing such as &#x60;GET api/2.0/files/{folderId}&#x60;: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: 10] |
+| **id** | path | **Integer** (int32) | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: 10] |
 | **count** | query | **Integer** (int32) | How many entries at most to answer with, in the operations of this file that return a list; an operation that  answers with a single object is not affected by it. | [optional] [example: 25] [min: 1] [max: 100] |
-| **startIndex** | query | **Integer** (int32) | How many entries of such a list to skip before answering, used together with &#x60;count&#x60; to walk through it page  by page. | [optional] [example: 0] |
+| **startIndex** | query | **Integer** (int32) | How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page. | [optional] [example: 0] |
 
 #### Responses
 
@@ -1294,15 +1294,15 @@ Lists the external links of a file, each with its identifier, title, address, ri
 
 Get the file primary external link
 
-Answers with the primary external link of a file - the one the Copy link action of a client hands out - with  its address in &#x60;sharedTo.shareLink&#x60;, its rights in &#x60;access&#x60;, and its expiration date, password flag and  download restriction beside them. The link is created on the first read if the file has none, with read  rights, no password and no expiry, so this operation mutates on that first call and is a plain read  afterwards; repeated calls answer with the same link identifier. A PDF form in a form-filling room is answered  with the link of that room, carried over to the form. The caller needs the right to share the file, which its  creator, the room admin and a DocSpace admin acting as room manager have; a caller without access to the file  is refused with 403 and an anonymous caller is rejected, while a link that was deliberately revoked is  answered with 404 rather than being recreated. The custom links of the same file, the primary one excepted,  are listed by &#x60;GET api/2.0/files/file/{id}/links&#x60;.
+Answers with the primary external link of a file - the one the Copy link action of a client hands out - with  its address in `sharedTo.shareLink`, its rights in `access`, and its expiration date, password flag and  download restriction beside them. The link is created on the first read if the file has none, with read  rights, no password and no expiry, so this operation mutates on that first call and is a plain read  afterwards; repeated calls answer with the same link identifier. A PDF form in a form-filling room is answered  with the link of that room, carried over to the form. The caller needs the right to share the file, which its  creator, the room admin and a DocSpace admin acting as room manager have; a caller without access to the file  is refused with 403 and an anonymous caller is rejected, while a link that was deliberately revoked is  answered with 404 rather than being recreated. The custom links of the same file, the primary one excepted,  are listed by `GET api/2.0/files/file/{id}/links`.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The file the operation addresses. Take the identifier from a listing such as &#x60;GET api/2.0/files/{folderId}&#x60;: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: 10] |
+| **id** | path | **Integer** (int32) | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: 10] |
 | **count** | query | **Integer** (int32) | How many entries at most to answer with, in the operations of this file that return a list; an operation that  answers with a single object is not affected by it. | [optional] [example: 25] [min: 1] [max: 100] |
-| **startIndex** | query | **Integer** (int32) | How many entries of such a list to skip before answering, used together with &#x60;count&#x60; to walk through it page  by page. | [optional] [example: 0] |
+| **startIndex** | query | **Integer** (int32) | How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page. | [optional] [example: 0] |
 
 #### Responses
 
@@ -1323,7 +1323,7 @@ Answers with the primary external link of a file - the one the Copy link action 
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -1338,13 +1338,13 @@ No authorization required
 
 Get file versions
 
-Returns every stored version of a file, newest first, each of them shaped like the file itself - the version  and the revision group it belongs to, the size, the comment saved with it, the addresses for viewing it, and  the thumbnail and lock state. Unlike the editing revisions of &#x60;GET api/2.0/files/file/{fileId}/edit/history&#x60;,  this list also holds the autosave revisions an editing session writes, so it is the fuller of the two, and it  is the shape a client already knows how to render. The caller needs the right to read the history of the file,  which is a stricter rule than reading the file: in a room only its managers and content creators may read the  history, and in a personal section editing access is enough, so a member with read access to somebody else&#39;s  file, and even a DocSpace admin in that position, are refused, as is an anonymous caller. The operation is  read-only. To restore one of the versions use &#x60;POST api/2.0/files/file/{fileId}/restoreversion&#x60;, and to close  or reopen a revision group &#x60;PUT api/2.0/files/file/{fileId}/history&#x60;.
+Returns every stored version of a file, newest first, each of them shaped like the file itself - the version  and the revision group it belongs to, the size, the comment saved with it, the addresses for viewing it, and  the thumbnail and lock state. Unlike the editing revisions of `GET api/2.0/files/file/{fileId}/edit/history`,  this list also holds the autosave revisions an editing session writes, so it is the fuller of the two, and it  is the shape a client already knows how to render. The caller needs the right to read the history of the file,  which is a stricter rule than reading the file: in a room only its managers and content creators may read the  history, and in a personal section editing access is enough, so a member with read access to somebody else's  file, and even a DocSpace admin in that position, are refused, as is an anonymous caller. The operation is  read-only. To restore one of the versions use `POST api/2.0/files/file/{fileId}/restoreversion`, and to close  or reopen a revision group `PUT api/2.0/files/file/{fileId}/history`.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **Integer** (int32) | The file the operation addresses. Take the identifier from a listing such as &#x60;GET api/2.0/files/{folderId}&#x60;: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: 10] |
+| **fileId** | path | **Integer** (int32) | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: 10] |
 
 #### Responses
 
@@ -1363,7 +1363,7 @@ Returns every stored version of a file, newest first, each of them shaped like t
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -1378,7 +1378,7 @@ No authorization required
 
 Get form-filling result
 
-Answers with the outcome of one completed form-filling session: the filled copy of the form, the original form  it was made from, the number this submission was given inside the room, the identifier of the room and the  account that started the filling. &#x60;isRoomMember&#x60; says whether the caller is a member of that room, which a  client uses to decide whether the room can be offered for opening. The session is named by &#x60;fillingSessionId&#x60;,  the value the document service reports when the filling ends; the portal remembers it only for a while after  that, so a session that was never completed, one already forgotten and a value of the wrong shape are all  answered as not found, while omitting the parameter is rejected as an invalid request. The operation is  read-only and needs no sign-in: it is meant for the caller that has just finished filling the form through an  external link, and the session identifier is the only secret involved. The filled copy itself is an ordinary  file - read it with &#x60;GET api/2.0/files/file/{fileId}&#x60;.
+Answers with the outcome of one completed form-filling session: the filled copy of the form, the original form  it was made from, the number this submission was given inside the room, the identifier of the room and the  account that started the filling. `isRoomMember` says whether the caller is a member of that room, which a  client uses to decide whether the room can be offered for opening. The session is named by `fillingSessionId`,  the value the document service reports when the filling ends; the portal remembers it only for a while after  that, so a session that was never completed, one already forgotten and a value of the wrong shape are all  answered as not found, while omitting the parameter is rejected as an invalid request. The operation is  read-only and needs no sign-in: it is meant for the caller that has just finished filling the form through an  external link, and the session identifier is the only secret involved. The filled copy itself is an ordinary  file - read it with `GET api/2.0/files/file/{fileId}`.
 
 #### Parameters
 
@@ -1403,7 +1403,7 @@ Answers with the outcome of one completed form-filling session: the filled copy 
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -1418,13 +1418,13 @@ No authorization required
 
 Get form submission results
 
-Returns everything that has been submitted against one PDF form: &#x60;metadata&#x60; describes the fields of the form,  in the order they are laid out, and &#x60;submissions&#x60; carries one record per completed copy, each of them holding  the values that were entered. It is the data behind the results table a client shows for a form, and the same  data the spreadsheet report of &#x60;POST api/2.0/files/file/{fileId}/xlsx&#x60; is built from. Only the submissions of  the version that is currently being filled are reported. The form has to be a PDF form whose filling has been  started and which is still the original form of its room; a form that was never started, a copy of a form and  a form whose room has been moved away are all refused. Read access to the form is enough, so every member of  the room can read the results, while a caller without access to it is refused with 403. The operation is  read-only. The list of roles and whose turn it is comes from &#x60;GET api/2.0/files/file/{fileId}/formroles&#x60;  instead.
+Returns everything that has been submitted against one PDF form: `metadata` describes the fields of the form,  in the order they are laid out, and `submissions` carries one record per completed copy, each of them holding  the values that were entered. It is the data behind the results table a client shows for a form, and the same  data the spreadsheet report of `POST api/2.0/files/file/{fileId}/xlsx` is built from. Only the submissions of  the version that is currently being filled are reported. The form has to be a PDF form whose filling has been  started and which is still the original form of its room; a form that was never started, a copy of a form and  a form whose room has been moved away are all refused. Read access to the form is enough, so every member of  the room can read the results, while a caller without access to it is refused with 403. The operation is  read-only. The list of roles and whose turn it is comes from `GET api/2.0/files/file/{fileId}/formroles`  instead.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **Integer** (int32) | The file the operation addresses. Take the identifier from a listing such as &#x60;GET api/2.0/files/{folderId}&#x60;: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: 10] |
+| **fileId** | path | **Integer** (int32) | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: 10] |
 
 #### Responses
 
@@ -1460,13 +1460,13 @@ Returns everything that has been submitted against one PDF form: &#x60;metadata&
 
 Get a signed download address
 
-Returns a direct download address for the current content of the file together with the signature token that  the document service validates, which is what the portal hands over when the editors have to fetch the  document themselves. The address points at the portal&#39;s file stream endpoint and is rewritten to the host the  document service can reach, so on a deployment where the editors sit behind a private address it is not the  address a browser should follow. The answer also carries the extension of the stored document, leading dot  included. The caller needs read access to the file, and an unknown file id is reported as missing. The call  only reads, and each call mints a fresh address and token rather than reusing the previous one, so the value  is worth requesting again once a token has expired. For a link meant for a person, a plain address with no  token to put behind a download button, use &#x60;GET api/2.0/files/file/{fileId}/presigneduri&#x60; instead.
+Returns a direct download address for the current content of the file together with the signature token that  the document service validates, which is what the portal hands over when the editors have to fetch the  document themselves. The address points at the portal's file stream endpoint and is rewritten to the host the  document service can reach, so on a deployment where the editors sit behind a private address it is not the  address a browser should follow. The answer also carries the extension of the stored document, leading dot  included. The caller needs read access to the file, and an unknown file id is reported as missing. The call  only reads, and each call mints a fresh address and token rather than reusing the previous one, so the value  is worth requesting again once a token has expired. For a link meant for a person, a plain address with no  token to put behind a download button, use `GET api/2.0/files/file/{fileId}/presigneduri` instead.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **Integer** (int32) | The file the operation addresses. Take the identifier from a listing such as &#x60;GET api/2.0/files/{folderId}&#x60;: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: 10] |
+| **fileId** | path | **Integer** (int32) | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: 10] |
 
 #### Responses
 
@@ -1501,13 +1501,13 @@ Returns a direct download address for the current content of the file together w
 
 Get file download link
 
-Builds a download address for the current version of a file and answers with it as a plain string. The address  points at the portal&#39;s own file handler and carries the file identifier, the version it was built for and a  time-limited authentication key, so it can be handed to a downloader that cannot sign in to the portal itself;  it stops working once that key has expired, and it keeps naming the version that was current when it was built  rather than following later edits. The caller needs read access to the file: a member of the room it lies in  gets an address, a caller without access to the room is refused, an unknown identifier is answered as not  found and an anonymous caller is rejected. The operation is read-only and safe to repeat, though every call  mints a new key. Nothing is downloaded here - follow the address to fetch the bytes. For the variant the  document service signs, which comes back as an object with the file type and a token, use  &#x60;GET api/2.0/files/file/{fileId}/presigned&#x60;.
+Builds a download address for the current version of a file and answers with it as a plain string. The address  points at the portal's own file handler and carries the file identifier, the version it was built for and a  time-limited authentication key, so it can be handed to a downloader that cannot sign in to the portal itself;  it stops working once that key has expired, and it keeps naming the version that was current when it was built  rather than following later edits. The caller needs read access to the file: a member of the room it lies in  gets an address, a caller without access to the room is refused, an unknown identifier is answered as not  found and an anonymous caller is rejected. The operation is read-only and safe to repeat, though every call  mints a new key. Nothing is downloaded here - follow the address to fetch the bytes. For the variant the  document service signs, which comes back as an object with the file type and a token, use  `GET api/2.0/files/file/{fileId}/presigned`.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **Integer** (int32) | The file the operation addresses. Take the identifier from a listing such as &#x60;GET api/2.0/files/{folderId}&#x60;: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: 10] |
+| **fileId** | path | **Integer** (int32) | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: 10] |
 
 #### Responses
 
@@ -1542,13 +1542,13 @@ Builds a download address for the current version of a file and answers with it 
 
 Get users for document protection
 
-Lists the users the file is shared with, which is what a client offers when the author protects a document and  picks who may still edit it. The list is built from the whole access list of the file: every entry that is not  an explicit denial, with groups expanded into their members, the caller themselves and deleted accounts left  out, ordered by display name. Access inherited from the room counts, so a member who never received a share on  the file itself is listed too. A file kept in the legacy project storage always answers with an empty list  rather than with its team. The call only reads. A guest is refused, an anonymous caller is answered with  nothing, and a file id that resolves to nothing is refused as well instead of being reported as missing. For  the readers to offer as mentions inside the editor use &#x60;GET api/2.0/files/file/{fileId}/sharedusers&#x60;.
+Lists the users the file is shared with, which is what a client offers when the author protects a document and  picks who may still edit it. The list is built from the whole access list of the file: every entry that is not  an explicit denial, with groups expanded into their members, the caller themselves and deleted accounts left  out, ordered by display name. Access inherited from the room counts, so a member who never received a share on  the file itself is listed too. A file kept in the legacy project storage always answers with an empty list  rather than with its team. The call only reads. A guest is refused, an anonymous caller is answered with  nothing, and a file id that resolves to nothing is refused as well instead of being reported as missing. For  the readers to offer as mentions inside the editor use `GET api/2.0/files/file/{fileId}/sharedusers`.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **Integer** (int32) | The file the operation addresses. Take the identifier from a listing such as &#x60;GET api/2.0/files/{folderId}&#x60;: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: 10] |
+| **fileId** | path | **Integer** (int32) | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: 10] |
 
 #### Responses
 
@@ -1583,7 +1583,7 @@ Lists the users the file is shared with, which is what a client offers when the 
 
 Resolve a spreadsheet reference
 
-Resolves a reference that a formula in one spreadsheet makes to another document, and answers with the  descriptor the document service needs in order to read it: the title, the download address, the file type, the  document key of the co-editing session, the web editor link and the signature token. Three ways of naming the  target are tried in order, and the first that resolves wins: &#x60;fileKey&#x60; as a file id inside the portal named by  &#x60;instanceId&#x60;, then &#x60;path&#x60; looked up among the files sitting next to &#x60;sourceFileId&#x60;, then &#x60;link&#x60;, short links  included, from which the file id is read out. A link that points outside this portal is not resolved at all  and comes back unchanged as the address to follow. The caller needs read access to the source file and to its  folder, otherwise the call is refused. The call only reads. A reference that resolves to nothing is still  answered with 200, with the error text filled in and the rest of the descriptor empty, so read the error  before using any other field.
+Resolves a reference that a formula in one spreadsheet makes to another document, and answers with the  descriptor the document service needs in order to read it: the title, the download address, the file type, the  document key of the co-editing session, the web editor link and the signature token. Three ways of naming the  target are tried in order, and the first that resolves wins: `fileKey` as a file id inside the portal named by  `instanceId`, then `path` looked up among the files sitting next to `sourceFileId`, then `link`, short links  included, from which the file id is read out. A link that points outside this portal is not resolved at all  and comes back unchanged as the address to follow. The caller needs read access to the source file and to its  folder, otherwise the call is refused. The call only reads. A reference that resolves to nothing is still  answered with 200, with the error text filled in and the rest of the descriptor empty, so read the error  before using any other field.
 
 #### Parameters
 
@@ -1624,13 +1624,13 @@ Resolves a reference that a formula in one spreadsheet makes to another document
 
 Get form report generation status
 
-Reports how far the spreadsheet of submitted form answers has got, the one queued by  &#x60;POST api/2.0/files/file/{fileId}/xlsx&#x60;. A run is kept per portal, per caller and per form, so this reports  the caller&#39;s own run and not one started by another member of the room; address it with the id of the original  form rather than with the id of the produced spreadsheet. The answer carries the completion flag, the progress  percentage, the error text when the run failed, and the id, name and address of the produced file once it is  there. Nothing at all comes back when no run is on record for this caller and form, which is the normal answer  before the first run and not an error. The call only reads and is meant to be polled until completion is  reported. Any authenticated caller may ask; whether the report may be built is decided when the run is queued,  not here.
+Reports how far the spreadsheet of submitted form answers has got, the one queued by  `POST api/2.0/files/file/{fileId}/xlsx`. A run is kept per portal, per caller and per form, so this reports  the caller's own run and not one started by another member of the room; address it with the id of the original  form rather than with the id of the produced spreadsheet. The answer carries the completion flag, the progress  percentage, the error text when the run failed, and the id, name and address of the produced file once it is  there. Nothing at all comes back when no run is on record for this caller and form, which is the normal answer  before the first run and not an error. The call only reads and is meant to be polled until completion is  reported. Any authenticated caller may ask; whether the report may be built is decided when the run is queued,  not here.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **Integer** (int32) | The file the operation addresses. Take the identifier from a listing such as &#x60;GET api/2.0/files/{folderId}&#x60;: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: 10] |
+| **fileId** | path | **Integer** (int32) | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: 10] |
 
 #### Responses
 
@@ -1665,13 +1665,13 @@ Reports how far the spreadsheet of submitted form answers has got, the one queue
 
 Check the PDF file
 
-Tells whether a file is a PDF form that can be filled out in the portal, and answers with a single boolean.  The check is by content, not by extension: the beginning of the file is read and the answer is &#x60;true&#x60; only  when it carries the marker the editors write into the forms they produce, so an ordinary PDF, and a PDF form  made in other software, both answer &#x60;false&#x60;. A file whose name is not a PDF at all answers &#x60;false&#x60; without  being read. Use it before offering the form-filling operations on a file, because a document that answers  &#x60;false&#x60; cannot be started for filling. The caller needs read access to the file, and read access is enough - a  member of the room with read-only rights gets the answer; a caller without access to the room is refused and  an anonymous caller is rejected. The operation is read-only and idempotent. It says nothing about the state of  the filling - for that read &#x60;GET api/2.0/files/file/{fileId}/formroles&#x60;.
+Tells whether a file is a PDF form that can be filled out in the portal, and answers with a single boolean.  The check is by content, not by extension: the beginning of the file is read and the answer is `true` only  when it carries the marker the editors write into the forms they produce, so an ordinary PDF, and a PDF form  made in other software, both answer `false`. A file whose name is not a PDF at all answers `false` without  being read. Use it before offering the form-filling operations on a file, because a document that answers  `false` cannot be started for filling. The caller needs read access to the file, and read access is enough - a  member of the room with read-only rights gets the answer; a caller without access to the room is refused and  an anonymous caller is rejected. The operation is read-only and idempotent. It says nothing about the state of  the filling - for that read `GET api/2.0/files/file/{fileId}/formroles`.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **Integer** (int32) | The file the operation addresses. Take the identifier from a listing such as &#x60;GET api/2.0/files/{folderId}&#x60;: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: 10] |
+| **fileId** | path | **Integer** (int32) | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: 10] |
 
 #### Responses
 
@@ -1706,7 +1706,7 @@ Tells whether a file is a PDF form that can be filled out in the portal, and ans
 
 Lock a file
 
-Locks a file so that nobody else can change it, or releases that lock, and answers with the file as it now  stands. With &#x60;lockFile&#x3D;true&#x60; the lock is put on the file and everybody else who is editing it at that moment  is dropped out of the session, the caller excepted; the lock then blocks editing, renaming and deleting for  everybody but the account that set it and the room admins. With &#x60;lockFile&#x3D;false&#x60; the lock is removed and a  note about the unlocking is appended to the current version comment, unless the file lives in a connected  third-party storage. Locking a file that is already locked, or unlocking one that is not, changes nothing and  still answers with the file, so the call is idempotent in effect while remaining a mutating one. The caller  needs the right to lock the file, which the room admin, a DocSpace admin acting as room manager and a member  with content-creator rights have; a member without access to the room and a guest are refused, and so is a  file in Trash. A lock set by somebody else can only be released by a room manager.
+Locks a file so that nobody else can change it, or releases that lock, and answers with the file as it now  stands. With `lockFile=true` the lock is put on the file and everybody else who is editing it at that moment  is dropped out of the session, the caller excepted; the lock then blocks editing, renaming and deleting for  everybody but the account that set it and the room admins. With `lockFile=false` the lock is removed and a  note about the unlocking is appended to the current version comment, unless the file lives in a connected  third-party storage. Locking a file that is already locked, or unlocking one that is not, changes nothing and  still answers with the file, so the call is idempotent in effect while remaining a mutating one. The caller  needs the right to lock the file, which the room admin, a DocSpace admin acting as room manager and a member  with content-creator rights have; a member without access to the room and a guest are refused, and so is a  file in Trash. A lock set by somebody else can only be released by a room manager.
 
 #### Parameters
 
@@ -1748,13 +1748,13 @@ Locks a file so that nobody else can change it, or releases that lock, and answe
 
 Perform form filling action
 
-Drives the filling of a PDF form through its states, the action deciding which way. Action 2 starts the  filling: in a form-filling room the form is opened for filling, the members whose rights are limited to  filling forms are let in, and a form that has been changed since it was last started has the drafts of its  previous round dropped. Action 0 stops it, which in a virtual data room records who interrupted it and at  which role and notifies the people who held the other roles, and in a form-filling room closes the form for  filling. Action 1 resumes a filling that was stopped, clearing that record. Action 3 puts the form back into  editing, closing it for filling and remembering the version it was edited from. The file has to be a PDF form  lying in a room. Starting needs the right to start the filling, which the room admin and a member with  content-creator rights have, while stopping a filling that somebody else started belongs to room managers  alone, so a content creator is refused with 403 there. The call is mutating; the state that resulted is read  with &#x60;GET api/2.0/files/file/{fileId}/formroles&#x60;.
+Drives the filling of a PDF form through its states, the action deciding which way. Action 2 starts the  filling: in a form-filling room the form is opened for filling, the members whose rights are limited to  filling forms are let in, and a form that has been changed since it was last started has the drafts of its  previous round dropped. Action 0 stops it, which in a virtual data room records who interrupted it and at  which role and notifies the people who held the other roles, and in a form-filling room closes the form for  filling. Action 1 resumes a filling that was stopped, clearing that record. Action 3 puts the form back into  editing, closing it for filling and remembering the version it was edited from. The file has to be a PDF form  lying in a room. Starting needs the right to start the filling, which the room admin and a member with  content-creator rights have, while stopping a filling that somebody else started belongs to room managers  alone, so a content creator is refused with 403 there. The call is mutating; the state that resulted is read  with `GET api/2.0/files/file/{fileId}/formroles`.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **String** | The form the action applies to. Send the same value as the &#x60;formId&#x60; of the request body, which is the one the handler reads. | [required] |
+| **fileId** | path | **String** | The form the action applies to. Send the same value as the `formId` of the request body, which is the one the handler reads. | [required] |
 | **ManageFormFillingDtoInteger** | body | [**ManageFormFillingDtoInteger**](#model-manageformfillingdtointeger) |  | [optional] |
 
 #### Responses
@@ -1791,15 +1791,15 @@ null (empty response body)
 
 Get the editor configuration
 
-Builds everything an editor client needs to open the file: the document descriptor with its download address,  title, type and document key, the editor configuration with the mode, the caller&#39;s permissions, the user and  the customization, the callback the editors report back to, and the signature token the document service  validates. &#x60;version&#x60; opens one entry of the file history and requires access to that history; left out, the  current revision is opened. &#x60;view&#x60;, &#x60;edit&#x60; and &#x60;fill&#x60; say what the client intends to do, and &#x60;editorType&#x60;  picks the desktop, mobile or embedded layout. For a PDF form the room decides the outcome and may overrule the  request: a form-filling room, a virtual data room, a public room and a user folder each produce their own  mode, and a form opened from the templates folder is read-only and, outside the mobile layout, framed as  embedded. When the portal is over its storage quota the configuration comes back read-only with the exceeded  scope named. In a private room the caller&#39;s encryption keys are added to the editor configuration. Payment is  not required and an anonymous caller opens through an external link.
+Builds everything an editor client needs to open the file: the document descriptor with its download address,  title, type and document key, the editor configuration with the mode, the caller's permissions, the user and  the customization, the callback the editors report back to, and the signature token the document service  validates. `version` opens one entry of the file history and requires access to that history; left out, the  current revision is opened. `view`, `edit` and `fill` say what the client intends to do, and `editorType`  picks the desktop, mobile or embedded layout. For a PDF form the room decides the outcome and may overrule the  request: a form-filling room, a virtual data room, a public room and a user folder each produce their own  mode, and a form opened from the templates folder is read-only and, outside the mobile layout, framed as  embedded. When the portal is over its storage quota the configuration comes back read-only with the exceeded  scope named. In a private room the caller's encryption keys are added to the editor configuration. Payment is  not required and an anonymous caller opens through an external link.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **Integer** (int32) | The file the editor configuration is built for. Take the id from a folder listing such as  &#x60;GET api/2.0/files/{folderId}&#x60;. | [required] [example: 1] |
+| **fileId** | path | **Integer** (int32) | The file the editor configuration is built for. Take the id from a folder listing such as  `GET api/2.0/files/{folderId}`. | [required] [example: 1] |
 | **version** | query | **Integer** (int32) | Which entry of the file history to open, numbered the way the file versions are. Left out, the current  revision is opened; naming a version requires access to the history of the file. | [optional] [example: 1] |
-| **view** | query | **Boolean** | Asks for a read-only configuration. Left off, the configuration is built for editing as far as the caller&#39;s  rights and the room the file lies in allow. | [optional] [example: false] |
+| **view** | query | **Boolean** | Asks for a read-only configuration. Left off, the configuration is built for editing as far as the caller's  rights and the room the file lies in allow. | [optional] [example: false] |
 | **editorType** | query | **EditorType** | Which editor layout the configuration is built for: the full desktop interface, the reduced mobile one, or the  embedded viewer meant to be framed inside another page. | [optional] [example: 1] [enum: 0, 1, 2] |
 | **edit** | query | **Boolean** | Asks for editing rather than viewing. On a form in a form-filling room this also records that the form is  being edited; the room may still turn the request into viewing or into filling. | [optional] [example: false] |
 | **fill** | query | **Boolean** | Asks for a PDF form to open for filling out rather than for editing. It has no effect on a file that is not a  form. | [optional] [example: false] |
@@ -1822,7 +1822,7 @@ Builds everything an editor client needs to open the file: the document descript
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -1837,14 +1837,14 @@ No authorization required
 
 Restore a file version
 
-Brings an earlier version of a file back and answers with the editing revisions of the file after the restore.  Nothing is overwritten: the content of the chosen version is stored again as a new version on top of the  history, carrying a comment that says which version it was reverted to, so the intervening versions stay  readable. &#x60;url&#x60; changes the source - with it the content is fetched from that address, which is how the  document service returns a document with a set of changes rolled back, and the new version records that  instead. Any links that pointed at drafts of the file are dropped, and the file is marked as new for the other  people who can read it. &#x60;version&#x60; has to name an existing version and is refused with 400 when it is missing  or already the current one. The caller needs the right to edit the history of the file and is otherwise  refused with 403, an anonymous caller included. The call is mutating and not idempotent. A locked file, one in  Trash, one being edited, an encrypted one and one kept in a connected third-party storage are all refused.
+Brings an earlier version of a file back and answers with the editing revisions of the file after the restore.  Nothing is overwritten: the content of the chosen version is stored again as a new version on top of the  history, carrying a comment that says which version it was reverted to, so the intervening versions stay  readable. `url` changes the source - with it the content is fetched from that address, which is how the  document service returns a document with a set of changes rolled back, and the new version records that  instead. Any links that pointed at drafts of the file are dropped, and the file is marked as new for the other  people who can read it. `version` has to name an existing version and is refused with 400 when it is missing  or already the current one. The caller needs the right to edit the history of the file and is otherwise  refused with 403, an anonymous caller included. The call is mutating and not idempotent. A locked file, one in  Trash, one being edited, an encrypted one and one kept in a connected third-party storage are all refused.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
 | **fileId** | path | **Integer** (int32) | The file whose version is restored. | [required] [example: 1] |
-| **version** | query | **Integer** (int32) | The version to restore, as reported by &#x60;GET api/2.0/files/file/{fileId}/edit/history&#x60;. It has to name an  existing version that is not the current one. | [optional] [example: 1] |
+| **version** | query | **Integer** (int32) | The version to restore, as reported by `GET api/2.0/files/file/{fileId}/edit/history`. It has to name an  existing version that is not the current one. | [optional] [example: 1] |
 | **url** | query | **String** | The address the content of the new version is fetched from instead of the stored version, which is how the  document service hands back a document with a set of changes rolled back; left out, the stored version is  used. | [optional] [example: https://document-server.example.com/cache/files/conv_1_docx/output.docx] |
 
 #### Responses
@@ -1865,7 +1865,7 @@ Brings an earlier version of a file back and answers with the editing revisions 
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -1880,7 +1880,7 @@ No authorization required
 
 Save edited file content
 
-Replaces the content of an existing file with an edited copy and answers with the file as it now stands. The  content is the &#x60;File&#x60; part of a &#x60;multipart/form-data&#x60; body, and when no such part is sent the raw request body  is saved instead, so an empty body empties the file. The &#x60;DownloadUri&#x60; query parameter does not supply content  here; it is only read for the extension when &#x60;FileExtension&#x60; is empty. &#x60;fileExtension&#x60; names the format of the  content being sent, and when it differs from the stored format the portal converts the content, or keeps it  under a renamed copy when a third-party storage cannot convert it. The caller needs edit access to the file.  The call is mutating and not idempotent: an ordinary call adds a version to the file history, while  &#x60;forcesave&#x3D;true&#x60; records an editor autosave, which overwrites the previous autosave revision instead of adding  another version and leaves a running editing session in place. It is refused with 403 when the file is locked,  lies in Trash, or is open in an editing session started by somebody else, and an unknown file id is reported  as missing. For content too large to post in one request use &#x60;POST api/2.0/files/file/{fileId}/edit_session&#x60;.
+Replaces the content of an existing file with an edited copy and answers with the file as it now stands. The  content is the `File` part of a `multipart/form-data` body, and when no such part is sent the raw request body  is saved instead, so an empty body empties the file. The `DownloadUri` query parameter does not supply content  here; it is only read for the extension when `FileExtension` is empty. `fileExtension` names the format of the  content being sent, and when it differs from the stored format the portal converts the content, or keeps it  under a renamed copy when a third-party storage cannot convert it. The caller needs edit access to the file.  The call is mutating and not idempotent: an ordinary call adds a version to the file history, while  `forcesave=true` records an editor autosave, which overwrites the previous autosave revision instead of adding  another version and leaves a running editing session in place. It is refused with 403 when the file is locked,  lies in Trash, or is open in an editing session started by somebody else, and an unknown file id is reported  as missing. For content too large to post in one request use `POST api/2.0/files/file/{fileId}/edit_session`.
 
 #### Parameters
 
@@ -1888,8 +1888,8 @@ Replaces the content of an existing file with an edited copy and answers with th
 |------------- | ------------- | ------------- | ------------- | -------------|
 | **fileId** | path | **Integer** (int32) | The file whose content is replaced. The submitted content is written onto this file, so it has to be the file  the editing session was opened on rather than a copy of it. | [required] [example: 1] |
 | **DownloadUri** | query | **String** | An address the document service saved the document at. This operation does not fetch the content from it - the  content always comes from the request body - and reads it only for the extension, when no file extension is  given. | [optional] [example: https://example.com/file.txt] |
-| **FileExtension** | form | **String** | The format the submitted content is in, with the leading dot, as in &#x60;.docx&#x60;. When it differs from the format  the file is stored in, the portal converts the content before saving it. Left empty, the extension is read off  the download address, and failing that the stored format is assumed. | [optional] |
-| **File** | form | **File** (binary) | The edited content, sent as the &#x60;File&#x60; part of a &#x60;multipart/form-data&#x60; body. When the part is missing the raw  request body is saved as the content instead, so an empty body empties the file. | [optional] |
+| **FileExtension** | form | **String** | The format the submitted content is in, with the leading dot, as in `.docx`. When it differs from the format  the file is stored in, the portal converts the content before saving it. Left empty, the extension is read off  the download address, and failing that the stored format is assumed. | [optional] |
+| **File** | form | **File** (binary) | The edited content, sent as the `File` part of a `multipart/form-data` body. When the part is missing the raw  request body is saved as the content instead, so an empty body empties the file. | [optional] |
 | **Forcesave** | form | **Boolean** | Records the write as an editor autosave: the file keeps its running editing session and the previous autosave  revision is overwritten. Left off, the write closes the solo editing session, is refused while somebody else  has the file open, and adds a version to the history. | [optional] |
 
 #### Responses
@@ -1898,7 +1898,7 @@ Replaces the content of an existing file with an edited copy and answers with th
 |------------- | ------------- | ------------- | -------------|
 | **200** | The file is saved and the stored version is returned | [**FileIntegerWrapper**](#model-fileintegerwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **400** | The file id cannot be resolved to a storage that could accept the content | - | - |
-| **403** | The caller cannot edit the file, or it is locked, in Trash, or open in somebody else&#39;s editing session | - | - |
+| **403** | The caller cannot edit the file, or it is locked, in Trash, or open in somebody else's editing session | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
@@ -1926,7 +1926,7 @@ Replaces the content of an existing file with an edited copy and answers with th
 
 Save a file as PDF
 
-Converts a file into a PDF, stores that PDF as a new file in the folder named in the body, and answers with  the file that was created. The source is left untouched, so the two files then live side by side. &#x60;title&#x60;  names the result without an extension - the &#x60;.pdf&#x60; extension is added to it - and an empty title reuses the  name of the source with its extension replaced. The conversion is done by the document service while the  request waits, so the call takes as long as the document needs and answers with the finished file rather than  with a queue entry. The caller needs read access to the source file and the right to create files in the  destination folder, and is otherwise refused; a source file or a destination folder that does not exist is  answered with 404. The call is mutating and not idempotent: each call adds another PDF, its title made unique  when one of that name is already there. The result is marked as new for the room, and for a form the portal  recognises it is stored as a PDF form. To convert in place instead use  &#x60;PUT api/2.0/files/file/{fileId}/checkconversion&#x60;.
+Converts a file into a PDF, stores that PDF as a new file in the folder named in the body, and answers with  the file that was created. The source is left untouched, so the two files then live side by side. `title`  names the result without an extension - the `.pdf` extension is added to it - and an empty title reuses the  name of the source with its extension replaced. The conversion is done by the document service while the  request waits, so the call takes as long as the document needs and answers with the finished file rather than  with a queue entry. The caller needs read access to the source file and the right to create files in the  destination folder, and is otherwise refused; a source file or a destination folder that does not exist is  answered with 404. The call is mutating and not idempotent: each call adds another PDF, its title made unique  when one of that name is already there. The result is marked as new for the room, and for a form the portal  recognises it is stored as a PDF form. To convert in place instead use  `PUT api/2.0/files/file/{fileId}/checkconversion`.
 
 #### Parameters
 
@@ -1969,13 +1969,13 @@ Converts a file into a PDF, stores that PDF as a new file in the folder named in
 
 Save form role mapping
 
-Assigns the roles of a PDF form to the people who are to fill them in, and starts the filling: the form is  marked as being filled out, the account that called is recorded as the one who started it, everybody named in  a role is notified, and the form becomes visible to the members whose room rights are limited to filling  forms. Each role carries its name, the account that takes it and the sequence number that decides the turn, so  the same sequence means the roles may be filled in parallel and different ones make a queue. Sending an empty  role list resets the filling instead, dropping the assignment altogether. The whole set is replaced on every  call, so the call is idempotent for a given set of roles but not additive. The file has to be a PDF form lying  in a room; the caller needs the right to start the filling of that form, which the room admin and a member  with content-creator rights have, and is otherwise refused with 403. Read back what was stored with  &#x60;GET api/2.0/files/file/{fileId}/formroles&#x60;.
+Assigns the roles of a PDF form to the people who are to fill them in, and starts the filling: the form is  marked as being filled out, the account that called is recorded as the one who started it, everybody named in  a role is notified, and the form becomes visible to the members whose room rights are limited to filling  forms. Each role carries its name, the account that takes it and the sequence number that decides the turn, so  the same sequence means the roles may be filled in parallel and different ones make a queue. Sending an empty  role list resets the filling instead, dropping the assignment altogether. The whole set is replaced on every  call, so the call is idempotent for a given set of roles but not additive. The file has to be a PDF form lying  in a room; the caller needs the right to start the filling of that form, which the room admin and a member  with content-creator rights have, and is otherwise refused with 403. Read back what was stored with  `GET api/2.0/files/file/{fileId}/formroles`.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **String** | The form the role mapping belongs to. Send the same value as the &#x60;formId&#x60; of the request body, which is the one the handler reads. | [required] |
+| **fileId** | path | **String** | The form the role mapping belongs to. Send the same value as the `formId` of the request body, which is the one the handler reads. | [required] |
 | **SaveFormRoleMappingDtoInteger** | body | [**SaveFormRoleMappingDtoInteger**](#model-saveformrolemappingdtointeger) |  | [optional] |
 
 #### Responses
@@ -2054,14 +2054,14 @@ Turns the Custom Filter editing mode of a spreadsheet on or off and answers with
 
 Set file encryption information
 
-Issues the file keys that let the named people open one file of an end-to-end encrypted private room. Each  entry of the body names the account the key is for, the public key it was encrypted with and the encrypted key  itself, so the plain key never reaches the portal: the client encrypts it once per recipient with the public  key that &#x60;GET api/2.0/files/file/{fileId}/publickeys&#x60; reports for them. The keys of the accounts named in the  request are replaced, and the keys of everybody else are left as they are, which makes the call idempotent for  a given set of recipients while remaining a mutating one; sending no entry for a person does not revoke that  person&#39;s key. The file has to lie in a private room, and every account named in the request has to have read  access to it. The caller needs read access to the file and the right to create content in that room, which its  members with editing rights and its admins have; a caller without those rights, a file outside a private room  and a file that does not exist are all refused with 403. Read the result back with  &#x60;GET api/2.0/files/{fileId}/access&#x60;.
+Issues the file keys that let the named people open one file of an end-to-end encrypted private room. Each  entry of the body names the account the key is for, the public key it was encrypted with and the encrypted key  itself, so the plain key never reaches the portal: the client encrypts it once per recipient with the public  key that `GET api/2.0/files/file/{fileId}/publickeys` reports for them. The keys of the accounts named in the  request are replaced, and the keys of everybody else are left as they are, which makes the call idempotent for  a given set of recipients while remaining a mutating one; sending no entry for a person does not revoke that  person's key. The file has to lie in a private room, and every account named in the request has to have read  access to it. The caller needs read access to the file and the right to create content in that room, which its  members with editing rights and its admins have; a caller without those rights, a file outside a private room  and a file that does not exist are all refused with 403. Read the result back with  `GET api/2.0/files/{fileId}/access`.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
 | **fileId** | path | **Integer** (int32) | The file the keys are issued for; it has to lie in a private room. | [required] [example: 12345] |
-| **AccessRequestKeyDto** | body | [**List**](#model-accessrequestkeydto) | One key per account that is to open the file. The keys of the accounts named here are replaced and the keys of  everybody else are left as they are, so sending no entry for a person does not revoke that person&#39;s key. | [optional] |
+| **AccessRequestKeyDto** | body | [**List**](#model-accessrequestkeydto) | One key per account that is to open the file. The keys of the accounts named here are replaced and the keys of  everybody else are left as they are, so sending no entry for a person does not revoke that person's key. | [optional] |
 
 #### Responses
 
@@ -2098,7 +2098,7 @@ null (empty response body)
 
 Set a file external link
 
-Creates an external link to a file, or changes or revokes an existing one, and answers with the link as it now  stands. &#x60;linkId&#x60; decides which: an identifier that is not yet in use, the empty one included, creates a link,  while the identifier of an existing link rewrites it, so the whole set of parameters is applied every time and  a field left out is reset rather than kept. &#x60;access&#x60; carries the rights the link grants, and &#x60;access&#x60; set to  the value that denies everything revokes the link instead - the answer is then empty, and a revoked primary  link is not recreated by a later read. &#x60;title&#x60; names the link for the people who manage it, &#x60;expirationDate&#x60;  limits its lifetime and is refused when it lies more than a few years ahead, &#x60;password&#x60; asks visitors for a  secret, &#x60;denyDownload&#x60; leaves them with viewing only, &#x60;internal&#x60; admits signed-in members alone, and  &#x60;primary&#x3D;true&#x60; makes it the primary link of the file. The caller needs the right to share the file and is  otherwise refused, an unknown file being answered as not found. The call is mutating.
+Creates an external link to a file, or changes or revokes an existing one, and answers with the link as it now  stands. `linkId` decides which: an identifier that is not yet in use, the empty one included, creates a link,  while the identifier of an existing link rewrites it, so the whole set of parameters is applied every time and  a field left out is reset rather than kept. `access` carries the rights the link grants, and `access` set to  the value that denies everything revokes the link instead - the answer is then empty, and a revoked primary  link is not recreated by a later read. `title` names the link for the people who manage it, `expirationDate`  limits its lifetime and is refused when it lies more than a few years ahead, `password` asks visitors for a  secret, `denyDownload` leaves them with viewing only, `internal` admits signed-in members alone, and  `primary=true` makes it the primary link of the file. The caller needs the right to share the file and is  otherwise refused, an unknown file being answered as not found. The call is mutating.
 
 #### Parameters
 
@@ -2140,7 +2140,7 @@ Creates an external link to a file, or changes or revokes an existing one, and a
 
 Set file order
 
-Puts a file at a given position inside its folder and answers with the file, its &#x60;order&#x60; reporting where it  now stands. Positions count from 1, and the file that held the wanted position, together with everything after  it, is shifted to make room, so the numbering of a folder stays without gaps; a position beyond the end of the  folder places the file last. The value may also be sent as a dotted path, as in 1.2.3, in which case only  its last segment is read. Ordering is what the manual sorting of a room is built on, and it only means  something in rooms whose contents are indexed - elsewhere the value is stored and ignored. The caller needs  edit access to the file, which room managers, content creators and members with editing rights have; a member  acting on somebody else&#39;s file, a guest and an anonymous caller are refused with 403, and an unknown file is  answered with 404. The call is mutating and idempotent. To move several items in one go use  &#x60;PUT api/2.0/files/order&#x60;.
+Puts a file at a given position inside its folder and answers with the file, its `order` reporting where it  now stands. Positions count from 1, and the file that held the wanted position, together with everything after  it, is shifted to make room, so the numbering of a folder stays without gaps; a position beyond the end of the  folder places the file last. The value may also be sent as a dotted path, as in 1.2.3, in which case only  its last segment is read. Ordering is what the manual sorting of a room is built on, and it only means  something in rooms whose contents are indexed - elsewhere the value is stored and ignored. The caller needs  edit access to the file, which room managers, content creators and members with editing rights have; a member  acting on somebody else's file, a guest and an anonymous caller are refused with 403, and an unknown file is  answered with 404. The call is mutating and idempotent. To move several items in one go use  `PUT api/2.0/files/order`.
 
 #### Parameters
 
@@ -2184,7 +2184,7 @@ Puts a file at a given position inside its folder and answers with the file, its
 
 Set order of files
 
-Puts several files and folders at given positions in one go and answers with the entries that were moved, each  with the position it now holds. Every item of &#x60;items&#x60; names an entry by its identifier and its kind - a file  or a folder - and the position it is to take, counting from 1; a position may also be sent as a dotted path,  as in 1.2.3, of which only the last segment is read. The items are applied one after another in the order  they are sent, and each of them shifts its neighbours, so the result depends on that order; the whole request  is not one transaction, and a failure in the middle leaves the items before it moved. Every item has to lie in  a room the caller may administer, which the room admin and a DocSpace admin acting as room manager do:  read-only access, a guest and an anonymous caller are refused, and an identifier that matches nothing is  answered as not found. Ordering only means something in rooms whose contents are indexed. The call is  mutating. For a single file use &#x60;PUT api/2.0/files/{fileId}/order&#x60;.
+Puts several files and folders at given positions in one go and answers with the entries that were moved, each  with the position it now holds. Every item of `items` names an entry by its identifier and its kind - a file  or a folder - and the position it is to take, counting from 1; a position may also be sent as a dotted path,  as in 1.2.3, of which only the last segment is read. The items are applied one after another in the order  they are sent, and each of them shifts its neighbours, so the result depends on that order; the whole request  is not one transaction, and a failure in the middle leaves the items before it moved. Every item has to lie in  a room the caller may administer, which the room admin and a DocSpace admin acting as room manager do:  read-only access, a guest and an anonymous caller are refused, and an identifier that matches nothing is  answered as not found. Ordering only means something in rooms whose contents are indexed. The call is  mutating. For a single file use `PUT api/2.0/files/{fileId}/order`.
 
 #### Parameters
 
@@ -2225,7 +2225,7 @@ Puts several files and folders at given positions in one go and answers with the
 
 Open an editing session
 
-Opens an editing session on the file and answers with the document key that identifies it, the value an editor  client passes to the document service in order to join the co-editing session for that exact revision. The  file is marked as being edited for as long as the session lasts, which keeps it from being deleted or moved.  With &#x60;editingAlone&#x3D;false&#x60; the portal builds the editor configuration, requires write mode plus at least one of  the edit, review, comment, form-filling or filter permissions, and asks the document service to start tracking  the document. With &#x60;editingAlone&#x3D;true&#x60; the caller claims the file for itself, and the call is refused with 403  when anybody is already editing it. The caller needs edit access: a member with read access, a guest and an  anonymous caller whose external link does not grant editing are all refused. The call is mutating and not  idempotent. Keep the session alive with &#x60;GET api/2.0/files/file/{fileId}/trackeditfile&#x60;, and end it by calling  that operation with &#x60;isFinish&#x3D;true&#x60;.
+Opens an editing session on the file and answers with the document key that identifies it, the value an editor  client passes to the document service in order to join the co-editing session for that exact revision. The  file is marked as being edited for as long as the session lasts, which keeps it from being deleted or moved.  With `editingAlone=false` the portal builds the editor configuration, requires write mode plus at least one of  the edit, review, comment, form-filling or filter permissions, and asks the document service to start tracking  the document. With `editingAlone=true` the caller claims the file for itself, and the call is refused with 403  when anybody is already editing it. The caller needs edit access: a member with read access, a guest and an  anonymous caller whose external link does not grant editing are all refused. The call is mutating and not  idempotent. Keep the session alive with `GET api/2.0/files/file/{fileId}/trackeditfile`, and end it by calling  that operation with `isFinish=true`.
 
 #### Parameters
 
@@ -2252,7 +2252,7 @@ Opens an editing session on the file and answers with the document key that iden
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -2267,7 +2267,7 @@ No authorization required
 
 Start filling a form
 
-Marks a PDF form in a form-filling room as open for filling out and answers with the form file. The portal  stores the filling properties on it - the room it belongs to, its title, the account that started it and the  id it keeps as the original form - so that later submissions are collected against this form. The file has to  be a PDF whose parent folder is a form-filling room; anything else is answered unchanged and nothing is  stored. Access follows room membership rather than portal role: a member holding only form-filling access on  the room may not start filling, and a caller with no access to the room at all is refused with 403 unless they  can manage it, which the room owner, a room administrator and a DocSpace administrator can. The call is  mutating and safe to repeat, since a repeat rewrites the same properties. Once a form is started, the answers  submitted for it can be collected into a spreadsheet with &#x60;POST api/2.0/files/file/{fileId}/xlsx&#x60;.
+Marks a PDF form in a form-filling room as open for filling out and answers with the form file. The portal  stores the filling properties on it - the room it belongs to, its title, the account that started it and the  id it keeps as the original form - so that later submissions are collected against this form. The file has to  be a PDF whose parent folder is a form-filling room; anything else is answered unchanged and nothing is  stored. Access follows room membership rather than portal role: a member holding only form-filling access on  the room may not start filling, and a caller with no access to the room at all is refused with 403 unless they  can manage it, which the room owner, a room administrator and a DocSpace administrator can. The call is  mutating and safe to repeat, since a repeat rewrites the same properties. Once a form is started, the answers  submitted for it can be collected into a spreadsheet with `POST api/2.0/files/file/{fileId}/xlsx`.
 
 #### Parameters
 
@@ -2309,14 +2309,14 @@ Marks a PDF form in a form-filling room as open for filling out and answers with
 
 Set the file favorite status
 
-Sets or clears the favorite mark of one file for the calling account: &#x60;true&#x60; adds the file to the favorites,  &#x60;false&#x60; takes it out again. The call changes stored state even though it is a GET, so it is not one to issue  speculatively; repeating it with the same value changes nothing further. The mark is personal, no other member  sees it, and the file stays where it is stored. Read access is enough, so a room member with view-only rights  and a guest may call it. The answer only echoes the value that was asked for: an identifier that resolves to  nothing and a file the caller cannot read are skipped without a word, an encrypted file of a private room is  never marked, and the requested value still comes back, so read the outcome from  &#x60;GET api/2.0/files/@favorites&#x60; instead. A file moved to the Trash keeps its mark and is left out of that  listing until it is restored. To mark several entries at once, or to mark folders, use  &#x60;POST api/2.0/files/favorites&#x60; and &#x60;DELETE api/2.0/files/favorites&#x60;.
+Sets or clears the favorite mark of one file for the calling account: `true` adds the file to the favorites,  `false` takes it out again. The call changes stored state even though it is a GET, so it is not one to issue  speculatively; repeating it with the same value changes nothing further. The mark is personal, no other member  sees it, and the file stays where it is stored. Read access is enough, so a room member with view-only rights  and a guest may call it. The answer only echoes the value that was asked for: an identifier that resolves to  nothing and a file the caller cannot read are skipped without a word, an encrypted file of a private room is  never marked, and the requested value still comes back, so read the outcome from  `GET api/2.0/files/@favorites` instead. A file moved to the Trash keeps its mark and is left out of that  listing until it is restored. To mark several entries at once, or to mark folders, use  `POST api/2.0/files/favorites` and `DELETE api/2.0/files/favorites`.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **Integer** (int32) | The file the operation addresses. Take the identifier from a listing such as &#x60;GET api/2.0/files/{folderId}&#x60;: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: 10] |
-| **favorite** | query | **Boolean** | Which state to put the mark in: &#x60;true&#x60; adds the file to the favorites of the calling account, &#x60;false&#x60; removes  it from them. Leaving the field out of the request removes the mark rather than setting it. | [optional] [example: true] |
+| **fileId** | path | **Integer** (int32) | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: 10] |
+| **favorite** | query | **Boolean** | Which state to put the mark in: `true` adds the file to the favorites of the calling account, `false` removes  it from them. Leaving the field out of the request removes the mark rather than setting it. | [optional] [example: true] |
 
 #### Responses
 
@@ -2352,7 +2352,7 @@ Sets or clears the favorite mark of one file for the calling account: &#x60;true
 
 Track an editing session
 
-Keeps an editing session on the file alive, or ends it; an editor client calls it repeatedly while a document  is open. &#x60;docKeyForTrack&#x60; has to be the document key of the file as it currently stands, the value  &#x60;POST api/2.0/files/file/{fileId}/startedit&#x60; returned, and a key matching neither the current revision nor the  one being edited is refused with 403. &#x60;tabId&#x60; names the client tab that holds the session, so several tabs and  several users are tracked on one file independently. Refreshing an entry requires one of the editing rights on  the file - editing, reviewing, commenting, filling or filter editing - so a reader is refused. With  &#x60;isFinish&#x3D;false&#x60; the entry is refreshed and the file stays marked as being edited; with &#x60;isFinish&#x3D;true&#x60; the  entry for that tab is dropped and the other clients are told that editing has stopped. The call changes the  tracking state and never the document, and repeating it is safe. It answers &#x60;key&#x60; true with an empty &#x60;value&#x60;  whenever it succeeds, so a failure arrives as an error rather than as a false key. An anonymous caller is  accepted only through an external share link.
+Keeps an editing session on the file alive, or ends it; an editor client calls it repeatedly while a document  is open. `docKeyForTrack` has to be the document key of the file as it currently stands, the value  `POST api/2.0/files/file/{fileId}/startedit` returned, and a key matching neither the current revision nor the  one being edited is refused with 403. `tabId` names the client tab that holds the session, so several tabs and  several users are tracked on one file independently. Refreshing an entry requires one of the editing rights on  the file - editing, reviewing, commenting, filling or filter editing - so a reader is refused. With  `isFinish=false` the entry is refreshed and the file stays marked as being edited; with `isFinish=true` the  entry for that tab is dropped and the other clients are told that editing has stopped. The call changes the  tracking state and never the document, and repeating it is safe. It answers `key` true with an empty `value`  whenever it succeeds, so a failure arrives as an error rather than as a false key. An anonymous caller is  accepted only through an external share link.
 
 #### Parameters
 
@@ -2360,7 +2360,7 @@ Keeps an editing session on the file alive, or ends it; an editor client calls i
 |------------- | ------------- | ------------- | ------------- | -------------|
 | **fileId** | path | **Integer** (int32) | The file whose editing session is being tracked. | [required] [example: 1] |
 | **tabId** | query | **UUID** (uuid) | The client tab that holds the session, a value the client makes up once and repeats on every call about that  tab. Two tabs sending different values are tracked as two sessions on the same file, while the all-zero value  belongs to a session claimed for a single editor. | [optional] [example: 00000000-0000-0000-0000-000000000000] |
-| **docKeyForTrack** | query | **String** | The document key of the revision being edited, as &#x60;POST api/2.0/files/file/{fileId}/startedit&#x60; returned it. It  is checked against the file&#39;s current key on every call, so a key left over from an older revision is refused. | [optional] [example: abc123] |
+| **docKeyForTrack** | query | **String** | The document key of the revision being edited, as `POST api/2.0/files/file/{fileId}/startedit` returned it. It  is checked against the file's current key on every call, so a key left over from an older revision is refused. | [optional] [example: abc123] |
 | **isFinish** | query | **Boolean** | Ends the session for this tab and tells the other clients that editing has stopped. Left off, the session is  refreshed and the file stays marked as being edited. | [optional] [example: true] |
 
 #### Responses
@@ -2381,7 +2381,7 @@ Keeps an editing session on the file alive, or ends it; an editor client calls i
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -2396,7 +2396,7 @@ No authorization required
 
 Update a file
 
-Renames a file, restores one of its versions, or both at once, and answers with the file as it now stands. A  non-empty &#x60;title&#x60; renames the file, keeping the stored extension whatever the new title says, so a rename  cannot change the format; an empty or missing title leaves the name alone. A &#x60;lastVersion&#x60; above 0 restores  that version the way &#x60;POST api/2.0/files/file/{fileId}/restoreversion&#x60; does, storing its content again on top  of the history, while 0 or less leaves the versions untouched and answers with the file as it is - which makes  this operation a read of the file when both fields are left out. The caller needs edit access, and renaming  somebody else&#39;s file additionally needs room-manager rights: a member or room admin with plain editing access,  read-only access, a guest and a DocSpace admin who is not a member of the room are all refused with 403, while  a content creator may rename a file of their own. The call is mutating. Renaming marks the file as new for  everybody else who can read it.
+Renames a file, restores one of its versions, or both at once, and answers with the file as it now stands. A  non-empty `title` renames the file, keeping the stored extension whatever the new title says, so a rename  cannot change the format; an empty or missing title leaves the name alone. A `lastVersion` above 0 restores  that version the way `POST api/2.0/files/file/{fileId}/restoreversion` does, storing its content again on top  of the history, while 0 or less leaves the versions untouched and answers with the file as it is - which makes  this operation a read of the file when both fields are left out. The caller needs edit access, and renaming  somebody else's file additionally needs room-manager rights: a member or room admin with plain editing access,  read-only access, a guest and a DocSpace admin who is not a member of the room are all refused with 403, while  a content creator may rename a file of their own. The call is mutating. Renaming marks the file as new for  everybody else who can read it.
 
 #### Parameters
 
@@ -2423,7 +2423,7 @@ Renames a file, restores one of its versions, or both at once, and answers with 
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -2440,13 +2440,13 @@ No authorization required
 
 Check for upload conflicts
 
-Reports which of the submitted titles already belong to a file in the folder, so an upload can decide in  advance whether to overwrite or to ask for another name. Only the clashing titles come back, unordered and  without repetitions, and an empty array means every name is free. Matching is by title and ignores case, so a  name that differs only in capitalisation is still reported; an existing file that is encrypted is left out,  because an upload cannot take it over. The call changes nothing. It needs the same right as the upload itself,  the right to add content to the folder, which room managers and content creators have and readers, editors and  guests do not; an archived room, a section root and a folder the caller cannot write to are all refused, while  an unknown folder is answered as missing. A request without &#x60;filesTitle&#x60; is rejected as an invalid request, an  empty list is accepted and answers with an empty array.
+Reports which of the submitted titles already belong to a file in the folder, so an upload can decide in  advance whether to overwrite or to ask for another name. Only the clashing titles come back, unordered and  without repetitions, and an empty array means every name is free. Matching is by title and ignores case, so a  name that differs only in capitalisation is still reported; an existing file that is encrypted is left out,  because an upload cannot take it over. The call changes nothing. It needs the same right as the upload itself,  the right to add content to the folder, which room managers and content creators have and readers, editors and  guests do not; an archived room, a section root and a folder the caller cannot write to are all refused, while  an unknown folder is answered as missing. A request without `filesTitle` is rejected as an invalid request, an  empty list is accepted and answers with an empty array.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **folderId** | path | **Integer** (int32) | The folder whose contents the names are tested against; take the id from a listing such as  &#x60;GET api/2.0/files/@root&#x60;. | [required] [example: 1] |
+| **folderId** | path | **Integer** (int32) | The folder whose contents the names are tested against; take the id from a listing such as  `GET api/2.0/files/@root`. | [required] [example: 1] |
 | **CheckUploadRequest** | body | [**CheckUploadRequest**](#model-checkuploadrequest) | The names to test against the files the folder already holds. | [required] |
 
 #### Responses
@@ -2482,7 +2482,7 @@ Reports which of the submitted titles already belong to a file in the folder, so
 
 Create a folder
 
-Creates a folder inside the folder named in the path and answers with the folder as it was stored. The title  is trimmed, may not be blank and is refused when it is longer than the limit the schema prints; titles are not  required to be unique, so creating the same title twice leaves two folders side by side, which makes the call  mutating and not idempotent. The caller needs the right to create content in the parent, which the room  manager, a content creator and the owner of a personal section have; a member without that right, an archived  parent, and a section root that only holds rooms - Rooms, Forms and AI agents - are all refused, as is a  parent that does not exist. Rooms are not created here: use &#x60;POST api/2.0/files/rooms&#x60; for those, and this  operation for ordinary folders within them. Members of the room are notified of the new folder. Read the  identifier of the new folder from &#x60;id&#x60; and fill it with &#x60;POST api/2.0/files/{folderId}/upload&#x60;.
+Creates a folder inside the folder named in the path and answers with the folder as it was stored. The title  is trimmed, may not be blank and is refused when it is longer than the limit the schema prints; titles are not  required to be unique, so creating the same title twice leaves two folders side by side, which makes the call  mutating and not idempotent. The caller needs the right to create content in the parent, which the room  manager, a content creator and the owner of a personal section have; a member without that right, an archived  parent, and a section root that only holds rooms - Rooms, Forms and AI agents - are all refused, as is a  parent that does not exist. Rooms are not created here: use `POST api/2.0/files/rooms` for those, and this  operation for ordinary folders within them. Members of the room are notified of the new folder. Read the  identifier of the new folder from `id` and fill it with `POST api/2.0/files/{folderId}/upload`.
 
 #### Parameters
 
@@ -2524,7 +2524,7 @@ Creates a folder inside the folder named in the path and answers with the folder
 
 Create the folder primary external link
 
-Answers with the primary external link of a folder or a room, creating it on the first call and returning the  one that already exists afterwards, so the operation is idempotent in effect: a second call with other  parameters does not reconfigure the existing link, and changing one is the business of  &#x60;PUT api/2.0/files/folder/{id}/links&#x60;. The parameters therefore only shape the link at the moment it is born -  &#x60;access&#x60; its rights, &#x60;title&#x60; its name, &#x60;expirationDate&#x60; its lifetime, which is unlimited here unless one is  given, &#x60;internal&#x60; whether only signed-in members may follow it, &#x60;denyDownload&#x60; whether the contents may only  be viewed, and &#x60;password&#x60; a secret to be asked for. Sending &#x60;access&#x60; with the value that grants nothing  creates no link and answers with nothing. The caller needs the right to manage the links of the room the  folder belongs to, which its manager and a portal administrator acting as room manager have, and a member with  content-creator or read access is refused with 403; an unknown folder is answered with 404. Read the address  from &#x60;sharedTo.shareLink&#x60;.
+Answers with the primary external link of a folder or a room, creating it on the first call and returning the  one that already exists afterwards, so the operation is idempotent in effect: a second call with other  parameters does not reconfigure the existing link, and changing one is the business of  `PUT api/2.0/files/folder/{id}/links`. The parameters therefore only shape the link at the moment it is born -  `access` its rights, `title` its name, `expirationDate` its lifetime, which is unlimited here unless one is  given, `internal` whether only signed-in members may follow it, `denyDownload` whether the contents may only  be viewed, and `password` a secret to be asked for. Sending `access` with the value that grants nothing  creates no link and answers with nothing. The caller needs the right to manage the links of the room the  folder belongs to, which its manager and a portal administrator acting as room manager have, and a member with  content-creator or read access is refused with 403; an unknown folder is answered with 404. Read the address  from `sharedTo.shareLink`.
 
 #### Parameters
 
@@ -2568,14 +2568,14 @@ Answers with the primary external link of a folder or a room, creating it on the
 
 Start the folder history report generation
 
-Queues a background job that renders the history of a folder into a spreadsheet, or into a CSV file when  &#x60;format&#x60; asks for one, and saves the result in the caller&#39;s My documents. The answer is the queued task, not  the report: poll &#x60;GET api/2.0/files/folder/{folderId}/log/report&#x60; until &#x60;isCompleted&#x60; is true, then take the  file from &#x60;resultFileId&#x60;, &#x60;resultFileName&#x60; and &#x60;resultFileUrl&#x60;, of which a CSV report fills only the last two.  &#x60;from&#x60; and &#x60;to&#x60; limit the exported period; leaving both out exports the whole history. While a report for the  same folder and caller is still running, this call joins it and answers with the running task instead of  starting a second one, so retrying is safe. The caller needs read access to the folder and may not be a guest,  and the portal plan has to include the audit feature - otherwise the call is refused, with 403 for the access  rule and 404 for a folder that does not exist. Only a portal administrator gets the address, browser and  platform columns. Give up a running report with &#x60;DELETE api/2.0/files/folder/{folderId}/log/report&#x60;.
+Queues a background job that renders the history of a folder into a spreadsheet, or into a CSV file when  `format` asks for one, and saves the result in the caller's My documents. The answer is the queued task, not  the report: poll `GET api/2.0/files/folder/{folderId}/log/report` until `isCompleted` is true, then take the  file from `resultFileId`, `resultFileName` and `resultFileUrl`, of which a CSV report fills only the last two.  `from` and `to` limit the exported period; leaving both out exports the whole history. While a report for the  same folder and caller is still running, this call joins it and answers with the running task instead of  starting a second one, so retrying is safe. The caller needs read access to the folder and may not be a guest,  and the portal plan has to include the audit feature - otherwise the call is refused, with 403 for the access  rule and 404 for a folder that does not exist. Only a portal administrator gets the address, browser and  platform columns. Give up a running report with `DELETE api/2.0/files/folder/{folderId}/log/report`.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
 | **folderId** | path | **Integer** (int32) | The folder whose history is exported; the report covers the folder itself and the entries inside it. | [required] [example: 1] |
-| **format** | query | **AuditReportFormat** | The shape the report is written in: &#x60;Xlsx&#x60; produces a spreadsheet that is saved as a file of the portal, while  &#x60;Csv&#x60; produces a comma-separated text file that is uploaded to My documents without being reported back with  a file identifier. | [optional] [example: Xlsx] [enum: 0, 1] |
+| **format** | query | **AuditReportFormat** | The shape the report is written in: `Xlsx` produces a spreadsheet that is saved as a file of the portal, while  `Csv` produces a comma-separated text file that is uploaded to My documents without being reported back with  a file identifier. | [optional] [example: Xlsx] [enum: 0, 1] |
 | **from** | query | **Date** (date-time) | The earliest moment an exported entry may have, read in the time zone of the portal; left out, the report  starts at the oldest entry the portal still keeps. | [optional] [example: 2025-01-01T00:00:00] |
 | **to** | query | **Date** (date-time) | The latest moment an exported entry may have, read in the time zone of the portal; left out, the report ends  at the newest entry. | [optional] [example: 2025-12-31T23:59:59] |
 
@@ -2614,7 +2614,7 @@ Queues a background job that renders the history of a folder into a spreadsheet,
 
 Delete a folder
 
-Queues the deletion of one folder together with everything inside it, and answers with the file operations of  the caller, the one just created among them. The folder is not gone when the response arrives: poll  &#x60;GET api/2.0/files/fileops&#x60; until the operation reports &#x60;finished&#x60;, and read its &#x60;error&#x60; to learn whether the  deletion succeeded. By default the folder is moved to the Trash section, from where it can be restored;  &#x60;immediately&#x3D;true&#x60; discards it for good instead, and inside a room, where there is no Trash, deletion is  always final. &#x60;deleteAfter&#x3D;true&#x60; postpones the deletion until the editing sessions on the contents have ended,  so files somebody is working on are not pulled away. The caller needs the right to delete the folder, which  the room manager, a portal administrator acting as room manager and a content creator acting on a folder of  their own have; editing access alone, read access and a guest are refused. The call is destructive. To delete  several items at once use &#x60;PUT api/2.0/files/fileops/delete&#x60;.
+Queues the deletion of one folder together with everything inside it, and answers with the file operations of  the caller, the one just created among them. The folder is not gone when the response arrives: poll  `GET api/2.0/files/fileops` until the operation reports `finished`, and read its `error` to learn whether the  deletion succeeded. By default the folder is moved to the Trash section, from where it can be restored;  `immediately=true` discards it for good instead, and inside a room, where there is no Trash, deletion is  always final. `deleteAfter=true` postpones the deletion until the editing sessions on the contents have ended,  so files somebody is working on are not pulled away. The caller needs the right to delete the folder, which  the room manager, a portal administrator acting as room manager and a content creator acting on a folder of  their own have; editing access alone, read access and a guest are refused. The call is destructive. To delete  several items at once use `PUT api/2.0/files/fileops/delete`.
 
 #### Parameters
 
@@ -2656,13 +2656,13 @@ Queues the deletion of one folder together with everything inside it, and answer
 
 Generate XLSX report by folder
 
-Rebuilds the spreadsheet that gathers the answers submitted to a form, starting from the Complete folder  that holds the filled copies. The answer names the original form the results belong to, says in &#x60;isNewFile&#x60;  whether the spreadsheet is being created or an existing one rewritten in place, and carries the queued job in  &#x60;task&#x60;; the file itself is not ready yet, so poll &#x60;GET api/2.0/files/file/{fileId}/xlsx&#x60; with the identifier  of the form until the task reports completion. The folder has to be the Complete folder of a form-filling  room and has to hold at least one submitted copy whose original form still exists, and the caller needs the  right to maintain that form, which the room manager has. A folder that does not exist, or one that holds  nothing to report on, is answered with 404, and a folder of the wrong kind or a caller without those rights  with 403. The call is mutating: it writes the results file of the form.
+Rebuilds the spreadsheet that gathers the answers submitted to a form, starting from the Complete folder  that holds the filled copies. The answer names the original form the results belong to, says in `isNewFile`  whether the spreadsheet is being created or an existing one rewritten in place, and carries the queued job in  `task`; the file itself is not ready yet, so poll `GET api/2.0/files/file/{fileId}/xlsx` with the identifier  of the form until the task reports completion. The folder has to be the Complete folder of a form-filling  room and has to hold at least one submitted copy whose original form still exists, and the caller needs the  right to maintain that form, which the room manager has. A folder that does not exist, or one that holds  nothing to report on, is answered with 404, and a folder of the wrong kind or a caller without those rights  with 403. The call is mutating: it writes the results file of the form.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **folderId** | path | **Integer** (int32) | The folder the operation acts on. Take the identifier from a listing such as &#x60;GET api/2.0/files/@root&#x60; or  &#x60;GET api/2.0/files/{folderId}&#x60;: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string. | [required] [example: 1] |
+| **folderId** | path | **Integer** (int32) | The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string. | [required] [example: 1] |
 
 #### Responses
 
@@ -2699,7 +2699,7 @@ Rebuilds the spreadsheet that gathers the answers submitted to a form, starting 
 
 Get the Favorites section
 
-Returns the caller&#39;s own Favorites section: the files and folders this account has marked as favorite,  together with the section folder itself. Favorites are per-account, so the entries another member marked are  not listed here, and a guest sees only their own, usually empty, list. Mark a single file with  &#x60;GET api/2.0/files/favorites/{fileId}&#x60;, or add and remove batches of files and folders with  &#x60;POST api/2.0/files/favorites&#x60; and &#x60;DELETE api/2.0/files/favorites&#x60;. Nothing in the section is modified,  though passing &#x60;sortBy&#x60; saves the requested order as the default order for this account. Entries the caller  can no longer read, and entries that have been moved to the Trash section, drop out of the listing even  though their favorite mark stays, so the section can shrink without an explicit unmark. &#x60;folders&#x60; and &#x60;files&#x60;  hold one page of the section, &#x60;total&#x60; counts the entries matching the request before &#x60;count&#x60; and &#x60;startIndex&#x60;  are applied, and &#x60;current&#x60; describes the section folder itself.
+Returns the caller's own Favorites section: the files and folders this account has marked as favorite,  together with the section folder itself. Favorites are per-account, so the entries another member marked are  not listed here, and a guest sees only their own, usually empty, list. Mark a single file with  `GET api/2.0/files/favorites/{fileId}`, or add and remove batches of files and folders with  `POST api/2.0/files/favorites` and `DELETE api/2.0/files/favorites`. Nothing in the section is modified,  though passing `sortBy` saves the requested order as the default order for this account. Entries the caller  can no longer read, and entries that have been moved to the Trash section, drop out of the listing even  though their favorite mark stays, so the section can shrink without an explicit unmark. `folders` and `files`  hold one page of the section, `total` counts the entries matching the request before `count` and `startIndex`  are applied, and `current` describes the section folder itself.
 
 #### Parameters
 
@@ -2707,10 +2707,10 @@ Returns the caller&#39;s own Favorites section: the files and folders this accou
 |------------- | ------------- | ------------- | ------------- | -------------|
 | **userIdOrGroupId** | query | **UUID** (uuid) | Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read. | [optional] [example: 00000000-0000-0000-0000-000000000000] |
 | **filterType** | query | **FilterType** | Narrows the listing to a single kind of entry, such as documents, images or one type of room. Omit it to list  every kind the section holds. | [optional] [example: 1] [enum: 0, 1, 2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 17, 20, 22, 23, 24, 25, 26] |
-| **count** | query | **Integer** (int32) | The size of one page of section content. Pair it with &#x60;startIndex&#x60; to walk the listing, and compare the two  with &#x60;total&#x60; in the response to see when the last page has been read. | [optional] [example: 25] [min: 1] [max: 100] |
-| **startIndex** | query | **Integer** (int32) | The number of matching entries to skip before the returned page begins; add &#x60;count&#x60; to it to ask for the next  page. | [optional] [example: 0] |
-| **sortBy** | query | **String** | The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  &#x60;DateAndTime&#x60;, &#x60;AZ&#x60;, &#x60;Size&#x60;, &#x60;Author&#x60;, &#x60;Type&#x60;, &#x60;New&#x60;, &#x60;DateAndTimeCreation&#x60;, &#x60;RoomType&#x60;, &#x60;Tags&#x60;, &#x60;Room&#x60;,  &#x60;CustomOrder&#x60;, &#x60;LastOpened&#x60; and &#x60;UsedSpace&#x60;. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place. | [optional] [example: DateAndTime] |
-| **sortOrder** | query | **SortOrder** | The direction in which the &#x60;sortBy&#x60; field is ordered. It is saved together with &#x60;sortBy&#x60; as the default order  of the account. | [optional] [example: 1] [enum: 0, 1] |
+| **count** | query | **Integer** (int32) | The size of one page of section content. Pair it with `startIndex` to walk the listing, and compare the two  with `total` in the response to see when the last page has been read. | [optional] [example: 25] [min: 1] [max: 100] |
+| **startIndex** | query | **Integer** (int32) | The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page. | [optional] [example: 0] |
+| **sortBy** | query | **String** | The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place. | [optional] [example: DateAndTime] |
+| **sortOrder** | query | **SortOrder** | The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account. | [optional] [example: 1] [enum: 0, 1] |
 | **filterValue** | query | **String** | The search string the section is filtered by: it is matched as a substring of entry titles and, for files,  against the indexed document content as well. Omit it to list the section unfiltered. | [optional] [example: My Document] |
 
 #### Responses
@@ -2785,13 +2785,13 @@ This endpoint does not need any parameter.
 
 Get folder form filter
 
-Lists the fields the completed forms of a form-filling room carry, each of them a key and the kind of value  behind it, so that a client can offer them as filters. Feed a pair from this list back as &#x60;formsItemKey&#x60; and  &#x60;formsItemType&#x60; of &#x60;GET api/2.0/files/{folderId}&#x60; to keep only the completed forms whose field of that name  holds a value. The fields are read from the search index of one of the forms already gathered, so they appear  once indexing has caught up with the first submission. Only the Complete folder of a form-filling room  carries such fields: for any other folder, for a folder that does not exist and for one that has been deleted  the answer is an empty list rather than a refusal, and the same holds while nothing has been submitted yet.  The operation reads the index alone, changes nothing and needs no authorization.
+Lists the fields the completed forms of a form-filling room carry, each of them a key and the kind of value  behind it, so that a client can offer them as filters. Feed a pair from this list back as `formsItemKey` and  `formsItemType` of `GET api/2.0/files/{folderId}` to keep only the completed forms whose field of that name  holds a value. The fields are read from the search index of one of the forms already gathered, so they appear  once indexing has caught up with the first submission. Only the Complete folder of a form-filling room  carries such fields: for any other folder, for a folder that does not exist and for one that has been deleted  the answer is an empty list rather than a refusal, and the same holds while nothing has been submitted yet.  The operation reads the index alone, changes nothing and needs no authorization.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **folderId** | path | **Integer** (int32) | The folder the operation acts on. Take the identifier from a listing such as &#x60;GET api/2.0/files/@root&#x60; or  &#x60;GET api/2.0/files/{folderId}&#x60;: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string. | [required] [example: 1] |
+| **folderId** | path | **Integer** (int32) | The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string. | [required] [example: 1] |
 
 #### Responses
 
@@ -2810,7 +2810,7 @@ Lists the fields the completed forms of a form-filling room carry, each of them 
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -2825,31 +2825,31 @@ No authorization required
 
 Get a folder by ID
 
-Returns one page of the contents of a folder - its subfolders in &#x60;folders&#x60;, its files in &#x60;files&#x60;, the folder  itself in &#x60;current&#x60; and the chain of parents in &#x60;pathParts&#x60; - and is the operation a client browses the file  tree with. &#x60;filterType&#x60;, &#x60;filterValue&#x60;, &#x60;extension&#x60;, &#x60;userIdOrGroupId&#x60;, &#x60;sharedBy&#x60; and &#x60;folderType&#x60; narrow  what is listed, &#x60;applyFilterOption&#x60; decides whether those filters bite on the files, on the folders or on  both, and &#x60;withSubFolders&#x60;, which is on unless it is switched off, lets a narrowed request descend through the  whole subtree instead of the top level alone. &#x60;filterValue&#x60; is matched against titles and against indexed  document content, and indexing is asynchronous, so a file uploaded a moment ago can be missing from a search  for a short while. &#x60;count&#x60; and &#x60;startIndex&#x60; page through the result while &#x60;total&#x60; counts everything that  matches, and &#x60;sortBy&#x60; with &#x60;sortOrder&#x60; both order the page and are saved as the default order of the account.  Reading a room or an ordinary folder clears its new-item marks for the caller. A caller who may not read the  folder is answered with 403, and a folder that does not exist with 404.
+Returns one page of the contents of a folder - its subfolders in `folders`, its files in `files`, the folder  itself in `current` and the chain of parents in `pathParts` - and is the operation a client browses the file  tree with. `filterType`, `filterValue`, `extension`, `userIdOrGroupId`, `sharedBy` and `folderType` narrow  what is listed, `applyFilterOption` decides whether those filters bite on the files, on the folders or on  both, and `withSubFolders`, which is on unless it is switched off, lets a narrowed request descend through the  whole subtree instead of the top level alone. `filterValue` is matched against titles and against indexed  document content, and indexing is asynchronous, so a file uploaded a moment ago can be missing from a search  for a short while. `count` and `startIndex` page through the result while `total` counts everything that  matches, and `sortBy` with `sortOrder` both order the page and are saved as the default order of the account.  Reading a room or an ordinary folder clears its new-item marks for the caller. A caller who may not read the  folder is answered with 403, and a folder that does not exist with 404.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **folderId** | path | **Integer** (int32) | The folder whose contents are listed. Each section root has an operation of its own, such as  &#x60;GET api/2.0/files/@my&#x60;, and every other folder is opened by the identifier a listing gave for it. | [required] [example: 1] |
+| **folderId** | path | **Integer** (int32) | The folder whose contents are listed. Each section root has an operation of its own, such as  `GET api/2.0/files/@my`, and every other folder is opened by the identifier a listing gave for it. | [required] [example: 1] |
 | **userIdOrGroupId** | query | **UUID** (uuid) | Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read. | [optional] [example: 00000000-0000-0000-0000-000000000000] |
 | **sharedBy** | query | **UUID** (uuid) | Restricts the listing to the entries this member shared, which narrows a shared listing down to what one  person handed out. | [optional] [example: 00000000-0000-0000-0000-000000000000] |
 | **filterType** | query | **FilterType** | Narrows the listing to a single kind of entry, such as documents, spreadsheets, images or one type of room.  Omit it to list every kind the folder holds. | [optional] [example: 1] [enum: 0, 1, 2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 17, 20, 22, 23, 24, 25, 26] |
 | **roomId** | query | **Integer** (int32) | Keeps only the entries that lie in this room, which matters when the listing being read gathers entries from  more than one of them. | [optional] [example: 1] |
 | **folderType** | query | **List** | Keeps only the folders of these kinds, each given as the number of a folder type; it is how a listing is  narrowed down to, say, the form-filling folders of a room. | [optional] [example: [2]] [enum: 0, 1, 2, 3, 5, 6, 8, 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36] |
-| **excludeSubject** | query | **Boolean** | Turns &#x60;userIdOrGroupId&#x60; around: with true the entries of that member or group are the ones left out, with  false they are the only ones kept. | [optional] [example: false] |
-| **applyFilterOption** | query | **ApplyFilterOption** | Chooses which half of the listing &#x60;filterType&#x60; and &#x60;filterValue&#x60; are applied to: with &#x60;Files&#x60; the folders come  back unfiltered, with &#x60;Folders&#x60; the files do, and with &#x60;All&#x60; both halves are filtered. | [optional] [example: 1] [enum: 0, 1, 2] |
-| **withSubFolders** | query | **Boolean** | Whether a narrowed request reaches into the subfolders: with true, which is what an omitted parameter means,  matching entries are gathered from the whole subtree, with false only the top level is read. It makes a  difference only once &#x60;filterType&#x60;, &#x60;userIdOrGroupId&#x60; or &#x60;filterValue&#x60; narrows the request, because an  unfiltered listing always shows the top level alone. | [optional] [example: true] |
+| **excludeSubject** | query | **Boolean** | Turns `userIdOrGroupId` around: with true the entries of that member or group are the ones left out, with  false they are the only ones kept. | [optional] [example: false] |
+| **applyFilterOption** | query | **ApplyFilterOption** | Chooses which half of the listing `filterType` and `filterValue` are applied to: with `Files` the folders come  back unfiltered, with `Folders` the files do, and with `All` both halves are filtered. | [optional] [example: 1] [enum: 0, 1, 2] |
+| **withSubFolders** | query | **Boolean** | Whether a narrowed request reaches into the subfolders: with true, which is what an omitted parameter means,  matching entries are gathered from the whole subtree, with false only the top level is read. It makes a  difference only once `filterType`, `userIdOrGroupId` or `filterValue` narrows the request, because an  unfiltered listing always shows the top level alone. | [optional] [example: true] |
 | **extension** | query | **String** | Keeps only the files carrying one of these extensions, several of them separated by commas; the leading dot is  optional. | [optional] [example: docx,pdf] |
 | **searchArea** | query | **SearchArea** | Which area a listing that spans several of them is taken from - the active rooms, the archive, the room  templates or the form-filling rooms. A folder that belongs to one area only settles the area itself and  ignores the parameter. | [optional] [example: 1] [enum: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9] |
-| **formsItemKey** | query | **String** | Keeps only the completed forms whose form field of this name holds a value. Take the name from  &#x60;GET api/2.0/files/{folderId}/formfilter&#x60;, and use it in the folder that gathers the completed copies of a  form-filling room. | [optional] [example: first_name] |
-| **formsItemType** | query | **String** | The kind of the form field named by &#x60;formsItemKey&#x60;, taken from the same list; the two are sent together. | [optional] [example: text] |
-| **count** | query | **Integer** (int32) | The size of one page of the listing. Pair it with &#x60;startIndex&#x60; to walk through the result, and compare the two  with &#x60;total&#x60; in the response to see when the last page has been read. | [optional] [example: 25] [min: 1] [max: 100] |
-| **startIndex** | query | **Integer** (int32) | The number of matching entries to skip before the returned page begins; add &#x60;count&#x60; to it to ask for the next  page. | [optional] [example: 0] |
-| **sortBy** | query | **String** | The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  &#x60;DateAndTime&#x60;, &#x60;AZ&#x60;, &#x60;Size&#x60;, &#x60;Author&#x60;, &#x60;Type&#x60;, &#x60;New&#x60;, &#x60;DateAndTimeCreation&#x60;, &#x60;RoomType&#x60;, &#x60;Tags&#x60;, &#x60;Room&#x60;,  &#x60;CustomOrder&#x60;, &#x60;LastOpened&#x60; and &#x60;UsedSpace&#x60;. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place. | [optional] [example: DateAndTime] |
-| **sortOrder** | query | **SortOrder** | The direction in which the &#x60;sortBy&#x60; field is ordered. It is saved together with &#x60;sortBy&#x60; as the default order  of the account. | [optional] [example: 1] [enum: 0, 1] |
+| **formsItemKey** | query | **String** | Keeps only the completed forms whose form field of this name holds a value. Take the name from  `GET api/2.0/files/{folderId}/formfilter`, and use it in the folder that gathers the completed copies of a  form-filling room. | [optional] [example: first_name] |
+| **formsItemType** | query | **String** | The kind of the form field named by `formsItemKey`, taken from the same list; the two are sent together. | [optional] [example: text] |
+| **count** | query | **Integer** (int32) | The size of one page of the listing. Pair it with `startIndex` to walk through the result, and compare the two  with `total` in the response to see when the last page has been read. | [optional] [example: 25] [min: 1] [max: 100] |
+| **startIndex** | query | **Integer** (int32) | The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page. | [optional] [example: 0] |
+| **sortBy** | query | **String** | The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place. | [optional] [example: DateAndTime] |
+| **sortOrder** | query | **SortOrder** | The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account. | [optional] [example: 1] [enum: 0, 1] |
 | **filterValue** | query | **String** | The search string the listing is filtered by: it is matched as a substring of entry titles and, for files,  against the indexed document content as well. Omit it to list the folder unfiltered. | [optional] [example: My Document] |
-| **Location** | query | **Location** | Where the entries of a tag-based listing have to live to be kept: &#x60;Room&#x60; keeps what lies in a room,  &#x60;Documents&#x60; what lies in a personal section, and &#x60;Link&#x60; what was reached through an external link that is  still valid. It shapes the Favorites and Recent listings and does nothing in an ordinary folder. | [optional] [example: 1] [enum: 1, 2, 3] |
+| **Location** | query | **Location** | Where the entries of a tag-based listing have to live to be kept: `Room` keeps what lies in a room,  `Documents` what lies in a personal section, and `Link` what was reached through an external link that is  still valid. It shapes the Favorites and Recent listings and does nothing in an ordinary folder. | [optional] [example: 1] [enum: 1, 2, 3] |
 
 #### Responses
 
@@ -2870,7 +2870,7 @@ Returns one page of the contents of a folder - its subfolders in &#x60;folders&#
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -2885,7 +2885,7 @@ No authorization required
 
 Get folder history
 
-Lists what has happened to a folder and to the entries inside it - creations, renames, uploads, moves,  deletions and changes of access - each record naming the action, the moment it happened and the member behind  it. Records that belong to one action are grouped, so a batch arrives as a single entry carrying the rest of  itself in &#x60;related&#x60;, and the list runs from the most recent record backwards. &#x60;fromDate&#x60; and &#x60;toDate&#x60; narrow  the period, &#x60;startIndex&#x60; and &#x60;count&#x60; page through the result, and the number of records matching the request  is reported in the response headers rather than in the body. Any member who can read the folder may read its  history; a caller without access is answered with 403 and a folder that does not exist with 404. When the  folder is a form-filling folder the caller reached through a filling invitation, the history is narrowed to  what that caller may see. The call is read-only. To take the same history away as a spreadsheet, start a  report with &#x60;POST api/2.0/files/folder/{folderId}/log/report&#x60;.
+Lists what has happened to a folder and to the entries inside it - creations, renames, uploads, moves,  deletions and changes of access - each record naming the action, the moment it happened and the member behind  it. Records that belong to one action are grouped, so a batch arrives as a single entry carrying the rest of  itself in `related`, and the list runs from the most recent record backwards. `fromDate` and `toDate` narrow  the period, `startIndex` and `count` page through the result, and the number of records matching the request  is reported in the response headers rather than in the body. Any member who can read the folder may read its  history; a caller without access is answered with 403 and a folder that does not exist with 404. When the  folder is a form-filling folder the caller reached through a filling invitation, the history is narrowed to  what that caller may see. The call is read-only. To take the same history away as a spreadsheet, start a  report with `POST api/2.0/files/folder/{folderId}/log/report`.
 
 #### Parameters
 
@@ -2932,13 +2932,13 @@ Lists what has happened to a folder and to the entries inside it - creations, re
 
 Get folder information
 
-Returns one folder as an object - its title, its parent, the moments it was created and last changed, the  access the caller has to it, the number of items that are new for them, and the room settings when the folder  is a room - without listing anything inside it. Use it to resolve a folder identifier into something  displayable, and &#x60;GET api/2.0/files/{folderId}&#x60; when the contents are what is wanted; unlike that operation,  this one leaves the new-item marks of the folder alone. Any member who can read the folder may call it, and an  anonymous caller only through an external link that grants access, everybody else being refused; a folder that  does not exist is answered as not found. The call is read-only. The chain of parents above the folder is not  part of the answer and is read with &#x60;GET api/2.0/files/folder/{folderId}/path&#x60;.
+Returns one folder as an object - its title, its parent, the moments it was created and last changed, the  access the caller has to it, the number of items that are new for them, and the room settings when the folder  is a room - without listing anything inside it. Use it to resolve a folder identifier into something  displayable, and `GET api/2.0/files/{folderId}` when the contents are what is wanted; unlike that operation,  this one leaves the new-item marks of the folder alone. Any member who can read the folder may call it, and an  anonymous caller only through an external link that grants access, everybody else being refused; a folder that  does not exist is answered as not found. The call is read-only. The chain of parents above the folder is not  part of the answer and is read with `GET api/2.0/files/folder/{folderId}/path`.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **folderId** | path | **Integer** (int32) | The folder the operation acts on. Take the identifier from a listing such as &#x60;GET api/2.0/files/@root&#x60; or  &#x60;GET api/2.0/files/{folderId}&#x60;: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string. | [required] [example: 1] |
+| **folderId** | path | **Integer** (int32) | The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string. | [required] [example: 1] |
 
 #### Responses
 
@@ -2957,7 +2957,7 @@ Returns one folder as an object - its title, its parent, the moments it was crea
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -2972,7 +2972,7 @@ No authorization required
 
 Get folder external links
 
-Lists the external links of a folder or a room, each with its identifier, title, address, rights, expiration  date, password flag and download restriction, the primary link among them once it exists. At most the first  hundred links are answered and the number returned is reported in the response headers; there are no paging  parameters here. A folder that has never been shared by link answers with an empty list, and so does a member  who may read the folder but not manage its links - the empty answer therefore means nothing to show you  rather than no links exist. A member without access to the room is refused, an anonymous caller is rejected,  and a folder that does not exist is answered as not found. The call is read-only. Take an identifier from here  to &#x60;PUT api/2.0/files/folder/{id}/links&#x60; to change or remove that link, and read the primary one alone with  &#x60;GET api/2.0/files/folder/{id}/link&#x60;.
+Lists the external links of a folder or a room, each with its identifier, title, address, rights, expiration  date, password flag and download restriction, the primary link among them once it exists. At most the first  hundred links are answered and the number returned is reported in the response headers; there are no paging  parameters here. A folder that has never been shared by link answers with an empty list, and so does a member  who may read the folder but not manage its links - the empty answer therefore means nothing to show you  rather than no links exist. A member without access to the room is refused, an anonymous caller is rejected,  and a folder that does not exist is answered as not found. The call is read-only. Take an identifier from here  to `PUT api/2.0/files/folder/{id}/links` to change or remove that link, and read the primary one alone with  `GET api/2.0/files/folder/{id}/link`.
 
 #### Parameters
 
@@ -3013,13 +3013,13 @@ Lists the external links of a folder or a room, each with its identifier, title,
 
 Get the folder path
 
-Returns the chain of folders that leads to the folder named in the path, ordered from the section root down to  the folder itself, which is the last entry. It is what a breadcrumb trail is built from, and it also tells a  client which section - a room, the personal section, the archive - a bare folder identifier belongs to. Only  the folders the caller may see are part of the chain, so a member who was given access to a folder deep inside  a room gets a shorter path than the room manager does. The caller needs read access to the folder and is  otherwise answered with 403, while a folder that does not exist is answered as not found. The call is  read-only and takes no paging parameters. To go the other way, from a folder down into its contents, call  &#x60;GET api/2.0/files/{folderId}&#x60;.
+Returns the chain of folders that leads to the folder named in the path, ordered from the section root down to  the folder itself, which is the last entry. It is what a breadcrumb trail is built from, and it also tells a  client which section - a room, the personal section, the archive - a bare folder identifier belongs to. Only  the folders the caller may see are part of the chain, so a member who was given access to a folder deep inside  a room gets a shorter path than the room manager does. The caller needs read access to the folder and is  otherwise answered with 403, while a folder that does not exist is answered as not found. The call is  read-only and takes no paging parameters. To go the other way, from a folder down into its contents, call  `GET api/2.0/files/{folderId}`.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **folderId** | path | **Integer** (int32) | The folder the operation acts on. Take the identifier from a listing such as &#x60;GET api/2.0/files/@root&#x60; or  &#x60;GET api/2.0/files/{folderId}&#x60;: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string. | [required] [example: 1] |
+| **folderId** | path | **Integer** (int32) | The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string. | [required] [example: 1] |
 
 #### Responses
 
@@ -3055,7 +3055,7 @@ Returns the chain of folders that leads to the folder named in the path, ordered
 
 Get the folder primary external link
 
-Answers with the primary external link of a folder or a room - the one the Copy link action of a client  hands out - with its address in &#x60;sharedTo.shareLink&#x60;, its rights in &#x60;access&#x60;, and its title, expiration date,  password flag and download restriction beside them. The link is created on the first read if the folder has  none, with read rights, no password and no expiry, so this operation mutates on that first call and is a plain  read afterwards; repeated calls answer with the same link identifier. The caller needs the right to manage the  links of the room the folder belongs to, which its manager and a portal administrator acting as room manager  have; a member with read access alone is refused with 403 and an anonymous caller is rejected, while a link  that was deliberately revoked is answered with 404 rather than being recreated. The paging parameters are  accepted for compatibility and leave the single link answered here unchanged. Every external link of the same  folder is listed by &#x60;GET api/2.0/files/folder/{id}/links&#x60;.
+Answers with the primary external link of a folder or a room - the one the Copy link action of a client  hands out - with its address in `sharedTo.shareLink`, its rights in `access`, and its title, expiration date,  password flag and download restriction beside them. The link is created on the first read if the folder has  none, with read rights, no password and no expiry, so this operation mutates on that first call and is a plain  read afterwards; repeated calls answer with the same link identifier. The caller needs the right to manage the  links of the room the folder belongs to, which its manager and a portal administrator acting as room manager  have; a member with read access alone is refused with 403 and an anonymous caller is rejected, while a link  that was deliberately revoked is answered with 404 rather than being recreated. The paging parameters are  accepted for compatibility and leave the single link answered here unchanged. Every external link of the same  folder is listed by `GET api/2.0/files/folder/{id}/links`.
 
 #### Parameters
 
@@ -3063,7 +3063,7 @@ Answers with the primary external link of a folder or a room - the one the Copy 
 |------------- | ------------- | ------------- | ------------- | -------------|
 | **id** | path | **Integer** (int32) | The folder or room the operation addresses. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string. | [required] [example: 10] |
 | **count** | query | **Integer** (int32) | How many entries at most to answer with, in the operations of this folder that return a list; an operation  that answers with a single object is not affected by it. | [optional] [example: 25] [min: 1] [max: 100] |
-| **startIndex** | query | **Integer** (int32) | How many entries of such a list to skip before answering, used together with &#x60;count&#x60; to walk through it page  by page. | [optional] [example: 0] |
+| **startIndex** | query | **Integer** (int32) | How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page. | [optional] [example: 0] |
 
 #### Responses
 
@@ -3084,7 +3084,7 @@ Answers with the primary external link of a folder or a room - the one the Copy 
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -3099,13 +3099,13 @@ No authorization required
 
 Get subfolders
 
-Lists the folders that sit directly inside the folder named in the path, ordered by title, without their own  contents and without the files that lie beside them. The whole list arrives at once - there are no paging or  filtering parameters here - so for a large folder, or when the files are wanted as well, use  &#x60;GET api/2.0/files/{folderId}&#x60;, which pages and filters. A folder that holds no subfolders answers with an  empty list. The caller needs read access to the folder, and only the subfolders they may see are listed, so a  member of a room can get fewer entries than its manager; a caller without access is answered with 403, and a  folder that does not exist, or one that has been deleted for good, is answered as not found. The call is  read-only and leaves the new-item marks of the folder alone.
+Lists the folders that sit directly inside the folder named in the path, ordered by title, without their own  contents and without the files that lie beside them. The whole list arrives at once - there are no paging or  filtering parameters here - so for a large folder, or when the files are wanted as well, use  `GET api/2.0/files/{folderId}`, which pages and filters. A folder that holds no subfolders answers with an  empty list. The caller needs read access to the folder, and only the subfolders they may see are listed, so a  member of a room can get fewer entries than its manager; a caller without access is answered with 403, and a  folder that does not exist, or one that has been deleted for good, is answered as not found. The call is  read-only and leaves the new-item marks of the folder alone.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **folderId** | path | **Integer** (int32) | The folder the operation acts on. Take the identifier from a listing such as &#x60;GET api/2.0/files/@root&#x60; or  &#x60;GET api/2.0/files/{folderId}&#x60;: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string. | [required] [example: 1] |
+| **folderId** | path | **Integer** (int32) | The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string. | [required] [example: 1] |
 
 #### Responses
 
@@ -3141,7 +3141,7 @@ Lists the folders that sit directly inside the folder named in the path, ordered
 
 Get the Forms section
 
-Returns the Forms section: the flat list of form-filling rooms the caller may read. Such rooms are stored  under the Rooms tree but are surfaced only here, so &#x60;GET api/2.0/files/rooms&#x60; leaves them out of the active  area and lists them when &#x60;searchArea&#x60; names the forms area instead. The section is not expanded into room  content, so &#x60;folders&#x60; carries the rooms while &#x60;files&#x60; comes back empty; to read what is inside one of them,  call &#x60;GET api/2.0/files/{folderId}&#x60; with the room identifier. Nothing is modified, though passing &#x60;sortBy&#x60;  saves the requested order as the default order for this account. &#x60;filterType&#x60;, &#x60;filterValue&#x60;,  &#x60;userIdOrGroupId&#x60; and the sorting parameters narrow and order the room list, &#x60;count&#x60; and &#x60;startIndex&#x60; page  through it, &#x60;total&#x60; reports how many rooms match the request in full, and &#x60;current&#x60; describes the section  folder itself.
+Returns the Forms section: the flat list of form-filling rooms the caller may read. Such rooms are stored  under the Rooms tree but are surfaced only here, so `GET api/2.0/files/rooms` leaves them out of the active  area and lists them when `searchArea` names the forms area instead. The section is not expanded into room  content, so `folders` carries the rooms while `files` comes back empty; to read what is inside one of them,  call `GET api/2.0/files/{folderId}` with the room identifier. Nothing is modified, though passing `sortBy`  saves the requested order as the default order for this account. `filterType`, `filterValue`,  `userIdOrGroupId` and the sorting parameters narrow and order the room list, `count` and `startIndex` page  through it, `total` reports how many rooms match the request in full, and `current` describes the section  folder itself.
 
 #### Parameters
 
@@ -3149,10 +3149,10 @@ Returns the Forms section: the flat list of form-filling rooms the caller may re
 |------------- | ------------- | ------------- | ------------- | -------------|
 | **userIdOrGroupId** | query | **UUID** (uuid) | Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read. | [optional] [example: 00000000-0000-0000-0000-000000000000] |
 | **filterType** | query | **FilterType** | Narrows the listing to a single kind of entry, such as documents, images or one type of room. Omit it to list  every kind the section holds. | [optional] [example: 1] [enum: 0, 1, 2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 17, 20, 22, 23, 24, 25, 26] |
-| **count** | query | **Integer** (int32) | The size of one page of section content. Pair it with &#x60;startIndex&#x60; to walk the listing, and compare the two  with &#x60;total&#x60; in the response to see when the last page has been read. | [optional] [example: 25] [min: 1] [max: 100] |
-| **startIndex** | query | **Integer** (int32) | The number of matching entries to skip before the returned page begins; add &#x60;count&#x60; to it to ask for the next  page. | [optional] [example: 0] |
-| **sortBy** | query | **String** | The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  &#x60;DateAndTime&#x60;, &#x60;AZ&#x60;, &#x60;Size&#x60;, &#x60;Author&#x60;, &#x60;Type&#x60;, &#x60;New&#x60;, &#x60;DateAndTimeCreation&#x60;, &#x60;RoomType&#x60;, &#x60;Tags&#x60;, &#x60;Room&#x60;,  &#x60;CustomOrder&#x60;, &#x60;LastOpened&#x60; and &#x60;UsedSpace&#x60;. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place. | [optional] [example: DateAndTime] |
-| **sortOrder** | query | **SortOrder** | The direction in which the &#x60;sortBy&#x60; field is ordered. It is saved together with &#x60;sortBy&#x60; as the default order  of the account. | [optional] [example: 1] [enum: 0, 1] |
+| **count** | query | **Integer** (int32) | The size of one page of section content. Pair it with `startIndex` to walk the listing, and compare the two  with `total` in the response to see when the last page has been read. | [optional] [example: 25] [min: 1] [max: 100] |
+| **startIndex** | query | **Integer** (int32) | The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page. | [optional] [example: 0] |
+| **sortBy** | query | **String** | The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place. | [optional] [example: DateAndTime] |
+| **sortOrder** | query | **SortOrder** | The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account. | [optional] [example: 1] [enum: 0, 1] |
 | **filterValue** | query | **String** | The search string the section is filtered by: it is matched as a substring of entry titles and, for files,  against the indexed document content as well. Omit it to list the section unfiltered. | [optional] [example: My Document] |
 
 #### Responses
@@ -3190,7 +3190,7 @@ Returns the Forms section: the flat list of form-filling rooms the caller may re
 
 Get the My documents section
 
-Returns the contents of the caller&#39;s My documents section, the personal storage that belongs to this account  alone and stays invisible to other members until something in it is shared explicitly. Any authenticated  member that has a personal section can read it; guest accounts are not given one, and the call then answers  404. Nothing in the section is modified, though passing &#x60;sortBy&#x60; saves the requested order as the default  order for this account. Without a filter only the top level of the section is listed; as soon as &#x60;filterType&#x60;,  &#x60;userIdOrGroupId&#x60; or &#x60;filterValue&#x60; narrows the request, the search descends through the whole subtree.  &#x60;filterValue&#x60; is matched against titles and against indexed document content, and the index is written  asynchronously, so a file uploaded a moment ago can be missing from a search for a short while. &#x60;folders&#x60; and  &#x60;files&#x60; hold one page of the result, &#x60;total&#x60; counts everything that matches before &#x60;count&#x60; and &#x60;startIndex&#x60;  are applied, and &#x60;current&#x60; describes the section folder. To open a folder inside the section, call  &#x60;GET api/2.0/files/{folderId}&#x60; with its identifier.
+Returns the contents of the caller's My documents section, the personal storage that belongs to this account  alone and stays invisible to other members until something in it is shared explicitly. Any authenticated  member that has a personal section can read it; guest accounts are not given one, and the call then answers  404. Nothing in the section is modified, though passing `sortBy` saves the requested order as the default  order for this account. Without a filter only the top level of the section is listed; as soon as `filterType`,  `userIdOrGroupId` or `filterValue` narrows the request, the search descends through the whole subtree.  `filterValue` is matched against titles and against indexed document content, and the index is written  asynchronously, so a file uploaded a moment ago can be missing from a search for a short while. `folders` and  `files` hold one page of the result, `total` counts everything that matches before `count` and `startIndex`  are applied, and `current` describes the section folder. To open a folder inside the section, call  `GET api/2.0/files/{folderId}` with its identifier.
 
 #### Parameters
 
@@ -3198,11 +3198,11 @@ Returns the contents of the caller&#39;s My documents section, the personal stor
 |------------- | ------------- | ------------- | ------------- | -------------|
 | **userIdOrGroupId** | query | **UUID** (uuid) | Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read. | [optional] [example: 00000000-0000-0000-0000-000000000000] |
 | **filterType** | query | **FilterType** | Narrows the listing to a single kind of entry, such as documents, images or one type of room. Omit it to list  every kind the section holds. | [optional] [example: 1] [enum: 0, 1, 2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 17, 20, 22, 23, 24, 25, 26] |
-| **applyFilterOption** | query | **ApplyFilterOption** | Chooses which half of the listing &#x60;filterType&#x60; and &#x60;filterValue&#x60; are applied to: with &#x60;Files&#x60; the folders come  back unfiltered, with &#x60;Folders&#x60; the files do, and with &#x60;All&#x60; both halves are filtered. | [optional] [example: 1] [enum: 0, 1, 2] |
-| **count** | query | **Integer** (int32) | The size of one page of section content. Pair it with &#x60;startIndex&#x60; to walk the listing, and compare the two  with &#x60;total&#x60; in the response to see when the last page has been read. | [optional] [example: 25] [min: 1] [max: 100] |
-| **startIndex** | query | **Integer** (int32) | The number of matching entries to skip before the returned page begins; add &#x60;count&#x60; to it to ask for the next  page. | [optional] [example: 0] |
-| **sortBy** | query | **String** | The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  &#x60;DateAndTime&#x60;, &#x60;AZ&#x60;, &#x60;Size&#x60;, &#x60;Author&#x60;, &#x60;Type&#x60;, &#x60;New&#x60;, &#x60;DateAndTimeCreation&#x60;, &#x60;RoomType&#x60;, &#x60;Tags&#x60;, &#x60;Room&#x60;,  &#x60;CustomOrder&#x60;, &#x60;LastOpened&#x60; and &#x60;UsedSpace&#x60;. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place. | [optional] [example: DateAndTime] |
-| **sortOrder** | query | **SortOrder** | The direction in which the &#x60;sortBy&#x60; field is ordered. It is saved together with &#x60;sortBy&#x60; as the default order  of the account. | [optional] [example: 1] [enum: 0, 1] |
+| **applyFilterOption** | query | **ApplyFilterOption** | Chooses which half of the listing `filterType` and `filterValue` are applied to: with `Files` the folders come  back unfiltered, with `Folders` the files do, and with `All` both halves are filtered. | [optional] [example: 1] [enum: 0, 1, 2] |
+| **count** | query | **Integer** (int32) | The size of one page of section content. Pair it with `startIndex` to walk the listing, and compare the two  with `total` in the response to see when the last page has been read. | [optional] [example: 25] [min: 1] [max: 100] |
+| **startIndex** | query | **Integer** (int32) | The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page. | [optional] [example: 0] |
+| **sortBy** | query | **String** | The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place. | [optional] [example: DateAndTime] |
+| **sortOrder** | query | **SortOrder** | The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account. | [optional] [example: 1] [enum: 0, 1] |
 | **filterValue** | query | **String** | The search string the section is filtered by, matched as a substring of entry titles. Omit it to list the  section unfiltered. | [optional] [example: My Document] |
 
 #### Responses
@@ -3240,13 +3240,13 @@ Returns the contents of the caller&#39;s My documents section, the personal stor
 
 Get new folder items
 
-Lists the entries of a folder that are new for the calling member - the files and folders created or changed  there since they last opened it - ordered from the most recently changed backwards. It is what the badge of a  room is filled from, and it is personal: two members of the same room get different answers. Reading this list  does not clear the marks, so the same entries come back until the folder itself is opened with  &#x60;GET api/2.0/files/{folderId}&#x60;, which does clear them. A folder with nothing new answers with an empty list,  and marks disappear on their own when the entry behind them is deleted or moved out of reach. The caller needs  read access to the folder and is otherwise answered with 403. The whole list arrives at once, without paging  or filtering, and the call is read-only.
+Lists the entries of a folder that are new for the calling member - the files and folders created or changed  there since they last opened it - ordered from the most recently changed backwards. It is what the badge of a  room is filled from, and it is personal: two members of the same room get different answers. Reading this list  does not clear the marks, so the same entries come back until the folder itself is opened with  `GET api/2.0/files/{folderId}`, which does clear them. A folder with nothing new answers with an empty list,  and marks disappear on their own when the entry behind them is deleted or moved out of reach. The caller needs  read access to the folder and is otherwise answered with 403. The whole list arrives at once, without paging  or filtering, and the call is read-only.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **folderId** | path | **Integer** (int32) | The folder the operation acts on. Take the identifier from a listing such as &#x60;GET api/2.0/files/@root&#x60; or  &#x60;GET api/2.0/files/{folderId}&#x60;: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string. | [required] [example: 1] |
+| **folderId** | path | **Integer** (int32) | The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string. | [required] [example: 1] |
 
 #### Responses
 
@@ -3282,7 +3282,7 @@ Lists the entries of a folder that are new for the calling member - the files an
 
 Get the Recent section
 
-Returns the Recent section: the files the calling account has opened lately. The section holds files only,  so &#x60;folders&#x60; comes back empty, and it is personal, so another member&#39;s history is not visible here. A file is  added when it is opened and can also be added explicitly with &#x60;POST api/2.0/files/file/{fileId}/recent&#x60;;  &#x60;DELETE api/2.0/files/recent&#x60; clears the whole history, and &#x60;PUT api/2.0/files/displayrecent&#x60; switches the  section on and off for the account, which also decides whether &#x60;GET api/2.0/files/@root&#x60; includes it. Nothing  in the section is modified, though passing &#x60;sortBy&#x60; saves the requested order as the default order for this  account. The listing is ordered by the moment the caller last opened each file, newest first, and &#x60;sortBy&#x60; and  &#x60;sortOrder&#x60; do not change that order. &#x60;files&#x60; holds one page, &#x60;total&#x60; counts the files matching the request  before &#x60;count&#x60; and &#x60;startIndex&#x60; are applied, and &#x60;current&#x60; describes the section folder itself.
+Returns the Recent section: the files the calling account has opened lately. The section holds files only,  so `folders` comes back empty, and it is personal, so another member's history is not visible here. A file is  added when it is opened and can also be added explicitly with `POST api/2.0/files/file/{fileId}/recent`;  `DELETE api/2.0/files/recent` clears the whole history, and `PUT api/2.0/files/displayrecent` switches the  section on and off for the account, which also decides whether `GET api/2.0/files/@root` includes it. Nothing  in the section is modified, though passing `sortBy` saves the requested order as the default order for this  account. The listing is ordered by the moment the caller last opened each file, newest first, and `sortBy` and  `sortOrder` do not change that order. `files` holds one page, `total` counts the files matching the request  before `count` and `startIndex` are applied, and `current` describes the section folder itself.
 
 #### Parameters
 
@@ -3290,14 +3290,14 @@ Returns the Recent section: the files the calling account has opened lately. The
 |------------- | ------------- | ------------- | ------------- | -------------|
 | **userIdOrGroupId** | query | **UUID** (uuid) | Restricts the listing to the files authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list the whole history. | [optional] [example: 00000000-0000-0000-0000-000000000000] |
 | **filterType** | query | **FilterType** | Narrows the listing to a single kind of file, such as documents, spreadsheets or images. Omit it to list every  kind the history holds. | [optional] [example: 1] [enum: 0, 1, 2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 17, 20, 22, 23, 24, 25, 26] |
-| **excludeSubject** | query | **Boolean** | Inverts &#x60;userIdOrGroupId&#x60;: with &#x60;true&#x60; the files of that member or group are the ones left out of the listing  instead of the only ones kept. | [optional] [example: false] |
-| **applyFilterOption** | query | **ApplyFilterOption** | Chooses which half of a listing &#x60;filterType&#x60; and &#x60;filterValue&#x60; are applied to. The Recent section holds  files only, so the value does not change what comes back. | [optional] [example: 1] [enum: 0, 1, 2] |
-| **searchArea** | query | **SearchArea** | The area a listing is taken from. The Recent section is assembled from the caller&#39;s own open history rather  than from an area, so the value does not change which files are returned. | [optional] [example: 1] [enum: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9] |
+| **excludeSubject** | query | **Boolean** | Inverts `userIdOrGroupId`: with `true` the files of that member or group are the ones left out of the listing  instead of the only ones kept. | [optional] [example: false] |
+| **applyFilterOption** | query | **ApplyFilterOption** | Chooses which half of a listing `filterType` and `filterValue` are applied to. The Recent section holds  files only, so the value does not change what comes back. | [optional] [example: 1] [enum: 0, 1, 2] |
+| **searchArea** | query | **SearchArea** | The area a listing is taken from. The Recent section is assembled from the caller's own open history rather  than from an area, so the value does not change which files are returned. | [optional] [example: 1] [enum: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9] |
 | **extension** | query | **List** | The file extensions the listing is limited to, matched against the end of the file name. The leading dot is  optional, and the parameter is repeated once per extension. | [optional] [example: .docx] |
-| **count** | query | **Integer** (int32) | The size of one page of section content. Pair it with &#x60;startIndex&#x60; to walk the listing, and compare the two  with &#x60;total&#x60; in the response to see when the last page has been read. | [optional] [example: 25] [min: 1] [max: 100] |
-| **startIndex** | query | **Integer** (int32) | The number of matching entries to skip before the returned page begins; add &#x60;count&#x60; to it to ask for the next  page. | [optional] [example: 0] |
-| **sortBy** | query | **String** | The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  &#x60;DateAndTime&#x60;, &#x60;AZ&#x60;, &#x60;Size&#x60;, &#x60;Author&#x60;, &#x60;Type&#x60;, &#x60;New&#x60;, &#x60;DateAndTimeCreation&#x60;, &#x60;RoomType&#x60;, &#x60;Tags&#x60;, &#x60;Room&#x60;,  &#x60;CustomOrder&#x60;, &#x60;LastOpened&#x60; and &#x60;UsedSpace&#x60;. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place. The Recent section keeps its own newest-first order, so the value does not  reorder this listing. | [optional] [example: DateAndTime] |
-| **sortOrder** | query | **SortOrder** | The direction in which the &#x60;sortBy&#x60; field is ordered. It is saved together with &#x60;sortBy&#x60; as the default order  of the account. The Recent section keeps its own newest-first order, so the value does not reorder this  listing. | [optional] [example: 1] [enum: 0, 1] |
+| **count** | query | **Integer** (int32) | The size of one page of section content. Pair it with `startIndex` to walk the listing, and compare the two  with `total` in the response to see when the last page has been read. | [optional] [example: 25] [min: 1] [max: 100] |
+| **startIndex** | query | **Integer** (int32) | The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page. | [optional] [example: 0] |
+| **sortBy** | query | **String** | The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place. The Recent section keeps its own newest-first order, so the value does not  reorder this listing. | [optional] [example: DateAndTime] |
+| **sortOrder** | query | **SortOrder** | The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account. The Recent section keeps its own newest-first order, so the value does not reorder this  listing. | [optional] [example: 1] [enum: 0, 1] |
 | **filterValue** | query | **String** | The search string the history is filtered by: it is matched as a substring of file titles and against the  indexed document content as well. Omit it to list the whole history. | [optional] [example: My Document] |
 
 #### Responses
@@ -3335,7 +3335,7 @@ Returns the Recent section: the files the calling account has opened lately. The
 
 Get the folder history report generation status
 
-Reports how far the history report of a folder has got, and is the operation to poll after  &#x60;POST api/2.0/files/folder/{folderId}/log/report&#x60; has queued one. &#x60;percentage&#x60; climbs to 100, &#x60;isCompleted&#x60;  turns true when the job is over however it ended, &#x60;error&#x60; carries the reason when it failed, and  &#x60;resultFileId&#x60;, &#x60;resultFileName&#x60; and &#x60;resultFileUrl&#x60; name the file that was saved in the caller&#39;s My  documents - a CSV report leaving the identifier empty. An empty answer means there is no report for this  folder and caller, either because none was started or because a finished one has already been picked up by an  earlier poll. The caller needs read access to the folder and may not be a guest, and the portal plan has to  include the audit feature; a caller who fails the access rule is answered with 403 and a folder that does not  exist with 404. The call is read-only, and each caller sees only their own report.
+Reports how far the history report of a folder has got, and is the operation to poll after  `POST api/2.0/files/folder/{folderId}/log/report` has queued one. `percentage` climbs to 100, `isCompleted`  turns true when the job is over however it ended, `error` carries the reason when it failed, and  `resultFileId`, `resultFileName` and `resultFileUrl` name the file that was saved in the caller's My  documents - a CSV report leaving the identifier empty. An empty answer means there is no report for this  folder and caller, either because none was started or because a finished one has already been picked up by an  earlier poll. The caller needs read access to the folder and may not be a guest, and the portal plan has to  include the audit feature; a caller who fails the access rule is answered with 403 and a folder that does not  exist with 404. The call is read-only, and each caller sees only their own report.
 
 #### Parameters
 
@@ -3378,7 +3378,7 @@ Reports how far the history report of a folder has got, and is the operation to 
 
 Get filtered sections
 
-Returns every top-level section the calling account can see in one response, each of them a full section  object carrying its own first page of content: Favorites, Recent, Shared with me, My documents,  Trash, Rooms, Forms, Archive and, while AI access is enabled for the portal, AI agents. A section is  left out when the account has none of it, which is why a guest gets no personal section, and Recent is  listed only while it is switched on with &#x60;PUT api/2.0/files/displayrecent&#x60;. Pass &#x60;withoutTrash&#x3D;true&#x60; to drop  the Trash section. The filters, &#x60;count&#x60; and &#x60;startIndex&#x60; are applied to each section separately, so  &#x60;count&#x3D;1&#x60; returns one entry per section and every section reports its own &#x60;total&#x60;. Because it builds the  content of all of them, this is the most expensive listing in the module: when a single section is enough,  read it directly, for example with &#x60;GET api/2.0/files/@my&#x60;. The call modifies nothing in the sections and  leaves their new-item badges untouched, though passing &#x60;sortBy&#x60; saves the requested order as the default order  for this account.
+Returns every top-level section the calling account can see in one response, each of them a full section  object carrying its own first page of content: Favorites, Recent, Shared with me, My documents,  Trash, Rooms, Forms, Archive and, while AI access is enabled for the portal, AI agents. A section is  left out when the account has none of it, which is why a guest gets no personal section, and Recent is  listed only while it is switched on with `PUT api/2.0/files/displayrecent`. Pass `withoutTrash=true` to drop  the Trash section. The filters, `count` and `startIndex` are applied to each section separately, so  `count=1` returns one entry per section and every section reports its own `total`. Because it builds the  content of all of them, this is the most expensive listing in the module: when a single section is enough,  read it directly, for example with `GET api/2.0/files/@my`. The call modifies nothing in the sections and  leaves their new-item badges untouched, though passing `sortBy` saves the requested order as the default order  for this account.
 
 #### Parameters
 
@@ -3386,11 +3386,11 @@ Returns every top-level section the calling account can see in one response, eac
 |------------- | ------------- | ------------- | ------------- | -------------|
 | **userIdOrGroupId** | query | **UUID** (uuid) | Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read. | [optional] [example: 00000000-0000-0000-0000-000000000000] |
 | **filterType** | query | **FilterType** | Narrows the content listed inside every returned section to a single kind of entry, such as documents, images  or one type of room. Omit it to list every kind the sections hold. | [optional] [example: 1] [enum: 0, 1, 2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 17, 20, 22, 23, 24, 25, 26] |
-| **withoutTrash** | query | **Boolean** | Set it to &#x60;true&#x60; to leave the Trash section out of the returned set of sections; with &#x60;false&#x60;, or when the  parameter is omitted, the section is returned whenever the account has one of its own. | [optional] [example: false] |
+| **withoutTrash** | query | **Boolean** | Set it to `true` to leave the Trash section out of the returned set of sections; with `false`, or when the  parameter is omitted, the section is returned whenever the account has one of its own. | [optional] [example: false] |
 | **count** | query | **Integer** (int32) | The size of the content page returned for each section separately, so a value of 1 yields one entry per  section rather than one entry in total. | [optional] [example: 25] [min: 1] [max: 100] |
-| **startIndex** | query | **Integer** (int32) | The number of matching entries skipped in each section before its page begins; add &#x60;count&#x60; to it to ask for  the next page of every section. | [optional] [example: 0] |
-| **sortBy** | query | **String** | The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  &#x60;DateAndTime&#x60;, &#x60;AZ&#x60;, &#x60;Size&#x60;, &#x60;Author&#x60;, &#x60;Type&#x60;, &#x60;New&#x60;, &#x60;DateAndTimeCreation&#x60;, &#x60;RoomType&#x60;, &#x60;Tags&#x60;, &#x60;Room&#x60;,  &#x60;CustomOrder&#x60;, &#x60;LastOpened&#x60; and &#x60;UsedSpace&#x60;. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place. | [optional] [example: DateAndTime] |
-| **sortOrder** | query | **SortOrder** | The direction in which the &#x60;sortBy&#x60; field is ordered. It is saved together with &#x60;sortBy&#x60; as the default order  of the account. | [optional] [example: 1] [enum: 0, 1] |
+| **startIndex** | query | **Integer** (int32) | The number of matching entries skipped in each section before its page begins; add `count` to it to ask for  the next page of every section. | [optional] [example: 0] |
+| **sortBy** | query | **String** | The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place. | [optional] [example: DateAndTime] |
+| **sortOrder** | query | **SortOrder** | The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account. | [optional] [example: 1] [enum: 0, 1] |
 | **filterValue** | query | **String** | The search string the content of every section is filtered by: it is matched as a substring of entry titles  and, for files, against the indexed document content as well. Omit it to list the sections unfiltered. | [optional] [example: My Document] |
 
 #### Responses
@@ -3428,7 +3428,7 @@ Returns every top-level section the calling account can see in one response, eac
 
 Get the Trash section
 
-Returns the caller&#39;s Trash section: the files and folders this account has deleted, kept there until they  are restored or discarded. Each member has a Trash of their own and sees only what they deleted themselves.  Restore an entry by moving it back with &#x60;PUT api/2.0/files/fileops/move&#x60;, or discard the whole section with  &#x60;PUT api/2.0/files/fileops/emptytrash&#x60;; both start a background operation that is polled through  &#x60;GET api/2.0/files/fileops&#x60;. This call itself modifies nothing, though passing &#x60;sortBy&#x60; saves the requested  order as the default order for this account. Only the top level of the section is listed, so the contents of a  deleted folder are not expanded into it, and &#x60;filterValue&#x60; is matched against titles alone here rather than  against document content. &#x60;folders&#x60; and &#x60;files&#x60; hold one page of the result, &#x60;total&#x60; counts everything that  matches before &#x60;count&#x60; and &#x60;startIndex&#x60; are applied, and &#x60;current&#x60; describes the section folder. An account  that is given no Trash of its own, an outsider for instance, receives 404.
+Returns the caller's Trash section: the files and folders this account has deleted, kept there until they  are restored or discarded. Each member has a Trash of their own and sees only what they deleted themselves.  Restore an entry by moving it back with `PUT api/2.0/files/fileops/move`, or discard the whole section with  `PUT api/2.0/files/fileops/emptytrash`; both start a background operation that is polled through  `GET api/2.0/files/fileops`. This call itself modifies nothing, though passing `sortBy` saves the requested  order as the default order for this account. Only the top level of the section is listed, so the contents of a  deleted folder are not expanded into it, and `filterValue` is matched against titles alone here rather than  against document content. `folders` and `files` hold one page of the result, `total` counts everything that  matches before `count` and `startIndex` are applied, and `current` describes the section folder. An account  that is given no Trash of its own, an outsider for instance, receives 404.
 
 #### Parameters
 
@@ -3436,11 +3436,11 @@ Returns the caller&#39;s Trash section: the files and folders this account has d
 |------------- | ------------- | ------------- | ------------- | -------------|
 | **userIdOrGroupId** | query | **UUID** (uuid) | Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read. | [optional] [example: 00000000-0000-0000-0000-000000000000] |
 | **filterType** | query | **FilterType** | Narrows the listing to a single kind of entry, such as documents, images or one type of room. Omit it to list  every kind the section holds. | [optional] [example: 1] [enum: 0, 1, 2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 17, 20, 22, 23, 24, 25, 26] |
-| **applyFilterOption** | query | **ApplyFilterOption** | Chooses which half of the listing &#x60;filterType&#x60; and &#x60;filterValue&#x60; are applied to: with &#x60;Files&#x60; the folders come  back unfiltered, with &#x60;Folders&#x60; the files do, and with &#x60;All&#x60; both halves are filtered. | [optional] [example: 1] [enum: 0, 1, 2] |
-| **count** | query | **Integer** (int32) | The size of one page of section content. Pair it with &#x60;startIndex&#x60; to walk the listing, and compare the two  with &#x60;total&#x60; in the response to see when the last page has been read. | [optional] [example: 25] [min: 1] [max: 100] |
-| **startIndex** | query | **Integer** (int32) | The number of matching entries to skip before the returned page begins; add &#x60;count&#x60; to it to ask for the next  page. | [optional] [example: 0] |
-| **sortBy** | query | **String** | The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  &#x60;DateAndTime&#x60;, &#x60;AZ&#x60;, &#x60;Size&#x60;, &#x60;Author&#x60;, &#x60;Type&#x60;, &#x60;New&#x60;, &#x60;DateAndTimeCreation&#x60;, &#x60;RoomType&#x60;, &#x60;Tags&#x60;, &#x60;Room&#x60;,  &#x60;CustomOrder&#x60;, &#x60;LastOpened&#x60; and &#x60;UsedSpace&#x60;. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place. | [optional] [example: DateAndTime] |
-| **sortOrder** | query | **SortOrder** | The direction in which the &#x60;sortBy&#x60; field is ordered. It is saved together with &#x60;sortBy&#x60; as the default order  of the account. | [optional] [example: 1] [enum: 0, 1] |
+| **applyFilterOption** | query | **ApplyFilterOption** | Chooses which half of the listing `filterType` and `filterValue` are applied to: with `Files` the folders come  back unfiltered, with `Folders` the files do, and with `All` both halves are filtered. | [optional] [example: 1] [enum: 0, 1, 2] |
+| **count** | query | **Integer** (int32) | The size of one page of section content. Pair it with `startIndex` to walk the listing, and compare the two  with `total` in the response to see when the last page has been read. | [optional] [example: 25] [min: 1] [max: 100] |
+| **startIndex** | query | **Integer** (int32) | The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page. | [optional] [example: 0] |
+| **sortBy** | query | **String** | The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place. | [optional] [example: DateAndTime] |
+| **sortOrder** | query | **SortOrder** | The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account. | [optional] [example: 1] [enum: 0, 1] |
 | **filterValue** | query | **String** | The search string the section is filtered by, matched as a substring of entry titles. Omit it to list the  section unfiltered. | [optional] [example: My Document] |
 
 #### Responses
@@ -3478,17 +3478,17 @@ Returns the caller&#39;s Trash section: the files and folders this account has d
 
 Insert a file
 
-Stores a file in the folder named by the path in a single request, taking its name from &#x60;title&#x60; rather than  from the uploaded part, which is what separates it from &#x60;POST api/2.0/files/{folderId}/upload&#x60;. The content  may arrive either as a multipart part or as the raw request body. The name is stripped of characters a title  cannot hold and truncated, and &#x60;createNewIfExist&#x60; settles the clash: false adds a new version to the file that  already carries the name, true keeps both by giving the new one a numeric suffix. The caller needs the right  to add content to the folder, so a reader, an editor and a guest get 403, a section root and an archived room  are refused as well, and an unknown folder gives 404. Formats the portal converts are converted afterwards in  the background; pass &#x60;keepConvertStatus&#x60; to keep the outcome readable through  &#x60;GET api/2.0/files/file/{fileId}/checkconversion&#x60;. The answer is the stored file. A large payload belongs in a  chunked session instead.
+Stores a file in the folder named by the path in a single request, taking its name from `title` rather than  from the uploaded part, which is what separates it from `POST api/2.0/files/{folderId}/upload`. The content  may arrive either as a multipart part or as the raw request body. The name is stripped of characters a title  cannot hold and truncated, and `createNewIfExist` settles the clash: false adds a new version to the file that  already carries the name, true keeps both by giving the new one a numeric suffix. The caller needs the right  to add content to the folder, so a reader, an editor and a guest get 403, a section root and an archived room  are refused as well, and an unknown folder gives 404. Formats the portal converts are converted afterwards in  the background; pass `keepConvertStatus` to keep the outcome readable through  `GET api/2.0/files/file/{fileId}/checkconversion`. The answer is the stored file. A large payload belongs in a  chunked session instead.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **folderId** | path | **Integer** (int32) | The folder that receives the file; take the id from a listing such as &#x60;GET api/2.0/files/@root&#x60;. A room or an  ordinary folder inside one is accepted, a section root is not. | [required] [example: 1] |
-| **InsertFile.File** | form | **File** (binary) | The content to store, sent as a &#x60;multipart/form-data&#x60; part. The same content may instead be sent as the raw  request body, which is what a client that cannot build a form does; when both are present the form part wins. | [optional] |
+| **folderId** | path | **Integer** (int32) | The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not. | [required] [example: 1] |
+| **InsertFile.File** | form | **File** (binary) | The content to store, sent as a `multipart/form-data` part. The same content may instead be sent as the raw  request body, which is what a client that cannot build a form does; when both are present the form part wins. | [optional] |
 | **InsertFile.Title** | form | **String** | The name to store the file under, extension included. It wins over the name of the uploaded part, which is the  reason to choose this operation over the plain upload, and it is the only name available when the content  arrives as a raw body. Characters a title cannot hold are replaced with underscores and the name is cut to 170  characters before the file is stored. | [optional] |
 | **InsertFile.CreateNewIfExist** | form | **Boolean** | Settles the clash with a file already carrying that title: left out, the content is written as the next  version of that file; set to true, both survive and the new one gets a numeric suffix in its title. | [optional] |
-| **InsertFile.KeepConvertStatus** | form | **Boolean** | Decides whether the outcome of the background conversion outlives the conversion itself. True keeps the queue  record, so &#x60;GET api/2.0/files/file/{fileId}/checkconversion&#x60; can still report the result or the error; left  out, the record is cleared the moment the conversion ends and that call finds nothing. | [optional] |
+| **InsertFile.KeepConvertStatus** | form | **Boolean** | Decides whether the outcome of the background conversion outlives the conversion itself. True keeps the queue  record, so `GET api/2.0/files/file/{fileId}/checkconversion` can still report the result or the error; left  out, the record is cleared the moment the conversion ends and that call finds nothing. | [optional] |
 | **InsertFile.Stream.CanRead** | form | **Boolean** |  | [optional] |
 | **InsertFile.Stream.CanWrite** | form | **Boolean** |  | [optional] |
 | **InsertFile.Stream.CanSeek** | form | **Boolean** |  | [optional] |
@@ -3533,16 +3533,16 @@ Stores a file in the folder named by the path in a single request, taking its na
 
 Insert a file into My documents
 
-Stores one file in the caller&#39;s own My documents section, the personal storage every portal member has, and  returns the stored file. The destination takes no identifier: it is resolved from the calling account and  created on first use, while a guest account has none and is answered as missing (404). Send the content as a  &#x60;multipart/form-data&#x60; part or as the raw request body, and name it with &#x60;title&#x60;, which wins over the name of  the uploaded part and has invalid characters replaced before storing. The call is not idempotent: by default a  file of the same title is overwritten as a new version, while &#x60;createNewIfExist&#x3D;true&#x60; stores a separate copy  under a title made unique with a numeric suffix; a title held by a file that is locked or open in the editor  cannot be overwritten either, and a second file appears under the same title. Formats listed in  &#x60;extsMustConvert&#x60; of &#x60;GET api/2.0/files/settings&#x60; are converted after the response is sent;  &#x60;keepConvertStatus&#x3D;true&#x60; keeps that result readable through &#x60;GET api/2.0/files/file/{fileId}/checkconversion&#x60;,  which otherwise drops it. Files over the single-request size limit or the account&#39;s storage quota are refused:  send those through &#x60;POST api/2.0/files/{folderId}/upload/create_session&#x60;, and use  &#x60;POST api/2.0/files/{folderId}/insert&#x60; for any other destination.
+Stores one file in the caller's own My documents section, the personal storage every portal member has, and  returns the stored file. The destination takes no identifier: it is resolved from the calling account and  created on first use, while a guest account has none and is answered as missing (404). Send the content as a  `multipart/form-data` part or as the raw request body, and name it with `title`, which wins over the name of  the uploaded part and has invalid characters replaced before storing. The call is not idempotent: by default a  file of the same title is overwritten as a new version, while `createNewIfExist=true` stores a separate copy  under a title made unique with a numeric suffix; a title held by a file that is locked or open in the editor  cannot be overwritten either, and a second file appears under the same title. Formats listed in  `extsMustConvert` of `GET api/2.0/files/settings` are converted after the response is sent;  `keepConvertStatus=true` keeps that result readable through `GET api/2.0/files/file/{fileId}/checkconversion`,  which otherwise drops it. Files over the single-request size limit or the account's storage quota are refused:  send those through `POST api/2.0/files/{folderId}/upload/create_session`, and use  `POST api/2.0/files/{folderId}/insert` for any other destination.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **File** | form | **File** (binary) | The content to store, sent as a &#x60;multipart/form-data&#x60; part. The same content may instead be sent as the raw  request body, which is what a client that cannot build a form does; when both are present the form part wins. | [optional] |
+| **File** | form | **File** (binary) | The content to store, sent as a `multipart/form-data` part. The same content may instead be sent as the raw  request body, which is what a client that cannot build a form does; when both are present the form part wins. | [optional] |
 | **Title** | form | **String** | The name to store the file under, extension included. It wins over the name of the uploaded part, which is the  reason to choose this operation over the plain upload, and it is the only name available when the content  arrives as a raw body. Characters a title cannot hold are replaced with underscores and the name is cut to 170  characters before the file is stored. | [optional] |
 | **CreateNewIfExist** | form | **Boolean** | Settles the clash with a file already carrying that title: left out, the content is written as the next  version of that file; set to true, both survive and the new one gets a numeric suffix in its title. | [optional] |
-| **KeepConvertStatus** | form | **Boolean** | Decides whether the outcome of the background conversion outlives the conversion itself. True keeps the queue  record, so &#x60;GET api/2.0/files/file/{fileId}/checkconversion&#x60; can still report the result or the error; left  out, the record is cleared the moment the conversion ends and that call finds nothing. | [optional] |
+| **KeepConvertStatus** | form | **Boolean** | Decides whether the outcome of the background conversion outlives the conversion itself. True keeps the queue  record, so `GET api/2.0/files/file/{fileId}/checkconversion` can still report the result or the error; left  out, the record is cleared the moment the conversion ends and that call finds nothing. | [optional] |
 | **Stream.CanRead** | form | **Boolean** |  | [optional] |
 | **Stream.CanWrite** | form | **Boolean** |  | [optional] |
 | **Stream.CanSeek** | form | **Boolean** |  | [optional] |
@@ -3587,7 +3587,7 @@ Stores one file in the caller&#39;s own My documents section, the personal stora
 
 Rename a folder
 
-Gives a folder a new title and answers with the folder as it now stands. The title is trimmed, may not be  blank and is refused when it is longer than the limit the schema prints; a title that matches the current one  leaves the folder untouched, and titles need not be unique among the neighbours. The caller needs the right to  rename the folder, which the room manager, a content creator acting on a folder of their own and the owner of  a personal section have, while a guest is refused with 403 whatever their access; a folder in the Trash  section or in an archived room cannot be renamed either, and a folder that does not exist is answered as  not found. A room may be renamed here as well, in which case the caller needs the right to edit the  room, and &#x60;PUT api/2.0/files/rooms/{id}&#x60; is the operation that changes its other settings. The call is  mutating and idempotent; on a folder stored in a connected third-party account the identifier of the folder  may change with the title.
+Gives a folder a new title and answers with the folder as it now stands. The title is trimmed, may not be  blank and is refused when it is longer than the limit the schema prints; a title that matches the current one  leaves the folder untouched, and titles need not be unique among the neighbours. The caller needs the right to  rename the folder, which the room manager, a content creator acting on a folder of their own and the owner of  a personal section have, while a guest is refused with 403 whatever their access; a folder in the Trash  section or in an archived room cannot be renamed either, and a folder that does not exist is answered as  not found. A room may be renamed here as well, in which case the caller needs the right to edit the  room, and `PUT api/2.0/files/rooms/{id}` is the operation that changes its other settings. The call is  mutating and idempotent; on a folder stored in a connected third-party account the identifier of the folder  may change with the title.
 
 #### Parameters
 
@@ -3630,7 +3630,7 @@ Gives a folder a new title and answers with the folder as it now stands. The tit
 
 Set folder order
 
-Puts a folder at a given position among the entries of its parent and answers with the folder, its &#x60;order&#x60;  reporting where it now stands. Positions count from 1, and the entry that held the wanted position, together  with everything after it, is shifted to make room, so the numbering of the parent stays without gaps; a  position beyond the end places the folder last. The value may also be sent as a dotted path, as in 1.2.3, in  which case only its last segment is read. Ordering is what the manual arrangement of a room is built on, and  it only means something in rooms whose contents are indexed - elsewhere the value is stored and ignored. The  caller needs edit access to the folder, which room managers and content creators have, and a member without it  is refused, while a folder that does not exist is answered as not found. The call is mutating and idempotent.  To move several entries in one go use &#x60;PUT api/2.0/files/order&#x60;.
+Puts a folder at a given position among the entries of its parent and answers with the folder, its `order`  reporting where it now stands. Positions count from 1, and the entry that held the wanted position, together  with everything after it, is shifted to make room, so the numbering of the parent stays without gaps; a  position beyond the end places the folder last. The value may also be sent as a dotted path, as in 1.2.3, in  which case only its last segment is read. Ordering is what the manual arrangement of a room is built on, and  it only means something in rooms whose contents are indexed - elsewhere the value is stored and ignored. The  caller needs edit access to the folder, which room managers and content creators have, and a member without it  is refused, while a folder that does not exist is answered as not found. The call is mutating and idempotent.  To move several entries in one go use `PUT api/2.0/files/order`.
 
 #### Parameters
 
@@ -3672,7 +3672,7 @@ Puts a folder at a given position among the entries of its parent and answers wi
 
 Set the folder external link
 
-Creates an external link to a folder or a room, or changes or revokes an existing one, and answers with the  link as it now stands. &#x60;linkId&#x60; decides which: an identifier that is not yet in use, the empty one included,  creates a link, while the identifier of an existing link rewrites it, so the whole set of parameters is  applied every time and a field left out is reset rather than kept. &#x60;access&#x60; carries the rights the link  grants, and &#x60;access&#x60; set to the value that denies everything revokes the link instead - the answer is then  empty, and a revoked primary link is not recreated by a later read. &#x60;title&#x60; names the link for the people who  manage it, &#x60;expirationDate&#x60; limits its lifetime and is ignored when it lies in the past, &#x60;password&#x60; asks  visitors for a secret, &#x60;denyDownload&#x60; leaves them with viewing only, &#x60;internal&#x60; admits signed-in members  alone, and &#x60;primary&#x3D;true&#x60; makes it the primary link of the folder. The caller needs the right to manage the  links of the room, which its manager and a portal administrator acting as room manager have; anyone else is  refused and an unknown folder is answered as not found. The call is mutating.
+Creates an external link to a folder or a room, or changes or revokes an existing one, and answers with the  link as it now stands. `linkId` decides which: an identifier that is not yet in use, the empty one included,  creates a link, while the identifier of an existing link rewrites it, so the whole set of parameters is  applied every time and a field left out is reset rather than kept. `access` carries the rights the link  grants, and `access` set to the value that denies everything revokes the link instead - the answer is then  empty, and a revoked primary link is not recreated by a later read. `title` names the link for the people who  manage it, `expirationDate` limits its lifetime and is ignored when it lies in the past, `password` asks  visitors for a secret, `denyDownload` leaves them with viewing only, `internal` admits signed-in members  alone, and `primary=true` makes it the primary link of the folder. The caller needs the right to manage the  links of the room, which its manager and a portal administrator acting as room manager have; anyone else is  refused and an unknown folder is answered as not found. The call is mutating.
 
 #### Parameters
 
@@ -3714,7 +3714,7 @@ Creates an external link to a folder or a room, or changes or revokes an existin
 
 Terminate the folder history report generation
 
-Gives up the history report the caller has started for a folder with  &#x60;POST api/2.0/files/folder/{folderId}/log/report&#x60;. The request only asks the background worker to stop, and  the answer carries no body, so a following &#x60;GET api/2.0/files/folder/{folderId}/log/report&#x60; is what shows the  task ending as cancelled. Asking to terminate when nothing is running is accepted and changes nothing, which  makes the call safe to repeat. A report that has already finished is not undone by this call and its file  stays in My documents. The caller needs read access to the folder and may not be a guest, and the portal  plan has to include the audit feature; a caller who fails the access rule is answered with 403 and a folder  that does not exist with 404. Each caller can only terminate their own report.
+Gives up the history report the caller has started for a folder with  `POST api/2.0/files/folder/{folderId}/log/report`. The request only asks the background worker to stop, and  the answer carries no body, so a following `GET api/2.0/files/folder/{folderId}/log/report` is what shows the  task ending as cancelled. Asking to terminate when nothing is running is accepted and changes nothing, which  makes the call safe to repeat. A report that has already finished is not undone by this call and its file  stays in My documents. The caller needs read access to the folder and may not be a guest, and the portal  plan has to include the audit feature; a caller who fails the access rule is answered with 403 and a folder  that does not exist with 404. Each caller can only terminate their own report.
 
 #### Parameters
 
@@ -3757,17 +3757,17 @@ null (empty response body)
 
 Upload a file
 
-Stores a file in the folder named by the path in a single multipart request, taking its name from the uploaded  part; use &#x60;POST api/2.0/files/{folderId}/insert&#x60; when the name has to be given separately or the content is  sent as a raw body. The answer is a list that always holds exactly one file. &#x60;createNewIfExist&#x60; settles the  clash: false adds a new version to the file that already carries the name, true keeps both by giving the new  one a numeric suffix. &#x60;storeOriginalFile&#x60; reaches further than this call, because it saves the setting on the  calling account, the same one &#x60;PUT api/2.0/files/storeoriginal&#x60; writes, and it stays in force for later  uploads. The caller needs the right to add content to the folder, so a reader, an editor and a guest get 403,  a section root and an archived room are refused as well, and an unknown folder gives 404. A request without a  file is rejected as invalid, and a payload above the portal upload limit is refused.
+Stores a file in the folder named by the path in a single multipart request, taking its name from the uploaded  part; use `POST api/2.0/files/{folderId}/insert` when the name has to be given separately or the content is  sent as a raw body. The answer is a list that always holds exactly one file. `createNewIfExist` settles the  clash: false adds a new version to the file that already carries the name, true keeps both by giving the new  one a numeric suffix. `storeOriginalFile` reaches further than this call, because it saves the setting on the  calling account, the same one `PUT api/2.0/files/storeoriginal` writes, and it stays in force for later  uploads. The caller needs the right to add content to the folder, so a reader, an editor and a guest get 403,  a section root and an archived room are refused as well, and an unknown folder gives 404. A request without a  file is rejected as invalid, and a payload above the portal upload limit is refused.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **folderId** | path | **Integer** (int32) | The folder that receives the file; take the id from a listing such as &#x60;GET api/2.0/files/@root&#x60;. A room or an  ordinary folder inside one is accepted, a section root is not. | [required] [example: 1] |
+| **folderId** | path | **Integer** (int32) | The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not. | [required] [example: 1] |
 | **createNewIfExist** | query | **Boolean** | Settles the clash with a file already carrying that title: left out, the content is written as the next  version of that file; set to true, both survive and the new one gets a numeric suffix in its title. | [optional] [example: true] |
-| **storeOriginalFile** | query | **Boolean** | Reaches further than this request: it writes a setting on the calling account, the same one  &#x60;PUT api/2.0/files/storeoriginal&#x60; writes, and it stays in force for later uploads. True keeps both the  uploaded file and the copy the portal converts it into, false replaces the uploaded file with the converted  one, and leaving it out keeps whatever the account already has. | [optional] [example: true] |
-| **keepConvertStatus** | query | **Boolean** | Decides whether the outcome of the background conversion outlives the conversion itself. True keeps the queue  record, so &#x60;GET api/2.0/files/file/{fileId}/checkconversion&#x60; can still report the result or the error; left  out, the record is cleared the moment the conversion ends and that call finds nothing. | [optional] [example: true] |
-| **File** | form | **File** (binary) | The content to store, sent as a &#x60;multipart/form-data&#x60; part; the name of that part becomes the title of the  stored file, with characters a title cannot hold replaced and the name cut to 170 characters. A request  without it is rejected as invalid. | [optional] |
+| **storeOriginalFile** | query | **Boolean** | Reaches further than this request: it writes a setting on the calling account, the same one  `PUT api/2.0/files/storeoriginal` writes, and it stays in force for later uploads. True keeps both the  uploaded file and the copy the portal converts it into, false replaces the uploaded file with the converted  one, and leaving it out keeps whatever the account already has. | [optional] [example: true] |
+| **keepConvertStatus** | query | **Boolean** | Decides whether the outcome of the background conversion outlives the conversion itself. True keeps the queue  record, so `GET api/2.0/files/file/{fileId}/checkconversion` can still report the result or the error; left  out, the record is cleared the moment the conversion ends and that call finds nothing. | [optional] [example: true] |
+| **File** | form | **File** (binary) | The content to store, sent as a `multipart/form-data` part; the name of that part becomes the title of the  stored file, with characters a title cannot hold replaced and the name cut to 170 characters. A request  without it is rejected as invalid. | [optional] |
 
 #### Responses
 
@@ -3804,16 +3804,16 @@ Stores a file in the folder named by the path in a single multipart request, tak
 
 Upload a file to My documents
 
-Uploads one file into the caller&#39;s own My documents section and returns it inside a single-element array; one  request stores exactly one file. The destination takes no identifier: it is resolved from the calling account  and created on first use, while a guest account has none and is answered as missing (404). The body has to be  &#x60;multipart/form-data&#x60; carrying the file part; a request without it is rejected as invalid, and the stored name  comes from that part, since unlike &#x60;POST api/2.0/files/@my/insert&#x60; there is no separate title. The call is not  idempotent: by default a file of the same title is overwritten as a new version, while &#x60;createNewIfExist&#x3D;true&#x60;  stores a separate copy under a title made unique with a numeric suffix. &#x60;storeOriginalFile&#x60; is not a  per-request switch: it writes the same account setting as &#x60;PUT api/2.0/files/storeoriginal&#x60;, which decides  what happens to the formats listed in &#x60;extsMustConvert&#x60; of &#x60;GET api/2.0/files/settings&#x60; when they are  converted after the response - false replaces the uploaded file with the converted one, true keeps both;  &#x60;keepConvertStatus&#x3D;true&#x60; keeps that conversion result readable through  &#x60;GET api/2.0/files/file/{fileId}/checkconversion&#x60;. Files over the single-request size limit or the account&#39;s  storage quota are refused; send those through &#x60;POST api/2.0/files/{folderId}/upload/create_session&#x60;.
+Uploads one file into the caller's own My documents section and returns it inside a single-element array; one  request stores exactly one file. The destination takes no identifier: it is resolved from the calling account  and created on first use, while a guest account has none and is answered as missing (404). The body has to be  `multipart/form-data` carrying the file part; a request without it is rejected as invalid, and the stored name  comes from that part, since unlike `POST api/2.0/files/@my/insert` there is no separate title. The call is not  idempotent: by default a file of the same title is overwritten as a new version, while `createNewIfExist=true`  stores a separate copy under a title made unique with a numeric suffix. `storeOriginalFile` is not a  per-request switch: it writes the same account setting as `PUT api/2.0/files/storeoriginal`, which decides  what happens to the formats listed in `extsMustConvert` of `GET api/2.0/files/settings` when they are  converted after the response - false replaces the uploaded file with the converted one, true keeps both;  `keepConvertStatus=true` keeps that conversion result readable through  `GET api/2.0/files/file/{fileId}/checkconversion`. Files over the single-request size limit or the account's  storage quota are refused; send those through `POST api/2.0/files/{folderId}/upload/create_session`.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
 | **createNewIfExist** | query | **Boolean** | Settles the clash with a file already carrying that title: left out, the content is written as the next  version of that file; set to true, both survive and the new one gets a numeric suffix in its title. | [optional] [example: true] |
-| **storeOriginalFile** | query | **Boolean** | Reaches further than this request: it writes a setting on the calling account, the same one  &#x60;PUT api/2.0/files/storeoriginal&#x60; writes, and it stays in force for later uploads. True keeps both the  uploaded file and the copy the portal converts it into, false replaces the uploaded file with the converted  one, and leaving it out keeps whatever the account already has. | [optional] [example: true] |
-| **keepConvertStatus** | query | **Boolean** | Decides whether the outcome of the background conversion outlives the conversion itself. True keeps the queue  record, so &#x60;GET api/2.0/files/file/{fileId}/checkconversion&#x60; can still report the result or the error; left  out, the record is cleared the moment the conversion ends and that call finds nothing. | [optional] [example: true] |
-| **File** | form | **File** (binary) | The content to store, sent as a &#x60;multipart/form-data&#x60; part; the name of that part becomes the title of the  stored file, with characters a title cannot hold replaced and the name cut to 170 characters. A request  without it is rejected as invalid. | [optional] |
+| **storeOriginalFile** | query | **Boolean** | Reaches further than this request: it writes a setting on the calling account, the same one  `PUT api/2.0/files/storeoriginal` writes, and it stays in force for later uploads. True keeps both the  uploaded file and the copy the portal converts it into, false replaces the uploaded file with the converted  one, and leaving it out keeps whatever the account already has. | [optional] [example: true] |
+| **keepConvertStatus** | query | **Boolean** | Decides whether the outcome of the background conversion outlives the conversion itself. True keeps the queue  record, so `GET api/2.0/files/file/{fileId}/checkconversion` can still report the result or the error; left  out, the record is cleared the moment the conversion ends and that call finds nothing. | [optional] [example: true] |
+| **File** | form | **File** (binary) | The content to store, sent as a `multipart/form-data` part; the name of that part becomes the title of the  stored file, with characters a title cannot hold replaced and the name cut to 170 characters. A request  without it is rejected as invalid. | [optional] |
 
 #### Responses
 
@@ -3852,13 +3852,13 @@ Uploads one file into the caller&#39;s own My documents section and returns it i
 
 Abort an upload session
 
-Cancels a chunked upload opened with &#x60;POST api/2.0/files/{folderId}/session&#x60; and discards the parts already  received, so nothing of it reaches the folder. The session is found by the id in the path alone: the folder  segment is not matched against it, and neither is the account that opened it, which makes the id the only  secret protecting the transfer. The call is destructive and is not safe to repeat, because the record is gone  afterwards: a second attempt, a session already closed by  &#x60;PUT api/2.0/files/{folderId}/session/{sessionId}/finalize&#x60; and a session that expired after twelve hours of  silence all fail rather than answer as missing. Finalizing removes the session too, so there is nothing left  to abort once the file exists. The answer carries no body. An upload that is simply abandoned needs no call at  all, since the session and its buffered parts are dropped when it expires.
+Cancels a chunked upload opened with `POST api/2.0/files/{folderId}/session` and discards the parts already  received, so nothing of it reaches the folder. The session is found by the id in the path alone: the folder  segment is not matched against it, and neither is the account that opened it, which makes the id the only  secret protecting the transfer. The call is destructive and is not safe to repeat, because the record is gone  afterwards: a second attempt, a session already closed by  `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize` and a session that expired after twelve hours of  silence all fail rather than answer as missing. Finalizing removes the session too, so there is nothing left  to abort once the file exists. The answer carries no body. An upload that is simply abandoned needs no call at  all, since the session and its buffered parts are dropped when it expires.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **sessionId** | path | **String** | The session to cancel, as returned in &#x60;id&#x60; when it was created: a 32-character hexadecimal string that  identifies the session on its own. | [required] [example: 9f1c7a2b4d3e4f5a8b6c0d1e2f3a4b5c] |
+| **sessionId** | path | **String** | The session to cancel, as returned in `id` when it was created: a 32-character hexadecimal string that  identifies the session on its own. | [required] [example: 9f1c7a2b4d3e4f5a8b6c0d1e2f3a4b5c] |
 | **folderId** | path | **Integer** (int32) | The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id. | [required] [example: 1] |
 
 #### Responses
@@ -3894,7 +3894,7 @@ null (empty response body)
 
 Add favorite files and folders
 
-Marks the listed files and folders as favorites for the calling account. The favorite list is personal:  nothing changes for other members, and the entries stay where they are stored. Read access to each item is  enough, so a room member with view-only rights and a guest may call it. Items the caller cannot read, ids that  do not exist and encrypted files of a private room are skipped without a word, and the answer is &#x60;true&#x60; even  when nothing was marked, so read the outcome back from &#x60;GET api/2.0/files/@favorites&#x60; instead of trusting it.  Numeric ids address entries stored in the portal itself, string ids entries on a connected third-party  account, and both kinds may be sent in one request. The call is mutating but safe to repeat: an item already  marked stays listed once. An entry moved to the Trash keeps its mark and is left out of the listing until it  is restored. &#x60;returnSingleOperation&#x60; arrives with the shared body and does nothing here. Use  &#x60;DELETE api/2.0/files/favorites&#x60; to undo, or &#x60;GET api/2.0/files/favorites/{fileId}&#x60; for a single file.
+Marks the listed files and folders as favorites for the calling account. The favorite list is personal:  nothing changes for other members, and the entries stay where they are stored. Read access to each item is  enough, so a room member with view-only rights and a guest may call it. Items the caller cannot read, ids that  do not exist and encrypted files of a private room are skipped without a word, and the answer is `true` even  when nothing was marked, so read the outcome back from `GET api/2.0/files/@favorites` instead of trusting it.  Numeric ids address entries stored in the portal itself, string ids entries on a connected third-party  account, and both kinds may be sent in one request. The call is mutating but safe to repeat: an item already  marked stays listed once. An entry moved to the Trash keeps its mark and is left out of the listing until it  is restored. `returnSingleOperation` arrives with the shared body and does nothing here. Use  `DELETE api/2.0/files/favorites` to undo, or `GET api/2.0/files/favorites/{fileId}` for a single file.
 
 #### Parameters
 
@@ -3936,7 +3936,7 @@ Marks the listed files and folders as favorites for the calling account. The fav
 
 Bulk download
 
-Queues a background job that packs the requested files and folders into a single archive, and answers with the  caller&#39;s download operations, including the one just started. The archive is not ready when the response  arrives: poll &#x60;GET api/2.0/files/fileops&#x60; until the operation reports &#x60;finished&#x60;, then take the address of the  archive from its &#x60;url&#x60;. Items listed in &#x60;fileConvertIds&#x60; are converted to the format named there before they  are packed, while the items of &#x60;fileIds&#x60; are packed as they are. Read access to every listed item is required:  an item the caller may not read fails the whole call with 403, and an id that resolves to nothing is answered  as missing, so filter the selection beforehand. Only one download at a time is allowed per caller, and a  second call made while the first is still running is refused with 403 as well. An empty selection queues  nothing and simply answers with the operations that are already there. An anonymous caller may use the call  for the items covered by the external link they hold.
+Queues a background job that packs the requested files and folders into a single archive, and answers with the  caller's download operations, including the one just started. The archive is not ready when the response  arrives: poll `GET api/2.0/files/fileops` until the operation reports `finished`, then take the address of the  archive from its `url`. Items listed in `fileConvertIds` are converted to the format named there before they  are packed, while the items of `fileIds` are packed as they are. Read access to every listed item is required:  an item the caller may not read fails the whole call with 403, and an id that resolves to nothing is answered  as missing, so filter the selection beforehand. Only one download at a time is allowed per caller, and a  second call made while the first is still running is refused with 403 as well. An empty selection queues  nothing and simply answers with the operations that are already there. An anonymous caller may use the call  for the items covered by the external link they hold.
 
 #### Parameters
 
@@ -3962,7 +3962,7 @@ Queues a background job that packs the requested files and folders into a single
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -3977,14 +3977,14 @@ No authorization required
 
 Get conversion status
 
-Reports how far the conversion of a file has got, as a list that holds one entry while the portal still knows  about that conversion and nothing once it is over. Read &#x60;progress&#x60;, which counts from 0 to 100, &#x60;error&#x60; for  the reason a conversion failed, and &#x60;file&#x60;, which carries the converted file as soon as it exists. Queue the  conversion with &#x60;PUT api/2.0/files/file/{fileId}/checkconversion&#x60; and poll this operation until the entry  reaches 100 or disappears: a finished entry is handed out once and then dropped, and an entry whose conversion  stopped is discarded a few minutes later, so an empty list means either already reported or never started  rather than an error. The same empty list is the answer for an identifier no file matches. Passing  &#x60;start&#x3D;true&#x60; starts the conversion as well, with the format from the portal settings and no password, which  makes that one flag mutating; without it the operation is read-only. The caller needs read access to the file,  and anyone else is refused.
+Reports how far the conversion of a file has got, as a list that holds one entry while the portal still knows  about that conversion and nothing once it is over. Read `progress`, which counts from 0 to 100, `error` for  the reason a conversion failed, and `file`, which carries the converted file as soon as it exists. Queue the  conversion with `PUT api/2.0/files/file/{fileId}/checkconversion` and poll this operation until the entry  reaches 100 or disappears: a finished entry is handed out once and then dropped, and an entry whose conversion  stopped is discarded a few minutes later, so an empty list means either already reported or never started  rather than an error. The same empty list is the answer for an identifier no file matches. Passing  `start=true` starts the conversion as well, with the format from the portal settings and no password, which  makes that one flag mutating; without it the operation is read-only. The caller needs read access to the file,  and anyone else is refused.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
 | **fileId** | path | **Integer** (int32) | The file whose conversion is asked about. | [required] [example: 1] |
-| **start** | query | **Boolean** | Whether to start the conversion as well: &#x60;true&#x60; queues it with the default output format and no password,  &#x60;false&#x60; only reports what the portal already knows. | [optional] [example: false] |
+| **start** | query | **Boolean** | Whether to start the conversion as well: `true` queues it with the default output format and no password,  `false` only reports what the portal already knows. | [optional] [example: false] |
 
 #### Responses
 
@@ -4019,7 +4019,7 @@ Reports how far the conversion of a file has got, as a list that holds one entry
 
 Check move or copy conflicts
 
-Reports which of the requested files and folders already have a same-named entry in &#x60;destFolderId&#x60;, so that  the clash can be settled before the move or the copy is started. Nothing is moved, copied or changed by the  call, although the address is shared with &#x60;PUT api/2.0/files/fileops/move&#x60;: the answer is the part of the  request that clashes, and an empty array means the batch would go through without one. The  &#x60;conflictResolveType&#x60; of the request is not taken into account — clashing items are reported whatever it says  — and encrypted files are left out of the report. A source id that resolves to nothing is not an error and is  passed over. The caller needs create access to the destination: an archived room and a room the caller cannot  write to are refused with 403, a destination that does not exist is answered as missing, and a request without  &#x60;destFolderId&#x60; is rejected as an invalid request. To learn whether the destination accepts the files at all  use &#x60;GET api/2.0/files/fileops/checkdestfolder&#x60;.
+Reports which of the requested files and folders already have a same-named entry in `destFolderId`, so that  the clash can be settled before the move or the copy is started. Nothing is moved, copied or changed by the  call, although the address is shared with `PUT api/2.0/files/fileops/move`: the answer is the part of the  request that clashes, and an empty array means the batch would go through without one. The  `conflictResolveType` of the request is not taken into account — clashing items are reported whatever it says  — and encrypted files are left out of the report. A source id that resolves to nothing is not an error and is  passed over. The caller needs create access to the destination: an archived room and a room the caller cannot  write to are refused with 403, a destination that does not exist is answered as missing, and a request without  `destFolderId` is rejected as an invalid request. To learn whether the destination accepts the files at all  use `GET api/2.0/files/fileops/checkdestfolder`.
 
 #### Parameters
 
@@ -4061,7 +4061,7 @@ Reports which of the requested files and folders already have a same-named entry
 
 Check the destination folder
 
-Reports whether the destination folder accepts the listed files, before a move or a copy is started. Only  &#x60;fileIds&#x60; and &#x60;destFolderId&#x60; are read from the request: &#x60;result&#x60; says whether all of the files are accepted,  only some of them or none, and &#x60;files&#x60; names the ones that are. The check is about what the destination allows  to be stored in it rather than about name clashes — everywhere except a form-filling room every file is  accepted, while a form-filling room accepts only PDF forms, so a text document offered to one comes back as  none accepted. The caller needs create access to the destination, so a room the caller cannot write to and an  archived room are refused with 403, a destination that does not exist is answered as missing, and a request  without &#x60;destFolderId&#x60; is rejected as an invalid request. Folder ids and the copying options of the request  play no part here. The call changes nothing; for same-named entries at the destination use  &#x60;GET api/2.0/files/fileops/move&#x60;.
+Reports whether the destination folder accepts the listed files, before a move or a copy is started. Only  `fileIds` and `destFolderId` are read from the request: `result` says whether all of the files are accepted,  only some of them or none, and `files` names the ones that are. The check is about what the destination allows  to be stored in it rather than about name clashes — everywhere except a form-filling room every file is  accepted, while a form-filling room accepts only PDF forms, so a text document offered to one comes back as  none accepted. The caller needs create access to the destination, so a room the caller cannot write to and an  archived room are refused with 403, a destination that does not exist is answered as missing, and a request  without `destFolderId` is rejected as an invalid request. Folder ids and the copying options of the request  play no part here. The call changes nothing; for same-named entries at the destination use  `GET api/2.0/files/fileops/move`.
 
 #### Parameters
 
@@ -4103,7 +4103,7 @@ Reports whether the destination folder accepts the listed files, before a move o
 
 Copy files and folders
 
-Queues a background job that copies the requested files and folders into &#x60;destFolderId&#x60;, leaving the originals  where they are, and answers with the caller&#39;s move and copy operations, including the one just started. Poll  &#x60;GET api/2.0/files/fileops&#x60; until the operation reports &#x60;finished&#x60;; its &#x60;files&#x60; and &#x60;folders&#x60; then name what  was produced. Before starting, &#x60;GET api/2.0/files/fileops/move&#x60; reports which items already have a same-named  entry at the destination and &#x60;conflictResolveType&#x60; decides what happens to them, while  &#x60;GET api/2.0/files/fileops/checkdestfolder&#x60; reports whether the destination accepts the files at all. The  caller needs create access to the destination — room manager or content-creator rights inside a room — and  read access to every source item; anything less is refused with 403. With &#x60;content&#x3D;true&#x60; each listed folder is  replaced by its own files and subfolders, so the folder itself is not recreated at the destination. An empty  selection queues nothing and answers with the operations that are already there. To remove the originals  instead use &#x60;PUT api/2.0/files/fileops/move&#x60;.
+Queues a background job that copies the requested files and folders into `destFolderId`, leaving the originals  where they are, and answers with the caller's move and copy operations, including the one just started. Poll  `GET api/2.0/files/fileops` until the operation reports `finished`; its `files` and `folders` then name what  was produced. Before starting, `GET api/2.0/files/fileops/move` reports which items already have a same-named  entry at the destination and `conflictResolveType` decides what happens to them, while  `GET api/2.0/files/fileops/checkdestfolder` reports whether the destination accepts the files at all. The  caller needs create access to the destination — room manager or content-creator rights inside a room — and  read access to every source item; anything less is refused with 403. With `content=true` each listed folder is  replaced by its own files and subfolders, so the folder itself is not recreated at the destination. An empty  selection queues nothing and answers with the operations that are already there. To remove the originals  instead use `PUT api/2.0/files/fileops/move`.
 
 #### Parameters
 
@@ -4145,13 +4145,13 @@ Queues a background job that copies the requested files and folders into &#x60;d
 
 Chunked upload
 
-Deprecated in favour of &#x60;POST api/2.0/files/{folderId}/session&#x60;, which opens the same session and returns it  without the success envelope used here; new callers should go there. Reserves a chunked upload of a file in  the folder named by the path: the title comes from &#x60;fileName&#x60;, the declared payload size from &#x60;fileSize&#x60;, and  the answer carries the session id every later call quotes, the address of the standalone chunk handler, the  moment an idle session is dropped and the reserved byte count. No content is stored yet. Send the payload as  multipart parts to &#x60;POST api/2.0/files/{folderId}/session/{sessionId}/upload&#x60;, keeping each part within  &#x60;chunkUploadSize&#x60; from &#x60;GET api/2.0/files/settings&#x60;, then close the session with  &#x60;PUT api/2.0/files/{folderId}/session/{sessionId}/finalize&#x60;. The caller needs the right to add content to the  target folder, which room managers and content creators have and readers, editors and guests do not: they get  403, as does a section root such as Rooms or Archive, while an unknown folder is answered as missing. A  payload above the portal limit for chunked uploads is refused before the session exists.
+Deprecated in favour of `POST api/2.0/files/{folderId}/session`, which opens the same session and returns it  without the success envelope used here; new callers should go there. Reserves a chunked upload of a file in  the folder named by the path: the title comes from `fileName`, the declared payload size from `fileSize`, and  the answer carries the session id every later call quotes, the address of the standalone chunk handler, the  moment an idle session is dropped and the reserved byte count. No content is stored yet. Send the payload as  multipart parts to `POST api/2.0/files/{folderId}/session/{sessionId}/upload`, keeping each part within  `chunkUploadSize` from `GET api/2.0/files/settings`, then close the session with  `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize`. The caller needs the right to add content to the  target folder, which room managers and content creators have and readers, editors and guests do not: they get  403, as does a section root such as Rooms or Archive, while an unknown folder is answered as missing. A  payload above the portal limit for chunked uploads is refused before the session exists.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **folderId** | path | **Integer** (int32) | The folder that receives the file; take the id from a listing such as &#x60;GET api/2.0/files/@root&#x60;. A room or an  ordinary folder inside one is accepted, a section root is not. | [required] [example: 1] |
+| **folderId** | path | **Integer** (int32) | The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not. | [required] [example: 1] |
 | **SessionRequest** | body | [**SessionRequest**](#model-sessionrequest) | The file the session is opened for, and how a clash with an existing name is settled. | [required] |
 
 #### Responses
@@ -4188,13 +4188,13 @@ Deprecated in favour of &#x60;POST api/2.0/files/{folderId}/session&#x60;, which
 
 Create an upload session
 
-Opens a chunked upload session for a file in the folder named by the path and returns the session itself,  which is the difference from the deprecated &#x60;POST api/2.0/files/{folderId}/upload/create_session&#x60; and its  success envelope. The answer gives &#x60;id&#x60;, quoted by every later call, &#x60;location&#x60; for the standalone chunk  handler used by clients that bypass this API, &#x60;expired&#x60;, and &#x60;bytes_total&#x60; echoing the reserved size. Whether  parts are really needed follows from &#x60;fileSize&#x60;: below &#x60;chunkUploadSize&#x60; from &#x60;GET api/2.0/files/settings&#x60; the  whole payload goes in one &#x60;POST api/2.0/files/{folderId}/session/{sessionId}&#x60;, which stores the file and  answers 201, and above it the parts go one by one to  &#x60;POST api/2.0/files/{folderId}/session/{sessionId}/upload&#x60; and the file appears only after  &#x60;PUT api/2.0/files/{folderId}/session/{sessionId}/finalize&#x60;. The caller must be allowed to add content to the  folder, so readers, editors and guests are refused, a section root is refused as well, and an unknown folder  is answered as missing. Nothing is written until the parts arrive, and an abandoned session disappears twelve  hours later.
+Opens a chunked upload session for a file in the folder named by the path and returns the session itself,  which is the difference from the deprecated `POST api/2.0/files/{folderId}/upload/create_session` and its  success envelope. The answer gives `id`, quoted by every later call, `location` for the standalone chunk  handler used by clients that bypass this API, `expired`, and `bytes_total` echoing the reserved size. Whether  parts are really needed follows from `fileSize`: below `chunkUploadSize` from `GET api/2.0/files/settings` the  whole payload goes in one `POST api/2.0/files/{folderId}/session/{sessionId}`, which stores the file and  answers 201, and above it the parts go one by one to  `POST api/2.0/files/{folderId}/session/{sessionId}/upload` and the file appears only after  `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize`. The caller must be allowed to add content to the  folder, so readers, editors and guests are refused, a section root is refused as well, and an unknown folder  is answered as missing. Nothing is written until the parts arrive, and an abandoned session disappears twelve  hours later.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **folderId** | path | **Integer** (int32) | The folder that receives the file; take the id from a listing such as &#x60;GET api/2.0/files/@root&#x60;. A room or an  ordinary folder inside one is accepted, a section root is not. | [required] [example: 1] |
+| **folderId** | path | **Integer** (int32) | The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not. | [required] [example: 1] |
 | **SessionRequest** | body | [**SessionRequest**](#model-sessionrequest) | The file the session is opened for, and how a clash with an existing name is settled. | [required] |
 
 #### Responses
@@ -4230,7 +4230,7 @@ Opens a chunked upload session for a file in the folder named by the path and re
 
 Delete files and folders
 
-Queues a background job that deletes the requested files and folders, and answers with the caller&#39;s delete  operations, including the one just started. Poll &#x60;GET api/2.0/files/fileops&#x60; until the operation reports  &#x60;finished&#x60;, and read its &#x60;error&#x60;: a failure on a single item is reported there rather than as a status code.  With &#x60;immediately&#x3D;false&#x60; the items are moved to the caller&#39;s Trash and can be restored from it, while  &#x60;immediately&#x3D;true&#x60; removes them at once and for good; deleting a folder takes everything inside it either way.  The call is destructive and it is not a no-op on repetition — a second call with the same ids deletes whatever  has been restored in the meantime. Access is checked before the job is queued: deleting from a room requires  room manager or content-creator rights, editing or read rights are refused with 403, and an id that resolves  to nothing is answered as missing. An empty selection queues nothing and answers with the operations that are  already there. To clear the Trash itself use &#x60;PUT api/2.0/files/fileops/emptytrash&#x60;.
+Queues a background job that deletes the requested files and folders, and answers with the caller's delete  operations, including the one just started. Poll `GET api/2.0/files/fileops` until the operation reports  `finished`, and read its `error`: a failure on a single item is reported there rather than as a status code.  With `immediately=false` the items are moved to the caller's Trash and can be restored from it, while  `immediately=true` removes them at once and for good; deleting a folder takes everything inside it either way.  The call is destructive and it is not a no-op on repetition — a second call with the same ids deletes whatever  has been restored in the meantime. Access is checked before the job is queued: deleting from a room requires  room manager or content-creator rights, editing or read rights are refused with 403, and an id that resolves  to nothing is answered as missing. An empty selection queues nothing and answers with the operations that are  already there. To clear the Trash itself use `PUT api/2.0/files/fileops/emptytrash`.
 
 #### Parameters
 
@@ -4272,7 +4272,7 @@ Queues a background job that deletes the requested files and folders, and answer
 
 Delete favorite files and folders
 
-Removes the favorite mark from the listed files and folders for the calling account. Nothing is deleted from  storage: the entries keep their place, their content and their sharing, and only disappear from  &#x60;GET api/2.0/files/@favorites&#x60;; to delete the entries themselves call &#x60;PUT api/2.0/files/fileops/delete&#x60;  instead. Marks of other members are untouched, and read access to each item is enough to call it. The ids go  into the JSON body documented here; the same route also accepts them as repeated &#x60;fileIds&#x60; and &#x60;folderIds&#x60;  query parameters, but only in a request that carries no JSON body at all. Numeric ids address entries stored  in the portal itself, string ids entries on a connected third-party account. The answer is &#x60;true&#x60; whenever the  request was understood, which an empty request, an id that does not exist and an item that was never marked  all achieve, so it does not report how many marks were dropped. &#x60;returnSingleOperation&#x60; arrives with the  shared body and does nothing here. Repeating the call is safe. Use &#x60;POST api/2.0/files/favorites&#x60; to mark  entries again.
+Removes the favorite mark from the listed files and folders for the calling account. Nothing is deleted from  storage: the entries keep their place, their content and their sharing, and only disappear from  `GET api/2.0/files/@favorites`; to delete the entries themselves call `PUT api/2.0/files/fileops/delete`  instead. Marks of other members are untouched, and read access to each item is enough to call it. The ids go  into the JSON body documented here; the same route also accepts them as repeated `fileIds` and `folderIds`  query parameters, but only in a request that carries no JSON body at all. Numeric ids address entries stored  in the portal itself, string ids entries on a connected third-party account. The answer is `true` whenever the  request was understood, which an empty request, an id that does not exist and an item that was never marked  all achieve, so it does not report how many marks were dropped. `returnSingleOperation` arrives with the  shared body and does nothing here. Repeating the call is safe. Use `POST api/2.0/files/favorites` to mark  entries again.
 
 #### Parameters
 
@@ -4313,7 +4313,7 @@ Removes the favorite mark from the listed files and folders for the calling acco
 
 Delete file versions
 
-Queues a background job that removes the listed versions from the history of one file, and answers with the  caller&#39;s delete operations, including the one just started. Poll &#x60;GET api/2.0/files/fileops&#x60; until the  operation reports &#x60;finished&#x60;; a failure met while the job runs is reported in its &#x60;error&#x60; rather than as a  status code. Removal is permanent — deleted versions do not travel through Trash and cannot be restored, while  the file itself stays in place with the versions that are left. Send the numbers that  &#x60;GET api/2.0/files/file/{fileId}/history&#x60; reports, and send at least one: an empty list is not an empty  request, it deletes the whole file instead. The number of the current version is refused before anything is  queued, while numbers that no longer exist are passed over without a complaint. The caller needs the rights  that deleting the file itself would need, so a member with read-only rights is refused, as are a file in an  archived room and a file that is already in Trash, and a file that does not exist is answered as missing. To  delete the file itself use &#x60;PUT api/2.0/files/fileops/delete&#x60;.
+Queues a background job that removes the listed versions from the history of one file, and answers with the  caller's delete operations, including the one just started. Poll `GET api/2.0/files/fileops` until the  operation reports `finished`; a failure met while the job runs is reported in its `error` rather than as a  status code. Removal is permanent — deleted versions do not travel through Trash and cannot be restored, while  the file itself stays in place with the versions that are left. Send the numbers that  `GET api/2.0/files/file/{fileId}/history` reports, and send at least one: an empty list is not an empty  request, it deletes the whole file instead. The number of the current version is refused before anything is  queued, while numbers that no longer exist are passed over without a complaint. The caller needs the rights  that deleting the file itself would need, so a member with read-only rights is refused, as are a file in an  archived room and a file that is already in Trash, and a file that does not exist is answered as missing. To  delete the file itself use `PUT api/2.0/files/fileops/delete`.
 
 #### Parameters
 
@@ -4354,7 +4354,7 @@ Queues a background job that removes the listed versions from the history of one
 
 Duplicate files and folders
 
-Queues a background job that copies each requested file and folder next to itself, into the folder where it  already is, and answers with the caller&#39;s duplicate operations, including the one just started. Poll  &#x60;GET api/2.0/files/fileops&#x60; until the operation reports &#x60;finished&#x60;. The copies keep the name of the original  with a numeric suffix, so nothing is overwritten and every repetition adds one more copy; duplicating a folder  duplicates its content as well. No destination is taken — to place a copy somewhere else use  &#x60;PUT api/2.0/files/fileops/copy&#x60;. The caller needs the rights that creating an item in that folder would need,  which inside a room means room manager or content-creator rights: read or editing rights, and an item the  caller has no access to at all, are refused with 403. An empty selection queues nothing and answers with the  operations that are already there.
+Queues a background job that copies each requested file and folder next to itself, into the folder where it  already is, and answers with the caller's duplicate operations, including the one just started. Poll  `GET api/2.0/files/fileops` until the operation reports `finished`. The copies keep the name of the original  with a numeric suffix, so nothing is overwritten and every repetition adds one more copy; duplicating a folder  duplicates its content as well. No destination is taken — to place a copy somewhere else use  `PUT api/2.0/files/fileops/copy`. The caller needs the rights that creating an item in that folder would need,  which inside a room means room manager or content-creator rights: read or editing rights, and an item the  caller has no access to at all, are refused with 403. An empty selection queues nothing and answers with the  operations that are already there.
 
 #### Parameters
 
@@ -4396,14 +4396,14 @@ Queues a background job that copies each requested file and folder next to itsel
 
 Empty the Trash folder
 
-Queues a background job that permanently removes the content of the caller&#39;s own Trash, and answers with the  caller&#39;s delete operations, including the one just started. Poll &#x60;GET api/2.0/files/fileops&#x60; until the  operation reports &#x60;finished&#x60;. Every authenticated account may empty its own Trash and only its own: no  per-item access check takes place because nothing outside the caller&#39;s Trash is touched. With &#x60;folderType&#x60; the  sweep is narrowed to the items that were originally stored in sections and rooms of the named types, so  clearing what came from personal documents leaves what came from rooms untouched; without the parameter the  whole Trash is emptied. What is removed here cannot be restored afterwards, which is the difference from  &#x60;PUT api/2.0/files/fileops/delete&#x60;, where &#x60;immediately&#x3D;false&#x60; puts items into Trash in the first place.  Calling it on an already empty Trash queues nothing and answers with the operations that are already there.
+Queues a background job that permanently removes the content of the caller's own Trash, and answers with the  caller's delete operations, including the one just started. Poll `GET api/2.0/files/fileops` until the  operation reports `finished`. Every authenticated account may empty its own Trash and only its own: no  per-item access check takes place because nothing outside the caller's Trash is touched. With `folderType` the  sweep is narrowed to the items that were originally stored in sections and rooms of the named types, so  clearing what came from personal documents leaves what came from rooms untouched; without the parameter the  whole Trash is emptied. What is removed here cannot be restored afterwards, which is the difference from  `PUT api/2.0/files/fileops/delete`, where `immediately=false` puts items into Trash in the first place.  Calling it on an already empty Trash queues nothing and answers with the operations that are already there.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **Single** | query | **Boolean** | Which operations the answer carries: &#x60;true&#x60; returns the operation this call started and nothing else, &#x60;false&#x60;  returns every delete operation that the caller has running or unread. | [optional] [example: false] |
-| **folderType** | query | **List** | Limits the sweep to the items whose original location was inside a section or a room of one of the named  types, leaving the rest of the Trash untouched; without the parameter the whole Trash is emptied. &#x60;5&#x60; covers  what was deleted from personal documents, &#x60;14&#x60; what was deleted from rooms. | [optional] [example: [5]] [enum: 0, 1, 2, 3, 5, 6, 8, 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36] |
+| **Single** | query | **Boolean** | Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every delete operation that the caller has running or unread. | [optional] [example: false] |
+| **folderType** | query | **List** | Limits the sweep to the items whose original location was inside a section or a room of one of the named  types, leaving the rest of the Trash untouched; without the parameter the whole Trash is emptied. `5` covers  what was deleted from personal documents, `14` what was deleted from rooms. | [optional] [example: [5]] [enum: 0, 1, 2, 3, 5, 6, 8, 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36] |
 
 #### Responses
 
@@ -4438,14 +4438,14 @@ Queues a background job that permanently removes the content of the caller&#39;s
 
 Finalize an upload session
 
-Assembles the parts received so far into the file the session was opened for and closes the session. What  comes out depends on how the session started: one opened against an existing file through  &#x60;POST api/2.0/files/file/{fileId}/edit_session&#x60; replaces that content in place and keeps the version number,  while one opened against a folder either creates the file or, when a file of the same name was taken over,  stores the content as its next version. A form loses its filling state on the way in. The answer arrives with  201 and carries the identifiers of the file together with the file itself. The call ends the session: the  record and the buffered parts are removed, so it cannot be repeated and there is nothing left to abort  afterwards. Running it before all the declared bytes have arrived assembles whatever is there, so read the  progress from the chunk calls first. An unknown, already closed or expired session id fails instead of  answering as missing.
+Assembles the parts received so far into the file the session was opened for and closes the session. What  comes out depends on how the session started: one opened against an existing file through  `POST api/2.0/files/file/{fileId}/edit_session` replaces that content in place and keeps the version number,  while one opened against a folder either creates the file or, when a file of the same name was taken over,  stores the content as its next version. A form loses its filling state on the way in. The answer arrives with  201 and carries the identifiers of the file together with the file itself. The call ends the session: the  record and the buffered parts are removed, so it cannot be repeated and there is nothing left to abort  afterwards. Running it before all the declared bytes have arrived assembles whatever is there, so read the  progress from the chunk calls first. An unknown, already closed or expired session id fails instead of  answering as missing.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
 | **folderId** | path | **Integer** (int32) | The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id. | [required] [example: 1] |
-| **sessionId** | path | **String** | The session to assemble, as returned in &#x60;id&#x60; when it was created: a 32-character hexadecimal string that  identifies the session on its own. | [required] [example: 9f1c7a2b4d3e4f5a8b6c0d1e2f3a4b5c] |
+| **sessionId** | path | **String** | The session to assemble, as returned in `id` when it was created: a 32-character hexadecimal string that  identifies the session on its own. | [required] [example: 9f1c7a2b4d3e4f5a8b6c0d1e2f3a4b5c] |
 
 #### Responses
 
@@ -4480,13 +4480,13 @@ Assembles the parts received so far into the file the session was opened for and
 
 Get active file operations
 
-Returns the background file operations of the caller that are still running or whose finished result has not  been read yet, grouped by kind: duplications first, then moves and copies, deletions, downloads and  mark-as-read. This is the polling target for every operation in this section — an operation appears here as  soon as it is queued and carries &#x60;progress&#x60; from 0 to 100, &#x60;finished&#x60;, the &#x60;error&#x60; of a failed item and, for a  download, the address of the archive in &#x60;url&#x60;. A record is dropped once its finished state has been handed  out, so a completed operation is reported once and an empty array means there is nothing left to report rather  than that the work failed. Pass &#x60;id&#x60; to follow a single operation; an id that is not among the caller&#39;s  operations gives an empty array. Operations are private to the account that started them, an anonymous caller  being scoped to the session of the external link. The call changes nothing. To follow one kind only use  &#x60;GET api/2.0/files/fileops/{operationType}&#x60;.
+Returns the background file operations of the caller that are still running or whose finished result has not  been read yet, grouped by kind: duplications first, then moves and copies, deletions, downloads and  mark-as-read. This is the polling target for every operation in this section — an operation appears here as  soon as it is queued and carries `progress` from 0 to 100, `finished`, the `error` of a failed item and, for a  download, the address of the archive in `url`. A record is dropped once its finished state has been handed  out, so a completed operation is reported once and an empty array means there is nothing left to report rather  than that the work failed. Pass `id` to follow a single operation; an id that is not among the caller's  operations gives an empty array. Operations are private to the account that started them, an anonymous caller  being scoped to the session of the external link. The call changes nothing. To follow one kind only use  `GET api/2.0/files/fileops/{operationType}`.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | query | **String** | The operation to report on, as returned in &#x60;id&#x60; when it was started; without it every operation of the caller  is reported. An id that is not among the caller&#39;s operations gives an empty answer rather than an error. | [optional] [example: b2f3e9a4-7c15-4d8e-9f60-3a1c5e7d0b42] |
+| **id** | query | **String** | The operation to report on, as returned in `id` when it was started; without it every operation of the caller  is reported. An id that is not among the caller's operations gives an empty answer rather than an error. | [optional] [example: b2f3e9a4-7c15-4d8e-9f60-3a1c5e7d0b42] |
 
 #### Responses
 
@@ -4505,7 +4505,7 @@ Returns the background file operations of the caller that are still running or w
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -4520,14 +4520,14 @@ No authorization required
 
 Get file operations by type
 
-Returns the background file operations of the caller that are of one kind, named by the number in the route:  &#x60;1&#x60; for a copy, &#x60;2&#x60; for a deletion, &#x60;3&#x60; for a download, &#x60;4&#x60; for a mark-as-read and &#x60;7&#x60; for a duplication. The  answer carries the same records as &#x60;GET api/2.0/files/fileops&#x60;, with the same rule that a finished operation  is reported once and then dropped, and &#x60;id&#x60; narrows it further to a single operation. Moves, kind &#x60;0&#x60;, cannot  be read through this route: the address &#x60;api/2.0/files/fileops/move&#x60; belongs to another operation, so read  moves from &#x60;GET api/2.0/files/fileops&#x60; and pick the records whose &#x60;operation&#x60; is &#x60;0&#x60;. A kind that has no queue  of its own — &#x60;5&#x60; for an import, &#x60;6&#x60; for a conversion — is accepted and answers with an empty array, while a  number outside the operation type is rejected as an invalid request. The call changes nothing and never shows  another account&#39;s operations.
+Returns the background file operations of the caller that are of one kind, named by the number in the route:  `1` for a copy, `2` for a deletion, `3` for a download, `4` for a mark-as-read and `7` for a duplication. The  answer carries the same records as `GET api/2.0/files/fileops`, with the same rule that a finished operation  is reported once and then dropped, and `id` narrows it further to a single operation. Moves, kind `0`, cannot  be read through this route: the address `api/2.0/files/fileops/move` belongs to another operation, so read  moves from `GET api/2.0/files/fileops` and pick the records whose `operation` is `0`. A kind that has no queue  of its own — `5` for an import, `6` for a conversion — is accepted and answers with an empty array, while a  number outside the operation type is rejected as an invalid request. The call changes nothing and never shows  another account's operations.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
 | **operationType** | path | **FileOperationType** | The kind of operation the answer is limited to. Only the kinds that have a queue of their own ever carry  records — a copy, a deletion, a download, a mark-as-read and a duplication — and moves cannot be read through  this route at all, because its address belongs to another operation. | [required] [example: 2] [enum: 0, 1, 2, 3, 4, 5, 6, 7] |
-| **id** | query | **String** | The operation to report on, as returned in &#x60;id&#x60; when it was started; without it every operation of the caller  is reported. An id that is not among the caller&#39;s operations gives an empty answer rather than an error. | [optional] [example: b2f3e9a4-7c15-4d8e-9f60-3a1c5e7d0b42] |
+| **id** | query | **String** | The operation to report on, as returned in `id` when it was started; without it every operation of the caller  is reported. An id that is not among the caller's operations gives an empty answer rather than an error. | [optional] [example: b2f3e9a4-7c15-4d8e-9f60-3a1c5e7d0b42] |
 
 #### Responses
 
@@ -4546,7 +4546,7 @@ Returns the background file operations of the caller that are of one kind, named
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -4561,7 +4561,7 @@ No authorization required
 
 Mark files and folders as read
 
-Queues a background job that clears the new-item badge from the requested files and folders for the calling  account, and answers with the caller&#39;s mark-as-read operations, including the one just started. Poll  &#x60;GET api/2.0/files/fileops&#x60; until the operation reports &#x60;finished&#x60;. Marking a folder clears the badges of  everything inside it as well. Items the caller cannot read are passed over in silence rather than refused, so  the call succeeds even when the whole selection is inaccessible, and an empty selection queues nothing and  answers with the operations that are already there. Repeating the call on items that are already read changes  nothing, and nothing is opened, moved or modified by it — only the caller&#39;s own badges are affected, while  other members keep theirs. To see what is currently marked as new use &#x60;GET api/2.0/files/{folderId}/news&#x60; for  one folder and &#x60;GET api/2.0/files/rooms/news&#x60; for the rooms of the caller.
+Queues a background job that clears the new-item badge from the requested files and folders for the calling  account, and answers with the caller's mark-as-read operations, including the one just started. Poll  `GET api/2.0/files/fileops` until the operation reports `finished`. Marking a folder clears the badges of  everything inside it as well. Items the caller cannot read are passed over in silence rather than refused, so  the call succeeds even when the whole selection is inaccessible, and an empty selection queues nothing and  answers with the operations that are already there. Repeating the call on items that are already read changes  nothing, and nothing is opened, moved or modified by it — only the caller's own badges are affected, while  other members keep theirs. To see what is currently marked as new use `GET api/2.0/files/{folderId}/news` for  one folder and `GET api/2.0/files/rooms/news` for the rooms of the caller.
 
 #### Parameters
 
@@ -4602,7 +4602,7 @@ Queues a background job that clears the new-item badge from the requested files 
 
 Move files and folders
 
-Queues a background job that moves the requested files and folders into &#x60;destFolderId&#x60;, removing them from  where they were, and answers with the caller&#39;s move and copy operations, including the one just started. Poll  &#x60;GET api/2.0/files/fileops&#x60; until the operation reports &#x60;finished&#x60;. Before starting,  &#x60;GET api/2.0/files/fileops/move&#x60; reports which items already have a same-named entry at the destination and  &#x60;conflictResolveType&#x60; decides what happens to them, while &#x60;GET api/2.0/files/fileops/checkdestfolder&#x60; reports  whether the destination accepts the files at all. The caller needs create access to the destination and the  right to take the items out of their source, which is why room members with editing or review rights are  refused with 403, and why content-creator rights inside a room allow copying an item out of it but not moving  it. A room cannot be moved this way — use &#x60;PUT api/2.0/files/rooms/{id}/archive&#x60; instead. To keep the  originals use &#x60;PUT api/2.0/files/fileops/copy&#x60;. An empty selection queues nothing.
+Queues a background job that moves the requested files and folders into `destFolderId`, removing them from  where they were, and answers with the caller's move and copy operations, including the one just started. Poll  `GET api/2.0/files/fileops` until the operation reports `finished`. Before starting,  `GET api/2.0/files/fileops/move` reports which items already have a same-named entry at the destination and  `conflictResolveType` decides what happens to them, while `GET api/2.0/files/fileops/checkdestfolder` reports  whether the destination accepts the files at all. The caller needs create access to the destination and the  right to take the items out of their source, which is why room members with editing or review rights are  refused with 403, and why content-creator rights inside a room allow copying an item out of it but not moving  it. A room cannot be moved this way — use `PUT api/2.0/files/rooms/{id}/archive` instead. To keep the  originals use `PUT api/2.0/files/fileops/copy`. An empty selection queues nothing.
 
 #### Parameters
 
@@ -4644,7 +4644,7 @@ Queues a background job that moves the requested files and folders into &#x60;de
 
 Start file conversion
 
-Queues the conversion of a file into the portal&#39;s own editable format and answers with the conversion entry  the caller is to poll. The whole body may be omitted, in which case the defaults apply. &#x60;outputType&#x60; names the  target format and, left empty, the portal&#39;s default for that kind of document is used; &#x60;password&#x60; unlocks a  protected source file; &#x60;version&#x60; converts an older version instead of the current one. &#x60;createNewIfExist&#x60;  decides where the result goes: with &#x60;true&#x60; a new file is created beside the source, while with &#x60;false&#x60;, the  default, the converted file that already exists is replaced. &#x60;sync&#x3D;true&#x60; converts inside the request and  answers with the finished result instead of a queue entry, which is only sensible for small documents.  Otherwise poll &#x60;GET api/2.0/files/file/{fileId}/checkconversion&#x60; until &#x60;progress&#x60; reaches 100 and take the  converted file from &#x60;file&#x60;. Only formats the portal has to convert are accepted; anything already editable,  and anything it cannot convert, is answered without work being queued or rejected as an invalid request. The  caller needs read access to the file. The call is mutating and not idempotent.
+Queues the conversion of a file into the portal's own editable format and answers with the conversion entry  the caller is to poll. The whole body may be omitted, in which case the defaults apply. `outputType` names the  target format and, left empty, the portal's default for that kind of document is used; `password` unlocks a  protected source file; `version` converts an older version instead of the current one. `createNewIfExist`  decides where the result goes: with `true` a new file is created beside the source, while with `false`, the  default, the converted file that already exists is replaced. `sync=true` converts inside the request and  answers with the finished result instead of a queue entry, which is only sensible for small documents.  Otherwise poll `GET api/2.0/files/file/{fileId}/checkconversion` until `progress` reaches 100 and take the  converted file from `file`. Only formats the portal has to convert are accepted; anything already editable,  and anything it cannot convert, is answered without work being queued or rejected as an invalid request. The  caller needs read access to the file. The call is mutating and not idempotent.
 
 #### Parameters
 
@@ -4686,13 +4686,13 @@ Queues the conversion of a file into the portal&#39;s own editable format and an
 
 Cancel file operations
 
-Cancels a background file operation of the caller and answers with the operations that are left. Pass the &#x60;id&#x60;  that was reported when the operation started to stop that one; a call that leaves the trailing route segment  out stops every operation the caller has running, of every kind. Cancelling stops the job where it stands and  does not undo it: what has already been copied, moved or deleted stays that way, so a cancelled batch can  leave part of itself at the destination and part of it at the source, and the result has to be read back  rather than assumed. The cancelled record is dropped from &#x60;GET api/2.0/files/fileops&#x60; at once, which is why  the answer here is usually empty. An id that is not among the caller&#39;s operations cancels nothing and is not  an error. Operations are private to the account that started them, an anonymous caller being scoped to the  session of the external link, so the call can never reach an operation of anyone else.
+Cancels a background file operation of the caller and answers with the operations that are left. Pass the `id`  that was reported when the operation started to stop that one; a call that leaves the trailing route segment  out stops every operation the caller has running, of every kind. Cancelling stops the job where it stands and  does not undo it: what has already been copied, moved or deleted stays that way, so a cancelled batch can  leave part of itself at the destination and part of it at the source, and the result has to be read back  rather than assumed. The cancelled record is dropped from `GET api/2.0/files/fileops` at once, which is why  the answer here is usually empty. An id that is not among the caller's operations cancels nothing and is not  an error. Operations are private to the account that started them, an anonymous caller being scoped to the  session of the external link, so the call can never reach an operation of anyone else.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **String** | The operation to cancel, as returned in &#x60;id&#x60; when it was started. A call that leaves the route segment out  cancels every operation of the caller, and an id that is not among their operations cancels nothing without  being an error. | [required] [example: b2f3e9a4-7c15-4d8e-9f60-3a1c5e7d0b42] |
+| **id** | path | **String** | The operation to cancel, as returned in `id` when it was started. A call that leaves the route segment out  cancels every operation of the caller, and an id that is not among their operations cancels nothing without  being an error. | [required] [example: b2f3e9a4-7c15-4d8e-9f60-3a1c5e7d0b42] |
 
 #### Responses
 
@@ -4711,7 +4711,7 @@ Cancels a background file operation of the caller and answers with the operation
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -4726,7 +4726,7 @@ No authorization required
 
 Update a comment
 
-Replaces the comment stored on one version of a file - the note that explains what changed in it - and answers  with the comment as it was stored, which is the text cut to the length the portal keeps. &#x60;version&#x60; names the  version and has to be an existing one: a version that does not exist is rejected as an invalid request, while  a file that does not exist at all is answered as not found. Sending an empty comment clears the note. The  caller needs the right to edit the history of the file, which the room admin, a DocSpace admin acting as room  manager and a member with content-creator rights have; a member with editing access to somebody else&#39;s file,  read-only access, a guest and an anonymous caller are all refused. A file that is locked by somebody else or  lies in Trash is refused as well. The call is mutating and idempotent - repeating it with the same text leaves  the same comment. The comments of all versions come back with &#x60;GET api/2.0/files/file/{fileId}/edit/history&#x60;.
+Replaces the comment stored on one version of a file - the note that explains what changed in it - and answers  with the comment as it was stored, which is the text cut to the length the portal keeps. `version` names the  version and has to be an existing one: a version that does not exist is rejected as an invalid request, while  a file that does not exist at all is answered as not found. Sending an empty comment clears the note. The  caller needs the right to edit the history of the file, which the room admin, a DocSpace admin acting as room  manager and a member with content-creator rights have; a member with editing access to somebody else's file,  read-only access, a guest and an anonymous caller are all refused. A file that is locked by somebody else or  lies in Trash is refused as well. The call is mutating and idempotent - repeating it with the same text leaves  the same comment. The comments of all versions come back with `GET api/2.0/files/file/{fileId}/edit/history`.
 
 #### Parameters
 
@@ -4768,14 +4768,14 @@ Replaces the comment stored on one version of a file - the note that explains wh
 
 Upload a numbered chunk
 
-Stores one part of a file under the number given in &#x60;chunkNumber&#x60;, which is what the ordinary chunked flow  uses: parts are kept by their number rather than by arrival, so a part that failed can be resent under the  same number without restarting the session. Numbering starts at 1, and leaving the number out makes the server  count the parts itself. The answer is always the session, never the file, and this call never completes the  upload: the file appears only after &#x60;PUT api/2.0/files/{folderId}/session/{sessionId}/finalize&#x60;. Use  &#x60;POST api/2.0/files/{folderId}/session/{sessionId}&#x60; instead when the parts go strictly in order and the upload  should complete by itself. A part bigger than &#x60;chunkUploadSize&#x60; from &#x60;GET api/2.0/files/settings&#x60; is refused,  so that value is also the size to split the payload by. The first part of a PDF is inspected, and a PDF that  is not a fillable form is refused when the session targets a form-filling room. The session is found by its id  alone.
+Stores one part of a file under the number given in `chunkNumber`, which is what the ordinary chunked flow  uses: parts are kept by their number rather than by arrival, so a part that failed can be resent under the  same number without restarting the session. Numbering starts at 1, and leaving the number out makes the server  count the parts itself. The answer is always the session, never the file, and this call never completes the  upload: the file appears only after `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize`. Use  `POST api/2.0/files/{folderId}/session/{sessionId}` instead when the parts go strictly in order and the upload  should complete by itself. A part bigger than `chunkUploadSize` from `GET api/2.0/files/settings` is refused,  so that value is also the size to split the payload by. The first part of a PDF is inspected, and a PDF that  is not a fillable form is refused when the session targets a form-filling room. The session is found by its id  alone.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
 | **folderId** | path | **Integer** (int32) | The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id. | [required] [example: 1] |
-| **sessionId** | path | **String** | The session this part belongs to, as returned in &#x60;id&#x60; when it was created; a 32-character hexadecimal string. | [required] [example: 9f1c7a2b4d3e4f5a8b6c0d1e2f3a4b5c] |
+| **sessionId** | path | **String** | The session this part belongs to, as returned in `id` when it was created; a 32-character hexadecimal string. | [required] [example: 9f1c7a2b4d3e4f5a8b6c0d1e2f3a4b5c] |
 | **ChunkNumber** | query | **Integer** (int32) | The position of this part in the file, counted from 1. Sending the same number again replaces that part  instead of adding one, which is how a failed part is retried; leaving the number out makes the server count  the parts itself. | [optional] [example: 1] |
 | **File** | form | **File** (binary) | The part of the file to store, sent as the multipart field of the same name. It is kept under the number given  beside it, and a part larger than the portal chunk size is refused. | [optional] |
 
@@ -4812,14 +4812,14 @@ Stores one part of a file under the number given in &#x60;chunkNumber&#x60;, whi
 
 Upload the next chunk
 
-Sends the next part of a file into the session opened for it, as the multipart &#x60;File&#x60; field, and lets the  server keep count: parts are appended in the order they arrive, so two of these calls must never run in  parallel on one session. While bytes are still missing the answer describes the session and &#x60;uploaded&#x60; is  false; when the last part completes the declared size the file is written, its upload links are cleared, it is  marked as new for the room, and the answer comes back with 201, &#x60;uploaded&#x60; true and the whole file in &#x60;file&#x60;.  A session created for a payload smaller than &#x60;chunkUploadSize&#x60; from &#x60;GET api/2.0/files/settings&#x60; finishes on  the first such call and needs no separate finalize step. A part larger than that limit is refused. The first  part of a PDF is inspected, and a PDF that is not a fillable form is refused when the session targets a  form-filling room. The session is addressed by its id, and the folder in the path is not matched against it.
+Sends the next part of a file into the session opened for it, as the multipart `File` field, and lets the  server keep count: parts are appended in the order they arrive, so two of these calls must never run in  parallel on one session. While bytes are still missing the answer describes the session and `uploaded` is  false; when the last part completes the declared size the file is written, its upload links are cleared, it is  marked as new for the room, and the answer comes back with 201, `uploaded` true and the whole file in `file`.  A session created for a payload smaller than `chunkUploadSize` from `GET api/2.0/files/settings` finishes on  the first such call and needs no separate finalize step. A part larger than that limit is refused. The first  part of a PDF is inspected, and a PDF that is not a fillable form is refused when the session targets a  form-filling room. The session is addressed by its id, and the folder in the path is not matched against it.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
 | **folderId** | path | **Integer** (int32) | The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id. | [required] [example: 1] |
-| **sessionId** | path | **String** | The session this part belongs to, as returned in &#x60;id&#x60; when it was created; the parts of one session must be  sent one after another, not in parallel. | [required] [example: 9f1c7a2b4d3e4f5a8b6c0d1e2f3a4b5c] |
+| **sessionId** | path | **String** | The session this part belongs to, as returned in `id` when it was created; the parts of one session must be  sent one after another, not in parallel. | [required] [example: 9f1c7a2b4d3e4f5a8b6c0d1e2f3a4b5c] |
 | **File** | form | **File** (binary) | The next part of the file, sent as the multipart field of the same name. Parts are appended in the order they  arrive, and a part larger than the portal chunk size is refused. | [optional] |
 
 #### Responses
@@ -4857,7 +4857,7 @@ Sends the next part of a file into the session opened for it, as the multipart &
 
 Reset the room quota limit
 
-Returns every listed room to the default room quota of the portal and streams the updated rooms back in the  order they were given. This is not the same as removing the limit: the room stops carrying its own value and  starts following the portal default, which a portal administrator can change at any time. The per-room quota  feature has to be on, the caller must be a manager of each listed room, and an archived room or a room in the  trash is refused. The list is not transactional, so rooms processed before a failing one keep the default and  the rest keep what they had. Only numeric room ids are processed, which means ids of rooms stored in a  connected third-party account are silently skipped. Use &#x60;PUT api/2.0/files/rooms/roomquota&#x60; to set an explicit  value, and a quota of -1 in &#x60;PUT api/2.0/files/rooms/{id}&#x60; to leave the room with no custom limit at all.
+Returns every listed room to the default room quota of the portal and streams the updated rooms back in the  order they were given. This is not the same as removing the limit: the room stops carrying its own value and  starts following the portal default, which a portal administrator can change at any time. The per-room quota  feature has to be on, the caller must be a manager of each listed room, and an archived room or a room in the  trash is refused. The list is not transactional, so rooms processed before a failing one keep the default and  the rest keep what they had. Only numeric room ids are processed, which means ids of rooms stored in a  connected third-party account are silently skipped. Use `PUT api/2.0/files/rooms/roomquota` to set an explicit  value, and a quota of -1 in `PUT api/2.0/files/rooms/{id}` to leave the room with no custom limit at all.
 
 #### Parameters
 
@@ -4898,7 +4898,7 @@ Returns every listed room to the default room quota of the portal and streams th
 
 Change the room quota limit
 
-Sets the same custom storage limit, in bytes, on every listed room and streams the updated rooms back in the  order they were given. The per-room quota feature has to be on for the portal, and the value must stay within  the portal own limit, otherwise the call is refused before anything is written. The caller must be a manager  of each listed room, and an archived room or a room in the trash is refused. The list is not transactional:  rooms processed before the offending one keep their new limit, so a failed call has to be checked room by  room. Only numeric room ids are processed, which means ids of rooms stored in a connected third-party account  are silently skipped. A room whose limit already equals the requested value is left untouched and still  returned. To go back to the portal default use &#x60;PUT api/2.0/files/rooms/resetquota&#x60;, and to drop the custom  limit entirely send a quota of -1 to &#x60;PUT api/2.0/files/rooms/{id}&#x60;.
+Sets the same custom storage limit, in bytes, on every listed room and streams the updated rooms back in the  order they were given. The per-room quota feature has to be on for the portal, and the value must stay within  the portal own limit, otherwise the call is refused before anything is written. The caller must be a manager  of each listed room, and an archived room or a room in the trash is refused. The list is not transactional:  rooms processed before the offending one keep their new limit, so a failed call has to be checked room by  room. Only numeric room ids are processed, which means ids of rooms stored in a connected third-party account  are silently skipped. A room whose limit already equals the requested value is left untouched and still  returned. To go back to the portal default use `PUT api/2.0/files/rooms/resetquota`, and to drop the custom  limit entirely send a quota of -1 to `PUT api/2.0/files/rooms/{id}`.
 
 #### Parameters
 
@@ -4941,7 +4941,7 @@ Sets the same custom storage limit, in bytes, on every listed room and streams t
 
 Change the third-party settings access
 
-Turns the portal-wide permission to connect third-party storages such as Google Drive, Dropbox or Nextcloud on  or off, and returns the value that is now stored. Only the portal owner and a DocSpace administrator may  change it: a room administrator, a member or a guest is refused, and so is an unauthenticated caller. This is  a single setting for the whole portal rather than a preference of the caller, so it changes what every account  sees. While it is off, connecting an account through &#x60;POST api/2.0/files/thirdparty&#x60; is refused and the  contents of an already connected provider folder cannot be listed; the stored connections themselves survive  and work again once it is turned back on. The providers this portal can offer are listed by  &#x60;GET api/2.0/files/thirdparty/capabilities&#x60;. The same value is published as &#x60;enableThirdParty&#x60; by  &#x60;GET api/2.0/files/settings&#x60;. Sending the same value again is safe. The response is the value read back from  the portal, not a success flag.
+Turns the portal-wide permission to connect third-party storages such as Google Drive, Dropbox or Nextcloud on  or off, and returns the value that is now stored. Only the portal owner and a DocSpace administrator may  change it: a room administrator, a member or a guest is refused, and so is an unauthenticated caller. This is  a single setting for the whole portal rather than a preference of the caller, so it changes what every account  sees. While it is off, connecting an account through `POST api/2.0/files/thirdparty` is refused and the  contents of an already connected provider folder cannot be listed; the stored connections themselves survive  and work again once it is turned back on. The providers this portal can offer are listed by  `GET api/2.0/files/thirdparty/capabilities`. The same value is published as `enableThirdParty` by  `GET api/2.0/files/settings`. Sending the same value again is safe. The response is the value read back from  the portal, not a success flag.
 
 #### Parameters
 
@@ -4982,7 +4982,7 @@ Turns the portal-wide permission to connect third-party storages such as Google 
 
 Update the trash bin auto-clearing setting
 
-Writes the trash auto-clearing setting of the calling account and returns the pair that is now stored. Both  fields are written together from the request, so a call that omits &#x60;gap&#x60; stores an interval outside the  published list rather than keeping the previous one - always send the interval, including when &#x60;set&#x60; is false.  While clearing is on, an item is removed from the caller&#39;s trash for good once it has been there longer than  the interval, and each trashed entry reports the moment it is due to disappear in its own &#x60;autoDelete&#x60; field;  switching clearing off stops that and leaves whatever is in the trash. The setting belongs to the calling  account alone: every authenticated role down to a guest may change its own, one member&#39;s choice never affects  another, and an unauthenticated caller is refused. Items already removed are not recoverable. Read the pair  back with &#x60;GET api/2.0/files/settings/autocleanup&#x60;.
+Writes the trash auto-clearing setting of the calling account and returns the pair that is now stored. Both  fields are written together from the request, so a call that omits `gap` stores an interval outside the  published list rather than keeping the previous one - always send the interval, including when `set` is false.  While clearing is on, an item is removed from the caller's trash for good once it has been there longer than  the interval, and each trashed entry reports the moment it is due to disappear in its own `autoDelete` field;  switching clearing off stops that and leaves whatever is in the trash. The setting belongs to the calling  account alone: every authenticated role down to a guest may change its own, one member's choice never affects  another, and an unauthenticated caller is refused. Items already removed are not recoverable. Read the pair  back with `GET api/2.0/files/settings/autocleanup`.
 
 #### Parameters
 
@@ -5023,7 +5023,7 @@ Writes the trash auto-clearing setting of the calling account and returns the pa
 
 Change the default access rights
 
-Stores the access rights the sharing dialog offers the calling account by default, and returns the set that  was actually stored. The body is a bare array of access-right values, not an object. The portal normalises the  array instead of keeping it as sent: it keeps the fill-forms, custom-filter and review entries, then adds  read-and-write or comment - whichever is present, in that order - and stops there, and it falls back to read  alone when nothing else applies, so the response can be shorter than the request and its order can differ. An  empty array clears the setting, after which read alone is reported. A value outside the published list is  rejected as an invalid request. The set belongs to the calling account alone: every authenticated role down to  a guest may store its own, and an unauthenticated caller is refused. Nothing already shared is changed. The  stored set is published as &#x60;defaultSharingAccessRights&#x60; by &#x60;GET api/2.0/files/settings&#x60;.
+Stores the access rights the sharing dialog offers the calling account by default, and returns the set that  was actually stored. The body is a bare array of access-right values, not an object. The portal normalises the  array instead of keeping it as sent: it keeps the fill-forms, custom-filter and review entries, then adds  read-and-write or comment - whichever is present, in that order - and stops there, and it falls back to read  alone when nothing else applies, so the response can be shorter than the request and its order can differ. An  empty array clears the setting, after which read alone is reported. A value outside the published list is  rejected as an invalid request. The set belongs to the calling account alone: every authenticated role down to  a guest may store its own, and an unauthenticated caller is refused. Nothing already shared is changed. The  stored set is published as `defaultSharingAccessRights` by `GET api/2.0/files/settings`.
 
 #### Parameters
 
@@ -5064,7 +5064,7 @@ Stores the access rights the sharing dialog offers the calling account by defaul
 
 Ask for delete confirmation
 
-Stores whether the caller wants to be asked for confirmation before files and folders are deleted, and returns  the value that is now stored. The setting belongs to the calling account alone: every authenticated role down  to a guest may change its own copy, one member&#39;s choice never affects another, and an unauthenticated caller  is refused. It is a hint for the interface, not a server-side guard: the delete operations under  &#x60;api/2.0/files/fileops&#x60; remove whatever they are given regardless of this value, so a client that skips its  own prompt loses nothing but the prompt. Pass &#x60;set&#x3D;true&#x60; to be asked again, &#x60;set&#x3D;false&#x60; to delete without a  prompt. The same value is published as &#x60;confirmDelete&#x60; by &#x60;GET api/2.0/files/settings&#x60;, which is the only way  to read it back. Repeating the call with the same value writes it again and is safe. A new account starts with  the confirmation switched on, and the value says nothing about where deleted items land: they go to the trash  and are cleared from there according to &#x60;GET api/2.0/files/settings/autocleanup&#x60;.
+Stores whether the caller wants to be asked for confirmation before files and folders are deleted, and returns  the value that is now stored. The setting belongs to the calling account alone: every authenticated role down  to a guest may change its own copy, one member's choice never affects another, and an unauthenticated caller  is refused. It is a hint for the interface, not a server-side guard: the delete operations under  `api/2.0/files/fileops` remove whatever they are given regardless of this value, so a client that skips its  own prompt loses nothing but the prompt. Pass `set=true` to be asked again, `set=false` to delete without a  prompt. The same value is published as `confirmDelete` by `GET api/2.0/files/settings`, which is the only way  to read it back. Repeating the call with the same value writes it again and is safe. A new account starts with  the confirmation switched on, and the value says nothing about where deleted items land: they go to the trash  and are cleared from there according to `GET api/2.0/files/settings/autocleanup`.
 
 #### Parameters
 
@@ -5105,7 +5105,7 @@ Stores whether the caller wants to be asked for confirmation before files and fo
 
 Change the download archive format
 
-Selects the archive format the portal packs the caller&#39;s multi-item downloads into: &#x60;set&#x3D;true&#x60; switches to  &#x60;.tar.gz&#x60;, &#x60;set&#x3D;false&#x60; back to &#x60;.zip&#x60;. The choice is stored for the calling account only, so every  authenticated role down to a guest may set its own, while an unauthenticated caller is refused. It takes  effect on the archives built by &#x60;PUT api/2.0/files/fileops/bulkdownload&#x60; and by the download links that  operation returns; archives already produced keep the format they were packed with. The returned archive  object carries no readable fields of its own, so it cannot be used to confirm the change: read &#x60;downloadTarGz&#x60;  from &#x60;GET api/2.0/files/settings&#x60; instead. Writing the same value again is safe and changes nothing else. A  new account starts on &#x60;.zip&#x60;. The format decides only how the archive is packed: which items go into it, and  the access needed to take them, are decided by the bulk-download operation itself, and a single file is  downloaded as it is whatever is stored here.
+Selects the archive format the portal packs the caller's multi-item downloads into: `set=true` switches to  `.tar.gz`, `set=false` back to `.zip`. The choice is stored for the calling account only, so every  authenticated role down to a guest may set its own, while an unauthenticated caller is refused. It takes  effect on the archives built by `PUT api/2.0/files/fileops/bulkdownload` and by the download links that  operation returns; archives already produced keep the format they were packed with. The returned archive  object carries no readable fields of its own, so it cannot be used to confirm the change: read `downloadTarGz`  from `GET api/2.0/files/settings` instead. Writing the same value again is safe and changes nothing else. A  new account starts on `.zip`. The format decides only how the archive is packed: which items go into it, and  the access needed to take them, are decided by the bulk-download operation itself, and a single file is  downloaded as it is whatever is stored here.
 
 #### Parameters
 
@@ -5146,7 +5146,7 @@ Selects the archive format the portal packs the caller&#39;s multi-item download
 
 Configure external sharing
 
-Writes the portal&#39;s whole external-sharing policy in one request and returns the set that is now in force.  Only the portal owner and a DocSpace administrator may call it; everyone else is refused, including an  unauthenticated caller. Every field of the request is applied, so send the complete set rather than the field  being changed - an omitted boolean is read as false. The portal keeps the set consistent: with &#x60;externalShare&#x60;  false the default link type is forced to users of this portal only and sharing on social networks is turned  off, and the three restriction fields only matter while external sharing is off.  &#x60;blockExistingLinksOnRestrict&#x60; decides what happens to links that already exist, so it is the field that  changes access to data already shared. The new set is pushed to the connected clients of the portal as well,  and is published field by field by &#x60;GET api/2.0/files/settings&#x60;. Sending the same set again is safe.
+Writes the portal's whole external-sharing policy in one request and returns the set that is now in force.  Only the portal owner and a DocSpace administrator may call it; everyone else is refused, including an  unauthenticated caller. Every field of the request is applied, so send the complete set rather than the field  being changed - an omitted boolean is read as false. The portal keeps the set consistent: with `externalShare`  false the default link type is forced to users of this portal only and sharing on social networks is turned  off, and the three restriction fields only matter while external sharing is off.  `blockExistingLinksOnRestrict` decides what happens to links that already exist, so it is the field that  changes access to data already shared. The new set is pushed to the connected clients of the portal as well,  and is published field by field by `GET api/2.0/files/settings`. Sending the same set again is safe.
 
 #### Parameters
 
@@ -5187,7 +5187,7 @@ Writes the portal&#39;s whole external-sharing policy in one request and returns
 
 Set the document service address
 
-Writes the portal-wide ONLYOFFICE Docs connection settings - the public Document Server address, its address  inside the private network, the address it calls this portal back on, the request signature secret and header,  and SSL verification - then verifies them against the running Document Server before keeping them. Every  address is optional: an empty value drops the portal&#39;s own setting so that the deployment default takes over  again. An address gets &#x60;http://&#x60; prepended when it carries no scheme, while an absolute address with a query  string is rejected with 400, as is a signature secret sent without its header. Only the portal owner and a  DocSpace administrator may call this; a room administrator, a user and a guest are refused with 403. The call  is mutating and safe to repeat with the same body. Verification is live - the editor api script, the  healthcheck, a test conversion, the command service and the document builder are all exercised - and when it  fails the previous settings are restored in full and nothing is changed. The answer is what  &#x60;GET api/2.0/files/docservice&#x60; returns with no version requested, so &#x60;version&#x60; comes back empty and the  signature secret is not echoed back.
+Writes the portal-wide ONLYOFFICE Docs connection settings - the public Document Server address, its address  inside the private network, the address it calls this portal back on, the request signature secret and header,  and SSL verification - then verifies them against the running Document Server before keeping them. Every  address is optional: an empty value drops the portal's own setting so that the deployment default takes over  again. An address gets `http://` prepended when it carries no scheme, while an absolute address with a query  string is rejected with 400, as is a signature secret sent without its header. Only the portal owner and a  DocSpace administrator may call this; a room administrator, a user and a guest are refused with 403. The call  is mutating and safe to repeat with the same body. Verification is live - the editor api script, the  healthcheck, a test conversion, the command service and the document builder are all exercised - and when it  fails the previous settings are restored in full and nothing is changed. The answer is what  `GET api/2.0/files/docservice` returns with no version requested, so `version` comes back empty and the  signature secret is not echoed back.
 
 #### Parameters
 
@@ -5229,7 +5229,7 @@ Writes the portal-wide ONLYOFFICE Docs connection settings - the public Document
 
 Display a file extension
 
-Stores whether file titles are shown to the caller with their extension, and returns the value that is now  stored. It is a preference of the calling account: every authenticated role down to a guest may change its own  copy, and an unauthenticated caller is refused. Only the presentation changes - the titles kept by the portal  always include the extension, and the listing and file operations keep returning them in full, so a client  that trims the extension for display must add it back before it renames or searches for anything. Writing a  value that is already stored is accepted and leaves the setting untouched. The value is published as  &#x60;displayFileExtension&#x60; by &#x60;GET api/2.0/files/settings&#x60;, which is the only way to read it back. A new account  starts with extensions hidden. This governs display alone: which extensions may be uploaded, viewed or edited  at all is published by the same settings operation as separate format lists.
+Stores whether file titles are shown to the caller with their extension, and returns the value that is now  stored. It is a preference of the calling account: every authenticated role down to a guest may change its own  copy, and an unauthenticated caller is refused. Only the presentation changes - the titles kept by the portal  always include the extension, and the listing and file operations keep returning them in full, so a client  that trims the extension for display must add it back before it renames or searches for anything. Writing a  value that is already stored is accepted and leaves the setting untouched. The value is published as  `displayFileExtension` by `GET api/2.0/files/settings`, which is the only way to read it back. A new account  starts with extensions hidden. This governs display alone: which extensions may be uploaded, viewed or edited  at all is published by the same settings operation as separate format lists.
 
 #### Parameters
 
@@ -5270,7 +5270,7 @@ Stores whether file titles are shown to the caller with their extension, and ret
 
 Show the Recent section
 
-Stores whether the Recent section is offered to the calling account, and returns the value that is now  stored. The setting belongs to that account alone: every authenticated role down to a guest may change its own  copy, and an unauthenticated caller is refused. Hiding the section removes it from the list of section roots  returned by &#x60;GET api/2.0/files/@root&#x60;, and the document editor stops offering the recent-files entry; the  section itself keeps being maintained, and &#x60;GET api/2.0/files/recent&#x60; still returns its contents. Pass  &#x60;set&#x3D;true&#x60; to show it again. The same value is published as &#x60;recentSection&#x60; by &#x60;GET api/2.0/files/settings&#x60;,  which is the only way to read it back. Repeating the call with the same value writes it again and is safe. A  new account starts with the section shown. Hiding it neither clears the recent history nor stops it being  recorded, so showing the section again brings the same entries back.
+Stores whether the Recent section is offered to the calling account, and returns the value that is now  stored. The setting belongs to that account alone: every authenticated role down to a guest may change its own  copy, and an unauthenticated caller is refused. Hiding the section removes it from the list of section roots  returned by `GET api/2.0/files/@root`, and the document editor stops offering the recent-files entry; the  section itself keeps being maintained, and `GET api/2.0/files/recent` still returns its contents. Pass  `set=true` to show it again. The same value is published as `recentSection` by `GET api/2.0/files/settings`,  which is the only way to read it back. Repeating the call with the same value writes it again and is safe. A  new account starts with the section shown. Hiding it neither clears the recent history nor stops it being  recorded, so showing the section again brings the same entries back.
 
 #### Parameters
 
@@ -5312,7 +5312,7 @@ Stores whether the Recent section is offered to the calling account, and returns
 
 Change the external sharing ability
 
-Turns external (public) links on or off for the whole portal and returns the value that is now stored. Only  the portal owner and a DocSpace administrator may change it: a room administrator, a member or a guest is  refused, and so is an unauthenticated caller. Turning it off also turns sharing on social networks off, so a  following read of &#x60;externalShareSocialMedia&#x60; reports false without a separate call. This operation sets one  flag; to write the whole external-sharing policy in one request - the default link type, the sections the  restriction applies to and whether existing links are blocked at once - use  &#x60;PUT api/2.0/files/settings/externalsharingsettings&#x60;. The value is published as &#x60;externalShare&#x60; by  &#x60;GET api/2.0/files/settings&#x60;. Sending the same value again is safe. The response is the value read back from  the portal rather than a success flag. External links are allowed in a new portal. Turning them off does not  delete the links that already exist - whether those stop working at once is decided by the  &#x60;blockExistingLinksOnRestrict&#x60; field of the settings operation named above.
+Turns external (public) links on or off for the whole portal and returns the value that is now stored. Only  the portal owner and a DocSpace administrator may change it: a room administrator, a member or a guest is  refused, and so is an unauthenticated caller. Turning it off also turns sharing on social networks off, so a  following read of `externalShareSocialMedia` reports false without a separate call. This operation sets one  flag; to write the whole external-sharing policy in one request - the default link type, the sections the  restriction applies to and whether existing links are blocked at once - use  `PUT api/2.0/files/settings/externalsharingsettings`. The value is published as `externalShare` by  `GET api/2.0/files/settings`. Sending the same value again is safe. The response is the value read back from  the portal rather than a success flag. External links are allowed in a new portal. Turning them off does not  delete the links that already exist - whether those stop working at once is decided by the  `blockExistingLinksOnRestrict` field of the settings operation named above.
 
 #### Parameters
 
@@ -5353,7 +5353,7 @@ Turns external (public) links on or off for the whole portal and returns the val
 
 Change the external sharing ability on social networks
 
-Turns the social-network sharing buttons on or off for the whole portal and returns the value that is now in  force. Only the portal owner and a DocSpace administrator may change it; a room administrator, a member or a  guest is refused, and so is an unauthenticated caller. The requested value is combined with the state of  external sharing itself: while that is off, enabling this setting has no effect and the response comes back  false, so turn external sharing on with &#x60;PUT api/2.0/files/settings/external&#x60; first and only then this one.  Turning external sharing off later switches this setting off again on its own. The value is published as  &#x60;externalShareSocialMedia&#x60; by &#x60;GET api/2.0/files/settings&#x60;. Sending the same value again is safe. Read the  response instead of assuming the requested value was stored. The setting governs the share-to-network buttons  offered next to an external link; it neither creates nor revokes links, and the links themselves keep working  either way.
+Turns the social-network sharing buttons on or off for the whole portal and returns the value that is now in  force. Only the portal owner and a DocSpace administrator may change it; a room administrator, a member or a  guest is refused, and so is an unauthenticated caller. The requested value is combined with the state of  external sharing itself: while that is off, enabling this setting has no effect and the response comes back  false, so turn external sharing on with `PUT api/2.0/files/settings/external` first and only then this one.  Turning external sharing off later switches this setting off again on its own. The value is published as  `externalShareSocialMedia` by `GET api/2.0/files/settings`. Sending the same value again is safe. Read the  response instead of assuming the requested value was stored. The setting governs the share-to-network buttons  offered next to an external link; it neither creates nor revokes links, and the links themselves keep working  either way.
 
 #### Parameters
 
@@ -5394,7 +5394,7 @@ Turns the social-network sharing buttons on or off for the whole portal and retu
 
 Change the forcesaving ability
 
-Reports that forcesaving is on for this portal. The operation is a stub kept for compatibility: it takes no  request body, stores nothing and always answers true, so calling it neither turns forcesaving on nor off and  repeating it changes nothing. Forcesaving itself - the editor writing the document back to storage while the  session is still open - is on for every portal and cannot be switched off through the API. Any authenticated  role down to a guest may call it; an unauthenticated caller is refused. The same constant is published as  &#x60;forcesave&#x60; by &#x60;GET api/2.0/files/settings&#x60;, which is the cheaper way to read it together with the rest of the  settings. A companion stub, &#x60;PUT api/2.0/files/storeforcesave&#x60;, answers for the storing of forcesaved versions  in the same way. Nothing in this call reaches a document: to have the current state of an editing session  written to storage, drive the document through the editor operations of the file itself rather than through  this setting.
+Reports that forcesaving is on for this portal. The operation is a stub kept for compatibility: it takes no  request body, stores nothing and always answers true, so calling it neither turns forcesaving on nor off and  repeating it changes nothing. Forcesaving itself - the editor writing the document back to storage while the  session is still open - is on for every portal and cannot be switched off through the API. Any authenticated  role down to a guest may call it; an unauthenticated caller is refused. The same constant is published as  `forcesave` by `GET api/2.0/files/settings`, which is the cheaper way to read it together with the rest of the  settings. A companion stub, `PUT api/2.0/files/storeforcesave`, answers for the storing of forcesaved versions  in the same way. Nothing in this call reaches a document: to have the current state of an editing session  written to storage, drive the document through the editor operations of the file itself rather than through  this setting.
 
 #### Parameters
 This endpoint does not need any parameter.
@@ -5431,7 +5431,7 @@ This endpoint does not need any parameter.
 
 Get the trash bin auto-clearing setting
 
-Returns the trash auto-clearing setting of the calling account: whether it is on, and after which interval an  item that sits in the trash is removed for good. The setting belongs to that account alone, so every  authenticated role down to a guest reads its own value and an unauthenticated caller is refused. The first  call for an account is not read-only: when nothing has been stored yet the portal writes the default -  clearing on, thirty days - and returns it, so the answer never comes back empty and a following call reports  the same pair. The interval is the age of an entry in the trash, not a schedule; each trashed entry also  reports the moment it is due to disappear in its own &#x60;autoDelete&#x60; field. Use  &#x60;PUT api/2.0/files/settings/autocleanup&#x60; to change the pair, or read it together with the rest of the  configuration from &#x60;GET api/2.0/files/settings&#x60;.
+Returns the trash auto-clearing setting of the calling account: whether it is on, and after which interval an  item that sits in the trash is removed for good. The setting belongs to that account alone, so every  authenticated role down to a guest reads its own value and an unauthenticated caller is refused. The first  call for an account is not read-only: when nothing has been stored yet the portal writes the default -  clearing on, thirty days - and returns it, so the answer never comes back empty and a following call reports  the same pair. The interval is the age of an entry in the trash, not a schedule; each trashed entry also  reports the moment it is due to disappear in its own `autoDelete` field. Use  `PUT api/2.0/files/settings/autocleanup` to change the pair, or read it together with the rest of the  configuration from `GET api/2.0/files/settings`.
 
 #### Parameters
 This endpoint does not need any parameter.
@@ -5468,7 +5468,7 @@ This endpoint does not need any parameter.
 
 Get the default template setting
 
-Returns the blank document the portal creates for each format: one entry per extension the built-in template  set covers, with the file that has been chosen as the blank for it, if any. An entry whose &#x60;selectedFile&#x60; is  null means no custom template has been set and the built-in blank is used; the remaining fields - title, size,  modification moment and view address - are filled only for a custom one. The list is assembled from the  portal&#39;s built-in template set on every call, so an extension the set no longer covers disappears from it.  Entries come in the order the interface shows them: the text document, spreadsheet, presentation and PDF  formats first, the rest by extension. Reading the setting requires the portal settings permission, so only the  portal owner and a DocSpace administrator may call it. Use &#x60;PUT api/2.0/files/settings/defaulttemplate&#x60; to  choose an existing file and the matching POST to upload one.
+Returns the blank document the portal creates for each format: one entry per extension the built-in template  set covers, with the file that has been chosen as the blank for it, if any. An entry whose `selectedFile` is  null means no custom template has been set and the built-in blank is used; the remaining fields - title, size,  modification moment and view address - are filled only for a custom one. The list is assembled from the  portal's built-in template set on every call, so an extension the set no longer covers disappears from it.  Entries come in the order the interface shows them: the text document, spreadsheet, presentation and PDF  formats first, the rest by extension. Reading the setting requires the portal settings permission, so only the  portal owner and a DocSpace administrator may call it. Use `PUT api/2.0/files/settings/defaulttemplate` to  choose an existing file and the matching POST to upload one.
 
 #### Parameters
 This endpoint does not need any parameter.
@@ -5506,13 +5506,13 @@ This endpoint does not need any parameter.
 
 Get the document service address
 
-Reports where this portal expects ONLYOFFICE Docs to be: the public Document Server address, the URL of the  editor api script and of the preload page a client loads before opening a document, the address used inside  the private network, the address the Document Server calls this portal back on, the name of the request  signature header, whether SSL verification is on, and whether all of it is still at the deployment default.  The call is read-only and needs no authorization: an anonymous caller and every role from the portal owner  down to a guest read the same values. Pass &#x60;version&#x3D;true&#x60; to have the editor version of the running Document  Server included in &#x60;version&#x60;; left out, &#x60;version&#x60; comes back empty and the portal answers without contacting  the Document Server at all. A version request never fails the call - when the Document Server does not answer,  a fallback version string is reported instead of an error, so the value is no proof that the server is  reachable. The signature secret is not part of the answer, only the header name it travels in. To change any  of these settings use &#x60;PUT api/2.0/files/docservice&#x60;.
+Reports where this portal expects ONLYOFFICE Docs to be: the public Document Server address, the URL of the  editor api script and of the preload page a client loads before opening a document, the address used inside  the private network, the address the Document Server calls this portal back on, the name of the request  signature header, whether SSL verification is on, and whether all of it is still at the deployment default.  The call is read-only and needs no authorization: an anonymous caller and every role from the portal owner  down to a guest read the same values. Pass `version=true` to have the editor version of the running Document  Server included in `version`; left out, `version` comes back empty and the portal answers without contacting  the Document Server at all. A version request never fails the call - when the Document Server does not answer,  a fallback version string is reported instead of an error, so the value is no proof that the server is  reachable. The signature secret is not part of the answer, only the header name it travels in. To change any  of these settings use `PUT api/2.0/files/docservice`.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **version** | query | **Boolean** | Whether the running Document Server is asked for its editor version so that &#x60;version&#x60; can report it. Left off,  the portal answers from its own settings without contacting the Document Server and &#x60;version&#x60; comes back  empty. | [optional] [example: true] |
+| **version** | query | **Boolean** | Whether the running Document Server is asked for its editor version so that `version` can report it. Left off,  the portal answers from its own settings without contacting the Document Server and `version` comes back  empty. | [optional] [example: true] |
 
 #### Responses
 
@@ -5531,7 +5531,7 @@ Reports where this portal expects ONLYOFFICE Docs to be: the public Document Ser
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -5546,7 +5546,7 @@ No authorization required
 
 Get the Documents module information
 
-Returns the descriptor of the Documents module of this portal: its identifier, display title and description,  the address of its start page, the icon and image addresses, the address of its help section, and whether it  is the portal&#39;s primary module. It is meant for building navigation to the module, not for working with  documents: nothing about files, rooms or permissions comes back, and nothing is changed by the call. The  values follow the portal&#39;s own configuration and branding, so the title and the description arrive already  translated for the caller. Any authenticated role down to a guest may read it; an unauthenticated caller is  refused. The content is the same for everyone in the portal and changes only when the portal is reconfigured,  so it can be fetched once and cached rather than requested per screen. Only the Documents module is described  here; this document carries no listing of the other modules of the portal. The file-related configuration a  client needs alongside it - the format tables, the editor addresses and the upload limits - comes from  &#x60;GET api/2.0/files/settings&#x60;.
+Returns the descriptor of the Documents module of this portal: its identifier, display title and description,  the address of its start page, the icon and image addresses, the address of its help section, and whether it  is the portal's primary module. It is meant for building navigation to the module, not for working with  documents: nothing about files, rooms or permissions comes back, and nothing is changed by the call. The  values follow the portal's own configuration and branding, so the title and the description arrive already  translated for the caller. Any authenticated role down to a guest may read it; an unauthenticated caller is  refused. The content is the same for everyone in the portal and changes only when the portal is reconfigured,  so it can be fetched once and cached rather than requested per screen. Only the Documents module is described  here; this document carries no listing of the other modules of the portal. The file-related configuration a  client needs alongside it - the format tables, the editor addresses and the upload limits - comes from  `GET api/2.0/files/settings`.
 
 #### Parameters
 This endpoint does not need any parameter.
@@ -5583,7 +5583,7 @@ This endpoint does not need any parameter.
 
 Get file settings
 
-Returns the whole Files configuration in one object: the caller&#39;s own preferences (trash auto-clearing,  default sharing rights, hidden confirmation dialogs, archive format, section visibility), the portal-wide  switches an administrator controls (third-party storages, external sharing), and the static tables a client  needs to work with documents - which extensions can be viewed, edited, converted or uploaded, the URL  templates for the viewer, editor and thumbnails, and the upload limits. This is the read side of the setting  operations in this section: each of those answers with the one value it wrote, and only the trash  auto-clearing and default-template settings have a GET of their own. Marked as allowing anonymous access  because the external-link pages read the extension tables before signing in, but a caller with neither a  session nor a valid link key is still rejected. The result is not filtered by role and is not paginated; fetch  it once per session rather than before each file action.
+Returns the whole Files configuration in one object: the caller's own preferences (trash auto-clearing,  default sharing rights, hidden confirmation dialogs, archive format, section visibility), the portal-wide  switches an administrator controls (third-party storages, external sharing), and the static tables a client  needs to work with documents - which extensions can be viewed, edited, converted or uploaded, the URL  templates for the viewer, editor and thumbnails, and the upload limits. This is the read side of the setting  operations in this section: each of those answers with the one value it wrote, and only the trash  auto-clearing and default-template settings have a GET of their own. Marked as allowing anonymous access  because the external-link pages read the extension tables before signing in, but a caller with neither a  session nor a valid link key is still rejected. The result is not filtered by role and is not paginated; fetch  it once per session rather than before each file action.
 
 #### Parameters
 This endpoint does not need any parameter.
@@ -5604,7 +5604,7 @@ This endpoint does not need any parameter.
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -5619,7 +5619,7 @@ No authorization required
 
 Hide confirmation dialog when canceling operations
 
-Stores whether the caller is asked to confirm cancelling a running file operation, and returns the value that  is now stored. The setting belongs to the calling account alone: every authenticated role down to a guest may  change its own copy, and an unauthenticated caller is refused. Unlike the conversion prompt of  &#x60;PUT api/2.0/files/hideconfirmconvert&#x60;, this one works in both directions - &#x60;set&#x3D;true&#x60; hides the confirmation,  &#x60;set&#x3D;false&#x60; brings it back. It is a hint for the interface only: cancelling an operation through the API is  unaffected, and the operations themselves keep being reported by &#x60;GET api/2.0/files/fileops&#x60;. The value is  published as &#x60;hideConfirmCancelOperation&#x60; by &#x60;GET api/2.0/files/settings&#x60;, which is the only way to read it  back. Writing a value that is already stored is accepted and leaves the setting untouched. A new account  starts with the confirmation shown. The prompt it hides is the one raised when a running copy, move or  download is about to be abandoned, not the one raised before a deletion - that one is  &#x60;PUT api/2.0/files/changedeleteconfrim&#x60;.
+Stores whether the caller is asked to confirm cancelling a running file operation, and returns the value that  is now stored. The setting belongs to the calling account alone: every authenticated role down to a guest may  change its own copy, and an unauthenticated caller is refused. Unlike the conversion prompt of  `PUT api/2.0/files/hideconfirmconvert`, this one works in both directions - `set=true` hides the confirmation,  `set=false` brings it back. It is a hint for the interface only: cancelling an operation through the API is  unaffected, and the operations themselves keep being reported by `GET api/2.0/files/fileops`. The value is  published as `hideConfirmCancelOperation` by `GET api/2.0/files/settings`, which is the only way to read it  back. Writing a value that is already stored is accepted and leaves the setting untouched. A new account  starts with the confirmation shown. The prompt it hides is the one raised when a running copy, move or  download is about to be abandoned, not the one raised before a deletion - that one is  `PUT api/2.0/files/changedeleteconfrim`.
 
 #### Parameters
 
@@ -5660,7 +5660,7 @@ Stores whether the caller is asked to confirm cancelling a running file operatio
 
 Hide the confirmation dialog when converting
 
-Hides one of the two prompts the interface shows around file conversion, for the calling account only. The  &#x60;save&#x60; field chooses which prompt, and is not the value being written: &#x60;save&#x3D;true&#x60; hides the prompt that  offers to keep a copy in the original format when a file is converted, &#x60;save&#x3D;false&#x60; hides the prompt that  offers to open the conversion result. Both flags are one-way - the operation can only hide a prompt, and there  is no API to show it again - so the answer is always true and repeating the call changes nothing. The two  flags are independent: hiding one leaves the other as it was. Every authenticated role down to a guest may set  its own, and an unauthenticated caller is refused. The stored flags are published as &#x60;hideConfirmConvertSave&#x60;  and &#x60;hideConfirmConvertOpen&#x60; by &#x60;GET api/2.0/files/settings&#x60;. Conversion itself is started by  &#x60;PUT api/2.0/files/file/{fileId}/checkconversion&#x60; and is not affected by either flag.
+Hides one of the two prompts the interface shows around file conversion, for the calling account only. The  `save` field chooses which prompt, and is not the value being written: `save=true` hides the prompt that  offers to keep a copy in the original format when a file is converted, `save=false` hides the prompt that  offers to open the conversion result. Both flags are one-way - the operation can only hide a prompt, and there  is no API to show it again - so the answer is always true and repeating the call changes nothing. The two  flags are independent: hiding one leaves the other as it was. Every authenticated role down to a guest may set  its own, and an unauthenticated caller is refused. The stored flags are published as `hideConfirmConvertSave`  and `hideConfirmConvertOpen` by `GET api/2.0/files/settings`. Conversion itself is started by  `PUT api/2.0/files/file/{fileId}/checkconversion` and is not affected by either flag.
 
 #### Parameters
 
@@ -5701,7 +5701,7 @@ Hides one of the two prompts the interface shows around file conversion, for the
 
 Hide confirmation dialog when changing room lifetime settings
 
-Stores whether the caller is warned before the lifetime settings of a room are changed, and returns the value  that is now stored. A room lifetime moves the files of the room to the trash once they reach the configured  age, which is why the interface confirms the change; this setting decides whether that confirmation is shown  to the calling account. It belongs to that account alone: every authenticated role down to a guest may change  its own copy, and an unauthenticated caller is refused. It works in both directions - &#x60;set&#x3D;true&#x60; hides the  warning, &#x60;set&#x3D;false&#x60; brings it back - and is a hint for the interface only, so changing a room lifetime  through &#x60;PUT api/2.0/files/rooms/{id}&#x60; is unaffected. The value is published as &#x60;hideConfirmRoomLifetime&#x60; by  &#x60;GET api/2.0/files/settings&#x60;, which is the only way to read it back. A new account starts with the warning  shown, and writing a value that is already stored is accepted and leaves the setting untouched. Hiding the  warning does not shorten or extend any lifetime: what a room does with ageing files is decided by the room  itself.
+Stores whether the caller is warned before the lifetime settings of a room are changed, and returns the value  that is now stored. A room lifetime moves the files of the room to the trash once they reach the configured  age, which is why the interface confirms the change; this setting decides whether that confirmation is shown  to the calling account. It belongs to that account alone: every authenticated role down to a guest may change  its own copy, and an unauthenticated caller is refused. It works in both directions - `set=true` hides the  warning, `set=false` brings it back - and is a hint for the interface only, so changing a room lifetime  through `PUT api/2.0/files/rooms/{id}` is unaffected. The value is published as `hideConfirmRoomLifetime` by  `GET api/2.0/files/settings`, which is the only way to read it back. A new account starts with the warning  shown, and writing a value that is already stored is accepted and leaves the setting untouched. Hiding the  warning does not shorten or extend any lifetime: what a room does with ageing files is decided by the room  itself.
 
 #### Parameters
 
@@ -5742,7 +5742,7 @@ Stores whether the caller is warned before the lifetime settings of a room are c
 
 Keep the default file name
 
-Stores whether the caller wants new documents created with the default name instead of being asked for one,  and returns the value that is now stored. It is a preference of the calling account: every authenticated role  down to a guest may change its own copy, one member&#39;s choice never affects another, and an unauthenticated  caller is refused. The portal only keeps the value and reports it - the creation operations,  &#x60;POST api/2.0/files/{folderId}/file&#x60; among them, always use the title they are given, so this setting changes  what an interface asks for rather than what the server does. Writing a value that is already stored is  accepted and leaves the setting and the audit trail untouched. The value is published as &#x60;keepNewFileName&#x60; by  &#x60;GET api/2.0/files/settings&#x60;, which is the only way to read it back. A new account starts with the prompt in  place. The title a created document actually gets, and how a clash with an existing title is resolved, are  decided by the creation request rather than here.
+Stores whether the caller wants new documents created with the default name instead of being asked for one,  and returns the value that is now stored. It is a preference of the calling account: every authenticated role  down to a guest may change its own copy, one member's choice never affects another, and an unauthenticated  caller is refused. The portal only keeps the value and reports it - the creation operations,  `POST api/2.0/files/{folderId}/file` among them, always use the title they are given, so this setting changes  what an interface asks for rather than what the server does. Writing a value that is already stored is  accepted and leaves the setting and the audit trail untouched. The value is published as `keepNewFileName` by  `GET api/2.0/files/settings`, which is the only way to read it back. A new account starts with the prompt in  place. The title a created document actually gets, and how a clash with an existing title is resolved, are  decided by the creation request rather than here.
 
 #### Parameters
 
@@ -5783,7 +5783,7 @@ Stores whether the caller wants new documents created with the default name inst
 
 Reset the default template setting
 
-Drops the custom blank document configured for one extension and returns the full set of templates as it now  stands. New documents of that extension are created from the portal&#39;s built-in blank again, and the file that  served as the custom one is deleted from the template storage - the original the template was copied from is  untouched. The extension is named in the request body, and the entry for it comes back with &#x60;selectedFile&#x60;  null. Resetting an extension that has no custom blank is accepted and changes nothing, which makes a repeated  call safe; an extension the built-in template set does not cover is ignored in the same way. Requires the  portal settings permission, so only the portal owner and a DocSpace administrator may call it. To set a blank  instead of dropping it, use &#x60;PUT api/2.0/files/settings/defaulttemplate&#x60;. Documents already created from the  custom blank are left as they are - the reset only decides what the next new document of that extension starts  from. The set as it stands can also be read with &#x60;GET api/2.0/files/settings/defaulttemplate&#x60;.
+Drops the custom blank document configured for one extension and returns the full set of templates as it now  stands. New documents of that extension are created from the portal's built-in blank again, and the file that  served as the custom one is deleted from the template storage - the original the template was copied from is  untouched. The extension is named in the request body, and the entry for it comes back with `selectedFile`  null. Resetting an extension that has no custom blank is accepted and changes nothing, which makes a repeated  call safe; an extension the built-in template set does not cover is ignored in the same way. Requires the  portal settings permission, so only the portal owner and a DocSpace administrator may call it. To set a blank  instead of dropping it, use `PUT api/2.0/files/settings/defaulttemplate`. Documents already created from the  custom blank are left as they are - the reset only decides what the next new document of that extension starts  from. The set as it stands can also be read with `GET api/2.0/files/settings/defaulttemplate`.
 
 #### Parameters
 
@@ -5825,7 +5825,7 @@ Drops the custom blank document configured for one extension and returns the ful
 
 Change the default template setting
 
-Makes an existing document the blank the portal creates for one extension, and returns the full set of  templates as it now stands. The file is copied into the portal&#39;s template storage, so later edits of the  original do not change the blank, and the file that served as the previous custom blank for that extension is  deleted. &#x60;selectedFile&#x60; takes the identifier of a file the caller may copy - a number for a document stored in  the portal, a string for one in a connected third-party storage - and its extension must be the one named in  &#x60;fileExtension&#x60;; a mismatch or an identifier of another kind answers 400, a file the caller may not copy  answers 403, and a file that is not there is answered as missing. An extension the built-in template set does  not cover is not an error: the call succeeds and changes nothing, so compare the answer with what was asked  for. Requires the portal settings permission.
+Makes an existing document the blank the portal creates for one extension, and returns the full set of  templates as it now stands. The file is copied into the portal's template storage, so later edits of the  original do not change the blank, and the file that served as the previous custom blank for that extension is  deleted. `selectedFile` takes the identifier of a file the caller may copy - a number for a document stored in  the portal, a string for one in a connected third-party storage - and its extension must be the one named in  `fileExtension`; a mismatch or an identifier of another kind answers 400, a file the caller may not copy  answers 403, and a file that is not there is answered as missing. An extension the built-in template set does  not cover is not an error: the call succeeds and changes nothing, so compare the answer with what was asked  for. Requires the portal settings permission.
 
 #### Parameters
 
@@ -5867,7 +5867,7 @@ Makes an existing document the blank the portal creates for one extension, and r
 
 Open document in the same browser tab
 
-Stores whether the caller wants documents opened in the current browser tab instead of a new one, and returns  the value that is now stored. It is a preference of the calling account: every authenticated role down to a  guest may change its own copy, and an unauthenticated caller is refused. The portal only keeps the value - the  editor addresses returned by the file operations are the same either way, so this setting changes how a client  opens them rather than what it receives. Writing a value that is already stored is accepted and leaves the  setting untouched. The value is published as &#x60;openEditorInSameTab&#x60; by &#x60;GET api/2.0/files/settings&#x60;, which is  the only way to read it back. A new account starts with documents opening in a new tab. Nothing about the  document changes with it: the editing session, the access rights that apply and the addresses handed out are  the same whichever tab a client uses.
+Stores whether the caller wants documents opened in the current browser tab instead of a new one, and returns  the value that is now stored. It is a preference of the calling account: every authenticated role down to a  guest may change its own copy, and an unauthenticated caller is refused. The portal only keeps the value - the  editor addresses returned by the file operations are the same either way, so this setting changes how a client  opens them rather than what it receives. Writing a value that is already stored is accepted and leaves the  setting untouched. The value is published as `openEditorInSameTab` by `GET api/2.0/files/settings`, which is  the only way to read it back. A new account starts with documents opening in a new tab. Nothing about the  document changes with it: the editing session, the access rights that apply and the addresses handed out are  the same whichever tab a client uses.
 
 #### Parameters
 
@@ -5908,7 +5908,7 @@ Stores whether the caller wants documents opened in the current browser tab inst
 
 Organize rooms grouping
 
-Stores whether the caller sees rooms arranged by the groups they belong to instead of one flat list, and  returns the value that is now stored. It is a preference of the calling account: every authenticated role down  to a guest may change its own copy, and an unauthenticated caller is refused. The groups themselves are the  room groups managed under &#x60;api/2.0/files/group&#x60;, and they exist whether or not this setting is on - the portal  only records the preference, while &#x60;GET api/2.0/files/rooms&#x60; keeps returning the same rooms either way, so the  arrangement is done by the client. Writing a value that is already stored is accepted and leaves the setting  untouched. The value is published as &#x60;organizeRoomsGrouping&#x60; by &#x60;GET api/2.0/files/settings&#x60;, which is the  only way to read it back. A new account starts with the grouping on. Turning it off changes no group: the  groups, the rooms in them and who may see them stay exactly as they were, and are still read through the room  group operations.
+Stores whether the caller sees rooms arranged by the groups they belong to instead of one flat list, and  returns the value that is now stored. It is a preference of the calling account: every authenticated role down  to a guest may change its own copy, and an unauthenticated caller is refused. The groups themselves are the  room groups managed under `api/2.0/files/group`, and they exist whether or not this setting is on - the portal  only records the preference, while `GET api/2.0/files/rooms` keeps returning the same rooms either way, so the  arrangement is done by the client. Writing a value that is already stored is accepted and leaves the setting  untouched. The value is published as `organizeRoomsGrouping` by `GET api/2.0/files/settings`, which is the  only way to read it back. A new account starts with the grouping on. Turning it off changes no group: the  groups, the rooms in them and who may see them stay exactly as they were, and are still read through the room  group operations.
 
 #### Parameters
 
@@ -5949,7 +5949,7 @@ Stores whether the caller sees rooms arranged by the groups they belong to inste
 
 Display quick actions
 
-Specifies whether to display quick action buttons or not.
+Turns the quick action buttons shown next to a file name on or off, and answers with the value that was  sent. This is a preference of the calling account rather than a portal setting, so it changes what the  caller sees and nothing for anybody else; any authenticated role down to a guest may set it, while an  unauthenticated caller is refused. The value is written only when it differs from the one already stored,  and only then is the change recorded in the audit trail, so repeating the same call is harmless and leaves  no trace. An account that has never set it is treated as having the buttons on. The answer echoes the  request instead of re-reading what was stored, so read the setting back through  `GET api/2.0/files/settings`, which publishes it as `showQuickActions`.
 
 #### Parameters
 
@@ -5961,7 +5961,7 @@ Specifies whether to display quick action buttons or not.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Boolean value: true if the parameter is enabled | [**BooleanWrapper**](#model-booleanwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | true if quick action buttons are now shown to the caller next to a file name | [**BooleanWrapper**](#model-booleanwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
@@ -5990,7 +5990,7 @@ Specifies whether to display quick action buttons or not.
 
 Change the ability to store the forcesaved files
 
-Reports that forcesaved versions are not kept as separate file versions in this portal. The operation is a  stub kept for compatibility: it takes no request body, stores nothing and always answers false, so it neither  turns the behaviour on nor off and repeating it changes nothing. What it describes is what happens to the  intermediate saves the editor makes while a document is still open - they update the current version instead  of piling up as new ones in &#x60;GET api/2.0/files/file/{fileId}/history&#x60;. Any authenticated role down to a guest  may call it; an unauthenticated caller is refused. The same constant is published as &#x60;storeForcesave&#x60; by  &#x60;GET api/2.0/files/settings&#x60;, which is the cheaper way to read it. Its companion stub  &#x60;PUT api/2.0/files/forcesave&#x60; answers for forcesaving itself in the same way. Version history is not affected  by this call either: the versions a document really has are the ones the file history operation lists, and a  new one appears when the editing session is closed.
+Reports that forcesaved versions are not kept as separate file versions in this portal. The operation is a  stub kept for compatibility: it takes no request body, stores nothing and always answers false, so it neither  turns the behaviour on nor off and repeating it changes nothing. What it describes is what happens to the  intermediate saves the editor makes while a document is still open - they update the current version instead  of piling up as new ones in `GET api/2.0/files/file/{fileId}/history`. Any authenticated role down to a guest  may call it; an unauthenticated caller is refused. The same constant is published as `storeForcesave` by  `GET api/2.0/files/settings`, which is the cheaper way to read it. Its companion stub  `PUT api/2.0/files/forcesave` answers for forcesaving itself in the same way. Version history is not affected  by this call either: the versions a document really has are the ones the file history operation lists, and a  new one appears when the editing session is closed.
 
 #### Parameters
 This endpoint does not need any parameter.
@@ -6027,7 +6027,7 @@ This endpoint does not need any parameter.
 
 Change the ability to upload original formats
 
-Stores whether the caller&#39;s uploads keep the original file when the portal converts them into an editable  format, and returns the value that is now stored. With &#x60;set&#x3D;true&#x60; the converted document is saved as a new  file next to the upload, so both the original and the converted copy stay in the folder; with &#x60;set&#x3D;false&#x60; the  conversion replaces the uploaded file with a new version of it whenever the caller may edit that file. The  setting belongs to the calling account alone: every authenticated role down to a guest may change its own  copy, and an unauthenticated caller is refused. It applies to conversion on upload and to  &#x60;PUT api/2.0/files/file/{fileId}/checkconversion&#x60;, not to files already stored. The value is published as  &#x60;storeOriginalFiles&#x60; by &#x60;GET api/2.0/files/settings&#x60;, which is the only way to read it back. The change is  recorded in the portal audit trail.
+Stores whether the caller's uploads keep the original file when the portal converts them into an editable  format, and returns the value that is now stored. With `set=true` the converted document is saved as a new  file next to the upload, so both the original and the converted copy stay in the folder; with `set=false` the  conversion replaces the uploaded file with a new version of it whenever the caller may edit that file. The  setting belongs to the calling account alone: every authenticated role down to a guest may change its own  copy, and an unauthenticated caller is refused. It applies to conversion on upload and to  `PUT api/2.0/files/file/{fileId}/checkconversion`, not to files already stored. The value is published as  `storeOriginalFiles` by `GET api/2.0/files/settings`, which is the only way to read it back. The change is  recorded in the portal audit trail.
 
 #### Parameters
 
@@ -6068,7 +6068,7 @@ Stores whether the caller&#39;s uploads keep the original file when the portal c
 
 Update a file version if it exists
 
-Reports that uploading a file under a name that already exists does not update the existing file. The  operation is a stub kept for compatibility: the request body is read but ignored, nothing is stored, and the  answer is always false, so calling it changes no behaviour and repeating it changes nothing. What actually  decides the outcome of a name clash is the parameter of the upload itself - see the &#x60;createNewIfExist&#x60; and  conflict-resolution parameters of the operations under &#x60;api/2.0/files/{folderId}/upload&#x60; and of  &#x60;PUT api/2.0/files/fileops/copy&#x60;. Any authenticated role down to a guest may call it; an unauthenticated  caller is refused. Because the value is a constant, there is nothing to read back afterwards, and  &#x60;GET api/2.0/files/settings&#x60; does not publish it. To add a version to a document that is already stored,  address the file directly through the update operations under &#x60;api/2.0/files/file/{fileId}&#x60; instead of  uploading under the same name and relying on this setting.
+Reports that uploading a file under a name that already exists does not update the existing file. The  operation is a stub kept for compatibility: the request body is read but ignored, nothing is stored, and the  answer is always false, so calling it changes no behaviour and repeating it changes nothing. What actually  decides the outcome of a name clash is the parameter of the upload itself - see the `createNewIfExist` and  conflict-resolution parameters of the operations under `api/2.0/files/{folderId}/upload` and of  `PUT api/2.0/files/fileops/copy`. Any authenticated role down to a guest may call it; an unauthenticated  caller is refused. Because the value is a constant, there is nothing to read back afterwards, and  `GET api/2.0/files/settings` does not publish it. To add a version to a document that is already stored,  address the file directly through the update operations under `api/2.0/files/file/{fileId}` instead of  uploading under the same name and relying on this setting.
 
 #### Parameters
 
@@ -6109,13 +6109,13 @@ Reports that uploading a file under a name that already exists does not update t
 
 Upload a file as the default template setting
 
-Uploads a document and makes it the blank the portal creates for one extension, and returns the full set of  templates as it now stands. The request is multipart form data carrying the file, while the extension travels  in the &#x60;FileExtension&#x60; query parameter; the extension of the uploaded file name must be exactly that one, or  the call answers 403. A PDF is additionally checked to be a fillable form, and answers 403 as well when it is  not one. The upload is capped at 100 MB and a larger body answers 400 while it is still streaming in. The file  is stored in the portal&#39;s template storage and the file that served as the previous custom blank for that  extension is deleted; an extension the built-in template set does not cover leaves everything unchanged.  Requires the portal settings permission. Use &#x60;PUT api/2.0/files/settings/defaulttemplate&#x60; to reuse a document  that is already in the portal.
+Uploads a document and makes it the blank the portal creates for one extension, and returns the full set of  templates as it now stands. The request is multipart form data carrying the file, while the extension travels  in the `FileExtension` query parameter; the extension of the uploaded file name must be exactly that one, or  the call answers 403. A PDF is additionally checked to be a fillable form, and answers 403 as well when it is  not one. The upload is capped at 100 MB and a larger body answers 400 while it is still streaming in. The file  is stored in the portal's template storage and the file that served as the previous custom blank for that  extension is deleted; an extension the built-in template set does not cover leaves everything unchanged.  Requires the portal settings permission. Use `PUT api/2.0/files/settings/defaulttemplate` to reuse a document  that is already in the portal.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **FileExtension** | query | **String** | The extension the uploaded blank is set for, written in lower case with the leading dot, and travelling in the  query string rather than in the form. It must match the extension of the uploaded file name. Only the  extensions the portal&#39;s built-in template set covers are accepted, and  &#x60;GET api/2.0/files/settings/defaulttemplate&#x60; returns exactly that list; an extension outside it leaves the  settings unchanged instead of failing. | [required] [example: .docx] |
+| **FileExtension** | query | **String** | The extension the uploaded blank is set for, written in lower case with the leading dot, and travelling in the  query string rather than in the form. It must match the extension of the uploaded file name. Only the  extensions the portal's built-in template set covers are accepted, and  `GET api/2.0/files/settings/defaulttemplate` returns exactly that list; an extension outside it leaves the  settings unchanged instead of failing. | [required] [example: .docx] |
 | **File** | form | **File** (binary) | The template document itself. Its file name must end with the extension named above, a PDF must be a fillable  form, and the body is capped at 100 MB - a larger one is refused while it is still streaming in. | [required] |
 
 #### Responses
@@ -6154,13 +6154,13 @@ Uploads a document and makes it the blank the portal creates for one extension, 
 
 Unlock a password-protected link
 
-Submits the password of a protected external share link and answers with the same resolved link data as  &#x60;GET api/2.0/files/share/{key}&#x60;, so this operation is called only after that one reported that a password is  required. The token in the path is the &#x60;requestToken&#x60; of the link, and the password is the one chosen by the  member who shared the entry. The call needs no authentication; a signed-in caller that may already read the  room is let through by the resolve operation itself and does not need the password at all. A correct password  is remembered for the caller, so later requests with the same token resolve without repeating it, and a wrong  one is reported in the &#x60;status&#x60; field as an invalid password rather than as an HTTP error, while the  remembered password is dropped. Attempts are counted per link and per calling address: once the portal&#39;s limit  is reached, further attempts are rejected until the block expires, which makes the operation unsuitable for  trying passwords in a loop. Nothing about the entry is changed by the call itself.
+Submits the password of a protected external share link and answers with the same resolved link data as  `GET api/2.0/files/share/{key}`, so this operation is called only after that one reported that a password is  required. The token in the path is the `requestToken` of the link, and the password is the one chosen by the  member who shared the entry. The call needs no authentication; a signed-in caller that may already read the  room is let through by the resolve operation itself and does not need the password at all. A correct password  is remembered for the caller, so later requests with the same token resolve without repeating it, and a wrong  one is reported in the `status` field as an invalid password rather than as an HTTP error, while the  remembered password is dropped. Attempts are counted per link and per calling address: once the portal's limit  is reached, further attempts are rejected until the block expires, which makes the operation unsuitable for  trying passwords in a loop. Nothing about the entry is changed by the call itself.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **key** | path | **String** | The token of the external share link, taken verbatim from the &#x60;requestToken&#x60; of a link returned by the link  operations of an entry, such as &#x60;GET api/2.0/files/rooms/{id}/link&#x60;. It is an opaque URL-safe string that  carries the link&#39;s own identifier, so it cannot be assembled by hand. | [required] [example: q7Ry8cQ1lZ0dP3sK2mXfA9tBnV6hJ4uE8wCz5oLg] |
+| **key** | path | **String** | The token of the external share link, taken verbatim from the `requestToken` of a link returned by the link  operations of an entry, such as `GET api/2.0/files/rooms/{id}/link`. It is an opaque URL-safe string that  carries the link's own identifier, so it cannot be assembled by hand. | [required] [example: q7Ry8cQ1lZ0dP3sK2mXfA9tBnV6hJ4uE8wCz5oLg] |
 | **ExternalShareRequestParam** | body | [**ExternalShareRequestParam**](#model-externalsharerequestparam) | The body of the request, holding the password to check. | [required] |
 
 #### Responses
@@ -6180,7 +6180,7 @@ Submits the password of a protected external share link and answers with the sam
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -6195,7 +6195,7 @@ No authorization required
 
 Change the room or file owner
 
-Hands the ownership of the listed rooms and files over to a single account, and returns the entries as they  look afterwards. Among folders only rooms are accepted - take their identifiers from  &#x60;GET api/2.0/files/rooms&#x60;; a plain folder is refused. A file is accepted only while it lies in the portal&#39;s  common section, so a file kept inside a room or in a personal section is refused as well, and so is a file  that is locked or currently open in the editor. The new owner has to be an active account that is allowed to  manage rooms, and a private room additionally requires that this account has already set up its encryption  keys; a deactivated account, a guest or a plain member is rejected. The caller must be the creator of every  listed room, or a portal administrator. The call mutates the entries one at a time and stops at the first item  it may not touch, leaving the entries already processed changed, so a partial answer is possible; an item  whose owner is already the target account is returned untouched, which makes a repeat safe. The previous owner  keeps access to a transferred room as its manager, while a transferred file is saved as a new version authored  by the new owner. An entry that lives on a connected third-party account is quietly left out.
+Hands the ownership of the listed rooms and files over to a single account, and returns the entries as they  look afterwards. Among folders only rooms are accepted - take their identifiers from  `GET api/2.0/files/rooms`; a plain folder is refused. A file is accepted only while it lies in the portal's  common section, so a file kept inside a room or in a personal section is refused as well, and so is a file  that is locked or currently open in the editor. The new owner has to be an active account that is allowed to  manage rooms, and a private room additionally requires that this account has already set up its encryption  keys; a deactivated account, a guest or a plain member is rejected. The caller must be the creator of every  listed room, or a portal administrator. The call mutates the entries one at a time and stops at the first item  it may not touch, leaving the entries already processed changed, so a partial answer is possible; an item  whose owner is already the target account is returned untouched, which makes a repeat safe. The previous owner  keeps access to a transferred room as its manager, while a transferred file is saved as a new version authored  by the new owner. An entry that lives on a connected third-party account is quietly left out.
 
 #### Parameters
 
@@ -6236,13 +6236,13 @@ Hands the ownership of the listed rooms and files over to a single account, and 
 
 Get file encryption keys
 
-Answers with the encryption keys that open one file kept in a private room: one entry per member who holds  rights on the file and has published keys, each carrying that member&#39;s public key, and the caller&#39;s own entry  carrying the encrypted private half as well. The private half of another member is never handed out. A member  who has not published keys yet is left out of the answer altogether, which is how a client tells that this  member cannot open the file until keys are published through &#x60;POST api/2.0/privacyroom/keys&#x60;; a member who  holds the file only through a group is not reported either, because group entries are skipped. The file has to  lie in a private room or in the encrypted section - a file kept anywhere else carries no keys and is rejected  as an unsupported request. The caller needs read access to the file and is answered with 403 otherwise, and a  file that does not exist is answered as missing. The call is read-only, and the answer changes as soon as a  member publishes or rotates keys, so read it again rather than caching it for a later session.
+Answers with the encryption keys that open one file kept in a private room: one entry per member who holds  rights on the file and has published keys, each carrying that member's public key, and the caller's own entry  carrying the encrypted private half as well. The private half of another member is never handed out. A member  who has not published keys yet is left out of the answer altogether, which is how a client tells that this  member cannot open the file until keys are published through `POST api/2.0/privacyroom/keys`; a member who  holds the file only through a group is not reported either, because group entries are skipped. The file has to  lie in a private room or in the encrypted section - a file kept anywhere else carries no keys and is rejected  as an unsupported request. The caller needs read access to the file and is answered with 403 otherwise, and a  file that does not exist is answered as missing. The call is read-only, and the answer changes as soon as a  member publishes or rotates keys, so read it again rather than caching it for a later session.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **Integer** (int32) | The file the operation addresses. Take the identifier from a listing such as &#x60;GET api/2.0/files/{folderId}&#x60;: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: 10] |
+| **fileId** | path | **Integer** (int32) | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: 10] |
 
 #### Responses
 
@@ -6278,15 +6278,15 @@ Answers with the encryption keys that open one file kept in a private room: one 
 
 Resolve an external share link
 
-Resolves the token of an external share link into the room or file it points at, and reports the outcome of  validating the link. The token is the &#x60;requestToken&#x60; of a link returned by the link operations of an entry,  such as &#x60;GET api/2.0/files/file/{id}/link&#x60; or &#x60;GET api/2.0/files/rooms/{id}/link&#x60;. The call needs no  authentication and answers a refused link in the &#x60;status&#x60; field rather than with an HTTP error, so that field  has to be read before anything else: a token that matches no link, and a link whose entry has been archived or  moved to the trash, both resolve as invalid; a link past its expiration date resolves as expired; a  password-protected link resolves as requiring a password, which is then submitted through  &#x60;POST api/2.0/files/share/{key}/password&#x60;; and a public link resolves as denied when the portal forbids  sharing with people outside it. The call is not read-only: for a signed-in caller the first successful  resolution puts the entry into the account&#39;s own lists, and for a visitor without an account it opens an  anonymous session that later requests with the same token reuse. Pass &#x60;fileId&#x60; or &#x60;folderId&#x60; to have an entry  inside the link&#39;s target echoed back.
+Resolves the token of an external share link into the room or file it points at, and reports the outcome of  validating the link. The token is the `requestToken` of a link returned by the link operations of an entry,  such as `GET api/2.0/files/file/{id}/link` or `GET api/2.0/files/rooms/{id}/link`. The call needs no  authentication and answers a refused link in the `status` field rather than with an HTTP error, so that field  has to be read before anything else: a token that matches no link, and a link whose entry has been archived or  moved to the trash, both resolve as invalid; a link past its expiration date resolves as expired; a  password-protected link resolves as requiring a password, which is then submitted through  `POST api/2.0/files/share/{key}/password`; and a public link resolves as denied when the portal forbids  sharing with people outside it. The call is not read-only: for a signed-in caller the first successful  resolution puts the entry into the account's own lists, and for a visitor without an account it opens an  anonymous session that later requests with the same token reuse. Pass `fileId` or `folderId` to have an entry  inside the link's target echoed back.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **key** | path | **String** | The token of the external share link, taken verbatim from the &#x60;requestToken&#x60; of a link returned by the link  operations of an entry, such as &#x60;GET api/2.0/files/rooms/{id}/link&#x60;. It is an opaque URL-safe string that  carries the link&#39;s own identifier, so it cannot be assembled by hand. | [required] [example: q7Ry8cQ1lZ0dP3sK2mXfA9tBnV6hJ4uE8wCz5oLg] |
-| **fileId** | query | **String** | A file inside the room the link points at, echoed back in the answer&#39;s entity fields so a client can show what  was opened. The value is ignored when the file does not sit under the link&#39;s target, and passing it together  with a folder has no effect - the file wins. | [optional] [example: 9] |
-| **folderId** | query | **String** | A folder inside the room the link points at, echoed back in the answer&#39;s entity fields. It is ignored when the  folder does not sit under the link&#39;s target, and when a file is passed as well. | [optional] [example: 3] |
+| **key** | path | **String** | The token of the external share link, taken verbatim from the `requestToken` of a link returned by the link  operations of an entry, such as `GET api/2.0/files/rooms/{id}/link`. It is an opaque URL-safe string that  carries the link's own identifier, so it cannot be assembled by hand. | [required] [example: q7Ry8cQ1lZ0dP3sK2mXfA9tBnV6hJ4uE8wCz5oLg] |
+| **fileId** | query | **String** | A file inside the room the link points at, echoed back in the answer's entity fields so a client can show what  was opened. The value is ignored when the file does not sit under the link's target, and passing it together  with a folder has no effect - the file wins. | [optional] [example: 9] |
+| **folderId** | query | **String** | A folder inside the room the link points at, echoed back in the answer's entity fields. It is ignored when the  folder does not sit under the link's target, and when a file is passed as well. | [optional] [example: 3] |
 
 #### Responses
 
@@ -6305,7 +6305,7 @@ Resolves the token of an external share link into the room or file it points at,
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -6320,15 +6320,15 @@ No authorization required
 
 Get file sharing rights
 
-Lists the accounts and groups that hold rights on one file, one entry per subject, with the level each of them  has, whether the caller may still change that level, and which of them owns the file. The owner comes first,  then room managers, groups, ordinary members, guests, and last the accounts that have not accepted their  invitation yet, each of those ranked by access level and by name. External links are left out and are listed  by &#x60;GET api/2.0/files/file/{id}/links&#x60; instead, while a PDF form kept in a form-filling room also reports the  link of that room, because the form is filled out through it. &#x60;startIndex&#x60; and &#x60;count&#x60; page through the  subjects, and their total number is reported in the response headers rather than in the body. Listing takes  the right to change the sharing of the file, which its creator, the manager of its room and a portal  administrator acting as room manager have, while inside a public room reading the file is enough; a member who  may read but not share is answered with an empty list although the header still counts the subjects, and a  caller with no access, a guest included, is refused. A file that does not exist, or was deleted permanently,  is answered as missing. The call is read-only; for several entries at once use &#x60;POST api/2.0/files/share&#x60;.
+Lists the accounts and groups that hold rights on one file, one entry per subject, with the level each of them  has, whether the caller may still change that level, and which of them owns the file. The owner comes first,  then room managers, groups, ordinary members, guests, and last the accounts that have not accepted their  invitation yet, each of those ranked by access level and by name. External links are left out and are listed  by `GET api/2.0/files/file/{id}/links` instead, while a PDF form kept in a form-filling room also reports the  link of that room, because the form is filled out through it. `startIndex` and `count` page through the  subjects, and their total number is reported in the response headers rather than in the body. Listing takes  the right to change the sharing of the file, which its creator, the manager of its room and a portal  administrator acting as room manager have, while inside a public room reading the file is enough; a member who  may read but not share is answered with an empty list although the header still counts the subjects, and a  caller with no access, a guest included, is refused. A file that does not exist, or was deleted permanently,  is answered as missing. The call is read-only; for several entries at once use `POST api/2.0/files/share`.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The file the operation addresses. Take the identifier from a listing such as &#x60;GET api/2.0/files/{folderId}&#x60;: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: 10] |
+| **id** | path | **Integer** (int32) | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: 10] |
 | **count** | query | **Integer** (int32) | How many entries at most to answer with, in the operations of this file that return a list; an operation that  answers with a single object is not affected by it. | [optional] [example: 25] [min: 1] [max: 100] |
-| **startIndex** | query | **Integer** (int32) | How many entries of such a list to skip before answering, used together with &#x60;count&#x60; to walk through it page  by page. | [optional] [example: 0] |
+| **startIndex** | query | **Integer** (int32) | How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page. | [optional] [example: 0] |
 
 #### Responses
 
@@ -6363,7 +6363,7 @@ Lists the accounts and groups that hold rights on one file, one entry per subjec
 
 Get folder sharing rights
 
-Lists the accounts and groups that hold rights on one folder or room, one entry per subject, with the level  each of them has, whether the caller may still change that level, and which of them owns the entry. The owner  comes first, then room managers, groups, ordinary members, guests, and last the accounts that have not  accepted their invitation yet, each of those ranked by access level and by name. External links are left out  and are listed by &#x60;GET api/2.0/files/folder/{id}/links&#x60; instead. &#x60;startIndex&#x60; and &#x60;count&#x60; page through the  subjects, and their total number is reported in the response headers rather than in the body. For a room, and  for a folder inside a public room, read access is enough; any other folder is listed only to a caller who may  change its sharing, which the manager of its room and a portal administrator acting as room manager may, and a  member who may only read such a folder is answered with an empty list although the header still counts the  subjects. A caller with no access, a guest included, is refused, and a folder that does not exist is answered  as missing. The call is read-only. For a room prefer &#x60;GET api/2.0/files/rooms/{id}/share&#x60;, which filters the  same subjects by kind and by name.
+Lists the accounts and groups that hold rights on one folder or room, one entry per subject, with the level  each of them has, whether the caller may still change that level, and which of them owns the entry. The owner  comes first, then room managers, groups, ordinary members, guests, and last the accounts that have not  accepted their invitation yet, each of those ranked by access level and by name. External links are left out  and are listed by `GET api/2.0/files/folder/{id}/links` instead. `startIndex` and `count` page through the  subjects, and their total number is reported in the response headers rather than in the body. For a room, and  for a folder inside a public room, read access is enough; any other folder is listed only to a caller who may  change its sharing, which the manager of its room and a portal administrator acting as room manager may, and a  member who may only read such a folder is answered with an empty list although the header still counts the  subjects. A caller with no access, a guest included, is refused, and a folder that does not exist is answered  as missing. The call is read-only. For a room prefer `GET api/2.0/files/rooms/{id}/share`, which filters the  same subjects by kind and by name.
 
 #### Parameters
 
@@ -6371,7 +6371,7 @@ Lists the accounts and groups that hold rights on one folder or room, one entry 
 |------------- | ------------- | ------------- | ------------- | -------------|
 | **id** | path | **Integer** (int32) | The folder or room the operation addresses. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string. | [required] [example: 10] |
 | **count** | query | **Integer** (int32) | How many entries at most to answer with, in the operations of this folder that return a list; an operation  that answers with a single object is not affected by it. | [optional] [example: 25] [min: 1] [max: 100] |
-| **startIndex** | query | **Integer** (int32) | How many entries of such a list to skip before answering, used together with &#x60;count&#x60; to walk through it page  by page. | [optional] [example: 0] |
+| **startIndex** | query | **Integer** (int32) | How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page. | [optional] [example: 0] |
 
 #### Responses
 
@@ -6406,16 +6406,16 @@ Lists the accounts and groups that hold rights on one folder or room, one entry 
 
 Get file access of group members
 
-Lists the members of one portal group together with the access each of them has on a file that group was  granted rights to: &#x60;groupAccess&#x60; is the level the group itself carries, &#x60;userAccess&#x60; is the level set on that  member alone, &#x60;overridden&#x60; says which of the two applies, &#x60;owner&#x60; marks the member who created the file, and  &#x60;canEditAccess&#x60; says whether the caller may still change that member&#39;s level. Take the group identifier from  the group entries of &#x60;GET api/2.0/files/file/{id}/share&#x60;. &#x60;startIndex&#x60; and &#x60;count&#x60; page through the members,  &#x60;filterValue&#x60; keeps only those whose first name, last name or email contains the value - the comparison is  made in lower case, so an uppercase value matches nothing - and the number of members is reported in the  response headers. Members come back ordered by first name. A group that holds no rights on this file, a file  the caller cannot read and a file that does not exist are all answered with an empty list rather than an  error, so an empty answer does not mean that the group has no members. A guest is refused. The call is  read-only.
+Lists the members of one portal group together with the access each of them has on a file that group was  granted rights to: `groupAccess` is the level the group itself carries, `userAccess` is the level set on that  member alone, `overridden` says which of the two applies, `owner` marks the member who created the file, and  `canEditAccess` says whether the caller may still change that member's level. Take the group identifier from  the group entries of `GET api/2.0/files/file/{id}/share`. `startIndex` and `count` page through the members,  `filterValue` keeps only those whose first name, last name or email contains the value - the comparison is  made in lower case, so an uppercase value matches nothing - and the number of members is reported in the  response headers. Members come back ordered by first name. A group that holds no rights on this file, a file  the caller cannot read and a file that does not exist are all answered with an empty list rather than an  error, so an empty answer does not mean that the group has no members. A guest is refused. The call is  read-only.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
 | **fileId** | path | **Integer** (int32) | The file whose access is being read. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string. | [required] [example: 10] |
-| **groupId** | path | **UUID** (uuid) | The group whose members are listed. Take it from the entries of &#x60;GET api/2.0/files/file/{id}/share&#x60; that stand  for a group; a group that holds no rights on this file is answered with an empty list. | [required] [example: 9924256a-739c-462b-af15-e652a3b1b6eb] |
+| **groupId** | path | **UUID** (uuid) | The group whose members are listed. Take it from the entries of `GET api/2.0/files/file/{id}/share` that stand  for a group; a group that holds no rights on this file is answered with an empty list. | [required] [example: 9924256a-739c-462b-af15-e652a3b1b6eb] |
 | **count** | query | **Integer** (int32) | How many members at most to answer with. | [optional] [example: 25] [min: 1] [max: 100] |
-| **startIndex** | query | **Integer** (int32) | How many members to skip before answering, used together with &#x60;count&#x60; to page through a large group. | [optional] [example: 0] |
+| **startIndex** | query | **Integer** (int32) | How many members to skip before answering, used together with `count` to page through a large group. | [optional] [example: 0] |
 | **filterValue** | query | **String** | Keeps only the members whose first name, last name or email contains this value. The value is matched in lower  case, so an uppercase one finds nothing. | [optional] [example: john] |
 
 #### Responses
@@ -6451,16 +6451,16 @@ Lists the members of one portal group together with the access each of them has 
 
 Get folder access of group members
 
-Lists the members of one portal group together with the access each of them has on a folder or room that group  was granted rights to: &#x60;groupAccess&#x60; is the level the group itself carries, &#x60;userAccess&#x60; is the level set on  that member alone, &#x60;overridden&#x60; says which of the two applies, &#x60;owner&#x60; marks the member who created the entry,  and &#x60;canEditAccess&#x60; says whether the caller may still change that member&#39;s level. Take the group identifier  from the group entries of &#x60;GET api/2.0/files/folder/{id}/share&#x60;. &#x60;startIndex&#x60; and &#x60;count&#x60; page through the  members, &#x60;filterValue&#x60; keeps only those whose first name, last name or email contains the value - the  comparison is made in lower case, so an uppercase value matches nothing - and the number of members is  reported in the response headers. Members come back ordered by first name. A group that holds no rights on  this folder, a folder the caller cannot read and a folder that does not exist are all answered with an empty  list rather than an error, so an empty answer does not mean that the group has no members. A guest is refused.  The call is read-only.
+Lists the members of one portal group together with the access each of them has on a folder or room that group  was granted rights to: `groupAccess` is the level the group itself carries, `userAccess` is the level set on  that member alone, `overridden` says which of the two applies, `owner` marks the member who created the entry,  and `canEditAccess` says whether the caller may still change that member's level. Take the group identifier  from the group entries of `GET api/2.0/files/folder/{id}/share`. `startIndex` and `count` page through the  members, `filterValue` keeps only those whose first name, last name or email contains the value - the  comparison is made in lower case, so an uppercase value matches nothing - and the number of members is  reported in the response headers. Members come back ordered by first name. A group that holds no rights on  this folder, a folder the caller cannot read and a folder that does not exist are all answered with an empty  list rather than an error, so an empty answer does not mean that the group has no members. A guest is refused.  The call is read-only.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
 | **folderId** | path | **Integer** (int32) | The folder or room whose access is being read. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string. | [required] [example: 10] |
-| **groupId** | path | **UUID** (uuid) | The group whose members are listed. Take it from the entries of &#x60;GET api/2.0/files/folder/{id}/share&#x60; that  stand for a group; a group that holds no rights on this folder is answered with an empty list. | [required] [example: 9924256a-739c-462b-af15-e652a3b1b6eb] |
+| **groupId** | path | **UUID** (uuid) | The group whose members are listed. Take it from the entries of `GET api/2.0/files/folder/{id}/share` that  stand for a group; a group that holds no rights on this folder is answered with an empty list. | [required] [example: 9924256a-739c-462b-af15-e652a3b1b6eb] |
 | **count** | query | **Integer** (int32) | How many members at most to answer with. | [optional] [example: 25] [min: 1] [max: 100] |
-| **startIndex** | query | **Integer** (int32) | How many members to skip before answering, used together with &#x60;count&#x60; to page through a large group. | [optional] [example: 0] |
+| **startIndex** | query | **Integer** (int32) | How many members to skip before answering, used together with `count` to page through a large group. | [optional] [example: 0] |
 | **filterValue** | query | **String** | Keeps only the members whose first name, last name or email contains this value. The value is matched in lower  case, so an uppercase one finds nothing. | [optional] [example: john] |
 
 #### Responses
@@ -6496,7 +6496,7 @@ Lists the members of one portal group together with the access each of them has 
 
 Get sharing rights in batch
 
-Returns who has access to the files and folders listed in the request, merged into one list of subjects, and  is the batch counterpart of &#x60;GET api/2.0/files/file/{id}/share&#x60; and &#x60;GET api/2.0/files/rooms/{id}/share&#x60;.  Identifiers come from any listing operation, such as &#x60;GET api/2.0/files/{folderId}&#x60;. The caller needs read  access to every listed entry: a single entry it cannot read makes the whole call fail instead of dropping that  entry, so the list has to be filtered beforehand. Identifiers that match nothing are skipped without an error,  and an empty list of identifiers gives an empty answer. The call is read-only. Each account or group appears  once: the caller&#39;s own record comes first, the owner&#39;s record second, and the rest are ordered by display  name. When the same subject holds different rights on the listed entries, its access is reported as the  &#x60;Varies&#x60; value instead of a real level, which means the entries have to be inspected one by one to see the  difference. Records that describe external links are included only for a caller that is allowed to read the  links of the entry.
+Returns who has access to the files and folders listed in the request, merged into one list of subjects, and  is the batch counterpart of `GET api/2.0/files/file/{id}/share` and `GET api/2.0/files/rooms/{id}/share`.  Identifiers come from any listing operation, such as `GET api/2.0/files/{folderId}`. The caller needs read  access to every listed entry: a single entry it cannot read makes the whole call fail instead of dropping that  entry, so the list has to be filtered beforehand. Identifiers that match nothing are skipped without an error,  and an empty list of identifiers gives an empty answer. The call is read-only. Each account or group appears  once: the caller's own record comes first, the owner's record second, and the rest are ordered by display  name. When the same subject holds different rights on the listed entries, its access is reported as the  `Varies` value instead of a real level, which means the entries have to be inspected one by one to see the  difference. Records that describe external links are included only for a caller that is allowed to read the  links of the entry.
 
 #### Parameters
 
@@ -6537,13 +6537,13 @@ Returns who has access to the files and folders listed in the request, merged in
 
 Get users to mention in a file
 
-Lists the portal members who can read the file, which is what an editor client offers when somebody types a  mention. The set holds the readers of the file plus everyone who reads it by role rather than by share - the  portal owner, the DocSpace administrators and the author of the file - while the caller themselves, the  subjects standing behind external links and deactivated accounts are left out. It is ordered by display name  as the portal renders it. A guest receives a single entry, the owner of the file, because a guest is not a  portal member and may not learn who else works on the document. The caller needs read access to the file, and  an unknown file id is reported as missing. The call only reads. A caller who reached the file through an  external link instead of an account is answered with nothing at all. For the users to offer when protecting a  document use &#x60;GET api/2.0/files/file/{fileId}/protectusers&#x60;.
+Lists the portal members who can read the file, which is what an editor client offers when somebody types a  mention. The set holds the readers of the file plus everyone who reads it by role rather than by share - the  portal owner, the DocSpace administrators and the author of the file - while the caller themselves, the  subjects standing behind external links and deactivated accounts are left out. It is ordered by display name  as the portal renders it. A guest receives a single entry, the owner of the file, because a guest is not a  portal member and may not learn who else works on the document. The caller needs read access to the file, and  an unknown file id is reported as missing. The call only reads. A caller who reached the file through an  external link instead of an account is answered with nothing at all. For the users to offer when protecting a  document use `GET api/2.0/files/file/{fileId}/protectusers`.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **Integer** (int32) | The file the operation addresses. Take the identifier from a listing such as &#x60;GET api/2.0/files/{folderId}&#x60;: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: 10] |
+| **fileId** | path | **Integer** (int32) | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: 10] |
 
 #### Responses
 
@@ -6578,7 +6578,7 @@ Lists the portal members who can read the file, which is what an editor client o
 
 Remove sharing rights in batch
 
-Revokes the access of every account and group on the files and folders listed in the request, and clears the  entries from the caller&#39;s own favorites, recent and unread marks. The owner&#39;s own record is kept, since  removing it would take the entry away from the account that owns it, and external links survive untouched -  remove those through the link operations of the entry. The caller must be allowed to change the access of each  entry, which means the creator of the room, a portal administrator, or a member with the rights to manage it;  a caller whose only access came through an external link may use this call to drop the entry from its own  list, while a directly invited member or an unrelated account is refused. The answer is always &#x60;true&#x60; and  identifiers that match nothing are skipped silently, so a successful answer is not proof that anything was  revoked - read the rights back with &#x60;POST api/2.0/files/share&#x60;. The call is destructive and safe to repeat. To  take the rights of one account away instead of all of them, call &#x60;PUT api/2.0/files/share&#x60; with that account&#39;s  access set to &#x60;None&#x60;.
+Revokes the access of every account and group on the files and folders listed in the request, and clears the  entries from the caller's own favorites, recent and unread marks. The owner's own record is kept, since  removing it would take the entry away from the account that owns it, and external links survive untouched -  remove those through the link operations of the entry. The caller must be allowed to change the access of each  entry, which means the creator of the room, a portal administrator, or a member with the rights to manage it;  a caller whose only access came through an external link may use this call to drop the entry from its own  list, while a directly invited member or an unrelated account is refused. The answer is always `true` and  identifiers that match nothing are skipped silently, so a successful answer is not proof that anything was  revoked - read the rights back with `POST api/2.0/files/share`. The call is destructive and safe to repeat. To  take the rights of one account away instead of all of them, call `PUT api/2.0/files/share` with that account's  access set to `None`.
 
 #### Parameters
 
@@ -6619,7 +6619,7 @@ Revokes the access of every account and group on the files and folders listed in
 
 Notify mentioned users
 
-Emails the people named in &#x60;emails&#x60; that they were mentioned in a file, with a link that opens the file at the  place the mention sits when &#x60;actionLink&#x60; carries the anchor the editor produced. Only addresses that belong to  portal accounts are notified: an address that belongs to nobody is skipped, and the note is cut to its first  200 characters in the mail, while a &#x60;message&#x60; longer than the field allows is refused with 400. The answer is  usually empty: the access list of the file comes back when the file is encrypted, or when one of the addresses  belongs to nobody and the caller may share the file - that is then the cue to invite that person with  &#x60;PUT api/2.0/files/file/{id}/share&#x60;. The caller needs comment rights, which the creator of the file, the  manager of its room and a member invited to comment, review or edit have, while a guest or a member without  access is refused with 403; a file that does not exist answers with 404 and a file in the trash is refused.  The operation is rate-limited and answers 429 once the caller sends too many notifications. A delivery failure  is swallowed, so 200 does not prove that the mail left the portal.
+Emails the people named in `emails` that they were mentioned in a file, with a link that opens the file at the  place the mention sits when `actionLink` carries the anchor the editor produced. Only addresses that belong to  portal accounts are notified: an address that belongs to nobody is skipped, and the note is cut to its first  200 characters in the mail, while a `message` longer than the field allows is refused with 400. The answer is  usually empty: the access list of the file comes back when the file is encrypted, or when one of the addresses  belongs to nobody and the caller may share the file - that is then the cue to invite that person with  `PUT api/2.0/files/file/{id}/share`. The caller needs comment rights, which the creator of the file, the  manager of its room and a member invited to comment, review or edit have, while a guest or a member without  access is refused with 403; a file that does not exist answers with 404 and a file in the trash is refused.  The operation is rate-limited and answers 429 once the caller sends too many notifications. A delivery failure  is swallowed, so 200 does not prove that the mail left the portal.
 
 #### Parameters
 
@@ -6663,7 +6663,7 @@ Emails the people named in &#x60;emails&#x60; that they were mentioned in a file
 
 Share a file
 
-Grants, changes or withdraws the rights of the listed accounts and groups on one file, and answers with the  rights those subjects hold afterwards. Every element of &#x60;share&#x60; names a subject and the level it is to get,  and the level that denies everything takes the access away instead; an empty &#x60;share&#x60; changes nothing and is  answered with an empty list. A subject the caller is not allowed to share with, such as a guest who belongs to  another member, is dropped without an error, so compare the answer with what was sent. With &#x60;notify&#x60; set, each  account named is emailed about the access it received and &#x60;sharingMessage&#x60; is put into that mail with its  markup stripped, while a message longer than the field allows is rejected as an invalid request. The caller  has to be allowed to change the sharing of the file, which its creator, the manager of the room it lies in and  a portal administrator acting as room manager are; anyone else, a guest and a member with read access  included, is refused. The call is mutating and safe to repeat. For several files and folders in one request  use &#x60;PUT api/2.0/files/share&#x60;.
+Grants, changes or withdraws the rights of the listed accounts and groups on one file, and answers with the  rights those subjects hold afterwards. Every element of `share` names a subject and the level it is to get,  and the level that denies everything takes the access away instead; an empty `share` changes nothing and is  answered with an empty list. A subject the caller is not allowed to share with, such as a guest who belongs to  another member, is dropped without an error, so compare the answer with what was sent. With `notify` set, each  account named is emailed about the access it received and `sharingMessage` is put into that mail with its  markup stripped, while a message longer than the field allows is rejected as an invalid request. The caller  has to be allowed to change the sharing of the file, which its creator, the manager of the room it lies in and  a portal administrator acting as room manager are; anyone else, a guest and a member with read access  included, is refused. The call is mutating and safe to repeat. For several files and folders in one request  use `PUT api/2.0/files/share`.
 
 #### Parameters
 
@@ -6705,7 +6705,7 @@ Grants, changes or withdraws the rights of the listed accounts and groups on one
 
 Share a folder
 
-Grants, changes or withdraws the rights of the listed accounts and groups on one folder, and answers with the  rights those subjects hold afterwards. Every element of &#x60;share&#x60; names a subject and the level it is to get,  and the level that denies everything takes the access away instead; an empty &#x60;share&#x60; changes nothing and is  answered with an empty list. A subject the caller is not allowed to share with, such as a guest who belongs to  another member, is dropped without an error. With &#x60;notify&#x60; set, each account named is emailed about the access  it received and &#x60;sharingMessage&#x60; is put into that mail with its markup stripped, while a message longer than  the field allows is rejected as an invalid request. The caller has to be allowed to change the sharing of the  folder, which the manager of the room it belongs to and a portal administrator acting as room manager are;  anyone else, a guest and a member with read access included, is refused. The call is mutating and safe to  repeat. For a room use &#x60;PUT api/2.0/files/rooms/{id}/share&#x60;, which invites people by email as well.
+Grants, changes or withdraws the rights of the listed accounts and groups on one folder, and answers with the  rights those subjects hold afterwards. Every element of `share` names a subject and the level it is to get,  and the level that denies everything takes the access away instead; an empty `share` changes nothing and is  answered with an empty list. A subject the caller is not allowed to share with, such as a guest who belongs to  another member, is dropped without an error. With `notify` set, each account named is emailed about the access  it received and `sharingMessage` is put into that mail with its markup stripped, while a message longer than  the field allows is rejected as an invalid request. The caller has to be allowed to change the sharing of the  folder, which the manager of the room it belongs to and a portal administrator acting as room manager are;  anyone else, a guest and a member with read access included, is refused. The call is mutating and safe to  repeat. For a room use `PUT api/2.0/files/rooms/{id}/share`, which invites people by email as well.
 
 #### Parameters
 
@@ -6747,7 +6747,7 @@ Grants, changes or withdraws the rights of the listed accounts and groups on one
 
 Set sharing rights in batch
 
-Grants, changes or withdraws the access of the listed accounts and groups on every file and folder named in  the request at once, and returns the resulting rights. Entry identifiers come from a listing operation, and  the accounts and groups come from the portal&#39;s own account and group lists; an access of &#x60;None&#x60; withdraws the  rights instead of granting them. The caller must be allowed to change the access of every listed entry - the  creator of the room, a member with the rights to manage it, or a portal administrator - and a read-only member  or a guest is refused even when the payload changes nothing. A subject the caller is not allowed to share  with, such as a guest that belongs to another member, is skipped without an error, and an empty &#x60;share&#x60;  collection makes the call do nothing and answer with an empty list. Repeating the same request leaves the same  rights in place. The answer holds one record per listed subject for each entry that was actually processed, so  it is shorter than the request when something was skipped and worth comparing against it. For a single room  prefer &#x60;PUT api/2.0/files/rooms/{id}/share&#x60;, which also invites members by email.
+Grants, changes or withdraws the access of the listed accounts and groups on every file and folder named in  the request at once, and returns the resulting rights. Entry identifiers come from a listing operation, and  the accounts and groups come from the portal's own account and group lists; an access of `None` withdraws the  rights instead of granting them. The caller must be allowed to change the access of every listed entry - the  creator of the room, a member with the rights to manage it, or a portal administrator - and a read-only member  or a guest is refused even when the payload changes nothing. A subject the caller is not allowed to share  with, such as a guest that belongs to another member, is skipped without an error, and an empty `share`  collection makes the call do nothing and answer with an empty list. Repeating the same request leaves the same  rights in place. The answer holds one record per listed subject for each entry that was actually processed, so  it is shorter than the request when something was skipped and worth comparing against it. For a single room  prefer `PUT api/2.0/files/rooms/{id}/share`, which also invites members by email.
 
 #### Parameters
 
@@ -6790,13 +6790,13 @@ Grants, changes or withdraws the access of the listed accounts and groups on eve
 
 Remove a third-party account
 
-Disconnects a third-party storage account from the portal and returns the ID of the folder that stood for it,  in the &#x60;provider-accountId&#x60; form the Files operations use for third-party entries. Take &#x60;providerId&#x60; from  &#x60;GET api/2.0/files/thirdparty&#x60;: it is the numeric account ID, not that composed folder ID. The member who  connected the account can remove it; another member&#39;s request is refused unless they hold delete rights on the  folder it stands for. Nothing is deleted at the storage service: the files stay with the provider, and what  goes away is the portal&#39;s link to them together with the stored credentials, the sharing records and the tags  kept for its entries. A room that was created on this account stops being available. When the account being  removed is the one connected for backups by &#x60;POST api/2.0/files/thirdparty/backup&#x60;, its backup schedule is  deleted as well. The removal cannot be repeated: once the account is gone the same ID is refused rather than  confirmed, so treat the first successful answer as the record of it.
+Disconnects a third-party storage account from the portal and returns the ID of the folder that stood for it,  in the `provider-accountId` form the Files operations use for third-party entries. Take `providerId` from  `GET api/2.0/files/thirdparty`: it is the numeric account ID, not that composed folder ID. The member who  connected the account can remove it; another member's request is refused unless they hold delete rights on the  folder it stands for. Nothing is deleted at the storage service: the files stay with the provider, and what  goes away is the portal's link to them together with the stored credentials, the sharing records and the tags  kept for its entries. A room that was created on this account stops being available. When the account being  removed is the one connected for backups by `POST api/2.0/files/thirdparty/backup`, its backup schedule is  deleted as well. The removal cannot be repeated: once the account is gone the same ID is refused rather than  confirmed, so treat the first successful answer as the record of it.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **providerId** | path | **Integer** (int32) | The ID of the connected third-party storage account, as &#x60;providerId&#x60; of &#x60;GET api/2.0/files/thirdparty&#x60;. | [required] [example: 12] |
+| **providerId** | path | **Integer** (int32) | The ID of the connected third-party storage account, as `providerId` of `GET api/2.0/files/thirdparty`. | [required] [example: 12] |
 
 #### Responses
 
@@ -6831,7 +6831,7 @@ Disconnects a third-party storage account from the portal and returns the ID of 
 
 Get all third-party providers
 
-Lists the third-party storage services this portal can connect, with everything a connection form needs: the  display name, the key to send as &#x60;providerKey&#x60;, whether the service authenticates through OAuth 2.0, the OAuth  client ID and redirect URL where it does, and whether the caller has to supply the server address. Several  WebDAV presets share the key &#x60;WebDav&#x60; and are told apart by their names, so keep the name the caller chose  next to the key when building the request. Pass &#x60;excludewebdav&#x3D;true&#x60; to drop the whole WebDAV family,  including the kDrive and Yandex presets, and keep only the OAuth services. The call is read-only. An empty  array is a normal answer: it is what a guest gets, and what everyone gets while the portal-wide third-party  switch is off (&#x60;PUT api/2.0/files/thirdparty&#x60;). The &#x60;connected&#x60; flag of an element says the service is  available on this portal, not that an account of it exists - the caller&#39;s own accounts are listed by  &#x60;GET api/2.0/files/thirdparty&#x60;.
+Lists the third-party storage services this portal can connect, with everything a connection form needs: the  display name, the key to send as `providerKey`, whether the service authenticates through OAuth 2.0, the OAuth  client ID and redirect URL where it does, and whether the caller has to supply the server address. Several  WebDAV presets share the key `WebDav` and are told apart by their names, so keep the name the caller chose  next to the key when building the request. Pass `excludewebdav=true` to drop the whole WebDAV family,  including the kDrive and Yandex presets, and keep only the OAuth services. The call is read-only. An empty  array is a normal answer: it is what a guest gets, and what everyone gets while the portal-wide third-party  switch is off (`PUT api/2.0/files/thirdparty`). The `connected` flag of an element says the service is  available on this portal, not that an account of it exists - the caller's own accounts are listed by  `GET api/2.0/files/thirdparty`.
 
 #### Parameters
 
@@ -6872,7 +6872,7 @@ Lists the third-party storage services this portal can connect, with everything 
 
 Get the third-party backup folder
 
-Returns the folder of the third-party storage account the portal keeps for backups, so a caller can check  where scheduled and manual backups are written. There is at most one such account per portal, connected by an  administrator through &#x60;POST api/2.0/files/thirdparty/backup&#x60;, and it is deliberately kept out of the personal  list of &#x60;GET api/2.0/files/thirdparty&#x60;. Any authenticated member may ask, and the call is read-only. The body  is &#x60;null&#x60;, with a successful status, in two situations the answer does not distinguish: no backup account has  been connected, and the caller has no read access to the folder of the one that is. When a folder does come  back, its &#x60;id&#x60; is the string ID of a third-party folder and can be used with the folder operations that accept  one, and its &#x60;title&#x60; is the title the account was saved under. Connecting a different account through the  backup operation replaces this one rather than adding a second, and  &#x60;DELETE api/2.0/files/thirdparty/{providerId}&#x60; removes it.
+Returns the folder of the third-party storage account the portal keeps for backups, so a caller can check  where scheduled and manual backups are written. There is at most one such account per portal, connected by an  administrator through `POST api/2.0/files/thirdparty/backup`, and it is deliberately kept out of the personal  list of `GET api/2.0/files/thirdparty`. Any authenticated member may ask, and the call is read-only. The body  is `null`, with a successful status, in two situations the answer does not distinguish: no backup account has  been connected, and the caller has no read access to the folder of the one that is. When a folder does come  back, its `id` is the string ID of a third-party folder and can be used with the folder operations that accept  one, and its `title` is the title the account was saved under. Connecting a different account through the  backup operation replaces this one rather than adding a second, and  `DELETE api/2.0/files/thirdparty/{providerId}` removes it.
 
 #### Parameters
 This endpoint does not need any parameter.
@@ -6909,7 +6909,7 @@ This endpoint does not need any parameter.
 
 Get third-party provider capabilities
 
-Lists the third-party storage services this portal is able to connect, in the compact form a connection dialog  needs. Every element is itself an array whose first item is the provider key accepted as &#x60;providerKey&#x60; by  &#x60;POST api/2.0/files/thirdparty&#x60;. For the services that authenticate through OAuth 2.0 (&#x60;Box&#x60;, &#x60;DropboxV2&#x60;,  &#x60;GoogleDrive&#x60;, &#x60;OneDrive&#x60;) the second and third items are the OAuth client ID and the redirect URL this portal  is registered with, so the caller can build the consent screen URL itself; the services that authenticate by  login and password (&#x60;SharePoint&#x60;, &#x60;WebDav&#x60;, &#x60;kDrive&#x60;, &#x60;Yandex&#x60;) contribute a single-item array. Only the  services enabled in the portal configuration are listed, and an OAuth service whose application is not  configured is left out. The call is read-only. An empty array is a normal answer rather than a failure: it is  what a guest gets, and what everyone gets while the portal-wide third-party switch is off  (&#x60;PUT api/2.0/files/thirdparty&#x60;). For display names, the WebDAV presets and the flags a connection form needs,  use &#x60;GET api/2.0/files/thirdparty/providers&#x60; instead.
+Lists the third-party storage services this portal is able to connect, in the compact form a connection dialog  needs. Every element is itself an array whose first item is the provider key accepted as `providerKey` by  `POST api/2.0/files/thirdparty`. For the services that authenticate through OAuth 2.0 (`Box`, `DropboxV2`,  `GoogleDrive`, `OneDrive`) the second and third items are the OAuth client ID and the redirect URL this portal  is registered with, so the caller can build the consent screen URL itself; the services that authenticate by  login and password (`SharePoint`, `WebDav`, `kDrive`, `Yandex`) contribute a single-item array. Only the  services enabled in the portal configuration are listed, and an OAuth service whose application is not  configured is left out. The call is read-only. An empty array is a normal answer rather than a failure: it is  what a guest gets, and what everyone gets while the portal-wide third-party switch is off  (`PUT api/2.0/files/thirdparty`). For display names, the WebDAV presets and the flags a connection form needs,  use `GET api/2.0/files/thirdparty/providers` instead.
 
 #### Parameters
 This endpoint does not need any parameter.
@@ -6946,7 +6946,7 @@ This endpoint does not need any parameter.
 
 Get common third-party folders
 
-Lists the third-party storage accounts attached to the legacy Common section, as folder entries that can be  browsed with the usual folder operations. Each entry stands for a whole connected account: its title is the  account title, and &#x60;providerId&#x60; and &#x60;providerKey&#x60; identify the account behind it. Only accounts whose owner  the caller may read are included, so the answer differs from one member to another. The call is read-only and  returns a plain array with no paging. An empty array is the expected answer in most portals and does not mean  an error: accounts connected by &#x60;POST api/2.0/files/thirdparty&#x60; are attached to the Rooms section, not to  Common, so only accounts inherited from an older portal appear here. The list is also empty while the  portal-wide third-party switch is off (&#x60;PUT api/2.0/files/thirdparty&#x60;) and when no storage service is  configured. For the accounts the caller owns, regardless of where they are attached, use  &#x60;GET api/2.0/files/thirdparty&#x60;.
+Lists the third-party storage accounts attached to the legacy Common section, as folder entries that can be  browsed with the usual folder operations. Each entry stands for a whole connected account: its title is the  account title, and `providerId` and `providerKey` identify the account behind it. Only accounts whose owner  the caller may read are included, so the answer differs from one member to another. The call is read-only and  returns a plain array with no paging. An empty array is the expected answer in most portals and does not mean  an error: accounts connected by `POST api/2.0/files/thirdparty` are attached to the Rooms section, not to  Common, so only accounts inherited from an older portal appear here. The list is also empty while the  portal-wide third-party switch is off (`PUT api/2.0/files/thirdparty`) and when no storage service is  configured. For the accounts the caller owns, regardless of where they are attached, use  `GET api/2.0/files/thirdparty`.
 
 #### Parameters
 This endpoint does not need any parameter.
@@ -6983,7 +6983,7 @@ This endpoint does not need any parameter.
 
 Get the third-party accounts
 
-Lists the third-party storage accounts the caller has connected, one element per account, with the title it  was saved under, the storage service behind it and the portal section it is attached to. Accounts connected by  other members are not included, and neither is the portal backup account of  &#x60;GET api/2.0/files/thirdparty/backup&#x60;, even for an administrator. The &#x60;providerId&#x60; of an element is the value  to send to &#x60;DELETE api/2.0/files/thirdparty/{providerId}&#x60; and, as &#x60;providerId&#x60; in  &#x60;POST api/2.0/files/thirdparty&#x60;, the way to re-authenticate that same account instead of connecting a new one.  Credentials are never disclosed: &#x60;auth_data&#x60; comes back empty for every element. An element with  &#x60;roomsStorage&#x60; set is available as storage for a room, while &#x60;corporate&#x60; marks an account inherited from the  legacy Common section. The call is read-only, returns a plain array with no paging and no contractual  ordering, and answers with an empty array when the caller has connected nothing. To browse the content of an  account, take the folder ID from the answer of the operation that connected it or from  &#x60;GET api/2.0/files/@root&#x60;.
+Lists the third-party storage accounts the caller has connected, one element per account, with the title it  was saved under, the storage service behind it and the portal section it is attached to. Accounts connected by  other members are not included, and neither is the portal backup account of  `GET api/2.0/files/thirdparty/backup`, even for an administrator. The `providerId` of an element is the value  to send to `DELETE api/2.0/files/thirdparty/{providerId}` and, as `providerId` in  `POST api/2.0/files/thirdparty`, the way to re-authenticate that same account instead of connecting a new one.  Credentials are never disclosed: `auth_data` comes back empty for every element. An element with  `roomsStorage` set is available as storage for a room, while `corporate` marks an account inherited from the  legacy Common section. The call is read-only, returns a plain array with no paging and no contractual  ordering, and answers with an empty array when the caller has connected nothing. To browse the content of an  account, take the folder ID from the answer of the operation that connected it or from  `GET api/2.0/files/@root`.
 
 #### Parameters
 This endpoint does not need any parameter.
@@ -7020,7 +7020,7 @@ This endpoint does not need any parameter.
 
 Connect a third-party account
 
-Connects an account at a third-party storage service to the portal, or re-authenticates one that is already  connected, and returns the folder that now stands for its root. Send &#x60;providerId&#x60; to update an existing  account and omit it to connect a new one; the accepted &#x60;providerKey&#x60; values come from  &#x60;GET api/2.0/files/thirdparty/providers&#x60;. The credentials to send depend on the service: the OAuth services  take &#x60;token&#x60;, which is the authorization code from their consent screen and not an access token, while the  WebDAV family and SharePoint take &#x60;login&#x60; with &#x60;password&#x60;, plus &#x60;url&#x60; where the server address is not fixed.  Credentials are verified against the service before anything is stored, so a wrong password is refused and  nothing is saved. The caller needs the rights to create rooms, and the portal-wide third-party switch has to  be on, otherwise the call is refused. A new account is attached to the Rooms section and becomes available as  room storage for &#x60;POST api/2.0/files/rooms/thirdparty/{id}&#x60;. Connecting twice with the same title creates two  separate accounts.
+Connects an account at a third-party storage service to the portal, or re-authenticates one that is already  connected, and returns the folder that now stands for its root. Send `providerId` to update an existing  account and omit it to connect a new one; the accepted `providerKey` values come from  `GET api/2.0/files/thirdparty/providers`. The credentials to send depend on the service: the OAuth services  take `token`, which is the authorization code from their consent screen and not an access token, while the  WebDAV family and SharePoint take `login` with `password`, plus `url` where the server address is not fixed.  Credentials are verified against the service before anything is stored, so a wrong password is refused and  nothing is saved. The caller needs the rights to create rooms, and the portal-wide third-party switch has to  be on, otherwise the call is refused. A new account is attached to the Rooms section and becomes available as  room storage for `POST api/2.0/files/rooms/thirdparty/{id}`. Connecting twice with the same title creates two  separate accounts.
 
 #### Parameters
 
@@ -7061,7 +7061,7 @@ Connects an account at a third-party storage service to the portal, or re-authen
 
 Connect the third-party backup storage
 
-Connects the third-party storage account the portal writes its backups to, and returns the folder that stands  for its root. Only a portal administrator may call it, and the portal-wide third-party switch has to be on;  other callers are refused. The account is portal-wide and single: a second call does not add another one but  re-authenticates and retitles the existing one, which makes the operation safe to repeat with the same body.  The credentials follow the same rules as in &#x60;POST api/2.0/files/thirdparty&#x60; - an authorization code in &#x60;token&#x60;  for the OAuth services, &#x60;login&#x60; with &#x60;password&#x60; and, where the server address is not fixed, &#x60;url&#x60; for the  WebDAV family and SharePoint - and are verified against the service before anything is stored, so a wrong  password leaves the previous account untouched. The account is deliberately absent from  &#x60;GET api/2.0/files/thirdparty&#x60;; read it back with &#x60;GET api/2.0/files/thirdparty/backup&#x60; and remove it with  &#x60;DELETE api/2.0/files/thirdparty/{providerId}&#x60;.
+Connects the third-party storage account the portal writes its backups to, and returns the folder that stands  for its root. Only a portal administrator may call it, and the portal-wide third-party switch has to be on;  other callers are refused. The account is portal-wide and single: a second call does not add another one but  re-authenticates and retitles the existing one, which makes the operation safe to repeat with the same body.  The credentials follow the same rules as in `POST api/2.0/files/thirdparty` - an authorization code in `token`  for the OAuth services, `login` with `password` and, where the server address is not fixed, `url` for the  WebDAV family and SharePoint - and are verified against the service before anything is stored, so a wrong  password leaves the previous account untouched. The account is deliberately absent from  `GET api/2.0/files/thirdparty`; read it back with `GET api/2.0/files/thirdparty/backup` and remove it with  `DELETE api/2.0/files/thirdparty/{providerId}`.
 
 #### Parameters
 
@@ -7104,13 +7104,13 @@ Connects the third-party storage account the portal writes its backups to, and r
 
 Attach tags to a room
 
-Attaches the named tags to a room and returns the room with its whole tag set. Tags are portal-wide labels  shared by every room, and a name that the catalogue does not hold yet is created there by this call, so  attaching is also the short way of adding a tag to the portal. Names already attached to the room are kept as  they are, and repeating the call changes nothing, which makes it safe to retry. An empty list is accepted and  does nothing, while a blank or overlong name is rejected as an invalid request. The caller must be a manager  of the room or an administrator of the portal, and a room in the Archive section is refused with 403. A tag  has no identifier of its own and is addressed by name, so &#x60;GET api/2.0/files/tags&#x60; is what shows which names  already exist. Use &#x60;DELETE api/2.0/files/rooms/{id}/tags&#x60; to detach them again, which leaves the tags  themselves in the catalogue.
+Attaches the named tags to a room and returns the room with its whole tag set. Tags are portal-wide labels  shared by every room, and a name that the catalogue does not hold yet is created there by this call, so  attaching is also the short way of adding a tag to the portal. Names already attached to the room are kept as  they are, and repeating the call changes nothing, which makes it safe to retry. An empty list is accepted and  does nothing, while a blank or overlong name is rejected as an invalid request. The caller must be a manager  of the room or an administrator of the portal, and a room in the Archive section is refused with 403. A tag  has no identifier of its own and is addressed by name, so `GET api/2.0/files/tags` is what shows which names  already exist. Use `DELETE api/2.0/files/rooms/{id}/tags` to detach them again, which leaves the tags  themselves in the catalogue.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The room whose tags are changed, named by the identifier that &#x60;GET api/2.0/files/rooms&#x60; reports for it. | [required] [example: 1] |
+| **id** | path | **Integer** (int32) | The room whose tags are changed, named by the identifier that `GET api/2.0/files/rooms` reports for it. | [required] [example: 1] |
 | **BatchTagsRequestDto** | body | [**BatchTagsRequestDto**](#model-batchtagsrequestdto) | The names to attach or to detach. | [optional] |
 
 #### Responses
@@ -7147,13 +7147,13 @@ Attaches the named tags to a room and returns the room with its whole tag set. T
 
 Archive a room
 
-Queues a background job that moves one room from the Rooms section to the Archive section, and returns the  operation record of that job. An archived room stays readable to its members and becomes read only: files  cannot be created, renamed or edited in it, and its settings, tags, logo and links can no longer be changed,  which is why many other room operations answer an archived room with a refusal. The caller must be a manager  of the room; administrators of the portal cannot archive a room they were not invited to, and a room template  cannot be archived at all and is answered as missing. The room is not archived when the response arrives: poll  &#x60;GET api/2.0/files/fileops&#x60; until &#x60;finished&#x60; is true. Archiving an already archived room is harmless.  &#x60;deleteAfter&#x60; decides only how long the finished record survives, not what happens to the room. Use  &#x60;PUT api/2.0/files/rooms/{id}/unarchive&#x60; to bring the room back.
+Queues a background job that moves one room from the Rooms section to the Archive section, and returns the  operation record of that job. An archived room stays readable to its members and becomes read only: files  cannot be created, renamed or edited in it, and its settings, tags, logo and links can no longer be changed,  which is why many other room operations answer an archived room with a refusal. The caller must be a manager  of the room; administrators of the portal cannot archive a room they were not invited to, and a room template  cannot be archived at all and is answered as missing. The room is not archived when the response arrives: poll  `GET api/2.0/files/fileops` until `finished` is true. Archiving an already archived room is harmless.  `deleteAfter` decides only how long the finished record survives, not what happens to the room. Use  `PUT api/2.0/files/rooms/{id}/unarchive` to bring the room back.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The room to move, named by the identifier that &#x60;GET api/2.0/files/rooms&#x60; reports for it. | [required] [example: 1] |
+| **id** | path | **Integer** (int32) | The room to move, named by the identifier that `GET api/2.0/files/rooms` reports for it. | [required] [example: 1] |
 | **ArchiveRoomRequest** | body | [**ArchiveRoomRequest**](#model-archiveroomrequest) | The body of the request. It carries only the lifetime of the job record, so an empty object is a normal  request. | [optional] |
 
 #### Responses
@@ -7189,13 +7189,13 @@ Queues a background job that moves one room from the Rooms section to the Archiv
 
 Change the room cover
 
-Sets the cover picture and the background colour a room is shown with, and returns the whole room afterwards.  &#x60;cover&#x60; accepts only an identifier listed by &#x60;GET api/2.0/files/rooms/covers&#x60;, and &#x60;color&#x60; only six  hexadecimal digits with no leading number sign, so anything else is rejected as an invalid request. Either  field may be sent on its own, an empty &#x60;cover&#x60; clears the picture, an empty &#x60;color&#x60; restores the default one,  and an empty body leaves the room untouched. The cover is what the room shows while it has no uploaded logo:  setting a logo with &#x60;POST api/2.0/files/rooms/{id}/logo&#x60; hides the cover without erasing it, and deleting that  logo brings it back. The caller must be a manager of the room, an archived room is refused with 403, and an  unknown or deleted room is answered with 404. Repeating the same request is harmless, and the cover survives  archiving and unarchiving.
+Sets the cover picture and the background colour a room is shown with, and returns the whole room afterwards.  `cover` accepts only an identifier listed by `GET api/2.0/files/rooms/covers`, and `color` only six  hexadecimal digits with no leading number sign, so anything else is rejected as an invalid request. Either  field may be sent on its own, an empty `cover` clears the picture, an empty `color` restores the default one,  and an empty body leaves the room untouched. The cover is what the room shows while it has no uploaded logo:  setting a logo with `POST api/2.0/files/rooms/{id}/logo` hides the cover without erasing it, and deleting that  logo brings it back. The caller must be a manager of the room, an archived room is refused with 403, and an  unknown or deleted room is answered with 404. Repeating the same request is harmless, and the cover survives  archiving and unarchiving.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The room to change, named by the identifier that &#x60;GET api/2.0/files/rooms&#x60; reports for it. | [required] [example: 1] |
+| **id** | path | **Integer** (int32) | The room to change, named by the identifier that `GET api/2.0/files/rooms` reports for it. | [required] [example: 1] |
 | **CoverRequestDto** | body | [**CoverRequestDto**](#model-coverrequestdto) | The cover and the colour to apply. Either half may be sent on its own, and an empty object leaves the room as  it is. | [required] |
 
 #### Responses
@@ -7233,7 +7233,7 @@ Sets the cover picture and the background colour a room is shown with, and retur
 
 Create a room
 
-Creates a room in the portal Rooms section and returns it. &#x60;roomType&#x60; decides which sharing links, member  roles and form features the room offers, and it cannot be changed afterwards, so a room of the wrong kind has  to be recreated. The caller must be the portal owner, a portal administrator or a room administrator; a user  or a guest is refused, and so is a public room while the portal forbids external sharing. &#x60;title&#x60; is required  and must not be blank: characters a folder name cannot hold are replaced with underscores and the rest is  truncated, so the stored title can differ from the one sent and two rooms can share it. &#x60;quota&#x60; is accepted  only while the per-room quota feature is on and must stay within the portal quota, &#x60;cover&#x60; only for an id  returned by &#x60;GET api/2.0/files/rooms/covers&#x60;, and &#x60;color&#x60; as six hexadecimal digits with no leading number  sign. Tag names the portal does not know yet are added to the tag catalogue. &#x60;share&#x60; is not implemented and  any non-empty value is rejected, so invite members afterwards with &#x60;PUT api/2.0/files/rooms/{id}/share&#x60;.  Passing the portal room limit ends the call as a billing refusal and creates nothing.
+Creates a room in the portal Rooms section and returns it. `roomType` decides which sharing links, member  roles and form features the room offers, and it cannot be changed afterwards, so a room of the wrong kind has  to be recreated. The caller must be the portal owner, a portal administrator or a room administrator; a user  or a guest is refused, and so is a public room while the portal forbids external sharing. `title` is required  and must not be blank: characters a folder name cannot hold are replaced with underscores and the rest is  truncated, so the stored title can differ from the one sent and two rooms can share it. `quota` is accepted  only while the per-room quota feature is on and must stay within the portal quota, `cover` only for an id  returned by `GET api/2.0/files/rooms/covers`, and `color` as six hexadecimal digits with no leading number  sign. Tag names the portal does not know yet are added to the tag catalogue. `share` is not implemented and  any non-empty value is rejected, so invite members afterwards with `PUT api/2.0/files/rooms/{id}/share`.  Passing the portal room limit ends the call as a billing refusal and creates nothing.
 
 #### Parameters
 
@@ -7274,7 +7274,7 @@ Creates a room in the portal Rooms section and returns it. &#x60;roomType&#x60; 
 
 Create a room from the template
 
-Starts a background job that copies a room template into a new room of the Rooms section, and answers with the  same progress record that &#x60;GET api/2.0/files/rooms/fromtemplate/status&#x60; returns. The caller must be able to  read the template and to create rooms at all, so a user or a guest is refused, and the checks run before the  job is queued. The room does not exist when the response arrives: poll the status operation until  &#x60;isCompleted&#x60; is true, then take &#x60;roomId&#x60; from it, and treat a non-empty &#x60;error&#x60; as a failed job. Only one  such job is kept per account, and a finished one is discarded when the next is started, so a second creation  loses the record of the first. Anything not sent is inherited from the template, and &#x60;copyLogo&#x60; keeps the  template logo and makes &#x60;logo&#x60; pointless. &#x60;quota&#x60; is accepted only while the per-room quota feature is on, and  a template of a public room cannot be instantiated while the portal forbids external sharing. A template that  does not exist or cannot be read is answered as missing.
+Starts a background job that copies a room template into a new room of the Rooms section, and answers with the  same progress record that `GET api/2.0/files/rooms/fromtemplate/status` returns. The caller must be able to  read the template and to create rooms at all, so a user or a guest is refused, and the checks run before the  job is queued. The room does not exist when the response arrives: poll the status operation until  `isCompleted` is true, then take `roomId` from it, and treat a non-empty `error` as a failed job. Only one  such job is kept per account, and a finished one is discarded when the next is started, so a second creation  loses the record of the first. Anything not sent is inherited from the template, and `copyLogo` keeps the  template logo and makes `logo` pointless. `quota` is accepted only while the per-room quota feature is on, and  a template of a public room cannot be instantiated while the portal forbids external sharing. A template that  does not exist or cannot be read is answered as missing.
 
 #### Parameters
 
@@ -7315,7 +7315,7 @@ Starts a background job that copies a room template into a new room of the Rooms
 
 Set the room logo
 
-Turns an image already uploaded to the portal into the logo of a room and returns the room with the addresses  of the four logo sizes. This is the second half of a two-step flow: upload the picture with  &#x60;POST api/2.0/files/logos&#x60; first and pass the path it returns as &#x60;tmpFile&#x60;, because the image itself is never  sent here. The temporary file belongs to the account that uploaded it and is consumed by this call, so it  cannot be reused for a second room and a path somebody else uploaded is refused. &#x60;x&#x60;, &#x60;y&#x60;, &#x60;width&#x60; and  &#x60;height&#x60; crop the picture; sending a position without a size is rejected as an invalid request, while a size  without a position is accepted. An empty &#x60;tmpFile&#x60; leaves the room as it is. A logo replaces the cover in the  interface without erasing it, and removing the logo brings the cover back. The caller must be a manager of the  room, an archived room is refused, and an unknown room is answered with 404.
+Turns an image already uploaded to the portal into the logo of a room and returns the room with the addresses  of the four logo sizes. This is the second half of a two-step flow: upload the picture with  `POST api/2.0/files/logos` first and pass the path it returns as `tmpFile`, because the image itself is never  sent here. The temporary file belongs to the account that uploaded it and is consumed by this call, so it  cannot be reused for a second room and a path somebody else uploaded is refused. `x`, `y`, `width` and  `height` crop the picture; sending a position without a size is rejected as an invalid request, while a size  without a position is accepted. An empty `tmpFile` leaves the room as it is. A logo replaces the cover in the  interface without erasing it, and removing the logo brings the cover back. The caller must be a manager of the  room, an archived room is refused, and an unknown room is answered with 404.
 
 #### Parameters
 
@@ -7358,7 +7358,7 @@ Turns an image already uploaded to the portal into the logo of a room and return
 
 Create a room tag
 
-Adds a custom tag to the portal-wide catalog of room tags and answers with the stored name. Tags are shared by  the whole portal instead of belonging to the caller: once the tag exists, every room manager can attach it to  their own rooms with &#x60;PUT api/2.0/files/rooms/{id}/tags&#x60;, and that call also creates a tag it does not find.  Creating a name that is already in the catalog returns the existing tag unchanged rather than a duplicate or  an error, so repeating the call after a timeout is safe. A blank name, or one longer than the published limit,  is rejected as an invalid request. Only a room manager or a portal administrator may create a tag, and a user  or a guest is refused. The answer is the name as stored, and that name is the value to send in the &#x60;tags&#x60;  filter of &#x60;GET api/2.0/files/rooms&#x60; and in the room tag calls. The catalog itself is read with  &#x60;GET api/2.0/files/tags&#x60;.
+Adds a custom tag to the portal-wide catalog of room tags and answers with the stored name. Tags are shared by  the whole portal instead of belonging to the caller: once the tag exists, every room manager can attach it to  their own rooms with `PUT api/2.0/files/rooms/{id}/tags`, and that call also creates a tag it does not find.  Creating a name that is already in the catalog returns the existing tag unchanged rather than a duplicate or  an error, so repeating the call after a timeout is safe. A blank name, or one longer than the published limit,  is rejected as an invalid request. Only a room manager or a portal administrator may create a tag, and a user  or a guest is refused. The answer is the name as stored, and that name is the value to send in the `tags`  filter of `GET api/2.0/files/rooms` and in the room tag calls. The catalog itself is read with  `GET api/2.0/files/tags`.
 
 #### Parameters
 
@@ -7400,7 +7400,7 @@ Adds a custom tag to the portal-wide catalog of room tags and answers with the s
 
 Create a room template
 
-Queues a background job that turns an existing room into a reusable room template, and returns the state of  that job right away. The template lands in the portal&#39;s Templates section, inherits the source room&#39;s type,  privacy, indexing, storage limit, lifetime, download and watermark settings, and receives copies of the room&#39;s  files together with its ordinary subfolders and everything inside them; the service subfolders a room keeps  for its own workflows are left out. The caller needs room-manager rights on the source room, and the room must  not be archived: a room that cannot be found under Rooms is answered as missing, and every other refusal comes  back as a rejection. The template is not ready when the response arrives, so poll  &#x60;GET api/2.0/files/roomtemplate/status&#x60; until &#x60;isCompleted&#x60; is true, then read &#x60;templateId&#x60;; a non-empty  &#x60;error&#x60; there means the job failed and the half-built template was removed. Only one template creation is  tracked per caller, and starting another replaces the previous record. Setting &#x60;public&#x60; to true discards  &#x60;share&#x60; and &#x60;groups&#x60; and shares the finished template with everyone instead, while &#x60;copyLogo&#x60; reuses the  source room&#39;s own picture and makes &#x60;logo&#x60; irrelevant.
+Queues a background job that turns an existing room into a reusable room template, and returns the state of  that job right away. The template lands in the portal's Templates section, inherits the source room's type,  privacy, indexing, storage limit, lifetime, download and watermark settings, and receives copies of the room's  files together with its ordinary subfolders and everything inside them; the service subfolders a room keeps  for its own workflows are left out. The caller needs room-manager rights on the source room, and the room must  not be archived: a room that cannot be found under Rooms is answered as missing, and every other refusal comes  back as a rejection. The template is not ready when the response arrives, so poll  `GET api/2.0/files/roomtemplate/status` until `isCompleted` is true, then read `templateId`; a non-empty  `error` there means the job failed and the half-built template was removed. Only one template creation is  tracked per caller, and starting another replaces the previous record. Setting `public` to true discards  `share` and `groups` and shares the finished template with everyone instead, while `copyLogo` reuses the  source room's own picture and makes `logo` irrelevant.
 
 #### Parameters
 
@@ -7441,7 +7441,7 @@ Queues a background job that turns an existing room into a reusable room templat
 
 Create a third-party room
 
-Turns a folder of a connected third-party storage account into a room of the &#x60;Rooms&#x60; section, so that the  files of the room keep living in that storage instead of the portal. Connect the account first with  &#x60;POST api/2.0/files/thirdparty&#x60; and take the path parameter from a folder listing of that account: it is the  identifier of a folder in the storage, not of a room. One connected account can back one room only, so a  second call over the same account is refused, and so is an account that was not connected for room storage.  The caller needs the right to create rooms, which a portal user and a guest do not have; a public room is  refused while the administrator restricts external access, and reaching the room limit of the tariff is  refused too. With &#x60;createAsNewFolder&#x60; the room is a new subfolder named after &#x60;title&#x60;, otherwise the folder  from the path becomes the room itself and &#x60;indexing&#x60;, &#x60;denyDownload&#x60;, &#x60;tags&#x60; and &#x60;logo&#x60; are then dropped. The  answer is the new room, whose identifiers are strings; a public or a form-filling room already has its primary  link, readable with &#x60;GET api/2.0/files/rooms/{id}/link&#x60;.
+Turns a folder of a connected third-party storage account into a room of the `Rooms` section, so that the  files of the room keep living in that storage instead of the portal. Connect the account first with  `POST api/2.0/files/thirdparty` and take the path parameter from a folder listing of that account: it is the  identifier of a folder in the storage, not of a room. One connected account can back one room only, so a  second call over the same account is refused, and so is an account that was not connected for room storage.  The caller needs the right to create rooms, which a portal user and a guest do not have; a public room is  refused while the administrator restricts external access, and reaching the room limit of the tariff is  refused too. With `createAsNewFolder` the room is a new subfolder named after `title`, otherwise the folder  from the path becomes the room itself and `indexing`, `denyDownload`, `tags` and `logo` are then dropped. The  answer is the new room, whose identifiers are strings; a public or a form-filling room already has its primary  link, readable with `GET api/2.0/files/rooms/{id}/link`.
 
 #### Parameters
 
@@ -7483,7 +7483,7 @@ Turns a folder of a connected third-party storage account into a room of the &#x
 
 Delete the custom room tags
 
-Deletes custom room tags from the portal catalog by name and detaches them from every room that carries them;  the rooms themselves and their content are untouched, and only the tag disappears from their tag lists. Only a  portal administrator may call it, and a room manager who is allowed to create tags is refused. The names are  matched exactly as they are stored: names that are not in the catalog are skipped in silence and an empty list  is accepted as a no-op, so a successful answer does not prove that anything was deleted; check a name with  &#x60;GET api/2.0/files/tags/{tagName}/haslinks&#x60; first when that matters. The call cannot be undone: creating the  name again with &#x60;POST api/2.0/files/tags&#x60; brings back the tag but not its links, which have to be attached to  each room once more. The answer carries no body. To take a tag off one room and leave it in the catalog for  the others, use &#x60;DELETE api/2.0/files/rooms/{id}/tags&#x60; instead.
+Deletes custom room tags from the portal catalog by name and detaches them from every room that carries them;  the rooms themselves and their content are untouched, and only the tag disappears from their tag lists. Only a  portal administrator may call it, and a room manager who is allowed to create tags is refused. The names are  matched exactly as they are stored: names that are not in the catalog are skipped in silence and an empty list  is accepted as a no-op, so a successful answer does not prove that anything was deleted; check a name with  `GET api/2.0/files/tags/{tagName}/haslinks` first when that matters. The call cannot be undone: creating the  name again with `POST api/2.0/files/tags` brings back the tag but not its links, which have to be attached to  each room once more. The answer carries no body. To take a tag off one room and leave it in the catalog for  the others, use `DELETE api/2.0/files/rooms/{id}/tags` instead.
 
 #### Parameters
 
@@ -7525,13 +7525,13 @@ null (empty response body)
 
 Remove a room
 
-Queues a background job that deletes one room with everything inside it, and returns the operation record of  that job. Deleting a room is destructive and has no trash step: the room and its files are gone once the job  finishes, unlike a file or a folder, which is moved to the trash first. The right to delete is checked before  the job is queued, so a caller who may not delete the room is refused straight away and an unknown room is  answered as missing; the same checks run again when the job starts, which is why the &#x60;error&#x60; of the finished  operation still has to be read. Poll &#x60;GET api/2.0/files/fileops&#x60; until &#x60;finished&#x60; is true, or read the  returned record again by its &#x60;id&#x60;. The record is kept until it is read once, so one poll after completion  still sees it. &#x60;deleteAfter&#x60; in the body is required by the contract but has no effect on the job. An archived  room is deleted the same way, and a second delete of the same id reports that the room is missing.
+Queues a background job that deletes one room with everything inside it, and returns the operation record of  that job. Deleting a room is destructive and has no trash step: the room and its files are gone once the job  finishes, unlike a file or a folder, which is moved to the trash first. The right to delete is checked before  the job is queued, so a caller who may not delete the room is refused straight away and an unknown room is  answered as missing; the same checks run again when the job starts, which is why the `error` of the finished  operation still has to be read. Poll `GET api/2.0/files/fileops` until `finished` is true, or read the  returned record again by its `id`. The record is kept until it is read once, so one poll after completion  still sees it. `deleteAfter` in the body is required by the contract but has no effect on the job. An archived  room is deleted the same way, and a second delete of the same id reports that the room is missing.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The room to delete, named by the identifier that &#x60;GET api/2.0/files/rooms&#x60; reports for it. | [required] [example: 10] |
+| **id** | path | **Integer** (int32) | The room to delete, named by the identifier that `GET api/2.0/files/rooms` reports for it. | [required] [example: 10] |
 | **DeleteRoomRequest** | body | [**DeleteRoomRequest**](#model-deleteroomrequest) | The body of the request. It is required even though the deletion does not depend on what it holds. | [required] |
 
 #### Responses
@@ -7567,13 +7567,13 @@ Queues a background job that deletes one room with everything inside it, and ret
 
 Remove a room logo
 
-Removes the uploaded logo of a room and returns the room with empty logo addresses. What the room falls back  to is its cover and colour, which the logo only hid: if a cover was set before the logo, it is shown again,  and &#x60;POST api/2.0/files/rooms/{id}/cover&#x60; is what changes it. Nothing else about the room is touched, so  membership, tags, links and settings are preserved. A room that has no logo is accepted and answered with 200,  and repeating the call is therefore harmless. The caller must be a manager of the room; a member invited even  with editing rights is refused, and so is a room in the Archive section. A room that does not exist or was  deleted is answered as missing. After the logo is removed a new one can be set again through  &#x60;POST api/2.0/files/logos&#x60; followed by &#x60;POST api/2.0/files/rooms/{id}/logo&#x60;.
+Removes the uploaded logo of a room and returns the room with empty logo addresses. What the room falls back  to is its cover and colour, which the logo only hid: if a cover was set before the logo, it is shown again,  and `POST api/2.0/files/rooms/{id}/cover` is what changes it. Nothing else about the room is touched, so  membership, tags, links and settings are preserved. A room that has no logo is accepted and answered with 200,  and repeating the call is therefore harmless. The caller must be a manager of the room; a member invited even  with editing rights is refused, and so is a room in the Archive section. A room that does not exist or was  deleted is answered as missing. After the logo is removed a new one can be set again through  `POST api/2.0/files/logos` followed by `POST api/2.0/files/rooms/{id}/logo`.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The room to act on, named by the identifier that &#x60;GET api/2.0/files/rooms&#x60; reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. | [required] [example: 1] |
+| **id** | path | **Integer** (int32) | The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. | [required] [example: 1] |
 
 #### Responses
 
@@ -7608,13 +7608,13 @@ Removes the uploaded logo of a room and returns the room with empty logo address
 
 Detach tags from a room
 
-Detaches the named tags from a room and returns the room with its remaining tag set. Only the link between the  room and the tag is removed: the tag stays in the portal catalogue and keeps working for every other room, and  &#x60;DELETE api/2.0/files/tags&#x60; is what removes it from the portal itself. Names that are not in the catalogue, or  not attached to this room, are skipped without an error, so a successful answer does not prove that anything  was detached; compare the returned tag set instead. An empty list is accepted and does nothing, while a null  entry in the list is rejected as an invalid request. The caller must be a manager of the room or an  administrator of the portal, and a room in the Archive section is refused with 403. A tag that loses its last  room stays in the catalogue, and only deleting that room takes the tag with it.
+Detaches the named tags from a room and returns the room with its remaining tag set. Only the link between the  room and the tag is removed: the tag stays in the portal catalogue and keeps working for every other room, and  `DELETE api/2.0/files/tags` is what removes it from the portal itself. Names that are not in the catalogue, or  not attached to this room, are skipped without an error, so a successful answer does not prove that anything  was detached; compare the returned tag set instead. An empty list is accepted and does nothing, while a null  entry in the list is rejected as an invalid request. The caller must be a manager of the room or an  administrator of the portal, and a room in the Archive section is refused with 403. A tag that loses its last  room stays in the catalogue, and only deleting that room takes the tag with it.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The room whose tags are changed, named by the identifier that &#x60;GET api/2.0/files/rooms&#x60; reports for it. | [required] [example: 1] |
+| **id** | path | **Integer** (int32) | The room whose tags are changed, named by the identifier that `GET api/2.0/files/rooms` reports for it. | [required] [example: 1] |
 | **BatchTagsRequestDto** | body | [**BatchTagsRequestDto**](#model-batchtagsrequestdto) | The names to attach or to detach. | [optional] |
 
 #### Responses
@@ -7651,13 +7651,13 @@ Detaches the named tags from a room and returns the room with its remaining tag 
 
 Get external DB sync status
 
-Returns the record of the external database export job of a form filling room, or an empty body when the room  has no job at all. The room must be a form filling room and the caller must be able to edit it, otherwise the  call is refused; an unknown room is answered with 404. This is the polling target of  &#x60;POST api/2.0/files/rooms/{id}/externaldbsync&#x60;: repeat it until &#x60;isCompleted&#x60; is true, and then read &#x60;forms&#x60;,  which lists one entry per original form with its own &#x60;success&#x60; and &#x60;error&#x60; and is empty while the job is still  running. &#x60;percentage&#x60; advances as forms are processed, &#x60;status&#x60; distinguishes a job that is queued, running,  finished or failed, and &#x60;error&#x60; carries the message of a job that stopped as a whole. The record belongs to  the room rather than to the account that started the job, so any member who can edit the room sees the same  answer. The call changes nothing and is safe to repeat.
+Returns the record of the external database export job of a form filling room, or an empty body when the room  has no job at all. The room must be a form filling room and the caller must be able to edit it, otherwise the  call is refused; an unknown room is answered with 404. This is the polling target of  `POST api/2.0/files/rooms/{id}/externaldbsync`: repeat it until `isCompleted` is true, and then read `forms`,  which lists one entry per original form with its own `success` and `error` and is empty while the job is still  running. `percentage` advances as forms are processed, `status` distinguishes a job that is queued, running,  finished or failed, and `error` carries the message of a job that stopped as a whole. The record belongs to  the room rather than to the account that started the job, so any member who can edit the room sees the same  answer. The call changes nothing and is safe to repeat.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The room to act on, named by the identifier that &#x60;GET api/2.0/files/rooms&#x60; reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. | [required] [example: 1] |
+| **id** | path | **Integer** (int32) | The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. | [required] [example: 1] |
 
 #### Responses
 
@@ -7693,13 +7693,13 @@ Returns the record of the external database export job of a form filling room, o
 
 Get new items in a room
 
-Returns what is new for the calling account in one room, grouped by the day the entry was last changed, with  the newest day first and the entries inside a day ordered from the most recent. Only files are reported: a  folder somebody else created is not an entry of its own, while a file created inside it is, however deep it  lies. What the caller changed is never new for the caller, and a file that was deleted afterwards disappears  from the answer. Reading this list leaves the badges alone, which is what makes it the operation to call  before &#x60;GET api/2.0/files/rooms/{id}&#x60;, since opening the room clears them. An empty array therefore means that  there is nothing new, not that the badges were already read. The caller needs access to the room; somebody who  is not a member is refused, and an unknown or deleted room is answered as missing. Use  &#x60;GET api/2.0/files/rooms/news&#x60; for the same report across every room at once.
+Returns what is new for the calling account in one room, grouped by the day the entry was last changed, with  the newest day first and the entries inside a day ordered from the most recent. Only files are reported: a  folder somebody else created is not an entry of its own, while a file created inside it is, however deep it  lies. What the caller changed is never new for the caller, and a file that was deleted afterwards disappears  from the answer. Reading this list leaves the badges alone, which is what makes it the operation to call  before `GET api/2.0/files/rooms/{id}`, since opening the room clears them. An empty array therefore means that  there is nothing new, not that the badges were already read. The caller needs access to the room; somebody who  is not a member is refused, and an unknown or deleted room is answered as missing. Use  `GET api/2.0/files/rooms/news` for the same report across every room at once.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The room to act on, named by the identifier that &#x60;GET api/2.0/files/rooms&#x60; reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. | [required] [example: 1] |
+| **id** | path | **Integer** (int32) | The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. | [required] [example: 1] |
 
 #### Responses
 
@@ -7734,13 +7734,13 @@ Returns what is new for the calling account in one room, grouped by the day the 
 
 Get room template public access
 
-Reports whether the room template addressed by &#x60;id&#x60; is shared with everyone or is reachable only by the  accounts it was explicitly shared with. True means the Everyone group holds read access, so any member allowed  to create rooms can build one from the template with &#x60;POST api/2.0/files/rooms/fromtemplate&#x60;; false means only  the owner and the named recipients can. The identifier has to belong to a room template — take it from  &#x60;templateId&#x60; of &#x60;GET api/2.0/files/roomtemplate/status&#x60;, or from the folder list of &#x60;GET api/2.0/files/rooms&#x60;  called with &#x60;searchArea&#x60; set to 4 — while an ordinary room, a deleted template or an unknown value is answered  as missing. The caller needs read access to the template, so somebody else&#39;s private template is refused even  for a portal administrator, and members who cannot reach the Templates section at all are refused whatever the  template&#39;s state. The call only reads state; use &#x60;PUT api/2.0/files/roomtemplate/public&#x60; to change it.
+Reports whether the room template addressed by `id` is shared with everyone or is reachable only by the  accounts it was explicitly shared with. True means the Everyone group holds read access, so any member allowed  to create rooms can build one from the template with `POST api/2.0/files/rooms/fromtemplate`; false means only  the owner and the named recipients can. The identifier has to belong to a room template — take it from  `templateId` of `GET api/2.0/files/roomtemplate/status`, or from the folder list of `GET api/2.0/files/rooms`  called with `searchArea` set to 4 — while an ordinary room, a deleted template or an unknown value is answered  as missing. The caller needs read access to the template, so somebody else's private template is refused even  for a portal administrator, and members who cannot reach the Templates section at all are refused whatever the  template's state. The call only reads state; use `PUT api/2.0/files/roomtemplate/public` to change it.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The identifier of the room template. Take it from &#x60;templateId&#x60; of &#x60;GET api/2.0/files/roomtemplate/status&#x60;, or  from the folder list of &#x60;GET api/2.0/files/rooms&#x60; called with &#x60;searchArea&#x60; set to 4; an identifier of an  ordinary room is not accepted. | [required] [example: 1234] [min: 1] [max: 2147483647] |
+| **id** | path | **Integer** (int32) | The identifier of the room template. Take it from `templateId` of `GET api/2.0/files/roomtemplate/status`, or  from the folder list of `GET api/2.0/files/rooms` called with `searchArea` set to 4; an identifier of an  ordinary room is not accepted. | [required] [example: 1234] [min: 1] [max: 2147483647] |
 
 #### Responses
 
@@ -7775,7 +7775,7 @@ Reports whether the room template addressed by &#x60;id&#x60; is shared with eve
 
 Get room cover gallery
 
-Returns the gallery of cover pictures a room can be given: every entry pairs the identifier to send to  &#x60;POST api/2.0/files/rooms/{id}/cover&#x60; with the drawing itself as inline vector markup ready to be rendered.  The gallery is built into the product rather than stored per portal, so it is the same for every account and  every room, does not depend on what rooms exist, and its identifiers do not change with the language of the  request. The identifiers are unique and stable, which makes them safe to keep in a client, while the drawings  behind them may change between product versions. Any account of the portal may read the gallery, but a guest  is refused. The list is the only source of valid cover identifiers: a value that is not in it is rejected  wherever a cover is set, including room creation and room update. The call changes nothing and is safe to  repeat.
+Returns the gallery of cover pictures a room can be given: every entry pairs the identifier to send to  `POST api/2.0/files/rooms/{id}/cover` with the drawing itself as inline vector markup ready to be rendered.  The gallery is built into the product rather than stored per portal, so it is the same for every account and  every room, does not depend on what rooms exist, and its identifiers do not change with the language of the  request. The identifiers are unique and stable, which makes them safe to keep in a client, while the drawings  behind them may change between product versions. Any account of the portal may read the gallery, but a guest  is refused. The list is the only source of valid cover identifiers: a value that is not in it is rejected  wherever a cover is set, including room creation and room update. The call changes nothing and is safe to  repeat.
 
 #### Parameters
 This endpoint does not need any parameter.
@@ -7812,7 +7812,7 @@ This endpoint does not need any parameter.
 
 Get the room creation progress
 
-Returns the progress of the room-from-template job started by the calling account with  &#x60;POST api/2.0/files/rooms/fromtemplate&#x60;. The record is private to the account that started the job: jobs of  other members are never reported, and only one record is kept per account. The body is empty when the account  has no such record, and it is also empty when the job queue cannot be read, so an empty answer is not proof  that nothing was started. &#x60;progress&#x60; is a percentage, &#x60;isCompleted&#x60; marks the end of the job whether it  succeeded or failed, &#x60;error&#x60; carries the failure message and is empty on success, and &#x60;roomId&#x60; is meaningful  only once the room exists. The record survives the end of the job and is dropped when the next creation  starts, so polling after completion keeps returning the same answer. Poll this operation until &#x60;isCompleted&#x60;  is true and then read the room itself with &#x60;GET api/2.0/files/rooms/{id}&#x60;. The call changes nothing and is  safe to repeat.
+Returns the progress of the room-from-template job started by the calling account with  `POST api/2.0/files/rooms/fromtemplate`. The record is private to the account that started the job: jobs of  other members are never reported, and only one record is kept per account. The body is empty when the account  has no such record, and it is also empty when the job queue cannot be read, so an empty answer is not proof  that nothing was started. `progress` is a percentage, `isCompleted` marks the end of the job whether it  succeeded or failed, `error` carries the failure message and is empty on success, and `roomId` is meaningful  only once the room exists. The record survives the end of the job and is dropped when the next creation  starts, so polling after completion keeps returning the same answer. Poll this operation until `isCompleted`  is true and then read the room itself with `GET api/2.0/files/rooms/{id}`. The call changes nothing and is  safe to repeat.
 
 #### Parameters
 This endpoint does not need any parameter.
@@ -7849,7 +7849,7 @@ This endpoint does not need any parameter.
 
 Get the room index export
 
-Returns the state of the index export of the calling account, the job started by  &#x60;POST api/2.0/files/rooms/{id}/indexexport&#x60;. The record is not addressed by room: there is at most one per  account, and the answer describes the latest export whichever room it was started for. When the account has  never started one, or its record was cancelled, the body is null rather than an error, so null is the normal  way of saying that there is nothing to report. While the job runs, &#x60;percentage&#x60; moves in coarse steps instead  of smoothly, which makes it a rough hint rather than a measure of the remaining time; &#x60;isCompleted&#x60; is the  field to wait on, and it is also set for a job that failed or was cancelled, so read &#x60;status&#x60; to tell the  outcomes apart and &#x60;error&#x60; for the message. After a successful build, &#x60;resultFileId&#x60;, &#x60;resultFileName&#x60; and  &#x60;resultFileUrl&#x60; point to the spreadsheet saved in the My documents section of the caller. The record survives  completion and is replaced only by the next export.
+Returns the state of the index export of the calling account, the job started by  `POST api/2.0/files/rooms/{id}/indexexport`. The record is not addressed by room: there is at most one per  account, and the answer describes the latest export whichever room it was started for. When the account has  never started one, or its record was cancelled, the body is null rather than an error, so null is the normal  way of saying that there is nothing to report. While the job runs, `percentage` moves in coarse steps instead  of smoothly, which makes it a rough hint rather than a measure of the remaining time; `isCompleted` is the  field to wait on, and it is also set for a job that failed or was cancelled, so read `status` to tell the  outcomes apart and `error` for the message. After a successful build, `resultFileId`, `resultFileName` and  `resultFileUrl` point to the spreadsheet saved in the My documents section of the caller. The record survives  completion and is replaced only by the next export.
 
 #### Parameters
 This endpoint does not need any parameter.
@@ -7886,13 +7886,13 @@ This endpoint does not need any parameter.
 
 Get room information
 
-Returns one room with its type, title, tags, logo, cover, colour, quota and virtual data room settings,  together with the access level the caller has in it. Reading the room is not a side-effect-free call: it  clears the caller new-item badges for that room, and &#x60;newForMe&#x60; comes back as 0, so read  &#x60;GET api/2.0/files/rooms/{id}/news&#x60; first when the new items matter. The caller needs read access to the room;  portal administrators can read a room they were never invited to, while a member without access is refused.  The operation also answers an anonymous caller, but only in the context of a valid external share link of that  room, and a plain anonymous request is rejected as unauthenticated. A room that never existed, was deleted, or  lives in a section the caller cannot see is answered as missing. Archived rooms are returned as well and are  recognised by their root section rather than by a separate flag. Use &#x60;GET api/2.0/files/rooms&#x60; to search and  page through rooms instead of guessing ids.
+Returns one room with its type, title, tags, logo, cover, colour, quota and virtual data room settings,  together with the access level the caller has in it. Reading the room is not a side-effect-free call: it  clears the caller new-item badges for that room, and `newForMe` comes back as 0, so read  `GET api/2.0/files/rooms/{id}/news` first when the new items matter. The caller needs read access to the room;  portal administrators can read a room they were never invited to, while a member without access is refused.  The operation also answers an anonymous caller, but only in the context of a valid external share link of that  room, and a plain anonymous request is rejected as unauthenticated. A room that never existed, was deleted, or  lives in a section the caller cannot see is answered as missing. Archived rooms are returned as well and are  recognised by their root section rather than by a separate flag. Use `GET api/2.0/files/rooms` to search and  page through rooms instead of guessing ids.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The room to act on, named by the identifier that &#x60;GET api/2.0/files/rooms&#x60; reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. | [required] [example: 1] |
+| **id** | path | **Integer** (int32) | The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. | [required] [example: 1] |
 
 #### Responses
 
@@ -7911,7 +7911,7 @@ Returns one room with its type, title, tags, logo, cover, colour, quota and virt
 
 #### Authorization
 
-No authorization required
+[cookieAuth](#cookieauth), [bearerAuth](#bearerauth)
 
 #### HTTP request headers
 
@@ -7926,13 +7926,13 @@ No authorization required
 
 Get the room links
 
-Returns the sharing links of a room, with the invitation and the external links mixed together unless &#x60;type&#x60;  narrows it to one kind. Each entry carries the link address, its title, access level, expiration, the flag  that marks the primary external link of the room and, for invitation links, how many times it may still be  used. Public and form filling rooms come with an external link created for them, so an empty answer there  means that the link was revoked rather than that the room is private; rooms of the other kinds start with no  links at all and only gain one when somebody creates it, which for a collaboration room and a virtual data  room can be an invitation link alone. The caller needs access to the room and the right to see its links: a  member invited without that right gets an empty list rather than an error, while somebody who is not in the  room at all is refused. Paging parameters are not honoured here: the first hundred links are returned and the  reported count is the number of entries actually sent.
+Returns the sharing links of a room, with the invitation and the external links mixed together unless `type`  narrows it to one kind. Each entry carries the link address, its title, access level, expiration, the flag  that marks the primary external link of the room and, for invitation links, how many times it may still be  used. Public and form filling rooms come with an external link created for them, so an empty answer there  means that the link was revoked rather than that the room is private; rooms of the other kinds start with no  links at all and only gain one when somebody creates it, which for a collaboration room and a virtual data  room can be an invitation link alone. The caller needs access to the room and the right to see its links: a  member invited without that right gets an empty list rather than an error, while somebody who is not in the  room at all is refused. Paging parameters are not honoured here: the first hundred links are returned and the  reported count is the number of entries actually sent.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The room whose links are listed, named by the identifier that &#x60;GET api/2.0/files/rooms&#x60; reports for it. | [required] [example: 1] |
+| **id** | path | **Integer** (int32) | The room whose links are listed, named by the identifier that `GET api/2.0/files/rooms` reports for it. | [required] [example: 1] |
 | **type** | query | **LinkType** | Narrows the answer to one kind of link: invitation links, which turn whoever opens them into a member, or  external links, which open the room without an account. Leaving it out returns both kinds together. | [optional] [example: 1] [enum: 0, 1] |
 
 #### Responses
@@ -7968,14 +7968,14 @@ Returns the sharing links of a room, with the invitation and the external links 
 
 Get the room access rights
 
-Returns one page of the access list of a room: the owner first, then the managers, the groups, the ordinary  members, the guests and finally the invitations nobody has accepted yet, with the total in the response  headers. &#x60;filterType&#x60; selects what is listed and defaults to accounts and groups, which leaves the sharing  links of the room out; those are read with &#x60;GET api/2.0/files/rooms/{id}/links&#x60;. &#x60;filterValue&#x60; matches the  displayed name of the subject, and an invitation that is still pending is listed under the email address it  was sent to. Paging is done with &#x60;count&#x60; and &#x60;startIndex&#x60;, and the order is stable between calls. Any member  who can read the room sees the accounts and the groups, so the list is not limited to the managers, and portal  administrators can read the list of a room they were never invited to; somebody who is not in the room at all  is refused. Asking for the link entries instead needs the right to see the links of the room, and a member  without it gets an empty page rather than an error.
+Returns one page of the access list of a room: the owner first, then the managers, the groups, the ordinary  members, the guests and finally the invitations nobody has accepted yet, with the total in the response  headers. `filterType` selects what is listed and defaults to accounts and groups, which leaves the sharing  links of the room out; those are read with `GET api/2.0/files/rooms/{id}/links`. `filterValue` matches the  displayed name of the subject, and an invitation that is still pending is listed under the email address it  was sent to. Paging is done with `count` and `startIndex`, and the order is stable between calls. Any member  who can read the room sees the accounts and the groups, so the list is not limited to the managers, and portal  administrators can read the list of a room they were never invited to; somebody who is not in the room at all  is refused. Asking for the link entries instead needs the right to see the links of the room, and a member  without it gets an empty page rather than an error.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The room whose access list is read, named by the identifier that &#x60;GET api/2.0/files/rooms&#x60; reports for it. | [required] [example: 1] |
-| **filterType** | query | **ShareFilterType** | What kind of access entries to list. The default covers accounts and groups and leaves the sharing links of  the room out; those are read with &#x60;GET api/2.0/files/rooms/{id}/links&#x60;. | [optional] [example: 0] [enum: 0, 1, 2, 4, 8, 15, 16, 32] |
+| **id** | path | **Integer** (int32) | The room whose access list is read, named by the identifier that `GET api/2.0/files/rooms` reports for it. | [required] [example: 1] |
+| **filterType** | query | **ShareFilterType** | What kind of access entries to list. The default covers accounts and groups and leaves the sharing links of  the room out; those are read with `GET api/2.0/files/rooms/{id}/links`. | [optional] [example: 0] [enum: 0, 1, 2, 4, 8, 15, 16, 32] |
 | **count** | query | **Integer** (int32) | How many entries to return in one answer. The total number of matching entries comes back in the response  headers, so it is what tells the caller whether another page is needed. | [optional] [example: 25] [min: 1] [max: 100] |
 | **startIndex** | query | **Integer** (int32) | How many matching entries to skip before the page starts. Together with the page size it walks the list, which  is ordered by role and then by name and is therefore stable between calls. | [optional] [example: 0] |
 | **filterValue** | query | **String** | Keeps only the entries whose displayed name contains this text. An invitation that has not been accepted yet  is listed under the email address it was sent to, so that is what has to be searched for. | [optional] [example: Smith] |
@@ -8013,7 +8013,7 @@ Returns one page of the access list of a room: the owner first, then the manager
 
 Get available room tags
 
-Returns the custom room tags available to the caller as a flat array of names, not of objects. What the array  holds depends on the account: a portal administrator gets the whole catalog, including tags that no room uses  yet, while every other account gets only the tags attached to rooms it can see, with duplicates removed. An  empty answer therefore means that this caller sees no tagged room, not that the portal has no tags.  &#x60;filterValue&#x60; keeps the names that contain the given text, ignoring case, while &#x60;count&#x60; and &#x60;startIndex&#x60; page  the result; no total is returned, so a page shorter than &#x60;count&#x60; is the signal that the list is exhausted. The  names are exactly the values accepted by the &#x60;tags&#x60; filter of &#x60;GET api/2.0/files/rooms&#x60; and by the room tag  calls, which makes this the call to fill a tag picker with. Add a tag with &#x60;POST api/2.0/files/tags&#x60; and check  whether one is still in use with &#x60;GET api/2.0/files/tags/{tagName}/haslinks&#x60;.
+Returns the custom room tags available to the caller as a flat array of names, not of objects. What the array  holds depends on the account: a portal administrator gets the whole catalog, including tags that no room uses  yet, while every other account gets only the tags attached to rooms it can see, with duplicates removed. An  empty answer therefore means that this caller sees no tagged room, not that the portal has no tags.  `filterValue` keeps the names that contain the given text, ignoring case, while `count` and `startIndex` page  the result; no total is returned, so a page shorter than `count` is the signal that the list is exhausted. The  names are exactly the values accepted by the `tags` filter of `GET api/2.0/files/rooms` and by the room tag  calls, which makes this the call to fill a tag picker with. Add a tag with `POST api/2.0/files/tags` and check  whether one is still in use with `GET api/2.0/files/tags/{tagName}/haslinks`.
 
 #### Parameters
 
@@ -8056,7 +8056,7 @@ Returns the custom room tags available to the caller as a flat array of names, n
 
 Get room template creation status
 
-Reports the state of the room template creation the caller started with &#x60;POST api/2.0/files/roomtemplate&#x60;. The  record is private to the account that started the job: work started by another member is never reported, and a  caller who has started none gets an empty response instead of an object. Poll until &#x60;isCompleted&#x60; turns true,  then take the identifier of the finished template from &#x60;templateId&#x60;; a non-empty &#x60;error&#x60; means the job failed  and no template was kept. Treat &#x60;isCompleted&#x60; as the completion signal rather than &#x60;progress&#x60;, which the  background job only sets to 100 once the work is over. The record outlives the job, so a finished operation  can be read again and keeps returning the same identifier until the caller starts another template creation,  which replaces it. The call only reads state and needs no access to the source room or to the template, but it  does require an authenticated caller.
+Reports the state of the room template creation the caller started with `POST api/2.0/files/roomtemplate`. The  record is private to the account that started the job: work started by another member is never reported, and a  caller who has started none gets an empty response instead of an object. Poll until `isCompleted` turns true,  then take the identifier of the finished template from `templateId`; a non-empty `error` means the job failed  and no template was kept. Treat `isCompleted` as the completion signal rather than `progress`, which the  background job only sets to 100 once the work is over. The record outlives the job, so a finished operation  can be read again and keeps returning the same identifier until the caller starts another template creation,  which replaces it. The call only reads state and needs no access to the source room or to the template, but it  does require an authenticated caller.
 
 #### Parameters
 This endpoint does not need any parameter.
@@ -8093,7 +8093,7 @@ This endpoint does not need any parameter.
 
 Get rooms
 
-Lists the rooms of one section of the portal: the active rooms by default, or the archive, the form-filling  section or the room templates, chosen with &#x60;searchArea&#x60;. The rooms arrive in &#x60;folders&#x60; while &#x60;files&#x60; stays  empty, &#x60;current&#x60; describes the section itself, and &#x60;total&#x60; counts every room that matched the filters before  paging. A caller sees only the rooms they created or were invited to, while a portal administrator sees all of  them, so an empty answer means nothing is visible to this account rather than nothing exists. The remaining  parameters narrow the same set, by room type, title, tags, member, owner, storage, quota and privacy, and they  combine with each other. Sorting is not free of side effects: a &#x60;sortBy&#x60; value is also stored as this  account&#39;s default order for later listings, and omitting it reuses the stored order. Page the result with  &#x60;count&#x60; and &#x60;startIndex&#x60;. Read a single room with &#x60;GET api/2.0/files/rooms/{id}&#x60;, and create one with  &#x60;POST api/2.0/files/rooms&#x60;.
+Lists the rooms of one section of the portal: the active rooms by default, or the archive, the form-filling  section or the room templates, chosen with `searchArea`. The rooms arrive in `folders` while `files` stays  empty, `current` describes the section itself, and `total` counts every room that matched the filters before  paging. A caller sees only the rooms they created or were invited to, while a portal administrator sees all of  them, so an empty answer means nothing is visible to this account rather than nothing exists. The remaining  parameters narrow the same set, by room type, title, tags, member, owner, storage, quota and privacy, and they  combine with each other. Sorting is not free of side effects: a `sortBy` value is also stored as this  account's default order for later listings, and omitting it reuses the stored order. Page the result with  `count` and `startIndex`. Read a single room with `GET api/2.0/files/rooms/{id}`, and create one with  `POST api/2.0/files/rooms`.
 
 #### Parameters
 
@@ -8104,7 +8104,7 @@ Lists the rooms of one section of the portal: the active rooms by default, or th
 | **subjectOwnerId** | query | **UUID** (uuid) | Keeps only the rooms created by this account, regardless of who else was invited to them. The identifier comes  from the portal people listing, and the exclude flag turns the filter into its opposite. | [optional] [example: 9a1b2c3d-4e5f-6071-8293-a4b5c6d7e8f9] |
 | **searchArea** | query | **SearchArea** | The section to list. Every section is a separate root and a room belongs to exactly one of them at a time, so  archiving a room moves it out of the active section. The default is the active section, which leaves the  form-filling rooms to their own value. | [optional] [example: 1] [enum: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9] |
 | **withoutTags** | query | **Boolean** | When true, keeps only the rooms that carry no tag at all, which is the complement of the tag filter. When  false or omitted, tags play no part in the selection. | [optional] [example: false] |
-| **tags** | query | **String** | A JSON array of tag names serialized into a single query value, for example [Important,Legal]. A room  matches when it carries any one of them. Take the names from &#x60;GET api/2.0/files/tags&#x60;; a name that is not in  the catalog simply matches nothing. | [optional] [example: ["Important"]] |
+| **tags** | query | **String** | A JSON array of tag names serialized into a single query value, for example [Important,Legal]. A room  matches when it carries any one of them. Take the names from `GET api/2.0/files/tags`; a name that is not in  the catalog simply matches nothing. | [optional] [example: ["Important"]] |
 | **excludeSubject** | query | **Boolean** | Inverts the two subject filters: when true, the rooms of the named account are the ones left out of the answer  instead of the only ones kept. It does nothing on its own. | [optional] [example: false] |
 | **provider** | query | **ProviderFilter** | Keeps only the rooms whose content lives in the named third-party service, for portals where rooms may be  connected to external storage. The default keeps rooms of every origin. | [optional] [example: 1] [enum: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9] |
 | **quotaFilter** | query | **QuotaFilter** | Splits the rooms by whether a storage quota was set on the room itself or it follows the portal default, which  is how rooms with a custom limit are found. | [optional] [example: 1] [enum: 0, 1, 2] |
@@ -8112,10 +8112,10 @@ Lists the rooms of one section of the portal: the active rooms by default, or th
 | **privacyFilter** | query | **RoomPrivacyFilter** | Splits the rooms by whether they are private, that is encrypted rooms whose content the portal cannot read.  Omitting it returns both kinds. | [optional] [example: 1] [enum: 0, 1, 2] |
 | **count** | query | **Integer** (int32) | How many rooms one page may carry. Ask for the next page by raising the start index by the number of rooms  already received. | [optional] [example: 25] [min: 1] [max: 100] |
 | **startIndex** | query | **Integer** (int32) | How many matching rooms to skip before the page begins. Page through the answer until the skip plus the rooms  received reaches the total it reports. | [optional] [example: 0] |
-| **sortBy** | query | **String** | The field to order the rooms by, named as in the file listings: &#x60;AZ&#x60; for the title, &#x60;DateAndTime&#x60; for the last  change, &#x60;DateAndTimeCreation&#x60;, &#x60;Author&#x60;, &#x60;Size&#x60;, &#x60;Type&#x60;, &#x60;RoomType&#x60;, &#x60;Tags&#x60;, &#x60;UsedSpace&#x60;, &#x60;LastOpened&#x60;. The  name is matched ignoring case, an unknown one is rejected rather than ignored, and the accepted one also  becomes this account&#39;s stored order. | [optional] [example: DateAndTime] |
+| **sortBy** | query | **String** | The field to order the rooms by, named as in the file listings: `AZ` for the title, `DateAndTime` for the last  change, `DateAndTimeCreation`, `Author`, `Size`, `Type`, `RoomType`, `Tags`, `UsedSpace`, `LastOpened`. The  name is matched ignoring case, an unknown one is rejected rather than ignored, and the accepted one also  becomes this account's stored order. | [optional] [example: DateAndTime] |
 | **sortOrder** | query | **SortOrder** | The direction of the order chosen by the sort field. It has no effect when no sort field is given and the  stored order of the account is used. | [optional] [example: 1] [enum: 0, 1] |
 | **filterValue** | query | **String** | Keeps only the rooms whose title contains this text, ignoring case. It is a substring match over the title  alone: room content and tags are not searched. | [optional] [example: Sales] |
-| **groupId** | query | **Integer** (int32) | Keeps only the rooms that belong to this room group. The identifier comes from &#x60;GET api/2.0/files/group&#x60;; the  groups of portal members are a different concept and their identifiers do not match here. | [optional] [example: 1] |
+| **groupId** | query | **Integer** (int32) | Keeps only the rooms that belong to this room group. The identifier comes from `GET api/2.0/files/group`; the  groups of portal members are a different concept and their identifiers do not match here. | [optional] [example: 1] |
 
 #### Responses
 
@@ -8151,7 +8151,7 @@ Lists the rooms of one section of the portal: the active rooms by default, or th
 
 Get new items in all rooms
 
-Collects everything that is marked as new for the caller across the active rooms into one answer, grouped  first by the day an entry changed and then by the room it belongs to. An entry becomes new when somebody else  creates or changes it in a room the caller has already opened, so the caller&#39;s own work never shows up here,  and neither does anything from a room they have never visited. Only files are listed: a new subfolder is not  an item, although files created inside it are, at any depth. The days come newest first, and inside a day the  rooms and their files follow the same order by change time. The archive is out of scope, only rooms of the  active section are covered. Reading the list clears nothing: the marks stay until the room itself is opened  with &#x60;GET api/2.0/files/rooms/{id}&#x60;. An empty array means that this account has nothing new. For one room, use  &#x60;GET api/2.0/files/rooms/{id}/news&#x60;.
+Collects everything that is marked as new for the caller across the active rooms into one answer, grouped  first by the day an entry changed and then by the room it belongs to. An entry becomes new when somebody else  creates or changes it in a room the caller has already opened, so the caller's own work never shows up here,  and neither does anything from a room they have never visited. Only files are listed: a new subfolder is not  an item, although files created inside it are, at any depth. The days come newest first, and inside a day the  rooms and their files follow the same order by change time. The archive is out of scope, only rooms of the  active section are covered. Reading the list clears nothing: the marks stay until the room itself is opened  with `GET api/2.0/files/rooms/{id}`. An empty array means that this account has nothing new. For one room, use  `GET api/2.0/files/rooms/{id}/news`.
 
 #### Parameters
 This endpoint does not need any parameter.
@@ -8188,13 +8188,13 @@ This endpoint does not need any parameter.
 
 Get the room primary external link
 
-Returns the primary external link of a room, which is the one address meant to be handed out to people outside  the portal. A public room and a form filling room get such a link when they are created, and asking for it  again returns the same link rather than a new one, so the answer is stable. In a room that has no primary link  yet this call creates one instead of reporting nothing, which needs the right to manage the links of the room:  a member invited with a lower level is refused with 403, and so is anybody who is not in the room at all. A  link that was explicitly revoked stays revoked and is reported as missing rather than recreated, and an  unknown room is answered with 404 as well. An archived public room still reports its link. The answer is the  same entry that &#x60;GET api/2.0/files/rooms/{id}/links&#x60; returns with the primary flag set, including the request  token that has to travel with the address.
+Returns the primary external link of a room, which is the one address meant to be handed out to people outside  the portal. A public room and a form filling room get such a link when they are created, and asking for it  again returns the same link rather than a new one, so the answer is stable. In a room that has no primary link  yet this call creates one instead of reporting nothing, which needs the right to manage the links of the room:  a member invited with a lower level is refused with 403, and so is anybody who is not in the room at all. A  link that was explicitly revoked stays revoked and is reported as missing rather than recreated, and an  unknown room is answered with 404 as well. An archived public room still reports its link. The answer is the  same entry that `GET api/2.0/files/rooms/{id}/links` returns with the primary flag set, including the request  token that has to travel with the address.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The room to act on, named by the identifier that &#x60;GET api/2.0/files/rooms&#x60; reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. | [required] [example: 1] |
+| **id** | path | **Integer** (int32) | The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. | [required] [example: 1] |
 
 #### Responses
 
@@ -8231,13 +8231,13 @@ Returns the primary external link of a room, which is the one address meant to b
 
 Check room tag usage
 
-Reports whether any room still carries the named tag, which is the check to run before the tag is deleted from  the catalog. Only a portal administrator may call it, and every other account is refused. The name is matched  exactly against the catalog, and a name that is not in it is answered with 404. That also tells the two ways a  tag stops being used apart: taking the tag off the last room that carried it leaves the tag in the catalog and  turns the answer to false, while deleting that last room removes the tag itself, after which the call answers  404. A true answer means at least one room, active or archived, still references the tag, so deleting it with  &#x60;DELETE api/2.0/files/tags&#x60; would strip it from those rooms. The handler reads the tag name from the query  string, so the value has to be sent twice: in the path segment and as the &#x60;tagName&#x60; query parameter.
+Reports whether any room still carries the named tag, which is the check to run before the tag is deleted from  the catalog. Only a portal administrator may call it, and every other account is refused. The name is matched  exactly against the catalog, and a name that is not in it is answered with 404. That also tells the two ways a  tag stops being used apart: taking the tag off the last room that carried it leaves the tag in the catalog and  turns the answer to false, while deleting that last room removes the tag itself, after which the call answers  404. A true answer means at least one room, active or archived, still references the tag, so deleting it with  `DELETE api/2.0/files/tags` would strip it from those rooms. The handler reads the tag name from the query  string, so the value has to be sent twice: in the path segment and as the `tagName` query parameter.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **tagName2** | path | **String** | The tag being checked. Send the same value as the &#x60;tagName&#x60; query parameter, which is the one the handler reads. | [required] |
+| **tagName2** | path | **String** | The tag being checked. Send the same value as the `tagName` query parameter, which is the one the handler reads. | [required] |
 | **tagName** | query | **String** | The tag to check, spelled exactly as it is stored in the catalog. This query value is the one the handler  reads, so the path segment of the same name has to repeat it. | [optional] [example: Important] |
 
 #### Responses
@@ -8274,13 +8274,13 @@ Reports whether any room still carries the named tag, which is the check to run 
 
 Pin a room
 
-Pins a room to the top of the room list of the calling account and returns the room with the pinned flag set.  Pinning is personal: it changes the order only for the caller, is invisible to the other members of the room,  and does not survive a trip through the Archive section, so an unarchived room has to be pinned again. Pinned  rooms stay above the unpinned ones whatever sorting or filter the listing uses, and their own order between  each other is stable. An account may keep only a limited number of pinned rooms at a time, ten on a portal  with the default configuration, and AI rooms are counted separately against their own allowance; a request  over the limit is refused until something is unpinned with &#x60;PUT api/2.0/files/rooms/{id}/unpin&#x60;. Pinning a  room that is already pinned changes nothing and is safe to repeat. Anybody who can read the room may pin it,  including guests and portal administrators who were never invited, while somebody who is not in the room is  refused, an archived room is rejected and an unknown room is answered as missing.
+Pins a room to the top of the room list of the calling account and returns the room with the pinned flag set.  Pinning is personal: it changes the order only for the caller, is invisible to the other members of the room,  and does not survive a trip through the Archive section, so an unarchived room has to be pinned again. Pinned  rooms stay above the unpinned ones whatever sorting or filter the listing uses, and their own order between  each other is stable. An account may keep only a limited number of pinned rooms at a time, ten on a portal  with the default configuration, and AI rooms are counted separately against their own allowance; a request  over the limit is refused until something is unpinned with `PUT api/2.0/files/rooms/{id}/unpin`. Pinning a  room that is already pinned changes nothing and is safe to repeat. Anybody who can read the room may pin it,  including guests and portal administrators who were never invited, while somebody who is not in the room is  refused, an archived room is rejected and an unknown room is answered as missing.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The room to act on, named by the identifier that &#x60;GET api/2.0/files/rooms&#x60; reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. | [required] [example: 1] |
+| **id** | path | **Integer** (int32) | The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. | [required] [example: 1] |
 
 #### Responses
 
@@ -8321,7 +8321,7 @@ Renumbers the manual order of the items lying directly in a room so that they ru
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The room to act on, named by the identifier that &#x60;GET api/2.0/files/rooms&#x60; reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. | [required] [example: 1] |
+| **id** | path | **Integer** (int32) | The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. | [required] [example: 1] |
 
 #### Responses
 
@@ -8356,13 +8356,13 @@ Renumbers the manual order of the items lying directly in a room so that they ru
 
 Resend the room invitations
 
-Sends the room invitation email again to members who were invited but have not joined yet. &#x60;resendAll&#x60; covers  every pending invitation of the room and makes &#x60;usersIds&#x60; irrelevant, while an explicit list without that flag  is limited to the named accounts. An account that has already accepted the invitation, is not a member of the  room, or is invisible to the caller is skipped without an error, and a request that names nobody and does not  set the flag does nothing, so a successful answer never proves that a message went out. Nothing about the room  or its membership changes, and the operation can be repeated. The caller must be a manager of the room, an  archived room is refused, a room template is answered as missing, and a malformed account id is rejected as an  invalid request. The call is rate limited, so a client that loops over members should send one batch instead.  The response carries no body.
+Sends the room invitation email again to members who were invited but have not joined yet. `resendAll` covers  every pending invitation of the room and makes `usersIds` irrelevant, while an explicit list without that flag  is limited to the named accounts. An account that has already accepted the invitation, is not a member of the  room, or is invisible to the caller is skipped without an error, and a request that names nobody and does not  set the flag does nothing, so a successful answer never proves that a message went out. Nothing about the room  or its membership changes, and the operation can be repeated. The caller must be a manager of the room, an  archived room is refused, a room template is answered as missing, and a malformed account id is rejected as an  invalid request. The call is rate limited, so a client that loops over members should send one batch instead.  The response carries no body.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The room whose invitations are resent, named by the identifier that &#x60;GET api/2.0/files/rooms&#x60; reports for it. | [required] [example: 1] |
+| **id** | path | **Integer** (int32) | The room whose invitations are resent, named by the identifier that `GET api/2.0/files/rooms` reports for it. | [required] [example: 1] |
 | **UserInvitation** | body | [**UserInvitation**](#model-userinvitation) | Which pending invitations to send again. | [required] |
 
 #### Responses
@@ -8398,7 +8398,7 @@ null (empty response body)
 
 Set room template public access
 
-Switches the room template named by &#x60;id&#x60; between shared with everyone and private, rewriting its whole  recipient list in the process. With &#x60;public&#x60; true the Everyone group is granted read access, so every member  allowed to create rooms can build one from the template with &#x60;POST api/2.0/files/rooms/fromtemplate&#x60;; with  false that access is taken away. In both cases every other account and group the template was shared with —  including the addresses passed as &#x60;share&#x60; when it was created — loses access, so this is not a way to add a  single recipient to an existing list. Only the account that owns the template may call it: a portal  administrator who does not own it is refused, and so is a member invited to the source room. The identifier  has to resolve to a room template; an ordinary room or an unknown value is answered as missing, and an  identifier below 1 is rejected as an invalid request. Repeating the call with the same value changes nothing,  and nothing is returned; read the current state with &#x60;GET api/2.0/files/roomtemplate/{id}/public&#x60;.
+Switches the room template named by `id` between shared with everyone and private, rewriting its whole  recipient list in the process. With `public` true the Everyone group is granted read access, so every member  allowed to create rooms can build one from the template with `POST api/2.0/files/rooms/fromtemplate`; with  false that access is taken away. In both cases every other account and group the template was shared with —  including the addresses passed as `share` when it was created — loses access, so this is not a way to add a  single recipient to an existing list. Only the account that owns the template may call it: a portal  administrator who does not own it is refused, and so is a member invited to the source room. The identifier  has to resolve to a room template; an ordinary room or an unknown value is answered as missing, and an  identifier below 1 is rejected as an invalid request. Repeating the call with the same value changes nothing,  and nothing is returned; read the current state with `GET api/2.0/files/roomtemplate/{id}/public`.
 
 #### Parameters
 
@@ -8439,13 +8439,13 @@ null (empty response body)
 
 Set the room external or invitation link
 
-Creates, updates or deletes one sharing link of a room and returns it. &#x60;linkType&#x60; chooses the kind: an  invitation link makes whoever opens it a member with the given access level, while an external link opens the  room without an account. Omitting &#x60;linkId&#x60; creates a link, passing the id of an existing one updates it, and  an unknown id is created with that id; the kind of an existing link cannot be changed afterwards. An access  level of 0 deletes the link, and deleting the primary external link of a public or form filling room  immediately replaces it with a fresh one, so such a room is never left without one. A room keeps at most one  invitation link, and a second one is refused; form filling rooms take no invitation links, and collaboration,  form filling and virtual data rooms take no external links. An expiration date in the past is dropped silently  for an external link and rejected for an invitation link. &#x60;password&#x60;, &#x60;denyDownload&#x60; and &#x60;internal&#x60; apply to  external links only.
+Creates, updates or deletes one sharing link of a room and returns it. `linkType` chooses the kind: an  invitation link makes whoever opens it a member with the given access level, while an external link opens the  room without an account. Omitting `linkId` creates a link, passing the id of an existing one updates it, and  an unknown id is created with that id; the kind of an existing link cannot be changed afterwards. An access  level of 0 deletes the link, and deleting the primary external link of a public or form filling room  immediately replaces it with a fresh one, so such a room is never left without one. A room keeps at most one  invitation link, and a second one is refused; form filling rooms take no invitation links, and collaboration,  form filling and virtual data rooms take no external links. An expiration date in the past is dropped silently  for an external link and rejected for an invitation link. `password`, `denyDownload` and `internal` apply to  external links only.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The room the link belongs to, named by the identifier that &#x60;GET api/2.0/files/rooms&#x60; reports for it. | [required] [example: 1] |
+| **id** | path | **Integer** (int32) | The room the link belongs to, named by the identifier that `GET api/2.0/files/rooms` reports for it. | [required] [example: 1] |
 | **RoomLinkRequest** | body | [**RoomLinkRequest**](#model-roomlinkrequest) | The link to create, change or revoke. | [required] |
 
 #### Responses
@@ -8481,13 +8481,13 @@ Creates, updates or deletes one sharing link of a room and returns it. &#x60;lin
 
 Set the room access rights
 
-Adds, changes and removes room members in one batch, and returns the resulting access list of the named  subjects. Each entry names either an account or a group of the portal, or the email address of somebody who  has no account yet, together with the access level to grant; an access of 0 removes the subject from the room.  An entry without an access level is ignored, the same subject listed twice keeps the last level, and an empty  list is accepted and changes nothing. The caller must be a manager of the room, so an invitation sent by a  user or a guest is refused, and an account that is a portal user or a guest cannot be made a room manager.  Inviting by email also needs the portal to allow guest invitations. A subject the caller is not allowed to see  is dropped without an error, which is why the answer has to be compared with the request. Removing a member  who still holds a form role is refused through &#x60;error&#x60; unless &#x60;force&#x60; is set. &#x60;notify&#x60; sends the invitation  email with the optional &#x60;message&#x60;.
+Adds, changes and removes room members in one batch, and returns the resulting access list of the named  subjects. Each entry names either an account or a group of the portal, or the email address of somebody who  has no account yet, together with the access level to grant; an access of 0 removes the subject from the room.  An entry without an access level is ignored, the same subject listed twice keeps the last level, and an empty  list is accepted and changes nothing. The caller must be a manager of the room, so an invitation sent by a  user or a guest is refused, and an account that is a portal user or a guest cannot be made a room manager.  Inviting by email also needs the portal to allow guest invitations. A subject the caller is not allowed to see  is dropped without an error, which is why the answer has to be compared with the request. Removing a member  who still holds a form role is refused through `error` unless `force` is set. `notify` sends the invitation  email with the optional `message`.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The room whose membership changes, named by the identifier that &#x60;GET api/2.0/files/rooms&#x60; reports for it. | [required] [example: 1] |
+| **id** | path | **Integer** (int32) | The room whose membership changes, named by the identifier that `GET api/2.0/files/rooms` reports for it. | [required] [example: 1] |
 | **RoomInvitationRequest** | body | [**RoomInvitationRequest**](#model-roominvitationrequest) | The membership changes to apply, together with how the people concerned are notified. | [required] |
 
 #### Responses
@@ -8522,13 +8522,13 @@ Adds, changes and removes room members in one batch, and returns the resulting a
 
 Start external DB sync
 
-Queues a background job that re-exports the collected data of every original form of a form filling room into  the external database configured for the portal, and returns the job record. The room must be a form filling  room and the caller must be able to edit it, otherwise the call is refused with 403; an unknown room is  answered with 404. The export is not done when the response arrives: poll  &#x60;GET api/2.0/files/rooms/{id}/externaldbsync&#x60; until &#x60;isCompleted&#x60; is true, then read &#x60;forms&#x60; for the per-form  outcome, which stays empty while the job is running. Starting the job again while it is still running returns  the same record instead of a second job, so a retry is safe; a finished job is replaced by the new one. One  job is kept per room. A form whose data cannot be exported does not stop the others: it comes back in &#x60;forms&#x60;  with &#x60;success&#x60; false and its own &#x60;error&#x60;. When the portal has no external database configured the call fails  and nothing is queued.
+Queues a background job that re-exports the collected data of every original form of a form filling room into  the external database configured for the portal, and returns the job record. The room must be a form filling  room and the caller must be able to edit it, otherwise the call is refused with 403; an unknown room is  answered with 404. The export is not done when the response arrives: poll  `GET api/2.0/files/rooms/{id}/externaldbsync` until `isCompleted` is true, then read `forms` for the per-form  outcome, which stays empty while the job is running. Starting the job again while it is still running returns  the same record instead of a second job, so a retry is safe; a finished job is replaced by the new one. One  job is kept per room. A form whose data cannot be exported does not stop the others: it comes back in `forms`  with `success` false and its own `error`. When the portal has no external database configured the call fails  and nothing is queued.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The room to act on, named by the identifier that &#x60;GET api/2.0/files/rooms&#x60; reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. | [required] [example: 1] |
+| **id** | path | **Integer** (int32) | The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. | [required] [example: 1] |
 
 #### Responses
 
@@ -8565,13 +8565,13 @@ Queues a background job that re-exports the collected data of every original for
 
 Start the room index export
 
-Queues a background job that builds the index of a virtual data room as a spreadsheet, and answers with the  job record to poll. The room has to be a virtual data room with indexing switched on, and the caller has to be  its manager or a portal administrator; any other kind of room, a room template, and a member invited with a  lower access level are refused, while an unknown room is answered as missing. There is one job per account:  starting an export while an earlier one is still running answers with that earlier record instead of queuing a  second job, and a finished record is replaced by the new one. Poll &#x60;GET api/2.0/files/rooms/indexexport&#x60; until  &#x60;isCompleted&#x60; is true, then read &#x60;status&#x60; to tell a completed job from a failed or cancelled one, and take  &#x60;resultFileId&#x60; and &#x60;resultFileUrl&#x60; from the same record. The report is saved as a spreadsheet in the My  documents section of the caller, not in the room. Cancel a running job with  &#x60;DELETE api/2.0/files/rooms/indexexport&#x60;.
+Queues a background job that builds the index of a virtual data room as a spreadsheet, and answers with the  job record to poll. The room has to be a virtual data room with indexing switched on, and the caller has to be  its manager or a portal administrator; any other kind of room, a room template, and a member invited with a  lower access level are refused, while an unknown room is answered as missing. There is one job per account:  starting an export while an earlier one is still running answers with that earlier record instead of queuing a  second job, and a finished record is replaced by the new one. Poll `GET api/2.0/files/rooms/indexexport` until  `isCompleted` is true, then read `status` to tell a completed job from a failed or cancelled one, and take  `resultFileId` and `resultFileUrl` from the same record. The report is saved as a spreadsheet in the My  documents section of the caller, not in the room. Cancel a running job with  `DELETE api/2.0/files/rooms/indexexport`.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The room to act on, named by the identifier that &#x60;GET api/2.0/files/rooms&#x60; reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. | [required] [example: 1] |
+| **id** | path | **Integer** (int32) | The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. | [required] [example: 1] |
 
 #### Responses
 
@@ -8607,7 +8607,7 @@ Queues a background job that builds the index of a virtual data room as a spread
 
 Terminate the room index export
 
-Cancels the room index export of the calling account and drops its job record. No room is named because there  is at most one export per account, so the call always acts on the caller&#39;s own job and never on somebody  else&#39;s: an account with nothing running gets a successful answer that changes nothing, which makes the call  safe to repeat and makes it useless as a way of stopping an export somebody else started. Afterwards  &#x60;GET api/2.0/files/rooms/indexexport&#x60; answers with an empty body until a new export is started with  &#x60;POST api/2.0/files/rooms/{id}/indexexport&#x60;. The cancellation is asynchronous: the background job stops at its  next checkpoint, so one that is already saving the file may still finish, and a report that was written before  the cancellation stays in the My documents section of the caller and has to be deleted as an ordinary file.  The answer carries no body and says nothing about whether an export was running.
+Cancels the room index export of the calling account and drops its job record. No room is named because there  is at most one export per account, so the call always acts on the caller's own job and never on somebody  else's: an account with nothing running gets a successful answer that changes nothing, which makes the call  safe to repeat and makes it useless as a way of stopping an export somebody else started. Afterwards  `GET api/2.0/files/rooms/indexexport` answers with an empty body until a new export is started with  `POST api/2.0/files/rooms/{id}/indexexport`. The cancellation is asynchronous: the background job stops at its  next checkpoint, so one that is already saving the file may still finish, and a report that was written before  the cancellation stays in the My documents section of the caller and has to be deleted as an ordinary file.  The answer carries no body and says nothing about whether an export was running.
 
 #### Parameters
 This endpoint does not need any parameter.
@@ -8644,13 +8644,13 @@ null (empty response body)
 
 Unarchive a room
 
-Queues a background job that moves one room from the Archive section back to the Rooms section, and returns  the operation record of that job. The room becomes writable again with the membership, tags, logo and links it  had before, while the pinned state of its members is not restored and has to be set again with  &#x60;PUT api/2.0/files/rooms/{id}/pin&#x60;. The caller must be a manager of the room; a member who was only invited to  it is refused, a room template is answered as missing, and a room that was never archived simply stays where  it is. The room is not moved when the response arrives: poll &#x60;GET api/2.0/files/fileops&#x60; until &#x60;finished&#x60; is  true, and expect a room that is still archived until then. &#x60;deleteAfter&#x60; decides only how long the finished  record survives. Calling the operation twice in a row does not corrupt the room, and a deleted or unknown room  id is reported as missing.
+Queues a background job that moves one room from the Archive section back to the Rooms section, and returns  the operation record of that job. The room becomes writable again with the membership, tags, logo and links it  had before, while the pinned state of its members is not restored and has to be set again with  `PUT api/2.0/files/rooms/{id}/pin`. The caller must be a manager of the room; a member who was only invited to  it is refused, a room template is answered as missing, and a room that was never archived simply stays where  it is. The room is not moved when the response arrives: poll `GET api/2.0/files/fileops` until `finished` is  true, and expect a room that is still archived until then. `deleteAfter` decides only how long the finished  record survives. Calling the operation twice in a row does not corrupt the room, and a deleted or unknown room  id is reported as missing.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The room to move, named by the identifier that &#x60;GET api/2.0/files/rooms&#x60; reports for it. | [required] [example: 1] |
+| **id** | path | **Integer** (int32) | The room to move, named by the identifier that `GET api/2.0/files/rooms` reports for it. | [required] [example: 1] |
 | **ArchiveRoomRequest** | body | [**ArchiveRoomRequest**](#model-archiveroomrequest) | The body of the request. It carries only the lifetime of the job record, so an empty object is a normal  request. | [optional] |
 
 #### Responses
@@ -8686,13 +8686,13 @@ Queues a background job that moves one room from the Archive section back to the
 
 Unpin a room
 
-Removes a room from the pinned group of the calling account and returns the room with the pinned flag cleared.  Only the personal ordering of the caller changes: the room itself, its members, their roles and its contents  are left exactly as they were, and the room stays in the list, simply among the unpinned ones. Unpinning frees  one of the pin slots of the account, which AI rooms count separately, so it is the way out of a refused  &#x60;PUT api/2.0/files/rooms/{id}/pin&#x60;. Unpinning a room that was never pinned is accepted and changes nothing, so  the call can be repeated safely and its answer does not prove that anything was pinned before. Anybody who can  read the room may unpin it, while somebody who is not in the room at all is refused and an unknown or deleted  room is answered as missing. An archived room cannot be unpinned.
+Removes a room from the pinned group of the calling account and returns the room with the pinned flag cleared.  Only the personal ordering of the caller changes: the room itself, its members, their roles and its contents  are left exactly as they were, and the room stays in the list, simply among the unpinned ones. Unpinning frees  one of the pin slots of the account, which AI rooms count separately, so it is the way out of a refused  `PUT api/2.0/files/rooms/{id}/pin`. Unpinning a room that was never pinned is accepted and changes nothing, so  the call can be repeated safely and its answer does not prove that anything was pinned before. Anybody who can  read the room may unpin it, while somebody who is not in the room at all is refused and an unknown or deleted  room is answered as missing. An archived room cannot be unpinned.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The room to act on, named by the identifier that &#x60;GET api/2.0/files/rooms&#x60; reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. | [required] [example: 1] |
+| **id** | path | **Integer** (int32) | The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. | [required] [example: 1] |
 
 #### Responses
 
@@ -8727,13 +8727,13 @@ Removes a room from the pinned group of the calling account and returns the room
 
 Update a room
 
-Applies a partial change to one room and returns the whole room as it is after it. Only the fields present in  the body are touched, an empty body changes nothing, and a property the body does not define is rejected as an  invalid request instead of being ignored. The caller must be a manager of this room: portal administrators do  not get in without an invitation, and an archived room is refused. &#x60;title&#x60; is trimmed, sanitised the way a  room title is sanitised at creation, and a blank value is treated as no change. &#x60;tags&#x60; replaces the whole tag  set and an empty array clears it, an empty &#x60;color&#x60; restores the default and an empty &#x60;cover&#x60; removes the  cover. A &#x60;quota&#x60; of -1 switches the room back to no custom limit, any other negative value restores the portal  default, and a positive one is accepted only while the per-room quota feature is on. Turning &#x60;indexing&#x60; on  renumbers the room contents. &#x60;chatSettings&#x60; belongs to an AI room and is rejected anywhere else. Use  &#x60;POST api/2.0/files/rooms/{id}/logo&#x60; for logo cropping.
+Applies a partial change to one room and returns the whole room as it is after it. Only the fields present in  the body are touched, an empty body changes nothing, and a property the body does not define is rejected as an  invalid request instead of being ignored. The caller must be a manager of this room: portal administrators do  not get in without an invitation, and an archived room is refused. `title` is trimmed, sanitised the way a  room title is sanitised at creation, and a blank value is treated as no change. `tags` replaces the whole tag  set and an empty array clears it, an empty `color` restores the default and an empty `cover` removes the  cover. A `quota` of -1 switches the room back to no custom limit, any other negative value restores the portal  default, and a positive one is accepted only while the per-room quota feature is on. Turning `indexing` on  renumbers the room contents. `chatSettings` belongs to an AI room and is rejected anywhere else. Use  `POST api/2.0/files/rooms/{id}/logo` for logo cropping.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The room to update, named by the identifier that &#x60;GET api/2.0/files/rooms&#x60; reports for it. | [required] [example: 1] |
+| **id** | path | **Integer** (int32) | The room to update, named by the identifier that `GET api/2.0/files/rooms` reports for it. | [required] [example: 1] |
 | **UpdateRoomRequest** | body | [**UpdateRoomRequest**](#model-updateroomrequest) | The fields to change. Only the properties present in the object are applied, and a property that the object  does not define is rejected instead of being ignored. | [required] |
 
 #### Responses
@@ -8769,7 +8769,7 @@ Applies a partial change to one room and returns the whole room as it is after i
 
 Rename a room tag
 
-Renames a custom room tag in the portal catalog. The rename follows the tag everywhere it is used: every room  that carries it keeps it and shows the new name, so nothing has to be re-attached afterwards. Only a portal  administrator may rename a tag, and a room manager who is allowed to create tags is still refused here. The  old name is matched exactly as it is stored rather than searched for, and a name that is not in the catalog is  answered as missing. A new name that another tag already occupies is rejected as an invalid request, because  tag names are unique across the portal; both names must be non-blank and within the published length limit.  The answer is the new name. Stored queries are not updated for the caller: a &#x60;tags&#x60; filter of  &#x60;GET api/2.0/files/rooms&#x60; that still names the old value stops matching anything. The catalog is read with  &#x60;GET api/2.0/files/tags&#x60;.
+Renames a custom room tag in the portal catalog. The rename follows the tag everywhere it is used: every room  that carries it keeps it and shows the new name, so nothing has to be re-attached afterwards. Only a portal  administrator may rename a tag, and a room manager who is allowed to create tags is still refused here. The  old name is matched exactly as it is stored rather than searched for, and a name that is not in the catalog is  answered as missing. A new name that another tag already occupies is rejected as an invalid request, because  tag names are unique across the portal; both names must be non-blank and within the published length limit.  The answer is the new name. Stored queries are not updated for the caller: a `tags` filter of  `GET api/2.0/files/rooms` that still names the old value stops matching anything. The catalog is read with  `GET api/2.0/files/tags`.
 
 #### Parameters
 
@@ -8811,7 +8811,7 @@ Renames a custom room tag in the portal catalog. The rename follows the tag ever
 
 Upload a room logo image
 
-Stores an image in temporary storage and answers with the path to it, which is the first half of setting a  room logo. No room changes here: pass the returned path as &#x60;tmpFile&#x60; to &#x60;POST api/2.0/files/rooms/{id}/logo&#x60;,  together with the crop rectangle, to make the image the logo of a room. The image travels as multipart form  data, and the first file part of the request is the one that is used while any other part is ignored. It is  re-encoded to PNG and scaled down to fit 1280 by 1280 pixels, so a larger picture is accepted and shrunk,  while a part that is not a readable image, or one over the portal limit for uploaded images, is refused with  400. Only a room manager or a portal administrator may upload, and everyone else gets 403. Every call produces  a new path, and an image that is never used stays in temporary storage until it is cleaned up, so uploading  twice is harmless.
+Stores an image in temporary storage and answers with the path to it, which is the first half of setting a  room logo. No room changes here: pass the returned path as `tmpFile` to `POST api/2.0/files/rooms/{id}/logo`,  together with the crop rectangle, to make the image the logo of a room. The image travels as multipart form  data, and the first file part of the request is the one that is used while any other part is ignored. It is  re-encoded to PNG and scaled down to fit 1280 by 1280 pixels, so a larger picture is accepted and shrunk,  while a part that is not a readable image, or one over the portal limit for uploaded images, is refused with  400. Only a room manager or a portal administrator may upload, and everyone else gets 403. Every call produces  a new path, and an image that is never used stays in temporary storage until it is cleaned up, so uploading  twice is harmless.
 
 #### Parameters
 
@@ -8855,7 +8855,7 @@ Stores an image in temporary storage and answers with the path to it, which is t
 
 Add a new room group
 
-Creates a room group, a personal collection that gathers rooms the caller already works with under one name  and icon; it belongs to the account that created it and is never shown to other members of the portal. Pass  the group name, the identifier of one of the built-in covers offered by &#x60;GET api/2.0/files/rooms/covers&#x60;, and  a list of at least one room - a number for a room stored in the portal, a string for a room on a connected  third-party account. Any role may create its own group, a guest included: what is checked is read access to  each listed room, not the role of the caller. Repeated identifiers are collapsed, and a value that is not a  room identifier at all is rejected as an invalid request. When none of the listed rooms can be read the group  is not created; when only some of them can, the group is created with those rooms and the call is still  reported as failed, so re-read &#x60;GET api/2.0/files/group&#x60; before retrying. A room may sit in several groups,  and two groups of the same account may carry the same name. The answer is the stored group with its rooms.
+Creates a room group, a personal collection that gathers rooms the caller already works with under one name  and icon; it belongs to the account that created it and is never shown to other members of the portal. Pass  the group name, the identifier of one of the built-in covers offered by `GET api/2.0/files/rooms/covers`, and  a list of at least one room - a number for a room stored in the portal, a string for a room on a connected  third-party account. Any role may create its own group, a guest included: what is checked is read access to  each listed room, not the role of the caller. Repeated identifiers are collapsed, and a value that is not a  room identifier at all is rejected as an invalid request. When none of the listed rooms can be read the group  is not created; when only some of them can, the group is created with those rooms and the call is still  reported as failed, so re-read `GET api/2.0/files/group` before retrying. A room may sit in several groups,  and two groups of the same account may carry the same name. The answer is the stored group with its rooms.
 
 #### Parameters
 
@@ -8896,13 +8896,13 @@ Creates a room group, a personal collection that gathers rooms the caller alread
 
 Change room group icon
 
-Replaces the icon of one of the caller&#39;s own room groups and returns the whole group, its name and its rooms  left as they were. Send the identifier of one of the built-in covers offered by  &#x60;GET api/2.0/files/rooms/covers&#x60;; an empty string strips the icon, after which the group comes back with an  empty &#x60;icon&#x60;, and any other value - including a word that merely reads like one, such as &#x60;none&#x60; - is rejected  as an invalid request. An uploaded image cannot be used here, unlike the logo of a room. Leaving &#x60;icon&#x60; out of  the body or sending it as null is accepted and changes nothing, whereas a request that carries no body at all,  or a body that is not JSON, is refused. Setting the icon the group already has is accepted as well, so  retrying the call is safe. Any role may re-icon its own group, and a group belonging to another account is  answered as missing rather than refused, exactly as reading it would be.
+Replaces the icon of one of the caller's own room groups and returns the whole group, its name and its rooms  left as they were. Send the identifier of one of the built-in covers offered by  `GET api/2.0/files/rooms/covers`; an empty string strips the icon, after which the group comes back with an  empty `icon`, and any other value - including a word that merely reads like one, such as `none` - is rejected  as an invalid request. An uploaded image cannot be used here, unlike the logo of a room. Leaving `icon` out of  the body or sending it as null is accepted and changes nothing, whereas a request that carries no body at all,  or a body that is not JSON, is refused. Setting the icon the group already has is accepted as well, so  retrying the call is safe. Any role may re-icon its own group, and a group belonging to another account is  answered as missing rather than refused, exactly as reading it would be.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The room group to re-icon, identified by the value &#x60;GET api/2.0/files/group&#x60; reports for it. A group of  another account cannot be addressed and reads as missing. | [required] [example: 42] |
+| **id** | path | **Integer** (int32) | The room group to re-icon, identified by the value `GET api/2.0/files/group` reports for it. A group of  another account cannot be addressed and reads as missing. | [required] [example: 42] |
 | **IconRequest** | body | [**IconRequest**](#model-iconrequest) | The icon to give the group. A body that leaves the icon out is accepted and changes nothing. | [optional] |
 
 #### Responses
@@ -8938,14 +8938,14 @@ Replaces the icon of one of the caller&#39;s own room groups and returns the who
 
 Delete a room group
 
-Deletes one of the caller&#39;s own room groups. Only the collection goes away: the rooms it gathered, their  content and the shares on them are left exactly as they were, and a room that was in no other group simply  stops being grouped. Deleting a group of another account is refused, and an identifier that names nothing -  because it never existed, or because the group has already been deleted - is answered as missing, so repeating  the call after a successful delete does not report success a second time. The operation is destructive and  cannot be undone: there is no trash for groups, and rebuilding one means calling &#x60;POST api/2.0/files/group&#x60;  again with the same name, icon and rooms, which gives it a new identifier. Nothing is returned in the body.  The &#x60;includeMembers&#x60; parameter is accepted here because the route shares its contract with  &#x60;GET api/2.0/files/group/{id}&#x60;, and has no effect on what is deleted. Read the group first when the rooms it  gathers still have to be recorded somewhere.
+Deletes one of the caller's own room groups. Only the collection goes away: the rooms it gathered, their  content and the shares on them are left exactly as they were, and a room that was in no other group simply  stops being grouped. Deleting a group of another account is refused, and an identifier that names nothing -  because it never existed, or because the group has already been deleted - is answered as missing, so repeating  the call after a successful delete does not report success a second time. The operation is destructive and  cannot be undone: there is no trash for groups, and rebuilding one means calling `POST api/2.0/files/group`  again with the same name, icon and rooms, which gives it a new identifier. Nothing is returned in the body.  The `includeMembers` parameter is accepted here because the route shares its contract with  `GET api/2.0/files/group/{id}`, and has no effect on what is deleted. Read the group first when the rooms it  gathers still have to be recorded somewhere.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The room group to act on, identified by the value &#x60;GET api/2.0/files/group&#x60; reports for it. A group of another  account cannot be addressed and reads as missing. | [required] [example: 42] |
-| **includeMembers** | query | **Boolean** | Whether the rooms of the group are listed in the answer: true fills the &#x60;rooms&#x60; array, false leaves it out and  reports only how many there are in &#x60;totalRooms&#x60;. | [optional] [example: true] |
+| **id** | path | **Integer** (int32) | The room group to act on, identified by the value `GET api/2.0/files/group` reports for it. A group of another  account cannot be addressed and reads as missing. | [required] [example: 42] |
+| **includeMembers** | query | **Boolean** | Whether the rooms of the group are listed in the answer: true fills the `rooms` array, false leaves it out and  reports only how many there are in `totalRooms`. | [optional] [example: true] |
 
 #### Responses
 
@@ -8980,14 +8980,14 @@ null (empty response body)
 
 Get room group info
 
-Returns one room group of the calling account together with the rooms it gathers. Groups are personal: an  identifier that belongs to another member is answered the same way as one that was never created or has  already been deleted, and a portal administrator is no exception to that rule. Take the identifier from  &#x60;GET api/2.0/files/group&#x60;, which lists the groups the caller owns. Set &#x60;includeMembers&#x60; to false to get the  group without the &#x60;rooms&#x60; array, which is the cheaper form when only the name, the icon and the number of  rooms are needed; &#x60;totalRooms&#x60; is filled either way. A room moved to the archive is left out of both &#x60;rooms&#x60;  and &#x60;totalRooms&#x60; while its membership survives, so taking the room out of the archive brings it back into the  group. Rooms stored in the portal are listed before rooms on connected third-party accounts. The call is  read-only and changes nothing about the group or the rooms it refers to.
+Returns one room group of the calling account together with the rooms it gathers. Groups are personal: an  identifier that belongs to another member is answered the same way as one that was never created or has  already been deleted, and a portal administrator is no exception to that rule. Take the identifier from  `GET api/2.0/files/group`, which lists the groups the caller owns. Set `includeMembers` to false to get the  group without the `rooms` array, which is the cheaper form when only the name, the icon and the number of  rooms are needed; `totalRooms` is filled either way. A room moved to the archive is left out of both `rooms`  and `totalRooms` while its membership survives, so taking the room out of the archive brings it back into the  group. Rooms stored in the portal are listed before rooms on connected third-party accounts. The call is  read-only and changes nothing about the group or the rooms it refers to.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The room group to act on, identified by the value &#x60;GET api/2.0/files/group&#x60; reports for it. A group of another  account cannot be addressed and reads as missing. | [required] [example: 42] |
-| **includeMembers** | query | **Boolean** | Whether the rooms of the group are listed in the answer: true fills the &#x60;rooms&#x60; array, false leaves it out and  reports only how many there are in &#x60;totalRooms&#x60;. | [optional] [example: true] |
+| **id** | path | **Integer** (int32) | The room group to act on, identified by the value `GET api/2.0/files/group` reports for it. A group of another  account cannot be addressed and reads as missing. | [required] [example: 42] |
+| **includeMembers** | query | **Boolean** | Whether the rooms of the group are listed in the answer: true fills the `rooms` array, false leaves it out and  reports only how many there are in `totalRooms`. | [optional] [example: true] |
 
 #### Responses
 
@@ -9022,13 +9022,13 @@ Returns one room group of the calling account together with the rooms it gathers
 
 List room groups
 
-Returns every room group of the calling account, each with the rooms it gathers. Only groups the caller  created are listed: groups of other members never appear here, and an account that has never made one gets an  empty array back. Set &#x60;includeMembers&#x60; to false to leave the &#x60;rooms&#x60; array out of every entry and keep the  name, the icon and &#x60;totalRooms&#x60; alone, which is the cheaper form when the list is only being shown as a menu.  Archived rooms are skipped in both the &#x60;rooms&#x60; array and the &#x60;totalRooms&#x60; count, and reappear once the room is  taken out of the archive. The listing is neither paged nor filtered - it always carries the whole set - and  the order of the entries is not contractual, so sort them on the client when the order matters. The call is  read-only. Use &#x60;GET api/2.0/files/group/{id}&#x60; when the identifier of a single group is already known, and  &#x60;POST api/2.0/files/group&#x60; to add one.
+Returns every room group of the calling account, each with the rooms it gathers. Only groups the caller  created are listed: groups of other members never appear here, and an account that has never made one gets an  empty array back. Set `includeMembers` to false to leave the `rooms` array out of every entry and keep the  name, the icon and `totalRooms` alone, which is the cheaper form when the list is only being shown as a menu.  Archived rooms are skipped in both the `rooms` array and the `totalRooms` count, and reappear once the room is  taken out of the archive. The listing is neither paged nor filtered - it always carries the whole set - and  the order of the entries is not contractual, so sort them on the client when the order matters. The call is  read-only. Use `GET api/2.0/files/group/{id}` when the identifier of a single group is already known, and  `POST api/2.0/files/group` to add one.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **includeMembers** | query | **Boolean** | Whether the rooms of each group are listed in the answer: true fills the &#x60;rooms&#x60; array of every entry, false  leaves it out and reports only how many there are in &#x60;totalRooms&#x60;. | [optional] [example: true] |
+| **includeMembers** | query | **Boolean** | Whether the rooms of each group are listed in the answer: true fills the `rooms` array of every entry, false  leaves it out and reports only how many there are in `totalRooms`. | [optional] [example: true] |
 
 #### Responses
 
@@ -9063,13 +9063,13 @@ Returns every room group of the calling account, each with the rooms it gathers.
 
 Update room group
 
-Applies changes to one of the caller&#39;s own room groups: a new name, rooms to attach, rooms to detach, or any  combination of the three in a single call. A body that carries none of the three (&#x60;{}&#x60;) is accepted and  changes nothing, while a body that names them and leaves every one of them empty asks for an update that  cannot be performed and is rejected as an invalid request. &#x60;roomsToAdd&#x60; is resolved the way creation resolves  its list: every identifier has to name a room the caller can read, repeats and rooms already in the group are  collapsed, and when only part of the list resolves the rest is still attached and the call is reported as  failed. &#x60;roomsToRemove&#x60; works the other way round - a room already in the group is always detached, even when  the caller has since lost access to it, whereas an identifier that is not in the group is resolved first and  refused when it names nothing. The steps are applied in order and are not rolled back when a later one fails.  A group of another account is answered as missing. The answer is the group as stored after the call.
+Applies changes to one of the caller's own room groups: a new name, rooms to attach, rooms to detach, or any  combination of the three in a single call. A body that carries none of the three (`{}`) is accepted and  changes nothing, while a body that names them and leaves every one of them empty asks for an update that  cannot be performed and is rejected as an invalid request. `roomsToAdd` is resolved the way creation resolves  its list: every identifier has to name a room the caller can read, repeats and rooms already in the group are  collapsed, and when only part of the list resolves the rest is still attached and the call is reported as  failed. `roomsToRemove` works the other way round - a room already in the group is always detached, even when  the caller has since lost access to it, whereas an identifier that is not in the group is resolved first and  refused when it names nothing. The steps are applied in order and are not rolled back when a later one fails.  A group of another account is answered as missing. The answer is the group as stored after the call.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The room group to change, identified by the value &#x60;GET api/2.0/files/group&#x60; reports for it. A group of another  account cannot be addressed and reads as missing. | [required] [example: 42] |
+| **id** | path | **Integer** (int32) | The room group to change, identified by the value `GET api/2.0/files/group` reports for it. A group of another  account cannot be addressed and reads as missing. | [required] [example: 42] |
 | **UpdateRoomGroupRequest** | body | [**UpdateRoomGroupRequest**](#model-updateroomgrouprequest) | The changes to apply. Carrying none of them leaves the group as it is, and each of them may be sent on its own  or together with the others. | [required] |
 
 #### Responses
@@ -9107,13 +9107,13 @@ Applies changes to one of the caller&#39;s own room groups: a new name, rooms to
 
 Delete an encryption key
 
-Removes one encryption key pair from the calling user&#39;s own key set and answers 204 with no body. The pair is  named by the &#x60;id&#x60; of an entry of &#x60;GET api/2.0/privacyroom/keys&#x60;; the caller&#39;s other pairs stay as they are.  The call is destructive and cannot be repeated: the key material is gone for good, a second delete of the same  &#x60;id&#x60;, like an &#x60;id&#x60; that was never stored, is answered with 404, and there is no parameter for another user&#39;s  keys, so an authenticated member only ever deletes their own while a guest is refused. Deleting the last key  the caller holds locks them out of the private rooms they belong to, their own rooms included: the rooms and  their content survive untouched and stay listed as private, but &#x60;GET api/2.0/privacyroom/{roomId}/access&#x60; then  refuses the caller until a new key is stored with &#x60;POST api/2.0/privacyroom/keys&#x60;. Before DocSpace 4.0 the  call answered 200 with the caller&#39;s remaining keys, so a client that read that list has to call  &#x60;GET api/2.0/privacyroom/keys&#x60; instead.
+Removes one encryption key pair from the calling user's own key set and answers 204 with no body. The pair is  named by the `id` of an entry of `GET api/2.0/privacyroom/keys`; the caller's other pairs stay as they are.  The call is destructive and cannot be repeated: the key material is gone for good, a second delete of the same  `id`, like an `id` that was never stored, is answered with 404, and there is no parameter for another user's  keys, so an authenticated member only ever deletes their own while a guest is refused. Deleting the last key  the caller holds locks them out of the private rooms they belong to, their own rooms included: the rooms and  their content survive untouched and stay listed as private, but `GET api/2.0/privacyroom/{roomId}/access` then  refuses the caller until a new key is stored with `POST api/2.0/privacyroom/keys`. Before DocSpace 4.0 the  call answered 200 with the caller's remaining keys, so a client that read that list has to call  `GET api/2.0/privacyroom/keys` instead.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **UUID** (uuid) | The pair to delete, taken from the &#x60;id&#x60; of an entry of &#x60;GET api/2.0/privacyroom/keys&#x60;. Only the caller&#39;s own  pairs can be named here. | [required] [example: 9924256B-447C-4F19-9dbd-8ad8c39e8ff5] |
+| **id** | path | **UUID** (uuid) | The pair to delete, taken from the `id` of an entry of `GET api/2.0/privacyroom/keys`. Only the caller's own  pairs can be named here. | [required] [example: 9924256B-447C-4F19-9dbd-8ad8c39e8ff5] |
 
 #### Responses
 
@@ -9149,7 +9149,7 @@ null (empty response body)
 
 Get own encryption keys
 
-Returns every encryption key pair the calling user holds, the encrypted private half included, which is the  material a client needs in order to decrypt content in a private room. The set is personal and there is no  parameter for another user&#39;s keys: an authenticated caller reads only their own, and a guest, who cannot own  key material at all, always reads an empty set. The call is read-only. An empty answer, whether an empty list  or none at all, means no key has been created yet, and until &#x60;POST api/2.0/privacyroom/keys&#x60; creates one the  user cannot be invited to a private room. Each entry carries the pair&#39;s &#x60;id&#x60;, its owner in &#x60;userId&#x60;, the  moment the material was stored in &#x60;date&#x60;, the public half, the private half encrypted with the user&#39;s  password, and the portal-wide crypto engine in &#x60;cryptoEngineId&#x60;. For the keys that open a whole private room  use &#x60;GET api/2.0/privacyroom/{roomId}/access&#x60;, and for the keys a single file is shared with use  &#x60;GET api/2.0/files/file/{fileId}/publickeys&#x60;; this operation is about the caller alone.
+Returns every encryption key pair the calling user holds, the encrypted private half included, which is the  material a client needs in order to decrypt content in a private room. The set is personal and there is no  parameter for another user's keys: an authenticated caller reads only their own, and a guest, who cannot own  key material at all, always reads an empty set. The call is read-only. An empty answer, whether an empty list  or none at all, means no key has been created yet, and until `POST api/2.0/privacyroom/keys` creates one the  user cannot be invited to a private room. Each entry carries the pair's `id`, its owner in `userId`, the  moment the material was stored in `date`, the public half, the private half encrypted with the user's  password, and the portal-wide crypto engine in `cryptoEngineId`. For the keys that open a whole private room  use `GET api/2.0/privacyroom/{roomId}/access`, and for the keys a single file is shared with use  `GET api/2.0/files/file/{fileId}/publickeys`; this operation is about the caller alone.
 
 #### Parameters
 This endpoint does not need any parameter.
@@ -9186,13 +9186,13 @@ This endpoint does not need any parameter.
 
 Get private room access keys
 
-Returns the encryption keys that give access to a private room: one entry per key held by each of its members,  which is what a client needs in order to encrypt a file key for everyone allowed to open the room&#39;s content.  Only the caller&#39;s own entries carry &#x60;privateKeyEnc&#x60;; another member&#39;s entry carries the public half alone, and  an entry with no public half is not reported as access at all. The room has to be a private one, a room  created without private mode holds no access keys and the call is refused, and it has to still exist: an  unknown room, or one already moved to Trash, is reported as missing, while an archived private room still  answers. Access follows room membership and not portal role: any member from read access upwards receives the  full set, whereas a DocSpace administrator who is not a member is refused, and so is a caller holding no key  of their own, the room creator included once they delete their last key. The call is read-only. For the keys  of a single file use &#x60;GET api/2.0/files/file/{fileId}/publickeys&#x60;.
+Returns the encryption keys that give access to a private room: one entry per key held by each of its members,  which is what a client needs in order to encrypt a file key for everyone allowed to open the room's content.  Only the caller's own entries carry `privateKeyEnc`; another member's entry carries the public half alone, and  an entry with no public half is not reported as access at all. The room has to be a private one, a room  created without private mode holds no access keys and the call is refused, and it has to still exist: an  unknown room, or one already moved to Trash, is reported as missing, while an archived private room still  answers. Access follows room membership and not portal role: any member from read access upwards receives the  full set, whereas a DocSpace administrator who is not a member is refused, and so is a caller holding no key  of their own, the room creator included once they delete their last key. The call is read-only. For the keys  of a single file use `GET api/2.0/files/file/{fileId}/publickeys`.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **roomId** | path | **Integer** (int32) | The private room whose access keys are read. Take it from the &#x60;id&#x60; of the room returned by  &#x60;POST api/2.0/files/rooms&#x60; or listed by &#x60;GET api/2.0/files/rooms&#x60;. | [required] |
+| **roomId** | path | **Integer** (int32) | The private room whose access keys are read. Take it from the `id` of the room returned by  `POST api/2.0/files/rooms` or listed by `GET api/2.0/files/rooms`. | [required] |
 
 #### Responses
 
@@ -9227,7 +9227,7 @@ Returns the encryption keys that give access to a private room: one entry per ke
 
 Rotate an encryption key
 
-Rotates one encryption key pair of the calling user: the entry whose &#x60;id&#x60; matches is overwritten with the  submitted &#x60;publicKey&#x60; and &#x60;privateKeyEnc&#x60;, and the caller&#39;s other pairs are left untouched. The pair has to  exist already, an &#x60;id&#x60; that is not in the caller&#39;s set is answered with 404, and a first key is created with  &#x60;POST api/2.0/privacyroom/keys&#x60;. This is a full replacement rather than a merge: both halves are mandatory,  and a request that omits or blanks one of them is rejected as invalid with the stored pair surviving  unchanged, so a rotation that means to keep the private half has to send it again. Omitting &#x60;id&#x60; targets the  all-zero pair, the one a client that never sets an id keeps rotating. Every authenticated member rotates their  own keys and only their own, and a guest is refused. The call is mutating, and repeating it with the same body  leaves the same state. It answers with every key the caller holds afterwards, and from then on  &#x60;GET api/2.0/privacyroom/{roomId}/access&#x60; reports the new public half for this member.
+Rotates one encryption key pair of the calling user: the entry whose `id` matches is overwritten with the  submitted `publicKey` and `privateKeyEnc`, and the caller's other pairs are left untouched. The pair has to  exist already, an `id` that is not in the caller's set is answered with 404, and a first key is created with  `POST api/2.0/privacyroom/keys`. This is a full replacement rather than a merge: both halves are mandatory,  and a request that omits or blanks one of them is rejected as invalid with the stored pair surviving  unchanged, so a rotation that means to keep the private half has to send it again. Omitting `id` targets the  all-zero pair, the one a client that never sets an id keeps rotating. Every authenticated member rotates their  own keys and only their own, and a guest is refused. The call is mutating, and repeating it with the same body  leaves the same state. It answers with every key the caller holds afterwards, and from then on  `GET api/2.0/privacyroom/{roomId}/access` reports the new public half for this member.
 
 #### Parameters
 
@@ -9269,7 +9269,7 @@ Rotates one encryption key pair of the calling user: the entry whose &#x60;id&#x
 
 Create an encryption key
 
-Stores a new encryption key pair for the calling user and answers with that user&#39;s whole key set. The material  is end-to-end: &#x60;publicKey&#x60; is the half other members use to encrypt file keys for this user, while  &#x60;privateKeyEnc&#x60; arrives already encrypted with the user&#39;s own password, so the portal keeps it as opaque text.  A member must hold at least one key before they can be invited to a private room, which makes this the first  call of the private-room flow. Every authenticated member manages their own keys and only their own, there is  no parameter for somebody else&#39;s, and a guest is refused, which is also why a guest cannot become a member of  a private room. The call is mutating and is not safe to repeat: &#x60;id&#x60; names the pair inside the caller&#39;s set  and an &#x60;id&#x60; that is already stored is answered with 409, while a request that omits or blanks either half is  rejected as invalid and stores nothing. A successful call answers 201 with every key the caller now holds. To  change the material of an existing pair use &#x60;PUT api/2.0/privacyroom/keys&#x60;.
+Stores a new encryption key pair for the calling user and answers with that user's whole key set. The material  is end-to-end: `publicKey` is the half other members use to encrypt file keys for this user, while  `privateKeyEnc` arrives already encrypted with the user's own password, so the portal keeps it as opaque text.  A member must hold at least one key before they can be invited to a private room, which makes this the first  call of the private-room flow. Every authenticated member manages their own keys and only their own, there is  no parameter for somebody else's, and a guest is refused, which is also why a guest cannot become a member of  a private room. The call is mutating and is not safe to repeat: `id` names the pair inside the caller's set  and an `id` that is already stored is answered with 409, while a request that omits or blanks either half is  rejected as invalid and stores nothing. A successful call answers 201 with every key the caller now holds. To  change the material of an existing pair use `PUT api/2.0/privacyroom/keys`.
 
 #### Parameters
 
@@ -9320,7 +9320,7 @@ The file key issued to one account.
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **userId** | **UUID** (uuid) | The account that is to open the file with this key; it has to have read access to the file. | [optional] [example: 00000000-0000-0000-0000-000000000000] |
-| **publicKeyId** | **UUID** (uuid) | The public key the file key was encrypted with, as reported for that account by  &#x60;GET api/2.0/files/file/{fileId}/publickeys&#x60;. | [optional] [example: 00000000-0000-0000-0000-000000000000] |
+| **publicKeyId** | **UUID** (uuid) | The public key the file key was encrypted with, as reported for that account by  `GET api/2.0/files/file/{fileId}/publickeys`. | [optional] [example: 00000000-0000-0000-0000-000000000000] |
 | **privateKeyEnc** | **String** | The key of the file itself, encrypted by the client with that public key, so that the plain key never reaches  the portal. | [optional] [example: encrypted_key_string] [nullable] |
 
 
@@ -9329,7 +9329,7 @@ One line of a document sharing list in display form: who the document is shared 
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **user** | **String** | Who or what the line stands for, as a display string: the display name of a member, the name of a group, or  the title given to a shared link when &#x60;isLink&#x60; is true. It is empty when the subject has no name to show - a  shared link that was never given a title, for instance. | [optional] [example: John Doe] [nullable] |
+| **user** | **String** | Who or what the line stands for, as a display string: the display name of a member, the name of a group, or  the title given to a shared link when `isLink` is true. It is empty when the subject has no name to show - a  shared link that was never given a title, for instance. | [optional] [example: John Doe] [nullable] |
 | **permissions** | **String** | The access level of that subject as a localized label, not a code: inside a room it usually names the role the  subject holds there (Viewer, Editor, Room Manager), while outside a room it names the access itself  (Read Only, Full Access). The wording comes from the portal resources and is translated for the current  language, so show it to a person rather than compare it in code. | [optional] [example: Read Only] [nullable] |
 | **isLink** | **Boolean** | Whether the line stands for a shared link instead of a member or a group. Clients use it to draw a link badge  where they would otherwise draw an avatar. | [optional] [example: false] |
 
@@ -9427,7 +9427,7 @@ The credentials of a third-party storage account. The portal takes them when an 
 | **rawToken** | **String** | The token of the account, kept as the raw JSON document the storage service issued it in. | [optional] [example: {"access_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...","expires_in":3600}] [nullable] |
 | **url** | **URI** (uri) | The address of the storage server the account lives on. | [optional] [example: https://cloud.example.com/remote.php/dav/files/admin/] [nullable] |
 | **provider** | **String** | The storage service the credentials belong to, as the provider key the account was connected with. | [optional] [example: WebDav] [nullable] |
-| **token** | [**OAuth20Token**](#model-oauth20token) | The same token as in &#x60;rawToken&#x60;, parsed into its OAuth 2.0 fields. | [optional] |
+| **token** | [**OAuth20Token**](#model-oauth20token) | The same token as in `rawToken`, parsed into its OAuth 2.0 fields. | [optional] |
 
 
 ### Model AutoCleanUpData
@@ -9436,7 +9436,7 @@ The trash auto-clearing setting of an account.
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **isAutoCleanUp** | **Boolean** | Whether the trash of the account is cleared automatically. While it is false nothing is removed by the portal  and the interval below is kept but unused. | [optional] [example: false] |
-| **gap** | [**DateToAutoCleanUp**](#model-datetoautocleanup) | How long an item may stay in the trash before it is removed for good. It is reported even while clearing is  off, and it is what the moment in the &#x60;autoDelete&#x60; field of a trashed entry is computed from. | [optional] [enum: 1, 2, 3, 4, 5, 6] |
+| **gap** | [**DateToAutoCleanUp**](#model-datetoautocleanup) | How long an item may stay in the trash before it is removed for good. It is reported even while clearing is  off, and it is what the moment in the `autoDelete` field of a trashed entry is computed from. | [optional] [enum: 1, 2, 3, 4, 5, 6] |
 
 
 ### Model AutoCleanUpDataWrapper
@@ -9456,7 +9456,7 @@ The trash auto-clearing setting to store: the on/off flag together with the inte
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **set** | **Boolean** | Whether the caller&#39;s trash is cleared automatically: with true an item is removed for good once it has been in  the trash longer than the interval below, with false the portal removes nothing and waits for the trash to be  emptied by hand. | [optional] [example: true] |
+| **set** | **Boolean** | Whether the caller's trash is cleared automatically: with true an item is removed for good once it has been in  the trash longer than the interval below, with false the portal removes nothing and waits for the trash to be  emptied by hand. | [optional] [example: true] |
 | **gap** | [**DateToAutoCleanUp**](#model-datetoautocleanup) | How long an item may stay in the trash before it is removed for good. It is written from every request,  including one that switches clearing off, so send it together with the flag instead of expecting the stored  interval to be kept. | [optional] [enum: 1, 2, 3, 4, 5, 6] |
 
 
@@ -9465,9 +9465,9 @@ The files and folders a background operation is applied to.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **returnSingleOperation** | **Boolean** | Which operations the answer carries: &#x60;true&#x60; returns the operation this call started and nothing else, &#x60;false&#x60;  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, &#x60;true&#x60; falls back to the full list. | [optional] |
-| **folderIds** | [**List**](#model-basebatchrequestdtofolderids) | The folders to act on, by id, as reported by a folder listing such as &#x60;GET api/2.0/files/{folderId}&#x60;. A number  addresses a folder stored in the portal itself, a string addresses a folder on a connected third-party  account, and both kinds may be sent in one list. | [optional] [nullable] |
-| **fileIds** | [**List**](#model-basebatchrequestdtofileids) | The files to act on, by id, as reported by a folder listing such as &#x60;GET api/2.0/files/{folderId}&#x60;. A number  addresses a file stored in the portal itself, a string addresses a file on a connected third-party account,  and both kinds may be sent in one list. | [optional] [nullable] |
+| **returnSingleOperation** | **Boolean** | Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list. | [optional] |
+| **folderIds** | [**List**](#model-basebatchrequestdtofolderids) | The folders to act on, by id, as reported by a folder listing such as `GET api/2.0/files/{folderId}`. A number  addresses a folder stored in the portal itself, a string addresses a folder on a connected third-party  account, and both kinds may be sent in one list. | [optional] [nullable] |
+| **fileIds** | [**List**](#model-basebatchrequestdtofileids) | The files to act on, by id, as reported by a folder listing such as `GET api/2.0/files/{folderId}`. A number  addresses a file stored in the portal itself, a string addresses a file on a connected third-party account,  and both kinds may be sent in one list. | [optional] [nullable] |
 
 
 ### Model BaseBatchRequestDto.fileIds
@@ -9481,18 +9481,18 @@ The files and folders to move or copy, the folder they go to, and the way name c
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **returnSingleOperation** | **Boolean** | Which operations the answer carries: &#x60;true&#x60; returns the operation this call started and nothing else, &#x60;false&#x60;  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, &#x60;true&#x60; falls back to the full list. | [optional] |
+| **returnSingleOperation** | **Boolean** | Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list. | [optional] |
 | **folderIds** | [**List**](#model-batchrequestdtofolderids) | The folders to move or copy, by id. A number addresses a folder stored in the portal itself, a string  addresses a folder on a connected third-party account, and both kinds may be sent in one list. | [optional] [nullable] |
 | **fileIds** | [**List**](#model-batchrequestdtofileids) | The files to move or copy, by id. A number addresses a file stored in the portal itself, a string addresses a  file on a connected third-party account, and both kinds may be sent in one list. | [optional] [nullable] |
 | **destFolderId** | [**BatchRequestDto_allOf_destFolderId**](#model-batchrequestdtodestfolderid) |  | [optional] |
-| **conflictResolveType** | [**FileConflictResolveType**](#model-fileconflictresolvetype) | What happens to an item whose name is already taken in the destination folder: &#x60;skip&#x60; leaves it where it is,  &#x60;overwrite&#x60; replaces the entry at the destination, and &#x60;duplicate&#x60; places it beside that entry under a name  with a numeric suffix. &#x60;GET api/2.0/files/fileops/move&#x60; reports which items would clash. | [optional] [enum: Skip, Overwrite, Duplicate] |
-| **deleteAfter** | **Boolean** | Whether the finished operation is still reported: &#x60;false&#x60; keeps its final record readable through  &#x60;GET api/2.0/files/fileops&#x60; until it has been read once, &#x60;true&#x60; drops the record as soon as the work is done.  It deletes nothing: a move takes the sources away in any case, and a copy always leaves them. | [optional] |
-| **content** | **Boolean** | What is taken from a listed folder: &#x60;false&#x60; moves or copies the folder itself, &#x60;true&#x60; takes only what it  contains, so its files and subfolders land in the destination and the folder is not recreated there. | [optional] |
+| **conflictResolveType** | [**FileConflictResolveType**](#model-fileconflictresolvetype) | What happens to an item whose name is already taken in the destination folder: `skip` leaves it where it is,  `overwrite` replaces the entry at the destination, and `duplicate` places it beside that entry under a name  with a numeric suffix. `GET api/2.0/files/fileops/move` reports which items would clash. | [optional] [enum: Skip, Overwrite, Duplicate] |
+| **deleteAfter** | **Boolean** | Whether the finished operation is still reported: `false` keeps its final record readable through  `GET api/2.0/files/fileops` until it has been read once, `true` drops the record as soon as the work is done.  It deletes nothing: a move takes the sources away in any case, and a copy always leaves them. | [optional] |
+| **content** | **Boolean** | What is taken from a listed folder: `false` moves or copies the folder itself, `true` takes only what it  contains, so its files and subfolders land in the destination and the folder is not recreated there. | [optional] |
 | **toFillOut** | **Boolean** | Marks every copied PDF form as a draft prepared for filling, which is how such a copy reports its filling  status in a virtual data room. Files that are not forms are left unaffected. | [optional] |
 
 
 ### Model BatchRequestDto.destFolderId
-The folder the items go to, by id — a number for a folder stored in the portal itself, a string for a folder  on a connected third-party account. Take it from a folder listing such as &#x60;GET api/2.0/files/@root&#x60;; the  caller has to be allowed to create items in it, and the id of a room addresses the root of that room.
+The folder the items go to, by id — a number for a folder stored in the portal itself, a string for a folder  on a connected third-party account. Take it from a folder listing such as `GET api/2.0/files/@root`; the  caller has to be allowed to create items in it, and the id of a room addresses the root of that room.
 
 
 ### Model BatchRequestDto.fileIds
@@ -9506,7 +9506,7 @@ The tag names a request attaches to a room or detaches from it.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **names** | **List** | The tags, by name: a tag has no identifier of its own, and the name is what links a room to it.  &#x60;GET api/2.0/files/tags&#x60; lists the names already in the portal catalogue. An empty list is accepted and does  nothing, while a blank or overlong entry makes the whole request invalid. | [required] [example: [Finance, 2026]] |
+| **names** | **List** | The tags, by name: a tag has no identifier of its own, and the name is what links a room to it.  `GET api/2.0/files/tags` lists the names already in the portal catalogue. An empty list is accepted and does  nothing, while a blank or overlong entry makes the whole request invalid. | [required] [example: [Finance, 2026]] |
 
 
 ### Model BooleanWrapper
@@ -9535,7 +9535,7 @@ The change to make to a revision group of a file.
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **version** | **Integer** (int32) | The version the change applies to; 0 means the current version of the file. | [required] [example: 1] |
-| **continueVersion** | **Boolean** | What to do with the revision group: &#x60;false&#x60; completes the named version, storing its content again as a fresh  version that opens a new group, while &#x60;true&#x60; folds the last group back into the group before it, so the next  save continues that revision. | [optional] [example: false] |
+| **continueVersion** | **Boolean** | What to do with the revision group: `false` completes the named version, storing its content again as a fresh  version that opens a new group, while `true` folds the last group back into the group before it, so the next  save continues that revision. | [optional] [example: false] |
 
 
 ### Model ChangeOwnerRequestDto
@@ -9543,8 +9543,8 @@ The rooms and files to hand over, together with the account that takes them.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **folderIds** | [**List**](#model-batchrequestdtofileids) | The rooms to hand over, identified as &#x60;GET api/2.0/files/rooms&#x60; returns them - a number for a room stored on  the portal and a string for one that lives on a connected third-party account. Only rooms belong here; a  folder inside a room is refused. | [optional] [example: [1, 2, 3]] [nullable] |
-| **fileIds** | [**List**](#model-batchrequestdtofileids) | The files to hand over, identified as a listing operation returns them - a number for a file stored on the  portal and a string for one on a connected third-party account. Only a file kept in the portal&#39;s common  section is accepted. | [optional] [example: [7, 8]] [nullable] |
+| **folderIds** | [**List**](#model-batchrequestdtofileids) | The rooms to hand over, identified as `GET api/2.0/files/rooms` returns them - a number for a room stored on  the portal and a string for one that lives on a connected third-party account. Only rooms belong here; a  folder inside a room is refused. | [optional] [example: [1, 2, 3]] [nullable] |
+| **fileIds** | [**List**](#model-batchrequestdtofileids) | The files to hand over, identified as a listing operation returns them - a number for a file stored on the  portal and a string for one on a connected third-party account. Only a file kept in the portal's common  section is accepted. | [optional] [example: [7, 8]] [nullable] |
 | **userId** | **UUID** (uuid) | The account that becomes the owner of every listed entry. It has to be an active member allowed to manage  rooms, so a deactivated account, a guest or a plain member is rejected, and for a private room the account  must have set up its encryption keys beforehand. | [required] [example: 9924256a-739c-462b-af15-e652a3b1b6eb] |
 
 
@@ -9573,12 +9573,12 @@ The parameters of one file conversion.
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **fileId** | **Integer** (int32) | The file to convert. It is taken from the route of the operation, so a value sent in the body is overwritten. | [optional] [example: 1] |
-| **sync** | **Boolean** | How to wait for the result: &#x60;true&#x60; converts inside the request and answers with the finished result, which is  only sensible for small documents, while &#x60;false&#x60; queues the conversion and answers with an entry to poll. | [optional] [example: false] |
+| **sync** | **Boolean** | How to wait for the result: `true` converts inside the request and answers with the finished result, which is  only sensible for small documents, while `false` queues the conversion and answers with an entry to poll. | [optional] [example: false] |
 | **startConvert** | **Boolean** | Whether the conversion is to be started. It is set by the operation itself, so a value sent in the body is  overwritten. | [optional] [example: true] |
 | **version** | **Integer** (int32) | The version to convert; 0 or less means the current version. | [optional] [example: 1] |
 | **password** | **String** | The password that opens the source document, for a file that is protected by one; anything else may be left  out. | [optional] [example: password123] [nullable] |
 | **outputType** | **String** | The extension of the format to convert into, without the dot, and one the portal can produce from that  source format; left out, the default of the portal for that kind of document is used. | [optional] [example: pdf] [nullable] |
-| **createNewIfExist** | **Boolean** | Where the result goes when the file has been converted before: &#x60;true&#x60; creates another file beside the source,  &#x60;false&#x60; replaces the converted file that already exists. | [optional] [example: false] |
+| **createNewIfExist** | **Boolean** | Where the result goes when the file has been converted before: `true` creates another file beside the source,  `false` replaces the converted file that already exists. | [optional] [example: false] |
 
 
 ### Model CheckDestFolderDto
@@ -9616,9 +9616,9 @@ The ONLYOFFICE Docs connection settings to store and verify.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **docServiceUrl** | **String** | The public address of the Document Server, the one a browser loads the editor from. An empty value drops the  portal&#39;s own setting, so the address configured for the deployment takes over again. A value with no scheme is  stored with &#x60;http://&#x60; prepended, and an absolute address may not carry a query string. | [required] [example: https://documentserver.example.com] [nullable] |
+| **docServiceUrl** | **String** | The public address of the Document Server, the one a browser loads the editor from. An empty value drops the  portal's own setting, so the address configured for the deployment takes over again. A value with no scheme is  stored with `http://` prepended, and an absolute address may not carry a query string. | [required] [example: https://documentserver.example.com] [nullable] |
 | **docServiceUrlInternal** | **String** | The address the portal itself uses for its server-to-server calls to the Document Server, for deployments  where that traffic stays inside the private network. Left empty, those calls go to the public address instead. | [optional] [example: https://documentserver-internal.example.com] [nullable] |
-| **docServiceUrlPortal** | **String** | The address of this portal as the Document Server has to call it back on in order to fetch and save a  document. Set it when the Document Server cannot resolve the portal by its public name; left empty, the  portal&#39;s own resolved address is used. | [optional] [example: https://portal.example.com] [nullable] |
+| **docServiceUrlPortal** | **String** | The address of this portal as the Document Server has to call it back on in order to fetch and save a  document. Set it when the Document Server cannot resolve the portal by its public name; left empty, the  portal's own resolved address is used. | [optional] [example: https://portal.example.com] [nullable] |
 | **docServiceSignatureSecret** | **String** | The shared secret that requests between the portal and the Document Server are signed with; it has to be the  same value the Document Server itself is configured with, otherwise the verification of the new settings  fails. It is write-only: the document service location is reported without it. | [optional] [example: secret-key-123] [nullable] |
 | **docServiceSignatureHeader** | **String** | The name of the HTTP header the signature travels in, which has to match the header the Document Server  expects. A secret without a header is not a usable pair and is rejected. | [optional] [example: Authorization] [nullable] |
 | **docServiceSslVerification** | **Boolean** | Whether the portal validates the TLS certificate of the Document Server. With verification on, a self-signed  certificate breaks the connection; with it off, any certificate is accepted, which is meant for test  deployments only. Omitting the field turns verification on. | [optional] [example: true] [nullable] |
@@ -9630,9 +9630,9 @@ The revision of the form to open and what the caller intends to do with it.
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **version** | **Integer** (int32) | The revision of the form to open. Pass 0 for the current revision; a positive number addresses that entry of  the file history and is accepted only from a caller who may read the history, so a member who only has  fill-forms access must send 0. | [required] [example: 0] |
-| **action** | **String** | What the caller intends to do with the form. &#x60;view&#x60; asks for a read-only address and &#x60;embedded&#x60; for an address  to be shown inside a frame; both only resolve the address and leave the file untouched. Leave it out to enter  the filling flow, where the personal draft is created or reused. The value is matched case-insensitively, and  anything else behaves like an empty value. | [optional] [example: view] [nullable] |
-| **requestView** | **Boolean** | Whether the caller asked for a read-only address. The server derives it from &#x60;action&#x60; being &#x60;view&#x60; and ignores  any value sent with the request. | [optional] [example: false] |
-| **requestEmbedded** | **Boolean** | Whether the caller asked for an address to be shown inside a frame. The server derives it from &#x60;action&#x60; being  &#x60;embedded&#x60; and ignores any value sent with the request. | [optional] [example: false] |
+| **action** | **String** | What the caller intends to do with the form. `view` asks for a read-only address and `embedded` for an address  to be shown inside a frame; both only resolve the address and leave the file untouched. Leave it out to enter  the filling flow, where the personal draft is created or reused. The value is matched case-insensitively, and  anything else behaves like an empty value. | [optional] [example: view] [nullable] |
+| **requestView** | **Boolean** | Whether the caller asked for a read-only address. The server derives it from `action` being `view` and ignores  any value sent with the request. | [optional] [example: false] |
+| **requestEmbedded** | **Boolean** | Whether the caller asked for an address to be shown inside a frame. The server derives it from `action` being  `embedded` and ignores any value sent with the request. | [optional] [example: false] |
 
 
 ### Model CheckUploadRequest
@@ -9713,12 +9713,12 @@ Everything an editor client needs in order to open one document: the document it
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **document** | [**DocumentConfigDto**](#model-documentconfigdto) | The document as the editors address it: its revision key, title, type, download address and the permissions of  this caller on it. | [required] |
-| **documentType** | **String** | The editor family the file opens in - &#x60;word&#x60;, &#x60;cell&#x60;, &#x60;slide&#x60;, &#x60;pdf&#x60; or &#x60;diagram&#x60;. It comes back empty for a  format no editor handles. | [required] [example: word] [nullable] |
+| **documentType** | **String** | The editor family the file opens in - `word`, `cell`, `slide`, `pdf` or `diagram`. It comes back empty for a  format no editor handles. | [required] [example: word] [nullable] |
 | **editorConfig** | [**EditorConfigurationDto**](#model-editorconfigurationdto) | How the editor is set up for this opening: the mode, the language, the interface customization, the callback  the editors save through, and the account they attribute changes to. | [required] |
 | **editorType** | [**EditorType**](#model-editortype) | The layout the configuration was actually built for. It echoes the requested one except where the room  overruled it, as the templates folder does by forcing the embedded viewer. | [required] [enum: 0, 1, 2] |
 | **editorUrl** | **URI** (uri) | The address of the editor api script the client has to load, with the shard key of this document already  appended. Load it as it is given rather than assembling it by hand. | [required] [example: https://portal.example.com/web-apps/apps/api/documents/api.js?shardkey=1_512_3] [nullable] |
 | **token** | **String** | Signs this whole configuration so that the editors can trust it; anything a client changes in the  configuration invalidates it. It stays empty on a portal that has no signature secret configured for the  document service. | [optional] [example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...] [nullable] |
-| **type** | **String** | The layout spelled as a lowercase word - &#x60;desktop&#x60;, &#x60;mobile&#x60; or &#x60;embedded&#x60; - the same value the editor type  carries as a number. | [optional] [example: desktop] [nullable] |
+| **type** | **String** | The layout spelled as a lowercase word - `desktop`, `mobile` or `embedded` - the same value the editor type  carries as a number. | [optional] [example: desktop] [nullable] |
 | **file** | [**FileDtoInteger**](#model-filedtointeger) | The file the configuration was built for, in the same shape the file listings report it. | [required] |
 | **errorMessage** | **String** | Filled in when the document could not be prepared for opening; the rest of the configuration should then not  be handed to the editors. | [optional] [example: The file is being converted] [nullable] |
 | **startFilling** | **Boolean** | Whether this caller may start a filling session on the form from inside the editor. It stays empty when the  file is not a form opened where starting is possible at all. | [optional] [example: false] [nullable] |
@@ -9772,8 +9772,8 @@ The progress of one file conversion, together with the converted file once it ex
 | **progress** | **Integer** (int32) | How far the conversion has got, counted in percent from 0 while it is only queued to 100 once it is over -  whether it ended with a converted file or with an error. 100 is the value a polling caller waits for. | [required] [example: 50] |
 | **source** | **String** | Describes what is being converted: the identifier of the source file, the version that was taken and whether  an existing result may be overwritten, packed as a JSON object inside a string. It is what identifies the  entry when several conversions of the same caller are in flight. | [optional] [example: {"id":9846,"version":1,"updateIfExist":false}] [nullable] |
 | **result** | **oas_any_type_not_mapped** |  | [optional] [nullable] |
-| **error** | **String** | The reason the conversion stopped, in the language of the caller, and empty while it is running and after it  has succeeded. &#x60;progress&#x60; reaches 100 for a failure as well, so this field is what separates a converted file  from a broken conversion; a conversion still unfinished after ten minutes ends with a timeout reported here. | [optional] [example: Conversion failed] [nullable] |
-| **processed** | **String** | Reports whether the portal has taken the entry as far as it goes: &#x60;1&#x60; once the conversion has finished or  failed, and empty while it is still queued or still being converted. It is the bookkeeping of the conversion  queue rather than a result - what happened is in &#x60;progress&#x60;, &#x60;error&#x60; and &#x60;result&#x60;. | [optional] [example: 1] [nullable] |
+| **error** | **String** | The reason the conversion stopped, in the language of the caller, and empty while it is running and after it  has succeeded. `progress` reaches 100 for a failure as well, so this field is what separates a converted file  from a broken conversion; a conversion still unfinished after ten minutes ends with a timeout reported here. | [optional] [example: Conversion failed] [nullable] |
+| **processed** | **String** | Reports whether the portal has taken the entry as far as it goes: `1` once the conversion has finished or  failed, and empty while it is still queued or still being converted. It is the bookkeeping of the conversion  queue rather than a result - what happened is in `progress`, `error` and `result`. | [optional] [example: 1] [nullable] |
 
 
 ### Model CopyAsJsonElement
@@ -9789,7 +9789,7 @@ The parameters of a file copy that may change the format on the way.
 
 
 ### Model CopyAsJsonElement.destFolderId
-The folder the copy is placed in, as a number for a folder inside the portal and as a string for one in a  connected third-party storage; obtain it from &#x60;GET api/2.0/files/@root&#x60;. Anything else is answered with an  empty body and nothing is copied.
+The folder the copy is placed in, as a number for a folder inside the portal and as a string for one in a  connected third-party storage; obtain it from `GET api/2.0/files/@root`. Anything else is answered with an  empty body and nothing is copied.
 
 
 ### Model CoverRequestDto
@@ -9798,7 +9798,7 @@ The picture and the colour a room is drawn with while it has no logo.
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **color** | **String** | The background colour the room is drawn with while it has no logo, as six hexadecimal digits with no leading  number sign. An empty value restores the default colour of the room type. | [optional] [example: FF5733] [pattern: /^[A-Fa-f0-9]{6}$/] [nullable] |
-| **cover** | **String** | The picture drawn on the room while it has no logo, named by an identifier from  &#x60;GET api/2.0/files/rooms/covers&#x60;. Any other value is rejected, and an empty value leaves the room without a  cover. | [optional] [example: bookmark] [nullable] |
+| **cover** | **String** | The picture drawn on the room while it has no logo, named by an identifier from  `GET api/2.0/files/rooms/covers`. Any other value is rejected, and an empty value leaves the room without a  cover. | [optional] [example: bookmark] [nullable] |
 
 
 ### Model CoversResultArrayWrapper
@@ -9818,8 +9818,8 @@ One drawing of the built-in gallery of room covers.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **id** | **String** | The name of the cover, and the value to send as &#x60;cover&#x60; when a room is created or changed. The names are the  same on every portal and do not change with the language of the request. | [required] [example: bookmark] [nullable] |
-| **data** | **String** | The drawing itself, as inline vector markup ready to be rendered as it is. It is the default size of the  cover, and it may change between product versions while the name stays. | [required] [example: <svg viewBox="0 0 32 32"><path d="M8 4h16v24l-8-6-8 6z"/></svg>] [nullable] |
+| **id** | **String** | The name of the cover, and the value to send as `cover` when a room is created or changed. The names are the  same on every portal and do not change with the language of the request. | [required] [example: bookmark] [nullable] |
+| **data** | **String** | The drawing itself, as inline vector markup ready to be rendered as it is. It is the default size of the  cover, and it may change between product versions while the name stays. | [required] [example: &lt;svg viewBox="0 0 32 32"&gt;&lt;path d="M8 4h16v24l-8-6-8 6z"/&gt;&lt;/svg&gt;] [nullable] |
 
 
 ### Model CreateFileJsonElement
@@ -9827,10 +9827,10 @@ The parameters of a file that the portal creates from a template or a blank docu
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **title** | **String** | The title of the new file. The extension in it decides the format, and one of a known text, spreadsheet or  presentation format is rewritten to the DOCX, XLSX or PPTX of the portal unless &#x60;enableExternalExt&#x60; says  otherwise; a title with no extension gets DOCX added. | [required] [example: New Document.docx] [minLength: 0] [maxLength: 165] [nullable] |
+| **title** | **String** | The title of the new file. The extension in it decides the format, and one of a known text, spreadsheet or  presentation format is rewritten to the DOCX, XLSX or PPTX of the portal unless `enableExternalExt` says  otherwise; a title with no extension gets DOCX added. | [required] [example: New Document.docx] [minLength: 0] [maxLength: 165] [nullable] |
 | **templateId** | [**CreateFileJsonElement_templateId**](#model-createfilejsonelementtemplateid) |  | [optional] |
-| **enableExternalExt** | **Boolean** | Whether the extension of the title is kept as it is: &#x60;true&#x60; stores the title verbatim, &#x60;false&#x60; rewrites a  known foreign format to the format the portal edits itself. | [optional] [example: false] |
-| **formId** | **Integer** (int32) | A ready form from the form gallery of the portal to copy instead of a template, named by the identifier the  gallery reports for it. It takes precedence over &#x60;templateId&#x60;; 0 means no form. | [optional] [example: 0] |
+| **enableExternalExt** | **Boolean** | Whether the extension of the title is kept as it is: `true` stores the title verbatim, `false` rewrites a  known foreign format to the format the portal edits itself. | [optional] [example: false] |
+| **formId** | **Integer** (int32) | A ready form from the form gallery of the portal to copy instead of a template, named by the identifier the  gallery reports for it. It takes precedence over `templateId`; 0 means no form. | [optional] [example: 0] |
 
 
 ### Model CreateFileJsonElement.templateId
@@ -9850,15 +9850,15 @@ The parameters of a room built from a room template.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **templateId** | **Integer** (int32) | The room template to copy. Templates live in their own section and are listed by &#x60;GET api/2.0/files/rooms&#x60;  with a search area of 4; an ordinary room id is rejected here. | [required] [example: 42] |
+| **templateId** | **Integer** (int32) | The room template to copy. Templates live in their own section and are listed by `GET api/2.0/files/rooms`  with a search area of 4; an ordinary room id is rejected here. | [required] [example: 42] |
 | **title** | **String** | The name of the room to create. It is sanitised and truncated the way a room title is, and a blank value is  rejected; the title of the template is not reused. | [required] [example: Project Alpha] [minLength: 0] [maxLength: 170] [nullable] |
-| **logo** | [**LogoRequest**](#model-logorequest) | The picture to use as the room logo, named by the path that &#x60;POST api/2.0/files/logos&#x60; returned for an image  uploaded beforehand, plus the crop to take from it. Leaving the field out keeps the room on its cover and  colour. It is ignored when the logo of the template is copied instead. | [optional] |
+| **logo** | [**LogoRequest**](#model-logorequest) | The picture to use as the room logo, named by the path that `POST api/2.0/files/logos` returned for an image  uploaded beforehand, plus the crop to take from it. Leaving the field out keeps the room on its cover and  colour. It is ignored when the logo of the template is copied instead. | [optional] |
 | **copyLogo** | **Boolean** | Whether the new room keeps the logo of the template. With it on the uploaded picture is ignored; with it off  the room starts with no logo unless one is supplied. | [optional] [example: false] |
-| **tags** | **List** | The labels to attach to the room, by name. Names the portal tag catalogue does not hold yet are added to it,  and &#x60;GET api/2.0/files/tags&#x60; lists what already exists. Leaving the field out keeps the tags of the template. | [optional] [example: [Finance, 2026]] [nullable] |
+| **tags** | **List** | The labels to attach to the room, by name. Names the portal tag catalogue does not hold yet are added to it,  and `GET api/2.0/files/tags` lists what already exists. Leaving the field out keeps the tags of the template. | [optional] [example: [Finance, 2026]] [nullable] |
 | **color** | **String** | The background colour the room is drawn with while it has no logo, as six hexadecimal digits with no leading  number sign. An empty value restores the default colour of the room type. | [optional] [example: FF5733] [minLength: 0] [maxLength: 6] [nullable] |
-| **cover** | **String** | The picture drawn on the room while it has no logo, named by an identifier from  &#x60;GET api/2.0/files/rooms/covers&#x60;. Any other value is rejected, and an empty value leaves the room without a  cover. | [optional] [example: bookmark] [minLength: 0] [maxLength: 50] [nullable] |
+| **cover** | **String** | The picture drawn on the room while it has no logo, named by an identifier from  `GET api/2.0/files/rooms/covers`. Any other value is rejected, and an empty value leaves the room without a  cover. | [optional] [example: bookmark] [minLength: 0] [maxLength: 50] [nullable] |
 | **quota** | **Long** (int64) | The storage the room may take, in bytes. It is accepted only while the per-room quota feature is on for the  portal and must stay inside the portal own limit; leaving it out lets the room follow the portal default. | [optional] [example: 1073741824] [nullable] |
-| **indexing** | **Boolean** | Whether the room keeps a manual order of its contents. With it on every file and folder carries a position  that listings follow and that &#x60;PUT api/2.0/files/rooms/{id}/reorder&#x60; compacts; with it off the contents are  ordered by the sorting of the request. Leaving it out keeps the setting of the template. | [optional] [example: true] [nullable] |
+| **indexing** | **Boolean** | Whether the room keeps a manual order of its contents. With it on every file and folder carries a position  that listings follow and that `PUT api/2.0/files/rooms/{id}/reorder` compacts; with it off the contents are  ordered by the sorting of the request. Leaving it out keeps the setting of the template. | [optional] [example: true] [nullable] |
 | **denyDownload** | **Boolean** | Whether members without editing rights are stopped from downloading and printing the contents of the room.  They can still open the documents in the editor. Leaving it out keeps the setting of the template. | [optional] [example: false] [nullable] |
 | **lifetime** | [**RoomDataLifetimeDto**](#model-roomdatalifetimedto) | How long files may stay in the room before they are deleted automatically. The countdown starts when the  setting is saved, and leaving the field out keeps the files forever. Leaving the field out keeps the setting  of the template. | [optional] |
 | **watermark** | [**WatermarkRequestDto**](#model-watermarkrequestdto) | The watermark drawn over documents opened in the room. Leaving the field out adds no watermark, and sending it  with the switch turned off removes the one the room has. Leaving the field out keeps the setting of the  template. | [optional] |
@@ -9872,19 +9872,19 @@ The parameters of a new room in the Rooms section.
 |------------ | ------------- | ------------- | -------------|
 | **title** | **String** | The name of the room. It is trimmed, characters that a folder name cannot hold are replaced with underscores  and the rest is truncated, so the stored title can differ from the one sent; a blank title is rejected. Titles  are not unique, and rooms are told apart by their id. | [required] [example: Project Alpha] [minLength: 0] [maxLength: 170] [nullable] |
 | **quota** | **Long** (int64) | The storage the room may take, in bytes. It is accepted only while the per-room quota feature is on for the  portal and must stay inside the portal own limit; leaving it out lets the room follow the portal default. | [optional] [example: 1073741824] [nullable] |
-| **indexing** | **Boolean** | Whether the room keeps a manual order of its contents. With it on every file and folder carries a position  that listings follow and that &#x60;PUT api/2.0/files/rooms/{id}/reorder&#x60; compacts; with it off the contents are  ordered by the sorting of the request. | [optional] [example: true] [nullable] |
+| **indexing** | **Boolean** | Whether the room keeps a manual order of its contents. With it on every file and folder carries a position  that listings follow and that `PUT api/2.0/files/rooms/{id}/reorder` compacts; with it off the contents are  ordered by the sorting of the request. | [optional] [example: true] [nullable] |
 | **denyDownload** | **Boolean** | Whether members without editing rights are stopped from downloading and printing the contents of the room.  They can still open the documents in the editor. | [optional] [example: false] [nullable] |
 | **lifetime** | [**RoomDataLifetimeDto**](#model-roomdatalifetimedto) | How long files may stay in the room before they are deleted automatically. The countdown starts when the  setting is saved, and leaving the field out keeps the files forever. | [optional] |
 | **watermark** | [**WatermarkRequestDto**](#model-watermarkrequestdto) | The watermark drawn over documents opened in the room. Leaving the field out adds no watermark, and sending it  with the switch turned off removes the one the room has. | [optional] |
-| **logo** | [**LogoRequest**](#model-logorequest) | The picture to use as the room logo, named by the path that &#x60;POST api/2.0/files/logos&#x60; returned for an image  uploaded beforehand, plus the crop to take from it. Leaving the field out keeps the room on its cover and  colour. | [optional] |
-| **tags** | **List** | The labels to attach to the room, by name. Names the portal tag catalogue does not hold yet are added to it,  and &#x60;GET api/2.0/files/tags&#x60; lists what already exists. | [optional] [example: [Finance, 2026]] [nullable] |
+| **logo** | [**LogoRequest**](#model-logorequest) | The picture to use as the room logo, named by the path that `POST api/2.0/files/logos` returned for an image  uploaded beforehand, plus the crop to take from it. Leaving the field out keeps the room on its cover and  colour. | [optional] |
+| **tags** | **List** | The labels to attach to the room, by name. Names the portal tag catalogue does not hold yet are added to it,  and `GET api/2.0/files/tags` lists what already exists. | [optional] [example: [Finance, 2026]] [nullable] |
 | **color** | **String** | The background colour the room is drawn with while it has no logo, as six hexadecimal digits with no leading  number sign. An empty value restores the default colour of the room type. | [optional] [example: FF5733] [pattern: /^[0-9a-fA-F]{6}$/] [nullable] |
-| **cover** | **String** | The picture drawn on the room while it has no logo, named by an identifier from  &#x60;GET api/2.0/files/rooms/covers&#x60;. Any other value is rejected, and an empty value leaves the room without a  cover. | [optional] [example: bookmark] [minLength: 0] [maxLength: 50] [nullable] |
+| **cover** | **String** | The picture drawn on the room while it has no logo, named by an identifier from  `GET api/2.0/files/rooms/covers`. Any other value is rejected, and an empty value leaves the room without a  cover. | [optional] [example: bookmark] [minLength: 0] [maxLength: 50] [nullable] |
 | **roomType** | [**RoomType**](#model-roomtype) | What the room is for. It decides which sharing links, roles and form features the room offers, and it cannot  be changed once the room exists, so a room of the wrong kind has to be recreated. | [required] [enum: 1, 2, 5, 6, 8, 9] |
 | **private** | **Boolean** | Whether the room is end-to-end encrypted. Its files can then be opened only in the desktop application by  members whose encryption keys are set up, and the flag cannot be changed after the room is created. | [optional] [example: false] |
-| **share** | [**List**](#model-fileshareparams) | Not implemented on room creation: any non-empty value is rejected, and members are invited afterwards with  &#x60;PUT api/2.0/files/rooms/{id}/share&#x60;. | [optional] [example: []] [nullable] |
+| **share** | [**List**](#model-fileshareparams) | Not implemented on room creation: any non-empty value is rejected, and members are invited afterwards with  `PUT api/2.0/files/rooms/{id}/share`. | [optional] [example: []] [nullable] |
 | **chatSettings** | [**ChatSettings**](#model-chatsettings) | The model and the prompt an AI room answers with. It belongs to AI rooms only and is rejected for a room of  any other kind. | [optional] |
-| **sendFormToExternalDB** | **Boolean** | For a form filling room, whether the data of every completed submission is also pushed to the external  database configured for the portal. It is what &#x60;POST api/2.0/files/rooms/{id}/externaldbsync&#x60; re-runs for the  forms already collected. | [optional] [example: false] [nullable] |
+| **sendFormToExternalDB** | **Boolean** | For a form filling room, whether the data of every completed submission is also pushed to the external  database configured for the portal. It is what `POST api/2.0/files/rooms/{id}/externaldbsync` re-runs for the  forms already collected. | [optional] [example: false] [nullable] |
 | **saveFormAsXLSX** | **Boolean** | For a form filling room, whether the collected submissions are also gathered into a spreadsheet stored next to  the completed forms. With it off the submissions are kept only as the filled documents themselves. | [optional] [example: false] [nullable] |
 
 
@@ -9903,7 +9903,7 @@ The parameters of a text or HTML file created from content sent in the request.
 |------------ | ------------- | ------------- | -------------|
 | **title** | **String** | The title of the file. The extension the operation stands for is appended unless the title already ends with  it, so Notes becomes Notes.txt or Notes.html. | [required] [example: Document.txt] [minLength: 1] [maxLength: 165] [nullable] |
 | **content** | **String** | The content of the file, as plain text or as HTML markup. A request carrying none is rejected as an invalid  request, and for a text file content that looks like markup makes the portal store it as HTML instead. | [optional] [example: This is the file content] [nullable] |
-| **createNewIfExist** | **Boolean** | What to do when the folder already holds a file of this title, the other way round than the name reads: &#x60;true&#x60;  updates that file and adds a version to its history, &#x60;false&#x60; creates another file and makes its title unique,  as in Notes (1).txt. | [optional] [example: false] |
+| **createNewIfExist** | **Boolean** | What to do when the folder already holds a file of this title, the other way round than the name reads: `true`  updates that file and adds a version to its history, `false` creates another file and makes its title unique,  as in Notes (1).txt. | [optional] [example: false] |
 
 
 ### Model CreateThirdPartyRoom
@@ -9911,16 +9911,16 @@ The room to be created out of a folder of a connected third-party storage accoun
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **createAsNewFolder** | **Boolean** | Creates a new folder named after &#x60;title&#x60; inside the folder named in the path and turns that subfolder into the  room, leaving the named folder itself untouched. When omitted, the named folder becomes the room and keeps  everything it already holds. | [optional] [example: false] |
-| **title** | **String** | The name the room is shown under. It is stored on the connected account, so it does not have to match the name  of the folder in the storage; with &#x60;createAsNewFolder&#x60; it is also the name given to the created subfolder. | [required] [example: Third-party project room] [nullable] |
+| **createAsNewFolder** | **Boolean** | Creates a new folder named after `title` inside the folder named in the path and turns that subfolder into the  room, leaving the named folder itself untouched. When omitted, the named folder becomes the room and keeps  everything it already holds. | [optional] [example: false] |
+| **title** | **String** | The name the room is shown under. It is stored on the connected account, so it does not have to match the name  of the folder in the storage; with `createAsNewFolder` it is also the name given to the created subfolder. | [required] [example: Third-party project room] [nullable] |
 | **roomType** | [**RoomType**](#model-roomtype) | The kind of room the folder becomes, which decides the default access rules of its members and cannot be  changed afterwards. | [required] [enum: 1, 2, 5, 6, 8, 9] |
 | **private** | **Boolean** | Restricts the room to the members explicitly invited into it. The flag is kept on the connected storage  account rather than on the folder, so every folder read through that account reports the same value. | [optional] [example: false] |
-| **indexing** | **Boolean** | Keeps the contents of the room in an explicit numbered order, the one reported as &#x60;order&#x60; on every entry,  instead of leaving the order to the reader. | [optional] [example: true] |
+| **indexing** | **Boolean** | Keeps the contents of the room in an explicit numbered order, the one reported as `order` on every entry,  instead of leaving the order to the reader. | [optional] [example: true] |
 | **denyDownload** | **Boolean** | Forbids downloading and printing the contents of the room, which leaves the members with viewing and editing  in the editor only. | [optional] [example: false] |
 | **color** | **String** | The background colour drawn behind the cover of the room, as six hexadecimal digits without a leading number  sign. An empty value restores the colour the portal picks by default. | [optional] [example: FF5733] [nullable] |
-| **cover** | **String** | The drawing shown on the room tile, named by one of the built-in cover identifiers returned by  &#x60;GET api/2.0/files/rooms/covers&#x60;. An empty value leaves the room without a cover, and any other unknown value  is rejected as an invalid request. | [optional] [example: bookmark] [nullable] |
-| **tags** | **List** | The tags to attach to the room, named by their text. A name that is not in the portal tag catalogue yet is  added to it, and &#x60;GET api/2.0/files/tags&#x60; lists the names already there. | [optional] [example: [Marketing, Q3]] [nullable] |
-| **logo** | [**LogoRequest**](#model-logorequest) | The picture to use as the room logo, which has to be uploaded with &#x60;POST api/2.0/files/logos&#x60; first; leaving  it out keeps the room on its cover and colour. | [optional] |
+| **cover** | **String** | The drawing shown on the room tile, named by one of the built-in cover identifiers returned by  `GET api/2.0/files/rooms/covers`. An empty value leaves the room without a cover, and any other unknown value  is rejected as an invalid request. | [optional] [example: bookmark] [nullable] |
+| **tags** | **List** | The tags to attach to the room, named by their text. A name that is not in the portal tag catalogue yet is  added to it, and `GET api/2.0/files/tags` lists the names already there. | [optional] [example: [Marketing, Q3]] [nullable] |
+| **logo** | [**LogoRequest**](#model-logorequest) | The picture to use as the room logo, which has to be uploaded with `POST api/2.0/files/logos` first; leaving  it out keeps the room on its cover and colour. | [optional] |
 
 
 ### Model CustomFilterParameters
@@ -9928,7 +9928,7 @@ The Custom Filter state a spreadsheet is to be put into.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **enabled** | **Boolean** | The state to reach: &#x60;true&#x60; turns the mode on, so that the sorting and filtering each person applies stays  visible to that person alone, and drops the others out of a running editing session; &#x60;false&#x60; turns it off and  makes filtering shared again. | [optional] [example: true] |
+| **enabled** | **Boolean** | The state to reach: `true` turns the mode on, so that the sorting and filtering each person applies stays  visible to that person alone, and drops the others out of a running editing session; `false` turns it off and  makes filtering shared again. | [optional] [example: true] |
 
 
 ### Model CustomerConfigDto
@@ -9989,7 +9989,7 @@ The blank document configured for one extension.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **selectedFile** | **Integer** (int32) | The copy stored in the portal that serves as the blank for this extension. A null means no custom blank has  been chosen and new documents start from the portal&#39;s built-in one; the other fields of the entry are then  empty as well. | [optional] [example: 123] [nullable] |
+| **selectedFile** | **Integer** (int32) | The copy stored in the portal that serves as the blank for this extension. A null means no custom blank has  been chosen and new documents start from the portal's built-in one; the other fields of the entry are then  empty as well. | [optional] [example: 123] [nullable] |
 | **fileExtension** | **String** | The extension the entry describes, in lower case with the leading dot. It is the value to send back when this  blank is replaced or reset. | [required] [example: .docx] [nullable] |
 | **fileTitle** | **String** | The name the custom blank was copied under, useful for showing which document was chosen. Empty while the  built-in blank is in use. | [optional] [example: Company letter.docx] [nullable] |
 | **lastModified** | **Date** (date-time) | When the custom blank was last changed, in the time zone of the portal. Null while the built-in blank is in  use. | [optional] [example: 2026-03-18T11:42:07] [nullable] |
@@ -10002,7 +10002,7 @@ The blank document the portal creates for each extension it covers.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **items** | [**List**](#model-defaulttemplateitemdto) | One entry per extension the portal&#39;s built-in template set covers, whether or not a custom blank has been  chosen for it, so the list is never empty and its length follows the template set rather than the number of  custom blanks. Entries come in the order an interface shows them: text document, spreadsheet, presentation and  PDF first, everything else by extension. | [required] [example: [{fileExtension=.docx, fileTitle=Company letter.docx, selectedFile=123}]] [nullable] |
+| **items** | [**List**](#model-defaulttemplateitemdto) | One entry per extension the portal's built-in template set covers, whether or not a custom blank has been  chosen for it, so the list is never empty and its length follows the template set rather than the number of  custom blanks. Entries come in the order an interface shows them: text document, spreadsheet, presentation and  PDF first, everything else by extension. | [required] [example: [{fileExtension=.docx, fileTitle=Company letter.docx, selectedFile=123}]] [nullable] |
 
 
 ### Model DefaultTemplateSettingsRequestDto
@@ -10011,11 +10011,11 @@ The document to use as the blank the portal creates for one extension.
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **selectedFile** | [**DefaultTemplateSettingsRequestDto_selectedFile**](#model-defaulttemplatesettingsrequestdtoselectedfile) |  | [required] |
-| **fileExtension** | **String** | The extension the blank is set for, written in lower case with the leading dot. Only the extensions the  portal&#39;s built-in template set covers are accepted, and &#x60;GET api/2.0/files/settings/defaulttemplate&#x60; returns  exactly that list; an extension outside it leaves the settings unchanged instead of failing. | [required] [example: .docx] [nullable] |
+| **fileExtension** | **String** | The extension the blank is set for, written in lower case with the leading dot. Only the extensions the  portal's built-in template set covers are accepted, and `GET api/2.0/files/settings/defaulttemplate` returns  exactly that list; an extension outside it leaves the settings unchanged instead of failing. | [required] [example: .docx] [nullable] |
 
 
 ### Model DefaultTemplateSettingsRequestDto.selectedFile
-The document to copy as the blank: a number for a file stored in the portal, a string for one in a connected  third-party storage. Take the identifier from a folder listing such as &#x60;GET api/2.0/files/{folderId}&#x60;; the  caller must be allowed to copy that file, and its extension must be the one named below.
+The document to copy as the blank: a number for a file stored in the portal, a string for one in a connected  third-party storage. Take the identifier from a folder listing such as `GET api/2.0/files/{folderId}`; the  caller must be allowed to copy that file, and its extension must be the one named below.
 
 
 ### Model DefaultTemplateSettingsResetRequestDto
@@ -10023,7 +10023,7 @@ The extension whose custom blank is dropped in favour of the built-in one.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **fileExtension** | **String** | The extension whose custom blank is dropped, written in lower case with the leading dot. Only the extensions  the portal&#39;s built-in template set covers are accepted, and &#x60;GET api/2.0/files/settings/defaulttemplate&#x60;  returns exactly that list; an extension outside it leaves the settings unchanged instead of failing. | [required] [example: .docx] [nullable] |
+| **fileExtension** | **String** | The extension whose custom blank is dropped, written in lower case with the leading dot. Only the extensions  the portal's built-in template set covers are accepted, and `GET api/2.0/files/settings/defaulttemplate`  returns exactly that list; an extension outside it leaves the settings unchanged instead of failing. | [required] [example: .docx] [nullable] |
 
 
 ### Model DefaultTemplateSettingsWrapper
@@ -10043,8 +10043,8 @@ The parameters of a single file deletion.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **deleteAfter** | **Boolean** | When to delete: &#x60;true&#x60; waits until the editing session on the file has ended, &#x60;false&#x60; deletes at once, pulling  the file away from whoever is working on it. | [optional] [example: false] |
-| **immediately** | **Boolean** | Where the file goes: &#x60;false&#x60; moves it to Trash, from where it can be restored, &#x60;true&#x60; deletes it for good.  Inside a room, where there is no Trash, deletion is always final. | [optional] [example: false] |
+| **deleteAfter** | **Boolean** | When to delete: `true` waits until the editing session on the file has ended, `false` deletes at once, pulling  the file away from whoever is working on it. | [optional] [example: false] |
+| **immediately** | **Boolean** | Where the file goes: `false` moves it to Trash, from where it can be restored, `true` deletes it for good.  Inside a room, where there is no Trash, deletion is always final. | [optional] [example: false] |
 
 
 ### Model DeleteBatchRequestDto
@@ -10052,11 +10052,11 @@ The files and folders to delete, and how final the deletion is.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **returnSingleOperation** | **Boolean** | Which operations the answer carries: &#x60;true&#x60; returns the operation this call started and nothing else, &#x60;false&#x60;  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, &#x60;true&#x60; falls back to the full list. | [optional] |
+| **returnSingleOperation** | **Boolean** | Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list. | [optional] |
 | **folderIds** | [**List**](#model-deletebatchrequestdtofolderids) | The folders to delete, by id, each with everything it contains. A number addresses a folder stored in the  portal itself, a string addresses a folder on a connected third-party account, and both kinds may be sent in  one list. | [optional] [nullable] |
 | **fileIds** | [**List**](#model-deletebatchrequestdtofileids) | The files to delete, by id. A number addresses a file stored in the portal itself, a string addresses a file  on a connected third-party account, and both kinds may be sent in one list. | [optional] [nullable] |
-| **deleteAfter** | **Boolean** | Whether the finished operation is still reported: &#x60;false&#x60; keeps its final record readable through  &#x60;GET api/2.0/files/fileops&#x60; until it has been read once, &#x60;true&#x60; drops the record as soon as the work is done.  It does not postpone the deletion and does not delete anything of its own. | [optional] |
-| **immediately** | **Boolean** | Where the deleted items go: &#x60;false&#x60; moves them to the Trash of the caller, from which they can be restored,  &#x60;true&#x60; removes them at once and for good. | [optional] |
+| **deleteAfter** | **Boolean** | Whether the finished operation is still reported: `false` keeps its final record readable through  `GET api/2.0/files/fileops` until it has been read once, `true` drops the record as soon as the work is done.  It does not postpone the deletion and does not delete anything of its own. | [optional] |
+| **immediately** | **Boolean** | Where the deleted items go: `false` moves them to the Trash of the caller, from which they can be restored,  `true` removes them at once and for good. | [optional] |
 
 
 ### Model DeleteBatchRequestDto.fileIds
@@ -10087,10 +10087,10 @@ The file whose versions are deleted, and the versions to delete.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **returnSingleOperation** | **Boolean** | Which operations the answer carries: &#x60;true&#x60; returns the operation this call started and nothing else, &#x60;false&#x60;  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, &#x60;true&#x60; falls back to the full list. | [optional] |
-| **deleteAfter** | **Boolean** | Whether the finished operation is still reported: &#x60;false&#x60; keeps its final record readable through  &#x60;GET api/2.0/files/fileops&#x60; until it has been read once, &#x60;true&#x60; drops the record as soon as the work is done.  It does not postpone the deletion and does not delete anything of its own. | [optional] |
+| **returnSingleOperation** | **Boolean** | Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list. | [optional] |
+| **deleteAfter** | **Boolean** | Whether the finished operation is still reported: `false` keeps its final record readable through  `GET api/2.0/files/fileops` until it has been read once, `true` drops the record as soon as the work is done.  It does not postpone the deletion and does not delete anything of its own. | [optional] |
 | **fileId** | **Integer** (int32) | The file whose history the versions are taken from; only files stored in the portal itself are addressed here. | [required] |
-| **versions** | **List** (int32) | The version numbers to remove, as reported by &#x60;GET api/2.0/files/file/{fileId}/history&#x60;. At least one number  has to be sent: an empty list removes the file itself instead of one of its versions. The number of the  current version is refused outright, while a number that no longer exists is passed over without a complaint. | [required] [nullable] |
+| **versions** | **List** (int32) | The version numbers to remove, as reported by `GET api/2.0/files/file/{fileId}/history`. At least one number  has to be sent: an empty list removes the file itself instead of one of its versions. The number of the  current version is refused outright, while a number that no longer exists is passed over without a complaint. | [required] [nullable] |
 
 
 ### Model DisplayRequestDto
@@ -10122,7 +10122,7 @@ The document service location as this portal has it configured, together with th
 | **docServiceUrl** | **String** | The public Document Server address a browser loads the editor from. Empty means no document server is  configured for this portal, and documents cannot be opened for editing or viewing. | [required] [example: https://documentserver.example.com/] [nullable] |
 | **docServicePreloadUrl** | **String** | The absolute URL of a page a client may load in advance to warm the editor scripts up. Loading it is optional  and changes nothing on the portal. | [required] [example: https://documentserver.example.com/web-apps/apps/api/documents/preload.html] [nullable] |
 | **docServiceUrlInternal** | **String** | The address the portal uses for its own server-to-server calls to the Document Server. When no private-network  address is configured, it repeats the public one. | [required] [example: http://documentserver-internal.local/] [nullable] |
-| **docServicePortalUrl** | **String** | The address the Document Server is told to call this portal back on. Empty means nothing overrides it and the  portal&#39;s own resolved address is used. | [required] [example: https://portal.example.com/] [nullable] |
+| **docServicePortalUrl** | **String** | The address the Document Server is told to call this portal back on. Empty means nothing overrides it and the  portal's own resolved address is used. | [required] [example: https://portal.example.com/] [nullable] |
 | **docServiceSignatureHeader** | **String** | The name of the HTTP header that carries the signature on requests between the portal and the Document Server.  The secret itself is not part of the answer, so this only tells a client whether request signing is set up and  under which header. | [required] [example: Authorization] [nullable] |
 | **docServiceSslVerification** | **Boolean** | Whether the portal validates the TLS certificate of the Document Server. False means any certificate is  accepted, which is expected only in a test deployment. | [required] [example: true] |
 | **isDefault** | **Boolean** | Whether every one of these settings is still the one the deployment ships with. False means at least one of  the addresses, the signature settings or SSL verification has been overridden for this portal. | [required] [example: true] |
@@ -10179,7 +10179,7 @@ The document itself as the editors address it: what to fetch, under which revisi
 | **permissions** | [**PermissionsConfig**](#model-permissionsconfig) | What this caller may do inside the editor - edit, comment, review, fill, download, print, copy and chat. | [optional] |
 | **sharedLinkParam** | **String** | The name of the query parameter that carries the external share key. It is set only when the document was  opened through an external link. | [optional] [example: share] [nullable] |
 | **sharedLinkKey** | **String** | The external share key this opening runs under, empty when the caller opened the document as a portal member.  The editors pass it back on every request they make for the document. | [optional] [example: HkQd9nT2] [nullable] |
-| **referenceData** | [**FileReferenceData**](#model-filereferencedata) | How another spreadsheet names this document in a formula. Pass it to &#x60;POST api/2.0/files/file/referencedata&#x60;  to resolve such a reference. | [optional] |
+| **referenceData** | [**FileReferenceData**](#model-filereferencedata) | How another spreadsheet names this document in a formula. Pass it to `POST api/2.0/files/file/referencedata`  to resolve such a reference. | [optional] |
 | **title** | **String** | The name the editors display. When a past version was opened, the moment that version was created is appended  to it in brackets. | [optional] [example: Budget 2026.xlsx] [nullable] |
 | **url** | **URI** (uri) | Where the editors fetch the content. It is addressed to the host the document service can reach, which is not  necessarily the address a browser should follow. | [optional] [example: https://portal.example.com/filehandler.ashx?action=download&fileid=512] [nullable] |
 | **isForm** | **Boolean** | Whether the document is a fillable PDF form. A PDF that the portal has never classified is inspected while the  configuration is built, so the answer is trustworthy even for a freshly uploaded file. | [optional] [example: false] |
@@ -10191,10 +10191,10 @@ The files and folders to pack into one archive, together with the formats they a
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **returnSingleOperation** | **Boolean** | Which operations the answer carries: &#x60;true&#x60; returns the operation this call started and nothing else, &#x60;false&#x60;  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, &#x60;true&#x60; falls back to the full list. | [optional] |
+| **returnSingleOperation** | **Boolean** | Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list. | [optional] |
 | **folderIds** | [**List**](#model-downloadrequestdtofolderids) | The folders to pack, by id; everything inside them that the caller may read goes into the archive. A number  addresses a folder stored in the portal itself, a string addresses a folder on a connected third-party  account, and both kinds may be sent in one list. | [optional] [nullable] |
 | **fileIds** | [**List**](#model-downloadrequestdtofileids) | The files to pack as they are, by id, without conversion. A number addresses a file stored in the portal  itself, a string addresses a file on a connected third-party account, and both kinds may be sent in one list. | [optional] [nullable] |
-| **fileConvertIds** | [**List**](#model-downloadrequestitemdto) | The files to convert before they are packed, each named together with the format it is converted to. A file  listed here does not have to be repeated in &#x60;fileIds&#x60;. | [optional] [nullable] |
+| **fileConvertIds** | [**List**](#model-downloadrequestitemdto) | The files to convert before they are packed, each named together with the format it is converted to. A file  listed here does not have to be repeated in `fileIds`. | [optional] [nullable] |
 
 
 ### Model DownloadRequestDto.fileIds
@@ -10218,7 +10218,7 @@ The file to convert and pack, by id — a number for a file stored in the portal
 
 
 ### Model DraftLocationInteger
-Where the caller&#39;s own filling draft of a form is kept.
+Where the caller's own filling draft of a form is kept.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
@@ -10233,7 +10233,7 @@ The files and folders to duplicate.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **returnSingleOperation** | **Boolean** | Which operations the answer carries: &#x60;true&#x60; returns the operation this call started and nothing else, &#x60;false&#x60;  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, &#x60;true&#x60; falls back to the full list. | [optional] |
+| **returnSingleOperation** | **Boolean** | Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list. | [optional] |
 | **folderIds** | [**List**](#model-duplicaterequestdtofolderids) | The folders to duplicate, by id; the copy of each one is created in the folder that already holds it. A number  addresses a folder stored in the portal itself, a string addresses a folder on a connected third-party  account, and both kinds may be sent in one list. | [optional] [nullable] |
 | **fileIds** | [**List**](#model-duplicaterequestdtofileids) | The files to duplicate, by id; the copy of each one is created in the folder that already holds it. A number  addresses a file stored in the portal itself, a string addresses a file on a connected third-party account,  and both kinds may be sent in one list. | [optional] [nullable] |
 
@@ -10271,7 +10271,7 @@ One single change inside a saved revision of a file.
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **user** | [**EditHistoryAuthor**](#model-edithistoryauthor) | The account that made this change, as the editing service reported it; an account it could not name is  reported as a guest. | [optional] |
-| **created** | [**ApiDateTime**](#model-apidatetime) | When this change was made, written with the offset of the portal&#39;s time zone rather than as plain UTC. | [optional] |
+| **created** | [**ApiDateTime**](#model-apidatetime) | When this change was made, written with the offset of the portal's time zone rather than as plain UTC. | [optional] |
 | **documentSha256** | **String** | The SHA-256 hash of the document as it stood after this change, where the editing service recorded one, so  that a client can check a stored copy against the change it claims to hold. Empty when the change record  carries no hash. | [optional] [example: 9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08] [nullable] |
 
 
@@ -10282,7 +10282,7 @@ Everything an editor needs in order to show what one revision of a file changed.
 |------------ | ------------- | ------------- | -------------|
 | **changesUrl** | **URI** (uri) | The address the editor downloads the recorded changes of this revision from. It is filled in only when the  portal has a change record for the revision; without it the revision can be shown as a whole document but not  as a set of changes. | [optional] [example: https://example.com/changes] [nullable] |
 | **key** | **String** | The document key of the revision being shown, which the editing service uses to identify it and to reuse the  copy it has cached. | [required] [example: doc1] [nullable] |
-| **previous** | [**EditHistoryUrl**](#model-edithistoryurl) | The revision this one is compared against. It arrives together with &#x60;changesUrl&#x60;, and when the revision shown  is the first one the file ever had, it points at the blank template the file was created from instead of at an  earlier revision. | [optional] |
+| **previous** | [**EditHistoryUrl**](#model-edithistoryurl) | The revision this one is compared against. It arrives together with `changesUrl`, and when the revision shown  is the first one the file ever had, it points at the blank template the file was created from instead of at an  earlier revision. | [optional] |
 | **token** | **String** | The signature over the whole answer, as a JSON Web Token that the editing service verifies before it accepts  the addresses in it. Empty when the portal runs without a document-service secret. | [optional] [example: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ2ZXJzaW9uIjoxfQ.7HxQ0Zx1] [nullable] |
 | **url** | **URI** (uri) | The address the content of this revision is served from. It is meant for the editing service and carries its  own key, which is valid for a limited time. | [required] [example: https://example.com/file.docx] [nullable] |
 | **version** | **Integer** (int32) | Echoes the revision that was asked for, so it reports 0 when the request named no version and the current  revision was taken. | [required] [example: 1] |
@@ -10311,8 +10311,8 @@ One saved revision of a file, as the editing service recorded it.
 | **version** | **Integer** (int32) | The number of the revision, counting up from 1 in the order the revisions were saved. It is the value the  operations that show the changes of a revision or restore it expect. | [optional] [example: 2] |
 | **versionGroup** | **Integer** (int32) | Groups the revisions written by one editing session: entries sharing this number were saved while the same  session was open, which is how a client collapses a long list of revisions into the versions a person would  recognise. | [optional] [example: 1] |
 | **user** | [**EditHistoryAuthor**](#model-edithistoryauthor) | The account that saved the revision. A revision saved by an account that no longer exists, or through an  anonymous link, is reported as a guest. | [optional] |
-| **created** | [**ApiDateTime**](#model-apidatetime) | When the revision was saved, written with the offset of the portal&#39;s time zone rather than as plain UTC. The  times of one history are consistent with each other, so order and display the revisions by them. | [optional] |
-| **changesHistory** | **String** | The change record the editing service stored for this revision, as the raw JSON it was written in, and empty  for a revision the portal has no record for - one uploaded as a whole file, for instance. &#x60;changes&#x60; is the  same record already parsed. | [optional] [example: Changes history text] [nullable] |
+| **created** | [**ApiDateTime**](#model-apidatetime) | When the revision was saved, written with the offset of the portal's time zone rather than as plain UTC. The  times of one history are consistent with each other, so order and display the revisions by them. | [optional] |
+| **changesHistory** | **String** | The change record the editing service stored for this revision, as the raw JSON it was written in, and empty  for a revision the portal has no record for - one uploaded as a whole file, for instance. `changes` is the  same record already parsed. | [optional] [example: Changes history text] [nullable] |
 | **changes** | [**List**](#model-edithistorychangeswrapper) | The single changes this revision introduced - who made each of them and when - taken from the stored change  record. It comes back empty both for a revision whose changes were never recorded and for one whose record is  in a format the portal no longer reads, so an empty list is not proof that nothing changed. | [optional] [example: [{user={id=123, name=John Doe}, created=2021-01-01T00:00:00Z}]] [nullable] |
 | **serverVersion** | **String** | The build of the editing service that wrote the change record of this revision, taken from the record itself;  empty when the portal holds no record for the revision. | [optional] [example: 8.0.1] [nullable] |
 
@@ -10323,7 +10323,7 @@ The address, document key and format of the revision a comparison is made agains
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **key** | **String** | The document key of that revision. When the file has no earlier revision the portal generates a fresh key for  the template it falls back to, so the value is not always one an earlier revision ever had. | [optional] [example: doc_v2_20260101] [nullable] |
-| **url** | **URI** (uri) | The address that revision&#39;s content is served from. It is meant for the editing service and carries its own  key, which is valid for a limited time. | [optional] [example: https://files.example.com/history/doc_v2_20260101.docx] [nullable] |
+| **url** | **URI** (uri) | The address that revision's content is served from. It is meant for the editing service and carries its own  key, which is valid for a limited time. | [optional] [example: https://files.example.com/history/doc_v2_20260101.docx] [nullable] |
 | **fileType** | **String** | The format of that revision, as an extension without the leading dot. | [optional] [example: docx] [nullable] |
 
 
@@ -10337,12 +10337,12 @@ How the editors behave for this opening: the mode, the language, the interface, 
 | **createUrl** | **String** | Where the editor sends the user when they ask for a new document of the same type. It is empty when creating  one is not offered here. | [optional] [example: https://portal.example.com/products/files/?action=create&doctype=word] [nullable] |
 | **customization** | [**CustomizationConfigDto**](#model-customizationconfigdto) | How the editor interface is dressed for this portal, this document and this layout. | [optional] |
 | **embedded** | [**EmbeddedConfig**](#model-embeddedconfig) | The addresses the framed viewer needs. It is filled in only for the embedded layout. | [optional] |
-| **encryptionKeys** | [**List**](#model-encryptionkeydto) | The caller&#39;s end-to-end encryption keys, added only when the document lies in a private room, so that the  editors can decrypt it in the browser. It is empty everywhere else. | [optional] [nullable] |
+| **encryptionKeys** | [**List**](#model-encryptionkeydto) | The caller's end-to-end encryption keys, added only when the document lies in a private room, so that the  editors can decrypt it in the browser. It is empty everywhere else. | [optional] [nullable] |
 | **lang** | **String** | The culture the editor interface is shown in, taken from the profile of the caller. | [required] [example: en-US] [nullable] |
-| **mode** | **String** | &#x60;edit&#x60; when this session may write the document, &#x60;view&#x60; when it may only read it. | [required] [example: edit] [nullable] |
+| **mode** | **String** | `edit` when this session may write the document, `view` when it may only read it. | [required] [example: edit] [nullable] |
 | **modeWrite** | **Boolean** | Whether this session may write; it is what the mode above says in one word. | [optional] [example: true] |
 | **plugins** | [**PluginsConfig**](#model-pluginsconfig) | Which editor plugins are offered. The portal currently offers none, so the list inside comes back empty. | [optional] |
-| **recent** | [**List**](#model-recentconfig) | The documents offered in the editor&#39;s recent list. It is left out altogether when there is nothing to offer. | [optional] [example: []] [nullable] |
+| **recent** | [**List**](#model-recentconfig) | The documents offered in the editor's recent list. It is left out altogether when there is nothing to offer. | [optional] [example: []] [nullable] |
 | **templates** | [**List**](#model-templatesconfig) | Always empty: the portal no longer passes creation templates through the editor configuration. | [optional] [example: []] [nullable] |
 | **user** | [**UserConfig**](#model-userconfig) | The account the editors attribute changes to. It is empty for an anonymous session opened through an external  link, and the editors then ask for a name themselves. | [optional] |
 
@@ -10412,7 +10412,7 @@ The user parameters.
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **id** | **UUID** (uuid) | The user ID. | [optional] [example: 00000000-0000-0000-0000-000000000000] |
-| **displayName** | **String** | The HTML-encoded user&#39;s display name formatted according to the default format for the current culture. | [optional] [example: Mike Zanyatski] [nullable] |
+| **displayName** | **String** | The HTML-encoded user's display name formatted according to the default format for the current culture. | [optional] [example: Mike Zanyatski] [nullable] |
 | **avatar** | **String** | The user avatar. | [optional] [example: https://example.com/avatar.jpg] [nullable] |
 | **avatarOriginal** | **String** | The user original size avatar. | [optional] [example: https://example.com/avatar_original.jpg] [nullable] |
 | **avatarMax** | **String** | The user maximum size avatar. | [optional] [example: https://example.com/avatar_max.jpg] [nullable] |
@@ -10429,7 +10429,7 @@ The full list of user parameters.
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **id** | **UUID** (uuid) | The user ID. | [optional] |
-| **displayName** | **String** | The HTML-encoded user&#39;s display name formatted according to the default format for the current culture. | [optional] |
+| **displayName** | **String** | The HTML-encoded user's display name formatted according to the default format for the current culture. | [optional] |
 | **avatar** | **String** | The user avatar. | [optional] |
 | **avatarOriginal** | **String** | The user original size avatar. | [optional] |
 | **avatarMax** | **String** | The user maximum size avatar. | [optional] |
@@ -10498,15 +10498,15 @@ The successful API response containing the list of EncryptionKeyDto objects.
 
 
 ### Model EncryptionKeyDto
-An encryption key pair as the portal reports it: the public half of some member&#39;s key, with the encrypted private  half filled in only when the pair belongs to the caller.
+An encryption key pair as the portal reports it: the public half of some member's key, with the encrypted private  half filled in only when the pair belongs to the caller.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **id** | **UUID** (uuid) | Names the pair inside its owner&#39;s key set. Pass it back to rotate the pair or to delete it; the all-zero value  belongs to a client that stores its keys without sending an identifier. | [optional] [example: 9924256B-447C-4F19-9dbd-8ad8c39e8ff5] |
+| **id** | **UUID** (uuid) | Names the pair inside its owner's key set. Pass it back to rotate the pair or to delete it; the all-zero value  belongs to a client that stores its keys without sending an identifier. | [optional] [example: 9924256B-447C-4F19-9dbd-8ad8c39e8ff5] |
 | **userId** | **UUID** (uuid) | The member the pair belongs to. In the key set of a room or of a file this is how the caller tells its own  entries, the ones carrying a private half, from those of the other members. | [optional] [example: 9924256B-447C-4F19-9dbd-8ad8c39e8ff5] |
 | **date** | **Date** (date-time) | When this key material was written. Rotating the pair refreshes it, so it dates the material that is being  reported rather than the first appearance of the identifier. | [optional] [example: 2025-01-01T00:00:00] |
-| **publicKey** | **String** | The public half of the pair, the half a client encrypts file keys with. A pair whose public half is missing  is treated as no access and left out of a room&#39;s or a file&#39;s key set. | [optional] [example: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8A...] [nullable] |
-| **privateKeyEnc** | **String** | The private half, encrypted with its owner&#39;s password. It is filled in only when the pair belongs to the  calling user; on another member&#39;s entry it comes back empty, because the private half is not handed out. | [optional] [example: U2FsdGVkX1+Lm3s...] [nullable] |
+| **publicKey** | **String** | The public half of the pair, the half a client encrypts file keys with. A pair whose public half is missing  is treated as no access and left out of a room's or a file's key set. | [optional] [example: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8A...] [nullable] |
+| **privateKeyEnc** | **String** | The private half, encrypted with its owner's password. It is filled in only when the pair belongs to the  calling user; on another member's entry it comes back empty, because the private half is not handed out. | [optional] [example: U2FsdGVkX1+Lm3s...] [nullable] |
 | **cryptoEngineId** | **String** | The crypto engine this material was issued for, as a braced GUID. The engine is portal-wide, so the same value  comes back for every key of every member. | [optional] [example: {DC522726-5E0E-43E5-AA02-8EA156BECBC5}] [nullable] |
 
 
@@ -10515,9 +10515,9 @@ The two halves of an encryption key pair to store for the calling user, plus the
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **id** | **UUID** (uuid) | Names the pair inside the caller&#39;s own key set. The client generates it, and leaving it out means the all-zero  GUID, which is the pair a client that never sends an identifier keeps working with. | [optional] [example: 9924256B-447C-4F19-9dbd-8ad8c39e8ff5] |
-| **publicKey** | **String** | The public half of the pair, as the client&#39;s crypto engine produced it and stored verbatim. This is the half  handed to the other members of a private room so that they can encrypt file keys for this user. | [optional] [example: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8A...] [nullable] |
-| **privateKeyEnc** | **String** | The private half of the pair, encrypted on the client with the user&#39;s password before it is sent. The portal  stores it as opaque text and cannot decrypt it, so material lost on the client cannot be recovered from here. | [optional] [example: U2FsdGVkX1+Lm3s...] [nullable] |
+| **id** | **UUID** (uuid) | Names the pair inside the caller's own key set. The client generates it, and leaving it out means the all-zero  GUID, which is the pair a client that never sends an identifier keeps working with. | [optional] [example: 9924256B-447C-4F19-9dbd-8ad8c39e8ff5] |
+| **publicKey** | **String** | The public half of the pair, as the client's crypto engine produced it and stored verbatim. This is the half  handed to the other members of a private room so that they can encrypt file keys for this user. | [optional] [example: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8A...] [nullable] |
+| **privateKeyEnc** | **String** | The private half of the pair, encrypted on the client with the user's password before it is sent. The portal  stores it as opaque text and cannot decrypt it, so material lost on the client cannot be recovered from here. | [optional] [example: U2FsdGVkX1+Lm3s...] [nullable] |
 
 
 ### Model ErrorApiResponse
@@ -10558,11 +10558,11 @@ The state of the job that exports the collected form data of a form filling room
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **id** | **String** | The identifier of the job, which stays the same while a job for this room exists and is worth quoting when a  failure has to be traced in the portal logs. Polling is done by room, so the value is not needed to read the  state again. | [required] [example: ExternalDbSyncTask_1_42] [nullable] |
-| **error** | **String** | The message of a failure that stopped the whole job. It is empty while the job is running and after a job that  ended without such a failure; a job that finished with individual forms rejected reports those in &#x60;forms&#x60; and  leaves this field empty. | [optional] [example: Connection refused] [nullable] |
+| **error** | **String** | The message of a failure that stopped the whole job. It is empty while the job is running and after a job that  ended without such a failure; a job that finished with individual forms rejected reports those in `forms` and  leaves this field empty. | [optional] [example: Connection refused] [nullable] |
 | **percentage** | **Integer** (int32) | How much of the work is done, from 0 to 100. It advances as the forms of the room are processed one by one, so  it is a usable progress indicator for a room with many forms and jumps straight to the end for a room with  one. | [required] [example: 75] |
-| **isCompleted** | **Boolean** | Whether the job has ended. It is set both for a job that finished its work and for one that stopped on an  error, so this is the flag to poll for, and &#x60;status&#x60; and &#x60;error&#x60; are what tell the two apart. | [required] [example: false] |
-| **status** | [**DistributedTaskStatus**](#model-distributedtaskstatus) | How the job ended, or how far it has got: queued, running, finished, cancelled or failed. It is the only field  that separates a successful end from a failed one once &#x60;isCompleted&#x60; is set. | [required] [enum: 0, 1, 2, 3, 4] |
-| **forms** | [**List**](#model-externaldbsyncformresultdto) | The outcome for every original form of the room, one entry each. The list is empty while the job is running  and is filled in only when the job ends, so it is what to read after &#x60;isCompleted&#x60; turns true; it stays empty  for a room that holds no forms at all. | [required] [example: [{id=42, title=Application.pdf, success=true, error=null}]] [nullable] |
+| **isCompleted** | **Boolean** | Whether the job has ended. It is set both for a job that finished its work and for one that stopped on an  error, so this is the flag to poll for, and `status` and `error` are what tell the two apart. | [required] [example: false] |
+| **status** | [**DistributedTaskStatus**](#model-distributedtaskstatus) | How the job ended, or how far it has got: queued, running, finished, cancelled or failed. It is the only field  that separates a successful end from a failed one once `isCompleted` is set. | [required] [enum: 0, 1, 2, 3, 4] |
+| **forms** | [**List**](#model-externaldbsyncformresultdto) | The outcome for every original form of the room, one entry each. The list is empty while the job is running  and is filled in only when the job ends, so it is what to read after `isCompleted` turns true; it stays empty  for a room that holds no forms at all. | [required] [example: [{id=42, title=Application.pdf, success=true, error=null}]] [nullable] |
 
 
 ### Model ExternalDbSyncTaskWrapper
@@ -10587,13 +10587,13 @@ The outcome of validating an external share link and the entry it points at.
 | **title** | **String** | The title of the entry the link points at, suitable for showing to the visitor before they are let in. It is  null when the link could not be resolved. | [optional] [example: Project documents] [nullable] |
 | **type** | [**FileEntryType**](#model-fileentrytype) | Whether the link points at a folder - a room counts as one - or at a single file. It is null when the link  could not be resolved. | [optional] [enum: 1, 2] |
 | **tenantId** | **Integer** (int32) | The portal the link belongs to, which matters for a client that works with more than one. It stays 0 for a  link that did not resolve. | [required] [example: 1] |
-| **entityId** | **String** | The identifier of the entry that was asked about through the request&#39;s file or folder parameter, echoed back  once it was found under the link&#39;s target. It is null when nothing was asked about, or when the entry lies  outside what the link opens. | [optional] [example: 9] [nullable] |
+| **entityId** | **String** | The identifier of the entry that was asked about through the request's file or folder parameter, echoed back  once it was found under the link's target. It is null when nothing was asked about, or when the entry lies  outside what the link opens. | [optional] [example: 9] [nullable] |
 | **entityTitle** | **String** | The title of that entry, null under the same conditions as its identifier. | [optional] [example: Contract.docx] [nullable] |
 | **entityType** | [**FileEntryType**](#model-fileentrytype) | Whether that entry is a folder or a file, null under the same conditions as its identifier. | [optional] [enum: 1, 2] |
 | **isRoom** | **Boolean** | True when the link opens a whole room rather than one entry inside it. It is null for a link to a file and for  a link that did not resolve. | [optional] [example: true] [nullable] |
-| **shared** | **Boolean** | True when the entry now sits in the calling account&#39;s own lists - it was already shared with that account, or  resolving the link has just put it there. It stays false for a visitor browsing without an account, who  reaches the entry through the link alone. | [required] [example: true] |
+| **shared** | **Boolean** | True when the entry now sits in the calling account's own lists - it was already shared with that account, or  resolving the link has just put it there. It stays false for a visitor browsing without an account, who  reaches the entry through the link alone. | [required] [example: true] |
 | **linkId** | **UUID** (uuid) | The link the token belongs to, which is also the subject under which the link appears among the sharing rights  of the entry. It is an empty identifier when the link did not resolve. | [required] [example: b3a1f0c7-5d2e-4a19-9f38-71c6e0d4b852] |
-| **isAuthenticated** | **Boolean** | Whether the request carried a signed-in account. It says nothing about that account&#39;s rights on the entry, so  it must not be read as permission - it is false for every anonymous visitor and true for any member, even one  who is a stranger to the room. | [required] [example: true] |
+| **isAuthenticated** | **Boolean** | Whether the request carried a signed-in account. It says nothing about that account's rights on the entry, so  it must not be read as permission - it is false for every anonymous visitor and true for any member, even one  who is a stranger to the room. | [required] [example: true] |
 | **isRoomMember** | **Boolean** | Whether the signed-in caller already has rights of their own on the room that holds the entry, as opposed to  reaching it through this link. It is false for an anonymous visitor and for a member who has never been  invited. | [optional] [example: false] |
 
 
@@ -10602,7 +10602,7 @@ The password that unlocks a protected external share link.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **password** | **String** | The password chosen by the member who shared the entry, spelled exactly as they typed it. It is compared  against the stored value and never returned back; a mismatch is reported through the answer&#39;s status instead  of an error. | [optional] [example: p@ssw0rd] [nullable] |
+| **password** | **String** | The password chosen by the member who shared the entry, spelled exactly as they typed it. It is compared  against the stored value and never returned back; a mismatch is reported through the answer's status instead  of an error. | [optional] [example: p@ssw0rd] [nullable] |
 
 
 ### Model ExternalShareWrapper
@@ -10636,7 +10636,7 @@ The complete external sharing policy of the portal. Every field is written, so a
 |------------ | ------------- | ------------- | -------------|
 | **externalShare** | **Boolean** | Whether links that open a file or a room without a portal account may be created at all. This is the master  switch of the policy: while it is false the portal keeps the default link type internal, turns sharing on  social networks off, and applies the three restriction fields below. | [optional] [example: true] |
 | **defaultShareLinkInternal** | **Boolean** | The kind of link offered first when a new one is created: true offers a link only accounts of this portal can  open, false one that anyone holding it can open. The portal keeps it at true while external sharing is  switched off. | [optional] [example: false] |
-| **externalShareApplyToDocuments** | **Boolean** | Whether the restriction reaches personal documents: with true, no external link can be created for an entry in  the caller&#39;s own documents while external sharing is off. It has no effect while external sharing is allowed. | [optional] [example: true] |
+| **externalShareApplyToDocuments** | **Boolean** | Whether the restriction reaches personal documents: with true, no external link can be created for an entry in  the caller's own documents while external sharing is off. It has no effect while external sharing is allowed. | [optional] [example: true] |
 | **externalShareApplyToRooms** | **Boolean** | Whether the restriction reaches rooms: with true, no external link can be created for a room or its content  while external sharing is off, and a new room cannot be made public. It has no effect while external sharing  is allowed. | [optional] [example: true] |
 | **blockExistingLinksOnRestrict** | **Boolean** | What happens to the links that already exist once external sharing is switched off: with true they stop  opening for the sections named above, with false they keep working and only new ones are refused. This is the  field that changes access to data that is already shared. | [optional] [example: true] |
 
@@ -10654,11 +10654,11 @@ The successful API response containing the ExternalSharingSettingsDto object.
 
 
 ### Model FeedbackConfig
-The settings for the Feedback &amp; Support menu button.
+The settings for the Feedback & Support menu button.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **url** | **String** | The absolute URL to the website address which will be opened when clicking the Feedback &amp; Support menu button. | [optional] [example: https://portal.example.com/support] [nullable] |
+| **url** | **String** | The absolute URL to the website address which will be opened when clicking the Feedback & Support menu button. | [optional] [example: https://portal.example.com/support] [nullable] |
 | **visible** | **Boolean** | Whether the support button is shown. The portal always asks for it to be shown. | [optional] [example: true] |
 
 
@@ -10692,13 +10692,13 @@ A stored file as the calling account sees it: where it lives, which revision thi
 | **ownedBy** | [**EmployeeDto**](#model-employeedto) | Who owns the place the entry is shared from - the creator of the room it lies in, or of the personal section  that holds it. It is filled in only while the entry is being read through a share, and never for a caller  without an account. | [optional] |
 | **shared** | **Boolean** | Whether at least one external link exists for the entry, whichever kind. It says nothing about accounts and  groups - those are counted by the flag for members below. | [optional] |
 | **sharedForUser** | **Boolean** | Whether at least one account or group has been given rights on the entry directly, as opposed to reaching it  through a link or through the room around it. | [optional] |
-| **sharedExternal** | **Boolean** | Whether one of the entry&#39;s links is open to people outside the portal, as opposed to a link that only its own  members can follow. This is the flag to watch when the concern is who can reach the content from outside. | [optional] |
+| **sharedExternal** | **Boolean** | Whether one of the entry's links is open to people outside the portal, as opposed to a link that only its own  members can follow. This is the flag to watch when the concern is who can reach the content from outside. | [optional] |
 | **parentShared** | **Boolean** | Whether the entry is reachable because the room or folder around it is shared, rather than through rights of  its own. A copy or a move takes the entry out of that scope. | [optional] |
 | **shortWebUrl** | **URI** (uri) | A shortened address that opens the entry through the link it is being read with. It is an empty string  whenever no link applies, which is the usual case for a member browsing their own rooms. | [optional] |
-| **created** | [**ApiDateTime**](#model-apidatetime) | When the entry was created, written with the offset of the portal&#39;s time zone. For a file restored from an  older version this is still the moment the file first appeared. | [optional] |
-| **createdBy** | [**EmployeeDto**](#model-employeedto) | Who created the entry. It is null for a caller without an account, who is told nothing about the portal&#39;s  members. | [optional] |
-| **updated** | [**ApiDateTime**](#model-apidatetime) | When the entry last changed, written with the offset of the portal&#39;s time zone. It is never reported as  earlier than the creation moment, so the two can be compared safely. | [optional] |
-| **autoDelete** | [**ApiDateTime**](#model-apidatetime) | When the entry will disappear on its own, written with the offset of the portal&#39;s time zone. It is filled in  only where a removal is actually scheduled - something in the trash while the portal cleans it up  automatically, or a guest&#39;s own documents - so a null means nothing is scheduled rather than that the entry is  permanent. | [optional] |
+| **created** | [**ApiDateTime**](#model-apidatetime) | When the entry was created, written with the offset of the portal's time zone. For a file restored from an  older version this is still the moment the file first appeared. | [optional] |
+| **createdBy** | [**EmployeeDto**](#model-employeedto) | Who created the entry. It is null for a caller without an account, who is told nothing about the portal's  members. | [optional] |
+| **updated** | [**ApiDateTime**](#model-apidatetime) | When the entry last changed, written with the offset of the portal's time zone. It is never reported as  earlier than the creation moment, so the two can be compared safely. | [optional] |
+| **autoDelete** | [**ApiDateTime**](#model-apidatetime) | When the entry will disappear on its own, written with the offset of the portal's time zone. It is filled in  only where a removal is actually scheduled - something in the trash while the portal cleans it up  automatically, or a guest's own documents - so a null means nothing is scheduled rather than that the entry is  permanent. | [optional] |
 | **rootFolderType** | [**FolderType**](#model-foldertype) | The section the entry ultimately belongs to, which is what tells a personal document from one inside a room,  from a template and from something in the trash or the archive. | [optional] [enum: 0, 1, 2, 3, 5, 6, 8, 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36] |
 | **parentRoomType** | [**FolderType**](#model-foldertype) | The kind of room the entry lies in, which decides what the room allows - filling forms, public links,  indexing. It is null for an entry that is not inside a room at all. | [optional] [enum: 0, 1, 2, 3, 5, 6, 8, 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36] |
 | **updatedBy** | [**EmployeeDto**](#model-employeedto) | Who changed the entry last. It is null for a caller without an account. | [optional] |
@@ -10720,47 +10720,47 @@ A stored file as the calling account sees it: where it lives, which revision thi
 | **availableShareRights** | [**FileEntryDtoInteger_allOf_availableShareRights**](#model-fileentrydtointegeravailablesharerights) |  | [optional] [nullable] |
 | **requestToken** | **String** | The token of the link the entry is being read through, which is the value the external-share operations expect  and which also has to be carried by the download and preview addresses. It is null whenever the entry is not  being read through a link. | [optional] |
 | **external** | **Boolean** | Set when the link being used was made for this very entry, and false when the entry is reached through a link  to the room around it. It is null when no link is involved. | [optional] |
-| **expirationDate** | [**ApiDateTime**](#model-apidatetime) | When the link being used stops working, written with the offset of the portal&#39;s time zone. It is null for a  link that never expires and whenever no link is involved. | [optional] |
+| **expirationDate** | [**ApiDateTime**](#model-apidatetime) | When the link being used stops working, written with the offset of the portal's time zone. It is null for a  link that never expires and whenever no link is involved. | [optional] |
 | **isLinkExpired** | **Boolean** | Set when the link being used has already passed its expiration date, which is why the entry cannot be opened  even though it is described here. It is null when no link is involved. | [optional] |
 | **folderId** | **Integer** (int32) | The folder the file is stored in. When the file was reached through a share and the caller cannot open its  real parent, the identifier of the Shared with me section is reported instead, so this is where the file is  visible rather than where it physically sits. | [optional] |
-| **version** | **Integer** (int32) | The revision this entry describes. It starts at 1 and moves to the next number each time new content is stored  over the file, except for an editing session opened against the file itself, which replaces the content and  keeps the number. &#x60;GET api/2.0/files/file/{fileId}/history&#x60; lists them all. | [optional] |
+| **version** | **Integer** (int32) | The revision this entry describes. It starts at 1 and moves to the next number each time new content is stored  over the file, except for an editing session opened against the file itself, which replaces the content and  keeps the number. `GET api/2.0/files/file/{fileId}/history` lists them all. | [optional] |
 | **versionGroup** | **Integer** (int32) | Groups revisions that belong together, which is how a history can fold a long editing session into one entry:  versions saved inside one session share this number, and an upload over the file starts a new group. | [optional] |
-| **contentLength** | **String** | The size already formatted for display, with a unit and the separators of the caller&#39;s language. Read  &#x60;pureContentLength&#x60; for a number to calculate with. | [optional] [nullable] |
+| **contentLength** | **String** | The size already formatted for display, with a unit and the separators of the caller's language. Read  `pureContentLength` for a number to calculate with. | [optional] [nullable] |
 | **pureContentLength** | **Long** (int64) | The size of the stored content in bytes, and null for an empty file. | [optional] [nullable] |
 | **fileStatus** | [**FileStatus**](#model-filestatus) | What the portal is currently doing with the file and how the caller stands towards it - open in the editor,  unread, being converted, and so on. The value is a bit mask that combines those states, so a file can report a  number that matches none of the published members on its own. | [optional] [enum: 0, 1, 2, 4, 8, 16, 32, 64, 128, 256] |
 | **editingBy** | **Map** | The accounts that have the file open in the editor at this moment, as account identifier to display name, and  empty when nobody has. The all-zero identifier stands for people who came in through an external link without  signing in, and its name carries their number in brackets when there is more than one. | [optional] |
-| **mute** | **Boolean** | Not a property of the file at all: it repeats, inverted, the calling account&#39;s own switch for new-item badges,  so it is the same in every entry of one answer. True means that account has badges turned off. | [optional] |
-| **viewUrl** | **URI** (uri) | The address that returns the bytes of the file - a download, in spite of the name; &#x60;webUrl&#x60; is the address a  person opens. When the file was reached through an external link the address carries the key of that link, so  it keeps working without signing in. | [optional] [nullable] |
+| **mute** | **Boolean** | Not a property of the file at all: it repeats, inverted, the calling account's own switch for new-item badges,  so it is the same in every entry of one answer. True means that account has badges turned off. | [optional] |
+| **viewUrl** | **URI** (uri) | The address that returns the bytes of the file - a download, in spite of the name; `webUrl` is the address a  person opens. When the file was reached through an external link the address carries the key of that link, so  it keeps working without signing in. | [optional] [nullable] |
 | **webUrl** | **URI** (uri) | The page that opens the file in a browser: the editor for a format the portal edits, the media viewer for  pictures, audio and video, and the download address for a format it cannot show at all. | [optional] [nullable] |
-| **fileType** | [**FileType**](#model-filetype) | The broad kind of content, worked out from the extension, which is what a client uses to pick an icon or a  viewer without parsing &#x60;fileExst&#x60; itself. | [optional] [enum: 0, 1, 2, 3, 4, 5, 6, 7, 10, 11] |
+| **fileType** | [**FileType**](#model-filetype) | The broad kind of content, worked out from the extension, which is what a client uses to pick an icon or a  viewer without parsing `fileExst` itself. | [optional] [enum: 0, 1, 2, 3, 4, 5, 6, 7, 10, 11] |
 | **fileExst** | **String** | The extension of the stored file, leading dot included and always lower case. For a format the portal keeps in  a converted shape this is the extension it is served under, not the one it was uploaded with. | [optional] [nullable] |
 | **comment** | **String** | The note kept with this revision. The portal writes it itself for revisions it creates, an upload over an  existing file among them, and an editor stores the note a person typed when saving a version. | [optional] [nullable] |
 | **encrypted** | **Boolean** | True for a file in a private room, whose content the server never sees and which therefore cannot be converted  or taken over by an upload. Null, rather than false, for an ordinary file. | [optional] [nullable] |
-| **thumbnailUrl** | **URI** (uri) | The address of the generated preview image. It is filled in only while &#x60;thumbnailStatus&#x60; says the preview has  been created, and it carries a suffix that changes with the file, so an image cached for an earlier revision  is not reused. | [optional] [nullable] |
-| **thumbnailStatus** | [**Thumbnail**](#model-thumbnail) | How far the preview image has got. Only the created state means &#x60;thumbnailUrl&#x60; holds an address; the others  mean there is none, either because it is still being produced or because this format has no preview. | [optional] [enum: 0, 1, 2, 3, 4] |
-| **locked** | **Boolean** | True while the file is held under a lock that stops anyone but its holder from editing it, and null rather  than false when there is no lock. &#x60;lockedBy&#x60; names the holder unless the caller is the holder. | [optional] [nullable] |
-| **lockedBy** | **String** | The display name of the account holding the lock, and null when the caller holds it - so &#x60;locked&#x60; true  together with no name here means the lock is the caller&#39;s own. | [optional] [nullable] |
-| **hasDraft** | **Boolean** | For a fillable PDF form, whether the caller already has a filling draft of it, in which case &#x60;draftLocation&#x60;  says where that draft lives. Null for anything that is not a form. | [optional] [nullable] |
+| **thumbnailUrl** | **URI** (uri) | The address of the generated preview image. It is filled in only while `thumbnailStatus` says the preview has  been created, and it carries a suffix that changes with the file, so an image cached for an earlier revision  is not reused. | [optional] [nullable] |
+| **thumbnailStatus** | [**Thumbnail**](#model-thumbnail) | How far the preview image has got. Only the created state means `thumbnailUrl` holds an address; the others  mean there is none, either because it is still being produced or because this format has no preview. | [optional] [enum: 0, 1, 2, 3, 4] |
+| **locked** | **Boolean** | True while the file is held under a lock that stops anyone but its holder from editing it, and null rather  than false when there is no lock. `lockedBy` names the holder unless the caller is the holder. | [optional] [nullable] |
+| **lockedBy** | **String** | The display name of the account holding the lock, and null when the caller holds it - so `locked` true  together with no name here means the lock is the caller's own. | [optional] [nullable] |
+| **hasDraft** | **Boolean** | For a fillable PDF form, whether the caller already has a filling draft of it, in which case `draftLocation`  says where that draft lives. Null for anything that is not a form. | [optional] [nullable] |
 | **formFillingStatus** | [**FormFillingStatus**](#model-formfillingstatus) | How far the filling of this form has got for the calling account, and whose turn it is now. It is worked out  only inside a virtual data room, where filling runs in steps; everywhere else it stays at the none value. | [optional] [enum: 0, 1, 2, 3, 4, 5] |
-| **isForm** | **Boolean** | Whether the PDF is a fillable form rather than a plain document. When the stored classification does not say,  the portal opens the file to find out, so the answer is reliable for a PDF and null for anything else. | [optional] [nullable] |
+| **isForm** | **Boolean** | Whether the file is a PDF, and so offered as a fillable form. It is null for any other file type. | [optional] [nullable] |
 | **customFilterEnabled** | **Boolean** | True while a spreadsheet is in the mode where each person sorts and filters their own view without changing  what the others see, and null rather than false when it is not. | [optional] [nullable] |
 | **customFilterEnabledBy** | **String** | The display name of the account that turned that mode on, and null when the caller turned it on themselves. | [optional] [nullable] |
 | **startFilling** | **Boolean** | For a form in a room for filling, whether it has been released for filling; until then it is still being  prepared and only the people running the room work with it. Null for a file this does not apply to. | [optional] [nullable] |
 | **isFillingPreparing** | **Boolean** | True during the short window in which a released form is still being written out by the editor. Neither  filling nor editing is accepted while it lasts, so a client should wait and read the file again. | [optional] [nullable] |
-| **inProcessFolderId** | **Integer** (int32) | Left empty by the portal: the folder holding the caller&#39;s draft is reported in &#x60;draftLocation&#x60; instead. | [optional] [nullable] |
-| **inProcessFolderTitle** | **String** | Left empty by the portal, like the identifier beside it; the draft&#39;s folder is named in &#x60;draftLocation&#x60;. | [optional] [nullable] |
+| **inProcessFolderId** | **Integer** (int32) | Left empty by the portal: the folder holding the caller's draft is reported in `draftLocation` instead. | [optional] [nullable] |
+| **inProcessFolderTitle** | **String** | Left empty by the portal, like the identifier beside it; the draft's folder is named in `draftLocation`. | [optional] [nullable] |
 | **resultsFolderId** | **Integer** (int32) | The folder that collects the completed copies of this form. It is filled in only for the original form of a  room for filling, and only for a caller allowed to work with that form; null everywhere else. | [optional] [nullable] |
-| **draftLocation** | [**DraftLocationInteger**](#model-draftlocationinteger) | Where the caller&#39;s own filling draft of this form is kept. Null when there is no draft yet, which is the same  thing &#x60;hasDraft&#x60; reports. | [optional] |
+| **draftLocation** | [**DraftLocationInteger**](#model-draftlocationinteger) | Where the caller's own filling draft of this form is kept. Null when there is no draft yet, which is the same  thing `hasDraft` reports. | [optional] |
 | **viewAccessibility** | [**FileDtoInteger_allOf_viewAccessibility**](#model-filedtointegerviewaccessibility) |  | [optional] [nullable] |
-| **lastOpened** | [**ApiDateTime**](#model-apidatetime) | The moment the caller last opened the file. It is kept per account and is what orders the Recent section, so  it is null for a file this account has never opened. Written with the offset of the portal&#39;s time zone. | [optional] |
-| **expired** | [**ApiDateTime**](#model-apidatetime) | The moment the file falls under the lifetime rule of the room holding it and is removed. It is counted from  the first revision rather than the latest one, so editing a file does not postpone it, and it is null when the  room sets no lifetime. Written with the offset of the portal&#39;s time zone. | [optional] |
-| **vectorizationStatus** | [**VectorizationStatus**](#model-vectorizationstatus) | How far the indexing of the file&#39;s content for AI search has got. It is null for a file that has never been  queued for indexing, which is every file while the feature is off for the portal. | [optional] [enum: 0, 1, 2] |
+| **lastOpened** | [**ApiDateTime**](#model-apidatetime) | The moment the caller last opened the file. It is kept per account and is what orders the Recent section, so  it is null for a file this account has never opened. Written with the offset of the portal's time zone. | [optional] |
+| **expired** | [**ApiDateTime**](#model-apidatetime) | The moment the file falls under the lifetime rule of the room holding it and is removed. It is counted from  the first revision rather than the latest one, so editing a file does not postpone it, and it is null when the  room sets no lifetime. Written with the offset of the portal's time zone. | [optional] |
+| **vectorizationStatus** | [**VectorizationStatus**](#model-vectorizationstatus) | How far the indexing of the file's content for AI search has got. It is null for a file that has never been  queued for indexing, which is every file while the feature is off for the portal. | [optional] [enum: 0, 1, 2] |
 | **externalDbTableName** | **String** | The table collecting the submitted values of this form in the external database configured for its room. The  field is left out of the answer entirely when the form has no such table. | [optional] [nullable] |
 | **dimensions** | [**Size**](#model-size) | The pixel size of the picture, measured by reading the stored file rather than taken from any stored metadata.  Null for anything that is not a picture the portal can show, and also when the file could not be read. | [optional] |
 
 
 ### Model FileDtoInteger.viewAccessibility
-Which ways of opening this format the portal supports at all - its own editor, the picture viewer, the media  player and so on. It answers whether the format can be shown, not whether this account may do it; rights are  reported in &#x60;security&#x60;.
+Which ways of opening this format the portal supports at all - its own editor, the picture viewer, the media  player and so on. It answers whether the format can be shown, not whether this account may do it; rights are  reported in `security`.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
@@ -10781,7 +10781,7 @@ The keys the calling account needs in order to open one file of an end-to-end en
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **userKeys** | [**List**](#model-encryptionkeydto) | The key pairs of the calling account, never those of the other people in the room. The private half of each  pair is stored encrypted with that person&#39;s own password and has to be decrypted on the client. An empty list  means the account has generated no key pair yet, and until it does no file key can be issued to it. | [optional] [example: [{id=9924256B-447C-4F19-9dbd-8ad8c39e8ff5, userId=9924256B-447C-4F19-9dbd-8ad8c39e8ff5, date=2025-01-01T00:00:00, publicKey=-----BEGIN PUBLIC KEY-----<br>MIIBIjANBg..., privateKeyEnc=U2FsdGVkX1+Lm3s..., cryptoEngineId=defaultCryptoEngine}]] [nullable] |
+| **userKeys** | [**List**](#model-encryptionkeydto) | The key pairs of the calling account, never those of the other people in the room. The private half of each  pair is stored encrypted with that person's own password and has to be decrypted on the client. An empty list  means the account has generated no key pair yet, and until it does no file key can be issued to it. | [optional] [example: [{id=9924256B-447C-4F19-9dbd-8ad8c39e8ff5, userId=9924256B-447C-4F19-9dbd-8ad8c39e8ff5, date=2025-01-01T00:00:00, publicKey=-----BEGIN PUBLIC KEY-----<br>MIIBIjANBg..., privateKeyEnc=U2FsdGVkX1+Lm3s..., cryptoEngineId=defaultCryptoEngine}]] [nullable] |
 | **fileKeys** | [**List**](#model-filekeys) | The keys of this file that were issued to the calling account, each naming the public key it was encrypted for  so that the client can pick the matching private half. An empty list means the file has not been shared with  this account rather than that the file is unencrypted. | [optional] [example: [{userId=9924256B-447C-4F19-9dbd-8ad8c39e8ff5, publicKeyId=9924256B-447C-4F19-9dbd-8ad8c39e8ff5, privateKeyEnc=U2FsdGVkX1+Lm3s..., tenantId=1, fileId=9846, createOn=2025-01-01T00:00:00}]] [nullable] |
 
 
@@ -10820,13 +10820,13 @@ What every file and folder in an answer has in common; the concrete shape is a f
 | **ownedBy** | [**EmployeeDto**](#model-employeedto) | Who owns the place the entry is shared from - the creator of the room it lies in, or of the personal section  that holds it. It is filled in only while the entry is being read through a share, and never for a caller  without an account. | [optional] |
 | **shared** | **Boolean** | Whether at least one external link exists for the entry, whichever kind. It says nothing about accounts and  groups - those are counted by the flag for members below. | [optional] [example: false] |
 | **sharedForUser** | **Boolean** | Whether at least one account or group has been given rights on the entry directly, as opposed to reaching it  through a link or through the room around it. | [optional] [example: false] |
-| **sharedExternal** | **Boolean** | Whether one of the entry&#39;s links is open to people outside the portal, as opposed to a link that only its own  members can follow. This is the flag to watch when the concern is who can reach the content from outside. | [optional] [example: false] |
+| **sharedExternal** | **Boolean** | Whether one of the entry's links is open to people outside the portal, as opposed to a link that only its own  members can follow. This is the flag to watch when the concern is who can reach the content from outside. | [optional] [example: false] |
 | **parentShared** | **Boolean** | Whether the entry is reachable because the room or folder around it is shared, rather than through rights of  its own. A copy or a move takes the entry out of that scope. | [optional] [example: false] |
 | **shortWebUrl** | **URI** (uri) | A shortened address that opens the entry through the link it is being read with. It is an empty string  whenever no link applies, which is the usual case for a member browsing their own rooms. | [optional] [example: http://localhost/s/abc123] [nullable] |
-| **created** | [**ApiDateTime**](#model-apidatetime) | When the entry was created, written with the offset of the portal&#39;s time zone. For a file restored from an  older version this is still the moment the file first appeared. | [optional] |
-| **createdBy** | [**EmployeeDto**](#model-employeedto) | Who created the entry. It is null for a caller without an account, who is told nothing about the portal&#39;s  members. | [optional] |
-| **updated** | [**ApiDateTime**](#model-apidatetime) | When the entry last changed, written with the offset of the portal&#39;s time zone. It is never reported as  earlier than the creation moment, so the two can be compared safely. | [optional] |
-| **autoDelete** | [**ApiDateTime**](#model-apidatetime) | When the entry will disappear on its own, written with the offset of the portal&#39;s time zone. It is filled in  only where a removal is actually scheduled - something in the trash while the portal cleans it up  automatically, or a guest&#39;s own documents - so a null means nothing is scheduled rather than that the entry is  permanent. | [optional] |
+| **created** | [**ApiDateTime**](#model-apidatetime) | When the entry was created, written with the offset of the portal's time zone. For a file restored from an  older version this is still the moment the file first appeared. | [optional] |
+| **createdBy** | [**EmployeeDto**](#model-employeedto) | Who created the entry. It is null for a caller without an account, who is told nothing about the portal's  members. | [optional] |
+| **updated** | [**ApiDateTime**](#model-apidatetime) | When the entry last changed, written with the offset of the portal's time zone. It is never reported as  earlier than the creation moment, so the two can be compared safely. | [optional] |
+| **autoDelete** | [**ApiDateTime**](#model-apidatetime) | When the entry will disappear on its own, written with the offset of the portal's time zone. It is filled in  only where a removal is actually scheduled - something in the trash while the portal cleans it up  automatically, or a guest's own documents - so a null means nothing is scheduled rather than that the entry is  permanent. | [optional] |
 | **rootFolderType** | [**FolderType**](#model-foldertype) | The section the entry ultimately belongs to, which is what tells a personal document from one inside a room,  from a template and from something in the trash or the archive. | [optional] [enum: 0, 1, 2, 3, 5, 6, 8, 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36] |
 | **parentRoomType** | [**FolderType**](#model-foldertype) | The kind of room the entry lies in, which decides what the room allows - filling forms, public links,  indexing. It is null for an entry that is not inside a room at all. | [optional] [enum: 0, 1, 2, 3, 5, 6, 8, 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36] |
 | **updatedBy** | [**EmployeeDto**](#model-employeedto) | Who changed the entry last. It is null for a caller without an account. | [optional] |
@@ -10861,13 +10861,13 @@ The part of a file or folder that depends on how the entry is identified: by a n
 | **ownedBy** | [**EmployeeDto**](#model-employeedto) | Who owns the place the entry is shared from - the creator of the room it lies in, or of the personal section  that holds it. It is filled in only while the entry is being read through a share, and never for a caller  without an account. | [optional] |
 | **shared** | **Boolean** | Whether at least one external link exists for the entry, whichever kind. It says nothing about accounts and  groups - those are counted by the flag for members below. | [optional] |
 | **sharedForUser** | **Boolean** | Whether at least one account or group has been given rights on the entry directly, as opposed to reaching it  through a link or through the room around it. | [optional] |
-| **sharedExternal** | **Boolean** | Whether one of the entry&#39;s links is open to people outside the portal, as opposed to a link that only its own  members can follow. This is the flag to watch when the concern is who can reach the content from outside. | [optional] |
+| **sharedExternal** | **Boolean** | Whether one of the entry's links is open to people outside the portal, as opposed to a link that only its own  members can follow. This is the flag to watch when the concern is who can reach the content from outside. | [optional] |
 | **parentShared** | **Boolean** | Whether the entry is reachable because the room or folder around it is shared, rather than through rights of  its own. A copy or a move takes the entry out of that scope. | [optional] |
 | **shortWebUrl** | **URI** (uri) | A shortened address that opens the entry through the link it is being read with. It is an empty string  whenever no link applies, which is the usual case for a member browsing their own rooms. | [optional] |
-| **created** | [**ApiDateTime**](#model-apidatetime) | When the entry was created, written with the offset of the portal&#39;s time zone. For a file restored from an  older version this is still the moment the file first appeared. | [optional] |
-| **createdBy** | [**EmployeeDto**](#model-employeedto) | Who created the entry. It is null for a caller without an account, who is told nothing about the portal&#39;s  members. | [optional] |
-| **updated** | [**ApiDateTime**](#model-apidatetime) | When the entry last changed, written with the offset of the portal&#39;s time zone. It is never reported as  earlier than the creation moment, so the two can be compared safely. | [optional] |
-| **autoDelete** | [**ApiDateTime**](#model-apidatetime) | When the entry will disappear on its own, written with the offset of the portal&#39;s time zone. It is filled in  only where a removal is actually scheduled - something in the trash while the portal cleans it up  automatically, or a guest&#39;s own documents - so a null means nothing is scheduled rather than that the entry is  permanent. | [optional] |
+| **created** | [**ApiDateTime**](#model-apidatetime) | When the entry was created, written with the offset of the portal's time zone. For a file restored from an  older version this is still the moment the file first appeared. | [optional] |
+| **createdBy** | [**EmployeeDto**](#model-employeedto) | Who created the entry. It is null for a caller without an account, who is told nothing about the portal's  members. | [optional] |
+| **updated** | [**ApiDateTime**](#model-apidatetime) | When the entry last changed, written with the offset of the portal's time zone. It is never reported as  earlier than the creation moment, so the two can be compared safely. | [optional] |
+| **autoDelete** | [**ApiDateTime**](#model-apidatetime) | When the entry will disappear on its own, written with the offset of the portal's time zone. It is filled in  only where a removal is actually scheduled - something in the trash while the portal cleans it up  automatically, or a guest's own documents - so a null means nothing is scheduled rather than that the entry is  permanent. | [optional] |
 | **rootFolderType** | [**FolderType**](#model-foldertype) | The section the entry ultimately belongs to, which is what tells a personal document from one inside a room,  from a template and from something in the trash or the archive. | [optional] [enum: 0, 1, 2, 3, 5, 6, 8, 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36] |
 | **parentRoomType** | [**FolderType**](#model-foldertype) | The kind of room the entry lies in, which decides what the room allows - filling forms, public links,  indexing. It is null for an entry that is not inside a room at all. | [optional] [enum: 0, 1, 2, 3, 5, 6, 8, 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36] |
 | **updatedBy** | [**EmployeeDto**](#model-employeedto) | Who changed the entry last. It is null for a caller without an account. | [optional] |
@@ -10889,7 +10889,7 @@ The part of a file or folder that depends on how the entry is identified: by a n
 | **availableShareRights** | [**FileEntryDtoInteger_allOf_availableShareRights**](#model-fileentrydtointegeravailablesharerights) |  | [optional] [nullable] |
 | **requestToken** | **String** | The token of the link the entry is being read through, which is the value the external-share operations expect  and which also has to be carried by the download and preview addresses. It is null whenever the entry is not  being read through a link. | [optional] [nullable] |
 | **external** | **Boolean** | Set when the link being used was made for this very entry, and false when the entry is reached through a link  to the room around it. It is null when no link is involved. | [optional] [nullable] |
-| **expirationDate** | [**ApiDateTime**](#model-apidatetime) | When the link being used stops working, written with the offset of the portal&#39;s time zone. It is null for a  link that never expires and whenever no link is involved. | [optional] |
+| **expirationDate** | [**ApiDateTime**](#model-apidatetime) | When the link being used stops working, written with the offset of the portal's time zone. It is null for a  link that never expires and whenever no link is involved. | [optional] |
 | **isLinkExpired** | **Boolean** | Set when the link being used has already passed its expiration date, which is why the entry cannot be opened  even though it is described here. It is null when no link is involved. | [optional] [nullable] |
 
 
@@ -10906,7 +10906,7 @@ Which access levels may be handed out on this entry, listed per kind of recipien
 
 
 ### Model FileEntryDtoInteger.security
-What the calling account may do with this entry, one flag per action, and the cheapest way to decide which  operations to offer without trying them. The flags already take the room&#39;s settings and the account&#39;s role  into account.
+What the calling account may do with this entry, one flag per action, and the cheapest way to decide which  operations to offer without trying them. The flags already take the room's settings and the account's role  into account.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
@@ -10982,13 +10982,13 @@ The part of a file or folder that depends on how the entry is identified: by a n
 | **ownedBy** | [**EmployeeDto**](#model-employeedto) | Who owns the place the entry is shared from - the creator of the room it lies in, or of the personal section  that holds it. It is filled in only while the entry is being read through a share, and never for a caller  without an account. | [optional] |
 | **shared** | **Boolean** | Whether at least one external link exists for the entry, whichever kind. It says nothing about accounts and  groups - those are counted by the flag for members below. | [optional] |
 | **sharedForUser** | **Boolean** | Whether at least one account or group has been given rights on the entry directly, as opposed to reaching it  through a link or through the room around it. | [optional] |
-| **sharedExternal** | **Boolean** | Whether one of the entry&#39;s links is open to people outside the portal, as opposed to a link that only its own  members can follow. This is the flag to watch when the concern is who can reach the content from outside. | [optional] |
+| **sharedExternal** | **Boolean** | Whether one of the entry's links is open to people outside the portal, as opposed to a link that only its own  members can follow. This is the flag to watch when the concern is who can reach the content from outside. | [optional] |
 | **parentShared** | **Boolean** | Whether the entry is reachable because the room or folder around it is shared, rather than through rights of  its own. A copy or a move takes the entry out of that scope. | [optional] |
 | **shortWebUrl** | **URI** (uri) | A shortened address that opens the entry through the link it is being read with. It is an empty string  whenever no link applies, which is the usual case for a member browsing their own rooms. | [optional] |
-| **created** | [**ApiDateTime**](#model-apidatetime) | When the entry was created, written with the offset of the portal&#39;s time zone. For a file restored from an  older version this is still the moment the file first appeared. | [optional] |
-| **createdBy** | [**EmployeeDto**](#model-employeedto) | Who created the entry. It is null for a caller without an account, who is told nothing about the portal&#39;s  members. | [optional] |
-| **updated** | [**ApiDateTime**](#model-apidatetime) | When the entry last changed, written with the offset of the portal&#39;s time zone. It is never reported as  earlier than the creation moment, so the two can be compared safely. | [optional] |
-| **autoDelete** | [**ApiDateTime**](#model-apidatetime) | When the entry will disappear on its own, written with the offset of the portal&#39;s time zone. It is filled in  only where a removal is actually scheduled - something in the trash while the portal cleans it up  automatically, or a guest&#39;s own documents - so a null means nothing is scheduled rather than that the entry is  permanent. | [optional] |
+| **created** | [**ApiDateTime**](#model-apidatetime) | When the entry was created, written with the offset of the portal's time zone. For a file restored from an  older version this is still the moment the file first appeared. | [optional] |
+| **createdBy** | [**EmployeeDto**](#model-employeedto) | Who created the entry. It is null for a caller without an account, who is told nothing about the portal's  members. | [optional] |
+| **updated** | [**ApiDateTime**](#model-apidatetime) | When the entry last changed, written with the offset of the portal's time zone. It is never reported as  earlier than the creation moment, so the two can be compared safely. | [optional] |
+| **autoDelete** | [**ApiDateTime**](#model-apidatetime) | When the entry will disappear on its own, written with the offset of the portal's time zone. It is filled in  only where a removal is actually scheduled - something in the trash while the portal cleans it up  automatically, or a guest's own documents - so a null means nothing is scheduled rather than that the entry is  permanent. | [optional] |
 | **rootFolderType** | [**FolderType**](#model-foldertype) | The section the entry ultimately belongs to, which is what tells a personal document from one inside a room,  from a template and from something in the trash or the archive. | [optional] [enum: 0, 1, 2, 3, 5, 6, 8, 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36] |
 | **parentRoomType** | [**FolderType**](#model-foldertype) | The kind of room the entry lies in, which decides what the room allows - filling forms, public links,  indexing. It is null for an entry that is not inside a room at all. | [optional] [enum: 0, 1, 2, 3, 5, 6, 8, 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36] |
 | **updatedBy** | [**EmployeeDto**](#model-employeedto) | Who changed the entry last. It is null for a caller without an account. | [optional] |
@@ -11010,7 +11010,7 @@ The part of a file or folder that depends on how the entry is identified: by a n
 | **availableShareRights** | [**FileEntryDtoInteger_allOf_availableShareRights**](#model-fileentrydtointegeravailablesharerights) |  | [optional] [nullable] |
 | **requestToken** | **String** | The token of the link the entry is being read through, which is the value the external-share operations expect  and which also has to be carried by the download and preview addresses. It is null whenever the entry is not  being read through a link. | [optional] [nullable] |
 | **external** | **Boolean** | Set when the link being used was made for this very entry, and false when the entry is reached through a link  to the room around it. It is null when no link is involved. | [optional] [nullable] |
-| **expirationDate** | [**ApiDateTime**](#model-apidatetime) | When the link being used stops working, written with the offset of the portal&#39;s time zone. It is null for a  link that never expires and whenever no link is involved. | [optional] |
+| **expirationDate** | [**ApiDateTime**](#model-apidatetime) | When the link being used stops working, written with the offset of the portal's time zone. It is null for a  link that never expires and whenever no link is involved. | [optional] |
 | **isLinkExpired** | **Boolean** | Set when the link being used has already passed its expiration date, which is why the entry cannot be opened  even though it is described here. It is null when no link is involved. | [optional] [nullable] |
 
 
@@ -11086,13 +11086,13 @@ The settings of an external link to a file.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **linkId** | **UUID** (uuid) | The link to rewrite, as reported by &#x60;GET api/2.0/files/file/{id}/links&#x60;. An identifier that is not yet in use,  the empty one included, creates a link instead. | [optional] [example: 00000000-0000-0000-0000-000000000000] |
+| **linkId** | **UUID** (uuid) | The link to rewrite, as reported by `GET api/2.0/files/file/{id}/links`. An identifier that is not yet in use,  the empty one included, creates a link instead. | [optional] [example: 00000000-0000-0000-0000-000000000000] |
 | **access** | [**FileShare**](#model-fileshare) | The rights the link grants to whoever follows it. The value that denies everything revokes the link. | [optional] [enum: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] |
 | **expirationDate** | [**ApiDateTime**](#model-apidatetime) | The moment the link stops working, read in the time zone of the portal. A date more than a few years ahead is  rejected as an invalid request; left out, the link does not expire on its own. | [optional] |
 | **title** | **String** | The name the link carries in the sharing list of the file, for the people who manage it; it is not shown to  whoever follows the link. | [optional] [example: My Document] [minLength: 0] [maxLength: 255] [nullable] |
-| **internal** | **Boolean** | Who may follow the link: &#x60;true&#x60; admits only accounts that are signed in to the portal, &#x60;false&#x60; admits anybody  who has the address. | [optional] [example: false] |
+| **internal** | **Boolean** | Who may follow the link: `true` admits only accounts that are signed in to the portal, `false` admits anybody  who has the address. | [optional] [example: false] |
 | **primary** | **Boolean** | Whether this link becomes the primary link of the file - the one the Copy link action of a client hands out.  A file has one primary link at a time. | [optional] [example: true] |
-| **denyDownload** | **Boolean** | What a visitor may do with the content: &#x60;true&#x60; leaves them with viewing in the browser, &#x60;false&#x60; lets them  download and print it as their rights allow. | [optional] [example: false] |
+| **denyDownload** | **Boolean** | What a visitor may do with the content: `true` leaves them with viewing in the browser, `false` lets them  download and print it as their rights allow. | [optional] [example: false] |
 | **password** | **String** | The secret a visitor has to type before the file opens; left out, the link opens without one. | [optional] [example: p@ssw0rd] [minLength: 0] [maxLength: 255] [nullable] |
 
 
@@ -11125,11 +11125,11 @@ One background file operation of the caller, as it stood when the answer was bui
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **id** | **String** | The identifier of the operation, the one to pass to &#x60;PUT api/2.0/files/fileops/terminate/{id}&#x60; to stop it.  Operations belong to the account that started them, so an identifier of somebody else is never listed here. | [required] [example: a1f4c9b2-3d8e-4f77-9b16-2c5de8f0a913] [nullable] |
-| **Operation** | [**FileOperationType**](#model-fileoperationtype) | What the operation does with the entries, which also decides what else is reported: only a download fills  &#x60;url&#x60;, and a deletion leaves &#x60;files&#x60; and &#x60;folders&#x60; empty. | [required] [enum: 0, 1, 2, 3, 4, 5, 6, 7] |
-| **progress** | **Integer** (int32) | How far the operation has come, from 0 to 100. Reaching 100 only means it stopped; whether it did what it was  asked for is told by &#x60;error&#x60;. | [required] [example: 100] |
+| **id** | **String** | The identifier of the operation, the one to pass to `PUT api/2.0/files/fileops/terminate/{id}` to stop it.  Operations belong to the account that started them, so an identifier of somebody else is never listed here. | [required] [example: a1f4c9b2-3d8e-4f77-9b16-2c5de8f0a913] [nullable] |
+| **Operation** | [**FileOperationType**](#model-fileoperationtype) | What the operation does with the entries, which also decides what else is reported: only a download fills  `url`, and a deletion leaves `files` and `folders` empty. | [required] [enum: 0, 1, 2, 3, 4, 5, 6, 7] |
+| **progress** | **Integer** (int32) | How far the operation has come, from 0 to 100. Reaching 100 only means it stopped; whether it did what it was  asked for is told by `error`. | [required] [example: 100] |
 | **error** | **String** | The reason the operation could not finish its work, in the language of the request. Empty when nothing went  wrong, which is the only way to tell a successful operation from a failed one. | [required] [example: Folder not found.] [nullable] |
-| **processed** | **String** | How many entries the operation has handled so far, written as a decimal number in a string. It counts items,  not percent, and stays behind &#x60;progress&#x60; on operations that walk into subfolders. | [required] [example: 12] [nullable] |
+| **processed** | **String** | How many entries the operation has handled so far, written as a decimal number in a string. It counts items,  not percent, and stays behind `progress` on operations that walk into subfolders. | [required] [example: 12] [nullable] |
 | **finished** | **Boolean** | Whether the operation has stopped running. A finished operation is reported once and then dropped, so the next  read of the operation list no longer contains it. | [required] [example: true] |
 | **url** | **URI** (uri) | The address the packed archive can be downloaded from once a bulk download has finished. Empty for every other  kind of operation. | [optional] [example: https://portal.example.com/filehandler.ashx?action=bulk] [nullable] |
 | **files** | [**List**](#model-fileentrybasedto) | The files the operation produced or moved, in the order it wrote them down. Empty while nothing has been  written yet and for a deletion, which reports no entries at all. | [optional] [example: [{id=10, title=document.docx}]] [nullable] |
@@ -11142,7 +11142,7 @@ The parameter shared by every request that starts a background file operation.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **returnSingleOperation** | **Boolean** | Which operations the answer carries: &#x60;true&#x60; returns the operation this call started and nothing else, &#x60;false&#x60;  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, &#x60;true&#x60; falls back to the full list. | [optional] [example: false] |
+| **returnSingleOperation** | **Boolean** | Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list. | [optional] [example: false] |
 
 
 ### Model FileOperationType
@@ -11244,14 +11244,14 @@ One access entry on a file, a folder or a room: who holds it, at which level, an
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **access** | [**FileShare**](#model-fileshare) | The level the subject holds on the entry. On a link entry it is the level the link hands to whoever opens it,  and in a batch answer &#x60;Varies&#x60; means the subject holds different levels on the listed entries. | [optional] [enum: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] |
+| **access** | [**FileShare**](#model-fileshare) | The level the subject holds on the entry. On a link entry it is the level the link hands to whoever opens it,  and in a batch answer `Varies` means the subject holds different levels on the listed entries. | [optional] [enum: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] |
 | **sharedTo** | **oas_any_type_not_mapped** |  | [optional] [nullable] |
-| **sharedToUser** | [**EmployeeFullDto**](#model-employeefulldto) | The account the entry belongs to. It is filled in only when &#x60;subjectType&#x60; says an account, and is null for a  group entry and for a link. | [optional] |
+| **sharedToUser** | [**EmployeeFullDto**](#model-employeefulldto) | The account the entry belongs to. It is filled in only when `subjectType` says an account, and is null for a  group entry and for a link. | [optional] |
 | **sharedToGroup** | [**GroupSummaryDto**](#model-groupsummarydto) | The portal group the entry belongs to, which hands the level to everybody in it. It is filled in only for a  group entry, and is null otherwise. | [optional] |
 | **sharedLink** | [**FileShareLink**](#model-filesharelink) | The sharing link the entry stands for, together with everything set on it. It is filled in only for a link  entry, and is null for an account or a group. | [optional] |
-| **isLocked** | **Boolean** | Whether this entry is the caller&#39;s own, which is why they cannot change its level. Link entries never report  it. | [required] [example: false] |
+| **isLocked** | **Boolean** | Whether this entry is the caller's own, which is why they cannot change its level. Link entries never report  it. | [required] [example: false] |
 | **isOwner** | **Boolean** | Whether the subject created the entry the access is given on, and so cannot be removed from it. | [required] [example: false] |
-| **canEditAccess** | **Boolean** | Whether the caller may change the level of this entry. It is false on the caller&#39;s own entry, on every link,  and whenever the caller may not hand out access at all. | [required] [example: true] |
+| **canEditAccess** | **Boolean** | Whether the caller may change the level of this entry. It is false on the caller's own entry, on every link,  and whenever the caller may not hand out access at all. | [required] [example: true] |
 | **canEditInternal** | **Boolean** | Whether the caller may switch this link between being open to anybody and asking the visitor to sign in to the  portal first. | [required] [example: true] |
 | **canEditDenyDownload** | **Boolean** | Whether the caller may forbid downloading through this link. Only a link of a virtual data room reports true,  and only while the room itself still allows downloads. | [required] [example: true] |
 | **canEditExpirationDate** | **Boolean** | Whether the caller may move the moment this link stops working. | [required] [example: true] |
@@ -11264,19 +11264,19 @@ A sharing link of a file, a folder or a room, with everything set on it.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **id** | **UUID** (uuid) | The identifier of the link, the one to send back as &#x60;linkId&#x60; to change or delete it. | [optional] [example: 9a2c1b3e-6d47-4f10-9b52-ac7d3e5f0812] |
+| **id** | **UUID** (uuid) | The identifier of the link, the one to send back as `linkId` to change or delete it. | [optional] [example: 9a2c1b3e-6d47-4f10-9b52-ac7d3e5f0812] |
 | **title** | **String** | The name the link is listed under, which its author is free to choose and to leave empty. | [optional] [example: Shared document] [nullable] |
 | **shareLink** | **String** | The shortened address to hand out. Opening it is what turns the link into access; the address stays the same  while the link exists. | [optional] [example: https://portal.example.com/s/a1b2c3d4] [nullable] |
 | **expirationDate** | [**ApiDateTime**](#model-apidatetime) | The moment the link stops working, written with the offset of the portal time zone. Null when the link was  left without an end. | [optional] |
 | **linkType** | [**LinkType**](#model-linktype) | Which of the two jobs the link does: letting somebody into the room as a member, or handing out the entry  itself. The counters of uses are filled in for the first kind only. | [optional] [enum: 0, 1] |
 | **password** | **String** | The password a visitor has to send before the link resolves, readable only by those who may manage the link.  Empty when the link asks for none. | [optional] [example: S3cretPhrase] [nullable] |
 | **denyDownload** | **Boolean** | Whether visitors coming through this link may only read the entry in the editor and not download or print it. | [optional] [example: false] [nullable] |
-| **isExpired** | **Boolean** | Whether the moment in &#x60;expirationDate&#x60; has already passed, which leaves the link in place but refuses  everybody who opens it. | [optional] [example: false] [nullable] |
+| **isExpired** | **Boolean** | Whether the moment in `expirationDate` has already passed, which leaves the link in place but refuses  everybody who opens it. | [optional] [example: false] [nullable] |
 | **primary** | **Boolean** | Whether this is the one link the entry always keeps: a public or a form-filling room is given it at creation,  and deleting it there only makes a new one. | [optional] [example: true] |
 | **internal** | **Boolean** | Whether the visitor has to sign in to the portal before the link resolves, as opposed to it being open to  anybody who has the address. | [optional] [example: false] [nullable] |
-| **requestToken** | **String** | The key that stands for this link in the calls that resolve it, such as &#x60;GET api/2.0/files/share/{key}&#x60;. It is  filled in for links that hand out the entry, and empty for the ones that invite into a room. | [optional] [example: gg9J4mBW7pW9Wk0HqQoQ9L2mS1x6bK8vTnQ0aZ3] [nullable] |
+| **requestToken** | **String** | The key that stands for this link in the calls that resolve it, such as `GET api/2.0/files/share/{key}`. It is  filled in for links that hand out the entry, and empty for the ones that invite into a room. | [optional] [example: gg9J4mBW7pW9Wk0HqQoQ9L2mS1x6bK8vTnQ0aZ3] [nullable] |
 | **maxUseCount** | **Integer** (int32) | How many accounts may still join the room through this invitation link in total. Null on a link that hands out  the entry, where nothing is counted. | [optional] [example: 10] [nullable] |
-| **currentUseCount** | **Integer** (int32) | How many accounts have already joined through this invitation link. Once it reaches &#x60;maxUseCount&#x60; the link  stops letting anybody else in. Null on a link that hands out the entry. | [optional] [example: 5] [nullable] |
+| **currentUseCount** | **Integer** (int32) | How many accounts have already joined through this invitation link. Once it reaches `maxUseCount` the link  stops letting anybody else in. Null on a link that hands out the entry. | [optional] [example: 5] [nullable] |
 
 
 ### Model FileShareParams
@@ -11375,18 +11375,18 @@ Everything a client needs to work with documents in this portal: the format tabl
 | **masterFormExtension** | **String** | The extension of a fillable form template in this portal. It is configurable, so read it rather than assuming  the product default. | [optional] [example: .pdf] [nullable] |
 | **paramVersion** | **String** | The name of the query parameter that pins a document address to one version. Append it to the addresses below  instead of composing a version address by hand. | [optional] [example: version] [nullable] |
 | **paramOutType** | **String** | The name of the query parameter that asks a download address for a converted copy in another format. | [optional] [example: outputtype] [nullable] |
-| **fileDownloadUrlString** | **URI** (uri) | The template of the address a file is downloaded from: substitute the file identifier for the &#x60;{0}&#x60;  placeholder. Add the version and output-type parameters named above for a particular version or format. | [optional] [example: https://example.com/filehandler.ashx?action=download&fileid={0}] [nullable] |
-| **fileWebViewerUrlString** | **String** | The template of the address that opens a file in the viewer inside the portal, with &#x60;{0}&#x60; for the file  identifier. It is a portal-relative address, meant to be opened in a browser rather than called as an API. | [optional] [example: /products/files/doceditor?fileid={0}&action=view] [nullable] |
+| **fileDownloadUrlString** | **URI** (uri) | The template of the address a file is downloaded from: substitute the file identifier for the `{0}`  placeholder. Add the version and output-type parameters named above for a particular version or format. | [optional] [example: https://example.com/filehandler.ashx?action=download&fileid={0}] [nullable] |
+| **fileWebViewerUrlString** | **String** | The template of the address that opens a file in the viewer inside the portal, with `{0}` for the file  identifier. It is a portal-relative address, meant to be opened in a browser rather than called as an API. | [optional] [example: /products/files/doceditor?fileid={0}&action=view] [nullable] |
 | **fileWebViewerExternalUrlString** | **URI** (uri) | The same viewer address as an absolute one, for a message or a page outside the portal. | [optional] [example: https://example.com/products/files/doceditor?fileid={0}&action=view] [nullable] |
-| **fileWebEditorUrlString** | **String** | The template of the address that opens a file for editing inside the portal, with &#x60;{0}&#x60; for the file  identifier. Whether the session really becomes editable still depends on the access the caller holds. | [optional] [example: /products/files/doceditor?fileid={0}&action=edit] [nullable] |
+| **fileWebEditorUrlString** | **String** | The template of the address that opens a file for editing inside the portal, with `{0}` for the file  identifier. Whether the session really becomes editable still depends on the access the caller holds. | [optional] [example: /products/files/doceditor?fileid={0}&action=edit] [nullable] |
 | **fileWebEditorExternalUrlString** | **URI** (uri) | The same editing address as an absolute one, for use outside the portal. | [optional] [example: https://example.com/products/files/doceditor?fileid={0}&action=edit] [nullable] |
-| **fileRedirectPreviewUrlString** | **URI** (uri) | The template of the address that sends the browser on to whichever viewer or editor suits the file, with &#x60;{0}&#x60;  for the file identifier. Use it when the kind of the file is not known in advance. | [optional] [example: https://example.com/products/files/{0}] [nullable] |
-| **fileThumbnailUrlString** | **URI** (uri) | The template of the address a file thumbnail is fetched from, with &#x60;{0}&#x60; for the file identifier. A thumbnail  is built in the background, so the address can answer with nothing for a while after the file appears. | [optional] [example: https://example.com/filehandler.ashx?action=thumb&fileid={0}] [nullable] |
-| **confirmDelete** | **Boolean** | Whether the caller asked to be prompted before a deletion. Written by &#x60;PUT api/2.0/files/changedeleteconfrim&#x60;. | [optional] [example: true] |
+| **fileRedirectPreviewUrlString** | **URI** (uri) | The template of the address that sends the browser on to whichever viewer or editor suits the file, with `{0}`  for the file identifier. Use it when the kind of the file is not known in advance. | [optional] [example: https://example.com/products/files/{0}] [nullable] |
+| **fileThumbnailUrlString** | **URI** (uri) | The template of the address a file thumbnail is fetched from, with `{0}` for the file identifier. A thumbnail  is built in the background, so the address can answer with nothing for a while after the file appears. | [optional] [example: https://example.com/filehandler.ashx?action=thumb&fileid={0}] [nullable] |
+| **confirmDelete** | **Boolean** | Whether the caller asked to be prompted before a deletion. Written by `PUT api/2.0/files/changedeleteconfrim`. | [optional] [example: true] |
 | **enableThirdParty** | **Boolean** | Whether this portal allows third-party storages to be connected at all. It is set portal-wide by an  administrator, so a member sees it as read-only. | [optional] [example: true] |
 | **externalShare** | **Boolean** | Whether links that open an entry without a portal account may be created in this portal. Set portal-wide by an  administrator. | [optional] [example: true] |
 | **externalShareSocialMedia** | **Boolean** | Whether the share-to-network buttons are offered next to an external link. It is reported as false whenever  external sharing itself is off. | [optional] [example: true] |
-| **storeOriginalFiles** | **Boolean** | Whether the caller&#39;s uploads keep the original file when the portal converts them. With false the conversion  replaces the uploaded file with a new version of it. | [optional] [example: true] |
+| **storeOriginalFiles** | **Boolean** | Whether the caller's uploads keep the original file when the portal converts them. With false the conversion  replaces the uploaded file with a new version of it. | [optional] [example: true] |
 | **keepNewFileName** | **Boolean** | Whether the caller asked for new documents to be created with the default name instead of being prompted for  one. | [optional] [example: false] |
 | **displayFileExtension** | **Boolean** | Whether the caller asked to see extensions in file titles. Stored titles always carry the extension whatever  this says. | [optional] [example: true] |
 | **showQuickActions** | **Boolean** | Specifies whether to display the quick action buttons. | [optional] [example: true] |
@@ -11401,8 +11401,8 @@ Everything a client needs to work with documents in this portal: the format tabl
 | **recentSection** | **Boolean** | Whether the Recent section is offered to the caller among the section roots. | [optional] [example: true] |
 | **favoritesSection** | **Boolean** | Whether the Favorites section is offered to the caller among the section roots. | [optional] [example: true] |
 | **templatesSection** | **Boolean** | Whether the Templates section is offered to the caller among the section roots. | [optional] [example: true] |
-| **downloadTarGz** | **Boolean** | The archive format the caller&#39;s multi-item downloads are packed into: true for &#x60;.tar.gz&#x60;, false for &#x60;.zip&#x60;. | [optional] [example: true] |
-| **automaticallyCleanUp** | [**AutoCleanUpData**](#model-autocleanupdata) | The trash auto-clearing setting of the caller, the same pair &#x60;GET api/2.0/files/settings/autocleanup&#x60; returns. | [optional] |
+| **downloadTarGz** | **Boolean** | The archive format the caller's multi-item downloads are packed into: true for `.tar.gz`, false for `.zip`. | [optional] [example: true] |
+| **automaticallyCleanUp** | [**AutoCleanUpData**](#model-autocleanupdata) | The trash auto-clearing setting of the caller, the same pair `GET api/2.0/files/settings/autocleanup` returns. | [optional] |
 | **canSearchByContent** | **Boolean** | Whether documents in this portal can be searched by what is inside them and not only by title. It depends on  the full-text search service being configured and having indexed the portal. | [optional] [example: true] |
 | **defaultSharingAccessRights** | **List** | The access rights the sharing dialog offers the caller by default. The portal normalises the set it stores, so  this can be shorter than what was last sent. | [optional] [example: [1, 2]] [enum: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] [nullable] |
 | **maxUploadThreadCount** | **Integer** (int32) | How many upload requests the portal accepts from one account at a time. Sending more than this in parallel  gets the extra ones refused rather than queued. | [optional] [example: 10] |
@@ -11460,12 +11460,12 @@ The space that stored documents take in each section of the portal, in bytes. Th
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **myDocumentsUsedSpace** | [**FilesStatisticsFolder**](#model-filesstatisticsfolder) | The space taken by the personal Files sections of all accounts of the portal added together. An item deleted  to the trash keeps taking space and is counted in &#x60;trashUsedSpace&#x60; until the trash is emptied. | [optional] |
+| **myDocumentsUsedSpace** | [**FilesStatisticsFolder**](#model-filesstatisticsfolder) | The space taken by the personal Files sections of all accounts of the portal added together. An item deleted  to the trash keeps taking space and is counted in `trashUsedSpace` until the trash is emptied. | [optional] |
 | **trashUsedSpace** | [**FilesStatisticsFolder**](#model-filesstatisticsfolder) | The space held by the items deleted to the trash from any section, which is given back only when the trash is  emptied or the items are erased for good. | [optional] |
-| **archiveUsedSpace** | [**FilesStatisticsFolder**](#model-filesstatisticsfolder) | The space taken by the content of the archived rooms, the archived form filling rooms included. Restoring a  room moves its space back to &#x60;roomsUsedSpace&#x60; or &#x60;formsUsedSpace&#x60;. | [optional] |
-| **roomsUsedSpace** | [**FilesStatisticsFolder**](#model-filesstatisticsfolder) | The space taken by the content of the active rooms, except the form filling rooms, whose content is reported  in &#x60;formsUsedSpace&#x60;. Archiving a room moves its space to &#x60;archiveUsedSpace&#x60;. | [optional] |
+| **archiveUsedSpace** | [**FilesStatisticsFolder**](#model-filesstatisticsfolder) | The space taken by the content of the archived rooms, the archived form filling rooms included. Restoring a  room moves its space back to `roomsUsedSpace` or `formsUsedSpace`. | [optional] |
+| **roomsUsedSpace** | [**FilesStatisticsFolder**](#model-filesstatisticsfolder) | The space taken by the content of the active rooms, except the form filling rooms, whose content is reported  in `formsUsedSpace`. Archiving a room moves its space to `archiveUsedSpace`. | [optional] |
 | **aiAgentsUsedSpace** | [**FilesStatisticsFolder**](#model-filesstatisticsfolder) | The space taken by the content of the AI agents section, which exists only in a portal where the AI agents  feature is active; creating an AI room is not enough to bring the section into being. | [optional] |
-| **formsUsedSpace** | [**FilesStatisticsFolder**](#model-filesstatisticsfolder) | The space taken by the content of the active form filling rooms, which is kept apart from &#x60;roomsUsedSpace&#x60;  even though those rooms are listed among the rooms. | [optional] |
+| **formsUsedSpace** | [**FilesStatisticsFolder**](#model-filesstatisticsfolder) | The space taken by the content of the active form filling rooms, which is kept apart from `roomsUsedSpace`  even though those rooms are listed among the rooms. | [optional] |
 
 
 ### Model FilesStatisticsResultWrapper
@@ -11582,13 +11582,13 @@ The folder, with the fields that only a room carries filled in when the folder i
 | **ownedBy** | [**EmployeeDto**](#model-employeedto) | Who owns the place the entry is shared from - the creator of the room it lies in, or of the personal section  that holds it. It is filled in only while the entry is being read through a share, and never for a caller  without an account. | [optional] |
 | **shared** | **Boolean** | Whether at least one external link exists for the entry, whichever kind. It says nothing about accounts and  groups - those are counted by the flag for members below. | [optional] |
 | **sharedForUser** | **Boolean** | Whether at least one account or group has been given rights on the entry directly, as opposed to reaching it  through a link or through the room around it. | [optional] |
-| **sharedExternal** | **Boolean** | Whether one of the entry&#39;s links is open to people outside the portal, as opposed to a link that only its own  members can follow. This is the flag to watch when the concern is who can reach the content from outside. | [optional] |
+| **sharedExternal** | **Boolean** | Whether one of the entry's links is open to people outside the portal, as opposed to a link that only its own  members can follow. This is the flag to watch when the concern is who can reach the content from outside. | [optional] |
 | **parentShared** | **Boolean** | Whether the entry is reachable because the room or folder around it is shared, rather than through rights of  its own. A copy or a move takes the entry out of that scope. | [optional] |
 | **shortWebUrl** | **URI** (uri) | A shortened address that opens the entry through the link it is being read with. It is an empty string  whenever no link applies, which is the usual case for a member browsing their own rooms. | [optional] |
-| **created** | [**ApiDateTime**](#model-apidatetime) | When the entry was created, written with the offset of the portal&#39;s time zone. For a file restored from an  older version this is still the moment the file first appeared. | [optional] |
-| **createdBy** | [**EmployeeDto**](#model-employeedto) | Who created the entry. It is null for a caller without an account, who is told nothing about the portal&#39;s  members. | [optional] |
-| **updated** | [**ApiDateTime**](#model-apidatetime) | When the entry last changed, written with the offset of the portal&#39;s time zone. It is never reported as  earlier than the creation moment, so the two can be compared safely. | [optional] |
-| **autoDelete** | [**ApiDateTime**](#model-apidatetime) | When the entry will disappear on its own, written with the offset of the portal&#39;s time zone. It is filled in  only where a removal is actually scheduled - something in the trash while the portal cleans it up  automatically, or a guest&#39;s own documents - so a null means nothing is scheduled rather than that the entry is  permanent. | [optional] |
+| **created** | [**ApiDateTime**](#model-apidatetime) | When the entry was created, written with the offset of the portal's time zone. For a file restored from an  older version this is still the moment the file first appeared. | [optional] |
+| **createdBy** | [**EmployeeDto**](#model-employeedto) | Who created the entry. It is null for a caller without an account, who is told nothing about the portal's  members. | [optional] |
+| **updated** | [**ApiDateTime**](#model-apidatetime) | When the entry last changed, written with the offset of the portal's time zone. It is never reported as  earlier than the creation moment, so the two can be compared safely. | [optional] |
+| **autoDelete** | [**ApiDateTime**](#model-apidatetime) | When the entry will disappear on its own, written with the offset of the portal's time zone. It is filled in  only where a removal is actually scheduled - something in the trash while the portal cleans it up  automatically, or a guest's own documents - so a null means nothing is scheduled rather than that the entry is  permanent. | [optional] |
 | **rootFolderType** | [**FolderType**](#model-foldertype) | The section the entry ultimately belongs to, which is what tells a personal document from one inside a room,  from a template and from something in the trash or the archive. | [optional] [enum: 0, 1, 2, 3, 5, 6, 8, 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36] |
 | **parentRoomType** | [**FolderType**](#model-foldertype) | The kind of room the entry lies in, which decides what the room allows - filling forms, public links,  indexing. It is null for an entry that is not inside a room at all. | [optional] [enum: 0, 1, 2, 3, 5, 6, 8, 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36] |
 | **updatedBy** | [**EmployeeDto**](#model-employeedto) | Who changed the entry last. It is null for a caller without an account. | [optional] |
@@ -11610,11 +11610,11 @@ The folder, with the fields that only a room carries filled in when the folder i
 | **availableShareRights** | [**FileEntryDtoInteger_allOf_availableShareRights**](#model-fileentrydtointegeravailablesharerights) |  | [optional] [nullable] |
 | **requestToken** | **String** | The token of the link the entry is being read through, which is the value the external-share operations expect  and which also has to be carried by the download and preview addresses. It is null whenever the entry is not  being read through a link. | [optional] |
 | **external** | **Boolean** | Set when the link being used was made for this very entry, and false when the entry is reached through a link  to the room around it. It is null when no link is involved. | [optional] |
-| **expirationDate** | [**ApiDateTime**](#model-apidatetime) | When the link being used stops working, written with the offset of the portal&#39;s time zone. It is null for a  link that never expires and whenever no link is involved. | [optional] |
+| **expirationDate** | [**ApiDateTime**](#model-apidatetime) | When the link being used stops working, written with the offset of the portal's time zone. It is null for a  link that never expires and whenever no link is involved. | [optional] |
 | **isLinkExpired** | **Boolean** | Set when the link being used has already passed its expiration date, which is why the entry cannot be opened  even though it is described here. It is null when no link is involved. | [optional] |
 | **parentId** | **Integer** (int32) | The folder this one is listed in. For a room it is the root of the section the room lives in, and for an entry  opened through a sharing link whose real parent the caller may not read it is the root of the section with the  entries shared with them. | [optional] |
-| **filesCount** | **Integer** (int32) | How many files lie directly in the folder, without counting the subfolders. The roots of the &#x60;Rooms&#x60;, room  templates and default templates sections always report 0, because the number is not collected for them. | [optional] |
-| **foldersCount** | **Integer** (int32) | How many subfolders lie directly in the folder. For an AI room the two service subfolders it always holds are  subtracted, so the number matches what a listing of it shows, and the roots of the &#x60;Rooms&#x60; and templates  sections report 0. | [optional] |
+| **filesCount** | **Integer** (int32) | How many files lie directly in the folder, without counting the subfolders. The roots of the `Rooms`, room  templates and default templates sections always report 0, because the number is not collected for them. | [optional] |
+| **foldersCount** | **Integer** (int32) | How many subfolders lie directly in the folder. For an AI room the two service subfolders it always holds are  subtracted, so the number matches what a listing of it shows, and the roots of the `Rooms` and templates  sections report 0. | [optional] |
 | **isShareable** | **Boolean** | Whether the caller may hand out access to the folder. It is filled in only for the folder a folder-contents  answer is about, and is null in every other answer, so null says nothing about the sharing rights. | [optional] [nullable] |
 | **new** | **Integer** (int32) | How many entries inside the folder the caller has not opened yet, the number drawn as the badge on it. An  account that turned the badges off in its own settings always reads 0 here, so 0 alone does not prove that  everything has been seen. | [optional] |
 | **mute** | **Boolean** | Whether the caller silenced the notifications of this room: true means no message about its activity reaches  them. The choice belongs to the reading account rather than to the room, so two members of one room read  different values. | [optional] |
@@ -11623,17 +11623,17 @@ The folder, with the fields that only a room carries filled in when the folder i
 | **pinned** | **Boolean** | Whether the caller pinned the room to the top of their own room list. Pinning is personal and is lost when the  room is archived. | [optional] |
 | **roomType** | [**RoomType**](#model-roomtype) | The kind of the room, which decides the default access rules of its members. Null for a folder that is not a  room. | [optional] [enum: 1, 2, 5, 6, 8, 9] |
 | **private** | **Boolean** | Whether the room is a private one, which limits it to the accounts invited into it and needs encryption keys  set up for each of them. | [optional] |
-| **indexing** | **Boolean** | Whether the contents of the room are kept in an explicit numbered order, the one reported as &#x60;order&#x60; on each  entry, instead of being left to the sorting the reader asks for. | [optional] |
+| **indexing** | **Boolean** | Whether the contents of the room are kept in an explicit numbered order, the one reported as `order` on each  entry, instead of being left to the sorting the reader asks for. | [optional] |
 | **denyDownload** | **Boolean** | Whether downloading and printing the contents of the room is forbidden, which leaves its members with viewing  and editing in the editor. | [optional] |
 | **lifetime** | [**RoomDataLifetimeDto**](#model-roomdatalifetimedto) | The rule by which the files of the room are removed once they grow old. Null when the room has no such rule,  which is also what is reported after the rule is switched off, because switching it off erases it. | [optional] |
 | **watermark** | [**WatermarkDto**](#model-watermarkdto) | The watermark stamped over the documents of the room while they are viewed and printed. Null when the room has  no watermark, and for every folder that is not a room. | [optional] |
 | **type** | [**FolderType**](#model-foldertype) | The part the folder plays inside its room: one of the service folders of the form-filling flow, or the  knowledge and result storages of an AI room. It stays null for an ordinary folder and for the room itself, so  it does not describe folders in general. | [optional] [enum: 0, 1, 2, 3, 5, 6, 8, 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36] |
 | **inRoom** | **Boolean** | Whether the caller holds the room through an invitation of their own: true for the account that created it and  for a member invited personally, false when the access comes from a group they belong to, and null for a  folder that is not a room. | [optional] [nullable] |
 | **quotaLimit** | **Long** (int64) | How much space the files of the room may take, in bytes. It is the limit set on this room, or the portal  default for rooms when none was set. Null when the tariff of the portal does not count room statistics, when  room quotas are switched off, when the room lies in the archive or the trash, or when the caller may only read  it. | [optional] [nullable] |
-| **isCustomQuota** | **Boolean** | Whether &#x60;quotaLimit&#x60; is a limit set on this room (true) or the portal default for rooms (false). Null exactly  when &#x60;quotaLimit&#x60; is null. | [optional] [nullable] |
+| **isCustomQuota** | **Boolean** | Whether `quotaLimit` is a limit set on this room (true) or the portal default for rooms (false). Null exactly  when `quotaLimit` is null. | [optional] [nullable] |
 | **usedSpace** | **Long** (int64) | How much the files of the room take, in bytes, as of the last time the counter was recomputed. The counter is  refreshed when a file operation finishes, so a read right after an upload or a deletion can still report the  previous figure. Null for a folder that is not a room. | [optional] [nullable] |
-| **passwordProtected** | **Boolean** | Whether the sharing link the folder was opened through asks for a password that has not been entered yet.  While it is true the contents stay unreadable; send the password to &#x60;POST api/2.0/files/share/{key}/password&#x60;  first. Null when the folder was not reached through a link. | [optional] [nullable] |
-| **expired** | **Boolean** | Deprecated, read &#x60;isLinkExpired&#x60; instead: whether the sharing link the folder was opened through has run out  of its lifetime. | [optional] [nullable] |
+| **passwordProtected** | **Boolean** | Whether the sharing link the folder was opened through asks for a password that has not been entered yet.  While it is true the contents stay unreadable; send the password to `POST api/2.0/files/share/{key}/password`  first. Null when the folder was not reached through a link. | [optional] [nullable] |
+| **expired** | **Boolean** | Deprecated, read `isLinkExpired` instead: whether the sharing link the folder was opened through has run out  of its lifetime. | [optional] [nullable] |
 | **chatSettings** | [**ChatSettingsDto**](#model-chatsettingsdto) | The chat configuration of an AI room. Only the system prompt is reported here, whatever else the room stores,  and the field is null for every folder that is not an AI room. | [optional] |
 | **rootRoomType** | [**RoomType**](#model-roomtype) | The kind of the room the folder lies in. It is filled in only for the folder a folder-contents answer is  about, and only when that room is an AI room, so it is null in every other answer and for every other room  kind. | [optional] [enum: 1, 2, 5, 6, 8, 9] |
 | **saveFormAsXLSX** | **Boolean** | Whether the answers collected in this form-filling room are also gathered into a spreadsheet next to the  completed copies. Filled in for form-filling rooms only. | [optional] [nullable] |
@@ -11652,13 +11652,13 @@ The folder, with the fields that only a room carries filled in when the folder i
 | **ownedBy** | [**EmployeeDto**](#model-employeedto) | Who owns the place the entry is shared from - the creator of the room it lies in, or of the personal section  that holds it. It is filled in only while the entry is being read through a share, and never for a caller  without an account. | [optional] |
 | **shared** | **Boolean** | Whether at least one external link exists for the entry, whichever kind. It says nothing about accounts and  groups - those are counted by the flag for members below. | [optional] |
 | **sharedForUser** | **Boolean** | Whether at least one account or group has been given rights on the entry directly, as opposed to reaching it  through a link or through the room around it. | [optional] |
-| **sharedExternal** | **Boolean** | Whether one of the entry&#39;s links is open to people outside the portal, as opposed to a link that only its own  members can follow. This is the flag to watch when the concern is who can reach the content from outside. | [optional] |
+| **sharedExternal** | **Boolean** | Whether one of the entry's links is open to people outside the portal, as opposed to a link that only its own  members can follow. This is the flag to watch when the concern is who can reach the content from outside. | [optional] |
 | **parentShared** | **Boolean** | Whether the entry is reachable because the room or folder around it is shared, rather than through rights of  its own. A copy or a move takes the entry out of that scope. | [optional] |
 | **shortWebUrl** | **URI** (uri) | A shortened address that opens the entry through the link it is being read with. It is an empty string  whenever no link applies, which is the usual case for a member browsing their own rooms. | [optional] |
-| **created** | [**ApiDateTime**](#model-apidatetime) | When the entry was created, written with the offset of the portal&#39;s time zone. For a file restored from an  older version this is still the moment the file first appeared. | [optional] |
-| **createdBy** | [**EmployeeDto**](#model-employeedto) | Who created the entry. It is null for a caller without an account, who is told nothing about the portal&#39;s  members. | [optional] |
-| **updated** | [**ApiDateTime**](#model-apidatetime) | When the entry last changed, written with the offset of the portal&#39;s time zone. It is never reported as  earlier than the creation moment, so the two can be compared safely. | [optional] |
-| **autoDelete** | [**ApiDateTime**](#model-apidatetime) | When the entry will disappear on its own, written with the offset of the portal&#39;s time zone. It is filled in  only where a removal is actually scheduled - something in the trash while the portal cleans it up  automatically, or a guest&#39;s own documents - so a null means nothing is scheduled rather than that the entry is  permanent. | [optional] |
+| **created** | [**ApiDateTime**](#model-apidatetime) | When the entry was created, written with the offset of the portal's time zone. For a file restored from an  older version this is still the moment the file first appeared. | [optional] |
+| **createdBy** | [**EmployeeDto**](#model-employeedto) | Who created the entry. It is null for a caller without an account, who is told nothing about the portal's  members. | [optional] |
+| **updated** | [**ApiDateTime**](#model-apidatetime) | When the entry last changed, written with the offset of the portal's time zone. It is never reported as  earlier than the creation moment, so the two can be compared safely. | [optional] |
+| **autoDelete** | [**ApiDateTime**](#model-apidatetime) | When the entry will disappear on its own, written with the offset of the portal's time zone. It is filled in  only where a removal is actually scheduled - something in the trash while the portal cleans it up  automatically, or a guest's own documents - so a null means nothing is scheduled rather than that the entry is  permanent. | [optional] |
 | **rootFolderType** | [**FolderType**](#model-foldertype) | The section the entry ultimately belongs to, which is what tells a personal document from one inside a room,  from a template and from something in the trash or the archive. | [optional] [enum: 0, 1, 2, 3, 5, 6, 8, 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36] |
 | **parentRoomType** | [**FolderType**](#model-foldertype) | The kind of room the entry lies in, which decides what the room allows - filling forms, public links,  indexing. It is null for an entry that is not inside a room at all. | [optional] [enum: 0, 1, 2, 3, 5, 6, 8, 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36] |
 | **updatedBy** | [**EmployeeDto**](#model-employeedto) | Who changed the entry last. It is null for a caller without an account. | [optional] |
@@ -11680,11 +11680,11 @@ The folder, with the fields that only a room carries filled in when the folder i
 | **availableShareRights** | [**FileEntryDtoInteger_allOf_availableShareRights**](#model-fileentrydtointegeravailablesharerights) |  | [optional] [nullable] |
 | **requestToken** | **String** | The token of the link the entry is being read through, which is the value the external-share operations expect  and which also has to be carried by the download and preview addresses. It is null whenever the entry is not  being read through a link. | [optional] |
 | **external** | **Boolean** | Set when the link being used was made for this very entry, and false when the entry is reached through a link  to the room around it. It is null when no link is involved. | [optional] |
-| **expirationDate** | [**ApiDateTime**](#model-apidatetime) | When the link being used stops working, written with the offset of the portal&#39;s time zone. It is null for a  link that never expires and whenever no link is involved. | [optional] |
+| **expirationDate** | [**ApiDateTime**](#model-apidatetime) | When the link being used stops working, written with the offset of the portal's time zone. It is null for a  link that never expires and whenever no link is involved. | [optional] |
 | **isLinkExpired** | **Boolean** | Set when the link being used has already passed its expiration date, which is why the entry cannot be opened  even though it is described here. It is null when no link is involved. | [optional] |
 | **parentId** | **String** | The folder this one is listed in. For a room it is the root of the section the room lives in, and for an entry  opened through a sharing link whose real parent the caller may not read it is the root of the section with the  entries shared with them. | [optional] [nullable] |
-| **filesCount** | **Integer** (int32) | How many files lie directly in the folder, without counting the subfolders. The roots of the &#x60;Rooms&#x60;, room  templates and default templates sections always report 0, because the number is not collected for them. | [optional] |
-| **foldersCount** | **Integer** (int32) | How many subfolders lie directly in the folder. For an AI room the two service subfolders it always holds are  subtracted, so the number matches what a listing of it shows, and the roots of the &#x60;Rooms&#x60; and templates  sections report 0. | [optional] |
+| **filesCount** | **Integer** (int32) | How many files lie directly in the folder, without counting the subfolders. The roots of the `Rooms`, room  templates and default templates sections always report 0, because the number is not collected for them. | [optional] |
+| **foldersCount** | **Integer** (int32) | How many subfolders lie directly in the folder. For an AI room the two service subfolders it always holds are  subtracted, so the number matches what a listing of it shows, and the roots of the `Rooms` and templates  sections report 0. | [optional] |
 | **isShareable** | **Boolean** | Whether the caller may hand out access to the folder. It is filled in only for the folder a folder-contents  answer is about, and is null in every other answer, so null says nothing about the sharing rights. | [optional] [nullable] |
 | **new** | **Integer** (int32) | How many entries inside the folder the caller has not opened yet, the number drawn as the badge on it. An  account that turned the badges off in its own settings always reads 0 here, so 0 alone does not prove that  everything has been seen. | [optional] |
 | **mute** | **Boolean** | Whether the caller silenced the notifications of this room: true means no message about its activity reaches  them. The choice belongs to the reading account rather than to the room, so two members of one room read  different values. | [optional] |
@@ -11693,17 +11693,17 @@ The folder, with the fields that only a room carries filled in when the folder i
 | **pinned** | **Boolean** | Whether the caller pinned the room to the top of their own room list. Pinning is personal and is lost when the  room is archived. | [optional] |
 | **roomType** | [**RoomType**](#model-roomtype) | The kind of the room, which decides the default access rules of its members. Null for a folder that is not a  room. | [optional] [enum: 1, 2, 5, 6, 8, 9] |
 | **private** | **Boolean** | Whether the room is a private one, which limits it to the accounts invited into it and needs encryption keys  set up for each of them. | [optional] |
-| **indexing** | **Boolean** | Whether the contents of the room are kept in an explicit numbered order, the one reported as &#x60;order&#x60; on each  entry, instead of being left to the sorting the reader asks for. | [optional] |
+| **indexing** | **Boolean** | Whether the contents of the room are kept in an explicit numbered order, the one reported as `order` on each  entry, instead of being left to the sorting the reader asks for. | [optional] |
 | **denyDownload** | **Boolean** | Whether downloading and printing the contents of the room is forbidden, which leaves its members with viewing  and editing in the editor. | [optional] |
 | **lifetime** | [**RoomDataLifetimeDto**](#model-roomdatalifetimedto) | The rule by which the files of the room are removed once they grow old. Null when the room has no such rule,  which is also what is reported after the rule is switched off, because switching it off erases it. | [optional] |
 | **watermark** | [**WatermarkDto**](#model-watermarkdto) | The watermark stamped over the documents of the room while they are viewed and printed. Null when the room has  no watermark, and for every folder that is not a room. | [optional] |
 | **type** | [**FolderType**](#model-foldertype) | The part the folder plays inside its room: one of the service folders of the form-filling flow, or the  knowledge and result storages of an AI room. It stays null for an ordinary folder and for the room itself, so  it does not describe folders in general. | [optional] [enum: 0, 1, 2, 3, 5, 6, 8, 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36] |
 | **inRoom** | **Boolean** | Whether the caller holds the room through an invitation of their own: true for the account that created it and  for a member invited personally, false when the access comes from a group they belong to, and null for a  folder that is not a room. | [optional] [nullable] |
 | **quotaLimit** | **Long** (int64) | How much space the files of the room may take, in bytes. It is the limit set on this room, or the portal  default for rooms when none was set. Null when the tariff of the portal does not count room statistics, when  room quotas are switched off, when the room lies in the archive or the trash, or when the caller may only read  it. | [optional] [nullable] |
-| **isCustomQuota** | **Boolean** | Whether &#x60;quotaLimit&#x60; is a limit set on this room (true) or the portal default for rooms (false). Null exactly  when &#x60;quotaLimit&#x60; is null. | [optional] [nullable] |
+| **isCustomQuota** | **Boolean** | Whether `quotaLimit` is a limit set on this room (true) or the portal default for rooms (false). Null exactly  when `quotaLimit` is null. | [optional] [nullable] |
 | **usedSpace** | **Long** (int64) | How much the files of the room take, in bytes, as of the last time the counter was recomputed. The counter is  refreshed when a file operation finishes, so a read right after an upload or a deletion can still report the  previous figure. Null for a folder that is not a room. | [optional] [nullable] |
-| **passwordProtected** | **Boolean** | Whether the sharing link the folder was opened through asks for a password that has not been entered yet.  While it is true the contents stay unreadable; send the password to &#x60;POST api/2.0/files/share/{key}/password&#x60;  first. Null when the folder was not reached through a link. | [optional] [nullable] |
-| **expired** | **Boolean** | Deprecated, read &#x60;isLinkExpired&#x60; instead: whether the sharing link the folder was opened through has run out  of its lifetime. | [optional] [nullable] |
+| **passwordProtected** | **Boolean** | Whether the sharing link the folder was opened through asks for a password that has not been entered yet.  While it is true the contents stay unreadable; send the password to `POST api/2.0/files/share/{key}/password`  first. Null when the folder was not reached through a link. | [optional] [nullable] |
+| **expired** | **Boolean** | Deprecated, read `isLinkExpired` instead: whether the sharing link the folder was opened through has run out  of its lifetime. | [optional] [nullable] |
 | **chatSettings** | [**ChatSettingsDto**](#model-chatsettingsdto) | The chat configuration of an AI room. Only the system prompt is reported here, whatever else the room stores,  and the field is null for every folder that is not an AI room. | [optional] |
 | **rootRoomType** | [**RoomType**](#model-roomtype) | The kind of the room the folder lies in. It is filled in only for the folder a folder-contents answer is  about, and only when that room is an AI room, so it is null in every other answer and for every other room  kind. | [optional] [enum: 1, 2, 5, 6, 8, 9] |
 | **saveFormAsXLSX** | **Boolean** | Whether the answers collected in this form-filling room are also gathered into a spreadsheet next to the  completed copies. Filled in for form-filling rooms only. | [optional] [nullable] |
@@ -11740,7 +11740,7 @@ The external link of a folder, as it is to be created or rewritten.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **linkId** | **UUID** (uuid) | Which link the request addresses: the identifier of an existing link rewrites that link, while an identifier  that is not in use, the empty one included, creates a new link. Take an existing identifier from  &#x60;GET api/2.0/files/folder/{id}/links&#x60;. | [optional] [example: 00000000-0000-0000-0000-000000000000] |
+| **linkId** | **UUID** (uuid) | Which link the request addresses: the identifier of an existing link rewrites that link, while an identifier  that is not in use, the empty one included, creates a new link. Take an existing identifier from  `GET api/2.0/files/folder/{id}/links`. | [optional] [example: 00000000-0000-0000-0000-000000000000] |
 | **access** | [**FileShare**](#model-fileshare) | The rights a visitor following the link is given. The value that grants nothing revokes the link instead of  setting it, and the answer is then empty. | [optional] [enum: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] |
 | **expirationDate** | [**ApiDateTime**](#model-apidatetime) | The moment the link stops working, sent as an ISO-8601 stamp. A moment that lies in the past is ignored,  and leaving the field out gives the link no expiry. | [optional] |
 | **title** | **String** | The name the link is listed under for the people who manage the folder; a visitor following it never sees the  name. | [optional] [example: Public link] [minLength: 0] [maxLength: 255] [nullable] |
@@ -11849,7 +11849,7 @@ One completed copy of a form, with the values that were entered into it.
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **createOn** | **Date** (date-time) | When the portal recorded this copy, in UTC: the moment the filled copy was completed and its data indexed, not  the moment the form itself was made. | [optional] [example: 2025-01-01T00:00:00] |
-| **formsData** | [**List**](#model-formsitemdata) | The values that were entered into this copy, one entry per field, preceded by an entry keyed &#x60;FormNumber&#x60; that  carries the number of the copy and is what the submissions are ordered by. Fields holding a picture or a  signature are left out of the record, so a field missing here was not necessarily left blank. | [optional] [example: [{key=field1, value=Answer}]] [nullable] |
+| **formsData** | [**List**](#model-formsitemdata) | The values that were entered into this copy, one entry per field, preceded by an entry keyed `FormNumber` that  carries the number of the copy and is what the submissions are ordered by. Fields holding a picture or a  signature are left out of the record, so a field missing here was not necessarily left blank. | [optional] [example: [{key=field1, value=Answer}]] [nullable] |
 
 
 ### Model FormRole
@@ -11900,7 +11900,7 @@ All completed copies of a form, together with the description of the fields they
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **metadata** | [**List**](#model-formmetadata) | Describes the fields of the form version that is being filled - the key each value is stored under, the type  and format of the field and, where the field offers a fixed set of answers, those answers - in the order the  fields are laid out, which is the order to build a results table in. It comes back empty when the portal holds  no indexed description of that version. | [optional] [example: []] [nullable] |
-| **submissions** | [**List**](#model-formresultsdto) | One entry per completed copy, ordered by the copy number that &#x60;formsData&#x60; carries. An empty list means nothing  has been completed for the version that is currently being filled; the copies of earlier versions of the form  are not reported here. | [optional] [example: []] [nullable] |
+| **submissions** | [**List**](#model-formresultsdto) | One entry per completed copy, ordered by the copy number that `formsData` carries. An empty list means nothing  has been completed for the version that is currently being filled; the copies of earlier versions of the form  are not reported here. | [optional] [example: []] [nullable] |
 
 
 ### Model FormSubmissionsWrapper
@@ -11943,8 +11943,8 @@ One field of a form, offered as a filter over the copies gathered in a form-fill
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **key** | **String** | The name of the field as it is written in the form; send it back as &#x60;formsItemKey&#x60; to keep only              the completed copies whose field of that name holds a value.              &lt;example&gt;first_name&lt;/example&gt; | [optional] [nullable] |
-| **type** | **String** | The kind of value the field holds, a text box or a checkbox for instance; send it back as              &#x60;formsItemType&#x60; beside the key.              &lt;example&gt;text&lt;/example&gt; | [optional] [nullable] |
+| **key** | **String** | The name of the field as it is written in the form; send it back as `formsItemKey` to keep only              the completed copies whose field of that name holds a value.              &lt;example&gt;first_name&lt;/example&gt; | [optional] [nullable] |
+| **type** | **String** | The kind of value the field holds, a text box or a checkbox for instance; send it back as              `formsItemType` beside the key.              &lt;example&gt;text&lt;/example&gt; | [optional] [nullable] |
 
 
 ### Model GenerateDocxToolCallParametersDto
@@ -11978,7 +11978,7 @@ The body of a spreadsheet reference request: the source spreadsheet, and the thr
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **fileKey** | **String** | The id of the referenced file as the document service recorded it in the formula. It is tried first, and only  when &#x60;instanceId&#x60; names this portal. | [required] [example: 512] [nullable] |
+| **fileKey** | **String** | The id of the referenced file as the document service recorded it in the formula. It is tried first, and only  when `instanceId` names this portal. | [required] [example: 512] [nullable] |
 | **instanceId** | **String** | The portal the reference was made on, as the document service recorded it. Only the id of this portal makes  the file key resolvable; any other value falls through to the path and the link. | [required] [example: 1] [nullable] |
 | **sourceFileId** | **Integer** (int32) | The spreadsheet the formula sits in. The path is resolved against it - the referenced file is looked for among  the files lying next to it - and it is the file whose read access is checked. | [optional] [example: 1] |
 | **path** | **String** | The title of the referenced file exactly as the formula spells it, matched against the files lying next to the  source file. It is tried after the file key, and only when no link is given. | [optional] [example: Budget 2026.xlsx] [nullable] |
@@ -12012,8 +12012,8 @@ One member of a portal group together with the access that member has on the fil
 |------------ | ------------- | ------------- | -------------|
 | **user** | [**EmployeeFullDto**](#model-employeefulldto) | The member the line is about, as the portal reports the account: the display name, the avatar and the portal  role to show next to the access level. | [required] |
 | **groupAccess** | [**FileShare**](#model-fileshare) | The level granted to the group as a whole on this file or folder. It belongs to the group record rather than  to the member, so the same value repeats on every line of the answer; a group whose record was set back to  none is answered with an empty list instead. | [required] [enum: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] |
-| **userAccess** | [**FileShare**](#model-fileshare) | The level granted to this member alone on the same file or folder, or &#x60;null&#x60; when the member has no record of  their own and the group level is what applies. The member who created the file or folder is always reported  here as a room manager, whatever their own record says. | [optional] [enum: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] |
-| **overridden** | **Boolean** | Whether &#x60;userAccess&#x60; is the level that decides what the member may do. When it is false the member inherits  &#x60;groupAccess&#x60;, and the creator of the file or folder is always reported as overridden because of the room  manager level forced onto them. | [required] [example: true] |
+| **userAccess** | [**FileShare**](#model-fileshare) | The level granted to this member alone on the same file or folder, or `null` when the member has no record of  their own and the group level is what applies. The member who created the file or folder is always reported  here as a room manager, whatever their own record says. | [optional] [enum: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] |
+| **overridden** | **Boolean** | Whether `userAccess` is the level that decides what the member may do. When it is false the member inherits  `groupAccess`, and the creator of the file or folder is always reported as overridden because of the room  manager level forced onto them. | [required] [example: true] |
 | **canEditAccess** | **Boolean** | Whether the caller may still change the level of this member. It comes back false on the line of the member  who created the file or folder, on the line of the caller themselves, and on every line at once when the  caller may read the file or folder but not manage access to it. | [required] [example: true] |
 | **owner** | **Boolean** | Whether this member created the file or folder - the owner of the entry, not the owner of the group. Their  level is reported as a room manager one and cannot be taken away through this group. | [required] [example: false] |
 
@@ -12074,8 +12074,8 @@ One record of the activity log of a file or a folder.
 | **id** | **Integer** (int32) | The identifier of the record, which tells two records of the same action apart and stays stable as long as the  portal keeps the log. | [required] [example: 123] |
 | **action** | [**HistoryAction**](#model-historyaction) | What happened - the kind of event the record stands for, such as a file being uploaded, renamed, moved or  shared - with the key a client can key its own wording off. | [required] |
 | **initiator** | [**EmployeeDto**](#model-employeedto) | Who caused the event. For an event caused by a visitor following an external link only the name they gave is  filled in, the account fields staying empty. | [required] |
-| **date** | [**ApiDateTime**](#model-apidatetime) | When the event happened, written with the offset of the portal&#39;s time zone. | [required] |
-| **data** | [**HistoryData**](#model-historydata) | The history data. Absent for actions that carry no payload of their own - changing a room&#39;s  logo, icon colour or cover, whose interpreter returns no data (see  &#x60;RoomLogoChangedInterpreter&#x60;). It used to be declared required, which put it in the  OpenAPI document&#39;s required list while the null-dropping serializer left it out of the  response, so a generated client threw on any history page holding one of those entries. | [optional] |
+| **date** | [**ApiDateTime**](#model-apidatetime) | When the event happened, written with the offset of the portal's time zone. | [required] |
+| **data** | [**HistoryData**](#model-historydata) | The history data. Absent for actions that carry no payload of their own - changing a room's  logo, icon colour or cover, whose interpreter returns no data (see  `RoomLogoChangedInterpreter`). It used to be declared required, which put it in the  OpenAPI document's required list while the null-dropping serializer left it out of the  response, so a generated client threw on any history page holding one of those entries. | [optional] |
 | **related** | [**List**](#model-historydto) | The records folded into this one because they belong to the same action, the separate files of one upload for  instance. It is empty when the record stands alone, and the records inside it carry no further nesting. | [optional] [example: [{id=124, action=0}]] [nullable] |
 
 
@@ -12096,7 +12096,7 @@ The icon to set on a room group.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **icon** | **String** | The identifier of one of the built-in covers listed by &#x60;GET api/2.0/files/rooms/covers&#x60;. An empty string  clears the icon of the group, null or a missing member keeps the current one, and anything else is refused. | [optional] [example: heart] [nullable] |
+| **icon** | **String** | The identifier of one of the built-in covers listed by `GET api/2.0/files/rooms/covers`. An empty string  clears the icon of the group, null or a missing member keeps the current one, and anything else is refused. | [optional] [example: heart] [nullable] |
 
 
 ### Model InfoConfigDto
@@ -12113,7 +12113,7 @@ The facts the editor information panel shows about the open document.
 
 
 ### Model ItemKeyValuePairBooleanString
-One entry of a keyed collection, carried as an explicit pair of &#x60;key&#x60; and &#x60;value&#x60; fields instead of as a member  of a JSON object, so that the key is not restricted to a string and the entries keep the order they are sent in.
+One entry of a keyed collection, carried as an explicit pair of `key` and `value` fields instead of as a member  of a JSON object, so that the key is not restricted to a string and the entries keep the order they are sent in.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
@@ -12155,7 +12155,7 @@ The lock state a file is to be put into.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **lockFile** | **Boolean** | The state to reach: &#x60;true&#x60; locks the file, which blocks editing, renaming and deleting for everybody but the  account that locked it and the room admins, and drops the others out of a running editing session; &#x60;false&#x60;  releases the lock. | [optional] [example: true] |
+| **lockFile** | **Boolean** | The state to reach: `true` locks the file, which blocks editing, renaming and deleting for everybody but the  account that locked it and the room admins, and drops the others out of a running editing session; `false`  releases the lock. | [optional] [example: true] |
 
 
 ### Model Logo
@@ -12198,7 +12198,7 @@ The part of an uploaded picture to use as the logo.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **tmpFile** | **String** | The picture to cut the logo out of, named by the path that &#x60;POST api/2.0/files/logos&#x60; returned for it. The  path may be used once and only by the account that uploaded it. | [required] [example: /temp/logo_a1b2c3.png] [minLength: 1] |
+| **tmpFile** | **String** | The picture to cut the logo out of, named by the path that `POST api/2.0/files/logos` returned for it. The  path may be used once and only by the account that uploaded it. | [required] [example: /temp/logo_a1b2c3.png] [minLength: 1] |
 | **x** | **Integer** (int32) | The left edge of the rectangle cut out of the uploaded picture, counted in pixels from its left side. The  picture itself was already scaled down to fit 1280 by 1280 pixels when it was uploaded. | [optional] [example: 0] [min: 0] [max: 1280] |
 | **y** | **Integer** (int32) | The top edge of the rectangle cut out of the uploaded picture, counted in pixels from its top. | [optional] [example: 0] [min: 0] [max: 1280] |
 | **width** | **Integer** (int32) | How wide a piece of the uploaded picture to cut out, in pixels. It has to be sent together with the height,  and the portal builds the four logo sizes out of the piece. | [optional] [example: 300] [min: 1] [max: 1280] |
@@ -12699,11 +12699,11 @@ The OAuth 2.0 token issued by a third-party provider.
 |------------ | ------------- | ------------- | -------------|
 | **access\_token** | **String** | The token sent to the provider with every request made on behalf of the account. | [optional] [example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...] [nullable] |
 | **refresh\_token** | **String** | The token used to obtain a new access token when the current one expires. A provider that issues no refresh  token leaves it empty, and the account then has to be connected again to keep working. | [optional] [example: def50200a1b2c3d4e5f6...] [nullable] |
-| **expires\_in** | **Long** (int64) | How long the access token stays usable, in seconds counted from &#x60;timestamp&#x60;. Zero means the provider did not  say, and the token is then treated as expired. | [optional] [example: 3600] |
+| **expires\_in** | **Long** (int64) | How long the access token stays usable, in seconds counted from `timestamp`. Zero means the provider did not  say, and the token is then treated as expired. | [optional] [example: 3600] |
 | **client\_id** | **String** | The OAuth 2.0 client ID of the application the token was issued to. | [optional] [example: my-client-id] [nullable] |
 | **client\_secret** | **String** | The client secret of the application the token was issued to, needed when the token is refreshed. | [optional] [example: my-client-secret] [nullable] |
 | **redirect\_uri** | **URI** (uri) | The redirect URL the authorization code behind this token was obtained with; providers require the same value  again when the token is refreshed. | [optional] [example: https://app.example.com/callback] [nullable] |
-| **timestamp** | **Date** (date-time) | When the token was issued, in UTC. This is the point &#x60;expires_in&#x60; is counted from. | [optional] [example: 2026-01-01T00:00:00Z] |
+| **timestamp** | **Date** (date-time) | When the token was issued, in UTC. This is the point `expires_in` is counted from. | [optional] [example: 2026-01-01T00:00:00Z] |
 | **isExpired** | **Boolean** | Whether the access token can no longer be used and has to be refreshed. It is also true when the provider did  not say how long the token lives. | [optional] [example: false] |
 
 
@@ -12827,12 +12827,12 @@ One storage service this portal can connect, with the values a connection form n
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **name** | **String** | The display name of the service, and the only thing that tells the WebDAV presets apart: &#x60;kDrive&#x60;, &#x60;Yandex&#x60;,  &#x60;WebDav&#x60;, &#x60;Nextcloud&#x60; and &#x60;ownCloud&#x60; all report the same key. | [optional] [example: Nextcloud] [nullable] |
-| **key** | **String** | The value to send as &#x60;providerKey&#x60; when an account of this service is connected. | [optional] [example: WebDav] [nullable] |
+| **name** | **String** | The display name of the service, and the only thing that tells the WebDAV presets apart: `kDrive`, `Yandex`,  `WebDav`, `Nextcloud` and `ownCloud` all report the same key. | [optional] [example: Nextcloud] [nullable] |
+| **key** | **String** | The value to send as `providerKey` when an account of this service is connected. | [optional] [example: WebDav] [nullable] |
 | **connected** | **Boolean** | Whether the service can be used on this portal: it is enabled in the configuration and, for an OAuth service,  its application is registered. It says nothing about whether an account of it is connected. | [optional] [example: true] |
-| **oauth** | **Boolean** | Whether an account of this service is connected with an OAuth 2.0 authorization code in &#x60;token&#x60;; when false,  it is connected with &#x60;login&#x60; and &#x60;password&#x60;. | [optional] [example: true] |
+| **oauth** | **Boolean** | Whether an account of this service is connected with an OAuth 2.0 authorization code in `token`; when false,  it is connected with `login` and `password`. | [optional] [example: true] |
 | **redirectUrl** | **String** | The redirect URL this portal is registered with at the service, to build the consent screen URL from. It comes  back as null for the services that do not use OAuth. | [optional] [example: https://example.com/thirdparty] [nullable] |
-| **requiredConnectionUrl** | **Boolean** | Whether an account of this service cannot be connected without &#x60;url&#x60;, which is the case for the WebDAV servers  whose address is not known in advance. The presets with a fixed address and the OAuth services do not need it. | [optional] [example: false] |
+| **requiredConnectionUrl** | **Boolean** | Whether an account of this service cannot be connected without `url`, which is the case for the WebDAV servers  whose address is not known in advance. The presets with a fixed address and the OAuth services do not need it. | [optional] [example: false] |
 | **clientId** | **String** | The OAuth 2.0 client ID this portal is registered with at the service, to build the consent screen URL from.  It comes back as null for the services that do not use OAuth. | [optional] [example: l1s2h3d4f5g6h7j8k9l0] [nullable] |
 
 
@@ -12913,10 +12913,10 @@ The progress of the job that creates a room out of a room template.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **roomId** | **Integer** (int32) | The room the job is creating. It is meaningful once the room exists, which is guaranteed only after  &#x60;isCompleted&#x60; turns true and &#x60;error&#x60; stays empty; until then it carries no usable id. | [required] [example: 456] |
+| **roomId** | **Integer** (int32) | The room the job is creating. It is meaningful once the room exists, which is guaranteed only after  `isCompleted` turns true and `error` stays empty; until then it carries no usable id. | [required] [example: 456] |
 | **progress** | **Double** (double) | How far the job has got. The value climbs while the contents of the template are being copied into the new  room and reaches its maximum at the very end. | [required] [example: 50.0] |
 | **error** | **String** | Why the job stopped. It is empty while the job runs and after a successful one, and a filled value means that  no room was created, so the request has to be repeated rather than waited out. | [required] [example: Room creation failed] [nullable] |
-| **isCompleted** | **Boolean** | Whether the job has ended. It is set both after a successful creation and after a failure, so it is the flag  to poll for, while &#x60;error&#x60; is what separates the two outcomes. | [required] [example: false] |
+| **isCompleted** | **Boolean** | Whether the job has ended. It is set both after a successful creation and after a failure, so it is the flag  to poll for, while `error` is what separates the two outcomes. | [required] [example: false] |
 
 
 ### Model RoomFromTemplateStatusWrapper
@@ -12953,7 +12953,7 @@ A personal collection of rooms: the name and icon it was given, the account that
 | **icon** | [**MultiSizeLogoCover**](#model-multisizelogocover) | The built-in cover chosen for the group, carrying the cover identifier and its rendering in each available  size. Null when the group has no icon, either because it was never given one or because the icon was cleared  by setting it to an empty value. | [optional] |
 | **userId** | **UUID** (uuid) | The account that created the group and the only one able to read, change or delete it; for any other member of  the portal the group does not exist. | [optional] [example: 9a1b2c3d-4e5f-6071-8293-a4b5c6d7e8f9] |
 | **rooms** | [**List**](#model-fileentrybasedto) | The rooms the group gathers, those stored in the portal first and those on connected third-party accounts  after them. Null when the group was asked for without its members, and an empty array when the group holds no  room the caller can still see. A room moved to the archive is left out until it is taken out of the archive. | [optional] [example: [{title=Client onboarding, fileEntryType=1}]] [nullable] |
-| **totalRooms** | **Integer** (int32) | How many rooms the group shows: the same rooms &#x60;rooms&#x60; lists, so archived ones are not counted either. It is  filled even when the rooms themselves were not asked for, which makes it the cheap way to tell an empty group  from a populated one. | [optional] [example: 2] |
+| **totalRooms** | **Integer** (int32) | How many rooms the group shows: the same rooms `rooms` lists, so archived ones are not counted either. It is  filled even when the rooms themselves were not asked for, which makes it the cheap way to tell an empty group  from a populated one. | [optional] [example: 2] |
 
 
 ### Model RoomGroupRequestDto
@@ -12961,8 +12961,8 @@ The name, the icon and the rooms of a room group to create.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **name** | **String** | The name to show the group under. Surrounding spaces are trimmed before it is stored, a name that is blank  once trimmed is refused, and the name does not have to differ from the names of the caller&#39;s other groups. | [required] [example: Client projects] [minLength: 0] [maxLength: 128] |
-| **icon** | **String** | The icon of the group, given as the identifier of one of the built-in covers listed by  &#x60;GET api/2.0/files/rooms/covers&#x60;. An uploaded image cannot be used, and any value that is not one of those  identifiers is refused. | [required] [example: star] [minLength: 0] [maxLength: 50] |
+| **name** | **String** | The name to show the group under. Surrounding spaces are trimmed before it is stored, a name that is blank  once trimmed is refused, and the name does not have to differ from the names of the caller's other groups. | [required] [example: Client projects] [minLength: 0] [maxLength: 128] |
+| **icon** | **String** | The icon of the group, given as the identifier of one of the built-in covers listed by  `GET api/2.0/files/rooms/covers`. An uploaded image cannot be used, and any value that is not one of those  identifiers is refused. | [required] [example: star] [minLength: 0] [maxLength: 50] |
 | **rooms** | [**List**](#model-duplicaterequestdtofileids) | The rooms to gather in the group, each given as a number for a room stored in the portal or as a string for a  room on a connected third-party account. Every identifier has to name a room the caller can read; repeats are  collapsed, and an element of any other shape - a decimal number, a number sent as a string, null - is refused. | [required] [example: [12, 15, folder-123-abc]] |
 
 
@@ -13005,7 +13005,7 @@ The link of a room to create, change or revoke.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **linkId** | **UUID** (uuid) | Which link to change, taken from &#x60;GET api/2.0/files/rooms/{id}/links&#x60;. Leaving it out creates a link, and an  identifier the room does not know creates a link carrying that identifier. | [optional] [example: b3f1c8de-5a64-4d1e-9f27-6c0a8d5b7e41] |
+| **linkId** | **UUID** (uuid) | Which link to change, taken from `GET api/2.0/files/rooms/{id}/links`. Leaving it out creates a link, and an  identifier the room does not know creates a link carrying that identifier. | [optional] [example: b3f1c8de-5a64-4d1e-9f27-6c0a8d5b7e41] |
 | **access** | [**FileShare**](#model-fileshare) | What whoever opens the link may do in the room. The value 0 revokes the link instead of changing it, and the  levels a room accepts depend on its kind. | [optional] [enum: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] |
 | **expirationDate** | [**ApiDateTime**](#model-apidatetime) | When the link stops working, written with the offset of the portal time zone. A date already past is dropped  silently for an external link and refused for an invitation link, and a date further ahead than the portal  allows is refused as well; leaving it out means the link does not expire. | [optional] |
 | **internal** | **Boolean** | Whether the external link works only for people already signed in to the portal. With it off the link opens  the room for anyone who has the address, subject to the password. | [optional] [example: false] |
@@ -13042,7 +13042,7 @@ The outcome of a change of the room membership.
 |------------ | ------------- | ------------- | -------------|
 | **members** | [**List**](#model-filesharedto) | The access entries of the subjects named in the request, read back after the change was applied. A subject the  caller may not see is missing from it, so comparing this list with the request is the way to learn who was  skipped; it is null when nothing was applied at all. | [optional] [example: [{access=10, isOwner=false, subjectType=0}]] [nullable] |
 | **warning** | **String** | The reason the first subject that could not be handled was skipped, in the language of the request, while the  rest of the list was still applied. Null when every named subject went through. The text is meant to be shown  to a person, not matched against. | [optional] [example: The maximum number of links is 10] [nullable] |
-| **error** | [**RoomSecurityError**](#model-roomsecurityerror) | Reports the one case in which nothing at all was changed: a member being removed still holds a role in a form  of the room, and the request did not ask to remove them anyway. Repeat the call with &#x60;force&#x60; to remove them  together with the role. | [optional] [enum: 0, 1] |
+| **error** | [**RoomSecurityError**](#model-roomsecurityerror) | Reports the one case in which nothing at all was changed: a member being removed still holds a role in a form  of the room, and the request did not ask to remove them anyway. Repeat the call with `force` to remove them  together with the role. | [optional] [enum: 0, 1] |
 
 
 ### Model RoomSecurityError
@@ -13070,16 +13070,16 @@ The parameters of a room template built from an existing room.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **roomId** | **Integer** (int32) | The identifier of the room the template is built from. Take it from the room listing of  &#x60;GET api/2.0/files/rooms&#x60;; a folder identifier is not accepted. | [required] [example: 1234] |
+| **roomId** | **Integer** (int32) | The identifier of the room the template is built from. Take it from the room listing of  `GET api/2.0/files/rooms`; a folder identifier is not accepted. | [required] [example: 1234] |
 | **title** | **String** | The title the template is saved under in the Templates section. Characters that a folder name cannot contain  are replaced with an underscore on save, and two templates may share a title. | [required] [example: Sales agreement room] [minLength: 0] [maxLength: 400] |
-| **logo** | [**LogoRequest**](#model-logorequest) | A picture of the caller&#39;s own for the template, cropped out of an image already placed in the temporary  storage. | [optional] |
+| **logo** | [**LogoRequest**](#model-logorequest) | A picture of the caller's own for the template, cropped out of an image already placed in the temporary  storage. | [optional] |
 | **copyLogo** | **Boolean** | Whether the template takes over the picture already set on the source room. When false the template gets no  picture from that room. | [optional] [example: true] |
 | **share** | **List** | The email addresses of the portal members who are granted read access to the finished template. | [optional] [example: [user1@example.com, user2@example.com]] [nullable] |
 | **groups** | **List** (uuid) | The identifiers of the portal groups whose members are granted read access to the finished template. | [optional] [example: [9924256a-739c-462b-af15-e652a3b1b6eb]] [nullable] |
 | **public** | **Boolean** | Whether the finished template is shared with everyone allowed to create rooms. When false it stays reachable  only for the recipients named for it. | [optional] [example: true] |
 | **tags** | **List** | The labels attached to the template and shown next to it in listings. | [optional] [example: [Contracts, Sales]] [nullable] |
 | **color** | **String** | The accent colour of the generated cover, written as six hexadecimal digits with no leading hash sign. When it  is left empty a colour is picked at random. | [optional] [example: FF5733] [minLength: 0] [maxLength: 6] [nullable] |
-| **cover** | **String** | The identifier of a built-in cover picture, as listed by &#x60;GET api/2.0/files/rooms/covers&#x60;. When it is left  empty the template gets no cover. | [optional] [example: bookmark] [minLength: 0] [maxLength: 50] [nullable] |
+| **cover** | **String** | The identifier of a built-in cover picture, as listed by `GET api/2.0/files/rooms/covers`. When it is left  empty the template gets no cover. | [optional] [example: bookmark] [minLength: 0] [maxLength: 50] [nullable] |
 | **quota** | **Long** (int64) | The storage limit assigned to the template, in bytes. When it is not set the template keeps the limit of the  source room. | [optional] [example: 10485760] [nullable] |
 
 
@@ -13088,10 +13088,10 @@ The progress of the job that builds a room template out of an existing room.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **templateId** | **Integer** (int32) | The template the job is building. It is meaningful once the job has created the template folder, and the  template can be opened with the room operations only after &#x60;isCompleted&#x60; turns true. | [required] [example: 123] |
+| **templateId** | **Integer** (int32) | The template the job is building. It is meaningful once the job has created the template folder, and the  template can be opened with the room operations only after `isCompleted` turns true. | [required] [example: 123] |
 | **progress** | **Double** (double) | How far the job has got. The value climbs while the contents of the room are being copied and reaches its  maximum at the very end, so it is an indication of life rather than a reliable estimate of the time left. | [required] [example: 75.5] |
 | **error** | **String** | Why the job stopped. It is empty while the job runs and after a successful one; when it is filled the  half-built template has already been removed, so nothing has to be cleaned up by the caller. | [optional] [example: Template creation failed] [nullable] |
-| **isCompleted** | **Boolean** | Whether the job has ended. It is set both after a successful build and after a failure, so &#x60;error&#x60; is what  tells the two apart, and the record keeps answering with the same values until another job is started. | [required] [example: false] |
+| **isCompleted** | **Boolean** | Whether the job has ended. It is set both after a successful build and after a failure, so `error` is what  tells the two apart, and the record keeps answering with the same values until another job is started. | [required] [example: false] |
 
 
 ### Model RoomTemplateStatusWrapper
@@ -13146,7 +13146,7 @@ The place and the name the PDF copy of a file is stored under.
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **folderId** | **Integer** (int32) | The folder the PDF is created in; the caller has to be allowed to create files there. | [required] [example: 1] |
-| **title** | **String** | The name of the PDF, without an extension - &#x60;.pdf&#x60; is appended. Left empty, the name of the source file is  reused with its extension replaced. | [required] [example: My Document] [nullable] |
+| **title** | **String** | The name of the PDF, without an extension - `.pdf` is appended. Left empty, the name of the source file is  reused with its extension replaced. | [required] [example: My Document] [nullable] |
 
 
 ### Model SaveFormRoleMappingDtoInteger
@@ -13181,9 +13181,9 @@ The entries whose sharing rights are being changed, and the rights to apply to t
 |------------ | ------------- | ------------- | -------------|
 | **folderIds** | [**List**](#model-duplicaterequestdtofileids) | The folders and rooms whose rights are being changed, identified as a listing operation returns them - a  number on the portal, a string on a connected third-party account. | [optional] [example: [1, 2, 3]] [nullable] |
 | **fileIds** | [**List**](#model-duplicaterequestdtofileids) | The files whose rights are being changed, identified as a listing operation returns them - a number on the  portal, a string on a connected third-party account. | [optional] [example: [7, 8]] [nullable] |
-| **share** | [**List**](#model-fileshareparams) | One record per account or group whose rights are being set, each naming the subject and the level it gets on  all of the listed entries; a level of &#x60;None&#x60; takes the access away. An empty collection makes the call change  nothing. | [optional] [example: [{access=2, shareTo=9924256a-739c-462b-af15-e652a3b1b6eb}]] [nullable] |
-| **notify** | **Boolean** | Set to true to have every account named in &#x60;share&#x60; emailed about the access it just received; false changes  the rights without telling anyone. | [optional] [example: true] |
-| **sharingMessage** | **String** | The text put into that email, ignored while &#x60;notify&#x60; is false. Markup is stripped before sending, so only the  plain text of the value survives. | [optional] [example: You have been granted access to the file] [minLength: 0] [maxLength: 255] [nullable] |
+| **share** | [**List**](#model-fileshareparams) | One record per account or group whose rights are being set, each naming the subject and the level it gets on  all of the listed entries; a level of `None` takes the access away. An empty collection makes the call change  nothing. | [optional] [example: [{access=2, shareTo=9924256a-739c-462b-af15-e652a3b1b6eb}]] [nullable] |
+| **notify** | **Boolean** | Set to true to have every account named in `share` emailed about the access it just received; false changes  the rights without telling anyone. | [optional] [example: true] |
+| **sharingMessage** | **String** | The text put into that email, ignored while `notify` is false. Markup is stripped before sending, so only the  plain text of the value survives. | [optional] [example: You have been granted access to the file] [minLength: 0] [maxLength: 255] [nullable] |
 
 
 ### Model SecurityInfoSimpleRequestDto
@@ -13191,9 +13191,9 @@ The rights to apply to a single file or folder, and how to announce them.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **share** | [**List**](#model-fileshareparams) | One record per account or group whose rights are being set, each naming the subject and the level it gets; a  level of &#x60;None&#x60; takes the access away. An empty collection makes the call change nothing. | [optional] [example: [{access=2, shareTo=9924256a-739c-462b-af15-e652a3b1b6eb}]] [nullable] |
-| **notify** | **Boolean** | Set to true to have every account named in &#x60;share&#x60; emailed about the access it just received; false changes  the rights without telling anyone. | [optional] [example: true] |
-| **sharingMessage** | **String** | The text put into that email, ignored while &#x60;notify&#x60; is false. Markup is stripped before sending, so only the  plain text of the value survives. | [optional] [example: You have been granted access to the file] [minLength: 0] [maxLength: 255] [nullable] |
+| **share** | [**List**](#model-fileshareparams) | One record per account or group whose rights are being set, each naming the subject and the level it gets; a  level of `None` takes the access away. An empty collection makes the call change nothing. | [optional] [example: [{access=2, shareTo=9924256a-739c-462b-af15-e652a3b1b6eb}]] [nullable] |
+| **notify** | **Boolean** | Set to true to have every account named in `share` emailed about the access it just received; false changes  the rights without telling anyone. | [optional] [example: true] |
+| **sharingMessage** | **String** | The text put into that email, ignored while `notify` is false. Markup is stripped before sending, so only the  plain text of the value survives. | [optional] [example: You have been granted access to the file] [minLength: 0] [maxLength: 255] [nullable] |
 
 
 ### Model SessionRequest
@@ -13214,7 +13214,7 @@ The public access to set on a room template.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **id** | **Integer** (int32) | The identifier of the room template. Take it from &#x60;templateId&#x60; of &#x60;GET api/2.0/files/roomtemplate/status&#x60;, or  from the folder list of &#x60;GET api/2.0/files/rooms&#x60; called with &#x60;searchArea&#x60; set to 4; an identifier of an  ordinary room is not accepted. | [required] [example: 1234] [min: 1] [max: 2147483647] |
+| **id** | **Integer** (int32) | The identifier of the room template. Take it from `templateId` of `GET api/2.0/files/roomtemplate/status`, or  from the folder list of `GET api/2.0/files/rooms` called with `searchArea` set to 4; an identifier of an  ordinary room is not accepted. | [required] [example: 1234] [min: 1] [max: 2147483647] |
 | **public** | **Boolean** | Whether the Everyone group keeps read access to the template. True shares it with every member allowed to  create rooms; false leaves it reachable only for its owner. | [optional] [example: true] |
 
 
@@ -13348,11 +13348,11 @@ Possible values:
 
 
 ### Model SubmitForm
-The Complete &amp; Submit button settings.
+The Complete & Submit button settings.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **visible** | **Boolean** | Specifies whether the Complete  &amp; Submit button will be displayed or hidden on the top toolbar. | [optional] [example: true] |
+| **visible** | **Boolean** | Specifies whether the Complete  & Submit button will be displayed or hidden on the top toolbar. | [optional] [example: true] |
 | **resultMessage** | **String** | A message displayed after forms are submitted. | [optional] [example: Form submitted successfully] [nullable] |
 
 
@@ -13371,7 +13371,7 @@ The files to put on the personal template list of the calling account.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **fileIds** | **List** (int32) | The files to put on the template list, by id, as reported by a folder listing such as  &#x60;GET api/2.0/files/{folderId}&#x60;. Only a file stored in the portal itself can become a template, which is why an  id here is always numeric. | [optional] [example: [1, 2, 3]] [nullable] |
+| **fileIds** | **List** (int32) | The files to put on the template list, by id, as reported by a folder listing such as  `GET api/2.0/files/{folderId}`. Only a file stored in the portal itself can become a template, which is why an  id here is always numeric. | [optional] [example: [1, 2, 3]] [nullable] |
 
 
 ### Model ThirdPartyBackupRequestDto
@@ -13379,12 +13379,12 @@ The credentials and the title of the third-party storage account the portal writ
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **url** | **String** | The address of the storage server to connect to. It is needed by the WebDAV presets whose server is not known  in advance (&#x60;WebDav&#x60;, &#x60;Nextcloud&#x60;, &#x60;ownCloud&#x60;), where it points at the WebDAV endpoint of that server, and by  &#x60;SharePoint&#x60;; the presets with a fixed address and the OAuth services ignore it. | [optional] [example: https://cloud.example.com/remote.php/dav/files/admin/] [nullable] |
+| **url** | **String** | The address of the storage server to connect to. It is needed by the WebDAV presets whose server is not known  in advance (`WebDav`, `Nextcloud`, `ownCloud`), where it points at the WebDAV endpoint of that server, and by  `SharePoint`; the presets with a fixed address and the OAuth services ignore it. | [optional] [example: https://cloud.example.com/remote.php/dav/files/admin/] [nullable] |
 | **login** | **String** | The account name at the storage service, used by the services that authenticate by login and password. A login  sent without a password is rejected as an invalid request. | [optional] [example: admin] [nullable] |
-| **password** | **String** | The password, or the application password, for &#x60;login&#x60; at the storage service. Either this or &#x60;token&#x60; has to  be sent, and the credentials are verified against the service before the account is saved. | [optional] [example: p@ssw0rd!] [nullable] |
-| **token** | **String** | The OAuth 2.0 authorization code from the consent screen of &#x60;Box&#x60;, &#x60;DropboxV2&#x60;, &#x60;GoogleDrive&#x60; or &#x60;OneDrive&#x60; -  not an access token: the portal exchanges the code for its own token and keeps that. The client ID and  redirect URL the consent screen URL is built from come from &#x60;GET api/2.0/files/thirdparty/capabilities&#x60;. | [optional] [example: 4/0AY0e-g5Tn8vQrM2kZs7xB1pLd9] [nullable] |
+| **password** | **String** | The password, or the application password, for `login` at the storage service. Either this or `token` has to  be sent, and the credentials are verified against the service before the account is saved. | [optional] [example: p@ssw0rd!] [nullable] |
+| **token** | **String** | The OAuth 2.0 authorization code from the consent screen of `Box`, `DropboxV2`, `GoogleDrive` or `OneDrive` -  not an access token: the portal exchanges the code for its own token and keeps that. The client ID and  redirect URL the consent screen URL is built from come from `GET api/2.0/files/thirdparty/capabilities`. | [optional] [example: 4/0AY0e-g5Tn8vQrM2kZs7xB1pLd9] [nullable] |
 | **customerTitle** | **String** | The name the backup account is shown under in the portal. Characters that a folder title cannot hold are  replaced and the value is truncated; on the first connection a title that comes out of that empty is refused. | [optional] [example: Backup storage] [nullable] |
-| **providerKey** | **String** | The storage service to connect, as the &#x60;key&#x60; of &#x60;GET api/2.0/files/thirdparty/providers&#x60;; the value is matched  case-insensitively. &#x60;Nextcloud&#x60; and &#x60;ownCloud&#x60; are presets over WebDAV and are stored and reported back as  &#x60;WebDav&#x60;. | [optional] [example: Nextcloud] [nullable] |
+| **providerKey** | **String** | The storage service to connect, as the `key` of `GET api/2.0/files/thirdparty/providers`; the value is matched  case-insensitively. `Nextcloud` and `ownCloud` are presets over WebDAV and are stored and reported back as  `WebDav`. | [optional] [example: Nextcloud] [nullable] |
 
 
 ### Model ThirdPartyParams
@@ -13394,10 +13394,10 @@ A third-party storage account connected to the portal.
 |------------ | ------------- | ------------- | -------------|
 | **auth\_data** | [**AuthData**](#model-authdata) | The stored credentials of the account. They are not filled in here: the portal does not give back credentials  once an account is saved. | [optional] |
 | **corporate** | **Boolean** | Whether the account is attached to the legacy Common section, which is the case only for accounts inherited  from an older portal. | [optional] [example: false] |
-| **roomsStorage** | **Boolean** | Whether the account is attached to the Rooms section, room templates and the archive counted in. This is where  &#x60;POST api/2.0/files/thirdparty&#x60; puts every account it connects. | [optional] [example: true] |
+| **roomsStorage** | **Boolean** | Whether the account is attached to the Rooms section, room templates and the archive counted in. This is where  `POST api/2.0/files/thirdparty` puts every account it connects. | [optional] [example: true] |
 | **customer\_title** | **String** | The name the account is shown under in the portal, as it was saved when the account was connected. | [optional] [example: Nextcloud storage] [nullable] |
-| **provider\_id** | **Integer** (int32) | The account ID to send to &#x60;DELETE api/2.0/files/thirdparty/{providerId}&#x60;, or as &#x60;providerId&#x60; to  re-authenticate the account. | [optional] [example: 12] [nullable] |
-| **provider\_key** | **String** | The storage service behind the account. &#x60;WebDav&#x60; stands for every WebDAV preset, so it does not tell which of  them was chosen when the account was connected. | [optional] [example: WebDav] [nullable] |
+| **provider\_id** | **Integer** (int32) | The account ID to send to `DELETE api/2.0/files/thirdparty/{providerId}`, or as `providerId` to  re-authenticate the account. | [optional] [example: 12] [nullable] |
+| **provider\_key** | **String** | The storage service behind the account. `WebDav` stands for every WebDAV preset, so it does not tell which of  them was chosen when the account was connected. | [optional] [example: WebDav] [nullable] |
 
 
 ### Model ThirdPartyParamsArrayWrapper
@@ -13417,13 +13417,13 @@ The credentials and the title of a third-party storage account to connect or to 
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **url** | **String** | The address of the storage server to connect to. It is needed by the WebDAV presets whose server is not known  in advance (&#x60;WebDav&#x60;, &#x60;Nextcloud&#x60;, &#x60;ownCloud&#x60;), where it points at the WebDAV endpoint of that server, and by  &#x60;SharePoint&#x60;; the presets with a fixed address and the OAuth services ignore it. | [optional] [example: https://cloud.example.com/remote.php/dav/files/admin/] [nullable] |
+| **url** | **String** | The address of the storage server to connect to. It is needed by the WebDAV presets whose server is not known  in advance (`WebDav`, `Nextcloud`, `ownCloud`), where it points at the WebDAV endpoint of that server, and by  `SharePoint`; the presets with a fixed address and the OAuth services ignore it. | [optional] [example: https://cloud.example.com/remote.php/dav/files/admin/] [nullable] |
 | **login** | **String** | The account name at the storage service, used by the services that authenticate by login and password. A login  sent without a password is rejected as an invalid request. | [optional] [example: admin] [nullable] |
-| **password** | **String** | The password, or the application password, for &#x60;login&#x60; at the storage service. Either this or &#x60;token&#x60; has to  be sent, and the credentials are verified against the service before the account is saved. | [optional] [example: p@ssw0rd!] [nullable] |
-| **token** | **String** | The OAuth 2.0 authorization code from the consent screen of &#x60;Box&#x60;, &#x60;DropboxV2&#x60;, &#x60;GoogleDrive&#x60; or &#x60;OneDrive&#x60; -  not an access token: the portal exchanges the code for its own token and keeps that. The client ID and  redirect URL the consent screen URL is built from come from &#x60;GET api/2.0/files/thirdparty/capabilities&#x60;. | [optional] [example: 4/0AY0e-g5Tn8vQrM2kZs7xB1pLd9] [nullable] |
+| **password** | **String** | The password, or the application password, for `login` at the storage service. Either this or `token` has to  be sent, and the credentials are verified against the service before the account is saved. | [optional] [example: p@ssw0rd!] [nullable] |
+| **token** | **String** | The OAuth 2.0 authorization code from the consent screen of `Box`, `DropboxV2`, `GoogleDrive` or `OneDrive` -  not an access token: the portal exchanges the code for its own token and keeps that. The client ID and  redirect URL the consent screen URL is built from come from `GET api/2.0/files/thirdparty/capabilities`. | [optional] [example: 4/0AY0e-g5Tn8vQrM2kZs7xB1pLd9] [nullable] |
 | **customerTitle** | **String** | The name the connected account is shown under in the portal. Characters that a folder title cannot hold are  replaced and the value is truncated, and a title that comes out of that empty is refused. | [required] [example: Nextcloud storage] [nullable] |
-| **providerKey** | **String** | The storage service to connect, as the &#x60;key&#x60; of &#x60;GET api/2.0/files/thirdparty/providers&#x60;; the value is matched  case-insensitively. &#x60;Nextcloud&#x60; and &#x60;ownCloud&#x60; are presets over WebDAV and are stored and reported back as  &#x60;WebDav&#x60;. | [required] [example: Nextcloud] [nullable] |
-| **providerId** | **Integer** (int32) | The account to re-authenticate instead of connecting a new one, as &#x60;providerId&#x60; of  &#x60;GET api/2.0/files/thirdparty&#x60;; both a number and its decimal string form are accepted. For an account  attached to the Rooms section only the credentials are applied, and its title and server address are kept. | [optional] [example: 12] [nullable] |
+| **providerKey** | **String** | The storage service to connect, as the `key` of `GET api/2.0/files/thirdparty/providers`; the value is matched  case-insensitively. `Nextcloud` and `ownCloud` are presets over WebDAV and are stored and reported back as  `WebDav`. | [required] [example: Nextcloud] [nullable] |
+| **providerId** | **Integer** (int32) | The account to re-authenticate instead of connecting a new one, as `providerId` of  `GET api/2.0/files/thirdparty`; both a number and its decimal string form are accepted. For an account  attached to the Rooms section only the credentials are applied, and its title and server address are kept. | [optional] [example: 12] [nullable] |
 
 
 ### Model Thumbnail
@@ -13442,7 +13442,7 @@ The comment to store on one version of a file.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **version** | **Integer** (int32) | The version the comment belongs to, as reported by &#x60;GET api/2.0/files/file/{fileId}/edit/history&#x60;. A version  that does not exist is rejected as an invalid request. | [required] [example: 1] [min: 1] [max: 2147483647] |
+| **version** | **Integer** (int32) | The version the comment belongs to, as reported by `GET api/2.0/files/file/{fileId}/edit/history`. A version  that does not exist is rejected as an invalid request. | [required] [example: 1] [min: 1] [max: 2147483647] |
 | **comment** | **String** | The note that explains what changed in that version, as the version history shows it. An empty text clears the  note, and a longer one is cut rather than refused, so read the stored text from the answer. | [optional] [example: This is a comment] [minLength: 0] [maxLength: 255] [nullable] |
 
 
@@ -13452,7 +13452,7 @@ The changes to make to a file: a new title, an earlier version to restore, or bo
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **title** | **String** | The new title of the file, without an extension - the stored extension is kept whatever the title says, so a  rename cannot change the format. Left empty, the file keeps its name. | [optional] [example: My Document] [minLength: 0] [maxLength: 165] [nullable] |
-| **lastVersion** | **Integer** (int32) | The version to restore on top of the history, as reported by &#x60;GET api/2.0/files/file/{fileId}/history&#x60;; 0 or  less leaves the versions untouched. | [optional] [example: 1] |
+| **lastVersion** | **Integer** (int32) | The version to restore on top of the history, as reported by `GET api/2.0/files/file/{fileId}/history`; 0 or  less leaves the versions untouched. | [optional] [example: 1] |
 
 
 ### Model UpdateRoomGroupRequest
@@ -13472,16 +13472,16 @@ The fields of a room that a partial update changes.
 |------------ | ------------- | ------------- | -------------|
 | **title** | **String** | The new name of the room. It is trimmed and sanitised the way a room title is at creation, and a blank or  missing value leaves the current name alone rather than clearing it. | [optional] [example: Project Alpha] [minLength: 0] [maxLength: 170] [nullable] |
 | **quota** | **Long** (int64) | The new storage limit of the room, in bytes. A value of -1 leaves the room with no limit of its own, any other  negative value puts it back on the portal default, and a positive one is accepted only while the per-room  quota feature is on. | [optional] [example: 1073741824] [nullable] |
-| **indexing** | **Boolean** | Whether the room keeps a manual order of its contents. With it on every file and folder carries a position  that listings follow and that &#x60;PUT api/2.0/files/rooms/{id}/reorder&#x60; compacts; with it off the contents are  ordered by the sorting of the request. Turning it on renumbers the existing contents at once. | [optional] [example: true] [nullable] |
+| **indexing** | **Boolean** | Whether the room keeps a manual order of its contents. With it on every file and folder carries a position  that listings follow and that `PUT api/2.0/files/rooms/{id}/reorder` compacts; with it off the contents are  ordered by the sorting of the request. Turning it on renumbers the existing contents at once. | [optional] [example: true] [nullable] |
 | **denyDownload** | **Boolean** | Whether members without editing rights are stopped from downloading and printing the contents of the room.  They can still open the documents in the editor. | [optional] [example: true] [nullable] |
 | **lifetime** | [**RoomDataLifetimeDto**](#model-roomdatalifetimedto) | How long files may stay in the room before they are deleted automatically. The countdown starts when the  setting is saved, and leaving the field out keeps the files forever. Sending it with the switch off stops the  automatic deletion. | [optional] |
 | **watermark** | [**WatermarkRequestDto**](#model-watermarkrequestdto) | The watermark drawn over documents opened in the room. Leaving the field out adds no watermark, and sending it  with the switch turned off removes the one the room has. | [optional] |
-| **logo** | [**LogoRequest**](#model-logorequest) | The picture to use as the room logo, named by the path that &#x60;POST api/2.0/files/logos&#x60; returned for an image  uploaded beforehand, plus the crop to take from it. Leaving the field out keeps the room on its cover and  colour. | [optional] |
+| **logo** | [**LogoRequest**](#model-logorequest) | The picture to use as the room logo, named by the path that `POST api/2.0/files/logos` returned for an image  uploaded beforehand, plus the crop to take from it. Leaving the field out keeps the room on its cover and  colour. | [optional] |
 | **tags** | **List** | The labels the room is to carry from now on. The list replaces the whole tag set rather than adding to it, an  empty list clears it, and names the portal catalogue does not hold yet are added to it. | [optional] [example: [Finance, 2026]] [nullable] |
 | **color** | **String** | The background colour the room is drawn with while it has no logo, as six hexadecimal digits with no leading  number sign. An empty value restores the default colour of the room type. | [optional] [example: FF5733] [pattern: /^[0-9a-fA-F]{6}$/] [nullable] |
-| **cover** | **String** | The picture drawn on the room while it has no logo, named by an identifier from  &#x60;GET api/2.0/files/rooms/covers&#x60;. Any other value is rejected, and an empty value leaves the room without a  cover. | [optional] [example: bookmark] [minLength: 0] [maxLength: 50] [nullable] |
+| **cover** | **String** | The picture drawn on the room while it has no logo, named by an identifier from  `GET api/2.0/files/rooms/covers`. Any other value is rejected, and an empty value leaves the room without a  cover. | [optional] [example: bookmark] [minLength: 0] [maxLength: 50] [nullable] |
 | **chatSettings** | [**ChatSettings**](#model-chatsettings) | The model and the prompt an AI room answers with. It belongs to AI rooms only and is rejected for a room of  any other kind. | [optional] |
-| **sendFormToExternalDB** | **Boolean** | For a form filling room, whether the data of every completed submission is also pushed to the external  database configured for the portal. It is what &#x60;POST api/2.0/files/rooms/{id}/externaldbsync&#x60; re-runs for the  forms already collected. | [optional] [example: false] [nullable] |
+| **sendFormToExternalDB** | **Boolean** | For a form filling room, whether the data of every completed submission is also pushed to the external  database configured for the portal. It is what `POST api/2.0/files/rooms/{id}/externaldbsync` re-runs for the  forms already collected. | [optional] [example: false] [nullable] |
 | **saveFormAsXLSX** | **Boolean** | For a form filling room, whether the collected submissions are also gathered into a spreadsheet stored next to  the completed forms. With it off the submissions are kept only as the filled documents themselves. | [optional] [example: false] [nullable] |
 
 
@@ -13490,7 +13490,7 @@ The rooms whose storage limit is to be changed, and the limit to give them.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **roomIds** | [**List**](#model-duplicaterequestdtofileids) | The rooms to change, named by the identifiers that &#x60;GET api/2.0/files/rooms&#x60; reports. Only whole numbers are  processed, so identifiers of rooms kept in a connected third-party account are skipped without an error. | [optional] [example: [1, 2, 3]] [nullable] |
+| **roomIds** | [**List**](#model-duplicaterequestdtofileids) | The rooms to change, named by the identifiers that `GET api/2.0/files/rooms` reports. Only whole numbers are  processed, so identifiers of rooms kept in a connected third-party account are skipped without an error. | [optional] [example: [1, 2, 3]] [nullable] |
 | **quota** | **Long** (int64) | The storage each of the listed rooms may take, in bytes. It has to stay inside the portal own limit, and the  per-room quota feature has to be on, otherwise nothing is changed. | [optional] [example: 10737418240] |
 
 
@@ -13499,7 +13499,7 @@ The rooms that are to go back to the default storage limit of the portal.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **roomIds** | [**List**](#model-duplicaterequestdtofileids) | The rooms to reset, named by the identifiers that &#x60;GET api/2.0/files/rooms&#x60; reports. Only whole numbers are  processed, so identifiers of rooms kept in a connected third-party account are skipped without an error. | [optional] [example: [1, 2, 3]] [nullable] |
+| **roomIds** | [**List**](#model-duplicaterequestdtofileids) | The rooms to reset, named by the identifiers that `GET api/2.0/files/rooms` reports. Only whole numbers are  processed, so identifiers of rooms kept in a connected third-party account are skipped without an error. | [optional] [example: [1, 2, 3]] [nullable] |
 
 
 ### Model UpdateTagRequestDto
@@ -13507,7 +13507,7 @@ The parameters for renaming a custom room tag in the portal catalog.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **oldName** | **String** | The name of the tag to rename, matched against the catalog exactly as it is stored rather than searched for.  Read the stored spelling from &#x60;GET api/2.0/files/tags&#x60;. | [required] [example: Confidential] [minLength: 0] [maxLength: 255] [nullable] |
+| **oldName** | **String** | The name of the tag to rename, matched against the catalog exactly as it is stored rather than searched for.  Read the stored spelling from `GET api/2.0/files/tags`. | [required] [example: Confidential] [minLength: 0] [maxLength: 255] [nullable] |
 | **newName** | **String** | The name to store instead. It has to be free: names are unique across the portal, so a name another tag  already carries is refused, and merging two tags this way is not possible. | [required] [example: Restricted] [minLength: 0] [maxLength: 255] [nullable] |
 
 
@@ -13538,13 +13538,13 @@ How far a chunked upload has got, and the file it produced once the last byte ha
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **id** | **Integer** (int32) | The file the parts are being written into. An upload that took over a file of the same title carries it from  the start, while an upload that creates a new file has nothing to name yet and reports 0 until the answer that  sets &#x60;uploaded&#x60; to true. | [optional] [example: 1234] |
+| **id** | **Integer** (int32) | The file the parts are being written into. An upload that took over a file of the same title carries it from  the start, while an upload that creates a new file has nothing to name yet and reports 0 until the answer that  sets `uploaded` to true. | [optional] [example: 1234] |
 | **folderId** | **Integer** (int32) | The folder receiving the file. It is the folder the upload was reserved against, or the sub-folder created for  it when the reservation declared a relative path. | [optional] [example: 10] |
 | **version** | **Integer** (int32) | The revision the content is being written as: 1 for a file that did not exist, the next number when the upload  took over a file of the same title, and the unchanged current number for an upload opened over an existing  file, which replaces its content in place. | [optional] [example: 1] |
 | **title** | **String** | The title the file is stored under, after characters a title cannot hold were replaced and, where a second  copy was asked for, a numeric suffix was added - so it can differ from the name that was sent. | [optional] [example: Quarterly report.docx] [nullable] |
-| **providerKey** | **String** | The third-party service holding the destination, such as &#x60;GoogleDrive&#x60; or &#x60;OneDrive&#x60;, and null for a folder  stored on the portal itself. | [optional] [example: GoogleDrive] [nullable] |
+| **providerKey** | **String** | The third-party service holding the destination, such as `GoogleDrive` or `OneDrive`, and null for a folder  stored on the portal itself. | [optional] [example: GoogleDrive] [nullable] |
 | **uploaded** | **Boolean** | False while bytes are still missing, when the answer only reports progress; true in the answer that reports  the stored file, which is also the answer that arrives with 201. | [optional] [example: false] |
-| **file** | [**FileDtoInteger**](#model-filedtointeger) | The file as it stands. It is filled in both answers, but while &#x60;uploaded&#x60; is false it describes a file that  has not been written yet, so its identifier, size and links are only worth reading once that flag turns true. | [optional] |
+| **file** | [**FileDtoInteger**](#model-filedtointeger) | The file as it stands. It is filled in both answers, but while `uploaded` is false it describes a file that  has not been written yet, so its identifier, size and links are only worth reading once that flag turns true. | [optional] |
 
 
 ### Model UploadSessionResponseIntegerWrapper
@@ -13577,8 +13577,8 @@ The user information.
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **id** | **UUID** (uuid) | The user ID. | [optional] [example: 00000000-0000-0000-0000-000000000000] |
-| **firstName** | **String** | The user&#39;s first name. | [optional] [example: John] [nullable] |
-| **lastName** | **String** | The user&#39;s last name. | [optional] [example: Doe] [nullable] |
+| **firstName** | **String** | The user's first name. | [optional] [example: John] [nullable] |
+| **lastName** | **String** | The user's last name. | [optional] [example: Doe] [nullable] |
 | **userName** | **String** | The user username. | [optional] [example: johndoe] [nullable] |
 | **birthDate** | **Date** (date-time) | The user birthday. | [optional] [example: 1990-01-01T00:00:00Z] [nullable] |
 | **sex** | **Boolean** | The user sex (male or female). | [optional] [example: true] [nullable] |
@@ -13614,7 +13614,7 @@ Which pending room invitations are to be sent again.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **usersIds** | **List** (uuid) | The accounts to write to, taken from &#x60;GET api/2.0/files/rooms/{id}/share&#x60;. Anyone who has already joined, is  not in the room, or is invisible to the caller is skipped without an error, and the field is ignored once  every pending invitation is being resent. | [optional] [example: [e9a7b4c1-2d3f-4a56-8b90-1c2d3e4f5a6b]] [nullable] |
+| **usersIds** | **List** (uuid) | The accounts to write to, taken from `GET api/2.0/files/rooms/{id}/share`. Anyone who has already joined, is  not in the room, or is invisible to the caller is skipped without an error, and the field is ignored once  every pending invitation is being resent. | [optional] [example: [e9a7b4c1-2d3f-4a56-8b90-1c2d3e4f5a6b]] [nullable] |
 | **resendAll** | **Boolean** | Whether every invitation of the room that is still waiting is sent again. With it on the list of accounts is  ignored, and with it off an empty list means that nothing is sent at all. | [optional] [example: false] |
 
 
@@ -13676,7 +13676,7 @@ The watermark drawn over the documents of a room.
 | **text** | **String** | The fixed line drawn over the document, shown before the details selected alongside it. It is the whole  watermark when no details are added. | [optional] [example: Confidential] [minLength: 0] [maxLength: 255] [nullable] |
 | **rotate** | **Integer** (int32) | How far the watermark is turned, in degrees, with negative values turning it anticlockwise. Zero draws it  horizontally across the page. | [optional] [example: -45] |
 | **imageScale** | **Integer** (int32) | How large the watermark image is drawn, as a percentage of its own size. It applies to the image form of the  watermark only. | [optional] [example: 100] |
-| **imageUrl** | **String** | The picture to use instead of a text watermark, named by the path that &#x60;POST api/2.0/files/logos&#x60; returned for  an image uploaded beforehand. The portal copies it into the room when the setting is saved. | [optional] [example: /temp/watermark_a1b2c3.png] [nullable] |
+| **imageUrl** | **String** | The picture to use instead of a text watermark, named by the path that `POST api/2.0/files/logos` returned for  an image uploaded beforehand. The portal copies it into the room when the setting is saved. | [optional] [example: /temp/watermark_a1b2c3.png] [nullable] |
 | **imageHeight** | **Double** (double) | The height the watermark image is drawn with, in pixels, used together with the width to keep its proportions. | [optional] [example: 100.0] |
 | **imageWidth** | **Double** (double) | The width the watermark image is drawn with, in pixels, used together with the height to keep its proportions. | [optional] [example: 200.0] |
 
@@ -13687,7 +13687,7 @@ The answer to a report generation request: the queued task, the form whose answe
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **form** | [**FileDtoInteger**](#model-filedtointeger) | The original form the answers are collected from. It is not the produced spreadsheet - that one arrives with  the task, once the task reports completion. | [optional] |
-| **task** | [**DocumentBuilderTaskDto**](#model-documentbuildertaskdto) | The queued generation. Poll it with &#x60;GET api/2.0/files/file/{fileId}/xlsx&#x60; until it reports completion, and  take the produced file from it then. | [optional] |
+| **task** | [**DocumentBuilderTaskDto**](#model-documentbuildertaskdto) | The queued generation. Poll it with `GET api/2.0/files/file/{fileId}/xlsx` until it reports completion, and  take the produced file from it then. | [optional] |
 | **isNewFile** | **Boolean** | True when this run creates the report file, false when an existing report is rewritten in place, which means  it keeps its id and the links already shared for it. | [optional] [example: true] |
 
 
@@ -13704,6 +13704,17 @@ The successful API response containing the XlsxReportResponseDto object.
 
 
 ## Authorization
+
+
+### cookieAuth
+- **Type**: API key
+- **API key parameter name**: asc_auth_key
+- **Location**: 
+
+
+### bearerAuth
+
+- **Type**: HTTP Bearer Token authentication
 
 
 ### asc_auth_key
@@ -13739,17 +13750,6 @@ The successful API response containing the XlsxReportResponseDto object.
 
 
 ### OpenId
-
-
-### cookieAuth
-- **Type**: API key
-- **API key parameter name**: asc_auth_key
-- **Location**: 
-
-
-### bearerAuth
-
-- **Type**: HTTP Bearer Token authentication
 
 
 ### x-signature

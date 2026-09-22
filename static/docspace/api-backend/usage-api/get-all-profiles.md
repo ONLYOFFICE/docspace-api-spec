@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../people.md).
 
 Get the active profiles
 
-Returns a page of the working accounts of the portal, with the full profile of each of them.  It reports only the accounts whose status is &#x60;Active&#x60;, so disabled accounts and open invitations are never  listed - use &#x60;GET api/2.0/people/status/{status}&#x60; for those, or &#x60;GET api/2.0/people/filter&#x60; to search across  every state.  The caller has to be a room admin, a DocSpace admin or a People module admin; a member or a guest gets 403.  The call is read-only, paged by &#x60;count&#x60; and &#x60;startIndex&#x60;, ordered by &#x60;sortBy&#x60; and &#x60;sortOrder&#x60;, and reports  the number of matches in the total count of the response.  Narrow it with &#x60;filterValue&#x60; on the name and the email, and with &#x60;filterBy&#x60; set to &#x60;group&#x60; to keep only the  members of the group whose ID is passed in &#x60;filterValue&#x60;.
+Returns a page of the working accounts of the portal, with the full profile of each of them.  It reports only the accounts whose status is `Active`, so disabled accounts and open invitations are never  listed - use `GET api/2.0/people/status/{status}` for those, or `GET api/2.0/people/filter` to search across  every state.  The caller has to be a room admin, a DocSpace admin or a People module admin; a member or a guest gets 403.  The call is read-only, paged by `count` and `startIndex`, ordered by `sortBy` and `sortOrder`, and reports  the number of matches in the total count of the response.  Narrow it with `filterValue` on the name and the email, and with `filterBy` set to `group` to keep only the  members of the group whose ID is passed in `filterValue`.
 
 ## Parameters
 
@@ -16,10 +16,10 @@ Returns a page of the working accounts of the portal, with the full profile of e
 |------------- | ------------- | ------------- | ------------- | -------------|
 | **count** | query | **Integer** (int32) | The size of the page. It defaults to 100, which is also the largest value the operation accepts. | [optional] [example: 25] [min: 1] [max: 100] |
 | **startIndex** | query | **Integer** (int32) | The number of matches to skip before the page starts. It defaults to 0, and the total number of matches is  reported in the total count of the response. | [optional] [example: 0] |
-| **filterBy** | query | **String** | The only recognised value is &#x60;group&#x60;, which makes &#x60;filterValue&#x60; the ID of the group to keep the members of.  Any other value, and omitting the field, applies no group filter. | [optional] [example: group] |
-| **sortBy** | query | **String** | What to order the accounts by, compared without regard to case: &#x60;FirstName&#x60;, &#x60;LastName&#x60;, &#x60;DisplayName&#x60;,  &#x60;Type&#x60;, &#x60;Email&#x60;, &#x60;Department&#x60;, &#x60;UsedSpace&#x60;, &#x60;CreatedBy&#x60; or &#x60;RegistrationDate&#x60;. | [optional] [example: DisplayName] |
-| **sortOrder** | query | **SortOrder** | The direction of the ordering: &#x60;Ascending&#x60;, which is the default, or &#x60;Descending&#x60;. | [optional] [example: Ascending] [enum: 0, 1] |
-| **filterSeparator** | query | **String** | The character that splits &#x60;filterValue&#x60; into several terms, of which any one may match. Omit it to split  the value on spaces instead, in which case every term has to match. | [optional] [example: ,] |
+| **filterBy** | query | **String** | The only recognised value is `group`, which makes `filterValue` the ID of the group to keep the members of.  Any other value, and omitting the field, applies no group filter. | [optional] [example: group] |
+| **sortBy** | query | **String** | What to order the accounts by, compared without regard to case: `FirstName`, `LastName`, `DisplayName`,  `Type`, `Email`, `Department`, `UsedSpace`, `CreatedBy` or `RegistrationDate`. | [optional] [example: DisplayName] |
+| **sortOrder** | query | **SortOrder** | The direction of the ordering: `Ascending`, which is the default, or `Descending`. | [optional] [example: Ascending] [enum: 0, 1] |
+| **filterSeparator** | query | **String** | The character that splits `filterValue` into several terms, of which any one may match. Omit it to split  the value on spaces instead, in which case every term has to match. | [optional] [example: ,] |
 | **filterValue** | query | **String** | The text to match against the name and the email of the account, case-insensitively. Omit it to apply no  text filter. | [optional] [example: John] |
 
 ## Responses

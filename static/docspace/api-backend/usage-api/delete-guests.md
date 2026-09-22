@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../people.md).
 
 Remove guest relations
 
-Removes the listed guests from the caller&#39;s own list of guests and withdraws the access the caller had  granted them.  It does not delete the accounts: each guest keeps its profile and any access other members gave it, and only  the link to the caller and the caller&#39;s own shares disappear.  The caller has to be a room admin or a DocSpace admin, and every listed account has to exist, be an active  guest and be one of the caller&#39;s own guests - a single entry that is not rejects the whole call with 403 and  changes nothing.  The call returns no body; read &#x60;GET api/2.0/people/filter&#x60; with &#x60;area&#x60; set to &#x60;Guests&#x60; to see what is left.  To delete a guest account for good, disable it and then use &#x60;DELETE api/2.0/people/{userid}&#x60;.
+Removes the listed guests from the caller's own list of guests and withdraws the access the caller had  granted them.  It does not delete the accounts: each guest keeps its profile and any access other members gave it, and only  the link to the caller and the caller's own shares disappear.  The caller has to be a room admin or a DocSpace admin, and every listed account has to exist, be an active  guest and be one of the caller's own guests - a single entry that is not rejects the whole call with 403 and  changes nothing.  The call returns no body; read `GET api/2.0/people/filter` with `area` set to `Guests` to see what is left.  To delete a guest account for good, disable it and then use `DELETE api/2.0/people/{userid}`.
 
 ## Parameters
 

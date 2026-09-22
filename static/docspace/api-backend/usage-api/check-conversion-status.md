@@ -8,14 +8,14 @@ Referenced types are defined in the [full reference](../files.md).
 
 Get conversion status
 
-Reports how far the conversion of a file has got, as a list that holds one entry while the portal still knows  about that conversion and nothing once it is over. Read &#x60;progress&#x60;, which counts from 0 to 100, &#x60;error&#x60; for  the reason a conversion failed, and &#x60;file&#x60;, which carries the converted file as soon as it exists. Queue the  conversion with &#x60;PUT api/2.0/files/file/{fileId}/checkconversion&#x60; and poll this operation until the entry  reaches 100 or disappears: a finished entry is handed out once and then dropped, and an entry whose conversion  stopped is discarded a few minutes later, so an empty list means either already reported or never started  rather than an error. The same empty list is the answer for an identifier no file matches. Passing  &#x60;start&#x3D;true&#x60; starts the conversion as well, with the format from the portal settings and no password, which  makes that one flag mutating; without it the operation is read-only. The caller needs read access to the file,  and anyone else is refused.
+Reports how far the conversion of a file has got, as a list that holds one entry while the portal still knows  about that conversion and nothing once it is over. Read `progress`, which counts from 0 to 100, `error` for  the reason a conversion failed, and `file`, which carries the converted file as soon as it exists. Queue the  conversion with `PUT api/2.0/files/file/{fileId}/checkconversion` and poll this operation until the entry  reaches 100 or disappears: a finished entry is handed out once and then dropped, and an entry whose conversion  stopped is discarded a few minutes later, so an empty list means either already reported or never started  rather than an error. The same empty list is the answer for an identifier no file matches. Passing  `start=true` starts the conversion as well, with the format from the portal settings and no password, which  makes that one flag mutating; without it the operation is read-only. The caller needs read access to the file,  and anyone else is refused.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
 | **fileId** | path | **Integer** (int32) | The file whose conversion is asked about. | [required] [example: 1] |
-| **start** | query | **Boolean** | Whether to start the conversion as well: &#x60;true&#x60; queues it with the default output format and no password,  &#x60;false&#x60; only reports what the portal already knows. | [optional] [example: false] |
+| **start** | query | **Boolean** | Whether to start the conversion as well: `true` queues it with the default output format and no password,  `false` only reports what the portal already knows. | [optional] [example: false] |
 
 ## Responses
 

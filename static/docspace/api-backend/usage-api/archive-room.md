@@ -8,13 +8,13 @@ Referenced types are defined in the [full reference](../files.md).
 
 Archive a room
 
-Queues a background job that moves one room from the Rooms section to the Archive section, and returns the  operation record of that job. An archived room stays readable to its members and becomes read only: files  cannot be created, renamed or edited in it, and its settings, tags, logo and links can no longer be changed,  which is why many other room operations answer an archived room with a refusal. The caller must be a manager  of the room; administrators of the portal cannot archive a room they were not invited to, and a room template  cannot be archived at all and is answered as missing. The room is not archived when the response arrives: poll  &#x60;GET api/2.0/files/fileops&#x60; until &#x60;finished&#x60; is true. Archiving an already archived room is harmless.  &#x60;deleteAfter&#x60; decides only how long the finished record survives, not what happens to the room. Use  &#x60;PUT api/2.0/files/rooms/{id}/unarchive&#x60; to bring the room back.
+Queues a background job that moves one room from the Rooms section to the Archive section, and returns the  operation record of that job. An archived room stays readable to its members and becomes read only: files  cannot be created, renamed or edited in it, and its settings, tags, logo and links can no longer be changed,  which is why many other room operations answer an archived room with a refusal. The caller must be a manager  of the room; administrators of the portal cannot archive a room they were not invited to, and a room template  cannot be archived at all and is answered as missing. The room is not archived when the response arrives: poll  `GET api/2.0/files/fileops` until `finished` is true. Archiving an already archived room is harmless.  `deleteAfter` decides only how long the finished record survives, not what happens to the room. Use  `PUT api/2.0/files/rooms/{id}/unarchive` to bring the room back.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The room to move, named by the identifier that &#x60;GET api/2.0/files/rooms&#x60; reports for it. | [required] [example: 1] |
+| **id** | path | **Integer** (int32) | The room to move, named by the identifier that `GET api/2.0/files/rooms` reports for it. | [required] [example: 1] |
 | **ArchiveRoomRequest** | body | [**ArchiveRoomRequest**](../files.md#model-archiveroomrequest) | The body of the request. It carries only the lifetime of the job record, so an empty object is a normal  request. | [optional] |
 
 ## Responses

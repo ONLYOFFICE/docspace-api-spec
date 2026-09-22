@@ -8,13 +8,13 @@ Referenced types are defined in the [full reference](../people.md).
 
 Update an API key
 
-Renames an API key, replaces the scopes it may use, or activates and deactivates it, without changing the  secret.  The caller may update a key they created themselves, and a DocSpace administrator may update any key of the  portal.  Take the values for &#x60;permissions&#x60; from &#x60;GET api/2.0/keys/permissions&#x60;; an unknown scope or an empty array is  rejected with 400, and the fields that are left out keep their current values.  The answer is a plain boolean: true when the key was changed, and false when it was not - which is also what  an already expired key returns, because such a key is left untouched instead of being reported as an error.  Deactivating a key through &#x60;isActive&#x60; stops it from authenticating while keeping it in the list, so use it  when the key may be needed again and &#x60;DELETE api/2.0/keys/{keyId}&#x60; when it may not.
+Renames an API key, replaces the scopes it may use, or activates and deactivates it, without changing the  secret.  The caller may update a key they created themselves, and a DocSpace administrator may update any key of the  portal.  Take the values for `permissions` from `GET api/2.0/keys/permissions`; an unknown scope or an empty array is  rejected with 400, and the fields that are left out keep their current values.  The answer is a plain boolean: true when the key was changed, and false when it was not - which is also what  an already expired key returns, because such a key is left untouched instead of being reported as an error.  Deactivating a key through `isActive` stops it from authenticating while keeping it in the list, so use it  when the key may be needed again and `DELETE api/2.0/keys/{keyId}` when it may not.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **keyId** | path | **UUID** (uuid) | The ID of the key to update, taken from the route. Read it from the &#x60;id&#x60; of an entry of  &#x60;GET api/2.0/keys&#x60; - it is not the secret and not the &#x60;keyPostfix&#x60;. | [required] [example: 00000000-0000-0000-0000-000000000000] |
+| **keyId** | path | **UUID** (uuid) | The ID of the key to update, taken from the route. Read it from the `id` of an entry of  `GET api/2.0/keys` - it is not the secret and not the `keyPostfix`. | [required] [example: 00000000-0000-0000-0000-000000000000] |
 | **UpdateApiKeyRequest** | body | [**UpdateApiKeyRequest**](../people.md#model-updateapikeyrequest) | The fields to change. Every field is optional and the ones that are left out keep their current values, so an  empty object changes nothing. | [required] |
 
 ## Responses

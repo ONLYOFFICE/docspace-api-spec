@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../api.md).
 
 Send a message to the administrator
 
-Sends a message from someone who cannot get into the portal to its administrators - the contact form the  sign-in page offers unauthenticated visitors. No token is needed. The form has to be published first with  &#x60;POST api/2.0/settings/messagesettings&#x60; unless the portal&#39;s payment has lapsed, otherwise nothing is sent;  &#x60;enableAdmMess&#x60; in &#x60;GET api/2.0/settings&#x60; reports whether the call is worth making. &#x60;email&#x60; is the address the  administrators answer to and has to be a real address, and &#x60;message&#x60; is reduced to plain text first, so a body  carrying nothing but markup counts as empty - either fault is refused with 400. When the caller is not signed  in and this installation has a CAPTCHA configured, &#x60;recaptchaResponse&#x60; has to carry a solved challenge of the  &#x60;recaptchaType&#x60; that &#x60;GET api/2.0/settings&#x60; publishes together with the site key, and a missing or stale  answer refuses the call. &#x60;culture&#x60; picks the language of the letter. Delivery is queued and reaches the  administrators subscribed to administrator notifications, so a confirmed call means accepted rather than read,  and the answer is a localized confirmation. Attempts are rate limited per address and per operation, and  further ones are refused with 429.
+Sends a message from someone who cannot get into the portal to its administrators - the contact form the  sign-in page offers unauthenticated visitors. No token is needed. The form has to be published first with  `POST api/2.0/settings/messagesettings` unless the portal's payment has lapsed, otherwise nothing is sent;  `enableAdmMess` in `GET api/2.0/settings` reports whether the call is worth making. `email` is the address the  administrators answer to and has to be a real address, and `message` is reduced to plain text first, so a body  carrying nothing but markup counts as empty - either fault is refused with 400. When the caller is not signed  in and this installation has a CAPTCHA configured, `recaptchaResponse` has to carry a solved challenge of the  `recaptchaType` that `GET api/2.0/settings` publishes together with the site key, and a missing or stale  answer refuses the call. `culture` picks the language of the letter. Delivery is queued and reaches the  administrators subscribed to administrator notifications, so a confirmed call means accepted rather than read,  and the answer is a localized confirmation. Attempts are rate limited per address and per operation, and  further ones are refused with 429.
 
 ## Parameters
 
@@ -33,7 +33,7 @@ Sends a message from someone who cannot get into the portal to its administrator
 
 ## Authorization
 
-No authorization required
+[cookieAuth](../api.md#cookieauth), [bearerAuth](../api.md#bearerauth)
 
 ## HTTP request headers
 

@@ -8,13 +8,13 @@ Referenced types are defined in the [full reference](../files.md).
 
 Change the room cover
 
-Sets the cover picture and the background colour a room is shown with, and returns the whole room afterwards.  &#x60;cover&#x60; accepts only an identifier listed by &#x60;GET api/2.0/files/rooms/covers&#x60;, and &#x60;color&#x60; only six  hexadecimal digits with no leading number sign, so anything else is rejected as an invalid request. Either  field may be sent on its own, an empty &#x60;cover&#x60; clears the picture, an empty &#x60;color&#x60; restores the default one,  and an empty body leaves the room untouched. The cover is what the room shows while it has no uploaded logo:  setting a logo with &#x60;POST api/2.0/files/rooms/{id}/logo&#x60; hides the cover without erasing it, and deleting that  logo brings it back. The caller must be a manager of the room, an archived room is refused with 403, and an  unknown or deleted room is answered with 404. Repeating the same request is harmless, and the cover survives  archiving and unarchiving.
+Sets the cover picture and the background colour a room is shown with, and returns the whole room afterwards.  `cover` accepts only an identifier listed by `GET api/2.0/files/rooms/covers`, and `color` only six  hexadecimal digits with no leading number sign, so anything else is rejected as an invalid request. Either  field may be sent on its own, an empty `cover` clears the picture, an empty `color` restores the default one,  and an empty body leaves the room untouched. The cover is what the room shows while it has no uploaded logo:  setting a logo with `POST api/2.0/files/rooms/{id}/logo` hides the cover without erasing it, and deleting that  logo brings it back. The caller must be a manager of the room, an archived room is refused with 403, and an  unknown or deleted room is answered with 404. Repeating the same request is harmless, and the cover survives  archiving and unarchiving.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The room to change, named by the identifier that &#x60;GET api/2.0/files/rooms&#x60; reports for it. | [required] [example: 1] |
+| **id** | path | **Integer** (int32) | The room to change, named by the identifier that `GET api/2.0/files/rooms` reports for it. | [required] [example: 1] |
 | **CoverRequestDto** | body | [**CoverRequestDto**](../files.md#model-coverrequestdto) | The cover and the colour to apply. Either half may be sent on its own, and an empty object leaves the room as  it is. | [required] |
 
 ## Responses

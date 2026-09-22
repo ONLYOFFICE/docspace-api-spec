@@ -8,13 +8,13 @@ Referenced types are defined in the [full reference](../people.md).
 
 Search users by query
 
-Searches the active accounts of the portal by a term passed in the query string, and is the same search as  &#x60;GET api/2.0/people/@search/{query}&#x60;, which takes the term in the path instead.  Only a DocSpace administrator may call it; every other account, including a room admin, gets 403.  Only accounts with the &#x60;Active&#x60; status are searched, so a pending invitation and a disabled account are never  found - use &#x60;GET api/2.0/people/filter&#x60; to search across states.  The call is read-only and is not paged: every match is streamed, without a total.  It takes the search term and nothing else - the group filter of  &#x60;GET api/2.0/people/@search/{query}&#x60; is not reachable here, because the handler forwards only &#x60;query&#x60; - so  use that operation when the result has to be narrowed to one group.  The answer holds full profiles, because the handler passes the request on to the operation that builds the  complete profile.
+Searches the active accounts of the portal by a term passed in the query string, and is the same search as  `GET api/2.0/people/@search/{query}`, which takes the term in the path instead.  Only a DocSpace administrator may call it; every other account, including a room admin, gets 403.  Only accounts with the `Active` status are searched, so a pending invitation and a disabled account are never  found - use `GET api/2.0/people/filter` to search across states.  The call is read-only and is not paged: every match is streamed, without a total.  It takes the search term and nothing else - the group filter of  `GET api/2.0/people/@search/{query}` is not reachable here, because the handler forwards only `query` - so  use that operation when the result has to be narrowed to one group.  The answer holds full profiles, because the handler passes the request on to the operation that builds the  complete profile.
 
 ## Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **query** | query | **String** | The term to look for. Only accounts with the &#x60;Active&#x60; status are searched, and this is the only parameter the  operation reads. | [optional] [example: John] |
+| **query** | query | **String** | The term to look for. Only accounts with the `Active` status are searched, and this is the only parameter the  operation reads. | [optional] [example: John] |
 
 ## Responses
 

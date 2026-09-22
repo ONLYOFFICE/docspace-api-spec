@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../files.md).
 
 Bulk download
 
-Queues a background job that packs the requested files and folders into a single archive, and answers with the  caller&#39;s download operations, including the one just started. The archive is not ready when the response  arrives: poll &#x60;GET api/2.0/files/fileops&#x60; until the operation reports &#x60;finished&#x60;, then take the address of the  archive from its &#x60;url&#x60;. Items listed in &#x60;fileConvertIds&#x60; are converted to the format named there before they  are packed, while the items of &#x60;fileIds&#x60; are packed as they are. Read access to every listed item is required:  an item the caller may not read fails the whole call with 403, and an id that resolves to nothing is answered  as missing, so filter the selection beforehand. Only one download at a time is allowed per caller, and a  second call made while the first is still running is refused with 403 as well. An empty selection queues  nothing and simply answers with the operations that are already there. An anonymous caller may use the call  for the items covered by the external link they hold.
+Queues a background job that packs the requested files and folders into a single archive, and answers with the  caller's download operations, including the one just started. The archive is not ready when the response  arrives: poll `GET api/2.0/files/fileops` until the operation reports `finished`, then take the address of the  archive from its `url`. Items listed in `fileConvertIds` are converted to the format named there before they  are packed, while the items of `fileIds` are packed as they are. Read access to every listed item is required:  an item the caller may not read fails the whole call with 403, and an id that resolves to nothing is answered  as missing, so filter the selection beforehand. Only one download at a time is allowed per caller, and a  second call made while the first is still running is refused with 403 as well. An empty selection queues  nothing and simply answers with the operations that are already there. An anonymous caller may use the call  for the items covered by the external link they hold.
 
 ## Parameters
 
@@ -34,7 +34,7 @@ Queues a background job that packs the requested files and folders into a single
 
 ## Authorization
 
-No authorization required
+[cookieAuth](../files.md#cookieauth), [bearerAuth](../files.md#bearerauth)
 
 ## HTTP request headers
 

@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../backup.md).
 
 Get the restoring progress
 
-Reports the state of the restoring job, and is the operation to poll after  &#x60;POST api/2.0/backup/startrestore&#x60;. It is the only operation of this service that needs no  authorization and the only one that stays reachable while the portal is being restored, which is  exactly the state a client polls it in - every other operation of the service answers 403 then.  &#x60;dump&#x60; is read as three states rather than as a flag: omit it to get whichever restoring job concerns  this portal, including a server-wide one, pass false to get the job of this portal only, and pass true  to get the server-wide job; on a portal that is not a standalone installation the value is forced to  false. When there is no matching job the call still answers 200, but the body carries no &#x60;response&#x60;  member at all.  &#x60;isCompleted&#x60; is the field to poll, a non-empty &#x60;error&#x60; is the only report of a failure, and neither  &#x60;link&#x60; nor &#x60;warning&#x60; is ever filled in for a restoring job.
+Reports the state of the restoring job, and is the operation to poll after  `POST api/2.0/backup/startrestore`. It is the only operation of this service that needs no  authorization and the only one that stays reachable while the portal is being restored, which is  exactly the state a client polls it in - every other operation of the service answers 403 then.  `dump` is read as three states rather than as a flag: omit it to get whichever restoring job concerns  this portal, including a server-wide one, pass false to get the job of this portal only, and pass true  to get the server-wide job; on a portal that is not a standalone installation the value is forced to  false. When there is no matching job the call still answers 200, but the body carries no `response`  member at all.  `isCompleted` is the field to poll, a non-empty `error` is the only report of a failure, and neither  `link` nor `warning` is ever filled in for a restoring job.
 
 ## Parameters
 
@@ -33,7 +33,7 @@ Reports the state of the restoring job, and is the operation to poll after  &#x6
 
 ## Authorization
 
-No authorization required
+[cookieAuth](../backup.md#cookieauth), [bearerAuth](../backup.md#bearerauth)
 
 ## HTTP request headers
 

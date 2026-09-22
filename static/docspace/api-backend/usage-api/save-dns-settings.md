@@ -8,7 +8,7 @@ Referenced types are defined in the [full reference](../api.md).
 
 Save the DNS settings
 
-Maps a custom domain name onto the current tenant, or clears the mapping, so the portal becomes reachable  under the caller&#39;s own DNS name instead of only its default alias. Available only on a Standalone  (self-hosted) installation; on SaaS the call is always refused. Requires Owner or DocSpaceAdmin (the  EditPortalSettings permission). Disable the mapping by passing &#x60;enable&#x3D;false&#x60;, in which case the domain name  in the request is ignored. A domain that collides with the portal&#39;s reserved base domain, or otherwise fails  validation, is rejected without changing the current mapping. This is a mutating, idempotent call. On success  the previous domain also stops answering, and any CSP configuration referencing it is updated to the new one.
+Maps a custom domain name onto the current tenant, or clears the mapping, so the portal becomes reachable  under the caller's own DNS name instead of only its default alias. Available only on a Standalone  (self-hosted) installation; on SaaS the call is always refused. Requires Owner or DocSpaceAdmin (the  EditPortalSettings permission). Disable the mapping by passing `enable=false`, in which case the domain name  in the request is ignored. A domain that collides with the portal's reserved base domain, or otherwise fails  validation, is rejected without changing the current mapping. This is a mutating, idempotent call. On success  the previous domain also stops answering, and any CSP configuration referencing it is updated to the new one.
 
 ## Parameters
 
@@ -21,8 +21,8 @@ Maps a custom domain name onto the current tenant, or clears the mapping, so the
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Confirmation that the DNS mapping was updated | [**StringWrapper**](../api.md#model-stringwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **400** | The domain name is invalid, or collides with the portal&#39;s reserved base domain | - | - |
-| **402** | This option is not available under the portal&#39;s current pricing plan | - | - |
+| **400** | The domain name is invalid, or collides with the portal's reserved base domain | - | - |
+| **402** | This option is not available under the portal's current pricing plan | - | - |
 | **405** | The portal is not a Standalone installation, so a custom domain cannot be mapped | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../api.md#model-errorapiresponse) | `Retry-After` |
