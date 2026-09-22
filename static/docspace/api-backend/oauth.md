@@ -1,7 +1,7 @@
 # ONLYOFFICE DocSpace OAuth 2.0 API
 
 The browsable version of this reference, with a request builder and code samples, is published at
-<https://api.onlyoffice.com/docspace/api-backend/usage-api/>.
+[https://api.onlyoffice.com/docspace/api-backend/usage-api/](https://api.onlyoffice.com/docspace/api-backend/usage-api/).
 
 All URIs are relative to *https://yourportal.onlyoffice.com*, where the host is the address of your DocSpace instance.
 
@@ -12,20 +12,20 @@ All URIs are relative to *https://yourportal.onlyoffice.com*, where the host is 
 | *OAuth20AuthorizationApi* | [**authorizeOAuth**](#authorizeoauth) | **GET** /oauth2/authorize | Start the authorization flow |
 | *OAuth20AuthorizationApi* | [**exchangeToken**](#exchangetoken) | **POST** /oauth2/token | Exchange the authorization code |
 | *OAuth20AuthorizationApi* | [**submitConsent**](#submitconsent) | **POST** /oauth2/authorize | Submit the consent decision |
-| *OAuth20ClientManagementApi* | [**changeActivation**](#changeactivation) | **PATCH** /api/2.0/oauth2/clients/{clientId}/activation | Change client activation status |
+| *OAuth20ClientManagementApi* | [**changeActivation**](#changeactivation) | **PATCH** /api/2.0/oauth2/clients/\{clientId\}/activation | Change client activation status |
 | *OAuth20ClientManagementApi* | [**createClient**](#createclient) | **POST** /api/2.0/oauth2/clients | Create a new OAuth2 client |
-| *OAuth20ClientManagementApi* | [**deleteClient**](#deleteclient) | **DELETE** /api/2.0/oauth2/clients/{clientId} | Delete an OAuth2 client |
+| *OAuth20ClientManagementApi* | [**deleteClient**](#deleteclient) | **DELETE** /api/2.0/oauth2/clients/\{clientId\} | Delete an OAuth2 client |
 | *OAuth20ClientManagementApi* | [**deleteTenantClients**](#deletetenantclients) | **DELETE** /api/2.0/oauth2/clients/tenant | Delete all tenant OAuth2 clients |
 | *OAuth20ClientManagementApi* | [**deleteUserClients**](#deleteuserclients) | **DELETE** /api/2.0/oauth2/clients | Delete all user OAuth2 clients |
-| *OAuth20ClientManagementApi* | [**regenerateSecret**](#regeneratesecret) | **PATCH** /api/2.0/oauth2/clients/{clientId}/regenerate | Regenerate client secret |
-| *OAuth20ClientManagementApi* | [**revokeUserClient**](#revokeuserclient) | **DELETE** /api/2.0/oauth2/clients/{clientId}/revoke | Revoke client consent |
-| *OAuth20ClientManagementApi* | [**updateClient**](#updateclient) | **PUT** /api/2.0/oauth2/clients/{clientId} | Update an existing OAuth2 client |
-| *OAuth20ClientQueryingApi* | [**getClient**](#getclient) | **GET** /api/2.0/oauth2/clients/{clientId} | Get client details |
-| *OAuth20ClientQueryingApi* | [**getClientInfo**](#getclientinfo) | **GET** /api/2.0/oauth2/clients/{clientId}/info | Get client info |
+| *OAuth20ClientManagementApi* | [**regenerateSecret**](#regeneratesecret) | **PATCH** /api/2.0/oauth2/clients/\{clientId\}/regenerate | Regenerate client secret |
+| *OAuth20ClientManagementApi* | [**revokeUserClient**](#revokeuserclient) | **DELETE** /api/2.0/oauth2/clients/\{clientId\}/revoke | Revoke client consent |
+| *OAuth20ClientManagementApi* | [**updateClient**](#updateclient) | **PUT** /api/2.0/oauth2/clients/\{clientId\} | Update an existing OAuth2 client |
+| *OAuth20ClientQueryingApi* | [**getClient**](#getclient) | **GET** /api/2.0/oauth2/clients/\{clientId\} | Get client details |
+| *OAuth20ClientQueryingApi* | [**getClientInfo**](#getclientinfo) | **GET** /api/2.0/oauth2/clients/\{clientId\}/info | Get client info |
 | *OAuth20ClientQueryingApi* | [**getClients**](#getclients) | **GET** /api/2.0/oauth2/clients | List clients |
 | *OAuth20ClientQueryingApi* | [**getClientsInfo**](#getclientsinfo) | **GET** /api/2.0/oauth2/clients/info | List client info |
 | *OAuth20ClientQueryingApi* | [**getConsents**](#getconsents) | **GET** /api/2.0/oauth2/clients/consents | List user consents |
-| *OAuth20ClientQueryingApi* | [**getPublicClientInfo**](#getpublicclientinfo) | **GET** /api/2.0/oauth2/clients/{clientId}/public/info | Get public client info |
+| *OAuth20ClientQueryingApi* | [**getPublicClientInfo**](#getpublicclientinfo) | **GET** /api/2.0/oauth2/clients/\{clientId\}/public/info | Get public client info |
 | *OAuth20DiscoveryApi* | [**handleOptions**](#handleoptions) | **OPTIONS** /.well-known/oauth-authorization-server | Probe the discovery endpoint |
 | *OAuth20ScopeManagementApi* | [**getScopes**](#getscopes) | **GET** /api/2.0/oauth2/scopes | List available OAuth2 scopes |
 
@@ -891,15 +891,15 @@ Client creation request containing client details
 |------------ | ------------- | ------------- | -------------|
 | **name** | **String** | The display name shown to the user on the consent screen. It has to be between 3 and 256 characters long. | [required] [example: Example Client] [minLength: 3] [maxLength: 256] |
 | **description** | **String** | The free-text description shown next to the name on the consent screen, at most 255 characters. | [optional] [example: Description of the client] [minLength: 0] [maxLength: 255] |
-| **logo** | **String** | The client logo as a data URI carrying base64 image data, shown on the consent screen. Only png, jpeg, jpg and svg+xml are accepted, the whole string may not exceed 2000000 characters and the decoded image may not exceed 256000 bytes. | [required] [example: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==] [minLength: 1] [pattern: /^data:image\/(?:png\|jpeg\|jpg\|svg\\+xml);base64,.*.{1,}/] |
+| **logo** | **String** | The client logo as a data URI carrying base64 image data, shown on the consent screen. Only png, jpeg, jpg and svg+xml are accepted, the whole string may not exceed 2000000 characters and the decoded image may not exceed 256000 bytes. | [required] [example: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==] [minLength: 1] [pattern: /^data:image\/(?:png\|jpeg\|jpg\|svg\\+xml);base64,.*.\{1,\}/] |
 | **scopes** | **Set** | The permissions the client may ask for, named as they appear in the tenant scope catalogue - for example files:read, rooms:write or openid. A client cannot request a scope that is not listed here. | [required] |
 | **allow\_pkce** | **Boolean** | Whether the client may use PKCE. Turning it on lets the client authenticate with the none method and prove itself with a code verifier instead of sending a secret, which is what a client that cannot keep a secret needs. | [optional] [example: true] |
-| **website\_url** | **String** | The URL of the client home page, offered to the user before they consent. The value has to be an http or https URL. | [required] [example: http://example.com] [minLength: 1] [pattern: /^(https?:\/\/)?([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,}(:\\d+)?(\/[a-zA-Z0-9-._~:\/?#\\[\\]@!$&'()*+,;=]*)?$\|^https?:\/\/(\\d{1,3}\\.){3}\\d{1,3}(:\\d+)?(\/[a-zA-Z0-9-._~:\/?#\\[\\]@!$&'()*+,;=]*)?$/] |
-| **terms\_url** | **String** | The URL of the client terms of service, linked from the consent screen. The value has to be an http or https URL. | [required] [example: http://example.com/terms] [minLength: 1] [pattern: /^(https?:\/\/)?([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,}(:\\d+)?(\/[a-zA-Z0-9-._~:\/?#\\[\\]@!$&'()*+,;=]*)?$\|^https?:\/\/(\\d{1,3}\\.){3}\\d{1,3}(:\\d+)?(\/[a-zA-Z0-9-._~:\/?#\\[\\]@!$&'()*+,;=]*)?$/] |
-| **policy\_url** | **String** | The URL of the client privacy policy, linked from the consent screen. The value has to be an http or https URL. | [required] [example: http://example.com/policy] [minLength: 1] [pattern: /^(https?:\/\/)?([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,}(:\\d+)?(\/[a-zA-Z0-9-._~:\/?#\\[\\]@!$&'()*+,;=]*)?$\|^https?:\/\/(\\d{1,3}\\.){3}\\d{1,3}(:\\d+)?(\/[a-zA-Z0-9-._~:\/?#\\[\\]@!$&'()*+,;=]*)?$/] |
+| **website\_url** | **String** | The URL of the client home page, offered to the user before they consent. The value has to be an http or https URL. | [required] [example: http://example.com] [minLength: 1] [pattern: /^(https?:\/\/)?([a-zA-Z0-9-]+\\.)+[a-zA-Z]\{2,\}(:\\d+)?(\/[a-zA-Z0-9-._~:\/?#\\[\\]@!$&'()*+,;=]*)?$\|^https?:\/\/(\\d\{1,3\}\\.)\{3\}\\d\{1,3\}(:\\d+)?(\/[a-zA-Z0-9-._~:\/?#\\[\\]@!$&'()*+,;=]*)?$/] |
+| **terms\_url** | **String** | The URL of the client terms of service, linked from the consent screen. The value has to be an http or https URL. | [required] [example: http://example.com/terms] [minLength: 1] [pattern: /^(https?:\/\/)?([a-zA-Z0-9-]+\\.)+[a-zA-Z]\{2,\}(:\\d+)?(\/[a-zA-Z0-9-._~:\/?#\\[\\]@!$&'()*+,;=]*)?$\|^https?:\/\/(\\d\{1,3\}\\.)\{3\}\\d\{1,3\}(:\\d+)?(\/[a-zA-Z0-9-._~:\/?#\\[\\]@!$&'()*+,;=]*)?$/] |
+| **policy\_url** | **String** | The URL of the client privacy policy, linked from the consent screen. The value has to be an http or https URL. | [required] [example: http://example.com/policy] [minLength: 1] [pattern: /^(https?:\/\/)?([a-zA-Z0-9-]+\\.)+[a-zA-Z]\{2,\}(:\\d+)?(\/[a-zA-Z0-9-._~:\/?#\\[\\]@!$&'()*+,;=]*)?$\|^https?:\/\/(\\d\{1,3\}\\.)\{3\}\\d\{1,3\}(:\\d+)?(\/[a-zA-Z0-9-._~:\/?#\\[\\]@!$&'()*+,;=]*)?$/] |
 | **redirect\_uris** | **Set** | The URIs an authorization code may be delivered to. An authorization request naming any other URI is refused, and the set holds between 1 and 12 addresses. | [required] |
 | **allowed\_origins** | **Set** | The web origins allowed to call the portal on behalf of this client, used for the CORS check. The set holds between 1 and 12 addresses. | [required] |
-| **logout\_redirect\_uri** | **String** | The single URI the user may be sent back to once they have logged out. The value has to be an http or https URL. | [required] [example: http://example.com/logout] [minLength: 1] [pattern: /^(https?:\/\/)?([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,}(:\\d+)?(\/[a-zA-Z0-9-._~:\/?#\\[\\]@!$&'()*+,;=]*)?$\|^https?:\/\/(\\d{1,3}\\.){3}\\d{1,3}(:\\d+)?(\/[a-zA-Z0-9-._~:\/?#\\[\\]@!$&'()*+,;=]*)?$/] |
+| **logout\_redirect\_uri** | **String** | The single URI the user may be sent back to once they have logged out. The value has to be an http or https URL. | [required] [example: http://example.com/logout] [minLength: 1] [pattern: /^(https?:\/\/)?([a-zA-Z0-9-]+\\.)+[a-zA-Z]\{2,\}(:\\d+)?(\/[a-zA-Z0-9-._~:\/?#\\[\\]@!$&'()*+,;=]*)?$\|^https?:\/\/(\\d\{1,3\}\\.)\{3\}\\d\{1,3\}(:\\d+)?(\/[a-zA-Z0-9-._~:\/?#\\[\\]@!$&'()*+,;=]*)?$/] |
 | **is\_public** | **Boolean** | Whether the client is offered to third-party tenants rather than only to the tenant that registers it. | [optional] [example: false] |
 
 
@@ -976,7 +976,7 @@ Client update request containing modified client details
 |------------ | ------------- | ------------- | -------------|
 | **name** | **String** | The display name shown to the user on the consent screen. It has to be between 3 and 256 characters long. | [required] [example: Updated Client] [minLength: 3] [maxLength: 256] |
 | **description** | **String** | The free-text description shown next to the name on the consent screen, at most 255 characters. | [optional] [example: Updated description of the client] [minLength: 0] [maxLength: 255] |
-| **logo** | **String** | The client logo as a data URI carrying base64 image data, shown on the consent screen. Only png, jpeg, jpg and svg+xml are accepted. | [required] [example: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==] [minLength: 1] [pattern: /^data:image\/(?:png\|jpeg\|jpg\|svg\\+xml);base64,.*.{1,}/] |
+| **logo** | **String** | The client logo as a data URI carrying base64 image data, shown on the consent screen. Only png, jpeg, jpg and svg+xml are accepted. | [required] [example: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==] [minLength: 1] [pattern: /^data:image\/(?:png\|jpeg\|jpg\|svg\\+xml);base64,.*.\{1,\}/] |
 | **scopes** | **Set** | The permissions the client may ask for, named as they appear in the tenant scope catalogue - for example files:read, rooms:write or openid. A client cannot request a scope that is not listed here. | [required] |
 | **allow\_pkce** | **Boolean** | Whether the client may use PKCE. Turning it on lets the client authenticate with the none method and prove itself with a code verifier instead of sending a secret, which is what a client that cannot keep a secret needs. | [optional] [example: true] |
 | **allowed\_origins** | **Set** | The web origins allowed to call the portal on behalf of this client, used for the CORS check. The set holds between 1 and 12 addresses. | [required] |

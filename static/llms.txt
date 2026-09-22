@@ -589,18 +589,18 @@ One document per service, each carrying every endpoint of that service and the m
 - [Update the user invitation settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-invitation-settings.md): PUT /api/2.0/settings/invitationsettings
 - [Get the cookie lifetime settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-cookie-settings.md): GET /api/2.0/settings/cookiesettings
 - [Update the cookie lifetime settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-cookie-settings.md): PUT /api/2.0/settings/cookiesettings
-- [Calculate the Docs Connect Dev Pack switch cost](https://api.onlyoffice.com/docspace/api-backend/usage-api/calculate-dev-pack.md): POST /api/2.0/settings/docscloud/calculatedevpack
-- [Start the Docs Connect quota report](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-tenant-quota-report.md): POST /api/2.0/settings/docscloud/tenant/quota/report
-- [Get the Docs Connect tenant](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tenant.md): GET /api/2.0/settings/docscloud/tenant
-- [Get the Docs Connect tenant configuration](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tenant-config.md): GET /api/2.0/settings/docscloud/tenant/config
-- [Get the Docs Connect tenant information](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tenant-info.md): GET /api/2.0/settings/docscloud/tenant/info
-- [Get the Docs Connect tenant quota](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tenant-quota.md): GET /api/2.0/settings/docscloud/tenant/quota
-- [Get the Docs Connect quota report status](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tenant-quota-report.md): GET /api/2.0/settings/docscloud/tenant/quota/report
-- [Get the Docs Connect tenant usage](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tenant-usage.md): GET /api/2.0/settings/docscloud/tenant/usage
-- [Start the Docs Connect trial](https://api.onlyoffice.com/docspace/api-backend/usage-api/start-docs-cloud-trial.md): POST /api/2.0/settings/docscloud/trial
-- [Switch Docs Connect to Docs Connect Dev Pack](https://api.onlyoffice.com/docspace/api-backend/usage-api/switch-to-dev-pack.md): POST /api/2.0/settings/docscloud/switchtodevpack
-- [Terminate the Docs Connect quota report](https://api.onlyoffice.com/docspace/api-backend/usage-api/terminate-tenant-quota-report.md): DELETE /api/2.0/settings/docscloud/tenant/quota/report
-- [Update the Docs Connect tenant configuration](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-tenant-config.md): PUT /api/2.0/settings/docscloud/tenant/config
+- [Calculate the DocsCloudDevPack switch cost](https://api.onlyoffice.com/docspace/api-backend/usage-api/calculate-dev-pack.md): POST /api/2.0/settings/docscloud/calculatedevpack
+- [Start the DocsCloud quota report](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-tenant-quota-report.md): POST /api/2.0/settings/docscloud/tenant/quota/report
+- [Get the DocsCloud tenant](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tenant.md): GET /api/2.0/settings/docscloud/tenant
+- [Get the DocsCloud tenant configuration](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tenant-config.md): GET /api/2.0/settings/docscloud/tenant/config
+- [Get the DocsCloud tenant information](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tenant-info.md): GET /api/2.0/settings/docscloud/tenant/info
+- [Get the DocsCloud tenant quota](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tenant-quota.md): GET /api/2.0/settings/docscloud/tenant/quota
+- [Get the DocsCloud quota report status](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tenant-quota-report.md): GET /api/2.0/settings/docscloud/tenant/quota/report
+- [Get the DocsCloud tenant usage](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tenant-usage.md): GET /api/2.0/settings/docscloud/tenant/usage
+- [Start the DocsCloud trial](https://api.onlyoffice.com/docspace/api-backend/usage-api/start-docs-cloud-trial.md): POST /api/2.0/settings/docscloud/trial
+- [Switch DocsCloud to DocsCloudDevPack](https://api.onlyoffice.com/docspace/api-backend/usage-api/switch-to-dev-pack.md): POST /api/2.0/settings/docscloud/switchtodevpack
+- [Terminate the DocsCloud quota report](https://api.onlyoffice.com/docspace/api-backend/usage-api/terminate-tenant-quota-report.md): DELETE /api/2.0/settings/docscloud/tenant/quota/report
+- [Update the DocsCloud tenant configuration](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-tenant-config.md): PUT /api/2.0/settings/docscloud/tenant/config
 - [Get the storage encryption progress](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-storage-encryption-progress.md): GET /api/2.0/settings/encryption/progress
 - [Get the storage encryption settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-storage-encryption-settings.md): GET /api/2.0/settings/encryption/settings
 - [Start the storage encryption](https://api.onlyoffice.com/docspace/api-backend/usage-api/start-storage-encryption.md): POST /api/2.0/settings/encryption/start

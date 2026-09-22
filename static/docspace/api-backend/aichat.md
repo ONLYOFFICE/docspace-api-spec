@@ -1,7 +1,7 @@
 # ONLYOFFICE DocSpace AI API
 
 The browsable version of this reference, with a request builder and code samples, is published at
-<https://api.onlyoffice.com/docspace/api-backend/usage-api/>.
+[https://api.onlyoffice.com/docspace/api-backend/usage-api/](https://api.onlyoffice.com/docspace/api-backend/usage-api/).
 
 All URIs are relative to *https://yourportal.onlyoffice.com*, where the host is the address of your DocSpace instance.
 
@@ -17,12 +17,12 @@ All URIs are relative to *https://yourportal.onlyoffice.com*, where the host is 
 | *AIAIApi* | [**aiAiSendWithStream**](#aiaisendwithstream) | **POST** /api/2.0/ai/ai/send-with-stream | Send with stream |
 | *AIAIApi* | [**aiAiSendWithStreamOpenAI**](#aiaisendwithstreamopenai) | **POST** /api/2.0/ai/ai/send-with-stream-openai | Stream a chat in OpenAI format |
 | *AIAgentsApi* | [**aiAgentsCreate**](#aiagentscreate) | **POST** /api/2.0/ai/agents | Create an agent |
-| *AIAgentsApi* | [**aiAgentsDelete**](#aiagentsdelete) | **DELETE** /api/2.0/ai/agents/{id} | Delete an agent |
-| *AIAgentsApi* | [**aiAgentsGet**](#aiagentsget) | **GET** /api/2.0/ai/agents/{id} | Get an agent |
+| *AIAgentsApi* | [**aiAgentsDelete**](#aiagentsdelete) | **DELETE** /api/2.0/ai/agents/\{id\} | Delete an agent |
+| *AIAgentsApi* | [**aiAgentsGet**](#aiagentsget) | **GET** /api/2.0/ai/agents/\{id\} | Get an agent |
 | *AIAgentsApi* | [**aiAgentsList**](#aiagentslist) | **GET** /api/2.0/ai/agents | List agents |
 | *AIAgentsApi* | [**aiAgentsNews**](#aiagentsnews) | **GET** /api/2.0/ai/agents/news | List agent news items |
 | *AIAgentsApi* | [**aiAgentsResetQuota**](#aiagentsresetquota) | **PUT** /api/2.0/ai/agents/resetquota | Reset agents' quota |
-| *AIAgentsApi* | [**aiAgentsUpdate**](#aiagentsupdate) | **PUT** /api/2.0/ai/agents/{id} | Update an agent |
+| *AIAgentsApi* | [**aiAgentsUpdate**](#aiagentsupdate) | **PUT** /api/2.0/ai/agents/\{id\} | Update an agent |
 | *AIAgentsApi* | [**aiAgentsUpdateQuota**](#aiagentsupdatequota) | **PUT** /api/2.0/ai/agents/agentquota | Update agents' quota |
 | *AIAssignmentsApi* | [**aiAssignmentsAssign**](#aiassignmentsassign) | **PUT** /api/2.0/ai/assignments/assign | Bind a profile to an action |
 | *AIAssignmentsApi* | [**aiAssignmentsBulkAssign**](#aiassignmentsbulkassign) | **PUT** /api/2.0/ai/assignments/bulk-assign | Bulk assign |
@@ -42,8 +42,8 @@ All URIs are relative to *https://yourportal.onlyoffice.com*, where the host is 
 | *AIEditorToolsApi* | [**aiEditorToolsCall**](#aieditortoolscall) | **POST** /api/2.0/ai/editor-tools/call | Call an editor tool |
 | *AIEditorToolsApi* | [**aiEditorToolsList**](#aieditortoolslist) | **GET** /api/2.0/ai/editor-tools/list | List editor tools |
 | *AIExportApi* | [**aiExportTextToDocx**](#aiexporttexttodocx) | **POST** /api/2.0/ai/text-to-docx | Start markdown → docx export |
-| *AIOpenAIPassthroughApi* | [**aiOpenaiChatCompletions**](#aiopenaichatcompletions) | **POST** /api/2.0/ai/openai/{profileId}/v1/chat/completions | OpenAI chat completions passthrough |
-| *AIOpenAIPassthroughApi* | [**aiOpenaiImagesGenerations**](#aiopenaiimagesgenerations) | **POST** /api/2.0/ai/openai/{profileId}/v1/images/generations | OpenAI image generation passthrough |
+| *AIOpenAIPassthroughApi* | [**aiOpenaiChatCompletions**](#aiopenaichatcompletions) | **POST** /api/2.0/ai/openai/\{profileId\}/v1/chat/completions | OpenAI chat completions passthrough |
+| *AIOpenAIPassthroughApi* | [**aiOpenaiImagesGenerations**](#aiopenaiimagesgenerations) | **POST** /api/2.0/ai/openai/\{profileId\}/v1/images/generations | OpenAI image generation passthrough |
 | *AIPreferencesApi* | [**aiPreferencesClearDeepMode**](#aipreferencescleardeepmode) | **DELETE** /api/2.0/ai/preferences/clear-deep-mode | Clear deep mode |
 | *AIPreferencesApi* | [**aiPreferencesGetDeepMode**](#aipreferencesgetdeepmode) | **GET** /api/2.0/ai/preferences/get-deep-mode | Get deep mode |
 | *AIPreferencesApi* | [**aiPreferencesGetReasoningLevel**](#aipreferencesgetreasoninglevel) | **GET** /api/2.0/ai/preferences/get-reasoning-level | Get reasoning level |
@@ -3057,7 +3057,7 @@ Returns one message by its ID, wherever it sits, without needing the thread it b
 
 List chat threads
 
-Lists the threads of a scope, most recently edited first, and searches their titles case-insensitively when `query` is given. Every parameter is optional: omitting `entityId` lists the global scope, and omitting `count` lets the engine apply its own page size. Pagination is by cursor, and the cursor is a JSON object passed as a string in the query - `{id: &lt;last thread id&gt;, lastEditDate: &lt;its date&gt;}` - taken from the last entry of the previous page. A cursor that is not valid JSON, or that lacks an `id`, is ignored rather than rejected, and the read silently starts from the first page again.
+Lists the threads of a scope, most recently edited first, and searches their titles case-insensitively when `query` is given. Every parameter is optional: omitting `entityId` lists the global scope, and omitting `count` lets the engine apply its own page size. Pagination is by cursor, and the cursor is a JSON object passed as a string in the query - `{id: <last thread id>, lastEditDate: <its date>}` - taken from the last entry of the previous page. A cursor that is not valid JSON, or that lacks an `id`, is ignored rather than rejected, and the read silently starts from the first page again.
 
 #### Parameters
 
@@ -3065,7 +3065,7 @@ Lists the threads of a scope, most recently edited first, and searches their tit
 |------------- | ------------- | ------------- | ------------- | -------------|
 | **entityId** | query | **String** | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | [optional] [example: 1234] |
 | **count** | query | **Integer** | The maximum number of items to return in one page. | [optional] [example: 20] |
-| **cursor** | query | **String** | The keyset pagination cursor: the JSON-encoded sort key of the last item already received. Omit for the first page. | [optional] [example: {"id":"11111111-1111-1111-1111-111111111111","lastEditDate":1767225600000}] |
+| **cursor** | query | **String** | The keyset pagination cursor: the JSON-encoded sort key of the last item already received. Omit for the first page. | [optional] [example: \{"id":"11111111-1111-1111-1111-111111111111","lastEditDate":1767225600000\}] |
 | **query** | query | **String** | The full-text query the thread list is filtered by. | [optional] [example: contract] |
 
 #### Responses
@@ -3146,7 +3146,7 @@ Reads the messages of one thread, oldest first, with the same string-encoded JSO
 |------------- | ------------- | ------------- | ------------- | -------------|
 | **threadId** | query | **String** | The chat thread identifier. | [required] [example: 11111111-1111-1111-1111-111111111111] |
 | **count** | query | **Integer** | The maximum number of items to return in one page. | [optional] [example: 20] |
-| **cursor** | query | **String** | The keyset pagination cursor: the JSON-encoded sort key of the last item already received. Omit for the first page. | [optional] [example: {"id":"11111111-1111-1111-1111-111111111111","lastEditDate":1767225600000}] |
+| **cursor** | query | **String** | The keyset pagination cursor: the JSON-encoded sort key of the last item already received. Omit for the first page. | [optional] [example: \{"id":"11111111-1111-1111-1111-111111111111","lastEditDate":1767225600000\}] |
 | **direction** | query | **String** | The order the message page is read in. Only desc turns the read around and pages back from the newest message; omit for the forward read. | [optional] [example: desc] |
 
 #### Responses
@@ -4282,8 +4282,8 @@ Shared body of the two streaming send endpoints (`sendWithStream` and its OpenAI
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **threadId** | **String** | Target thread; a new one is created (with an auto title) when omitted. | [optional] [example: 11111111-1111-1111-1111-111111111111] |
-| **userMessage** | [**AiThreadMessageLike**](#model-aithreadmessagelike) | The user turn to send. | [required] [example: {role=user, content=Summarise the attached contract.}] |
-| **actionArgs** | [**AiAiActionArgs**](#model-aiaiactionargs) | Per-request engine options: extra tools, reasoning, prompt override. | [optional] [example: {isReasoning=false}] |
+| **userMessage** | [**AiThreadMessageLike**](#model-aithreadmessagelike) | The user turn to send. | [required] [example: \{role=user, content=Summarise the attached contract.\}] |
+| **actionArgs** | [**AiAiActionArgs**](#model-aiaiactionargs) | Per-request engine options: extra tools, reasoning, prompt override. | [optional] [example: \{isReasoning=false\}] |
 | **entityId** | **String** | Optional entity (room) scope for profile resolution. | [optional] [example: 1234] |
 | **profileId** | **String** | Session-level profile override for this request only. | [optional] [example: 00000000-0000-0000-0000-000000000000] |
 
@@ -4321,8 +4321,8 @@ Identifies a pending tool call to resume — mirrors the library `ToolCallData` 
 | **threadId** | **String** | Thread the assistant message belongs to. | [required] [example: 11111111-1111-1111-1111-111111111111] |
 | **messageId** | **String** | Storage id of the assistant message holding the tool call. | [required] [example: 22222222-2222-2222-2222-222222222222] |
 | **idx** | **BigDecimal** | Index of the tool-call content part inside `message.content`. | [required] [example: 0] |
-| **message** | [**AiThreadMessageLike**](#model-aithreadmessagelike) | Snapshot of the assistant message at the time the tool call surfaced. | [required] [example: {role=assistant, content=}] |
-| **actionArgs** | [**AiAiActionArgs**](#model-aiaiactionargs) | Per-request engine options: extra tools, reasoning, prompt override. | [optional] [example: {isReasoning=false}] |
+| **message** | [**AiThreadMessageLike**](#model-aithreadmessagelike) | Snapshot of the assistant message at the time the tool call surfaced. | [required] [example: \{role=assistant, content=\}] |
+| **actionArgs** | [**AiAiActionArgs**](#model-aiaiactionargs) | Per-request engine options: extra tools, reasoning, prompt override. | [optional] [example: \{isReasoning=false\}] |
 | **entityId** | **String** | Optional entity (room) scope for profile resolution. | [optional] [example: 1234] |
 | **profileId** | **String** | Session-level profile override for this request only. | [optional] [example: 00000000-0000-0000-0000-000000000000] |
 
@@ -4477,7 +4477,7 @@ Input for creating a new profile — the same shape as `Profile` without the eng
 | **basedOn** | [**AiBuiltinProviderType**](#model-aibuiltinprovidertype) | Selects the response-format parser used by the `external` provider. Ignored for any other `providerType`.  Supported values are `openai`, `anthropic`, `mistral` and `openrouter`. Remaining values (`genai`, `stabilityai`, …) are accepted by the type but not yet implemented; passing one raises an error at request time. | [optional] [example: openai] [enum: anthropic, ollama, openai, openaicompatible, together, openrouter, genai, deepseek, xai, lm-studio, mistral, groq, zhipu, stabilityai, gpt4all, onlyoffice, external] |
 | **baseUrl** | **String** | Base URL of the provider API. | [required] [example: https://api.openai.com/v1] |
 | **key** | **String** | API key or token. Optional for local providers. | [optional] [example: sk-your-provider-api-key] |
-| **headers** | **Map** | Extra HTTP headers sent with every request to this provider. Merged into the SDK client's default headers; an explicit `Authorization` here wins over the one derived from `key`. Honoured by the OpenAI-family providers. | [optional] [example: {X-Organization=acme}] |
+| **headers** | **Map** | Extra HTTP headers sent with every request to this provider. Merged into the SDK client's default headers; an explicit `Authorization` here wins over the one derived from `key`. Honoured by the OpenAI-family providers. | [optional] [example: \{X-Organization=acme\}] |
 | **modelId** | **String** | Selected model ID within this provider. | [required] [example: gpt-4o] |
 | **reasoning** | **Boolean** | Whether extended thinking is enabled for this profile's model. | [optional] [example: false] |
 | **reasoningSupport** | [**AiReasoningSupport**](#model-aireasoningsupport) | Extended-thinking capabilities of the selected model as reported by the provider's catalogue at save time (see `Model.reasoningSupport`). When present the composer's Effort row follows it exactly; when absent the provider's id-based table answers. Hosts persist it with the rest of the profile. | [optional] |
@@ -4714,8 +4714,8 @@ One background file operation of the caller, as it stood when the answer was bui
 | **processed** | **String** | How many entries the operation has handled so far, written as a decimal number in a string. It counts items,  not percent, and stays behind `progress` on operations that walk into subfolders. | [required] [example: 12] [nullable] |
 | **finished** | **Boolean** | Whether the operation has stopped running. A finished operation is reported once and then dropped, so the next  read of the operation list no longer contains it. | [required] [example: true] |
 | **url** | **URI** (uri) | The address the packed archive can be downloaded from once a bulk download has finished. Empty for every other  kind of operation. | [optional] [example: https://portal.example.com/filehandler.ashx?action=bulk] [nullable] |
-| **files** | [**List**](#model-aifileentrybasedto) | The files the operation produced or moved, in the order it wrote them down. Empty while nothing has been  written yet and for a deletion, which reports no entries at all. | [optional] [example: [{id=10, title=document.docx}]] [nullable] |
-| **folders** | [**List**](#model-aifileentrybasedto) | The folders the operation produced or moved, in the order it wrote them down. Empty while nothing has been  written yet and for a deletion. | [optional] [example: [{id=20, title=Reports}]] [nullable] |
+| **files** | [**List**](#model-aifileentrybasedto) | The files the operation produced or moved, in the order it wrote them down. Empty while nothing has been  written yet and for a deletion, which reports no entries at all. | [optional] [example: [\{id=10, title=document.docx\}]] [nullable] |
+| **folders** | [**List**](#model-aifileentrybasedto) | The folders the operation produced or moved, in the order it wrote them down. Empty while nothing has been  written yet and for a deletion. | [optional] [example: [\{id=20, title=Reports\}]] [nullable] |
 | **status** | [**AiDistributedTaskStatus**](#model-aidistributedtaskstatus) | The state of the background task behind the operation, which tells a task that was cancelled or that crashed  from one that ran to its end. | [optional] [enum: 0, 1, 2, 3, 4] |
 
 
@@ -4768,8 +4768,8 @@ One page of the contents of a folder or of a section: its entries split into fil
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **files** | [**List**](#model-aifileentrybasedto) | The file entries of this page. It is empty when the folder holds no files, when the filters matched none of  them, and in the sections that list rooms only. | [optional] [example: [{id=10, title=document.docx}]] [nullable] |
-| **folders** | [**List**](#model-aifileentrybasedto) | The folder entries of this page. In a section of rooms these entries are the rooms themselves, which is where  their type, tags, logo and quota are read from. | [optional] [example: [{id=20, title=My Folder}]] [nullable] |
+| **files** | [**List**](#model-aifileentrybasedto) | The file entries of this page. It is empty when the folder holds no files, when the filters matched none of  them, and in the sections that list rooms only. | [optional] [example: [\{id=10, title=document.docx\}]] [nullable] |
+| **folders** | [**List**](#model-aifileentrybasedto) | The folder entries of this page. In a section of rooms these entries are the rooms themselves, which is where  their type, tags, logo and quota are read from. | [optional] [example: [\{id=20, title=My Folder\}]] [nullable] |
 | **current** | [**AiFolderDtoInteger**](#model-aifolderdtointeger) | The folder or section the page was read from, with its own title, type and access rights. It describes the  container, not the entries, and is filled in even when the page is empty. | [optional] |
 | **pathParts** | **oas_any_type_not_mapped** |  | [required] [nullable] |
 | **startIndex** | **Integer** (int32) | The position of the first entry of this page in the whole result, echoing the requested start index. Add the  number of entries received to it to ask for the next page. | [optional] [example: 0] |
@@ -5141,7 +5141,7 @@ Complete AI provider + model configuration saved by the user. Profiles are the p
 | **basedOn** | [**AiBuiltinProviderType**](#model-aibuiltinprovidertype) | Selects the response-format parser used by the `external` provider. Ignored for any other `providerType`.  Supported values are `openai`, `anthropic`, `mistral` and `openrouter`. Remaining values (`genai`, `stabilityai`, …) are accepted by the type but not yet implemented; passing one raises an error at request time. | [optional] [example: openai] [enum: anthropic, ollama, openai, openaicompatible, together, openrouter, genai, deepseek, xai, lm-studio, mistral, groq, zhipu, stabilityai, gpt4all, onlyoffice, external] |
 | **baseUrl** | **String** | Base URL of the provider API. | [required] [example: https://api.openai.com/v1] |
 | **key** | **String** | API key or token. Optional for local providers. | [optional] [example: sk-your-provider-api-key] |
-| **headers** | **Map** | Extra HTTP headers sent with every request to this provider. Merged into the SDK client's default headers; an explicit `Authorization` here wins over the one derived from `key`. Honoured by the OpenAI-family providers. | [optional] [example: {X-Organization=acme}] |
+| **headers** | **Map** | Extra HTTP headers sent with every request to this provider. Merged into the SDK client's default headers; an explicit `Authorization` here wins over the one derived from `key`. Honoured by the OpenAI-family providers. | [optional] [example: \{X-Organization=acme\}] |
 | **modelId** | **String** | Selected model ID within this provider. | [required] [example: gpt-4o] |
 | **reasoning** | **Boolean** | Whether extended thinking is enabled for this profile's model. | [optional] [example: false] |
 | **reasoningSupport** | [**AiReasoningSupport**](#model-aireasoningsupport) | Extended-thinking capabilities of the selected model as reported by the provider's catalogue at save time (see `Model.reasoningSupport`). When present the composer's Effort row follows it exactly; when absent the provider's id-based table answers. Hosts persist it with the rest of the profile. | [optional] |
@@ -5298,7 +5298,7 @@ Descriptor for a tool exposed by an MCP server.
 |------------ | ------------- | ------------- | -------------|
 | **name** | **String** | Tool name as registered on the MCP server (e.g. `web_search`, `insert_text`). | [required] [example: docspace_get_folder] |
 | **description** | **String** | Human-readable description shown to the AI model and in the tools list UI. | [required] [example: Read the contents of a DocSpace folder.] |
-| **inputSchema** | **Object** | JSON Schema describing the tool's input parameters. | [required] [example: {type=object, properties={folderId={type=string}}, required=[folderId]}] |
+| **inputSchema** | **Object** | JSON Schema describing the tool's input parameters. | [required] [example: \{type=object, properties=\{folderId=\{type=string\}\}, required=[folderId]\}] |
 | **enabled** | **Boolean** | Whether this tool is currently enabled. Disabled tools are hidden from the AI model. | [optional] [example: true] |
 | **serverType** | **String** | Server type (MCP server name / host tool group id) this tool belongs to — the key the persisted disabled map is stored under. Set by the source that enumerated the tool, so a caller-supplied tool can still be attributed to its group after being flattened into a single list: that is what lets the engine apply the disabled map to `actionArgs.tools` instead of trusting the caller to pre-filter. Wire-serializable, so it survives a remote (server-side) engine. | [optional] [example: docspace] |
 | **requireApproval** | **Boolean** | Whether the consumer must show an approval dialog before this tool runs. The engine reads it when deciding the `autoAllow` flag on a `tool-call-pending` event: `requireApproval === false` auto-allows the call (no dialog), `true` always prompts. `undefined` leaves the decision to the persisted always-allow list alone — so MCP / custom-server tools (which never set it) keep prompting as before, while host tools opt into auto-allow by default. Wire-serializable, so it survives a remote (server-side) engine. | [optional] [example: false] |
@@ -5338,7 +5338,7 @@ A single chat message as it travels on the wire.
 | **content** | [**AiThreadMessageLike_content**](#model-aithreadmessagelikecontent) |  | [required] |
 | **createdAt** | **String** | Creation timestamp, ISO-8601 on the wire. | [optional] [example: 2026-01-01T00:00:00.000Z] |
 | **status** | [**AiThreadMessageLike_status**](#model-aithreadmessagelikestatus) |  | [optional] |
-| **metadata** | **Object** | Arbitrary per-message metadata. | [optional] [example: {}] |
+| **metadata** | **Object** | Arbitrary per-message metadata. | [optional] [example: \{\}] |
 | **attachments** | **List** | Attachments linked to the message. | [optional] [example: [55555555-5555-5555-5555-555555555555]] |
 
 
@@ -5443,7 +5443,7 @@ Web-search provider configuration. Credentials and provider selection for the bu
 | **key** | **String** | API key for the provider. Optional for self-hosted or keyless setups. | [optional] [example: your-web-search-api-key] |
 | **baseUrl** | **String** | Optional override for the provider's base URL. | [optional] [example: https://api.exa.ai] |
 | **isCloudProvider** | **Boolean** | Whether this provider is cloud-hosted (vs. self-hosted). | [optional] [example: true] |
-| **headers** | **Map** | Extra HTTP headers sent with each request to the ONLYOFFICE / cloud backend (e.g. `X-Tenant`). Merged after the derived `Authorization` header, so a custom header of the same name wins. | [optional] [example: {}] |
+| **headers** | **Map** | Extra HTTP headers sent with each request to the ONLYOFFICE / cloud backend (e.g. `X-Tenant`). Merged after the derived `Authorization` header, so a custom header of the same name wins. | [optional] [example: \{\}] |
 
 
 ### Model AiWebSearchMutationResult
@@ -5673,7 +5673,7 @@ A file attachment draft to persist.
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **name** | **String** | Name of the tool to run, as listed by the tools endpoint. A name that is unknown or excluded from the editor is rejected with 400. | [required] [example: docspace_get_folder] |
-| **arguments** | **Map** | Arguments for the tool, shaped by that tool's own input schema. Treated as empty when it is not an object. | [optional] [example: {"folderId":"1234"}] |
+| **arguments** | **Map** | Arguments for the tool, shaped by that tool's own input schema. Treated as empty when it is not an object. | [optional] [example: \{"folderId":"1234"\}] |
 | **entityId** | **String** | Room the call is scoped to. Left out for a portal-wide call. | [optional] [example: 1234] |
 
 

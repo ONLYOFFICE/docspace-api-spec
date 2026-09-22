@@ -1,7 +1,7 @@
 # ONLYOFFICE DocSpace Backup API
 
 The browsable version of this reference, with a request builder and code samples, is published at
-<https://api.onlyoffice.com/docspace/api-backend/usage-api/>.
+[https://api.onlyoffice.com/docspace/api-backend/usage-api/](https://api.onlyoffice.com/docspace/api-backend/usage-api/).
 
 All URIs are relative to *https://yourportal.onlyoffice.com*, where the host is the address of your DocSpace instance.
 
@@ -11,7 +11,7 @@ All URIs are relative to *https://yourportal.onlyoffice.com*, where the host is 
 |------------ | ------------- | ------------- | -------------|
 | *BackupApi* | [**cancelBackup**](#cancelbackup) | **POST** /api/2.0/backup/cancelbackup | Cancel the running backup |
 | *BackupApi* | [**createBackupSchedule**](#createbackupschedule) | **POST** /api/2.0/backup/createbackupschedule | Create the backup schedule |
-| *BackupApi* | [**deleteBackup**](#deletebackup) | **DELETE** /api/2.0/backup/deletebackup/{id} | Delete the backup |
+| *BackupApi* | [**deleteBackup**](#deletebackup) | **DELETE** /api/2.0/backup/deletebackup/\{id\} | Delete the backup |
 | *BackupApi* | [**deleteBackupHistory**](#deletebackuphistory) | **DELETE** /api/2.0/backup/deletebackuphistory | Delete the backup history |
 | *BackupApi* | [**deleteBackupSchedule**](#deletebackupschedule) | **DELETE** /api/2.0/backup/deletebackupschedule | Delete the backup schedule |
 | *BackupApi* | [**getBackupHistory**](#getbackuphistory) | **GET** /api/2.0/backup/getbackuphistory | Get the backup history |
@@ -631,7 +631,7 @@ The request parameters for starting a backup.
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **storageType** | [**BackupStorageType**](#model-backupstoragetype) | The storage the archive is written to. It defaults to `Documents`, and it decides which keys  `storageParams` has to carry. | [optional] [enum: 0, 1, 2, 3, 4, 5] |
-| **storageParams** | [**List**](#model-itemkeyvaluepairobjectobject) | The settings of the chosen storage, as an array of key and value pairs. `Documents` needs an integer  `folderId`, `ThridpartyDocuments` a provider-specific non-integer `folderId`, `Local` a `filePath`,  `ThirdPartyConsumer` a `module` plus the settings of that consumer, and `DataStore` none. The  `subdir` key is added by the operation itself and must not be sent. | [optional] [example: [{key=folderId, value=1234}]] [nullable] |
+| **storageParams** | [**List**](#model-itemkeyvaluepairobjectobject) | The settings of the chosen storage, as an array of key and value pairs. `Documents` needs an integer  `folderId`, `ThridpartyDocuments` a provider-specific non-integer `folderId`, `Local` a `filePath`,  `ThirdPartyConsumer` a `module` plus the settings of that consumer, and `DataStore` none. The  `subdir` key is added by the operation itself and must not be sent. | [optional] [example: [\{key=folderId, value=1234\}]] [nullable] |
 | **dump** | **Boolean** | Backs up the whole server rather than this one portal. It requires the space access permission and  works on a standalone installation only. | [optional] [example: false] |
 
 
@@ -720,7 +720,7 @@ The request parameters for restoring a portal from a backup.
 |------------ | ------------- | ------------- | -------------|
 | **backupId** | **String** | The ID of the backup to restore from, as listed by `GET api/2.0/backup/getbackuphistory`. Send  anything that is not a GUID to restore from a file given by `storageParams` instead; an all-zero GUID  selects neither, because it parses as a GUID and then matches no record. | [required] [example: 11111111-1111-1111-1111-111111111111] [nullable] |
 | **storageType** | [**BackupStorageType**](#model-backupstoragetype) | The storage the archive is read from. It defaults to `Documents` and is only used when `backupId` is  not a GUID, because a known backup carries the storage of its own record. | [optional] [enum: 0, 1, 2, 3, 4, 5] |
-| **storageParams** | [**List**](#model-itemkeyvaluepairobjectobject) | The location of the archive, as an array of key and value pairs. The key read here is `filePath` -  not the `folderId` a backup is started with - and it holds a file ID for `Documents`, a  provider-specific file ID for `ThridpartyDocuments` and a path on the server for `Local`. It is only  used when `backupId` is not a GUID. | [optional] [example: [{key=filePath, value=1234}]] [nullable] |
+| **storageParams** | [**List**](#model-itemkeyvaluepairobjectobject) | The location of the archive, as an array of key and value pairs. The key read here is `filePath` -  not the `folderId` a backup is started with - and it holds a file ID for `Documents`, a  provider-specific file ID for `ThridpartyDocuments` and a path on the server for `Local`. It is only  used when `backupId` is not a GUID. | [optional] [example: [\{key=filePath, value=1234\}]] [nullable] |
 | **notify** | **Boolean** | Chooses who is emailed when the restoring starts and when it finishes: every active user of the  portal when true, and its owner alone when false. Mail goes only to accounts that have been  activated, so this decides the audience rather than whether anybody is notified at all. | [optional] [example: true] |
 | **dump** | **Boolean** | Restores the whole server rather than this one portal. It requires the space access permission. | [optional] [example: false] |
 
@@ -731,7 +731,7 @@ The request parameters for setting the backup schedule.
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **storageType** | [**BackupStorageType**](#model-backupstoragetype) | The storage the scheduled archives are written to. It defaults to `Documents`, and it decides which  keys `storageParams` has to carry. | [optional] [enum: 0, 1, 2, 3, 4, 5] |
-| **storageParams** | [**List**](#model-itemkeyvaluepairobjectobject) | The settings of the chosen storage, as an array of key and value pairs. `Documents` and  `ThridpartyDocuments` need `folderId`, `Local` needs `filePath`, `ThirdPartyConsumer` needs `module`  plus the settings of that consumer, and `DataStore` needs none. | [optional] [example: [{key=folderId, value=1234}]] [nullable] |
+| **storageParams** | [**List**](#model-itemkeyvaluepairobjectobject) | The settings of the chosen storage, as an array of key and value pairs. `Documents` and  `ThridpartyDocuments` need `folderId`, `Local` needs `filePath`, `ThirdPartyConsumer` needs `module`  plus the settings of that consumer, and `DataStore` needs none. | [optional] [example: [\{key=folderId, value=1234\}]] [nullable] |
 | **backupsStored** | **Integer** (int32) | The number of scheduled copies to keep, from 1 to 30. It defaults to 1, and only the copies this  schedule creates are counted and removed - archives started by hand are left alone. | [optional] [example: 5] [nullable] |
 | **cronParams** | [**Cron**](#model-cron) | When the backup runs. It is required: a request without it fails rather than falling back to a  default. | [optional] |
 | **dump** | **Boolean** | Schedules a backup of the whole server rather than of this one portal. It requires the space access  permission and works on a standalone installation only. | [optional] [example: false] |
@@ -905,7 +905,7 @@ The backup schedule of a portal.
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **storageType** | [**BackupStorageType**](#model-backupstoragetype) | The storage the scheduled archives are written to, reported as a number rather than as the name the  schedule was created with. | [required] [enum: 0, 1, 2, 3, 4, 5] |
-| **storageParams** | **Map** | The settings of the storage, as an object keyed by parameter name - not as the array of key and value  pairs the schedule was created with, so it cannot be sent back unchanged. For every storage type  except `ThirdPartyConsumer` the `folderId` key is built from the stored base path. | [required] [example: {folderId=1234}] |
+| **storageParams** | **Map** | The settings of the storage, as an object keyed by parameter name - not as the array of key and value  pairs the schedule was created with, so it cannot be sent back unchanged. For every storage type  except `ThirdPartyConsumer` the `folderId` key is built from the stored base path. | [required] [example: \{folderId=1234\}] |
 | **cronParams** | [**CronParams**](#model-cronparams) | When the backup runs, read back from the stored cron expression. `day` is 0 for a daily schedule,  because a daily one has no day. | [required] |
 | **backupsStored** | **Integer** (int32) | The number of scheduled copies kept. It is null, not 0, when the schedule keeps an unlimited number. | [optional] [example: 5] [nullable] |
 | **lastBackupTime** | **Date** (date-time) | The date and time the schedule last ran at. It is `0001-01-01T00:00:00` until the schedule has run  for the first time. | [required] [example: 2026-01-01T00:00:00Z] |

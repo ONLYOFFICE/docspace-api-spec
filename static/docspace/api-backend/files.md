@@ -1,7 +1,7 @@
 # ONLYOFFICE DocSpace Files API
 
 The browsable version of this reference, with a request builder and code samples, is published at
-<https://api.onlyoffice.com/docspace/api-backend/usage-api/>.
+[https://api.onlyoffice.com/docspace/api-backend/usage-api/](https://api.onlyoffice.com/docspace/api-backend/usage-api/).
 
 All URIs are relative to *https://yourportal.onlyoffice.com*, where the host is the address of your DocSpace instance.
 
@@ -9,113 +9,113 @@ All URIs are relative to *https://yourportal.onlyoffice.com*, where the host is 
 
 | Class | Method | HTTP request | Description |
 |------------ | ------------- | ------------- | -------------|
-| *FilesFilesApi* | [**addFileToRecent**](#addfiletorecent) | **POST** /api/2.0/files/file/{fileId}/recent | Add a file to Recent |
+| *FilesFilesApi* | [**addFileToRecent**](#addfiletorecent) | **POST** /api/2.0/files/file/\{fileId\}/recent | Add a file to Recent |
 | *FilesFilesApi* | [**addTemplates**](#addtemplates) | **POST** /api/2.0/files/templates | Add template files |
-| *FilesFilesApi* | [**changeVersionHistory**](#changeversionhistory) | **PUT** /api/2.0/files/file/{fileId}/history | Change version history |
-| *FilesFilesApi* | [**checkFillFormDraft**](#checkfillformdraft) | **POST** /api/2.0/files/masterform/{fileId}/checkfillformdraft | Open a form draft for filling |
-| *FilesFilesApi* | [**copyFileAs**](#copyfileas) | **POST** /api/2.0/files/file/{fileId}/copyas | Copy a file |
-| *FilesFilesApi* | [**createEditSession**](#createeditsession) | **POST** /api/2.0/files/file/{fileId}/edit_session | Create the editing session |
-| *FilesFilesApi* | [**createFile**](#createfile) | **POST** /api/2.0/files/{folderId}/file | Create a file |
+| *FilesFilesApi* | [**changeVersionHistory**](#changeversionhistory) | **PUT** /api/2.0/files/file/\{fileId\}/history | Change version history |
+| *FilesFilesApi* | [**checkFillFormDraft**](#checkfillformdraft) | **POST** /api/2.0/files/masterform/\{fileId\}/checkfillformdraft | Open a form draft for filling |
+| *FilesFilesApi* | [**copyFileAs**](#copyfileas) | **POST** /api/2.0/files/file/\{fileId\}/copyas | Copy a file |
+| *FilesFilesApi* | [**createEditSession**](#createeditsession) | **POST** /api/2.0/files/file/\{fileId\}/edit_session | Create the editing session |
+| *FilesFilesApi* | [**createFile**](#createfile) | **POST** /api/2.0/files/\{folderId\}/file | Create a file |
 | *FilesFilesApi* | [**createFileInMyDocuments**](#createfileinmydocuments) | **POST** /api/2.0/files/@my/file | Create a file in My documents |
-| *FilesFilesApi* | [**createFilePrimaryExternalLink**](#createfileprimaryexternallink) | **POST** /api/2.0/files/file/{id}/link | Create the file primary external link |
-| *FilesFilesApi* | [**createHtmlFile**](#createhtmlfile) | **POST** /api/2.0/files/{folderId}/html | Create an HTML file |
+| *FilesFilesApi* | [**createFilePrimaryExternalLink**](#createfileprimaryexternallink) | **POST** /api/2.0/files/file/\{id\}/link | Create the file primary external link |
+| *FilesFilesApi* | [**createHtmlFile**](#createhtmlfile) | **POST** /api/2.0/files/\{folderId\}/html | Create an HTML file |
 | *FilesFilesApi* | [**createHtmlFileInMyDocuments**](#createhtmlfileinmydocuments) | **POST** /api/2.0/files/@my/html | Create an HTML file in My documents |
-| *FilesFilesApi* | [**createTextFile**](#createtextfile) | **POST** /api/2.0/files/{folderId}/text | Create a text file |
+| *FilesFilesApi* | [**createTextFile**](#createtextfile) | **POST** /api/2.0/files/\{folderId\}/text | Create a text file |
 | *FilesFilesApi* | [**createTextFileInMyDocuments**](#createtextfileinmydocuments) | **POST** /api/2.0/files/@my/text | Create a text file in My documents |
 | *FilesFilesApi* | [**createThumbnails**](#createthumbnails) | **POST** /api/2.0/files/thumbnails | Queue file thumbnails |
-| *FilesFilesApi* | [**deleteFile**](#deletefile) | **DELETE** /api/2.0/files/file/{fileId} | Delete a file |
+| *FilesFilesApi* | [**deleteFile**](#deletefile) | **DELETE** /api/2.0/files/file/\{fileId\} | Delete a file |
 | *FilesFilesApi* | [**deleteRecent**](#deleterecent) | **DELETE** /api/2.0/files/recent | Delete recent files |
 | *FilesFilesApi* | [**deleteTemplates**](#deletetemplates) | **DELETE** /api/2.0/files/templates | Delete template files |
-| *FilesFilesApi* | [**generateXlsx**](#generatexlsx) | **POST** /api/2.0/files/file/{fileId}/xlsx | Generate a form answers report |
-| *FilesFilesApi* | [**getAllFormRoles**](#getallformroles) | **GET** /api/2.0/files/file/{fileId}/formroles | Get form roles |
-| *FilesFilesApi* | [**getEditDiffUrl**](#geteditdiffurl) | **GET** /api/2.0/files/file/{fileId}/edit/diff | Get changes URL |
-| *FilesFilesApi* | [**getEditHistory**](#getedithistory) | **GET** /api/2.0/files/file/{fileId}/edit/history | Get version history |
-| *FilesFilesApi* | [**getEncryptionInfo**](#getencryptioninfo) | **GET** /api/2.0/files/{fileId}/access | Get file encryption information |
-| *FilesFilesApi* | [**getFileHistory**](#getfilehistory) | **GET** /api/2.0/files/file/{fileId}/log | Get file history |
-| *FilesFilesApi* | [**getFileInfo**](#getfileinfo) | **GET** /api/2.0/files/file/{fileId} | Get file information |
-| *FilesFilesApi* | [**getFileLinks**](#getfilelinks) | **GET** /api/2.0/files/file/{id}/links | Get file external links |
-| *FilesFilesApi* | [**getFilePrimaryExternalLink**](#getfileprimaryexternallink) | **GET** /api/2.0/files/file/{id}/link | Get the file primary external link |
-| *FilesFilesApi* | [**getFileVersionInfo**](#getfileversioninfo) | **GET** /api/2.0/files/file/{fileId}/history | Get file versions |
+| *FilesFilesApi* | [**generateXlsx**](#generatexlsx) | **POST** /api/2.0/files/file/\{fileId\}/xlsx | Generate a form answers report |
+| *FilesFilesApi* | [**getAllFormRoles**](#getallformroles) | **GET** /api/2.0/files/file/\{fileId\}/formroles | Get form roles |
+| *FilesFilesApi* | [**getEditDiffUrl**](#geteditdiffurl) | **GET** /api/2.0/files/file/\{fileId\}/edit/diff | Get changes URL |
+| *FilesFilesApi* | [**getEditHistory**](#getedithistory) | **GET** /api/2.0/files/file/\{fileId\}/edit/history | Get version history |
+| *FilesFilesApi* | [**getEncryptionInfo**](#getencryptioninfo) | **GET** /api/2.0/files/\{fileId\}/access | Get file encryption information |
+| *FilesFilesApi* | [**getFileHistory**](#getfilehistory) | **GET** /api/2.0/files/file/\{fileId\}/log | Get file history |
+| *FilesFilesApi* | [**getFileInfo**](#getfileinfo) | **GET** /api/2.0/files/file/\{fileId\} | Get file information |
+| *FilesFilesApi* | [**getFileLinks**](#getfilelinks) | **GET** /api/2.0/files/file/\{id\}/links | Get file external links |
+| *FilesFilesApi* | [**getFilePrimaryExternalLink**](#getfileprimaryexternallink) | **GET** /api/2.0/files/file/\{id\}/link | Get the file primary external link |
+| *FilesFilesApi* | [**getFileVersionInfo**](#getfileversioninfo) | **GET** /api/2.0/files/file/\{fileId\}/history | Get file versions |
 | *FilesFilesApi* | [**getFillResult**](#getfillresult) | **GET** /api/2.0/files/file/fillresult | Get form-filling result |
-| *FilesFilesApi* | [**getFormSubmissions**](#getformsubmissions) | **GET** /api/2.0/files/file/{fileId}/submissions | Get form submission results |
-| *FilesFilesApi* | [**getPresignedFileUri**](#getpresignedfileuri) | **GET** /api/2.0/files/file/{fileId}/presigned | Get a signed download address |
-| *FilesFilesApi* | [**getPresignedUri**](#getpresigneduri) | **GET** /api/2.0/files/file/{fileId}/presigneduri | Get file download link |
-| *FilesFilesApi* | [**getProtectedFileUsers**](#getprotectedfileusers) | **GET** /api/2.0/files/file/{fileId}/protectusers | Get users for document protection |
+| *FilesFilesApi* | [**getFormSubmissions**](#getformsubmissions) | **GET** /api/2.0/files/file/\{fileId\}/submissions | Get form submission results |
+| *FilesFilesApi* | [**getPresignedFileUri**](#getpresignedfileuri) | **GET** /api/2.0/files/file/\{fileId\}/presigned | Get a signed download address |
+| *FilesFilesApi* | [**getPresignedUri**](#getpresigneduri) | **GET** /api/2.0/files/file/\{fileId\}/presigneduri | Get file download link |
+| *FilesFilesApi* | [**getProtectedFileUsers**](#getprotectedfileusers) | **GET** /api/2.0/files/file/\{fileId\}/protectusers | Get users for document protection |
 | *FilesFilesApi* | [**getReferenceData**](#getreferencedata) | **POST** /api/2.0/files/file/referencedata | Resolve a spreadsheet reference |
-| *FilesFilesApi* | [**getXlsx**](#getxlsx) | **GET** /api/2.0/files/file/{fileId}/xlsx | Get form report generation status |
-| *FilesFilesApi* | [**isFormPDF**](#isformpdf) | **GET** /api/2.0/files/file/{fileId}/isformpdf | Check the PDF file |
-| *FilesFilesApi* | [**lockFile**](#lockfile) | **PUT** /api/2.0/files/file/{fileId}/lock | Lock a file |
-| *FilesFilesApi* | [**manageFormFilling**](#manageformfilling) | **PUT** /api/2.0/files/file/{fileId}/manageformfilling | Perform form filling action |
-| *FilesFilesApi* | [**openEditFile**](#openeditfile) | **GET** /api/2.0/files/file/{fileId}/openedit | Get the editor configuration |
-| *FilesFilesApi* | [**restoreFileVersion**](#restorefileversion) | **POST** /api/2.0/files/file/{fileId}/restoreversion | Restore a file version |
-| *FilesFilesApi* | [**saveEditingFileFromForm**](#saveeditingfilefromform) | **PUT** /api/2.0/files/file/{fileId}/saveediting | Save edited file content |
-| *FilesFilesApi* | [**saveFileAsPdf**](#savefileaspdf) | **POST** /api/2.0/files/file/{id}/saveaspdf | Save a file as PDF |
-| *FilesFilesApi* | [**saveFormRoleMapping**](#saveformrolemapping) | **POST** /api/2.0/files/file/{fileId}/formrolemapping | Save form role mapping |
-| *FilesFilesApi* | [**setCustomFilterTag**](#setcustomfiltertag) | **PUT** /api/2.0/files/file/{fileId}/customfilter | Set the Custom Filter editing mode |
-| *FilesFilesApi* | [**setEncryptionInfo**](#setencryptioninfo) | **PUT** /api/2.0/files/{fileId}/access | Set file encryption information |
-| *FilesFilesApi* | [**setFileExternalLink**](#setfileexternallink) | **PUT** /api/2.0/files/file/{id}/links | Set a file external link |
-| *FilesFilesApi* | [**setFileOrder**](#setfileorder) | **PUT** /api/2.0/files/{fileId}/order | Set file order |
+| *FilesFilesApi* | [**getXlsx**](#getxlsx) | **GET** /api/2.0/files/file/\{fileId\}/xlsx | Get form report generation status |
+| *FilesFilesApi* | [**isFormPDF**](#isformpdf) | **GET** /api/2.0/files/file/\{fileId\}/isformpdf | Check the PDF file |
+| *FilesFilesApi* | [**lockFile**](#lockfile) | **PUT** /api/2.0/files/file/\{fileId\}/lock | Lock a file |
+| *FilesFilesApi* | [**manageFormFilling**](#manageformfilling) | **PUT** /api/2.0/files/file/\{fileId\}/manageformfilling | Perform form filling action |
+| *FilesFilesApi* | [**openEditFile**](#openeditfile) | **GET** /api/2.0/files/file/\{fileId\}/openedit | Get the editor configuration |
+| *FilesFilesApi* | [**restoreFileVersion**](#restorefileversion) | **POST** /api/2.0/files/file/\{fileId\}/restoreversion | Restore a file version |
+| *FilesFilesApi* | [**saveEditingFileFromForm**](#saveeditingfilefromform) | **PUT** /api/2.0/files/file/\{fileId\}/saveediting | Save edited file content |
+| *FilesFilesApi* | [**saveFileAsPdf**](#savefileaspdf) | **POST** /api/2.0/files/file/\{id\}/saveaspdf | Save a file as PDF |
+| *FilesFilesApi* | [**saveFormRoleMapping**](#saveformrolemapping) | **POST** /api/2.0/files/file/\{fileId\}/formrolemapping | Save form role mapping |
+| *FilesFilesApi* | [**setCustomFilterTag**](#setcustomfiltertag) | **PUT** /api/2.0/files/file/\{fileId\}/customfilter | Set the Custom Filter editing mode |
+| *FilesFilesApi* | [**setEncryptionInfo**](#setencryptioninfo) | **PUT** /api/2.0/files/\{fileId\}/access | Set file encryption information |
+| *FilesFilesApi* | [**setFileExternalLink**](#setfileexternallink) | **PUT** /api/2.0/files/file/\{id\}/links | Set a file external link |
+| *FilesFilesApi* | [**setFileOrder**](#setfileorder) | **PUT** /api/2.0/files/\{fileId\}/order | Set file order |
 | *FilesFilesApi* | [**setFilesOrder**](#setfilesorder) | **PUT** /api/2.0/files/order | Set order of files |
-| *FilesFilesApi* | [**startEditFile**](#starteditfile) | **POST** /api/2.0/files/file/{fileId}/startedit | Open an editing session |
-| *FilesFilesApi* | [**startFillingFile**](#startfillingfile) | **PUT** /api/2.0/files/file/{fileId}/startfilling | Start filling a form |
-| *FilesFilesApi* | [**toggleFileFavorite**](#togglefilefavorite) | **GET** /api/2.0/files/favorites/{fileId} | Set the file favorite status |
-| *FilesFilesApi* | [**trackEditFile**](#trackeditfile) | **GET** /api/2.0/files/file/{fileId}/trackeditfile | Track an editing session |
-| *FilesFilesApi* | [**updateFile**](#updatefile) | **PUT** /api/2.0/files/file/{fileId} | Update a file |
-| *FilesFoldersApi* | [**checkUpload**](#checkupload) | **POST** /api/2.0/files/{folderId}/upload/check | Check for upload conflicts |
-| *FilesFoldersApi* | [**createFolder**](#createfolder) | **POST** /api/2.0/files/folder/{folderId} | Create a folder |
-| *FilesFoldersApi* | [**createFolderPrimaryExternalLink**](#createfolderprimaryexternallink) | **POST** /api/2.0/files/folder/{id}/link | Create the folder primary external link |
-| *FilesFoldersApi* | [**createReportFolderHistory**](#createreportfolderhistory) | **POST** /api/2.0/files/folder/{folderId}/log/report | Start the folder history report generation |
-| *FilesFoldersApi* | [**deleteFolder**](#deletefolder) | **DELETE** /api/2.0/files/folder/{folderId} | Delete a folder |
-| *FilesFoldersApi* | [**generateXlsxByFolder**](#generatexlsxbyfolder) | **POST** /api/2.0/files/folder/{folderId}/xlsx | Generate XLSX report by folder |
+| *FilesFilesApi* | [**startEditFile**](#starteditfile) | **POST** /api/2.0/files/file/\{fileId\}/startedit | Open an editing session |
+| *FilesFilesApi* | [**startFillingFile**](#startfillingfile) | **PUT** /api/2.0/files/file/\{fileId\}/startfilling | Start filling a form |
+| *FilesFilesApi* | [**toggleFileFavorite**](#togglefilefavorite) | **GET** /api/2.0/files/favorites/\{fileId\} | Set the file favorite status |
+| *FilesFilesApi* | [**trackEditFile**](#trackeditfile) | **GET** /api/2.0/files/file/\{fileId\}/trackeditfile | Track an editing session |
+| *FilesFilesApi* | [**updateFile**](#updatefile) | **PUT** /api/2.0/files/file/\{fileId\} | Update a file |
+| *FilesFoldersApi* | [**checkUpload**](#checkupload) | **POST** /api/2.0/files/\{folderId\}/upload/check | Check for upload conflicts |
+| *FilesFoldersApi* | [**createFolder**](#createfolder) | **POST** /api/2.0/files/folder/\{folderId\} | Create a folder |
+| *FilesFoldersApi* | [**createFolderPrimaryExternalLink**](#createfolderprimaryexternallink) | **POST** /api/2.0/files/folder/\{id\}/link | Create the folder primary external link |
+| *FilesFoldersApi* | [**createReportFolderHistory**](#createreportfolderhistory) | **POST** /api/2.0/files/folder/\{folderId\}/log/report | Start the folder history report generation |
+| *FilesFoldersApi* | [**deleteFolder**](#deletefolder) | **DELETE** /api/2.0/files/folder/\{folderId\} | Delete a folder |
+| *FilesFoldersApi* | [**generateXlsxByFolder**](#generatexlsxbyfolder) | **POST** /api/2.0/files/folder/\{folderId\}/xlsx | Generate XLSX report by folder |
 | *FilesFoldersApi* | [**getFavoritesFolder**](#getfavoritesfolder) | **GET** /api/2.0/files/@favorites | Get the Favorites section |
 | *FilesFoldersApi* | [**getFilesUsedSpace**](#getfilesusedspace) | **GET** /api/2.0/files/filesusedspace | Get used space of files |
-| *FilesFoldersApi* | [**getFolder**](#getfolder) | **GET** /api/2.0/files/{folderId}/formfilter | Get folder form filter |
-| *FilesFoldersApi* | [**getFolderByFolderId**](#getfolderbyfolderid) | **GET** /api/2.0/files/{folderId} | Get a folder by ID |
-| *FilesFoldersApi* | [**getFolderHistory**](#getfolderhistory) | **GET** /api/2.0/files/folder/{folderId}/log | Get folder history |
-| *FilesFoldersApi* | [**getFolderInfo**](#getfolderinfo) | **GET** /api/2.0/files/folder/{folderId} | Get folder information |
-| *FilesFoldersApi* | [**getFolderLinks**](#getfolderlinks) | **GET** /api/2.0/files/folder/{id}/links | Get folder external links |
-| *FilesFoldersApi* | [**getFolderPath**](#getfolderpath) | **GET** /api/2.0/files/folder/{folderId}/path | Get the folder path |
-| *FilesFoldersApi* | [**getFolderPrimaryExternalLink**](#getfolderprimaryexternallink) | **GET** /api/2.0/files/folder/{id}/link | Get the folder primary external link |
-| *FilesFoldersApi* | [**getFolders**](#getfolders) | **GET** /api/2.0/files/{folderId}/subfolders | Get subfolders |
+| *FilesFoldersApi* | [**getFolder**](#getfolder) | **GET** /api/2.0/files/\{folderId\}/formfilter | Get folder form filter |
+| *FilesFoldersApi* | [**getFolderByFolderId**](#getfolderbyfolderid) | **GET** /api/2.0/files/\{folderId\} | Get a folder by ID |
+| *FilesFoldersApi* | [**getFolderHistory**](#getfolderhistory) | **GET** /api/2.0/files/folder/\{folderId\}/log | Get folder history |
+| *FilesFoldersApi* | [**getFolderInfo**](#getfolderinfo) | **GET** /api/2.0/files/folder/\{folderId\} | Get folder information |
+| *FilesFoldersApi* | [**getFolderLinks**](#getfolderlinks) | **GET** /api/2.0/files/folder/\{id\}/links | Get folder external links |
+| *FilesFoldersApi* | [**getFolderPath**](#getfolderpath) | **GET** /api/2.0/files/folder/\{folderId\}/path | Get the folder path |
+| *FilesFoldersApi* | [**getFolderPrimaryExternalLink**](#getfolderprimaryexternallink) | **GET** /api/2.0/files/folder/\{id\}/link | Get the folder primary external link |
+| *FilesFoldersApi* | [**getFolders**](#getfolders) | **GET** /api/2.0/files/\{folderId\}/subfolders | Get subfolders |
 | *FilesFoldersApi* | [**getFormsFolder**](#getformsfolder) | **GET** /api/2.0/files/@forms | Get the Forms section |
 | *FilesFoldersApi* | [**getMyFolder**](#getmyfolder) | **GET** /api/2.0/files/@my | Get the My documents section |
-| *FilesFoldersApi* | [**getNewFolderItems**](#getnewfolderitems) | **GET** /api/2.0/files/{folderId}/news | Get new folder items |
+| *FilesFoldersApi* | [**getNewFolderItems**](#getnewfolderitems) | **GET** /api/2.0/files/\{folderId\}/news | Get new folder items |
 | *FilesFoldersApi* | [**getRecentFolder**](#getrecentfolder) | **GET** /api/2.0/files/recent | Get the Recent section |
-| *FilesFoldersApi* | [**getReportFolderHistory**](#getreportfolderhistory) | **GET** /api/2.0/files/folder/{folderId}/log/report | Get the folder history report generation status |
+| *FilesFoldersApi* | [**getReportFolderHistory**](#getreportfolderhistory) | **GET** /api/2.0/files/folder/\{folderId\}/log/report | Get the folder history report generation status |
 | *FilesFoldersApi* | [**getRootFolders**](#getrootfolders) | **GET** /api/2.0/files/@root | Get filtered sections |
 | *FilesFoldersApi* | [**getTrashFolder**](#gettrashfolder) | **GET** /api/2.0/files/@trash | Get the Trash section |
-| *FilesFoldersApi* | [**insertFile**](#insertfile) | **POST** /api/2.0/files/{folderId}/insert | Insert a file |
+| *FilesFoldersApi* | [**insertFile**](#insertfile) | **POST** /api/2.0/files/\{folderId\}/insert | Insert a file |
 | *FilesFoldersApi* | [**insertFileToMyFromBody**](#insertfiletomyfrombody) | **POST** /api/2.0/files/@my/insert | Insert a file into My documents |
-| *FilesFoldersApi* | [**renameFolder**](#renamefolder) | **PUT** /api/2.0/files/folder/{folderId} | Rename a folder |
-| *FilesFoldersApi* | [**setFolderOrder**](#setfolderorder) | **PUT** /api/2.0/files/folder/{folderId}/order | Set folder order |
-| *FilesFoldersApi* | [**setFolderPrimaryExternalLink**](#setfolderprimaryexternallink) | **PUT** /api/2.0/files/folder/{id}/links | Set the folder external link |
-| *FilesFoldersApi* | [**terminateReportFolderHistory**](#terminatereportfolderhistory) | **DELETE** /api/2.0/files/folder/{folderId}/log/report | Terminate the folder history report generation |
-| *FilesFoldersApi* | [**uploadFile**](#uploadfile) | **POST** /api/2.0/files/{folderId}/upload | Upload a file |
+| *FilesFoldersApi* | [**renameFolder**](#renamefolder) | **PUT** /api/2.0/files/folder/\{folderId\} | Rename a folder |
+| *FilesFoldersApi* | [**setFolderOrder**](#setfolderorder) | **PUT** /api/2.0/files/folder/\{folderId\}/order | Set folder order |
+| *FilesFoldersApi* | [**setFolderPrimaryExternalLink**](#setfolderprimaryexternallink) | **PUT** /api/2.0/files/folder/\{id\}/links | Set the folder external link |
+| *FilesFoldersApi* | [**terminateReportFolderHistory**](#terminatereportfolderhistory) | **DELETE** /api/2.0/files/folder/\{folderId\}/log/report | Terminate the folder history report generation |
+| *FilesFoldersApi* | [**uploadFile**](#uploadfile) | **POST** /api/2.0/files/\{folderId\}/upload | Upload a file |
 | *FilesFoldersApi* | [**uploadFileToMy**](#uploadfiletomy) | **POST** /api/2.0/files/@my/upload | Upload a file to My documents |
-| *FilesOperationsApi* | [**abortUploadSession**](#abortuploadsession) | **DELETE** /api/2.0/files/{folderId}/session/{sessionId} | Abort an upload session |
+| *FilesOperationsApi* | [**abortUploadSession**](#abortuploadsession) | **DELETE** /api/2.0/files/\{folderId\}/session/\{sessionId\} | Abort an upload session |
 | *FilesOperationsApi* | [**addFavorites**](#addfavorites) | **POST** /api/2.0/files/favorites | Add favorite files and folders |
 | *FilesOperationsApi* | [**bulkDownload**](#bulkdownload) | **PUT** /api/2.0/files/fileops/bulkdownload | Bulk download |
-| *FilesOperationsApi* | [**checkConversionStatus**](#checkconversionstatus) | **GET** /api/2.0/files/file/{fileId}/checkconversion | Get conversion status |
+| *FilesOperationsApi* | [**checkConversionStatus**](#checkconversionstatus) | **GET** /api/2.0/files/file/\{fileId\}/checkconversion | Get conversion status |
 | *FilesOperationsApi* | [**checkMoveOrCopyBatchItems**](#checkmoveorcopybatchitems) | **GET** /api/2.0/files/fileops/move | Check move or copy conflicts |
 | *FilesOperationsApi* | [**checkMoveOrCopyDestFolder**](#checkmoveorcopydestfolder) | **GET** /api/2.0/files/fileops/checkdestfolder | Check the destination folder |
 | *FilesOperationsApi* | [**copyBatchItems**](#copybatchitems) | **PUT** /api/2.0/files/fileops/copy | Copy files and folders |
-| *FilesOperationsApi* | [**createUploadSession**](#createuploadsession) | **POST** /api/2.0/files/{folderId}/upload/create_session | Chunked upload |
-| *FilesOperationsApi* | [**createUploadSessionInFolder**](#createuploadsessioninfolder) | **POST** /api/2.0/files/{folderId}/session | Create an upload session |
+| *FilesOperationsApi* | [**createUploadSession**](#createuploadsession) | **POST** /api/2.0/files/\{folderId\}/upload/create_session | Chunked upload |
+| *FilesOperationsApi* | [**createUploadSessionInFolder**](#createuploadsessioninfolder) | **POST** /api/2.0/files/\{folderId\}/session | Create an upload session |
 | *FilesOperationsApi* | [**deleteBatchItems**](#deletebatchitems) | **PUT** /api/2.0/files/fileops/delete | Delete files and folders |
 | *FilesOperationsApi* | [**deleteFavoritesFromBody**](#deletefavoritesfrombody) | **DELETE** /api/2.0/files/favorites | Delete favorite files and folders |
 | *FilesOperationsApi* | [**deleteFileVersions**](#deletefileversions) | **PUT** /api/2.0/files/fileops/deleteversion | Delete file versions |
 | *FilesOperationsApi* | [**duplicateBatchItems**](#duplicatebatchitems) | **PUT** /api/2.0/files/fileops/duplicate | Duplicate files and folders |
 | *FilesOperationsApi* | [**emptyTrash**](#emptytrash) | **PUT** /api/2.0/files/fileops/emptytrash | Empty the Trash folder |
-| *FilesOperationsApi* | [**finalizeSession**](#finalizesession) | **PUT** /api/2.0/files/{folderId}/session/{sessionId}/finalize | Finalize an upload session |
+| *FilesOperationsApi* | [**finalizeSession**](#finalizesession) | **PUT** /api/2.0/files/\{folderId\}/session/\{sessionId\}/finalize | Finalize an upload session |
 | *FilesOperationsApi* | [**getOperationStatuses**](#getoperationstatuses) | **GET** /api/2.0/files/fileops | Get active file operations |
-| *FilesOperationsApi* | [**getOperationStatusesByType**](#getoperationstatusesbytype) | **GET** /api/2.0/files/fileops/{operationType} | Get file operations by type |
+| *FilesOperationsApi* | [**getOperationStatusesByType**](#getoperationstatusesbytype) | **GET** /api/2.0/files/fileops/\{operationType\} | Get file operations by type |
 | *FilesOperationsApi* | [**markAsRead**](#markasread) | **PUT** /api/2.0/files/fileops/markasread | Mark files and folders as read |
 | *FilesOperationsApi* | [**moveBatchItems**](#movebatchitems) | **PUT** /api/2.0/files/fileops/move | Move files and folders |
-| *FilesOperationsApi* | [**startFileConversion**](#startfileconversion) | **PUT** /api/2.0/files/file/{fileId}/checkconversion | Start file conversion |
-| *FilesOperationsApi* | [**terminateTasks**](#terminatetasks) | **PUT** /api/2.0/files/fileops/terminate/{id} | Cancel file operations |
-| *FilesOperationsApi* | [**updateFileComment**](#updatefilecomment) | **PUT** /api/2.0/files/file/{fileId}/comment | Update a comment |
-| *FilesOperationsApi* | [**uploadAsyncSession**](#uploadasyncsession) | **POST** /api/2.0/files/{folderId}/session/{sessionId}/upload | Upload a numbered chunk |
-| *FilesOperationsApi* | [**uploadSession**](#uploadsession) | **POST** /api/2.0/files/{folderId}/session/{sessionId} | Upload the next chunk |
+| *FilesOperationsApi* | [**startFileConversion**](#startfileconversion) | **PUT** /api/2.0/files/file/\{fileId\}/checkconversion | Start file conversion |
+| *FilesOperationsApi* | [**terminateTasks**](#terminatetasks) | **PUT** /api/2.0/files/fileops/terminate/\{id\} | Cancel file operations |
+| *FilesOperationsApi* | [**updateFileComment**](#updatefilecomment) | **PUT** /api/2.0/files/file/\{fileId\}/comment | Update a comment |
+| *FilesOperationsApi* | [**uploadAsyncSession**](#uploadasyncsession) | **POST** /api/2.0/files/\{folderId\}/session/\{sessionId\}/upload | Upload a numbered chunk |
+| *FilesOperationsApi* | [**uploadSession**](#uploadsession) | **POST** /api/2.0/files/\{folderId\}/session/\{sessionId\} | Upload the next chunk |
 | *FilesQuotaApi* | [**resetRoomQuota**](#resetroomquota) | **PUT** /api/2.0/files/rooms/resetquota | Reset the room quota limit |
 | *FilesQuotaApi* | [**updateRoomsQuota**](#updateroomsquota) | **PUT** /api/2.0/files/rooms/roomquota | Change the room quota limit |
 | *FilesSettingsApi* | [**changeAccessToThirdparty**](#changeaccesstothirdparty) | **PUT** /api/2.0/files/thirdparty | Change the third-party settings access |
@@ -148,22 +148,22 @@ All URIs are relative to *https://yourportal.onlyoffice.com*, where the host is 
 | *FilesSettingsApi* | [**storeOriginal**](#storeoriginal) | **PUT** /api/2.0/files/storeoriginal | Change the ability to upload original formats |
 | *FilesSettingsApi* | [**updateFileIfExist**](#updatefileifexist) | **PUT** /api/2.0/files/updateifexist | Update a file version if it exists |
 | *FilesSettingsApi* | [**uploadDefaultTemplate**](#uploaddefaulttemplate) | **POST** /api/2.0/files/settings/defaulttemplate | Upload a file as the default template setting |
-| *FilesSharingApi* | [**applyExternalSharePassword**](#applyexternalsharepassword) | **POST** /api/2.0/files/share/{key}/password | Unlock a password-protected link |
+| *FilesSharingApi* | [**applyExternalSharePassword**](#applyexternalsharepassword) | **POST** /api/2.0/files/share/\{key\}/password | Unlock a password-protected link |
 | *FilesSharingApi* | [**changeFileOwner**](#changefileowner) | **POST** /api/2.0/files/owner | Change the room or file owner |
-| *FilesSharingApi* | [**getEncryptionAccess**](#getencryptionaccess) | **GET** /api/2.0/files/file/{fileId}/publickeys | Get file encryption keys |
-| *FilesSharingApi* | [**getExternalShareData**](#getexternalsharedata) | **GET** /api/2.0/files/share/{key} | Resolve an external share link |
-| *FilesSharingApi* | [**getFileSecurityInfo**](#getfilesecurityinfo) | **GET** /api/2.0/files/file/{id}/share | Get file sharing rights |
-| *FilesSharingApi* | [**getFolderSecurityInfo**](#getfoldersecurityinfo) | **GET** /api/2.0/files/folder/{id}/share | Get folder sharing rights |
-| *FilesSharingApi* | [**getGroupsMembersWithFileSecurity**](#getgroupsmemberswithfilesecurity) | **GET** /api/2.0/files/file/{fileId}/group/{groupId}/share | Get file access of group members |
-| *FilesSharingApi* | [**getGroupsMembersWithFolderSecurity**](#getgroupsmemberswithfoldersecurity) | **GET** /api/2.0/files/folder/{folderId}/group/{groupId}/share | Get folder access of group members |
+| *FilesSharingApi* | [**getEncryptionAccess**](#getencryptionaccess) | **GET** /api/2.0/files/file/\{fileId\}/publickeys | Get file encryption keys |
+| *FilesSharingApi* | [**getExternalShareData**](#getexternalsharedata) | **GET** /api/2.0/files/share/\{key\} | Resolve an external share link |
+| *FilesSharingApi* | [**getFileSecurityInfo**](#getfilesecurityinfo) | **GET** /api/2.0/files/file/\{id\}/share | Get file sharing rights |
+| *FilesSharingApi* | [**getFolderSecurityInfo**](#getfoldersecurityinfo) | **GET** /api/2.0/files/folder/\{id\}/share | Get folder sharing rights |
+| *FilesSharingApi* | [**getGroupsMembersWithFileSecurity**](#getgroupsmemberswithfilesecurity) | **GET** /api/2.0/files/file/\{fileId\}/group/\{groupId\}/share | Get file access of group members |
+| *FilesSharingApi* | [**getGroupsMembersWithFolderSecurity**](#getgroupsmemberswithfoldersecurity) | **GET** /api/2.0/files/folder/\{folderId\}/group/\{groupId\}/share | Get folder access of group members |
 | *FilesSharingApi* | [**getSecurityInfo**](#getsecurityinfo) | **POST** /api/2.0/files/share | Get sharing rights in batch |
-| *FilesSharingApi* | [**getSharedUsers**](#getsharedusers) | **GET** /api/2.0/files/file/{fileId}/sharedusers | Get users to mention in a file |
+| *FilesSharingApi* | [**getSharedUsers**](#getsharedusers) | **GET** /api/2.0/files/file/\{fileId\}/sharedusers | Get users to mention in a file |
 | *FilesSharingApi* | [**removeSecurityInfo**](#removesecurityinfo) | **DELETE** /api/2.0/files/share | Remove sharing rights in batch |
-| *FilesSharingApi* | [**sendEditorNotify**](#sendeditornotify) | **POST** /api/2.0/files/file/{fileId}/sendeditornotify | Notify mentioned users |
-| *FilesSharingApi* | [**setFileSecurityInfo**](#setfilesecurityinfo) | **PUT** /api/2.0/files/file/{id}/share | Share a file |
-| *FilesSharingApi* | [**setFolderSecurityInfo**](#setfoldersecurityinfo) | **PUT** /api/2.0/files/folder/{id}/share | Share a folder |
+| *FilesSharingApi* | [**sendEditorNotify**](#sendeditornotify) | **POST** /api/2.0/files/file/\{fileId\}/sendeditornotify | Notify mentioned users |
+| *FilesSharingApi* | [**setFileSecurityInfo**](#setfilesecurityinfo) | **PUT** /api/2.0/files/file/\{id\}/share | Share a file |
+| *FilesSharingApi* | [**setFolderSecurityInfo**](#setfoldersecurityinfo) | **PUT** /api/2.0/files/folder/\{id\}/share | Share a folder |
 | *FilesSharingApi* | [**setSecurityInfo**](#setsecurityinfo) | **PUT** /api/2.0/files/share | Set sharing rights in batch |
-| *FilesThirdPartyIntegrationApi* | [**deleteThirdParty**](#deletethirdparty) | **DELETE** /api/2.0/files/thirdparty/{providerId} | Remove a third-party account |
+| *FilesThirdPartyIntegrationApi* | [**deleteThirdParty**](#deletethirdparty) | **DELETE** /api/2.0/files/thirdparty/\{providerId\} | Remove a third-party account |
 | *FilesThirdPartyIntegrationApi* | [**getAllProviders**](#getallproviders) | **GET** /api/2.0/files/thirdparty/providers | Get all third-party providers |
 | *FilesThirdPartyIntegrationApi* | [**getBackupThirdPartyAccount**](#getbackupthirdpartyaccount) | **GET** /api/2.0/files/thirdparty/backup | Get the third-party backup folder |
 | *FilesThirdPartyIntegrationApi* | [**getCapabilities**](#getcapabilities) | **GET** /api/2.0/files/thirdparty/capabilities | Get third-party provider capabilities |
@@ -171,57 +171,57 @@ All URIs are relative to *https://yourportal.onlyoffice.com*, where the host is 
 | *FilesThirdPartyIntegrationApi* | [**getThirdPartyAccounts**](#getthirdpartyaccounts) | **GET** /api/2.0/files/thirdparty | Get the third-party accounts |
 | *FilesThirdPartyIntegrationApi* | [**saveThirdParty**](#savethirdparty) | **POST** /api/2.0/files/thirdparty | Connect a third-party account |
 | *FilesThirdPartyIntegrationApi* | [**saveThirdPartyBackup**](#savethirdpartybackup) | **POST** /api/2.0/files/thirdparty/backup | Connect the third-party backup storage |
-| *RoomsApi* | [**addRoomTags**](#addroomtags) | **PUT** /api/2.0/files/rooms/{id}/tags | Attach tags to a room |
-| *RoomsApi* | [**archiveRoom**](#archiveroom) | **PUT** /api/2.0/files/rooms/{id}/archive | Archive a room |
-| *RoomsApi* | [**changeRoomCover**](#changeroomcover) | **POST** /api/2.0/files/rooms/{id}/cover | Change the room cover |
+| *RoomsApi* | [**addRoomTags**](#addroomtags) | **PUT** /api/2.0/files/rooms/\{id\}/tags | Attach tags to a room |
+| *RoomsApi* | [**archiveRoom**](#archiveroom) | **PUT** /api/2.0/files/rooms/\{id\}/archive | Archive a room |
+| *RoomsApi* | [**changeRoomCover**](#changeroomcover) | **POST** /api/2.0/files/rooms/\{id\}/cover | Change the room cover |
 | *RoomsApi* | [**createRoom**](#createroom) | **POST** /api/2.0/files/rooms | Create a room |
 | *RoomsApi* | [**createRoomFromTemplate**](#createroomfromtemplate) | **POST** /api/2.0/files/rooms/fromtemplate | Create a room from the template |
-| *RoomsApi* | [**createRoomLogo**](#createroomlogo) | **POST** /api/2.0/files/rooms/{id}/logo | Set the room logo |
+| *RoomsApi* | [**createRoomLogo**](#createroomlogo) | **POST** /api/2.0/files/rooms/\{id\}/logo | Set the room logo |
 | *RoomsApi* | [**createRoomTag**](#createroomtag) | **POST** /api/2.0/files/tags | Create a room tag |
 | *RoomsApi* | [**createRoomTemplate**](#createroomtemplate) | **POST** /api/2.0/files/roomtemplate | Create a room template |
-| *RoomsApi* | [**createRoomThirdParty**](#createroomthirdparty) | **POST** /api/2.0/files/rooms/thirdparty/{id} | Create a third-party room |
+| *RoomsApi* | [**createRoomThirdParty**](#createroomthirdparty) | **POST** /api/2.0/files/rooms/thirdparty/\{id\} | Create a third-party room |
 | *RoomsApi* | [**deleteCustomTags**](#deletecustomtags) | **DELETE** /api/2.0/files/tags | Delete the custom room tags |
-| *RoomsApi* | [**deleteRoom**](#deleteroom) | **DELETE** /api/2.0/files/rooms/{id} | Remove a room |
-| *RoomsApi* | [**deleteRoomLogo**](#deleteroomlogo) | **DELETE** /api/2.0/files/rooms/{id}/logo | Remove a room logo |
-| *RoomsApi* | [**deleteRoomTags**](#deleteroomtags) | **DELETE** /api/2.0/files/rooms/{id}/tags | Detach tags from a room |
-| *RoomsApi* | [**getExternalDbSyncStatus**](#getexternaldbsyncstatus) | **GET** /api/2.0/files/rooms/{id}/externaldbsync | Get external DB sync status |
-| *RoomsApi* | [**getNewRoomItems**](#getnewroomitems) | **GET** /api/2.0/files/rooms/{id}/news | Get new items in a room |
-| *RoomsApi* | [**getPublicSettings**](#getpublicsettings) | **GET** /api/2.0/files/roomtemplate/{id}/public | Get room template public access |
+| *RoomsApi* | [**deleteRoom**](#deleteroom) | **DELETE** /api/2.0/files/rooms/\{id\} | Remove a room |
+| *RoomsApi* | [**deleteRoomLogo**](#deleteroomlogo) | **DELETE** /api/2.0/files/rooms/\{id\}/logo | Remove a room logo |
+| *RoomsApi* | [**deleteRoomTags**](#deleteroomtags) | **DELETE** /api/2.0/files/rooms/\{id\}/tags | Detach tags from a room |
+| *RoomsApi* | [**getExternalDbSyncStatus**](#getexternaldbsyncstatus) | **GET** /api/2.0/files/rooms/\{id\}/externaldbsync | Get external DB sync status |
+| *RoomsApi* | [**getNewRoomItems**](#getnewroomitems) | **GET** /api/2.0/files/rooms/\{id\}/news | Get new items in a room |
+| *RoomsApi* | [**getPublicSettings**](#getpublicsettings) | **GET** /api/2.0/files/roomtemplate/\{id\}/public | Get room template public access |
 | *RoomsApi* | [**getRoomCovers**](#getroomcovers) | **GET** /api/2.0/files/rooms/covers | Get room cover gallery |
 | *RoomsApi* | [**getRoomCreatingStatus**](#getroomcreatingstatus) | **GET** /api/2.0/files/rooms/fromtemplate/status | Get the room creation progress |
 | *RoomsApi* | [**getRoomIndexExport**](#getroomindexexport) | **GET** /api/2.0/files/rooms/indexexport | Get the room index export |
-| *RoomsApi* | [**getRoomInfo**](#getroominfo) | **GET** /api/2.0/files/rooms/{id} | Get room information |
-| *RoomsApi* | [**getRoomLinks**](#getroomlinks) | **GET** /api/2.0/files/rooms/{id}/links | Get the room links |
-| *RoomsApi* | [**getRoomSecurityInfo**](#getroomsecurityinfo) | **GET** /api/2.0/files/rooms/{id}/share | Get the room access rights |
+| *RoomsApi* | [**getRoomInfo**](#getroominfo) | **GET** /api/2.0/files/rooms/\{id\} | Get room information |
+| *RoomsApi* | [**getRoomLinks**](#getroomlinks) | **GET** /api/2.0/files/rooms/\{id\}/links | Get the room links |
+| *RoomsApi* | [**getRoomSecurityInfo**](#getroomsecurityinfo) | **GET** /api/2.0/files/rooms/\{id\}/share | Get the room access rights |
 | *RoomsApi* | [**getRoomTagsInfo**](#getroomtagsinfo) | **GET** /api/2.0/files/tags | Get available room tags |
 | *RoomsApi* | [**getRoomTemplateCreatingStatus**](#getroomtemplatecreatingstatus) | **GET** /api/2.0/files/roomtemplate/status | Get room template creation status |
 | *RoomsApi* | [**getRoomsFolder**](#getroomsfolder) | **GET** /api/2.0/files/rooms | Get rooms |
 | *RoomsApi* | [**getRoomsNewItems**](#getroomsnewitems) | **GET** /api/2.0/files/rooms/news | Get new items in all rooms |
-| *RoomsApi* | [**getRoomsPrimaryExternalLink**](#getroomsprimaryexternallink) | **GET** /api/2.0/files/rooms/{id}/link | Get the room primary external link |
-| *RoomsApi* | [**hasTagLinks**](#hastaglinks) | **GET** /api/2.0/files/tags/{tagName}/haslinks | Check room tag usage |
-| *RoomsApi* | [**pinRoom**](#pinroom) | **PUT** /api/2.0/files/rooms/{id}/pin | Pin a room |
-| *RoomsApi* | [**reorderRoom**](#reorderroom) | **PUT** /api/2.0/files/rooms/{id}/reorder | Reorder room contents |
-| *RoomsApi* | [**resendEmailInvitations**](#resendemailinvitations) | **POST** /api/2.0/files/rooms/{id}/resend | Resend the room invitations |
+| *RoomsApi* | [**getRoomsPrimaryExternalLink**](#getroomsprimaryexternallink) | **GET** /api/2.0/files/rooms/\{id\}/link | Get the room primary external link |
+| *RoomsApi* | [**hasTagLinks**](#hastaglinks) | **GET** /api/2.0/files/tags/\{tagName\}/haslinks | Check room tag usage |
+| *RoomsApi* | [**pinRoom**](#pinroom) | **PUT** /api/2.0/files/rooms/\{id\}/pin | Pin a room |
+| *RoomsApi* | [**reorderRoom**](#reorderroom) | **PUT** /api/2.0/files/rooms/\{id\}/reorder | Reorder room contents |
+| *RoomsApi* | [**resendEmailInvitations**](#resendemailinvitations) | **POST** /api/2.0/files/rooms/\{id\}/resend | Resend the room invitations |
 | *RoomsApi* | [**setPublicSettings**](#setpublicsettings) | **PUT** /api/2.0/files/roomtemplate/public | Set room template public access |
-| *RoomsApi* | [**setRoomLink**](#setroomlink) | **PUT** /api/2.0/files/rooms/{id}/links | Set the room external or invitation link |
-| *RoomsApi* | [**setRoomSecurity**](#setroomsecurity) | **PUT** /api/2.0/files/rooms/{id}/share | Set the room access rights |
-| *RoomsApi* | [**startExternalDbSync**](#startexternaldbsync) | **POST** /api/2.0/files/rooms/{id}/externaldbsync | Start external DB sync |
-| *RoomsApi* | [**startRoomIndexExport**](#startroomindexexport) | **POST** /api/2.0/files/rooms/{id}/indexexport | Start the room index export |
+| *RoomsApi* | [**setRoomLink**](#setroomlink) | **PUT** /api/2.0/files/rooms/\{id\}/links | Set the room external or invitation link |
+| *RoomsApi* | [**setRoomSecurity**](#setroomsecurity) | **PUT** /api/2.0/files/rooms/\{id\}/share | Set the room access rights |
+| *RoomsApi* | [**startExternalDbSync**](#startexternaldbsync) | **POST** /api/2.0/files/rooms/\{id\}/externaldbsync | Start external DB sync |
+| *RoomsApi* | [**startRoomIndexExport**](#startroomindexexport) | **POST** /api/2.0/files/rooms/\{id\}/indexexport | Start the room index export |
 | *RoomsApi* | [**terminateRoomIndexExport**](#terminateroomindexexport) | **DELETE** /api/2.0/files/rooms/indexexport | Terminate the room index export |
-| *RoomsApi* | [**unarchiveRoom**](#unarchiveroom) | **PUT** /api/2.0/files/rooms/{id}/unarchive | Unarchive a room |
-| *RoomsApi* | [**unpinRoom**](#unpinroom) | **PUT** /api/2.0/files/rooms/{id}/unpin | Unpin a room |
-| *RoomsApi* | [**updateRoom**](#updateroom) | **PUT** /api/2.0/files/rooms/{id} | Update a room |
+| *RoomsApi* | [**unarchiveRoom**](#unarchiveroom) | **PUT** /api/2.0/files/rooms/\{id\}/unarchive | Unarchive a room |
+| *RoomsApi* | [**unpinRoom**](#unpinroom) | **PUT** /api/2.0/files/rooms/\{id\}/unpin | Unpin a room |
+| *RoomsApi* | [**updateRoom**](#updateroom) | **PUT** /api/2.0/files/rooms/\{id\} | Update a room |
 | *RoomsApi* | [**updateRoomTag**](#updateroomtag) | **PUT** /api/2.0/files/tags | Rename a room tag |
 | *RoomsApi* | [**uploadRoomLogo**](#uploadroomlogo) | **POST** /api/2.0/files/logos | Upload a room logo image |
 | *RoomsGroupsApi* | [**addRoomGroup**](#addroomgroup) | **POST** /api/2.0/files/group | Add a new room group |
-| *RoomsGroupsApi* | [**changeRoomGroupIcon**](#changeroomgroupicon) | **POST** /api/2.0/files/group/{id}/icon | Change room group icon |
-| *RoomsGroupsApi* | [**deleteRoomGroup**](#deleteroomgroup) | **DELETE** /api/2.0/files/group/{id} | Delete a room group |
-| *RoomsGroupsApi* | [**getRoomGroupInfo**](#getroomgroupinfo) | **GET** /api/2.0/files/group/{id} | Get room group info |
+| *RoomsGroupsApi* | [**changeRoomGroupIcon**](#changeroomgroupicon) | **POST** /api/2.0/files/group/\{id\}/icon | Change room group icon |
+| *RoomsGroupsApi* | [**deleteRoomGroup**](#deleteroomgroup) | **DELETE** /api/2.0/files/group/\{id\} | Delete a room group |
+| *RoomsGroupsApi* | [**getRoomGroupInfo**](#getroomgroupinfo) | **GET** /api/2.0/files/group/\{id\} | Get room group info |
 | *RoomsGroupsApi* | [**getRoomGroups**](#getroomgroups) | **GET** /api/2.0/files/group | List room groups |
-| *RoomsGroupsApi* | [**updateRoomGroup**](#updateroomgroup) | **PUT** /api/2.0/files/group/{id} | Update room group |
-| *RoomsPrivacyRoomApi* | [**deleteKeys**](#deletekeys) | **DELETE** /api/2.0/privacyroom/keys/{id} | Delete an encryption key |
+| *RoomsGroupsApi* | [**updateRoomGroup**](#updateroomgroup) | **PUT** /api/2.0/files/group/\{id\} | Update room group |
+| *RoomsPrivacyRoomApi* | [**deleteKeys**](#deletekeys) | **DELETE** /api/2.0/privacyroom/keys/\{id\} | Delete an encryption key |
 | *RoomsPrivacyRoomApi* | [**getUserKeys**](#getuserkeys) | **GET** /api/2.0/privacyroom/keys | Get own encryption keys |
-| *RoomsPrivacyRoomApi* | [**getUserKeysForRoom**](#getuserkeysforroom) | **GET** /api/2.0/privacyroom/{roomId}/access | Get private room access keys |
+| *RoomsPrivacyRoomApi* | [**getUserKeysForRoom**](#getuserkeysforroom) | **GET** /api/2.0/privacyroom/\{roomId\}/access | Get private room access keys |
 | *RoomsPrivacyRoomApi* | [**replaceKey**](#replacekey) | **PUT** /api/2.0/privacyroom/keys | Rotate an encryption key |
 | *RoomsPrivacyRoomApi* | [**setKeys**](#setkeys) | **POST** /api/2.0/privacyroom/keys | Create an encryption key |
 
@@ -5949,7 +5949,7 @@ Stores whether the caller sees rooms arranged by the groups they belong to inste
 
 Display quick actions
 
-Turns the quick action buttons shown next to a file name on or off, and answers with the value that was  sent. This is a preference of the calling account rather than a portal setting, so it changes what the  caller sees and nothing for anybody else; any authenticated role down to a guest may set it, while an  unauthenticated caller is refused. The value is written only when it differs from the one already stored,  and only then is the change recorded in the audit trail, so repeating the same call is harmless and leaves  no trace. An account that has never set it is treated as having the buttons on. The answer echoes the  request instead of re-reading what was stored, so read the setting back through  `GET api/2.0/files/settings`, which publishes it as `showQuickActions`.
+Specifies whether to display quick action buttons or not.
 
 #### Parameters
 
@@ -5961,7 +5961,7 @@ Turns the quick action buttons shown next to a file name on or off, and answers 
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | true if quick action buttons are now shown to the caller next to a file name | [**BooleanWrapper**](#model-booleanwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | Boolean value: true if the parameter is enabled | [**BooleanWrapper**](#model-booleanwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
@@ -9424,7 +9424,7 @@ The credentials of a third-party storage account. The portal takes them when an 
 |------------ | ------------- | ------------- | -------------|
 | **login** | **String** | The account name at the storage service. | [optional] [example: user@example.com] [nullable] |
 | **password** | **String** | The password of the account at the storage service. | [optional] [example: p@ssw0rd!] [nullable] |
-| **rawToken** | **String** | The token of the account, kept as the raw JSON document the storage service issued it in. | [optional] [example: {"access_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...","expires_in":3600}] [nullable] |
+| **rawToken** | **String** | The token of the account, kept as the raw JSON document the storage service issued it in. | [optional] [example: \{"access_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...","expires_in":3600\}] [nullable] |
 | **url** | **URI** (uri) | The address of the storage server the account lives on. | [optional] [example: https://cloud.example.com/remote.php/dav/files/admin/] [nullable] |
 | **provider** | **String** | The storage service the credentials belong to, as the provider key the account was connected with. | [optional] [example: WebDav] [nullable] |
 | **token** | [**OAuth20Token**](#model-oauth20token) | The same token as in `rawToken`, parsed into its OAuth 2.0 fields. | [optional] |
@@ -9587,7 +9587,7 @@ The verdict on placing the requested files in the destination folder.
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **result** | [**CheckDestFolderResult**](#model-checkdestfolderresult) | Whether the destination folder accepts all of the requested files, only some of them or none at all. | [optional] [enum: 0, 1, 2] |
-| **files** | [**List**](#model-fileentrybasedto) | The requested files the destination accepts, each with the information it was listed under. The files it  rejects are absent, so an empty list means that none of them is accepted. | [optional] [example: [{title=document.docx, fileEntryType=2}]] [nullable] |
+| **files** | [**List**](#model-fileentrybasedto) | The requested files the destination accepts, each with the information it was listed under. The files it  rejects are absent, so an empty list means that none of them is accepted. | [optional] [example: [\{title=document.docx, fileEntryType=2\}]] [nullable] |
 
 
 ### Model CheckDestFolderResult
@@ -9770,7 +9770,7 @@ The progress of one file conversion, together with the converted file once it ex
 | **id** | **String** | The identifier of the conversion entry. The portal leaves it empty for file conversions, so a caller follows  its own conversion by the file it queued rather than by this value. | [required] [example: 12345] [nullable] |
 | **Operation** | [**FileOperationType**](#model-fileoperationtype) | Tells which kind of file operation the entry describes, so that a conversion can be told apart from the copy,  move and download entries that share this envelope. A conversion entry reports the conversion type. | [required] [enum: 0, 1, 2, 3, 4, 5, 6, 7] |
 | **progress** | **Integer** (int32) | How far the conversion has got, counted in percent from 0 while it is only queued to 100 once it is over -  whether it ended with a converted file or with an error. 100 is the value a polling caller waits for. | [required] [example: 50] |
-| **source** | **String** | Describes what is being converted: the identifier of the source file, the version that was taken and whether  an existing result may be overwritten, packed as a JSON object inside a string. It is what identifies the  entry when several conversions of the same caller are in flight. | [optional] [example: {"id":9846,"version":1,"updateIfExist":false}] [nullable] |
+| **source** | **String** | Describes what is being converted: the identifier of the source file, the version that was taken and whether  an existing result may be overwritten, packed as a JSON object inside a string. It is what identifies the  entry when several conversions of the same caller are in flight. | [optional] [example: \{"id":9846,"version":1,"updateIfExist":false\}] [nullable] |
 | **result** | **oas_any_type_not_mapped** |  | [optional] [nullable] |
 | **error** | **String** | The reason the conversion stopped, in the language of the caller, and empty while it is running and after it  has succeeded. `progress` reaches 100 for a failure as well, so this field is what separates a converted file  from a broken conversion; a conversion still unfinished after ten minutes ends with a timeout reported here. | [optional] [example: Conversion failed] [nullable] |
 | **processed** | **String** | Reports whether the portal has taken the entry as far as it goes: `1` once the conversion has finished or  failed, and empty while it is still queued or still being converted. It is the bookkeeping of the conversion  queue rather than a result - what happened is in `progress`, `error` and `result`. | [optional] [example: 1] [nullable] |
@@ -9797,7 +9797,7 @@ The picture and the colour a room is drawn with while it has no logo.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **color** | **String** | The background colour the room is drawn with while it has no logo, as six hexadecimal digits with no leading  number sign. An empty value restores the default colour of the room type. | [optional] [example: FF5733] [pattern: /^[A-Fa-f0-9]{6}$/] [nullable] |
+| **color** | **String** | The background colour the room is drawn with while it has no logo, as six hexadecimal digits with no leading  number sign. An empty value restores the default colour of the room type. | [optional] [example: FF5733] [pattern: /^[A-Fa-f0-9]\{6\}$/] [nullable] |
 | **cover** | **String** | The picture drawn on the room while it has no logo, named by an identifier from  `GET api/2.0/files/rooms/covers`. Any other value is rejected, and an empty value leaves the room without a  cover. | [optional] [example: bookmark] [nullable] |
 
 
@@ -9819,7 +9819,7 @@ One drawing of the built-in gallery of room covers.
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **id** | **String** | The name of the cover, and the value to send as `cover` when a room is created or changed. The names are the  same on every portal and do not change with the language of the request. | [required] [example: bookmark] [nullable] |
-| **data** | **String** | The drawing itself, as inline vector markup ready to be rendered as it is. It is the default size of the  cover, and it may change between product versions while the name stays. | [required] [example: &lt;svg viewBox="0 0 32 32"&gt;&lt;path d="M8 4h16v24l-8-6-8 6z"/&gt;&lt;/svg&gt;] [nullable] |
+| **data** | **String** | The drawing itself, as inline vector markup ready to be rendered as it is. It is the default size of the  cover, and it may change between product versions while the name stays. | [required] [example: &lt;svg viewBox="0 0 32 32">&lt;path d="M8 4h16v24l-8-6-8 6z"/>&lt;/svg>] [nullable] |
 
 
 ### Model CreateFileJsonElement
@@ -9878,7 +9878,7 @@ The parameters of a new room in the Rooms section.
 | **watermark** | [**WatermarkRequestDto**](#model-watermarkrequestdto) | The watermark drawn over documents opened in the room. Leaving the field out adds no watermark, and sending it  with the switch turned off removes the one the room has. | [optional] |
 | **logo** | [**LogoRequest**](#model-logorequest) | The picture to use as the room logo, named by the path that `POST api/2.0/files/logos` returned for an image  uploaded beforehand, plus the crop to take from it. Leaving the field out keeps the room on its cover and  colour. | [optional] |
 | **tags** | **List** | The labels to attach to the room, by name. Names the portal tag catalogue does not hold yet are added to it,  and `GET api/2.0/files/tags` lists what already exists. | [optional] [example: [Finance, 2026]] [nullable] |
-| **color** | **String** | The background colour the room is drawn with while it has no logo, as six hexadecimal digits with no leading  number sign. An empty value restores the default colour of the room type. | [optional] [example: FF5733] [pattern: /^[0-9a-fA-F]{6}$/] [nullable] |
+| **color** | **String** | The background colour the room is drawn with while it has no logo, as six hexadecimal digits with no leading  number sign. An empty value restores the default colour of the room type. | [optional] [example: FF5733] [pattern: /^[0-9a-fA-F]\{6\}$/] [nullable] |
 | **cover** | **String** | The picture drawn on the room while it has no logo, named by an identifier from  `GET api/2.0/files/rooms/covers`. Any other value is rejected, and an empty value leaves the room without a  cover. | [optional] [example: bookmark] [minLength: 0] [maxLength: 50] [nullable] |
 | **roomType** | [**RoomType**](#model-roomtype) | What the room is for. It decides which sharing links, roles and form features the room offers, and it cannot  be changed once the room exists, so a room of the wrong kind has to be recreated. | [required] [enum: 1, 2, 5, 6, 8, 9] |
 | **private** | **Boolean** | Whether the room is end-to-end encrypted. Its files can then be opened only in the desktop application by  members whose encryption keys are set up, and the flag cannot be changed after the room is created. | [optional] [example: false] |
@@ -10002,7 +10002,7 @@ The blank document the portal creates for each extension it covers.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **items** | [**List**](#model-defaulttemplateitemdto) | One entry per extension the portal's built-in template set covers, whether or not a custom blank has been  chosen for it, so the list is never empty and its length follows the template set rather than the number of  custom blanks. Entries come in the order an interface shows them: text document, spreadsheet, presentation and  PDF first, everything else by extension. | [required] [example: [{fileExtension=.docx, fileTitle=Company letter.docx, selectedFile=123}]] [nullable] |
+| **items** | [**List**](#model-defaulttemplateitemdto) | One entry per extension the portal's built-in template set covers, whether or not a custom blank has been  chosen for it, so the list is never empty and its length follows the template set rather than the number of  custom blanks. Entries come in the order an interface shows them: text document, spreadsheet, presentation and  PDF first, everything else by extension. | [required] [example: [\{fileExtension=.docx, fileTitle=Company letter.docx, selectedFile=123\}]] [nullable] |
 
 
 ### Model DefaultTemplateSettingsRequestDto
@@ -10313,7 +10313,7 @@ One saved revision of a file, as the editing service recorded it.
 | **user** | [**EditHistoryAuthor**](#model-edithistoryauthor) | The account that saved the revision. A revision saved by an account that no longer exists, or through an  anonymous link, is reported as a guest. | [optional] |
 | **created** | [**ApiDateTime**](#model-apidatetime) | When the revision was saved, written with the offset of the portal's time zone rather than as plain UTC. The  times of one history are consistent with each other, so order and display the revisions by them. | [optional] |
 | **changesHistory** | **String** | The change record the editing service stored for this revision, as the raw JSON it was written in, and empty  for a revision the portal has no record for - one uploaded as a whole file, for instance. `changes` is the  same record already parsed. | [optional] [example: Changes history text] [nullable] |
-| **changes** | [**List**](#model-edithistorychangeswrapper) | The single changes this revision introduced - who made each of them and when - taken from the stored change  record. It comes back empty both for a revision whose changes were never recorded and for one whose record is  in a format the portal no longer reads, so an empty list is not proof that nothing changed. | [optional] [example: [{user={id=123, name=John Doe}, created=2021-01-01T00:00:00Z}]] [nullable] |
+| **changes** | [**List**](#model-edithistorychangeswrapper) | The single changes this revision introduced - who made each of them and when - taken from the stored change  record. It comes back empty both for a revision whose changes were never recorded and for one whose record is  in a format the portal no longer reads, so an empty list is not proof that nothing changed. | [optional] [example: [\{user=\{id=123, name=John Doe\}, created=2021-01-01T00:00:00Z\}]] [nullable] |
 | **serverVersion** | **String** | The build of the editing service that wrote the change record of this revision, taken from the record itself;  empty when the portal holds no record for the revision. | [optional] [example: 8.0.1] [nullable] |
 
 
@@ -10507,7 +10507,7 @@ An encryption key pair as the portal reports it: the public half of some member'
 | **date** | **Date** (date-time) | When this key material was written. Rotating the pair refreshes it, so it dates the material that is being  reported rather than the first appearance of the identifier. | [optional] [example: 2025-01-01T00:00:00] |
 | **publicKey** | **String** | The public half of the pair, the half a client encrypts file keys with. A pair whose public half is missing  is treated as no access and left out of a room's or a file's key set. | [optional] [example: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8A...] [nullable] |
 | **privateKeyEnc** | **String** | The private half, encrypted with its owner's password. It is filled in only when the pair belongs to the  calling user; on another member's entry it comes back empty, because the private half is not handed out. | [optional] [example: U2FsdGVkX1+Lm3s...] [nullable] |
-| **cryptoEngineId** | **String** | The crypto engine this material was issued for, as a braced GUID. The engine is portal-wide, so the same value  comes back for every key of every member. | [optional] [example: {DC522726-5E0E-43E5-AA02-8EA156BECBC5}] [nullable] |
+| **cryptoEngineId** | **String** | The crypto engine this material was issued for, as a braced GUID. The engine is portal-wide, so the same value  comes back for every key of every member. | [optional] [example: \{DC522726-5E0E-43E5-AA02-8EA156BECBC5\}] [nullable] |
 
 
 ### Model EncryptionKeyRequestDto
@@ -10562,7 +10562,7 @@ The state of the job that exports the collected form data of a form filling room
 | **percentage** | **Integer** (int32) | How much of the work is done, from 0 to 100. It advances as the forms of the room are processed one by one, so  it is a usable progress indicator for a room with many forms and jumps straight to the end for a room with  one. | [required] [example: 75] |
 | **isCompleted** | **Boolean** | Whether the job has ended. It is set both for a job that finished its work and for one that stopped on an  error, so this is the flag to poll for, and `status` and `error` are what tell the two apart. | [required] [example: false] |
 | **status** | [**DistributedTaskStatus**](#model-distributedtaskstatus) | How the job ended, or how far it has got: queued, running, finished, cancelled or failed. It is the only field  that separates a successful end from a failed one once `isCompleted` is set. | [required] [enum: 0, 1, 2, 3, 4] |
-| **forms** | [**List**](#model-externaldbsyncformresultdto) | The outcome for every original form of the room, one entry each. The list is empty while the job is running  and is filled in only when the job ends, so it is what to read after `isCompleted` turns true; it stays empty  for a room that holds no forms at all. | [required] [example: [{id=42, title=Application.pdf, success=true, error=null}]] [nullable] |
+| **forms** | [**List**](#model-externaldbsyncformresultdto) | The outcome for every original form of the room, one entry each. The list is empty while the job is running  and is filled in only when the job ends, so it is what to read after `isCompleted` turns true; it stays empty  for a room that holds no forms at all. | [required] [example: [\{id=42, title=Application.pdf, success=true, error=null\}]] [nullable] |
 
 
 ### Model ExternalDbSyncTaskWrapper
@@ -10742,7 +10742,7 @@ A stored file as the calling account sees it: where it lives, which revision thi
 | **lockedBy** | **String** | The display name of the account holding the lock, and null when the caller holds it - so `locked` true  together with no name here means the lock is the caller's own. | [optional] [nullable] |
 | **hasDraft** | **Boolean** | For a fillable PDF form, whether the caller already has a filling draft of it, in which case `draftLocation`  says where that draft lives. Null for anything that is not a form. | [optional] [nullable] |
 | **formFillingStatus** | [**FormFillingStatus**](#model-formfillingstatus) | How far the filling of this form has got for the calling account, and whose turn it is now. It is worked out  only inside a virtual data room, where filling runs in steps; everywhere else it stays at the none value. | [optional] [enum: 0, 1, 2, 3, 4, 5] |
-| **isForm** | **Boolean** | Whether the file is a PDF, and so offered as a fillable form. It is null for any other file type. | [optional] [nullable] |
+| **isForm** | **Boolean** | Whether the PDF is a fillable form rather than a plain document. When the stored classification does not say,  the portal opens the file to find out, so the answer is reliable for a PDF and null for anything else. | [optional] [nullable] |
 | **customFilterEnabled** | **Boolean** | True while a spreadsheet is in the mode where each person sorts and filters their own view without changing  what the others see, and null rather than false when it is not. | [optional] [nullable] |
 | **customFilterEnabledBy** | **String** | The display name of the account that turned that mode on, and null when the caller turned it on themselves. | [optional] [nullable] |
 | **startFilling** | **Boolean** | For a form in a room for filling, whether it has been released for filling; until then it is still being  prepared and only the people running the room work with it. Null for a file this does not apply to. | [optional] [nullable] |
@@ -10781,8 +10781,8 @@ The keys the calling account needs in order to open one file of an end-to-end en
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **userKeys** | [**List**](#model-encryptionkeydto) | The key pairs of the calling account, never those of the other people in the room. The private half of each  pair is stored encrypted with that person's own password and has to be decrypted on the client. An empty list  means the account has generated no key pair yet, and until it does no file key can be issued to it. | [optional] [example: [{id=9924256B-447C-4F19-9dbd-8ad8c39e8ff5, userId=9924256B-447C-4F19-9dbd-8ad8c39e8ff5, date=2025-01-01T00:00:00, publicKey=-----BEGIN PUBLIC KEY-----<br>MIIBIjANBg..., privateKeyEnc=U2FsdGVkX1+Lm3s..., cryptoEngineId=defaultCryptoEngine}]] [nullable] |
-| **fileKeys** | [**List**](#model-filekeys) | The keys of this file that were issued to the calling account, each naming the public key it was encrypted for  so that the client can pick the matching private half. An empty list means the file has not been shared with  this account rather than that the file is unencrypted. | [optional] [example: [{userId=9924256B-447C-4F19-9dbd-8ad8c39e8ff5, publicKeyId=9924256B-447C-4F19-9dbd-8ad8c39e8ff5, privateKeyEnc=U2FsdGVkX1+Lm3s..., tenantId=1, fileId=9846, createOn=2025-01-01T00:00:00}]] [nullable] |
+| **userKeys** | [**List**](#model-encryptionkeydto) | The key pairs of the calling account, never those of the other people in the room. The private half of each  pair is stored encrypted with that person's own password and has to be decrypted on the client. An empty list  means the account has generated no key pair yet, and until it does no file key can be issued to it. | [optional] [example: [\{id=9924256B-447C-4F19-9dbd-8ad8c39e8ff5, userId=9924256B-447C-4F19-9dbd-8ad8c39e8ff5, date=2025-01-01T00:00:00, publicKey=-----BEGIN PUBLIC KEY-----<br/>MIIBIjANBg..., privateKeyEnc=U2FsdGVkX1+Lm3s..., cryptoEngineId=defaultCryptoEngine\}]] [nullable] |
+| **fileKeys** | [**List**](#model-filekeys) | The keys of this file that were issued to the calling account, each naming the public key it was encrypted for  so that the client can pick the matching private half. An empty list means the file has not been shared with  this account rather than that the file is unencrypted. | [optional] [example: [\{userId=9924256B-447C-4F19-9dbd-8ad8c39e8ff5, publicKeyId=9924256B-447C-4F19-9dbd-8ad8c39e8ff5, privateKeyEnc=U2FsdGVkX1+Lm3s..., tenantId=1, fileId=9846, createOn=2025-01-01T00:00:00\}]] [nullable] |
 
 
 ### Model FileEncryptionInfoWrapper
@@ -11132,8 +11132,8 @@ One background file operation of the caller, as it stood when the answer was bui
 | **processed** | **String** | How many entries the operation has handled so far, written as a decimal number in a string. It counts items,  not percent, and stays behind `progress` on operations that walk into subfolders. | [required] [example: 12] [nullable] |
 | **finished** | **Boolean** | Whether the operation has stopped running. A finished operation is reported once and then dropped, so the next  read of the operation list no longer contains it. | [required] [example: true] |
 | **url** | **URI** (uri) | The address the packed archive can be downloaded from once a bulk download has finished. Empty for every other  kind of operation. | [optional] [example: https://portal.example.com/filehandler.ashx?action=bulk] [nullable] |
-| **files** | [**List**](#model-fileentrybasedto) | The files the operation produced or moved, in the order it wrote them down. Empty while nothing has been  written yet and for a deletion, which reports no entries at all. | [optional] [example: [{id=10, title=document.docx}]] [nullable] |
-| **folders** | [**List**](#model-fileentrybasedto) | The folders the operation produced or moved, in the order it wrote them down. Empty while nothing has been  written yet and for a deletion. | [optional] [example: [{id=20, title=Reports}]] [nullable] |
+| **files** | [**List**](#model-fileentrybasedto) | The files the operation produced or moved, in the order it wrote them down. Empty while nothing has been  written yet and for a deletion, which reports no entries at all. | [optional] [example: [\{id=10, title=document.docx\}]] [nullable] |
+| **folders** | [**List**](#model-fileentrybasedto) | The folders the operation produced or moved, in the order it wrote them down. Empty while nothing has been  written yet and for a deletion. | [optional] [example: [\{id=20, title=Reports\}]] [nullable] |
 | **status** | [**DistributedTaskStatus**](#model-distributedtaskstatus) | The state of the background task behind the operation, which tells a task that was cancelled or that crashed  from one that ran to its end. | [optional] [enum: 0, 1, 2, 3, 4] |
 
 
@@ -11361,7 +11361,7 @@ Everything a client needs to work with documents in this portal: the format tabl
 | **extsWebCommented** | **List** | Documents that support comments, so that granting comment access to them is meaningful. | [optional] [example: [.docx]] [nullable] |
 | **extsWebTemplate** | **List** | Documents the portal treats as templates to create new files from. | [optional] [example: [.docx, .xlsx, .pptx]] [nullable] |
 | **extsMustConvert** | **List** | Formats that cannot be edited as they are and are converted on upload or on first opening. Which target each  one has is in the convertible table below. | [optional] [example: [.doc, .xls, .ppt]] [nullable] |
-| **extsConvertible** | **Map** | The conversion map of the portal: for each source extension, the extensions it can be converted into. Use it  to fill the target format of a conversion request instead of guessing one. | [optional] [example: {.doc=[.docx, .pdf], .xls=[.xlsx, .pdf]}] |
+| **extsConvertible** | **Map** | The conversion map of the portal: for each source extension, the extensions it can be converted into. Use it  to fill the target format of a conversion request instead of guessing one. | [optional] [example: \{.doc=[.docx, .pdf], .xls=[.xlsx, .pdf]\}] |
 | **extsUploadable** | **List** | Formats the portal offers to create and upload as documents. It is not an upload filter: files of other  formats are stored as they are. | [optional] [example: [.docx, .xlsx, .pdf]] [nullable] |
 | **extsArchive** | **List** | Formats recognised as archives, which is what decides the archive icon and the offer to unpack. | [optional] [example: [.zip, .rar, .7z]] [nullable] |
 | **extsVideo** | **List** | Formats classified as video. The classification lists drive icons and the media filters of the listing  operations, and are wider than what the built-in player can show. | [optional] [example: [.mp4, .webm, .avi]] [nullable] |
@@ -11375,13 +11375,13 @@ Everything a client needs to work with documents in this portal: the format tabl
 | **masterFormExtension** | **String** | The extension of a fillable form template in this portal. It is configurable, so read it rather than assuming  the product default. | [optional] [example: .pdf] [nullable] |
 | **paramVersion** | **String** | The name of the query parameter that pins a document address to one version. Append it to the addresses below  instead of composing a version address by hand. | [optional] [example: version] [nullable] |
 | **paramOutType** | **String** | The name of the query parameter that asks a download address for a converted copy in another format. | [optional] [example: outputtype] [nullable] |
-| **fileDownloadUrlString** | **URI** (uri) | The template of the address a file is downloaded from: substitute the file identifier for the `{0}`  placeholder. Add the version and output-type parameters named above for a particular version or format. | [optional] [example: https://example.com/filehandler.ashx?action=download&fileid={0}] [nullable] |
-| **fileWebViewerUrlString** | **String** | The template of the address that opens a file in the viewer inside the portal, with `{0}` for the file  identifier. It is a portal-relative address, meant to be opened in a browser rather than called as an API. | [optional] [example: /products/files/doceditor?fileid={0}&action=view] [nullable] |
-| **fileWebViewerExternalUrlString** | **URI** (uri) | The same viewer address as an absolute one, for a message or a page outside the portal. | [optional] [example: https://example.com/products/files/doceditor?fileid={0}&action=view] [nullable] |
-| **fileWebEditorUrlString** | **String** | The template of the address that opens a file for editing inside the portal, with `{0}` for the file  identifier. Whether the session really becomes editable still depends on the access the caller holds. | [optional] [example: /products/files/doceditor?fileid={0}&action=edit] [nullable] |
-| **fileWebEditorExternalUrlString** | **URI** (uri) | The same editing address as an absolute one, for use outside the portal. | [optional] [example: https://example.com/products/files/doceditor?fileid={0}&action=edit] [nullable] |
-| **fileRedirectPreviewUrlString** | **URI** (uri) | The template of the address that sends the browser on to whichever viewer or editor suits the file, with `{0}`  for the file identifier. Use it when the kind of the file is not known in advance. | [optional] [example: https://example.com/products/files/{0}] [nullable] |
-| **fileThumbnailUrlString** | **URI** (uri) | The template of the address a file thumbnail is fetched from, with `{0}` for the file identifier. A thumbnail  is built in the background, so the address can answer with nothing for a while after the file appears. | [optional] [example: https://example.com/filehandler.ashx?action=thumb&fileid={0}] [nullable] |
+| **fileDownloadUrlString** | **URI** (uri) | The template of the address a file is downloaded from: substitute the file identifier for the `{0}`  placeholder. Add the version and output-type parameters named above for a particular version or format. | [optional] [example: https://example.com/filehandler.ashx?action=download&fileid=\{0\}] [nullable] |
+| **fileWebViewerUrlString** | **String** | The template of the address that opens a file in the viewer inside the portal, with `{0}` for the file  identifier. It is a portal-relative address, meant to be opened in a browser rather than called as an API. | [optional] [example: /products/files/doceditor?fileid=\{0\}&action=view] [nullable] |
+| **fileWebViewerExternalUrlString** | **URI** (uri) | The same viewer address as an absolute one, for a message or a page outside the portal. | [optional] [example: https://example.com/products/files/doceditor?fileid=\{0\}&action=view] [nullable] |
+| **fileWebEditorUrlString** | **String** | The template of the address that opens a file for editing inside the portal, with `{0}` for the file  identifier. Whether the session really becomes editable still depends on the access the caller holds. | [optional] [example: /products/files/doceditor?fileid=\{0\}&action=edit] [nullable] |
+| **fileWebEditorExternalUrlString** | **URI** (uri) | The same editing address as an absolute one, for use outside the portal. | [optional] [example: https://example.com/products/files/doceditor?fileid=\{0\}&action=edit] [nullable] |
+| **fileRedirectPreviewUrlString** | **URI** (uri) | The template of the address that sends the browser on to whichever viewer or editor suits the file, with `{0}`  for the file identifier. Use it when the kind of the file is not known in advance. | [optional] [example: https://example.com/products/files/\{0\}] [nullable] |
+| **fileThumbnailUrlString** | **URI** (uri) | The template of the address a file thumbnail is fetched from, with `{0}` for the file identifier. A thumbnail  is built in the background, so the address can answer with nothing for a while after the file appears. | [optional] [example: https://example.com/filehandler.ashx?action=thumb&fileid=\{0\}] [nullable] |
 | **confirmDelete** | **Boolean** | Whether the caller asked to be prompted before a deletion. Written by `PUT api/2.0/files/changedeleteconfrim`. | [optional] [example: true] |
 | **enableThirdParty** | **Boolean** | Whether this portal allows third-party storages to be connected at all. It is set portal-wide by an  administrator, so a member sees it as read-only. | [optional] [example: true] |
 | **externalShare** | **Boolean** | Whether links that open an entry without a portal account may be created in this portal. Set portal-wide by an  administrator. | [optional] [example: true] |
@@ -11537,8 +11537,8 @@ One page of the contents of a folder or of a section: its entries split into fil
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **files** | [**List**](#model-fileentrybasedto) | The file entries of this page. It is empty when the folder holds no files, when the filters matched none of  them, and in the sections that list rooms only. | [optional] [example: [{id=10, title=document.docx}]] [nullable] |
-| **folders** | [**List**](#model-fileentrybasedto) | The folder entries of this page. In a section of rooms these entries are the rooms themselves, which is where  their type, tags, logo and quota are read from. | [optional] [example: [{id=20, title=My Folder}]] [nullable] |
+| **files** | [**List**](#model-fileentrybasedto) | The file entries of this page. It is empty when the folder holds no files, when the filters matched none of  them, and in the sections that list rooms only. | [optional] [example: [\{id=10, title=document.docx\}]] [nullable] |
+| **folders** | [**List**](#model-fileentrybasedto) | The folder entries of this page. In a section of rooms these entries are the rooms themselves, which is where  their type, tags, logo and quota are read from. | [optional] [example: [\{id=20, title=My Folder\}]] [nullable] |
 | **current** | [**FolderDtoInteger**](#model-folderdtointeger) | The folder or section the page was read from, with its own title, type and access rights. It describes the  container, not the entries, and is filled in even when the page is empty. | [optional] |
 | **pathParts** | **oas_any_type_not_mapped** |  | [required] [nullable] |
 | **startIndex** | **Integer** (int32) | The position of the first entry of this page in the whole result, echoing the requested start index. Add the  number of entries received to it to ask for the next page. | [optional] [example: 0] |
@@ -11849,7 +11849,7 @@ One completed copy of a form, with the values that were entered into it.
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **createOn** | **Date** (date-time) | When the portal recorded this copy, in UTC: the moment the filled copy was completed and its data indexed, not  the moment the form itself was made. | [optional] [example: 2025-01-01T00:00:00] |
-| **formsData** | [**List**](#model-formsitemdata) | The values that were entered into this copy, one entry per field, preceded by an entry keyed `FormNumber` that  carries the number of the copy and is what the submissions are ordered by. Fields holding a picture or a  signature are left out of the record, so a field missing here was not necessarily left blank. | [optional] [example: [{key=field1, value=Answer}]] [nullable] |
+| **formsData** | [**List**](#model-formsitemdata) | The values that were entered into this copy, one entry per field, preceded by an entry keyed `FormNumber` that  carries the number of the copy and is what the submissions are ordered by. Fields holding a picture or a  signature are left out of the record, so a field missing here was not necessarily left blank. | [optional] [example: [\{key=field1, value=Answer\}]] [nullable] |
 
 
 ### Model FormRole
@@ -11890,7 +11890,7 @@ One role of a PDF form, with the state the turn of that role is in.
 | **sequence** | **Integer** (int32) | The turn this role takes: the roles come back ordered by this number, roles sharing a number are filled in  parallel, and a role with a higher number waits until every lower one has been submitted. | [required] [example: 1] |
 | **submitted** | **Boolean** | Reports whether this role has already handed in its part. The lowest sequence number that still holds an  unsubmitted role is the turn the form as a whole is waiting on. | [required] [example: false] |
 | **stopedBy** | [**EmployeeFullDto**](#model-employeefulldto) | The account that interrupted the filling. It is filled in on the one role the filling was stopped at and stays  empty on every other role, and on all of them while the filling runs normally. | [optional] |
-| **history** | **Map** (date-time) | When the role passed through the stages of its turn, keyed by stage: 0 is the moment the form was opened for  it, 1 the moment it was submitted and 2 the moment the filling was stopped at it. The times are given in the  time zone of the portal, and only the stages that have actually happened are present, so an empty object means  the role has not been opened yet. | [optional] [example: {0=2025-01-15T10:30:00}] |
+| **history** | **Map** (date-time) | When the role passed through the stages of its turn, keyed by stage: 0 is the moment the form was opened for  it, 1 the moment it was submitted and 2 the moment the filling was stopped at it. The times are given in the  time zone of the portal, and only the stages that have actually happened are present, so an empty object means  the role has not been opened yet. | [optional] [example: \{0=2025-01-15T10:30:00\}] |
 | **roleStatus** | [**FormFillingStatus**](#model-formfillingstatus) | Where the role stands in the queue: roles of earlier turns are reported as complete, roles of later turns as a  draft, and the role whose turn it is as either yours to fill or in progress, depending on whether that person  has already opened the form. The role the filling was stopped at is reported as stopped whatever its turn. | [optional] [enum: 0, 1, 2, 3, 4, 5] |
 
 
@@ -11943,8 +11943,8 @@ One field of a form, offered as a filter over the copies gathered in a form-fill
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **key** | **String** | The name of the field as it is written in the form; send it back as `formsItemKey` to keep only              the completed copies whose field of that name holds a value.              &lt;example&gt;first_name&lt;/example&gt; | [optional] [nullable] |
-| **type** | **String** | The kind of value the field holds, a text box or a checkbox for instance; send it back as              `formsItemType` beside the key.              &lt;example&gt;text&lt;/example&gt; | [optional] [nullable] |
+| **key** | **String** | The name of the field as it is written in the form; send it back as `formsItemKey` to keep only              the completed copies whose field of that name holds a value.              &lt;example>first_name&lt;/example> | [optional] [nullable] |
+| **type** | **String** | The kind of value the field holds, a text box or a checkbox for instance; send it back as              `formsItemType` beside the key.              &lt;example>text&lt;/example> | [optional] [nullable] |
 
 
 ### Model GenerateDocxToolCallParametersDto
@@ -12076,7 +12076,7 @@ One record of the activity log of a file or a folder.
 | **initiator** | [**EmployeeDto**](#model-employeedto) | Who caused the event. For an event caused by a visitor following an external link only the name they gave is  filled in, the account fields staying empty. | [required] |
 | **date** | [**ApiDateTime**](#model-apidatetime) | When the event happened, written with the offset of the portal's time zone. | [required] |
 | **data** | [**HistoryData**](#model-historydata) | The history data. Absent for actions that carry no payload of their own - changing a room's  logo, icon colour or cover, whose interpreter returns no data (see  `RoomLogoChangedInterpreter`). It used to be declared required, which put it in the  OpenAPI document's required list while the null-dropping serializer left it out of the  response, so a generated client threw on any history page holding one of those entries. | [optional] |
-| **related** | [**List**](#model-historydto) | The records folded into this one because they belong to the same action, the separate files of one upload for  instance. It is empty when the record stands alone, and the records inside it carry no further nesting. | [optional] [example: [{id=124, action=0}]] [nullable] |
+| **related** | [**List**](#model-historydto) | The records folded into this one because they belong to the same action, the separate files of one upload for  instance. It is empty when the record stands alone, and the records inside it carry no further nesting. | [optional] [example: [\{id=124, action=0\}]] [nullable] |
 
 
 ### Model ICompressWrapper
@@ -12647,7 +12647,7 @@ The logo cover information, with the cover data in every available size.
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **id** | **String** | The logo cover ID. | [required] [example: default_cover] [nullable] |
-| **data** | **Map** | The logo cover data. | [required] [example: {small=base64..., medium=base64..., large=base64...}] |
+| **data** | **Map** | The logo cover data. | [required] [example: \{small=base64..., medium=base64..., large=base64...\}] |
 
 
 ### Model NewItemsDtoFileEntryBaseDto
@@ -12759,7 +12759,7 @@ The request that moves several files and folders to given positions.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **items** | [**List**](#model-ordersitemrequestdtointeger) | The entries to move, applied one after another in the order they are sent, so each of them shifts the  neighbours the ones before it left behind. | [required] [example: [{entryId=1, entryType=2, order=1}, {entryId=4, entryType=1, order=2}]] [nullable] |
+| **items** | [**List**](#model-ordersitemrequestdtointeger) | The entries to move, applied one after another in the order they are sent, so each of them shifts the  neighbours the ones before it left behind. | [required] [example: [\{entryId=1, entryType=2, order=1\}, \{entryId=4, entryType=1, order=2\}]] [nullable] |
 
 
 ### Model Paragraph
@@ -12768,7 +12768,7 @@ The paragraph parameters.
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **align** | **Integer** (int32) | The paragraph align. | [optional] [example: 2] |
-| **runs** | [**List**](#model-run) | The list of text runs from the paragraph. | [optional] [example: [{fill=[124, 124, 124], text=CONFIDENTIAL, fontSize=26}]] [nullable] |
+| **runs** | [**List**](#model-run) | The list of text runs from the paragraph. | [optional] [example: [\{fill=[124, 124, 124], text=CONFIDENTIAL, fontSize=26\}]] [nullable] |
 
 
 ### Model PermissionsConfig
@@ -12952,7 +12952,7 @@ A personal collection of rooms: the name and icon it was given, the account that
 | **name** | **String** | The name its owner gave the group, stored trimmed of surrounding spaces. Names are not unique, so two groups  of the same account can be told apart only by their identifier. | [optional] [example: Client projects] [nullable] |
 | **icon** | [**MultiSizeLogoCover**](#model-multisizelogocover) | The built-in cover chosen for the group, carrying the cover identifier and its rendering in each available  size. Null when the group has no icon, either because it was never given one or because the icon was cleared  by setting it to an empty value. | [optional] |
 | **userId** | **UUID** (uuid) | The account that created the group and the only one able to read, change or delete it; for any other member of  the portal the group does not exist. | [optional] [example: 9a1b2c3d-4e5f-6071-8293-a4b5c6d7e8f9] |
-| **rooms** | [**List**](#model-fileentrybasedto) | The rooms the group gathers, those stored in the portal first and those on connected third-party accounts  after them. Null when the group was asked for without its members, and an empty array when the group holds no  room the caller can still see. A room moved to the archive is left out until it is taken out of the archive. | [optional] [example: [{title=Client onboarding, fileEntryType=1}]] [nullable] |
+| **rooms** | [**List**](#model-fileentrybasedto) | The rooms the group gathers, those stored in the portal first and those on connected third-party accounts  after them. Null when the group was asked for without its members, and an empty array when the group holds no  room the caller can still see. A room moved to the archive is left out until it is taken out of the archive. | [optional] [example: [\{title=Client onboarding, fileEntryType=1\}]] [nullable] |
 | **totalRooms** | **Integer** (int32) | How many rooms the group shows: the same rooms `rooms` lists, so archived ones are not counted either. It is  filled even when the rooms themselves were not asked for, which makes it the cheap way to tell an empty group  from a populated one. | [optional] [example: 2] |
 
 
@@ -12993,7 +12993,7 @@ One batch of membership changes for a room.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **invitations** | [**List**](#model-roominvitation) | Who is added, changed or removed, one entry per subject. The same subject named twice keeps the level of the  last entry, and an empty list is accepted and changes nothing. | [optional] [example: [{id=e9a7b4c1-2d3f-4a56-8b90-1c2d3e4f5a6b, access=10}]] [nullable] |
+| **invitations** | [**List**](#model-roominvitation) | Who is added, changed or removed, one entry per subject. The same subject named twice keeps the level of the  last entry, and an empty list is accepted and changes nothing. | [optional] [example: [\{id=e9a7b4c1-2d3f-4a56-8b90-1c2d3e4f5a6b, access=10\}]] [nullable] |
 | **notify** | **Boolean** | Whether the subjects that gained access are told about it by email. With it off the change is silent, which is  the usual choice when membership is synchronised from another system. | [optional] [example: true] |
 | **message** | **String** | The line added to the invitation email. It is used only while the notification is on, and it reaches nobody  whose access was removed. | [optional] [example: Please review the contract by Friday] [nullable] |
 | **culture** | **String** | The language of the invitation email, as a portal culture name such as en-US. Leaving it out sends each  message in the language of its recipient. | [optional] [example: en-US] [nullable] |
@@ -13040,7 +13040,7 @@ The outcome of a change of the room membership.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **members** | [**List**](#model-filesharedto) | The access entries of the subjects named in the request, read back after the change was applied. A subject the  caller may not see is missing from it, so comparing this list with the request is the way to learn who was  skipped; it is null when nothing was applied at all. | [optional] [example: [{access=10, isOwner=false, subjectType=0}]] [nullable] |
+| **members** | [**List**](#model-filesharedto) | The access entries of the subjects named in the request, read back after the change was applied. A subject the  caller may not see is missing from it, so comparing this list with the request is the way to learn who was  skipped; it is null when nothing was applied at all. | [optional] [example: [\{access=10, isOwner=false, subjectType=0\}]] [nullable] |
 | **warning** | **String** | The reason the first subject that could not be handled was skipped, in the language of the request, while the  rest of the list was still applied. Null when every named subject went through. The text is meant to be shown  to a person, not matched against. | [optional] [example: The maximum number of links is 10] [nullable] |
 | **error** | [**RoomSecurityError**](#model-roomsecurityerror) | Reports the one case in which nothing at all was changed: a member being removed still holds a role in a form  of the room, and the request did not ask to remove them anyway. Repeat the call with `force` to remove them  together with the role. | [optional] [enum: 0, 1] |
 
@@ -13155,7 +13155,7 @@ The people who are to fill in the roles of a PDF form.
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **formId** | **Integer** (int32) | The PDF form the roles belong to. This is the value the operation reads, rather than the identifier in its  route, and the two are to be sent the same. | [required] [example: 1] |
-| **roles** | [**List**](#model-formrole) | The roles with the account taking each of them and the sequence number that decides the turn: the same number  means the roles may be filled in parallel, different ones make a queue. The whole set is replaced on every  call, and an empty set resets the filling. | [required] [example: [{roleName=Approver, userId=00000000-0000-0000-0000-000000000000}]] [nullable] |
+| **roles** | [**List**](#model-formrole) | The roles with the account taking each of them and the sequence number that decides the turn: the same number  means the roles may be filled in parallel, different ones make a queue. The whole set is replaced on every  call, and an empty set resets the filling. | [required] [example: [\{roleName=Approver, userId=00000000-0000-0000-0000-000000000000\}]] [nullable] |
 
 
 ### Model SearchArea
@@ -13181,7 +13181,7 @@ The entries whose sharing rights are being changed, and the rights to apply to t
 |------------ | ------------- | ------------- | -------------|
 | **folderIds** | [**List**](#model-duplicaterequestdtofileids) | The folders and rooms whose rights are being changed, identified as a listing operation returns them - a  number on the portal, a string on a connected third-party account. | [optional] [example: [1, 2, 3]] [nullable] |
 | **fileIds** | [**List**](#model-duplicaterequestdtofileids) | The files whose rights are being changed, identified as a listing operation returns them - a number on the  portal, a string on a connected third-party account. | [optional] [example: [7, 8]] [nullable] |
-| **share** | [**List**](#model-fileshareparams) | One record per account or group whose rights are being set, each naming the subject and the level it gets on  all of the listed entries; a level of `None` takes the access away. An empty collection makes the call change  nothing. | [optional] [example: [{access=2, shareTo=9924256a-739c-462b-af15-e652a3b1b6eb}]] [nullable] |
+| **share** | [**List**](#model-fileshareparams) | One record per account or group whose rights are being set, each naming the subject and the level it gets on  all of the listed entries; a level of `None` takes the access away. An empty collection makes the call change  nothing. | [optional] [example: [\{access=2, shareTo=9924256a-739c-462b-af15-e652a3b1b6eb\}]] [nullable] |
 | **notify** | **Boolean** | Set to true to have every account named in `share` emailed about the access it just received; false changes  the rights without telling anyone. | [optional] [example: true] |
 | **sharingMessage** | **String** | The text put into that email, ignored while `notify` is false. Markup is stripped before sending, so only the  plain text of the value survives. | [optional] [example: You have been granted access to the file] [minLength: 0] [maxLength: 255] [nullable] |
 
@@ -13191,7 +13191,7 @@ The rights to apply to a single file or folder, and how to announce them.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **share** | [**List**](#model-fileshareparams) | One record per account or group whose rights are being set, each naming the subject and the level it gets; a  level of `None` takes the access away. An empty collection makes the call change nothing. | [optional] [example: [{access=2, shareTo=9924256a-739c-462b-af15-e652a3b1b6eb}]] [nullable] |
+| **share** | [**List**](#model-fileshareparams) | One record per account or group whose rights are being set, each naming the subject and the level it gets; a  level of `None` takes the access away. An empty collection makes the call change nothing. | [optional] [example: [\{access=2, shareTo=9924256a-739c-462b-af15-e652a3b1b6eb\}]] [nullable] |
 | **notify** | **Boolean** | Set to true to have every account named in `share` emailed about the access it just received; false changes  the rights without telling anyone. | [optional] [example: true] |
 | **sharingMessage** | **String** | The text put into that email, ignored while `notify` is false. Markup is stripped before sending, so only the  plain text of the value survives. | [optional] [example: You have been granted access to the file] [minLength: 0] [maxLength: 255] [nullable] |
 
@@ -13478,7 +13478,7 @@ The fields of a room that a partial update changes.
 | **watermark** | [**WatermarkRequestDto**](#model-watermarkrequestdto) | The watermark drawn over documents opened in the room. Leaving the field out adds no watermark, and sending it  with the switch turned off removes the one the room has. | [optional] |
 | **logo** | [**LogoRequest**](#model-logorequest) | The picture to use as the room logo, named by the path that `POST api/2.0/files/logos` returned for an image  uploaded beforehand, plus the crop to take from it. Leaving the field out keeps the room on its cover and  colour. | [optional] |
 | **tags** | **List** | The labels the room is to carry from now on. The list replaces the whole tag set rather than adding to it, an  empty list clears it, and names the portal catalogue does not hold yet are added to it. | [optional] [example: [Finance, 2026]] [nullable] |
-| **color** | **String** | The background colour the room is drawn with while it has no logo, as six hexadecimal digits with no leading  number sign. An empty value restores the default colour of the room type. | [optional] [example: FF5733] [pattern: /^[0-9a-fA-F]{6}$/] [nullable] |
+| **color** | **String** | The background colour the room is drawn with while it has no logo, as six hexadecimal digits with no leading  number sign. An empty value restores the default colour of the room type. | [optional] [example: FF5733] [pattern: /^[0-9a-fA-F]\{6\}$/] [nullable] |
 | **cover** | **String** | The picture drawn on the room while it has no logo, named by an identifier from  `GET api/2.0/files/rooms/covers`. Any other value is rejected, and an empty value leaves the room without a  cover. | [optional] [example: bookmark] [minLength: 0] [maxLength: 50] [nullable] |
 | **chatSettings** | [**ChatSettings**](#model-chatsettings) | The model and the prompt an AI room answers with. It belongs to AI rooms only and is rejected for a room of  any other kind. | [optional] |
 | **sendFormToExternalDB** | **Boolean** | For a form filling room, whether the data of every completed submission is also pushed to the external  database configured for the portal. It is what `POST api/2.0/files/rooms/{id}/externaldbsync` re-runs for the  forms already collected. | [optional] [example: false] [nullable] |
@@ -13663,7 +13663,7 @@ The document watermark parameters.
 | **fill** | **String** | Defines the watermark fill color. | [optional] [example: #FF0000] [nullable] |
 | **rotate** | **Integer** (int32) | Defines the watermark rotation angle. | [optional] [example: 45] |
 | **transparent** | **Double** (double) | Defines the watermark transparency percentage. | [optional] [example: 0.4] |
-| **paragraphs** | [**List**](#model-paragraph) | The list of paragraphs of the watermark. | [optional] [example: [{align=2, runs=[{fill=[124, 124, 124], text=CONFIDENTIAL, fontSize=26}]}]] [nullable] |
+| **paragraphs** | [**List**](#model-paragraph) | The list of paragraphs of the watermark. | [optional] [example: [\{align=2, runs=[\{fill=[124, 124, 124], text=CONFIDENTIAL, fontSize=26\}]\}]] [nullable] |
 
 
 ### Model WatermarkRequestDto

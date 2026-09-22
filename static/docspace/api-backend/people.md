@@ -1,7 +1,7 @@
 # ONLYOFFICE DocSpace People API
 
 The browsable version of this reference, with a request builder and code samples, is published at
-<https://api.onlyoffice.com/docspace/api-backend/usage-api/>.
+[https://api.onlyoffice.com/docspace/api-backend/usage-api/](https://api.onlyoffice.com/docspace/api-backend/usage-api/).
 
 All URIs are relative to *https://yourportal.onlyoffice.com*, where the host is the address of your DocSpace instance.
 
@@ -10,63 +10,63 @@ All URIs are relative to *https://yourportal.onlyoffice.com*, where the host is 
 | Class | Method | HTTP request | Description |
 |------------ | ------------- | ------------- | -------------|
 | *ApiKeysApi* | [**createApiKey**](#createapikey) | **POST** /api/2.0/keys | Create a user API key |
-| *ApiKeysApi* | [**deleteApiKey**](#deleteapikey) | **DELETE** /api/2.0/keys/{keyId} | Delete an API key |
+| *ApiKeysApi* | [**deleteApiKey**](#deleteapikey) | **DELETE** /api/2.0/keys/\{keyId\} | Delete an API key |
 | *ApiKeysApi* | [**getAllPermissions**](#getallpermissions) | **GET** /api/2.0/keys/permissions | Get API key permissions |
 | *ApiKeysApi* | [**getApiKey**](#getapikey) | **GET** /api/2.0/keys/@self | Get the current API key |
 | *ApiKeysApi* | [**getApiKeys**](#getapikeys) | **GET** /api/2.0/keys | Get the API keys |
-| *ApiKeysApi* | [**updateApiKey**](#updateapikey) | **PUT** /api/2.0/keys/{keyId} | Update an API key |
+| *ApiKeysApi* | [**updateApiKey**](#updateapikey) | **PUT** /api/2.0/keys/\{keyId\} | Update an API key |
 | *GroupApi* | [**addGroup**](#addgroup) | **POST** /api/2.0/group | Add a new group |
-| *GroupApi* | [**addMembersTo**](#addmembersto) | **PUT** /api/2.0/group/{id}/members | Add group members |
-| *GroupApi* | [**deleteGroup**](#deletegroup) | **DELETE** /api/2.0/group/{id} | Delete a group |
-| *GroupApi* | [**getGroup**](#getgroup) | **GET** /api/2.0/group/{id} | Get a group |
-| *GroupApi* | [**getGroupByUserId**](#getgroupbyuserid) | **GET** /api/2.0/group/user/{userid} | Get user groups |
+| *GroupApi* | [**addMembersTo**](#addmembersto) | **PUT** /api/2.0/group/\{id\}/members | Add group members |
+| *GroupApi* | [**deleteGroup**](#deletegroup) | **DELETE** /api/2.0/group/\{id\} | Delete a group |
+| *GroupApi* | [**getGroup**](#getgroup) | **GET** /api/2.0/group/\{id\} | Get a group |
+| *GroupApi* | [**getGroupByUserId**](#getgroupbyuserid) | **GET** /api/2.0/group/user/\{userid\} | Get user groups |
 | *GroupApi* | [**getGroups**](#getgroups) | **GET** /api/2.0/group | Get groups |
-| *GroupApi* | [**moveMembersTo**](#movemembersto) | **PUT** /api/2.0/group/{fromId}/members/{toId} | Move group members |
-| *GroupApi* | [**removeMembersFrom**](#removemembersfrom) | **DELETE** /api/2.0/group/{id}/members | Remove group members |
-| *GroupApi* | [**setGroupManager**](#setgroupmanager) | **PUT** /api/2.0/group/{id}/manager | Set a group manager |
-| *GroupApi* | [**setMembersTo**](#setmembersto) | **POST** /api/2.0/group/{id}/members | Replace group members |
-| *GroupApi* | [**updateGroup**](#updategroup) | **PUT** /api/2.0/group/{id} | Update a group |
-| *GroupSearchApi* | [**getGroupsWithFilesShared**](#getgroupswithfilesshared) | **GET** /api/2.0/group/file/{id} | Search groups for a file |
-| *GroupSearchApi* | [**getGroupsWithFoldersShared**](#getgroupswithfoldersshared) | **GET** /api/2.0/group/folder/{id} | Search groups for a folder |
-| *GroupSearchApi* | [**getGroupsWithRoomsShared**](#getgroupswithroomsshared) | **GET** /api/2.0/group/room/{id} | Search groups for a room |
-| *PeopleEmailApi* | [**changeUserEmail**](#changeuseremail) | **PUT** /api/2.0/people/{userid}/email | Change a user email |
+| *GroupApi* | [**moveMembersTo**](#movemembersto) | **PUT** /api/2.0/group/\{fromId\}/members/\{toId\} | Move group members |
+| *GroupApi* | [**removeMembersFrom**](#removemembersfrom) | **DELETE** /api/2.0/group/\{id\}/members | Remove group members |
+| *GroupApi* | [**setGroupManager**](#setgroupmanager) | **PUT** /api/2.0/group/\{id\}/manager | Set a group manager |
+| *GroupApi* | [**setMembersTo**](#setmembersto) | **POST** /api/2.0/group/\{id\}/members | Replace group members |
+| *GroupApi* | [**updateGroup**](#updategroup) | **PUT** /api/2.0/group/\{id\} | Update a group |
+| *GroupSearchApi* | [**getGroupsWithFilesShared**](#getgroupswithfilesshared) | **GET** /api/2.0/group/file/\{id\} | Search groups for a file |
+| *GroupSearchApi* | [**getGroupsWithFoldersShared**](#getgroupswithfoldersshared) | **GET** /api/2.0/group/folder/\{id\} | Search groups for a folder |
+| *GroupSearchApi* | [**getGroupsWithRoomsShared**](#getgroupswithroomsshared) | **GET** /api/2.0/group/room/\{id\} | Search groups for a room |
+| *PeopleEmailApi* | [**changeUserEmail**](#changeuseremail) | **PUT** /api/2.0/people/\{userid\}/email | Change a user email |
 | *PeopleEmailApi* | [**sendEmailChangeInstructions**](#sendemailchangeinstructions) | **POST** /api/2.0/people/email | Send instructions to change email |
 | *PeopleGuestsApi* | [**approveGuestShareLink**](#approveguestsharelink) | **POST** /api/2.0/people/guests/share/approve | Approve a guest sharing link |
 | *PeopleGuestsApi* | [**deleteGuests**](#deleteguests) | **DELETE** /api/2.0/people/guests | Remove guest relations |
-| *PeoplePasswordApi* | [**changeUserPassword**](#changeuserpassword) | **PUT** /api/2.0/people/{userid}/password | Change a user password |
+| *PeoplePasswordApi* | [**changeUserPassword**](#changeuserpassword) | **PUT** /api/2.0/people/\{userid\}/password | Change a user password |
 | *PeoplePasswordApi* | [**sendUserPassword**](#senduserpassword) | **POST** /api/2.0/people/password | Remind a user password |
-| *PeoplePhotosApi* | [**createMemberPhotoThumbnails**](#creatememberphotothumbnails) | **POST** /api/2.0/people/{userid}/photo/thumbnails | Create photo thumbnails |
-| *PeoplePhotosApi* | [**deleteMemberPhoto**](#deletememberphoto) | **DELETE** /api/2.0/people/{userid}/photo | Delete a user photo |
-| *PeoplePhotosApi* | [**getMemberPhoto**](#getmemberphoto) | **GET** /api/2.0/people/{userid}/photo | Get a user photo |
-| *PeoplePhotosApi* | [**updateMemberPhoto**](#updatememberphoto) | **PUT** /api/2.0/people/{userid}/photo | Update a user photo |
-| *PeoplePhotosApi* | [**uploadMemberPhoto**](#uploadmemberphoto) | **POST** /api/2.0/people/{userid}/photo | Upload a user photo |
+| *PeoplePhotosApi* | [**createMemberPhotoThumbnails**](#creatememberphotothumbnails) | **POST** /api/2.0/people/\{userid\}/photo/thumbnails | Create photo thumbnails |
+| *PeoplePhotosApi* | [**deleteMemberPhoto**](#deletememberphoto) | **DELETE** /api/2.0/people/\{userid\}/photo | Delete a user photo |
+| *PeoplePhotosApi* | [**getMemberPhoto**](#getmemberphoto) | **GET** /api/2.0/people/\{userid\}/photo | Get a user photo |
+| *PeoplePhotosApi* | [**updateMemberPhoto**](#updatememberphoto) | **PUT** /api/2.0/people/\{userid\}/photo | Update a user photo |
+| *PeoplePhotosApi* | [**uploadMemberPhoto**](#uploadmemberphoto) | **POST** /api/2.0/people/\{userid\}/photo | Upload a user photo |
 | *PeopleProfilesApi* | [**addMember**](#addmember) | **POST** /api/2.0/people | Add a user |
 | *PeopleProfilesApi* | [**checkUserExistsByEmail**](#checkuserexistsbyemail) | **GET** /api/2.0/people/exists | Check whether an email is taken |
-| *PeopleProfilesApi* | [**deleteMember**](#deletemember) | **DELETE** /api/2.0/people/{userid} | Delete a user |
+| *PeopleProfilesApi* | [**deleteMember**](#deletemember) | **DELETE** /api/2.0/people/\{userid\} | Delete a user |
 | *PeopleProfilesApi* | [**deleteProfile**](#deleteprofile) | **DELETE** /api/2.0/people/@self | Close my own profile |
 | *PeopleProfilesApi* | [**getAllProfiles**](#getallprofiles) | **GET** /api/2.0/people | Get the active profiles |
 | *PeopleProfilesApi* | [**getClaims**](#getclaims) | **GET** /api/2.0/people/tokendiagnostics | Get user claims |
 | *PeopleProfilesApi* | [**getProfileByEmail**](#getprofilebyemail) | **GET** /api/2.0/people/email | Get a profile by user email |
-| *PeopleProfilesApi* | [**getProfileByUserId**](#getprofilebyuserid) | **GET** /api/2.0/people/{userid} | Get a profile by user ID |
+| *PeopleProfilesApi* | [**getProfileByUserId**](#getprofilebyuserid) | **GET** /api/2.0/people/\{userid\} | Get a profile by user ID |
 | *PeopleProfilesApi* | [**getSelfProfile**](#getselfprofile) | **GET** /api/2.0/people/@self | Get my profile |
 | *PeopleProfilesApi* | [**inviteUsers**](#inviteusers) | **POST** /api/2.0/people/invite | Invite users |
 | *PeopleProfilesApi* | [**removeUsers**](#removeusers) | **PUT** /api/2.0/people/delete | Delete users |
 | *PeopleProfilesApi* | [**resendUserInvites**](#resenduserinvites) | **PUT** /api/2.0/people/invite | Resend activation emails |
-| *PeopleProfilesApi* | [**updateMember**](#updatemember) | **PUT** /api/2.0/people/{userid} | Update a user |
-| *PeopleProfilesApi* | [**updateMemberCulture**](#updatememberculture) | **PUT** /api/2.0/people/{userid}/culture | Update a user culture |
+| *PeopleProfilesApi* | [**updateMember**](#updatemember) | **PUT** /api/2.0/people/\{userid\} | Update a user |
+| *PeopleProfilesApi* | [**updateMemberCulture**](#updatememberculture) | **PUT** /api/2.0/people/\{userid\}/culture | Update a user culture |
 | *PeopleQuotaApi* | [**resetUsersQuota**](#resetusersquota) | **PUT** /api/2.0/people/resetquota | Reset a user quota limit |
 | *PeopleQuotaApi* | [**updateUserQuota**](#updateuserquota) | **PUT** /api/2.0/people/userquota | Change a user quota limit |
-| *PeopleSearchApi* | [**getAccountsEntriesWithFilesShared**](#getaccountsentrieswithfilesshared) | **GET** /api/2.0/accounts/file/{id}/search | Search accounts for a file |
-| *PeopleSearchApi* | [**getAccountsEntriesWithFoldersShared**](#getaccountsentrieswithfoldersshared) | **GET** /api/2.0/accounts/folder/{id}/search | Search accounts for a folder |
-| *PeopleSearchApi* | [**getAccountsEntriesWithRoomsShared**](#getaccountsentrieswithroomsshared) | **GET** /api/2.0/accounts/room/{id}/search | Search accounts for a room |
-| *PeopleSearchApi* | [**getSearch**](#getsearch) | **GET** /api/2.0/people/@search/{query} | Search users |
+| *PeopleSearchApi* | [**getAccountsEntriesWithFilesShared**](#getaccountsentrieswithfilesshared) | **GET** /api/2.0/accounts/file/\{id\}/search | Search accounts for a file |
+| *PeopleSearchApi* | [**getAccountsEntriesWithFoldersShared**](#getaccountsentrieswithfoldersshared) | **GET** /api/2.0/accounts/folder/\{id\}/search | Search accounts for a folder |
+| *PeopleSearchApi* | [**getAccountsEntriesWithRoomsShared**](#getaccountsentrieswithroomsshared) | **GET** /api/2.0/accounts/room/\{id\}/search | Search accounts for a room |
+| *PeopleSearchApi* | [**getSearch**](#getsearch) | **GET** /api/2.0/people/@search/\{query\} | Search users |
 | *PeopleSearchApi* | [**getSimpleByFilter**](#getsimplebyfilter) | **GET** /api/2.0/people/simple/filter | Filter users in brief |
-| *PeopleSearchApi* | [**getUsersWithFilesShared**](#getuserswithfilesshared) | **GET** /api/2.0/people/file/{id} | Search users for a file |
-| *PeopleSearchApi* | [**getUsersWithFoldersShared**](#getuserswithfoldersshared) | **GET** /api/2.0/people/folder/{id} | Search users for a folder |
-| *PeopleSearchApi* | [**getUsersWithRoomShared**](#getuserswithroomshared) | **GET** /api/2.0/people/room/{id} | Search users for a room |
+| *PeopleSearchApi* | [**getUsersWithFilesShared**](#getuserswithfilesshared) | **GET** /api/2.0/people/file/\{id\} | Search users for a file |
+| *PeopleSearchApi* | [**getUsersWithFoldersShared**](#getuserswithfoldersshared) | **GET** /api/2.0/people/folder/\{id\} | Search users for a folder |
+| *PeopleSearchApi* | [**getUsersWithRoomShared**](#getuserswithroomshared) | **GET** /api/2.0/people/room/\{id\} | Search users for a room |
 | *PeopleSearchApi* | [**searchUsersByExtendedFilter**](#searchusersbyextendedfilter) | **GET** /api/2.0/people/filter | Filter users in detail |
 | *PeopleSearchApi* | [**searchUsersByQuery**](#searchusersbyquery) | **GET** /api/2.0/people/search | Search users by query |
-| *PeopleSearchApi* | [**searchUsersByStatus**](#searchusersbystatus) | **GET** /api/2.0/people/status/{status}/search | Search users by status filter |
+| *PeopleSearchApi* | [**searchUsersByStatus**](#searchusersbystatus) | **GET** /api/2.0/people/status/\{status\}/search | Search users by status filter |
 | *PeopleThemeApi* | [**changePortalTheme**](#changeportaltheme) | **PUT** /api/2.0/people/theme | Change the portal theme |
 | *PeopleThemeApi* | [**getPortalTheme**](#getportaltheme) | **GET** /api/2.0/people/theme | Get the portal theme |
 | *PeopleThirdPartyAccountsApi* | [**getThirdPartyAuthProviders**](#getthirdpartyauthproviders) | **GET** /api/2.0/people/thirdparty/providers | Get third-party providers |
@@ -74,8 +74,8 @@ All URIs are relative to *https://yourportal.onlyoffice.com*, where the host is 
 | *PeopleThirdPartyAccountsApi* | [**signupThirdPartyAccount**](#signupthirdpartyaccount) | **POST** /api/2.0/people/thirdparty/signup | Sign up with a provider |
 | *PeopleThirdPartyAccountsApi* | [**unlinkThirdPartyAccount**](#unlinkthirdpartyaccount) | **DELETE** /api/2.0/people/thirdparty/unlinkaccount | Unlink a third-party account |
 | *PeopleUserDataApi* | [**getDeletePersonalFolderProgress**](#getdeletepersonalfolderprogress) | **GET** /api/2.0/people/delete/personal/progress | Get the personal folder deletion progress |
-| *PeopleUserDataApi* | [**getReassignProgress**](#getreassignprogress) | **GET** /api/2.0/people/reassign/progress/{userid} | Get the reassignment progress |
-| *PeopleUserDataApi* | [**getRemoveProgress**](#getremoveprogress) | **GET** /api/2.0/people/remove/progress/{userid} | Get the deletion progress |
+| *PeopleUserDataApi* | [**getReassignProgress**](#getreassignprogress) | **GET** /api/2.0/people/reassign/progress/\{userid\} | Get the reassignment progress |
+| *PeopleUserDataApi* | [**getRemoveProgress**](#getremoveprogress) | **GET** /api/2.0/people/remove/progress/\{userid\} | Get the deletion progress |
 | *PeopleUserDataApi* | [**necessaryReassign**](#necessaryreassign) | **GET** /api/2.0/people/reassign/necessary | Check data for reassignment need |
 | *PeopleUserDataApi* | [**sendInstructionsToDelete**](#sendinstructionstodelete) | **PUT** /api/2.0/people/self/delete | Send the deletion instructions |
 | *PeopleUserDataApi* | [**startDeletePersonalFolder**](#startdeletepersonalfolder) | **POST** /api/2.0/people/delete/personal/start | Delete the personal folder |
@@ -83,14 +83,14 @@ All URIs are relative to *https://yourportal.onlyoffice.com*, where the host is 
 | *PeopleUserDataApi* | [**startRemove**](#startremove) | **POST** /api/2.0/people/remove/start | Start the data deletion |
 | *PeopleUserDataApi* | [**terminateReassign**](#terminatereassign) | **PUT** /api/2.0/people/reassign/terminate | Terminate the data reassignment |
 | *PeopleUserDataApi* | [**terminateRemove**](#terminateremove) | **PUT** /api/2.0/people/remove/terminate | Terminate the data deletion |
-| *PeopleUserStatusApi* | [**getByStatus**](#getbystatus) | **GET** /api/2.0/people/status/{status} | Get profiles by status |
-| *PeopleUserStatusApi* | [**updateUserActivationStatus**](#updateuseractivationstatus) | **PUT** /api/2.0/people/activationstatus/{activationstatus} | Set my activation status |
-| *PeopleUserStatusApi* | [**updateUserStatus**](#updateuserstatus) | **PUT** /api/2.0/people/status/{status} | Change a user status |
-| *PeopleUserTypeApi* | [**getUserTypeUpdateProgress**](#getusertypeupdateprogress) | **GET** /api/2.0/people/type/progress/{userid} | Get the user type change progress |
+| *PeopleUserStatusApi* | [**getByStatus**](#getbystatus) | **GET** /api/2.0/people/status/\{status\} | Get profiles by status |
+| *PeopleUserStatusApi* | [**updateUserActivationStatus**](#updateuseractivationstatus) | **PUT** /api/2.0/people/activationstatus/\{activationstatus\} | Set my activation status |
+| *PeopleUserStatusApi* | [**updateUserStatus**](#updateuserstatus) | **PUT** /api/2.0/people/status/\{status\} | Change a user status |
+| *PeopleUserTypeApi* | [**getUserTypeUpdateProgress**](#getusertypeupdateprogress) | **GET** /api/2.0/people/type/progress/\{userid\} | Get the user type change progress |
 | *PeopleUserTypeApi* | [**startUserTypeUpdate**](#startusertypeupdate) | **POST** /api/2.0/people/type | Start updating user type |
 | *PeopleUserTypeApi* | [**terminateUserTypeUpdate**](#terminateusertypeupdate) | **PUT** /api/2.0/people/type/terminate | Terminate updating user type |
-| *PeopleUserTypeApi* | [**updateUserType**](#updateusertype) | **PUT** /api/2.0/people/type/{type} | Change a user type |
-| *PortalGuestsApi* | [**getGuestSharingLink**](#getguestsharinglink) | **GET** /api/2.0/people/guests/{userid}/share | Get a guest sharing link |
+| *PeopleUserTypeApi* | [**updateUserType**](#updateusertype) | **PUT** /api/2.0/people/type/\{type\} | Change a user type |
+| *PortalGuestsApi* | [**getGuestSharingLink**](#getguestsharinglink) | **GET** /api/2.0/people/guests/\{userid\}/share | Get a guest sharing link |
 
 
 
@@ -4177,7 +4177,7 @@ The group parameters.
 | **isLDAP** | **Boolean** | Specifies if the LDAP settings are enabled for the group or not. | [required] [example: false] |
 | **isSystem** | **Boolean** | Indicates whether the group is a system group. | [optional] [example: false] [nullable] |
 | **manager** | [**EmployeeFullDto**](#model-employeefulldto) | The group manager full information. | [optional] |
-| **members** | [**List**](#model-employeefulldto) | The list of group members. | [optional] [example: [{displayName=John Doe}]] [nullable] |
+| **members** | [**List**](#model-employeefulldto) | The list of group members. | [optional] [example: [\{displayName=John Doe\}]] [nullable] |
 | **shared** | **Boolean** | Specifies whether the group can be shared or not. | [optional] [example: false] [nullable] |
 | **membersCount** | **Integer** (int32) | The number of group members. | [optional] [example: 0] |
 
@@ -4302,7 +4302,7 @@ The request parameters for inviting users.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **invitations** | [**List**](#model-userinvitationrequestdto) | The list of user invitations. | [required] [example: [{email=user@example.com, type=1}]] |
+| **invitations** | [**List**](#model-userinvitationrequestdto) | The list of user invitations. | [required] [example: [\{email=user@example.com, type=1\}]] |
 | **culture** | **String** | The culture code of invitations. | [optional] [example: en-US] [nullable] |
 
 
@@ -4311,7 +4311,7 @@ The request parameters for linking accounts.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **serializedProfile** | **String** | The profile a completed provider authorization produced, in the serialized form the login flow hands back.  Pass that value unchanged; it carries the provider, the third-party account ID and the authorization result,  and a hand-written object is not accepted. | [optional] [example: {"provider":"google","id":"123456"}] [nullable] |
+| **serializedProfile** | **String** | The profile a completed provider authorization produced, in the serialized form the login flow hands back.  Pass that value unchanged; it carries the provider, the third-party account ID and the authorization result,  and a hand-written object is not accepted. | [optional] [example: \{"provider":"google","id":"123456"\}] [nullable] |
 
 
 ### Model MemberRequestDto
@@ -4329,7 +4329,7 @@ The user request parameters.
 | **department** | **List** (uuid) | The groups to put the new account into, by group ID. Read the IDs from `GET api/2.0/group`; an ID that  matches no group is skipped without an error. | [optional] [example: [00000000-0000-0000-0000-000000000000]] [nullable] |
 | **location** | **String** | The free-text location shown on the profile. It is stored as it is given and is not validated. | [optional] [example: New York] [nullable] |
 | **comment** | **String** | The free-text note kept with the profile, shown to administrators. It is stored as it is given. | [optional] [example: User comment] [nullable] |
-| **contacts** | [**List**](#model-contact) | The additional ways to reach the person, each as a type and a value pair. The type is a free-text label such  as `email`, `phone`, `skype` or `telegram`, and an entry with an empty value is dropped. | [optional] [example: [{type=email, value=john.doe@example.com}]] [nullable] |
+| **contacts** | [**List**](#model-contact) | The additional ways to reach the person, each as a type and a value pair. The type is a free-text label such  as `email`, `phone`, `skype` or `telegram`, and an entry with an empty value is dropped. | [optional] [example: [\{type=email, value=john.doe@example.com\}]] [nullable] |
 | **files** | **String** | The address the portal downloads the avatar from. It has to use HTTPS unless the request itself came over  HTTP, an address the portal refuses to fetch is rejected, and passing the default avatar path means no  avatar is downloaded. | [optional] [example: https://example.com/avatar.jpg] [nullable] |
 | **fromInviteLink** | **Boolean** | Set it to true when the account is created by somebody accepting an invitation, which makes `key` required  and lets the link decide the type. With the default false the caller has to hold the permission to add an  account of the requested type. | [optional] [example: false] |
 | **key** | **String** | The key of the invitation link being accepted, taken from the link itself. It is read only when  `fromInviteLink` is true, and an expired or already used key answers 403. | [optional] [example: user_key_string] [nullable] |
@@ -4423,7 +4423,7 @@ The request parameters for creating a third-party account.
 | **employeeType** | [**EmployeeType**](#model-employeetype) | The type the invitation link is looked up as, defaulting to `RoomAdmin`. It does not decide the resulting  type: the link itself does, and this value only has to match the kind of link that was issued. | [optional] [enum: All, RoomAdmin, Guest, DocSpaceAdmin, User] |
 | **key** | **String** | The key of the invitation link being accepted, taken from the link the invitation email or the room  invitation contains. An expired or already used key is rejected with 403. | [required] [example: invite_key_123456] [nullable] |
 | **culture** | **String** | The culture to set on the new profile, as a culture code. It is applied only when the portal has that culture  enabled, and otherwise the portal default is kept. | [optional] [example: en-US] [nullable] |
-| **serializedProfile** | **String** | The profile a completed provider authorization produced, in the serialized form the login flow hands back.  Pass that value unchanged; the first name, the last name, the email and the avatar of the new profile are  taken from it. | [required] [example: {"provider":"google","id":"123456"}] [nullable] |
+| **serializedProfile** | **String** | The profile a completed provider authorization produced, in the serialized form the login flow hands back.  Pass that value unchanged; the first name, the last name, the email and the avatar of the new profile are  taken from it. | [required] [example: \{"provider":"google","id":"123456"\}] [nullable] |
 
 
 ### Model SortOrder
@@ -4591,7 +4591,7 @@ The request parameters for updating the user information.
 | **department** | **List** (uuid) | The groups the profile should belong to, by group ID, replacing the current ones. It is applied only to the  caller's own profile. | [optional] [example: [00000000-0000-0000-0000-000000000000]] [nullable] |
 | **location** | **String** | The new free-text location shown on the profile. It is applied only to the caller's own profile and is left  alone on an LDAP or SSO account. | [optional] [example: New York] [nullable] |
 | **comment** | **String** | The new free-text note kept with the profile. It is applied only to the caller's own profile. | [optional] [example: User comment] [nullable] |
-| **contacts** | [**List**](#model-contact) | The additional ways to reach the person, replacing the current ones. Each entry is a free-text type such as  `email`, `phone`, `skype` or `telegram` and its value, an entry with an empty value is dropped, and the field  is applied only to the caller's own profile. | [optional] [example: [{type=email, value=john.doe@example.com}]] [nullable] |
+| **contacts** | [**List**](#model-contact) | The additional ways to reach the person, replacing the current ones. Each entry is a free-text type such as  `email`, `phone`, `skype` or `telegram` and its value, an entry with an empty value is dropped, and the field  is applied only to the caller's own profile. | [optional] [example: [\{type=email, value=john.doe@example.com\}]] [nullable] |
 | **files** | **String** | The address the portal downloads the new avatar from. It is applied only to the caller's own profile, has to  use HTTPS unless the request itself came over HTTP, and passing the address the profile already uses  downloads nothing. | [optional] [example: https://example.com/avatar.jpg] [nullable] |
 | **spam** | **Boolean** | Whether the account agrees to receive tips, updates and offers. It is applied only to the caller's own  profile, and omitting it on such a request stores false rather than keeping the current value. | [optional] [example: false] [nullable] |
 

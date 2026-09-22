@@ -1,7 +1,7 @@
 # ONLYOFFICE DocSpace Portal API
 
 The browsable version of this reference, with a request builder and code samples, is published at
-<https://api.onlyoffice.com/docspace/api-backend/usage-api/>.
+[https://api.onlyoffice.com/docspace/api-backend/usage-api/](https://api.onlyoffice.com/docspace/api-backend/usage-api/).
 
 All URIs are relative to *https://yourportal.onlyoffice.com*, where the host is the address of your DocSpace instance.
 
@@ -9,13 +9,13 @@ All URIs are relative to *https://yourportal.onlyoffice.com*, where the host is 
 
 | Class | Method | HTTP request | Description |
 |------------ | ------------- | ------------- | -------------|
-| *AppsApi* | [**get**](#get) | **GET** /api/2.0/apps/{id} | Get an app |
+| *AppsApi* | [**get**](#get) | **GET** /api/2.0/apps/\{id\} | Get an app |
 | *AppsApi* | [**getAll**](#getall) | **GET** /api/2.0/apps | Get all apps |
-| *AppsApi* | [**getSettings**](#getsettings) | **GET** /api/2.0/apps/{id}/settings | Get app settings |
-| *AppsApi* | [**setEnabled**](#setenabled) | **PUT** /api/2.0/apps/{id}/enabled | Enable or disable an app |
-| *AppsApi* | [**setSettings**](#setsettings) | **PUT** /api/2.0/apps/{id}/settings | Save app settings |
+| *AppsApi* | [**getSettings**](#getsettings) | **GET** /api/2.0/apps/\{id\}/settings | Get app settings |
+| *AppsApi* | [**setEnabled**](#setenabled) | **PUT** /api/2.0/apps/\{id\}/enabled | Enable or disable an app |
+| *AppsApi* | [**setSettings**](#setsettings) | **PUT** /api/2.0/apps/\{id\}/settings | Save app settings |
 | *AuthenticationApi* | [**authenticateMe**](#authenticateme) | **POST** /api/2.0/authentication | Authenticate a user |
-| *AuthenticationApi* | [**authenticateMeFromBodyWithCode**](#authenticatemefrombodywithcode) | **POST** /api/2.0/authentication/{code} | Authenticate a user by code |
+| *AuthenticationApi* | [**authenticateMeFromBodyWithCode**](#authenticatemefrombodywithcode) | **POST** /api/2.0/authentication/\{code\} | Authenticate a user by code |
 | *AuthenticationApi* | [**checkConfirm**](#checkconfirm) | **POST** /api/2.0/authentication/confirm | Check a confirmation link |
 | *AuthenticationApi* | [**getIsAuthentificated**](#getisauthentificated) | **GET** /api/2.0/authentication | Check authentication |
 | *AuthenticationApi* | [**logout**](#logout) | **POST** /api/2.0/authentication/logout | Log out |
@@ -29,13 +29,13 @@ All URIs are relative to *https://yourportal.onlyoffice.com*, where the host is 
 | *MigrationApi* | [**getMigrationStatus**](#getmigrationstatus) | **GET** /api/2.0/migration/status | Get migration status |
 | *MigrationApi* | [**listMigrations**](#listmigrations) | **GET** /api/2.0/migration/list | Get available migrators |
 | *MigrationApi* | [**startMigration**](#startmigration) | **POST** /api/2.0/migration/migrate | Start migration |
-| *MigrationApi* | [**uploadAndInitializeMigration**](#uploadandinitializemigration) | **POST** /api/2.0/migration/init/{migratorName} | Parse migration archive |
+| *MigrationApi* | [**uploadAndInitializeMigration**](#uploadandinitializemigration) | **POST** /api/2.0/migration/init/\{migratorName\} | Parse migration archive |
 | *PortalPaymentApi* | [**calculateWalletPayment**](#calculatewalletpayment) | **PUT** /api/2.0/portal/payment/calculatewallet | Calculate the wallet payment amount |
 | *PortalPaymentApi* | [**changeTenantWalletServiceState**](#changetenantwalletservicestate) | **POST** /api/2.0/portal/payment/servicestate | Switch a wallet service |
 | *PortalPaymentApi* | [**createCustomerMonthlyUsageReport**](#createcustomermonthlyusagereport) | **POST** /api/2.0/portal/payment/customer/usage/monthly/report | Start the monthly usage report |
 | *PortalPaymentApi* | [**createCustomerOperationsReport**](#createcustomeroperationsreport) | **POST** /api/2.0/portal/payment/customer/operationsreport | Start the operations report |
 | *PortalPaymentApi* | [**createCustomerServiceUsageReport**](#createcustomerserviceusagereport) | **POST** /api/2.0/portal/payment/customer/usage/report | Start the service usage report |
-| *PortalPaymentApi* | [**getAccountingServicePrices**](#getaccountingserviceprices) | **GET** /api/2.0/portal/payment/accounting/prices/{serviceName} | Get the service prices from the accounting service |
+| *PortalPaymentApi* | [**getAccountingServicePrices**](#getaccountingserviceprices) | **GET** /api/2.0/portal/payment/accounting/prices/\{serviceName\} | Get the service prices from the accounting service |
 | *PortalPaymentApi* | [**getActiveServices**](#getactiveservices) | **GET** /api/2.0/portal/payment/activeservices | Get the active wallet services |
 | *PortalPaymentApi* | [**getAiPrices**](#getaiprices) | **GET** /api/2.0/portal/payment/ai-prices | Get AI model prices |
 | *PortalPaymentApi* | [**getCheckoutSetupUrl**](#getcheckoutsetupurl) | **GET** /api/2.0/portal/payment/checkoutsetupurl | Get the checkout setup page URL |
@@ -83,18 +83,18 @@ All URIs are relative to *https://yourportal.onlyoffice.com*, where the host is 
 | *PortalSettingsApi* | [**suspendPortal**](#suspendportal) | **PUT** /api/2.0/portal/suspend | Deactivate a portal |
 | *PortalUsersApi* | [**createInvitationLink**](#createinvitationlink) | **POST** /api/2.0/portal/users/invitationlink | Create an invitation link |
 | *PortalUsersApi* | [**deleteInvitationLink**](#deleteinvitationlink) | **DELETE** /api/2.0/portal/users/invitationlink | Delete an invitation link |
-| *PortalUsersApi* | [**getInvitationLink**](#getinvitationlink) | **GET** /api/2.0/portal/users/invite/{employeeType} | Get a legacy invitation link |
-| *PortalUsersApi* | [**getInvitationLinkByEmployeeType**](#getinvitationlinkbyemployeetype) | **GET** /api/2.0/portal/users/invitationlink/{employeeType} | Get an invitation link by role |
+| *PortalUsersApi* | [**getInvitationLink**](#getinvitationlink) | **GET** /api/2.0/portal/users/invite/\{employeeType\} | Get a legacy invitation link |
+| *PortalUsersApi* | [**getInvitationLinkByEmployeeType**](#getinvitationlinkbyemployeetype) | **GET** /api/2.0/portal/users/invitationlink/\{employeeType\} | Get an invitation link by role |
 | *PortalUsersApi* | [**getPortalUsersCount**](#getportaluserscount) | **GET** /api/2.0/portal/userscount | Get a number of portal users |
-| *PortalUsersApi* | [**getUserById**](#getuserbyid) | **GET** /api/2.0/portal/users/{userID} | Get a portal user |
+| *PortalUsersApi* | [**getUserById**](#getuserbyid) | **GET** /api/2.0/portal/users/\{userID\} | Get a portal user |
 | *PortalUsersApi* | [**markGiftMessageAsRead**](#markgiftmessageasread) | **POST** /api/2.0/portal/present/mark | Mark a gift message as read |
 | *PortalUsersApi* | [**sendCongratulations**](#sendcongratulations) | **POST** /api/2.0/portal/sendcongratulations | Send congratulations |
 | *PortalUsersApi* | [**updateInvitationLink**](#updateinvitationlink) | **PUT** /api/2.0/portal/users/invitationlink | Update an invitation link |
 | *SecurityAccessToDevToolsApi* | [**setTenantDevToolsAccessSettings**](#settenantdevtoolsaccesssettings) | **POST** /api/2.0/settings/devtoolsaccess | Set the Developer Tools access settings |
 | *SecurityActiveConnectionsApi* | [**getAllActiveConnections**](#getallactiveconnections) | **GET** /api/2.0/security/activeconnections | Get active connections |
-| *SecurityActiveConnectionsApi* | [**logOutActiveConnection**](#logoutactiveconnection) | **PUT** /api/2.0/security/activeconnections/logout/{loginEventId} | Log out one connection |
+| *SecurityActiveConnectionsApi* | [**logOutActiveConnection**](#logoutactiveconnection) | **PUT** /api/2.0/security/activeconnections/logout/\{loginEventId\} | Log out one connection |
 | *SecurityActiveConnectionsApi* | [**logOutAllActiveConnectionsChangePassword**](#logoutallactiveconnectionschangepassword) | **PUT** /api/2.0/security/activeconnections/logoutallchangepassword | Log out and reset password |
-| *SecurityActiveConnectionsApi* | [**logOutAllActiveConnectionsForUser**](#logoutallactiveconnectionsforuser) | **PUT** /api/2.0/security/activeconnections/logoutall/{userId} | Log out a user everywhere |
+| *SecurityActiveConnectionsApi* | [**logOutAllActiveConnectionsForUser**](#logoutallactiveconnectionsforuser) | **PUT** /api/2.0/security/activeconnections/logoutall/\{userId\} | Log out a user everywhere |
 | *SecurityActiveConnectionsApi* | [**logOutAllExceptThisConnection**](#logoutallexceptthisconnection) | **PUT** /api/2.0/security/activeconnections/logoutallexceptthis | Log out other connections |
 | *SecurityAuditTrailDataApi* | [**createAuditTrailReport**](#createaudittrailreport) | **POST** /api/2.0/security/audit/events/report | Start audit trail report |
 | *SecurityAuditTrailDataApi* | [**getAuditEventsByFilter**](#getauditeventsbyfilter) | **GET** /api/2.0/security/audit/events/filter | Get filtered audit events |
@@ -150,18 +150,18 @@ All URIs are relative to *https://yourportal.onlyoffice.com*, where the host is 
 | *SettingsCommonSettingsApi* | [**updateInvitationSettings**](#updateinvitationsettings) | **PUT** /api/2.0/settings/invitationsettings | Update the user invitation settings |
 | *SettingsCookiesApi* | [**getCookieSettings**](#getcookiesettings) | **GET** /api/2.0/settings/cookiesettings | Get the cookie lifetime settings |
 | *SettingsCookiesApi* | [**updateCookieSettings**](#updatecookiesettings) | **PUT** /api/2.0/settings/cookiesettings | Update the cookie lifetime settings |
-| *SettingsDocsCloudApi* | [**calculateDevPack**](#calculatedevpack) | **POST** /api/2.0/settings/docscloud/calculatedevpack | Calculate the Docs Connect Dev Pack switch cost |
-| *SettingsDocsCloudApi* | [**createTenantQuotaReport**](#createtenantquotareport) | **POST** /api/2.0/settings/docscloud/tenant/quota/report | Start the Docs Connect quota report |
-| *SettingsDocsCloudApi* | [**getTenant**](#gettenant) | **GET** /api/2.0/settings/docscloud/tenant | Get the Docs Connect tenant |
-| *SettingsDocsCloudApi* | [**getTenantConfig**](#gettenantconfig) | **GET** /api/2.0/settings/docscloud/tenant/config | Get the Docs Connect tenant configuration |
-| *SettingsDocsCloudApi* | [**getTenantInfo**](#gettenantinfo) | **GET** /api/2.0/settings/docscloud/tenant/info | Get the Docs Connect tenant information |
-| *SettingsDocsCloudApi* | [**getTenantQuota**](#gettenantquota) | **GET** /api/2.0/settings/docscloud/tenant/quota | Get the Docs Connect tenant quota |
-| *SettingsDocsCloudApi* | [**getTenantQuotaReport**](#gettenantquotareport) | **GET** /api/2.0/settings/docscloud/tenant/quota/report | Get the Docs Connect quota report status |
-| *SettingsDocsCloudApi* | [**getTenantUsage**](#gettenantusage) | **GET** /api/2.0/settings/docscloud/tenant/usage | Get the Docs Connect tenant usage |
-| *SettingsDocsCloudApi* | [**startDocsCloudTrial**](#startdocscloudtrial) | **POST** /api/2.0/settings/docscloud/trial | Start the Docs Connect trial |
-| *SettingsDocsCloudApi* | [**switchToDevPack**](#switchtodevpack) | **POST** /api/2.0/settings/docscloud/switchtodevpack | Switch Docs Connect to Docs Connect Dev Pack |
-| *SettingsDocsCloudApi* | [**terminateTenantQuotaReport**](#terminatetenantquotareport) | **DELETE** /api/2.0/settings/docscloud/tenant/quota/report | Terminate the Docs Connect quota report |
-| *SettingsDocsCloudApi* | [**updateTenantConfig**](#updatetenantconfig) | **PUT** /api/2.0/settings/docscloud/tenant/config | Update the Docs Connect tenant configuration |
+| *SettingsDocsCloudApi* | [**calculateDevPack**](#calculatedevpack) | **POST** /api/2.0/settings/docscloud/calculatedevpack | Calculate the DocsCloudDevPack switch cost |
+| *SettingsDocsCloudApi* | [**createTenantQuotaReport**](#createtenantquotareport) | **POST** /api/2.0/settings/docscloud/tenant/quota/report | Start the DocsCloud quota report |
+| *SettingsDocsCloudApi* | [**getTenant**](#gettenant) | **GET** /api/2.0/settings/docscloud/tenant | Get the DocsCloud tenant |
+| *SettingsDocsCloudApi* | [**getTenantConfig**](#gettenantconfig) | **GET** /api/2.0/settings/docscloud/tenant/config | Get the DocsCloud tenant configuration |
+| *SettingsDocsCloudApi* | [**getTenantInfo**](#gettenantinfo) | **GET** /api/2.0/settings/docscloud/tenant/info | Get the DocsCloud tenant information |
+| *SettingsDocsCloudApi* | [**getTenantQuota**](#gettenantquota) | **GET** /api/2.0/settings/docscloud/tenant/quota | Get the DocsCloud tenant quota |
+| *SettingsDocsCloudApi* | [**getTenantQuotaReport**](#gettenantquotareport) | **GET** /api/2.0/settings/docscloud/tenant/quota/report | Get the DocsCloud quota report status |
+| *SettingsDocsCloudApi* | [**getTenantUsage**](#gettenantusage) | **GET** /api/2.0/settings/docscloud/tenant/usage | Get the DocsCloud tenant usage |
+| *SettingsDocsCloudApi* | [**startDocsCloudTrial**](#startdocscloudtrial) | **POST** /api/2.0/settings/docscloud/trial | Start the DocsCloud trial |
+| *SettingsDocsCloudApi* | [**switchToDevPack**](#switchtodevpack) | **POST** /api/2.0/settings/docscloud/switchtodevpack | Switch DocsCloud to DocsCloudDevPack |
+| *SettingsDocsCloudApi* | [**terminateTenantQuotaReport**](#terminatetenantquotareport) | **DELETE** /api/2.0/settings/docscloud/tenant/quota/report | Terminate the DocsCloud quota report |
+| *SettingsDocsCloudApi* | [**updateTenantConfig**](#updatetenantconfig) | **PUT** /api/2.0/settings/docscloud/tenant/config | Update the DocsCloud tenant configuration |
 | *SettingsEncryptionApi* | [**getStorageEncryptionProgress**](#getstorageencryptionprogress) | **GET** /api/2.0/settings/encryption/progress | Get the storage encryption progress |
 | *SettingsEncryptionApi* | [**getStorageEncryptionSettings**](#getstorageencryptionsettings) | **GET** /api/2.0/settings/encryption/settings | Get the storage encryption settings |
 | *SettingsEncryptionApi* | [**startStorageEncryption**](#startstorageencryption) | **POST** /api/2.0/settings/encryption/start | Start the storage encryption |
@@ -184,7 +184,7 @@ All URIs are relative to *https://yourportal.onlyoffice.com*, where the host is 
 | *SettingsMessagesApi* | [**sendAdminMail**](#sendadminmail) | **POST** /api/2.0/settings/sendadmmail | Send a message to the administrator |
 | *SettingsMessagesApi* | [**sendJoinInviteMail**](#sendjoininvitemail) | **POST** /api/2.0/settings/sendjoininvite | Send an invitation email |
 | *SettingsNotificationsApi* | [**getNotificationChannels**](#getnotificationchannels) | **GET** /api/2.0/settings/notification/channels | Get notification channels |
-| *SettingsNotificationsApi* | [**getNotificationSettings**](#getnotificationsettings) | **GET** /api/2.0/settings/notification/{type} | Check notification availability |
+| *SettingsNotificationsApi* | [**getNotificationSettings**](#getnotificationsettings) | **GET** /api/2.0/settings/notification/\{type\} | Check notification availability |
 | *SettingsNotificationsApi* | [**getRoomsNotificationSettings**](#getroomsnotificationsettings) | **GET** /api/2.0/settings/notification/rooms | Get muted rooms |
 | *SettingsNotificationsApi* | [**setNotificationSettings**](#setnotificationsettings) | **POST** /api/2.0/settings/notification | Set notification status |
 | *SettingsNotificationsApi* | [**setRoomsNotificationStatus**](#setroomsnotificationstatus) | **POST** /api/2.0/settings/notification/rooms | Mute or unmute a room |
@@ -219,14 +219,14 @@ All URIs are relative to *https://yourportal.onlyoffice.com*, where the host is 
 | *SettingsSecurityApi* | [**getEnabledModules**](#getenabledmodules) | **GET** /api/2.0/settings/security/modules | Get enabled modules |
 | *SettingsSecurityApi* | [**getIsProductAdministrator**](#getisproductadministrator) | **GET** /api/2.0/settings/security/administrator | Check product administrator |
 | *SettingsSecurityApi* | [**getPasswordSettings**](#getpasswordsettings) | **GET** /api/2.0/settings/security/password | Get password settings |
-| *SettingsSecurityApi* | [**getProductAdministrators**](#getproductadministrators) | **GET** /api/2.0/settings/security/administrator/{productid} | Get product administrators |
-| *SettingsSecurityApi* | [**getWebItemSecurityInfo**](#getwebitemsecurityinfo) | **GET** /api/2.0/settings/security/{id} | Check module availability |
+| *SettingsSecurityApi* | [**getProductAdministrators**](#getproductadministrators) | **GET** /api/2.0/settings/security/administrator/\{productid\} | Get product administrators |
+| *SettingsSecurityApi* | [**getWebItemSecurityInfo**](#getwebitemsecurityinfo) | **GET** /api/2.0/settings/security/\{id\} | Check module availability |
 | *SettingsSecurityApi* | [**getWebItemSettingsSecurityInfo**](#getwebitemsettingssecurityinfo) | **GET** /api/2.0/settings/security | Get module access settings |
 | *SettingsSecurityApi* | [**setAccessToWebItems**](#setaccesstowebitems) | **PUT** /api/2.0/settings/security/access | Set access to modules in bulk |
 | *SettingsSecurityApi* | [**setProductAdministrator**](#setproductadministrator) | **PUT** /api/2.0/settings/security/administrator | Set product administrator |
 | *SettingsSecurityApi* | [**setWebItemSecurity**](#setwebitemsecurity) | **PUT** /api/2.0/settings/security | Set module access |
 | *SettingsSecurityApi* | [**updatePasswordSettings**](#updatepasswordsettings) | **PUT** /api/2.0/settings/security/password | Update password settings |
-| *SettingsStatisticsApi* | [**getSpaceUsageStatistics**](#getspaceusagestatistics) | **GET** /api/2.0/settings/statistics/spaceusage/{id} | Get the space usage statistics |
+| *SettingsStatisticsApi* | [**getSpaceUsageStatistics**](#getspaceusagestatistics) | **GET** /api/2.0/settings/statistics/spaceusage/\{id\} | Get the space usage statistics |
 | *SettingsStorageApi* | [**getAllBackupStorages**](#getallbackupstorages) | **GET** /api/2.0/settings/storage/backup | Get the backup storages |
 | *SettingsStorageApi* | [**getAllCdnStorages**](#getallcdnstorages) | **GET** /api/2.0/settings/storage/cdn | Get the CDN storages |
 | *SettingsStorageApi* | [**getAllStorages**](#getallstorages) | **GET** /api/2.0/settings/storage | Get the portal storages |
@@ -253,16 +253,16 @@ All URIs are relative to *https://yourportal.onlyoffice.com*, where the host is 
 | *SettingsWebhooksApi* | [**getTenantWebhooks**](#gettenantwebhooks) | **GET** /api/2.0/settings/webhook | Get the portal webhooks |
 | *SettingsWebhooksApi* | [**getWebhookTriggers**](#getwebhooktriggers) | **GET** /api/2.0/settings/webhook/triggers | Get the webhook triggers |
 | *SettingsWebhooksApi* | [**getWebhooksLogs**](#getwebhookslogs) | **GET** /api/2.0/settings/webhooks/log | Get the webhook delivery log |
-| *SettingsWebhooksApi* | [**removeWebhook**](#removewebhook) | **DELETE** /api/2.0/settings/webhook/{id} | Remove a webhook |
-| *SettingsWebhooksApi* | [**retryWebhook**](#retrywebhook) | **PUT** /api/2.0/settings/webhook/{id}/retry | Retry a webhook delivery |
+| *SettingsWebhooksApi* | [**removeWebhook**](#removewebhook) | **DELETE** /api/2.0/settings/webhook/\{id\} | Remove a webhook |
+| *SettingsWebhooksApi* | [**retryWebhook**](#retrywebhook) | **PUT** /api/2.0/settings/webhook/\{id\}/retry | Retry a webhook delivery |
 | *SettingsWebhooksApi* | [**retryWebhooks**](#retrywebhooks) | **PUT** /api/2.0/settings/webhook/retry | Retry webhook deliveries |
 | *SettingsWebhooksApi* | [**updateWebhook**](#updatewebhook) | **PUT** /api/2.0/settings/webhook | Update a webhook |
 | *SettingsWebpluginsApi* | [**addWebPluginFromFile**](#addwebpluginfromfile) | **POST** /api/2.0/settings/webplugins | Add a web plugin |
-| *SettingsWebpluginsApi* | [**deleteWebPlugin**](#deletewebplugin) | **DELETE** /api/2.0/settings/webplugins/{name} | Delete a web plugin |
-| *SettingsWebpluginsApi* | [**getWebPlugin**](#getwebplugin) | **GET** /api/2.0/settings/webplugins/{name} | Get a web plugin by name |
+| *SettingsWebpluginsApi* | [**deleteWebPlugin**](#deletewebplugin) | **DELETE** /api/2.0/settings/webplugins/\{name\} | Delete a web plugin |
+| *SettingsWebpluginsApi* | [**getWebPlugin**](#getwebplugin) | **GET** /api/2.0/settings/webplugins/\{name\} | Get a web plugin by name |
 | *SettingsWebpluginsApi* | [**getWebPlugins**](#getwebplugins) | **GET** /api/2.0/settings/webplugins | Get web plugins |
-| *SettingsWebpluginsApi* | [**updateWebPlugin**](#updatewebplugin) | **PUT** /api/2.0/settings/webplugins/{name} | Update a web plugin |
-| *ThirdPartyApi* | [**getThirdPartyCode**](#getthirdpartycode) | **GET** /api/2.0/thirdparty/{provider} | Get provider consent URL |
+| *SettingsWebpluginsApi* | [**updateWebPlugin**](#updatewebplugin) | **PUT** /api/2.0/settings/webplugins/\{name\} | Update a web plugin |
+| *ThirdPartyApi* | [**getThirdPartyCode**](#getthirdpartycode) | **GET** /api/2.0/thirdparty/\{provider\} | Get provider consent URL |
 
 
 
@@ -1388,7 +1388,7 @@ Returns the portal's automatic wallet top-up settings: whether it is switched on
 
 Get the active wallet services
 
-Lists the wallet services the portal is running right now: the add-ons its plan pays for that are in the  active state, plus the ones an administrator switched on by hand in the wallet service settings; the Docs Connect  trial is listed as well, although it is not paid from the wallet. Only a DocSpace administrator may call it,  no billing customer is needed for it, and the call is read-only. Every item names the service, its title and  the unit it is measured in, and says whether it is a subscription; a subscribed service also carries the limit  it grants and how much of it is used where that number is known - the editor seats and the editors currently  active for Docs Connect, the purchased units and the units already consumed for disk storage. A service listed  with no limit is one whose usage is not counted this way, not one without a limit. The catalogue of what could  be switched on is `GET api/2.0/portal/payment/walletservices`, and switching one is  `POST api/2.0/portal/payment/servicestate`.
+Lists the wallet services the portal is running right now: the add-ons its plan pays for that are in the  active state, plus the ones an administrator switched on by hand in the wallet service settings; the DocsCloud  trial is listed as well, although it is not paid from the wallet. Only a DocSpace administrator may call it,  no billing customer is needed for it, and the call is read-only. Every item names the service, its title and  the unit it is measured in, and says whether it is a subscription; a subscribed service also carries the limit  it grants and how much of it is used where that number is known - the editor seats and the editors currently  active for DocsCloud, the purchased units and the units already consumed for disk storage. A service listed  with no limit is one whose usage is not counted this way, not one without a limit. The catalogue of what could  be switched on is `GET api/2.0/portal/payment/walletservices`, and switching one is  `POST api/2.0/portal/payment/servicestate`.
 
 #### Parameters
 This endpoint does not need any parameter.
@@ -1777,7 +1777,7 @@ Returns how much of each wallet service the portal consumed and what that cost, 
 | **Status** | query | **OperationStatus** | The outcome to keep. Consumption that is still being settled is reported as pending and may change later,  while the other outcomes are final; every outcome is counted when this is omitted. | [optional] [example: Completed] [enum: 0, 1, 2, 3] |
 | **StartDate** | query | **Date** (date-time) | The beginning of the reported period, inclusive. Read in the portal time zone rather than in UTC, and  defaults to the portal creation date. | [optional] [example: 2025-01-01T00:00:00Z] |
 | **EndDate** | query | **Date** (date-time) | The end of the reported period, inclusive. Read in the portal time zone rather than in UTC, and defaults to  the moment the call is made. | [optional] [example: 2025-12-31T23:59:59Z] |
-| **Metadata** | query | **Map** | The usage annotations a wallet service records alongside its consumption, as the key and value pairs that  must all match for a record to be counted. The keys are chosen by the service that writes them, so read them  off the `metadata` of the records already returned rather than guessing; an omitted map counts every record. | [optional] [example: {"key1":"value1","key2":"value2"}] |
+| **Metadata** | query | **Map** | The usage annotations a wallet service records alongside its consumption, as the key and value pairs that  must all match for a record to be counted. The keys are chosen by the service that writes them, so read them  off the `metadata` of the records already returned rather than guessing; an omitted map counts every record. | [optional] [example: \{"key1":"value1","key2":"value2"\}] |
 | **offset** | query | **Integer** (int32) | The number of per-service totals to skip before the first one returned. Counted after the filters and the  ordering are applied, and starts at 0 when omitted. | [optional] [example: 0] |
 | **limit** | query | **Integer** (int32) | The maximum number of per-service totals returned in one page. Defaults to 25 when omitted; the answer echoes  the window back with its paging information, so the next `offset` can be computed without counting the items. | [optional] [example: 25] |
 | **OrderBy** | query | **String** | The name of the field the per-service totals are sorted by, spelled as the accounting service names it, such  as `ServiceName` or `StartDate`. Surrounding whitespace is trimmed, and the accounting service applies its  own ordering when this is omitted. | [optional] [example: ServiceName] |
@@ -2300,7 +2300,7 @@ Returns one wallet service by name, for a client that already knows which servic
 
 Get wallet services
 
-Lists every service the portal may pay for out of its wallet - extra administrators, disk storage, backup, AI  tools, AI search and Docs Connect - with the price of a unit, the unit it is sold in and whether the portal has  it switched on. Nothing has to be called first, the caller needs the permission to edit the portal settings,  and the call is read-only. Services that are variants of one another are folded together: the visible one  carries the rest in its `innerServices`, so a client renders one card per group. The AI services are left out  entirely when AI is not enabled for the portal. This is the catalogue and not the state of the portal - what  is actually running is `GET api/2.0/portal/payment/activeservices`, one service on its own is  `GET api/2.0/portal/payment/walletservice`, and switching one on or off is  `POST api/2.0/portal/payment/servicestate`.
+Lists every service the portal may pay for out of its wallet - extra administrators, disk storage, backup, AI  tools, AI search and DocsCloud - with the price of a unit, the unit it is sold in and whether the portal has  it switched on. Nothing has to be called first, the caller needs the permission to edit the portal settings,  and the call is read-only. Services that are variants of one another are folded together: the visible one  carries the rest in its `innerServices`, so a client renders one card per group. The AI services are left out  entirely when AI is not enabled for the portal. This is the catalogue and not the state of the portal - what  is actually running is `GET api/2.0/portal/payment/activeservices`, one service on its own is  `GET api/2.0/portal/payment/walletservice`, and switching one on or off is  `POST api/2.0/portal/payment/servicestate`.
 
 #### Parameters
 This endpoint does not need any parameter.
@@ -2713,7 +2713,7 @@ Changes how many units of the plan the portal is paying for - the number of admi
 
 Change a wallet service quantity
 
-Buys more units of a wallet service - extra administrators, disk storage, backup, AI tools, AI search or  Docs Connect - or writes down the quantity that service will have after the next renewal, depending on  `productQuantityType`. With `Add` (1) the units are bought at once and paid out of the portal wallet, so the  wallet needs a sub-account in the accounting currency and enough money on it; with `Set` (0) nothing is  charged now and the quantity only takes effect in the next period, where an empty or zero quantity cancels a  change scheduled earlier. `Renew` and `Sub` are not accepted here. The portal needs a billing customer and the  caller has to be a DocSpace administrator; a service that is an add-on to the plan also needs the plan itself  to be paid, otherwise the answer is 402. Minimum quantities apply - disk storage starts at 100 units, the  Docs Connect Dev Pack at 10, and the administrators may not be fewer than the portal already has - and in  the `Add` form they are checked only while the portal does not hold that service yet. Asking for the Docs Connect  plan in the `Set` form while Docs Connect Dev Pack is active schedules the reversion to it at the next period,  while the upgrade in the other direction is not done here at all: use  `POST api/2.0/settings/docscloud/switchtodevpack`. The result is `true` when the change was accepted; the call  is mutating, spends money in its `Add` form and is limited to ten requests a minute per user by default. Price  the same purchase without paying for it with `PUT api/2.0/portal/payment/calculatewallet`.
+Buys more units of a wallet service - extra administrators, disk storage, backup, AI tools, AI search or  DocsCloud - or writes down the quantity that service will have after the next renewal, depending on  `productQuantityType`. With `Add` (1) the units are bought at once and paid out of the portal wallet, so the  wallet needs a sub-account in the accounting currency and enough money on it; with `Set` (0) nothing is  charged now and the quantity only takes effect in the next period, where an empty or zero quantity cancels a  change scheduled earlier. `Renew` and `Sub` are not accepted here. The portal needs a billing customer and the  caller has to be a DocSpace administrator; a service that is an add-on to the plan also needs the plan itself  to be paid, otherwise the answer is 402. Minimum quantities apply - disk storage starts at 100 units, the  DocsCloud developer pack at 10, and the administrators may not be fewer than the portal already has - and in  the `Add` form they are checked only while the portal does not hold that service yet. Asking for the DocsCloud  plan in the `Set` form while the developer pack is active schedules the reversion to it at the next period,  while the upgrade in the other direction is not done here at all: use  `POST api/2.0/settings/docscloud/switchtodevpack`. The result is `true` when the change was accepted; the call  is mutating, spends money in its `Add` form and is limited to ten requests a minute per user by default. Price  the same purchase without paying for it with `PUT api/2.0/portal/payment/calculatewallet`.
 
 #### Parameters
 
@@ -5995,9 +5995,9 @@ Stores how long an authentication session of this portal stays valid: `lifeTime`
 
 `POST /api/2.0/settings/docscloud/calculatedevpack`
 
-Calculate the Docs Connect Dev Pack switch cost
+Calculate the DocsCloudDevPack switch cost
 
-Prices the upgrade of the paid Docs Connect subscription of the current portal to Docs Connect Dev Pack for  the requested number of users, without changing the subscription or charging anything. It applies the  same preconditions as the switch itself: the portal must hold an active Docs Connect subscription, must  not already hold a Docs Connect Dev Pack one, and its tariff must not be delayed or unpaid; the quotas and  the state of the current tariff are listed by `GET api/2.0/portal/tariff`. The caller must be a  DocSpace administrator of a portal registered with the billing service. The call is read-only and  idempotent, so it can be repeated for different quantities before any switch is made. It returns the  amount that switching would cost, the three-letter ISO 4217 currency of that amount, the quantity the  amount was calculated for, and the identifier of the billing operation; an empty result means the  billing service could not price the switch, which should then not be attempted. The switch itself is  performed by `POST api/2.0/settings/docscloud/switchtodevpack` with the same `quantity` and takes no  identifier from this response; to price a change in the number of users of a subscription the portal  already has, use `PUT api/2.0/portal/payment/calculatewallet` instead.
+Prices the upgrade of the paid DocsCloud subscription of the current portal to DocsCloudDevPack for  the requested number of users, without changing the subscription or charging anything. It applies the  same preconditions as the switch itself: the portal must hold an active DocsCloud subscription, must  not already hold a DocsCloudDevPack one, and its tariff must not be delayed or unpaid; the quotas and  the state of the current tariff are listed by `GET api/2.0/portal/tariff`. The caller must be a  DocSpace administrator of a portal registered with the billing service. The call is read-only and  idempotent, so it can be repeated for different quantities before any switch is made. It returns the  amount that switching would cost, the three-letter ISO 4217 currency of that amount, the quantity the  amount was calculated for, and the identifier of the billing operation; an empty result means the  billing service could not price the switch, which should then not be attempted. The switch itself is  performed by `POST api/2.0/settings/docscloud/switchtodevpack` with the same `quantity` and takes no  identifier from this response; to price a change in the number of users of a subscription the portal  already has, use `PUT api/2.0/portal/payment/calculatewallet` instead.
 
 #### Parameters
 
@@ -6009,11 +6009,11 @@ Prices the upgrade of the paid Docs Connect subscription of the current portal t
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The cost of switching to Docs Connect Dev Pack for the requested quantity, or an empty result if the billing service could not price it | [**PaymentCalculationWrapper**](#model-paymentcalculationwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **400** | The quantity is below the allowed minimum, the portal has no active Docs Connect subscription, or it already has a Docs Connect Dev Pack subscription | - | - |
+| **200** | The cost of switching to DocsCloudDevPack for the requested quantity, or an empty result if the billing service could not price it | [**PaymentCalculationWrapper**](#model-paymentcalculationwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **400** | The quantity is below the allowed minimum, the portal has no active DocsCloud subscription, or it already has a DocsCloudDevPack subscription | - | - |
 | **402** | The portal tariff is delayed or not paid, so the switch cannot be priced | - | - |
 | **403** | The caller is not a DocSpace administrator, or the billing service is not configured | - | - |
-| **404** | The portal is not registered as a billing customer, or the Docs Connect and Docs Connect Dev Pack wallet products are not configured on this installation | - | - |
+| **404** | The portal is not registered as a billing customer, or the DocsCloud and DocsCloudDevPack wallet products are not configured on this installation | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
@@ -6039,9 +6039,9 @@ Prices the upgrade of the paid Docs Connect subscription of the current portal t
 
 `POST /api/2.0/settings/docscloud/tenant/quota/report`
 
-Start the Docs Connect quota report
+Start the DocsCloud quota report
 
-Queues a background job that renders the current Docs Connect user quota of the portal into an xlsx file and  saves that file in the My documents folder of the calling user; the report lists the editor and the viewer  users with the type and the expiration date of each, and summarizes the internal, external and remaining users  against the license limits. The file is not ready when the response arrives: poll  `GET api/2.0/settings/docscloud/tenant/quota/report` until `isCompleted` is true, then take the file from  `resultFileId` or `resultFileUrl`, and use `DELETE api/2.0/settings/docscloud/tenant/quota/report` to cancel a  job that is still running. The caller must be a portal administrator allowed to edit the portal settings. The  portal should have an activated Docs Connect tenant: this call does not check that, and without a tenant the job  itself fails and reports the reason in the `error` of the status response. One report per caller runs at a  time: while a report of this user is still being built, the call describes that running job and no second  generation is started, so a repeated call is safe. What comes back is the initial state of the job, with  `percentage` 0 and a created `status`, not the report; the report is a point-in-time snapshot and carries the  generation date in its file name. To read the same data as JSON, without building a file, use  `GET api/2.0/settings/docscloud/tenant/quota`.
+Queues a background job that renders the current DocsCloud user quota of the portal into an xlsx file and  saves that file in the My documents folder of the calling user; the report lists the editor and the viewer  users with the type and the expiration date of each, and summarizes the internal, external and remaining users  against the license limits. The file is not ready when the response arrives: poll  `GET api/2.0/settings/docscloud/tenant/quota/report` until `isCompleted` is true, then take the file from  `resultFileId` or `resultFileUrl`, and use `DELETE api/2.0/settings/docscloud/tenant/quota/report` to cancel a  job that is still running. The caller must be a portal administrator allowed to edit the portal settings. The  portal should have an activated DocsCloud tenant: this call does not check that, and without a tenant the job  itself fails and reports the reason in the `error` of the status response. One report per caller runs at a  time: while a report of this user is still being built, the call describes that running job and no second  generation is started, so a repeated call is safe. What comes back is the initial state of the job, with  `percentage` 0 and a created `status`, not the report; the report is a point-in-time snapshot and carries the  generation date in its file name. To read the same data as JSON, without building a file, use  `GET api/2.0/settings/docscloud/tenant/quota`.
 
 #### Parameters
 This endpoint does not need any parameter.
@@ -6077,21 +6077,21 @@ This endpoint does not need any parameter.
 
 `GET /api/2.0/settings/docscloud/tenant`
 
-Get the Docs Connect tenant
+Get the DocsCloud tenant
 
-Returns the Docs Connect tenant of the current portal: the Docs Connect server assigned to the portal, with its  address, the date the tenant subscription ends and the payment the tenant was created for. A tenant exists  only after a Docs Connect subscription has been granted, by `POST api/2.0/settings/docscloud/trial` or by a  Docs Connect purchase, and only on an installation where the Docs Connect service is configured. The caller must  be a portal administrator allowed to edit the portal settings. The call is read-only and idempotent, and it  is served from a cache that keeps the tenant for an hour and the absence of a tenant for a minute, so pass  `refresh=true` right after a subscription change to read the current state from Docs Connect instead. In the  result, `address` is the absolute URL of the assigned server, `isActive` tells whether `endDate` is still in  the future, and the dates are in UTC. An empty result means the portal has no Docs Connect tenant yet, which is  the normal state before a subscription and not an error, so this is the operation to call to find out whether  Docs Connect is activated at all. The license and server details, the editing settings, the user quota and the  usage statistics are not part of it: they live in `GET api/2.0/settings/docscloud/tenant/info`,  `.../tenant/config`, `.../tenant/quota` and `.../tenant/usage`, each of which fails with 400 while the  portal has no activated tenant.
+Returns the DocsCloud tenant of the current portal: the DocsCloud server assigned to the portal, with its  address, the date the tenant subscription ends and the payment the tenant was created for. A tenant exists  only after a DocsCloud subscription has been granted, by `POST api/2.0/settings/docscloud/trial` or by a  DocsCloud purchase, and only on an installation where the DocsCloud service is configured. The caller must  be a portal administrator allowed to edit the portal settings. The call is read-only and idempotent, and it  is served from a cache that keeps the tenant for an hour and the absence of a tenant for a minute, so pass  `refresh=true` right after a subscription change to read the current state from DocsCloud instead. In the  result, `address` is the absolute URL of the assigned server, `isActive` tells whether `endDate` is still in  the future, and the dates are in UTC. An empty result means the portal has no DocsCloud tenant yet, which is  the normal state before a subscription and not an error, so this is the operation to call to find out whether  DocsCloud is activated at all. The license and server details, the editing settings, the user quota and the  usage statistics are not part of it: they live in `GET api/2.0/settings/docscloud/tenant/info`,  `.../tenant/config`, `.../tenant/quota` and `.../tenant/usage`, each of which fails with 400 while the  portal has no activated tenant.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **refresh** | query | **Boolean** | Pass `true` to skip the cached copy and request the tenant from Docs Connect again, replacing the cached one; with the default `false` the answer may be up to an hour old, or up to a minute old while the portal has no tenant. | [optional] [default to false] |
+| **refresh** | query | **Boolean** | Pass `true` to skip the cached copy and request the tenant from DocsCloud again, replacing the cached one; with the default `false` the answer may be up to an hour old, or up to a minute old while the portal has no tenant. | [optional] [default to false] |
 
 #### Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The Docs Connect tenant of the portal, or an empty result if no Docs Connect tenant is assigned to it | [**DocsCloudTenantWrapper**](#model-docscloudtenantwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The DocsCloud tenant of the portal, or an empty result if no DocsCloud tenant is assigned to it | [**DocsCloudTenantWrapper**](#model-docscloudtenantwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | The caller is not allowed to edit the portal settings | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
@@ -6119,22 +6119,22 @@ Returns the Docs Connect tenant of the current portal: the Docs Connect server a
 
 `GET /api/2.0/settings/docscloud/tenant/config`
 
-Get the Docs Connect tenant configuration
+Get the DocsCloud tenant configuration
 
-Returns the configuration of the Docs Connect tenant of the current portal: its name, the security secret and  header name, the file size limit and anonymous access switch of the server, the WOPI switch and the IP filter  rules. The portal must have an activated Docs Connect tenant, granted by `POST api/2.0/settings/docscloud/trial`  or by a Docs Connect purchase: an empty result from `GET api/2.0/settings/docscloud/tenant` means there is none  and this call fails with 400. The caller must be a portal administrator allowed to edit the portal settings,  on an installation where the Docs Connect service is configured. The call is read-only, idempotent and cached for  an hour, so pass `refresh=true` to read the current state from Docs Connect; the same values are changed by  `PUT api/2.0/settings/docscloud/tenant/config`, which drops the cached copy itself, so no refresh is needed  after an update. In the result, `security.secret` is a credential, so the response should be treated as  sensitive; `server.fileSizeLimit` is in bytes and an update cannot raise it above 209715200 (200 MB); and an  empty or absent `ipFilter.rules` means no address restriction is configured. The license and server version,  the address of the assigned server, the per-user quota and the usage counters are not part of it: they live in  `.../tenant/info`, `.../tenant`, `.../tenant/quota` and `.../tenant/usage`.
+Returns the configuration of the DocsCloud tenant of the current portal: its name, the security secret and  header name, the file size limit and anonymous access switch of the server, the WOPI switch and the IP filter  rules. The portal must have an activated DocsCloud tenant, granted by `POST api/2.0/settings/docscloud/trial`  or by a DocsCloud purchase: an empty result from `GET api/2.0/settings/docscloud/tenant` means there is none  and this call fails with 400. The caller must be a portal administrator allowed to edit the portal settings,  on an installation where the DocsCloud service is configured. The call is read-only, idempotent and cached for  an hour, so pass `refresh=true` to read the current state from DocsCloud; the same values are changed by  `PUT api/2.0/settings/docscloud/tenant/config`, which drops the cached copy itself, so no refresh is needed  after an update. In the result, `security.secret` is a credential, so the response should be treated as  sensitive; `server.fileSizeLimit` is in bytes and an update cannot raise it above 209715200 (200 MB); and an  empty or absent `ipFilter.rules` means no address restriction is configured. The license and server version,  the address of the assigned server, the per-user quota and the usage counters are not part of it: they live in  `.../tenant/info`, `.../tenant`, `.../tenant/quota` and `.../tenant/usage`.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **refresh** | query | **Boolean** | Pass `true` to skip the cached copy and request the configuration from Docs Connect again, replacing the cached one; with the default `false` the answer may be up to an hour old. | [optional] [default to false] |
+| **refresh** | query | **Boolean** | Pass `true` to skip the cached copy and request the configuration from DocsCloud again, replacing the cached one; with the default `false` the answer may be up to an hour old. | [optional] [default to false] |
 
 #### Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The configuration of the Docs Connect tenant of the portal, with its security, server, WOPI and IP filter settings | [**DocsCloudConfigWrapper**](#model-docscloudconfigwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **400** | The portal has no activated Docs Connect tenant, so there is no configuration to return | - | - |
+| **200** | The configuration of the DocsCloud tenant of the portal, with its security, server, WOPI and IP filter settings | [**DocsCloudConfigWrapper**](#model-docscloudconfigwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **400** | The portal has no activated DocsCloud tenant, so there is no configuration to return | - | - |
 | **403** | The caller is not allowed to edit the portal settings | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
@@ -6161,22 +6161,22 @@ Returns the configuration of the Docs Connect tenant of the current portal: its 
 
 `GET /api/2.0/settings/docscloud/tenant/info`
 
-Get the Docs Connect tenant information
+Get the DocsCloud tenant information
 
-Returns the Docs Connect license of the current portal, the Docs Connect server serving it, the user limits of  that license and the editor and viewer usage counted against them for the current period. The portal must  have an activated Docs Connect tenant, granted by `POST api/2.0/settings/docscloud/trial` or by a Docs Connect  purchase: an empty result from `GET api/2.0/settings/docscloud/tenant` means there is none and this call  fails with 400. The caller must be a portal administrator allowed to edit the portal settings, on an  installation where the Docs Connect service is configured. The call is read-only, idempotent and cached for a  minute, so pass `refresh=true` right after a subscription change to read the current state from Docs Connect.  In the result, `license.valid` is when the license expires and `license.trial` is reported as `false` once  the portal holds a paid Docs Connect or Docs Connect Dev Pack subscription, even when the license itself still says  trial; `usersLimit` caps the editors and the viewers allowed, `stats` counts the active, internal, external  and remaining users of each of those two kinds over the last `stats.periodDay` days, and the dates are in  UTC. The editing settings, the per-user quota lists and the address of the assigned server live in  `.../tenant/config`, `.../tenant/quota` and `.../tenant`, while `.../tenant/usage` gives one active-user  total instead of this per-role breakdown.
+Returns the DocsCloud license of the current portal, the DocsCloud server serving it, the user limits of  that license and the editor and viewer usage counted against them for the current period. The portal must  have an activated DocsCloud tenant, granted by `POST api/2.0/settings/docscloud/trial` or by a DocsCloud  purchase: an empty result from `GET api/2.0/settings/docscloud/tenant` means there is none and this call  fails with 400. The caller must be a portal administrator allowed to edit the portal settings, on an  installation where the DocsCloud service is configured. The call is read-only, idempotent and cached for a  minute, so pass `refresh=true` right after a subscription change to read the current state from DocsCloud.  In the result, `license.valid` is when the license expires and `license.trial` is reported as `false` once  the portal holds a paid DocsCloud or DocsCloudDevPack subscription, even when the license itself still says  trial; `usersLimit` caps the editors and the viewers allowed, `stats` counts the active, internal, external  and remaining users of each of those two kinds over the last `stats.periodDay` days, and the dates are in  UTC. The editing settings, the per-user quota lists and the address of the assigned server live in  `.../tenant/config`, `.../tenant/quota` and `.../tenant`, while `.../tenant/usage` gives one active-user  total instead of this per-role breakdown.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **refresh** | query | **Boolean** | Pass `true` to skip the cached copy and request the license, server and usage information from Docs Connect again, replacing the cached one; with the default `false` the answer may be up to a minute old. | [optional] [default to false] |
+| **refresh** | query | **Boolean** | Pass `true` to skip the cached copy and request the license, server and usage information from DocsCloud again, replacing the cached one; with the default `false` the answer may be up to a minute old. | [optional] [default to false] |
 
 #### Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The Docs Connect license and server information of the portal, with the user limits of the license and the usage statistics for the current period | [**DocsCloudTenantInfoWrapper**](#model-docscloudtenantinfowrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **400** | The portal has no activated Docs Connect tenant, so there is no license information to return | - | - |
+| **200** | The DocsCloud license and server information of the portal, with the user limits of the license and the usage statistics for the current period | [**DocsCloudTenantInfoWrapper**](#model-docscloudtenantinfowrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **400** | The portal has no activated DocsCloud tenant, so there is no license information to return | - | - |
 | **403** | The caller is not allowed to edit the portal settings | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
@@ -6203,22 +6203,22 @@ Returns the Docs Connect license of the current portal, the Docs Connect server 
 
 `GET /api/2.0/settings/docscloud/tenant/quota`
 
-Get the Docs Connect tenant quota
+Get the DocsCloud tenant quota
 
-Returns the Docs Connect user quota of the current portal: the users who currently count as Docs Connect editors and  the users who count as viewers, each with the identifier Docs Connect knows them by and the date their quota entry  expires. The portal must have an activated Docs Connect tenant, granted by `POST api/2.0/settings/docscloud/trial`  or by a Docs Connect purchase: an empty result from `GET api/2.0/settings/docscloud/tenant` means there is none  and this call fails with 400. The caller must be a portal administrator allowed to edit the portal settings,  on an installation where the Docs Connect service is configured. The call is read-only, idempotent and cached for  a minute, so pass `refresh=true` to read the current state from Docs Connect. In the result, `users` holds the  editor entries and `usersView` the viewer entries, both unordered; `userId` is the DocSpace user ID for a  portal member and an identifier of Docs Connect's own for anyone else; `expire` is the date and time the entry  expires, as a UTC string; and empty lists mean no user has been counted yet. It lists the users themselves,  not the counters: the license limits with the per-role totals are in  `GET api/2.0/settings/docscloud/tenant/info`, a single active-user total is in `.../tenant/usage`, and the  same lists as a downloadable xlsx file are produced by  `POST api/2.0/settings/docscloud/tenant/quota/report`.
+Returns the DocsCloud user quota of the current portal: the users who currently count as DocsCloud editors and  the users who count as viewers, each with the identifier DocsCloud knows them by and the date their quota entry  expires. The portal must have an activated DocsCloud tenant, granted by `POST api/2.0/settings/docscloud/trial`  or by a DocsCloud purchase: an empty result from `GET api/2.0/settings/docscloud/tenant` means there is none  and this call fails with 400. The caller must be a portal administrator allowed to edit the portal settings,  on an installation where the DocsCloud service is configured. The call is read-only, idempotent and cached for  a minute, so pass `refresh=true` to read the current state from DocsCloud. In the result, `users` holds the  editor entries and `usersView` the viewer entries, both unordered; `userId` is the DocSpace user ID for a  portal member and an identifier of DocsCloud's own for anyone else; `expire` is the date and time the entry  expires, as a UTC string; and empty lists mean no user has been counted yet. It lists the users themselves,  not the counters: the license limits with the per-role totals are in  `GET api/2.0/settings/docscloud/tenant/info`, a single active-user total is in `.../tenant/usage`, and the  same lists as a downloadable xlsx file are produced by  `POST api/2.0/settings/docscloud/tenant/quota/report`.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **refresh** | query | **Boolean** | Pass `true` to skip the cached copy and request the user quota from Docs Connect again, replacing the cached one; with the default `false` the answer may be up to a minute old. | [optional] [default to false] |
+| **refresh** | query | **Boolean** | Pass `true` to skip the cached copy and request the user quota from DocsCloud again, replacing the cached one; with the default `false` the answer may be up to a minute old. | [optional] [default to false] |
 
 #### Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The editor and viewer users of the Docs Connect tenant of the portal, with the expiration date of each entry | [**DocsCloudQuotaWrapper**](#model-docscloudquotawrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **400** | The portal has no activated Docs Connect tenant, so there is no user quota to return | - | - |
+| **200** | The editor and viewer users of the DocsCloud tenant of the portal, with the expiration date of each entry | [**DocsCloudQuotaWrapper**](#model-docscloudquotawrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **400** | The portal has no activated DocsCloud tenant, so there is no user quota to return | - | - |
 | **403** | The caller is not allowed to edit the portal settings | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
@@ -6245,9 +6245,9 @@ Returns the Docs Connect user quota of the current portal: the users who current
 
 `GET /api/2.0/settings/docscloud/tenant/quota/report`
 
-Get the Docs Connect quota report status
+Get the DocsCloud quota report status
 
-Returns the state of the Docs Connect user quota report that the current user started with  `POST api/2.0/settings/docscloud/tenant/quota/report`, so that the caller can follow the generation and pick  up the resulting file. It reports the caller's own job only: a report started by another administrator is not  visible here, and an empty result means this user has no job, because none was started, because it was  terminated, or because a finished one has already been cleared (a job state is kept for a day, and starting a  new report drops the previous finished one); that is a normal state and not an error. The caller must be a  portal administrator allowed to edit the portal settings. The call is read-only and idempotent, and it is  meant to be polled while the job runs. In the result, `percentage` goes from 0 to 100 and `isCompleted`  becomes true both on success and on failure, so check `error`: it is empty when the report was built and  carries the failure message otherwise;  `resultFileId`, `resultFileName` and `resultFileUrl` are filled in only once the file exists, and that file  also stays in the My documents folder of the caller. Use the `POST` operation on this path to start a report  and the `DELETE` one to cancel it.
+Returns the state of the DocsCloud user quota report that the current user started with  `POST api/2.0/settings/docscloud/tenant/quota/report`, so that the caller can follow the generation and pick  up the resulting file. It reports the caller's own job only: a report started by another administrator is not  visible here, and an empty result means this user has no job, because none was started, because it was  terminated, or because a finished one has already been cleared (a job state is kept for a day, and starting a  new report drops the previous finished one); that is a normal state and not an error. The caller must be a  portal administrator allowed to edit the portal settings. The call is read-only and idempotent, and it is  meant to be polled while the job runs. In the result, `percentage` goes from 0 to 100 and `isCompleted`  becomes true both on success and on failure, so check `error`: it is empty when the report was built and  carries the failure message otherwise;  `resultFileId`, `resultFileName` and `resultFileUrl` are filled in only once the file exists, and that file  also stays in the My documents folder of the caller. Use the `POST` operation on this path to start a report  and the `DELETE` one to cancel it.
 
 #### Parameters
 This endpoint does not need any parameter.
@@ -6256,7 +6256,7 @@ This endpoint does not need any parameter.
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The state of the Docs Connect quota report job of the caller, or an empty result if there is no such job | [**DocumentBuilderTaskWrapper**](#model-documentbuildertaskwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The state of the DocsCloud quota report job of the caller, or an empty result if there is no such job | [**DocumentBuilderTaskWrapper**](#model-documentbuildertaskwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | The caller is not allowed to edit the portal settings | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
@@ -6283,22 +6283,22 @@ This endpoint does not need any parameter.
 
 `GET /api/2.0/settings/docscloud/tenant/usage`
 
-Get the Docs Connect tenant usage
+Get the DocsCloud tenant usage
 
-Returns the Docs Connect usage of the current portal: the number of users who have been active in Docs Connect in  the current period, and the moment that period is counted from. The portal must have an activated Docs Connect  tenant, granted by `POST api/2.0/settings/docscloud/trial` or by a Docs Connect purchase: an empty result from  `GET api/2.0/settings/docscloud/tenant` means there is none and this call fails with 400. The caller must be a  portal administrator allowed to edit the portal settings, on an installation where the Docs Connect service is  configured. The call is read-only, idempotent and cached for a minute, so pass `refresh=true` to read the  current state from Docs Connect. In the result, `activeCount` counts the users seen since `since`, which is in  UTC, and it is one total for the whole tenant, with no split by role and no limit to compare it against. For  the editor and viewer breakdown with the license limits use `GET api/2.0/settings/docscloud/tenant/info`, and  for the users counted one by one `GET api/2.0/settings/docscloud/tenant/quota`.
+Returns the DocsCloud usage of the current portal: the number of users who have been active in DocsCloud in  the current period, and the moment that period is counted from. The portal must have an activated DocsCloud  tenant, granted by `POST api/2.0/settings/docscloud/trial` or by a DocsCloud purchase: an empty result from  `GET api/2.0/settings/docscloud/tenant` means there is none and this call fails with 400. The caller must be a  portal administrator allowed to edit the portal settings, on an installation where the DocsCloud service is  configured. The call is read-only, idempotent and cached for a minute, so pass `refresh=true` to read the  current state from DocsCloud. In the result, `activeCount` counts the users seen since `since`, which is in  UTC, and it is one total for the whole tenant, with no split by role and no limit to compare it against. For  the editor and viewer breakdown with the license limits use `GET api/2.0/settings/docscloud/tenant/info`, and  for the users counted one by one `GET api/2.0/settings/docscloud/tenant/quota`.
 
 #### Parameters
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **refresh** | query | **Boolean** | Pass `true` to skip the cached copy and request the usage statistics from Docs Connect again, replacing the cached one; with the default `false` the answer may be up to a minute old. | [optional] [default to false] |
+| **refresh** | query | **Boolean** | Pass `true` to skip the cached copy and request the usage statistics from DocsCloud again, replacing the cached one; with the default `false` the answer may be up to a minute old. | [optional] [default to false] |
 
 #### Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The number of active Docs Connect users of the portal and the date the count starts from | [**DocsCloudUsageWrapper**](#model-docscloudusagewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **400** | The portal has no activated Docs Connect tenant, so there is no usage information to return | - | - |
+| **200** | The number of active DocsCloud users of the portal and the date the count starts from | [**DocsCloudUsageWrapper**](#model-docscloudusagewrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **400** | The portal has no activated DocsCloud tenant, so there is no usage information to return | - | - |
 | **403** | The caller is not allowed to edit the portal settings | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
@@ -6325,9 +6325,9 @@ Returns the Docs Connect usage of the current portal: the number of users who ha
 
 `POST /api/2.0/settings/docscloud/trial`
 
-Start the Docs Connect trial
+Start the DocsCloud trial
 
-Activates the free Docs Connect trial subscription for the current portal, and, once a Docs Connect server is  assigned to the portal, allows the address of that server in the Content Security Policy settings.  The portal tariff must be in the trial or paid state (not delayed and not unpaid), and the portal must not  already hold a Docs Connect trial, Docs Connect or Docs Connect Dev Pack subscription: the quotas of the current  tariff are listed by `GET api/2.0/portal/tariff`. The caller must be a portal administrator allowed to edit  the portal settings, on an installation where the billing service is configured. The operation changes the  portal subscription and is not idempotent: repeating it after a successful activation fails with 400.  It returns `true` when the trial has been granted, and `false` when the billing service declines it  (for example, when this portal has already used its trial), in which case nothing is changed. It never buys  a paid plan: an existing paid Docs Connect subscription is moved to Docs Connect Dev Pack by  `POST api/2.0/settings/docscloud/switchtodevpack` instead.
+Activates the free DocsCloud trial subscription for the current portal, and, once a DocsCloud server is  assigned to the portal, allows the address of that server in the Content Security Policy settings.  The portal tariff must be in the trial or paid state (not delayed and not unpaid), and the portal must not  already hold a DocsCloud trial, DocsCloud or DocsCloudDevPack subscription: the quotas of the current  tariff are listed by `GET api/2.0/portal/tariff`. The caller must be a portal administrator allowed to edit  the portal settings, on an installation where the billing service is configured. The operation changes the  portal subscription and is not idempotent: repeating it after a successful activation fails with 400.  It returns `true` when the trial has been granted, and `false` when the billing service declines it  (for example, when this portal has already used its trial), in which case nothing is changed. It never buys  a paid plan: an existing paid DocsCloud subscription is moved to DocsCloudDevPack by  `POST api/2.0/settings/docscloud/switchtodevpack` instead.
 
 #### Parameters
 This endpoint does not need any parameter.
@@ -6337,10 +6337,10 @@ This endpoint does not need any parameter.
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | Boolean value: true if the trial subscription is activated, false if the billing service declines it | [**BooleanWrapper**](#model-booleanwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **400** | The portal already has a Docs Connect trial, Docs Connect or Docs Connect Dev Pack subscription | - | - |
+| **400** | The portal already has a DocsCloud trial, DocsCloud or DocsCloudDevPack subscription | - | - |
 | **402** | The portal tariff is delayed or not paid, so the trial cannot be started | - | - |
 | **403** | The caller is not allowed to edit the portal settings, or the billing service is not configured | - | - |
-| **404** | The Docs Connect trial quota is not available on this installation | - | - |
+| **404** | The DocsCloud trial quota is not available on this installation | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
@@ -6366,9 +6366,9 @@ This endpoint does not need any parameter.
 
 `POST /api/2.0/settings/docscloud/switchtodevpack`
 
-Switch Docs Connect to Docs Connect Dev Pack
+Switch DocsCloud to DocsCloudDevPack
 
-Upgrades the paid Docs Connect subscription of the current portal to Docs Connect Dev Pack for the requested  number of users, charging the price difference to the portal wallet and moving the Docs Connect license  to the new product. The portal must hold an active Docs Connect subscription, must not already hold a  Docs Connect Dev Pack one, and its tariff must not be delayed or unpaid: the quotas and the state of the  current tariff are listed by `GET api/2.0/portal/tariff`, and the amount that will be charged is  returned by `POST api/2.0/settings/docscloud/calculatedevpack` for the same `quantity`. The caller  must be a DocSpace administrator of a portal registered with the billing service. The switch is  synchronous, mutating and not idempotent: repeating it after a successful call fails with 400, and  concurrent calls for one portal are serialized so that the wallet is charged only once. It returns  `true` when the subscription has been switched, and `false` when the billing service declines or  fails to perform the switch, in which case nothing is charged and the portal stays on Docs Connect.  Only the Docs Connect to Docs Connect Dev Pack direction is supported: to change the number of users of a  subscription the portal already has, or to schedule a reversion from Docs Connect Dev Pack back to  Docs Connect at the next billing period, use `PUT api/2.0/portal/payment/updatewallet` instead.
+Upgrades the paid DocsCloud subscription of the current portal to DocsCloudDevPack for the requested  number of users, charging the price difference to the portal wallet and moving the DocsCloud license  to the new product. The portal must hold an active DocsCloud subscription, must not already hold a  DocsCloudDevPack one, and its tariff must not be delayed or unpaid: the quotas and the state of the  current tariff are listed by `GET api/2.0/portal/tariff`, and the amount that will be charged is  returned by `POST api/2.0/settings/docscloud/calculatedevpack` for the same `quantity`. The caller  must be a DocSpace administrator of a portal registered with the billing service. The switch is  synchronous, mutating and not idempotent: repeating it after a successful call fails with 400, and  concurrent calls for one portal are serialized so that the wallet is charged only once. It returns  `true` when the subscription has been switched, and `false` when the billing service declines or  fails to perform the switch, in which case nothing is charged and the portal stays on DocsCloud.  Only the DocsCloud to DocsCloudDevPack direction is supported: to change the number of users of a  subscription the portal already has, or to schedule a reversion from DocsCloudDevPack back to  DocsCloud at the next billing period, use `PUT api/2.0/portal/payment/updatewallet` instead.
 
 #### Parameters
 
@@ -6380,11 +6380,11 @@ Upgrades the paid Docs Connect subscription of the current portal to Docs Connec
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | Boolean value: true if the subscription is switched to Docs Connect Dev Pack, false if the billing service declines it | [**BooleanWrapper**](#model-booleanwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **400** | The quantity is below the allowed minimum, the portal has no active Docs Connect subscription, or it already has a Docs Connect Dev Pack subscription | - | - |
+| **200** | Boolean value: true if the subscription is switched to DocsCloudDevPack, false if the billing service declines it | [**BooleanWrapper**](#model-booleanwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **400** | The quantity is below the allowed minimum, the portal has no active DocsCloud subscription, or it already has a DocsCloudDevPack subscription | - | - |
 | **402** | The portal tariff is delayed or not paid, so the subscription cannot be switched | - | - |
 | **403** | The caller is not a DocSpace administrator, or the billing service is not configured | - | - |
-| **404** | The portal is not registered as a billing customer, or the Docs Connect and Docs Connect Dev Pack wallet products are not configured on this installation | - | - |
+| **404** | The portal is not registered as a billing customer, or the DocsCloud and DocsCloudDevPack wallet products are not configured on this installation | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](#model-errorapiresponse) | - |
@@ -6410,9 +6410,9 @@ Upgrades the paid Docs Connect subscription of the current portal to Docs Connec
 
 `DELETE /api/2.0/settings/docscloud/tenant/quota/report`
 
-Terminate the Docs Connect quota report
+Terminate the DocsCloud quota report
 
-Cancels the Docs Connect user quota report that the current user started with  `POST api/2.0/settings/docscloud/tenant/quota/report` and removes its job, so that a new report can be started  right away. There is no precondition: the call is accepted even when this user has no report job at all, and  it affects the caller's own job only, never one started by another administrator. The caller must be a portal  administrator allowed to edit the portal settings. The cancellation is asynchronous and idempotent: 200 means  the request has been queued for the report worker, not that the job has already stopped, so poll  `GET api/2.0/settings/docscloud/tenant/quota/report` until it returns an empty result. Nothing is returned in  the body. A report file that has already been saved in the My documents folder of the caller is left there  and has to be deleted through the file operations if it is no longer wanted.
+Cancels the DocsCloud user quota report that the current user started with  `POST api/2.0/settings/docscloud/tenant/quota/report` and removes its job, so that a new report can be started  right away. There is no precondition: the call is accepted even when this user has no report job at all, and  it affects the caller's own job only, never one started by another administrator. The caller must be a portal  administrator allowed to edit the portal settings. The cancellation is asynchronous and idempotent: 200 means  the request has been queued for the report worker, not that the job has already stopped, so poll  `GET api/2.0/settings/docscloud/tenant/quota/report` until it returns an empty result. Nothing is returned in  the body. A report file that has already been saved in the My documents folder of the caller is left there  and has to be deleted through the file operations if it is no longer wanted.
 
 #### Parameters
 This endpoint does not need any parameter.
@@ -6448,9 +6448,9 @@ null (empty response body)
 
 `PUT /api/2.0/settings/docscloud/tenant/config`
 
-Update the Docs Connect tenant configuration
+Update the DocsCloud tenant configuration
 
-Replaces the configuration of the Docs Connect tenant of the current portal: its name, the security secret and  header name, the file size limit and anonymous access switch of the server, the WOPI switch and the IP filter  rules; it returns the configuration as Docs Connect stored it. The portal must have an activated Docs Connect tenant,  granted by `POST api/2.0/settings/docscloud/trial` or by a Docs Connect purchase: an empty result from  `GET api/2.0/settings/docscloud/tenant` means there is none and this call fails with 400. Read the current  values with `GET api/2.0/settings/docscloud/tenant/config` first and send back whole sections: the sections  left out of the request are not sent to Docs Connect at all, while a section that is present is sent with all of  its fields, so a field left unset inside it goes out as `0`, `false` or empty. The caller must be a portal  administrator allowed to edit the portal settings, on an installation where the Docs Connect service is  configured. The call is mutating,  synchronous and idempotent, it is recorded in the portal audit trail, and it drops the cached configuration  itself, so the next read returns the new values without `refresh=true`. The `tenantName`, `security.secret`,  `security.header` and every `ipFilter.rules` address are capped at 255 characters and `server.fileSizeLimit`  at 209715200 bytes (200 MB); a value outside those bounds is rejected with 400 before anything reaches  Docs Connect. It changes these settings only, never the subscription, the user quota or the license.
+Replaces the configuration of the DocsCloud tenant of the current portal: its name, the security secret and  header name, the file size limit and anonymous access switch of the server, the WOPI switch and the IP filter  rules; it returns the configuration as DocsCloud stored it. The portal must have an activated DocsCloud tenant,  granted by `POST api/2.0/settings/docscloud/trial` or by a DocsCloud purchase: an empty result from  `GET api/2.0/settings/docscloud/tenant` means there is none and this call fails with 400. Read the current  values with `GET api/2.0/settings/docscloud/tenant/config` first and send back whole sections: the sections  left out of the request are not sent to DocsCloud at all, while a section that is present is sent with all of  its fields, so a field left unset inside it goes out as `0`, `false` or empty. The caller must be a portal  administrator allowed to edit the portal settings, on an installation where the DocsCloud service is  configured. The call is mutating,  synchronous and idempotent, it is recorded in the portal audit trail, and it drops the cached configuration  itself, so the next read returns the new values without `refresh=true`. The `tenantName`, `security.secret`,  `security.header` and every `ipFilter.rules` address are capped at 255 characters and `server.fileSizeLimit`  at 209715200 bytes (200 MB); a value outside those bounds is rejected with 400 before anything reaches  DocsCloud. It changes these settings only, never the subscription, the user quota or the license.
 
 #### Parameters
 
@@ -6462,8 +6462,8 @@ Replaces the configuration of the Docs Connect tenant of the current portal: its
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The configuration of the Docs Connect tenant as Docs Connect stored it after the update | [**DocsCloudConfigWrapper**](#model-docscloudconfigwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **400** | A text field is longer than 255 characters, the file size limit is outside 0-209715200 bytes, or the portal has no activated Docs Connect tenant | - | - |
+| **200** | The configuration of the DocsCloud tenant as DocsCloud stored it after the update | [**DocsCloudConfigWrapper**](#model-docscloudconfigwrapper) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **400** | A text field is longer than 255 characters, the file size limit is outside 0-209715200 bytes, or the portal has no activated DocsCloud tenant | - | - |
 | **403** | The caller is not allowed to edit the portal settings | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](#model-errorapiresponse) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](#model-errorapiresponse) | `Retry-After` |
@@ -10112,7 +10112,7 @@ Returns the delivery records of the portal webhooks, one record per attempt, car
 | **configId** | query | **Integer** (int32) | The subscription whose deliveries are kept, by the `id` that `GET api/2.0/settings/webhook` reports. | [optional] [example: 1] |
 | **eventId** | query | **Integer** (int32) | A single delivery record, by its own identifier. It narrows the answer to that one record, which is how a  client follows up a retry it queued earlier. | [optional] [example: 1] |
 | **groupStatus** | query | **WebhookGroupStatus** | The classes of answered status to keep, as a bitmask; 0 keeps every record whatever the target answered. | [optional] [example: NotSent] [enum: 0, 1, 2, 4, 8, 16] |
-| **userId** | query | **UUID** (uuid) | The member whose subscriptions the records belong to, by portal user ID - who created the subscription, not  who caused the event. For a caller who is not a DocSpace administrator it is overwritten with the caller own  ID, so such a caller never sees another member deliveries whatever is sent here. | [optional] [example: {}] |
+| **userId** | query | **UUID** (uuid) | The member whose subscriptions the records belong to, by portal user ID - who created the subscription, not  who caused the event. For a caller who is not a DocSpace administrator it is overwritten with the caller own  ID, so such a caller never sees another member deliveries whatever is sent here. | [optional] [example: \{\}] |
 | **trigger** | query | **WebhookTrigger** | The single event kind to keep; 0 keeps every kind. It names one trigger rather than a mask of several, unlike  the `triggers` a subscription is created with. | [optional] [example: 0] [enum: 0, 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536, 131072, 262144, 524288, 1048576, 2097152, 4194304, 8388608, 16777216, 33554432, 67108864, 134217728, 268435456, 536870912, 1073741824] |
 | **count** | query | **Integer** (int32) | How many records one page may hold. The maximum is also the default, so a client that wants shorter pages has  to ask for them; the number of records matching the filter comes back as `total` beside the page. | [optional] [example: 1] [min: 1] [max: 100] |
 | **startIndex** | query | **Integer** (int32) | How many matching records to skip before the page begins, counting from the newest. Advance it by `count` to  walk back through the log. | [optional] [example: 1] |
@@ -10606,7 +10606,7 @@ The connections the calling user currently has open, and which of them the reque
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **loginEvent** | **Integer** (int32) | The `id` of the item in `items` that the current request is authenticated by. It is `0` when the request  carried a token in the `Authorization` header instead of the portal cookie, and in that case none of the  items is the current connection. | [required] [example: 1] |
-| **items** | [**List**](#model-activeconnectionsitemdto) | One item per sign-in of the caller that is still active, ordered newest sign-in first, with the connection  the request itself uses moved to the front. Sign-ins older than a year are left out, and a caller with no  stored connection gets a single item describing the current request rather than an empty list. | [optional] [example: [{id=1234, ip=192.0.2.1}]] [nullable] |
+| **items** | [**List**](#model-activeconnectionsitemdto) | One item per sign-in of the caller that is still active, ordered newest sign-in first, with the connection  the request itself uses moved to the front. Sign-ins older than a year are left out, and a caller with no  stored connection gets a single item describing the current request rather than an empty list. | [optional] [example: [\{id=1234, ip=192.0.2.1\}]] [nullable] |
 
 
 ### Model ActiveConnectionsItemDto
@@ -10752,9 +10752,6 @@ What a chat model charges, split by the direction the tokens flow in.
 |------------ | ------------- | ------------- | -------------|
 | **prompt** | **Double** (double) | The cost of one million tokens sent to the model, which includes the conversation history resent with  every turn and not just the newest message. | [optional] [example: 5.0] |
 | **completion** | **Double** (double) | The cost of one million tokens the model writes back. It is normally the dearer of the two directions. | [optional] [example: 15.0] |
-| **promptCacheRead** | **Double** (double) | The cost of one million prompt tokens served from the prompt cache. It is absent when the model does not  support prompt caching. | [optional] [example: 0.2] [nullable] |
-| **promptCacheWrite** | **Double** (double) | The cost of one million prompt tokens written to the prompt cache with the default lifetime. It is absent  when the model does not support prompt caching. | [optional] [example: 2.5] [nullable] |
-| **promptCacheWrite1H** | **Double** (double) | The cost of one million prompt tokens written to the prompt cache with a one-hour lifetime. It is absent  when the model offers no such option. | [optional] [example: 4.0] [nullable] |
 
 
 ### Model AiEmbeddingPriceDto
@@ -10813,7 +10810,7 @@ One AI model or service on the price list: how to name it, who provides it, and 
 | **alias** | **String** | The model name as the vendor writes it, meant to be shown to a person rather than matched on. | [required] [example: GPT-4o] [nullable] |
 | **provider** | **String** | Who runs the model. Two entries can share a provider, and one provider's models can be priced quite  differently, so the price always belongs to the entry and never to the provider. | [required] [example: openai] [nullable] |
 | **image** | **String** | The absolute URL of the provider's icon, for rendering next to the entry. | [required] [example: https://cdn.example.com/providers/openai.png] [nullable] |
-| **price** | **Double** (double) | What the entry costs, in the currency the answer names. Amounts per token are normalised per million  tokens, so they are not the price of a single call. | [required] [example: {prompt=5.0, completion=15.0}] |
+| **price** | **Double** (double) | What the entry costs, in the currency the answer names. Amounts per token are normalised per million  tokens, so they are not the price of a single call. | [required] [example: \{prompt=5.0, completion=15.0\}] |
 | **link** | **String** | The provider's own page for the model, for a person to read the model's terms. It is empty when the  provider publishes none. | [required] [example: https://openai.com/pricing] [nullable] |
 
 
@@ -10832,10 +10829,10 @@ What the AI features cost out of the portal wallet, grouped by the kind of model
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **chat** | [**List**](#model-aientrypricingdtoaichatpricedto) | The chat models on offer, each priced per million prompt and completion tokens. A model listed here is one  the installation can bill for, not necessarily one this portal may use -  `GET api/2.0/portal/payment/ai-model/restrictions` says which are allowed. | [required] [example: [{id=gpt-4o, alias=GPT-4o, provider=openai, image=https://cdn.example.com/providers/openai.png, price={prompt=5.0, completion=15.0}}]] [nullable] |
-| **embedding** | [**List**](#model-aientrypricingdtoaiembeddingpricedto) | The embedding models on offer, priced per million tokens of input; an embedding model has no completion  side, so its price object carries `prompt` alone. | [required] [example: [{id=text-embedding-3-large, alias=Text Embedding 3 Large, provider=openai, image=https://cdn.example.com/providers/openai.png, price={prompt=0.13}}]] [nullable] |
-| **image** | [**List**](#model-aientrypricingdtoaiimagepricedto) | The image models on offer, priced per million prompt and completion tokens plus a price for each image  produced. | [required] [example: [{id=gpt-5.4-image-2, alias=GPT 5.4 Image 2, provider=OpenRouter, image=https://cdn.example.com/providers/openai.png, price={prompt=8.0, completion=15.0, image=30.0}}]] [nullable] |
-| **webSearch** | [**List**](#model-aientrypricingdtodecimal) | The web search providers on offer. Their `price` is a bare number - the cost of one search - rather than  an object, because there are no tokens to distinguish. | [required] [example: [{id=web-search, alias=Web Search, provider=tavily, image=https://cdn.example.com/providers/tavily.png, price=0.01}]] [nullable] |
+| **chat** | [**List**](#model-aientrypricingdtoaichatpricedto) | The chat models on offer, each priced per million prompt and completion tokens. A model listed here is one  the installation can bill for, not necessarily one this portal may use -  `GET api/2.0/portal/payment/ai-model/restrictions` says which are allowed. | [required] [example: [\{id=gpt-4o, alias=GPT-4o, provider=openai, image=https://cdn.example.com/providers/openai.png, price=\{prompt=5.0, completion=15.0\}\}]] [nullable] |
+| **embedding** | [**List**](#model-aientrypricingdtoaiembeddingpricedto) | The embedding models on offer, priced per million tokens of input; an embedding model has no completion  side, so its price object carries `prompt` alone. | [required] [example: [\{id=text-embedding-3-large, alias=Text Embedding 3 Large, provider=openai, image=https://cdn.example.com/providers/openai.png, price=\{prompt=0.13\}\}]] [nullable] |
+| **image** | [**List**](#model-aientrypricingdtoaiimagepricedto) | The image models on offer, priced per million prompt and completion tokens plus a price for each image  produced. | [required] [example: [\{id=gpt-5.4-image-2, alias=GPT 5.4 Image 2, provider=OpenRouter, image=https://cdn.example.com/providers/openai.png, price=\{prompt=8.0, completion=15.0, image=30.0\}\}]] [nullable] |
+| **webSearch** | [**List**](#model-aientrypricingdtodecimal) | The web search providers on offer. Their `price` is a bare number - the cost of one search - rather than  an object, because there are no tokens to distinguish. | [required] [example: [\{id=web-search, alias=Web Search, provider=tavily, image=https://cdn.example.com/providers/tavily.png, price=0.01\}]] [nullable] |
 | **currency** | [**CurrencyInfo**](#model-currencyinfo) | The currency every price above is expressed in, with its ISO code and symbol. One answer never mixes  currencies, so this is the only place to read it. | [required] |
 
 
@@ -10873,7 +10870,7 @@ An Amazon S3 region.
 | **partitionName** | **String** | The Amazon partition the region sits in - the ordinary commercial cloud, the Chinese one, or a government  one. Regions of different partitions are not reachable with the same credentials. | [optional] [example: aws] [nullable] |
 | **partitionDnsSuffix** | **String** | The domain the partition's service host names end in, which differs from partition to partition. | [optional] [example: amazonaws.com] [nullable] |
 | **partitionRegionRegex** | **String** | The pattern every region code of this partition matches, for validating a code before sending it. | [optional] [example: ^(us\|eu\|ap\|sa\|ca\|me\|af\|il\|mx)\-\w+\-\d+$] [nullable] |
-| **hostnameTemplate** | **String** | How a service host name of the partition is assembled, with `{service}`, `{region}` and `{dnsSuffix}` to  be filled in. It is reference material - the portal builds its own endpoints from `systemName`. | [optional] [example: {service}.{region}.{dnsSuffix}] [nullable] |
+| **hostnameTemplate** | **String** | How a service host name of the partition is assembled, with `{service}`, `{region}` and `{dnsSuffix}` to  be filled in. It is reference material - the portal builds its own endpoints from `systemName`. | [optional] [example: \{service\}.\{region\}.\{dnsSuffix\}] [nullable] |
 
 
 ### Model ApiDateTime
@@ -11056,7 +11053,7 @@ The credentials a sign-in is attempted with: a portal password, a confirmation k
 | **passwordHash** | **String** | The password already hashed in the client. It has to be produced with the `salt`, iteration count and hash  size that `GET api/2.0/settings?withpassword=true` publishes, or the portal cannot recognise it; a value sent  here takes the place of `password`. | [optional] [example: 5f4dcc3b5aa765d61d8327deb882cf99] [nullable] |
 | **provider** | **String** | The third-party identity provider the account is being signed in through, by its internal key such as  `google` or `linkedin`. Sending it switches the call to a third-party sign-in, which needs `accessToken` or  `serializedProfile` and is only allowed on a self-hosted installation or a tariff that includes third-party  sign-in. | [optional] [example: google] [nullable] |
 | **accessToken** | **String** | The access token the provider named in `provider` issued for the account, passed on unchanged for the portal  to verify with that provider. The portal then matches the address it gets back against its own accounts, so a  valid token for an address unknown here is answered as no such user. | [optional] [example: ya29.a0AfH6SMBx...] [nullable] |
-| **serializedProfile** | **String** | The third-party profile already fetched and serialised by the caller, as an alternative to `accessToken` for  a provider whose profile the client holds. It identifies the account by the address it carries. | [optional] [example: {"name":"John Doe","email":"john@example.com"}] [nullable] |
+| **serializedProfile** | **String** | The third-party profile already fetched and serialised by the caller, as an alternative to `accessToken` for  a provider whose profile the client holds. It identifies the account by the address it carries. | [optional] [example: \{"name":"John Doe","email":"john@example.com"\}] [nullable] |
 | **codeOAuth** | **String** | The OAuth authorization code obtained from the provider, for a flow that has not been exchanged for an access  token yet. It is recorded with the sign-in rather than replacing `accessToken`. | [optional] [example: 4/0AY0e-g7...] [nullable] |
 | **session** | **Boolean** | Whether the issued token is tied to the browser session. When it is, the answer carries no `expires` and the  token dies with the session; otherwise it lives for the portal session lifetime. | [optional] [example: true] |
 | **confirmData** | [**ConfirmData**](#model-confirmdata) | The confirmation link data, as a third way to identify the account beside a password and a third-party  account. Send it when the sign-in comes from a link the portal mailed, in which case `userName` and the  password fields are not read. | [optional] |
@@ -11088,7 +11085,7 @@ One third-party authorization or storage provider and the keys the portal connec
 | **instruction** | **String** | The steps an administrator has to take on the provider side to obtain the keys, shown in the interface. It is  filled in by the portal and ignored when keys are saved. | [optional] [example: Configure your Google OAuth credentials] [nullable] |
 | **canSet** | **Boolean** | Whether this provider accepts keys through the API at all. A provider whose keys are fixed by the  installation reports `false`, and saving keys for it is refused; the field is reported by the portal and  ignored on the way in. | [optional] [example: true] |
 | **paid** | **Boolean** | Whether the provider is a paid option. A paid one can only be connected while the portal plan includes  third-party storage or the installation is licensed as self-hosted; the field is reported by the portal and  ignored on the way in. | [optional] [example: false] |
-| **props** | [**List**](#model-authkey) | The credentials the portal authenticates to the provider with, as the name and value pairs the provider  defines. Send the whole set the provider expects: leaving every value empty disconnects it, and a set that  fails the provider validation is cleared rather than stored half-applied. The listing operation reports the  values last saved, and a provider that forbids changes reports none at all. | [optional] [example: [{name=key, value=value}]] [nullable] |
+| **props** | [**List**](#model-authkey) | The credentials the portal authenticates to the provider with, as the name and value pairs the provider  defines. Send the whole set the provider expects: leaving every value empty disconnects it, and a set that  fails the provider validation is cleared rather than stored half-applied. The listing operation reports the  values last saved, and a provider that forbids changes reports none at all. | [optional] [example: [\{name=key, value=value\}]] [nullable] |
 
 
 ### Model AuthWithCodeRequestsDto
@@ -11146,7 +11143,7 @@ Represents a balance with an account number and a list of sub-accounts.
 | **subAccountNumber** | **Integer** (int32) | The sub-account number. | [optional] [example: 12345] |
 | **accountName** | **String** | The account name. | [optional] [example: account name] [nullable] |
 | **accountCurrency** | **String** | The account currency. | [optional] [example: "USD"] [nullable] |
-| **subAccounts** | [**List**](#model-subaccount) | A list of sub-accounts. | [optional] [example: [{currency=USD, amount=1500.75}]] [nullable] |
+| **subAccounts** | [**List**](#model-subaccount) | A list of sub-accounts. | [optional] [example: [\{currency=USD, amount=1500.75\}]] [nullable] |
 | **lastCredit** | [**TransactionInfo**](#model-transactioninfo) | The most recent credit transaction applied to the account. | [optional] |
 
 
@@ -11206,7 +11203,7 @@ The CDN storage settings.
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **module** | **String** | The storage name. | [optional] [example: LocalStorage] [nullable] |
-| **props** | **Map** | The storage properties. | [optional] [example: {region=eu-central-1, bucket=tenant-files}] |
+| **props** | **Map** | The storage properties. | [optional] [example: \{region=eu-central-1, bucket=tenant-files\}] |
 | **lastModified** | **Date** (date-time) | The date and time when the storage settings were last modified. | [optional] [example: 2025-01-01T12:00:00Z] |
 
 
@@ -11464,7 +11461,7 @@ The external resource parameters.
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **domain** | **String** | The external resource domain. | [optional] [example: example.com] [nullable] |
-| **entries** | **Map** | The external resource entries. | [optional] [example: {welcomeMessage=Welcome, logoutButton=Log out}] |
+| **entries** | **Map** | The external resource entries. | [optional] [example: \{welcomeMessage=Welcome, logoutButton=Log out\}] |
 
 
 ### Model CultureSpecificExternalResources
@@ -11554,7 +11551,7 @@ The colour themes the portal offers, which of them is applied, and how many the 
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **themes** | [**List**](#model-customcolorthemessettingsitem) | Every theme the portal can apply, ordered by ID, with the built-in ones first because they were created  first. It is never empty - the built-in themes cannot be deleted - and a custom theme is one whose ID is  higher than the built-in ones. | [optional] [example: [{id=1, name=Custom Theme}]] [nullable] |
+| **themes** | [**List**](#model-customcolorthemessettingsitem) | Every theme the portal can apply, ordered by ID, with the built-in ones first because they were created  first. It is never empty - the built-in themes cannot be deleted - and a custom theme is one whose ID is  higher than the built-in ones. | [optional] [example: [\{id=1, name=Custom Theme\}]] [nullable] |
 | **selected** | **Integer** (int32) | The ID of the theme in `themes` that is currently applied to the whole portal. Deleting the applied theme  moves it to the lowest remaining ID, so it can change without anyone having chosen a new one. | [optional] [example: 1] |
 | **limit** | **Integer** (int32) | How many entries `themes` may hold in total, built-in ones included; `0` means the plan caps nothing. Once  the cap is reached `PUT api/2.0/settings/colortheme` drops a new theme silently instead of failing, so  compare this with the length of `themes` to tell whether a save took effect. | [optional] [example: 1] |
 
@@ -11687,7 +11684,7 @@ One page of the per-service consumption totals, with the paging figures needed t
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **collection** | [**List**](#model-customerserviceusagedto) | The services on this page, one entry per service rather than per charge. It is empty for a period in  which nothing was consumed as well as for a page past the end of the report. | [optional] [example: [{service=backup, totalAmount=49.99}]] [nullable] |
+| **collection** | [**List**](#model-customerserviceusagedto) | The services on this page, one entry per service rather than per charge. It is empty for a period in  which nothing was consumed as well as for a page past the end of the report. | [optional] [example: [\{service=backup, totalAmount=49.99\}]] [nullable] |
 | **offset** | **Integer** (int32) | How many entries were skipped before this page, echoed from the request. | [optional] [example: 0] |
 | **limit** | **Integer** (int32) | How many entries one page may hold, echoed from the request; it is 25 unless another value was asked for. | [optional] [example: 25] |
 | **totalQuantity** | **Long** (int64) | How many services match the filters in total, across every page - services, not charges. | [optional] [example: 1] |
@@ -11705,7 +11702,7 @@ The filters that select which wallet service consumption is reported: the servic
 | **endDate** | **Date** (date-time) | The end of the reported period, inclusive. Read in the portal time zone rather than in UTC, and defaults to  the moment the call is made. | [optional] [example: 2024-01-31T23:59:59Z] [nullable] |
 | **participantName** | **String** | The participant whose consumption is reported - the account the accounting service records as the consumer.  Consumption caused by a portal user carries that user ID here; surrounding whitespace is trimmed, and an  omitted value reports every participant. | [optional] [example: My Own Corporation] [nullable] |
 | **status** | [**OperationStatus**](#model-operationstatus) | The outcome to keep. Consumption that is still being settled is reported as pending and may change later,  while the other outcomes are final; every outcome is reported when this is omitted. | [optional] [enum: 0, 1, 2, 3] |
-| **metadata** | **Map** | The usage annotations a wallet service records alongside its consumption, as the key and value pairs that  must all match for a record to be reported. The keys are chosen by the service that writes them, so read  them off the `metadata` of the records returned by `GET api/2.0/portal/payment/customer/usage` rather than  guessing; an omitted map reports every record. | [optional] [example: {key1=value1, key2=value2}] |
+| **metadata** | **Map** | The usage annotations a wallet service records alongside its consumption, as the key and value pairs that  must all match for a record to be reported. The keys are chosen by the service that writes them, so read  them off the `metadata` of the records returned by `GET api/2.0/portal/payment/customer/usage` rather than  guessing; an omitted map reports every record. | [optional] [example: \{key1=value1, key2=value2\}] |
 | **orderBy** | **String** | The name of the field the per-service totals are sorted by, spelled as the accounting service names it, such  as `ServiceName` or `StartDate`. Surrounding whitespace is trimmed, and the accounting service applies its  own ordering when this is omitted. | [optional] [example: ServiceName] [nullable] |
 | **orderType** | [**OperationOrderType**](#model-operationordertype) | The direction the field named in `orderBy` is sorted in. Newest or largest first is what the accounting  service does by default, so leaving this out sorts the same way as asking for descending explicitly. | [optional] [enum: 0, 1] |
 
@@ -11828,7 +11825,7 @@ The custom domain the portal answers on, and whether that mapping is in force.
 
 
 ### Model DocsCloudConfig
-Represents the configuration of a Docs Connect tenant.
+Represents the configuration of a DocsCloud tenant.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
@@ -11852,23 +11849,23 @@ The successful API response containing the DocsCloudConfig object.
 
 
 ### Model DocsCloudDevPackRequestDto
-The request parameters for switching the Docs Connect subscription to Docs Connect Dev Pack, or for calculating  the cost of that switch.
+The request parameters for switching the DocsCloud subscription to DocsCloudDevPack, or for calculating  the cost of that switch.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **quantity** | **Integer** (int32) | The number of users to subscribe to Docs Connect Dev Pack for. It must be at least the number of users of  the currently purchased Docs Connect subscription, and at least the Docs Connect Dev Pack minimum configured  for the installation, which is 10 users by default; a smaller value is rejected with 400. | [optional] [example: 10] [min: 1] [max: 2147483647] |
+| **quantity** | **Integer** (int32) | The number of users to subscribe to DocsCloudDevPack for. It must be at least the number of users of  the currently purchased DocsCloud subscription, and at least the DocsCloudDevPack minimum configured  for the installation, which is 10 users by default; a smaller value is rejected with 400. | [optional] [example: 10] [min: 1] [max: 2147483647] |
 
 
 ### Model DocsCloudIpFilterConfig
-Represents the IP filter configuration of a Docs Connect tenant.
+Represents the IP filter configuration of a DocsCloud tenant.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **rules** | [**List**](#model-docscloudipfilterrule) | The IP filter rules. | [optional] [example: [{address=127.0.0.1, allowed=true}]] [nullable] |
+| **rules** | [**List**](#model-docscloudipfilterrule) | The IP filter rules. | [optional] [example: [\{address=127.0.0.1, allowed=true\}]] [nullable] |
 
 
 ### Model DocsCloudIpFilterRule
-Represents the IP filter rule of a Docs Connect tenant.
+Represents the IP filter rule of a DocsCloud tenant.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
@@ -11877,7 +11874,7 @@ Represents the IP filter rule of a Docs Connect tenant.
 
 
 ### Model DocsCloudLicenseInfo
-Represents the license information of a Docs Connect tenant.
+Represents the license information of a DocsCloud tenant.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
@@ -11887,7 +11884,7 @@ Represents the license information of a Docs Connect tenant.
 
 
 ### Model DocsCloudPayment
-Represents the payment information of a Docs Connect tenant.
+Represents the payment information of a DocsCloud tenant.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
@@ -11902,16 +11899,16 @@ Represents the payment information of a Docs Connect tenant.
 
 
 ### Model DocsCloudQuota
-Represents the current user quota of a Docs Connect tenant.
+Represents the current user quota of a DocsCloud tenant.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **users** | [**List**](#model-docscloudquotauser) | The editor users. | [optional] [example: [{userid=00000000-0000-0000-0000-000000000000, expire=2024-01-15T10:30:00Z}]] [nullable] |
-| **usersView** | [**List**](#model-docscloudquotauser) | The viewer users. | [optional] [example: [{userid=00000000-0000-0000-0000-000000000000, expire=2024-01-15T10:30:00Z}]] [nullable] |
+| **users** | [**List**](#model-docscloudquotauser) | The editor users. | [optional] [example: [\{userid=00000000-0000-0000-0000-000000000000, expire=2024-01-15T10:30:00Z\}]] [nullable] |
+| **usersView** | [**List**](#model-docscloudquotauser) | The viewer users. | [optional] [example: [\{userid=00000000-0000-0000-0000-000000000000, expire=2024-01-15T10:30:00Z\}]] [nullable] |
 
 
 ### Model DocsCloudQuotaUser
-Represents a single user entry of a Docs Connect quota.
+Represents a single user entry of a DocsCloud quota.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
@@ -11932,7 +11929,7 @@ The successful API response containing the DocsCloudQuota object.
 
 
 ### Model DocsCloudSecurityConfig
-Represents the security configuration of a Docs Connect tenant.
+Represents the security configuration of a DocsCloud tenant.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
@@ -11941,7 +11938,7 @@ Represents the security configuration of a Docs Connect tenant.
 
 
 ### Model DocsCloudServerConfig
-Represents the server configuration of a Docs Connect tenant.
+Represents the server configuration of a DocsCloud tenant.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
@@ -11950,7 +11947,7 @@ Represents the server configuration of a Docs Connect tenant.
 
 
 ### Model DocsCloudServerInfo
-Represents the Docs Connect server information.
+Represents the DocsCloud server information.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
@@ -11960,7 +11957,7 @@ Represents the Docs Connect server information.
 
 
 ### Model DocsCloudStats
-Represents the usage statistics of a Docs Connect tenant for the current period.
+Represents the usage statistics of a DocsCloud tenant for the current period.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
@@ -11970,7 +11967,7 @@ Represents the usage statistics of a Docs Connect tenant for the current period.
 
 
 ### Model DocsCloudTenant
-Represents a Docs Connect tenant of a portal.
+Represents a DocsCloud tenant of a portal.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
@@ -11988,12 +11985,12 @@ Represents a Docs Connect tenant of a portal.
 
 
 ### Model DocsCloudTenantInfo
-Represents the license and server information of a Docs Connect tenant, with usage statistics for the current period.
+Represents the license and server information of a DocsCloud tenant, with usage statistics for the current period.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **license** | [**DocsCloudLicenseInfo**](#model-docscloudlicenseinfo) | The license information. | [optional] |
-| **server** | [**DocsCloudServerInfo**](#model-docscloudserverinfo) | The Docs Connect server information. | [optional] |
+| **server** | [**DocsCloudServerInfo**](#model-docscloudserverinfo) | The DocsCloud server information. | [optional] |
 | **usersLimit** | [**DocsCloudUsersLimit**](#model-docsclouduserslimit) | The user limits of the license. | [optional] |
 | **stats** | [**DocsCloudStats**](#model-docscloudstats) | The usage statistics for the current period. | [optional] |
 
@@ -12023,7 +12020,7 @@ The successful API response containing the DocsCloudTenant object.
 
 
 ### Model DocsCloudUsage
-Represents the usage statistics of a Docs Connect tenant.
+Represents the usage statistics of a DocsCloud tenant.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
@@ -12044,7 +12041,7 @@ The successful API response containing the DocsCloudUsage object.
 
 
 ### Model DocsCloudUserStats
-Represents the usage statistics of a single Docs Connect user category (editor or viewer).
+Represents the usage statistics of a single DocsCloud user category (editor or viewer).
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
@@ -12056,7 +12053,7 @@ Represents the usage statistics of a single Docs Connect user category (editor o
 
 
 ### Model DocsCloudUsersLimit
-Represents the user limits of a Docs Connect license.
+Represents the user limits of a DocsCloud license.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
@@ -12065,7 +12062,7 @@ Represents the user limits of a Docs Connect license.
 
 
 ### Model DocsCloudWopiConfig
-Represents the WOPI configuration of a Docs Connect tenant.
+Represents the WOPI configuration of a DocsCloud tenant.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
@@ -12610,7 +12607,7 @@ The addresses allowed to reach the portal, and whether the restriction is enforc
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **ipRestrictions** | [**List**](#model-iprestrictionbase) | The allowed addresses, each entry pairing a single IPv4 or IPv6 address with the flag that limits it to  administrators. This is the whole list that is to hold afterwards: entries not repeated here are deleted.  Ranges written as `from-to` and CIDR blocks are refused with 400, even though the portal matches such forms  when they are already stored. Enforcement spares only the portal owner and the installation own networks, so  a list without the caller address locks the remaining administrators out. | [required] [example: [{ip=192.0.2.1, forAdmin=false}]] [nullable] |
+| **ipRestrictions** | [**List**](#model-iprestrictionbase) | The allowed addresses, each entry pairing a single IPv4 or IPv6 address with the flag that limits it to  administrators. This is the whole list that is to hold afterwards: entries not repeated here are deleted.  Ranges written as `from-to` and CIDR blocks are refused with 400, even though the portal matches such forms  when they are already stored. Enforcement spares only the portal owner and the installation own networks, so  a list without the caller address locks the remaining administrators out. | [required] [example: [\{ip=192.0.2.1, forAdmin=false\}]] [nullable] |
 | **enable** | **Boolean** | Whether the list is enforced. Leaving it out follows the list - on when addresses are sent, off when the list  is empty - and sending `true` with an empty list is refused with 400, since that would admit nobody. | [optional] [example: true] [nullable] |
 
 
@@ -13205,10 +13202,10 @@ The migration API information.
 | **migratorName** | **String** | The migrator name. | [optional] [example: Nextcloud] [nullable] |
 | **operation** | **String** | The migration operation. | [optional] [example: parse] [nullable] |
 | **failedArchives** | **List** | The list of failed archives. | [optional] [example: [archive1.zip, archive2.zip]] [nullable] |
-| **users** | [**List**](#model-migratingapiuser) | The list of migrating users. | [optional] [example: [{id=9924256B-447C-4F19-9dbd-8ad8c39e8ff5, email=user@example.com, shouldImport=true}]] [nullable] |
-| **withoutEmailUsers** | [**List**](#model-migratingapiuser) | The list of migrating users without email. | [optional] [example: [{id=9924256B-447C-4F19-9dbd-8ad8c39e8ff5, shouldImport=false}]] [nullable] |
-| **existUsers** | [**List**](#model-migratingapiuser) | The list of existing migrating users. | [optional] [example: [{id=9924256B-447C-4F19-9dbd-8ad8c39e8ff5, email=existing@example.com, shouldImport=true}]] [nullable] |
-| **groups** | [**List**](#model-migratingapigroup) | The list of migrating groups. | [optional] [example: [{id=1, name=Group1, shouldImport=true}]] [nullable] |
+| **users** | [**List**](#model-migratingapiuser) | The list of migrating users. | [optional] [example: [\{id=9924256B-447C-4F19-9dbd-8ad8c39e8ff5, email=user@example.com, shouldImport=true\}]] [nullable] |
+| **withoutEmailUsers** | [**List**](#model-migratingapiuser) | The list of migrating users without email. | [optional] [example: [\{id=9924256B-447C-4F19-9dbd-8ad8c39e8ff5, shouldImport=false\}]] [nullable] |
+| **existUsers** | [**List**](#model-migratingapiuser) | The list of existing migrating users. | [optional] [example: [\{id=9924256B-447C-4F19-9dbd-8ad8c39e8ff5, email=existing@example.com, shouldImport=true\}]] [nullable] |
+| **groups** | [**List**](#model-migratingapigroup) | The list of migrating groups. | [optional] [example: [\{id=1, name=Group1, shouldImport=true\}]] [nullable] |
 | **importPersonalFiles** | **Boolean** | Specifies whether to import personal files or not. | [optional] [example: true] |
 | **importSharedFiles** | **Boolean** | Specifies whether to import shared files or not. | [optional] [example: true] |
 | **importSharedFolders** | **Boolean** | Specifies whether to import shared folders or not. | [optional] [example: true] |
@@ -13274,7 +13271,7 @@ The ways this installation can deliver a notification, and whether each of them 
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **channels** | [**List**](#model-notificationchanneldto) | The channels the running installation is configured with. A channel appears only when the notification  service names a sender for it, so the list can be shorter than the channels this build implements, and an  empty list means the configuration names none of them. | [optional] [example: [{name=email.sender, isEnabled=true}]] [nullable] |
+| **channels** | [**List**](#model-notificationchanneldto) | The channels the running installation is configured with. A channel appears only when the notification  service names a sender for it, so the list can be shorter than the channels this build implements, and an  empty list means the configuration names none of them. | [optional] [example: [\{name=email.sender, isEnabled=true\}]] [nullable] |
 
 
 ### Model NotificationChannelStatusWrapper
@@ -13536,7 +13533,7 @@ The plan being bought and the two pages the hosted checkout returns the buyer to
 |------------ | ------------- | ------------- | -------------|
 | **backUrl** | **URI** (uri) | The absolute address the hosted checkout page sends the buyer back to when the purchase is abandoned. It has  to be a well-formed URL and is carried into the checkout page as it is given, so it must be reachable by the  buyer rather than by the portal. | [required] [example: https://example.com/payment/back] [minLength: 0] [maxLength: 255] |
 | **successUrl** | **URI** (uri) | The absolute address the hosted checkout page sends the buyer to once the payment provider accepts the  purchase. Reaching it says the provider took the money, not that the portal has already been switched to the  new plan, so a client that lands here reads the plan back rather than assuming it. | [required] [example: https://example.com/payment/success] [minLength: 0] [maxLength: 255] |
-| **quantity** | **Map** (int32) | The plan being bought, as a single pair of the plan name and the number of units of it. The key is the `name`  of a monthly, non-wallet quota from `GET api/2.0/portal/payment/quotas`, and the value is how many  administrators the plan is to cover, which has to be greater than zero. Exactly one pair is accepted; yearly  and wallet products are refused with 400, and wallet services are bought through  `PUT api/2.0/portal/payment/updatewallet` instead. | [required] [example: {admin=1}] |
+| **quantity** | **Map** (int32) | The plan being bought, as a single pair of the plan name and the number of units of it. The key is the `name`  of a monthly, non-wallet quota from `GET api/2.0/portal/payment/quotas`, and the value is how many  administrators the plan is to cover, which has to be greater than zero. Exactly one pair is accepted; yearly  and wallet products are refused with 400, and wallet services are bought through  `PUT api/2.0/portal/payment/updatewallet` instead. | [required] [example: \{admin=1\}] |
 
 
 ### Model PluginsDto
@@ -13642,7 +13639,7 @@ The new size of the portal subscription.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **quantity** | **Map** (int32) | The plan and the number of units it is to cover, as a single pair. While the portal is on a priced plan the  key has to be the `name` of that same plan, which `GET api/2.0/portal/payment/quota` reports, because the  subscription is resized rather than swapped; the value is the total the subscription is to have afterwards,  not the difference. Exactly one pair is accepted, and a value that is already in effect is refused with 400. | [required] [example: {admin=1}] |
+| **quantity** | **Map** (int32) | The plan and the number of units it is to cover, as a single pair. While the portal is on a priced plan the  key has to be the `name` of that same plan, which `GET api/2.0/portal/payment/quota` reports, because the  subscription is resized rather than swapped; the value is the total the subscription is to have afterwards,  not the difference. Exactly one pair is accepted, and a value that is already in effect is refused with 400. | [required] [example: \{admin=1\}] |
 
 
 ### Model QuotaArrayWrapper
@@ -13668,7 +13665,7 @@ A quota - a plan, an add-on or a wallet service - with its price, the features i
 | **nonProfit** | **Boolean** | Whether this is the non-profit quota, which is granted rather than bought. A portal on it cannot buy any  other plan, so a catalogue asked for plans returns this one alone. | [required] [example: false] |
 | **free** | **Boolean** | Whether this is the free quota a portal falls back to when nothing is paid for. It has no end date and  the tightest limits of any quota. | [required] [example: true] |
 | **trial** | **Boolean** | Whether this is the trial quota, which grants the paid limits for a while and then expires. A trial is not  extended by paying - a plan has to be bought instead. | [required] [example: false] |
-| **features** | [**List**](#model-tenantquotafeaturedto) | The features the quota switches on, each with the limit it grants and, on the quota the portal is  actually on, how much of that limit is already used. A feature that is absent is off, so the list is the  whole truth about what the quota includes. | [required] [example: [{id=00000000-0000-0000-0000-000000000001, title=Premium Storage}]] [nullable] |
+| **features** | [**List**](#model-tenantquotafeaturedto) | The features the quota switches on, each with the limit it grants and, on the quota the portal is  actually on, how much of that limit is already used. A feature that is absent is off, so the list is the  whole truth about what the quota includes. | [required] [example: [\{id=00000000-0000-0000-0000-000000000001, title=Premium Storage\}]] [nullable] |
 | **usersQuota** | [**TenantEntityQuotaSettings**](#model-tenantentityquotasettings) | The per-member storage allowance an administrator has set on top of the quota, and whether it is applied  at all. It describes the live portal rather than this quota, so every entry of a catalogue listing repeats  the same values, and it is empty unless the portal is a server installation or its plan includes  statistics. | [optional] |
 | **roomsQuota** | [**TenantEntityQuotaSettings**](#model-tenantentityquotasettings) | The same kind of per-room storage override, filled in and read the same way as `usersQuota`. | [optional] |
 | **aiAgentsQuota** | [**TenantEntityQuotaSettings**](#model-tenantentityquotasettings) | The same kind of per-agent storage override for AI agents, filled in and read the same way as  `usersQuota`. | [optional] |
@@ -13733,7 +13730,7 @@ One page of the portal wallet's money movements, with the paging figures needed 
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **collection** | [**List**](#model-operationdto) | The movements on this page - top-ups, charges, refunds and corrections alike, newest first. It is empty  for a page past the end of the report as well as for a period in which nothing happened. | [optional] [example: [{service=disk-storage, debit=14.0}]] [nullable] |
+| **collection** | [**List**](#model-operationdto) | The movements on this page - top-ups, charges, refunds and corrections alike, newest first. It is empty  for a page past the end of the report as well as for a period in which nothing happened. | [optional] [example: [\{service=disk-storage, debit=14.0\}]] [nullable] |
 | **offset** | **Integer** (int32) | How many movements were skipped before this page, echoed from the request so a client need not remember  what it asked for. | [optional] [example: 0] |
 | **limit** | **Integer** (int32) | How many movements one page may hold, echoed from the request; it is 25 unless another value was asked  for. A full page is not proof that more exist - compare `currentPage` with `totalPage`. | [optional] [example: 25] |
 | **totalQuantity** | **Long** (int64) | How many movements match the filters in total, across every page. | [optional] [example: 137] |
@@ -13842,8 +13839,8 @@ How access to one portal module is configured: whether it is restricted, and who
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **webItemId** | **String** | The module this entry is about, echoed from the identifier that was asked about. When several identifiers  are asked about at once, entries come back one per identifier and in the order they were sent, so they can  also be matched by position. | [optional] [example: 00000000-0000-0000-0000-000000000000] [nullable] |
-| **users** | [**List**](#model-employeedto) | The individual members the rule was stored for. Members the caller is not allowed to see are left out, so  the same module can come back with different lists for different callers and an empty list does not prove  that nobody was granted access. | [optional] [example: [{displayName=John Doe}]] [nullable] |
-| **groups** | [**List**](#model-groupsummarydto) | The groups the rule was stored for, listed in full - unlike `users`, nothing is filtered out of it. | [optional] [example: [{id=00000000-0000-0000-0000-000000000000, name=Administrators}]] [nullable] |
+| **users** | [**List**](#model-employeedto) | The individual members the rule was stored for. Members the caller is not allowed to see are left out, so  the same module can come back with different lists for different callers and an empty list does not prove  that nobody was granted access. | [optional] [example: [\{displayName=John Doe\}]] [nullable] |
+| **groups** | [**List**](#model-groupsummarydto) | The groups the rule was stored for, listed in full - unlike `users`, nothing is filtered out of it. | [optional] [example: [\{id=00000000-0000-0000-0000-000000000000, name=Administrators\}]] [nullable] |
 | **enabled** | **Boolean** | Whether access to the module is restricted to the subjects listed here. It is `false` for a module nobody  has ever configured, in which case the two lists say nothing about who may open it. | [optional] [example: true] |
 | **isSubItem** | **Boolean** | Whether the module hangs under another one rather than standing on its own. A sub-module is never returned  by `GET api/2.0/settings/security/modules`, which lists top-level modules only. | [optional] [example: true] |
 
@@ -13959,7 +13956,7 @@ The general configuration of the current portal, as the client shell needs it be
 | **displayBanners** | **Boolean** | Whether the interface may show the vendor's promotional banners. A cloud portal always reports `true`; on  a server installation it follows the banner setting. Filled in for a signed-in caller only. | [optional] [example: true] |
 | **aiEnabled** | **Boolean** | Whether the AI features - chat, agents and vectorisation - may be used on this portal. While it is  `false` the AI Agents folder is hidden and the AI operations are refused. Filled in for a signed-in caller  only. | [optional] [example: true] |
 | **walletLowBalance** | **Boolean** | Whether the portal wallet has already dropped below its low-balance threshold, so a client can warn about  AI operations being cut off. It is reported to DocSpace administrators only and left empty for everyone  else, which is not the same as a healthy balance. | [optional] [example: false] [nullable] |
-| **userNameRegex** | **String** | The pattern a member's first and last name has to match, so a client can validate a name before sending  it. It is a .NET regular expression and is applied to each name part separately. | [optional] [example: ^[a-zA-Z0-9_]{3,20}$] [nullable] |
+| **userNameRegex** | **String** | The pattern a member's first and last name has to match, so a client can validate a name before sending  it. It is a .NET regular expression and is applied to each name part separately. | [optional] [example: ^[a-zA-Z0-9_]\{3,20\}$] [nullable] |
 | **invitationLimit** | **Integer** (int32) | How many invitations the portal may still send in the current window. Filled in for a signed-in caller  only, and set to the maximum value of a 32-bit integer on an installation that limits nothing. | [optional] [example: 10] [nullable] |
 | **plugins** | [**PluginsDto**](#model-pluginsdto) | What the installation allows to be done with web plugins. Filled in for a signed-in caller only, with all  three flags `false` unless the installation switched plugins on. | [optional] |
 | **deepLink** | [**DeepLinkDto**](#model-deeplinkdto) | What a mobile client needs to hand a document link over to the installed application instead of opening it  in the browser. Its fields are empty strings when the installation configures no application. | [required] |
@@ -14160,7 +14157,7 @@ The whole SAML Single Sign-On configuration of the portal, carried as a serialis
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **serializeSettings** | **String** | The configuration object serialised to a JSON string, not a nested object. It is the complete configuration  rather than a patch - fields left out are stored empty - so start from `GET api/2.0/settings/ssov2` or  `GET api/2.0/settings/ssov2/default` and send back a changed copy. The identity provider entity ID and  sign-in URL are required, the sign-in and sign-out URLs have to be absolute `http` or `https` addresses, and  the attribute mapping has to name the first name, last name and email fields; the values each SAML field  accepts are listed by `GET api/2.0/settings/ssov2/constants`. An empty string, or a string that carries no  configuration object, is refused with 400. | [required] [example: {"enableSso":true,"idpSettings":{"entityId":"https://idp.example.com"}}] [nullable] |
+| **serializeSettings** | **String** | The configuration object serialised to a JSON string, not a nested object. It is the complete configuration  rather than a patch - fields left out are stored empty - so start from `GET api/2.0/settings/ssov2` or  `GET api/2.0/settings/ssov2/default` and send back a changed copy. The identity provider entity ID and  sign-in URL are required, the sign-in and sign-out URLs have to be absolute `http` or `https` addresses, and  the attribute mapping has to name the first name, last name and email fields; the values each SAML field  accepts are listed by `GET api/2.0/settings/ssov2/constants`. An empty string, or a string that carries no  configuration object, is refused with 400. | [required] [example: \{"enableSso":true,"idpSettings":\{"entityId":"https://idp.example.com"\}\}] [nullable] |
 
 
 ### Model SsoSettingsV2
@@ -14171,10 +14168,10 @@ The SSO portal settings.
 | **lastModified** | **Date** (date-time) | The timestamp indicating when the settings were last modified. | [optional] [example: 1990-01-01T00:00:00Z] |
 | **enableSso** | **Boolean** | Specifies if the SSO settings are enabled or not. | [optional] [example: false] [nullable] |
 | **idpSettings** | [**SsoIdpSettings**](#model-ssoidpsettings) | The SSO IdP settings. | [optional] |
-| **idpCertificates** | [**List**](#model-ssocertificate) | The list of the IdP certificates. | [optional] [example: [{crt=base64-cert-data, key=base64-key-data}]] [nullable] |
+| **idpCertificates** | [**List**](#model-ssocertificate) | The list of the IdP certificates. | [optional] [example: [\{crt=base64-cert-data, key=base64-key-data\}]] [nullable] |
 | **idpCertificateAdvanced** | [**SsoIdpCertificateAdvanced**](#model-ssoidpcertificateadvanced) | The IdP advanced certificate. | [optional] |
 | **spLoginLabel** | **String** | The SP login label. | [optional] [example: Single Sign-on] [nullable] |
-| **spCertificates** | [**List**](#model-ssocertificate) | The list of the SP certificates. | [optional] [example: [{crt=base64-cert-data, key=base64-key-data}]] [nullable] |
+| **spCertificates** | [**List**](#model-ssocertificate) | The list of the SP certificates. | [optional] [example: [\{crt=base64-cert-data, key=base64-key-data\}]] [nullable] |
 | **spCertificateAdvanced** | [**SsoSpCertificateAdvanced**](#model-ssospcertificateadvanced) | The SP advanced certificate. | [optional] |
 | **fieldMapping** | [**SsoFieldMapping**](#model-ssofieldmapping) | The SSO field mapping. | [optional] |
 | **hideAuthPage** | **Boolean** | Specifies if the authentication page will be hidden or not. | [optional] [example: false] |
@@ -14272,7 +14269,7 @@ One third-party storage provider the portal data can be kept in, with the keys i
 |------------ | ------------- | ------------- | -------------|
 | **id** | **String** | The provider's key, which is what `PUT api/2.0/settings/storage` and its CDN and backup counterparts take  as the storage to switch to. The built-in local storage has no entry of its own: a listing in which  nothing is `current` means the data sits locally. | [required] [example: s3] [nullable] |
 | **title** | **String** | The provider name in the portal language, falling back to `id` when this build ships no wording for it. | [required] [example: Amazon AWS S3] [nullable] |
-| **properties** | [**List**](#model-authkey) | The settings the provider expects, each with its key, its localised label and the value the server  currently holds. For the entry marked `current` the values come from the portal's saved storage settings  and for the others from the installation configuration, so a setting nobody has configured comes back with  an empty value rather than being left out. | [optional] [example: [{name=acesskey, value=AKIAIOSFODNN7EXAMPLE, title=Access key}]] [nullable] |
+| **properties** | [**List**](#model-authkey) | The settings the provider expects, each with its key, its localised label and the value the server  currently holds. For the entry marked `current` the values come from the portal's saved storage settings  and for the others from the installation configuration, so a setting nobody has configured comes back with  an empty value rather than being left out. | [optional] [example: [\{name=acesskey, value=AKIAIOSFODNN7EXAMPLE, title=Access key\}]] [nullable] |
 | **current** | **Boolean** | Whether the portal is using this provider right now. At most one entry of a listing has it set. | [required] [example: true] |
 | **isSet** | **Boolean** | Whether the provider's keys are already filled in on the server, so it could be switched to without  sending credentials. It says nothing about whether the credentials still work. | [required] [example: true] |
 
@@ -14300,7 +14297,7 @@ The storage settings.
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **module** | **String** | The storage name. | [optional] [example: LocalStorage] [nullable] |
-| **props** | **Map** | The storage properties. | [optional] [example: {region=eu-central-1, bucket=tenant-files}] |
+| **props** | **Map** | The storage properties. | [optional] [example: \{region=eu-central-1, bucket=tenant-files\}] |
 | **lastModified** | **Date** (date-time) | The date and time when the storage settings were last modified. | [optional] [example: 2025-01-01T12:00:00Z] |
 
 
@@ -14400,7 +14397,7 @@ The subscription this portal runs on: its state, the end of the current period, 
 | **delayDueDate** | [**ApiDateTime**](#model-apidatetime) | When the grace period after `dueDate` runs out and the portal is cut off, in the portal time zone. Filled  in under the same conditions as `dueDate`, and equal to it when the plan grants no grace period. | [optional] |
 | **licenseDate** | [**ApiDateTime**](#model-apidatetime) | When the licence file behind the subscription was issued, in the portal time zone. It is meaningful on a  server installation and filled in for a caller with the portal-settings right only. | [optional] |
 | **customerId** | **String** | The account in the billing system the subscription is charged to, empty for a portal that has never been  billed. Filled in for a caller with the portal-settings right only. | [optional] [example: 00000000-0000-0000-0000-000000000001] [nullable] |
-| **quotas** | [**List**](#model-tariffquotadto) | The quotas the subscription is made of - the plan itself and its add-ons - with the overdue ones listed  alongside the current ones, so an entry here is not proof that it is still being paid for; read each  entry's own `state` for that. Filled in for a caller with the portal-settings right only. | [optional] [example: [{id=1, quantity=500}]] [nullable] |
+| **quotas** | [**List**](#model-tariffquotadto) | The quotas the subscription is made of - the plan itself and its add-ons - with the overdue ones listed  alongside the current ones, so an entry here is not proof that it is still being paid for; read each  entry's own `state` for that. Filled in for a caller with the portal-settings right only. | [optional] [example: [\{id=1, quantity=500\}]] [nullable] |
 
 
 ### Model TariffQuotaDto
@@ -14627,7 +14624,7 @@ The domain validator.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **regex** | **String** | The regex string to validate a domain. | [optional] [example: ^[a-z0-9]([a-z0-9-]){1,61}[a-z0-9]$] [nullable] |
+| **regex** | **String** | The regex string to validate a domain. | [optional] [example: ^[a-z0-9]([a-z0-9-])\{1,61\}[a-z0-9]$] [nullable] |
 | **minLength** | **Integer** (int32) | The minimum length of the valid domain. | [optional] [example: 6] |
 | **maxLength** | **Integer** (int32) | The maximum length of the valid domain. | [optional] [example: 63] |
 
@@ -14744,9 +14741,9 @@ The current tenant quota.
 | **countAIAgent** | **Integer** (int32) | The number of AI agents. | [optional] [example: 5] |
 | **aiTools** | **Boolean** | Specifies if the AI tools enabled as a wallet service or not. | [optional] [example: true] |
 | **aiSearch** | **Boolean** | Specifies if the AI search enabled as a wallet service or not. | [optional] [example: true] |
-| **docsCloud** | **Integer** (int32) | The number of Docs Connect users. | [optional] [example: true] |
-| **docsCloudDevPack** | **Boolean** | Specifies if the Docs Connect Dev Pack enabled or not. | [optional] [example: true] |
-| **docsCloudTrial** | **Boolean** | Specifies if the Docs Connect trial enabled or not. | [optional] [example: true] |
+| **docsCloud** | **Integer** (int32) | The number of DocsCloud users. | [optional] [example: true] |
+| **docsCloudDevPack** | **Boolean** | Specifies if the DocsCloudDevPack enabled or not. | [optional] [example: true] |
+| **docsCloudTrial** | **Boolean** | Specifies if the DocsCloudTrial enabled or not. | [optional] [example: true] |
 
 
 ### Model TenantQuotaFeatureDto
@@ -14756,7 +14753,7 @@ One feature a quota switches on, with the limit it grants and how much of that l
 |------------ | ------------- | ------------- | -------------|
 | **id** | **String** | The stable key of the feature - `total_size`, `manager`, `room`, `backup` and so on. It is the value to  branch on, since `title` is prose in the portal language. | [optional] [example: total_size] [nullable] |
 | **title** | **String** | The feature described in the portal language, with its limit already substituted into the sentence, so it  can be printed as it is. It is empty when this build ships no wording for the feature. | [optional] [example: Premium Storage] [nullable] |
-| **image** | **String** | The feature's icon as SVG markup to render inline - not a URL to fetch. It is filled in only when the  quota comes from the catalogue, and left empty on the quota the portal is actually on, on a feature that  this quota switches off, and on a feature that ships no icon. | [optional] [example: &lt;svg viewBox="0 0 24 24"&gt;&lt;path d="..."/&gt;&lt;/svg&gt;] [nullable] |
+| **image** | **String** | The feature's icon as SVG markup to render inline - not a URL to fetch. It is filled in only when the  quota comes from the catalogue, and left empty on the quota the portal is actually on, on a feature that  this quota switches off, and on a feature that ships no icon. | [optional] [example: &lt;svg viewBox="0 0 24 24">&lt;path d="..."/>&lt;/svg>] [nullable] |
 | **value** | **oas_any_type_not_mapped** |  | [optional] [nullable] |
 | **type** | **String** | How to read `value` and `used`: `size` for bytes, `count` for a number of things, `flag` for a feature  that is merely on or off. | [optional] [example: size] [nullable] |
 | **used** | [**FeatureUsedDto**](#model-featureuseddto) | How much of the limit is already used. It is present only on the quota the portal is actually on, and  only for a feature whose consumption is counted; a guest is shown none of these figures and a plain member  only the one for total size, so an absent value can mean the caller may not see it rather than that  nothing is used. | [optional] |
@@ -15310,7 +15307,7 @@ The wallet service being bought or scheduled, and the way its quantity is applie
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **quantity** | **Map** (int32) | The wallet service and the number of units of it, as a single pair. The key is the `serviceName` of a service  from `GET api/2.0/portal/payment/walletservices`, and the value is read according to  `productQuantityType`: the units to add, or the total the service is to have in the next period. Minimum  quantities apply per service - disk storage starts at 100 units, the Docs Connect Dev Pack at 10, and the  administrators may not be fewer than the portal already has. Exactly one pair is accepted, and a null or zero  value cancels a change scheduled earlier rather than buying nothing. | [required] [example: {admin=1}] |
+| **quantity** | **Map** (int32) | The wallet service and the number of units of it, as a single pair. The key is the `serviceName` of a service  from `GET api/2.0/portal/payment/walletservices`, and the value is read according to  `productQuantityType`: the units to add, or the total the service is to have in the next period. Minimum  quantities apply per service - disk storage starts at 100 units, the DocsCloud developer pack at 10, and the  administrators may not be fewer than the portal already has. Exactly one pair is accepted, and a null or zero  value cancels a change scheduled earlier rather than buying nothing. | [required] [example: \{admin=1\}] |
 | **productQuantityType** | [**ProductQuantityType**](#model-productquantitytype) | How the number in `quantity` is applied. `Add` buys the units straight away and charges them to the portal  wallet, while `Set` charges nothing now and records the quantity the service is to have from the next period.  Only these two are accepted here; `Sub` and `Renew` are refused with 400. | [optional] [enum: 0, 1, 2, 3] |
 
 
@@ -15374,7 +15371,7 @@ The modules switched on or off together, one entry per module.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **items** | [**List**](#model-itemkeyvaluepairstringboolean) | The modules to switch, each entry pairing a module GUID as its `key` with the new enabled flag as its  `value`. A key that is not a GUID fails the whole request as invalid, and a module listed twice is applied  once, from its first entry. No allow-list travels here: switching a product module on restores the users and  groups it was last restricted to, and everything else is stored as a plain allow or deny for everyone. | [optional] [example: [{key=00000000-0000-0000-0000-000000000000, value=true}]] [nullable] |
+| **items** | [**List**](#model-itemkeyvaluepairstringboolean) | The modules to switch, each entry pairing a module GUID as its `key` with the new enabled flag as its  `value`. A key that is not a GUID fails the whole request as invalid, and a module listed twice is applied  once, from its first entry. No allow-list travels here: switching a product module on restores the users and  groups it was last restricted to, and everything else is stored as a plain allow or deny for everyone. | [optional] [example: [\{key=00000000-0000-0000-0000-000000000000, value=true\}]] [nullable] |
 
 
 ### Model WebPluginArrayWrapper
@@ -15410,9 +15407,9 @@ One web plugin available to the portal: its manifest, where to load it from, and
 | **system** | **Boolean** | Whether the plugin ships with the installation rather than having been uploaded here. A system plugin  cannot be deleted through `DELETE api/2.0/settings/webplugins/{name}`, only switched off. | [required] [example: false] |
 | **url** | **String** | The address of the plugin's script, which a client loads to run it. It ends in a `hash` query taken from  `version`, so the address changes whenever the plugin is updated and an old one may be cached. | [required] [example: https://example.com/plugin.js] [nullable] |
 | **cssUrl** | **String** | The absolute address of the plugin's stylesheet, empty for a plugin that ships none. | [required] [example: https://example.com/plugin.css] [nullable] |
-| **settings** | **String** | The settings string the portal keeps for the plugin, stored and returned verbatim - only the plugin knows  its shape. It is empty until `PUT api/2.0/settings/webplugins/{name}` saves one. | [required] [example: {"theme":"dark"}] [nullable] |
-| **nameLocale** | **Map** | The plugin's name translated, keyed by culture name. A culture that is missing falls back to `name`, and  the whole map is empty for a plugin that ships no translations. | [optional] [example: {en-US=Example plugin, de-DE=Beispiel-Plugin}] |
-| **descriptionLocale** | **Map** | The plugin's description translated, keyed the same way as `nameLocale` and falling back to  `description`. | [optional] [example: {en-US=Adds extra actions, de-DE=Fugt Aktionen hinzu}] |
+| **settings** | **String** | The settings string the portal keeps for the plugin, stored and returned verbatim - only the plugin knows  its shape. It is empty until `PUT api/2.0/settings/webplugins/{name}` saves one. | [required] [example: \{"theme":"dark"\}] [nullable] |
+| **nameLocale** | **Map** | The plugin's name translated, keyed by culture name. A culture that is missing falls back to `name`, and  the whole map is empty for a plugin that ships no translations. | [optional] [example: \{en-US=Example plugin, de-DE=Beispiel-Plugin\}] |
+| **descriptionLocale** | **Map** | The plugin's description translated, keyed the same way as `nameLocale` and falling back to  `description`. | [optional] [example: \{en-US=Adds extra actions, de-DE=Fugt Aktionen hinzu\}] |
 | **runtime** | **String** | How the script at `url` is to be loaded - as an ES module or as a classic script. It is empty for a  plugin whose manifest does not say, which a client treats as a classic script. | [optional] [example: module] [nullable] |
 
 
@@ -15422,7 +15419,7 @@ The state the portal keeps for an installed web plugin: whether it runs, and its
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **enabled** | **Boolean** | Whether the plugin runs in this portal. Switching it on adds the domains its manifest declares to the portal  Content Security Policy and switching it off takes them away again; connected clients are told of the new  state without a reload. | [optional] [example: true] |
-| **settings** | **String** | The configuration the plugin reads at run time, as a JSON document serialised into a string. Its shape is  defined by the plugin and not by the portal, which stores it encrypted for this portal alone. It replaces  whatever was stored rather than merging into it, so send `{}` when there is nothing to keep. | [required] [example: {"theme":"dark","autoSave":true}] [minLength: 0] [maxLength: 255] [nullable] |
+| **settings** | **String** | The configuration the plugin reads at run time, as a JSON document serialised into a string. Its shape is  defined by the plugin and not by the portal, which stores it encrypted for this portal alone. It replaces  whatever was stored rather than merging into it, so send `{}` when there is nothing to keep. | [required] [example: \{"theme":"dark","autoSave":true\}] [minLength: 0] [maxLength: 255] [nullable] |
 
 
 ### Model WebPluginWrapper
@@ -15594,10 +15591,10 @@ One delivery attempt of a webhook: what was sent where, and what came back.
 | **creationTime** | **Date** (date-time) | When the attempt was queued, as a UTC instant - unlike the dates of the subscription itself, which come  in the portal time zone. Records come back newest first by this moment. | [optional] [example: 2024-01-15T10:30:00Z] |
 | **method** | **String** | The HTTP method the delivery was sent with, which is `POST` for every webhook the portal sends. | [optional] [example: POST] [nullable] |
 | **route** | **String** | The address the delivery was sent to, which is the subscription's URL as it stood at the time - so an  older record can name an address the subscription no longer uses. | [optional] [example: https://example.com/hooks/docspace] [nullable] |
-| **requestHeaders** | **String** | The headers the portal sent, serialised as one string, including the signature header a receiver verifies  the payload with. | [optional] [example: {"x-docspace-signature":"9f86d081884c7d65"}] [nullable] |
-| **requestPayload** | **String** | The body the portal sent, which is the event payload as JSON text. It is stored as it was sent, so it  still describes the entity as it looked at the time of the event. | [optional] [example: {"id":42,"title":"report.docx"}] [nullable] |
-| **responseHeaders** | **String** | The headers the target answered with, serialised the same way as `requestHeaders`. It is empty while the  attempt is still on its way and on an attempt that never reached the target. | [optional] [example: {"content-type":"application/json"}] [nullable] |
-| **responsePayload** | **String** | The body the target answered with, truncated for storage. Empty under the same conditions as  `responseHeaders`, and also for a target that answers with no body at all. | [optional] [example: {"ok":true}] [nullable] |
+| **requestHeaders** | **String** | The headers the portal sent, serialised as one string, including the signature header a receiver verifies  the payload with. | [optional] [example: \{"x-docspace-signature":"9f86d081884c7d65"\}] [nullable] |
+| **requestPayload** | **String** | The body the portal sent, which is the event payload as JSON text. It is stored as it was sent, so it  still describes the entity as it looked at the time of the event. | [optional] [example: \{"id":42,"title":"report.docx"\}] [nullable] |
+| **responseHeaders** | **String** | The headers the target answered with, serialised the same way as `requestHeaders`. It is empty while the  attempt is still on its way and on an attempt that never reached the target. | [optional] [example: \{"content-type":"application/json"\}] [nullable] |
+| **responsePayload** | **String** | The body the target answered with, truncated for storage. Empty under the same conditions as  `responseHeaders`, and also for a target that answers with no body at all. | [optional] [example: \{"ok":true\}] [nullable] |
 | **status** | **Integer** (int32) | The HTTP status code the target answered. It is `0` while the attempt is still on its way and on one that  never reached the target, so `0` is not a failure code - it is the absence of an answer. | [optional] [example: 200] |
 | **delivery** | **Date** (date-time) | When the answer came back, as a UTC instant like `creationTime`. It is empty while the attempt is still on  its way, which together with `status` is how a pending record is told from a finished one. | [optional] [example: 2024-01-15T10:30:00Z] [nullable] |
 
