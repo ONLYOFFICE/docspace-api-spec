@@ -14,7 +14,7 @@ Opens a chunked upload session for a file in the folder named by the path and re
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **folderId** | path | **Integer** (int32) | The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not. | [required] [example: 1] |
+| **folderId** | path | **Integer** (int32) | The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not. | [required] [example: `1`] |
 | **SessionRequest** | body | [**SessionRequest**](../files.md#model-sessionrequest) | The file the session is opened for, and how a clash with an existing name is settled. | [required] |
 
 ## Responses

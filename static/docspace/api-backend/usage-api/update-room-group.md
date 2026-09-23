@@ -14,7 +14,7 @@ Applies changes to one of the caller's own room groups: a new name, rooms to att
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The room group to change, identified by the value `GET api/2.0/files/group` reports for it. A group of another  account cannot be addressed and reads as missing. | [required] [example: 42] |
+| **id** | path | **Integer** (int32) | The room group to change, identified by the value `GET api/2.0/files/group` reports for it. A group of another  account cannot be addressed and reads as missing. | [required] [example: `42`] |
 | **UpdateRoomGroupRequest** | body | [**UpdateRoomGroupRequest**](../files.md#model-updateroomgrouprequest) | The changes to apply. Carrying none of them leaves the group as it is, and each of them may be sent on its own  or together with the others. | [required] |
 
 ## Responses

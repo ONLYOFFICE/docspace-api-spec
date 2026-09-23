@@ -14,7 +14,7 @@ Adds the listed accounts to a group, keeping the members it already has.  The ca
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **UUID** (uuid) | The ID of the group whose members are changed, taken from the route. It has to be a group that has not been  deleted, otherwise the operation answers 404. | [required] [example: 00000000-0000-0000-0000-000000000000] |
+| **id** | path | **UUID** (uuid) | The ID of the group whose members are changed, taken from the route. It has to be a group that has not been  deleted, otherwise the operation answers 404. | [required] [example: `00000000-0000-0000-0000-000000000000`] |
 | **MembersRequest** | body | [**MembersRequest**](../people.md#model-membersrequest) | The accounts to add, replace with, or remove. | [required] |
 
 ## Responses

@@ -14,10 +14,10 @@ Keeps an editing session on the file alive, or ends it; an editor client calls i
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **Integer** (int32) | The file whose editing session is being tracked. | [required] [example: 1] |
-| **tabId** | query | **UUID** (uuid) | The client tab that holds the session, a value the client makes up once and repeats on every call about that  tab. Two tabs sending different values are tracked as two sessions on the same file, while the all-zero value  belongs to a session claimed for a single editor. | [optional] [example: 00000000-0000-0000-0000-000000000000] |
-| **docKeyForTrack** | query | **String** | The document key of the revision being edited, as `POST api/2.0/files/file/{fileId}/startedit` returned it. It  is checked against the file's current key on every call, so a key left over from an older revision is refused. | [optional] [example: abc123] |
-| **isFinish** | query | **Boolean** | Ends the session for this tab and tells the other clients that editing has stopped. Left off, the session is  refreshed and the file stays marked as being edited. | [optional] [example: true] |
+| **fileId** | path | **Integer** (int32) | The file whose editing session is being tracked. | [required] [example: `1`] |
+| **tabId** | query | **UUID** (uuid) | The client tab that holds the session, a value the client makes up once and repeats on every call about that  tab. Two tabs sending different values are tracked as two sessions on the same file, while the all-zero value  belongs to a session claimed for a single editor. | [optional] [example: `00000000-0000-0000-0000-000000000000`] |
+| **docKeyForTrack** | query | **String** | The document key of the revision being edited, as `POST api/2.0/files/file/{fileId}/startedit` returned it. It  is checked against the file's current key on every call, so a key left over from an older revision is refused. | [optional] [example: `abc123`] |
+| **isFinish** | query | **Boolean** | Ends the session for this tab and tells the other clients that editing has stopped. Left off, the session is  refreshed and the file stays marked as being edited. | [optional] [example: `true`] |
 
 ## Responses
 

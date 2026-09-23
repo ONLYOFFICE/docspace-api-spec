@@ -14,7 +14,7 @@ Returns one thread by its ID, without its messages - read those with `GET api/2.
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **threadId** | query | **String** | The chat thread identifier. | [required] [example: 11111111-1111-1111-1111-111111111111] |
+| **threadId** | query | **String** | The chat thread identifier. | [required] [example: `11111111-1111-1111-1111-111111111111`] |
 
 ## Responses
 

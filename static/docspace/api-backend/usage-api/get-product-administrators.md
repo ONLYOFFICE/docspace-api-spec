@@ -14,7 +14,7 @@ Lists the users who administer the portal module identified by `productid` in th
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **productid** | path | **UUID** (uuid) | The module the operation acts on, by module GUID. The all-zero GUID stands for the portal itself rather than  for a single module, and a GUID that names no module group is answered with an empty result instead of a  failure. | [required] [example: 00000000-0000-0000-0000-000000000000] |
+| **productid** | path | **UUID** (uuid) | The module the operation acts on, by module GUID. The all-zero GUID stands for the portal itself rather than  for a single module, and a GUID that names no module group is answered with an empty result instead of a  failure. | [required] [example: `00000000-0000-0000-0000-000000000000`] |
 
 ## Responses
 

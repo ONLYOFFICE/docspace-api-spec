@@ -14,7 +14,7 @@ Returns the DocsCloud user quota of the current portal: the users who currently 
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **refresh** | query | **Boolean** | Pass `true` to skip the cached copy and request the user quota from DocsCloud again, replacing the cached one; with the default `false` the answer may be up to a minute old. | [optional] [default to false] |
+| **refresh** | query | **Boolean** | Pass `true` to skip the cached copy and request the user quota from DocsCloud again, replacing the cached one; with the default `false` the answer may be up to a minute old. | [optional] [default to `false`] |
 
 ## Responses
 

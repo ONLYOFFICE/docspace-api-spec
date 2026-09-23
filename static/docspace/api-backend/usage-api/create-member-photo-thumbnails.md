@@ -14,7 +14,7 @@ Crops the avatar of a profile to the rectangle given in the request and rebuilds
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **userid** | path | **String** | The profile whose avatar is cropped, taken from the route. Either the ID of the account or its user name is  accepted, and it has to be the calling account, because a profile photo can only be changed by its owner. | [required] [example: 00000000-0000-0000-0000-000000000000] |
+| **userid** | path | **String** | The profile whose avatar is cropped, taken from the route. Either the ID of the account or its user name is  accepted, and it has to be the calling account, because a profile photo can only be changed by its owner. | [required] [example: `00000000-0000-0000-0000-000000000000`] |
 | **ThumbnailsRequest** | body | [**ThumbnailsRequest**](../people.md#model-thumbnailsrequest) | The crop rectangle, and optionally the temporary image to crop. | [required] |
 
 ## Responses

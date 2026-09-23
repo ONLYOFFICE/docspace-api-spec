@@ -14,8 +14,8 @@ Reports whether the rooms and the shared files of a user have to be reassigned b
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **UserId** | query | **UUID** (uuid) | The ID of the user whose rooms and shared files are checked. | [optional] [example: 00000000-0000-0000-0000-000000000000] |
-| **Type** | query | **EmployeeType** | The type the user is about to be changed to, which decides what counts as data that has to be reassigned:  `RoomAdmin`, `DocSpaceAdmin` and `User` are checked for owned rooms only, while `Guest` is also checked for  files that are still shared. The default is `All`, which checks owned rooms only. | [optional] [example: RoomAdmin] [enum: All, RoomAdmin, Guest, DocSpaceAdmin, User] |
+| **UserId** | query | **UUID** (uuid) | The ID of the user whose rooms and shared files are checked. | [optional] [example: `00000000-0000-0000-0000-000000000000`] |
+| **Type** | query | **EmployeeType** | The type the user is about to be changed to, which decides what counts as data that has to be reassigned:  `RoomAdmin`, `DocSpaceAdmin` and `User` are checked for owned rooms only, while `Guest` is also checked for  files that are still shared. The default is `All`, which checks owned rooms only. | [optional] [example: `RoomAdmin`] [enum: `All`, `RoomAdmin`, `Guest`, `DocSpaceAdmin`, `User`] |
 
 ## Responses
 

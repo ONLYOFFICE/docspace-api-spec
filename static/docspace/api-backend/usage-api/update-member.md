@@ -14,7 +14,7 @@ Updates a portal profile, and which fields it accepts depends on whose profile i
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **userid** | path | **String** | The user ID. | [required] [example: 00000000-0000-0000-0000-000000000000] |
+| **userid** | path | **String** | The user ID. | [required] [example: `00000000-0000-0000-0000-000000000000`] |
 | **UpdateMemberRequestDto** | body | [**UpdateMemberRequestDto**](../people.md#model-updatememberrequestdto) | The request parameters for updating the user information. | [required] |
 
 ## Responses

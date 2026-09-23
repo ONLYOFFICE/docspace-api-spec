@@ -14,8 +14,8 @@ Hands back the hosted page on which a payment method is attached to the portal's
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **BackUrl** | query | **URI** (uri) | The absolute address the setup page sends the user back to when attaching a payment method is abandoned. It  has to be a well-formed URL and must be reachable by that user rather than by the portal. | [required] [example: https://example.com/payment/back] [minLength: 0] [maxLength: 255] |
-| **SuccessUrl** | query | **URI** (uri) | The absolute address the setup page sends the user to once the payment provider has stored the payment  method. Reaching it means a method is now on file, which `GET api/2.0/portal/payment/customerinfo` confirms;  nothing has been charged. | [required] [example: https://example.com/payment/success] [minLength: 0] [maxLength: 255] |
+| **BackUrl** | query | **URI** (uri) | The absolute address the setup page sends the user back to when attaching a payment method is abandoned. It  has to be a well-formed URL and must be reachable by that user rather than by the portal. | [required] [example: `https://example.com/payment/back`] [minLength: 0] [maxLength: 255] |
+| **SuccessUrl** | query | **URI** (uri) | The absolute address the setup page sends the user to once the payment provider has stored the payment  method. Reaching it means a method is now on file, which `GET api/2.0/portal/payment/customerinfo` confirms;  nothing has been charged. | [required] [example: `https://example.com/payment/success`] [minLength: 0] [maxLength: 255] |
 
 ## Responses
 

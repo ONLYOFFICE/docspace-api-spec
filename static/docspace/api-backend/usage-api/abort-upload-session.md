@@ -14,8 +14,8 @@ Cancels a chunked upload opened with `POST api/2.0/files/{folderId}/session` and
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **sessionId** | path | **String** | The session to cancel, as returned in `id` when it was created: a 32-character hexadecimal string that  identifies the session on its own. | [required] [example: 9f1c7a2b4d3e4f5a8b6c0d1e2f3a4b5c] |
-| **folderId** | path | **Integer** (int32) | The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id. | [required] [example: 1] |
+| **sessionId** | path | **String** | The session to cancel, as returned in `id` when it was created: a 32-character hexadecimal string that  identifies the session on its own. | [required] [example: `9f1c7a2b4d3e4f5a8b6c0d1e2f3a4b5c`] |
+| **folderId** | path | **Integer** (int32) | The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id. | [required] [example: `1`] |
 
 ## Responses
 

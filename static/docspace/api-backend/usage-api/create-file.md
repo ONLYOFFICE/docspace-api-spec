@@ -14,7 +14,7 @@ Creates a file in the folder named in the route and answers with the stored file
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **folderId** | path | **Integer** (int32) | The folder the file is created in. | [required] [example: 1] |
+| **folderId** | path | **Integer** (int32) | The folder the file is created in. | [required] [example: `1`] |
 | **CreateFileJsonElement** | body | [**CreateFileJsonElement**](../files.md#model-createfilejsonelement) | The title of the new file and the source of its content. | [required] |
 
 ## Responses

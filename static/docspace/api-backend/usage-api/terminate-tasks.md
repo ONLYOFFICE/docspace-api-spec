@@ -14,7 +14,7 @@ Cancels a background file operation of the caller and answers with the operation
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **String** | The operation to cancel, as returned in `id` when it was started. A call that leaves the route segment out  cancels every operation of the caller, and an id that is not among their operations cancels nothing without  being an error. | [required] [example: b2f3e9a4-7c15-4d8e-9f60-3a1c5e7d0b42] |
+| **id** | path | **String** | The operation to cancel, as returned in `id` when it was started. A call that leaves the route segment out  cancels every operation of the caller, and an id that is not among their operations cancels nothing without  being an error. | [required] [example: `b2f3e9a4-7c15-4d8e-9f60-3a1c5e7d0b42`] |
 
 ## Responses
 

@@ -14,11 +14,11 @@ Lists what has happened to a folder and to the entries inside it - creations, re
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **folderId** | path | **Integer** (int32) | The folder whose activity log is read; the log covers the folder itself and the entries inside it. | [required] [example: 1] |
-| **fromDate** | query | **Date** (date-time) | The earliest moment an entry may have, read in the time zone of the portal; left out, the log starts at the  oldest entry the portal still keeps. | [optional] [example: 2025-01-01T00:00:00.0000000Z] |
-| **toDate** | query | **Date** (date-time) | The latest moment an entry may have, read in the time zone of the portal; left out, the log ends at the newest  entry. | [optional] [example: 2025-12-31T23:59:59.0000000Z] |
-| **count** | query | **Integer** (int32) | How many entries one page holds. The number of entries that match the query is reported in the response  headers, not in the body. | [optional] [example: 25] [min: 1] [max: 100] |
-| **startIndex** | query | **Integer** (int32) | How many entries to skip before the page begins, counted from the newest one, so pages are taken by adding the  page size to it. | [optional] [example: 0] |
+| **folderId** | path | **Integer** (int32) | The folder whose activity log is read; the log covers the folder itself and the entries inside it. | [required] [example: `1`] |
+| **fromDate** | query | **Date** (date-time) | The earliest moment an entry may have, read in the time zone of the portal; left out, the log starts at the  oldest entry the portal still keeps. | [optional] [example: `2025-01-01T00:00:00.0000000Z`] |
+| **toDate** | query | **Date** (date-time) | The latest moment an entry may have, read in the time zone of the portal; left out, the log ends at the newest  entry. | [optional] [example: `2025-12-31T23:59:59.0000000Z`] |
+| **count** | query | **Integer** (int32) | How many entries one page holds. The number of entries that match the query is reported in the response  headers, not in the body. | [optional] [example: `25`] [min: 1] [max: 100] |
+| **startIndex** | query | **Integer** (int32) | How many entries to skip before the page begins, counted from the newest one, so pages are taken by adding the  page size to it. | [optional] [example: `0`] |
 
 ## Responses
 

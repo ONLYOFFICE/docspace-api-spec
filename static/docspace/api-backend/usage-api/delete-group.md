@@ -14,7 +14,7 @@ Deletes a group and withdraws the access it had been granted to rooms, folders a
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **UUID** (uuid) | The ID of the group to delete, taken from the route. It has to be a group that has not been deleted already,  otherwise the operation answers 404. | [required] [example: 00000000-0000-0000-0000-000000000000] |
+| **id** | path | **UUID** (uuid) | The ID of the group to delete, taken from the route. It has to be a group that has not been deleted already,  otherwise the operation answers 404. | [required] [example: `00000000-0000-0000-0000-000000000000`] |
 
 ## Responses
 

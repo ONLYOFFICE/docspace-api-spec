@@ -14,8 +14,8 @@ Returns one file as the portal stores it, together with the state it has for the
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **Integer** (int32) | The file to read. | [required] [example: 1] |
-| **version** | query | **Integer** (int32) | The version to read, as reported by `GET api/2.0/files/file/{fileId}/history`; -1, the default, reads the  current version. | [optional] [example: 1] |
+| **fileId** | path | **Integer** (int32) | The file to read. | [required] [example: `1`] |
+| **version** | query | **Integer** (int32) | The version to read, as reported by `GET api/2.0/files/file/{fileId}/history`; -1, the default, reads the  current version. | [optional] [example: `1`] |
 
 ## Responses
 

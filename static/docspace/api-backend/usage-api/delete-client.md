@@ -14,7 +14,7 @@ Deletes one client from the tenant permanently and answers 200 with an empty bod
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **clientId** | path | **String** | ID of the client to delete | [required] [example: 6c7cf17b-1bd3-47d5-94c6-be2d3570e168] [minLength: 1] |
+| **clientId** | path | **String** | ID of the client to delete | [required] [example: `6c7cf17b-1bd3-47d5-94c6-be2d3570e168`] [minLength: 1] |
 
 ## Responses
 

@@ -14,8 +14,8 @@ Answers with everything an editor needs in order to show what changed in one ver
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **Integer** (int32) | The file whose changes are read. | [required] [example: 1] |
-| **version** | query | **Integer** (int32) | The version to show the changes of, as reported by `GET api/2.0/files/file/{fileId}/edit/history`; 0 means the  current version. | [optional] [example: 1] |
+| **fileId** | path | **Integer** (int32) | The file whose changes are read. | [required] [example: `1`] |
+| **version** | query | **Integer** (int32) | The version to show the changes of, as reported by `GET api/2.0/files/file/{fileId}/edit/history`; 0 means the  current version. | [optional] [example: `1`] |
 
 ## Responses
 

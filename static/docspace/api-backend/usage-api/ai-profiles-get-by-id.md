@@ -14,7 +14,7 @@ Returns one AI provider profile by its ID, with its secrets stripped: neither th
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | query | **String** | The AI provider profile identifier. | [required] [example: 00000000-0000-0000-0000-000000000000] |
+| **id** | query | **String** | The AI provider profile identifier. | [required] [example: `00000000-0000-0000-0000-000000000000`] |
 
 ## Responses
 

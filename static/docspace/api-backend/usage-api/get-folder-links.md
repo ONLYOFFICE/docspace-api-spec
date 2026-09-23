@@ -14,7 +14,7 @@ Lists the external links of a folder or a room, each with its identifier, title,
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The folder or room whose external links are listed. | [required] [example: 1] |
+| **id** | path | **Integer** (int32) | The folder or room whose external links are listed. | [required] [example: `1`] |
 
 ## Responses
 

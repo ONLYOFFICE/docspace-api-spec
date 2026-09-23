@@ -14,7 +14,7 @@ Copies one file into another folder under a new title, converting its content wh
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **Integer** (int32) | The file to copy. | [required] [example: 1] |
+| **fileId** | path | **Integer** (int32) | The file to copy. | [required] [example: `1`] |
 | **CopyAsJsonElement** | body | [**CopyAsJsonElement**](../files.md#model-copyasjsonelement) | The title, the destination and the conversion options of the copy. | [required] |
 
 ## Responses

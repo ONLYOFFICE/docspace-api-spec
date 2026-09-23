@@ -14,7 +14,7 @@ Installs a web plugin into the current portal from an uploaded package, and swit
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **system** | query | **Boolean** | Whether the plugin is installed for every portal of the installation rather than only this one. It is  accepted on a self-hosted installation alone and refused with 403 elsewhere; an installation-wide plugin also  hides a portal plugin that carries the same name. | [optional] [example: false] |
+| **system** | query | **Boolean** | Whether the plugin is installed for every portal of the installation rather than only this one. It is  accepted on a self-hosted installation alone and refused with 403 elsewhere; an installation-wide plugin also  hides a portal plugin that carries the same name. | [optional] [example: `false`] |
 
 ## Responses
 

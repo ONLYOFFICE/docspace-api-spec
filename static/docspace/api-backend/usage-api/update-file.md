@@ -14,7 +14,7 @@ Renames a file, restores one of its versions, or both at once, and answers with 
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **Integer** (int32) | The file to update. | [required] [example: 1] |
+| **fileId** | path | **Integer** (int32) | The file to update. | [required] [example: `1`] |
 | **UpdateFile** | body | [**UpdateFile**](../files.md#model-updatefile) | The new title and the version to restore. | [required] |
 
 ## Responses

@@ -14,7 +14,7 @@ Changes the interface language of a profile, which decides the language of the p
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **userid** | path | **String** | The user ID. | [required] [example: 00000000-0000-0000-0000-000000000000] |
+| **userid** | path | **String** | The user ID. | [required] [example: `00000000-0000-0000-0000-000000000000`] |
 | **Culture** | body | [**Culture**](../people.md#model-culture) | The culture name parameters. | [optional] |
 
 ## Responses

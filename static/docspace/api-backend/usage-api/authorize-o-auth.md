@@ -14,10 +14,10 @@ Starts the OAuth2 authorization code flow for the client named by client_id. The
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **response\_type** | query | **String** | The OAuth 2.0 response type. Only code is supported: this server issues an authorization code, never a token, from this endpoint. | [required] [example: code] |
-| **client\_id** | query | **String** | The identifier the client was given when it was registered. It selects both the client shown on the consent screen and the set of redirect URIs the request is checked against. | [required] [example: 6c7cf17b-1bd3-47d5-94c6-be2d3570e168] |
-| **redirect\_uri** | query | **String** | Where to send the user once authorization is complete. It has to be one of the redirect URIs registered for the client, otherwise the request is refused. | [required] [example: https://example.com] |
-| **scope** | query | **String** | The permissions being asked for, as a space-separated list. Every scope has to be one the client is registered for, and the consent screen lists exactly these. | [required] [example: files:read] |
+| **response\_type** | query | **String** | The OAuth 2.0 response type. Only code is supported: this server issues an authorization code, never a token, from this endpoint. | [required] [example: `code`] |
+| **client\_id** | query | **String** | The identifier the client was given when it was registered. It selects both the client shown on the consent screen and the set of redirect URIs the request is checked against. | [required] [example: `6c7cf17b-1bd3-47d5-94c6-be2d3570e168`] |
+| **redirect\_uri** | query | **String** | Where to send the user once authorization is complete. It has to be one of the redirect URIs registered for the client, otherwise the request is refused. | [required] [example: `https://example.com`] |
+| **scope** | query | **String** | The permissions being asked for, as a space-separated list. Every scope has to be one the client is registered for, and the consent screen lists exactly these. | [required] [example: `files:read`] |
 
 ## Responses
 

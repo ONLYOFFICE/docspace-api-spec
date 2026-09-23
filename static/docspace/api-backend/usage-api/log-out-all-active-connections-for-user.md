@@ -14,7 +14,7 @@ Closes every active connection of one portal user: the connections are marked in
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **userId** | path | **UUID** (uuid) | The portal account the operation acts on, by user ID as `GET api/2.0/people` reports it. Acting on an account  other than the caller's own generally needs administrator rights. | [required] [example: 00000000-0000-0000-0000-000000000000] |
+| **userId** | path | **UUID** (uuid) | The portal account the operation acts on, by user ID as `GET api/2.0/people` reports it. Acting on an account  other than the caller's own generally needs administrator rights. | [required] [example: `00000000-0000-0000-0000-000000000000`] |
 
 ## Responses
 

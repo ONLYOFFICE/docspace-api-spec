@@ -14,7 +14,7 @@ Turns one portal application on or off for the current portal, and notifies the 
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **String** | The application to switch, by the identifier `GET api/2.0/apps` reports. It has to be an application declared  in the installation configuration; an unknown identifier answers 404 rather than creating anything. | [required] [example: ai-room] |
+| **id** | path | **String** | The application to switch, by the identifier `GET api/2.0/apps` reports. It has to be an application declared  in the installation configuration; an unknown identifier answers 404 rather than creating anything. | [required] [example: `ai-room`] |
 | **SetAppEnabledBody** | body | [**SetAppEnabledBody**](../api.md#model-setappenabledbody) | The new state of the application. Only the enabled flag travels here; the settings document is changed  through `PUT api/2.0/apps/{id}/settings`. | [required] |
 
 ## Responses

@@ -14,7 +14,7 @@ Answers with the outcome of one completed form-filling session: the filled copy 
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fillingSessionId** | query | **String** | The identifier of the finished filling session, the value the document service reports when the filling ends.  The portal remembers it only for a while afterwards, so an older session is answered as not found. | [optional] [example: 11111111-2222-3333-4444-555555555555] |
+| **fillingSessionId** | query | **String** | The identifier of the finished filling session, the value the document service reports when the filling ends.  The portal remembers it only for a while afterwards, so an older session is answered as not found. | [optional] [example: `11111111-2222-3333-4444-555555555555`] |
 
 ## Responses
 

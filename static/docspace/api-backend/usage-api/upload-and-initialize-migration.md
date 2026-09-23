@@ -14,7 +14,7 @@ Queues a pass that reads the backup already uploaded for this portal with the mi
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **migratorName** | path | **String** | The migrator that knows the format of the uploaded backup. It has to be one of the names  `GET api/2.0/migration/list` reports for this installation, spelled exactly as listed. | [required] [example: GoogleWorkspace] |
+| **migratorName** | path | **String** | The migrator that knows the format of the uploaded backup. It has to be one of the names  `GET api/2.0/migration/list` reports for this installation, spelled exactly as listed. | [required] [example: `GoogleWorkspace`] |
 
 ## Responses
 

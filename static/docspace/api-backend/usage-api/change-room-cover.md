@@ -14,7 +14,7 @@ Sets the cover picture and the background colour a room is shown with, and retur
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The room to change, named by the identifier that `GET api/2.0/files/rooms` reports for it. | [required] [example: 1] |
+| **id** | path | **Integer** (int32) | The room to change, named by the identifier that `GET api/2.0/files/rooms` reports for it. | [required] [example: `1`] |
 | **CoverRequestDto** | body | [**CoverRequestDto**](../files.md#model-coverrequestdto) | The cover and the colour to apply. Either half may be sent on its own, and an empty object leaves the room as  it is. | [required] |
 
 ## Responses

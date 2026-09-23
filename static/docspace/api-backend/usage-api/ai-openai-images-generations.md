@@ -14,7 +14,7 @@ OpenAI-compatible image generation for the document editor's AI plugin, working 
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **profileId** | path | **String** | The AI provider profile identifier. | [required] [example: 00000000-0000-0000-0000-000000000000] |
+| **profileId** | path | **String** | The AI provider profile identifier. | [required] [example: `00000000-0000-0000-0000-000000000000`] |
 | **request\_body** | body | **Map** | An OpenAI image-generation request, forwarded to the provider byte for byte. The shape is the provider's, not this API's, and the credentials come from the profile in the path. | [required] |
 
 ## Responses

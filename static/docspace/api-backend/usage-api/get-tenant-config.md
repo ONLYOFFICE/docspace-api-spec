@@ -14,7 +14,7 @@ Returns the configuration of the DocsCloud tenant of the current portal: its nam
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **refresh** | query | **Boolean** | Pass `true` to skip the cached copy and request the configuration from DocsCloud again, replacing the cached one; with the default `false` the answer may be up to an hour old. | [optional] [default to false] |
+| **refresh** | query | **Boolean** | Pass `true` to skip the cached copy and request the configuration from DocsCloud again, replacing the cached one; with the default `false` the answer may be up to an hour old. | [optional] [default to `false`] |
 
 ## Responses
 

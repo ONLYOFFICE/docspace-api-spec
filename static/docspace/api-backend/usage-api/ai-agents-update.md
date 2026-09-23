@@ -14,7 +14,7 @@ Changes an AI agent room - its title, tags or standing instruction - and optiona
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **String** | The agent identifier. | [required] [example: 1234] |
+| **id** | path | **String** | The agent identifier. | [required] [example: `1234`] |
 | **aiAgentsUpdate\_request** | body | [**aiAgentsUpdate_request**](../aichat.md#model-aiagentsupdate-request-body) |  | [required] |
 
 ## Responses

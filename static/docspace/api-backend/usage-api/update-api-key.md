@@ -14,7 +14,7 @@ Renames an API key, replaces the scopes it may use, or activates and deactivates
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **keyId** | path | **UUID** (uuid) | The ID of the key to update, taken from the route. Read it from the `id` of an entry of  `GET api/2.0/keys` - it is not the secret and not the `keyPostfix`. | [required] [example: 00000000-0000-0000-0000-000000000000] |
+| **keyId** | path | **UUID** (uuid) | The ID of the key to update, taken from the route. Read it from the `id` of an entry of  `GET api/2.0/keys` - it is not the secret and not the `keyPostfix`. | [required] [example: `00000000-0000-0000-0000-000000000000`] |
 | **UpdateApiKeyRequest** | body | [**UpdateApiKeyRequest**](../people.md#model-updateapikeyrequest) | The fields to change. Every field is optional and the ones that are left out keep their current values, so an  empty object changes nothing. | [required] |
 
 ## Responses

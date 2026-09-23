@@ -14,9 +14,9 @@ Searches the active accounts of the portal by a term taken from the path, and is
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **query** | path | **String** | The term to look for, taken from the route. Only accounts with the `Active` status are searched. | [required] [example: John] |
-| **filterBy** | query | **String** | The only recognised value is `group`, which turns `filterValue` into a group ID and keeps only the members of  that group. Any other value, and omitting the field, applies no group filter. | [optional] [example: group] |
-| **filterValue** | query | **String** | The group ID to keep the members of, used only when `filterBy` is `group`. It has to be a valid identifier -  a group name is not accepted. | [optional] [example: 00000000-0000-0000-0000-000000000000] |
+| **query** | path | **String** | The term to look for, taken from the route. Only accounts with the `Active` status are searched. | [required] [example: `John`] |
+| **filterBy** | query | **String** | The only recognised value is `group`, which turns `filterValue` into a group ID and keeps only the members of  that group. Any other value, and omitting the field, applies no group filter. | [optional] [example: `group`] |
+| **filterValue** | query | **String** | The group ID to keep the members of, used only when `filterBy` is `group`. It has to be a valid identifier -  a group name is not accepted. | [optional] [example: `00000000-0000-0000-0000-000000000000`] |
 
 ## Responses
 

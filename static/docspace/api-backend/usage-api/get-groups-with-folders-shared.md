@@ -14,11 +14,11 @@ Returns the groups that can be given access to the folder with the ID given in t
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The ID of the room, folder or file whose access the search is run against, taken from the route. It is an  integer for an entry stored in DocSpace and a provider-specific string for an entry in a connected  third-party storage. | [required] [example: 1234] |
-| **excludeShared** | query | **Boolean** | Keeps only the groups that do not have access to the entry yet, which is the set to offer when granting  access. Every returned entry then has `shared` set to false; without the flag every matching group comes back  and `shared` tells them apart. | [optional] [example: false] |
-| **count** | query | **Integer** (int32) | The size of the page. It defaults to 100, which is also the largest value the operation accepts. | [optional] [example: 25] [min: 1] [max: 100] |
-| **startIndex** | query | **Integer** (int32) | The number of matching groups to skip before the page starts. It defaults to 0, and the total number of  matches is reported in the total count of the response. | [optional] [example: 0] |
-| **filterValue** | query | **String** | The text to match against the group name. Omit it to get every group the caller may grant access to. | [optional] [example: Marketing] |
+| **id** | path | **Integer** (int32) | The ID of the room, folder or file whose access the search is run against, taken from the route. It is an  integer for an entry stored in DocSpace and a provider-specific string for an entry in a connected  third-party storage. | [required] [example: `1234`] |
+| **excludeShared** | query | **Boolean** | Keeps only the groups that do not have access to the entry yet, which is the set to offer when granting  access. Every returned entry then has `shared` set to false; without the flag every matching group comes back  and `shared` tells them apart. | [optional] [example: `false`] |
+| **count** | query | **Integer** (int32) | The size of the page. It defaults to 100, which is also the largest value the operation accepts. | [optional] [example: `25`] [min: 1] [max: 100] |
+| **startIndex** | query | **Integer** (int32) | The number of matching groups to skip before the page starts. It defaults to 0, and the total number of  matches is reported in the total count of the response. | [optional] [example: `0`] |
+| **filterValue** | query | **String** | The text to match against the group name. Omit it to get every group the caller may grant access to. | [optional] [example: `Marketing`] |
 
 ## Responses
 

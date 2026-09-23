@@ -14,7 +14,7 @@ Reports how access to the portal's own modules is configured: for every module i
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **ids** | query | **List** | The modules to report on, each given as a GUID and sent as a repeated query value. An entry that is not a  GUID fails the whole request as invalid. Leaving the list out asks about every module registered in the  portal, which on a DocSpace installation is none, so the answer is then empty rather than complete. | [optional] [example: ["00000000-0000-0000-0000-000000000000"]] |
+| **ids** | query | **List** | The modules to report on, each given as a GUID and sent as a repeated query value. An entry that is not a  GUID fails the whole request as invalid. Leaving the list out asks about every module registered in the  portal, which on a DocSpace installation is none, so the answer is then empty rather than complete. | [optional] [example: `["00000000-0000-0000-0000-000000000000"]`] |
 
 ## Responses
 

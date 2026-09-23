@@ -14,7 +14,7 @@ Hands back the address of the portal page on which the billing account is manage
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **backUrl** | query | **URI** (uri) | The absolute address the billing account page should offer as its way back. It is appended to the returned  portal-relative address as a query parameter rather than followed here, and omitting it yields the bare  address of the page. | [optional] [example: https://example.com] [minLength: 0] [maxLength: 255] |
+| **backUrl** | query | **URI** (uri) | The absolute address the billing account page should offer as its way back. It is appended to the returned  portal-relative address as a query parameter rather than followed here, and omitting it yields the bare  address of the page. | [optional] [example: `https://example.com`] [minLength: 0] [maxLength: 255] |
 
 ## Responses
 

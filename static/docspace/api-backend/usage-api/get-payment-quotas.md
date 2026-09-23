@@ -14,8 +14,8 @@ Lists the quotas the portal can be put on - the paid plans and the wallet servic
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **wallet** | query | **Boolean** | Which side of the catalogue is listed: `true` keeps the services paid out of the portal wallet, `false` keeps  the subscription plans, and omitting it keeps both. | [optional] [example: true] |
-| **additional** | query | **Boolean** | Which layer of the catalogue is listed: `true` keeps the add-ons that extend a plan, `false` keeps the plans  themselves, and omitting it keeps both. | [optional] [example: true] |
+| **wallet** | query | **Boolean** | Which side of the catalogue is listed: `true` keeps the services paid out of the portal wallet, `false` keeps  the subscription plans, and omitting it keeps both. | [optional] [example: `true`] |
+| **additional** | query | **Boolean** | Which layer of the catalogue is listed: `true` keeps the add-ons that extend a plan, `false` keeps the plans  themselves, and omitting it keeps both. | [optional] [example: `true`] |
 
 ## Responses
 

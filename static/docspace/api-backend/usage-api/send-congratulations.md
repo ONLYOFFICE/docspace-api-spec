@@ -14,8 +14,8 @@ Sends the welcome letter that follows the registration of a new portal to the ac
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **Userid** | query | **UUID** (uuid) | The account the welcome letter is addressed to, by portal user ID. The key in `key` has to have been issued  for this same account, so the pair is what authorises the call. | [required] [example: 00000000-0000-0000-0000-000000000000] |
-| **Key** | query | **String** | The confirmation key from the sign-in link the portal issued for that account, which stands in for a token  here. It is accepted for one hour after it was created; a wrong, foreign or expired key answers 403 and sends  nothing. | [required] [example: birthday] |
+| **Userid** | query | **UUID** (uuid) | The account the welcome letter is addressed to, by portal user ID. The key in `key` has to have been issued  for this same account, so the pair is what authorises the call. | [required] [example: `00000000-0000-0000-0000-000000000000`] |
+| **Key** | query | **String** | The confirmation key from the sign-in link the portal issued for that account, which stands in for a token  here. It is accepted for one hour after it was created; a wrong, foreign or expired key answers 403 and sends  nothing. | [required] [example: `birthday`] |
 
 ## Responses
 

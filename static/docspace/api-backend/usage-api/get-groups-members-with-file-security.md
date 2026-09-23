@@ -14,11 +14,11 @@ Lists the members of one portal group together with the access each of them has 
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **Integer** (int32) | The file whose access is being read. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string. | [required] [example: 10] |
-| **groupId** | path | **UUID** (uuid) | The group whose members are listed. Take it from the entries of `GET api/2.0/files/file/{id}/share` that stand  for a group; a group that holds no rights on this file is answered with an empty list. | [required] [example: 9924256a-739c-462b-af15-e652a3b1b6eb] |
-| **count** | query | **Integer** (int32) | How many members at most to answer with. | [optional] [example: 25] [min: 1] [max: 100] |
-| **startIndex** | query | **Integer** (int32) | How many members to skip before answering, used together with `count` to page through a large group. | [optional] [example: 0] |
-| **filterValue** | query | **String** | Keeps only the members whose first name, last name or email contains this value. The value is matched in lower  case, so an uppercase one finds nothing. | [optional] [example: john] |
+| **fileId** | path | **Integer** (int32) | The file whose access is being read. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string. | [required] [example: `10`] |
+| **groupId** | path | **UUID** (uuid) | The group whose members are listed. Take it from the entries of `GET api/2.0/files/file/{id}/share` that stand  for a group; a group that holds no rights on this file is answered with an empty list. | [required] [example: `9924256a-739c-462b-af15-e652a3b1b6eb`] |
+| **count** | query | **Integer** (int32) | How many members at most to answer with. | [optional] [example: `25`] [min: 1] [max: 100] |
+| **startIndex** | query | **Integer** (int32) | How many members to skip before answering, used together with `count` to page through a large group. | [optional] [example: `0`] |
+| **filterValue** | query | **String** | Keeps only the members whose first name, last name or email contains this value. The value is matched in lower  case, so an uppercase one finds nothing. | [optional] [example: `john`] |
 
 ## Responses
 

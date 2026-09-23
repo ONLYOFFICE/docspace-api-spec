@@ -14,9 +14,9 @@ Returns the custom room tags available to the caller as a flat array of names, n
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **count** | query | **Integer** (int32) | How many tag names one page may carry. The answer reports no total, so a page shorter than this is the sign  that the list is exhausted. | [optional] [example: 25] [min: 1] [max: 100] |
-| **startIndex** | query | **Integer** (int32) | How many tag names to skip before the page begins. Raise it by the number of names already received to read  the next page. | [optional] [example: 0] [min: 0] [max: 2147483647] |
-| **filterValue** | query | **String** | Keeps only the tag names that contain this text, ignoring case. It is a substring match, so a fragment from  the middle of a name is enough. | [optional] [example: conf] |
+| **count** | query | **Integer** (int32) | How many tag names one page may carry. The answer reports no total, so a page shorter than this is the sign  that the list is exhausted. | [optional] [example: `25`] [min: 1] [max: 100] |
+| **startIndex** | query | **Integer** (int32) | How many tag names to skip before the page begins. Raise it by the number of names already received to read  the next page. | [optional] [example: `0`] [min: 0] [max: 2147483647] |
+| **filterValue** | query | **String** | Keeps only the tag names that contain this text, ignoring case. It is a substring match, so a fragment from  the middle of a name is enough. | [optional] [example: `conf`] |
 
 ## Responses
 

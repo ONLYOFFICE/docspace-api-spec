@@ -14,7 +14,7 @@ Switches a web plugin of the current portal on or off and stores the settings st
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **name** | path | **String** | The plugin to change, by the manifest name `GET api/2.0/settings/webplugins` publishes as `name`, matched  without regard to case. It is neither the localized display name nor the JavaScript object name in  `pluginName`, so it cannot be read off the interface; a name that is not installed answers 404. | [required] [example: example-plugin] |
+| **name** | path | **String** | The plugin to change, by the manifest name `GET api/2.0/settings/webplugins` publishes as `name`, matched  without regard to case. It is neither the localized display name nor the JavaScript object name in  `pluginName`, so it cannot be read off the interface; a name that is not installed answers 404. | [required] [example: `example-plugin`] |
 | **WebPluginRequests** | body | [**WebPluginRequests**](../api.md#model-webpluginrequests) | The whole state the plugin is to have afterwards. It replaces what was stored instead of merging into it, so  both the enabled flag and the settings have to be sent every time. | [required] |
 
 ## Responses

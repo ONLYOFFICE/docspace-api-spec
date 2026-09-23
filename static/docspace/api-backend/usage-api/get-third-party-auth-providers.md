@@ -14,10 +14,10 @@ Returns the third-party identity providers this portal has enabled, each with th
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **inviteView** | query | **Boolean** | Set it to true when the list is rendered on an invitation page: the providers that cannot be used to accept an  invitation, `twitter` and `appleid`, are then left out. It defaults to false, which returns every enabled  provider. | [optional] [example: false] |
-| **settingsView** | query | **Boolean** | Set it to true when the list is rendered on a settings page, to get login URLs that open in a popup window.  With the default false the URL still opens in a popup for a desktop browser, and switches to a redirect only  for a mobile browser or for the DocSpace desktop application. | [optional] [example: false] |
-| **clientCallback** | query | **String** | The name of the client-side function the popup calls back when the provider authorization finishes. It is  placed into the returned URLs as they are, and it is only used by the popup mode. | [optional] [example: onAuthCallback] |
-| **fromOnly** | query | **String** | Keeps only the named provider, compared case-insensitively against the lowercase provider names such as  `google` or `microsoft`; the special value `openid` selects `google`. Omit it to get every enabled provider. | [optional] [example: google] |
+| **inviteView** | query | **Boolean** | Set it to true when the list is rendered on an invitation page: the providers that cannot be used to accept an  invitation, `twitter` and `appleid`, are then left out. It defaults to false, which returns every enabled  provider. | [optional] [example: `false`] |
+| **settingsView** | query | **Boolean** | Set it to true when the list is rendered on a settings page, to get login URLs that open in a popup window.  With the default false the URL still opens in a popup for a desktop browser, and switches to a redirect only  for a mobile browser or for the DocSpace desktop application. | [optional] [example: `false`] |
+| **clientCallback** | query | **String** | The name of the client-side function the popup calls back when the provider authorization finishes. It is  placed into the returned URLs as they are, and it is only used by the popup mode. | [optional] [example: `onAuthCallback`] |
+| **fromOnly** | query | **String** | Keeps only the named provider, compared case-insensitively against the lowercase provider names such as  `google` or `microsoft`; the special value `openid` selects `google`. Omit it to get every enabled provider. | [optional] [example: `google`] |
 
 ## Responses
 

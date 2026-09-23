@@ -14,7 +14,7 @@ Closes one active connection: the sign-in behind `loginEventId` is marked inacti
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **loginEventId** | path | **Integer** (int32) | The sign-in to act on, by login event ID. Take it from the `id` of an item of  `GET api/2.0/security/activeconnections`, which also marks the connection the caller is using, so a client  can avoid picking its own. | [required] [example: 12345] |
+| **loginEventId** | path | **Integer** (int32) | The sign-in to act on, by login event ID. Take it from the `id` of an item of  `GET api/2.0/security/activeconnections`, which also marks the connection the caller is using, so a client  can avoid picking its own. | [required] [example: `12345`] |
 
 ## Responses
 

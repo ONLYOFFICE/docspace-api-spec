@@ -14,7 +14,7 @@ Grants, changes or withdraws the rights of the listed accounts and groups on one
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The folder whose sharing is being changed. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string. | [required] [example: 10] |
+| **id** | path | **Integer** (int32) | The folder whose sharing is being changed. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string. | [required] [example: `10`] |
 | **SecurityInfoSimpleRequestDto** | body | [**SecurityInfoSimpleRequestDto**](../files.md#model-securityinfosimplerequestdto) | The rights to apply to the folder, and whether to announce them by mail. | [required] |
 
 ## Responses

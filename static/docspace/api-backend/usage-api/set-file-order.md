@@ -14,7 +14,7 @@ Puts a file at a given position inside its folder and answers with the file, its
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **Integer** (int32) | The file to move. | [required] [example: 1] |
+| **fileId** | path | **Integer** (int32) | The file to move. | [required] [example: `1`] |
 | **OrderRequestDto** | body | [**OrderRequestDto**](../files.md#model-orderrequestdto) | The position the file is to take. | [optional] |
 
 ## Responses

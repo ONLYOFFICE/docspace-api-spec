@@ -14,9 +14,9 @@ Brings an earlier version of a file back and answers with the editing revisions 
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **Integer** (int32) | The file whose version is restored. | [required] [example: 1] |
-| **version** | query | **Integer** (int32) | The version to restore, as reported by `GET api/2.0/files/file/{fileId}/edit/history`. It has to name an  existing version that is not the current one. | [optional] [example: 1] |
-| **url** | query | **String** | The address the content of the new version is fetched from instead of the stored version, which is how the  document service hands back a document with a set of changes rolled back; left out, the stored version is  used. | [optional] [example: https://document-server.example.com/cache/files/conv_1_docx/output.docx] |
+| **fileId** | path | **Integer** (int32) | The file whose version is restored. | [required] [example: `1`] |
+| **version** | query | **Integer** (int32) | The version to restore, as reported by `GET api/2.0/files/file/{fileId}/edit/history`. It has to name an  existing version that is not the current one. | [optional] [example: `1`] |
+| **url** | query | **String** | The address the content of the new version is fetched from instead of the stored version, which is how the  document service hands back a document with a set of changes rolled back; left out, the stored version is  used. | [optional] [example: `https://document-server.example.com/cache/files/conv_1_docx/output.docx`] |
 
 ## Responses
 

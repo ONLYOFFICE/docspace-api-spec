@@ -14,8 +14,8 @@ Returns the stored configuration of one registered custom MCP server. The name i
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **name** | query | **String** | The custom MCP server name. | [required] [example: acme-mcp] |
-| **entityId** | query | **String** | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | [optional] [example: 1234] |
+| **name** | query | **String** | The custom MCP server name. | [required] [example: `acme-mcp`] |
+| **entityId** | query | **String** | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | [optional] [example: `1234`] |
 
 ## Responses
 

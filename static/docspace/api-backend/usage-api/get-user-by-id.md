@@ -14,7 +14,7 @@ Returns one user of this portal, addressed by ID, in the shape the portal stores
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **userID** | path | **UUID** (uuid) | The portal account the operation acts on, by user ID as `GET api/2.0/people` reports it. An ID belonging to  no account of this portal and an ID of an internal system account are both answered as not found. | [required] [example: 00000000-0000-0000-0000-000000000000] |
+| **userID** | path | **UUID** (uuid) | The portal account the operation acts on, by user ID as `GET api/2.0/people` reports it. An ID belonging to  no account of this portal and an ID of an internal system account are both answered as not found. | [required] [example: `00000000-0000-0000-0000-000000000000`] |
 
 ## Responses
 

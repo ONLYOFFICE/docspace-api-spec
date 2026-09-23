@@ -14,7 +14,7 @@ Closes or reopens a revision group in the version history of a file and answers 
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **Integer** (int32) | The file whose version history is changed. | [required] [example: 1] |
+| **fileId** | path | **Integer** (int32) | The file whose version history is changed. | [required] [example: `1`] |
 | **ChangeHistory** | body | [**ChangeHistory**](../files.md#model-changehistory) | The change to make to the revision group. | [required] |
 
 ## Responses

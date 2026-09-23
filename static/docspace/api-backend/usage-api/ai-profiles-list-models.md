@@ -14,7 +14,7 @@ Lists the models a stored profile's provider currently offers, asking the provid
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **profileId** | query | **String** | The AI provider profile identifier. | [required] [example: 00000000-0000-0000-0000-000000000000] |
+| **profileId** | query | **String** | The AI provider profile identifier. | [required] [example: `00000000-0000-0000-0000-000000000000`] |
 
 ## Responses
 

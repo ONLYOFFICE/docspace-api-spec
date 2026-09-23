@@ -14,7 +14,7 @@ Turns an image already uploaded to the portal into the logo of a room and return
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The room the logo is set on. | [required] [example: 1] |
+| **id** | path | **Integer** (int32) | The room the logo is set on. | [required] [example: `1`] |
 | **LogoRequest** | body | [**LogoRequest**](../files.md#model-logorequest) | The uploaded picture and the piece of it to use. | [required] |
 
 ## Responses

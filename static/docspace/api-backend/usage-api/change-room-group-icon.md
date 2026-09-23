@@ -14,7 +14,7 @@ Replaces the icon of one of the caller's own room groups and returns the whole g
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The room group to re-icon, identified by the value `GET api/2.0/files/group` reports for it. A group of  another account cannot be addressed and reads as missing. | [required] [example: 42] |
+| **id** | path | **Integer** (int32) | The room group to re-icon, identified by the value `GET api/2.0/files/group` reports for it. A group of  another account cannot be addressed and reads as missing. | [required] [example: `42`] |
 | **IconRequest** | body | [**IconRequest**](../files.md#model-iconrequest) | The icon to give the group. A body that leaves the icon out is accepted and changes nothing. | [optional] |
 
 ## Responses

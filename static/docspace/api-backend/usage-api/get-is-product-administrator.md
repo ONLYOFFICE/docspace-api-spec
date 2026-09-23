@@ -14,8 +14,8 @@ Reports whether one user administers one portal module, as the identifiers asked
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **productid** | query | **UUID** (uuid) | The module being asked about, by module GUID. The all-zero GUID asks about the portal itself rather than a  single module. | [required] [example: 00000000-0000-0000-0000-000000000000] |
-| **userid** | query | **UUID** (uuid) | The account being asked about, by portal user ID. An ID that names no account is answered as a plain negative  rather than a failure, so a negative answer does not prove the account exists. | [required] [example: 00000000-0000-0000-0000-000000000000] |
+| **productid** | query | **UUID** (uuid) | The module being asked about, by module GUID. The all-zero GUID asks about the portal itself rather than a  single module. | [required] [example: `00000000-0000-0000-0000-000000000000`] |
+| **userid** | query | **UUID** (uuid) | The account being asked about, by portal user ID. An ID that names no account is answered as a plain negative  rather than a failure, so a negative answer does not prove the account exists. | [required] [example: `00000000-0000-0000-0000-000000000000`] |
 
 ## Responses
 

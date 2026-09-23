@@ -14,8 +14,8 @@ Returns the background file operations of the caller that are of one kind, named
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **operationType** | path | **FileOperationType** | The kind of operation the answer is limited to. Only the kinds that have a queue of their own ever carry  records — a copy, a deletion, a download, a mark-as-read and a duplication — and moves cannot be read through  this route at all, because its address belongs to another operation. | [required] [example: 2] [enum: 0, 1, 2, 3, 4, 5, 6, 7] |
-| **id** | query | **String** | The operation to report on, as returned in `id` when it was started; without it every operation of the caller  is reported. An id that is not among the caller's operations gives an empty answer rather than an error. | [optional] [example: b2f3e9a4-7c15-4d8e-9f60-3a1c5e7d0b42] |
+| **operationType** | path | **FileOperationType** | The kind of operation the answer is limited to. Only the kinds that have a queue of their own ever carry  records — a copy, a deletion, a download, a mark-as-read and a duplication — and moves cannot be read through  this route at all, because its address belongs to another operation. | [required] [example: `2`] [enum: `0`, `1`, `2`, `3`, `4`, `5`, `6`, `7`] |
+| **id** | query | **String** | The operation to report on, as returned in `id` when it was started; without it every operation of the caller  is reported. An id that is not among the caller's operations gives an empty answer rather than an error. | [optional] [example: `b2f3e9a4-7c15-4d8e-9f60-3a1c5e7d0b42`] |
 
 ## Responses
 

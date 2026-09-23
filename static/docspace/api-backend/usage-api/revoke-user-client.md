@@ -14,7 +14,7 @@ Revokes the calling user's own consent for one client and answers 200 with an em
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **clientId** | path | **String** | ID of the client to revoke consent for | [required] [example: 6c7cf17b-1bd3-47d5-94c6-be2d3570e168] [minLength: 1] |
+| **clientId** | path | **String** | ID of the client to revoke consent for | [required] [example: `6c7cf17b-1bd3-47d5-94c6-be2d3570e168`] [minLength: 1] |
 
 ## Responses
 

@@ -14,7 +14,7 @@ Answers with the primary external link of a file, creating it on the first call 
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The file the link points at. | [required] [example: 1] |
+| **id** | path | **Integer** (int32) | The file the link points at. | [required] [example: `1`] |
 | **FileLinkRequest** | body | [**FileLinkRequest**](../files.md#model-filelinkrequest) | The settings of the link. They are applied in full, so a field left out is reset rather than kept. | [required] |
 
 ## Responses

@@ -14,7 +14,7 @@ Sets a new email address on an account, which is the step that completes an emai
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **userid** | path | **UUID** (uuid) | The ID of the account whose address is set, taken from the route. It has to match the account the  confirmation token was issued for, and the account has to be active. | [required] [example: 00000000-0000-0000-0000-000000000000] |
+| **userid** | path | **UUID** (uuid) | The ID of the account whose address is set, taken from the route. It has to match the account the  confirmation token was issued for, and the account has to be active. | [required] [example: `00000000-0000-0000-0000-000000000000`] |
 | **ChangeEmailRequest** | body | [**ChangeEmailRequest**](../people.md#model-changeemailrequest) | The new address, in plain text or in the encrypted form the confirmation link carries. | [required] |
 
 ## Responses

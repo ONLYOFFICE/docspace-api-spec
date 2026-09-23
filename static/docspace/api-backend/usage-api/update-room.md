@@ -14,7 +14,7 @@ Applies a partial change to one room and returns the whole room as it is after i
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The room to update, named by the identifier that `GET api/2.0/files/rooms` reports for it. | [required] [example: 1] |
+| **id** | path | **Integer** (int32) | The room to update, named by the identifier that `GET api/2.0/files/rooms` reports for it. | [required] [example: `1`] |
 | **UpdateRoomRequest** | body | [**UpdateRoomRequest**](../files.md#model-updateroomrequest) | The fields to change. Only the properties present in the object are applied, and a property that the object  does not define is rejected instead of being ignored. | [required] |
 
 ## Responses

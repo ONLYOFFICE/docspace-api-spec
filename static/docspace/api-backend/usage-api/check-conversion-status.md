@@ -14,8 +14,8 @@ Reports how far the conversion of a file has got, as a list that holds one entry
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **Integer** (int32) | The file whose conversion is asked about. | [required] [example: 1] |
-| **start** | query | **Boolean** | Whether to start the conversion as well: `true` queues it with the default output format and no password,  `false` only reports what the portal already knows. | [optional] [example: false] |
+| **fileId** | path | **Integer** (int32) | The file whose conversion is asked about. | [required] [example: `1`] |
+| **start** | query | **Boolean** | Whether to start the conversion as well: `true` queues it with the default output format and no password,  `false` only reports what the portal already knows. | [optional] [example: `false`] |
 
 ## Responses
 

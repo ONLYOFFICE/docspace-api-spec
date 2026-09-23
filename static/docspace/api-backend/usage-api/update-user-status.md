@@ -14,7 +14,7 @@ Enables or disables several portal accounts at once, which is the way to suspend
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **status** | path | **EmployeeStatus** | The state to put the listed accounts into, taken from the route. Only `Active`, which enables an account,  and `Terminated`, which disables it, are accepted; any other value is rejected with 400. | [required] [example: Active] [enum: 1, 2, 4, 5, 7] |
+| **status** | path | **EmployeeStatus** | The state to put the listed accounts into, taken from the route. Only `Active`, which enables an account,  and `Terminated`, which disables it, are accepted; any other value is rejected with 400. | [required] [example: `Active`] [enum: `1`, `2`, `4`, `5`, `7`] |
 | **UpdateMembersRequestDto** | body | [**UpdateMembersRequestDto**](../people.md#model-updatemembersrequestdto) | The accounts to enable or disable. Only `userIds` is read by this operation; `resendAll` belongs to the  invitation operations and is ignored here. | [required] |
 
 ## Responses

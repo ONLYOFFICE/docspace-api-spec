@@ -14,13 +14,13 @@ Returns the groups of the portal, one page at a time, with the summary informati
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **userId** | query | **UUID** (uuid) | Keeps only the groups the account with this ID takes part in. Omit it to search every group of the portal. | [optional] [example: 00000000-0000-0000-0000-000000000000] |
-| **manager** | query | **Boolean** | Narrows `userId` down to the groups that account manages, instead of every group it belongs to. It has no  effect on its own and defaults to false. | [optional] [example: false] |
-| **count** | query | **Integer** (int32) | The size of the page. It defaults to 100, which is also the largest value the operation accepts. | [optional] [example: 25] [min: 1] [max: 100] |
-| **startIndex** | query | **Integer** (int32) | The number of matching groups to skip before the page starts. It defaults to 0, and the total number of  matches is reported in the total count of the response. | [optional] [example: 0] |
-| **sortBy** | query | **String** | What to order the groups by: `Title`, `Manager` or `MembersCount`, compared without regard to case. Any other  value, and omitting the field, orders by title. | [optional] [example: Title] |
-| **sortOrder** | query | **SortOrder** | The direction of the ordering: `Ascending`, which is the default, or `Descending`. | [optional] [example: Ascending] [enum: 0, 1] |
-| **filterValue** | query | **String** | The text to match against the group name. Omit it to get every group. | [optional] [example: Marketing] |
+| **userId** | query | **UUID** (uuid) | Keeps only the groups the account with this ID takes part in. Omit it to search every group of the portal. | [optional] [example: `00000000-0000-0000-0000-000000000000`] |
+| **manager** | query | **Boolean** | Narrows `userId` down to the groups that account manages, instead of every group it belongs to. It has no  effect on its own and defaults to false. | [optional] [example: `false`] |
+| **count** | query | **Integer** (int32) | The size of the page. It defaults to 100, which is also the largest value the operation accepts. | [optional] [example: `25`] [min: 1] [max: 100] |
+| **startIndex** | query | **Integer** (int32) | The number of matching groups to skip before the page starts. It defaults to 0, and the total number of  matches is reported in the total count of the response. | [optional] [example: `0`] |
+| **sortBy** | query | **String** | What to order the groups by: `Title`, `Manager` or `MembersCount`, compared without regard to case. Any other  value, and omitting the field, orders by title. | [optional] [example: `Title`] |
+| **sortOrder** | query | **SortOrder** | The direction of the ordering: `Ascending`, which is the default, or `Descending`. | [optional] [example: `Ascending`] [enum: `0`, `1`] |
+| **filterValue** | query | **String** | The text to match against the group name. Omit it to get every group. | [optional] [example: `Marketing`] |
 
 ## Responses
 

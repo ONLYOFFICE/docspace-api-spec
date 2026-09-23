@@ -451,7 +451,7 @@ Deletes an AI agent room. The ID has to be the room's integer identifier, and th
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **String** | The agent identifier. | [required] [example: 1234] |
+| **id** | path | **String** | The agent identifier. | [required] [example: `1234`] |
 | **aiAgentsDelete\_request** | body | [**aiAgentsDelete_request**](#model-aiagentsdelete-request-body) |  | [required] |
 
 #### Responses
@@ -492,7 +492,7 @@ Returns one AI agent room, enriched with the `profileId` currently bound to it s
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **String** | The agent identifier. | [required] [example: 1234] |
+| **id** | path | **String** | The agent identifier. | [required] [example: `1234`] |
 
 #### Responses
 
@@ -531,17 +531,17 @@ Lists the portal's AI agent rooms. The query is forwarded unchanged to the DocSp
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **subjectId** | query | **String** | Show only the agent rooms this user takes part in. | [optional] [example: 00000000-0000-0000-0000-000000000000] |
-| **subjectOwnerId** | query | **String** | Show only the agent rooms owned by this user. | [optional] [example: 00000000-0000-0000-0000-000000000000] |
-| **excludeSubject** | query | **Boolean** | Invert the user filter: leave out what `subjectId` selects instead of keeping it. | [optional] [example: false] |
-| **tags** | query | **String** | Show only the agent rooms carrying these tags, comma-separated. | [optional] [example: ai,assistant] |
-| **withoutTags** | query | **Boolean** | Show only the agent rooms that carry no tags at all. | [optional] [example: false] |
-| **quotaFilter** | query | **Integer** | Filter by quota kind: 0 for all, 1 for the default quota, 2 for a custom one. | [optional] [example: 0] |
-| **filterValue** | query | **String** | Show only the agent rooms whose title matches this text. | [optional] [example: assistant] |
-| **sortBy** | query | **String** | Field to sort by, for example `DateAndTime`. | [optional] [example: DateAndTime] |
-| **sortOrder** | query | **String** | Sort direction, `ascending` or `descending`. | [optional] [example: descending] |
-| **startIndex** | query | **Integer** | Index of the first entry to return; 0 starts at the beginning. | [optional] [example: 0] |
-| **count** | query | **Integer** | How many entries to return. The internal service applies its own default. | [optional] [example: 25] |
+| **subjectId** | query | **String** | Show only the agent rooms this user takes part in. | [optional] [example: `00000000-0000-0000-0000-000000000000`] |
+| **subjectOwnerId** | query | **String** | Show only the agent rooms owned by this user. | [optional] [example: `00000000-0000-0000-0000-000000000000`] |
+| **excludeSubject** | query | **Boolean** | Invert the user filter: leave out what `subjectId` selects instead of keeping it. | [optional] [example: `false`] |
+| **tags** | query | **String** | Show only the agent rooms carrying these tags, comma-separated. | [optional] [example: `ai,assistant`] |
+| **withoutTags** | query | **Boolean** | Show only the agent rooms that carry no tags at all. | [optional] [example: `false`] |
+| **quotaFilter** | query | **Integer** | Filter by quota kind: 0 for all, 1 for the default quota, 2 for a custom one. | [optional] [example: `0`] |
+| **filterValue** | query | **String** | Show only the agent rooms whose title matches this text. | [optional] [example: `assistant`] |
+| **sortBy** | query | **String** | Field to sort by, for example `DateAndTime`. | [optional] [example: `DateAndTime`] |
+| **sortOrder** | query | **String** | Sort direction, `ascending` or `descending`. | [optional] [example: `descending`] |
+| **startIndex** | query | **Integer** | Index of the first entry to return; 0 starts at the beginning. | [optional] [example: `0`] |
+| **count** | query | **Integer** | How many entries to return. The internal service applies its own default. | [optional] [example: `25`] |
 
 #### Responses
 
@@ -653,7 +653,7 @@ Changes an AI agent room - its title, tags or standing instruction - and optiona
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **String** | The agent identifier. | [required] [example: 1234] |
+| **id** | path | **String** | The agent identifier. | [required] [example: `1234`] |
 | **aiAgentsUpdate\_request** | body | [**aiAgentsUpdate_request**](#model-aiagentsupdate-request-body) |  | [required] |
 
 #### Responses
@@ -855,7 +855,7 @@ Returns every action-to-profile binding of a scope as one map, which is what a s
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **entityId** | query | **String** | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | [optional] [example: 1234] |
+| **entityId** | query | **String** | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | [optional] [example: `1234`] |
 
 #### Responses
 
@@ -894,7 +894,7 @@ Returns the profile bound to one AI action, without applying the `Default` fallb
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **actionType** | query | **String** | The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision. | [required] [example: Chat] |
+| **actionType** | query | **String** | The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision. | [required] [example: `Chat`] |
 
 #### Responses
 
@@ -933,8 +933,8 @@ Returns the profile that will serve one AI action, falling back to the `Default`
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **actionType** | query | **String** | The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision. | [required] [example: Chat] |
-| **entityId** | query | **String** | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | [optional] [example: 1234] |
+| **actionType** | query | **String** | The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision. | [required] [example: `Chat`] |
+| **entityId** | query | **String** | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | [optional] [example: `1234`] |
 
 #### Responses
 
@@ -973,8 +973,8 @@ Returns the profile that will serve one AI action, exactly as `GET api/2.0/ai/as
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **actionType** | query | **String** | The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision. | [required] [example: Chat] |
-| **entityId** | query | **String** | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | [optional] [example: 1234] |
+| **actionType** | query | **String** | The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision. | [required] [example: `Chat`] |
+| **entityId** | query | **String** | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | [optional] [example: `1234`] |
 
 #### Responses
 
@@ -1455,7 +1455,7 @@ OpenAI-compatible chat completions for the document editor's AI plugin. The prof
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **profileId** | path | **String** | The AI provider profile identifier. | [required] [example: 00000000-0000-0000-0000-000000000000] |
+| **profileId** | path | **String** | The AI provider profile identifier. | [required] [example: `00000000-0000-0000-0000-000000000000`] |
 | **request\_body** | body | **Map** | An OpenAI Chat Completions request, forwarded to the provider byte for byte. The shape is the provider's, not this API's, so consult the provider's own reference; the model and the credentials come from the profile in the path and must not be sent here. | [required] |
 
 #### Responses
@@ -1498,7 +1498,7 @@ OpenAI-compatible image generation for the document editor's AI plugin, working 
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **profileId** | path | **String** | The AI provider profile identifier. | [required] [example: 00000000-0000-0000-0000-000000000000] |
+| **profileId** | path | **String** | The AI provider profile identifier. | [required] [example: `00000000-0000-0000-0000-000000000000`] |
 | **request\_body** | body | **Map** | An OpenAI image-generation request, forwarded to the provider byte for byte. The shape is the provider's, not this API's, and the credentials come from the profile in the path. | [required] |
 
 #### Responses
@@ -1582,7 +1582,7 @@ Returns the deep-mode toggle of a scope, as a bare boolean: whether the stored e
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **entityId** | query | **String** | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | [optional] [example: 1234] |
+| **entityId** | query | **String** | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | [optional] [example: `1234`] |
 
 #### Responses
 
@@ -1620,7 +1620,7 @@ Returns the effective extended-thinking depth of the scope: `off` while deep mod
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **entityId** | query | **String** | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | [optional] [example: 1234] |
+| **entityId** | query | **String** | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | [optional] [example: `1234`] |
 
 #### Responses
 
@@ -1658,7 +1658,7 @@ Tells whether a scope has an explicitly persisted extended-thinking setting of i
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **entityId** | query | **String** | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | [optional] [example: 1234] |
+| **entityId** | query | **String** | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | [optional] [example: `1234`] |
 
 #### Responses
 
@@ -1857,7 +1857,7 @@ Returns one AI provider profile by its ID, with its secrets stripped: neither th
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | query | **String** | The AI provider profile identifier. | [required] [example: 00000000-0000-0000-0000-000000000000] |
+| **id** | query | **String** | The AI provider profile identifier. | [required] [example: `00000000-0000-0000-0000-000000000000`] |
 
 #### Responses
 
@@ -1932,7 +1932,7 @@ Lists the models a stored profile's provider currently offers, asking the provid
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **profileId** | query | **String** | The AI provider profile identifier. | [required] [example: 00000000-0000-0000-0000-000000000000] |
+| **profileId** | query | **String** | The AI provider profile identifier. | [required] [example: `00000000-0000-0000-0000-000000000000`] |
 
 #### Responses
 
@@ -2289,7 +2289,7 @@ Returns one saved prompt by its ID. The ID is required and is read from the quer
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | query | **String** | The saved prompt identifier. | [required] [example: 33333333-3333-3333-3333-333333333333] |
+| **id** | query | **String** | The saved prompt identifier. | [required] [example: `33333333-3333-3333-3333-333333333333`] |
 
 #### Responses
 
@@ -2328,7 +2328,7 @@ Returns one folder of the caller's prompt library by its ID, without the prompts
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | query | **String** | The prompt folder identifier. | [required] [example: 44444444-4444-4444-4444-444444444444] |
+| **id** | query | **String** | The prompt folder identifier. | [required] [example: `44444444-4444-4444-4444-444444444444`] |
 
 #### Responses
 
@@ -2406,7 +2406,7 @@ Lists the caller's saved prompts, newest first. `folderId` scopes the answer to 
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **folderId** | query | **String** | The prompt folder identifier. Omit to list the prompts that sit outside any folder. | [optional] [example: 44444444-4444-4444-4444-444444444444] |
+| **folderId** | query | **String** | The prompt folder identifier. Omit to list the prompts that sit outside any folder. | [optional] [example: `44444444-4444-4444-4444-444444444444`] |
 
 #### Responses
 
@@ -2984,7 +2984,7 @@ Returns one thread by its ID, without its messages - read those with `GET api/2.
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **threadId** | query | **String** | The chat thread identifier. | [required] [example: 11111111-1111-1111-1111-111111111111] |
+| **threadId** | query | **String** | The chat thread identifier. | [required] [example: `11111111-1111-1111-1111-111111111111`] |
 
 #### Responses
 
@@ -3024,7 +3024,7 @@ Returns one message by its ID, wherever it sits, without needing the thread it b
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **messageId** | query | **String** | The globally unique chat message identifier. | [required] [example: 22222222-2222-2222-2222-222222222222] |
+| **messageId** | query | **String** | The globally unique chat message identifier. | [required] [example: `22222222-2222-2222-2222-222222222222`] |
 
 #### Responses
 
@@ -3063,10 +3063,10 @@ Lists the threads of a scope, most recently edited first, and searches their tit
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **entityId** | query | **String** | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | [optional] [example: 1234] |
-| **count** | query | **Integer** | The maximum number of items to return in one page. | [optional] [example: 20] |
-| **cursor** | query | **String** | The keyset pagination cursor: the JSON-encoded sort key of the last item already received. Omit for the first page. | [optional] [example: \{"id":"11111111-1111-1111-1111-111111111111","lastEditDate":1767225600000\}] |
-| **query** | query | **String** | The full-text query the thread list is filtered by. | [optional] [example: contract] |
+| **entityId** | query | **String** | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | [optional] [example: `1234`] |
+| **count** | query | **Integer** | The maximum number of items to return in one page. | [optional] [example: `20`] |
+| **cursor** | query | **String** | The keyset pagination cursor: the JSON-encoded sort key of the last item already received. Omit for the first page. | [optional] [example: `{"id":"11111111-1111-1111-1111-111111111111","lastEditDate":1767225600000}`] |
+| **query** | query | **String** | The full-text query the thread list is filtered by. | [optional] [example: `contract`] |
 
 #### Responses
 
@@ -3144,10 +3144,10 @@ Reads the messages of one thread, oldest first, with the same string-encoded JSO
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **threadId** | query | **String** | The chat thread identifier. | [required] [example: 11111111-1111-1111-1111-111111111111] |
-| **count** | query | **Integer** | The maximum number of items to return in one page. | [optional] [example: 20] |
-| **cursor** | query | **String** | The keyset pagination cursor: the JSON-encoded sort key of the last item already received. Omit for the first page. | [optional] [example: \{"id":"11111111-1111-1111-1111-111111111111","lastEditDate":1767225600000\}] |
-| **direction** | query | **String** | The order the message page is read in. Only desc turns the read around and pages back from the newest message; omit for the forward read. | [optional] [example: desc] |
+| **threadId** | query | **String** | The chat thread identifier. | [required] [example: `11111111-1111-1111-1111-111111111111`] |
+| **count** | query | **Integer** | The maximum number of items to return in one page. | [optional] [example: `20`] |
+| **cursor** | query | **String** | The keyset pagination cursor: the JSON-encoded sort key of the last item already received. Omit for the first page. | [optional] [example: `{"id":"11111111-1111-1111-1111-111111111111","lastEditDate":1767225600000}`] |
+| **direction** | query | **String** | The order the message page is read in. Only desc turns the read around and pages back from the newest message; omit for the forward read. | [optional] [example: `desc`] |
 
 #### Responses
 
@@ -3386,7 +3386,7 @@ Returns the always-allow list of the scope - the tools whose calls run without p
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **entityId** | query | **String** | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | [optional] [example: 1234] |
+| **entityId** | query | **String** | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | [optional] [example: `1234`] |
 
 #### Responses
 
@@ -3424,8 +3424,8 @@ Returns the stored configuration of one registered custom MCP server. The name i
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **name** | query | **String** | The custom MCP server name. | [required] [example: acme-mcp] |
-| **entityId** | query | **String** | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | [optional] [example: 1234] |
+| **name** | query | **String** | The custom MCP server name. | [required] [example: `acme-mcp`] |
+| **entityId** | query | **String** | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | [optional] [example: `1234`] |
 
 #### Responses
 
@@ -3464,7 +3464,7 @@ Returns the tools switched off in the scope, as a map of server type to tool nam
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **entityId** | query | **String** | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | [optional] [example: 1234] |
+| **entityId** | query | **String** | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | [optional] [example: `1234`] |
 
 #### Responses
 
@@ -3502,9 +3502,9 @@ Tells whether one named tool runs without an approval pause in the scope. Both `
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **serverType** | query | **String** | The MCP server type the tool belongs to. | [required] [example: docspace] |
-| **toolName** | query | **String** | The tool name. | [required] [example: docspace_get_folder] |
-| **entityId** | query | **String** | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | [optional] [example: 1234] |
+| **serverType** | query | **String** | The MCP server type the tool belongs to. | [required] [example: `docspace`] |
+| **toolName** | query | **String** | The tool name. | [required] [example: `docspace_get_folder`] |
+| **entityId** | query | **String** | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | [optional] [example: `1234`] |
 
 #### Responses
 
@@ -3543,9 +3543,9 @@ Tells whether one named tool of one server type is switched off in the scope. Bo
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **serverType** | query | **String** | The MCP server type the tool belongs to. | [required] [example: docspace] |
-| **toolName** | query | **String** | The tool name. | [required] [example: docspace_get_folder] |
-| **entityId** | query | **String** | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | [optional] [example: 1234] |
+| **serverType** | query | **String** | The MCP server type the tool belongs to. | [required] [example: `docspace`] |
+| **toolName** | query | **String** | The tool name. | [required] [example: `docspace_get_folder`] |
+| **entityId** | query | **String** | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | [optional] [example: `1234`] |
 
 #### Responses
 
@@ -3584,7 +3584,7 @@ Lists the custom MCP servers registered in the scope as a map of name to configu
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **entityId** | query | **String** | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | [optional] [example: 1234] |
+| **entityId** | query | **String** | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | [optional] [example: `1234`] |
 
 #### Responses
 
@@ -3622,7 +3622,7 @@ Lists every tool the scope can offer the model, as a map of server type to tool 
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **entityId** | query | **String** | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | [optional] [example: 1234] |
+| **entityId** | query | **String** | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | [optional] [example: `1234`] |
 
 #### Responses
 
@@ -3987,7 +3987,7 @@ Returns the web-search configuration in force for a scope - the provider, its en
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **entityId** | query | **String** | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | [optional] [example: 1234] |
+| **entityId** | query | **String** | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | [optional] [example: `1234`] |
 
 #### Responses
 
@@ -4026,7 +4026,7 @@ Tells whether web search is available in a scope, as a bare boolean, which is th
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **entityId** | query | **String** | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | [optional] [example: 1234] |
+| **entityId** | query | **String** | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | [optional] [example: `1234`] |
 
 #### Responses
 
@@ -4249,9 +4249,9 @@ The agent new item's information.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **tools** | [**List**](#model-aitmcpitem) | Extra tools offered to the model for this request. | [optional] [example: []] |
-| **isReasoning** | **Boolean** | Legacy extended-thinking switch; stands for `medium`. `reasoningLevel` wins when both are set. | [optional] [example: false] |
-| **reasoningLevel** | [**AiAiReasoningLevel**](#model-aiaireasoninglevel) | Depth of extended thinking for the round; providers clamp it to what the model accepts. | [optional] [enum: off, low, medium, high, max] |
+| **tools** | [**List**](#model-aitmcpitem) | Extra tools offered to the model for this request. | [optional] [example: `[]`] |
+| **isReasoning** | **Boolean** | Legacy extended-thinking switch; stands for `medium`. `reasoningLevel` wins when both are set. | [optional] [example: `false`] |
+| **reasoningLevel** | [**AiAiReasoningLevel**](#model-aiaireasoninglevel) | Depth of extended thinking for the round; providers clamp it to what the model accepts. | [optional] [enum: `off`, `low`, `medium`, `high`, `max`] |
 | **prompt** | [**AiAiActionArgs_prompt**](#model-aiaiactionargsprompt) |  | [optional] |
 
 
@@ -4260,7 +4260,7 @@ Override the action's baked-in system prompt (replace or append).
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **mode** | **String** |  | [required] [enum: replace, append] |
+| **mode** | **String** |  | [required] [enum: `replace`, `append`] |
 | **text** | **String** |  | [required] |
 
 
@@ -4281,11 +4281,11 @@ Shared body of the two streaming send endpoints (`sendWithStream` and its OpenAI
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **threadId** | **String** | Target thread; a new one is created (with an auto title) when omitted. | [optional] [example: 11111111-1111-1111-1111-111111111111] |
-| **userMessage** | [**AiThreadMessageLike**](#model-aithreadmessagelike) | The user turn to send. | [required] [example: \{role=user, content=Summarise the attached contract.\}] |
-| **actionArgs** | [**AiAiActionArgs**](#model-aiaiactionargs) | Per-request engine options: extra tools, reasoning, prompt override. | [optional] [example: \{isReasoning=false\}] |
-| **entityId** | **String** | Optional entity (room) scope for profile resolution. | [optional] [example: 1234] |
-| **profileId** | **String** | Session-level profile override for this request only. | [optional] [example: 00000000-0000-0000-0000-000000000000] |
+| **threadId** | **String** | Target thread; a new one is created (with an auto title) when omitted. | [optional] [example: `11111111-1111-1111-1111-111111111111`] |
+| **userMessage** | [**AiThreadMessageLike**](#model-aithreadmessagelike) | The user turn to send. | [required] [example: `{role=user, content=Summarise the attached contract.}`] |
+| **actionArgs** | [**AiAiActionArgs**](#model-aiaiactionargs) | Per-request engine options: extra tools, reasoning, prompt override. | [optional] [example: `{isReasoning=false}`] |
+| **entityId** | **String** | Optional entity (room) scope for profile resolution. | [optional] [example: `1234`] |
+| **profileId** | **String** | Session-level profile override for this request only. | [optional] [example: `00000000-0000-0000-0000-000000000000`] |
 
 
 ### Model AiAiSettingsDto
@@ -4293,12 +4293,12 @@ The AI module settings.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **vectorizationEnabled** | **Boolean** | Indicates whether document vectorization is enabled. | [optional] [example: true] |
-| **vectorizationNeedReset** | **Boolean** | Indicates whether the embedding provider API key needs to be reconfigured. | [optional] [example: false] |
-| **aiReady** | **Boolean** | Indicates whether the AI subsystem is fully configured and operational. | [optional] [example: true] |
-| **embeddingModel** | **String** | The name of the embedding model used for document vectorization. | [required] [example: text-embedding-3-small] [nullable] |
-| **systemAiEnabled** | **Boolean** | Indicates whether the system-level AI provider is enabled. | [optional] [example: true] |
-| **recommendedModelForForms** | **String** | The identifier of the model recommended for form generation. | [optional] [example: gpt-5.4] [nullable] |
+| **vectorizationEnabled** | **Boolean** | Indicates whether document vectorization is enabled. | [optional] [example: `true`] |
+| **vectorizationNeedReset** | **Boolean** | Indicates whether the embedding provider API key needs to be reconfigured. | [optional] [example: `false`] |
+| **aiReady** | **Boolean** | Indicates whether the AI subsystem is fully configured and operational. | [optional] [example: `true`] |
+| **embeddingModel** | **String** | The name of the embedding model used for document vectorization. | [required] [example: `text-embedding-3-small`] [nullable] |
+| **systemAiEnabled** | **Boolean** | Indicates whether the system-level AI provider is enabled. | [optional] [example: `true`] |
+| **recommendedModelForForms** | **String** | The identifier of the model recommended for form generation. | [optional] [example: `gpt-5.4`] [nullable] |
 
 
 ### Model AiAiSettingsWrapper
@@ -4318,13 +4318,13 @@ Identifies a pending tool call to resume — mirrors the library `ToolCallData` 
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **threadId** | **String** | Thread the assistant message belongs to. | [required] [example: 11111111-1111-1111-1111-111111111111] |
-| **messageId** | **String** | Storage id of the assistant message holding the tool call. | [required] [example: 22222222-2222-2222-2222-222222222222] |
-| **idx** | **BigDecimal** | Index of the tool-call content part inside `message.content`. | [required] [example: 0] |
-| **message** | [**AiThreadMessageLike**](#model-aithreadmessagelike) | Snapshot of the assistant message at the time the tool call surfaced. | [required] [example: \{role=assistant, content=\}] |
-| **actionArgs** | [**AiAiActionArgs**](#model-aiaiactionargs) | Per-request engine options: extra tools, reasoning, prompt override. | [optional] [example: \{isReasoning=false\}] |
-| **entityId** | **String** | Optional entity (room) scope for profile resolution. | [optional] [example: 1234] |
-| **profileId** | **String** | Session-level profile override for this request only. | [optional] [example: 00000000-0000-0000-0000-000000000000] |
+| **threadId** | **String** | Thread the assistant message belongs to. | [required] [example: `11111111-1111-1111-1111-111111111111`] |
+| **messageId** | **String** | Storage id of the assistant message holding the tool call. | [required] [example: `22222222-2222-2222-2222-222222222222`] |
+| **idx** | **BigDecimal** | Index of the tool-call content part inside `message.content`. | [required] [example: `0`] |
+| **message** | [**AiThreadMessageLike**](#model-aithreadmessagelike) | Snapshot of the assistant message at the time the tool call surfaced. | [required] [example: `{role=assistant, content=}`] |
+| **actionArgs** | [**AiAiActionArgs**](#model-aiaiactionargs) | Per-request engine options: extra tools, reasoning, prompt override. | [optional] [example: `{isReasoning=false}`] |
+| **entityId** | **String** | Optional entity (room) scope for profile resolution. | [optional] [example: `1234`] |
+| **profileId** | **String** | Session-level profile override for this request only. | [optional] [example: `00000000-0000-0000-0000-000000000000`] |
 
 
 ### Model AiAiUserSettingsDto
@@ -4332,7 +4332,7 @@ The per-user AI settings.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **chatRecommendedModelVisible** | **Boolean** | Indicates whether the recommended model banner is visible in the AI chat for the current user. | [optional] [example: true] |
+| **chatRecommendedModelVisible** | **Boolean** | Indicates whether the recommended model banner is visible in the AI chat for the current user. | [optional] [example: `true`] |
 
 
 ### Model AiAiUserSettingsWrapper
@@ -4360,8 +4360,8 @@ The API date and time parameters.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **utcTime** | **Date** (date-time) | The time in UTC format. | [optional] [example: 2018-01-01T00:00:00.0000000Z] |
-| **timeZoneOffset** | **String** (date-span) | The time zone offset. | [optional] [example: 00:00:00] |
+| **utcTime** | **Date** (date-time) | The time in UTC format. | [optional] [example: `2018-01-01T00:00:00.0000000Z`] |
+| **timeZoneOffset** | **String** (date-span) | The time zone offset. | [optional] [example: `00:00:00`] |
 
 
 ### Model AiAssignmentMutationResult
@@ -4369,7 +4369,7 @@ Outcome of `AssignmentsEngine.assign` / `AssignmentsEngine.unassign`. Either a s
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **success** | **Boolean** | True when the assignment was persisted. | [required] [example: true] |
+| **success** | **Boolean** | True when the assignment was persisted. | [required] [example: `true`] |
 | **error** | [**AiTErrorData**](#model-aiterrordata) | Why the assignment was rejected. Present on failure. | [optional] |
 
 
@@ -4378,20 +4378,20 @@ Persistent record for a single attachment (file or image) referenced from a user
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **id** | **String** | Storage-assigned UUID. | [required] [example: 55555555-5555-5555-5555-555555555555] |
-| **kind** | **String** | file \| image. | [required] [example: file] [enum: file, image] |
-| **source** | **String** | Origin of the attachment. `user` — uploaded by the user in the composer (the default when unset, for backward compatibility). `tool` — produced by a tool call (e.g. `generate_image`). Lets the integrator's adapter route or apply policies (separate bucket, quotas, TTL, CDN) per source. | [optional] [example: user] [enum: user, tool] |
-| **title** | **String** | Display label (filename or user-visible title). | [required] [example: contract.docx] |
-| **content** | **String** | Extracted text for files. | [optional] [example: This agreement is made on 1 January 2026 between …] |
+| **id** | **String** | Storage-assigned UUID. | [required] [example: `55555555-5555-5555-5555-555555555555`] |
+| **kind** | **String** | file \| image. | [required] [example: `file`] [enum: `file`, `image`] |
+| **source** | **String** | Origin of the attachment. `user` — uploaded by the user in the composer (the default when unset, for backward compatibility). `tool` — produced by a tool call (e.g. `generate_image`). Lets the integrator's adapter route or apply policies (separate bucket, quotas, TTL, CDN) per source. | [optional] [example: `user`] [enum: `user`, `tool`] |
+| **title** | **String** | Display label (filename or user-visible title). | [required] [example: `contract.docx`] |
+| **content** | **String** | Extracted text for files. | [optional] [example: `This agreement is made on 1 January 2026 between …`] |
 | **base64** | **String** | Base64 data URL for images. | [optional] |
-| **path** | **String** | Original host file path (for files). | [optional] [example: file_1234] |
-| **type** | **BigDecimal** | ONLYOFFICE file type code (for files). | [optional] [example: 7] |
-| **messageId** | **String** | Owning message id once linked. Unset while the attachment is a draft. | [optional] [example: 22222222-2222-2222-2222-222222222222] |
-| **threadId** | **String** | Owning thread id once linked. Unset while the attachment is a draft. | [optional] [example: 11111111-1111-1111-1111-111111111111] |
-| **entityId** | **String** | Opaque scope token (entity / room) the attachment was created in. Drafts carry it so an entity switch keeps in-flight composer state isolated; once linked to a message the field is redundant with the thread's own entity binding. | [optional] [example: 1234] |
-| **createdAt** | **BigDecimal** | Storage-assigned creation timestamp. | [required] [example: 1767225600000] |
-| **canAnalyze** | **Boolean** | Whether the attached form can be analyzed. | [optional] [example: false] |
-| **formKeys** | [**List**](#model-aiattachmentformkeys-item) | Keys of the fields inside the form. `key` is the field identifier, `text` its human-readable label. | [optional] [example: []] |
+| **path** | **String** | Original host file path (for files). | [optional] [example: `file_1234`] |
+| **type** | **BigDecimal** | ONLYOFFICE file type code (for files). | [optional] [example: `7`] |
+| **messageId** | **String** | Owning message id once linked. Unset while the attachment is a draft. | [optional] [example: `22222222-2222-2222-2222-222222222222`] |
+| **threadId** | **String** | Owning thread id once linked. Unset while the attachment is a draft. | [optional] [example: `11111111-1111-1111-1111-111111111111`] |
+| **entityId** | **String** | Opaque scope token (entity / room) the attachment was created in. Drafts carry it so an entity switch keeps in-flight composer state isolated; once linked to a message the field is redundant with the thread's own entity binding. | [optional] [example: `1234`] |
+| **createdAt** | **BigDecimal** | Storage-assigned creation timestamp. | [required] [example: `1767225600000`] |
+| **canAnalyze** | **Boolean** | Whether the attached form can be analyzed. | [optional] [example: `false`] |
+| **formKeys** | [**List**](#model-aiattachmentformkeys-item) | Keys of the fields inside the form. `key` is the field identifier, `text` its human-readable label. | [optional] [example: `[]`] |
 
 
 ### Model AiAttachment.formKeys item
@@ -4431,15 +4431,15 @@ Outcome of `AssignmentsEngine.bulkAssign`. Either every entry persisted, or no e
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **success** | **Boolean** | True when every entry was persisted. | [required] [example: true] |
-| **errors** | [**List**](#model-aibulkassignmentresulterrors-item) | What was rejected, per action. Present on failure - and then no entry was persisted. | [optional] [example: []] |
+| **success** | **Boolean** | True when every entry was persisted. | [required] [example: `true`] |
+| **errors** | [**List**](#model-aibulkassignmentresulterrors-item) | What was rejected, per action. Present on failure - and then no entry was persisted. | [optional] [example: `[]`] |
 
 
 ### Model AiBulkAssignmentResult.errors item
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **actionType** | [**AiActionType**](#model-aiactiontype) |  | [required] [enum: Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision] |
+| **actionType** | [**AiActionType**](#model-aiactiontype) |  | [required] [enum: `Default`, `Chat`, `Code`, `Summarization`, `Translation`, `TextAnalyze`, `ImageGeneration`, `OCR`, `Vision`] |
 | **error** | [**AiTErrorData**](#model-aiterrordata) |  | [required] |
 
 
@@ -4448,11 +4448,11 @@ Discriminated event emitted by the streaming methods of `AIEngine`. The engine n
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **type** | **String** | Emitted once per `sendWithStream` call, immediately after the user message has been persisted by storage and before the assistant stream starts. Carries the storage-assigned `id` and `createdAt`. The UI uses it to render the user bubble — no client-side optimistic placeholder is needed, which keeps the runtime tree free of phantom nodes from index-fallback ids. | [required] [example: message-delta] [enum: user-message-stored, message-start, message-delta, message-end, message-incomplete, tool-call-pending, thread-title] |
+| **type** | **String** | Emitted once per `sendWithStream` call, immediately after the user message has been persisted by storage and before the assistant stream starts. Carries the storage-assigned `id` and `createdAt`. The UI uses it to render the user bubble — no client-side optimistic placeholder is needed, which keeps the runtime tree free of phantom nodes from index-fallback ids. | [required] [example: `message-delta`] [enum: `user-message-stored`, `message-start`, `message-delta`, `message-end`, `message-incomplete`, `tool-call-pending`, `thread-title`] |
 | **message** | [**AiThreadMessageLike**](#model-aithreadmessagelike) | The message the event is about, in the state it has reached. | [optional] |
-| **messageId** | **String** | The storage identifier of that message. | [optional] [example: 22222222-2222-2222-2222-222222222222] |
+| **messageId** | **String** | The storage identifier of that message. | [optional] [example: `22222222-2222-2222-2222-222222222222`] |
 | **idx** | **BigDecimal** | The zero-based position of the pending tool call within the message. | [optional] |
-| **threadId** | **String** | The thread the event belongs to. | [optional] [example: 11111111-1111-1111-1111-111111111111] |
+| **threadId** | **String** | The thread the event belongs to. | [optional] [example: `11111111-1111-1111-1111-111111111111`] |
 | **autoAllow** | **Boolean** | The consumer should execute the tool without prompting the user. True when the tool is in the persisted always-allow list, or the tool itself opts in via `TMCPItem.requireApproval === false` (host tools default to this). For a client-side tool with a server-side engine, this lets the engine return the pending call already flagged auto-allow so the client runs it and streams the result back without a dialog round-trip. | [optional] |
 | **serverExecuted** | **Boolean** | Set when the tool is served by a server-side system source: the consumer must NOT execute it locally — only show the approval UI (unless `autoAllow`) and resume via `approveToolCall` (no `result` needed) / `denyToolCall`. The engine runs it in-engine. | [optional] |
 | **title** | **String** | The generated thread title. | [optional] |
@@ -4464,7 +4464,7 @@ The chat configuration of an AI room.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **prompt** | **String** | The instruction put in front of every conversation held in the room, which sets the role the assistant takes  and the way it answers. Empty when the room was left on the behaviour the portal provides by default. | [optional] [example: You are a helpful assistant for project documentation.] [nullable] |
+| **prompt** | **String** | The instruction put in front of every conversation held in the room, which sets the role the assistant takes  and the way it answers. Empty when the room was left on the behaviour the portal provides by default. | [optional] [example: `You are a helpful assistant for project documentation.`] [nullable] |
 
 
 ### Model AiCreateProfileInput
@@ -4472,20 +4472,20 @@ Input for creating a new profile — the same shape as `Profile` without the eng
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **name** | **String** | User-defined profile display name. | [required] [example: OpenAI GPT-4o] |
-| **providerType** | [**AiProviderType**](#model-aiprovidertype) | Provider type for this profile. Use `external` to delegate all HTTP transport to `PlatformAdapter.externalFetch` while reusing an existing provider's response parser — see `Profile.basedOn` for the format selector. | [required] [example: openai] |
-| **basedOn** | [**AiBuiltinProviderType**](#model-aibuiltinprovidertype) | Selects the response-format parser used by the `external` provider. Ignored for any other `providerType`.  Supported values are `openai`, `anthropic`, `mistral` and `openrouter`. Remaining values (`genai`, `stabilityai`, …) are accepted by the type but not yet implemented; passing one raises an error at request time. | [optional] [example: openai] [enum: anthropic, ollama, openai, openaicompatible, together, openrouter, genai, deepseek, xai, lm-studio, mistral, groq, zhipu, stabilityai, gpt4all, onlyoffice, external] |
-| **baseUrl** | **String** | Base URL of the provider API. | [required] [example: https://api.openai.com/v1] |
-| **key** | **String** | API key or token. Optional for local providers. | [optional] [example: sk-your-provider-api-key] |
-| **headers** | **Map** | Extra HTTP headers sent with every request to this provider. Merged into the SDK client's default headers; an explicit `Authorization` here wins over the one derived from `key`. Honoured by the OpenAI-family providers. | [optional] [example: \{X-Organization=acme\}] |
-| **modelId** | **String** | Selected model ID within this provider. | [required] [example: gpt-4o] |
-| **reasoning** | **Boolean** | Whether extended thinking is enabled for this profile's model. | [optional] [example: false] |
+| **name** | **String** | User-defined profile display name. | [required] [example: `OpenAI GPT-4o`] |
+| **providerType** | [**AiProviderType**](#model-aiprovidertype) | Provider type for this profile. Use `external` to delegate all HTTP transport to `PlatformAdapter.externalFetch` while reusing an existing provider's response parser — see `Profile.basedOn` for the format selector. | [required] [example: `openai`] |
+| **basedOn** | [**AiBuiltinProviderType**](#model-aibuiltinprovidertype) | Selects the response-format parser used by the `external` provider. Ignored for any other `providerType`.  Supported values are `openai`, `anthropic`, `mistral` and `openrouter`. Remaining values (`genai`, `stabilityai`, …) are accepted by the type but not yet implemented; passing one raises an error at request time. | [optional] [example: `openai`] [enum: `anthropic`, `ollama`, `openai`, `openaicompatible`, `together`, `openrouter`, `genai`, `deepseek`, `xai`, `lm-studio`, `mistral`, `groq`, `zhipu`, `stabilityai`, `gpt4all`, `onlyoffice`, `external`] |
+| **baseUrl** | **String** | Base URL of the provider API. | [required] [example: `https://api.openai.com/v1`] |
+| **key** | **String** | API key or token. Optional for local providers. | [optional] [example: `sk-your-provider-api-key`] |
+| **headers** | **Map** | Extra HTTP headers sent with every request to this provider. Merged into the SDK client's default headers; an explicit `Authorization` here wins over the one derived from `key`. Honoured by the OpenAI-family providers. | [optional] [example: `{X-Organization=acme}`] |
+| **modelId** | **String** | Selected model ID within this provider. | [required] [example: `gpt-4o`] |
+| **reasoning** | **Boolean** | Whether extended thinking is enabled for this profile's model. | [optional] [example: `false`] |
 | **reasoningSupport** | [**AiReasoningSupport**](#model-aireasoningsupport) | Extended-thinking capabilities of the selected model as reported by the provider's catalogue at save time (see `Model.reasoningSupport`). When present the composer's Effort row follows it exactly; when absent the provider's id-based table answers. Hosts persist it with the rest of the profile. | [optional] |
-| **capabilities** | **BigDecimal** | Bitmask of capabilities supported by the selected model. | [optional] [example: 7] |
-| **canUseTool** | **Boolean** | Result of the live tool-capability probe performed at create time and on changes to `modelId` / `providerType` / `baseUrl`. `undefined` means the probe has never run for this profile (legacy record). | [optional] [example: true] |
-| **useResponsesApi** | **Boolean** | Result of the live Responses-API probe (parallel to `canUseTool`). `true` means the model speaks `/v1/responses` and the OpenAI provider must route through `client.responses.create` — required for gpt-5+ reasoning models that reject `reasoning_effort` together with `tools` on `/v1/chat/completions`. Probed at create time and whenever `modelId` / `providerType` / `baseUrl` change. `undefined` means the probe never ran (legacy record) — readers treat that as `false`. | [optional] [example: false] |
-| **isCloudProvider** | **Boolean** | Whether this profile uses a cloud-hosted provider (e.g. ONLYOFFICE DocSpace). | [optional] [example: true] |
-| **useProxy** | **Boolean** | Route every provider request through the host's `fetchProxy` instead of the global `fetch`. Useful when the host runs the widget in a sandbox without direct network access (CORS, custom auth, etc.). Has no effect when the `PlatformAdapter.fetchProxy` is not configured. | [optional] [example: false] |
+| **capabilities** | **BigDecimal** | Bitmask of capabilities supported by the selected model. | [optional] [example: `7`] |
+| **canUseTool** | **Boolean** | Result of the live tool-capability probe performed at create time and on changes to `modelId` / `providerType` / `baseUrl`. `undefined` means the probe has never run for this profile (legacy record). | [optional] [example: `true`] |
+| **useResponsesApi** | **Boolean** | Result of the live Responses-API probe (parallel to `canUseTool`). `true` means the model speaks `/v1/responses` and the OpenAI provider must route through `client.responses.create` — required for gpt-5+ reasoning models that reject `reasoning_effort` together with `tools` on `/v1/chat/completions`. Probed at create time and whenever `modelId` / `providerType` / `baseUrl` change. `undefined` means the probe never ran (legacy record) — readers treat that as `false`. | [optional] [example: `false`] |
+| **isCloudProvider** | **Boolean** | Whether this profile uses a cloud-hosted provider (e.g. ONLYOFFICE DocSpace). | [optional] [example: `true`] |
+| **useProxy** | **Boolean** | Route every provider request through the host's `fetchProxy` instead of the global `fetch`. Useful when the host runs the widget in a sandbox without direct network access (CORS, custom auth, etc.). Has no effect when the `PlatformAdapter.fetchProxy` is not configured. | [optional] [example: `false`] |
 
 
 ### Model AiCreatePromptInput
@@ -4493,9 +4493,9 @@ Input for creating a prompt — the engine generates `id`/`createdAt`/`updatedAt
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **name** | **String** | The prompt name. | [required] [example: Contract summary] |
-| **text** | **String** | The prompt body. | [required] [example: Summarise the key obligations and dates in the attached contract.] |
-| **folderId** | **String** | The folder to file the prompt under. Omit or send null to leave it outside any folder. | [optional] [example: 44444444-4444-4444-4444-444444444444] [nullable] |
+| **name** | **String** | The prompt name. | [required] [example: `Contract summary`] |
+| **text** | **String** | The prompt body. | [required] [example: `Summarise the key obligations and dates in the attached contract.`] |
+| **folderId** | **String** | The folder to file the prompt under. Omit or send null to leave it outside any folder. | [optional] [example: `44444444-4444-4444-4444-444444444444`] [nullable] |
 
 
 ### Model AiDistributedTaskStatus
@@ -4524,16 +4524,16 @@ The user parameters.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **id** | **UUID** (uuid) | The user ID. | [optional] [example: 00000000-0000-0000-0000-000000000000] |
-| **displayName** | **String** | The HTML-encoded user's display name formatted according to the default format for the current culture. | [optional] [example: Mike Zanyatski] [nullable] |
-| **avatar** | **String** | The user avatar. | [optional] [example: https://example.com/avatar.jpg] [nullable] |
-| **avatarOriginal** | **String** | The user original size avatar. | [optional] [example: https://example.com/avatar_original.jpg] [nullable] |
-| **avatarMax** | **String** | The user maximum size avatar. | [optional] [example: https://example.com/avatar_max.jpg] [nullable] |
-| **avatarMedium** | **String** | The user medium size avatar. | [optional] [example: https://example.com/avatar_medium.jpg] [nullable] |
-| **avatarSmall** | **String** | The user small size avatar. | [optional] [example: https://example.com/avatar_small.jpg] [nullable] |
-| **profileUrl** | **String** | The user profile URL. | [optional] [example: https://example.com/profile/user123] [nullable] |
-| **hasAvatar** | **Boolean** | Specifies if the user has an avatar or not. | [optional] [example: true] |
-| **isAnonim** | **Boolean** | Specifies if the user is anonymous or not. | [optional] [example: false] |
+| **id** | **UUID** (uuid) | The user ID. | [optional] [example: `00000000-0000-0000-0000-000000000000`] |
+| **displayName** | **String** | The HTML-encoded user's display name formatted according to the default format for the current culture. | [optional] [example: `Mike Zanyatski`] [nullable] |
+| **avatar** | **String** | The user avatar. | [optional] [example: `https://example.com/avatar.jpg`] [nullable] |
+| **avatarOriginal** | **String** | The user original size avatar. | [optional] [example: `https://example.com/avatar_original.jpg`] [nullable] |
+| **avatarMax** | **String** | The user maximum size avatar. | [optional] [example: `https://example.com/avatar_max.jpg`] [nullable] |
+| **avatarMedium** | **String** | The user medium size avatar. | [optional] [example: `https://example.com/avatar_medium.jpg`] [nullable] |
+| **avatarSmall** | **String** | The user small size avatar. | [optional] [example: `https://example.com/avatar_small.jpg`] [nullable] |
+| **profileUrl** | **String** | The user profile URL. | [optional] [example: `https://example.com/profile/user123`] [nullable] |
+| **hasAvatar** | **Boolean** | Specifies if the user has an avatar or not. | [optional] [example: `true`] |
+| **isAnonim** | **Boolean** | Specifies if the user is anonymous or not. | [optional] [example: `false`] |
 
 
 ### Model AiErrorResponse
@@ -4541,7 +4541,7 @@ Error body — a single human-readable message.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **error** | **String** | The error message, ready to be shown to the caller. | [required] [example: threadId required] |
+| **error** | **String** | The error message, ready to be shown to the caller. | [required] [example: `threadId required`] |
 
 
 ### Model AiFileEntryBaseDto
@@ -4549,28 +4549,28 @@ What every file and folder in an answer has in common; the concrete shape is a f
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **title** | **String** | The name shown for the entry. For a file it carries the extension, which is how the format is recognised, and  for a room it is the room name. | [optional] [example: Some title.txt] [nullable] |
-| **access** | [**AiFileShare**](#model-aifileshare) | The level the calling account holds on this entry, resolved from its own rights, the groups it belongs to and  any link it came in through. It is the level itself, not what the account may do with it - the action flags  below answer that. | [optional] [enum: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] |
+| **title** | **String** | The name shown for the entry. For a file it carries the extension, which is how the format is recognised, and  for a room it is the room name. | [optional] [example: `Some title.txt`] [nullable] |
+| **access** | [**AiFileShare**](#model-aifileshare) | The level the calling account holds on this entry, resolved from its own rights, the groups it belongs to and  any link it came in through. It is the level itself, not what the account may do with it - the action flags  below answer that. | [optional] [enum: `0`, `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`] |
 | **sharedBy** | [**AiEmployeeDto**](#model-aiemployeedto) | Who gave the calling account the access it is using. It is filled in only while the entry is being read  through a share, and never for a caller without an account. | [optional] |
 | **ownedBy** | [**AiEmployeeDto**](#model-aiemployeedto) | Who owns the place the entry is shared from - the creator of the room it lies in, or of the personal section  that holds it. It is filled in only while the entry is being read through a share, and never for a caller  without an account. | [optional] |
-| **shared** | **Boolean** | Whether at least one external link exists for the entry, whichever kind. It says nothing about accounts and  groups - those are counted by the flag for members below. | [optional] [example: false] |
-| **sharedForUser** | **Boolean** | Whether at least one account or group has been given rights on the entry directly, as opposed to reaching it  through a link or through the room around it. | [optional] [example: false] |
-| **sharedExternal** | **Boolean** | Whether one of the entry's links is open to people outside the portal, as opposed to a link that only its own  members can follow. This is the flag to watch when the concern is who can reach the content from outside. | [optional] [example: false] |
-| **parentShared** | **Boolean** | Whether the entry is reachable because the room or folder around it is shared, rather than through rights of  its own. A copy or a move takes the entry out of that scope. | [optional] [example: false] |
-| **shortWebUrl** | **URI** (uri) | A shortened address that opens the entry through the link it is being read with. It is an empty string  whenever no link applies, which is the usual case for a member browsing their own rooms. | [optional] [example: http://localhost/s/abc123] [nullable] |
+| **shared** | **Boolean** | Whether at least one external link exists for the entry, whichever kind. It says nothing about accounts and  groups - those are counted by the flag for members below. | [optional] [example: `false`] |
+| **sharedForUser** | **Boolean** | Whether at least one account or group has been given rights on the entry directly, as opposed to reaching it  through a link or through the room around it. | [optional] [example: `false`] |
+| **sharedExternal** | **Boolean** | Whether one of the entry's links is open to people outside the portal, as opposed to a link that only its own  members can follow. This is the flag to watch when the concern is who can reach the content from outside. | [optional] [example: `false`] |
+| **parentShared** | **Boolean** | Whether the entry is reachable because the room or folder around it is shared, rather than through rights of  its own. A copy or a move takes the entry out of that scope. | [optional] [example: `false`] |
+| **shortWebUrl** | **URI** (uri) | A shortened address that opens the entry through the link it is being read with. It is an empty string  whenever no link applies, which is the usual case for a member browsing their own rooms. | [optional] [example: `http://localhost/s/abc123`] [nullable] |
 | **created** | [**AiApiDateTime**](#model-aiapidatetime) | When the entry was created, written with the offset of the portal's time zone. For a file restored from an  older version this is still the moment the file first appeared. | [optional] |
 | **createdBy** | [**AiEmployeeDto**](#model-aiemployeedto) | Who created the entry. It is null for a caller without an account, who is told nothing about the portal's  members. | [optional] |
 | **updated** | [**AiApiDateTime**](#model-aiapidatetime) | When the entry last changed, written with the offset of the portal's time zone. It is never reported as  earlier than the creation moment, so the two can be compared safely. | [optional] |
 | **autoDelete** | [**AiApiDateTime**](#model-aiapidatetime) | When the entry will disappear on its own, written with the offset of the portal's time zone. It is filled in  only where a removal is actually scheduled - something in the trash while the portal cleans it up  automatically, or a guest's own documents - so a null means nothing is scheduled rather than that the entry is  permanent. | [optional] |
-| **rootFolderType** | [**AiFolderType**](#model-aifoldertype) | The section the entry ultimately belongs to, which is what tells a personal document from one inside a room,  from a template and from something in the trash or the archive. | [optional] [enum: 0, 1, 2, 3, 5, 6, 8, 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36] |
-| **parentRoomType** | [**AiFolderType**](#model-aifoldertype) | The kind of room the entry lies in, which decides what the room allows - filling forms, public links,  indexing. It is null for an entry that is not inside a room at all. | [optional] [enum: 0, 1, 2, 3, 5, 6, 8, 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36] |
+| **rootFolderType** | [**AiFolderType**](#model-aifoldertype) | The section the entry ultimately belongs to, which is what tells a personal document from one inside a room,  from a template and from something in the trash or the archive. | [optional] [enum: `0`, `1`, `2`, `3`, `5`, `6`, `8`, `10`, `11`, `12`, `13`, `14`, `15`, `16`, `19`, `20`, `21`, `22`, `25`, `26`, `27`, `28`, `29`, `30`, `31`, `32`, `33`, `34`, `35`, `36`] |
+| **parentRoomType** | [**AiFolderType**](#model-aifoldertype) | The kind of room the entry lies in, which decides what the room allows - filling forms, public links,  indexing. It is null for an entry that is not inside a room at all. | [optional] [enum: `0`, `1`, `2`, `3`, `5`, `6`, `8`, `10`, `11`, `12`, `13`, `14`, `15`, `16`, `19`, `20`, `21`, `22`, `25`, `26`, `27`, `28`, `29`, `30`, `31`, `32`, `33`, `34`, `35`, `36`] |
 | **updatedBy** | [**AiEmployeeDto**](#model-aiemployeedto) | Who changed the entry last. It is null for a caller without an account. | [optional] |
-| **providerItem** | **Boolean** | Set when the entry is stored on a connected third-party account rather than on the portal, and null when it is  stored on the portal. Such an entry is identified by a string rather than a number, and some operations skip  it. | [optional] [example: true] [nullable] |
-| **providerKey** | **String** | Which third-party service holds the entry, matching the keys accepted by the third-party operations. It is  null for an entry stored on the portal. | [optional] [example: google-drive] [nullable] |
-| **providerId** | **Integer** (int32) | The connected account the entry comes from, for telling apart two connections to the same service. It is null  for an entry stored on the portal. | [optional] [example: 1] [nullable] |
-| **order** | **String** | The place of the entry in a room where the members arrange the content themselves, given as the position of  the entry preceded by the positions of the folders leading to it, separated by dots. It is empty when nothing  has been arranged. | [optional] [example: 1.3.2] [nullable] |
-| **isFavorite** | **Boolean** | Set when the calling account has marked the entry as a favorite, which is what puts it into the favorites  listing. For a file that is not marked it is null rather than false. | [optional] [example: true] [nullable] |
-| **fileEntryType** | [**AiFileEntryType**](#model-aifileentrytype) | Tells a folder from a file, and so which of the two shapes the rest of the object has. A room is reported as a  folder here. | [optional] [enum: 1, 2] |
+| **providerItem** | **Boolean** | Set when the entry is stored on a connected third-party account rather than on the portal, and null when it is  stored on the portal. Such an entry is identified by a string rather than a number, and some operations skip  it. | [optional] [example: `true`] [nullable] |
+| **providerKey** | **String** | Which third-party service holds the entry, matching the keys accepted by the third-party operations. It is  null for an entry stored on the portal. | [optional] [example: `google-drive`] [nullable] |
+| **providerId** | **Integer** (int32) | The connected account the entry comes from, for telling apart two connections to the same service. It is null  for an entry stored on the portal. | [optional] [example: `1`] [nullable] |
+| **order** | **String** | The place of the entry in a room where the members arrange the content themselves, given as the position of  the entry preceded by the positions of the folders leading to it, separated by dots. It is empty when nothing  has been arranged. | [optional] [example: `1.3.2`] [nullable] |
+| **isFavorite** | **Boolean** | Set when the calling account has marked the entry as a favorite, which is what puts it into the favorites  listing. For a file that is not marked it is null rather than false. | [optional] [example: `true`] [nullable] |
+| **fileEntryType** | [**AiFileEntryType**](#model-aifileentrytype) | Tells a folder from a file, and so which of the two shapes the rest of the object has. A room is reported as a  folder here. | [optional] [enum: `1`, `2`] |
 
 
 ### Model AiFileEntryDtoInteger
@@ -4579,7 +4579,7 @@ The part of a file or folder that depends on how the entry is identified: by a n
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **title** | **String** | The name shown for the entry. For a file it carries the extension, which is how the format is recognised, and  for a room it is the room name. | [optional] |
-| **access** | [**AiFileShare**](#model-aifileshare) | The level the calling account holds on this entry, resolved from its own rights, the groups it belongs to and  any link it came in through. It is the level itself, not what the account may do with it - the action flags  below answer that. | [optional] [enum: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] |
+| **access** | [**AiFileShare**](#model-aifileshare) | The level the calling account holds on this entry, resolved from its own rights, the groups it belongs to and  any link it came in through. It is the level itself, not what the account may do with it - the action flags  below answer that. | [optional] [enum: `0`, `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`] |
 | **sharedBy** | [**AiEmployeeDto**](#model-aiemployeedto) | Who gave the calling account the access it is using. It is filled in only while the entry is being read  through a share, and never for a caller without an account. | [optional] |
 | **ownedBy** | [**AiEmployeeDto**](#model-aiemployeedto) | Who owns the place the entry is shared from - the creator of the room it lies in, or of the personal section  that holds it. It is filled in only while the entry is being read through a share, and never for a caller  without an account. | [optional] |
 | **shared** | **Boolean** | Whether at least one external link exists for the entry, whichever kind. It says nothing about accounts and  groups - those are counted by the flag for members below. | [optional] |
@@ -4591,15 +4591,15 @@ The part of a file or folder that depends on how the entry is identified: by a n
 | **createdBy** | [**AiEmployeeDto**](#model-aiemployeedto) | Who created the entry. It is null for a caller without an account, who is told nothing about the portal's  members. | [optional] |
 | **updated** | [**AiApiDateTime**](#model-aiapidatetime) | When the entry last changed, written with the offset of the portal's time zone. It is never reported as  earlier than the creation moment, so the two can be compared safely. | [optional] |
 | **autoDelete** | [**AiApiDateTime**](#model-aiapidatetime) | When the entry will disappear on its own, written with the offset of the portal's time zone. It is filled in  only where a removal is actually scheduled - something in the trash while the portal cleans it up  automatically, or a guest's own documents - so a null means nothing is scheduled rather than that the entry is  permanent. | [optional] |
-| **rootFolderType** | [**AiFolderType**](#model-aifoldertype) | The section the entry ultimately belongs to, which is what tells a personal document from one inside a room,  from a template and from something in the trash or the archive. | [optional] [enum: 0, 1, 2, 3, 5, 6, 8, 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36] |
-| **parentRoomType** | [**AiFolderType**](#model-aifoldertype) | The kind of room the entry lies in, which decides what the room allows - filling forms, public links,  indexing. It is null for an entry that is not inside a room at all. | [optional] [enum: 0, 1, 2, 3, 5, 6, 8, 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36] |
+| **rootFolderType** | [**AiFolderType**](#model-aifoldertype) | The section the entry ultimately belongs to, which is what tells a personal document from one inside a room,  from a template and from something in the trash or the archive. | [optional] [enum: `0`, `1`, `2`, `3`, `5`, `6`, `8`, `10`, `11`, `12`, `13`, `14`, `15`, `16`, `19`, `20`, `21`, `22`, `25`, `26`, `27`, `28`, `29`, `30`, `31`, `32`, `33`, `34`, `35`, `36`] |
+| **parentRoomType** | [**AiFolderType**](#model-aifoldertype) | The kind of room the entry lies in, which decides what the room allows - filling forms, public links,  indexing. It is null for an entry that is not inside a room at all. | [optional] [enum: `0`, `1`, `2`, `3`, `5`, `6`, `8`, `10`, `11`, `12`, `13`, `14`, `15`, `16`, `19`, `20`, `21`, `22`, `25`, `26`, `27`, `28`, `29`, `30`, `31`, `32`, `33`, `34`, `35`, `36`] |
 | **updatedBy** | [**AiEmployeeDto**](#model-aiemployeedto) | Who changed the entry last. It is null for a caller without an account. | [optional] |
 | **providerItem** | **Boolean** | Set when the entry is stored on a connected third-party account rather than on the portal, and null when it is  stored on the portal. Such an entry is identified by a string rather than a number, and some operations skip  it. | [optional] |
 | **providerKey** | **String** | Which third-party service holds the entry, matching the keys accepted by the third-party operations. It is  null for an entry stored on the portal. | [optional] |
 | **providerId** | **Integer** (int32) | The connected account the entry comes from, for telling apart two connections to the same service. It is null  for an entry stored on the portal. | [optional] |
 | **order** | **String** | The place of the entry in a room where the members arrange the content themselves, given as the position of  the entry preceded by the positions of the folders leading to it, separated by dots. It is empty when nothing  has been arranged. | [optional] |
 | **isFavorite** | **Boolean** | Set when the calling account has marked the entry as a favorite, which is what puts it into the favorites  listing. For a file that is not marked it is null rather than false. | [optional] |
-| **fileEntryType** | [**AiFileEntryType**](#model-aifileentrytype) | Tells a folder from a file, and so which of the two shapes the rest of the object has. A room is reported as a  folder here. | [optional] [enum: 1, 2] |
+| **fileEntryType** | [**AiFileEntryType**](#model-aifileentrytype) | Tells a folder from a file, and so which of the two shapes the rest of the object has. A room is reported as a  folder here. | [optional] [enum: `1`, `2`] |
 | **id** | **Integer** (int32) | The identifier to pass back to the other operations of this entry. It is a number for storage on the portal  and a string for a connected third-party account, and it is unique only within its own kind, so files and  folders may carry the same value. | [optional] |
 | **rootFolderId** | **Integer** (int32) | The section the entry ultimately lies in, as an identifier that can be listed like any other folder. For an  entry inside a room this is the rooms section, not the room. | [optional] |
 | **originId** | **Integer** (int32) | The folder the entry was deleted from, which is where restoring it puts it back. It is left out of the answer  unless the entry is in the trash. | [optional] |
@@ -4707,16 +4707,16 @@ One background file operation of the caller, as it stood when the answer was bui
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **id** | **String** | The identifier of the operation, the one to pass to `PUT api/2.0/files/fileops/terminate/{id}` to stop it.  Operations belong to the account that started them, so an identifier of somebody else is never listed here. | [required] [example: a1f4c9b2-3d8e-4f77-9b16-2c5de8f0a913] [nullable] |
-| **Operation** | [**AiFileOperationType**](#model-aifileoperationtype) | What the operation does with the entries, which also decides what else is reported: only a download fills  `url`, and a deletion leaves `files` and `folders` empty. | [required] [enum: 0, 1, 2, 3, 4, 5, 6, 7] |
-| **progress** | **Integer** (int32) | How far the operation has come, from 0 to 100. Reaching 100 only means it stopped; whether it did what it was  asked for is told by `error`. | [required] [example: 100] |
-| **error** | **String** | The reason the operation could not finish its work, in the language of the request. Empty when nothing went  wrong, which is the only way to tell a successful operation from a failed one. | [required] [example: Folder not found.] [nullable] |
-| **processed** | **String** | How many entries the operation has handled so far, written as a decimal number in a string. It counts items,  not percent, and stays behind `progress` on operations that walk into subfolders. | [required] [example: 12] [nullable] |
-| **finished** | **Boolean** | Whether the operation has stopped running. A finished operation is reported once and then dropped, so the next  read of the operation list no longer contains it. | [required] [example: true] |
-| **url** | **URI** (uri) | The address the packed archive can be downloaded from once a bulk download has finished. Empty for every other  kind of operation. | [optional] [example: https://portal.example.com/filehandler.ashx?action=bulk] [nullable] |
-| **files** | [**List**](#model-aifileentrybasedto) | The files the operation produced or moved, in the order it wrote them down. Empty while nothing has been  written yet and for a deletion, which reports no entries at all. | [optional] [example: [\{id=10, title=document.docx\}]] [nullable] |
-| **folders** | [**List**](#model-aifileentrybasedto) | The folders the operation produced or moved, in the order it wrote them down. Empty while nothing has been  written yet and for a deletion. | [optional] [example: [\{id=20, title=Reports\}]] [nullable] |
-| **status** | [**AiDistributedTaskStatus**](#model-aidistributedtaskstatus) | The state of the background task behind the operation, which tells a task that was cancelled or that crashed  from one that ran to its end. | [optional] [enum: 0, 1, 2, 3, 4] |
+| **id** | **String** | The identifier of the operation, the one to pass to `PUT api/2.0/files/fileops/terminate/{id}` to stop it.  Operations belong to the account that started them, so an identifier of somebody else is never listed here. | [required] [example: `a1f4c9b2-3d8e-4f77-9b16-2c5de8f0a913`] [nullable] |
+| **Operation** | [**AiFileOperationType**](#model-aifileoperationtype) | What the operation does with the entries, which also decides what else is reported: only a download fills  `url`, and a deletion leaves `files` and `folders` empty. | [required] [enum: `0`, `1`, `2`, `3`, `4`, `5`, `6`, `7`] |
+| **progress** | **Integer** (int32) | How far the operation has come, from 0 to 100. Reaching 100 only means it stopped; whether it did what it was  asked for is told by `error`. | [required] [example: `100`] |
+| **error** | **String** | The reason the operation could not finish its work, in the language of the request. Empty when nothing went  wrong, which is the only way to tell a successful operation from a failed one. | [required] [example: `Folder not found.`] [nullable] |
+| **processed** | **String** | How many entries the operation has handled so far, written as a decimal number in a string. It counts items,  not percent, and stays behind `progress` on operations that walk into subfolders. | [required] [example: `12`] [nullable] |
+| **finished** | **Boolean** | Whether the operation has stopped running. A finished operation is reported once and then dropped, so the next  read of the operation list no longer contains it. | [required] [example: `true`] |
+| **url** | **URI** (uri) | The address the packed archive can be downloaded from once a bulk download has finished. Empty for every other  kind of operation. | [optional] [example: `https://portal.example.com/filehandler.ashx?action=bulk`] [nullable] |
+| **files** | [**List**](#model-aifileentrybasedto) | The files the operation produced or moved, in the order it wrote them down. Empty while nothing has been  written yet and for a deletion, which reports no entries at all. | [optional] [example: `[{id=10, title=document.docx}]`] [nullable] |
+| **folders** | [**List**](#model-aifileentrybasedto) | The folders the operation produced or moved, in the order it wrote them down. Empty while nothing has been  written yet and for a deletion. | [optional] [example: `[{id=20, title=Reports}]`] [nullable] |
+| **status** | [**AiDistributedTaskStatus**](#model-aidistributedtaskstatus) | The state of the background task behind the operation, which tells a task that was cancelled or that crashed  from one that ran to its end. | [optional] [enum: `0`, `1`, `2`, `3`, `4`] |
 
 
 ### Model AiFileOperationType
@@ -4768,14 +4768,14 @@ One page of the contents of a folder or of a section: its entries split into fil
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **files** | [**List**](#model-aifileentrybasedto) | The file entries of this page. It is empty when the folder holds no files, when the filters matched none of  them, and in the sections that list rooms only. | [optional] [example: [\{id=10, title=document.docx\}]] [nullable] |
-| **folders** | [**List**](#model-aifileentrybasedto) | The folder entries of this page. In a section of rooms these entries are the rooms themselves, which is where  their type, tags, logo and quota are read from. | [optional] [example: [\{id=20, title=My Folder\}]] [nullable] |
+| **files** | [**List**](#model-aifileentrybasedto) | The file entries of this page. It is empty when the folder holds no files, when the filters matched none of  them, and in the sections that list rooms only. | [optional] [example: `[{id=10, title=document.docx}]`] [nullable] |
+| **folders** | [**List**](#model-aifileentrybasedto) | The folder entries of this page. In a section of rooms these entries are the rooms themselves, which is where  their type, tags, logo and quota are read from. | [optional] [example: `[{id=20, title=My Folder}]`] [nullable] |
 | **current** | [**AiFolderDtoInteger**](#model-aifolderdtointeger) | The folder or section the page was read from, with its own title, type and access rights. It describes the  container, not the entries, and is filled in even when the page is empty. | [optional] |
 | **pathParts** | **oas_any_type_not_mapped** |  | [required] [nullable] |
-| **startIndex** | **Integer** (int32) | The position of the first entry of this page in the whole result, echoing the requested start index. Add the  number of entries received to it to ask for the next page. | [optional] [example: 0] |
-| **count** | **Integer** (int32) | How many entries this page carries, files and folders together. A page shorter than the requested size means  the result is exhausted. | [optional] [example: 4] |
-| **total** | **Integer** (int32) | How many entries matched before paging was applied, across the whole folder. Page until the start index plus  the entries received reaches it. | [required] [example: 4] |
-| **new** | **Integer** (int32) | How many entries of this folder are marked as new for the caller. It is 0 for every listing when the account  has switched the new-item badges off, so a zero here does not prove that nothing has changed. | [optional] [example: 0] |
+| **startIndex** | **Integer** (int32) | The position of the first entry of this page in the whole result, echoing the requested start index. Add the  number of entries received to it to ask for the next page. | [optional] [example: `0`] |
+| **count** | **Integer** (int32) | How many entries this page carries, files and folders together. A page shorter than the requested size means  the result is exhausted. | [optional] [example: `4`] |
+| **total** | **Integer** (int32) | How many entries matched before paging was applied, across the whole folder. Page until the start index plus  the entries received reaches it. | [required] [example: `4`] |
+| **new** | **Integer** (int32) | How many entries of this folder are marked as new for the caller. It is 0 for every listing when the account  has switched the new-item badges off, so a zero here does not prove that nothing has changed. | [optional] [example: `0`] |
 
 
 ### Model AiFolderContentIntegerWrapper
@@ -4796,7 +4796,7 @@ The folder, with the fields that only a room carries filled in when the folder i
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **title** | **String** | The name shown for the entry. For a file it carries the extension, which is how the format is recognised, and  for a room it is the room name. | [optional] |
-| **access** | [**AiFileShare**](#model-aifileshare) | The level the calling account holds on this entry, resolved from its own rights, the groups it belongs to and  any link it came in through. It is the level itself, not what the account may do with it - the action flags  below answer that. | [optional] [enum: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] |
+| **access** | [**AiFileShare**](#model-aifileshare) | The level the calling account holds on this entry, resolved from its own rights, the groups it belongs to and  any link it came in through. It is the level itself, not what the account may do with it - the action flags  below answer that. | [optional] [enum: `0`, `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`] |
 | **sharedBy** | [**AiEmployeeDto**](#model-aiemployeedto) | Who gave the calling account the access it is using. It is filled in only while the entry is being read  through a share, and never for a caller without an account. | [optional] |
 | **ownedBy** | [**AiEmployeeDto**](#model-aiemployeedto) | Who owns the place the entry is shared from - the creator of the room it lies in, or of the personal section  that holds it. It is filled in only while the entry is being read through a share, and never for a caller  without an account. | [optional] |
 | **shared** | **Boolean** | Whether at least one external link exists for the entry, whichever kind. It says nothing about accounts and  groups - those are counted by the flag for members below. | [optional] |
@@ -4808,15 +4808,15 @@ The folder, with the fields that only a room carries filled in when the folder i
 | **createdBy** | [**AiEmployeeDto**](#model-aiemployeedto) | Who created the entry. It is null for a caller without an account, who is told nothing about the portal's  members. | [optional] |
 | **updated** | [**AiApiDateTime**](#model-aiapidatetime) | When the entry last changed, written with the offset of the portal's time zone. It is never reported as  earlier than the creation moment, so the two can be compared safely. | [optional] |
 | **autoDelete** | [**AiApiDateTime**](#model-aiapidatetime) | When the entry will disappear on its own, written with the offset of the portal's time zone. It is filled in  only where a removal is actually scheduled - something in the trash while the portal cleans it up  automatically, or a guest's own documents - so a null means nothing is scheduled rather than that the entry is  permanent. | [optional] |
-| **rootFolderType** | [**AiFolderType**](#model-aifoldertype) | The section the entry ultimately belongs to, which is what tells a personal document from one inside a room,  from a template and from something in the trash or the archive. | [optional] [enum: 0, 1, 2, 3, 5, 6, 8, 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36] |
-| **parentRoomType** | [**AiFolderType**](#model-aifoldertype) | The kind of room the entry lies in, which decides what the room allows - filling forms, public links,  indexing. It is null for an entry that is not inside a room at all. | [optional] [enum: 0, 1, 2, 3, 5, 6, 8, 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36] |
+| **rootFolderType** | [**AiFolderType**](#model-aifoldertype) | The section the entry ultimately belongs to, which is what tells a personal document from one inside a room,  from a template and from something in the trash or the archive. | [optional] [enum: `0`, `1`, `2`, `3`, `5`, `6`, `8`, `10`, `11`, `12`, `13`, `14`, `15`, `16`, `19`, `20`, `21`, `22`, `25`, `26`, `27`, `28`, `29`, `30`, `31`, `32`, `33`, `34`, `35`, `36`] |
+| **parentRoomType** | [**AiFolderType**](#model-aifoldertype) | The kind of room the entry lies in, which decides what the room allows - filling forms, public links,  indexing. It is null for an entry that is not inside a room at all. | [optional] [enum: `0`, `1`, `2`, `3`, `5`, `6`, `8`, `10`, `11`, `12`, `13`, `14`, `15`, `16`, `19`, `20`, `21`, `22`, `25`, `26`, `27`, `28`, `29`, `30`, `31`, `32`, `33`, `34`, `35`, `36`] |
 | **updatedBy** | [**AiEmployeeDto**](#model-aiemployeedto) | Who changed the entry last. It is null for a caller without an account. | [optional] |
 | **providerItem** | **Boolean** | Set when the entry is stored on a connected third-party account rather than on the portal, and null when it is  stored on the portal. Such an entry is identified by a string rather than a number, and some operations skip  it. | [optional] |
 | **providerKey** | **String** | Which third-party service holds the entry, matching the keys accepted by the third-party operations. It is  null for an entry stored on the portal. | [optional] |
 | **providerId** | **Integer** (int32) | The connected account the entry comes from, for telling apart two connections to the same service. It is null  for an entry stored on the portal. | [optional] |
 | **order** | **String** | The place of the entry in a room where the members arrange the content themselves, given as the position of  the entry preceded by the positions of the folders leading to it, separated by dots. It is empty when nothing  has been arranged. | [optional] |
 | **isFavorite** | **Boolean** | Set when the calling account has marked the entry as a favorite, which is what puts it into the favorites  listing. For a file that is not marked it is null rather than false. | [optional] |
-| **fileEntryType** | [**AiFileEntryType**](#model-aifileentrytype) | Tells a folder from a file, and so which of the two shapes the rest of the object has. A room is reported as a  folder here. | [optional] [enum: 1, 2] |
+| **fileEntryType** | [**AiFileEntryType**](#model-aifileentrytype) | Tells a folder from a file, and so which of the two shapes the rest of the object has. A room is reported as a  folder here. | [optional] [enum: `1`, `2`] |
 | **id** | **Integer** (int32) | The identifier to pass back to the other operations of this entry. It is a number for storage on the portal  and a string for a connected third-party account, and it is unique only within its own kind, so files and  folders may carry the same value. | [optional] |
 | **rootFolderId** | **Integer** (int32) | The section the entry ultimately lies in, as an identifier that can be listed like any other folder. For an  entry inside a room this is the rooms section, not the room. | [optional] |
 | **originId** | **Integer** (int32) | The folder the entry was deleted from, which is where restoring it puts it back. It is left out of the answer  unless the entry is in the trash. | [optional] |
@@ -4840,13 +4840,13 @@ The folder, with the fields that only a room carries filled in when the folder i
 | **tags** | **List** | The names of the tags attached to the room. Empty for a folder that is not a room, since only rooms carry  tags, and the names are the ones from the portal tag catalogue. | [optional] [nullable] |
 | **logo** | [**AiLogo**](#model-ailogo) | The addresses of the room logo in four sizes, together with the colour and the built-in cover that are drawn  when no logo was uploaded. A room without a logo answers with four empty addresses rather than with null, and  the field is null for a folder that is not a room. | [optional] |
 | **pinned** | **Boolean** | Whether the caller pinned the room to the top of their own room list. Pinning is personal and is lost when the  room is archived. | [optional] |
-| **roomType** | [**AiRoomType**](#model-airoomtype) | The kind of the room, which decides the default access rules of its members. Null for a folder that is not a  room. | [optional] [enum: 1, 2, 5, 6, 8, 9] |
+| **roomType** | [**AiRoomType**](#model-airoomtype) | The kind of the room, which decides the default access rules of its members. Null for a folder that is not a  room. | [optional] [enum: `1`, `2`, `5`, `6`, `8`, `9`] |
 | **private** | **Boolean** | Whether the room is a private one, which limits it to the accounts invited into it and needs encryption keys  set up for each of them. | [optional] |
 | **indexing** | **Boolean** | Whether the contents of the room are kept in an explicit numbered order, the one reported as `order` on each  entry, instead of being left to the sorting the reader asks for. | [optional] |
 | **denyDownload** | **Boolean** | Whether downloading and printing the contents of the room is forbidden, which leaves its members with viewing  and editing in the editor. | [optional] |
 | **lifetime** | [**AiRoomDataLifetimeDto**](#model-airoomdatalifetimedto) | The rule by which the files of the room are removed once they grow old. Null when the room has no such rule,  which is also what is reported after the rule is switched off, because switching it off erases it. | [optional] |
 | **watermark** | [**AiWatermarkDto**](#model-aiwatermarkdto) | The watermark stamped over the documents of the room while they are viewed and printed. Null when the room has  no watermark, and for every folder that is not a room. | [optional] |
-| **type** | [**AiFolderType**](#model-aifoldertype) | The part the folder plays inside its room: one of the service folders of the form-filling flow, or the  knowledge and result storages of an AI room. It stays null for an ordinary folder and for the room itself, so  it does not describe folders in general. | [optional] [enum: 0, 1, 2, 3, 5, 6, 8, 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36] |
+| **type** | [**AiFolderType**](#model-aifoldertype) | The part the folder plays inside its room: one of the service folders of the form-filling flow, or the  knowledge and result storages of an AI room. It stays null for an ordinary folder and for the room itself, so  it does not describe folders in general. | [optional] [enum: `0`, `1`, `2`, `3`, `5`, `6`, `8`, `10`, `11`, `12`, `13`, `14`, `15`, `16`, `19`, `20`, `21`, `22`, `25`, `26`, `27`, `28`, `29`, `30`, `31`, `32`, `33`, `34`, `35`, `36`] |
 | **inRoom** | **Boolean** | Whether the caller holds the room through an invitation of their own: true for the account that created it and  for a member invited personally, false when the access comes from a group they belong to, and null for a  folder that is not a room. | [optional] [nullable] |
 | **quotaLimit** | **Long** (int64) | How much space the files of the room may take, in bytes. It is the limit set on this room, or the portal  default for rooms when none was set. Null when the tariff of the portal does not count room statistics, when  room quotas are switched off, when the room lies in the archive or the trash, or when the caller may only read  it. | [optional] [nullable] |
 | **isCustomQuota** | **Boolean** | Whether `quotaLimit` is a limit set on this room (true) or the portal default for rooms (false). Null exactly  when `quotaLimit` is null. | [optional] [nullable] |
@@ -4854,7 +4854,7 @@ The folder, with the fields that only a room carries filled in when the folder i
 | **passwordProtected** | **Boolean** | Whether the sharing link the folder was opened through asks for a password that has not been entered yet.  While it is true the contents stay unreadable; send the password to `POST api/2.0/files/share/{key}/password`  first. Null when the folder was not reached through a link. | [optional] [nullable] |
 | **expired** | **Boolean** | Deprecated, read `isLinkExpired` instead: whether the sharing link the folder was opened through has run out  of its lifetime. | [optional] [nullable] |
 | **chatSettings** | [**AiChatSettingsDto**](#model-aichatsettingsdto) | The chat configuration of an AI room. Only the system prompt is reported here, whatever else the room stores,  and the field is null for every folder that is not an AI room. | [optional] |
-| **rootRoomType** | [**AiRoomType**](#model-airoomtype) | The kind of the room the folder lies in. It is filled in only for the folder a folder-contents answer is  about, and only when that room is an AI room, so it is null in every other answer and for every other room  kind. | [optional] [enum: 1, 2, 5, 6, 8, 9] |
+| **rootRoomType** | [**AiRoomType**](#model-airoomtype) | The kind of the room the folder lies in. It is filled in only for the folder a folder-contents answer is  about, and only when that room is an AI room, so it is null in every other answer and for every other room  kind. | [optional] [enum: `1`, `2`, `5`, `6`, `8`, `9`] |
 | **saveFormAsXLSX** | **Boolean** | Whether the answers collected in this form-filling room are also gathered into a spreadsheet next to the  completed copies. Filled in for form-filling rooms only. | [optional] [nullable] |
 | **sendFormToExternalDB** | **Boolean** | Whether the answers collected in this form-filling room are also pushed into the external database configured  for the portal. Filled in for form-filling rooms only. | [optional] [nullable] |
 | **originalFormId** | **Integer** (int32) | The form the completed copies in this folder were filled from, taken from the copy submitted last. Null while  the folder holds no completed copy, and for every folder that does not collect them. | [optional] [nullable] |
@@ -4889,7 +4889,7 @@ Outcome of `createFolder` / `renameFolder` — either the persisted folder or a 
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **success** | **Boolean** | True when the folder was persisted. | [required] [example: true] |
+| **success** | **Boolean** | True when the folder was persisted. | [required] [example: `true`] |
 | **folder** | [**AiPromptFolder**](#model-aipromptfolder) | The persisted folder. Present on success. | [optional] |
 | **error** | [**AiTErrorData**](#model-aiterrordata) | Why the folder was rejected. Present on failure. | [optional] |
 
@@ -4935,9 +4935,9 @@ Per-entry error reported by `PromptsEngine.importBundle`.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **kind** | **String** | `folder` or `prompt`, plus the offending name or id. | [required] [example: prompt] [enum: folder, prompt] |
-| **ref** | **String** | The offending entry - its name or its id. | [required] [example: 33333333-3333-3333-3333-333333333333] |
-| **error** | [**AiTErrorData**](#model-aiterrordata) | Why the entry was rejected. | [required] [example: a prompt of that name already exists] |
+| **kind** | **String** | `folder` or `prompt`, plus the offending name or id. | [required] [example: `prompt`] [enum: `folder`, `prompt`] |
+| **ref** | **String** | The offending entry - its name or its id. | [required] [example: `33333333-3333-3333-3333-333333333333`] |
+| **error** | [**AiTErrorData**](#model-aiterrordata) | Why the entry was rejected. | [required] [example: `a prompt of that name already exists`] |
 
 
 ### Model AiImportMode
@@ -4954,9 +4954,9 @@ Outcome of `PromptsEngine.importBundle`. Either every entry persisted with count
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **success** | **Boolean** | True when the whole bundle was imported. | [required] [example: true] |
+| **success** | **Boolean** | True when the whole bundle was imported. | [required] [example: `true`] |
 | **imported** | [**AiImportResult_imported**](#model-aiimportresultimported) |  | [optional] |
-| **errors** | [**List**](#model-aiimporterror) | What was rejected, per entry. Present on failure - and then nothing was imported. | [optional] [example: []] |
+| **errors** | [**List**](#model-aiimporterror) | What was rejected, per entry. Present on failure - and then nothing was imported. | [optional] [example: `[]`] |
 
 
 ### Model AiImportResult.imported
@@ -4973,11 +4973,11 @@ The room logo information.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **original** | **String** | The original logo. | [required] [example: https://portal.example.com/logo/original.png] [nullable] |
-| **large** | **String** | The large logo. | [required] [example: https://portal.example.com/logo/large.png] [nullable] |
-| **medium** | **String** | The medium logo. | [required] [example: https://portal.example.com/logo/medium.png] [nullable] |
-| **small** | **String** | The small logo. | [required] [example: https://portal.example.com/logo/small.png] [nullable] |
-| **color** | **String** | The logo color. | [optional] [example: #4781D1] [nullable] |
+| **original** | **String** | The original logo. | [required] [example: `https://portal.example.com/logo/original.png`] [nullable] |
+| **large** | **String** | The large logo. | [required] [example: `https://portal.example.com/logo/large.png`] [nullable] |
+| **medium** | **String** | The medium logo. | [required] [example: `https://portal.example.com/logo/medium.png`] [nullable] |
+| **small** | **String** | The small logo. | [required] [example: `https://portal.example.com/logo/small.png`] [nullable] |
+| **color** | **String** | The logo color. | [optional] [example: `#4781D1`] [nullable] |
 | **cover** | [**AiLogoCover**](#model-ailogocover) | The logo cover. | [optional] |
 
 
@@ -4986,8 +4986,8 @@ The logo cover information.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **id** | **String** | The logo cover ID. | [required] [example: default_cover] [nullable] |
-| **data** | **String** | The logo cover data. | [required] [example: base64-image-data...] [nullable] |
+| **id** | **String** | The logo cover ID. | [required] [example: `default_cover`] [nullable] |
+| **data** | **String** | The logo cover data. | [required] [example: `base64-image-data...`] [nullable] |
 
 
 ### Model AiModel
@@ -4995,12 +4995,12 @@ AI model metadata. Describes a single model available from a provider.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **id** | **String** | Model identifier as used by the provider API (e.g. `gpt-4o`, `claude-sonnet-4-20250514`). | [required] [example: gpt-4o] |
-| **name** | **String** | Human-readable model name for display in the UI. | [required] [example: GPT-4o] |
-| **provider** | [**AiProviderType**](#model-aiprovidertype) | Provider that offers this model. | [required] [example: openai] |
-| **reasoning** | **Boolean** | Whether this model supports extended thinking / chain-of-thought reasoning. | [optional] [example: false] |
+| **id** | **String** | Model identifier as used by the provider API (e.g. `gpt-4o`, `claude-sonnet-4-20250514`). | [required] [example: `gpt-4o`] |
+| **name** | **String** | Human-readable model name for display in the UI. | [required] [example: `GPT-4o`] |
+| **provider** | [**AiProviderType**](#model-aiprovidertype) | Provider that offers this model. | [required] [example: `openai`] |
+| **reasoning** | **Boolean** | Whether this model supports extended thinking / chain-of-thought reasoning. | [optional] [example: `false`] |
 | **reasoningSupport** | [**AiReasoningSupport**](#model-aireasoningsupport) | What the model can do with extended thinking, when the provider's catalogue says so (OpenRouter and the ONLYOFFICE route report a per-model `reasoning` object). Copied onto the profile at save time; absent, the widget falls back to the provider's id-based table. | [optional] |
-| **capabilities** | **BigDecimal** | Bitmask of model capabilities (Chat, Image, Vision, Tools, etc.). Used to filter models per `ActionType`. | [optional] [example: 7] |
+| **capabilities** | **BigDecimal** | Bitmask of model capabilities (Chat, Image, Vision, Tools, etc.). Used to filter models per `ActionType`. | [optional] [example: `7`] |
 
 
 ### Model AiNewItemsAgentNewItemsArrayWrapper
@@ -5030,7 +5030,7 @@ One `chat.completion.chunk` of an OpenAI-compatible streaming response. Only the
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **id** | **String** | The completion identifier, stable across every chunk of one response. | [required] |
-| **object** | **String** | Always `chat.completion.chunk`. | [required] [enum: chat.completion.chunk] |
+| **object** | **String** | Always `chat.completion.chunk`. | [required] [enum: `chat.completion.chunk`] |
 | **created** | **BigDecimal** | When the completion started, in Unix seconds. | [required] |
 | **model** | **String** | The model that produced the completion - the resolved profile's model. | [required] |
 | **choices** | [**List**](#model-aiopenaichunkchoice) | The choices carried by this chunk. This service emits exactly one. | [required] |
@@ -5041,7 +5041,7 @@ The incremental part of one choice - what this chunk adds to the assistant messa
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **role** | **String** | Sent on the first chunk only, always `assistant`. | [optional] [enum: assistant] |
+| **role** | **String** | Sent on the first chunk only, always `assistant`. | [optional] [enum: `assistant`] |
 | **content** | **String** | The text this chunk appends. Null when the chunk carries no text. | [optional] [nullable] |
 | **tool\_calls** | [**List**](#model-aiopenaitoolcalldelta) | The tool calls the model requested, emitted in place of text. | [optional] |
 
@@ -5053,7 +5053,7 @@ One choice of a streaming completion, carrying the part this chunk adds.
 |------------ | ------------- | ------------- | -------------|
 | **index** | **BigDecimal** | The zero-based position of the choice. This service emits a single choice, so always 0. | [required] |
 | **delta** | [**AiOpenAIChoiceDelta**](#model-aiopenaichoicedelta) | What this chunk adds to the choice. | [required] |
-| **finish\_reason** | [**AiOpenAIFinishReason**](#model-aiopenaifinishreason) | Why the completion stopped, or null while it is still streaming. | [required] [enum: stop, length, tool_calls, content_filter, null] [nullable] |
+| **finish\_reason** | [**AiOpenAIFinishReason**](#model-aiopenaifinishreason) | Why the completion stopped, or null while it is still streaming. | [required] [enum: `stop`, `length`, `tool_calls`, `content_filter`, `null`] [nullable] |
 
 
 ### Model AiOpenAIFinishReason
@@ -5074,7 +5074,7 @@ A chunk or the terminal error envelope emitted on a failed stream.
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **id** | **String** | The completion identifier, stable across every chunk of one response. | [required] |
-| **object** | **String** | Always `chat.completion.chunk`. | [required] [enum: chat.completion.chunk] |
+| **object** | **String** | Always `chat.completion.chunk`. | [required] [enum: `chat.completion.chunk`] |
 | **created** | **BigDecimal** | When the completion started, in Unix seconds. | [required] |
 | **model** | **String** | The model that produced the completion - the resolved profile's model. | [required] |
 | **choices** | [**List**](#model-aiopenaichunkchoice) | The choices carried by this chunk. This service emits exactly one. | [required] |
@@ -5107,7 +5107,7 @@ The incremental part of one tool call the model requested.
 |------------ | ------------- | ------------- | -------------|
 | **index** | **BigDecimal** | The zero-based position of the tool call within the message. | [required] |
 | **id** | **String** | The tool call identifier, quoted back when its result is submitted. | [optional] |
-| **type** | **String** | Always `function` - the only tool kind the API defines. | [optional] [enum: function] |
+| **type** | **String** | Always `function` - the only tool kind the API defines. | [optional] [enum: `function`] |
 | **function** | [**AiOpenAIToolCallDelta_function**](#model-aiopenaitoolcalldeltafunction) |  | [optional] |
 
 
@@ -5135,22 +5135,22 @@ Complete AI provider + model configuration saved by the user. Profiles are the p
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **id** | **String** | Unique profile identifier (UUID). | [required] [example: 00000000-0000-0000-0000-000000000000] |
-| **name** | **String** | User-defined profile display name. | [required] [example: OpenAI GPT-4o] |
-| **providerType** | [**AiProviderType**](#model-aiprovidertype) | Provider type for this profile. Use `external` to delegate all HTTP transport to `PlatformAdapter.externalFetch` while reusing an existing provider's response parser — see `Profile.basedOn` for the format selector. | [required] [example: openai] |
-| **basedOn** | [**AiBuiltinProviderType**](#model-aibuiltinprovidertype) | Selects the response-format parser used by the `external` provider. Ignored for any other `providerType`.  Supported values are `openai`, `anthropic`, `mistral` and `openrouter`. Remaining values (`genai`, `stabilityai`, …) are accepted by the type but not yet implemented; passing one raises an error at request time. | [optional] [example: openai] [enum: anthropic, ollama, openai, openaicompatible, together, openrouter, genai, deepseek, xai, lm-studio, mistral, groq, zhipu, stabilityai, gpt4all, onlyoffice, external] |
-| **baseUrl** | **String** | Base URL of the provider API. | [required] [example: https://api.openai.com/v1] |
-| **key** | **String** | API key or token. Optional for local providers. | [optional] [example: sk-your-provider-api-key] |
-| **headers** | **Map** | Extra HTTP headers sent with every request to this provider. Merged into the SDK client's default headers; an explicit `Authorization` here wins over the one derived from `key`. Honoured by the OpenAI-family providers. | [optional] [example: \{X-Organization=acme\}] |
-| **modelId** | **String** | Selected model ID within this provider. | [required] [example: gpt-4o] |
-| **reasoning** | **Boolean** | Whether extended thinking is enabled for this profile's model. | [optional] [example: false] |
+| **id** | **String** | Unique profile identifier (UUID). | [required] [example: `00000000-0000-0000-0000-000000000000`] |
+| **name** | **String** | User-defined profile display name. | [required] [example: `OpenAI GPT-4o`] |
+| **providerType** | [**AiProviderType**](#model-aiprovidertype) | Provider type for this profile. Use `external` to delegate all HTTP transport to `PlatformAdapter.externalFetch` while reusing an existing provider's response parser — see `Profile.basedOn` for the format selector. | [required] [example: `openai`] |
+| **basedOn** | [**AiBuiltinProviderType**](#model-aibuiltinprovidertype) | Selects the response-format parser used by the `external` provider. Ignored for any other `providerType`.  Supported values are `openai`, `anthropic`, `mistral` and `openrouter`. Remaining values (`genai`, `stabilityai`, …) are accepted by the type but not yet implemented; passing one raises an error at request time. | [optional] [example: `openai`] [enum: `anthropic`, `ollama`, `openai`, `openaicompatible`, `together`, `openrouter`, `genai`, `deepseek`, `xai`, `lm-studio`, `mistral`, `groq`, `zhipu`, `stabilityai`, `gpt4all`, `onlyoffice`, `external`] |
+| **baseUrl** | **String** | Base URL of the provider API. | [required] [example: `https://api.openai.com/v1`] |
+| **key** | **String** | API key or token. Optional for local providers. | [optional] [example: `sk-your-provider-api-key`] |
+| **headers** | **Map** | Extra HTTP headers sent with every request to this provider. Merged into the SDK client's default headers; an explicit `Authorization` here wins over the one derived from `key`. Honoured by the OpenAI-family providers. | [optional] [example: `{X-Organization=acme}`] |
+| **modelId** | **String** | Selected model ID within this provider. | [required] [example: `gpt-4o`] |
+| **reasoning** | **Boolean** | Whether extended thinking is enabled for this profile's model. | [optional] [example: `false`] |
 | **reasoningSupport** | [**AiReasoningSupport**](#model-aireasoningsupport) | Extended-thinking capabilities of the selected model as reported by the provider's catalogue at save time (see `Model.reasoningSupport`). When present the composer's Effort row follows it exactly; when absent the provider's id-based table answers. Hosts persist it with the rest of the profile. | [optional] |
-| **capabilities** | **BigDecimal** | Bitmask of capabilities supported by the selected model. | [optional] [example: 7] |
-| **canUseTool** | **Boolean** | Result of the live tool-capability probe performed at create time and on changes to `modelId` / `providerType` / `baseUrl`. `undefined` means the probe has never run for this profile (legacy record). | [optional] [example: true] |
-| **useResponsesApi** | **Boolean** | Result of the live Responses-API probe (parallel to `canUseTool`). `true` means the model speaks `/v1/responses` and the OpenAI provider must route through `client.responses.create` — required for gpt-5+ reasoning models that reject `reasoning_effort` together with `tools` on `/v1/chat/completions`. Probed at create time and whenever `modelId` / `providerType` / `baseUrl` change. `undefined` means the probe never ran (legacy record) — readers treat that as `false`. | [optional] [example: false] |
-| **isCloudProvider** | **Boolean** | Whether this profile uses a cloud-hosted provider (e.g. ONLYOFFICE DocSpace). | [optional] [example: true] |
-| **useProxy** | **Boolean** | Route every provider request through the host's `fetchProxy` instead of the global `fetch`. Useful when the host runs the widget in a sandbox without direct network access (CORS, custom auth, etc.). Has no effect when the `PlatformAdapter.fetchProxy` is not configured. | [optional] [example: false] |
-| **createdAt** | **BigDecimal** | Creation timestamp (ms since epoch). Used to sort the AI models list newest-first. | [optional] [example: 1767225600000] |
+| **capabilities** | **BigDecimal** | Bitmask of capabilities supported by the selected model. | [optional] [example: `7`] |
+| **canUseTool** | **Boolean** | Result of the live tool-capability probe performed at create time and on changes to `modelId` / `providerType` / `baseUrl`. `undefined` means the probe has never run for this profile (legacy record). | [optional] [example: `true`] |
+| **useResponsesApi** | **Boolean** | Result of the live Responses-API probe (parallel to `canUseTool`). `true` means the model speaks `/v1/responses` and the OpenAI provider must route through `client.responses.create` — required for gpt-5+ reasoning models that reject `reasoning_effort` together with `tools` on `/v1/chat/completions`. Probed at create time and whenever `modelId` / `providerType` / `baseUrl` change. `undefined` means the probe never ran (legacy record) — readers treat that as `false`. | [optional] [example: `false`] |
+| **isCloudProvider** | **Boolean** | Whether this profile uses a cloud-hosted provider (e.g. ONLYOFFICE DocSpace). | [optional] [example: `true`] |
+| **useProxy** | **Boolean** | Route every provider request through the host's `fetchProxy` instead of the global `fetch`. Useful when the host runs the widget in a sandbox without direct network access (CORS, custom auth, etc.). Has no effect when the `PlatformAdapter.fetchProxy` is not configured. | [optional] [example: `false`] |
+| **createdAt** | **BigDecimal** | Creation timestamp (ms since epoch). Used to sort the AI models list newest-first. | [optional] [example: `1767225600000`] |
 
 
 ### Model AiProfileMutationResult
@@ -5158,7 +5158,7 @@ Outcome of `create` / `update` — either a success carrying the persisted profi
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **success** | **Boolean** | True when the profile was persisted. | [required] [example: true] |
+| **success** | **Boolean** | True when the profile was persisted. | [required] [example: `true`] |
 | **profile** | [**AiProfile**](#model-aiprofile) | The persisted profile. Present on success. | [optional] |
 | **error** | [**AiTErrorData**](#model-aiterrordata) | Why the profile was rejected - the name check or the provider credential check. Present on failure. | [optional] |
 
@@ -5168,12 +5168,12 @@ Saved prompt template that users can quickly insert into the chat.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **id** | **String** | Unique prompt identifier (UUID). | [required] [example: 33333333-3333-3333-3333-333333333333] |
-| **name** | **String** | Prompt display name shown in the prompt picker. | [required] [example: Contract summary] |
-| **text** | **String** | Prompt template text. May contain placeholder tokens. | [required] [example: Summarise the key obligations and dates in the attached contract.] |
-| **folderId** | **String** | Optional parent folder ID. `undefined` means the prompt is at the root level. | [optional] [example: 44444444-4444-4444-4444-444444444444] |
-| **createdAt** | **BigDecimal** | Timestamp (ms since epoch) when the prompt was created. | [required] [example: 1767225600000] |
-| **updatedAt** | **BigDecimal** | Timestamp (ms since epoch) of the last prompt modification. | [required] [example: 1767225600000] |
+| **id** | **String** | Unique prompt identifier (UUID). | [required] [example: `33333333-3333-3333-3333-333333333333`] |
+| **name** | **String** | Prompt display name shown in the prompt picker. | [required] [example: `Contract summary`] |
+| **text** | **String** | Prompt template text. May contain placeholder tokens. | [required] [example: `Summarise the key obligations and dates in the attached contract.`] |
+| **folderId** | **String** | Optional parent folder ID. `undefined` means the prompt is at the root level. | [optional] [example: `44444444-4444-4444-4444-444444444444`] |
+| **createdAt** | **BigDecimal** | Timestamp (ms since epoch) when the prompt was created. | [required] [example: `1767225600000`] |
+| **updatedAt** | **BigDecimal** | Timestamp (ms since epoch) of the last prompt modification. | [required] [example: `1767225600000`] |
 
 
 ### Model AiPromptBundle
@@ -5181,9 +5181,9 @@ Versioned, self-contained bundle of every saved prompt and folder. Stable wire f
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **version** | **BigDecimal** | The bundle format version, so an import can migrate an older export. | [required] [example: 1] [enum: 1] |
-| **folders** | [**List**](#model-aipromptfolder) | Every exported prompt folder. | [required] [example: []] |
-| **prompts** | [**List**](#model-aiprompt) | Every exported prompt. | [required] [example: []] |
+| **version** | **BigDecimal** | The bundle format version, so an import can migrate an older export. | [required] [example: `1`] [enum: `1`] |
+| **folders** | [**List**](#model-aipromptfolder) | Every exported prompt folder. | [required] [example: `[]`] |
+| **prompts** | [**List**](#model-aiprompt) | Every exported prompt. | [required] [example: `[]`] |
 
 
 ### Model AiPromptFolder
@@ -5191,10 +5191,10 @@ Folder for organizing saved prompts.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **id** | **String** | Unique folder identifier (UUID). | [required] [example: 44444444-4444-4444-4444-444444444444] |
-| **name** | **String** | Folder display name. | [required] [example: Contract review] |
-| **createdAt** | **BigDecimal** | Timestamp (ms since epoch) when the folder was created. | [required] [example: 1767225600000] |
-| **updatedAt** | **BigDecimal** | Timestamp (ms since epoch) of the last folder modification. | [required] [example: 1767225600000] |
+| **id** | **String** | Unique folder identifier (UUID). | [required] [example: `44444444-4444-4444-4444-444444444444`] |
+| **name** | **String** | Folder display name. | [required] [example: `Contract review`] |
+| **createdAt** | **BigDecimal** | Timestamp (ms since epoch) when the folder was created. | [required] [example: `1767225600000`] |
+| **updatedAt** | **BigDecimal** | Timestamp (ms since epoch) of the last folder modification. | [required] [example: `1767225600000`] |
 
 
 ### Model AiPromptMutationResult
@@ -5202,7 +5202,7 @@ Outcome of `create` / `update` / `move` on a prompt — either the persisted pro
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **success** | **Boolean** | True when the prompt was persisted. | [required] [example: true] |
+| **success** | **Boolean** | True when the prompt was persisted. | [required] [example: `true`] |
 | **prompt** | [**AiPrompt**](#model-aiprompt) | The persisted prompt. Present on success. | [optional] |
 | **error** | [**AiTErrorData**](#model-aiterrordata) | Why the prompt was rejected. Present on failure. | [optional] |
 
@@ -5230,7 +5230,7 @@ What one model can do with extended thinking. Providers describe each model thro
 | **thinks** | **Boolean** | Whether the model can think at all. False hides the whole control. | [required] |
 | **canDisable** | **Boolean** | Whether `off` really turns thinking off. False means the model thinks always and off only drops to its lowest depth (or leaves the default depth, where there is no knob). | [required] |
 | **depths** | [**List**](#model-aireasoningdepth) | Depths the model distinguishes, lowest first. Empty when thinking is an on/off switch with no depth (or the model doesn't think). A level not listed is clamped to the nearest one — see `clampReasoningLevel`. | [required] |
-| **defaultDepth** | [**AiReasoningDepth**](#model-aireasoningdepth) | The depth the model runs at when nothing asks for one — what a stored `off` means on a model that cannot be switched off. Known only where a catalogue reports it (OpenRouter's `default_effort`); otherwise `DEFAULT_REASONING_LEVEL` clamped to `depths` is assumed. | [optional] [enum: low, medium, high, max] |
+| **defaultDepth** | [**AiReasoningDepth**](#model-aireasoningdepth) | The depth the model runs at when nothing asks for one — what a stored `off` means on a model that cannot be switched off. Known only where a catalogue reports it (OpenRouter's `default_effort`); otherwise `DEFAULT_REASONING_LEVEL` clamped to `depths` is assumed. | [optional] [enum: `low`, `medium`, `high`, `max`] |
 
 
 ### Model AiResolvedAssignment
@@ -5247,10 +5247,10 @@ The rule by which the files of a room are removed once they have been lying in i
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **deletePermanently** | **Boolean** | Decides what happens to a file that has grown too old: it is erased outright, or it is moved to the trash of  the account that created the room, from where it can still be brought back. | [optional] [example: false] |
-| **period** | [**AiRoomDataLifetimePeriod**](#model-airoomdatalifetimeperiod) | The unit the age is counted in. Months and years are counted as calendar ones, so the same number of them  covers a different number of days depending on when the clean-up runs. | [optional] [enum: 0, 1, 2] |
-| **value** | **Integer** (int32) | How many periods a file may stay in the room, counted from the moment it was last changed rather than from the  moment the rule was set. Files that are already older than this are removed by the next clean-up. | [optional] [example: 12] [min: 1] [max: 999] [nullable] |
-| **enabled** | **Boolean** | Switches the rule on and off. Switching it off erases the rule instead of keeping it aside, so afterwards the  room reports no rule at all and the other three values have to be sent again to bring it back. | [optional] [example: true] [nullable] |
+| **deletePermanently** | **Boolean** | Decides what happens to a file that has grown too old: it is erased outright, or it is moved to the trash of  the account that created the room, from where it can still be brought back. | [optional] [example: `false`] |
+| **period** | [**AiRoomDataLifetimePeriod**](#model-airoomdatalifetimeperiod) | The unit the age is counted in. Months and years are counted as calendar ones, so the same number of them  covers a different number of days depending on when the clean-up runs. | [optional] [enum: `0`, `1`, `2`] |
+| **value** | **Integer** (int32) | How many periods a file may stay in the room, counted from the moment it was last changed rather than from the  moment the rule was set. Files that are already older than this are removed by the next clean-up. | [optional] [example: `12`] [min: 1] [max: 999] [nullable] |
+| **enabled** | **Boolean** | Switches the rule on and off. Switching it off erases the rule instead of keeping it aside, so afterwards the  room reports no rule at all and the other three values have to be sent again to bring it back. | [optional] [example: `true`] [nullable] |
 
 
 ### Model AiRoomDataLifetimePeriod
@@ -5279,7 +5279,7 @@ Generic success acknowledgement for mutations that return no data.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **success** | **Boolean** | Always true — the mutation completed. | [required] [example: true] |
+| **success** | **Boolean** | Always true — the mutation completed. | [required] [example: `true`] |
 
 
 ### Model AiTErrorData
@@ -5287,7 +5287,7 @@ A field-scoped validation error: which form field was rejected, and why.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **field** | **String** | The rejected field. | [required] [enum: key, url, name] |
+| **field** | **String** | The rejected field. | [required] [enum: `key`, `url`, `name`] |
 | **message** | **String** | The human-readable reason the field was rejected. | [required] |
 
 
@@ -5296,12 +5296,12 @@ Descriptor for a tool exposed by an MCP server.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **name** | **String** | Tool name as registered on the MCP server (e.g. `web_search`, `insert_text`). | [required] [example: docspace_get_folder] |
-| **description** | **String** | Human-readable description shown to the AI model and in the tools list UI. | [required] [example: Read the contents of a DocSpace folder.] |
-| **inputSchema** | **Object** | JSON Schema describing the tool's input parameters. | [required] [example: \{type=object, properties=\{folderId=\{type=string\}\}, required=[folderId]\}] |
-| **enabled** | **Boolean** | Whether this tool is currently enabled. Disabled tools are hidden from the AI model. | [optional] [example: true] |
-| **serverType** | **String** | Server type (MCP server name / host tool group id) this tool belongs to — the key the persisted disabled map is stored under. Set by the source that enumerated the tool, so a caller-supplied tool can still be attributed to its group after being flattened into a single list: that is what lets the engine apply the disabled map to `actionArgs.tools` instead of trusting the caller to pre-filter. Wire-serializable, so it survives a remote (server-side) engine. | [optional] [example: docspace] |
-| **requireApproval** | **Boolean** | Whether the consumer must show an approval dialog before this tool runs. The engine reads it when deciding the `autoAllow` flag on a `tool-call-pending` event: `requireApproval === false` auto-allows the call (no dialog), `true` always prompts. `undefined` leaves the decision to the persisted always-allow list alone — so MCP / custom-server tools (which never set it) keep prompting as before, while host tools opt into auto-allow by default. Wire-serializable, so it survives a remote (server-side) engine. | [optional] [example: false] |
+| **name** | **String** | Tool name as registered on the MCP server (e.g. `web_search`, `insert_text`). | [required] [example: `docspace_get_folder`] |
+| **description** | **String** | Human-readable description shown to the AI model and in the tools list UI. | [required] [example: `Read the contents of a DocSpace folder.`] |
+| **inputSchema** | **Object** | JSON Schema describing the tool's input parameters. | [required] [example: `{type=object, properties={folderId={type=string}}, required=[folderId]}`] |
+| **enabled** | **Boolean** | Whether this tool is currently enabled. Disabled tools are hidden from the AI model. | [optional] [example: `true`] |
+| **serverType** | **String** | Server type (MCP server name / host tool group id) this tool belongs to — the key the persisted disabled map is stored under. Set by the source that enumerated the tool, so a caller-supplied tool can still be attributed to its group after being flattened into a single list: that is what lets the engine apply the disabled map to `actionArgs.tools` instead of trusting the caller to pre-filter. Wire-serializable, so it survives a remote (server-side) engine. | [optional] [example: `docspace`] |
+| **requireApproval** | **Boolean** | Whether the consumer must show an approval dialog before this tool runs. The engine reads it when deciding the `autoAllow` flag on a `tool-call-pending` event: `requireApproval === false` auto-allows the call (no dialog), `true` always prompts. `undefined` leaves the decision to the persisted always-allow list alone — so MCP / custom-server tools (which never set it) keep prompting as before, while host tools opt into auto-allow by default. Wire-serializable, so it survives a remote (server-side) engine. | [optional] [example: `false`] |
 
 
 ### Model AiTProvider
@@ -5309,10 +5309,10 @@ Minimal provider connection configuration. Used to connect to a provider API.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **type** | [**AiProviderType**](#model-aiprovidertype) | Provider type identifier. | [required] [example: openai] |
-| **name** | **String** | User-defined display name for this provider connection. | [required] [example: OpenAI GPT-4o] |
-| **key** | **String** | API key or token. Optional for local providers (Ollama, LM Studio). | [optional] [example: sk-your-provider-api-key] |
-| **baseUrl** | **String** | Base URL of the provider API. | [required] [example: https://api.openai.com/v1] |
+| **type** | [**AiProviderType**](#model-aiprovidertype) | Provider type identifier. | [required] [example: `openai`] |
+| **name** | **String** | User-defined display name for this provider connection. | [required] [example: `OpenAI GPT-4o`] |
+| **key** | **String** | API key or token. Optional for local providers (Ollama, LM Studio). | [optional] [example: `sk-your-provider-api-key`] |
+| **baseUrl** | **String** | Base URL of the provider API. | [required] [example: `https://api.openai.com/v1`] |
 
 
 ### Model AiThread
@@ -5320,12 +5320,12 @@ Chat conversation metadata. Represents a single chat session (thread).
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **threadId** | **String** | Unique thread identifier (UUID). | [required] [example: 11111111-1111-1111-1111-111111111111] |
-| **title** | **String** | Optional thread title. Auto-generated from the first message if not set. | [optional] [example: Contract review] |
-| **lastEditDate** | **BigDecimal** | Timestamp (ms since epoch) of the last message in this thread. Used for sorting. | [optional] [example: 1767225600000] |
+| **threadId** | **String** | Unique thread identifier (UUID). | [required] [example: `11111111-1111-1111-1111-111111111111`] |
+| **title** | **String** | Optional thread title. Auto-generated from the first message if not set. | [optional] [example: `Contract review`] |
+| **lastEditDate** | **BigDecimal** | Timestamp (ms since epoch) of the last message in this thread. Used for sorting. | [optional] [example: `1767225600000`] |
 | **provider** | [**AiTProvider**](#model-aitprovider) | Provider configuration at the time of last message. Used for thread-level provider display. | [optional] |
 | **model** | [**AiModel**](#model-aimodel) | Model info at the time of last message. | [optional] |
-| **profileId** | **String** | ID of the profile used for this thread. Links to `Profile.id`. | [optional] [example: 00000000-0000-0000-0000-000000000000] |
+| **profileId** | **String** | ID of the profile used for this thread. Links to `Profile.id`. | [optional] [example: `00000000-0000-0000-0000-000000000000`] |
 
 
 ### Model AiThreadMessageLike
@@ -5333,13 +5333,13 @@ A single chat message as it travels on the wire.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **id** | **String** | Storage-assigned message id (absent on inbound drafts). | [optional] [example: 22222222-2222-2222-2222-222222222222] |
-| **role** | **String** | Message author role. | [required] [example: user] [enum: user, assistant, system] |
+| **id** | **String** | Storage-assigned message id (absent on inbound drafts). | [optional] [example: `22222222-2222-2222-2222-222222222222`] |
+| **role** | **String** | Message author role. | [required] [example: `user`] [enum: `user`, `assistant`, `system`] |
 | **content** | [**AiThreadMessageLike_content**](#model-aithreadmessagelikecontent) |  | [required] |
-| **createdAt** | **String** | Creation timestamp, ISO-8601 on the wire. | [optional] [example: 2026-01-01T00:00:00.000Z] |
+| **createdAt** | **String** | Creation timestamp, ISO-8601 on the wire. | [optional] [example: `2026-01-01T00:00:00.000Z`] |
 | **status** | [**AiThreadMessageLike_status**](#model-aithreadmessagelikestatus) |  | [optional] |
-| **metadata** | **Object** | Arbitrary per-message metadata. | [optional] [example: \{\}] |
-| **attachments** | **List** | Attachments linked to the message. | [optional] [example: [55555555-5555-5555-5555-555555555555]] |
+| **metadata** | **Object** | Arbitrary per-message metadata. | [optional] [example: `{}`] |
+| **attachments** | **List** | Attachments linked to the message. | [optional] [example: `[55555555-5555-5555-5555-555555555555]`] |
 
 
 ### Model AiThreadMessageLike.content
@@ -5367,8 +5367,8 @@ Outcome of `ToolsEngine.replaceAllCustomServers` — either every entry persiste
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **success** | **Boolean** | True when every custom MCP server was persisted. | [required] [example: true] |
-| **errors** | [**List**](#model-aitoolsbulkresulterrors-item) | What was rejected, per server. Present on failure - and then no server was persisted. | [optional] [example: []] |
+| **success** | **Boolean** | True when every custom MCP server was persisted. | [required] [example: `true`] |
+| **errors** | [**List**](#model-aitoolsbulkresulterrors-item) | What was rejected, per server. Present on failure - and then no server was persisted. | [optional] [example: `[]`] |
 
 
 ### Model AiToolsBulkResult.errors item
@@ -5384,7 +5384,7 @@ Outcome of an MCP-server CRUD call. Either success or a field-scoped error suita
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **success** | **Boolean** | True when the MCP server was persisted. | [required] [example: true] |
+| **success** | **Boolean** | True when the MCP server was persisted. | [required] [example: `true`] |
 | **error** | [**AiTErrorData**](#model-aiterrordata) | Why the MCP server was rejected. Present on failure. | [optional] |
 
 
@@ -5393,8 +5393,8 @@ The vectorization settings.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **type** | [**AiEmbeddingProviderType**](#model-aiembeddingprovidertype) | The type of embedding provider configured for document vectorization. | [optional] [enum: 0, 1, 2, 3] |
-| **needReset** | **Boolean** | Indicates whether the embedding provider API key needs to be reconfigured. | [optional] [example: false] |
+| **type** | [**AiEmbeddingProviderType**](#model-aiembeddingprovidertype) | The type of embedding provider configured for document vectorization. | [optional] [enum: `0`, `1`, `2`, `3`] |
+| **needReset** | **Boolean** | Indicates whether the embedding provider API key needs to be reconfigured. | [optional] [example: `false`] |
 
 
 ### Model AiVectorizationSettingsWrapper
@@ -5425,13 +5425,13 @@ The watermark drawn over the documents of a room while they are viewed and print
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **additions** | [**AiWatermarkAdditions**](#model-aiwatermarkadditions) | Which details of the reader and of the room are stamped alongside the text. The values combine, so a number  that is not a member on its own is the sum of several of them, and 0 means that only the text is stamped. | [required] [enum: 1, 2, 4, 8, 16] |
-| **text** | **String** | The fixed line drawn over the document, printed before the details selected alongside it. Empty when the room  stamps an image instead. | [optional] [example: Confidential] [nullable] |
-| **rotate** | **Integer** (int32) | How far the stamp is turned, in degrees, with negative values turning it anticlockwise and 0 drawing it  horizontally. | [required] [example: -45] |
-| **imageScale** | **Integer** (int32) | How large the image is drawn, as a percentage of its own size. It is 0 for a text watermark, where nothing is  scaled. | [required] [example: 100] |
-| **imageUrl** | **String** | The address the stamped picture is served from, inside the storage of the room. Empty for a text watermark. | [optional] [example: https://portal.example.com/storage/watermark_a1b2c3.png] [nullable] |
-| **imageHeight** | **Double** (double) | The height the picture is drawn with, in pixels, kept together with the width so that the proportions survive.  It is 0 for a text watermark. | [required] [example: 100] |
-| **imageWidth** | **Double** (double) | The width the picture is drawn with, in pixels, kept together with the height so that the proportions survive.  It is 0 for a text watermark. | [required] [example: 200] |
+| **additions** | [**AiWatermarkAdditions**](#model-aiwatermarkadditions) | Which details of the reader and of the room are stamped alongside the text. The values combine, so a number  that is not a member on its own is the sum of several of them, and 0 means that only the text is stamped. | [required] [enum: `1`, `2`, `4`, `8`, `16`] |
+| **text** | **String** | The fixed line drawn over the document, printed before the details selected alongside it. Empty when the room  stamps an image instead. | [optional] [example: `Confidential`] [nullable] |
+| **rotate** | **Integer** (int32) | How far the stamp is turned, in degrees, with negative values turning it anticlockwise and 0 drawing it  horizontally. | [required] [example: `-45`] |
+| **imageScale** | **Integer** (int32) | How large the image is drawn, as a percentage of its own size. It is 0 for a text watermark, where nothing is  scaled. | [required] [example: `100`] |
+| **imageUrl** | **String** | The address the stamped picture is served from, inside the storage of the room. Empty for a text watermark. | [optional] [example: `https://portal.example.com/storage/watermark_a1b2c3.png`] [nullable] |
+| **imageHeight** | **Double** (double) | The height the picture is drawn with, in pixels, kept together with the width so that the proportions survive.  It is 0 for a text watermark. | [required] [example: `100`] |
+| **imageWidth** | **Double** (double) | The width the picture is drawn with, in pixels, kept together with the height so that the proportions survive.  It is 0 for a text watermark. | [required] [example: `200`] |
 
 
 ### Model AiWebSearchConfig
@@ -5439,11 +5439,11 @@ Web-search provider configuration. Credentials and provider selection for the bu
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **provider** | **String** | Provider identifier (e.g. `exa`). | [required] [example: exa] |
-| **key** | **String** | API key for the provider. Optional for self-hosted or keyless setups. | [optional] [example: your-web-search-api-key] |
-| **baseUrl** | **String** | Optional override for the provider's base URL. | [optional] [example: https://api.exa.ai] |
-| **isCloudProvider** | **Boolean** | Whether this provider is cloud-hosted (vs. self-hosted). | [optional] [example: true] |
-| **headers** | **Map** | Extra HTTP headers sent with each request to the ONLYOFFICE / cloud backend (e.g. `X-Tenant`). Merged after the derived `Authorization` header, so a custom header of the same name wins. | [optional] [example: \{\}] |
+| **provider** | **String** | Provider identifier (e.g. `exa`). | [required] [example: `exa`] |
+| **key** | **String** | API key for the provider. Optional for self-hosted or keyless setups. | [optional] [example: `your-web-search-api-key`] |
+| **baseUrl** | **String** | Optional override for the provider's base URL. | [optional] [example: `https://api.exa.ai`] |
+| **isCloudProvider** | **Boolean** | Whether this provider is cloud-hosted (vs. self-hosted). | [optional] [example: `true`] |
+| **headers** | **Map** | Extra HTTP headers sent with each request to the ONLYOFFICE / cloud backend (e.g. `X-Tenant`). Merged after the derived `Authorization` header, so a custom header of the same name wins. | [optional] [example: `{}`] |
 
 
 ### Model AiWebSearchMutationResult
@@ -5451,7 +5451,7 @@ Outcome of `WebSearchEngine.configure` — either the persisted config or a fiel
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **success** | **Boolean** | True when the configuration was persisted. | [required] [example: true] |
+| **success** | **Boolean** | True when the configuration was persisted. | [required] [example: `true`] |
 | **config** | [**AiWebSearchConfig**](#model-aiwebsearchconfig) | The persisted web-search configuration. Present on success. | [optional] |
 | **error** | [**AiTErrorData**](#model-aiterrordata) | Why the configuration was rejected. Present on failure. | [optional] |
 
@@ -5461,9 +5461,9 @@ Field specific validation error
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **field** | **String** | The name of the field that failed validation | [optional] [example: policy_url] |
-| **code** | **String** | Error code for localization purposes | [optional] [example: InvalidPolicyUrl] |
-| **message** | **String** | Human readable error message | [optional] [example: policy url is expected to be passed as url] |
+| **field** | **String** | The name of the field that failed validation | [optional] [example: `policy_url`] |
+| **code** | **String** | Error code for localization purposes | [optional] [example: `InvalidPolicyUrl`] |
+| **message** | **String** | Human readable error message | [optional] [example: `policy url is expected to be passed as url`] |
 
 
 ### Model ProblemDetail
@@ -5523,7 +5523,7 @@ RFC 7807 problem details returned by the registration API for failed requests.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **profileId** | **String** | The AI profile bound to this agent, added by this service on top of what the internal service returns. Absent when the agent has no profile assigned. | [optional] [example: 00000000-0000-0000-0000-000000000000] |
+| **profileId** | **String** | The AI profile bound to this agent, added by this service on top of what the internal service returns. Absent when the agent has no profile assigned. | [optional] [example: `00000000-0000-0000-0000-000000000000`] |
 
 
 ### Model aiAgentsResetQuota request body
@@ -5604,7 +5604,7 @@ A DocSpace room id: an integer for native rooms, a string for third-party-backed
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **actionType** | [**AiActionType**](#model-aiactiontype) | Which AI action to run — selects the assignment slot and action. | [required] [enum: Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision] |
+| **actionType** | [**AiActionType**](#model-aiactiontype) | Which AI action to run — selects the assignment slot and action. | [required] [enum: `Default`, `Chat`, `Code`, `Summarization`, `Translation`, `TextAnalyze`, `ImageGeneration`, `OCR`, `Vision`] |
 | **userMessage** | [**AiThreadMessageLike**](#model-aithreadmessagelike) | The user turn to send. | [required] |
 | **actionArgs** | [**AiAiActionArgs**](#model-aiaiactionargs) | Per-request engine options: extra tools, reasoning, prompt override. | [optional] |
 | **entityId** | **String** | Optional entity (room) scope for profile resolution. | [optional] |
@@ -5614,7 +5614,7 @@ A DocSpace room id: an integer for native rooms, a string for third-party-backed
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **actionType** | [**AiActionType**](#model-aiactiontype) | Action the assignment applies to. | [required] [enum: Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision] |
+| **actionType** | [**AiActionType**](#model-aiactiontype) | Action the assignment applies to. | [required] [enum: `Default`, `Chat`, `Code`, `Summarization`, `Translation`, `TextAnalyze`, `ImageGeneration`, `OCR`, `Vision`] |
 | **profileId** | **String** | Profile id to bind. | [required] |
 
 
@@ -5622,7 +5622,7 @@ A DocSpace room id: an integer for native rooms, a string for third-party-backed
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **profileId** | **String** | The profile whose assignments are removed. May be sent as the `profileId` query parameter instead of in the body. | [required] [example: 00000000-0000-0000-0000-000000000000] |
+| **profileId** | **String** | The profile whose assignments are removed. May be sent as the `profileId` query parameter instead of in the body. | [required] [example: `00000000-0000-0000-0000-000000000000`] |
 
 
 ### Model aiAttachmentsLinkToMessage request body
@@ -5672,9 +5672,9 @@ A file attachment draft to persist.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **name** | **String** | Name of the tool to run, as listed by the tools endpoint. A name that is unknown or excluded from the editor is rejected with 400. | [required] [example: docspace_get_folder] |
-| **arguments** | **Map** | Arguments for the tool, shaped by that tool's own input schema. Treated as empty when it is not an object. | [optional] [example: \{"folderId":"1234"\}] |
-| **entityId** | **String** | Room the call is scoped to. Left out for a portal-wide call. | [optional] [example: 1234] |
+| **name** | **String** | Name of the tool to run, as listed by the tools endpoint. A name that is unknown or excluded from the editor is rejected with 400. | [required] [example: `docspace_get_folder`] |
+| **arguments** | **Map** | Arguments for the tool, shaped by that tool's own input schema. Treated as empty when it is not an object. | [optional] [example: `{"folderId":"1234"}`] |
+| **entityId** | **String** | Room the call is scoped to. Left out for a portal-wide call. | [optional] [example: `1234`] |
 
 
 ### Model aiEditorToolsList 200 response
@@ -5688,10 +5688,10 @@ A file attachment draft to persist.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **name** | **String** | Tool name, as it is passed back to the call endpoint. | [required] [example: docspace_search_files] |
+| **name** | **String** | Tool name, as it is passed back to the call endpoint. | [required] [example: `docspace_search_files`] |
 | **description** | **String** | What the tool does, empty when the server declares nothing. | [required] |
 | **inputSchema** | **Map** | JSON Schema of the tool arguments. | [required] |
-| **requireApproval** | **Boolean** | Whether the editor has to ask the user before running the tool. Read-only operations arrive with this off. | [required] [example: true] |
+| **requireApproval** | **Boolean** | Whether the editor has to ask the user before running the tool. Read-only operations arrive with this off. | [required] [example: `true`] |
 
 
 ### Model aiExportTextToDocx 202 response
@@ -5727,7 +5727,7 @@ Target folder id (int or string).
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **message** | **String** | Human-readable description of the failure. | [required] |
-| **type** | **String** | OpenAI error class, for example `invalid_request_error`. | [required] [example: invalid_request_error] |
+| **type** | **String** | OpenAI error class, for example `invalid_request_error`. | [required] [example: `invalid_request_error`] |
 | **code** | **String** | Machine-readable code, when the provider supplies one. | [optional] [nullable] |
 | **param** | **String** | The request parameter at fault, when the failure names one. | [optional] [nullable] |
 
@@ -5744,7 +5744,7 @@ Target folder id (int or string).
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **value** | [**AiAiReasoningLevel**](#model-aiaireasoninglevel) | New extended-thinking depth; `off` turns deep mode off. | [required] [enum: off, low, medium, high, max] |
+| **value** | [**AiAiReasoningLevel**](#model-aiaireasoninglevel) | New extended-thinking depth; `off` turns deep mode off. | [required] [enum: `off`, `low`, `medium`, `high`, `max`] |
 | **entityId** | **String** |  | [optional] |
 
 
@@ -5755,7 +5755,7 @@ Target folder id (int or string).
 | **id** | **String** | Unique profile identifier (UUID). | [required] |
 | **name** | **String** | User-defined profile display name. | [required] |
 | **providerType** | [**AiProviderType**](#model-aiprovidertype) | Provider type for this profile. Use `external` to delegate all HTTP transport to `PlatformAdapter.externalFetch` while reusing an existing provider's response parser — see `Profile.basedOn` for the format selector. | [required] |
-| **basedOn** | [**AiBuiltinProviderType**](#model-aibuiltinprovidertype) | Selects the response-format parser used by the `external` provider. Ignored for any other `providerType`.  Supported values are `openai`, `anthropic`, `mistral` and `openrouter`. Remaining values (`genai`, `stabilityai`, …) are accepted by the type but not yet implemented; passing one raises an error at request time. | [optional] [enum: anthropic, ollama, openai, openaicompatible, together, openrouter, genai, deepseek, xai, lm-studio, mistral, groq, zhipu, stabilityai, gpt4all, onlyoffice, external] |
+| **basedOn** | [**AiBuiltinProviderType**](#model-aibuiltinprovidertype) | Selects the response-format parser used by the `external` provider. Ignored for any other `providerType`.  Supported values are `openai`, `anthropic`, `mistral` and `openrouter`. Remaining values (`genai`, `stabilityai`, …) are accepted by the type but not yet implemented; passing one raises an error at request time. | [optional] [enum: `anthropic`, `ollama`, `openai`, `openaicompatible`, `together`, `openrouter`, `genai`, `deepseek`, `xai`, `lm-studio`, `mistral`, `groq`, `zhipu`, `stabilityai`, `gpt4all`, `onlyoffice`, `external`] |
 | **baseUrl** | **String** | Base URL of the provider API. | [required] |
 | **modelId** | **String** | Selected model ID within this provider. | [required] |
 | **reasoning** | **Boolean** | Whether extended thinking is enabled for this profile's model. | [optional] |
@@ -5780,8 +5780,8 @@ Target folder id (int or string).
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **error** | **String** | The error message, ready to be shown to the caller. | [required] [example: providerType required] |
-| **field** | **String** | Name of the request field that was missing or rejected. | [required] [example: providerType] |
+| **error** | **String** | The error message, ready to be shown to the caller. | [required] [example: `providerType required`] |
+| **field** | **String** | Name of the request field that was missing or rejected. | [required] [example: `providerType`] |
 
 
 ### Model aiProfilesListProviderModels request body
@@ -5789,7 +5789,7 @@ Target folder id (int or string).
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **providerType** | [**AiProviderType**](#model-aiprovidertype) | Provider whose catalog to list. | [required] |
-| **baseUrl** | **String** | Provider API base URL. | [required] [example: https://api.openai.com/v1] |
+| **baseUrl** | **String** | Provider API base URL. | [required] [example: `https://api.openai.com/v1`] |
 | **apiKey** | **String** | Provider API key. Omit it for a provider that needs none; the request is then made without one. | [optional] |
 
 
@@ -5820,7 +5820,7 @@ Import options.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **mode** | [**AiImportMode**](#model-aiimportmode) |  | [optional] [enum: replace, merge] |
+| **mode** | [**AiImportMode**](#model-aiimportmode) |  | [optional] [enum: `replace`, `merge`] |
 
 
 ### Model aiPromptsMove request body
@@ -5861,7 +5861,7 @@ Fields to change.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **messageId** | **String** | Identifier of the message that was appended to the thread. | [required] [example: 22222222-2222-2222-2222-222222222222] |
+| **messageId** | **String** | Identifier of the message that was appended to the thread. | [required] [example: `22222222-2222-2222-2222-222222222222`] |
 
 
 ### Model aiThreadsAppendUserMessage request body
@@ -5907,7 +5907,7 @@ Optional entity hint (lib 0.5.64): only `entityId` is read; the source (`source_
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **title** | **String** | The regenerated thread title. | [required] [example: Quarterly report review] |
+| **title** | **String** | The regenerated thread title. | [required] [example: `Quarterly report review`] |
 
 
 ### Model aiThreadsRegenerateTitle request body
@@ -6009,16 +6009,16 @@ Optional entity hint (lib 0.5.64): only `entityId` is read; the source (`source_
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **count** | **Integer** | Envelope field from the internal service; 0 for this operation. | [required] [example: 0] |
-| **status** | **Integer** | Envelope status flag from the internal service. | [required] [example: 0] |
-| **statusCode** | **Integer** | HTTP status the internal service answered with. | [required] [example: 200] |
+| **count** | **Integer** | Envelope field from the internal service; 0 for this operation. | [required] [example: `0`] |
+| **status** | **Integer** | Envelope status flag from the internal service. | [required] [example: `0`] |
+| **statusCode** | **Integer** | HTTP status the internal service answered with. | [required] [example: `200`] |
 
 
 ### Model aiVectorizationStartTask request body
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **files** | **List** | Identifiers of the files to vectorize. | [required] [example: [1234,1235]] |
+| **files** | **List** | Identifiers of the files to vectorize. | [required] [example: `[1234,1235]`] |
 
 
 ### Model aiWebSearchConfigure request body

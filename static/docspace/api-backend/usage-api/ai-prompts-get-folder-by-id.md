@@ -14,7 +14,7 @@ Returns one folder of the caller's prompt library by its ID, without the prompts
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | query | **String** | The prompt folder identifier. | [required] [example: 44444444-4444-4444-4444-444444444444] |
+| **id** | query | **String** | The prompt folder identifier. | [required] [example: `44444444-4444-4444-4444-444444444444`] |
 
 ## Responses
 

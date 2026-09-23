@@ -14,7 +14,7 @@ Resolves the editor address the caller must open to fill out the given PDF form,
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **Integer** (int32) | The identifier of the PDF form to open, as it is returned by a room listing such as  `GET api/2.0/files/{folderId}`. The identifier of an already created draft is accepted here as well. | [required] [example: 1] |
+| **fileId** | path | **Integer** (int32) | The identifier of the PDF form to open, as it is returned by a room listing such as  `GET api/2.0/files/{folderId}`. The identifier of an already created draft is accepted here as well. | [required] [example: `1`] |
 | **CheckFillFormDraft** | body | [**CheckFillFormDraft**](../files.md#model-checkfillformdraft) | The revision of the form to open and what the caller intends to do with it. | [required] |
 
 ## Responses

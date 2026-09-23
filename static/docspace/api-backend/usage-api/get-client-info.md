@@ -14,7 +14,7 @@ Retrieves the detailed information for a client with the ID specified in the req
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **clientId** | path | **String** | ID of the client to retrieve | [required] [example: 6c7cf17b-1bd3-47d5-94c6-be2d3570e168] [minLength: 1] |
+| **clientId** | path | **String** | ID of the client to retrieve | [required] [example: `6c7cf17b-1bd3-47d5-94c6-be2d3570e168`] [minLength: 1] |
 
 ## Responses
 

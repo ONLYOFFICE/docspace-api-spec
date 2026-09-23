@@ -14,7 +14,7 @@ Returns one AI agent room, enriched with the `profileId` currently bound to it s
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **String** | The agent identifier. | [required] [example: 1234] |
+| **id** | path | **String** | The agent identifier. | [required] [example: `1234`] |
 
 ## Responses
 

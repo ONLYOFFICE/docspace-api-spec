@@ -14,7 +14,7 @@ Stores the application-specific settings document of one portal application for 
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **String** | The application whose configuration is stored, by the identifier `GET api/2.0/apps` reports. An identifier  not declared in the installation configuration answers 404. | [required] [example: ai-room] |
+| **id** | path | **String** | The application whose configuration is stored, by the identifier `GET api/2.0/apps` reports. An identifier  not declared in the installation configuration answers 404. | [required] [example: `ai-room`] |
 | **SetAppSettingsBody** | body | [**SetAppSettingsBody**](../api.md#model-setappsettingsbody) | The configuration to store for this portal, replacing whatever was stored before. | [required] |
 
 ## Responses

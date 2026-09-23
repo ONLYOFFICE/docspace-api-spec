@@ -124,7 +124,7 @@ Deletes one backup: first its history record, then the archive in the storage th
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **UUID** (uuid) | The ID of the backup to delete, taken from the route. It is the `id` of a record listed by  `GET api/2.0/backup/getbackuphistory`, which is also the `taskId` the backup was started with. | [required] [example: 11111111-1111-1111-1111-111111111111] |
+| **id** | path | **UUID** (uuid) | The ID of the backup to delete, taken from the route. It is the `id` of a record listed by  `GET api/2.0/backup/getbackuphistory`, which is also the `taskId` the backup was started with. | [required] [example: `11111111-1111-1111-1111-111111111111`] |
 
 #### Responses
 
@@ -167,7 +167,7 @@ Deletes every backup of the current portal, both the history records and the arc
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **Dump** | query | **Boolean** | Applies the operation to the whole server rather than to the current portal, which requires the space  access permission and works on a standalone installation only. Server-wide backups and schedules are  kept apart from the ones of a portal, so the two values address different data. | [optional] [example: false] |
+| **Dump** | query | **Boolean** | Applies the operation to the whole server rather than to the current portal, which requires the space  access permission and works on a standalone installation only. Server-wide backups and schedules are  kept apart from the ones of a portal, so the two values address different data. | [optional] [example: `false`] |
 
 #### Responses
 
@@ -210,7 +210,7 @@ Deletes the backup schedule of the current portal, which stops the scheduled bac
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **Dump** | query | **Boolean** | Applies the operation to the whole server rather than to the current portal, which requires the space  access permission and works on a standalone installation only. Server-wide backups and schedules are  kept apart from the ones of a portal, so the two values address different data. | [optional] [example: false] |
+| **Dump** | query | **Boolean** | Applies the operation to the whole server rather than to the current portal, which requires the space  access permission and works on a standalone installation only. Server-wide backups and schedules are  kept apart from the ones of a portal, so the two values address different data. | [optional] [example: `false`] |
 
 #### Responses
 
@@ -253,7 +253,7 @@ Lists the backups of the current portal whose archive is still present in the st
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **Dump** | query | **Boolean** | Applies the operation to the whole server rather than to the current portal, which requires the space  access permission and works on a standalone installation only. Server-wide backups and schedules are  kept apart from the ones of a portal, so the two values address different data. | [optional] [example: false] |
+| **Dump** | query | **Boolean** | Applies the operation to the whole server rather than to the current portal, which requires the space  access permission and works on a standalone installation only. Server-wide backups and schedules are  kept apart from the ones of a portal, so the two values address different data. | [optional] [example: `false`] |
 
 #### Responses
 
@@ -296,7 +296,7 @@ Reports the state of the backup job of the current portal, and is the operation 
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **Dump** | query | **Boolean** | Applies the operation to the whole server rather than to the current portal, which requires the space  access permission and works on a standalone installation only. Server-wide backups and schedules are  kept apart from the ones of a portal, so the two values address different data. | [optional] [example: false] |
+| **Dump** | query | **Boolean** | Applies the operation to the whole server rather than to the current portal, which requires the space  access permission and works on a standalone installation only. Server-wide backups and schedules are  kept apart from the ones of a portal, so the two values address different data. | [optional] [example: `false`] |
 
 #### Responses
 
@@ -338,7 +338,7 @@ Returns the backup schedule of the current portal. A portal keeps at most one sc
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **Dump** | query | **Boolean** | Applies the operation to the whole server rather than to the current portal, which requires the space  access permission and works on a standalone installation only. Server-wide backups and schedules are  kept apart from the ones of a portal, so the two values address different data. | [optional] [example: false] |
+| **Dump** | query | **Boolean** | Applies the operation to the whole server rather than to the current portal, which requires the space  access permission and works on a standalone installation only. Server-wide backups and schedules are  kept apart from the ones of a portal, so the two values address different data. | [optional] [example: `false`] |
 
 #### Responses
 
@@ -381,9 +381,9 @@ Counts the backups of the current portal that were created within a period, and 
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **from** | query | **Date** (date-time) | The start of the period, in UTC and inclusive. It defaults to the first day of the current calendar  month at 00:00 UTC, and it has to be no later than `to`. | [optional] [example: 2026-03-01T00:00:00Z] |
-| **to** | query | **Date** (date-time) | The end of the period, in UTC and inclusive. It defaults to the moment of the call. | [optional] [example: 2026-03-31T23:59:59Z] |
-| **paid** | query | **Boolean** | Counts the backups charged to the portal wallet when true, and the ones covered by the free monthly  allowance when false, which is the default. It is read only by  `GET api/2.0/backup/getbackupscount` and is ignored by  `GET api/2.0/backup/getbackupscountbypaid`, which always reports both. | [optional] [example: false] |
+| **from** | query | **Date** (date-time) | The start of the period, in UTC and inclusive. It defaults to the first day of the current calendar  month at 00:00 UTC, and it has to be no later than `to`. | [optional] [example: `2026-03-01T00:00:00Z`] |
+| **to** | query | **Date** (date-time) | The end of the period, in UTC and inclusive. It defaults to the moment of the call. | [optional] [example: `2026-03-31T23:59:59Z`] |
+| **paid** | query | **Boolean** | Counts the backups charged to the portal wallet when true, and the ones covered by the free monthly  allowance when false, which is the default. It is read only by  `GET api/2.0/backup/getbackupscount` and is ignored by  `GET api/2.0/backup/getbackupscountbypaid`, which always reports both. | [optional] [example: `false`] |
 
 #### Responses
 
@@ -425,9 +425,9 @@ Counts the backups of the current portal created within a period and splits the 
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **from** | query | **Date** (date-time) | The start of the period, in UTC and inclusive. It defaults to the first day of the current calendar  month at 00:00 UTC, and it has to be no later than `to`. | [optional] [example: 2026-03-01T00:00:00Z] |
-| **to** | query | **Date** (date-time) | The end of the period, in UTC and inclusive. It defaults to the moment of the call. | [optional] [example: 2026-03-31T23:59:59Z] |
-| **paid** | query | **Boolean** | Counts the backups charged to the portal wallet when true, and the ones covered by the free monthly  allowance when false, which is the default. It is read only by  `GET api/2.0/backup/getbackupscount` and is ignored by  `GET api/2.0/backup/getbackupscountbypaid`, which always reports both. | [optional] [example: false] |
+| **from** | query | **Date** (date-time) | The start of the period, in UTC and inclusive. It defaults to the first day of the current calendar  month at 00:00 UTC, and it has to be no later than `to`. | [optional] [example: `2026-03-01T00:00:00Z`] |
+| **to** | query | **Date** (date-time) | The end of the period, in UTC and inclusive. It defaults to the moment of the call. | [optional] [example: `2026-03-31T23:59:59Z`] |
+| **paid** | query | **Boolean** | Counts the backups charged to the portal wallet when true, and the ones covered by the free monthly  allowance when false, which is the default. It is read only by  `GET api/2.0/backup/getbackupscount` and is ignored by  `GET api/2.0/backup/getbackupscountbypaid`, which always reports both. | [optional] [example: `false`] |
 
 #### Responses
 
@@ -507,7 +507,7 @@ Reports the state of the restoring job, and is the operation to poll after  `POS
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **Dump** | query | **Boolean** | Which restoring job to look for, read as three states rather than as a flag: leave it out for  whichever job concerns this portal, including a server-wide one, send false for the job of this  portal alone, and send true for the server-wide job. On a portal that is not a standalone  installation the value is forced to false. | [optional] [example: false] |
+| **Dump** | query | **Boolean** | Which restoring job to look for, read as three states rather than as a flag: leave it out for  whichever job concerns this portal, including a server-wide one, send false for the job of this  portal alone, and send true for the server-wide job. On a portal that is not a standalone  installation the value is forced to false. | [optional] [example: `false`] |
 
 #### Responses
 
@@ -630,9 +630,9 @@ The request parameters for starting a backup.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **storageType** | [**BackupStorageType**](#model-backupstoragetype) | The storage the archive is written to. It defaults to `Documents`, and it decides which keys  `storageParams` has to carry. | [optional] [enum: 0, 1, 2, 3, 4, 5] |
-| **storageParams** | [**List**](#model-itemkeyvaluepairobjectobject) | The settings of the chosen storage, as an array of key and value pairs. `Documents` needs an integer  `folderId`, `ThridpartyDocuments` a provider-specific non-integer `folderId`, `Local` a `filePath`,  `ThirdPartyConsumer` a `module` plus the settings of that consumer, and `DataStore` none. The  `subdir` key is added by the operation itself and must not be sent. | [optional] [example: [\{key=folderId, value=1234\}]] [nullable] |
-| **dump** | **Boolean** | Backs up the whole server rather than this one portal. It requires the space access permission and  works on a standalone installation only. | [optional] [example: false] |
+| **storageType** | [**BackupStorageType**](#model-backupstoragetype) | The storage the archive is written to. It defaults to `Documents`, and it decides which keys  `storageParams` has to carry. | [optional] [enum: `0`, `1`, `2`, `3`, `4`, `5`] |
+| **storageParams** | [**List**](#model-itemkeyvaluepairobjectobject) | The settings of the chosen storage, as an array of key and value pairs. `Documents` needs an integer  `folderId`, `ThridpartyDocuments` a provider-specific non-integer `folderId`, `Local` a `filePath`,  `ThirdPartyConsumer` a `module` plus the settings of that consumer, and `DataStore` none. The  `subdir` key is added by the operation itself and must not be sent. | [optional] [example: `[{key=folderId, value=1234}]`] [nullable] |
+| **dump** | **Boolean** | Backs up the whole server rather than this one portal. It requires the space access permission and  works on a standalone installation only. | [optional] [example: `false`] |
 
 
 ### Model BackupHistoryRecord
@@ -640,11 +640,11 @@ One stored backup of a portal.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **id** | **UUID** (uuid) | The ID of the backup, which is the same value as the `taskId` the backup was started with. Pass it to  `DELETE api/2.0/backup/deletebackup/{id}` or as the `backupId` of  `POST api/2.0/backup/startrestore`. | [required] [example: 11111111-1111-1111-1111-111111111111] |
-| **fileName** | **String** | The name of the stored archive. It is built from the portal alias and the moment the backup started,  or from `workspace` instead of the alias for a backup of the whole server. | [required] [example: myportal_2026-03-01_02-15-00.tar.gz] [nullable] |
-| **storageType** | [**BackupStorageType**](#model-backupstoragetype) | The storage the archive was written to, reported as a number rather than as a name. | [required] [enum: 0, 1, 2, 3, 4, 5] |
-| **createdOn** | **Date** (date-time) | The date and time the backup was stored at, in UTC. | [required] [example: 2026-03-01T02:15:00Z] |
-| **expiresOn** | **Date** (date-time) | The date and time a background cleaner removes this backup at. Only a backup written to `DataStore`  expires, one day after it was stored; for every other storage type this is `0001-01-01T00:00:00`,  which means the backup is kept until it is deleted by hand or pushed out by the stored-copies limit  of a schedule. | [required] [example: 0001-01-01T00:00:00Z] |
+| **id** | **UUID** (uuid) | The ID of the backup, which is the same value as the `taskId` the backup was started with. Pass it to  `DELETE api/2.0/backup/deletebackup/{id}` or as the `backupId` of  `POST api/2.0/backup/startrestore`. | [required] [example: `11111111-1111-1111-1111-111111111111`] |
+| **fileName** | **String** | The name of the stored archive. It is built from the portal alias and the moment the backup started,  or from `workspace` instead of the alias for a backup of the whole server. | [required] [example: `myportal_2026-03-01_02-15-00.tar.gz`] [nullable] |
+| **storageType** | [**BackupStorageType**](#model-backupstoragetype) | The storage the archive was written to, reported as a number rather than as a name. | [required] [enum: `0`, `1`, `2`, `3`, `4`, `5`] |
+| **createdOn** | **Date** (date-time) | The date and time the backup was stored at, in UTC. | [required] [example: `2026-03-01T02:15:00Z`] |
+| **expiresOn** | **Date** (date-time) | The date and time a background cleaner removes this backup at. Only a backup written to `DataStore`  expires, one day after it was stored; for every other storage type this is `0001-01-01T00:00:00`,  which means the backup is kept until it is deleted by hand or pushed out by the stored-copies limit  of a schedule. | [required] [example: `0001-01-01T00:00:00Z`] |
 
 
 ### Model BackupHistoryRecordArrayWrapper
@@ -681,15 +681,15 @@ The state of one backup or restoring job.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **isCompleted** | **Boolean** | Specifies whether the job has stopped running. This is the field to poll: true means the job will not  change any more, whether it succeeded, failed or was cancelled, and `status` tells which of the three  it is. | [optional] [example: false] |
-| **progress** | **Integer** (int32) | The share of the job that is already done, from 0 to 100. A job that has only been queued reports 0,  because the work starts when a separate worker service picks it up. | [optional] [example: 50] |
-| **error** | **String** | The message of the error that stopped the job. It is an empty string, not null, while the job runs  and after a job that succeeded, so the sign of a failure is a non-empty value - and this is the only  place where the reason is reported. | [optional] [example: An error occurred during processing] [nullable] |
-| **warning** | **String** | A message about a job that stopped without failing: it names the entry inside the archive that lists  the files which could not be read, when a backup finished without some of them, and it says so when  the job was cancelled. It is an empty string otherwise, and it is only ever filled in for a backup  job - a cancelled restoring job leaves it empty. | [optional] [example: Some files were not included in the backup. For more details, please check storage/missing_info] [nullable] |
-| **link** | **String** | The link to download the stored archive. It is an empty string until the archive has been uploaded,  and it is only ever filled in for a backup job, never for a restoring one. | [optional] [example: https://example.com/products/files/httphandlers/filehandler.ashx?action=download&fileid=1234] [nullable] |
-| **tenantId** | **Integer** (int32) | The ID of the portal the job belongs to, or -1 for a job that covers the whole server. | [optional] [example: 1] |
-| **backupProgressEnum** | [**BackupProgressEnum**](#model-backupprogressenum) | Whether this is a backup or a restoring job, reported as a number rather than as a name. | [optional] [enum: 0, 1, 2] |
-| **status** | [**DistributedTaskStatus**](#model-distributedtaskstatus) | The state of the job: `Created` while it waits for a worker to pick it up, `Running` while it works,  `Completed` once it has finished on its own, `Canceled` after it was cancelled, and `Failted` when it  stopped on an error, in which case `error` carries the reason. Reported as a number rather than as a  name. | [optional] [enum: 0, 1, 2, 3, 4] |
-| **taskId** | **String** | The ID of the job. It is the handle to poll this operation with, and for a backup job it also becomes  the `id` of the record in `GET api/2.0/backup/getbackuphistory`. | [optional] [example: 11111111-1111-1111-1111-111111111111] [nullable] |
+| **isCompleted** | **Boolean** | Specifies whether the job has stopped running. This is the field to poll: true means the job will not  change any more, whether it succeeded, failed or was cancelled, and `status` tells which of the three  it is. | [optional] [example: `false`] |
+| **progress** | **Integer** (int32) | The share of the job that is already done, from 0 to 100. A job that has only been queued reports 0,  because the work starts when a separate worker service picks it up. | [optional] [example: `50`] |
+| **error** | **String** | The message of the error that stopped the job. It is an empty string, not null, while the job runs  and after a job that succeeded, so the sign of a failure is a non-empty value - and this is the only  place where the reason is reported. | [optional] [example: `An error occurred during processing`] [nullable] |
+| **warning** | **String** | A message about a job that stopped without failing: it names the entry inside the archive that lists  the files which could not be read, when a backup finished without some of them, and it says so when  the job was cancelled. It is an empty string otherwise, and it is only ever filled in for a backup  job - a cancelled restoring job leaves it empty. | [optional] [example: `Some files were not included in the backup. For more details, please check storage/missing_info`] [nullable] |
+| **link** | **String** | The link to download the stored archive. It is an empty string until the archive has been uploaded,  and it is only ever filled in for a backup job, never for a restoring one. | [optional] [example: `https://example.com/products/files/httphandlers/filehandler.ashx?action=download&fileid=1234`] [nullable] |
+| **tenantId** | **Integer** (int32) | The ID of the portal the job belongs to, or -1 for a job that covers the whole server. | [optional] [example: `1`] |
+| **backupProgressEnum** | [**BackupProgressEnum**](#model-backupprogressenum) | Whether this is a backup or a restoring job, reported as a number rather than as a name. | [optional] [enum: `0`, `1`, `2`] |
+| **status** | [**DistributedTaskStatus**](#model-distributedtaskstatus) | The state of the job: `Created` while it waits for a worker to pick it up, `Running` while it works,  `Completed` once it has finished on its own, `Canceled` after it was cancelled, and `Failted` when it  stopped on an error, in which case `error` carries the reason. Reported as a number rather than as a  name. | [optional] [enum: `0`, `1`, `2`, `3`, `4`] |
+| **taskId** | **String** | The ID of the job. It is the handle to poll this operation with, and for a backup job it also becomes  the `id` of the record in `GET api/2.0/backup/getbackuphistory`. | [optional] [example: `11111111-1111-1111-1111-111111111111`] [nullable] |
 
 
 ### Model BackupProgressEnum
@@ -718,11 +718,11 @@ The request parameters for restoring a portal from a backup.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **backupId** | **String** | The ID of the backup to restore from, as listed by `GET api/2.0/backup/getbackuphistory`. Send  anything that is not a GUID to restore from a file given by `storageParams` instead; an all-zero GUID  selects neither, because it parses as a GUID and then matches no record. | [required] [example: 11111111-1111-1111-1111-111111111111] [nullable] |
-| **storageType** | [**BackupStorageType**](#model-backupstoragetype) | The storage the archive is read from. It defaults to `Documents` and is only used when `backupId` is  not a GUID, because a known backup carries the storage of its own record. | [optional] [enum: 0, 1, 2, 3, 4, 5] |
-| **storageParams** | [**List**](#model-itemkeyvaluepairobjectobject) | The location of the archive, as an array of key and value pairs. The key read here is `filePath` -  not the `folderId` a backup is started with - and it holds a file ID for `Documents`, a  provider-specific file ID for `ThridpartyDocuments` and a path on the server for `Local`. It is only  used when `backupId` is not a GUID. | [optional] [example: [\{key=filePath, value=1234\}]] [nullable] |
-| **notify** | **Boolean** | Chooses who is emailed when the restoring starts and when it finishes: every active user of the  portal when true, and its owner alone when false. Mail goes only to accounts that have been  activated, so this decides the audience rather than whether anybody is notified at all. | [optional] [example: true] |
-| **dump** | **Boolean** | Restores the whole server rather than this one portal. It requires the space access permission. | [optional] [example: false] |
+| **backupId** | **String** | The ID of the backup to restore from, as listed by `GET api/2.0/backup/getbackuphistory`. Send  anything that is not a GUID to restore from a file given by `storageParams` instead; an all-zero GUID  selects neither, because it parses as a GUID and then matches no record. | [required] [example: `11111111-1111-1111-1111-111111111111`] [nullable] |
+| **storageType** | [**BackupStorageType**](#model-backupstoragetype) | The storage the archive is read from. It defaults to `Documents` and is only used when `backupId` is  not a GUID, because a known backup carries the storage of its own record. | [optional] [enum: `0`, `1`, `2`, `3`, `4`, `5`] |
+| **storageParams** | [**List**](#model-itemkeyvaluepairobjectobject) | The location of the archive, as an array of key and value pairs. The key read here is `filePath` -  not the `folderId` a backup is started with - and it holds a file ID for `Documents`, a  provider-specific file ID for `ThridpartyDocuments` and a path on the server for `Local`. It is only  used when `backupId` is not a GUID. | [optional] [example: `[{key=filePath, value=1234}]`] [nullable] |
+| **notify** | **Boolean** | Chooses who is emailed when the restoring starts and when it finishes: every active user of the  portal when true, and its owner alone when false. Mail goes only to accounts that have been  activated, so this decides the audience rather than whether anybody is notified at all. | [optional] [example: `true`] |
+| **dump** | **Boolean** | Restores the whole server rather than this one portal. It requires the space access permission. | [optional] [example: `false`] |
 
 
 ### Model BackupScheduleDto
@@ -730,11 +730,11 @@ The request parameters for setting the backup schedule.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **storageType** | [**BackupStorageType**](#model-backupstoragetype) | The storage the scheduled archives are written to. It defaults to `Documents`, and it decides which  keys `storageParams` has to carry. | [optional] [enum: 0, 1, 2, 3, 4, 5] |
-| **storageParams** | [**List**](#model-itemkeyvaluepairobjectobject) | The settings of the chosen storage, as an array of key and value pairs. `Documents` and  `ThridpartyDocuments` need `folderId`, `Local` needs `filePath`, `ThirdPartyConsumer` needs `module`  plus the settings of that consumer, and `DataStore` needs none. | [optional] [example: [\{key=folderId, value=1234\}]] [nullable] |
-| **backupsStored** | **Integer** (int32) | The number of scheduled copies to keep, from 1 to 30. It defaults to 1, and only the copies this  schedule creates are counted and removed - archives started by hand are left alone. | [optional] [example: 5] [nullable] |
+| **storageType** | [**BackupStorageType**](#model-backupstoragetype) | The storage the scheduled archives are written to. It defaults to `Documents`, and it decides which  keys `storageParams` has to carry. | [optional] [enum: `0`, `1`, `2`, `3`, `4`, `5`] |
+| **storageParams** | [**List**](#model-itemkeyvaluepairobjectobject) | The settings of the chosen storage, as an array of key and value pairs. `Documents` and  `ThridpartyDocuments` need `folderId`, `Local` needs `filePath`, `ThirdPartyConsumer` needs `module`  plus the settings of that consumer, and `DataStore` needs none. | [optional] [example: `[{key=folderId, value=1234}]`] [nullable] |
+| **backupsStored** | **Integer** (int32) | The number of scheduled copies to keep, from 1 to 30. It defaults to 1, and only the copies this  schedule creates are counted and removed - archives started by hand are left alone. | [optional] [example: `5`] [nullable] |
 | **cronParams** | [**Cron**](#model-cron) | When the backup runs. It is required: a request without it fails rather than falling back to a  default. | [optional] |
-| **dump** | **Boolean** | Schedules a backup of the whole server rather than of this one portal. It requires the space access  permission and works on a standalone installation only. | [optional] [example: false] |
+| **dump** | **Boolean** | Schedules a backup of the whole server rather than of this one portal. It requires the space access  permission and works on a standalone installation only. | [optional] [example: `false`] |
 
 
 ### Model BackupServiceStateDto
@@ -742,7 +742,7 @@ Whether the paid backup service is switched on for a portal.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **enabled** | **Boolean** | Specifies whether the paid backup service is switched on for this portal, which is a setting of its  wallet rather than the health of the backup service. While it is true, backups beyond the free  monthly allowance are charged to the wallet. | [optional] [example: true] |
+| **enabled** | **Boolean** | Specifies whether the paid backup service is switched on for this portal, which is a setting of its  wallet rather than the health of the backup service. While it is true, backups beyond the free  monthly allowance are charged to the wallet. | [optional] [example: `true`] |
 
 
 ### Model BackupServiceStateWrapper
@@ -774,8 +774,8 @@ The backups of a portal, split by who paid for them.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **free** | **Integer** (int32) | The number of backups covered by the free monthly allowance. | [optional] [example: 3] |
-| **paid** | **Integer** (int32) | The number of backups charged to the portal wallet. | [optional] [example: 5] |
+| **free** | **Integer** (int32) | The number of backups covered by the free monthly allowance. | [optional] [example: `3`] |
+| **paid** | **Integer** (int32) | The number of backups charged to the portal wallet. | [optional] [example: `5`] |
 
 
 ### Model BackupsCountResultWrapper
@@ -807,9 +807,9 @@ The request parameters for the time the scheduled backup runs.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **period** | [**BackupPeriod**](#model-backupperiod) | How often the backup runs: `EveryDay`, `EveryWeek` or `EveryMonth`. It defaults to `EveryDay`. | [optional] [enum: 0, 1, 2] |
-| **hour** | **Integer** (int32) | The hour of the day the backup starts at, from 0 to 23. Minutes cannot be chosen - it always starts  on the hour. | [optional] [example: 2] |
-| **day** | **Integer** (int32) | The day the backup runs on: the day of the week from 1 to 7, Sunday being 1, for `EveryWeek`, and the  day of the month from 1 to 31 for `EveryMonth`. Leave it out for `EveryDay` only - an omitted value is  stored as 0, which neither of the other two periods accepts, so a weekly or monthly schedule sent  without it fails. | [optional] [example: 1] [nullable] |
+| **period** | [**BackupPeriod**](#model-backupperiod) | How often the backup runs: `EveryDay`, `EveryWeek` or `EveryMonth`. It defaults to `EveryDay`. | [optional] [enum: `0`, `1`, `2`] |
+| **hour** | **Integer** (int32) | The hour of the day the backup starts at, from 0 to 23. Minutes cannot be chosen - it always starts  on the hour. | [optional] [example: `2`] |
+| **day** | **Integer** (int32) | The day the backup runs on: the day of the week from 1 to 7, Sunday being 1, for `EveryWeek`, and the  day of the month from 1 to 31 for `EveryMonth`. Leave it out for `EveryDay` only - an omitted value is  stored as 0, which neither of the other two periods accepts, so a weekly or monthly schedule sent  without it fails. | [optional] [example: `1`] [nullable] |
 
 
 ### Model CronParams
@@ -817,9 +817,9 @@ The time a scheduled backup runs at.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **period** | [**BackupPeriod**](#model-backupperiod) | How often the backup runs: 0 for every day, 1 for every week and 2 for every month. | [optional] [enum: 0, 1, 2] |
-| **hour** | **Integer** (int32) | The hour of the day the backup starts at, from 0 to 23. | [optional] [example: 2] |
-| **day** | **Integer** (int32) | The day the backup runs on: the day of the week from 1 to 7, Sunday being 1, for a weekly schedule,  and the day of the month from 1 to 31 for a monthly one. It is 0 for a daily schedule. | [optional] [example: 1] |
+| **period** | [**BackupPeriod**](#model-backupperiod) | How often the backup runs: 0 for every day, 1 for every week and 2 for every month. | [optional] [enum: `0`, `1`, `2`] |
+| **hour** | **Integer** (int32) | The hour of the day the backup starts at, from 0 to 23. | [optional] [example: `2`] |
+| **day** | **Integer** (int32) | The day the backup runs on: the day of the week from 1 to 7, Sunday being 1, for a weekly schedule,  and the day of the month from 1 to 31 for a monthly one. It is 0 for a daily schedule. | [optional] [example: `1`] |
 
 
 ### Model DistributedTaskStatus
@@ -859,9 +859,9 @@ Field specific validation error
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **field** | **String** | The name of the field that failed validation | [optional] [example: policy_url] |
-| **code** | **String** | Error code for localization purposes | [optional] [example: InvalidPolicyUrl] |
-| **message** | **String** | Human readable error message | [optional] [example: policy url is expected to be passed as url] |
+| **field** | **String** | The name of the field that failed validation | [optional] [example: `policy_url`] |
+| **code** | **String** | Error code for localization purposes | [optional] [example: `InvalidPolicyUrl`] |
+| **message** | **String** | Human readable error message | [optional] [example: `policy url is expected to be passed as url`] |
 
 
 ### Model Int32Wrapper
@@ -904,12 +904,12 @@ The backup schedule of a portal.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **storageType** | [**BackupStorageType**](#model-backupstoragetype) | The storage the scheduled archives are written to, reported as a number rather than as the name the  schedule was created with. | [required] [enum: 0, 1, 2, 3, 4, 5] |
-| **storageParams** | **Map** | The settings of the storage, as an object keyed by parameter name - not as the array of key and value  pairs the schedule was created with, so it cannot be sent back unchanged. For every storage type  except `ThirdPartyConsumer` the `folderId` key is built from the stored base path. | [required] [example: \{folderId=1234\}] |
+| **storageType** | [**BackupStorageType**](#model-backupstoragetype) | The storage the scheduled archives are written to, reported as a number rather than as the name the  schedule was created with. | [required] [enum: `0`, `1`, `2`, `3`, `4`, `5`] |
+| **storageParams** | **Map** | The settings of the storage, as an object keyed by parameter name - not as the array of key and value  pairs the schedule was created with, so it cannot be sent back unchanged. For every storage type  except `ThirdPartyConsumer` the `folderId` key is built from the stored base path. | [required] [example: `{folderId=1234}`] |
 | **cronParams** | [**CronParams**](#model-cronparams) | When the backup runs, read back from the stored cron expression. `day` is 0 for a daily schedule,  because a daily one has no day. | [required] |
-| **backupsStored** | **Integer** (int32) | The number of scheduled copies kept. It is null, not 0, when the schedule keeps an unlimited number. | [optional] [example: 5] [nullable] |
-| **lastBackupTime** | **Date** (date-time) | The date and time the schedule last ran at. It is `0001-01-01T00:00:00` until the schedule has run  for the first time. | [required] [example: 2026-01-01T00:00:00Z] |
-| **dump** | **Boolean** | Specifies whether this schedule backs up the whole server instead of one portal. | [required] [example: false] |
+| **backupsStored** | **Integer** (int32) | The number of scheduled copies kept. It is null, not 0, when the schedule keeps an unlimited number. | [optional] [example: `5`] [nullable] |
+| **lastBackupTime** | **Date** (date-time) | The date and time the schedule last ran at. It is `0001-01-01T00:00:00` until the schedule has run  for the first time. | [required] [example: `2026-01-01T00:00:00Z`] |
+| **dump** | **Boolean** | Specifies whether this schedule backs up the whole server instead of one portal. | [required] [example: `false`] |
 
 
 ### Model ScheduleWrapper

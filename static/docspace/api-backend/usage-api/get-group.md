@@ -14,8 +14,8 @@ Returns one group by its ID, with its name, its manager and - when asked for - t
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **UUID** (uuid) | The ID of the group to read, taken from the route. It has to be a group that has not been deleted, otherwise  the operation answers 404. | [required] [example: 00000000-0000-0000-0000-000000000000] |
-| **includeMembers** | query | **Boolean** | Whether to fill in the member list of the group. It defaults to true, so set it to false when only the name  and the manager are needed and the group may be large. | [optional] [example: true] |
+| **id** | path | **UUID** (uuid) | The ID of the group to read, taken from the route. It has to be a group that has not been deleted, otherwise  the operation answers 404. | [required] [example: `00000000-0000-0000-0000-000000000000`] |
+| **includeMembers** | query | **Boolean** | Whether to fill in the member list of the group. It defaults to true, so set it to false when only the name  and the manager are needed and the group may be large. | [optional] [example: `true`] |
 
 ## Responses
 

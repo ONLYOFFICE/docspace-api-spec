@@ -14,7 +14,7 @@ Creates a folder inside the folder named in the path and answers with the folder
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **folderId** | path | **Integer** (int32) | The folder the request is addressed to: when a folder is created it is the parent that receives the new  folder, and when a folder is renamed it is the folder that gets the new title. | [required] [example: 1] |
+| **folderId** | path | **Integer** (int32) | The folder the request is addressed to: when a folder is created it is the parent that receives the new  folder, and when a folder is renamed it is the folder that gets the new title. | [required] [example: `1`] |
 | **CreateFolder** | body | [**CreateFolder**](../files.md#model-createfolder) | The title carried by the request body. | [required] |
 
 ## Responses

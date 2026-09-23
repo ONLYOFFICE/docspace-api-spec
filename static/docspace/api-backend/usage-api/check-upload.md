@@ -14,7 +14,7 @@ Reports which of the submitted titles already belong to a file in the folder, so
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **folderId** | path | **Integer** (int32) | The folder whose contents the names are tested against; take the id from a listing such as  `GET api/2.0/files/@root`. | [required] [example: 1] |
+| **folderId** | path | **Integer** (int32) | The folder whose contents the names are tested against; take the id from a listing such as  `GET api/2.0/files/@root`. | [required] [example: `1`] |
 | **CheckUploadRequest** | body | [**CheckUploadRequest**](../files.md#model-checkuploadrequest) | The names to test against the files the folder already holds. | [required] |
 
 ## Responses

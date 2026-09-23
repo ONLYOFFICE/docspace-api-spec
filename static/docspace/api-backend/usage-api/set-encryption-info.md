@@ -14,7 +14,7 @@ Issues the file keys that let the named people open one file of an end-to-end en
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **Integer** (int32) | The file the keys are issued for; it has to lie in a private room. | [required] [example: 12345] |
+| **fileId** | path | **Integer** (int32) | The file the keys are issued for; it has to lie in a private room. | [required] [example: `12345`] |
 | **AccessRequestKeyDto** | body | [**List**](../files.md#model-accessrequestkeydto) | One key per account that is to open the file. The keys of the accounts named here are replaced and the keys of  everybody else are left as they are, so sending no entry for a person does not revoke that person's key. | [optional] |
 
 ## Responses

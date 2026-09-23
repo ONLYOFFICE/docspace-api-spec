@@ -14,9 +14,9 @@ Retrieves a paginated list of information for all clients, each in the same cons
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **limit** | query | **Integer** (int32) | How many entries to return, between 1 and 50. It has no default and has to be sent on every call. | [required] [example: 30] [min: 1] [max: 50] |
-| **last\_client\_id** | query | **String** | ID of the last retrieved client | [optional] [example: 6c7cf17b-1bd3-47d5-94c6-be2d3570e168] |
-| **last\_created\_on** | query | **Date** (date-time) | Date of the last retrieved client | [optional] [example: 2024-04-04T12:00:00Z] |
+| **limit** | query | **Integer** (int32) | How many entries to return, between 1 and 50. It has no default and has to be sent on every call. | [required] [example: `30`] [min: 1] [max: 50] |
+| **last\_client\_id** | query | **String** | ID of the last retrieved client | [optional] [example: `6c7cf17b-1bd3-47d5-94c6-be2d3570e168`] |
+| **last\_created\_on** | query | **Date** (date-time) | Date of the last retrieved client | [optional] [example: `2024-04-04T12:00:00Z`] |
 
 ## Responses
 

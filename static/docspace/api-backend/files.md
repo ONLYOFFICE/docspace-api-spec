@@ -243,7 +243,7 @@ Stamps the file as just used by the calling account and puts it at the top of th
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **Integer** (int32) | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: 10] |
+| **fileId** | path | **Integer** (int32) | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: `10`] |
 
 #### Responses
 
@@ -327,7 +327,7 @@ Closes or reopens a revision group in the version history of a file and answers 
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **Integer** (int32) | The file whose version history is changed. | [required] [example: 1] |
+| **fileId** | path | **Integer** (int32) | The file whose version history is changed. | [required] [example: `1`] |
 | **ChangeHistory** | body | [**ChangeHistory**](#model-changehistory) | The change to make to the revision group. | [required] |
 
 #### Responses
@@ -370,7 +370,7 @@ Resolves the editor address the caller must open to fill out the given PDF form,
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **Integer** (int32) | The identifier of the PDF form to open, as it is returned by a room listing such as  `GET api/2.0/files/{folderId}`. The identifier of an already created draft is accepted here as well. | [required] [example: 1] |
+| **fileId** | path | **Integer** (int32) | The identifier of the PDF form to open, as it is returned by a room listing such as  `GET api/2.0/files/{folderId}`. The identifier of an already created draft is accepted here as well. | [required] [example: `1`] |
 | **CheckFillFormDraft** | body | [**CheckFillFormDraft**](#model-checkfillformdraft) | The revision of the form to open and what the caller intends to do with it. | [required] |
 
 #### Responses
@@ -412,7 +412,7 @@ Copies one file into another folder under a new title, converting its content wh
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **Integer** (int32) | The file to copy. | [required] [example: 1] |
+| **fileId** | path | **Integer** (int32) | The file to copy. | [required] [example: `1`] |
 | **CopyAsJsonElement** | body | [**CopyAsJsonElement**](#model-copyasjsonelement) | The title, the destination and the conversion options of the copy. | [required] |
 
 #### Responses
@@ -456,8 +456,8 @@ Opens a chunked session that replaces the content of an existing file, which is 
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **Integer** (int32) | The file whose content the session will replace; take the id from a folder listing or from the file itself. | [required] [example: 1] |
-| **fileSize** | query | **Long** (int64) | The number of bytes the new content will take. It is checked against the portal limit for chunked uploads  before the session opens, and a session left at 0 takes the whole content in a single part. | [optional] [example: 1024] |
+| **fileId** | path | **Integer** (int32) | The file whose content the session will replace; take the id from a folder listing or from the file itself. | [required] [example: `1`] |
+| **fileSize** | query | **Long** (int64) | The number of bytes the new content will take. It is checked against the portal limit for chunked uploads  before the session opens, and a session left at 0 takes the whole content in a single part. | [optional] [example: `1024`] |
 
 #### Responses
 
@@ -499,7 +499,7 @@ Creates a file in the folder named in the route and answers with the stored file
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **folderId** | path | **Integer** (int32) | The folder the file is created in. | [required] [example: 1] |
+| **folderId** | path | **Integer** (int32) | The folder the file is created in. | [required] [example: `1`] |
 | **CreateFileJsonElement** | body | [**CreateFileJsonElement**](#model-createfilejsonelement) | The title of the new file and the source of its content. | [required] |
 
 #### Responses
@@ -582,7 +582,7 @@ Answers with the primary external link of a file, creating it on the first call 
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The file the link points at. | [required] [example: 1] |
+| **id** | path | **Integer** (int32) | The file the link points at. | [required] [example: `1`] |
 | **FileLinkRequest** | body | [**FileLinkRequest**](#model-filelinkrequest) | The settings of the link. They are applied in full, so a field left out is reset rather than kept. | [required] |
 
 #### Responses
@@ -626,7 +626,7 @@ Creates an HTML file in the folder named in the route out of the markup passed a
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **folderId** | path | **Integer** (int32) | The folder the file is created in. | [required] [example: 1] |
+| **folderId** | path | **Integer** (int32) | The folder the file is created in. | [required] [example: `1`] |
 | **CreateTextOrHtmlFile** | body | [**CreateTextOrHtmlFile**](#model-createtextorhtmlfile) | The title, the content and the collision behaviour of the new file. | [required] |
 
 #### Responses
@@ -711,7 +711,7 @@ Creates a text file in the folder named in the route out of the text passed as t
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **folderId** | path | **Integer** (int32) | The folder the file is created in. | [required] [example: 1] |
+| **folderId** | path | **Integer** (int32) | The folder the file is created in. | [required] [example: `1`] |
 | **CreateTextOrHtmlFile** | body | [**CreateTextOrHtmlFile**](#model-createtextorhtmlfile) | The title, the content and the collision behaviour of the new file. | [required] |
 
 #### Responses
@@ -834,9 +834,9 @@ Queues the deletion of one file and answers with the caller's file operations, t
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **Integer** (int32) | The file to delete. | [required] [example: 1] |
+| **fileId** | path | **Integer** (int32) | The file to delete. | [required] [example: `1`] |
 | **Delete** | body | [**Delete**](#model-delete) | When and how the file is deleted. | [required] |
-| **ReturnSingleOperation** | query | **Boolean** | Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list. | [optional] [example: false] |
+| **ReturnSingleOperation** | query | **Boolean** | Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list. | [optional] [example: `false`] |
 
 #### Responses
 
@@ -959,7 +959,7 @@ Queues generation of the spreadsheet that collects every answer submitted for a 
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **Integer** (int32) | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: 10] |
+| **fileId** | path | **Integer** (int32) | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: `10`] |
 
 #### Responses
 
@@ -1002,7 +1002,7 @@ Returns the roles of a PDF form together with the state each of them is in, whic
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **Integer** (int32) | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: 10] |
+| **fileId** | path | **Integer** (int32) | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: `10`] |
 
 #### Responses
 
@@ -1045,8 +1045,8 @@ Answers with everything an editor needs in order to show what changed in one ver
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **Integer** (int32) | The file whose changes are read. | [required] [example: 1] |
-| **version** | query | **Integer** (int32) | The version to show the changes of, as reported by `GET api/2.0/files/file/{fileId}/edit/history`; 0 means the  current version. | [optional] [example: 1] |
+| **fileId** | path | **Integer** (int32) | The file whose changes are read. | [required] [example: `1`] |
+| **version** | query | **Integer** (int32) | The version to show the changes of, as reported by `GET api/2.0/files/file/{fileId}/edit/history`; 0 means the  current version. | [optional] [example: `1`] |
 
 #### Responses
 
@@ -1086,7 +1086,7 @@ Returns the editing revisions of a file, oldest first, as the document service u
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **Integer** (int32) | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: 10] |
+| **fileId** | path | **Integer** (int32) | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: `10`] |
 
 #### Responses
 
@@ -1169,11 +1169,11 @@ Returns the activity log of a single file - who renamed, moved, shared, converte
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **Integer** (int32) | The file whose activity log is read; only files stored in the portal itself have one. | [required] [example: 1] |
-| **fromDate** | query | **Date** (date-time) | The earliest moment an entry may have, read in the time zone of the portal; left out, the log starts at the  oldest entry the portal still keeps. | [optional] [example: 2025-01-01T00:00:00.0000000Z] |
-| **toDate** | query | **Date** (date-time) | The latest moment an entry may have, read in the time zone of the portal; left out, the log ends at the newest  entry. | [optional] [example: 2025-12-31T23:59:59.0000000Z] |
-| **count** | query | **Integer** (int32) | How many entries one page holds. The number of entries that match the query is reported in the response  headers, not in the body. | [optional] [example: 25] [min: 1] [max: 100] |
-| **startIndex** | query | **Integer** (int32) | How many entries to skip before the page begins, counted from the newest one, so pages are taken by adding the  page size to it. | [optional] [example: 0] |
+| **fileId** | path | **Integer** (int32) | The file whose activity log is read; only files stored in the portal itself have one. | [required] [example: `1`] |
+| **fromDate** | query | **Date** (date-time) | The earliest moment an entry may have, read in the time zone of the portal; left out, the log starts at the  oldest entry the portal still keeps. | [optional] [example: `2025-01-01T00:00:00.0000000Z`] |
+| **toDate** | query | **Date** (date-time) | The latest moment an entry may have, read in the time zone of the portal; left out, the log ends at the newest  entry. | [optional] [example: `2025-12-31T23:59:59.0000000Z`] |
+| **count** | query | **Integer** (int32) | How many entries one page holds. The number of entries that match the query is reported in the response  headers, not in the body. | [optional] [example: `25`] [min: 1] [max: 100] |
+| **startIndex** | query | **Integer** (int32) | How many entries to skip before the page begins, counted from the newest one, so pages are taken by adding the  page size to it. | [optional] [example: `0`] |
 
 #### Responses
 
@@ -1216,8 +1216,8 @@ Returns one file as the portal stores it, together with the state it has for the
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **Integer** (int32) | The file to read. | [required] [example: 1] |
-| **version** | query | **Integer** (int32) | The version to read, as reported by `GET api/2.0/files/file/{fileId}/history`; -1, the default, reads the  current version. | [optional] [example: 1] |
+| **fileId** | path | **Integer** (int32) | The file to read. | [required] [example: `1`] |
+| **version** | query | **Integer** (int32) | The version to read, as reported by `GET api/2.0/files/file/{fileId}/history`; -1, the default, reads the  current version. | [optional] [example: `1`] |
 
 #### Responses
 
@@ -1257,9 +1257,9 @@ Lists the external links of a file, each with its identifier, title, address, ri
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: 10] |
-| **count** | query | **Integer** (int32) | How many entries at most to answer with, in the operations of this file that return a list; an operation that  answers with a single object is not affected by it. | [optional] [example: 25] [min: 1] [max: 100] |
-| **startIndex** | query | **Integer** (int32) | How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page. | [optional] [example: 0] |
+| **id** | path | **Integer** (int32) | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: `10`] |
+| **count** | query | **Integer** (int32) | How many entries at most to answer with, in the operations of this file that return a list; an operation that  answers with a single object is not affected by it. | [optional] [example: `25`] [min: 1] [max: 100] |
+| **startIndex** | query | **Integer** (int32) | How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page. | [optional] [example: `0`] |
 
 #### Responses
 
@@ -1300,9 +1300,9 @@ Answers with the primary external link of a file - the one the Copy link action 
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: 10] |
-| **count** | query | **Integer** (int32) | How many entries at most to answer with, in the operations of this file that return a list; an operation that  answers with a single object is not affected by it. | [optional] [example: 25] [min: 1] [max: 100] |
-| **startIndex** | query | **Integer** (int32) | How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page. | [optional] [example: 0] |
+| **id** | path | **Integer** (int32) | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: `10`] |
+| **count** | query | **Integer** (int32) | How many entries at most to answer with, in the operations of this file that return a list; an operation that  answers with a single object is not affected by it. | [optional] [example: `25`] [min: 1] [max: 100] |
+| **startIndex** | query | **Integer** (int32) | How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page. | [optional] [example: `0`] |
 
 #### Responses
 
@@ -1344,7 +1344,7 @@ Returns every stored version of a file, newest first, each of them shaped like t
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **Integer** (int32) | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: 10] |
+| **fileId** | path | **Integer** (int32) | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: `10`] |
 
 #### Responses
 
@@ -1384,7 +1384,7 @@ Answers with the outcome of one completed form-filling session: the filled copy 
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fillingSessionId** | query | **String** | The identifier of the finished filling session, the value the document service reports when the filling ends.  The portal remembers it only for a while afterwards, so an older session is answered as not found. | [optional] [example: 11111111-2222-3333-4444-555555555555] |
+| **fillingSessionId** | query | **String** | The identifier of the finished filling session, the value the document service reports when the filling ends.  The portal remembers it only for a while afterwards, so an older session is answered as not found. | [optional] [example: `11111111-2222-3333-4444-555555555555`] |
 
 #### Responses
 
@@ -1424,7 +1424,7 @@ Returns everything that has been submitted against one PDF form: `metadata` desc
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **Integer** (int32) | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: 10] |
+| **fileId** | path | **Integer** (int32) | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: `10`] |
 
 #### Responses
 
@@ -1466,7 +1466,7 @@ Returns a direct download address for the current content of the file together w
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **Integer** (int32) | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: 10] |
+| **fileId** | path | **Integer** (int32) | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: `10`] |
 
 #### Responses
 
@@ -1507,7 +1507,7 @@ Builds a download address for the current version of a file and answers with it 
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **Integer** (int32) | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: 10] |
+| **fileId** | path | **Integer** (int32) | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: `10`] |
 
 #### Responses
 
@@ -1548,7 +1548,7 @@ Lists the users the file is shared with, which is what a client offers when the 
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **Integer** (int32) | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: 10] |
+| **fileId** | path | **Integer** (int32) | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: `10`] |
 
 #### Responses
 
@@ -1630,7 +1630,7 @@ Reports how far the spreadsheet of submitted form answers has got, the one queue
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **Integer** (int32) | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: 10] |
+| **fileId** | path | **Integer** (int32) | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: `10`] |
 
 #### Responses
 
@@ -1671,7 +1671,7 @@ Tells whether a file is a PDF form that can be filled out in the portal, and ans
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **Integer** (int32) | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: 10] |
+| **fileId** | path | **Integer** (int32) | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: `10`] |
 
 #### Responses
 
@@ -1712,7 +1712,7 @@ Locks a file so that nobody else can change it, or releases that lock, and answe
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **Integer** (int32) | The file to lock or unlock. | [required] [example: 1] |
+| **fileId** | path | **Integer** (int32) | The file to lock or unlock. | [required] [example: `1`] |
 | **LockFileParameters** | body | [**LockFileParameters**](#model-lockfileparameters) | The lock state to reach. | [required] |
 
 #### Responses
@@ -1797,12 +1797,12 @@ Builds everything an editor client needs to open the file: the document descript
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **Integer** (int32) | The file the editor configuration is built for. Take the id from a folder listing such as  `GET api/2.0/files/{folderId}`. | [required] [example: 1] |
-| **version** | query | **Integer** (int32) | Which entry of the file history to open, numbered the way the file versions are. Left out, the current  revision is opened; naming a version requires access to the history of the file. | [optional] [example: 1] |
-| **view** | query | **Boolean** | Asks for a read-only configuration. Left off, the configuration is built for editing as far as the caller's  rights and the room the file lies in allow. | [optional] [example: false] |
-| **editorType** | query | **EditorType** | Which editor layout the configuration is built for: the full desktop interface, the reduced mobile one, or the  embedded viewer meant to be framed inside another page. | [optional] [example: 1] [enum: 0, 1, 2] |
-| **edit** | query | **Boolean** | Asks for editing rather than viewing. On a form in a form-filling room this also records that the form is  being edited; the room may still turn the request into viewing or into filling. | [optional] [example: false] |
-| **fill** | query | **Boolean** | Asks for a PDF form to open for filling out rather than for editing. It has no effect on a file that is not a  form. | [optional] [example: false] |
+| **fileId** | path | **Integer** (int32) | The file the editor configuration is built for. Take the id from a folder listing such as  `GET api/2.0/files/{folderId}`. | [required] [example: `1`] |
+| **version** | query | **Integer** (int32) | Which entry of the file history to open, numbered the way the file versions are. Left out, the current  revision is opened; naming a version requires access to the history of the file. | [optional] [example: `1`] |
+| **view** | query | **Boolean** | Asks for a read-only configuration. Left off, the configuration is built for editing as far as the caller's  rights and the room the file lies in allow. | [optional] [example: `false`] |
+| **editorType** | query | **EditorType** | Which editor layout the configuration is built for: the full desktop interface, the reduced mobile one, or the  embedded viewer meant to be framed inside another page. | [optional] [example: `1`] [enum: `0`, `1`, `2`] |
+| **edit** | query | **Boolean** | Asks for editing rather than viewing. On a form in a form-filling room this also records that the form is  being edited; the room may still turn the request into viewing or into filling. | [optional] [example: `false`] |
+| **fill** | query | **Boolean** | Asks for a PDF form to open for filling out rather than for editing. It has no effect on a file that is not a  form. | [optional] [example: `false`] |
 
 #### Responses
 
@@ -1843,9 +1843,9 @@ Brings an earlier version of a file back and answers with the editing revisions 
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **Integer** (int32) | The file whose version is restored. | [required] [example: 1] |
-| **version** | query | **Integer** (int32) | The version to restore, as reported by `GET api/2.0/files/file/{fileId}/edit/history`. It has to name an  existing version that is not the current one. | [optional] [example: 1] |
-| **url** | query | **String** | The address the content of the new version is fetched from instead of the stored version, which is how the  document service hands back a document with a set of changes rolled back; left out, the stored version is  used. | [optional] [example: https://document-server.example.com/cache/files/conv_1_docx/output.docx] |
+| **fileId** | path | **Integer** (int32) | The file whose version is restored. | [required] [example: `1`] |
+| **version** | query | **Integer** (int32) | The version to restore, as reported by `GET api/2.0/files/file/{fileId}/edit/history`. It has to name an  existing version that is not the current one. | [optional] [example: `1`] |
+| **url** | query | **String** | The address the content of the new version is fetched from instead of the stored version, which is how the  document service hands back a document with a set of changes rolled back; left out, the stored version is  used. | [optional] [example: `https://document-server.example.com/cache/files/conv_1_docx/output.docx`] |
 
 #### Responses
 
@@ -1886,8 +1886,8 @@ Replaces the content of an existing file with an edited copy and answers with th
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **Integer** (int32) | The file whose content is replaced. The submitted content is written onto this file, so it has to be the file  the editing session was opened on rather than a copy of it. | [required] [example: 1] |
-| **DownloadUri** | query | **String** | An address the document service saved the document at. This operation does not fetch the content from it - the  content always comes from the request body - and reads it only for the extension, when no file extension is  given. | [optional] [example: https://example.com/file.txt] |
+| **fileId** | path | **Integer** (int32) | The file whose content is replaced. The submitted content is written onto this file, so it has to be the file  the editing session was opened on rather than a copy of it. | [required] [example: `1`] |
+| **DownloadUri** | query | **String** | An address the document service saved the document at. This operation does not fetch the content from it - the  content always comes from the request body - and reads it only for the extension, when no file extension is  given. | [optional] [example: `https://example.com/file.txt`] |
 | **FileExtension** | form | **String** | The format the submitted content is in, with the leading dot, as in `.docx`. When it differs from the format  the file is stored in, the portal converts the content before saving it. Left empty, the extension is read off  the download address, and failing that the stored format is assumed. | [optional] |
 | **File** | form | **File** (binary) | The edited content, sent as the `File` part of a `multipart/form-data` body. When the part is missing the raw  request body is saved as the content instead, so an empty body empties the file. | [optional] |
 | **Forcesave** | form | **Boolean** | Records the write as an editor autosave: the file keeps its running editing session and the previous autosave  revision is overwritten. Left off, the write closes the solo editing session, is refused while somebody else  has the file open, and adds a version to the history. | [optional] |
@@ -1932,7 +1932,7 @@ Converts a file into a PDF, stores that PDF as a new file in the folder named in
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The file to convert; it is left untouched. | [required] [example: 1] |
+| **id** | path | **Integer** (int32) | The file to convert; it is left untouched. | [required] [example: `1`] |
 | **SaveAsPdfInteger** | body | [**SaveAsPdfInteger**](#model-saveaspdfinteger) | The destination folder and the name of the PDF. | [required] |
 
 #### Responses
@@ -2018,7 +2018,7 @@ Turns the Custom Filter editing mode of a spreadsheet on or off and answers with
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **Integer** (int32) | The spreadsheet whose Custom Filter mode is switched. | [required] [example: 1] |
+| **fileId** | path | **Integer** (int32) | The spreadsheet whose Custom Filter mode is switched. | [required] [example: `1`] |
 | **CustomFilterParameters** | body | [**CustomFilterParameters**](#model-customfilterparameters) | The Custom Filter state to reach. | [required] |
 
 #### Responses
@@ -2060,7 +2060,7 @@ Issues the file keys that let the named people open one file of an end-to-end en
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **Integer** (int32) | The file the keys are issued for; it has to lie in a private room. | [required] [example: 12345] |
+| **fileId** | path | **Integer** (int32) | The file the keys are issued for; it has to lie in a private room. | [required] [example: `12345`] |
 | **AccessRequestKeyDto** | body | [**List**](#model-accessrequestkeydto) | One key per account that is to open the file. The keys of the accounts named here are replaced and the keys of  everybody else are left as they are, so sending no entry for a person does not revoke that person's key. | [optional] |
 
 #### Responses
@@ -2104,7 +2104,7 @@ Creates an external link to a file, or changes or revokes an existing one, and a
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The file the link points at. | [required] [example: 1] |
+| **id** | path | **Integer** (int32) | The file the link points at. | [required] [example: `1`] |
 | **FileLinkRequest** | body | [**FileLinkRequest**](#model-filelinkrequest) | The settings of the link. They are applied in full, so a field left out is reset rather than kept. | [required] |
 
 #### Responses
@@ -2146,7 +2146,7 @@ Puts a file at a given position inside its folder and answers with the file, its
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **Integer** (int32) | The file to move. | [required] [example: 1] |
+| **fileId** | path | **Integer** (int32) | The file to move. | [required] [example: `1`] |
 | **OrderRequestDto** | body | [**OrderRequestDto**](#model-orderrequestdto) | The position the file is to take. | [optional] |
 
 #### Responses
@@ -2231,7 +2231,7 @@ Opens an editing session on the file and answers with the document key that iden
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **Integer** (int32) | The file to open the editing session on. The caller needs edit access to it. | [required] [example: 1] |
+| **fileId** | path | **Integer** (int32) | The file to open the editing session on. The caller needs edit access to it. | [required] [example: `1`] |
 | **StartEdit** | body | [**StartEdit**](#model-startedit) | The session options. The body is required even when it only carries the default, so send an empty object to  open an ordinary co-editing session. | [required] |
 
 #### Responses
@@ -2273,7 +2273,7 @@ Marks a PDF form in a form-filling room as open for filling out and answers with
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **Integer** (int32) | The PDF form to open for filling. It has to be the form as it lies in the form-filling room itself, not a copy  kept elsewhere and not a submitted result. | [required] [example: 1] |
+| **fileId** | path | **Integer** (int32) | The PDF form to open for filling. It has to be the form as it lies in the form-filling room itself, not a copy  kept elsewhere and not a submitted result. | [required] [example: `1`] |
 
 #### Responses
 
@@ -2315,8 +2315,8 @@ Sets or clears the favorite mark of one file for the calling account: `true` add
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **Integer** (int32) | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: 10] |
-| **favorite** | query | **Boolean** | Which state to put the mark in: `true` adds the file to the favorites of the calling account, `false` removes  it from them. Leaving the field out of the request removes the mark rather than setting it. | [optional] [example: true] |
+| **fileId** | path | **Integer** (int32) | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: `10`] |
+| **favorite** | query | **Boolean** | Which state to put the mark in: `true` adds the file to the favorites of the calling account, `false` removes  it from them. Leaving the field out of the request removes the mark rather than setting it. | [optional] [example: `true`] |
 
 #### Responses
 
@@ -2358,10 +2358,10 @@ Keeps an editing session on the file alive, or ends it; an editor client calls i
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **Integer** (int32) | The file whose editing session is being tracked. | [required] [example: 1] |
-| **tabId** | query | **UUID** (uuid) | The client tab that holds the session, a value the client makes up once and repeats on every call about that  tab. Two tabs sending different values are tracked as two sessions on the same file, while the all-zero value  belongs to a session claimed for a single editor. | [optional] [example: 00000000-0000-0000-0000-000000000000] |
-| **docKeyForTrack** | query | **String** | The document key of the revision being edited, as `POST api/2.0/files/file/{fileId}/startedit` returned it. It  is checked against the file's current key on every call, so a key left over from an older revision is refused. | [optional] [example: abc123] |
-| **isFinish** | query | **Boolean** | Ends the session for this tab and tells the other clients that editing has stopped. Left off, the session is  refreshed and the file stays marked as being edited. | [optional] [example: true] |
+| **fileId** | path | **Integer** (int32) | The file whose editing session is being tracked. | [required] [example: `1`] |
+| **tabId** | query | **UUID** (uuid) | The client tab that holds the session, a value the client makes up once and repeats on every call about that  tab. Two tabs sending different values are tracked as two sessions on the same file, while the all-zero value  belongs to a session claimed for a single editor. | [optional] [example: `00000000-0000-0000-0000-000000000000`] |
+| **docKeyForTrack** | query | **String** | The document key of the revision being edited, as `POST api/2.0/files/file/{fileId}/startedit` returned it. It  is checked against the file's current key on every call, so a key left over from an older revision is refused. | [optional] [example: `abc123`] |
+| **isFinish** | query | **Boolean** | Ends the session for this tab and tells the other clients that editing has stopped. Left off, the session is  refreshed and the file stays marked as being edited. | [optional] [example: `true`] |
 
 #### Responses
 
@@ -2402,7 +2402,7 @@ Renames a file, restores one of its versions, or both at once, and answers with 
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **Integer** (int32) | The file to update. | [required] [example: 1] |
+| **fileId** | path | **Integer** (int32) | The file to update. | [required] [example: `1`] |
 | **UpdateFile** | body | [**UpdateFile**](#model-updatefile) | The new title and the version to restore. | [required] |
 
 #### Responses
@@ -2446,7 +2446,7 @@ Reports which of the submitted titles already belong to a file in the folder, so
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **folderId** | path | **Integer** (int32) | The folder whose contents the names are tested against; take the id from a listing such as  `GET api/2.0/files/@root`. | [required] [example: 1] |
+| **folderId** | path | **Integer** (int32) | The folder whose contents the names are tested against; take the id from a listing such as  `GET api/2.0/files/@root`. | [required] [example: `1`] |
 | **CheckUploadRequest** | body | [**CheckUploadRequest**](#model-checkuploadrequest) | The names to test against the files the folder already holds. | [required] |
 
 #### Responses
@@ -2488,7 +2488,7 @@ Creates a folder inside the folder named in the path and answers with the folder
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **folderId** | path | **Integer** (int32) | The folder the request is addressed to: when a folder is created it is the parent that receives the new  folder, and when a folder is renamed it is the folder that gets the new title. | [required] [example: 1] |
+| **folderId** | path | **Integer** (int32) | The folder the request is addressed to: when a folder is created it is the parent that receives the new  folder, and when a folder is renamed it is the folder that gets the new title. | [required] [example: `1`] |
 | **CreateFolder** | body | [**CreateFolder**](#model-createfolder) | The title carried by the request body. | [required] |
 
 #### Responses
@@ -2530,7 +2530,7 @@ Answers with the primary external link of a folder or a room, creating it on the
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The folder or room the link belongs to. | [required] [example: 1] |
+| **id** | path | **Integer** (int32) | The folder or room the link belongs to. | [required] [example: `1`] |
 | **FolderLinkRequest** | body | [**FolderLinkRequest**](#model-folderlinkrequest) | The link and the way it is to be shaped. | [required] |
 
 #### Responses
@@ -2574,10 +2574,10 @@ Queues a background job that renders the history of a folder into a spreadsheet,
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **folderId** | path | **Integer** (int32) | The folder whose history is exported; the report covers the folder itself and the entries inside it. | [required] [example: 1] |
-| **format** | query | **AuditReportFormat** | The shape the report is written in: `Xlsx` produces a spreadsheet that is saved as a file of the portal, while  `Csv` produces a comma-separated text file that is uploaded to My documents without being reported back with  a file identifier. | [optional] [example: Xlsx] [enum: 0, 1] |
-| **from** | query | **Date** (date-time) | The earliest moment an exported entry may have, read in the time zone of the portal; left out, the report  starts at the oldest entry the portal still keeps. | [optional] [example: 2025-01-01T00:00:00] |
-| **to** | query | **Date** (date-time) | The latest moment an exported entry may have, read in the time zone of the portal; left out, the report ends  at the newest entry. | [optional] [example: 2025-12-31T23:59:59] |
+| **folderId** | path | **Integer** (int32) | The folder whose history is exported; the report covers the folder itself and the entries inside it. | [required] [example: `1`] |
+| **format** | query | **AuditReportFormat** | The shape the report is written in: `Xlsx` produces a spreadsheet that is saved as a file of the portal, while  `Csv` produces a comma-separated text file that is uploaded to My documents without being reported back with  a file identifier. | [optional] [example: `Xlsx`] [enum: `0`, `1`] |
+| **from** | query | **Date** (date-time) | The earliest moment an exported entry may have, read in the time zone of the portal; left out, the report  starts at the oldest entry the portal still keeps. | [optional] [example: `2025-01-01T00:00:00`] |
+| **to** | query | **Date** (date-time) | The latest moment an exported entry may have, read in the time zone of the portal; left out, the report ends  at the newest entry. | [optional] [example: `2025-12-31T23:59:59`] |
 
 #### Responses
 
@@ -2620,7 +2620,7 @@ Queues the deletion of one folder together with everything inside it, and answer
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **folderId** | path | **Integer** (int32) | The folder to delete, together with everything it holds. | [required] [example: 10] |
+| **folderId** | path | **Integer** (int32) | The folder to delete, together with everything it holds. | [required] [example: `10`] |
 | **DeleteFolder** | body | [**DeleteFolder**](#model-deletefolder) | How the deletion is to be carried out. | [required] |
 
 #### Responses
@@ -2662,7 +2662,7 @@ Rebuilds the spreadsheet that gathers the answers submitted to a form, starting 
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **folderId** | path | **Integer** (int32) | The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string. | [required] [example: 1] |
+| **folderId** | path | **Integer** (int32) | The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string. | [required] [example: `1`] |
 
 #### Responses
 
@@ -2705,13 +2705,13 @@ Returns the caller's own Favorites section: the files and folders this account h
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **userIdOrGroupId** | query | **UUID** (uuid) | Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read. | [optional] [example: 00000000-0000-0000-0000-000000000000] |
-| **filterType** | query | **FilterType** | Narrows the listing to a single kind of entry, such as documents, images or one type of room. Omit it to list  every kind the section holds. | [optional] [example: 1] [enum: 0, 1, 2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 17, 20, 22, 23, 24, 25, 26] |
-| **count** | query | **Integer** (int32) | The size of one page of section content. Pair it with `startIndex` to walk the listing, and compare the two  with `total` in the response to see when the last page has been read. | [optional] [example: 25] [min: 1] [max: 100] |
-| **startIndex** | query | **Integer** (int32) | The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page. | [optional] [example: 0] |
-| **sortBy** | query | **String** | The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place. | [optional] [example: DateAndTime] |
-| **sortOrder** | query | **SortOrder** | The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account. | [optional] [example: 1] [enum: 0, 1] |
-| **filterValue** | query | **String** | The search string the section is filtered by: it is matched as a substring of entry titles and, for files,  against the indexed document content as well. Omit it to list the section unfiltered. | [optional] [example: My Document] |
+| **userIdOrGroupId** | query | **UUID** (uuid) | Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read. | [optional] [example: `00000000-0000-0000-0000-000000000000`] |
+| **filterType** | query | **FilterType** | Narrows the listing to a single kind of entry, such as documents, images or one type of room. Omit it to list  every kind the section holds. | [optional] [example: `1`] [enum: `0`, `1`, `2`, `3`, `4`, `5`, `7`, `8`, `9`, `10`, `11`, `12`, `13`, `14`, `17`, `20`, `22`, `23`, `24`, `25`, `26`] |
+| **count** | query | **Integer** (int32) | The size of one page of section content. Pair it with `startIndex` to walk the listing, and compare the two  with `total` in the response to see when the last page has been read. | [optional] [example: `25`] [min: 1] [max: 100] |
+| **startIndex** | query | **Integer** (int32) | The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page. | [optional] [example: `0`] |
+| **sortBy** | query | **String** | The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place. | [optional] [example: `DateAndTime`] |
+| **sortOrder** | query | **SortOrder** | The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account. | [optional] [example: `1`] [enum: `0`, `1`] |
+| **filterValue** | query | **String** | The search string the section is filtered by: it is matched as a substring of entry titles and, for files,  against the indexed document content as well. Omit it to list the section unfiltered. | [optional] [example: `My Document`] |
 
 #### Responses
 
@@ -2791,7 +2791,7 @@ Lists the fields the completed forms of a form-filling room carry, each of them 
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **folderId** | path | **Integer** (int32) | The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string. | [required] [example: 1] |
+| **folderId** | path | **Integer** (int32) | The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string. | [required] [example: `1`] |
 
 #### Responses
 
@@ -2831,25 +2831,25 @@ Returns one page of the contents of a folder - its subfolders in `folders`, its 
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **folderId** | path | **Integer** (int32) | The folder whose contents are listed. Each section root has an operation of its own, such as  `GET api/2.0/files/@my`, and every other folder is opened by the identifier a listing gave for it. | [required] [example: 1] |
-| **userIdOrGroupId** | query | **UUID** (uuid) | Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read. | [optional] [example: 00000000-0000-0000-0000-000000000000] |
-| **sharedBy** | query | **UUID** (uuid) | Restricts the listing to the entries this member shared, which narrows a shared listing down to what one  person handed out. | [optional] [example: 00000000-0000-0000-0000-000000000000] |
-| **filterType** | query | **FilterType** | Narrows the listing to a single kind of entry, such as documents, spreadsheets, images or one type of room.  Omit it to list every kind the folder holds. | [optional] [example: 1] [enum: 0, 1, 2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 17, 20, 22, 23, 24, 25, 26] |
-| **roomId** | query | **Integer** (int32) | Keeps only the entries that lie in this room, which matters when the listing being read gathers entries from  more than one of them. | [optional] [example: 1] |
-| **folderType** | query | **List** | Keeps only the folders of these kinds, each given as the number of a folder type; it is how a listing is  narrowed down to, say, the form-filling folders of a room. | [optional] [example: [2]] [enum: 0, 1, 2, 3, 5, 6, 8, 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36] |
-| **excludeSubject** | query | **Boolean** | Turns `userIdOrGroupId` around: with true the entries of that member or group are the ones left out, with  false they are the only ones kept. | [optional] [example: false] |
-| **applyFilterOption** | query | **ApplyFilterOption** | Chooses which half of the listing `filterType` and `filterValue` are applied to: with `Files` the folders come  back unfiltered, with `Folders` the files do, and with `All` both halves are filtered. | [optional] [example: 1] [enum: 0, 1, 2] |
-| **withSubFolders** | query | **Boolean** | Whether a narrowed request reaches into the subfolders: with true, which is what an omitted parameter means,  matching entries are gathered from the whole subtree, with false only the top level is read. It makes a  difference only once `filterType`, `userIdOrGroupId` or `filterValue` narrows the request, because an  unfiltered listing always shows the top level alone. | [optional] [example: true] |
-| **extension** | query | **String** | Keeps only the files carrying one of these extensions, several of them separated by commas; the leading dot is  optional. | [optional] [example: docx,pdf] |
-| **searchArea** | query | **SearchArea** | Which area a listing that spans several of them is taken from - the active rooms, the archive, the room  templates or the form-filling rooms. A folder that belongs to one area only settles the area itself and  ignores the parameter. | [optional] [example: 1] [enum: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9] |
-| **formsItemKey** | query | **String** | Keeps only the completed forms whose form field of this name holds a value. Take the name from  `GET api/2.0/files/{folderId}/formfilter`, and use it in the folder that gathers the completed copies of a  form-filling room. | [optional] [example: first_name] |
-| **formsItemType** | query | **String** | The kind of the form field named by `formsItemKey`, taken from the same list; the two are sent together. | [optional] [example: text] |
-| **count** | query | **Integer** (int32) | The size of one page of the listing. Pair it with `startIndex` to walk through the result, and compare the two  with `total` in the response to see when the last page has been read. | [optional] [example: 25] [min: 1] [max: 100] |
-| **startIndex** | query | **Integer** (int32) | The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page. | [optional] [example: 0] |
-| **sortBy** | query | **String** | The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place. | [optional] [example: DateAndTime] |
-| **sortOrder** | query | **SortOrder** | The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account. | [optional] [example: 1] [enum: 0, 1] |
-| **filterValue** | query | **String** | The search string the listing is filtered by: it is matched as a substring of entry titles and, for files,  against the indexed document content as well. Omit it to list the folder unfiltered. | [optional] [example: My Document] |
-| **Location** | query | **Location** | Where the entries of a tag-based listing have to live to be kept: `Room` keeps what lies in a room,  `Documents` what lies in a personal section, and `Link` what was reached through an external link that is  still valid. It shapes the Favorites and Recent listings and does nothing in an ordinary folder. | [optional] [example: 1] [enum: 1, 2, 3] |
+| **folderId** | path | **Integer** (int32) | The folder whose contents are listed. Each section root has an operation of its own, such as  `GET api/2.0/files/@my`, and every other folder is opened by the identifier a listing gave for it. | [required] [example: `1`] |
+| **userIdOrGroupId** | query | **UUID** (uuid) | Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read. | [optional] [example: `00000000-0000-0000-0000-000000000000`] |
+| **sharedBy** | query | **UUID** (uuid) | Restricts the listing to the entries this member shared, which narrows a shared listing down to what one  person handed out. | [optional] [example: `00000000-0000-0000-0000-000000000000`] |
+| **filterType** | query | **FilterType** | Narrows the listing to a single kind of entry, such as documents, spreadsheets, images or one type of room.  Omit it to list every kind the folder holds. | [optional] [example: `1`] [enum: `0`, `1`, `2`, `3`, `4`, `5`, `7`, `8`, `9`, `10`, `11`, `12`, `13`, `14`, `17`, `20`, `22`, `23`, `24`, `25`, `26`] |
+| **roomId** | query | **Integer** (int32) | Keeps only the entries that lie in this room, which matters when the listing being read gathers entries from  more than one of them. | [optional] [example: `1`] |
+| **folderType** | query | **List** | Keeps only the folders of these kinds, each given as the number of a folder type; it is how a listing is  narrowed down to, say, the form-filling folders of a room. | [optional] [example: `[2]`] [enum: `0`, `1`, `2`, `3`, `5`, `6`, `8`, `10`, `11`, `12`, `13`, `14`, `15`, `16`, `19`, `20`, `21`, `22`, `25`, `26`, `27`, `28`, `29`, `30`, `31`, `32`, `33`, `34`, `35`, `36`] |
+| **excludeSubject** | query | **Boolean** | Turns `userIdOrGroupId` around: with true the entries of that member or group are the ones left out, with  false they are the only ones kept. | [optional] [example: `false`] |
+| **applyFilterOption** | query | **ApplyFilterOption** | Chooses which half of the listing `filterType` and `filterValue` are applied to: with `Files` the folders come  back unfiltered, with `Folders` the files do, and with `All` both halves are filtered. | [optional] [example: `1`] [enum: `0`, `1`, `2`] |
+| **withSubFolders** | query | **Boolean** | Whether a narrowed request reaches into the subfolders: with true, which is what an omitted parameter means,  matching entries are gathered from the whole subtree, with false only the top level is read. It makes a  difference only once `filterType`, `userIdOrGroupId` or `filterValue` narrows the request, because an  unfiltered listing always shows the top level alone. | [optional] [example: `true`] |
+| **extension** | query | **String** | Keeps only the files carrying one of these extensions, several of them separated by commas; the leading dot is  optional. | [optional] [example: `docx,pdf`] |
+| **searchArea** | query | **SearchArea** | Which area a listing that spans several of them is taken from - the active rooms, the archive, the room  templates or the form-filling rooms. A folder that belongs to one area only settles the area itself and  ignores the parameter. | [optional] [example: `1`] [enum: `0`, `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`] |
+| **formsItemKey** | query | **String** | Keeps only the completed forms whose form field of this name holds a value. Take the name from  `GET api/2.0/files/{folderId}/formfilter`, and use it in the folder that gathers the completed copies of a  form-filling room. | [optional] [example: `first_name`] |
+| **formsItemType** | query | **String** | The kind of the form field named by `formsItemKey`, taken from the same list; the two are sent together. | [optional] [example: `text`] |
+| **count** | query | **Integer** (int32) | The size of one page of the listing. Pair it with `startIndex` to walk through the result, and compare the two  with `total` in the response to see when the last page has been read. | [optional] [example: `25`] [min: 1] [max: 100] |
+| **startIndex** | query | **Integer** (int32) | The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page. | [optional] [example: `0`] |
+| **sortBy** | query | **String** | The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place. | [optional] [example: `DateAndTime`] |
+| **sortOrder** | query | **SortOrder** | The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account. | [optional] [example: `1`] [enum: `0`, `1`] |
+| **filterValue** | query | **String** | The search string the listing is filtered by: it is matched as a substring of entry titles and, for files,  against the indexed document content as well. Omit it to list the folder unfiltered. | [optional] [example: `My Document`] |
+| **Location** | query | **Location** | Where the entries of a tag-based listing have to live to be kept: `Room` keeps what lies in a room,  `Documents` what lies in a personal section, and `Link` what was reached through an external link that is  still valid. It shapes the Favorites and Recent listings and does nothing in an ordinary folder. | [optional] [example: `1`] [enum: `1`, `2`, `3`] |
 
 #### Responses
 
@@ -2891,11 +2891,11 @@ Lists what has happened to a folder and to the entries inside it - creations, re
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **folderId** | path | **Integer** (int32) | The folder whose activity log is read; the log covers the folder itself and the entries inside it. | [required] [example: 1] |
-| **fromDate** | query | **Date** (date-time) | The earliest moment an entry may have, read in the time zone of the portal; left out, the log starts at the  oldest entry the portal still keeps. | [optional] [example: 2025-01-01T00:00:00.0000000Z] |
-| **toDate** | query | **Date** (date-time) | The latest moment an entry may have, read in the time zone of the portal; left out, the log ends at the newest  entry. | [optional] [example: 2025-12-31T23:59:59.0000000Z] |
-| **count** | query | **Integer** (int32) | How many entries one page holds. The number of entries that match the query is reported in the response  headers, not in the body. | [optional] [example: 25] [min: 1] [max: 100] |
-| **startIndex** | query | **Integer** (int32) | How many entries to skip before the page begins, counted from the newest one, so pages are taken by adding the  page size to it. | [optional] [example: 0] |
+| **folderId** | path | **Integer** (int32) | The folder whose activity log is read; the log covers the folder itself and the entries inside it. | [required] [example: `1`] |
+| **fromDate** | query | **Date** (date-time) | The earliest moment an entry may have, read in the time zone of the portal; left out, the log starts at the  oldest entry the portal still keeps. | [optional] [example: `2025-01-01T00:00:00.0000000Z`] |
+| **toDate** | query | **Date** (date-time) | The latest moment an entry may have, read in the time zone of the portal; left out, the log ends at the newest  entry. | [optional] [example: `2025-12-31T23:59:59.0000000Z`] |
+| **count** | query | **Integer** (int32) | How many entries one page holds. The number of entries that match the query is reported in the response  headers, not in the body. | [optional] [example: `25`] [min: 1] [max: 100] |
+| **startIndex** | query | **Integer** (int32) | How many entries to skip before the page begins, counted from the newest one, so pages are taken by adding the  page size to it. | [optional] [example: `0`] |
 
 #### Responses
 
@@ -2938,7 +2938,7 @@ Returns one folder as an object - its title, its parent, the moments it was crea
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **folderId** | path | **Integer** (int32) | The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string. | [required] [example: 1] |
+| **folderId** | path | **Integer** (int32) | The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string. | [required] [example: `1`] |
 
 #### Responses
 
@@ -2978,7 +2978,7 @@ Lists the external links of a folder or a room, each with its identifier, title,
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The folder or room whose external links are listed. | [required] [example: 1] |
+| **id** | path | **Integer** (int32) | The folder or room whose external links are listed. | [required] [example: `1`] |
 
 #### Responses
 
@@ -3019,7 +3019,7 @@ Returns the chain of folders that leads to the folder named in the path, ordered
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **folderId** | path | **Integer** (int32) | The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string. | [required] [example: 1] |
+| **folderId** | path | **Integer** (int32) | The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string. | [required] [example: `1`] |
 
 #### Responses
 
@@ -3061,9 +3061,9 @@ Answers with the primary external link of a folder or a room - the one the Copy 
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The folder or room the operation addresses. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string. | [required] [example: 10] |
-| **count** | query | **Integer** (int32) | How many entries at most to answer with, in the operations of this folder that return a list; an operation  that answers with a single object is not affected by it. | [optional] [example: 25] [min: 1] [max: 100] |
-| **startIndex** | query | **Integer** (int32) | How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page. | [optional] [example: 0] |
+| **id** | path | **Integer** (int32) | The folder or room the operation addresses. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string. | [required] [example: `10`] |
+| **count** | query | **Integer** (int32) | How many entries at most to answer with, in the operations of this folder that return a list; an operation  that answers with a single object is not affected by it. | [optional] [example: `25`] [min: 1] [max: 100] |
+| **startIndex** | query | **Integer** (int32) | How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page. | [optional] [example: `0`] |
 
 #### Responses
 
@@ -3105,7 +3105,7 @@ Lists the folders that sit directly inside the folder named in the path, ordered
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **folderId** | path | **Integer** (int32) | The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string. | [required] [example: 1] |
+| **folderId** | path | **Integer** (int32) | The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string. | [required] [example: `1`] |
 
 #### Responses
 
@@ -3147,13 +3147,13 @@ Returns the Forms section: the flat list of form-filling rooms the caller may re
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **userIdOrGroupId** | query | **UUID** (uuid) | Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read. | [optional] [example: 00000000-0000-0000-0000-000000000000] |
-| **filterType** | query | **FilterType** | Narrows the listing to a single kind of entry, such as documents, images or one type of room. Omit it to list  every kind the section holds. | [optional] [example: 1] [enum: 0, 1, 2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 17, 20, 22, 23, 24, 25, 26] |
-| **count** | query | **Integer** (int32) | The size of one page of section content. Pair it with `startIndex` to walk the listing, and compare the two  with `total` in the response to see when the last page has been read. | [optional] [example: 25] [min: 1] [max: 100] |
-| **startIndex** | query | **Integer** (int32) | The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page. | [optional] [example: 0] |
-| **sortBy** | query | **String** | The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place. | [optional] [example: DateAndTime] |
-| **sortOrder** | query | **SortOrder** | The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account. | [optional] [example: 1] [enum: 0, 1] |
-| **filterValue** | query | **String** | The search string the section is filtered by: it is matched as a substring of entry titles and, for files,  against the indexed document content as well. Omit it to list the section unfiltered. | [optional] [example: My Document] |
+| **userIdOrGroupId** | query | **UUID** (uuid) | Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read. | [optional] [example: `00000000-0000-0000-0000-000000000000`] |
+| **filterType** | query | **FilterType** | Narrows the listing to a single kind of entry, such as documents, images or one type of room. Omit it to list  every kind the section holds. | [optional] [example: `1`] [enum: `0`, `1`, `2`, `3`, `4`, `5`, `7`, `8`, `9`, `10`, `11`, `12`, `13`, `14`, `17`, `20`, `22`, `23`, `24`, `25`, `26`] |
+| **count** | query | **Integer** (int32) | The size of one page of section content. Pair it with `startIndex` to walk the listing, and compare the two  with `total` in the response to see when the last page has been read. | [optional] [example: `25`] [min: 1] [max: 100] |
+| **startIndex** | query | **Integer** (int32) | The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page. | [optional] [example: `0`] |
+| **sortBy** | query | **String** | The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place. | [optional] [example: `DateAndTime`] |
+| **sortOrder** | query | **SortOrder** | The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account. | [optional] [example: `1`] [enum: `0`, `1`] |
+| **filterValue** | query | **String** | The search string the section is filtered by: it is matched as a substring of entry titles and, for files,  against the indexed document content as well. Omit it to list the section unfiltered. | [optional] [example: `My Document`] |
 
 #### Responses
 
@@ -3196,14 +3196,14 @@ Returns the contents of the caller's My documents section, the personal storage 
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **userIdOrGroupId** | query | **UUID** (uuid) | Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read. | [optional] [example: 00000000-0000-0000-0000-000000000000] |
-| **filterType** | query | **FilterType** | Narrows the listing to a single kind of entry, such as documents, images or one type of room. Omit it to list  every kind the section holds. | [optional] [example: 1] [enum: 0, 1, 2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 17, 20, 22, 23, 24, 25, 26] |
-| **applyFilterOption** | query | **ApplyFilterOption** | Chooses which half of the listing `filterType` and `filterValue` are applied to: with `Files` the folders come  back unfiltered, with `Folders` the files do, and with `All` both halves are filtered. | [optional] [example: 1] [enum: 0, 1, 2] |
-| **count** | query | **Integer** (int32) | The size of one page of section content. Pair it with `startIndex` to walk the listing, and compare the two  with `total` in the response to see when the last page has been read. | [optional] [example: 25] [min: 1] [max: 100] |
-| **startIndex** | query | **Integer** (int32) | The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page. | [optional] [example: 0] |
-| **sortBy** | query | **String** | The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place. | [optional] [example: DateAndTime] |
-| **sortOrder** | query | **SortOrder** | The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account. | [optional] [example: 1] [enum: 0, 1] |
-| **filterValue** | query | **String** | The search string the section is filtered by, matched as a substring of entry titles. Omit it to list the  section unfiltered. | [optional] [example: My Document] |
+| **userIdOrGroupId** | query | **UUID** (uuid) | Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read. | [optional] [example: `00000000-0000-0000-0000-000000000000`] |
+| **filterType** | query | **FilterType** | Narrows the listing to a single kind of entry, such as documents, images or one type of room. Omit it to list  every kind the section holds. | [optional] [example: `1`] [enum: `0`, `1`, `2`, `3`, `4`, `5`, `7`, `8`, `9`, `10`, `11`, `12`, `13`, `14`, `17`, `20`, `22`, `23`, `24`, `25`, `26`] |
+| **applyFilterOption** | query | **ApplyFilterOption** | Chooses which half of the listing `filterType` and `filterValue` are applied to: with `Files` the folders come  back unfiltered, with `Folders` the files do, and with `All` both halves are filtered. | [optional] [example: `1`] [enum: `0`, `1`, `2`] |
+| **count** | query | **Integer** (int32) | The size of one page of section content. Pair it with `startIndex` to walk the listing, and compare the two  with `total` in the response to see when the last page has been read. | [optional] [example: `25`] [min: 1] [max: 100] |
+| **startIndex** | query | **Integer** (int32) | The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page. | [optional] [example: `0`] |
+| **sortBy** | query | **String** | The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place. | [optional] [example: `DateAndTime`] |
+| **sortOrder** | query | **SortOrder** | The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account. | [optional] [example: `1`] [enum: `0`, `1`] |
+| **filterValue** | query | **String** | The search string the section is filtered by, matched as a substring of entry titles. Omit it to list the  section unfiltered. | [optional] [example: `My Document`] |
 
 #### Responses
 
@@ -3246,7 +3246,7 @@ Lists the entries of a folder that are new for the calling member - the files an
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **folderId** | path | **Integer** (int32) | The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string. | [required] [example: 1] |
+| **folderId** | path | **Integer** (int32) | The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string. | [required] [example: `1`] |
 
 #### Responses
 
@@ -3288,17 +3288,17 @@ Returns the Recent section: the files the calling account has opened lately. The
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **userIdOrGroupId** | query | **UUID** (uuid) | Restricts the listing to the files authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list the whole history. | [optional] [example: 00000000-0000-0000-0000-000000000000] |
-| **filterType** | query | **FilterType** | Narrows the listing to a single kind of file, such as documents, spreadsheets or images. Omit it to list every  kind the history holds. | [optional] [example: 1] [enum: 0, 1, 2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 17, 20, 22, 23, 24, 25, 26] |
-| **excludeSubject** | query | **Boolean** | Inverts `userIdOrGroupId`: with `true` the files of that member or group are the ones left out of the listing  instead of the only ones kept. | [optional] [example: false] |
-| **applyFilterOption** | query | **ApplyFilterOption** | Chooses which half of a listing `filterType` and `filterValue` are applied to. The Recent section holds  files only, so the value does not change what comes back. | [optional] [example: 1] [enum: 0, 1, 2] |
-| **searchArea** | query | **SearchArea** | The area a listing is taken from. The Recent section is assembled from the caller's own open history rather  than from an area, so the value does not change which files are returned. | [optional] [example: 1] [enum: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9] |
-| **extension** | query | **List** | The file extensions the listing is limited to, matched against the end of the file name. The leading dot is  optional, and the parameter is repeated once per extension. | [optional] [example: .docx] |
-| **count** | query | **Integer** (int32) | The size of one page of section content. Pair it with `startIndex` to walk the listing, and compare the two  with `total` in the response to see when the last page has been read. | [optional] [example: 25] [min: 1] [max: 100] |
-| **startIndex** | query | **Integer** (int32) | The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page. | [optional] [example: 0] |
-| **sortBy** | query | **String** | The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place. The Recent section keeps its own newest-first order, so the value does not  reorder this listing. | [optional] [example: DateAndTime] |
-| **sortOrder** | query | **SortOrder** | The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account. The Recent section keeps its own newest-first order, so the value does not reorder this  listing. | [optional] [example: 1] [enum: 0, 1] |
-| **filterValue** | query | **String** | The search string the history is filtered by: it is matched as a substring of file titles and against the  indexed document content as well. Omit it to list the whole history. | [optional] [example: My Document] |
+| **userIdOrGroupId** | query | **UUID** (uuid) | Restricts the listing to the files authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list the whole history. | [optional] [example: `00000000-0000-0000-0000-000000000000`] |
+| **filterType** | query | **FilterType** | Narrows the listing to a single kind of file, such as documents, spreadsheets or images. Omit it to list every  kind the history holds. | [optional] [example: `1`] [enum: `0`, `1`, `2`, `3`, `4`, `5`, `7`, `8`, `9`, `10`, `11`, `12`, `13`, `14`, `17`, `20`, `22`, `23`, `24`, `25`, `26`] |
+| **excludeSubject** | query | **Boolean** | Inverts `userIdOrGroupId`: with `true` the files of that member or group are the ones left out of the listing  instead of the only ones kept. | [optional] [example: `false`] |
+| **applyFilterOption** | query | **ApplyFilterOption** | Chooses which half of a listing `filterType` and `filterValue` are applied to. The Recent section holds  files only, so the value does not change what comes back. | [optional] [example: `1`] [enum: `0`, `1`, `2`] |
+| **searchArea** | query | **SearchArea** | The area a listing is taken from. The Recent section is assembled from the caller's own open history rather  than from an area, so the value does not change which files are returned. | [optional] [example: `1`] [enum: `0`, `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`] |
+| **extension** | query | **List** | The file extensions the listing is limited to, matched against the end of the file name. The leading dot is  optional, and the parameter is repeated once per extension. | [optional] [example: `.docx`] |
+| **count** | query | **Integer** (int32) | The size of one page of section content. Pair it with `startIndex` to walk the listing, and compare the two  with `total` in the response to see when the last page has been read. | [optional] [example: `25`] [min: 1] [max: 100] |
+| **startIndex** | query | **Integer** (int32) | The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page. | [optional] [example: `0`] |
+| **sortBy** | query | **String** | The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place. The Recent section keeps its own newest-first order, so the value does not  reorder this listing. | [optional] [example: `DateAndTime`] |
+| **sortOrder** | query | **SortOrder** | The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account. The Recent section keeps its own newest-first order, so the value does not reorder this  listing. | [optional] [example: `1`] [enum: `0`, `1`] |
+| **filterValue** | query | **String** | The search string the history is filtered by: it is matched as a substring of file titles and against the  indexed document content as well. Omit it to list the whole history. | [optional] [example: `My Document`] |
 
 #### Responses
 
@@ -3384,14 +3384,14 @@ Returns every top-level section the calling account can see in one response, eac
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **userIdOrGroupId** | query | **UUID** (uuid) | Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read. | [optional] [example: 00000000-0000-0000-0000-000000000000] |
-| **filterType** | query | **FilterType** | Narrows the content listed inside every returned section to a single kind of entry, such as documents, images  or one type of room. Omit it to list every kind the sections hold. | [optional] [example: 1] [enum: 0, 1, 2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 17, 20, 22, 23, 24, 25, 26] |
-| **withoutTrash** | query | **Boolean** | Set it to `true` to leave the Trash section out of the returned set of sections; with `false`, or when the  parameter is omitted, the section is returned whenever the account has one of its own. | [optional] [example: false] |
-| **count** | query | **Integer** (int32) | The size of the content page returned for each section separately, so a value of 1 yields one entry per  section rather than one entry in total. | [optional] [example: 25] [min: 1] [max: 100] |
-| **startIndex** | query | **Integer** (int32) | The number of matching entries skipped in each section before its page begins; add `count` to it to ask for  the next page of every section. | [optional] [example: 0] |
-| **sortBy** | query | **String** | The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place. | [optional] [example: DateAndTime] |
-| **sortOrder** | query | **SortOrder** | The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account. | [optional] [example: 1] [enum: 0, 1] |
-| **filterValue** | query | **String** | The search string the content of every section is filtered by: it is matched as a substring of entry titles  and, for files, against the indexed document content as well. Omit it to list the sections unfiltered. | [optional] [example: My Document] |
+| **userIdOrGroupId** | query | **UUID** (uuid) | Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read. | [optional] [example: `00000000-0000-0000-0000-000000000000`] |
+| **filterType** | query | **FilterType** | Narrows the content listed inside every returned section to a single kind of entry, such as documents, images  or one type of room. Omit it to list every kind the sections hold. | [optional] [example: `1`] [enum: `0`, `1`, `2`, `3`, `4`, `5`, `7`, `8`, `9`, `10`, `11`, `12`, `13`, `14`, `17`, `20`, `22`, `23`, `24`, `25`, `26`] |
+| **withoutTrash** | query | **Boolean** | Set it to `true` to leave the Trash section out of the returned set of sections; with `false`, or when the  parameter is omitted, the section is returned whenever the account has one of its own. | [optional] [example: `false`] |
+| **count** | query | **Integer** (int32) | The size of the content page returned for each section separately, so a value of 1 yields one entry per  section rather than one entry in total. | [optional] [example: `25`] [min: 1] [max: 100] |
+| **startIndex** | query | **Integer** (int32) | The number of matching entries skipped in each section before its page begins; add `count` to it to ask for  the next page of every section. | [optional] [example: `0`] |
+| **sortBy** | query | **String** | The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place. | [optional] [example: `DateAndTime`] |
+| **sortOrder** | query | **SortOrder** | The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account. | [optional] [example: `1`] [enum: `0`, `1`] |
+| **filterValue** | query | **String** | The search string the content of every section is filtered by: it is matched as a substring of entry titles  and, for files, against the indexed document content as well. Omit it to list the sections unfiltered. | [optional] [example: `My Document`] |
 
 #### Responses
 
@@ -3434,14 +3434,14 @@ Returns the caller's Trash section: the files and folders this account has delet
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **userIdOrGroupId** | query | **UUID** (uuid) | Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read. | [optional] [example: 00000000-0000-0000-0000-000000000000] |
-| **filterType** | query | **FilterType** | Narrows the listing to a single kind of entry, such as documents, images or one type of room. Omit it to list  every kind the section holds. | [optional] [example: 1] [enum: 0, 1, 2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 17, 20, 22, 23, 24, 25, 26] |
-| **applyFilterOption** | query | **ApplyFilterOption** | Chooses which half of the listing `filterType` and `filterValue` are applied to: with `Files` the folders come  back unfiltered, with `Folders` the files do, and with `All` both halves are filtered. | [optional] [example: 1] [enum: 0, 1, 2] |
-| **count** | query | **Integer** (int32) | The size of one page of section content. Pair it with `startIndex` to walk the listing, and compare the two  with `total` in the response to see when the last page has been read. | [optional] [example: 25] [min: 1] [max: 100] |
-| **startIndex** | query | **Integer** (int32) | The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page. | [optional] [example: 0] |
-| **sortBy** | query | **String** | The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place. | [optional] [example: DateAndTime] |
-| **sortOrder** | query | **SortOrder** | The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account. | [optional] [example: 1] [enum: 0, 1] |
-| **filterValue** | query | **String** | The search string the section is filtered by, matched as a substring of entry titles. Omit it to list the  section unfiltered. | [optional] [example: My Document] |
+| **userIdOrGroupId** | query | **UUID** (uuid) | Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read. | [optional] [example: `00000000-0000-0000-0000-000000000000`] |
+| **filterType** | query | **FilterType** | Narrows the listing to a single kind of entry, such as documents, images or one type of room. Omit it to list  every kind the section holds. | [optional] [example: `1`] [enum: `0`, `1`, `2`, `3`, `4`, `5`, `7`, `8`, `9`, `10`, `11`, `12`, `13`, `14`, `17`, `20`, `22`, `23`, `24`, `25`, `26`] |
+| **applyFilterOption** | query | **ApplyFilterOption** | Chooses which half of the listing `filterType` and `filterValue` are applied to: with `Files` the folders come  back unfiltered, with `Folders` the files do, and with `All` both halves are filtered. | [optional] [example: `1`] [enum: `0`, `1`, `2`] |
+| **count** | query | **Integer** (int32) | The size of one page of section content. Pair it with `startIndex` to walk the listing, and compare the two  with `total` in the response to see when the last page has been read. | [optional] [example: `25`] [min: 1] [max: 100] |
+| **startIndex** | query | **Integer** (int32) | The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page. | [optional] [example: `0`] |
+| **sortBy** | query | **String** | The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place. | [optional] [example: `DateAndTime`] |
+| **sortOrder** | query | **SortOrder** | The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account. | [optional] [example: `1`] [enum: `0`, `1`] |
+| **filterValue** | query | **String** | The search string the section is filtered by, matched as a substring of entry titles. Omit it to list the  section unfiltered. | [optional] [example: `My Document`] |
 
 #### Responses
 
@@ -3484,7 +3484,7 @@ Stores a file in the folder named by the path in a single request, taking its na
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **folderId** | path | **Integer** (int32) | The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not. | [required] [example: 1] |
+| **folderId** | path | **Integer** (int32) | The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not. | [required] [example: `1`] |
 | **InsertFile.File** | form | **File** (binary) | The content to store, sent as a `multipart/form-data` part. The same content may instead be sent as the raw  request body, which is what a client that cannot build a form does; when both are present the form part wins. | [optional] |
 | **InsertFile.Title** | form | **String** | The name to store the file under, extension included. It wins over the name of the uploaded part, which is the  reason to choose this operation over the plain upload, and it is the only name available when the content  arrives as a raw body. Characters a title cannot hold are replaced with underscores and the name is cut to 170  characters before the file is stored. | [optional] |
 | **InsertFile.CreateNewIfExist** | form | **Boolean** | Settles the clash with a file already carrying that title: left out, the content is written as the next  version of that file; set to true, both survive and the new one gets a numeric suffix in its title. | [optional] |
@@ -3593,7 +3593,7 @@ Gives a folder a new title and answers with the folder as it now stands. The tit
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **folderId** | path | **Integer** (int32) | The folder the request is addressed to: when a folder is created it is the parent that receives the new  folder, and when a folder is renamed it is the folder that gets the new title. | [required] [example: 1] |
+| **folderId** | path | **Integer** (int32) | The folder the request is addressed to: when a folder is created it is the parent that receives the new  folder, and when a folder is renamed it is the folder that gets the new title. | [required] [example: `1`] |
 | **CreateFolder** | body | [**CreateFolder**](#model-createfolder) | The title carried by the request body. | [required] |
 
 #### Responses
@@ -3636,7 +3636,7 @@ Puts a folder at a given position among the entries of its parent and answers wi
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **folderId** | path | **Integer** (int32) | The folder to move. | [required] [example: 1] |
+| **folderId** | path | **Integer** (int32) | The folder to move. | [required] [example: `1`] |
 | **OrderRequestDto** | body | [**OrderRequestDto**](#model-orderrequestdto) | The position the folder is to take. | [optional] |
 
 #### Responses
@@ -3678,7 +3678,7 @@ Creates an external link to a folder or a room, or changes or revokes an existin
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The folder or room the link belongs to. | [required] [example: 1] |
+| **id** | path | **Integer** (int32) | The folder or room the link belongs to. | [required] [example: `1`] |
 | **FolderLinkRequest** | body | [**FolderLinkRequest**](#model-folderlinkrequest) | The link and the way it is to be shaped. | [required] |
 
 #### Responses
@@ -3763,10 +3763,10 @@ Stores a file in the folder named by the path in a single multipart request, tak
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **folderId** | path | **Integer** (int32) | The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not. | [required] [example: 1] |
-| **createNewIfExist** | query | **Boolean** | Settles the clash with a file already carrying that title: left out, the content is written as the next  version of that file; set to true, both survive and the new one gets a numeric suffix in its title. | [optional] [example: true] |
-| **storeOriginalFile** | query | **Boolean** | Reaches further than this request: it writes a setting on the calling account, the same one  `PUT api/2.0/files/storeoriginal` writes, and it stays in force for later uploads. True keeps both the  uploaded file and the copy the portal converts it into, false replaces the uploaded file with the converted  one, and leaving it out keeps whatever the account already has. | [optional] [example: true] |
-| **keepConvertStatus** | query | **Boolean** | Decides whether the outcome of the background conversion outlives the conversion itself. True keeps the queue  record, so `GET api/2.0/files/file/{fileId}/checkconversion` can still report the result or the error; left  out, the record is cleared the moment the conversion ends and that call finds nothing. | [optional] [example: true] |
+| **folderId** | path | **Integer** (int32) | The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not. | [required] [example: `1`] |
+| **createNewIfExist** | query | **Boolean** | Settles the clash with a file already carrying that title: left out, the content is written as the next  version of that file; set to true, both survive and the new one gets a numeric suffix in its title. | [optional] [example: `true`] |
+| **storeOriginalFile** | query | **Boolean** | Reaches further than this request: it writes a setting on the calling account, the same one  `PUT api/2.0/files/storeoriginal` writes, and it stays in force for later uploads. True keeps both the  uploaded file and the copy the portal converts it into, false replaces the uploaded file with the converted  one, and leaving it out keeps whatever the account already has. | [optional] [example: `true`] |
+| **keepConvertStatus** | query | **Boolean** | Decides whether the outcome of the background conversion outlives the conversion itself. True keeps the queue  record, so `GET api/2.0/files/file/{fileId}/checkconversion` can still report the result or the error; left  out, the record is cleared the moment the conversion ends and that call finds nothing. | [optional] [example: `true`] |
 | **File** | form | **File** (binary) | The content to store, sent as a `multipart/form-data` part; the name of that part becomes the title of the  stored file, with characters a title cannot hold replaced and the name cut to 170 characters. A request  without it is rejected as invalid. | [optional] |
 
 #### Responses
@@ -3810,9 +3810,9 @@ Uploads one file into the caller's own My documents section and returns it insid
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **createNewIfExist** | query | **Boolean** | Settles the clash with a file already carrying that title: left out, the content is written as the next  version of that file; set to true, both survive and the new one gets a numeric suffix in its title. | [optional] [example: true] |
-| **storeOriginalFile** | query | **Boolean** | Reaches further than this request: it writes a setting on the calling account, the same one  `PUT api/2.0/files/storeoriginal` writes, and it stays in force for later uploads. True keeps both the  uploaded file and the copy the portal converts it into, false replaces the uploaded file with the converted  one, and leaving it out keeps whatever the account already has. | [optional] [example: true] |
-| **keepConvertStatus** | query | **Boolean** | Decides whether the outcome of the background conversion outlives the conversion itself. True keeps the queue  record, so `GET api/2.0/files/file/{fileId}/checkconversion` can still report the result or the error; left  out, the record is cleared the moment the conversion ends and that call finds nothing. | [optional] [example: true] |
+| **createNewIfExist** | query | **Boolean** | Settles the clash with a file already carrying that title: left out, the content is written as the next  version of that file; set to true, both survive and the new one gets a numeric suffix in its title. | [optional] [example: `true`] |
+| **storeOriginalFile** | query | **Boolean** | Reaches further than this request: it writes a setting on the calling account, the same one  `PUT api/2.0/files/storeoriginal` writes, and it stays in force for later uploads. True keeps both the  uploaded file and the copy the portal converts it into, false replaces the uploaded file with the converted  one, and leaving it out keeps whatever the account already has. | [optional] [example: `true`] |
+| **keepConvertStatus** | query | **Boolean** | Decides whether the outcome of the background conversion outlives the conversion itself. True keeps the queue  record, so `GET api/2.0/files/file/{fileId}/checkconversion` can still report the result or the error; left  out, the record is cleared the moment the conversion ends and that call finds nothing. | [optional] [example: `true`] |
 | **File** | form | **File** (binary) | The content to store, sent as a `multipart/form-data` part; the name of that part becomes the title of the  stored file, with characters a title cannot hold replaced and the name cut to 170 characters. A request  without it is rejected as invalid. | [optional] |
 
 #### Responses
@@ -3858,8 +3858,8 @@ Cancels a chunked upload opened with `POST api/2.0/files/{folderId}/session` and
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **sessionId** | path | **String** | The session to cancel, as returned in `id` when it was created: a 32-character hexadecimal string that  identifies the session on its own. | [required] [example: 9f1c7a2b4d3e4f5a8b6c0d1e2f3a4b5c] |
-| **folderId** | path | **Integer** (int32) | The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id. | [required] [example: 1] |
+| **sessionId** | path | **String** | The session to cancel, as returned in `id` when it was created: a 32-character hexadecimal string that  identifies the session on its own. | [required] [example: `9f1c7a2b4d3e4f5a8b6c0d1e2f3a4b5c`] |
+| **folderId** | path | **Integer** (int32) | The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id. | [required] [example: `1`] |
 
 #### Responses
 
@@ -3983,8 +3983,8 @@ Reports how far the conversion of a file has got, as a list that holds one entry
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **Integer** (int32) | The file whose conversion is asked about. | [required] [example: 1] |
-| **start** | query | **Boolean** | Whether to start the conversion as well: `true` queues it with the default output format and no password,  `false` only reports what the portal already knows. | [optional] [example: false] |
+| **fileId** | path | **Integer** (int32) | The file whose conversion is asked about. | [required] [example: `1`] |
+| **start** | query | **Boolean** | Whether to start the conversion as well: `true` queues it with the default output format and no password,  `false` only reports what the portal already knows. | [optional] [example: `false`] |
 
 #### Responses
 
@@ -4151,7 +4151,7 @@ Deprecated in favour of `POST api/2.0/files/{folderId}/session`, which opens the
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **folderId** | path | **Integer** (int32) | The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not. | [required] [example: 1] |
+| **folderId** | path | **Integer** (int32) | The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not. | [required] [example: `1`] |
 | **SessionRequest** | body | [**SessionRequest**](#model-sessionrequest) | The file the session is opened for, and how a clash with an existing name is settled. | [required] |
 
 #### Responses
@@ -4194,7 +4194,7 @@ Opens a chunked upload session for a file in the folder named by the path and re
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **folderId** | path | **Integer** (int32) | The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not. | [required] [example: 1] |
+| **folderId** | path | **Integer** (int32) | The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not. | [required] [example: `1`] |
 | **SessionRequest** | body | [**SessionRequest**](#model-sessionrequest) | The file the session is opened for, and how a clash with an existing name is settled. | [required] |
 
 #### Responses
@@ -4402,8 +4402,8 @@ Queues a background job that permanently removes the content of the caller's own
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **Single** | query | **Boolean** | Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every delete operation that the caller has running or unread. | [optional] [example: false] |
-| **folderType** | query | **List** | Limits the sweep to the items whose original location was inside a section or a room of one of the named  types, leaving the rest of the Trash untouched; without the parameter the whole Trash is emptied. `5` covers  what was deleted from personal documents, `14` what was deleted from rooms. | [optional] [example: [5]] [enum: 0, 1, 2, 3, 5, 6, 8, 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36] |
+| **Single** | query | **Boolean** | Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every delete operation that the caller has running or unread. | [optional] [example: `false`] |
+| **folderType** | query | **List** | Limits the sweep to the items whose original location was inside a section or a room of one of the named  types, leaving the rest of the Trash untouched; without the parameter the whole Trash is emptied. `5` covers  what was deleted from personal documents, `14` what was deleted from rooms. | [optional] [example: `[5]`] [enum: `0`, `1`, `2`, `3`, `5`, `6`, `8`, `10`, `11`, `12`, `13`, `14`, `15`, `16`, `19`, `20`, `21`, `22`, `25`, `26`, `27`, `28`, `29`, `30`, `31`, `32`, `33`, `34`, `35`, `36`] |
 
 #### Responses
 
@@ -4444,8 +4444,8 @@ Assembles the parts received so far into the file the session was opened for and
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **folderId** | path | **Integer** (int32) | The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id. | [required] [example: 1] |
-| **sessionId** | path | **String** | The session to assemble, as returned in `id` when it was created: a 32-character hexadecimal string that  identifies the session on its own. | [required] [example: 9f1c7a2b4d3e4f5a8b6c0d1e2f3a4b5c] |
+| **folderId** | path | **Integer** (int32) | The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id. | [required] [example: `1`] |
+| **sessionId** | path | **String** | The session to assemble, as returned in `id` when it was created: a 32-character hexadecimal string that  identifies the session on its own. | [required] [example: `9f1c7a2b4d3e4f5a8b6c0d1e2f3a4b5c`] |
 
 #### Responses
 
@@ -4486,7 +4486,7 @@ Returns the background file operations of the caller that are still running or w
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | query | **String** | The operation to report on, as returned in `id` when it was started; without it every operation of the caller  is reported. An id that is not among the caller's operations gives an empty answer rather than an error. | [optional] [example: b2f3e9a4-7c15-4d8e-9f60-3a1c5e7d0b42] |
+| **id** | query | **String** | The operation to report on, as returned in `id` when it was started; without it every operation of the caller  is reported. An id that is not among the caller's operations gives an empty answer rather than an error. | [optional] [example: `b2f3e9a4-7c15-4d8e-9f60-3a1c5e7d0b42`] |
 
 #### Responses
 
@@ -4526,8 +4526,8 @@ Returns the background file operations of the caller that are of one kind, named
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **operationType** | path | **FileOperationType** | The kind of operation the answer is limited to. Only the kinds that have a queue of their own ever carry  records — a copy, a deletion, a download, a mark-as-read and a duplication — and moves cannot be read through  this route at all, because its address belongs to another operation. | [required] [example: 2] [enum: 0, 1, 2, 3, 4, 5, 6, 7] |
-| **id** | query | **String** | The operation to report on, as returned in `id` when it was started; without it every operation of the caller  is reported. An id that is not among the caller's operations gives an empty answer rather than an error. | [optional] [example: b2f3e9a4-7c15-4d8e-9f60-3a1c5e7d0b42] |
+| **operationType** | path | **FileOperationType** | The kind of operation the answer is limited to. Only the kinds that have a queue of their own ever carry  records — a copy, a deletion, a download, a mark-as-read and a duplication — and moves cannot be read through  this route at all, because its address belongs to another operation. | [required] [example: `2`] [enum: `0`, `1`, `2`, `3`, `4`, `5`, `6`, `7`] |
+| **id** | query | **String** | The operation to report on, as returned in `id` when it was started; without it every operation of the caller  is reported. An id that is not among the caller's operations gives an empty answer rather than an error. | [optional] [example: `b2f3e9a4-7c15-4d8e-9f60-3a1c5e7d0b42`] |
 
 #### Responses
 
@@ -4650,7 +4650,7 @@ Queues the conversion of a file into the portal's own editable format and answer
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **Integer** (int32) | The file to convert. | [required] [example: 1] |
+| **fileId** | path | **Integer** (int32) | The file to convert. | [required] [example: `1`] |
 | **CheckConversionRequestDtoInteger** | body | [**CheckConversionRequestDtoInteger**](#model-checkconversionrequestdtointeger) | The parameters of the conversion. The whole body may be omitted, in which case the defaults of the portal  apply. | [optional] |
 
 #### Responses
@@ -4692,7 +4692,7 @@ Cancels a background file operation of the caller and answers with the operation
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **String** | The operation to cancel, as returned in `id` when it was started. A call that leaves the route segment out  cancels every operation of the caller, and an id that is not among their operations cancels nothing without  being an error. | [required] [example: b2f3e9a4-7c15-4d8e-9f60-3a1c5e7d0b42] |
+| **id** | path | **String** | The operation to cancel, as returned in `id` when it was started. A call that leaves the route segment out  cancels every operation of the caller, and an id that is not among their operations cancels nothing without  being an error. | [required] [example: `b2f3e9a4-7c15-4d8e-9f60-3a1c5e7d0b42`] |
 
 #### Responses
 
@@ -4732,7 +4732,7 @@ Replaces the comment stored on one version of a file - the note that explains wh
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **Integer** (int32) | The file whose version comment is replaced. | [required] [example: 1] |
+| **fileId** | path | **Integer** (int32) | The file whose version comment is replaced. | [required] [example: `1`] |
 | **UpdateComment** | body | [**UpdateComment**](#model-updatecomment) | The version and the comment to store on it. | [required] |
 
 #### Responses
@@ -4774,9 +4774,9 @@ Stores one part of a file under the number given in `chunkNumber`, which is what
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **folderId** | path | **Integer** (int32) | The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id. | [required] [example: 1] |
-| **sessionId** | path | **String** | The session this part belongs to, as returned in `id` when it was created; a 32-character hexadecimal string. | [required] [example: 9f1c7a2b4d3e4f5a8b6c0d1e2f3a4b5c] |
-| **ChunkNumber** | query | **Integer** (int32) | The position of this part in the file, counted from 1. Sending the same number again replaces that part  instead of adding one, which is how a failed part is retried; leaving the number out makes the server count  the parts itself. | [optional] [example: 1] |
+| **folderId** | path | **Integer** (int32) | The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id. | [required] [example: `1`] |
+| **sessionId** | path | **String** | The session this part belongs to, as returned in `id` when it was created; a 32-character hexadecimal string. | [required] [example: `9f1c7a2b4d3e4f5a8b6c0d1e2f3a4b5c`] |
+| **ChunkNumber** | query | **Integer** (int32) | The position of this part in the file, counted from 1. Sending the same number again replaces that part  instead of adding one, which is how a failed part is retried; leaving the number out makes the server count  the parts itself. | [optional] [example: `1`] |
 | **File** | form | **File** (binary) | The part of the file to store, sent as the multipart field of the same name. It is kept under the number given  beside it, and a part larger than the portal chunk size is refused. | [optional] |
 
 #### Responses
@@ -4818,8 +4818,8 @@ Sends the next part of a file into the session opened for it, as the multipart `
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **folderId** | path | **Integer** (int32) | The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id. | [required] [example: 1] |
-| **sessionId** | path | **String** | The session this part belongs to, as returned in `id` when it was created; the parts of one session must be  sent one after another, not in parallel. | [required] [example: 9f1c7a2b4d3e4f5a8b6c0d1e2f3a4b5c] |
+| **folderId** | path | **Integer** (int32) | The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id. | [required] [example: `1`] |
+| **sessionId** | path | **String** | The session this part belongs to, as returned in `id` when it was created; the parts of one session must be  sent one after another, not in parallel. | [required] [example: `9f1c7a2b4d3e4f5a8b6c0d1e2f3a4b5c`] |
 | **File** | form | **File** (binary) | The next part of the file, sent as the multipart field of the same name. Parts are appended in the order they  arrive, and a part larger than the portal chunk size is refused. | [optional] |
 
 #### Responses
@@ -5512,7 +5512,7 @@ Reports where this portal expects ONLYOFFICE Docs to be: the public Document Ser
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **version** | query | **Boolean** | Whether the running Document Server is asked for its editor version so that `version` can report it. Left off,  the portal answers from its own settings without contacting the Document Server and `version` comes back  empty. | [optional] [example: true] |
+| **version** | query | **Boolean** | Whether the running Document Server is asked for its editor version so that `version` can report it. Left off,  the portal answers from its own settings without contacting the Document Server and `version` comes back  empty. | [optional] [example: `true`] |
 
 #### Responses
 
@@ -6115,7 +6115,7 @@ Uploads a document and makes it the blank the portal creates for one extension, 
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **FileExtension** | query | **String** | The extension the uploaded blank is set for, written in lower case with the leading dot, and travelling in the  query string rather than in the form. It must match the extension of the uploaded file name. Only the  extensions the portal's built-in template set covers are accepted, and  `GET api/2.0/files/settings/defaulttemplate` returns exactly that list; an extension outside it leaves the  settings unchanged instead of failing. | [required] [example: .docx] |
+| **FileExtension** | query | **String** | The extension the uploaded blank is set for, written in lower case with the leading dot, and travelling in the  query string rather than in the form. It must match the extension of the uploaded file name. Only the  extensions the portal's built-in template set covers are accepted, and  `GET api/2.0/files/settings/defaulttemplate` returns exactly that list; an extension outside it leaves the  settings unchanged instead of failing. | [required] [example: `.docx`] |
 | **File** | form | **File** (binary) | The template document itself. Its file name must end with the extension named above, a PDF must be a fillable  form, and the body is capped at 100 MB - a larger one is refused while it is still streaming in. | [required] |
 
 #### Responses
@@ -6160,7 +6160,7 @@ Submits the password of a protected external share link and answers with the sam
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **key** | path | **String** | The token of the external share link, taken verbatim from the `requestToken` of a link returned by the link  operations of an entry, such as `GET api/2.0/files/rooms/{id}/link`. It is an opaque URL-safe string that  carries the link's own identifier, so it cannot be assembled by hand. | [required] [example: q7Ry8cQ1lZ0dP3sK2mXfA9tBnV6hJ4uE8wCz5oLg] |
+| **key** | path | **String** | The token of the external share link, taken verbatim from the `requestToken` of a link returned by the link  operations of an entry, such as `GET api/2.0/files/rooms/{id}/link`. It is an opaque URL-safe string that  carries the link's own identifier, so it cannot be assembled by hand. | [required] [example: `q7Ry8cQ1lZ0dP3sK2mXfA9tBnV6hJ4uE8wCz5oLg`] |
 | **ExternalShareRequestParam** | body | [**ExternalShareRequestParam**](#model-externalsharerequestparam) | The body of the request, holding the password to check. | [required] |
 
 #### Responses
@@ -6242,7 +6242,7 @@ Answers with the encryption keys that open one file kept in a private room: one 
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **Integer** (int32) | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: 10] |
+| **fileId** | path | **Integer** (int32) | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: `10`] |
 
 #### Responses
 
@@ -6284,9 +6284,9 @@ Resolves the token of an external share link into the room or file it points at,
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **key** | path | **String** | The token of the external share link, taken verbatim from the `requestToken` of a link returned by the link  operations of an entry, such as `GET api/2.0/files/rooms/{id}/link`. It is an opaque URL-safe string that  carries the link's own identifier, so it cannot be assembled by hand. | [required] [example: q7Ry8cQ1lZ0dP3sK2mXfA9tBnV6hJ4uE8wCz5oLg] |
-| **fileId** | query | **String** | A file inside the room the link points at, echoed back in the answer's entity fields so a client can show what  was opened. The value is ignored when the file does not sit under the link's target, and passing it together  with a folder has no effect - the file wins. | [optional] [example: 9] |
-| **folderId** | query | **String** | A folder inside the room the link points at, echoed back in the answer's entity fields. It is ignored when the  folder does not sit under the link's target, and when a file is passed as well. | [optional] [example: 3] |
+| **key** | path | **String** | The token of the external share link, taken verbatim from the `requestToken` of a link returned by the link  operations of an entry, such as `GET api/2.0/files/rooms/{id}/link`. It is an opaque URL-safe string that  carries the link's own identifier, so it cannot be assembled by hand. | [required] [example: `q7Ry8cQ1lZ0dP3sK2mXfA9tBnV6hJ4uE8wCz5oLg`] |
+| **fileId** | query | **String** | A file inside the room the link points at, echoed back in the answer's entity fields so a client can show what  was opened. The value is ignored when the file does not sit under the link's target, and passing it together  with a folder has no effect - the file wins. | [optional] [example: `9`] |
+| **folderId** | query | **String** | A folder inside the room the link points at, echoed back in the answer's entity fields. It is ignored when the  folder does not sit under the link's target, and when a file is passed as well. | [optional] [example: `3`] |
 
 #### Responses
 
@@ -6326,9 +6326,9 @@ Lists the accounts and groups that hold rights on one file, one entry per subjec
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: 10] |
-| **count** | query | **Integer** (int32) | How many entries at most to answer with, in the operations of this file that return a list; an operation that  answers with a single object is not affected by it. | [optional] [example: 25] [min: 1] [max: 100] |
-| **startIndex** | query | **Integer** (int32) | How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page. | [optional] [example: 0] |
+| **id** | path | **Integer** (int32) | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: `10`] |
+| **count** | query | **Integer** (int32) | How many entries at most to answer with, in the operations of this file that return a list; an operation that  answers with a single object is not affected by it. | [optional] [example: `25`] [min: 1] [max: 100] |
+| **startIndex** | query | **Integer** (int32) | How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page. | [optional] [example: `0`] |
 
 #### Responses
 
@@ -6369,9 +6369,9 @@ Lists the accounts and groups that hold rights on one folder or room, one entry 
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The folder or room the operation addresses. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string. | [required] [example: 10] |
-| **count** | query | **Integer** (int32) | How many entries at most to answer with, in the operations of this folder that return a list; an operation  that answers with a single object is not affected by it. | [optional] [example: 25] [min: 1] [max: 100] |
-| **startIndex** | query | **Integer** (int32) | How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page. | [optional] [example: 0] |
+| **id** | path | **Integer** (int32) | The folder or room the operation addresses. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string. | [required] [example: `10`] |
+| **count** | query | **Integer** (int32) | How many entries at most to answer with, in the operations of this folder that return a list; an operation  that answers with a single object is not affected by it. | [optional] [example: `25`] [min: 1] [max: 100] |
+| **startIndex** | query | **Integer** (int32) | How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page. | [optional] [example: `0`] |
 
 #### Responses
 
@@ -6412,11 +6412,11 @@ Lists the members of one portal group together with the access each of them has 
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **Integer** (int32) | The file whose access is being read. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string. | [required] [example: 10] |
-| **groupId** | path | **UUID** (uuid) | The group whose members are listed. Take it from the entries of `GET api/2.0/files/file/{id}/share` that stand  for a group; a group that holds no rights on this file is answered with an empty list. | [required] [example: 9924256a-739c-462b-af15-e652a3b1b6eb] |
-| **count** | query | **Integer** (int32) | How many members at most to answer with. | [optional] [example: 25] [min: 1] [max: 100] |
-| **startIndex** | query | **Integer** (int32) | How many members to skip before answering, used together with `count` to page through a large group. | [optional] [example: 0] |
-| **filterValue** | query | **String** | Keeps only the members whose first name, last name or email contains this value. The value is matched in lower  case, so an uppercase one finds nothing. | [optional] [example: john] |
+| **fileId** | path | **Integer** (int32) | The file whose access is being read. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string. | [required] [example: `10`] |
+| **groupId** | path | **UUID** (uuid) | The group whose members are listed. Take it from the entries of `GET api/2.0/files/file/{id}/share` that stand  for a group; a group that holds no rights on this file is answered with an empty list. | [required] [example: `9924256a-739c-462b-af15-e652a3b1b6eb`] |
+| **count** | query | **Integer** (int32) | How many members at most to answer with. | [optional] [example: `25`] [min: 1] [max: 100] |
+| **startIndex** | query | **Integer** (int32) | How many members to skip before answering, used together with `count` to page through a large group. | [optional] [example: `0`] |
+| **filterValue** | query | **String** | Keeps only the members whose first name, last name or email contains this value. The value is matched in lower  case, so an uppercase one finds nothing. | [optional] [example: `john`] |
 
 #### Responses
 
@@ -6457,11 +6457,11 @@ Lists the members of one portal group together with the access each of them has 
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **folderId** | path | **Integer** (int32) | The folder or room whose access is being read. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string. | [required] [example: 10] |
-| **groupId** | path | **UUID** (uuid) | The group whose members are listed. Take it from the entries of `GET api/2.0/files/folder/{id}/share` that  stand for a group; a group that holds no rights on this folder is answered with an empty list. | [required] [example: 9924256a-739c-462b-af15-e652a3b1b6eb] |
-| **count** | query | **Integer** (int32) | How many members at most to answer with. | [optional] [example: 25] [min: 1] [max: 100] |
-| **startIndex** | query | **Integer** (int32) | How many members to skip before answering, used together with `count` to page through a large group. | [optional] [example: 0] |
-| **filterValue** | query | **String** | Keeps only the members whose first name, last name or email contains this value. The value is matched in lower  case, so an uppercase one finds nothing. | [optional] [example: john] |
+| **folderId** | path | **Integer** (int32) | The folder or room whose access is being read. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string. | [required] [example: `10`] |
+| **groupId** | path | **UUID** (uuid) | The group whose members are listed. Take it from the entries of `GET api/2.0/files/folder/{id}/share` that  stand for a group; a group that holds no rights on this folder is answered with an empty list. | [required] [example: `9924256a-739c-462b-af15-e652a3b1b6eb`] |
+| **count** | query | **Integer** (int32) | How many members at most to answer with. | [optional] [example: `25`] [min: 1] [max: 100] |
+| **startIndex** | query | **Integer** (int32) | How many members to skip before answering, used together with `count` to page through a large group. | [optional] [example: `0`] |
+| **filterValue** | query | **String** | Keeps only the members whose first name, last name or email contains this value. The value is matched in lower  case, so an uppercase one finds nothing. | [optional] [example: `john`] |
 
 #### Responses
 
@@ -6543,7 +6543,7 @@ Lists the portal members who can read the file, which is what an editor client o
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **Integer** (int32) | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: 10] |
+| **fileId** | path | **Integer** (int32) | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: `10`] |
 
 #### Responses
 
@@ -6625,7 +6625,7 @@ Emails the people named in `emails` that they were mentioned in a file, with a l
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **Integer** (int32) | The file the mention was made in. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string. | [required] [example: 10] |
+| **fileId** | path | **Integer** (int32) | The file the mention was made in. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string. | [required] [example: `10`] |
 | **MentionMessageWrapper** | body | [**MentionMessageWrapper**](#model-mentionmessagewrapper) | The notification to send. | [optional] |
 
 #### Responses
@@ -6669,7 +6669,7 @@ Grants, changes or withdraws the rights of the listed accounts and groups on one
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The file whose sharing is being changed. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string. | [required] [example: 10] |
+| **id** | path | **Integer** (int32) | The file whose sharing is being changed. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string. | [required] [example: `10`] |
 | **SecurityInfoSimpleRequestDto** | body | [**SecurityInfoSimpleRequestDto**](#model-securityinfosimplerequestdto) | The rights to apply to the file, and whether to announce them by mail. | [required] |
 
 #### Responses
@@ -6711,7 +6711,7 @@ Grants, changes or withdraws the rights of the listed accounts and groups on one
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The folder whose sharing is being changed. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string. | [required] [example: 10] |
+| **id** | path | **Integer** (int32) | The folder whose sharing is being changed. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string. | [required] [example: `10`] |
 | **SecurityInfoSimpleRequestDto** | body | [**SecurityInfoSimpleRequestDto**](#model-securityinfosimplerequestdto) | The rights to apply to the folder, and whether to announce them by mail. | [required] |
 
 #### Responses
@@ -6796,7 +6796,7 @@ Disconnects a third-party storage account from the portal and returns the ID of 
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **providerId** | path | **Integer** (int32) | The ID of the connected third-party storage account, as `providerId` of `GET api/2.0/files/thirdparty`. | [required] [example: 12] |
+| **providerId** | path | **Integer** (int32) | The ID of the connected third-party storage account, as `providerId` of `GET api/2.0/files/thirdparty`. | [required] [example: `12`] |
 
 #### Responses
 
@@ -6837,7 +6837,7 @@ Lists the third-party storage services this portal can connect, with everything 
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **excludewebdav** | query | **Boolean** | Set to true to leave out the whole WebDAV family, the kDrive and Yandex presets included, and keep only the  services that authenticate through OAuth 2.0; false lists all of them. | [optional] [example: false] |
+| **excludewebdav** | query | **Boolean** | Set to true to leave out the whole WebDAV family, the kDrive and Yandex presets included, and keep only the  services that authenticate through OAuth 2.0; false lists all of them. | [optional] [example: `false`] |
 
 #### Responses
 
@@ -7110,7 +7110,7 @@ Attaches the named tags to a room and returns the room with its whole tag set. T
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The room whose tags are changed, named by the identifier that `GET api/2.0/files/rooms` reports for it. | [required] [example: 1] |
+| **id** | path | **Integer** (int32) | The room whose tags are changed, named by the identifier that `GET api/2.0/files/rooms` reports for it. | [required] [example: `1`] |
 | **BatchTagsRequestDto** | body | [**BatchTagsRequestDto**](#model-batchtagsrequestdto) | The names to attach or to detach. | [optional] |
 
 #### Responses
@@ -7153,7 +7153,7 @@ Queues a background job that moves one room from the Rooms section to the Archiv
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The room to move, named by the identifier that `GET api/2.0/files/rooms` reports for it. | [required] [example: 1] |
+| **id** | path | **Integer** (int32) | The room to move, named by the identifier that `GET api/2.0/files/rooms` reports for it. | [required] [example: `1`] |
 | **ArchiveRoomRequest** | body | [**ArchiveRoomRequest**](#model-archiveroomrequest) | The body of the request. It carries only the lifetime of the job record, so an empty object is a normal  request. | [optional] |
 
 #### Responses
@@ -7195,7 +7195,7 @@ Sets the cover picture and the background colour a room is shown with, and retur
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The room to change, named by the identifier that `GET api/2.0/files/rooms` reports for it. | [required] [example: 1] |
+| **id** | path | **Integer** (int32) | The room to change, named by the identifier that `GET api/2.0/files/rooms` reports for it. | [required] [example: `1`] |
 | **CoverRequestDto** | body | [**CoverRequestDto**](#model-coverrequestdto) | The cover and the colour to apply. Either half may be sent on its own, and an empty object leaves the room as  it is. | [required] |
 
 #### Responses
@@ -7321,7 +7321,7 @@ Turns an image already uploaded to the portal into the logo of a room and return
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The room the logo is set on. | [required] [example: 1] |
+| **id** | path | **Integer** (int32) | The room the logo is set on. | [required] [example: `1`] |
 | **LogoRequest** | body | [**LogoRequest**](#model-logorequest) | The uploaded picture and the piece of it to use. | [required] |
 
 #### Responses
@@ -7447,7 +7447,7 @@ Turns a folder of a connected third-party storage account into a room of the `Ro
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **String** | The identifier of the folder in the connected third-party storage that becomes the room, or receives it as a  subfolder. Folder identifiers of a connected account are strings and are returned by the folder listings of  that account. | [required] [example: box-12-\|280143035119] |
+| **id** | path | **String** | The identifier of the folder in the connected third-party storage that becomes the room, or receives it as a  subfolder. Folder identifiers of a connected account are strings and are returned by the folder listings of  that account. | [required] [example: `box-12-\|280143035119`] |
 | **CreateThirdPartyRoom** | body | [**CreateThirdPartyRoom**](#model-createthirdpartyroom) | The settings of the room to be created out of the folder. | [required] |
 
 #### Responses
@@ -7531,7 +7531,7 @@ Queues a background job that deletes one room with everything inside it, and ret
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The room to delete, named by the identifier that `GET api/2.0/files/rooms` reports for it. | [required] [example: 10] |
+| **id** | path | **Integer** (int32) | The room to delete, named by the identifier that `GET api/2.0/files/rooms` reports for it. | [required] [example: `10`] |
 | **DeleteRoomRequest** | body | [**DeleteRoomRequest**](#model-deleteroomrequest) | The body of the request. It is required even though the deletion does not depend on what it holds. | [required] |
 
 #### Responses
@@ -7573,7 +7573,7 @@ Removes the uploaded logo of a room and returns the room with empty logo address
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. | [required] [example: 1] |
+| **id** | path | **Integer** (int32) | The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. | [required] [example: `1`] |
 
 #### Responses
 
@@ -7614,7 +7614,7 @@ Detaches the named tags from a room and returns the room with its remaining tag 
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The room whose tags are changed, named by the identifier that `GET api/2.0/files/rooms` reports for it. | [required] [example: 1] |
+| **id** | path | **Integer** (int32) | The room whose tags are changed, named by the identifier that `GET api/2.0/files/rooms` reports for it. | [required] [example: `1`] |
 | **BatchTagsRequestDto** | body | [**BatchTagsRequestDto**](#model-batchtagsrequestdto) | The names to attach or to detach. | [optional] |
 
 #### Responses
@@ -7657,7 +7657,7 @@ Returns the record of the external database export job of a form filling room, o
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. | [required] [example: 1] |
+| **id** | path | **Integer** (int32) | The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. | [required] [example: `1`] |
 
 #### Responses
 
@@ -7699,7 +7699,7 @@ Returns what is new for the calling account in one room, grouped by the day the 
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. | [required] [example: 1] |
+| **id** | path | **Integer** (int32) | The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. | [required] [example: `1`] |
 
 #### Responses
 
@@ -7740,7 +7740,7 @@ Reports whether the room template addressed by `id` is shared with everyone or i
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The identifier of the room template. Take it from `templateId` of `GET api/2.0/files/roomtemplate/status`, or  from the folder list of `GET api/2.0/files/rooms` called with `searchArea` set to 4; an identifier of an  ordinary room is not accepted. | [required] [example: 1234] [min: 1] [max: 2147483647] |
+| **id** | path | **Integer** (int32) | The identifier of the room template. Take it from `templateId` of `GET api/2.0/files/roomtemplate/status`, or  from the folder list of `GET api/2.0/files/rooms` called with `searchArea` set to 4; an identifier of an  ordinary room is not accepted. | [required] [example: `1234`] [min: 1] [max: 2147483647] |
 
 #### Responses
 
@@ -7892,7 +7892,7 @@ Returns one room with its type, title, tags, logo, cover, colour, quota and virt
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. | [required] [example: 1] |
+| **id** | path | **Integer** (int32) | The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. | [required] [example: `1`] |
 
 #### Responses
 
@@ -7932,8 +7932,8 @@ Returns the sharing links of a room, with the invitation and the external links 
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The room whose links are listed, named by the identifier that `GET api/2.0/files/rooms` reports for it. | [required] [example: 1] |
-| **type** | query | **LinkType** | Narrows the answer to one kind of link: invitation links, which turn whoever opens them into a member, or  external links, which open the room without an account. Leaving it out returns both kinds together. | [optional] [example: 1] [enum: 0, 1] |
+| **id** | path | **Integer** (int32) | The room whose links are listed, named by the identifier that `GET api/2.0/files/rooms` reports for it. | [required] [example: `1`] |
+| **type** | query | **LinkType** | Narrows the answer to one kind of link: invitation links, which turn whoever opens them into a member, or  external links, which open the room without an account. Leaving it out returns both kinds together. | [optional] [example: `1`] [enum: `0`, `1`] |
 
 #### Responses
 
@@ -7974,11 +7974,11 @@ Returns one page of the access list of a room: the owner first, then the manager
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The room whose access list is read, named by the identifier that `GET api/2.0/files/rooms` reports for it. | [required] [example: 1] |
-| **filterType** | query | **ShareFilterType** | What kind of access entries to list. The default covers accounts and groups and leaves the sharing links of  the room out; those are read with `GET api/2.0/files/rooms/{id}/links`. | [optional] [example: 0] [enum: 0, 1, 2, 4, 8, 15, 16, 32] |
-| **count** | query | **Integer** (int32) | How many entries to return in one answer. The total number of matching entries comes back in the response  headers, so it is what tells the caller whether another page is needed. | [optional] [example: 25] [min: 1] [max: 100] |
-| **startIndex** | query | **Integer** (int32) | How many matching entries to skip before the page starts. Together with the page size it walks the list, which  is ordered by role and then by name and is therefore stable between calls. | [optional] [example: 0] |
-| **filterValue** | query | **String** | Keeps only the entries whose displayed name contains this text. An invitation that has not been accepted yet  is listed under the email address it was sent to, so that is what has to be searched for. | [optional] [example: Smith] |
+| **id** | path | **Integer** (int32) | The room whose access list is read, named by the identifier that `GET api/2.0/files/rooms` reports for it. | [required] [example: `1`] |
+| **filterType** | query | **ShareFilterType** | What kind of access entries to list. The default covers accounts and groups and leaves the sharing links of  the room out; those are read with `GET api/2.0/files/rooms/{id}/links`. | [optional] [example: `0`] [enum: `0`, `1`, `2`, `4`, `8`, `15`, `16`, `32`] |
+| **count** | query | **Integer** (int32) | How many entries to return in one answer. The total number of matching entries comes back in the response  headers, so it is what tells the caller whether another page is needed. | [optional] [example: `25`] [min: 1] [max: 100] |
+| **startIndex** | query | **Integer** (int32) | How many matching entries to skip before the page starts. Together with the page size it walks the list, which  is ordered by role and then by name and is therefore stable between calls. | [optional] [example: `0`] |
+| **filterValue** | query | **String** | Keeps only the entries whose displayed name contains this text. An invitation that has not been accepted yet  is listed under the email address it was sent to, so that is what has to be searched for. | [optional] [example: `Smith`] |
 
 #### Responses
 
@@ -8019,9 +8019,9 @@ Returns the custom room tags available to the caller as a flat array of names, n
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **count** | query | **Integer** (int32) | How many tag names one page may carry. The answer reports no total, so a page shorter than this is the sign  that the list is exhausted. | [optional] [example: 25] [min: 1] [max: 100] |
-| **startIndex** | query | **Integer** (int32) | How many tag names to skip before the page begins. Raise it by the number of names already received to read  the next page. | [optional] [example: 0] [min: 0] [max: 2147483647] |
-| **filterValue** | query | **String** | Keeps only the tag names that contain this text, ignoring case. It is a substring match, so a fragment from  the middle of a name is enough. | [optional] [example: conf] |
+| **count** | query | **Integer** (int32) | How many tag names one page may carry. The answer reports no total, so a page shorter than this is the sign  that the list is exhausted. | [optional] [example: `25`] [min: 1] [max: 100] |
+| **startIndex** | query | **Integer** (int32) | How many tag names to skip before the page begins. Raise it by the number of names already received to read  the next page. | [optional] [example: `0`] [min: 0] [max: 2147483647] |
+| **filterValue** | query | **String** | Keeps only the tag names that contain this text, ignoring case. It is a substring match, so a fragment from  the middle of a name is enough. | [optional] [example: `conf`] |
 
 #### Responses
 
@@ -8099,23 +8099,23 @@ Lists the rooms of one section of the portal: the active rooms by default, or th
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **type** | query | [**List**](#model-roomtype) | Keeps only the rooms of the listed kinds. Repeat the parameter to pass more than one value; they are combined  with OR, and omitting it returns the rooms of every kind. | [optional] [example: 1] |
-| **subjectId** | query | **UUID** (uuid) | Keeps only the rooms this account or group has access to, which is how the rooms of one member are listed. The  identifier comes from the portal people and group listings, and the exclude flag turns the filter into its  opposite. | [optional] [example: 9a1b2c3d-4e5f-6071-8293-a4b5c6d7e8f9] |
-| **subjectOwnerId** | query | **UUID** (uuid) | Keeps only the rooms created by this account, regardless of who else was invited to them. The identifier comes  from the portal people listing, and the exclude flag turns the filter into its opposite. | [optional] [example: 9a1b2c3d-4e5f-6071-8293-a4b5c6d7e8f9] |
-| **searchArea** | query | **SearchArea** | The section to list. Every section is a separate root and a room belongs to exactly one of them at a time, so  archiving a room moves it out of the active section. The default is the active section, which leaves the  form-filling rooms to their own value. | [optional] [example: 1] [enum: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9] |
-| **withoutTags** | query | **Boolean** | When true, keeps only the rooms that carry no tag at all, which is the complement of the tag filter. When  false or omitted, tags play no part in the selection. | [optional] [example: false] |
-| **tags** | query | **String** | A JSON array of tag names serialized into a single query value, for example [Important,Legal]. A room  matches when it carries any one of them. Take the names from `GET api/2.0/files/tags`; a name that is not in  the catalog simply matches nothing. | [optional] [example: ["Important"]] |
-| **excludeSubject** | query | **Boolean** | Inverts the two subject filters: when true, the rooms of the named account are the ones left out of the answer  instead of the only ones kept. It does nothing on its own. | [optional] [example: false] |
-| **provider** | query | **ProviderFilter** | Keeps only the rooms whose content lives in the named third-party service, for portals where rooms may be  connected to external storage. The default keeps rooms of every origin. | [optional] [example: 1] [enum: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9] |
-| **quotaFilter** | query | **QuotaFilter** | Splits the rooms by whether a storage quota was set on the room itself or it follows the portal default, which  is how rooms with a custom limit are found. | [optional] [example: 1] [enum: 0, 1, 2] |
-| **storageFilter** | query | **StorageFilter** | Splits the rooms by where their content is stored, in the portal itself or in a connected third-party account.  It is the coarse form of the provider filter. | [optional] [example: 1] [enum: 0, 1, 2] |
-| **privacyFilter** | query | **RoomPrivacyFilter** | Splits the rooms by whether they are private, that is encrypted rooms whose content the portal cannot read.  Omitting it returns both kinds. | [optional] [example: 1] [enum: 0, 1, 2] |
-| **count** | query | **Integer** (int32) | How many rooms one page may carry. Ask for the next page by raising the start index by the number of rooms  already received. | [optional] [example: 25] [min: 1] [max: 100] |
-| **startIndex** | query | **Integer** (int32) | How many matching rooms to skip before the page begins. Page through the answer until the skip plus the rooms  received reaches the total it reports. | [optional] [example: 0] |
-| **sortBy** | query | **String** | The field to order the rooms by, named as in the file listings: `AZ` for the title, `DateAndTime` for the last  change, `DateAndTimeCreation`, `Author`, `Size`, `Type`, `RoomType`, `Tags`, `UsedSpace`, `LastOpened`. The  name is matched ignoring case, an unknown one is rejected rather than ignored, and the accepted one also  becomes this account's stored order. | [optional] [example: DateAndTime] |
-| **sortOrder** | query | **SortOrder** | The direction of the order chosen by the sort field. It has no effect when no sort field is given and the  stored order of the account is used. | [optional] [example: 1] [enum: 0, 1] |
-| **filterValue** | query | **String** | Keeps only the rooms whose title contains this text, ignoring case. It is a substring match over the title  alone: room content and tags are not searched. | [optional] [example: Sales] |
-| **groupId** | query | **Integer** (int32) | Keeps only the rooms that belong to this room group. The identifier comes from `GET api/2.0/files/group`; the  groups of portal members are a different concept and their identifiers do not match here. | [optional] [example: 1] |
+| **type** | query | [**List**](#model-roomtype) | Keeps only the rooms of the listed kinds. Repeat the parameter to pass more than one value; they are combined  with OR, and omitting it returns the rooms of every kind. | [optional] [example: `1`] |
+| **subjectId** | query | **UUID** (uuid) | Keeps only the rooms this account or group has access to, which is how the rooms of one member are listed. The  identifier comes from the portal people and group listings, and the exclude flag turns the filter into its  opposite. | [optional] [example: `9a1b2c3d-4e5f-6071-8293-a4b5c6d7e8f9`] |
+| **subjectOwnerId** | query | **UUID** (uuid) | Keeps only the rooms created by this account, regardless of who else was invited to them. The identifier comes  from the portal people listing, and the exclude flag turns the filter into its opposite. | [optional] [example: `9a1b2c3d-4e5f-6071-8293-a4b5c6d7e8f9`] |
+| **searchArea** | query | **SearchArea** | The section to list. Every section is a separate root and a room belongs to exactly one of them at a time, so  archiving a room moves it out of the active section. The default is the active section, which leaves the  form-filling rooms to their own value. | [optional] [example: `1`] [enum: `0`, `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`] |
+| **withoutTags** | query | **Boolean** | When true, keeps only the rooms that carry no tag at all, which is the complement of the tag filter. When  false or omitted, tags play no part in the selection. | [optional] [example: `false`] |
+| **tags** | query | **String** | A JSON array of tag names serialized into a single query value, for example [Important,Legal]. A room  matches when it carries any one of them. Take the names from `GET api/2.0/files/tags`; a name that is not in  the catalog simply matches nothing. | [optional] [example: `["Important"]`] |
+| **excludeSubject** | query | **Boolean** | Inverts the two subject filters: when true, the rooms of the named account are the ones left out of the answer  instead of the only ones kept. It does nothing on its own. | [optional] [example: `false`] |
+| **provider** | query | **ProviderFilter** | Keeps only the rooms whose content lives in the named third-party service, for portals where rooms may be  connected to external storage. The default keeps rooms of every origin. | [optional] [example: `1`] [enum: `0`, `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`] |
+| **quotaFilter** | query | **QuotaFilter** | Splits the rooms by whether a storage quota was set on the room itself or it follows the portal default, which  is how rooms with a custom limit are found. | [optional] [example: `1`] [enum: `0`, `1`, `2`] |
+| **storageFilter** | query | **StorageFilter** | Splits the rooms by where their content is stored, in the portal itself or in a connected third-party account.  It is the coarse form of the provider filter. | [optional] [example: `1`] [enum: `0`, `1`, `2`] |
+| **privacyFilter** | query | **RoomPrivacyFilter** | Splits the rooms by whether they are private, that is encrypted rooms whose content the portal cannot read.  Omitting it returns both kinds. | [optional] [example: `1`] [enum: `0`, `1`, `2`] |
+| **count** | query | **Integer** (int32) | How many rooms one page may carry. Ask for the next page by raising the start index by the number of rooms  already received. | [optional] [example: `25`] [min: 1] [max: 100] |
+| **startIndex** | query | **Integer** (int32) | How many matching rooms to skip before the page begins. Page through the answer until the skip plus the rooms  received reaches the total it reports. | [optional] [example: `0`] |
+| **sortBy** | query | **String** | The field to order the rooms by, named as in the file listings: `AZ` for the title, `DateAndTime` for the last  change, `DateAndTimeCreation`, `Author`, `Size`, `Type`, `RoomType`, `Tags`, `UsedSpace`, `LastOpened`. The  name is matched ignoring case, an unknown one is rejected rather than ignored, and the accepted one also  becomes this account's stored order. | [optional] [example: `DateAndTime`] |
+| **sortOrder** | query | **SortOrder** | The direction of the order chosen by the sort field. It has no effect when no sort field is given and the  stored order of the account is used. | [optional] [example: `1`] [enum: `0`, `1`] |
+| **filterValue** | query | **String** | Keeps only the rooms whose title contains this text, ignoring case. It is a substring match over the title  alone: room content and tags are not searched. | [optional] [example: `Sales`] |
+| **groupId** | query | **Integer** (int32) | Keeps only the rooms that belong to this room group. The identifier comes from `GET api/2.0/files/group`; the  groups of portal members are a different concept and their identifiers do not match here. | [optional] [example: `1`] |
 
 #### Responses
 
@@ -8194,7 +8194,7 @@ Returns the primary external link of a room, which is the one address meant to b
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. | [required] [example: 1] |
+| **id** | path | **Integer** (int32) | The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. | [required] [example: `1`] |
 
 #### Responses
 
@@ -8238,7 +8238,7 @@ Reports whether any room still carries the named tag, which is the check to run 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
 | **tagName2** | path | **String** | The tag being checked. Send the same value as the `tagName` query parameter, which is the one the handler reads. | [required] |
-| **tagName** | query | **String** | The tag to check, spelled exactly as it is stored in the catalog. This query value is the one the handler  reads, so the path segment of the same name has to repeat it. | [optional] [example: Important] |
+| **tagName** | query | **String** | The tag to check, spelled exactly as it is stored in the catalog. This query value is the one the handler  reads, so the path segment of the same name has to repeat it. | [optional] [example: `Important`] |
 
 #### Responses
 
@@ -8280,7 +8280,7 @@ Pins a room to the top of the room list of the calling account and returns the r
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. | [required] [example: 1] |
+| **id** | path | **Integer** (int32) | The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. | [required] [example: `1`] |
 
 #### Responses
 
@@ -8321,7 +8321,7 @@ Renumbers the manual order of the items lying directly in a room so that they ru
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. | [required] [example: 1] |
+| **id** | path | **Integer** (int32) | The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. | [required] [example: `1`] |
 
 #### Responses
 
@@ -8362,7 +8362,7 @@ Sends the room invitation email again to members who were invited but have not j
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The room whose invitations are resent, named by the identifier that `GET api/2.0/files/rooms` reports for it. | [required] [example: 1] |
+| **id** | path | **Integer** (int32) | The room whose invitations are resent, named by the identifier that `GET api/2.0/files/rooms` reports for it. | [required] [example: `1`] |
 | **UserInvitation** | body | [**UserInvitation**](#model-userinvitation) | Which pending invitations to send again. | [required] |
 
 #### Responses
@@ -8445,7 +8445,7 @@ Creates, updates or deletes one sharing link of a room and returns it. `linkType
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The room the link belongs to, named by the identifier that `GET api/2.0/files/rooms` reports for it. | [required] [example: 1] |
+| **id** | path | **Integer** (int32) | The room the link belongs to, named by the identifier that `GET api/2.0/files/rooms` reports for it. | [required] [example: `1`] |
 | **RoomLinkRequest** | body | [**RoomLinkRequest**](#model-roomlinkrequest) | The link to create, change or revoke. | [required] |
 
 #### Responses
@@ -8487,7 +8487,7 @@ Adds, changes and removes room members in one batch, and returns the resulting a
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The room whose membership changes, named by the identifier that `GET api/2.0/files/rooms` reports for it. | [required] [example: 1] |
+| **id** | path | **Integer** (int32) | The room whose membership changes, named by the identifier that `GET api/2.0/files/rooms` reports for it. | [required] [example: `1`] |
 | **RoomInvitationRequest** | body | [**RoomInvitationRequest**](#model-roominvitationrequest) | The membership changes to apply, together with how the people concerned are notified. | [required] |
 
 #### Responses
@@ -8528,7 +8528,7 @@ Queues a background job that re-exports the collected data of every original for
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. | [required] [example: 1] |
+| **id** | path | **Integer** (int32) | The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. | [required] [example: `1`] |
 
 #### Responses
 
@@ -8571,7 +8571,7 @@ Queues a background job that builds the index of a virtual data room as a spread
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. | [required] [example: 1] |
+| **id** | path | **Integer** (int32) | The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. | [required] [example: `1`] |
 
 #### Responses
 
@@ -8650,7 +8650,7 @@ Queues a background job that moves one room from the Archive section back to the
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The room to move, named by the identifier that `GET api/2.0/files/rooms` reports for it. | [required] [example: 1] |
+| **id** | path | **Integer** (int32) | The room to move, named by the identifier that `GET api/2.0/files/rooms` reports for it. | [required] [example: `1`] |
 | **ArchiveRoomRequest** | body | [**ArchiveRoomRequest**](#model-archiveroomrequest) | The body of the request. It carries only the lifetime of the job record, so an empty object is a normal  request. | [optional] |
 
 #### Responses
@@ -8692,7 +8692,7 @@ Removes a room from the pinned group of the calling account and returns the room
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. | [required] [example: 1] |
+| **id** | path | **Integer** (int32) | The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. | [required] [example: `1`] |
 
 #### Responses
 
@@ -8733,7 +8733,7 @@ Applies a partial change to one room and returns the whole room as it is after i
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The room to update, named by the identifier that `GET api/2.0/files/rooms` reports for it. | [required] [example: 1] |
+| **id** | path | **Integer** (int32) | The room to update, named by the identifier that `GET api/2.0/files/rooms` reports for it. | [required] [example: `1`] |
 | **UpdateRoomRequest** | body | [**UpdateRoomRequest**](#model-updateroomrequest) | The fields to change. Only the properties present in the object are applied, and a property that the object  does not define is rejected instead of being ignored. | [required] |
 
 #### Responses
@@ -8902,7 +8902,7 @@ Replaces the icon of one of the caller's own room groups and returns the whole g
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The room group to re-icon, identified by the value `GET api/2.0/files/group` reports for it. A group of  another account cannot be addressed and reads as missing. | [required] [example: 42] |
+| **id** | path | **Integer** (int32) | The room group to re-icon, identified by the value `GET api/2.0/files/group` reports for it. A group of  another account cannot be addressed and reads as missing. | [required] [example: `42`] |
 | **IconRequest** | body | [**IconRequest**](#model-iconrequest) | The icon to give the group. A body that leaves the icon out is accepted and changes nothing. | [optional] |
 
 #### Responses
@@ -8944,8 +8944,8 @@ Deletes one of the caller's own room groups. Only the collection goes away: the 
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The room group to act on, identified by the value `GET api/2.0/files/group` reports for it. A group of another  account cannot be addressed and reads as missing. | [required] [example: 42] |
-| **includeMembers** | query | **Boolean** | Whether the rooms of the group are listed in the answer: true fills the `rooms` array, false leaves it out and  reports only how many there are in `totalRooms`. | [optional] [example: true] |
+| **id** | path | **Integer** (int32) | The room group to act on, identified by the value `GET api/2.0/files/group` reports for it. A group of another  account cannot be addressed and reads as missing. | [required] [example: `42`] |
+| **includeMembers** | query | **Boolean** | Whether the rooms of the group are listed in the answer: true fills the `rooms` array, false leaves it out and  reports only how many there are in `totalRooms`. | [optional] [example: `true`] |
 
 #### Responses
 
@@ -8986,8 +8986,8 @@ Returns one room group of the calling account together with the rooms it gathers
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The room group to act on, identified by the value `GET api/2.0/files/group` reports for it. A group of another  account cannot be addressed and reads as missing. | [required] [example: 42] |
-| **includeMembers** | query | **Boolean** | Whether the rooms of the group are listed in the answer: true fills the `rooms` array, false leaves it out and  reports only how many there are in `totalRooms`. | [optional] [example: true] |
+| **id** | path | **Integer** (int32) | The room group to act on, identified by the value `GET api/2.0/files/group` reports for it. A group of another  account cannot be addressed and reads as missing. | [required] [example: `42`] |
+| **includeMembers** | query | **Boolean** | Whether the rooms of the group are listed in the answer: true fills the `rooms` array, false leaves it out and  reports only how many there are in `totalRooms`. | [optional] [example: `true`] |
 
 #### Responses
 
@@ -9028,7 +9028,7 @@ Returns every room group of the calling account, each with the rooms it gathers.
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **includeMembers** | query | **Boolean** | Whether the rooms of each group are listed in the answer: true fills the `rooms` array of every entry, false  leaves it out and reports only how many there are in `totalRooms`. | [optional] [example: true] |
+| **includeMembers** | query | **Boolean** | Whether the rooms of each group are listed in the answer: true fills the `rooms` array of every entry, false  leaves it out and reports only how many there are in `totalRooms`. | [optional] [example: `true`] |
 
 #### Responses
 
@@ -9069,7 +9069,7 @@ Applies changes to one of the caller's own room groups: a new name, rooms to att
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The room group to change, identified by the value `GET api/2.0/files/group` reports for it. A group of another  account cannot be addressed and reads as missing. | [required] [example: 42] |
+| **id** | path | **Integer** (int32) | The room group to change, identified by the value `GET api/2.0/files/group` reports for it. A group of another  account cannot be addressed and reads as missing. | [required] [example: `42`] |
 | **UpdateRoomGroupRequest** | body | [**UpdateRoomGroupRequest**](#model-updateroomgrouprequest) | The changes to apply. Carrying none of them leaves the group as it is, and each of them may be sent on its own  or together with the others. | [required] |
 
 #### Responses
@@ -9113,7 +9113,7 @@ Removes one encryption key pair from the calling user's own key set and answers 
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **UUID** (uuid) | The pair to delete, taken from the `id` of an entry of `GET api/2.0/privacyroom/keys`. Only the caller's own  pairs can be named here. | [required] [example: 9924256B-447C-4F19-9dbd-8ad8c39e8ff5] |
+| **id** | path | **UUID** (uuid) | The pair to delete, taken from the `id` of an entry of `GET api/2.0/privacyroom/keys`. Only the caller's own  pairs can be named here. | [required] [example: `9924256B-447C-4F19-9dbd-8ad8c39e8ff5`] |
 
 #### Responses
 
@@ -9311,7 +9311,7 @@ Stores a new encryption key pair for the calling user and answers with that user
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **disabled** | **Boolean** | Indicates whether the AI feature is disabled. | [optional] [example: true] |
+| **disabled** | **Boolean** | Indicates whether the AI feature is disabled. | [optional] [example: `true`] |
 
 
 ### Model AccessRequestKeyDto
@@ -9319,9 +9319,9 @@ The file key issued to one account.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **userId** | **UUID** (uuid) | The account that is to open the file with this key; it has to have read access to the file. | [optional] [example: 00000000-0000-0000-0000-000000000000] |
-| **publicKeyId** | **UUID** (uuid) | The public key the file key was encrypted with, as reported for that account by  `GET api/2.0/files/file/{fileId}/publickeys`. | [optional] [example: 00000000-0000-0000-0000-000000000000] |
-| **privateKeyEnc** | **String** | The key of the file itself, encrypted by the client with that public key, so that the plain key never reaches  the portal. | [optional] [example: encrypted_key_string] [nullable] |
+| **userId** | **UUID** (uuid) | The account that is to open the file with this key; it has to have read access to the file. | [optional] [example: `00000000-0000-0000-0000-000000000000`] |
+| **publicKeyId** | **UUID** (uuid) | The public key the file key was encrypted with, as reported for that account by  `GET api/2.0/files/file/{fileId}/publickeys`. | [optional] [example: `00000000-0000-0000-0000-000000000000`] |
+| **privateKeyEnc** | **String** | The key of the file itself, encrypted by the client with that public key, so that the plain key never reaches  the portal. | [optional] [example: `encrypted_key_string`] [nullable] |
 
 
 ### Model AceShortWrapper
@@ -9329,9 +9329,9 @@ One line of a document sharing list in display form: who the document is shared 
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **user** | **String** | Who or what the line stands for, as a display string: the display name of a member, the name of a group, or  the title given to a shared link when `isLink` is true. It is empty when the subject has no name to show - a  shared link that was never given a title, for instance. | [optional] [example: John Doe] [nullable] |
-| **permissions** | **String** | The access level of that subject as a localized label, not a code: inside a room it usually names the role the  subject holds there (Viewer, Editor, Room Manager), while outside a room it names the access itself  (Read Only, Full Access). The wording comes from the portal resources and is translated for the current  language, so show it to a person rather than compare it in code. | [optional] [example: Read Only] [nullable] |
-| **isLink** | **Boolean** | Whether the line stands for a shared link instead of a member or a group. Clients use it to draw a link badge  where they would otherwise draw an avatar. | [optional] [example: false] |
+| **user** | **String** | Who or what the line stands for, as a display string: the display name of a member, the name of a group, or  the title given to a shared link when `isLink` is true. It is empty when the subject has no name to show - a  shared link that was never given a title, for instance. | [optional] [example: `John Doe`] [nullable] |
+| **permissions** | **String** | The access level of that subject as a localized label, not a code: inside a room it usually names the role the  subject holds there (Viewer, Editor, Room Manager), while outside a room it names the access itself  (Read Only, Full Access). The wording comes from the portal resources and is translated for the current  language, so show it to a person rather than compare it in code. | [optional] [example: `Read Only`] [nullable] |
+| **isLink** | **Boolean** | Whether the line stands for a shared link instead of a member or a group. Clients use it to draw a link badge  where they would otherwise draw an avatar. | [optional] [example: `false`] |
 
 
 ### Model AceShortWrapperArrayWrapper
@@ -9351,8 +9351,8 @@ An anchor inside a document, as the editor writes it.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **data** | **String** | The anchor value produced by the editor, opaque to the portal: it names the comment, the mention or the  place the document is scrolled to. | [optional] [example: section-42] [minLength: 0] [maxLength: 256] [nullable] |
-| **type** | **String** | What the anchor points at, as the editor names it - a comment thread, for instance. | [optional] [example: comment] [minLength: 0] [maxLength: 128] [nullable] |
+| **data** | **String** | The anchor value produced by the editor, opaque to the portal: it names the comment, the mention or the  place the document is scrolled to. | [optional] [example: `section-42`] [minLength: 0] [maxLength: 256] [nullable] |
+| **type** | **String** | What the anchor points at, as the editor names it - a comment thread, for instance. | [optional] [example: `comment`] [minLength: 0] [maxLength: 128] [nullable] |
 
 
 ### Model ActionLinkConfig
@@ -9368,7 +9368,7 @@ How the editors treat a participant who opened the document without an account.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **request** | **Boolean** | Whether the editors ask an anonymous participant for a display name before letting them in. It follows the  chat permission of the document, since a nameless participant cannot take part in one. | [required] [example: false] |
+| **request** | **Boolean** | Whether the editors ask an anonymous participant for a display name before letting them in. It follows the  chat permission of the document, since a nameless participant cannot take part in one. | [required] [example: `false`] |
 
 
 ### Model ApiDateTime
@@ -9376,8 +9376,8 @@ The API date and time parameters.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **utcTime** | **Date** (date-time) | The time in UTC format. | [optional] [example: 2018-01-01T00:00:00.0000000Z] |
-| **timeZoneOffset** | **String** (date-span) | The time zone offset. | [optional] [example: 00:00:00] |
+| **utcTime** | **Date** (date-time) | The time in UTC format. | [optional] [example: `2018-01-01T00:00:00.0000000Z`] |
+| **timeZoneOffset** | **String** (date-span) | The time zone offset. | [optional] [example: `00:00:00`] |
 
 
 ### Model ApplyFilterOption
@@ -9394,7 +9394,7 @@ The body of a room archiving request.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **deleteAfter** | **Boolean** | Whether the record of the finished job may be dropped without being read. With it off the record waits for the  first poll, which is what lets the caller learn how the move ended; it has no effect on the room itself. | [optional] [example: false] |
+| **deleteAfter** | **Boolean** | Whether the record of the finished job may be dropped without being read. With it off the record waits for the  first poll, which is what lets the caller learn how the move ended; it has no effect on the room itself. | [optional] [example: `false`] |
 
 
 ### Model ArrayArrayWrapper
@@ -9422,11 +9422,11 @@ The credentials of a third-party storage account. The portal takes them when an 
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **login** | **String** | The account name at the storage service. | [optional] [example: user@example.com] [nullable] |
-| **password** | **String** | The password of the account at the storage service. | [optional] [example: p@ssw0rd!] [nullable] |
-| **rawToken** | **String** | The token of the account, kept as the raw JSON document the storage service issued it in. | [optional] [example: \{"access_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...","expires_in":3600\}] [nullable] |
-| **url** | **URI** (uri) | The address of the storage server the account lives on. | [optional] [example: https://cloud.example.com/remote.php/dav/files/admin/] [nullable] |
-| **provider** | **String** | The storage service the credentials belong to, as the provider key the account was connected with. | [optional] [example: WebDav] [nullable] |
+| **login** | **String** | The account name at the storage service. | [optional] [example: `user@example.com`] [nullable] |
+| **password** | **String** | The password of the account at the storage service. | [optional] [example: `p@ssw0rd!`] [nullable] |
+| **rawToken** | **String** | The token of the account, kept as the raw JSON document the storage service issued it in. | [optional] [example: `{"access_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...","expires_in":3600}`] [nullable] |
+| **url** | **URI** (uri) | The address of the storage server the account lives on. | [optional] [example: `https://cloud.example.com/remote.php/dav/files/admin/`] [nullable] |
+| **provider** | **String** | The storage service the credentials belong to, as the provider key the account was connected with. | [optional] [example: `WebDav`] [nullable] |
 | **token** | [**OAuth20Token**](#model-oauth20token) | The same token as in `rawToken`, parsed into its OAuth 2.0 fields. | [optional] |
 
 
@@ -9435,8 +9435,8 @@ The trash auto-clearing setting of an account.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **isAutoCleanUp** | **Boolean** | Whether the trash of the account is cleared automatically. While it is false nothing is removed by the portal  and the interval below is kept but unused. | [optional] [example: false] |
-| **gap** | [**DateToAutoCleanUp**](#model-datetoautocleanup) | How long an item may stay in the trash before it is removed for good. It is reported even while clearing is  off, and it is what the moment in the `autoDelete` field of a trashed entry is computed from. | [optional] [enum: 1, 2, 3, 4, 5, 6] |
+| **isAutoCleanUp** | **Boolean** | Whether the trash of the account is cleared automatically. While it is false nothing is removed by the portal  and the interval below is kept but unused. | [optional] [example: `false`] |
+| **gap** | [**DateToAutoCleanUp**](#model-datetoautocleanup) | How long an item may stay in the trash before it is removed for good. It is reported even while clearing is  off, and it is what the moment in the `autoDelete` field of a trashed entry is computed from. | [optional] [enum: `1`, `2`, `3`, `4`, `5`, `6`] |
 
 
 ### Model AutoCleanUpDataWrapper
@@ -9456,8 +9456,8 @@ The trash auto-clearing setting to store: the on/off flag together with the inte
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **set** | **Boolean** | Whether the caller's trash is cleared automatically: with true an item is removed for good once it has been in  the trash longer than the interval below, with false the portal removes nothing and waits for the trash to be  emptied by hand. | [optional] [example: true] |
-| **gap** | [**DateToAutoCleanUp**](#model-datetoautocleanup) | How long an item may stay in the trash before it is removed for good. It is written from every request,  including one that switches clearing off, so send it together with the flag instead of expecting the stored  interval to be kept. | [optional] [enum: 1, 2, 3, 4, 5, 6] |
+| **set** | **Boolean** | Whether the caller's trash is cleared automatically: with true an item is removed for good once it has been in  the trash longer than the interval below, with false the portal removes nothing and waits for the trash to be  emptied by hand. | [optional] [example: `true`] |
+| **gap** | [**DateToAutoCleanUp**](#model-datetoautocleanup) | How long an item may stay in the trash before it is removed for good. It is written from every request,  including one that switches clearing off, so send it together with the flag instead of expecting the stored  interval to be kept. | [optional] [enum: `1`, `2`, `3`, `4`, `5`, `6`] |
 
 
 ### Model BaseBatchRequestDto
@@ -9485,7 +9485,7 @@ The files and folders to move or copy, the folder they go to, and the way name c
 | **folderIds** | [**List**](#model-batchrequestdtofolderids) | The folders to move or copy, by id. A number addresses a folder stored in the portal itself, a string  addresses a folder on a connected third-party account, and both kinds may be sent in one list. | [optional] [nullable] |
 | **fileIds** | [**List**](#model-batchrequestdtofileids) | The files to move or copy, by id. A number addresses a file stored in the portal itself, a string addresses a  file on a connected third-party account, and both kinds may be sent in one list. | [optional] [nullable] |
 | **destFolderId** | [**BatchRequestDto_allOf_destFolderId**](#model-batchrequestdtodestfolderid) |  | [optional] |
-| **conflictResolveType** | [**FileConflictResolveType**](#model-fileconflictresolvetype) | What happens to an item whose name is already taken in the destination folder: `skip` leaves it where it is,  `overwrite` replaces the entry at the destination, and `duplicate` places it beside that entry under a name  with a numeric suffix. `GET api/2.0/files/fileops/move` reports which items would clash. | [optional] [enum: Skip, Overwrite, Duplicate] |
+| **conflictResolveType** | [**FileConflictResolveType**](#model-fileconflictresolvetype) | What happens to an item whose name is already taken in the destination folder: `skip` leaves it where it is,  `overwrite` replaces the entry at the destination, and `duplicate` places it beside that entry under a name  with a numeric suffix. `GET api/2.0/files/fileops/move` reports which items would clash. | [optional] [enum: `Skip`, `Overwrite`, `Duplicate`] |
 | **deleteAfter** | **Boolean** | Whether the finished operation is still reported: `false` keeps its final record readable through  `GET api/2.0/files/fileops` until it has been read once, `true` drops the record as soon as the work is done.  It deletes nothing: a move takes the sources away in any case, and a copy always leaves them. | [optional] |
 | **content** | **Boolean** | What is taken from a listed folder: `false` moves or copies the folder itself, `true` takes only what it  contains, so its files and subfolders land in the destination and the folder is not recreated there. | [optional] |
 | **toFillOut** | **Boolean** | Marks every copied PDF form as a draft prepared for filling, which is how such a copy reports its filling  status in a virtual data room. Files that are not forms are left unaffected. | [optional] |
@@ -9506,7 +9506,7 @@ The tag names a request attaches to a room or detaches from it.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **names** | **List** | The tags, by name: a tag has no identifier of its own, and the name is what links a room to it.  `GET api/2.0/files/tags` lists the names already in the portal catalogue. An empty list is accepted and does  nothing, while a blank or overlong entry makes the whole request invalid. | [required] [example: [Finance, 2026]] |
+| **names** | **List** | The tags, by name: a tag has no identifier of its own, and the name is what links a room to it.  `GET api/2.0/files/tags` lists the names already in the portal catalogue. An empty list is accepted and does  nothing, while a blank or overlong entry makes the whole request invalid. | [required] [example: `[Finance, 2026]`] |
 
 
 ### Model BooleanWrapper
@@ -9534,8 +9534,8 @@ The change to make to a revision group of a file.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **version** | **Integer** (int32) | The version the change applies to; 0 means the current version of the file. | [required] [example: 1] |
-| **continueVersion** | **Boolean** | What to do with the revision group: `false` completes the named version, storing its content again as a fresh  version that opens a new group, while `true` folds the last group back into the group before it, so the next  save continues that revision. | [optional] [example: false] |
+| **version** | **Integer** (int32) | The version the change applies to; 0 means the current version of the file. | [required] [example: `1`] |
+| **continueVersion** | **Boolean** | What to do with the revision group: `false` completes the named version, storing its content again as a fresh  version that opens a new group, while `true` folds the last group back into the group before it, so the next  save continues that revision. | [optional] [example: `false`] |
 
 
 ### Model ChangeOwnerRequestDto
@@ -9543,9 +9543,9 @@ The rooms and files to hand over, together with the account that takes them.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **folderIds** | [**List**](#model-batchrequestdtofileids) | The rooms to hand over, identified as `GET api/2.0/files/rooms` returns them - a number for a room stored on  the portal and a string for one that lives on a connected third-party account. Only rooms belong here; a  folder inside a room is refused. | [optional] [example: [1, 2, 3]] [nullable] |
-| **fileIds** | [**List**](#model-batchrequestdtofileids) | The files to hand over, identified as a listing operation returns them - a number for a file stored on the  portal and a string for one on a connected third-party account. Only a file kept in the portal's common  section is accepted. | [optional] [example: [7, 8]] [nullable] |
-| **userId** | **UUID** (uuid) | The account that becomes the owner of every listed entry. It has to be an active member allowed to manage  rooms, so a deactivated account, a guest or a plain member is rejected, and for a private room the account  must have set up its encryption keys beforehand. | [required] [example: 9924256a-739c-462b-af15-e652a3b1b6eb] |
+| **folderIds** | [**List**](#model-batchrequestdtofileids) | The rooms to hand over, identified as `GET api/2.0/files/rooms` returns them - a number for a room stored on  the portal and a string for one that lives on a connected third-party account. Only rooms belong here; a  folder inside a room is refused. | [optional] [example: `[1, 2, 3]`] [nullable] |
+| **fileIds** | [**List**](#model-batchrequestdtofileids) | The files to hand over, identified as a listing operation returns them - a number for a file stored on the  portal and a string for one on a connected third-party account. Only a file kept in the portal's common  section is accepted. | [optional] [example: `[7, 8]`] [nullable] |
+| **userId** | **UUID** (uuid) | The account that becomes the owner of every listed entry. It has to be an active member allowed to manage  rooms, so a deactivated account, a guest or a plain member is rejected, and for a private room the account  must have set up its encryption keys beforehand. | [required] [example: `9924256a-739c-462b-af15-e652a3b1b6eb`] |
 
 
 ### Model ChatSettings
@@ -9553,10 +9553,10 @@ The chat settings.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **providerId** | **Integer** (int32) | The provider ID. | [optional] [example: 1] |
-| **modelId** | **String** | The model ID. | [optional] [example: gpt-4] [nullable] |
-| **prompt** | **String** | The prompt. | [optional] [example: Please analyze this document] [nullable] |
-| **internal** | **Boolean** | Specifies whether the provider is internal or not. | [optional] [example: false] |
+| **providerId** | **Integer** (int32) | The provider ID. | [optional] [example: `1`] |
+| **modelId** | **String** | The model ID. | [optional] [example: `gpt-4`] [nullable] |
+| **prompt** | **String** | The prompt. | [optional] [example: `Please analyze this document`] [nullable] |
+| **internal** | **Boolean** | Specifies whether the provider is internal or not. | [optional] [example: `false`] |
 
 
 ### Model ChatSettingsDto
@@ -9564,7 +9564,7 @@ The chat configuration of an AI room.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **prompt** | **String** | The instruction put in front of every conversation held in the room, which sets the role the assistant takes  and the way it answers. Empty when the room was left on the behaviour the portal provides by default. | [optional] [example: You are a helpful assistant for project documentation.] [nullable] |
+| **prompt** | **String** | The instruction put in front of every conversation held in the room, which sets the role the assistant takes  and the way it answers. Empty when the room was left on the behaviour the portal provides by default. | [optional] [example: `You are a helpful assistant for project documentation.`] [nullable] |
 
 
 ### Model CheckConversionRequestDtoInteger
@@ -9572,13 +9572,13 @@ The parameters of one file conversion.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **fileId** | **Integer** (int32) | The file to convert. It is taken from the route of the operation, so a value sent in the body is overwritten. | [optional] [example: 1] |
-| **sync** | **Boolean** | How to wait for the result: `true` converts inside the request and answers with the finished result, which is  only sensible for small documents, while `false` queues the conversion and answers with an entry to poll. | [optional] [example: false] |
-| **startConvert** | **Boolean** | Whether the conversion is to be started. It is set by the operation itself, so a value sent in the body is  overwritten. | [optional] [example: true] |
-| **version** | **Integer** (int32) | The version to convert; 0 or less means the current version. | [optional] [example: 1] |
-| **password** | **String** | The password that opens the source document, for a file that is protected by one; anything else may be left  out. | [optional] [example: password123] [nullable] |
-| **outputType** | **String** | The extension of the format to convert into, without the dot, and one the portal can produce from that  source format; left out, the default of the portal for that kind of document is used. | [optional] [example: pdf] [nullable] |
-| **createNewIfExist** | **Boolean** | Where the result goes when the file has been converted before: `true` creates another file beside the source,  `false` replaces the converted file that already exists. | [optional] [example: false] |
+| **fileId** | **Integer** (int32) | The file to convert. It is taken from the route of the operation, so a value sent in the body is overwritten. | [optional] [example: `1`] |
+| **sync** | **Boolean** | How to wait for the result: `true` converts inside the request and answers with the finished result, which is  only sensible for small documents, while `false` queues the conversion and answers with an entry to poll. | [optional] [example: `false`] |
+| **startConvert** | **Boolean** | Whether the conversion is to be started. It is set by the operation itself, so a value sent in the body is  overwritten. | [optional] [example: `true`] |
+| **version** | **Integer** (int32) | The version to convert; 0 or less means the current version. | [optional] [example: `1`] |
+| **password** | **String** | The password that opens the source document, for a file that is protected by one; anything else may be left  out. | [optional] [example: `password123`] [nullable] |
+| **outputType** | **String** | The extension of the format to convert into, without the dot, and one the portal can produce from that  source format; left out, the default of the portal for that kind of document is used. | [optional] [example: `pdf`] [nullable] |
+| **createNewIfExist** | **Boolean** | Where the result goes when the file has been converted before: `true` creates another file beside the source,  `false` replaces the converted file that already exists. | [optional] [example: `false`] |
 
 
 ### Model CheckDestFolderDto
@@ -9586,8 +9586,8 @@ The verdict on placing the requested files in the destination folder.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **result** | [**CheckDestFolderResult**](#model-checkdestfolderresult) | Whether the destination folder accepts all of the requested files, only some of them or none at all. | [optional] [enum: 0, 1, 2] |
-| **files** | [**List**](#model-fileentrybasedto) | The requested files the destination accepts, each with the information it was listed under. The files it  rejects are absent, so an empty list means that none of them is accepted. | [optional] [example: [\{title=document.docx, fileEntryType=2\}]] [nullable] |
+| **result** | [**CheckDestFolderResult**](#model-checkdestfolderresult) | Whether the destination folder accepts all of the requested files, only some of them or none at all. | [optional] [enum: `0`, `1`, `2`] |
+| **files** | [**List**](#model-fileentrybasedto) | The requested files the destination accepts, each with the information it was listed under. The files it  rejects are absent, so an empty list means that none of them is accepted. | [optional] [example: `[{title=document.docx, fileEntryType=2}]`] [nullable] |
 
 
 ### Model CheckDestFolderResult
@@ -9616,12 +9616,12 @@ The ONLYOFFICE Docs connection settings to store and verify.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **docServiceUrl** | **String** | The public address of the Document Server, the one a browser loads the editor from. An empty value drops the  portal's own setting, so the address configured for the deployment takes over again. A value with no scheme is  stored with `http://` prepended, and an absolute address may not carry a query string. | [required] [example: https://documentserver.example.com] [nullable] |
-| **docServiceUrlInternal** | **String** | The address the portal itself uses for its server-to-server calls to the Document Server, for deployments  where that traffic stays inside the private network. Left empty, those calls go to the public address instead. | [optional] [example: https://documentserver-internal.example.com] [nullable] |
-| **docServiceUrlPortal** | **String** | The address of this portal as the Document Server has to call it back on in order to fetch and save a  document. Set it when the Document Server cannot resolve the portal by its public name; left empty, the  portal's own resolved address is used. | [optional] [example: https://portal.example.com] [nullable] |
-| **docServiceSignatureSecret** | **String** | The shared secret that requests between the portal and the Document Server are signed with; it has to be the  same value the Document Server itself is configured with, otherwise the verification of the new settings  fails. It is write-only: the document service location is reported without it. | [optional] [example: secret-key-123] [nullable] |
-| **docServiceSignatureHeader** | **String** | The name of the HTTP header the signature travels in, which has to match the header the Document Server  expects. A secret without a header is not a usable pair and is rejected. | [optional] [example: Authorization] [nullable] |
-| **docServiceSslVerification** | **Boolean** | Whether the portal validates the TLS certificate of the Document Server. With verification on, a self-signed  certificate breaks the connection; with it off, any certificate is accepted, which is meant for test  deployments only. Omitting the field turns verification on. | [optional] [example: true] [nullable] |
+| **docServiceUrl** | **String** | The public address of the Document Server, the one a browser loads the editor from. An empty value drops the  portal's own setting, so the address configured for the deployment takes over again. A value with no scheme is  stored with `http://` prepended, and an absolute address may not carry a query string. | [required] [example: `https://documentserver.example.com`] [nullable] |
+| **docServiceUrlInternal** | **String** | The address the portal itself uses for its server-to-server calls to the Document Server, for deployments  where that traffic stays inside the private network. Left empty, those calls go to the public address instead. | [optional] [example: `https://documentserver-internal.example.com`] [nullable] |
+| **docServiceUrlPortal** | **String** | The address of this portal as the Document Server has to call it back on in order to fetch and save a  document. Set it when the Document Server cannot resolve the portal by its public name; left empty, the  portal's own resolved address is used. | [optional] [example: `https://portal.example.com`] [nullable] |
+| **docServiceSignatureSecret** | **String** | The shared secret that requests between the portal and the Document Server are signed with; it has to be the  same value the Document Server itself is configured with, otherwise the verification of the new settings  fails. It is write-only: the document service location is reported without it. | [optional] [example: `secret-key-123`] [nullable] |
+| **docServiceSignatureHeader** | **String** | The name of the HTTP header the signature travels in, which has to match the header the Document Server  expects. A secret without a header is not a usable pair and is rejected. | [optional] [example: `Authorization`] [nullable] |
+| **docServiceSslVerification** | **Boolean** | Whether the portal validates the TLS certificate of the Document Server. With verification on, a self-signed  certificate breaks the connection; with it off, any certificate is accepted, which is meant for test  deployments only. Omitting the field turns verification on. | [optional] [example: `true`] [nullable] |
 
 
 ### Model CheckFillFormDraft
@@ -9629,10 +9629,10 @@ The revision of the form to open and what the caller intends to do with it.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **version** | **Integer** (int32) | The revision of the form to open. Pass 0 for the current revision; a positive number addresses that entry of  the file history and is accepted only from a caller who may read the history, so a member who only has  fill-forms access must send 0. | [required] [example: 0] |
-| **action** | **String** | What the caller intends to do with the form. `view` asks for a read-only address and `embedded` for an address  to be shown inside a frame; both only resolve the address and leave the file untouched. Leave it out to enter  the filling flow, where the personal draft is created or reused. The value is matched case-insensitively, and  anything else behaves like an empty value. | [optional] [example: view] [nullable] |
-| **requestView** | **Boolean** | Whether the caller asked for a read-only address. The server derives it from `action` being `view` and ignores  any value sent with the request. | [optional] [example: false] |
-| **requestEmbedded** | **Boolean** | Whether the caller asked for an address to be shown inside a frame. The server derives it from `action` being  `embedded` and ignores any value sent with the request. | [optional] [example: false] |
+| **version** | **Integer** (int32) | The revision of the form to open. Pass 0 for the current revision; a positive number addresses that entry of  the file history and is accepted only from a caller who may read the history, so a member who only has  fill-forms access must send 0. | [required] [example: `0`] |
+| **action** | **String** | What the caller intends to do with the form. `view` asks for a read-only address and `embedded` for an address  to be shown inside a frame; both only resolve the address and leave the file untouched. Leave it out to enter  the filling flow, where the personal draft is created or reused. The value is matched case-insensitively, and  anything else behaves like an empty value. | [optional] [example: `view`] [nullable] |
+| **requestView** | **Boolean** | Whether the caller asked for a read-only address. The server derives it from `action` being `view` and ignores  any value sent with the request. | [optional] [example: `false`] |
+| **requestEmbedded** | **Boolean** | Whether the caller asked for an address to be shown inside a frame. The server derives it from `action` being  `embedded` and ignores any value sent with the request. | [optional] [example: `false`] |
 
 
 ### Model CheckUploadRequest
@@ -9640,7 +9640,7 @@ The names to test against the files the folder already holds.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **filesTitle** | **List** | The names to test, extensions included, spelled as they would be sent to the upload. Matching ignores case,  and a name repeated in the list is answered once. | [optional] [example: [file1.docx, file2.pdf, file3.xlsx]] [nullable] |
+| **filesTitle** | **List** | The names to test, extensions included, spelled as they would be sent to the upload. Matching ignores case,  and a name repeated in the list is answered once. | [optional] [example: `[file1.docx, file2.pdf, file3.xlsx]`] [nullable] |
 
 
 ### Model ChunkedUploadSessionResponseInteger
@@ -9648,12 +9648,12 @@ The reserved chunked upload: where the parts are sent, how much was declared and
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **id** | **String** | The identifier of the reserved upload, repeated in the path of every call that follows it - the chunk uploads,  the finalize and the abort. It is thirty-two hexadecimal characters without separators, and it is the only  thing the server checks, so anyone holding it can write into this upload. | [optional] [example: 1b6a2ee1f2a04c6f9bd2cbf0e0f23a54] [nullable] |
-| **path** | **List** (int32) | The chain of folders leading to the destination, outermost first and the destination itself last, with folders  the caller cannot read left out. An answer that reports a stored part carries the destination folder alone  instead of the whole chain. | [optional] [example: [1, 5, 12]] [nullable] |
-| **created** | **Date** (date-time) | The moment the upload was reserved, in UTC. | [optional] [example: 2026-09-11T10:30:00Z] |
-| **expired** | **Date** (date-time) | The moment the reservation lapses and the parts buffered for it are dropped, in UTC. It is a gap rather than a  deadline for the whole transfer: every accepted part pushes it twelve hours past that part, so only a long  silence loses the upload. | [optional] [example: 2026-09-11T22:30:00Z] |
-| **location** | **String** | The absolute address of the separate chunk handler that also accepts the parts of this upload, kept for  clients written against it. A caller working through this API does not need it and sends the parts to the  session operations instead. | [optional] [example: https://example.com/ChunkedUploader.ashx?uid=1b6a2ee1f2a04c6f9bd2cbf0e0f23a54] [nullable] |
-| **bytes\_total** | **Long** (int64) | The size in bytes that was declared when the upload was reserved, echoed back. It is what the arriving parts  are counted against to decide the file is complete, not the amount received so far. | [optional] [example: 10485760] |
+| **id** | **String** | The identifier of the reserved upload, repeated in the path of every call that follows it - the chunk uploads,  the finalize and the abort. It is thirty-two hexadecimal characters without separators, and it is the only  thing the server checks, so anyone holding it can write into this upload. | [optional] [example: `1b6a2ee1f2a04c6f9bd2cbf0e0f23a54`] [nullable] |
+| **path** | **List** (int32) | The chain of folders leading to the destination, outermost first and the destination itself last, with folders  the caller cannot read left out. An answer that reports a stored part carries the destination folder alone  instead of the whole chain. | [optional] [example: `[1, 5, 12]`] [nullable] |
+| **created** | **Date** (date-time) | The moment the upload was reserved, in UTC. | [optional] [example: `2026-09-11T10:30:00Z`] |
+| **expired** | **Date** (date-time) | The moment the reservation lapses and the parts buffered for it are dropped, in UTC. It is a gap rather than a  deadline for the whole transfer: every accepted part pushes it twelve hours past that part, so only a long  silence loses the upload. | [optional] [example: `2026-09-11T22:30:00Z`] |
+| **location** | **String** | The absolute address of the separate chunk handler that also accepts the parts of this upload, kept for  clients written against it. A caller working through this API does not need it and sends the parts to the  session operations instead. | [optional] [example: `https://example.com/ChunkedUploader.ashx?uid=1b6a2ee1f2a04c6f9bd2cbf0e0f23a54`] [nullable] |
+| **bytes\_total** | **Long** (int64) | The size in bytes that was declared when the upload was reserved, echoed back. It is what the arriving parts  are counted against to decide the file is complete, not the amount received so far. | [optional] [example: `10485760`] |
 
 
 ### Model ChunkedUploadSessionResponseIntegerWrapper
@@ -9673,7 +9673,7 @@ The reserved chunked upload wrapped in the envelope the two older session operat
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **success** | **Boolean** | Always true in a body that reaches the caller, because a call that does not succeed answers with an error  status and no body at all. It cannot be used to tell a refusal from a success. | [optional] [example: true] |
+| **success** | **Boolean** | Always true in a body that reaches the caller, because a call that does not succeed answers with an error  status and no body at all. It cannot be used to tell a refusal from a success. | [optional] [example: `true`] |
 | **data** | [**ChunkedUploadSessionResponseInteger**](#model-chunkeduploadsessionresponseinteger) | The reserved upload itself, in the same shape the newer session operations answer with directly. | [optional] |
 
 
@@ -9694,9 +9694,9 @@ How co-editing is preset when the document opens, and whether the user may switc
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **change** | **Boolean** | Whether the user may switch between the two co-editing modes from the editor interface, or is held to the one  the portal preset. | [optional] [example: true] |
-| **fast** | **Boolean** | Whether other participants see each change as it is typed. Left off, changes are exchanged only when a  participant saves, and the paragraph being edited is locked for the others meanwhile. | [optional] [example: false] |
-| **mode** | [**CoEditingConfigMode**](#model-coeditingconfigmode) | The mode the two settings above amount to, as the editors name it. | [optional] [enum: 0, 1] |
+| **change** | **Boolean** | Whether the user may switch between the two co-editing modes from the editor interface, or is held to the one  the portal preset. | [optional] [example: `true`] |
+| **fast** | **Boolean** | Whether other participants see each change as it is typed. Left off, changes are exchanged only when a  participant saves, and the paragraph being edited is locked for the others meanwhile. | [optional] [example: `false`] |
+| **mode** | [**CoEditingConfigMode**](#model-coeditingconfigmode) | The mode the two settings above amount to, as the editors name it. | [optional] [enum: `0`, `1`] |
 
 
 ### Model CoEditingConfigMode
@@ -9713,19 +9713,19 @@ Everything an editor client needs in order to open one document: the document it
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **document** | [**DocumentConfigDto**](#model-documentconfigdto) | The document as the editors address it: its revision key, title, type, download address and the permissions of  this caller on it. | [required] |
-| **documentType** | **String** | The editor family the file opens in - `word`, `cell`, `slide`, `pdf` or `diagram`. It comes back empty for a  format no editor handles. | [required] [example: word] [nullable] |
+| **documentType** | **String** | The editor family the file opens in - `word`, `cell`, `slide`, `pdf` or `diagram`. It comes back empty for a  format no editor handles. | [required] [example: `word`] [nullable] |
 | **editorConfig** | [**EditorConfigurationDto**](#model-editorconfigurationdto) | How the editor is set up for this opening: the mode, the language, the interface customization, the callback  the editors save through, and the account they attribute changes to. | [required] |
-| **editorType** | [**EditorType**](#model-editortype) | The layout the configuration was actually built for. It echoes the requested one except where the room  overruled it, as the templates folder does by forcing the embedded viewer. | [required] [enum: 0, 1, 2] |
-| **editorUrl** | **URI** (uri) | The address of the editor api script the client has to load, with the shard key of this document already  appended. Load it as it is given rather than assembling it by hand. | [required] [example: https://portal.example.com/web-apps/apps/api/documents/api.js?shardkey=1_512_3] [nullable] |
-| **token** | **String** | Signs this whole configuration so that the editors can trust it; anything a client changes in the  configuration invalidates it. It stays empty on a portal that has no signature secret configured for the  document service. | [optional] [example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...] [nullable] |
-| **type** | **String** | The layout spelled as a lowercase word - `desktop`, `mobile` or `embedded` - the same value the editor type  carries as a number. | [optional] [example: desktop] [nullable] |
+| **editorType** | [**EditorType**](#model-editortype) | The layout the configuration was actually built for. It echoes the requested one except where the room  overruled it, as the templates folder does by forcing the embedded viewer. | [required] [enum: `0`, `1`, `2`] |
+| **editorUrl** | **URI** (uri) | The address of the editor api script the client has to load, with the shard key of this document already  appended. Load it as it is given rather than assembling it by hand. | [required] [example: `https://portal.example.com/web-apps/apps/api/documents/api.js?shardkey=1_512_3`] [nullable] |
+| **token** | **String** | Signs this whole configuration so that the editors can trust it; anything a client changes in the  configuration invalidates it. It stays empty on a portal that has no signature secret configured for the  document service. | [optional] [example: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...`] [nullable] |
+| **type** | **String** | The layout spelled as a lowercase word - `desktop`, `mobile` or `embedded` - the same value the editor type  carries as a number. | [optional] [example: `desktop`] [nullable] |
 | **file** | [**FileDtoInteger**](#model-filedtointeger) | The file the configuration was built for, in the same shape the file listings report it. | [required] |
-| **errorMessage** | **String** | Filled in when the document could not be prepared for opening; the rest of the configuration should then not  be handed to the editors. | [optional] [example: The file is being converted] [nullable] |
-| **startFilling** | **Boolean** | Whether this caller may start a filling session on the form from inside the editor. It stays empty when the  file is not a form opened where starting is possible at all. | [optional] [example: false] [nullable] |
-| **fillingStatus** | **Boolean** | True once the caller holds a role in the running filling session of this form. It stays empty outside a  virtual data room, where roles are the only place it is set. | [optional] [example: false] [nullable] |
-| **startFillingMode** | [**StartFillingMode**](#model-startfillingmode) | Which filling button the editor offers: none at all, sharing the form out for others to fill, starting a  filling session, or starting one inside the form-filling room. | [optional] [enum: 0, 1, 2, 3] |
-| **fillingSessionId** | **String** | Identifies the filling session this opening belongs to, and is empty when the document is not opened as part  of one. Submissions made in the editor are collected under it. | [optional] [example: a1b2c3d4-0000-0000-0000-000000000000] [nullable] |
-| **quotaExceededScope** | [**QuotaScope**](#model-quotascope) | Names the quota that ran out - the user, the room or the portal - and is set only when the document had to be  opened read-only because of it. | [optional] [enum: 0, 1, 2] |
+| **errorMessage** | **String** | Filled in when the document could not be prepared for opening; the rest of the configuration should then not  be handed to the editors. | [optional] [example: `The file is being converted`] [nullable] |
+| **startFilling** | **Boolean** | Whether this caller may start a filling session on the form from inside the editor. It stays empty when the  file is not a form opened where starting is possible at all. | [optional] [example: `false`] [nullable] |
+| **fillingStatus** | **Boolean** | True once the caller holds a role in the running filling session of this form. It stays empty outside a  virtual data room, where roles are the only place it is set. | [optional] [example: `false`] [nullable] |
+| **startFillingMode** | [**StartFillingMode**](#model-startfillingmode) | Which filling button the editor offers: none at all, sharing the form out for others to fill, starting a  filling session, or starting one inside the form-filling room. | [optional] [enum: `0`, `1`, `2`, `3`] |
+| **fillingSessionId** | **String** | Identifies the filling session this opening belongs to, and is empty when the document is not opened as part  of one. Submissions made in the editor are collected under it. | [optional] [example: `a1b2c3d4-0000-0000-0000-000000000000`] [nullable] |
+| **quotaExceededScope** | [**QuotaScope**](#model-quotascope) | Names the quota that ran out - the user, the room or the portal - and is set only when the document had to be  opened read-only because of it. | [optional] [enum: `0`, `1`, `2`] |
 | **generationToolCallState** | [**EditorToolCallStateDto**](#model-editortoolcallstatedto) | The generation the editor should run as soon as the document opens. It is set only for a document an AI agent  produced and left waiting for its content, and is empty for every other file. | [optional] |
 
 
@@ -9746,8 +9746,8 @@ The contact information.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **type** | **String** | The contact type. | [optional] [example: GTalk] [nullable] |
-| **value** | **String** | The contact value. | [optional] [example: my@gmail.com] [nullable] |
+| **type** | **String** | The contact type. | [optional] [example: `GTalk`] [nullable] |
+| **value** | **String** | The contact value. | [optional] [example: `my@gmail.com`] [nullable] |
 
 
 ### Model ConversationResultArrayWrapper
@@ -9767,13 +9767,13 @@ The progress of one file conversion, together with the converted file once it ex
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **id** | **String** | The identifier of the conversion entry. The portal leaves it empty for file conversions, so a caller follows  its own conversion by the file it queued rather than by this value. | [required] [example: 12345] [nullable] |
-| **Operation** | [**FileOperationType**](#model-fileoperationtype) | Tells which kind of file operation the entry describes, so that a conversion can be told apart from the copy,  move and download entries that share this envelope. A conversion entry reports the conversion type. | [required] [enum: 0, 1, 2, 3, 4, 5, 6, 7] |
-| **progress** | **Integer** (int32) | How far the conversion has got, counted in percent from 0 while it is only queued to 100 once it is over -  whether it ended with a converted file or with an error. 100 is the value a polling caller waits for. | [required] [example: 50] |
-| **source** | **String** | Describes what is being converted: the identifier of the source file, the version that was taken and whether  an existing result may be overwritten, packed as a JSON object inside a string. It is what identifies the  entry when several conversions of the same caller are in flight. | [optional] [example: \{"id":9846,"version":1,"updateIfExist":false\}] [nullable] |
+| **id** | **String** | The identifier of the conversion entry. The portal leaves it empty for file conversions, so a caller follows  its own conversion by the file it queued rather than by this value. | [required] [example: `12345`] [nullable] |
+| **Operation** | [**FileOperationType**](#model-fileoperationtype) | Tells which kind of file operation the entry describes, so that a conversion can be told apart from the copy,  move and download entries that share this envelope. A conversion entry reports the conversion type. | [required] [enum: `0`, `1`, `2`, `3`, `4`, `5`, `6`, `7`] |
+| **progress** | **Integer** (int32) | How far the conversion has got, counted in percent from 0 while it is only queued to 100 once it is over -  whether it ended with a converted file or with an error. 100 is the value a polling caller waits for. | [required] [example: `50`] |
+| **source** | **String** | Describes what is being converted: the identifier of the source file, the version that was taken and whether  an existing result may be overwritten, packed as a JSON object inside a string. It is what identifies the  entry when several conversions of the same caller are in flight. | [optional] [example: `{"id":9846,"version":1,"updateIfExist":false}`] [nullable] |
 | **result** | **oas_any_type_not_mapped** |  | [optional] [nullable] |
-| **error** | **String** | The reason the conversion stopped, in the language of the caller, and empty while it is running and after it  has succeeded. `progress` reaches 100 for a failure as well, so this field is what separates a converted file  from a broken conversion; a conversion still unfinished after ten minutes ends with a timeout reported here. | [optional] [example: Conversion failed] [nullable] |
-| **processed** | **String** | Reports whether the portal has taken the entry as far as it goes: `1` once the conversion has finished or  failed, and empty while it is still queued or still being converted. It is the bookkeeping of the conversion  queue rather than a result - what happened is in `progress`, `error` and `result`. | [optional] [example: 1] [nullable] |
+| **error** | **String** | The reason the conversion stopped, in the language of the caller, and empty while it is running and after it  has succeeded. `progress` reaches 100 for a failure as well, so this field is what separates a converted file  from a broken conversion; a conversion still unfinished after ten minutes ends with a timeout reported here. | [optional] [example: `Conversion failed`] [nullable] |
+| **processed** | **String** | Reports whether the portal has taken the entry as far as it goes: `1` once the conversion has finished or  failed, and empty while it is still queued or still being converted. It is the bookkeeping of the conversion  queue rather than a result - what happened is in `progress`, `error` and `result`. | [optional] [example: `1`] [nullable] |
 
 
 ### Model CopyAsJsonElement
@@ -9781,11 +9781,11 @@ The parameters of a file copy that may change the format on the way.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **destTitle** | **String** | The title of the copy, extension included. That extension decides the format: the same one as the source  copies the content as it is, a different one has it converted first. | [required] [example: Document Copy.docx] [nullable] |
+| **destTitle** | **String** | The title of the copy, extension included. That extension decides the format: the same one as the source  copies the content as it is, a different one has it converted first. | [required] [example: `Document Copy.docx`] [nullable] |
 | **destFolderId** | [**CopyAsJsonElement_destFolderId**](#model-copyasjsonelementdestfolderid) |  | [required] |
-| **enableExternalExt** | **Boolean** | Whether the extension of the new title may be one the portal does not edit itself. | [optional] [example: false] |
-| **password** | **String** | The password that opens the source document, for a file that is protected by one. | [optional] [example: password123] [nullable] |
-| **toForm** | **Boolean** | Whether the copy is to become a PDF form rather than a plain document, which the conversion supports for the  text formats it can read. | [optional] [example: false] |
+| **enableExternalExt** | **Boolean** | Whether the extension of the new title may be one the portal does not edit itself. | [optional] [example: `false`] |
+| **password** | **String** | The password that opens the source document, for a file that is protected by one. | [optional] [example: `password123`] [nullable] |
+| **toForm** | **Boolean** | Whether the copy is to become a PDF form rather than a plain document, which the conversion supports for the  text formats it can read. | [optional] [example: `false`] |
 
 
 ### Model CopyAsJsonElement.destFolderId
@@ -9797,8 +9797,8 @@ The picture and the colour a room is drawn with while it has no logo.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **color** | **String** | The background colour the room is drawn with while it has no logo, as six hexadecimal digits with no leading  number sign. An empty value restores the default colour of the room type. | [optional] [example: FF5733] [pattern: /^[A-Fa-f0-9]\{6\}$/] [nullable] |
-| **cover** | **String** | The picture drawn on the room while it has no logo, named by an identifier from  `GET api/2.0/files/rooms/covers`. Any other value is rejected, and an empty value leaves the room without a  cover. | [optional] [example: bookmark] [nullable] |
+| **color** | **String** | The background colour the room is drawn with while it has no logo, as six hexadecimal digits with no leading  number sign. An empty value restores the default colour of the room type. | [optional] [example: `FF5733`] [pattern: `/^[A-Fa-f0-9]{6}$/`] [nullable] |
+| **cover** | **String** | The picture drawn on the room while it has no logo, named by an identifier from  `GET api/2.0/files/rooms/covers`. Any other value is rejected, and an empty value leaves the room without a  cover. | [optional] [example: `bookmark`] [nullable] |
 
 
 ### Model CoversResultArrayWrapper
@@ -9818,8 +9818,8 @@ One drawing of the built-in gallery of room covers.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **id** | **String** | The name of the cover, and the value to send as `cover` when a room is created or changed. The names are the  same on every portal and do not change with the language of the request. | [required] [example: bookmark] [nullable] |
-| **data** | **String** | The drawing itself, as inline vector markup ready to be rendered as it is. It is the default size of the  cover, and it may change between product versions while the name stays. | [required] [example: &lt;svg viewBox="0 0 32 32">&lt;path d="M8 4h16v24l-8-6-8 6z"/>&lt;/svg>] [nullable] |
+| **id** | **String** | The name of the cover, and the value to send as `cover` when a room is created or changed. The names are the  same on every portal and do not change with the language of the request. | [required] [example: `bookmark`] [nullable] |
+| **data** | **String** | The drawing itself, as inline vector markup ready to be rendered as it is. It is the default size of the  cover, and it may change between product versions while the name stays. | [required] [example: `<svg viewBox="0 0 32 32"><path d="M8 4h16v24l-8-6-8 6z"/></svg>`] [nullable] |
 
 
 ### Model CreateFileJsonElement
@@ -9827,10 +9827,10 @@ The parameters of a file that the portal creates from a template or a blank docu
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **title** | **String** | The title of the new file. The extension in it decides the format, and one of a known text, spreadsheet or  presentation format is rewritten to the DOCX, XLSX or PPTX of the portal unless `enableExternalExt` says  otherwise; a title with no extension gets DOCX added. | [required] [example: New Document.docx] [minLength: 0] [maxLength: 165] [nullable] |
+| **title** | **String** | The title of the new file. The extension in it decides the format, and one of a known text, spreadsheet or  presentation format is rewritten to the DOCX, XLSX or PPTX of the portal unless `enableExternalExt` says  otherwise; a title with no extension gets DOCX added. | [required] [example: `New Document.docx`] [minLength: 0] [maxLength: 165] [nullable] |
 | **templateId** | [**CreateFileJsonElement_templateId**](#model-createfilejsonelementtemplateid) |  | [optional] |
-| **enableExternalExt** | **Boolean** | Whether the extension of the title is kept as it is: `true` stores the title verbatim, `false` rewrites a  known foreign format to the format the portal edits itself. | [optional] [example: false] |
-| **formId** | **Integer** (int32) | A ready form from the form gallery of the portal to copy instead of a template, named by the identifier the  gallery reports for it. It takes precedence over `templateId`; 0 means no form. | [optional] [example: 0] |
+| **enableExternalExt** | **Boolean** | Whether the extension of the title is kept as it is: `true` stores the title verbatim, `false` rewrites a  known foreign format to the format the portal edits itself. | [optional] [example: `false`] |
+| **formId** | **Integer** (int32) | A ready form from the form gallery of the portal to copy instead of a template, named by the identifier the  gallery reports for it. It takes precedence over `templateId`; 0 means no form. | [optional] [example: `0`] |
 
 
 ### Model CreateFileJsonElement.templateId
@@ -9842,7 +9842,7 @@ The title a folder is created with or renamed to.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **title** | **String** | The title the folder is given. It is trimmed before it is stored and may not be blank or consist of spaces  alone; it need not differ from the titles of the neighbouring folders, so the same title may appear twice in  one parent. | [required] [example: New Folder] [minLength: 0] [maxLength: 165] [nullable] |
+| **title** | **String** | The title the folder is given. It is trimmed before it is stored and may not be blank or consist of spaces  alone; it need not differ from the titles of the neighbouring folders, so the same title may appear twice in  one parent. | [required] [example: `New Folder`] [minLength: 0] [maxLength: 165] [nullable] |
 
 
 ### Model CreateRoomFromTemplateDto
@@ -9850,19 +9850,19 @@ The parameters of a room built from a room template.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **templateId** | **Integer** (int32) | The room template to copy. Templates live in their own section and are listed by `GET api/2.0/files/rooms`  with a search area of 4; an ordinary room id is rejected here. | [required] [example: 42] |
-| **title** | **String** | The name of the room to create. It is sanitised and truncated the way a room title is, and a blank value is  rejected; the title of the template is not reused. | [required] [example: Project Alpha] [minLength: 0] [maxLength: 170] [nullable] |
+| **templateId** | **Integer** (int32) | The room template to copy. Templates live in their own section and are listed by `GET api/2.0/files/rooms`  with a search area of 4; an ordinary room id is rejected here. | [required] [example: `42`] |
+| **title** | **String** | The name of the room to create. It is sanitised and truncated the way a room title is, and a blank value is  rejected; the title of the template is not reused. | [required] [example: `Project Alpha`] [minLength: 0] [maxLength: 170] [nullable] |
 | **logo** | [**LogoRequest**](#model-logorequest) | The picture to use as the room logo, named by the path that `POST api/2.0/files/logos` returned for an image  uploaded beforehand, plus the crop to take from it. Leaving the field out keeps the room on its cover and  colour. It is ignored when the logo of the template is copied instead. | [optional] |
-| **copyLogo** | **Boolean** | Whether the new room keeps the logo of the template. With it on the uploaded picture is ignored; with it off  the room starts with no logo unless one is supplied. | [optional] [example: false] |
-| **tags** | **List** | The labels to attach to the room, by name. Names the portal tag catalogue does not hold yet are added to it,  and `GET api/2.0/files/tags` lists what already exists. Leaving the field out keeps the tags of the template. | [optional] [example: [Finance, 2026]] [nullable] |
-| **color** | **String** | The background colour the room is drawn with while it has no logo, as six hexadecimal digits with no leading  number sign. An empty value restores the default colour of the room type. | [optional] [example: FF5733] [minLength: 0] [maxLength: 6] [nullable] |
-| **cover** | **String** | The picture drawn on the room while it has no logo, named by an identifier from  `GET api/2.0/files/rooms/covers`. Any other value is rejected, and an empty value leaves the room without a  cover. | [optional] [example: bookmark] [minLength: 0] [maxLength: 50] [nullable] |
-| **quota** | **Long** (int64) | The storage the room may take, in bytes. It is accepted only while the per-room quota feature is on for the  portal and must stay inside the portal own limit; leaving it out lets the room follow the portal default. | [optional] [example: 1073741824] [nullable] |
-| **indexing** | **Boolean** | Whether the room keeps a manual order of its contents. With it on every file and folder carries a position  that listings follow and that `PUT api/2.0/files/rooms/{id}/reorder` compacts; with it off the contents are  ordered by the sorting of the request. Leaving it out keeps the setting of the template. | [optional] [example: true] [nullable] |
-| **denyDownload** | **Boolean** | Whether members without editing rights are stopped from downloading and printing the contents of the room.  They can still open the documents in the editor. Leaving it out keeps the setting of the template. | [optional] [example: false] [nullable] |
+| **copyLogo** | **Boolean** | Whether the new room keeps the logo of the template. With it on the uploaded picture is ignored; with it off  the room starts with no logo unless one is supplied. | [optional] [example: `false`] |
+| **tags** | **List** | The labels to attach to the room, by name. Names the portal tag catalogue does not hold yet are added to it,  and `GET api/2.0/files/tags` lists what already exists. Leaving the field out keeps the tags of the template. | [optional] [example: `[Finance, 2026]`] [nullable] |
+| **color** | **String** | The background colour the room is drawn with while it has no logo, as six hexadecimal digits with no leading  number sign. An empty value restores the default colour of the room type. | [optional] [example: `FF5733`] [minLength: 0] [maxLength: 6] [nullable] |
+| **cover** | **String** | The picture drawn on the room while it has no logo, named by an identifier from  `GET api/2.0/files/rooms/covers`. Any other value is rejected, and an empty value leaves the room without a  cover. | [optional] [example: `bookmark`] [minLength: 0] [maxLength: 50] [nullable] |
+| **quota** | **Long** (int64) | The storage the room may take, in bytes. It is accepted only while the per-room quota feature is on for the  portal and must stay inside the portal own limit; leaving it out lets the room follow the portal default. | [optional] [example: `1073741824`] [nullable] |
+| **indexing** | **Boolean** | Whether the room keeps a manual order of its contents. With it on every file and folder carries a position  that listings follow and that `PUT api/2.0/files/rooms/{id}/reorder` compacts; with it off the contents are  ordered by the sorting of the request. Leaving it out keeps the setting of the template. | [optional] [example: `true`] [nullable] |
+| **denyDownload** | **Boolean** | Whether members without editing rights are stopped from downloading and printing the contents of the room.  They can still open the documents in the editor. Leaving it out keeps the setting of the template. | [optional] [example: `false`] [nullable] |
 | **lifetime** | [**RoomDataLifetimeDto**](#model-roomdatalifetimedto) | How long files may stay in the room before they are deleted automatically. The countdown starts when the  setting is saved, and leaving the field out keeps the files forever. Leaving the field out keeps the setting  of the template. | [optional] |
 | **watermark** | [**WatermarkRequestDto**](#model-watermarkrequestdto) | The watermark drawn over documents opened in the room. Leaving the field out adds no watermark, and sending it  with the switch turned off removes the one the room has. Leaving the field out keeps the setting of the  template. | [optional] |
-| **private** | **Boolean** | Whether the room is end-to-end encrypted. Its files can then be opened only in the desktop application by  members whose encryption keys are set up, and the flag cannot be changed after the room is created. | [optional] [example: false] [nullable] |
+| **private** | **Boolean** | Whether the room is end-to-end encrypted. Its files can then be opened only in the desktop application by  members whose encryption keys are set up, and the flag cannot be changed after the room is created. | [optional] [example: `false`] [nullable] |
 
 
 ### Model CreateRoomRequestDto
@@ -9870,22 +9870,22 @@ The parameters of a new room in the Rooms section.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **title** | **String** | The name of the room. It is trimmed, characters that a folder name cannot hold are replaced with underscores  and the rest is truncated, so the stored title can differ from the one sent; a blank title is rejected. Titles  are not unique, and rooms are told apart by their id. | [required] [example: Project Alpha] [minLength: 0] [maxLength: 170] [nullable] |
-| **quota** | **Long** (int64) | The storage the room may take, in bytes. It is accepted only while the per-room quota feature is on for the  portal and must stay inside the portal own limit; leaving it out lets the room follow the portal default. | [optional] [example: 1073741824] [nullable] |
-| **indexing** | **Boolean** | Whether the room keeps a manual order of its contents. With it on every file and folder carries a position  that listings follow and that `PUT api/2.0/files/rooms/{id}/reorder` compacts; with it off the contents are  ordered by the sorting of the request. | [optional] [example: true] [nullable] |
-| **denyDownload** | **Boolean** | Whether members without editing rights are stopped from downloading and printing the contents of the room.  They can still open the documents in the editor. | [optional] [example: false] [nullable] |
+| **title** | **String** | The name of the room. It is trimmed, characters that a folder name cannot hold are replaced with underscores  and the rest is truncated, so the stored title can differ from the one sent; a blank title is rejected. Titles  are not unique, and rooms are told apart by their id. | [required] [example: `Project Alpha`] [minLength: 0] [maxLength: 170] [nullable] |
+| **quota** | **Long** (int64) | The storage the room may take, in bytes. It is accepted only while the per-room quota feature is on for the  portal and must stay inside the portal own limit; leaving it out lets the room follow the portal default. | [optional] [example: `1073741824`] [nullable] |
+| **indexing** | **Boolean** | Whether the room keeps a manual order of its contents. With it on every file and folder carries a position  that listings follow and that `PUT api/2.0/files/rooms/{id}/reorder` compacts; with it off the contents are  ordered by the sorting of the request. | [optional] [example: `true`] [nullable] |
+| **denyDownload** | **Boolean** | Whether members without editing rights are stopped from downloading and printing the contents of the room.  They can still open the documents in the editor. | [optional] [example: `false`] [nullable] |
 | **lifetime** | [**RoomDataLifetimeDto**](#model-roomdatalifetimedto) | How long files may stay in the room before they are deleted automatically. The countdown starts when the  setting is saved, and leaving the field out keeps the files forever. | [optional] |
 | **watermark** | [**WatermarkRequestDto**](#model-watermarkrequestdto) | The watermark drawn over documents opened in the room. Leaving the field out adds no watermark, and sending it  with the switch turned off removes the one the room has. | [optional] |
 | **logo** | [**LogoRequest**](#model-logorequest) | The picture to use as the room logo, named by the path that `POST api/2.0/files/logos` returned for an image  uploaded beforehand, plus the crop to take from it. Leaving the field out keeps the room on its cover and  colour. | [optional] |
-| **tags** | **List** | The labels to attach to the room, by name. Names the portal tag catalogue does not hold yet are added to it,  and `GET api/2.0/files/tags` lists what already exists. | [optional] [example: [Finance, 2026]] [nullable] |
-| **color** | **String** | The background colour the room is drawn with while it has no logo, as six hexadecimal digits with no leading  number sign. An empty value restores the default colour of the room type. | [optional] [example: FF5733] [pattern: /^[0-9a-fA-F]\{6\}$/] [nullable] |
-| **cover** | **String** | The picture drawn on the room while it has no logo, named by an identifier from  `GET api/2.0/files/rooms/covers`. Any other value is rejected, and an empty value leaves the room without a  cover. | [optional] [example: bookmark] [minLength: 0] [maxLength: 50] [nullable] |
-| **roomType** | [**RoomType**](#model-roomtype) | What the room is for. It decides which sharing links, roles and form features the room offers, and it cannot  be changed once the room exists, so a room of the wrong kind has to be recreated. | [required] [enum: 1, 2, 5, 6, 8, 9] |
-| **private** | **Boolean** | Whether the room is end-to-end encrypted. Its files can then be opened only in the desktop application by  members whose encryption keys are set up, and the flag cannot be changed after the room is created. | [optional] [example: false] |
-| **share** | [**List**](#model-fileshareparams) | Not implemented on room creation: any non-empty value is rejected, and members are invited afterwards with  `PUT api/2.0/files/rooms/{id}/share`. | [optional] [example: []] [nullable] |
+| **tags** | **List** | The labels to attach to the room, by name. Names the portal tag catalogue does not hold yet are added to it,  and `GET api/2.0/files/tags` lists what already exists. | [optional] [example: `[Finance, 2026]`] [nullable] |
+| **color** | **String** | The background colour the room is drawn with while it has no logo, as six hexadecimal digits with no leading  number sign. An empty value restores the default colour of the room type. | [optional] [example: `FF5733`] [pattern: `/^[0-9a-fA-F]{6}$/`] [nullable] |
+| **cover** | **String** | The picture drawn on the room while it has no logo, named by an identifier from  `GET api/2.0/files/rooms/covers`. Any other value is rejected, and an empty value leaves the room without a  cover. | [optional] [example: `bookmark`] [minLength: 0] [maxLength: 50] [nullable] |
+| **roomType** | [**RoomType**](#model-roomtype) | What the room is for. It decides which sharing links, roles and form features the room offers, and it cannot  be changed once the room exists, so a room of the wrong kind has to be recreated. | [required] [enum: `1`, `2`, `5`, `6`, `8`, `9`] |
+| **private** | **Boolean** | Whether the room is end-to-end encrypted. Its files can then be opened only in the desktop application by  members whose encryption keys are set up, and the flag cannot be changed after the room is created. | [optional] [example: `false`] |
+| **share** | [**List**](#model-fileshareparams) | Not implemented on room creation: any non-empty value is rejected, and members are invited afterwards with  `PUT api/2.0/files/rooms/{id}/share`. | [optional] [example: `[]`] [nullable] |
 | **chatSettings** | [**ChatSettings**](#model-chatsettings) | The model and the prompt an AI room answers with. It belongs to AI rooms only and is rejected for a room of  any other kind. | [optional] |
-| **sendFormToExternalDB** | **Boolean** | For a form filling room, whether the data of every completed submission is also pushed to the external  database configured for the portal. It is what `POST api/2.0/files/rooms/{id}/externaldbsync` re-runs for the  forms already collected. | [optional] [example: false] [nullable] |
-| **saveFormAsXLSX** | **Boolean** | For a form filling room, whether the collected submissions are also gathered into a spreadsheet stored next to  the completed forms. With it off the submissions are kept only as the filled documents themselves. | [optional] [example: false] [nullable] |
+| **sendFormToExternalDB** | **Boolean** | For a form filling room, whether the data of every completed submission is also pushed to the external  database configured for the portal. It is what `POST api/2.0/files/rooms/{id}/externaldbsync` re-runs for the  forms already collected. | [optional] [example: `false`] [nullable] |
+| **saveFormAsXLSX** | **Boolean** | For a form filling room, whether the collected submissions are also gathered into a spreadsheet stored next to  the completed forms. With it off the submissions are kept only as the filled documents themselves. | [optional] [example: `false`] [nullable] |
 
 
 ### Model CreateTagRequestDto
@@ -9893,7 +9893,7 @@ The parameters for adding a custom tag to the portal catalog of room tags.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **name** | **String** | The name of the tag to create, which is also its identity: tags are addressed by name everywhere, there is no  separate identifier. It is stored exactly as sent, spacing and case included, and a name that is already in  the catalog gives back that tag instead of a second one. | [required] [example: Important] [minLength: 0] [maxLength: 255] [nullable] |
+| **name** | **String** | The name of the tag to create, which is also its identity: tags are addressed by name everywhere, there is no  separate identifier. It is stored exactly as sent, spacing and case included, and a name that is already in  the catalog gives back that tag instead of a second one. | [required] [example: `Important`] [minLength: 0] [maxLength: 255] [nullable] |
 
 
 ### Model CreateTextOrHtmlFile
@@ -9901,9 +9901,9 @@ The parameters of a text or HTML file created from content sent in the request.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **title** | **String** | The title of the file. The extension the operation stands for is appended unless the title already ends with  it, so Notes becomes Notes.txt or Notes.html. | [required] [example: Document.txt] [minLength: 1] [maxLength: 165] [nullable] |
-| **content** | **String** | The content of the file, as plain text or as HTML markup. A request carrying none is rejected as an invalid  request, and for a text file content that looks like markup makes the portal store it as HTML instead. | [optional] [example: This is the file content] [nullable] |
-| **createNewIfExist** | **Boolean** | What to do when the folder already holds a file of this title, the other way round than the name reads: `true`  updates that file and adds a version to its history, `false` creates another file and makes its title unique,  as in Notes (1).txt. | [optional] [example: false] |
+| **title** | **String** | The title of the file. The extension the operation stands for is appended unless the title already ends with  it, so Notes becomes Notes.txt or Notes.html. | [required] [example: `Document.txt`] [minLength: 1] [maxLength: 165] [nullable] |
+| **content** | **String** | The content of the file, as plain text or as HTML markup. A request carrying none is rejected as an invalid  request, and for a text file content that looks like markup makes the portal store it as HTML instead. | [optional] [example: `This is the file content`] [nullable] |
+| **createNewIfExist** | **Boolean** | What to do when the folder already holds a file of this title, the other way round than the name reads: `true`  updates that file and adds a version to its history, `false` creates another file and makes its title unique,  as in Notes (1).txt. | [optional] [example: `false`] |
 
 
 ### Model CreateThirdPartyRoom
@@ -9911,15 +9911,15 @@ The room to be created out of a folder of a connected third-party storage accoun
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **createAsNewFolder** | **Boolean** | Creates a new folder named after `title` inside the folder named in the path and turns that subfolder into the  room, leaving the named folder itself untouched. When omitted, the named folder becomes the room and keeps  everything it already holds. | [optional] [example: false] |
-| **title** | **String** | The name the room is shown under. It is stored on the connected account, so it does not have to match the name  of the folder in the storage; with `createAsNewFolder` it is also the name given to the created subfolder. | [required] [example: Third-party project room] [nullable] |
-| **roomType** | [**RoomType**](#model-roomtype) | The kind of room the folder becomes, which decides the default access rules of its members and cannot be  changed afterwards. | [required] [enum: 1, 2, 5, 6, 8, 9] |
-| **private** | **Boolean** | Restricts the room to the members explicitly invited into it. The flag is kept on the connected storage  account rather than on the folder, so every folder read through that account reports the same value. | [optional] [example: false] |
-| **indexing** | **Boolean** | Keeps the contents of the room in an explicit numbered order, the one reported as `order` on every entry,  instead of leaving the order to the reader. | [optional] [example: true] |
-| **denyDownload** | **Boolean** | Forbids downloading and printing the contents of the room, which leaves the members with viewing and editing  in the editor only. | [optional] [example: false] |
-| **color** | **String** | The background colour drawn behind the cover of the room, as six hexadecimal digits without a leading number  sign. An empty value restores the colour the portal picks by default. | [optional] [example: FF5733] [nullable] |
-| **cover** | **String** | The drawing shown on the room tile, named by one of the built-in cover identifiers returned by  `GET api/2.0/files/rooms/covers`. An empty value leaves the room without a cover, and any other unknown value  is rejected as an invalid request. | [optional] [example: bookmark] [nullable] |
-| **tags** | **List** | The tags to attach to the room, named by their text. A name that is not in the portal tag catalogue yet is  added to it, and `GET api/2.0/files/tags` lists the names already there. | [optional] [example: [Marketing, Q3]] [nullable] |
+| **createAsNewFolder** | **Boolean** | Creates a new folder named after `title` inside the folder named in the path and turns that subfolder into the  room, leaving the named folder itself untouched. When omitted, the named folder becomes the room and keeps  everything it already holds. | [optional] [example: `false`] |
+| **title** | **String** | The name the room is shown under. It is stored on the connected account, so it does not have to match the name  of the folder in the storage; with `createAsNewFolder` it is also the name given to the created subfolder. | [required] [example: `Third-party project room`] [nullable] |
+| **roomType** | [**RoomType**](#model-roomtype) | The kind of room the folder becomes, which decides the default access rules of its members and cannot be  changed afterwards. | [required] [enum: `1`, `2`, `5`, `6`, `8`, `9`] |
+| **private** | **Boolean** | Restricts the room to the members explicitly invited into it. The flag is kept on the connected storage  account rather than on the folder, so every folder read through that account reports the same value. | [optional] [example: `false`] |
+| **indexing** | **Boolean** | Keeps the contents of the room in an explicit numbered order, the one reported as `order` on every entry,  instead of leaving the order to the reader. | [optional] [example: `true`] |
+| **denyDownload** | **Boolean** | Forbids downloading and printing the contents of the room, which leaves the members with viewing and editing  in the editor only. | [optional] [example: `false`] |
+| **color** | **String** | The background colour drawn behind the cover of the room, as six hexadecimal digits without a leading number  sign. An empty value restores the colour the portal picks by default. | [optional] [example: `FF5733`] [nullable] |
+| **cover** | **String** | The drawing shown on the room tile, named by one of the built-in cover identifiers returned by  `GET api/2.0/files/rooms/covers`. An empty value leaves the room without a cover, and any other unknown value  is rejected as an invalid request. | [optional] [example: `bookmark`] [nullable] |
+| **tags** | **List** | The tags to attach to the room, named by their text. A name that is not in the portal tag catalogue yet is  added to it, and `GET api/2.0/files/tags` lists the names already there. | [optional] [example: `[Marketing, Q3]`] [nullable] |
 | **logo** | [**LogoRequest**](#model-logorequest) | The picture to use as the room logo, which has to be uploaded with `POST api/2.0/files/logos` first; leaving  it out keeps the room on its cover and colour. | [optional] |
 
 
@@ -9928,7 +9928,7 @@ The Custom Filter state a spreadsheet is to be put into.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **enabled** | **Boolean** | The state to reach: `true` turns the mode on, so that the sorting and filtering each person applies stays  visible to that person alone, and drops the others out of a running editing session; `false` turns it off and  makes filtering shared again. | [optional] [example: true] |
+| **enabled** | **Boolean** | The state to reach: `true` turns the mode on, so that the sorting and filtering each person applies stays  visible to that person alone, and drops the others out of a running editing session; `false` turns it off and  makes filtering shared again. | [optional] [example: `true`] |
 
 
 ### Model CustomerConfigDto
@@ -9936,12 +9936,12 @@ The branding of the organization running the portal, as the editor About panel s
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **address** | **String** | The postal address from the portal branding settings; empty when none was entered. | [optional] [example: 20A-6 Ernesta Birznieka-Upisha Street, Riga] [nullable] |
-| **logo** | **String** | The About-panel logo of the organization. | [optional] [example: https://portal.example.com/logo/about.png] [nullable] |
-| **logoDark** | **String** | The About-panel logo for a dark interface theme. | [optional] [example: https://portal.example.com/logo/about-dark.png] [nullable] |
-| **mail** | **String** | The contact address from the portal branding settings. | [optional] [example: support@example.com] [nullable] |
-| **name** | **String** | The organization name shown in the editor. | [optional] [example: Example Ltd] [nullable] |
-| **www** | **String** | The website of the organization. | [optional] [example: https://www.example.com] [nullable] |
+| **address** | **String** | The postal address from the portal branding settings; empty when none was entered. | [optional] [example: `20A-6 Ernesta Birznieka-Upisha Street, Riga`] [nullable] |
+| **logo** | **String** | The About-panel logo of the organization. | [optional] [example: `https://portal.example.com/logo/about.png`] [nullable] |
+| **logoDark** | **String** | The About-panel logo for a dark interface theme. | [optional] [example: `https://portal.example.com/logo/about-dark.png`] [nullable] |
+| **mail** | **String** | The contact address from the portal branding settings. | [optional] [example: `support@example.com`] [nullable] |
+| **name** | **String** | The organization name shown in the editor. | [optional] [example: `Example Ltd`] [nullable] |
+| **www** | **String** | The website of the organization. | [optional] [example: `https://www.example.com`] [nullable] |
 
 
 ### Model CustomizationConfigDto
@@ -9949,15 +9949,15 @@ How the editor interface is dressed: branding, the buttons that lead back into t
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **about** | **Boolean** | Whether the About entry of the editor menu is shown. | [optional] [example: true] |
+| **about** | **Boolean** | Whether the About entry of the editor menu is shown. | [optional] [example: `true`] |
 | **customer** | [**CustomerConfigDto**](#model-customerconfigdto) | The branding of the organization running the portal. It is filled in on a server installation only and is  empty in the cloud. | [optional] |
 | **anonymous** | [**AnonymousConfigDto**](#model-anonymousconfigdto) | How an anonymous participant is treated in this session. | [optional] |
 | **feedback** | [**FeedbackConfig**](#model-feedbackconfig) | The support link the editor offers behind its feedback button. | [optional] |
-| **forcesave** | **Boolean** | Whether the editors write intermediate revisions while the document stays open. It is empty when the portal  leaves the decision to the editors themselves. | [optional] [example: false] [nullable] |
+| **forcesave** | **Boolean** | Whether the editors write intermediate revisions while the document stays open. It is empty when the portal  leaves the decision to the editors themselves. | [optional] [example: `false`] [nullable] |
 | **goback** | [**GobackConfig**](#model-gobackconfig) | Where the editor returns the user to when they leave the document. It is empty when there is nowhere to go  back to, as in an embedded opening. | [optional] |
 | **review** | [**ReviewConfig**](#model-reviewconfig) | How tracked changes are displayed when the document opens; it depends on whether this session may write. | [optional] |
 | **logo** | [**LogoConfigDto**](#model-logoconfigdto) | The logo the editor shows, in the variants the current layout and file type need. | [optional] |
-| **mentionShare** | **Boolean** | Whether mentioning a user who cannot yet open the document offers to share it with them, instead of silently  notifying nobody. | [optional] [example: true] |
+| **mentionShare** | **Boolean** | Whether mentioning a user who cannot yet open the document offers to share it with them, instead of silently  notifying nobody. | [optional] [example: `true`] |
 | **submitForm** | [**SubmitForm**](#model-submitform) | The submit button of a form: whether it is shown and what it says. | [optional] |
 | **startFillingForm** | [**StartFillingForm**](#model-startfillingform) | The button that starts filling out the form. It is empty when this opening offers no such button. | [optional] |
 | **ai** | [**AIConfig**](#model-aiconfig) | The AI configuration settings. | [optional] |
@@ -9989,12 +9989,12 @@ The blank document configured for one extension.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **selectedFile** | **Integer** (int32) | The copy stored in the portal that serves as the blank for this extension. A null means no custom blank has  been chosen and new documents start from the portal's built-in one; the other fields of the entry are then  empty as well. | [optional] [example: 123] [nullable] |
-| **fileExtension** | **String** | The extension the entry describes, in lower case with the leading dot. It is the value to send back when this  blank is replaced or reset. | [required] [example: .docx] [nullable] |
-| **fileTitle** | **String** | The name the custom blank was copied under, useful for showing which document was chosen. Empty while the  built-in blank is in use. | [optional] [example: Company letter.docx] [nullable] |
-| **lastModified** | **Date** (date-time) | When the custom blank was last changed, in the time zone of the portal. Null while the built-in blank is in  use. | [optional] [example: 2026-03-18T11:42:07] [nullable] |
-| **fileSize** | **Long** (int64) | The size of the custom blank in bytes. Null while the built-in blank is in use. | [optional] [example: 1024] [nullable] |
-| **viewUrl** | **String** | The address the custom blank can be downloaded from, already carrying the access key of the calling account.  Empty while the built-in blank is in use. | [optional] [example: https://example.com/filehandler.ashx?action=download&fileid=123] [nullable] |
+| **selectedFile** | **Integer** (int32) | The copy stored in the portal that serves as the blank for this extension. A null means no custom blank has  been chosen and new documents start from the portal's built-in one; the other fields of the entry are then  empty as well. | [optional] [example: `123`] [nullable] |
+| **fileExtension** | **String** | The extension the entry describes, in lower case with the leading dot. It is the value to send back when this  blank is replaced or reset. | [required] [example: `.docx`] [nullable] |
+| **fileTitle** | **String** | The name the custom blank was copied under, useful for showing which document was chosen. Empty while the  built-in blank is in use. | [optional] [example: `Company letter.docx`] [nullable] |
+| **lastModified** | **Date** (date-time) | When the custom blank was last changed, in the time zone of the portal. Null while the built-in blank is in  use. | [optional] [example: `2026-03-18T11:42:07`] [nullable] |
+| **fileSize** | **Long** (int64) | The size of the custom blank in bytes. Null while the built-in blank is in use. | [optional] [example: `1024`] [nullable] |
+| **viewUrl** | **String** | The address the custom blank can be downloaded from, already carrying the access key of the calling account.  Empty while the built-in blank is in use. | [optional] [example: `https://example.com/filehandler.ashx?action=download&fileid=123`] [nullable] |
 
 
 ### Model DefaultTemplateSettingsDto
@@ -10002,7 +10002,7 @@ The blank document the portal creates for each extension it covers.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **items** | [**List**](#model-defaulttemplateitemdto) | One entry per extension the portal's built-in template set covers, whether or not a custom blank has been  chosen for it, so the list is never empty and its length follows the template set rather than the number of  custom blanks. Entries come in the order an interface shows them: text document, spreadsheet, presentation and  PDF first, everything else by extension. | [required] [example: [\{fileExtension=.docx, fileTitle=Company letter.docx, selectedFile=123\}]] [nullable] |
+| **items** | [**List**](#model-defaulttemplateitemdto) | One entry per extension the portal's built-in template set covers, whether or not a custom blank has been  chosen for it, so the list is never empty and its length follows the template set rather than the number of  custom blanks. Entries come in the order an interface shows them: text document, spreadsheet, presentation and  PDF first, everything else by extension. | [required] [example: `[{fileExtension=.docx, fileTitle=Company letter.docx, selectedFile=123}]`] [nullable] |
 
 
 ### Model DefaultTemplateSettingsRequestDto
@@ -10011,7 +10011,7 @@ The document to use as the blank the portal creates for one extension.
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **selectedFile** | [**DefaultTemplateSettingsRequestDto_selectedFile**](#model-defaulttemplatesettingsrequestdtoselectedfile) |  | [required] |
-| **fileExtension** | **String** | The extension the blank is set for, written in lower case with the leading dot. Only the extensions the  portal's built-in template set covers are accepted, and `GET api/2.0/files/settings/defaulttemplate` returns  exactly that list; an extension outside it leaves the settings unchanged instead of failing. | [required] [example: .docx] [nullable] |
+| **fileExtension** | **String** | The extension the blank is set for, written in lower case with the leading dot. Only the extensions the  portal's built-in template set covers are accepted, and `GET api/2.0/files/settings/defaulttemplate` returns  exactly that list; an extension outside it leaves the settings unchanged instead of failing. | [required] [example: `.docx`] [nullable] |
 
 
 ### Model DefaultTemplateSettingsRequestDto.selectedFile
@@ -10023,7 +10023,7 @@ The extension whose custom blank is dropped in favour of the built-in one.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **fileExtension** | **String** | The extension whose custom blank is dropped, written in lower case with the leading dot. Only the extensions  the portal's built-in template set covers are accepted, and `GET api/2.0/files/settings/defaulttemplate`  returns exactly that list; an extension outside it leaves the settings unchanged instead of failing. | [required] [example: .docx] [nullable] |
+| **fileExtension** | **String** | The extension whose custom blank is dropped, written in lower case with the leading dot. Only the extensions  the portal's built-in template set covers are accepted, and `GET api/2.0/files/settings/defaulttemplate`  returns exactly that list; an extension outside it leaves the settings unchanged instead of failing. | [required] [example: `.docx`] [nullable] |
 
 
 ### Model DefaultTemplateSettingsWrapper
@@ -10043,8 +10043,8 @@ The parameters of a single file deletion.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **deleteAfter** | **Boolean** | When to delete: `true` waits until the editing session on the file has ended, `false` deletes at once, pulling  the file away from whoever is working on it. | [optional] [example: false] |
-| **immediately** | **Boolean** | Where the file goes: `false` moves it to Trash, from where it can be restored, `true` deletes it for good.  Inside a room, where there is no Trash, deletion is always final. | [optional] [example: false] |
+| **deleteAfter** | **Boolean** | When to delete: `true` waits until the editing session on the file has ended, `false` deletes at once, pulling  the file away from whoever is working on it. | [optional] [example: `false`] |
+| **immediately** | **Boolean** | Where the file goes: `false` moves it to Trash, from where it can be restored, `true` deletes it for good.  Inside a room, where there is no Trash, deletion is always final. | [optional] [example: `false`] |
 
 
 ### Model DeleteBatchRequestDto
@@ -10070,8 +10070,8 @@ How a folder is to be deleted.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **deleteAfter** | **Boolean** | Whether the deletion waits for the editing sessions on the contents to end: with true a folder somebody is  working in is removed once they are done, with false the deletion starts at once. | [optional] [example: false] |
-| **immediately** | **Boolean** | Whether the folder is discarded for good instead of being moved to the Trash section: with false it can be  restored from Trash, with true it cannot be recovered. Inside a room there is no Trash and the deletion is  final either way. | [optional] [example: false] |
+| **deleteAfter** | **Boolean** | Whether the deletion waits for the editing sessions on the contents to end: with true a folder somebody is  working in is removed once they are done, with false the deletion starts at once. | [optional] [example: `false`] |
+| **immediately** | **Boolean** | Whether the folder is discarded for good instead of being moved to the Trash section: with false it can be  restored from Trash, with true it cannot be recovered. Inside a room there is no Trash and the deletion is  final either way. | [optional] [example: `false`] |
 
 
 ### Model DeleteRoomRequest
@@ -10079,7 +10079,7 @@ The body of a room deletion request.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **deleteAfter** | **Boolean** | Carried by the contract but not acted upon: the deletion behaves the same either way, and the record of the  finished job is kept until it is read once. | [optional] [example: false] |
+| **deleteAfter** | **Boolean** | Carried by the contract but not acted upon: the deletion behaves the same either way, and the record of the  finished job is kept until it is read once. | [optional] [example: `false`] |
 
 
 ### Model DeleteVersionBatchRequestDto
@@ -10098,7 +10098,7 @@ The body of a file settings switch that turns something on or makes it visible.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **set** | **Boolean** | The state to store for the setting the operation addresses: true enables it or shows what it governs, false  disables or hides it. What exactly is affected, and whether the value belongs to the calling account or to the  whole portal, are stated by the operation that binds this body. The portal may store a different value than  the one sent when another setting overrides it, so read the answer rather than assuming. | [optional] [example: true] |
+| **set** | **Boolean** | The state to store for the setting the operation addresses: true enables it or shows what it governs, false  disables or hides it. What exactly is affected, and whether the value belongs to the calling account or to the  whole portal, are stated by the operation that binds this body. The portal may store a different value than  the one sent when another setting overrides it, so read the answer rather than assuming. | [optional] [example: `true`] |
 
 
 ### Model DistributedTaskStatus
@@ -10117,15 +10117,15 @@ The document service location as this portal has it configured, together with th
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **version** | **String** | The editor version the running Document Server reported. It is filled in only when the version was asked for,  and comes back empty otherwise. When the Document Server does not answer, a fallback version is reported  rather than an error, so a value here is no proof that the server is reachable. | [required] [example: 8.0.1] [nullable] |
-| **docServiceUrlApi** | **String** | The absolute URL of the editor api script that a client has to load before it can open a document. It is  derived from the public Document Server address unless the deployment overrides it separately. | [required] [example: https://documentserver.example.com/web-apps/apps/api/documents/api.js] [nullable] |
-| **docServiceUrl** | **String** | The public Document Server address a browser loads the editor from. Empty means no document server is  configured for this portal, and documents cannot be opened for editing or viewing. | [required] [example: https://documentserver.example.com/] [nullable] |
-| **docServicePreloadUrl** | **String** | The absolute URL of a page a client may load in advance to warm the editor scripts up. Loading it is optional  and changes nothing on the portal. | [required] [example: https://documentserver.example.com/web-apps/apps/api/documents/preload.html] [nullable] |
-| **docServiceUrlInternal** | **String** | The address the portal uses for its own server-to-server calls to the Document Server. When no private-network  address is configured, it repeats the public one. | [required] [example: http://documentserver-internal.local/] [nullable] |
-| **docServicePortalUrl** | **String** | The address the Document Server is told to call this portal back on. Empty means nothing overrides it and the  portal's own resolved address is used. | [required] [example: https://portal.example.com/] [nullable] |
-| **docServiceSignatureHeader** | **String** | The name of the HTTP header that carries the signature on requests between the portal and the Document Server.  The secret itself is not part of the answer, so this only tells a client whether request signing is set up and  under which header. | [required] [example: Authorization] [nullable] |
-| **docServiceSslVerification** | **Boolean** | Whether the portal validates the TLS certificate of the Document Server. False means any certificate is  accepted, which is expected only in a test deployment. | [required] [example: true] |
-| **isDefault** | **Boolean** | Whether every one of these settings is still the one the deployment ships with. False means at least one of  the addresses, the signature settings or SSL verification has been overridden for this portal. | [required] [example: true] |
+| **version** | **String** | The editor version the running Document Server reported. It is filled in only when the version was asked for,  and comes back empty otherwise. When the Document Server does not answer, a fallback version is reported  rather than an error, so a value here is no proof that the server is reachable. | [required] [example: `8.0.1`] [nullable] |
+| **docServiceUrlApi** | **String** | The absolute URL of the editor api script that a client has to load before it can open a document. It is  derived from the public Document Server address unless the deployment overrides it separately. | [required] [example: `https://documentserver.example.com/web-apps/apps/api/documents/api.js`] [nullable] |
+| **docServiceUrl** | **String** | The public Document Server address a browser loads the editor from. Empty means no document server is  configured for this portal, and documents cannot be opened for editing or viewing. | [required] [example: `https://documentserver.example.com/`] [nullable] |
+| **docServicePreloadUrl** | **String** | The absolute URL of a page a client may load in advance to warm the editor scripts up. Loading it is optional  and changes nothing on the portal. | [required] [example: `https://documentserver.example.com/web-apps/apps/api/documents/preload.html`] [nullable] |
+| **docServiceUrlInternal** | **String** | The address the portal uses for its own server-to-server calls to the Document Server. When no private-network  address is configured, it repeats the public one. | [required] [example: `http://documentserver-internal.local/`] [nullable] |
+| **docServicePortalUrl** | **String** | The address the Document Server is told to call this portal back on. Empty means nothing overrides it and the  portal's own resolved address is used. | [required] [example: `https://portal.example.com/`] [nullable] |
+| **docServiceSignatureHeader** | **String** | The name of the HTTP header that carries the signature on requests between the portal and the Document Server.  The secret itself is not part of the answer, so this only tells a client whether request signing is set up and  under which header. | [required] [example: `Authorization`] [nullable] |
+| **docServiceSslVerification** | **Boolean** | Whether the portal validates the TLS certificate of the Document Server. False means any certificate is  accepted, which is expected only in a test deployment. | [required] [example: `true`] |
+| **isDefault** | **Boolean** | Whether every one of these settings is still the one the deployment ships with. False means at least one of  the addresses, the signature settings or SSL verification has been overridden for this portal. | [required] [example: `true`] |
 
 
 ### Model DocServiceUrlWrapper
@@ -10145,14 +10145,14 @@ The state of a background document building task: how far it has got, how it end
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **id** | **String** | The identifier of the task. It is derived from the portal, the account and the kind of report, so starting the  same report again while it runs returns this same value, which is how a resumed poll is told from a newly  queued build. | [required] [example: DocumentBuilderTask_1_c2b0e3a4-1f6c-4c2e-9c4f-3a5d8b7e1c22] [nullable] |
-| **error** | **String** | The message of the failure that stopped the build. It is filled in only for a task that ended in the failed  state, and stays empty while the task runs and after it succeeds. | [required] [example: The document service is unavailable] [nullable] |
-| **percentage** | **Integer** (int32) | How far the build has got, from 0 to 100. It advances in a few coarse steps rather than smoothly, so it is a  progress hint and not a measure of the time left; wait on the completion flag instead. | [required] [example: 60] |
-| **isCompleted** | **Boolean** | True once the task has stopped for any reason, a failure and a cancellation included. It is the field to poll  on, and the status tells those outcomes apart. | [required] [example: false] |
-| **status** | [**DistributedTaskStatus**](#model-distributedtaskstatus) | How the task ended, or that it has not started yet. Read it together with the completion flag: a stopped task  can be a finished build, a cancelled one or a failure, and only this field separates them. | [required] [enum: 0, 1, 2, 3, 4] |
+| **id** | **String** | The identifier of the task. It is derived from the portal, the account and the kind of report, so starting the  same report again while it runs returns this same value, which is how a resumed poll is told from a newly  queued build. | [required] [example: `DocumentBuilderTask_1_c2b0e3a4-1f6c-4c2e-9c4f-3a5d8b7e1c22`] [nullable] |
+| **error** | **String** | The message of the failure that stopped the build. It is filled in only for a task that ended in the failed  state, and stays empty while the task runs and after it succeeds. | [required] [example: `The document service is unavailable`] [nullable] |
+| **percentage** | **Integer** (int32) | How far the build has got, from 0 to 100. It advances in a few coarse steps rather than smoothly, so it is a  progress hint and not a measure of the time left; wait on the completion flag instead. | [required] [example: `60`] |
+| **isCompleted** | **Boolean** | True once the task has stopped for any reason, a failure and a cancellation included. It is the field to poll  on, and the status tells those outcomes apart. | [required] [example: `false`] |
+| **status** | [**DistributedTaskStatus**](#model-distributedtaskstatus) | How the task ended, or that it has not started yet. Read it together with the completion flag: a stopped task  can be a finished build, a cancelled one or a failure, and only this field separates them. | [required] [enum: `0`, `1`, `2`, `3`, `4`] |
 | **resultFileId** | **oas_any_type_not_mapped** |  | [required] [nullable] |
-| **resultFileName** | **String** | The name the produced file was saved with, extension included. The name is built from the subject of the  report and is not unique: a second build adds another file instead of replacing the first. | [required] [example: usage_report.xlsx] [nullable] |
-| **resultFileUrl** | **String** | The address of the produced file in the document editor, relative to the portal root, so prefix it with the  portal address to open it. It stays empty until the build succeeds. | [required] [example: /doceditor?fileid=1234] [nullable] |
+| **resultFileName** | **String** | The name the produced file was saved with, extension included. The name is built from the subject of the  report and is not unique: a second build adds another file instead of replacing the first. | [required] [example: `usage_report.xlsx`] [nullable] |
+| **resultFileUrl** | **String** | The address of the produced file in the document editor, relative to the portal root, so prefix it with the  portal address to open it. It stays empty until the build succeeds. | [required] [example: `/doceditor?fileid=1234`] [nullable] |
 
 
 ### Model DocumentBuilderTaskWrapper
@@ -10172,17 +10172,17 @@ The document itself as the editors address it: what to fetch, under which revisi
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **fileType** | **String** | The format the editors treat the content as, without the leading dot. For a file that had to be converted this  is the format it was converted to, not the one it is stored under. | [optional] [example: docx] [nullable] |
+| **fileType** | **String** | The format the editors treat the content as, without the leading dot. For a file that had to be converted this  is the format it was converted to, not the one it is stored under. | [optional] [example: `docx`] [nullable] |
 | **info** | [**InfoConfigDto**](#model-infoconfigdto) | The facts the editor information panel shows about the document. | [optional] |
-| **isLinkedForMe** | **Boolean** | Whether the caller opened the original document rather than a link pointing at it, which matters only for  formats whose editing is restricted through links. | [optional] [example: false] |
-| **key** | **String** | Identifies the exact revision to the editors: everyone who receives the same key joins the same co-editing  session, and the key changes as soon as the document is saved. | [optional] [example: 1_512_3] [nullable] |
+| **isLinkedForMe** | **Boolean** | Whether the caller opened the original document rather than a link pointing at it, which matters only for  formats whose editing is restricted through links. | [optional] [example: `false`] |
+| **key** | **String** | Identifies the exact revision to the editors: everyone who receives the same key joins the same co-editing  session, and the key changes as soon as the document is saved. | [optional] [example: `1_512_3`] [nullable] |
 | **permissions** | [**PermissionsConfig**](#model-permissionsconfig) | What this caller may do inside the editor - edit, comment, review, fill, download, print, copy and chat. | [optional] |
-| **sharedLinkParam** | **String** | The name of the query parameter that carries the external share key. It is set only when the document was  opened through an external link. | [optional] [example: share] [nullable] |
-| **sharedLinkKey** | **String** | The external share key this opening runs under, empty when the caller opened the document as a portal member.  The editors pass it back on every request they make for the document. | [optional] [example: HkQd9nT2] [nullable] |
+| **sharedLinkParam** | **String** | The name of the query parameter that carries the external share key. It is set only when the document was  opened through an external link. | [optional] [example: `share`] [nullable] |
+| **sharedLinkKey** | **String** | The external share key this opening runs under, empty when the caller opened the document as a portal member.  The editors pass it back on every request they make for the document. | [optional] [example: `HkQd9nT2`] [nullable] |
 | **referenceData** | [**FileReferenceData**](#model-filereferencedata) | How another spreadsheet names this document in a formula. Pass it to `POST api/2.0/files/file/referencedata`  to resolve such a reference. | [optional] |
-| **title** | **String** | The name the editors display. When a past version was opened, the moment that version was created is appended  to it in brackets. | [optional] [example: Budget 2026.xlsx] [nullable] |
-| **url** | **URI** (uri) | Where the editors fetch the content. It is addressed to the host the document service can reach, which is not  necessarily the address a browser should follow. | [optional] [example: https://portal.example.com/filehandler.ashx?action=download&fileid=512] [nullable] |
-| **isForm** | **Boolean** | Whether the document is a fillable PDF form. A PDF that the portal has never classified is inspected while the  configuration is built, so the answer is trustworthy even for a freshly uploaded file. | [optional] [example: false] |
+| **title** | **String** | The name the editors display. When a past version was opened, the moment that version was created is appended  to it in brackets. | [optional] [example: `Budget 2026.xlsx`] [nullable] |
+| **url** | **URI** (uri) | Where the editors fetch the content. It is addressed to the host the document service can reach, which is not  necessarily the address a browser should follow. | [optional] [example: `https://portal.example.com/filehandler.ashx?action=download&fileid=512`] [nullable] |
+| **isForm** | **Boolean** | Whether the document is a fillable PDF form. A PDF that the portal has never classified is inspected while the  configuration is built, so the answer is trustworthy even for a freshly uploaded file. | [optional] [example: `false`] |
 | **options** | [**Options**](#model-options) | Extra instructions for the editors, currently the watermark to draw over the document. It is empty when the  room sets no watermark. | [optional] |
 
 
@@ -10209,8 +10209,8 @@ One file of a bulk download, together with the format it is converted to.
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **key** | [**DownloadRequestItemDto_key**](#model-downloadrequestitemdtokey) |  | [required] |
-| **value** | **String** | The format the file is converted to before it is packed, as a file extension without a leading dot. | [required] [example: pdf] [nullable] |
-| **password** | **String** | The password that opens the source file, for a file protected with one; a protected file cannot be converted  without it. | [optional] [example: password123] [nullable] |
+| **value** | **String** | The format the file is converted to before it is packed, as a file extension without a leading dot. | [required] [example: `pdf`] [nullable] |
+| **password** | **String** | The password that opens the source file, for a file protected with one; a protected file cannot be converted  without it. | [optional] [example: `password123`] [nullable] |
 
 
 ### Model DownloadRequestItemDto.key
@@ -10222,10 +10222,10 @@ Where the caller's own filling draft of a form is kept.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **folderId** | **Integer** (int32) | The folder holding the draft: the sub-folder that the room for filling keeps for drafts of this particular  form. | [optional] [example: 10] |
-| **folderTitle** | **String** | The title of that folder, which the portal takes from the form itself when the form is released for filling. | [optional] [example: Application] [nullable] |
-| **fileId** | **Integer** (int32) | The draft itself - the copy the caller fills in, not the original form, and the identifier to pass to the file  operations while filling. | [optional] [example: 123] |
-| **fileTitle** | **String** | The title of the draft, which the portal builds from the name of the person filling it and the name of the  form. Null when the draft the record points at no longer exists. | [optional] [example: John Doe - Application.pdf] [nullable] |
+| **folderId** | **Integer** (int32) | The folder holding the draft: the sub-folder that the room for filling keeps for drafts of this particular  form. | [optional] [example: `10`] |
+| **folderTitle** | **String** | The title of that folder, which the portal takes from the form itself when the form is released for filling. | [optional] [example: `Application`] [nullable] |
+| **fileId** | **Integer** (int32) | The draft itself - the copy the caller fills in, not the original form, and the identifier to pass to the file  operations while filling. | [optional] [example: `123`] |
+| **fileTitle** | **String** | The title of the draft, which the portal builds from the name of the person filling it and the name of the  form. Null when the draft the record points at no longer exists. | [optional] [example: `John Doe - Application.pdf`] [nullable] |
 
 
 ### Model DuplicateRequestDto
@@ -10261,8 +10261,8 @@ The person a saved revision of a file, or one single change in it, is attributed
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **id** | **String** | The account the revision or the change is attributed to, as the editing service stored it. It is normally the  identifier of a portal account; the empty identifier stands for a change nobody could be named for. | [required] [example: 9924256b-447c-4f19-9dbd-8ad8c39e8ff5] [nullable] |
-| **name** | **String** | The display name of that account as the portal spells it now, which need not be the name that was stored with  the revision. An account that cannot be resolved - one removed from the portal, or a change made through an  anonymous link - is reported as a guest. | [optional] [example: John Doe] [nullable] |
+| **id** | **String** | The account the revision or the change is attributed to, as the editing service stored it. It is normally the  identifier of a portal account; the empty identifier stands for a change nobody could be named for. | [required] [example: `9924256b-447c-4f19-9dbd-8ad8c39e8ff5`] [nullable] |
+| **name** | **String** | The display name of that account as the portal spells it now, which need not be the name that was stored with  the revision. An account that cannot be resolved - one removed from the portal, or a change made through an  anonymous link - is reported as a guest. | [optional] [example: `John Doe`] [nullable] |
 
 
 ### Model EditHistoryChangesWrapper
@@ -10272,7 +10272,7 @@ One single change inside a saved revision of a file.
 |------------ | ------------- | ------------- | -------------|
 | **user** | [**EditHistoryAuthor**](#model-edithistoryauthor) | The account that made this change, as the editing service reported it; an account it could not name is  reported as a guest. | [optional] |
 | **created** | [**ApiDateTime**](#model-apidatetime) | When this change was made, written with the offset of the portal's time zone rather than as plain UTC. | [optional] |
-| **documentSha256** | **String** | The SHA-256 hash of the document as it stood after this change, where the editing service recorded one, so  that a client can check a stored copy against the change it claims to hold. Empty when the change record  carries no hash. | [optional] [example: 9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08] [nullable] |
+| **documentSha256** | **String** | The SHA-256 hash of the document as it stood after this change, where the editing service recorded one, so  that a client can check a stored copy against the change it claims to hold. Empty when the change record  carries no hash. | [optional] [example: `9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08`] [nullable] |
 
 
 ### Model EditHistoryDataDto
@@ -10280,13 +10280,13 @@ Everything an editor needs in order to show what one revision of a file changed.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **changesUrl** | **URI** (uri) | The address the editor downloads the recorded changes of this revision from. It is filled in only when the  portal has a change record for the revision; without it the revision can be shown as a whole document but not  as a set of changes. | [optional] [example: https://example.com/changes] [nullable] |
-| **key** | **String** | The document key of the revision being shown, which the editing service uses to identify it and to reuse the  copy it has cached. | [required] [example: doc1] [nullable] |
+| **changesUrl** | **URI** (uri) | The address the editor downloads the recorded changes of this revision from. It is filled in only when the  portal has a change record for the revision; without it the revision can be shown as a whole document but not  as a set of changes. | [optional] [example: `https://example.com/changes`] [nullable] |
+| **key** | **String** | The document key of the revision being shown, which the editing service uses to identify it and to reuse the  copy it has cached. | [required] [example: `doc1`] [nullable] |
 | **previous** | [**EditHistoryUrl**](#model-edithistoryurl) | The revision this one is compared against. It arrives together with `changesUrl`, and when the revision shown  is the first one the file ever had, it points at the blank template the file was created from instead of at an  earlier revision. | [optional] |
-| **token** | **String** | The signature over the whole answer, as a JSON Web Token that the editing service verifies before it accepts  the addresses in it. Empty when the portal runs without a document-service secret. | [optional] [example: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ2ZXJzaW9uIjoxfQ.7HxQ0Zx1] [nullable] |
-| **url** | **URI** (uri) | The address the content of this revision is served from. It is meant for the editing service and carries its  own key, which is valid for a limited time. | [required] [example: https://example.com/file.docx] [nullable] |
-| **version** | **Integer** (int32) | Echoes the revision that was asked for, so it reports 0 when the request named no version and the current  revision was taken. | [required] [example: 1] |
-| **fileType** | **String** | The format of the revision being shown, as an extension without the leading dot. | [required] [example: docx] [nullable] |
+| **token** | **String** | The signature over the whole answer, as a JSON Web Token that the editing service verifies before it accepts  the addresses in it. Empty when the portal runs without a document-service secret. | [optional] [example: `eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ2ZXJzaW9uIjoxfQ.7HxQ0Zx1`] [nullable] |
+| **url** | **URI** (uri) | The address the content of this revision is served from. It is meant for the editing service and carries its  own key, which is valid for a limited time. | [required] [example: `https://example.com/file.docx`] [nullable] |
+| **version** | **Integer** (int32) | Echoes the revision that was asked for, so it reports 0 when the request named no version and the current  revision was taken. | [required] [example: `1`] |
+| **fileType** | **String** | The format of the revision being shown, as an extension without the leading dot. | [required] [example: `docx`] [nullable] |
 
 
 ### Model EditHistoryDataWrapper
@@ -10306,15 +10306,15 @@ One saved revision of a file, as the editing service recorded it.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **id** | **Integer** (int32) | The file the revision belongs to; every entry of one history carries the same value. | [optional] [example: 123] |
-| **key** | **String** | The document key of this revision, which the editing service uses to tell the revisions of a file apart and to  reuse the copy it has cached. Hand it back unchanged when asking the editor for this revision. | [optional] [example: doc-key-abc123] [nullable] |
-| **version** | **Integer** (int32) | The number of the revision, counting up from 1 in the order the revisions were saved. It is the value the  operations that show the changes of a revision or restore it expect. | [optional] [example: 2] |
-| **versionGroup** | **Integer** (int32) | Groups the revisions written by one editing session: entries sharing this number were saved while the same  session was open, which is how a client collapses a long list of revisions into the versions a person would  recognise. | [optional] [example: 1] |
+| **id** | **Integer** (int32) | The file the revision belongs to; every entry of one history carries the same value. | [optional] [example: `123`] |
+| **key** | **String** | The document key of this revision, which the editing service uses to tell the revisions of a file apart and to  reuse the copy it has cached. Hand it back unchanged when asking the editor for this revision. | [optional] [example: `doc-key-abc123`] [nullable] |
+| **version** | **Integer** (int32) | The number of the revision, counting up from 1 in the order the revisions were saved. It is the value the  operations that show the changes of a revision or restore it expect. | [optional] [example: `2`] |
+| **versionGroup** | **Integer** (int32) | Groups the revisions written by one editing session: entries sharing this number were saved while the same  session was open, which is how a client collapses a long list of revisions into the versions a person would  recognise. | [optional] [example: `1`] |
 | **user** | [**EditHistoryAuthor**](#model-edithistoryauthor) | The account that saved the revision. A revision saved by an account that no longer exists, or through an  anonymous link, is reported as a guest. | [optional] |
 | **created** | [**ApiDateTime**](#model-apidatetime) | When the revision was saved, written with the offset of the portal's time zone rather than as plain UTC. The  times of one history are consistent with each other, so order and display the revisions by them. | [optional] |
-| **changesHistory** | **String** | The change record the editing service stored for this revision, as the raw JSON it was written in, and empty  for a revision the portal has no record for - one uploaded as a whole file, for instance. `changes` is the  same record already parsed. | [optional] [example: Changes history text] [nullable] |
-| **changes** | [**List**](#model-edithistorychangeswrapper) | The single changes this revision introduced - who made each of them and when - taken from the stored change  record. It comes back empty both for a revision whose changes were never recorded and for one whose record is  in a format the portal no longer reads, so an empty list is not proof that nothing changed. | [optional] [example: [\{user=\{id=123, name=John Doe\}, created=2021-01-01T00:00:00Z\}]] [nullable] |
-| **serverVersion** | **String** | The build of the editing service that wrote the change record of this revision, taken from the record itself;  empty when the portal holds no record for the revision. | [optional] [example: 8.0.1] [nullable] |
+| **changesHistory** | **String** | The change record the editing service stored for this revision, as the raw JSON it was written in, and empty  for a revision the portal has no record for - one uploaded as a whole file, for instance. `changes` is the  same record already parsed. | [optional] [example: `Changes history text`] [nullable] |
+| **changes** | [**List**](#model-edithistorychangeswrapper) | The single changes this revision introduced - who made each of them and when - taken from the stored change  record. It comes back empty both for a revision whose changes were never recorded and for one whose record is  in a format the portal no longer reads, so an empty list is not proof that nothing changed. | [optional] [example: `[{user={id=123, name=John Doe}, created=2021-01-01T00:00:00Z}]`] [nullable] |
+| **serverVersion** | **String** | The build of the editing service that wrote the change record of this revision, taken from the record itself;  empty when the portal holds no record for the revision. | [optional] [example: `8.0.1`] [nullable] |
 
 
 ### Model EditHistoryUrl
@@ -10322,9 +10322,9 @@ The address, document key and format of the revision a comparison is made agains
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **key** | **String** | The document key of that revision. When the file has no earlier revision the portal generates a fresh key for  the template it falls back to, so the value is not always one an earlier revision ever had. | [optional] [example: doc_v2_20260101] [nullable] |
-| **url** | **URI** (uri) | The address that revision's content is served from. It is meant for the editing service and carries its own  key, which is valid for a limited time. | [optional] [example: https://files.example.com/history/doc_v2_20260101.docx] [nullable] |
-| **fileType** | **String** | The format of that revision, as an extension without the leading dot. | [optional] [example: docx] [nullable] |
+| **key** | **String** | The document key of that revision. When the file has no earlier revision the portal generates a fresh key for  the template it falls back to, so the value is not always one an earlier revision ever had. | [optional] [example: `doc_v2_20260101`] [nullable] |
+| **url** | **URI** (uri) | The address that revision's content is served from. It is meant for the editing service and carries its own  key, which is valid for a limited time. | [optional] [example: `https://files.example.com/history/doc_v2_20260101.docx`] [nullable] |
+| **fileType** | **String** | The format of that revision, as an extension without the leading dot. | [optional] [example: `docx`] [nullable] |
 
 
 ### Model EditorConfigurationDto
@@ -10332,18 +10332,18 @@ How the editors behave for this opening: the mode, the language, the interface, 
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **callbackUrl** | **URI** (uri) | Where the editors post the document back to when they save it. A client must not call it itself; it is the  address the document service uses. | [optional] [example: https://portal.example.com/filehandler.ashx?action=track&fileid=512] [nullable] |
+| **callbackUrl** | **URI** (uri) | Where the editors post the document back to when they save it. A client must not call it itself; it is the  address the document service uses. | [optional] [example: `https://portal.example.com/filehandler.ashx?action=track&fileid=512`] [nullable] |
 | **coEditing** | [**CoEditingConfig**](#model-coeditingconfig) | How co-editing starts out for this session and whether the user may switch it in the interface. | [optional] |
-| **createUrl** | **String** | Where the editor sends the user when they ask for a new document of the same type. It is empty when creating  one is not offered here. | [optional] [example: https://portal.example.com/products/files/?action=create&doctype=word] [nullable] |
+| **createUrl** | **String** | Where the editor sends the user when they ask for a new document of the same type. It is empty when creating  one is not offered here. | [optional] [example: `https://portal.example.com/products/files/?action=create&doctype=word`] [nullable] |
 | **customization** | [**CustomizationConfigDto**](#model-customizationconfigdto) | How the editor interface is dressed for this portal, this document and this layout. | [optional] |
 | **embedded** | [**EmbeddedConfig**](#model-embeddedconfig) | The addresses the framed viewer needs. It is filled in only for the embedded layout. | [optional] |
 | **encryptionKeys** | [**List**](#model-encryptionkeydto) | The caller's end-to-end encryption keys, added only when the document lies in a private room, so that the  editors can decrypt it in the browser. It is empty everywhere else. | [optional] [nullable] |
-| **lang** | **String** | The culture the editor interface is shown in, taken from the profile of the caller. | [required] [example: en-US] [nullable] |
-| **mode** | **String** | `edit` when this session may write the document, `view` when it may only read it. | [required] [example: edit] [nullable] |
-| **modeWrite** | **Boolean** | Whether this session may write; it is what the mode above says in one word. | [optional] [example: true] |
+| **lang** | **String** | The culture the editor interface is shown in, taken from the profile of the caller. | [required] [example: `en-US`] [nullable] |
+| **mode** | **String** | `edit` when this session may write the document, `view` when it may only read it. | [required] [example: `edit`] [nullable] |
+| **modeWrite** | **Boolean** | Whether this session may write; it is what the mode above says in one word. | [optional] [example: `true`] |
 | **plugins** | [**PluginsConfig**](#model-pluginsconfig) | Which editor plugins are offered. The portal currently offers none, so the list inside comes back empty. | [optional] |
-| **recent** | [**List**](#model-recentconfig) | The documents offered in the editor's recent list. It is left out altogether when there is nothing to offer. | [optional] [example: []] [nullable] |
-| **templates** | [**List**](#model-templatesconfig) | Always empty: the portal no longer passes creation templates through the editor configuration. | [optional] [example: []] [nullable] |
+| **recent** | [**List**](#model-recentconfig) | The documents offered in the editor's recent list. It is left out altogether when there is nothing to offer. | [optional] [example: `[]`] [nullable] |
+| **templates** | [**List**](#model-templatesconfig) | Always empty: the portal no longer passes creation templates through the editor configuration. | [optional] [example: `[]`] [nullable] |
 | **user** | [**UserConfig**](#model-userconfig) | The account the editors attribute changes to. It is empty for an anonymous session opened through an external  link, and the editors then ask for a name themselves. | [optional] |
 
 
@@ -10363,7 +10363,7 @@ A generation the editor is expected to run as soon as the document opens, left b
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **toolName** | **String** | Which generation to run, which also decides the shape of the parameters below. | [required] [example: GenerateDocx] [nullable] |
+| **toolName** | **String** | Which generation to run, which also decides the shape of the parameters below. | [required] [example: `GenerateDocx`] [nullable] |
 | **parameters** | [**EditorToolCallParametersDto**](#model-editortoolcallparametersdto) | The arguments of the generation named above. | [required] |
 
 
@@ -10381,7 +10381,7 @@ The email invitation parameters.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **email** | **String** (email) | The address of somebody who has no portal account yet. An invitation is sent to it and an account is created  once it is accepted, so this is the field to use instead of an account identifier when the person is new to  the portal. | [optional] [example: jane.doe@example.com] [maxLength: 255] [nullable] |
+| **email** | **String** (email) | The address of somebody who has no portal account yet. An invitation is sent to it and an account is created  once it is accepted, so this is the field to use instead of an account identifier when the person is new to  the portal. | [optional] [example: `jane.doe@example.com`] [maxLength: 255] [nullable] |
 
 
 ### Model EmbeddedConfig
@@ -10389,11 +10389,11 @@ The addresses the framed viewer needs. It is reported for the embedded layout on
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **embedUrl** | **String** | The page to put into the frame. It is empty when the opening carries no external share key, since a framed  viewer cannot authenticate a portal member. | [optional] [example: https://portal.example.com/products/files/doceditor?action=embedded&share=HkQd9nT2] [nullable] |
-| **saveUrl** | **String** | Where the download button of the framed viewer leads. | [optional] [example: https://portal.example.com/filehandler.ashx?action=download&share=HkQd9nT2] [nullable] |
-| **shareLinkParam** | **String** | The query fragment carrying the external share key, ampersand included, out of which the addresses around it  are built. | [optional] [example: &fileid=512&share=HkQd9nT2] [nullable] |
-| **shareUrl** | **String** | The address behind the share button of the framed viewer, the document opened full-screen for reading. It is  empty when the opening carries no external share key. | [optional] [example: https://portal.example.com/products/files/doceditor?action=view&share=HkQd9nT2] [nullable] |
-| **toolbarDocked** | **String** | Where the framed viewer puts its toolbar. The portal always asks for the top. | [optional] [example: top] [nullable] |
+| **embedUrl** | **String** | The page to put into the frame. It is empty when the opening carries no external share key, since a framed  viewer cannot authenticate a portal member. | [optional] [example: `https://portal.example.com/products/files/doceditor?action=embedded&share=HkQd9nT2`] [nullable] |
+| **saveUrl** | **String** | Where the download button of the framed viewer leads. | [optional] [example: `https://portal.example.com/filehandler.ashx?action=download&share=HkQd9nT2`] [nullable] |
+| **shareLinkParam** | **String** | The query fragment carrying the external share key, ampersand included, out of which the addresses around it  are built. | [optional] [example: `&fileid=512&share=HkQd9nT2`] [nullable] |
+| **shareUrl** | **String** | The address behind the share button of the framed viewer, the document opened full-screen for reading. It is  empty when the opening carries no external share key. | [optional] [example: `https://portal.example.com/products/files/doceditor?action=view&share=HkQd9nT2`] [nullable] |
+| **toolbarDocked** | **String** | Where the framed viewer puts its toolbar. The portal always asks for the top. | [optional] [example: `top`] [nullable] |
 
 
 ### Model EmployeeActivationStatus
@@ -10411,16 +10411,16 @@ The user parameters.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **id** | **UUID** (uuid) | The user ID. | [optional] [example: 00000000-0000-0000-0000-000000000000] |
-| **displayName** | **String** | The HTML-encoded user's display name formatted according to the default format for the current culture. | [optional] [example: Mike Zanyatski] [nullable] |
-| **avatar** | **String** | The user avatar. | [optional] [example: https://example.com/avatar.jpg] [nullable] |
-| **avatarOriginal** | **String** | The user original size avatar. | [optional] [example: https://example.com/avatar_original.jpg] [nullable] |
-| **avatarMax** | **String** | The user maximum size avatar. | [optional] [example: https://example.com/avatar_max.jpg] [nullable] |
-| **avatarMedium** | **String** | The user medium size avatar. | [optional] [example: https://example.com/avatar_medium.jpg] [nullable] |
-| **avatarSmall** | **String** | The user small size avatar. | [optional] [example: https://example.com/avatar_small.jpg] [nullable] |
-| **profileUrl** | **String** | The user profile URL. | [optional] [example: https://example.com/profile/user123] [nullable] |
-| **hasAvatar** | **Boolean** | Specifies if the user has an avatar or not. | [optional] [example: true] |
-| **isAnonim** | **Boolean** | Specifies if the user is anonymous or not. | [optional] [example: false] |
+| **id** | **UUID** (uuid) | The user ID. | [optional] [example: `00000000-0000-0000-0000-000000000000`] |
+| **displayName** | **String** | The HTML-encoded user's display name formatted according to the default format for the current culture. | [optional] [example: `Mike Zanyatski`] [nullable] |
+| **avatar** | **String** | The user avatar. | [optional] [example: `https://example.com/avatar.jpg`] [nullable] |
+| **avatarOriginal** | **String** | The user original size avatar. | [optional] [example: `https://example.com/avatar_original.jpg`] [nullable] |
+| **avatarMax** | **String** | The user maximum size avatar. | [optional] [example: `https://example.com/avatar_max.jpg`] [nullable] |
+| **avatarMedium** | **String** | The user medium size avatar. | [optional] [example: `https://example.com/avatar_medium.jpg`] [nullable] |
+| **avatarSmall** | **String** | The user small size avatar. | [optional] [example: `https://example.com/avatar_small.jpg`] [nullable] |
+| **profileUrl** | **String** | The user profile URL. | [optional] [example: `https://example.com/profile/user123`] [nullable] |
+| **hasAvatar** | **Boolean** | Specifies if the user has an avatar or not. | [optional] [example: `true`] |
+| **isAnonim** | **Boolean** | Specifies if the user is anonymous or not. | [optional] [example: `false`] |
 
 
 ### Model EmployeeFullDto
@@ -10443,8 +10443,8 @@ The full list of user parameters.
 | **userName** | **String** | The user username. | [optional] [nullable] |
 | **email** | **String** (email) | The user email. | [optional] [nullable] |
 | **contacts** | [**List**](#model-contact) | The list of user contacts. | [optional] [nullable] |
-| **status** | [**EmployeeStatus**](#model-employeestatus) | The user status. | [optional] [enum: 1, 2, 4, 5, 7] |
-| **activationStatus** | [**EmployeeActivationStatus**](#model-employeeactivationstatus) | The user activation status. | [optional] [enum: 0, 1, 2, 4] |
+| **status** | [**EmployeeStatus**](#model-employeestatus) | The user status. | [optional] [enum: `1`, `2`, `4`, `5`, `7`] |
+| **activationStatus** | [**EmployeeActivationStatus**](#model-employeeactivationstatus) | The user activation status. | [optional] [enum: `0`, `1`, `2`, `4`] |
 | **terminated** | [**ApiDateTime**](#model-apidatetime) | The date when the user account was terminated. | [optional] |
 | **department** | **String** | The user department. | [optional] [nullable] |
 | **groups** | [**List**](#model-groupsummarydto) | The list of user groups. | [optional] [nullable] |
@@ -10459,9 +10459,9 @@ The full list of user parameters.
 | **isCollaborator** | **Boolean** | Specifies if the user is a portal collaborator or not. | [optional] |
 | **cultureName** | **String** | The user culture code. | [optional] [nullable] |
 | **mobilePhone** | **String** | The user mobile phone number. | [optional] [nullable] |
-| **mobilePhoneActivationStatus** | [**MobilePhoneActivationStatus**](#model-mobilephoneactivationstatus) | The mobile phone activation status. | [optional] [enum: 0, 1] |
+| **mobilePhoneActivationStatus** | [**MobilePhoneActivationStatus**](#model-mobilephoneactivationstatus) | The mobile phone activation status. | [optional] [enum: `0`, `1`] |
 | **isSSO** | **Boolean** | Specifies if the SSO settings are enabled for the user or not. | [optional] |
-| **theme** | [**DarkThemeSettingsType**](#model-darkthemesettingstype) | The user theme settings. | [optional] [enum: Base, Dark, System] |
+| **theme** | [**DarkThemeSettingsType**](#model-darkthemesettingstype) | The user theme settings. | [optional] [enum: `Base`, `Dark`, `System`] |
 | **quotaLimit** | **Long** (int64) | The user quota limit. | [optional] [nullable] |
 | **usedSpace** | **Double** (double) | The portal used space of the user. | [optional] [nullable] |
 | **shared** | **Boolean** | Specifies if the user has access rights. | [optional] [nullable] |
@@ -10502,12 +10502,12 @@ An encryption key pair as the portal reports it: the public half of some member'
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **id** | **UUID** (uuid) | Names the pair inside its owner's key set. Pass it back to rotate the pair or to delete it; the all-zero value  belongs to a client that stores its keys without sending an identifier. | [optional] [example: 9924256B-447C-4F19-9dbd-8ad8c39e8ff5] |
-| **userId** | **UUID** (uuid) | The member the pair belongs to. In the key set of a room or of a file this is how the caller tells its own  entries, the ones carrying a private half, from those of the other members. | [optional] [example: 9924256B-447C-4F19-9dbd-8ad8c39e8ff5] |
-| **date** | **Date** (date-time) | When this key material was written. Rotating the pair refreshes it, so it dates the material that is being  reported rather than the first appearance of the identifier. | [optional] [example: 2025-01-01T00:00:00] |
-| **publicKey** | **String** | The public half of the pair, the half a client encrypts file keys with. A pair whose public half is missing  is treated as no access and left out of a room's or a file's key set. | [optional] [example: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8A...] [nullable] |
-| **privateKeyEnc** | **String** | The private half, encrypted with its owner's password. It is filled in only when the pair belongs to the  calling user; on another member's entry it comes back empty, because the private half is not handed out. | [optional] [example: U2FsdGVkX1+Lm3s...] [nullable] |
-| **cryptoEngineId** | **String** | The crypto engine this material was issued for, as a braced GUID. The engine is portal-wide, so the same value  comes back for every key of every member. | [optional] [example: \{DC522726-5E0E-43E5-AA02-8EA156BECBC5\}] [nullable] |
+| **id** | **UUID** (uuid) | Names the pair inside its owner's key set. Pass it back to rotate the pair or to delete it; the all-zero value  belongs to a client that stores its keys without sending an identifier. | [optional] [example: `9924256B-447C-4F19-9dbd-8ad8c39e8ff5`] |
+| **userId** | **UUID** (uuid) | The member the pair belongs to. In the key set of a room or of a file this is how the caller tells its own  entries, the ones carrying a private half, from those of the other members. | [optional] [example: `9924256B-447C-4F19-9dbd-8ad8c39e8ff5`] |
+| **date** | **Date** (date-time) | When this key material was written. Rotating the pair refreshes it, so it dates the material that is being  reported rather than the first appearance of the identifier. | [optional] [example: `2025-01-01T00:00:00`] |
+| **publicKey** | **String** | The public half of the pair, the half a client encrypts file keys with. A pair whose public half is missing  is treated as no access and left out of a room's or a file's key set. | [optional] [example: `MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8A...`] [nullable] |
+| **privateKeyEnc** | **String** | The private half, encrypted with its owner's password. It is filled in only when the pair belongs to the  calling user; on another member's entry it comes back empty, because the private half is not handed out. | [optional] [example: `U2FsdGVkX1+Lm3s...`] [nullable] |
+| **cryptoEngineId** | **String** | The crypto engine this material was issued for, as a braced GUID. The engine is portal-wide, so the same value  comes back for every key of every member. | [optional] [example: `{DC522726-5E0E-43E5-AA02-8EA156BECBC5}`] [nullable] |
 
 
 ### Model EncryptionKeyRequestDto
@@ -10515,9 +10515,9 @@ The two halves of an encryption key pair to store for the calling user, plus the
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **id** | **UUID** (uuid) | Names the pair inside the caller's own key set. The client generates it, and leaving it out means the all-zero  GUID, which is the pair a client that never sends an identifier keeps working with. | [optional] [example: 9924256B-447C-4F19-9dbd-8ad8c39e8ff5] |
-| **publicKey** | **String** | The public half of the pair, as the client's crypto engine produced it and stored verbatim. This is the half  handed to the other members of a private room so that they can encrypt file keys for this user. | [optional] [example: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8A...] [nullable] |
-| **privateKeyEnc** | **String** | The private half of the pair, encrypted on the client with the user's password before it is sent. The portal  stores it as opaque text and cannot decrypt it, so material lost on the client cannot be recovered from here. | [optional] [example: U2FsdGVkX1+Lm3s...] [nullable] |
+| **id** | **UUID** (uuid) | Names the pair inside the caller's own key set. The client generates it, and leaving it out means the all-zero  GUID, which is the pair a client that never sends an identifier keeps working with. | [optional] [example: `9924256B-447C-4F19-9dbd-8ad8c39e8ff5`] |
+| **publicKey** | **String** | The public half of the pair, as the client's crypto engine produced it and stored verbatim. This is the half  handed to the other members of a private room so that they can encrypt file keys for this user. | [optional] [example: `MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8A...`] [nullable] |
+| **privateKeyEnc** | **String** | The private half of the pair, encrypted on the client with the user's password before it is sent. The portal  stores it as opaque text and cannot decrypt it, so material lost on the client cannot be recovered from here. | [optional] [example: `U2FsdGVkX1+Lm3s...`] [nullable] |
 
 
 ### Model ErrorApiResponse
@@ -10546,10 +10546,10 @@ What happened to one original form while the room was being exported to the exte
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **id** | **Integer** (int32) | The file of the original form whose collected data was exported. It is the form itself, not one of the filled  copies, so the same id can be read with the file operations of the portal. | [optional] [example: 42] |
-| **title** | **String** | The name of that form file at the moment of the export. It is empty when the form file no longer exists, which  is also the case in which the export of that entry fails. | [optional] [example: Application.pdf] [nullable] |
-| **success** | **Boolean** | Whether the data of this form reached the external database. One rejected form does not stop the others, so a  finished job can hold both successful and failed entries. | [optional] [example: true] |
-| **error** | **String** | Why this form was not exported. It is empty for a successful entry, and for a failed one it carries either the  message of the underlying failure or the generic export error of the portal. | [optional] [example: Connection refused] [nullable] |
+| **id** | **Integer** (int32) | The file of the original form whose collected data was exported. It is the form itself, not one of the filled  copies, so the same id can be read with the file operations of the portal. | [optional] [example: `42`] |
+| **title** | **String** | The name of that form file at the moment of the export. It is empty when the form file no longer exists, which  is also the case in which the export of that entry fails. | [optional] [example: `Application.pdf`] [nullable] |
+| **success** | **Boolean** | Whether the data of this form reached the external database. One rejected form does not stop the others, so a  finished job can hold both successful and failed entries. | [optional] [example: `true`] |
+| **error** | **String** | Why this form was not exported. It is empty for a successful entry, and for a failed one it carries either the  message of the underlying failure or the generic export error of the portal. | [optional] [example: `Connection refused`] [nullable] |
 
 
 ### Model ExternalDbSyncTaskDto
@@ -10557,12 +10557,12 @@ The state of the job that exports the collected form data of a form filling room
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **id** | **String** | The identifier of the job, which stays the same while a job for this room exists and is worth quoting when a  failure has to be traced in the portal logs. Polling is done by room, so the value is not needed to read the  state again. | [required] [example: ExternalDbSyncTask_1_42] [nullable] |
-| **error** | **String** | The message of a failure that stopped the whole job. It is empty while the job is running and after a job that  ended without such a failure; a job that finished with individual forms rejected reports those in `forms` and  leaves this field empty. | [optional] [example: Connection refused] [nullable] |
-| **percentage** | **Integer** (int32) | How much of the work is done, from 0 to 100. It advances as the forms of the room are processed one by one, so  it is a usable progress indicator for a room with many forms and jumps straight to the end for a room with  one. | [required] [example: 75] |
-| **isCompleted** | **Boolean** | Whether the job has ended. It is set both for a job that finished its work and for one that stopped on an  error, so this is the flag to poll for, and `status` and `error` are what tell the two apart. | [required] [example: false] |
-| **status** | [**DistributedTaskStatus**](#model-distributedtaskstatus) | How the job ended, or how far it has got: queued, running, finished, cancelled or failed. It is the only field  that separates a successful end from a failed one once `isCompleted` is set. | [required] [enum: 0, 1, 2, 3, 4] |
-| **forms** | [**List**](#model-externaldbsyncformresultdto) | The outcome for every original form of the room, one entry each. The list is empty while the job is running  and is filled in only when the job ends, so it is what to read after `isCompleted` turns true; it stays empty  for a room that holds no forms at all. | [required] [example: [\{id=42, title=Application.pdf, success=true, error=null\}]] [nullable] |
+| **id** | **String** | The identifier of the job, which stays the same while a job for this room exists and is worth quoting when a  failure has to be traced in the portal logs. Polling is done by room, so the value is not needed to read the  state again. | [required] [example: `ExternalDbSyncTask_1_42`] [nullable] |
+| **error** | **String** | The message of a failure that stopped the whole job. It is empty while the job is running and after a job that  ended without such a failure; a job that finished with individual forms rejected reports those in `forms` and  leaves this field empty. | [optional] [example: `Connection refused`] [nullable] |
+| **percentage** | **Integer** (int32) | How much of the work is done, from 0 to 100. It advances as the forms of the room are processed one by one, so  it is a usable progress indicator for a room with many forms and jumps straight to the end for a room with  one. | [required] [example: `75`] |
+| **isCompleted** | **Boolean** | Whether the job has ended. It is set both for a job that finished its work and for one that stopped on an  error, so this is the flag to poll for, and `status` and `error` are what tell the two apart. | [required] [example: `false`] |
+| **status** | [**DistributedTaskStatus**](#model-distributedtaskstatus) | How the job ended, or how far it has got: queued, running, finished, cancelled or failed. It is the only field  that separates a successful end from a failed one once `isCompleted` is set. | [required] [enum: `0`, `1`, `2`, `3`, `4`] |
+| **forms** | [**List**](#model-externaldbsyncformresultdto) | The outcome for every original form of the room, one entry each. The list is empty while the job is running  and is filled in only when the job ends, so it is what to read after `isCompleted` turns true; it stays empty  for a room that holds no forms at all. | [required] [example: `[{id=42, title=Application.pdf, success=true, error=null}]`] [nullable] |
 
 
 ### Model ExternalDbSyncTaskWrapper
@@ -10582,19 +10582,19 @@ The outcome of validating an external share link and the entry it points at.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **status** | [**Status**](#model-status) | How validating the link went. It is the first field to read: a refused link is reported here with the answer  still arriving as a success. A link that resolved describes both the entry and the link, one that is waiting  for its password describes only the entry, and one that failed outright leaves the rest of the object empty. | [required] [enum: 0, 1, 2, 3, 4, 5] |
-| **id** | **String** | The identifier of the room, folder or file the link points at, always rendered as a string even where the  portal stores it as a number. It is null when the link could not be resolved. | [optional] [example: 42] [nullable] |
-| **title** | **String** | The title of the entry the link points at, suitable for showing to the visitor before they are let in. It is  null when the link could not be resolved. | [optional] [example: Project documents] [nullable] |
-| **type** | [**FileEntryType**](#model-fileentrytype) | Whether the link points at a folder - a room counts as one - or at a single file. It is null when the link  could not be resolved. | [optional] [enum: 1, 2] |
-| **tenantId** | **Integer** (int32) | The portal the link belongs to, which matters for a client that works with more than one. It stays 0 for a  link that did not resolve. | [required] [example: 1] |
-| **entityId** | **String** | The identifier of the entry that was asked about through the request's file or folder parameter, echoed back  once it was found under the link's target. It is null when nothing was asked about, or when the entry lies  outside what the link opens. | [optional] [example: 9] [nullable] |
-| **entityTitle** | **String** | The title of that entry, null under the same conditions as its identifier. | [optional] [example: Contract.docx] [nullable] |
-| **entityType** | [**FileEntryType**](#model-fileentrytype) | Whether that entry is a folder or a file, null under the same conditions as its identifier. | [optional] [enum: 1, 2] |
-| **isRoom** | **Boolean** | True when the link opens a whole room rather than one entry inside it. It is null for a link to a file and for  a link that did not resolve. | [optional] [example: true] [nullable] |
-| **shared** | **Boolean** | True when the entry now sits in the calling account's own lists - it was already shared with that account, or  resolving the link has just put it there. It stays false for a visitor browsing without an account, who  reaches the entry through the link alone. | [required] [example: true] |
-| **linkId** | **UUID** (uuid) | The link the token belongs to, which is also the subject under which the link appears among the sharing rights  of the entry. It is an empty identifier when the link did not resolve. | [required] [example: b3a1f0c7-5d2e-4a19-9f38-71c6e0d4b852] |
-| **isAuthenticated** | **Boolean** | Whether the request carried a signed-in account. It says nothing about that account's rights on the entry, so  it must not be read as permission - it is false for every anonymous visitor and true for any member, even one  who is a stranger to the room. | [required] [example: true] |
-| **isRoomMember** | **Boolean** | Whether the signed-in caller already has rights of their own on the room that holds the entry, as opposed to  reaching it through this link. It is false for an anonymous visitor and for a member who has never been  invited. | [optional] [example: false] |
+| **status** | [**Status**](#model-status) | How validating the link went. It is the first field to read: a refused link is reported here with the answer  still arriving as a success. A link that resolved describes both the entry and the link, one that is waiting  for its password describes only the entry, and one that failed outright leaves the rest of the object empty. | [required] [enum: `0`, `1`, `2`, `3`, `4`, `5`] |
+| **id** | **String** | The identifier of the room, folder or file the link points at, always rendered as a string even where the  portal stores it as a number. It is null when the link could not be resolved. | [optional] [example: `42`] [nullable] |
+| **title** | **String** | The title of the entry the link points at, suitable for showing to the visitor before they are let in. It is  null when the link could not be resolved. | [optional] [example: `Project documents`] [nullable] |
+| **type** | [**FileEntryType**](#model-fileentrytype) | Whether the link points at a folder - a room counts as one - or at a single file. It is null when the link  could not be resolved. | [optional] [enum: `1`, `2`] |
+| **tenantId** | **Integer** (int32) | The portal the link belongs to, which matters for a client that works with more than one. It stays 0 for a  link that did not resolve. | [required] [example: `1`] |
+| **entityId** | **String** | The identifier of the entry that was asked about through the request's file or folder parameter, echoed back  once it was found under the link's target. It is null when nothing was asked about, or when the entry lies  outside what the link opens. | [optional] [example: `9`] [nullable] |
+| **entityTitle** | **String** | The title of that entry, null under the same conditions as its identifier. | [optional] [example: `Contract.docx`] [nullable] |
+| **entityType** | [**FileEntryType**](#model-fileentrytype) | Whether that entry is a folder or a file, null under the same conditions as its identifier. | [optional] [enum: `1`, `2`] |
+| **isRoom** | **Boolean** | True when the link opens a whole room rather than one entry inside it. It is null for a link to a file and for  a link that did not resolve. | [optional] [example: `true`] [nullable] |
+| **shared** | **Boolean** | True when the entry now sits in the calling account's own lists - it was already shared with that account, or  resolving the link has just put it there. It stays false for a visitor browsing without an account, who  reaches the entry through the link alone. | [required] [example: `true`] |
+| **linkId** | **UUID** (uuid) | The link the token belongs to, which is also the subject under which the link appears among the sharing rights  of the entry. It is an empty identifier when the link did not resolve. | [required] [example: `b3a1f0c7-5d2e-4a19-9f38-71c6e0d4b852`] |
+| **isAuthenticated** | **Boolean** | Whether the request carried a signed-in account. It says nothing about that account's rights on the entry, so  it must not be read as permission - it is false for every anonymous visitor and true for any member, even one  who is a stranger to the room. | [required] [example: `true`] |
+| **isRoomMember** | **Boolean** | Whether the signed-in caller already has rights of their own on the room that holds the entry, as opposed to  reaching it through this link. It is false for an anonymous visitor and for a member who has never been  invited. | [optional] [example: `false`] |
 
 
 ### Model ExternalShareRequestParam
@@ -10602,7 +10602,7 @@ The password that unlocks a protected external share link.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **password** | **String** | The password chosen by the member who shared the entry, spelled exactly as they typed it. It is compared  against the stored value and never returned back; a mismatch is reported through the answer's status instead  of an error. | [optional] [example: p@ssw0rd] [nullable] |
+| **password** | **String** | The password chosen by the member who shared the entry, spelled exactly as they typed it. It is compared  against the stored value and never returned back; a mismatch is reported through the answer's status instead  of an error. | [optional] [example: `p@ssw0rd`] [nullable] |
 
 
 ### Model ExternalShareWrapper
@@ -10622,11 +10622,11 @@ The external sharing policy of the portal as it now stands.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **externalShare** | **Boolean** | Whether links that open a file or a room without a portal account may be created. While it is false the portal  also reports sharing on social networks as off and the default link type as internal, whatever was asked for. | [optional] [example: true] |
-| **defaultShareLinkInternal** | **Boolean** | The kind of link the portal offers first: true means a link only accounts of this portal can open, false one  that anyone holding it can open. | [optional] [example: false] |
-| **externalShareApplyToDocuments** | **Boolean** | Whether the restriction covers personal documents. It only has an effect while external sharing is off, so a  true here with sharing allowed restricts nothing. | [optional] [example: true] |
-| **externalShareApplyToRooms** | **Boolean** | Whether the restriction covers rooms, including the creation of new public ones. It only has an effect while  external sharing is off. | [optional] [example: true] |
-| **blockExistingLinksOnRestrict** | **Boolean** | Whether links created before the restriction stop opening as well. With false they keep working and only new  ones are refused. | [optional] [example: true] |
+| **externalShare** | **Boolean** | Whether links that open a file or a room without a portal account may be created. While it is false the portal  also reports sharing on social networks as off and the default link type as internal, whatever was asked for. | [optional] [example: `true`] |
+| **defaultShareLinkInternal** | **Boolean** | The kind of link the portal offers first: true means a link only accounts of this portal can open, false one  that anyone holding it can open. | [optional] [example: `false`] |
+| **externalShareApplyToDocuments** | **Boolean** | Whether the restriction covers personal documents. It only has an effect while external sharing is off, so a  true here with sharing allowed restricts nothing. | [optional] [example: `true`] |
+| **externalShareApplyToRooms** | **Boolean** | Whether the restriction covers rooms, including the creation of new public ones. It only has an effect while  external sharing is off. | [optional] [example: `true`] |
+| **blockExistingLinksOnRestrict** | **Boolean** | Whether links created before the restriction stop opening as well. With false they keep working and only new  ones are refused. | [optional] [example: `true`] |
 
 
 ### Model ExternalSharingSettingsRequestDto
@@ -10634,11 +10634,11 @@ The complete external sharing policy of the portal. Every field is written, so a
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **externalShare** | **Boolean** | Whether links that open a file or a room without a portal account may be created at all. This is the master  switch of the policy: while it is false the portal keeps the default link type internal, turns sharing on  social networks off, and applies the three restriction fields below. | [optional] [example: true] |
-| **defaultShareLinkInternal** | **Boolean** | The kind of link offered first when a new one is created: true offers a link only accounts of this portal can  open, false one that anyone holding it can open. The portal keeps it at true while external sharing is  switched off. | [optional] [example: false] |
-| **externalShareApplyToDocuments** | **Boolean** | Whether the restriction reaches personal documents: with true, no external link can be created for an entry in  the caller's own documents while external sharing is off. It has no effect while external sharing is allowed. | [optional] [example: true] |
-| **externalShareApplyToRooms** | **Boolean** | Whether the restriction reaches rooms: with true, no external link can be created for a room or its content  while external sharing is off, and a new room cannot be made public. It has no effect while external sharing  is allowed. | [optional] [example: true] |
-| **blockExistingLinksOnRestrict** | **Boolean** | What happens to the links that already exist once external sharing is switched off: with true they stop  opening for the sections named above, with false they keep working and only new ones are refused. This is the  field that changes access to data that is already shared. | [optional] [example: true] |
+| **externalShare** | **Boolean** | Whether links that open a file or a room without a portal account may be created at all. This is the master  switch of the policy: while it is false the portal keeps the default link type internal, turns sharing on  social networks off, and applies the three restriction fields below. | [optional] [example: `true`] |
+| **defaultShareLinkInternal** | **Boolean** | The kind of link offered first when a new one is created: true offers a link only accounts of this portal can  open, false one that anyone holding it can open. The portal keeps it at true while external sharing is  switched off. | [optional] [example: `false`] |
+| **externalShareApplyToDocuments** | **Boolean** | Whether the restriction reaches personal documents: with true, no external link can be created for an entry in  the caller's own documents while external sharing is off. It has no effect while external sharing is allowed. | [optional] [example: `true`] |
+| **externalShareApplyToRooms** | **Boolean** | Whether the restriction reaches rooms: with true, no external link can be created for a room or its content  while external sharing is off, and a new room cannot be made public. It has no effect while external sharing  is allowed. | [optional] [example: `true`] |
+| **blockExistingLinksOnRestrict** | **Boolean** | What happens to the links that already exist once external sharing is switched off: with true they stop  opening for the sections named above, with false they keep working and only new ones are refused. This is the  field that changes access to data that is already shared. | [optional] [example: `true`] |
 
 
 ### Model ExternalSharingSettingsWrapper
@@ -10658,8 +10658,8 @@ The settings for the Feedback & Support menu button.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **url** | **String** | The absolute URL to the website address which will be opened when clicking the Feedback & Support menu button. | [optional] [example: https://portal.example.com/support] [nullable] |
-| **visible** | **Boolean** | Whether the support button is shown. The portal always asks for it to be shown. | [optional] [example: true] |
+| **url** | **String** | The absolute URL to the website address which will be opened when clicking the Feedback & Support menu button. | [optional] [example: `https://portal.example.com/support`] [nullable] |
+| **visible** | **Boolean** | Whether the support button is shown. The portal always asks for it to be shown. | [optional] [example: `true`] |
 
 
 ### Model FieldError
@@ -10667,9 +10667,9 @@ Field specific validation error
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **field** | **String** | The name of the field that failed validation | [optional] [example: policy_url] |
-| **code** | **String** | Error code for localization purposes | [optional] [example: InvalidPolicyUrl] |
-| **message** | **String** | Human readable error message | [optional] [example: policy url is expected to be passed as url] |
+| **field** | **String** | The name of the field that failed validation | [optional] [example: `policy_url`] |
+| **code** | **String** | Error code for localization purposes | [optional] [example: `InvalidPolicyUrl`] |
+| **message** | **String** | Human readable error message | [optional] [example: `policy url is expected to be passed as url`] |
 
 
 ### Model FileConflictResolveType
@@ -10687,7 +10687,7 @@ A stored file as the calling account sees it: where it lives, which revision thi
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **title** | **String** | The name shown for the entry. For a file it carries the extension, which is how the format is recognised, and  for a room it is the room name. | [optional] |
-| **access** | [**FileShare**](#model-fileshare) | The level the calling account holds on this entry, resolved from its own rights, the groups it belongs to and  any link it came in through. It is the level itself, not what the account may do with it - the action flags  below answer that. | [optional] [enum: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] |
+| **access** | [**FileShare**](#model-fileshare) | The level the calling account holds on this entry, resolved from its own rights, the groups it belongs to and  any link it came in through. It is the level itself, not what the account may do with it - the action flags  below answer that. | [optional] [enum: `0`, `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`] |
 | **sharedBy** | [**EmployeeDto**](#model-employeedto) | Who gave the calling account the access it is using. It is filled in only while the entry is being read  through a share, and never for a caller without an account. | [optional] |
 | **ownedBy** | [**EmployeeDto**](#model-employeedto) | Who owns the place the entry is shared from - the creator of the room it lies in, or of the personal section  that holds it. It is filled in only while the entry is being read through a share, and never for a caller  without an account. | [optional] |
 | **shared** | **Boolean** | Whether at least one external link exists for the entry, whichever kind. It says nothing about accounts and  groups - those are counted by the flag for members below. | [optional] |
@@ -10699,15 +10699,15 @@ A stored file as the calling account sees it: where it lives, which revision thi
 | **createdBy** | [**EmployeeDto**](#model-employeedto) | Who created the entry. It is null for a caller without an account, who is told nothing about the portal's  members. | [optional] |
 | **updated** | [**ApiDateTime**](#model-apidatetime) | When the entry last changed, written with the offset of the portal's time zone. It is never reported as  earlier than the creation moment, so the two can be compared safely. | [optional] |
 | **autoDelete** | [**ApiDateTime**](#model-apidatetime) | When the entry will disappear on its own, written with the offset of the portal's time zone. It is filled in  only where a removal is actually scheduled - something in the trash while the portal cleans it up  automatically, or a guest's own documents - so a null means nothing is scheduled rather than that the entry is  permanent. | [optional] |
-| **rootFolderType** | [**FolderType**](#model-foldertype) | The section the entry ultimately belongs to, which is what tells a personal document from one inside a room,  from a template and from something in the trash or the archive. | [optional] [enum: 0, 1, 2, 3, 5, 6, 8, 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36] |
-| **parentRoomType** | [**FolderType**](#model-foldertype) | The kind of room the entry lies in, which decides what the room allows - filling forms, public links,  indexing. It is null for an entry that is not inside a room at all. | [optional] [enum: 0, 1, 2, 3, 5, 6, 8, 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36] |
+| **rootFolderType** | [**FolderType**](#model-foldertype) | The section the entry ultimately belongs to, which is what tells a personal document from one inside a room,  from a template and from something in the trash or the archive. | [optional] [enum: `0`, `1`, `2`, `3`, `5`, `6`, `8`, `10`, `11`, `12`, `13`, `14`, `15`, `16`, `19`, `20`, `21`, `22`, `25`, `26`, `27`, `28`, `29`, `30`, `31`, `32`, `33`, `34`, `35`, `36`] |
+| **parentRoomType** | [**FolderType**](#model-foldertype) | The kind of room the entry lies in, which decides what the room allows - filling forms, public links,  indexing. It is null for an entry that is not inside a room at all. | [optional] [enum: `0`, `1`, `2`, `3`, `5`, `6`, `8`, `10`, `11`, `12`, `13`, `14`, `15`, `16`, `19`, `20`, `21`, `22`, `25`, `26`, `27`, `28`, `29`, `30`, `31`, `32`, `33`, `34`, `35`, `36`] |
 | **updatedBy** | [**EmployeeDto**](#model-employeedto) | Who changed the entry last. It is null for a caller without an account. | [optional] |
 | **providerItem** | **Boolean** | Set when the entry is stored on a connected third-party account rather than on the portal, and null when it is  stored on the portal. Such an entry is identified by a string rather than a number, and some operations skip  it. | [optional] |
 | **providerKey** | **String** | Which third-party service holds the entry, matching the keys accepted by the third-party operations. It is  null for an entry stored on the portal. | [optional] |
 | **providerId** | **Integer** (int32) | The connected account the entry comes from, for telling apart two connections to the same service. It is null  for an entry stored on the portal. | [optional] |
 | **order** | **String** | The place of the entry in a room where the members arrange the content themselves, given as the position of  the entry preceded by the positions of the folders leading to it, separated by dots. It is empty when nothing  has been arranged. | [optional] |
 | **isFavorite** | **Boolean** | Set when the calling account has marked the entry as a favorite, which is what puts it into the favorites  listing. For a file that is not marked it is null rather than false. | [optional] |
-| **fileEntryType** | [**FileEntryType**](#model-fileentrytype) | Tells a folder from a file, and so which of the two shapes the rest of the object has. A room is reported as a  folder here. | [optional] [enum: 1, 2] |
+| **fileEntryType** | [**FileEntryType**](#model-fileentrytype) | Tells a folder from a file, and so which of the two shapes the rest of the object has. A room is reported as a  folder here. | [optional] [enum: `1`, `2`] |
 | **id** | **Integer** (int32) | The identifier to pass back to the other operations of this entry. It is a number for storage on the portal  and a string for a connected third-party account, and it is unique only within its own kind, so files and  folders may carry the same value. | [optional] |
 | **rootFolderId** | **Integer** (int32) | The section the entry ultimately lies in, as an identifier that can be listed like any other folder. For an  entry inside a room this is the rooms section, not the room. | [optional] |
 | **originId** | **Integer** (int32) | The folder the entry was deleted from, which is where restoring it puts it back. It is left out of the answer  unless the entry is in the trash. | [optional] |
@@ -10727,21 +10727,21 @@ A stored file as the calling account sees it: where it lives, which revision thi
 | **versionGroup** | **Integer** (int32) | Groups revisions that belong together, which is how a history can fold a long editing session into one entry:  versions saved inside one session share this number, and an upload over the file starts a new group. | [optional] |
 | **contentLength** | **String** | The size already formatted for display, with a unit and the separators of the caller's language. Read  `pureContentLength` for a number to calculate with. | [optional] [nullable] |
 | **pureContentLength** | **Long** (int64) | The size of the stored content in bytes, and null for an empty file. | [optional] [nullable] |
-| **fileStatus** | [**FileStatus**](#model-filestatus) | What the portal is currently doing with the file and how the caller stands towards it - open in the editor,  unread, being converted, and so on. The value is a bit mask that combines those states, so a file can report a  number that matches none of the published members on its own. | [optional] [enum: 0, 1, 2, 4, 8, 16, 32, 64, 128, 256] |
+| **fileStatus** | [**FileStatus**](#model-filestatus) | What the portal is currently doing with the file and how the caller stands towards it - open in the editor,  unread, being converted, and so on. The value is a bit mask that combines those states, so a file can report a  number that matches none of the published members on its own. | [optional] [enum: `0`, `1`, `2`, `4`, `8`, `16`, `32`, `64`, `128`, `256`] |
 | **editingBy** | **Map** | The accounts that have the file open in the editor at this moment, as account identifier to display name, and  empty when nobody has. The all-zero identifier stands for people who came in through an external link without  signing in, and its name carries their number in brackets when there is more than one. | [optional] |
 | **mute** | **Boolean** | Not a property of the file at all: it repeats, inverted, the calling account's own switch for new-item badges,  so it is the same in every entry of one answer. True means that account has badges turned off. | [optional] |
 | **viewUrl** | **URI** (uri) | The address that returns the bytes of the file - a download, in spite of the name; `webUrl` is the address a  person opens. When the file was reached through an external link the address carries the key of that link, so  it keeps working without signing in. | [optional] [nullable] |
 | **webUrl** | **URI** (uri) | The page that opens the file in a browser: the editor for a format the portal edits, the media viewer for  pictures, audio and video, and the download address for a format it cannot show at all. | [optional] [nullable] |
-| **fileType** | [**FileType**](#model-filetype) | The broad kind of content, worked out from the extension, which is what a client uses to pick an icon or a  viewer without parsing `fileExst` itself. | [optional] [enum: 0, 1, 2, 3, 4, 5, 6, 7, 10, 11] |
+| **fileType** | [**FileType**](#model-filetype) | The broad kind of content, worked out from the extension, which is what a client uses to pick an icon or a  viewer without parsing `fileExst` itself. | [optional] [enum: `0`, `1`, `2`, `3`, `4`, `5`, `6`, `7`, `10`, `11`] |
 | **fileExst** | **String** | The extension of the stored file, leading dot included and always lower case. For a format the portal keeps in  a converted shape this is the extension it is served under, not the one it was uploaded with. | [optional] [nullable] |
 | **comment** | **String** | The note kept with this revision. The portal writes it itself for revisions it creates, an upload over an  existing file among them, and an editor stores the note a person typed when saving a version. | [optional] [nullable] |
 | **encrypted** | **Boolean** | True for a file in a private room, whose content the server never sees and which therefore cannot be converted  or taken over by an upload. Null, rather than false, for an ordinary file. | [optional] [nullable] |
 | **thumbnailUrl** | **URI** (uri) | The address of the generated preview image. It is filled in only while `thumbnailStatus` says the preview has  been created, and it carries a suffix that changes with the file, so an image cached for an earlier revision  is not reused. | [optional] [nullable] |
-| **thumbnailStatus** | [**Thumbnail**](#model-thumbnail) | How far the preview image has got. Only the created state means `thumbnailUrl` holds an address; the others  mean there is none, either because it is still being produced or because this format has no preview. | [optional] [enum: 0, 1, 2, 3, 4] |
+| **thumbnailStatus** | [**Thumbnail**](#model-thumbnail) | How far the preview image has got. Only the created state means `thumbnailUrl` holds an address; the others  mean there is none, either because it is still being produced or because this format has no preview. | [optional] [enum: `0`, `1`, `2`, `3`, `4`] |
 | **locked** | **Boolean** | True while the file is held under a lock that stops anyone but its holder from editing it, and null rather  than false when there is no lock. `lockedBy` names the holder unless the caller is the holder. | [optional] [nullable] |
 | **lockedBy** | **String** | The display name of the account holding the lock, and null when the caller holds it - so `locked` true  together with no name here means the lock is the caller's own. | [optional] [nullable] |
 | **hasDraft** | **Boolean** | For a fillable PDF form, whether the caller already has a filling draft of it, in which case `draftLocation`  says where that draft lives. Null for anything that is not a form. | [optional] [nullable] |
-| **formFillingStatus** | [**FormFillingStatus**](#model-formfillingstatus) | How far the filling of this form has got for the calling account, and whose turn it is now. It is worked out  only inside a virtual data room, where filling runs in steps; everywhere else it stays at the none value. | [optional] [enum: 0, 1, 2, 3, 4, 5] |
+| **formFillingStatus** | [**FormFillingStatus**](#model-formfillingstatus) | How far the filling of this form has got for the calling account, and whose turn it is now. It is worked out  only inside a virtual data room, where filling runs in steps; everywhere else it stays at the none value. | [optional] [enum: `0`, `1`, `2`, `3`, `4`, `5`] |
 | **isForm** | **Boolean** | Whether the PDF is a fillable form rather than a plain document. When the stored classification does not say,  the portal opens the file to find out, so the answer is reliable for a PDF and null for anything else. | [optional] [nullable] |
 | **customFilterEnabled** | **Boolean** | True while a spreadsheet is in the mode where each person sorts and filters their own view without changing  what the others see, and null rather than false when it is not. | [optional] [nullable] |
 | **customFilterEnabledBy** | **String** | The display name of the account that turned that mode on, and null when the caller turned it on themselves. | [optional] [nullable] |
@@ -10754,7 +10754,7 @@ A stored file as the calling account sees it: where it lives, which revision thi
 | **viewAccessibility** | [**FileDtoInteger_allOf_viewAccessibility**](#model-filedtointegerviewaccessibility) |  | [optional] [nullable] |
 | **lastOpened** | [**ApiDateTime**](#model-apidatetime) | The moment the caller last opened the file. It is kept per account and is what orders the Recent section, so  it is null for a file this account has never opened. Written with the offset of the portal's time zone. | [optional] |
 | **expired** | [**ApiDateTime**](#model-apidatetime) | The moment the file falls under the lifetime rule of the room holding it and is removed. It is counted from  the first revision rather than the latest one, so editing a file does not postpone it, and it is null when the  room sets no lifetime. Written with the offset of the portal's time zone. | [optional] |
-| **vectorizationStatus** | [**VectorizationStatus**](#model-vectorizationstatus) | How far the indexing of the file's content for AI search has got. It is null for a file that has never been  queued for indexing, which is every file while the feature is off for the portal. | [optional] [enum: 0, 1, 2] |
+| **vectorizationStatus** | [**VectorizationStatus**](#model-vectorizationstatus) | How far the indexing of the file's content for AI search has got. It is null for a file that has never been  queued for indexing, which is every file while the feature is off for the portal. | [optional] [enum: `0`, `1`, `2`] |
 | **externalDbTableName** | **String** | The table collecting the submitted values of this form in the external database configured for its room. The  field is left out of the answer entirely when the form has no such table. | [optional] [nullable] |
 | **dimensions** | [**Size**](#model-size) | The pixel size of the picture, measured by reading the stored file rather than taken from any stored metadata.  Null for anything that is not a picture the portal can show, and also when the file could not be read. | [optional] |
 
@@ -10781,8 +10781,8 @@ The keys the calling account needs in order to open one file of an end-to-end en
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **userKeys** | [**List**](#model-encryptionkeydto) | The key pairs of the calling account, never those of the other people in the room. The private half of each  pair is stored encrypted with that person's own password and has to be decrypted on the client. An empty list  means the account has generated no key pair yet, and until it does no file key can be issued to it. | [optional] [example: [\{id=9924256B-447C-4F19-9dbd-8ad8c39e8ff5, userId=9924256B-447C-4F19-9dbd-8ad8c39e8ff5, date=2025-01-01T00:00:00, publicKey=-----BEGIN PUBLIC KEY-----<br/>MIIBIjANBg..., privateKeyEnc=U2FsdGVkX1+Lm3s..., cryptoEngineId=defaultCryptoEngine\}]] [nullable] |
-| **fileKeys** | [**List**](#model-filekeys) | The keys of this file that were issued to the calling account, each naming the public key it was encrypted for  so that the client can pick the matching private half. An empty list means the file has not been shared with  this account rather than that the file is unencrypted. | [optional] [example: [\{userId=9924256B-447C-4F19-9dbd-8ad8c39e8ff5, publicKeyId=9924256B-447C-4F19-9dbd-8ad8c39e8ff5, privateKeyEnc=U2FsdGVkX1+Lm3s..., tenantId=1, fileId=9846, createOn=2025-01-01T00:00:00\}]] [nullable] |
+| **userKeys** | [**List**](#model-encryptionkeydto) | The key pairs of the calling account, never those of the other people in the room. The private half of each  pair is stored encrypted with that person's own password and has to be decrypted on the client. An empty list  means the account has generated no key pair yet, and until it does no file key can be issued to it. | [optional] [example: `[{id=9924256B-447C-4F19-9dbd-8ad8c39e8ff5, userId=9924256B-447C-4F19-9dbd-8ad8c39e8ff5, date=2025-01-01T00:00:00, publicKey=-----BEGIN PUBLIC KEY----- MIIBIjANBg..., privateKeyEnc=U2FsdGVkX1+Lm3s..., cryptoEngineId=defaultCryptoEngine}]`] [nullable] |
+| **fileKeys** | [**List**](#model-filekeys) | The keys of this file that were issued to the calling account, each naming the public key it was encrypted for  so that the client can pick the matching private half. An empty list means the file has not been shared with  this account rather than that the file is unencrypted. | [optional] [example: `[{userId=9924256B-447C-4F19-9dbd-8ad8c39e8ff5, publicKeyId=9924256B-447C-4F19-9dbd-8ad8c39e8ff5, privateKeyEnc=U2FsdGVkX1+Lm3s..., tenantId=1, fileId=9846, createOn=2025-01-01T00:00:00}]`] [nullable] |
 
 
 ### Model FileEncryptionInfoWrapper
@@ -10814,28 +10814,28 @@ What every file and folder in an answer has in common; the concrete shape is a f
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **title** | **String** | The name shown for the entry. For a file it carries the extension, which is how the format is recognised, and  for a room it is the room name. | [optional] [example: Some title.txt] [nullable] |
-| **access** | [**FileShare**](#model-fileshare) | The level the calling account holds on this entry, resolved from its own rights, the groups it belongs to and  any link it came in through. It is the level itself, not what the account may do with it - the action flags  below answer that. | [optional] [enum: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] |
+| **title** | **String** | The name shown for the entry. For a file it carries the extension, which is how the format is recognised, and  for a room it is the room name. | [optional] [example: `Some title.txt`] [nullable] |
+| **access** | [**FileShare**](#model-fileshare) | The level the calling account holds on this entry, resolved from its own rights, the groups it belongs to and  any link it came in through. It is the level itself, not what the account may do with it - the action flags  below answer that. | [optional] [enum: `0`, `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`] |
 | **sharedBy** | [**EmployeeDto**](#model-employeedto) | Who gave the calling account the access it is using. It is filled in only while the entry is being read  through a share, and never for a caller without an account. | [optional] |
 | **ownedBy** | [**EmployeeDto**](#model-employeedto) | Who owns the place the entry is shared from - the creator of the room it lies in, or of the personal section  that holds it. It is filled in only while the entry is being read through a share, and never for a caller  without an account. | [optional] |
-| **shared** | **Boolean** | Whether at least one external link exists for the entry, whichever kind. It says nothing about accounts and  groups - those are counted by the flag for members below. | [optional] [example: false] |
-| **sharedForUser** | **Boolean** | Whether at least one account or group has been given rights on the entry directly, as opposed to reaching it  through a link or through the room around it. | [optional] [example: false] |
-| **sharedExternal** | **Boolean** | Whether one of the entry's links is open to people outside the portal, as opposed to a link that only its own  members can follow. This is the flag to watch when the concern is who can reach the content from outside. | [optional] [example: false] |
-| **parentShared** | **Boolean** | Whether the entry is reachable because the room or folder around it is shared, rather than through rights of  its own. A copy or a move takes the entry out of that scope. | [optional] [example: false] |
-| **shortWebUrl** | **URI** (uri) | A shortened address that opens the entry through the link it is being read with. It is an empty string  whenever no link applies, which is the usual case for a member browsing their own rooms. | [optional] [example: http://localhost/s/abc123] [nullable] |
+| **shared** | **Boolean** | Whether at least one external link exists for the entry, whichever kind. It says nothing about accounts and  groups - those are counted by the flag for members below. | [optional] [example: `false`] |
+| **sharedForUser** | **Boolean** | Whether at least one account or group has been given rights on the entry directly, as opposed to reaching it  through a link or through the room around it. | [optional] [example: `false`] |
+| **sharedExternal** | **Boolean** | Whether one of the entry's links is open to people outside the portal, as opposed to a link that only its own  members can follow. This is the flag to watch when the concern is who can reach the content from outside. | [optional] [example: `false`] |
+| **parentShared** | **Boolean** | Whether the entry is reachable because the room or folder around it is shared, rather than through rights of  its own. A copy or a move takes the entry out of that scope. | [optional] [example: `false`] |
+| **shortWebUrl** | **URI** (uri) | A shortened address that opens the entry through the link it is being read with. It is an empty string  whenever no link applies, which is the usual case for a member browsing their own rooms. | [optional] [example: `http://localhost/s/abc123`] [nullable] |
 | **created** | [**ApiDateTime**](#model-apidatetime) | When the entry was created, written with the offset of the portal's time zone. For a file restored from an  older version this is still the moment the file first appeared. | [optional] |
 | **createdBy** | [**EmployeeDto**](#model-employeedto) | Who created the entry. It is null for a caller without an account, who is told nothing about the portal's  members. | [optional] |
 | **updated** | [**ApiDateTime**](#model-apidatetime) | When the entry last changed, written with the offset of the portal's time zone. It is never reported as  earlier than the creation moment, so the two can be compared safely. | [optional] |
 | **autoDelete** | [**ApiDateTime**](#model-apidatetime) | When the entry will disappear on its own, written with the offset of the portal's time zone. It is filled in  only where a removal is actually scheduled - something in the trash while the portal cleans it up  automatically, or a guest's own documents - so a null means nothing is scheduled rather than that the entry is  permanent. | [optional] |
-| **rootFolderType** | [**FolderType**](#model-foldertype) | The section the entry ultimately belongs to, which is what tells a personal document from one inside a room,  from a template and from something in the trash or the archive. | [optional] [enum: 0, 1, 2, 3, 5, 6, 8, 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36] |
-| **parentRoomType** | [**FolderType**](#model-foldertype) | The kind of room the entry lies in, which decides what the room allows - filling forms, public links,  indexing. It is null for an entry that is not inside a room at all. | [optional] [enum: 0, 1, 2, 3, 5, 6, 8, 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36] |
+| **rootFolderType** | [**FolderType**](#model-foldertype) | The section the entry ultimately belongs to, which is what tells a personal document from one inside a room,  from a template and from something in the trash or the archive. | [optional] [enum: `0`, `1`, `2`, `3`, `5`, `6`, `8`, `10`, `11`, `12`, `13`, `14`, `15`, `16`, `19`, `20`, `21`, `22`, `25`, `26`, `27`, `28`, `29`, `30`, `31`, `32`, `33`, `34`, `35`, `36`] |
+| **parentRoomType** | [**FolderType**](#model-foldertype) | The kind of room the entry lies in, which decides what the room allows - filling forms, public links,  indexing. It is null for an entry that is not inside a room at all. | [optional] [enum: `0`, `1`, `2`, `3`, `5`, `6`, `8`, `10`, `11`, `12`, `13`, `14`, `15`, `16`, `19`, `20`, `21`, `22`, `25`, `26`, `27`, `28`, `29`, `30`, `31`, `32`, `33`, `34`, `35`, `36`] |
 | **updatedBy** | [**EmployeeDto**](#model-employeedto) | Who changed the entry last. It is null for a caller without an account. | [optional] |
-| **providerItem** | **Boolean** | Set when the entry is stored on a connected third-party account rather than on the portal, and null when it is  stored on the portal. Such an entry is identified by a string rather than a number, and some operations skip  it. | [optional] [example: true] [nullable] |
-| **providerKey** | **String** | Which third-party service holds the entry, matching the keys accepted by the third-party operations. It is  null for an entry stored on the portal. | [optional] [example: google-drive] [nullable] |
-| **providerId** | **Integer** (int32) | The connected account the entry comes from, for telling apart two connections to the same service. It is null  for an entry stored on the portal. | [optional] [example: 1] [nullable] |
-| **order** | **String** | The place of the entry in a room where the members arrange the content themselves, given as the position of  the entry preceded by the positions of the folders leading to it, separated by dots. It is empty when nothing  has been arranged. | [optional] [example: 1.3.2] [nullable] |
-| **isFavorite** | **Boolean** | Set when the calling account has marked the entry as a favorite, which is what puts it into the favorites  listing. For a file that is not marked it is null rather than false. | [optional] [example: true] [nullable] |
-| **fileEntryType** | [**FileEntryType**](#model-fileentrytype) | Tells a folder from a file, and so which of the two shapes the rest of the object has. A room is reported as a  folder here. | [optional] [enum: 1, 2] |
+| **providerItem** | **Boolean** | Set when the entry is stored on a connected third-party account rather than on the portal, and null when it is  stored on the portal. Such an entry is identified by a string rather than a number, and some operations skip  it. | [optional] [example: `true`] [nullable] |
+| **providerKey** | **String** | Which third-party service holds the entry, matching the keys accepted by the third-party operations. It is  null for an entry stored on the portal. | [optional] [example: `google-drive`] [nullable] |
+| **providerId** | **Integer** (int32) | The connected account the entry comes from, for telling apart two connections to the same service. It is null  for an entry stored on the portal. | [optional] [example: `1`] [nullable] |
+| **order** | **String** | The place of the entry in a room where the members arrange the content themselves, given as the position of  the entry preceded by the positions of the folders leading to it, separated by dots. It is empty when nothing  has been arranged. | [optional] [example: `1.3.2`] [nullable] |
+| **isFavorite** | **Boolean** | Set when the calling account has marked the entry as a favorite, which is what puts it into the favorites  listing. For a file that is not marked it is null rather than false. | [optional] [example: `true`] [nullable] |
+| **fileEntryType** | [**FileEntryType**](#model-fileentrytype) | Tells a folder from a file, and so which of the two shapes the rest of the object has. A room is reported as a  folder here. | [optional] [enum: `1`, `2`] |
 
 
 ### Model FileEntryBaseWrapper
@@ -10856,7 +10856,7 @@ The part of a file or folder that depends on how the entry is identified: by a n
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **title** | **String** | The name shown for the entry. For a file it carries the extension, which is how the format is recognised, and  for a room it is the room name. | [optional] |
-| **access** | [**FileShare**](#model-fileshare) | The level the calling account holds on this entry, resolved from its own rights, the groups it belongs to and  any link it came in through. It is the level itself, not what the account may do with it - the action flags  below answer that. | [optional] [enum: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] |
+| **access** | [**FileShare**](#model-fileshare) | The level the calling account holds on this entry, resolved from its own rights, the groups it belongs to and  any link it came in through. It is the level itself, not what the account may do with it - the action flags  below answer that. | [optional] [enum: `0`, `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`] |
 | **sharedBy** | [**EmployeeDto**](#model-employeedto) | Who gave the calling account the access it is using. It is filled in only while the entry is being read  through a share, and never for a caller without an account. | [optional] |
 | **ownedBy** | [**EmployeeDto**](#model-employeedto) | Who owns the place the entry is shared from - the creator of the room it lies in, or of the personal section  that holds it. It is filled in only while the entry is being read through a share, and never for a caller  without an account. | [optional] |
 | **shared** | **Boolean** | Whether at least one external link exists for the entry, whichever kind. It says nothing about accounts and  groups - those are counted by the flag for members below. | [optional] |
@@ -10868,15 +10868,15 @@ The part of a file or folder that depends on how the entry is identified: by a n
 | **createdBy** | [**EmployeeDto**](#model-employeedto) | Who created the entry. It is null for a caller without an account, who is told nothing about the portal's  members. | [optional] |
 | **updated** | [**ApiDateTime**](#model-apidatetime) | When the entry last changed, written with the offset of the portal's time zone. It is never reported as  earlier than the creation moment, so the two can be compared safely. | [optional] |
 | **autoDelete** | [**ApiDateTime**](#model-apidatetime) | When the entry will disappear on its own, written with the offset of the portal's time zone. It is filled in  only where a removal is actually scheduled - something in the trash while the portal cleans it up  automatically, or a guest's own documents - so a null means nothing is scheduled rather than that the entry is  permanent. | [optional] |
-| **rootFolderType** | [**FolderType**](#model-foldertype) | The section the entry ultimately belongs to, which is what tells a personal document from one inside a room,  from a template and from something in the trash or the archive. | [optional] [enum: 0, 1, 2, 3, 5, 6, 8, 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36] |
-| **parentRoomType** | [**FolderType**](#model-foldertype) | The kind of room the entry lies in, which decides what the room allows - filling forms, public links,  indexing. It is null for an entry that is not inside a room at all. | [optional] [enum: 0, 1, 2, 3, 5, 6, 8, 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36] |
+| **rootFolderType** | [**FolderType**](#model-foldertype) | The section the entry ultimately belongs to, which is what tells a personal document from one inside a room,  from a template and from something in the trash or the archive. | [optional] [enum: `0`, `1`, `2`, `3`, `5`, `6`, `8`, `10`, `11`, `12`, `13`, `14`, `15`, `16`, `19`, `20`, `21`, `22`, `25`, `26`, `27`, `28`, `29`, `30`, `31`, `32`, `33`, `34`, `35`, `36`] |
+| **parentRoomType** | [**FolderType**](#model-foldertype) | The kind of room the entry lies in, which decides what the room allows - filling forms, public links,  indexing. It is null for an entry that is not inside a room at all. | [optional] [enum: `0`, `1`, `2`, `3`, `5`, `6`, `8`, `10`, `11`, `12`, `13`, `14`, `15`, `16`, `19`, `20`, `21`, `22`, `25`, `26`, `27`, `28`, `29`, `30`, `31`, `32`, `33`, `34`, `35`, `36`] |
 | **updatedBy** | [**EmployeeDto**](#model-employeedto) | Who changed the entry last. It is null for a caller without an account. | [optional] |
 | **providerItem** | **Boolean** | Set when the entry is stored on a connected third-party account rather than on the portal, and null when it is  stored on the portal. Such an entry is identified by a string rather than a number, and some operations skip  it. | [optional] |
 | **providerKey** | **String** | Which third-party service holds the entry, matching the keys accepted by the third-party operations. It is  null for an entry stored on the portal. | [optional] |
 | **providerId** | **Integer** (int32) | The connected account the entry comes from, for telling apart two connections to the same service. It is null  for an entry stored on the portal. | [optional] |
 | **order** | **String** | The place of the entry in a room where the members arrange the content themselves, given as the position of  the entry preceded by the positions of the folders leading to it, separated by dots. It is empty when nothing  has been arranged. | [optional] |
 | **isFavorite** | **Boolean** | Set when the calling account has marked the entry as a favorite, which is what puts it into the favorites  listing. For a file that is not marked it is null rather than false. | [optional] |
-| **fileEntryType** | [**FileEntryType**](#model-fileentrytype) | Tells a folder from a file, and so which of the two shapes the rest of the object has. A room is reported as a  folder here. | [optional] [enum: 1, 2] |
+| **fileEntryType** | [**FileEntryType**](#model-fileentrytype) | Tells a folder from a file, and so which of the two shapes the rest of the object has. A room is reported as a  folder here. | [optional] [enum: `1`, `2`] |
 | **id** | **Integer** (int32) | The identifier to pass back to the other operations of this entry. It is a number for storage on the portal  and a string for a connected third-party account, and it is unique only within its own kind, so files and  folders may carry the same value. | [optional] |
 | **rootFolderId** | **Integer** (int32) | The section the entry ultimately lies in, as an identifier that can be listed like any other folder. For an  entry inside a room this is the rooms section, not the room. | [optional] |
 | **originId** | **Integer** (int32) | The folder the entry was deleted from, which is where restoring it puts it back. It is left out of the answer  unless the entry is in the trash. | [optional] |
@@ -10977,7 +10977,7 @@ The part of a file or folder that depends on how the entry is identified: by a n
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **title** | **String** | The name shown for the entry. For a file it carries the extension, which is how the format is recognised, and  for a room it is the room name. | [optional] |
-| **access** | [**FileShare**](#model-fileshare) | The level the calling account holds on this entry, resolved from its own rights, the groups it belongs to and  any link it came in through. It is the level itself, not what the account may do with it - the action flags  below answer that. | [optional] [enum: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] |
+| **access** | [**FileShare**](#model-fileshare) | The level the calling account holds on this entry, resolved from its own rights, the groups it belongs to and  any link it came in through. It is the level itself, not what the account may do with it - the action flags  below answer that. | [optional] [enum: `0`, `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`] |
 | **sharedBy** | [**EmployeeDto**](#model-employeedto) | Who gave the calling account the access it is using. It is filled in only while the entry is being read  through a share, and never for a caller without an account. | [optional] |
 | **ownedBy** | [**EmployeeDto**](#model-employeedto) | Who owns the place the entry is shared from - the creator of the room it lies in, or of the personal section  that holds it. It is filled in only while the entry is being read through a share, and never for a caller  without an account. | [optional] |
 | **shared** | **Boolean** | Whether at least one external link exists for the entry, whichever kind. It says nothing about accounts and  groups - those are counted by the flag for members below. | [optional] |
@@ -10989,15 +10989,15 @@ The part of a file or folder that depends on how the entry is identified: by a n
 | **createdBy** | [**EmployeeDto**](#model-employeedto) | Who created the entry. It is null for a caller without an account, who is told nothing about the portal's  members. | [optional] |
 | **updated** | [**ApiDateTime**](#model-apidatetime) | When the entry last changed, written with the offset of the portal's time zone. It is never reported as  earlier than the creation moment, so the two can be compared safely. | [optional] |
 | **autoDelete** | [**ApiDateTime**](#model-apidatetime) | When the entry will disappear on its own, written with the offset of the portal's time zone. It is filled in  only where a removal is actually scheduled - something in the trash while the portal cleans it up  automatically, or a guest's own documents - so a null means nothing is scheduled rather than that the entry is  permanent. | [optional] |
-| **rootFolderType** | [**FolderType**](#model-foldertype) | The section the entry ultimately belongs to, which is what tells a personal document from one inside a room,  from a template and from something in the trash or the archive. | [optional] [enum: 0, 1, 2, 3, 5, 6, 8, 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36] |
-| **parentRoomType** | [**FolderType**](#model-foldertype) | The kind of room the entry lies in, which decides what the room allows - filling forms, public links,  indexing. It is null for an entry that is not inside a room at all. | [optional] [enum: 0, 1, 2, 3, 5, 6, 8, 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36] |
+| **rootFolderType** | [**FolderType**](#model-foldertype) | The section the entry ultimately belongs to, which is what tells a personal document from one inside a room,  from a template and from something in the trash or the archive. | [optional] [enum: `0`, `1`, `2`, `3`, `5`, `6`, `8`, `10`, `11`, `12`, `13`, `14`, `15`, `16`, `19`, `20`, `21`, `22`, `25`, `26`, `27`, `28`, `29`, `30`, `31`, `32`, `33`, `34`, `35`, `36`] |
+| **parentRoomType** | [**FolderType**](#model-foldertype) | The kind of room the entry lies in, which decides what the room allows - filling forms, public links,  indexing. It is null for an entry that is not inside a room at all. | [optional] [enum: `0`, `1`, `2`, `3`, `5`, `6`, `8`, `10`, `11`, `12`, `13`, `14`, `15`, `16`, `19`, `20`, `21`, `22`, `25`, `26`, `27`, `28`, `29`, `30`, `31`, `32`, `33`, `34`, `35`, `36`] |
 | **updatedBy** | [**EmployeeDto**](#model-employeedto) | Who changed the entry last. It is null for a caller without an account. | [optional] |
 | **providerItem** | **Boolean** | Set when the entry is stored on a connected third-party account rather than on the portal, and null when it is  stored on the portal. Such an entry is identified by a string rather than a number, and some operations skip  it. | [optional] |
 | **providerKey** | **String** | Which third-party service holds the entry, matching the keys accepted by the third-party operations. It is  null for an entry stored on the portal. | [optional] |
 | **providerId** | **Integer** (int32) | The connected account the entry comes from, for telling apart two connections to the same service. It is null  for an entry stored on the portal. | [optional] |
 | **order** | **String** | The place of the entry in a room where the members arrange the content themselves, given as the position of  the entry preceded by the positions of the folders leading to it, separated by dots. It is empty when nothing  has been arranged. | [optional] |
 | **isFavorite** | **Boolean** | Set when the calling account has marked the entry as a favorite, which is what puts it into the favorites  listing. For a file that is not marked it is null rather than false. | [optional] |
-| **fileEntryType** | [**FileEntryType**](#model-fileentrytype) | Tells a folder from a file, and so which of the two shapes the rest of the object has. A room is reported as a  folder here. | [optional] [enum: 1, 2] |
+| **fileEntryType** | [**FileEntryType**](#model-fileentrytype) | Tells a folder from a file, and so which of the two shapes the rest of the object has. A room is reported as a  folder here. | [optional] [enum: `1`, `2`] |
 | **id** | **String** | The identifier to pass back to the other operations of this entry. It is a number for storage on the portal  and a string for a connected third-party account, and it is unique only within its own kind, so files and  folders may carry the same value. | [optional] [nullable] |
 | **rootFolderId** | **String** | The section the entry ultimately lies in, as an identifier that can be listed like any other folder. For an  entry inside a room this is the rooms section, not the room. | [optional] [nullable] |
 | **originId** | **String** | The folder the entry was deleted from, which is where restoring it puts it back. It is left out of the answer  unless the entry is in the trash. | [optional] [nullable] |
@@ -11063,12 +11063,12 @@ The encrypted file key issued to one user.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **userId** | **UUID** (uuid) | The identifier of the user the file key was issued to. | [optional] [example: 9924256B-447C-4F19-9dbd-8ad8c39e8ff5] |
-| **publicKeyId** | **UUID** (uuid) | The identifier of the key pair the file key is encrypted for. | [optional] [example: 9924256B-447C-4F19-9dbd-8ad8c39e8ff5] |
-| **privateKeyEnc** | **String** | The file key, encrypted with the public key of the pair. | [optional] [example: U2FsdGVkX1+Lm3s...] [nullable] |
-| **tenantId** | **Integer** (int32) | The identifier of the portal the file belongs to. | [optional] [example: 1] |
-| **fileId** | **Integer** (int32) | The identifier of the file the key unlocks. | [optional] [example: 9846] |
-| **createOn** | **Date** (date-time) | The date and time when the file key was issued. | [optional] [example: 2025-01-01T00:00:00] |
+| **userId** | **UUID** (uuid) | The identifier of the user the file key was issued to. | [optional] [example: `9924256B-447C-4F19-9dbd-8ad8c39e8ff5`] |
+| **publicKeyId** | **UUID** (uuid) | The identifier of the key pair the file key is encrypted for. | [optional] [example: `9924256B-447C-4F19-9dbd-8ad8c39e8ff5`] |
+| **privateKeyEnc** | **String** | The file key, encrypted with the public key of the pair. | [optional] [example: `U2FsdGVkX1+Lm3s...`] [nullable] |
+| **tenantId** | **Integer** (int32) | The identifier of the portal the file belongs to. | [optional] [example: `1`] |
+| **fileId** | **Integer** (int32) | The identifier of the file the key unlocks. | [optional] [example: `9846`] |
+| **createOn** | **Date** (date-time) | The date and time when the file key was issued. | [optional] [example: `2025-01-01T00:00:00`] |
 
 
 ### Model FileLink
@@ -11076,9 +11076,9 @@ The address the content of a file is fetched from, together with the signature t
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **filetype** | **String** | The format the stored content is in, lower-cased and with the leading dot, which is how the document  service learns how to read the bytes behind the address. It stays empty when the file title carries no  extension at all. | [required] [example: .docx] [nullable] |
-| **token** | **String** | Signs the address and the format above so that the document service can trust them. It stays empty on a  portal that has no signature secret configured for the document service, and the address is then meant  to be fetched unsigned. | [optional] [example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...] [nullable] |
-| **url** | **URI** (uri) | Where the content is fetched from: the portal download handler, pinned to the revision the file was at  when the address was issued and carrying an authorisation key of limited validity. It is addressed to  the host the document service can reach, which on a deployment with a private editor network is not the  address a browser should follow. | [required] [example: https://portal.example.com/filehandler.ashx?action=stream&fileid=512&version=3] [nullable] |
+| **filetype** | **String** | The format the stored content is in, lower-cased and with the leading dot, which is how the document  service learns how to read the bytes behind the address. It stays empty when the file title carries no  extension at all. | [required] [example: `.docx`] [nullable] |
+| **token** | **String** | Signs the address and the format above so that the document service can trust them. It stays empty on a  portal that has no signature secret configured for the document service, and the address is then meant  to be fetched unsigned. | [optional] [example: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...`] [nullable] |
+| **url** | **URI** (uri) | Where the content is fetched from: the portal download handler, pinned to the revision the file was at  when the address was issued and carrying an authorisation key of limited validity. It is addressed to  the host the document service can reach, which on a deployment with a private editor network is not the  address a browser should follow. | [required] [example: `https://portal.example.com/filehandler.ashx?action=stream&fileid=512&version=3`] [nullable] |
 
 
 ### Model FileLinkRequest
@@ -11086,14 +11086,14 @@ The settings of an external link to a file.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **linkId** | **UUID** (uuid) | The link to rewrite, as reported by `GET api/2.0/files/file/{id}/links`. An identifier that is not yet in use,  the empty one included, creates a link instead. | [optional] [example: 00000000-0000-0000-0000-000000000000] |
-| **access** | [**FileShare**](#model-fileshare) | The rights the link grants to whoever follows it. The value that denies everything revokes the link. | [optional] [enum: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] |
+| **linkId** | **UUID** (uuid) | The link to rewrite, as reported by `GET api/2.0/files/file/{id}/links`. An identifier that is not yet in use,  the empty one included, creates a link instead. | [optional] [example: `00000000-0000-0000-0000-000000000000`] |
+| **access** | [**FileShare**](#model-fileshare) | The rights the link grants to whoever follows it. The value that denies everything revokes the link. | [optional] [enum: `0`, `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`] |
 | **expirationDate** | [**ApiDateTime**](#model-apidatetime) | The moment the link stops working, read in the time zone of the portal. A date more than a few years ahead is  rejected as an invalid request; left out, the link does not expire on its own. | [optional] |
-| **title** | **String** | The name the link carries in the sharing list of the file, for the people who manage it; it is not shown to  whoever follows the link. | [optional] [example: My Document] [minLength: 0] [maxLength: 255] [nullable] |
-| **internal** | **Boolean** | Who may follow the link: `true` admits only accounts that are signed in to the portal, `false` admits anybody  who has the address. | [optional] [example: false] |
-| **primary** | **Boolean** | Whether this link becomes the primary link of the file - the one the Copy link action of a client hands out.  A file has one primary link at a time. | [optional] [example: true] |
-| **denyDownload** | **Boolean** | What a visitor may do with the content: `true` leaves them with viewing in the browser, `false` lets them  download and print it as their rights allow. | [optional] [example: false] |
-| **password** | **String** | The secret a visitor has to type before the file opens; left out, the link opens without one. | [optional] [example: p@ssw0rd] [minLength: 0] [maxLength: 255] [nullable] |
+| **title** | **String** | The name the link carries in the sharing list of the file, for the people who manage it; it is not shown to  whoever follows the link. | [optional] [example: `My Document`] [minLength: 0] [maxLength: 255] [nullable] |
+| **internal** | **Boolean** | Who may follow the link: `true` admits only accounts that are signed in to the portal, `false` admits anybody  who has the address. | [optional] [example: `false`] |
+| **primary** | **Boolean** | Whether this link becomes the primary link of the file - the one the Copy link action of a client hands out.  A file has one primary link at a time. | [optional] [example: `true`] |
+| **denyDownload** | **Boolean** | What a visitor may do with the content: `true` leaves them with viewing in the browser, `false` lets them  download and print it as their rights allow. | [optional] [example: `false`] |
+| **password** | **String** | The secret a visitor has to type before the file opens; left out, the link opens without one. | [optional] [example: `p@ssw0rd`] [minLength: 0] [maxLength: 255] [nullable] |
 
 
 ### Model FileLinkWrapper
@@ -11125,16 +11125,16 @@ One background file operation of the caller, as it stood when the answer was bui
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **id** | **String** | The identifier of the operation, the one to pass to `PUT api/2.0/files/fileops/terminate/{id}` to stop it.  Operations belong to the account that started them, so an identifier of somebody else is never listed here. | [required] [example: a1f4c9b2-3d8e-4f77-9b16-2c5de8f0a913] [nullable] |
-| **Operation** | [**FileOperationType**](#model-fileoperationtype) | What the operation does with the entries, which also decides what else is reported: only a download fills  `url`, and a deletion leaves `files` and `folders` empty. | [required] [enum: 0, 1, 2, 3, 4, 5, 6, 7] |
-| **progress** | **Integer** (int32) | How far the operation has come, from 0 to 100. Reaching 100 only means it stopped; whether it did what it was  asked for is told by `error`. | [required] [example: 100] |
-| **error** | **String** | The reason the operation could not finish its work, in the language of the request. Empty when nothing went  wrong, which is the only way to tell a successful operation from a failed one. | [required] [example: Folder not found.] [nullable] |
-| **processed** | **String** | How many entries the operation has handled so far, written as a decimal number in a string. It counts items,  not percent, and stays behind `progress` on operations that walk into subfolders. | [required] [example: 12] [nullable] |
-| **finished** | **Boolean** | Whether the operation has stopped running. A finished operation is reported once and then dropped, so the next  read of the operation list no longer contains it. | [required] [example: true] |
-| **url** | **URI** (uri) | The address the packed archive can be downloaded from once a bulk download has finished. Empty for every other  kind of operation. | [optional] [example: https://portal.example.com/filehandler.ashx?action=bulk] [nullable] |
-| **files** | [**List**](#model-fileentrybasedto) | The files the operation produced or moved, in the order it wrote them down. Empty while nothing has been  written yet and for a deletion, which reports no entries at all. | [optional] [example: [\{id=10, title=document.docx\}]] [nullable] |
-| **folders** | [**List**](#model-fileentrybasedto) | The folders the operation produced or moved, in the order it wrote them down. Empty while nothing has been  written yet and for a deletion. | [optional] [example: [\{id=20, title=Reports\}]] [nullable] |
-| **status** | [**DistributedTaskStatus**](#model-distributedtaskstatus) | The state of the background task behind the operation, which tells a task that was cancelled or that crashed  from one that ran to its end. | [optional] [enum: 0, 1, 2, 3, 4] |
+| **id** | **String** | The identifier of the operation, the one to pass to `PUT api/2.0/files/fileops/terminate/{id}` to stop it.  Operations belong to the account that started them, so an identifier of somebody else is never listed here. | [required] [example: `a1f4c9b2-3d8e-4f77-9b16-2c5de8f0a913`] [nullable] |
+| **Operation** | [**FileOperationType**](#model-fileoperationtype) | What the operation does with the entries, which also decides what else is reported: only a download fills  `url`, and a deletion leaves `files` and `folders` empty. | [required] [enum: `0`, `1`, `2`, `3`, `4`, `5`, `6`, `7`] |
+| **progress** | **Integer** (int32) | How far the operation has come, from 0 to 100. Reaching 100 only means it stopped; whether it did what it was  asked for is told by `error`. | [required] [example: `100`] |
+| **error** | **String** | The reason the operation could not finish its work, in the language of the request. Empty when nothing went  wrong, which is the only way to tell a successful operation from a failed one. | [required] [example: `Folder not found.`] [nullable] |
+| **processed** | **String** | How many entries the operation has handled so far, written as a decimal number in a string. It counts items,  not percent, and stays behind `progress` on operations that walk into subfolders. | [required] [example: `12`] [nullable] |
+| **finished** | **Boolean** | Whether the operation has stopped running. A finished operation is reported once and then dropped, so the next  read of the operation list no longer contains it. | [required] [example: `true`] |
+| **url** | **URI** (uri) | The address the packed archive can be downloaded from once a bulk download has finished. Empty for every other  kind of operation. | [optional] [example: `https://portal.example.com/filehandler.ashx?action=bulk`] [nullable] |
+| **files** | [**List**](#model-fileentrybasedto) | The files the operation produced or moved, in the order it wrote them down. Empty while nothing has been  written yet and for a deletion, which reports no entries at all. | [optional] [example: `[{id=10, title=document.docx}]`] [nullable] |
+| **folders** | [**List**](#model-fileentrybasedto) | The folders the operation produced or moved, in the order it wrote them down. Empty while nothing has been  written yet and for a deletion. | [optional] [example: `[{id=20, title=Reports}]`] [nullable] |
+| **status** | [**DistributedTaskStatus**](#model-distributedtaskstatus) | The state of the background task behind the operation, which tells a task that was cancelled or that crashed  from one that ran to its end. | [optional] [enum: `0`, `1`, `2`, `3`, `4`] |
 
 
 ### Model FileOperationRequestBaseDto
@@ -11142,7 +11142,7 @@ The parameter shared by every request that starts a background file operation.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **returnSingleOperation** | **Boolean** | Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list. | [optional] [example: false] |
+| **returnSingleOperation** | **Boolean** | Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list. | [optional] [example: `false`] |
 
 
 ### Model FileOperationType
@@ -11177,13 +11177,13 @@ The file reference parameters.
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **referenceData** | [**FileReferenceData**](#model-filereferencedata) | How this document is named when another spreadsheet refers to it. Send it back as it stands to resolve the  reference again. | [optional] |
-| **error** | **String** | Filled in when the reference resolved to nothing; the rest of the descriptor is then empty and must not be  handed to the editors. | [optional] [example: File not found] [nullable] |
-| **path** | **String** | The title of the document the reference resolved to. | [optional] [example: Budget 2026.xlsx] [nullable] |
-| **url** | **URI** (uri) | Where the content is fetched from. It is addressed to the host the document service can reach, which on a  deployment with a private editor network is not the address a browser should follow. | [optional] [example: https://portal.example.com/filehandler.ashx?action=download&fileid=512] [nullable] |
-| **fileType** | **String** | The format the content is in, without the leading dot. | [optional] [example: xlsx] [nullable] |
-| **key** | **String** | Identifies the exact revision to the editors: two clients that receive the same key read the same co-editing  session, and the key changes as soon as the document is saved. | [optional] [example: 1_512_3] [nullable] |
-| **link** | **String** | The address of the document in the portal web editor - the link to put in front of a person, unlike the  download address above. | [optional] [example: https://portal.example.com/doceditor?fileid=512] [nullable] |
-| **token** | **String** | Signs this descriptor so that the editors can trust it. It stays empty on a portal that has no signature  secret configured for the document service. | [optional] [example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...] [nullable] |
+| **error** | **String** | Filled in when the reference resolved to nothing; the rest of the descriptor is then empty and must not be  handed to the editors. | [optional] [example: `File not found`] [nullable] |
+| **path** | **String** | The title of the document the reference resolved to. | [optional] [example: `Budget 2026.xlsx`] [nullable] |
+| **url** | **URI** (uri) | Where the content is fetched from. It is addressed to the host the document service can reach, which on a  deployment with a private editor network is not the address a browser should follow. | [optional] [example: `https://portal.example.com/filehandler.ashx?action=download&fileid=512`] [nullable] |
+| **fileType** | **String** | The format the content is in, without the leading dot. | [optional] [example: `xlsx`] [nullable] |
+| **key** | **String** | Identifies the exact revision to the editors: two clients that receive the same key read the same co-editing  session, and the key changes as soon as the document is saved. | [optional] [example: `1_512_3`] [nullable] |
+| **link** | **String** | The address of the document in the portal web editor - the link to put in front of a person, unlike the  download address above. | [optional] [example: `https://portal.example.com/doceditor?fileid=512`] [nullable] |
+| **token** | **String** | Signs this descriptor so that the editors can trust it. It stays empty on a portal that has no signature  secret configured for the document service. | [optional] [example: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...`] [nullable] |
 
 
 ### Model FileReferenceData
@@ -11191,10 +11191,10 @@ The pair of values that names a document across portals, as it is written into a
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **fileKey** | **String** | The id of the document inside the portal named below. | [optional] [example: 512] [nullable] |
-| **instanceId** | **String** | The portal the document lives in. A reference whose value is not this portal cannot be resolved by the file  key and falls back to the path or the link. | [optional] [example: 1] [nullable] |
-| **roomId** | **String** | The room the document lies in. It is filled in only for a document opened in a virtual data room, and stays  empty everywhere else. | [optional] [example: 42] [nullable] |
-| **canEditRoom** | **Boolean** | Whether the caller may manage the room named above; it is only meaningful together with it. | [optional] [example: true] |
+| **fileKey** | **String** | The id of the document inside the portal named below. | [optional] [example: `512`] [nullable] |
+| **instanceId** | **String** | The portal the document lives in. A reference whose value is not this portal cannot be resolved by the file  key and falls back to the path or the link. | [optional] [example: `1`] [nullable] |
+| **roomId** | **String** | The room the document lies in. It is filled in only for a document opened in a virtual data room, and stays  empty everywhere else. | [optional] [example: `42`] [nullable] |
+| **canEditRoom** | **Boolean** | Whether the caller may manage the room named above; it is only meaningful together with it. | [optional] [example: `true`] |
 
 
 ### Model FileReferenceWrapper
@@ -11244,19 +11244,19 @@ One access entry on a file, a folder or a room: who holds it, at which level, an
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **access** | [**FileShare**](#model-fileshare) | The level the subject holds on the entry. On a link entry it is the level the link hands to whoever opens it,  and in a batch answer `Varies` means the subject holds different levels on the listed entries. | [optional] [enum: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] |
+| **access** | [**FileShare**](#model-fileshare) | The level the subject holds on the entry. On a link entry it is the level the link hands to whoever opens it,  and in a batch answer `Varies` means the subject holds different levels on the listed entries. | [optional] [enum: `0`, `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`] |
 | **sharedTo** | **oas_any_type_not_mapped** |  | [optional] [nullable] |
 | **sharedToUser** | [**EmployeeFullDto**](#model-employeefulldto) | The account the entry belongs to. It is filled in only when `subjectType` says an account, and is null for a  group entry and for a link. | [optional] |
 | **sharedToGroup** | [**GroupSummaryDto**](#model-groupsummarydto) | The portal group the entry belongs to, which hands the level to everybody in it. It is filled in only for a  group entry, and is null otherwise. | [optional] |
 | **sharedLink** | [**FileShareLink**](#model-filesharelink) | The sharing link the entry stands for, together with everything set on it. It is filled in only for a link  entry, and is null for an account or a group. | [optional] |
-| **isLocked** | **Boolean** | Whether this entry is the caller's own, which is why they cannot change its level. Link entries never report  it. | [required] [example: false] |
-| **isOwner** | **Boolean** | Whether the subject created the entry the access is given on, and so cannot be removed from it. | [required] [example: false] |
-| **canEditAccess** | **Boolean** | Whether the caller may change the level of this entry. It is false on the caller's own entry, on every link,  and whenever the caller may not hand out access at all. | [required] [example: true] |
-| **canEditInternal** | **Boolean** | Whether the caller may switch this link between being open to anybody and asking the visitor to sign in to the  portal first. | [required] [example: true] |
-| **canEditDenyDownload** | **Boolean** | Whether the caller may forbid downloading through this link. Only a link of a virtual data room reports true,  and only while the room itself still allows downloads. | [required] [example: true] |
-| **canEditExpirationDate** | **Boolean** | Whether the caller may move the moment this link stops working. | [required] [example: true] |
-| **canRevoke** | **Boolean** | Whether the caller may take this entry away altogether, which for a link means deleting the link. | [required] [example: true] |
-| **subjectType** | [**SubjectType**](#model-subjecttype) | What the entry was given to, which tells which of the three subject fields is filled in: an account, a group,  or one of the kinds of link. | [required] [enum: 0, 1, 2, 3, 4] |
+| **isLocked** | **Boolean** | Whether this entry is the caller's own, which is why they cannot change its level. Link entries never report  it. | [required] [example: `false`] |
+| **isOwner** | **Boolean** | Whether the subject created the entry the access is given on, and so cannot be removed from it. | [required] [example: `false`] |
+| **canEditAccess** | **Boolean** | Whether the caller may change the level of this entry. It is false on the caller's own entry, on every link,  and whenever the caller may not hand out access at all. | [required] [example: `true`] |
+| **canEditInternal** | **Boolean** | Whether the caller may switch this link between being open to anybody and asking the visitor to sign in to the  portal first. | [required] [example: `true`] |
+| **canEditDenyDownload** | **Boolean** | Whether the caller may forbid downloading through this link. Only a link of a virtual data room reports true,  and only while the room itself still allows downloads. | [required] [example: `true`] |
+| **canEditExpirationDate** | **Boolean** | Whether the caller may move the moment this link stops working. | [required] [example: `true`] |
+| **canRevoke** | **Boolean** | Whether the caller may take this entry away altogether, which for a link means deleting the link. | [required] [example: `true`] |
+| **subjectType** | [**SubjectType**](#model-subjecttype) | What the entry was given to, which tells which of the three subject fields is filled in: an account, a group,  or one of the kinds of link. | [required] [enum: `0`, `1`, `2`, `3`, `4`] |
 
 
 ### Model FileShareLink
@@ -11264,19 +11264,19 @@ A sharing link of a file, a folder or a room, with everything set on it.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **id** | **UUID** (uuid) | The identifier of the link, the one to send back as `linkId` to change or delete it. | [optional] [example: 9a2c1b3e-6d47-4f10-9b52-ac7d3e5f0812] |
-| **title** | **String** | The name the link is listed under, which its author is free to choose and to leave empty. | [optional] [example: Shared document] [nullable] |
-| **shareLink** | **String** | The shortened address to hand out. Opening it is what turns the link into access; the address stays the same  while the link exists. | [optional] [example: https://portal.example.com/s/a1b2c3d4] [nullable] |
+| **id** | **UUID** (uuid) | The identifier of the link, the one to send back as `linkId` to change or delete it. | [optional] [example: `9a2c1b3e-6d47-4f10-9b52-ac7d3e5f0812`] |
+| **title** | **String** | The name the link is listed under, which its author is free to choose and to leave empty. | [optional] [example: `Shared document`] [nullable] |
+| **shareLink** | **String** | The shortened address to hand out. Opening it is what turns the link into access; the address stays the same  while the link exists. | [optional] [example: `https://portal.example.com/s/a1b2c3d4`] [nullable] |
 | **expirationDate** | [**ApiDateTime**](#model-apidatetime) | The moment the link stops working, written with the offset of the portal time zone. Null when the link was  left without an end. | [optional] |
-| **linkType** | [**LinkType**](#model-linktype) | Which of the two jobs the link does: letting somebody into the room as a member, or handing out the entry  itself. The counters of uses are filled in for the first kind only. | [optional] [enum: 0, 1] |
-| **password** | **String** | The password a visitor has to send before the link resolves, readable only by those who may manage the link.  Empty when the link asks for none. | [optional] [example: S3cretPhrase] [nullable] |
-| **denyDownload** | **Boolean** | Whether visitors coming through this link may only read the entry in the editor and not download or print it. | [optional] [example: false] [nullable] |
-| **isExpired** | **Boolean** | Whether the moment in `expirationDate` has already passed, which leaves the link in place but refuses  everybody who opens it. | [optional] [example: false] [nullable] |
-| **primary** | **Boolean** | Whether this is the one link the entry always keeps: a public or a form-filling room is given it at creation,  and deleting it there only makes a new one. | [optional] [example: true] |
-| **internal** | **Boolean** | Whether the visitor has to sign in to the portal before the link resolves, as opposed to it being open to  anybody who has the address. | [optional] [example: false] [nullable] |
-| **requestToken** | **String** | The key that stands for this link in the calls that resolve it, such as `GET api/2.0/files/share/{key}`. It is  filled in for links that hand out the entry, and empty for the ones that invite into a room. | [optional] [example: gg9J4mBW7pW9Wk0HqQoQ9L2mS1x6bK8vTnQ0aZ3] [nullable] |
-| **maxUseCount** | **Integer** (int32) | How many accounts may still join the room through this invitation link in total. Null on a link that hands out  the entry, where nothing is counted. | [optional] [example: 10] [nullable] |
-| **currentUseCount** | **Integer** (int32) | How many accounts have already joined through this invitation link. Once it reaches `maxUseCount` the link  stops letting anybody else in. Null on a link that hands out the entry. | [optional] [example: 5] [nullable] |
+| **linkType** | [**LinkType**](#model-linktype) | Which of the two jobs the link does: letting somebody into the room as a member, or handing out the entry  itself. The counters of uses are filled in for the first kind only. | [optional] [enum: `0`, `1`] |
+| **password** | **String** | The password a visitor has to send before the link resolves, readable only by those who may manage the link.  Empty when the link asks for none. | [optional] [example: `S3cretPhrase`] [nullable] |
+| **denyDownload** | **Boolean** | Whether visitors coming through this link may only read the entry in the editor and not download or print it. | [optional] [example: `false`] [nullable] |
+| **isExpired** | **Boolean** | Whether the moment in `expirationDate` has already passed, which leaves the link in place but refuses  everybody who opens it. | [optional] [example: `false`] [nullable] |
+| **primary** | **Boolean** | Whether this is the one link the entry always keeps: a public or a form-filling room is given it at creation,  and deleting it there only makes a new one. | [optional] [example: `true`] |
+| **internal** | **Boolean** | Whether the visitor has to sign in to the portal before the link resolves, as opposed to it being open to  anybody who has the address. | [optional] [example: `false`] [nullable] |
+| **requestToken** | **String** | The key that stands for this link in the calls that resolve it, such as `GET api/2.0/files/share/{key}`. It is  filled in for links that hand out the entry, and empty for the ones that invite into a room. | [optional] [example: `gg9J4mBW7pW9Wk0HqQoQ9L2mS1x6bK8vTnQ0aZ3`] [nullable] |
+| **maxUseCount** | **Integer** (int32) | How many accounts may still join the room through this invitation link in total. Null on a link that hands out  the entry, where nothing is counted. | [optional] [example: `10`] [nullable] |
+| **currentUseCount** | **Integer** (int32) | How many accounts have already joined through this invitation link. Once it reaches `maxUseCount` the link  stops letting anybody else in. Null on a link that hands out the entry. | [optional] [example: `5`] [nullable] |
 
 
 ### Model FileShareParams
@@ -11286,7 +11286,7 @@ One sharing entry: an account, a group or an email address, and the access level
 |------------ | ------------- | ------------- | -------------|
 | **email** | **String** (email) | The address of somebody who has no portal account yet. An invitation is sent to it and an account is created  once it is accepted, so this is the field to use instead of an account identifier when the person is new to  the portal. | [optional] [maxLength: 255] |
 | **shareTo** | **UUID** (uuid) | The account or the group the entry is about, taken from the portal people and group listings. Leave it out and  give an email address instead to share with somebody who has no account yet. | [optional] |
-| **access** | [**FileShare**](#model-fileshare) | What the subject may do with the shared item. The value 0 takes the access away again, and which of the other  levels are accepted depends on what is being shared. | [optional] [enum: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] |
+| **access** | [**FileShare**](#model-fileshare) | What the subject may do with the shared item. The value 0 takes the access away again, and which of the other  levels are accepted depends on what is being shared. | [optional] [enum: `0`, `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`] |
 
 
 ### Model FileShareResponseArrayWrapper
@@ -11350,71 +11350,71 @@ Everything a client needs to work with documents in this portal: the format tabl
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **extsImagePreviewed** | **List** | Images the portal can show in its own viewer. Anything outside the list has to be downloaded to be seen. | [optional] [example: [.bmp, .gif, .jpeg, .jpg, .png, .svg]] [nullable] |
-| **extsMediaPreviewed** | **List** | Audio and video the portal can play in its own player. | [optional] [example: [.mp4, .webm, .mp3, .ogg]] [nullable] |
-| **extsWebPreviewed** | **List** | Documents the editor can open read-only. A format that is here but not in the edited list can be viewed and  not changed. | [optional] [example: [.docx, .xlsx, .pptx, .pdf]] [nullable] |
-| **extsWebEdited** | **List** | Documents the editor can open for editing. Uploading a format outside this list and outside the convertible  list leaves a file that can only be downloaded. | [optional] [example: [.docx, .xlsx, .pptx]] [nullable] |
-| **extsWebEncrypt** | **List** | Documents that can be edited inside a private room, where the content is encrypted on the client. | [optional] [example: [.docx, .xlsx, .pptx]] [nullable] |
-| **extsWebReviewed** | **List** | Documents that support the reviewing mode, so that granting review access to them is meaningful. | [optional] [example: [.docx]] [nullable] |
-| **extsWebCustomFilterEditing** | **List** | Spreadsheets that support the custom filter mode, where a filter applied by one editor does not disturb the  others. | [optional] [example: [.xlsx]] [nullable] |
-| **extsWebRestrictedEditing** | **List** | Documents that can only be filled in or commented on rather than edited freely, whatever access the caller  holds. | [optional] [example: [.pdf]] [nullable] |
-| **extsWebCommented** | **List** | Documents that support comments, so that granting comment access to them is meaningful. | [optional] [example: [.docx]] [nullable] |
-| **extsWebTemplate** | **List** | Documents the portal treats as templates to create new files from. | [optional] [example: [.docx, .xlsx, .pptx]] [nullable] |
-| **extsMustConvert** | **List** | Formats that cannot be edited as they are and are converted on upload or on first opening. Which target each  one has is in the convertible table below. | [optional] [example: [.doc, .xls, .ppt]] [nullable] |
-| **extsConvertible** | **Map** | The conversion map of the portal: for each source extension, the extensions it can be converted into. Use it  to fill the target format of a conversion request instead of guessing one. | [optional] [example: \{.doc=[.docx, .pdf], .xls=[.xlsx, .pdf]\}] |
-| **extsUploadable** | **List** | Formats the portal offers to create and upload as documents. It is not an upload filter: files of other  formats are stored as they are. | [optional] [example: [.docx, .xlsx, .pdf]] [nullable] |
-| **extsArchive** | **List** | Formats recognised as archives, which is what decides the archive icon and the offer to unpack. | [optional] [example: [.zip, .rar, .7z]] [nullable] |
-| **extsVideo** | **List** | Formats classified as video. The classification lists drive icons and the media filters of the listing  operations, and are wider than what the built-in player can show. | [optional] [example: [.mp4, .webm, .avi]] [nullable] |
-| **extsAudio** | **List** | Formats classified as audio. | [optional] [example: [.mp3, .ogg, .wav]] [nullable] |
-| **extsImage** | **List** | Formats classified as images. | [optional] [example: [.png, .jpg, .gif]] [nullable] |
-| **extsSpreadsheet** | **List** | Formats classified as spreadsheets. | [optional] [example: [.xlsx, .xls, .ods]] [nullable] |
-| **extsPresentation** | **List** | Formats classified as presentations. | [optional] [example: [.pptx, .ppt, .odp]] [nullable] |
-| **extsDocument** | **List** | Formats classified as text documents. | [optional] [example: [.docx, .doc, .odt]] [nullable] |
-| **extsDiagram** | **List** | Formats classified as diagrams. | [optional] [example: [.vsdx]] [nullable] |
+| **extsImagePreviewed** | **List** | Images the portal can show in its own viewer. Anything outside the list has to be downloaded to be seen. | [optional] [example: `[.bmp, .gif, .jpeg, .jpg, .png, .svg]`] [nullable] |
+| **extsMediaPreviewed** | **List** | Audio and video the portal can play in its own player. | [optional] [example: `[.mp4, .webm, .mp3, .ogg]`] [nullable] |
+| **extsWebPreviewed** | **List** | Documents the editor can open read-only. A format that is here but not in the edited list can be viewed and  not changed. | [optional] [example: `[.docx, .xlsx, .pptx, .pdf]`] [nullable] |
+| **extsWebEdited** | **List** | Documents the editor can open for editing. Uploading a format outside this list and outside the convertible  list leaves a file that can only be downloaded. | [optional] [example: `[.docx, .xlsx, .pptx]`] [nullable] |
+| **extsWebEncrypt** | **List** | Documents that can be edited inside a private room, where the content is encrypted on the client. | [optional] [example: `[.docx, .xlsx, .pptx]`] [nullable] |
+| **extsWebReviewed** | **List** | Documents that support the reviewing mode, so that granting review access to them is meaningful. | [optional] [example: `[.docx]`] [nullable] |
+| **extsWebCustomFilterEditing** | **List** | Spreadsheets that support the custom filter mode, where a filter applied by one editor does not disturb the  others. | [optional] [example: `[.xlsx]`] [nullable] |
+| **extsWebRestrictedEditing** | **List** | Documents that can only be filled in or commented on rather than edited freely, whatever access the caller  holds. | [optional] [example: `[.pdf]`] [nullable] |
+| **extsWebCommented** | **List** | Documents that support comments, so that granting comment access to them is meaningful. | [optional] [example: `[.docx]`] [nullable] |
+| **extsWebTemplate** | **List** | Documents the portal treats as templates to create new files from. | [optional] [example: `[.docx, .xlsx, .pptx]`] [nullable] |
+| **extsMustConvert** | **List** | Formats that cannot be edited as they are and are converted on upload or on first opening. Which target each  one has is in the convertible table below. | [optional] [example: `[.doc, .xls, .ppt]`] [nullable] |
+| **extsConvertible** | **Map** | The conversion map of the portal: for each source extension, the extensions it can be converted into. Use it  to fill the target format of a conversion request instead of guessing one. | [optional] [example: `{.doc=[.docx, .pdf], .xls=[.xlsx, .pdf]}`] |
+| **extsUploadable** | **List** | Formats the portal offers to create and upload as documents. It is not an upload filter: files of other  formats are stored as they are. | [optional] [example: `[.docx, .xlsx, .pdf]`] [nullable] |
+| **extsArchive** | **List** | Formats recognised as archives, which is what decides the archive icon and the offer to unpack. | [optional] [example: `[.zip, .rar, .7z]`] [nullable] |
+| **extsVideo** | **List** | Formats classified as video. The classification lists drive icons and the media filters of the listing  operations, and are wider than what the built-in player can show. | [optional] [example: `[.mp4, .webm, .avi]`] [nullable] |
+| **extsAudio** | **List** | Formats classified as audio. | [optional] [example: `[.mp3, .ogg, .wav]`] [nullable] |
+| **extsImage** | **List** | Formats classified as images. | [optional] [example: `[.png, .jpg, .gif]`] [nullable] |
+| **extsSpreadsheet** | **List** | Formats classified as spreadsheets. | [optional] [example: `[.xlsx, .xls, .ods]`] [nullable] |
+| **extsPresentation** | **List** | Formats classified as presentations. | [optional] [example: `[.pptx, .ppt, .odp]`] [nullable] |
+| **extsDocument** | **List** | Formats classified as text documents. | [optional] [example: `[.docx, .doc, .odt]`] [nullable] |
+| **extsDiagram** | **List** | Formats classified as diagrams. | [optional] [example: `[.vsdx]`] [nullable] |
 | **internalFormats** | [**FilesSettingsDto_internalFormats**](#model-filessettingsdtointernalformats) |  | [optional] [nullable] |
-| **masterFormExtension** | **String** | The extension of a fillable form template in this portal. It is configurable, so read it rather than assuming  the product default. | [optional] [example: .pdf] [nullable] |
-| **paramVersion** | **String** | The name of the query parameter that pins a document address to one version. Append it to the addresses below  instead of composing a version address by hand. | [optional] [example: version] [nullable] |
-| **paramOutType** | **String** | The name of the query parameter that asks a download address for a converted copy in another format. | [optional] [example: outputtype] [nullable] |
-| **fileDownloadUrlString** | **URI** (uri) | The template of the address a file is downloaded from: substitute the file identifier for the `{0}`  placeholder. Add the version and output-type parameters named above for a particular version or format. | [optional] [example: https://example.com/filehandler.ashx?action=download&fileid=\{0\}] [nullable] |
-| **fileWebViewerUrlString** | **String** | The template of the address that opens a file in the viewer inside the portal, with `{0}` for the file  identifier. It is a portal-relative address, meant to be opened in a browser rather than called as an API. | [optional] [example: /products/files/doceditor?fileid=\{0\}&action=view] [nullable] |
-| **fileWebViewerExternalUrlString** | **URI** (uri) | The same viewer address as an absolute one, for a message or a page outside the portal. | [optional] [example: https://example.com/products/files/doceditor?fileid=\{0\}&action=view] [nullable] |
-| **fileWebEditorUrlString** | **String** | The template of the address that opens a file for editing inside the portal, with `{0}` for the file  identifier. Whether the session really becomes editable still depends on the access the caller holds. | [optional] [example: /products/files/doceditor?fileid=\{0\}&action=edit] [nullable] |
-| **fileWebEditorExternalUrlString** | **URI** (uri) | The same editing address as an absolute one, for use outside the portal. | [optional] [example: https://example.com/products/files/doceditor?fileid=\{0\}&action=edit] [nullable] |
-| **fileRedirectPreviewUrlString** | **URI** (uri) | The template of the address that sends the browser on to whichever viewer or editor suits the file, with `{0}`  for the file identifier. Use it when the kind of the file is not known in advance. | [optional] [example: https://example.com/products/files/\{0\}] [nullable] |
-| **fileThumbnailUrlString** | **URI** (uri) | The template of the address a file thumbnail is fetched from, with `{0}` for the file identifier. A thumbnail  is built in the background, so the address can answer with nothing for a while after the file appears. | [optional] [example: https://example.com/filehandler.ashx?action=thumb&fileid=\{0\}] [nullable] |
-| **confirmDelete** | **Boolean** | Whether the caller asked to be prompted before a deletion. Written by `PUT api/2.0/files/changedeleteconfrim`. | [optional] [example: true] |
-| **enableThirdParty** | **Boolean** | Whether this portal allows third-party storages to be connected at all. It is set portal-wide by an  administrator, so a member sees it as read-only. | [optional] [example: true] |
-| **externalShare** | **Boolean** | Whether links that open an entry without a portal account may be created in this portal. Set portal-wide by an  administrator. | [optional] [example: true] |
-| **externalShareSocialMedia** | **Boolean** | Whether the share-to-network buttons are offered next to an external link. It is reported as false whenever  external sharing itself is off. | [optional] [example: true] |
-| **storeOriginalFiles** | **Boolean** | Whether the caller's uploads keep the original file when the portal converts them. With false the conversion  replaces the uploaded file with a new version of it. | [optional] [example: true] |
-| **keepNewFileName** | **Boolean** | Whether the caller asked for new documents to be created with the default name instead of being prompted for  one. | [optional] [example: false] |
-| **displayFileExtension** | **Boolean** | Whether the caller asked to see extensions in file titles. Stored titles always carry the extension whatever  this says. | [optional] [example: true] |
-| **showQuickActions** | **Boolean** | Specifies whether to display the quick action buttons. | [optional] [example: true] |
-| **convertNotify** | **Boolean** | Whether the caller is told about the result of a conversion. There is no operation in this document that  writes it. | [optional] [example: true] |
-| **hideConfirmCancelOperation** | **Boolean** | Whether the prompt shown before a running operation is abandoned is hidden for the caller. | [optional] [example: false] |
-| **hideConfirmConvertSave** | **Boolean** | Whether the prompt that offers to keep a copy in the original format on conversion is hidden for the caller.  Once true it cannot be turned back through the API. | [optional] [example: false] |
-| **hideConfirmConvertOpen** | **Boolean** | Whether the prompt that offers to open the conversion result is hidden for the caller. Once true it cannot be  turned back through the API. | [optional] [example: false] |
-| **hideConfirmRoomLifetime** | **Boolean** | Whether the warning shown before the lifetime settings of a room are changed is hidden for the caller. | [optional] [example: false] |
+| **masterFormExtension** | **String** | The extension of a fillable form template in this portal. It is configurable, so read it rather than assuming  the product default. | [optional] [example: `.pdf`] [nullable] |
+| **paramVersion** | **String** | The name of the query parameter that pins a document address to one version. Append it to the addresses below  instead of composing a version address by hand. | [optional] [example: `version`] [nullable] |
+| **paramOutType** | **String** | The name of the query parameter that asks a download address for a converted copy in another format. | [optional] [example: `outputtype`] [nullable] |
+| **fileDownloadUrlString** | **URI** (uri) | The template of the address a file is downloaded from: substitute the file identifier for the `{0}`  placeholder. Add the version and output-type parameters named above for a particular version or format. | [optional] [example: `https://example.com/filehandler.ashx?action=download&fileid={0}`] [nullable] |
+| **fileWebViewerUrlString** | **String** | The template of the address that opens a file in the viewer inside the portal, with `{0}` for the file  identifier. It is a portal-relative address, meant to be opened in a browser rather than called as an API. | [optional] [example: `/products/files/doceditor?fileid={0}&action=view`] [nullable] |
+| **fileWebViewerExternalUrlString** | **URI** (uri) | The same viewer address as an absolute one, for a message or a page outside the portal. | [optional] [example: `https://example.com/products/files/doceditor?fileid={0}&action=view`] [nullable] |
+| **fileWebEditorUrlString** | **String** | The template of the address that opens a file for editing inside the portal, with `{0}` for the file  identifier. Whether the session really becomes editable still depends on the access the caller holds. | [optional] [example: `/products/files/doceditor?fileid={0}&action=edit`] [nullable] |
+| **fileWebEditorExternalUrlString** | **URI** (uri) | The same editing address as an absolute one, for use outside the portal. | [optional] [example: `https://example.com/products/files/doceditor?fileid={0}&action=edit`] [nullable] |
+| **fileRedirectPreviewUrlString** | **URI** (uri) | The template of the address that sends the browser on to whichever viewer or editor suits the file, with `{0}`  for the file identifier. Use it when the kind of the file is not known in advance. | [optional] [example: `https://example.com/products/files/{0}`] [nullable] |
+| **fileThumbnailUrlString** | **URI** (uri) | The template of the address a file thumbnail is fetched from, with `{0}` for the file identifier. A thumbnail  is built in the background, so the address can answer with nothing for a while after the file appears. | [optional] [example: `https://example.com/filehandler.ashx?action=thumb&fileid={0}`] [nullable] |
+| **confirmDelete** | **Boolean** | Whether the caller asked to be prompted before a deletion. Written by `PUT api/2.0/files/changedeleteconfrim`. | [optional] [example: `true`] |
+| **enableThirdParty** | **Boolean** | Whether this portal allows third-party storages to be connected at all. It is set portal-wide by an  administrator, so a member sees it as read-only. | [optional] [example: `true`] |
+| **externalShare** | **Boolean** | Whether links that open an entry without a portal account may be created in this portal. Set portal-wide by an  administrator. | [optional] [example: `true`] |
+| **externalShareSocialMedia** | **Boolean** | Whether the share-to-network buttons are offered next to an external link. It is reported as false whenever  external sharing itself is off. | [optional] [example: `true`] |
+| **storeOriginalFiles** | **Boolean** | Whether the caller's uploads keep the original file when the portal converts them. With false the conversion  replaces the uploaded file with a new version of it. | [optional] [example: `true`] |
+| **keepNewFileName** | **Boolean** | Whether the caller asked for new documents to be created with the default name instead of being prompted for  one. | [optional] [example: `false`] |
+| **displayFileExtension** | **Boolean** | Whether the caller asked to see extensions in file titles. Stored titles always carry the extension whatever  this says. | [optional] [example: `true`] |
+| **showQuickActions** | **Boolean** | Specifies whether to display the quick action buttons. | [optional] [example: `true`] |
+| **convertNotify** | **Boolean** | Whether the caller is told about the result of a conversion. There is no operation in this document that  writes it. | [optional] [example: `true`] |
+| **hideConfirmCancelOperation** | **Boolean** | Whether the prompt shown before a running operation is abandoned is hidden for the caller. | [optional] [example: `false`] |
+| **hideConfirmConvertSave** | **Boolean** | Whether the prompt that offers to keep a copy in the original format on conversion is hidden for the caller.  Once true it cannot be turned back through the API. | [optional] [example: `false`] |
+| **hideConfirmConvertOpen** | **Boolean** | Whether the prompt that offers to open the conversion result is hidden for the caller. Once true it cannot be  turned back through the API. | [optional] [example: `false`] |
+| **hideConfirmRoomLifetime** | **Boolean** | Whether the warning shown before the lifetime settings of a room are changed is hidden for the caller. | [optional] [example: `false`] |
 | **defaultOrder** | [**OrderBy**](#model-orderby) | The ordering the listing operations fall back to when a request names none. It follows the last order the  caller asked a listing for, so it changes on its own as the account is used. | [optional] |
-| **forcesave** | **Boolean** | Whether the editor writes a document back to storage while the session is still open. It is on for every  portal and cannot be switched off. | [optional] [example: true] |
-| **storeForcesave** | **Boolean** | Whether those intermediate saves are kept as separate versions. They are not, in any portal: they update the  current version instead. | [optional] [example: false] |
-| **recentSection** | **Boolean** | Whether the Recent section is offered to the caller among the section roots. | [optional] [example: true] |
-| **favoritesSection** | **Boolean** | Whether the Favorites section is offered to the caller among the section roots. | [optional] [example: true] |
-| **templatesSection** | **Boolean** | Whether the Templates section is offered to the caller among the section roots. | [optional] [example: true] |
-| **downloadTarGz** | **Boolean** | The archive format the caller's multi-item downloads are packed into: true for `.tar.gz`, false for `.zip`. | [optional] [example: true] |
+| **forcesave** | **Boolean** | Whether the editor writes a document back to storage while the session is still open. It is on for every  portal and cannot be switched off. | [optional] [example: `true`] |
+| **storeForcesave** | **Boolean** | Whether those intermediate saves are kept as separate versions. They are not, in any portal: they update the  current version instead. | [optional] [example: `false`] |
+| **recentSection** | **Boolean** | Whether the Recent section is offered to the caller among the section roots. | [optional] [example: `true`] |
+| **favoritesSection** | **Boolean** | Whether the Favorites section is offered to the caller among the section roots. | [optional] [example: `true`] |
+| **templatesSection** | **Boolean** | Whether the Templates section is offered to the caller among the section roots. | [optional] [example: `true`] |
+| **downloadTarGz** | **Boolean** | The archive format the caller's multi-item downloads are packed into: true for `.tar.gz`, false for `.zip`. | [optional] [example: `true`] |
 | **automaticallyCleanUp** | [**AutoCleanUpData**](#model-autocleanupdata) | The trash auto-clearing setting of the caller, the same pair `GET api/2.0/files/settings/autocleanup` returns. | [optional] |
-| **canSearchByContent** | **Boolean** | Whether documents in this portal can be searched by what is inside them and not only by title. It depends on  the full-text search service being configured and having indexed the portal. | [optional] [example: true] |
-| **defaultSharingAccessRights** | **List** | The access rights the sharing dialog offers the caller by default. The portal normalises the set it stores, so  this can be shorter than what was last sent. | [optional] [example: [1, 2]] [enum: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] [nullable] |
-| **maxUploadThreadCount** | **Integer** (int32) | How many upload requests the portal accepts from one account at a time. Sending more than this in parallel  gets the extra ones refused rather than queued. | [optional] [example: 10] |
-| **chunkUploadSize** | **Long** (int64) | The size in bytes of one chunk of a chunked upload. Split a large file exactly along this size: a chunk that  does not match is refused by the upload session. | [optional] [example: 10485760] |
-| **openEditorInSameTab** | **Boolean** | Whether the caller asked for documents to open in the current browser tab. | [optional] [example: false] |
-| **organizeRoomsGrouping** | **Boolean** | Whether the caller asked to see rooms arranged by the groups they belong to. | [optional] [example: true] |
-| **defaultShareLinkInternal** | **Boolean** | The kind of external link this portal offers first: true for a link only its own accounts can open, false for  one anyone holding it can open. | [optional] [example: false] |
-| **externalShareApplyToDocuments** | **Boolean** | Whether the external sharing restriction covers personal documents. It matters only while external sharing is  off. | [optional] [example: true] |
-| **externalShareApplyToRooms** | **Boolean** | Whether the external sharing restriction covers rooms, including making a new one public. It matters only  while external sharing is off. | [optional] [example: true] |
-| **blockExistingLinksOnRestrict** | **Boolean** | Whether links created before the restriction stop opening as well, rather than only new ones being refused. | [optional] [example: true] |
-| **extsFilesVectorized** | **List** | Formats whose content can be indexed for the AI features of the portal. A file outside the list is left out of  that index. | [optional] [example: [.docx, .pdf, .txt]] [nullable] |
-| **maxVectorizationFileSize** | **Long** (int64) | The largest file size in bytes that is indexed for the AI features. A larger file is skipped even when its  format is listed above. | [optional] [example: 5242880] |
+| **canSearchByContent** | **Boolean** | Whether documents in this portal can be searched by what is inside them and not only by title. It depends on  the full-text search service being configured and having indexed the portal. | [optional] [example: `true`] |
+| **defaultSharingAccessRights** | **List** | The access rights the sharing dialog offers the caller by default. The portal normalises the set it stores, so  this can be shorter than what was last sent. | [optional] [example: `[1, 2]`] [enum: `0`, `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`] [nullable] |
+| **maxUploadThreadCount** | **Integer** (int32) | How many upload requests the portal accepts from one account at a time. Sending more than this in parallel  gets the extra ones refused rather than queued. | [optional] [example: `10`] |
+| **chunkUploadSize** | **Long** (int64) | The size in bytes of one chunk of a chunked upload. Split a large file exactly along this size: a chunk that  does not match is refused by the upload session. | [optional] [example: `10485760`] |
+| **openEditorInSameTab** | **Boolean** | Whether the caller asked for documents to open in the current browser tab. | [optional] [example: `false`] |
+| **organizeRoomsGrouping** | **Boolean** | Whether the caller asked to see rooms arranged by the groups they belong to. | [optional] [example: `true`] |
+| **defaultShareLinkInternal** | **Boolean** | The kind of external link this portal offers first: true for a link only its own accounts can open, false for  one anyone holding it can open. | [optional] [example: `false`] |
+| **externalShareApplyToDocuments** | **Boolean** | Whether the external sharing restriction covers personal documents. It matters only while external sharing is  off. | [optional] [example: `true`] |
+| **externalShareApplyToRooms** | **Boolean** | Whether the external sharing restriction covers rooms, including making a new one public. It matters only  while external sharing is off. | [optional] [example: `true`] |
+| **blockExistingLinksOnRestrict** | **Boolean** | Whether links created before the restriction stop opening as well, rather than only new ones being refused. | [optional] [example: `true`] |
+| **extsFilesVectorized** | **List** | Formats whose content can be indexed for the AI features of the portal. A file outside the list is left out of  that index. | [optional] [example: `[.docx, .pdf, .txt]`] [nullable] |
+| **maxVectorizationFileSize** | **Long** (int64) | The largest file size in bytes that is indexed for the AI features. A larger file is skipped even when its  format is listed above. | [optional] [example: `5242880`] |
 
 
 ### Model FilesSettingsDto.internalFormats
@@ -11451,8 +11451,8 @@ One section of the portal and the space its documents take.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **title** | **String** | The name of the section as the interface shows it, translated into the language used by the caller, so it  suits display but not matching - which section an entry describes is told by the field that carries it. | [optional] [example: Files] [nullable] |
-| **usedSpace** | **Long** (int64) | The size of the files kept in the section, in bytes, counting every folder and room inside it; 0 means the  section holds nothing. The counter is brought up to date as an operation finishes, so a reading taken right  after an upload or a delete can still show the previous value. | [optional] [example: 1048576] |
+| **title** | **String** | The name of the section as the interface shows it, translated into the language used by the caller, so it  suits display but not matching - which section an entry describes is told by the field that carries it. | [optional] [example: `Files`] [nullable] |
+| **usedSpace** | **Long** (int64) | The size of the files kept in the section, in bytes, counting every folder and room inside it; 0 means the  section holds nothing. The counter is brought up to date as an operation finishes, so a reading taken right  after an upload or a delete can still show the previous value. | [optional] [example: `1048576`] |
 
 
 ### Model FilesStatisticsResultDto
@@ -11485,12 +11485,12 @@ The outcome of one completed form-filling session, as the person who has just fi
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **formNumber** | **Integer** (int32) | The number this copy was given among the copies made of the same form, counting up from 1. It is the number  the results of the form are ordered by and the one the title of the copy carries. | [required] [example: 1] |
+| **formNumber** | **Integer** (int32) | The number this copy was given among the copies made of the same form, counting up from 1. It is the number  the results of the form are ordered by and the one the title of the copy carries. | [required] [example: `1`] |
 | **completedForm** | [**FileDtoInteger**](#model-filedtointeger) | The filled copy that the session produced, as an ordinary file: it can be read and downloaded with the file  operations of this API. | [optional] |
 | **originalForm** | [**FileDtoInteger**](#model-filedtointeger) | The form the copy was made from, so that a client can offer filling it once more. | [optional] |
 | **manager** | [**EmployeeFullDto**](#model-employeefulldto) | The account that owns the original form, reported with its email address, so that the person who has just  filled the form knows who receives it and whom to ask about it. | [optional] |
-| **roomId** | **Integer** (int32) | The room the form was filled in. It comes back as 0 when the session was reached through a link shared for  that single form rather than for its room, in which case there is no room the caller could be sent to. | [required] [example: 123] |
-| **isRoomMember** | **Boolean** | Tells whether the calling account may open that room: true for a member of the room and for a portal  administrator, in which case a client can offer going to the room; false for the anonymous caller who filled  the form through a link and can only be shown the copy itself. | [optional] [example: true] |
+| **roomId** | **Integer** (int32) | The room the form was filled in. It comes back as 0 when the session was reached through a link shared for  that single form rather than for its room, in which case there is no room the caller could be sent to. | [required] [example: `123`] |
+| **isRoomMember** | **Boolean** | Tells whether the calling account may open that room: true for a member of the room and for a portal  administrator, in which case a client can offer going to the room; false for the anonymous caller who filled  the form through a link and can only be shown the copy itself. | [optional] [example: `true`] |
 
 
 ### Model FillingFormResultIntegerWrapper
@@ -11537,14 +11537,14 @@ One page of the contents of a folder or of a section: its entries split into fil
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **files** | [**List**](#model-fileentrybasedto) | The file entries of this page. It is empty when the folder holds no files, when the filters matched none of  them, and in the sections that list rooms only. | [optional] [example: [\{id=10, title=document.docx\}]] [nullable] |
-| **folders** | [**List**](#model-fileentrybasedto) | The folder entries of this page. In a section of rooms these entries are the rooms themselves, which is where  their type, tags, logo and quota are read from. | [optional] [example: [\{id=20, title=My Folder\}]] [nullable] |
+| **files** | [**List**](#model-fileentrybasedto) | The file entries of this page. It is empty when the folder holds no files, when the filters matched none of  them, and in the sections that list rooms only. | [optional] [example: `[{id=10, title=document.docx}]`] [nullable] |
+| **folders** | [**List**](#model-fileentrybasedto) | The folder entries of this page. In a section of rooms these entries are the rooms themselves, which is where  their type, tags, logo and quota are read from. | [optional] [example: `[{id=20, title=My Folder}]`] [nullable] |
 | **current** | [**FolderDtoInteger**](#model-folderdtointeger) | The folder or section the page was read from, with its own title, type and access rights. It describes the  container, not the entries, and is filled in even when the page is empty. | [optional] |
 | **pathParts** | **oas_any_type_not_mapped** |  | [required] [nullable] |
-| **startIndex** | **Integer** (int32) | The position of the first entry of this page in the whole result, echoing the requested start index. Add the  number of entries received to it to ask for the next page. | [optional] [example: 0] |
-| **count** | **Integer** (int32) | How many entries this page carries, files and folders together. A page shorter than the requested size means  the result is exhausted. | [optional] [example: 4] |
-| **total** | **Integer** (int32) | How many entries matched before paging was applied, across the whole folder. Page until the start index plus  the entries received reaches it. | [required] [example: 4] |
-| **new** | **Integer** (int32) | How many entries of this folder are marked as new for the caller. It is 0 for every listing when the account  has switched the new-item badges off, so a zero here does not prove that nothing has changed. | [optional] [example: 0] |
+| **startIndex** | **Integer** (int32) | The position of the first entry of this page in the whole result, echoing the requested start index. Add the  number of entries received to it to ask for the next page. | [optional] [example: `0`] |
+| **count** | **Integer** (int32) | How many entries this page carries, files and folders together. A page shorter than the requested size means  the result is exhausted. | [optional] [example: `4`] |
+| **total** | **Integer** (int32) | How many entries matched before paging was applied, across the whole folder. Page until the start index plus  the entries received reaches it. | [required] [example: `4`] |
+| **new** | **Integer** (int32) | How many entries of this folder are marked as new for the caller. It is 0 for every listing when the account  has switched the new-item badges off, so a zero here does not prove that nothing has changed. | [optional] [example: `0`] |
 
 
 ### Model FolderContentIntegerArrayWrapper
@@ -11577,7 +11577,7 @@ The folder, with the fields that only a room carries filled in when the folder i
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **title** | **String** | The name shown for the entry. For a file it carries the extension, which is how the format is recognised, and  for a room it is the room name. | [optional] |
-| **access** | [**FileShare**](#model-fileshare) | The level the calling account holds on this entry, resolved from its own rights, the groups it belongs to and  any link it came in through. It is the level itself, not what the account may do with it - the action flags  below answer that. | [optional] [enum: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] |
+| **access** | [**FileShare**](#model-fileshare) | The level the calling account holds on this entry, resolved from its own rights, the groups it belongs to and  any link it came in through. It is the level itself, not what the account may do with it - the action flags  below answer that. | [optional] [enum: `0`, `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`] |
 | **sharedBy** | [**EmployeeDto**](#model-employeedto) | Who gave the calling account the access it is using. It is filled in only while the entry is being read  through a share, and never for a caller without an account. | [optional] |
 | **ownedBy** | [**EmployeeDto**](#model-employeedto) | Who owns the place the entry is shared from - the creator of the room it lies in, or of the personal section  that holds it. It is filled in only while the entry is being read through a share, and never for a caller  without an account. | [optional] |
 | **shared** | **Boolean** | Whether at least one external link exists for the entry, whichever kind. It says nothing about accounts and  groups - those are counted by the flag for members below. | [optional] |
@@ -11589,15 +11589,15 @@ The folder, with the fields that only a room carries filled in when the folder i
 | **createdBy** | [**EmployeeDto**](#model-employeedto) | Who created the entry. It is null for a caller without an account, who is told nothing about the portal's  members. | [optional] |
 | **updated** | [**ApiDateTime**](#model-apidatetime) | When the entry last changed, written with the offset of the portal's time zone. It is never reported as  earlier than the creation moment, so the two can be compared safely. | [optional] |
 | **autoDelete** | [**ApiDateTime**](#model-apidatetime) | When the entry will disappear on its own, written with the offset of the portal's time zone. It is filled in  only where a removal is actually scheduled - something in the trash while the portal cleans it up  automatically, or a guest's own documents - so a null means nothing is scheduled rather than that the entry is  permanent. | [optional] |
-| **rootFolderType** | [**FolderType**](#model-foldertype) | The section the entry ultimately belongs to, which is what tells a personal document from one inside a room,  from a template and from something in the trash or the archive. | [optional] [enum: 0, 1, 2, 3, 5, 6, 8, 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36] |
-| **parentRoomType** | [**FolderType**](#model-foldertype) | The kind of room the entry lies in, which decides what the room allows - filling forms, public links,  indexing. It is null for an entry that is not inside a room at all. | [optional] [enum: 0, 1, 2, 3, 5, 6, 8, 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36] |
+| **rootFolderType** | [**FolderType**](#model-foldertype) | The section the entry ultimately belongs to, which is what tells a personal document from one inside a room,  from a template and from something in the trash or the archive. | [optional] [enum: `0`, `1`, `2`, `3`, `5`, `6`, `8`, `10`, `11`, `12`, `13`, `14`, `15`, `16`, `19`, `20`, `21`, `22`, `25`, `26`, `27`, `28`, `29`, `30`, `31`, `32`, `33`, `34`, `35`, `36`] |
+| **parentRoomType** | [**FolderType**](#model-foldertype) | The kind of room the entry lies in, which decides what the room allows - filling forms, public links,  indexing. It is null for an entry that is not inside a room at all. | [optional] [enum: `0`, `1`, `2`, `3`, `5`, `6`, `8`, `10`, `11`, `12`, `13`, `14`, `15`, `16`, `19`, `20`, `21`, `22`, `25`, `26`, `27`, `28`, `29`, `30`, `31`, `32`, `33`, `34`, `35`, `36`] |
 | **updatedBy** | [**EmployeeDto**](#model-employeedto) | Who changed the entry last. It is null for a caller without an account. | [optional] |
 | **providerItem** | **Boolean** | Set when the entry is stored on a connected third-party account rather than on the portal, and null when it is  stored on the portal. Such an entry is identified by a string rather than a number, and some operations skip  it. | [optional] |
 | **providerKey** | **String** | Which third-party service holds the entry, matching the keys accepted by the third-party operations. It is  null for an entry stored on the portal. | [optional] |
 | **providerId** | **Integer** (int32) | The connected account the entry comes from, for telling apart two connections to the same service. It is null  for an entry stored on the portal. | [optional] |
 | **order** | **String** | The place of the entry in a room where the members arrange the content themselves, given as the position of  the entry preceded by the positions of the folders leading to it, separated by dots. It is empty when nothing  has been arranged. | [optional] |
 | **isFavorite** | **Boolean** | Set when the calling account has marked the entry as a favorite, which is what puts it into the favorites  listing. For a file that is not marked it is null rather than false. | [optional] |
-| **fileEntryType** | [**FileEntryType**](#model-fileentrytype) | Tells a folder from a file, and so which of the two shapes the rest of the object has. A room is reported as a  folder here. | [optional] [enum: 1, 2] |
+| **fileEntryType** | [**FileEntryType**](#model-fileentrytype) | Tells a folder from a file, and so which of the two shapes the rest of the object has. A room is reported as a  folder here. | [optional] [enum: `1`, `2`] |
 | **id** | **Integer** (int32) | The identifier to pass back to the other operations of this entry. It is a number for storage on the portal  and a string for a connected third-party account, and it is unique only within its own kind, so files and  folders may carry the same value. | [optional] |
 | **rootFolderId** | **Integer** (int32) | The section the entry ultimately lies in, as an identifier that can be listed like any other folder. For an  entry inside a room this is the rooms section, not the room. | [optional] |
 | **originId** | **Integer** (int32) | The folder the entry was deleted from, which is where restoring it puts it back. It is left out of the answer  unless the entry is in the trash. | [optional] |
@@ -11621,13 +11621,13 @@ The folder, with the fields that only a room carries filled in when the folder i
 | **tags** | **List** | The names of the tags attached to the room. Empty for a folder that is not a room, since only rooms carry  tags, and the names are the ones from the portal tag catalogue. | [optional] [nullable] |
 | **logo** | [**Logo**](#model-logo) | The addresses of the room logo in four sizes, together with the colour and the built-in cover that are drawn  when no logo was uploaded. A room without a logo answers with four empty addresses rather than with null, and  the field is null for a folder that is not a room. | [optional] |
 | **pinned** | **Boolean** | Whether the caller pinned the room to the top of their own room list. Pinning is personal and is lost when the  room is archived. | [optional] |
-| **roomType** | [**RoomType**](#model-roomtype) | The kind of the room, which decides the default access rules of its members. Null for a folder that is not a  room. | [optional] [enum: 1, 2, 5, 6, 8, 9] |
+| **roomType** | [**RoomType**](#model-roomtype) | The kind of the room, which decides the default access rules of its members. Null for a folder that is not a  room. | [optional] [enum: `1`, `2`, `5`, `6`, `8`, `9`] |
 | **private** | **Boolean** | Whether the room is a private one, which limits it to the accounts invited into it and needs encryption keys  set up for each of them. | [optional] |
 | **indexing** | **Boolean** | Whether the contents of the room are kept in an explicit numbered order, the one reported as `order` on each  entry, instead of being left to the sorting the reader asks for. | [optional] |
 | **denyDownload** | **Boolean** | Whether downloading and printing the contents of the room is forbidden, which leaves its members with viewing  and editing in the editor. | [optional] |
 | **lifetime** | [**RoomDataLifetimeDto**](#model-roomdatalifetimedto) | The rule by which the files of the room are removed once they grow old. Null when the room has no such rule,  which is also what is reported after the rule is switched off, because switching it off erases it. | [optional] |
 | **watermark** | [**WatermarkDto**](#model-watermarkdto) | The watermark stamped over the documents of the room while they are viewed and printed. Null when the room has  no watermark, and for every folder that is not a room. | [optional] |
-| **type** | [**FolderType**](#model-foldertype) | The part the folder plays inside its room: one of the service folders of the form-filling flow, or the  knowledge and result storages of an AI room. It stays null for an ordinary folder and for the room itself, so  it does not describe folders in general. | [optional] [enum: 0, 1, 2, 3, 5, 6, 8, 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36] |
+| **type** | [**FolderType**](#model-foldertype) | The part the folder plays inside its room: one of the service folders of the form-filling flow, or the  knowledge and result storages of an AI room. It stays null for an ordinary folder and for the room itself, so  it does not describe folders in general. | [optional] [enum: `0`, `1`, `2`, `3`, `5`, `6`, `8`, `10`, `11`, `12`, `13`, `14`, `15`, `16`, `19`, `20`, `21`, `22`, `25`, `26`, `27`, `28`, `29`, `30`, `31`, `32`, `33`, `34`, `35`, `36`] |
 | **inRoom** | **Boolean** | Whether the caller holds the room through an invitation of their own: true for the account that created it and  for a member invited personally, false when the access comes from a group they belong to, and null for a  folder that is not a room. | [optional] [nullable] |
 | **quotaLimit** | **Long** (int64) | How much space the files of the room may take, in bytes. It is the limit set on this room, or the portal  default for rooms when none was set. Null when the tariff of the portal does not count room statistics, when  room quotas are switched off, when the room lies in the archive or the trash, or when the caller may only read  it. | [optional] [nullable] |
 | **isCustomQuota** | **Boolean** | Whether `quotaLimit` is a limit set on this room (true) or the portal default for rooms (false). Null exactly  when `quotaLimit` is null. | [optional] [nullable] |
@@ -11635,7 +11635,7 @@ The folder, with the fields that only a room carries filled in when the folder i
 | **passwordProtected** | **Boolean** | Whether the sharing link the folder was opened through asks for a password that has not been entered yet.  While it is true the contents stay unreadable; send the password to `POST api/2.0/files/share/{key}/password`  first. Null when the folder was not reached through a link. | [optional] [nullable] |
 | **expired** | **Boolean** | Deprecated, read `isLinkExpired` instead: whether the sharing link the folder was opened through has run out  of its lifetime. | [optional] [nullable] |
 | **chatSettings** | [**ChatSettingsDto**](#model-chatsettingsdto) | The chat configuration of an AI room. Only the system prompt is reported here, whatever else the room stores,  and the field is null for every folder that is not an AI room. | [optional] |
-| **rootRoomType** | [**RoomType**](#model-roomtype) | The kind of the room the folder lies in. It is filled in only for the folder a folder-contents answer is  about, and only when that room is an AI room, so it is null in every other answer and for every other room  kind. | [optional] [enum: 1, 2, 5, 6, 8, 9] |
+| **rootRoomType** | [**RoomType**](#model-roomtype) | The kind of the room the folder lies in. It is filled in only for the folder a folder-contents answer is  about, and only when that room is an AI room, so it is null in every other answer and for every other room  kind. | [optional] [enum: `1`, `2`, `5`, `6`, `8`, `9`] |
 | **saveFormAsXLSX** | **Boolean** | Whether the answers collected in this form-filling room are also gathered into a spreadsheet next to the  completed copies. Filled in for form-filling rooms only. | [optional] [nullable] |
 | **sendFormToExternalDB** | **Boolean** | Whether the answers collected in this form-filling room are also pushed into the external database configured  for the portal. Filled in for form-filling rooms only. | [optional] [nullable] |
 | **originalFormId** | **Integer** (int32) | The form the completed copies in this folder were filled from, taken from the copy submitted last. Null while  the folder holds no completed copy, and for every folder that does not collect them. | [optional] [nullable] |
@@ -11647,7 +11647,7 @@ The folder, with the fields that only a room carries filled in when the folder i
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **title** | **String** | The name shown for the entry. For a file it carries the extension, which is how the format is recognised, and  for a room it is the room name. | [optional] |
-| **access** | [**FileShare**](#model-fileshare) | The level the calling account holds on this entry, resolved from its own rights, the groups it belongs to and  any link it came in through. It is the level itself, not what the account may do with it - the action flags  below answer that. | [optional] [enum: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] |
+| **access** | [**FileShare**](#model-fileshare) | The level the calling account holds on this entry, resolved from its own rights, the groups it belongs to and  any link it came in through. It is the level itself, not what the account may do with it - the action flags  below answer that. | [optional] [enum: `0`, `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`] |
 | **sharedBy** | [**EmployeeDto**](#model-employeedto) | Who gave the calling account the access it is using. It is filled in only while the entry is being read  through a share, and never for a caller without an account. | [optional] |
 | **ownedBy** | [**EmployeeDto**](#model-employeedto) | Who owns the place the entry is shared from - the creator of the room it lies in, or of the personal section  that holds it. It is filled in only while the entry is being read through a share, and never for a caller  without an account. | [optional] |
 | **shared** | **Boolean** | Whether at least one external link exists for the entry, whichever kind. It says nothing about accounts and  groups - those are counted by the flag for members below. | [optional] |
@@ -11659,15 +11659,15 @@ The folder, with the fields that only a room carries filled in when the folder i
 | **createdBy** | [**EmployeeDto**](#model-employeedto) | Who created the entry. It is null for a caller without an account, who is told nothing about the portal's  members. | [optional] |
 | **updated** | [**ApiDateTime**](#model-apidatetime) | When the entry last changed, written with the offset of the portal's time zone. It is never reported as  earlier than the creation moment, so the two can be compared safely. | [optional] |
 | **autoDelete** | [**ApiDateTime**](#model-apidatetime) | When the entry will disappear on its own, written with the offset of the portal's time zone. It is filled in  only where a removal is actually scheduled - something in the trash while the portal cleans it up  automatically, or a guest's own documents - so a null means nothing is scheduled rather than that the entry is  permanent. | [optional] |
-| **rootFolderType** | [**FolderType**](#model-foldertype) | The section the entry ultimately belongs to, which is what tells a personal document from one inside a room,  from a template and from something in the trash or the archive. | [optional] [enum: 0, 1, 2, 3, 5, 6, 8, 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36] |
-| **parentRoomType** | [**FolderType**](#model-foldertype) | The kind of room the entry lies in, which decides what the room allows - filling forms, public links,  indexing. It is null for an entry that is not inside a room at all. | [optional] [enum: 0, 1, 2, 3, 5, 6, 8, 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36] |
+| **rootFolderType** | [**FolderType**](#model-foldertype) | The section the entry ultimately belongs to, which is what tells a personal document from one inside a room,  from a template and from something in the trash or the archive. | [optional] [enum: `0`, `1`, `2`, `3`, `5`, `6`, `8`, `10`, `11`, `12`, `13`, `14`, `15`, `16`, `19`, `20`, `21`, `22`, `25`, `26`, `27`, `28`, `29`, `30`, `31`, `32`, `33`, `34`, `35`, `36`] |
+| **parentRoomType** | [**FolderType**](#model-foldertype) | The kind of room the entry lies in, which decides what the room allows - filling forms, public links,  indexing. It is null for an entry that is not inside a room at all. | [optional] [enum: `0`, `1`, `2`, `3`, `5`, `6`, `8`, `10`, `11`, `12`, `13`, `14`, `15`, `16`, `19`, `20`, `21`, `22`, `25`, `26`, `27`, `28`, `29`, `30`, `31`, `32`, `33`, `34`, `35`, `36`] |
 | **updatedBy** | [**EmployeeDto**](#model-employeedto) | Who changed the entry last. It is null for a caller without an account. | [optional] |
 | **providerItem** | **Boolean** | Set when the entry is stored on a connected third-party account rather than on the portal, and null when it is  stored on the portal. Such an entry is identified by a string rather than a number, and some operations skip  it. | [optional] |
 | **providerKey** | **String** | Which third-party service holds the entry, matching the keys accepted by the third-party operations. It is  null for an entry stored on the portal. | [optional] |
 | **providerId** | **Integer** (int32) | The connected account the entry comes from, for telling apart two connections to the same service. It is null  for an entry stored on the portal. | [optional] |
 | **order** | **String** | The place of the entry in a room where the members arrange the content themselves, given as the position of  the entry preceded by the positions of the folders leading to it, separated by dots. It is empty when nothing  has been arranged. | [optional] |
 | **isFavorite** | **Boolean** | Set when the calling account has marked the entry as a favorite, which is what puts it into the favorites  listing. For a file that is not marked it is null rather than false. | [optional] |
-| **fileEntryType** | [**FileEntryType**](#model-fileentrytype) | Tells a folder from a file, and so which of the two shapes the rest of the object has. A room is reported as a  folder here. | [optional] [enum: 1, 2] |
+| **fileEntryType** | [**FileEntryType**](#model-fileentrytype) | Tells a folder from a file, and so which of the two shapes the rest of the object has. A room is reported as a  folder here. | [optional] [enum: `1`, `2`] |
 | **id** | **String** | The identifier to pass back to the other operations of this entry. It is a number for storage on the portal  and a string for a connected third-party account, and it is unique only within its own kind, so files and  folders may carry the same value. | [optional] |
 | **rootFolderId** | **String** | The section the entry ultimately lies in, as an identifier that can be listed like any other folder. For an  entry inside a room this is the rooms section, not the room. | [optional] |
 | **originId** | **String** | The folder the entry was deleted from, which is where restoring it puts it back. It is left out of the answer  unless the entry is in the trash. | [optional] |
@@ -11691,13 +11691,13 @@ The folder, with the fields that only a room carries filled in when the folder i
 | **tags** | **List** | The names of the tags attached to the room. Empty for a folder that is not a room, since only rooms carry  tags, and the names are the ones from the portal tag catalogue. | [optional] [nullable] |
 | **logo** | [**Logo**](#model-logo) | The addresses of the room logo in four sizes, together with the colour and the built-in cover that are drawn  when no logo was uploaded. A room without a logo answers with four empty addresses rather than with null, and  the field is null for a folder that is not a room. | [optional] |
 | **pinned** | **Boolean** | Whether the caller pinned the room to the top of their own room list. Pinning is personal and is lost when the  room is archived. | [optional] |
-| **roomType** | [**RoomType**](#model-roomtype) | The kind of the room, which decides the default access rules of its members. Null for a folder that is not a  room. | [optional] [enum: 1, 2, 5, 6, 8, 9] |
+| **roomType** | [**RoomType**](#model-roomtype) | The kind of the room, which decides the default access rules of its members. Null for a folder that is not a  room. | [optional] [enum: `1`, `2`, `5`, `6`, `8`, `9`] |
 | **private** | **Boolean** | Whether the room is a private one, which limits it to the accounts invited into it and needs encryption keys  set up for each of them. | [optional] |
 | **indexing** | **Boolean** | Whether the contents of the room are kept in an explicit numbered order, the one reported as `order` on each  entry, instead of being left to the sorting the reader asks for. | [optional] |
 | **denyDownload** | **Boolean** | Whether downloading and printing the contents of the room is forbidden, which leaves its members with viewing  and editing in the editor. | [optional] |
 | **lifetime** | [**RoomDataLifetimeDto**](#model-roomdatalifetimedto) | The rule by which the files of the room are removed once they grow old. Null when the room has no such rule,  which is also what is reported after the rule is switched off, because switching it off erases it. | [optional] |
 | **watermark** | [**WatermarkDto**](#model-watermarkdto) | The watermark stamped over the documents of the room while they are viewed and printed. Null when the room has  no watermark, and for every folder that is not a room. | [optional] |
-| **type** | [**FolderType**](#model-foldertype) | The part the folder plays inside its room: one of the service folders of the form-filling flow, or the  knowledge and result storages of an AI room. It stays null for an ordinary folder and for the room itself, so  it does not describe folders in general. | [optional] [enum: 0, 1, 2, 3, 5, 6, 8, 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36] |
+| **type** | [**FolderType**](#model-foldertype) | The part the folder plays inside its room: one of the service folders of the form-filling flow, or the  knowledge and result storages of an AI room. It stays null for an ordinary folder and for the room itself, so  it does not describe folders in general. | [optional] [enum: `0`, `1`, `2`, `3`, `5`, `6`, `8`, `10`, `11`, `12`, `13`, `14`, `15`, `16`, `19`, `20`, `21`, `22`, `25`, `26`, `27`, `28`, `29`, `30`, `31`, `32`, `33`, `34`, `35`, `36`] |
 | **inRoom** | **Boolean** | Whether the caller holds the room through an invitation of their own: true for the account that created it and  for a member invited personally, false when the access comes from a group they belong to, and null for a  folder that is not a room. | [optional] [nullable] |
 | **quotaLimit** | **Long** (int64) | How much space the files of the room may take, in bytes. It is the limit set on this room, or the portal  default for rooms when none was set. Null when the tariff of the portal does not count room statistics, when  room quotas are switched off, when the room lies in the archive or the trash, or when the caller may only read  it. | [optional] [nullable] |
 | **isCustomQuota** | **Boolean** | Whether `quotaLimit` is a limit set on this room (true) or the portal default for rooms (false). Null exactly  when `quotaLimit` is null. | [optional] [nullable] |
@@ -11705,7 +11705,7 @@ The folder, with the fields that only a room carries filled in when the folder i
 | **passwordProtected** | **Boolean** | Whether the sharing link the folder was opened through asks for a password that has not been entered yet.  While it is true the contents stay unreadable; send the password to `POST api/2.0/files/share/{key}/password`  first. Null when the folder was not reached through a link. | [optional] [nullable] |
 | **expired** | **Boolean** | Deprecated, read `isLinkExpired` instead: whether the sharing link the folder was opened through has run out  of its lifetime. | [optional] [nullable] |
 | **chatSettings** | [**ChatSettingsDto**](#model-chatsettingsdto) | The chat configuration of an AI room. Only the system prompt is reported here, whatever else the room stores,  and the field is null for every folder that is not an AI room. | [optional] |
-| **rootRoomType** | [**RoomType**](#model-roomtype) | The kind of the room the folder lies in. It is filled in only for the folder a folder-contents answer is  about, and only when that room is an AI room, so it is null in every other answer and for every other room  kind. | [optional] [enum: 1, 2, 5, 6, 8, 9] |
+| **rootRoomType** | [**RoomType**](#model-roomtype) | The kind of the room the folder lies in. It is filled in only for the folder a folder-contents answer is  about, and only when that room is an AI room, so it is null in every other answer and for every other room  kind. | [optional] [enum: `1`, `2`, `5`, `6`, `8`, `9`] |
 | **saveFormAsXLSX** | **Boolean** | Whether the answers collected in this form-filling room are also gathered into a spreadsheet next to the  completed copies. Filled in for form-filling rooms only. | [optional] [nullable] |
 | **sendFormToExternalDB** | **Boolean** | Whether the answers collected in this form-filling room are also pushed into the external database configured  for the portal. Filled in for form-filling rooms only. | [optional] [nullable] |
 | **originalFormId** | **Integer** (int32) | The form the completed copies in this folder were filled from, taken from the copy submitted last. Null while  the folder holds no completed copy, and for every folder that does not collect them. | [optional] [nullable] |
@@ -11740,14 +11740,14 @@ The external link of a folder, as it is to be created or rewritten.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **linkId** | **UUID** (uuid) | Which link the request addresses: the identifier of an existing link rewrites that link, while an identifier  that is not in use, the empty one included, creates a new link. Take an existing identifier from  `GET api/2.0/files/folder/{id}/links`. | [optional] [example: 00000000-0000-0000-0000-000000000000] |
-| **access** | [**FileShare**](#model-fileshare) | The rights a visitor following the link is given. The value that grants nothing revokes the link instead of  setting it, and the answer is then empty. | [optional] [enum: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] |
+| **linkId** | **UUID** (uuid) | Which link the request addresses: the identifier of an existing link rewrites that link, while an identifier  that is not in use, the empty one included, creates a new link. Take an existing identifier from  `GET api/2.0/files/folder/{id}/links`. | [optional] [example: `00000000-0000-0000-0000-000000000000`] |
+| **access** | [**FileShare**](#model-fileshare) | The rights a visitor following the link is given. The value that grants nothing revokes the link instead of  setting it, and the answer is then empty. | [optional] [enum: `0`, `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`] |
 | **expirationDate** | [**ApiDateTime**](#model-apidatetime) | The moment the link stops working, sent as an ISO-8601 stamp. A moment that lies in the past is ignored,  and leaving the field out gives the link no expiry. | [optional] |
-| **title** | **String** | The name the link is listed under for the people who manage the folder; a visitor following it never sees the  name. | [optional] [example: Public link] [minLength: 0] [maxLength: 255] [nullable] |
-| **password** | **String** | The secret a visitor has to enter before the link opens. Leave it out for a link that opens without one; the  secret itself is never given back, only the fact that one is set. | [optional] [example: p@ssw0rd] [minLength: 0] [maxLength: 255] [nullable] |
-| **denyDownload** | **Boolean** | Whether visitors are left with viewing alone: with true downloading and copying through the link are blocked,  with false they are allowed. | [optional] [example: false] |
-| **internal** | **Boolean** | Whether the link admits signed-in portal members only: with true a visitor has to sign in before the link  opens, with false anyone holding the address may follow it. | [optional] [example: false] |
-| **primary** | **Boolean** | Whether this link becomes the primary link of the folder, the one the Copy link action of a client hands  out; a folder has one primary link at a time. | [optional] [example: true] |
+| **title** | **String** | The name the link is listed under for the people who manage the folder; a visitor following it never sees the  name. | [optional] [example: `Public link`] [minLength: 0] [maxLength: 255] [nullable] |
+| **password** | **String** | The secret a visitor has to enter before the link opens. Leave it out for a link that opens without one; the  secret itself is never given back, only the fact that one is set. | [optional] [example: `p@ssw0rd`] [minLength: 0] [maxLength: 255] [nullable] |
+| **denyDownload** | **Boolean** | Whether visitors are left with viewing alone: with true downloading and copying through the link are blocked,  with false they are allowed. | [optional] [example: `false`] |
+| **internal** | **Boolean** | Whether the link admits signed-in portal members only: with true a visitor has to sign in before the link  opens, with false anyone holding the address may follow it. | [optional] [example: `false`] |
+| **primary** | **Boolean** | Whether this link becomes the primary link of the folder, the one the Copy link action of a client hands  out; a folder has one primary link at a time. | [optional] [example: `true`] |
 
 
 ### Model FolderStringArrayWrapper
@@ -11837,10 +11837,10 @@ The metadata of a single form field.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **key** | **String** | The form field key. | [optional] [example: name] [nullable] |
-| **type** | **String** | The form field type. | [optional] [example: text] [nullable] |
-| **format** | **String** | The form field format. | [optional] [example: date] [nullable] |
-| **possibleValues** | **List** | The list of possible values for the form field. | [optional] [example: []] [nullable] |
+| **key** | **String** | The form field key. | [optional] [example: `name`] [nullable] |
+| **type** | **String** | The form field type. | [optional] [example: `text`] [nullable] |
+| **format** | **String** | The form field format. | [optional] [example: `date`] [nullable] |
+| **possibleValues** | **List** | The list of possible values for the form field. | [optional] [example: `[]`] [nullable] |
 
 
 ### Model FormResultsDto
@@ -11848,8 +11848,8 @@ One completed copy of a form, with the values that were entered into it.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **createOn** | **Date** (date-time) | When the portal recorded this copy, in UTC: the moment the filled copy was completed and its data indexed, not  the moment the form itself was made. | [optional] [example: 2025-01-01T00:00:00] |
-| **formsData** | [**List**](#model-formsitemdata) | The values that were entered into this copy, one entry per field, preceded by an entry keyed `FormNumber` that  carries the number of the copy and is what the submissions are ordered by. Fields holding a picture or a  signature are left out of the record, so a field missing here was not necessarily left blank. | [optional] [example: [\{key=field1, value=Answer\}]] [nullable] |
+| **createOn** | **Date** (date-time) | When the portal recorded this copy, in UTC: the moment the filled copy was completed and its data indexed, not  the moment the form itself was made. | [optional] [example: `2025-01-01T00:00:00`] |
+| **formsData** | [**List**](#model-formsitemdata) | The values that were entered into this copy, one entry per field, preceded by an entry keyed `FormNumber` that  carries the number of the copy and is what the submissions are ordered by. Fields holding a picture or a  signature are left out of the record, so a field missing here was not necessarily left blank. | [optional] [example: `[{key=field1, value=Answer}]`] [nullable] |
 
 
 ### Model FormRole
@@ -11857,14 +11857,14 @@ The form role.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **roomId** | **Integer** (int32) | The room ID. | [optional] [example: 1] |
-| **roleName** | **String** | The role name. | [optional] [example: Manager] [nullable] |
-| **roleColor** | **String** | The role color. | [optional] [example: #4781D1] [nullable] |
-| **userId** | **UUID** (uuid) | The user ID. | [optional] [example: 00000000-0000-0000-0000-000000000000] |
-| **sequence** | **Integer** (int32) | The role sequence. | [optional] [example: 12] |
-| **submitted** | **Boolean** | Specifies if the role was submitted or not. | [optional] [example: false] |
-| **openedAt** | **Date** (date-time) | The date and time when the role was opened. | [optional] [example: 2026-01-01T10:00:00Z] |
-| **submissionDate** | **Date** (date-time) | The date and time when the role was submitted. | [optional] [example: 2026-01-01T10:00:00Z] |
+| **roomId** | **Integer** (int32) | The room ID. | [optional] [example: `1`] |
+| **roleName** | **String** | The role name. | [optional] [example: `Manager`] [nullable] |
+| **roleColor** | **String** | The role color. | [optional] [example: `#4781D1`] [nullable] |
+| **userId** | **UUID** (uuid) | The user ID. | [optional] [example: `00000000-0000-0000-0000-000000000000`] |
+| **sequence** | **Integer** (int32) | The role sequence. | [optional] [example: `12`] |
+| **submitted** | **Boolean** | Specifies if the role was submitted or not. | [optional] [example: `false`] |
+| **openedAt** | **Date** (date-time) | The date and time when the role was opened. | [optional] [example: `2026-01-01T10:00:00Z`] |
+| **submissionDate** | **Date** (date-time) | The date and time when the role was submitted. | [optional] [example: `2026-01-01T10:00:00Z`] |
 
 
 ### Model FormRoleArrayWrapper
@@ -11884,14 +11884,14 @@ One role of a PDF form, with the state the turn of that role is in.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **roleName** | **String** | The name the role was given when the form was laid out, unique within that form. It is the value that names  the role in the calls which change or stop the filling. | [required] [example: Approver] [nullable] |
-| **roleColor** | **String** | The colour a client paints the role with, as a hexadecimal RGB value; empty when the role mapping assigned  none. | [optional] [example: #FF5733] [nullable] |
+| **roleName** | **String** | The name the role was given when the form was laid out, unique within that form. It is the value that names  the role in the calls which change or stop the filling. | [required] [example: `Approver`] [nullable] |
+| **roleColor** | **String** | The colour a client paints the role with, as a hexadecimal RGB value; empty when the role mapping assigned  none. | [optional] [example: `#FF5733`] [nullable] |
 | **user** | [**EmployeeFullDto**](#model-employeefulldto) | The account the role was assigned to, which is the person expected to fill this part of the form. | [optional] |
-| **sequence** | **Integer** (int32) | The turn this role takes: the roles come back ordered by this number, roles sharing a number are filled in  parallel, and a role with a higher number waits until every lower one has been submitted. | [required] [example: 1] |
-| **submitted** | **Boolean** | Reports whether this role has already handed in its part. The lowest sequence number that still holds an  unsubmitted role is the turn the form as a whole is waiting on. | [required] [example: false] |
+| **sequence** | **Integer** (int32) | The turn this role takes: the roles come back ordered by this number, roles sharing a number are filled in  parallel, and a role with a higher number waits until every lower one has been submitted. | [required] [example: `1`] |
+| **submitted** | **Boolean** | Reports whether this role has already handed in its part. The lowest sequence number that still holds an  unsubmitted role is the turn the form as a whole is waiting on. | [required] [example: `false`] |
 | **stopedBy** | [**EmployeeFullDto**](#model-employeefulldto) | The account that interrupted the filling. It is filled in on the one role the filling was stopped at and stays  empty on every other role, and on all of them while the filling runs normally. | [optional] |
-| **history** | **Map** (date-time) | When the role passed through the stages of its turn, keyed by stage: 0 is the moment the form was opened for  it, 1 the moment it was submitted and 2 the moment the filling was stopped at it. The times are given in the  time zone of the portal, and only the stages that have actually happened are present, so an empty object means  the role has not been opened yet. | [optional] [example: \{0=2025-01-15T10:30:00\}] |
-| **roleStatus** | [**FormFillingStatus**](#model-formfillingstatus) | Where the role stands in the queue: roles of earlier turns are reported as complete, roles of later turns as a  draft, and the role whose turn it is as either yours to fill or in progress, depending on whether that person  has already opened the form. The role the filling was stopped at is reported as stopped whatever its turn. | [optional] [enum: 0, 1, 2, 3, 4, 5] |
+| **history** | **Map** (date-time) | When the role passed through the stages of its turn, keyed by stage: 0 is the moment the form was opened for  it, 1 the moment it was submitted and 2 the moment the filling was stopped at it. The times are given in the  time zone of the portal, and only the stages that have actually happened are present, so an empty object means  the role has not been opened yet. | [optional] [example: `{0=2025-01-15T10:30:00}`] |
+| **roleStatus** | [**FormFillingStatus**](#model-formfillingstatus) | Where the role stands in the queue: roles of earlier turns are reported as complete, roles of later turns as a  draft, and the role whose turn it is as either yours to fill or in progress, depending on whether that person  has already opened the form. The role the filling was stopped at is reported as stopped whatever its turn. | [optional] [enum: `0`, `1`, `2`, `3`, `4`, `5`] |
 
 
 ### Model FormSubmissionsDto
@@ -11899,8 +11899,8 @@ All completed copies of a form, together with the description of the fields they
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **metadata** | [**List**](#model-formmetadata) | Describes the fields of the form version that is being filled - the key each value is stored under, the type  and format of the field and, where the field offers a fixed set of answers, those answers - in the order the  fields are laid out, which is the order to build a results table in. It comes back empty when the portal holds  no indexed description of that version. | [optional] [example: []] [nullable] |
-| **submissions** | [**List**](#model-formresultsdto) | One entry per completed copy, ordered by the copy number that `formsData` carries. An empty list means nothing  has been completed for the version that is currently being filled; the copies of earlier versions of the form  are not reported here. | [optional] [example: []] [nullable] |
+| **metadata** | [**List**](#model-formmetadata) | Describes the fields of the form version that is being filled - the key each value is stored under, the type  and format of the field and, where the field offers a fixed set of answers, those answers - in the order the  fields are laid out, which is the order to build a results table in. It comes back empty when the portal holds  no indexed description of that version. | [optional] [example: `[]`] [nullable] |
+| **submissions** | [**List**](#model-formresultsdto) | One entry per completed copy, ordered by the copy number that `formsData` carries. An empty list means nothing  has been completed for the version that is currently being filled; the copies of earlier versions of the form  are not reported here. | [optional] [example: `[]`] [nullable] |
 
 
 ### Model FormSubmissionsWrapper
@@ -11932,10 +11932,10 @@ The data of the separate form item.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **key** | **String** | The form data key. | [optional] [example: first_name] [nullable] |
-| **tag** | **String** | The form data tag. | [optional] [example: personal_info] [nullable] |
-| **value** | **String** | The form data value. | [optional] [example: John] [nullable] |
-| **type** | **String** | The form data type. | [optional] [example: text] [nullable] |
+| **key** | **String** | The form data key. | [optional] [example: `first_name`] [nullable] |
+| **tag** | **String** | The form data tag. | [optional] [example: `personal_info`] [nullable] |
+| **value** | **String** | The form data value. | [optional] [example: `John`] [nullable] |
+| **type** | **String** | The form data type. | [optional] [example: `text`] [nullable] |
 
 
 ### Model FormsItemDto
@@ -11952,7 +11952,7 @@ The generate docx tool call parameters.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **description** | **String** | What the generated text document should contain, in the words the request was made in. | [required] [example: A quarterly report on sales with a summary table] [nullable] |
+| **description** | **String** | What the generated text document should contain, in the words the request was made in. | [required] [example: `A quarterly report on sales with a summary table`] [nullable] |
 
 
 ### Model GenerateFormToolCallParametersDto
@@ -11960,7 +11960,7 @@ The generate form tool call parameters.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **description** | **String** | What the generated fillable form should ask for, in the words the request was made in. | [required] [example: An employee onboarding form with name, start date and department] [nullable] |
+| **description** | **String** | What the generated fillable form should ask for, in the words the request was made in. | [required] [example: `An employee onboarding form with name, start date and department`] [nullable] |
 
 
 ### Model GeneratePresentationToolCallParametersDto
@@ -11968,9 +11968,9 @@ The generate presentation tool call parameters.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **topic** | **String** | What the generated presentation is about. | [optional] [example: Sales results for 2026] [nullable] |
-| **slideCount** | **String** | How many slides to generate, as the request spelled it. | [optional] [example: 12] [nullable] |
-| **style** | **String** | The visual style the slides should be generated in. | [optional] [example: minimal] [nullable] |
+| **topic** | **String** | What the generated presentation is about. | [optional] [example: `Sales results for 2026`] [nullable] |
+| **slideCount** | **String** | How many slides to generate, as the request spelled it. | [optional] [example: `12`] [nullable] |
+| **style** | **String** | The visual style the slides should be generated in. | [optional] [example: `minimal`] [nullable] |
 
 
 ### Model GetReferenceDataDtoInteger
@@ -11978,11 +11978,11 @@ The body of a spreadsheet reference request: the source spreadsheet, and the thr
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **fileKey** | **String** | The id of the referenced file as the document service recorded it in the formula. It is tried first, and only  when `instanceId` names this portal. | [required] [example: 512] [nullable] |
-| **instanceId** | **String** | The portal the reference was made on, as the document service recorded it. Only the id of this portal makes  the file key resolvable; any other value falls through to the path and the link. | [required] [example: 1] [nullable] |
-| **sourceFileId** | **Integer** (int32) | The spreadsheet the formula sits in. The path is resolved against it - the referenced file is looked for among  the files lying next to it - and it is the file whose read access is checked. | [optional] [example: 1] |
-| **path** | **String** | The title of the referenced file exactly as the formula spells it, matched against the files lying next to the  source file. It is tried after the file key, and only when no link is given. | [optional] [example: Budget 2026.xlsx] [nullable] |
-| **link** | **String** | The web address the formula points at, an editor link of this portal or one of its short links. It is tried  last, and an address belonging to another site is not resolved at all but handed back for the client to follow  as it is. | [optional] [example: https://portal.example.com/doc/512] [nullable] |
+| **fileKey** | **String** | The id of the referenced file as the document service recorded it in the formula. It is tried first, and only  when `instanceId` names this portal. | [required] [example: `512`] [nullable] |
+| **instanceId** | **String** | The portal the reference was made on, as the document service recorded it. Only the id of this portal makes  the file key resolvable; any other value falls through to the path and the link. | [required] [example: `1`] [nullable] |
+| **sourceFileId** | **Integer** (int32) | The spreadsheet the formula sits in. The path is resolved against it - the referenced file is looked for among  the files lying next to it - and it is the file whose read access is checked. | [optional] [example: `1`] |
+| **path** | **String** | The title of the referenced file exactly as the formula spells it, matched against the files lying next to the  source file. It is tried after the file key, and only when no link is given. | [optional] [example: `Budget 2026.xlsx`] [nullable] |
+| **link** | **String** | The web address the formula points at, an editor link of this portal or one of its short links. It is tried  last, and an address belonging to another site is not resolved at all but handed back for the client to follow  as it is. | [optional] [example: `https://portal.example.com/doc/512`] [nullable] |
 
 
 ### Model GobackConfig
@@ -11990,7 +11990,7 @@ The settings for the Open file location menu button and upper right corner butto
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **url** | **String** | Where the user is taken when they leave the document, normally the folder or the room it lies in. It is empty  when there is nowhere to return to, as in a framed opening. | [optional] [example: https://portal.example.com/rooms/shared/42] [nullable] |
+| **url** | **String** | Where the user is taken when they leave the document, normally the folder or the room it lies in. It is empty  when there is nowhere to return to, as in a framed opening. | [optional] [example: `https://portal.example.com/rooms/shared/42`] [nullable] |
 
 
 ### Model GroupMemberSecurityRequestArrayWrapper
@@ -12011,11 +12011,11 @@ One member of a portal group together with the access that member has on the fil
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **user** | [**EmployeeFullDto**](#model-employeefulldto) | The member the line is about, as the portal reports the account: the display name, the avatar and the portal  role to show next to the access level. | [required] |
-| **groupAccess** | [**FileShare**](#model-fileshare) | The level granted to the group as a whole on this file or folder. It belongs to the group record rather than  to the member, so the same value repeats on every line of the answer; a group whose record was set back to  none is answered with an empty list instead. | [required] [enum: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] |
-| **userAccess** | [**FileShare**](#model-fileshare) | The level granted to this member alone on the same file or folder, or `null` when the member has no record of  their own and the group level is what applies. The member who created the file or folder is always reported  here as a room manager, whatever their own record says. | [optional] [enum: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] |
-| **overridden** | **Boolean** | Whether `userAccess` is the level that decides what the member may do. When it is false the member inherits  `groupAccess`, and the creator of the file or folder is always reported as overridden because of the room  manager level forced onto them. | [required] [example: true] |
-| **canEditAccess** | **Boolean** | Whether the caller may still change the level of this member. It comes back false on the line of the member  who created the file or folder, on the line of the caller themselves, and on every line at once when the  caller may read the file or folder but not manage access to it. | [required] [example: true] |
-| **owner** | **Boolean** | Whether this member created the file or folder - the owner of the entry, not the owner of the group. Their  level is reported as a room manager one and cannot be taken away through this group. | [required] [example: false] |
+| **groupAccess** | [**FileShare**](#model-fileshare) | The level granted to the group as a whole on this file or folder. It belongs to the group record rather than  to the member, so the same value repeats on every line of the answer; a group whose record was set back to  none is answered with an empty list instead. | [required] [enum: `0`, `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`] |
+| **userAccess** | [**FileShare**](#model-fileshare) | The level granted to this member alone on the same file or folder, or `null` when the member has no record of  their own and the group level is what applies. The member who created the file or folder is always reported  here as a room manager, whatever their own record says. | [optional] [enum: `0`, `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`] |
+| **overridden** | **Boolean** | Whether `userAccess` is the level that decides what the member may do. When it is false the member inherits  `groupAccess`, and the creator of the file or folder is always reported as overridden because of the room  manager level forced onto them. | [required] [example: `true`] |
+| **canEditAccess** | **Boolean** | Whether the caller may still change the level of this member. It comes back false on the line of the member  who created the file or folder, on the line of the caller themselves, and on every line at once when the  caller may read the file or folder but not manage access to it. | [required] [example: `true`] |
+| **owner** | **Boolean** | Whether this member created the file or folder - the owner of the entry, not the owner of the group. Their  level is reported as a room manager one and cannot be taken away through this group. | [required] [example: `false`] |
 
 
 ### Model GroupSummaryDto
@@ -12023,10 +12023,10 @@ The group summary parameters.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **id** | **UUID** (uuid) | The group ID. | [required] [example: 00000000-0000-0000-0000-000000000000] |
-| **name** | **String** | The group name. | [required] [example: Group Name] [nullable] |
-| **manager** | **String** | The group manager. | [optional] [example: Jake.Zazhitski] [nullable] |
-| **isSystem** | **Boolean** | Indicates whether the group is a system group. | [optional] [example: false] [nullable] |
+| **id** | **UUID** (uuid) | The group ID. | [required] [example: `00000000-0000-0000-0000-000000000000`] |
+| **name** | **String** | The group name. | [required] [example: `Group Name`] [nullable] |
+| **manager** | **String** | The group manager. | [optional] [example: `Jake.Zazhitski`] [nullable] |
+| **isSystem** | **Boolean** | Indicates whether the group is a system group. | [optional] [example: `false`] [nullable] |
 
 
 ### Model HideConfirmConvertRequestDto
@@ -12034,7 +12034,7 @@ The body of the conversion prompt switch: which of the two prompts to hide.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **save** | **Boolean** | Chooses the prompt to hide rather than the state to store: true hides the prompt that offers to keep a copy in  the original format when a document is converted, false hides the prompt that offers to open the conversion  result. Each of the two flags is stored separately for the calling account, and both are one-way - the portal  can hide a prompt but has no way to show it again. | [optional] [example: true] |
+| **save** | **Boolean** | Chooses the prompt to hide rather than the state to store: true hides the prompt that offers to keep a copy in  the original format when a document is converted, false hides the prompt that offers to open the conversion  result. Each of the two flags is stored separately for the calling account, and both are one-way - the portal  can hide a prompt but has no way to show it again. | [optional] [example: `true`] |
 
 
 ### Model HistoryAction
@@ -12042,8 +12042,8 @@ The action performed on the file.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **id** | [**MessageAction**](#model-messageaction) | The action performed on the file. | [optional] [enum: 1000, 1001, 1002, 1003, 1004, 1005, 1006, 1007, 1008, 1009, 1010, 1011, 1012, 1013, 1014, 1015, 1016, 1017, 1018, 1019, 1020, 1021, 1022, 1023, 1024, 1025, 1026, 1027, 1028, 1029, 4000, 4001, 4002, 4003, 4004, 4005, 4006, 4007, 4008, 4009, 4010, 4011, 4012, 4013, 4014, 4015, 4016, 4017, 4018, 4019, 4020, 4021, 4022, 4023, 4024, 4025, 4026, 4027, 4028, 4029, 4030, 4031, 4032, 4033, 4034, 4035, 4036, 4037, 5000, 5001, 5002, 5003, 5004, 5005, 5006, 5007, 5008, 5009, 5010, 5011, 5012, 5013, 5014, 5015, 5016, 5017, 5018, 5019, 5020, 5021, 5022, 5023, 5024, 5025, 5026, 5027, 5028, 5029, 5030, 5031, 5032, 5033, 5034, 5035, 5036, 5037, 5038, 5039, 5040, 5041, 5042, 5043, 5044, 5045, 5046, 5047, 5048, 5049, 5050, 5053, 5054, 5055, 5056, 5057, 5058, 5059, 5060, 5061, 5062, 5063, 5064, 5065, 5066, 5068, 5069, 5070, 5071, 5072, 5073, 5074, 5075, 5076, 5077, 5078, 5079, 5080, 5081, 5082, 5083, 5084, 5085, 5086, 5087, 5088, 5089, 5090, 5091, 5092, 5093, 5094, 5095, 5096, 5097, 5098, 5099, 5100, 5101, 5102, 5103, 5104, 5105, 5106, 5107, 5108, 5109, 5110, 5111, 5112, 5113, 5114, 5115, 5116, 5117, 5118, 5119, 5120, 5121, 5122, 5123, 5124, 5125, 5126, 5127, 5128, 5129, 5130, 5131, 5132, 5133, 5150, 5151, 5152, 5153, 5154, 5155, 5156, 5157, 5158, 5159, 5160, 5161, 5162, 5163, 5201, 5202, 5203, 5204, 5205, 5206, 5207, 5501, 5502, 5503, 6000, 6001, 6002, 6003, 6004, 6005, 6006, 6007, 6008, 6009, 6010, 6011, 6012, 6013, 6014, 6015, 6016, 6017, 6018, 6019, 6020, 6021, 6022, 6023, 6024, 6025, 6026, 6027, 6028, 6029, 6030, 6031, 6032, 6033, 6034, 6035, 6036, 6037, 6038, 6039, 6040, 6041, 6042, 6043, 6044, 6045, 6046, 6047, 6048, 6049, 6050, 6051, 6052, 6053, 6054, 6055, 6056, 6057, 6058, 6059, 6060, 6061, 6062, 6063, 6064, 6065, 6066, 6067, 6068, 6069, 6070, 6071, 6072, 6073, 6074, 6075, 6076, 6077, 6078, 6079, 6080, 6081, 6082, 6083, 6084, 6085, 6086, 6087, 6088, 6089, 6090, 6091, 6092, 6093, 6094, 6095, 6096, 6097, 6098, 6099, 6100, 6101, 6102, 6103, 6104, 6105, 6106, 6107, 6108, 6109, 7000, 7001, 7002, 7003, 7004, 7005, 9901, 9902, 9903, 9904, 9905, 9906, 9907, 9908, 9909, -1] |
-| **key** | **String** | The action performed on the file. | [optional] [example: fileUploaded] [nullable] |
+| **id** | [**MessageAction**](#model-messageaction) | The action performed on the file. | [optional] [enum: `1000`, `1001`, `1002`, `1003`, `1004`, `1005`, `1006`, `1007`, `1008`, `1009`, `1010`, `1011`, `1012`, `1013`, `1014`, `1015`, `1016`, `1017`, `1018`, `1019`, `1020`, `1021`, `1022`, `1023`, `1024`, `1025`, `1026`, `1027`, `1028`, `1029`, `4000`, `4001`, `4002`, `4003`, `4004`, `4005`, `4006`, `4007`, `4008`, `4009`, `4010`, `4011`, `4012`, `4013`, `4014`, `4015`, `4016`, `4017`, `4018`, `4019`, `4020`, `4021`, `4022`, `4023`, `4024`, `4025`, `4026`, `4027`, `4028`, `4029`, `4030`, `4031`, `4032`, `4033`, `4034`, `4035`, `4036`, `4037`, `5000`, `5001`, `5002`, `5003`, `5004`, `5005`, `5006`, `5007`, `5008`, `5009`, `5010`, `5011`, `5012`, `5013`, `5014`, `5015`, `5016`, `5017`, `5018`, `5019`, `5020`, `5021`, `5022`, `5023`, `5024`, `5025`, `5026`, `5027`, `5028`, `5029`, `5030`, `5031`, `5032`, `5033`, `5034`, `5035`, `5036`, `5037`, `5038`, `5039`, `5040`, `5041`, `5042`, `5043`, `5044`, `5045`, `5046`, `5047`, `5048`, `5049`, `5050`, `5053`, `5054`, `5055`, `5056`, `5057`, `5058`, `5059`, `5060`, `5061`, `5062`, `5063`, `5064`, `5065`, `5066`, `5068`, `5069`, `5070`, `5071`, `5072`, `5073`, `5074`, `5075`, `5076`, `5077`, `5078`, `5079`, `5080`, `5081`, `5082`, `5083`, `5084`, `5085`, `5086`, `5087`, `5088`, `5089`, `5090`, `5091`, `5092`, `5093`, `5094`, `5095`, `5096`, `5097`, `5098`, `5099`, `5100`, `5101`, `5102`, `5103`, `5104`, `5105`, `5106`, `5107`, `5108`, `5109`, `5110`, `5111`, `5112`, `5113`, `5114`, `5115`, `5116`, `5117`, `5118`, `5119`, `5120`, `5121`, `5122`, `5123`, `5124`, `5125`, `5126`, `5127`, `5128`, `5129`, `5130`, `5131`, `5132`, `5133`, `5150`, `5151`, `5152`, `5153`, `5154`, `5155`, `5156`, `5157`, `5158`, `5159`, `5160`, `5161`, `5162`, `5163`, `5201`, `5202`, `5203`, `5204`, `5205`, `5206`, `5207`, `5501`, `5502`, `5503`, `6000`, `6001`, `6002`, `6003`, `6004`, `6005`, `6006`, `6007`, `6008`, `6009`, `6010`, `6011`, `6012`, `6013`, `6014`, `6015`, `6016`, `6017`, `6018`, `6019`, `6020`, `6021`, `6022`, `6023`, `6024`, `6025`, `6026`, `6027`, `6028`, `6029`, `6030`, `6031`, `6032`, `6033`, `6034`, `6035`, `6036`, `6037`, `6038`, `6039`, `6040`, `6041`, `6042`, `6043`, `6044`, `6045`, `6046`, `6047`, `6048`, `6049`, `6050`, `6051`, `6052`, `6053`, `6054`, `6055`, `6056`, `6057`, `6058`, `6059`, `6060`, `6061`, `6062`, `6063`, `6064`, `6065`, `6066`, `6067`, `6068`, `6069`, `6070`, `6071`, `6072`, `6073`, `6074`, `6075`, `6076`, `6077`, `6078`, `6079`, `6080`, `6081`, `6082`, `6083`, `6084`, `6085`, `6086`, `6087`, `6088`, `6089`, `6090`, `6091`, `6092`, `6093`, `6094`, `6095`, `6096`, `6097`, `6098`, `6099`, `6100`, `6101`, `6102`, `6103`, `6104`, `6105`, `6106`, `6107`, `6108`, `6109`, `7000`, `7001`, `7002`, `7003`, `7004`, `7005`, `9901`, `9902`, `9903`, `9904`, `9905`, `9906`, `9907`, `9908`, `9909`, `-1`] |
+| **key** | **String** | The action performed on the file. | [optional] [example: `fileUploaded`] [nullable] |
 
 
 ### Model HistoryArrayWrapper
@@ -12063,7 +12063,7 @@ The history data.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **initiatorName** | **String** | The name of the action initiator. | [optional] [example: John Doe] [nullable] |
+| **initiatorName** | **String** | The name of the action initiator. | [optional] [example: `John Doe`] [nullable] |
 
 
 ### Model HistoryDto
@@ -12071,12 +12071,12 @@ One record of the activity log of a file or a folder.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **id** | **Integer** (int32) | The identifier of the record, which tells two records of the same action apart and stays stable as long as the  portal keeps the log. | [required] [example: 123] |
+| **id** | **Integer** (int32) | The identifier of the record, which tells two records of the same action apart and stays stable as long as the  portal keeps the log. | [required] [example: `123`] |
 | **action** | [**HistoryAction**](#model-historyaction) | What happened - the kind of event the record stands for, such as a file being uploaded, renamed, moved or  shared - with the key a client can key its own wording off. | [required] |
 | **initiator** | [**EmployeeDto**](#model-employeedto) | Who caused the event. For an event caused by a visitor following an external link only the name they gave is  filled in, the account fields staying empty. | [required] |
 | **date** | [**ApiDateTime**](#model-apidatetime) | When the event happened, written with the offset of the portal's time zone. | [required] |
 | **data** | [**HistoryData**](#model-historydata) | The history data. Absent for actions that carry no payload of their own - changing a room's  logo, icon colour or cover, whose interpreter returns no data (see  `RoomLogoChangedInterpreter`). It used to be declared required, which put it in the  OpenAPI document's required list while the null-dropping serializer left it out of the  response, so a generated client threw on any history page holding one of those entries. | [optional] |
-| **related** | [**List**](#model-historydto) | The records folded into this one because they belong to the same action, the separate files of one upload for  instance. It is empty when the record stands alone, and the records inside it carry no further nesting. | [optional] [example: [\{id=124, action=0\}]] [nullable] |
+| **related** | [**List**](#model-historydto) | The records folded into this one because they belong to the same action, the separate files of one upload for  instance. It is empty when the record stands alone, and the records inside it carry no further nesting. | [optional] [example: `[{id=124, action=0}]`] [nullable] |
 
 
 ### Model ICompressWrapper
@@ -12096,7 +12096,7 @@ The icon to set on a room group.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **icon** | **String** | The identifier of one of the built-in covers listed by `GET api/2.0/files/rooms/covers`. An empty string  clears the icon of the group, null or a missing member keeps the current one, and anything else is refused. | [optional] [example: heart] [nullable] |
+| **icon** | **String** | The identifier of one of the built-in covers listed by `GET api/2.0/files/rooms/covers`. An empty string  clears the icon of the group, null or a missing member keeps the current one, and anything else is refused. | [optional] [example: `heart`] [nullable] |
 
 
 ### Model InfoConfigDto
@@ -12104,12 +12104,12 @@ The facts the editor information panel shows about the open document.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **favorite** | **Boolean** | Whether the caller has this document among their favorites. It is empty when favorites do not apply - for an  anonymous caller, for a guest, and for an encrypted document. | [optional] [example: false] [nullable] |
-| **folder** | **String** | The place of the document as a readable path, its folders joined from the root downwards. It is empty in the  embedded layout, which shows no such panel. | [optional] [example: My documents \\ Reports] [nullable] |
-| **owner** | **String** | The display name of the owner of the document. It is empty for an anonymous session. | [optional] [example: John Doe] [nullable] |
-| **sharingSettings** | [**List**](#model-aceshortwrapper) | Who the document is shared with, as the information panel lists it. An empty list means it is shared with  nobody beyond its owner. | [optional] [example: []] [nullable] |
-| **type** | [**EditorType**](#model-editortype) | The layout the information panel is rendered for. | [optional] [enum: 0, 1, 2] |
-| **uploaded** | **String** | When the document was created on the portal, already formatted for reading in the culture of the caller rather  than as a machine timestamp. | [optional] [example: 01/01/2026 12:00 PM] [nullable] |
+| **favorite** | **Boolean** | Whether the caller has this document among their favorites. It is empty when favorites do not apply - for an  anonymous caller, for a guest, and for an encrypted document. | [optional] [example: `false`] [nullable] |
+| **folder** | **String** | The place of the document as a readable path, its folders joined from the root downwards. It is empty in the  embedded layout, which shows no such panel. | [optional] [example: `My documents \\ Reports`] [nullable] |
+| **owner** | **String** | The display name of the owner of the document. It is empty for an anonymous session. | [optional] [example: `John Doe`] [nullable] |
+| **sharingSettings** | [**List**](#model-aceshortwrapper) | Who the document is shared with, as the information panel lists it. An empty list means it is shared with  nobody beyond its owner. | [optional] [example: `[]`] [nullable] |
+| **type** | [**EditorType**](#model-editortype) | The layout the information panel is rendered for. | [optional] [enum: `0`, `1`, `2`] |
+| **uploaded** | **String** | When the document was created on the portal, already formatted for reading in the culture of the caller rather  than as a machine timestamp. | [optional] [example: `01/01/2026 12:00 PM`] [nullable] |
 
 
 ### Model ItemKeyValuePairBooleanString
@@ -12155,7 +12155,7 @@ The lock state a file is to be put into.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **lockFile** | **Boolean** | The state to reach: `true` locks the file, which blocks editing, renaming and deleting for everybody but the  account that locked it and the room admins, and drops the others out of a running editing session; `false`  releases the lock. | [optional] [example: true] |
+| **lockFile** | **Boolean** | The state to reach: `true` locks the file, which blocks editing, renaming and deleting for everybody but the  account that locked it and the room admins, and drops the others out of a running editing session; `false`  releases the lock. | [optional] [example: `true`] |
 
 
 ### Model Logo
@@ -12163,11 +12163,11 @@ The room logo information.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **original** | **String** | The original logo. | [required] [example: https://portal.example.com/logo/original.png] [nullable] |
-| **large** | **String** | The large logo. | [required] [example: https://portal.example.com/logo/large.png] [nullable] |
-| **medium** | **String** | The medium logo. | [required] [example: https://portal.example.com/logo/medium.png] [nullable] |
-| **small** | **String** | The small logo. | [required] [example: https://portal.example.com/logo/small.png] [nullable] |
-| **color** | **String** | The logo color. | [optional] [example: #4781D1] [nullable] |
+| **original** | **String** | The original logo. | [required] [example: `https://portal.example.com/logo/original.png`] [nullable] |
+| **large** | **String** | The large logo. | [required] [example: `https://portal.example.com/logo/large.png`] [nullable] |
+| **medium** | **String** | The medium logo. | [required] [example: `https://portal.example.com/logo/medium.png`] [nullable] |
+| **small** | **String** | The small logo. | [required] [example: `https://portal.example.com/logo/small.png`] [nullable] |
+| **color** | **String** | The logo color. | [optional] [example: `#4781D1`] [nullable] |
 | **cover** | [**LogoCover**](#model-logocover) | The logo cover. | [optional] |
 
 
@@ -12176,12 +12176,12 @@ The logo the editor shows, resolved for the file type and the layout of this ope
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **image** | **String** | The logo for the current layout and file type, as the portal branding defines it. | [optional] [example: https://portal.example.com/logo/editor.png] [nullable] |
-| **imageDark** | **String** | The variant for a dark interface theme. | [optional] [example: https://portal.example.com/logo/editor-dark.png] [nullable] |
-| **imageLight** | **String** | The variant for a light interface theme. | [optional] [example: https://portal.example.com/logo/editor-light.png] [nullable] |
-| **imageEmbedded** | **String** | The variant for the framed viewer. It is empty in every layout but the embedded one. | [optional] [example: https://portal.example.com/logo/editor-embedded.png] [nullable] |
-| **url** | **String** | Where clicking the logo takes the user. | [optional] [example: https://portal.example.com] [nullable] |
-| **visible** | **Boolean** | Whether the logo is shown at all; the mobile layout hides it. | [optional] [example: true] |
+| **image** | **String** | The logo for the current layout and file type, as the portal branding defines it. | [optional] [example: `https://portal.example.com/logo/editor.png`] [nullable] |
+| **imageDark** | **String** | The variant for a dark interface theme. | [optional] [example: `https://portal.example.com/logo/editor-dark.png`] [nullable] |
+| **imageLight** | **String** | The variant for a light interface theme. | [optional] [example: `https://portal.example.com/logo/editor-light.png`] [nullable] |
+| **imageEmbedded** | **String** | The variant for the framed viewer. It is empty in every layout but the embedded one. | [optional] [example: `https://portal.example.com/logo/editor-embedded.png`] [nullable] |
+| **url** | **String** | Where clicking the logo takes the user. | [optional] [example: `https://portal.example.com`] [nullable] |
+| **visible** | **Boolean** | Whether the logo is shown at all; the mobile layout hides it. | [optional] [example: `true`] |
 
 
 ### Model LogoCover
@@ -12189,8 +12189,8 @@ The logo cover information.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **id** | **String** | The logo cover ID. | [required] [example: default_cover] [nullable] |
-| **data** | **String** | The logo cover data. | [required] [example: base64-image-data...] [nullable] |
+| **id** | **String** | The logo cover ID. | [required] [example: `default_cover`] [nullable] |
+| **data** | **String** | The logo cover data. | [required] [example: `base64-image-data...`] [nullable] |
 
 
 ### Model LogoRequest
@@ -12198,11 +12198,11 @@ The part of an uploaded picture to use as the logo.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **tmpFile** | **String** | The picture to cut the logo out of, named by the path that `POST api/2.0/files/logos` returned for it. The  path may be used once and only by the account that uploaded it. | [required] [example: /temp/logo_a1b2c3.png] [minLength: 1] |
-| **x** | **Integer** (int32) | The left edge of the rectangle cut out of the uploaded picture, counted in pixels from its left side. The  picture itself was already scaled down to fit 1280 by 1280 pixels when it was uploaded. | [optional] [example: 0] [min: 0] [max: 1280] |
-| **y** | **Integer** (int32) | The top edge of the rectangle cut out of the uploaded picture, counted in pixels from its top. | [optional] [example: 0] [min: 0] [max: 1280] |
-| **width** | **Integer** (int32) | How wide a piece of the uploaded picture to cut out, in pixels. It has to be sent together with the height,  and the portal builds the four logo sizes out of the piece. | [optional] [example: 300] [min: 1] [max: 1280] |
-| **height** | **Integer** (int32) | How tall a piece of the uploaded picture to cut out, in pixels. It has to be sent together with the width. | [optional] [example: 300] [min: 1] [max: 1280] |
+| **tmpFile** | **String** | The picture to cut the logo out of, named by the path that `POST api/2.0/files/logos` returned for it. The  path may be used once and only by the account that uploaded it. | [required] [example: `/temp/logo_a1b2c3.png`] [minLength: 1] |
+| **x** | **Integer** (int32) | The left edge of the rectangle cut out of the uploaded picture, counted in pixels from its left side. The  picture itself was already scaled down to fit 1280 by 1280 pixels when it was uploaded. | [optional] [example: `0`] [min: 0] [max: 1280] |
+| **y** | **Integer** (int32) | The top edge of the rectangle cut out of the uploaded picture, counted in pixels from its top. | [optional] [example: `0`] [min: 0] [max: 1280] |
+| **width** | **Integer** (int32) | How wide a piece of the uploaded picture to cut out, in pixels. It has to be sent together with the height,  and the portal builds the four logo sizes out of the piece. | [optional] [example: `300`] [min: 1] [max: 1280] |
+| **height** | **Integer** (int32) | How tall a piece of the uploaded picture to cut out, in pixels. It has to be sent together with the width. | [optional] [example: `300`] [min: 1] [max: 1280] |
 
 
 ### Model ManageFormFillingDtoInteger
@@ -12210,8 +12210,8 @@ The action to apply to the filling of a PDF form.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **formId** | **Integer** (int32) | The PDF form the action applies to. This is the value the operation reads, rather than the identifier in its  route, and the two are to be sent the same. | [required] [example: 1] |
-| **action** | [**FormFillingManageAction**](#model-formfillingmanageaction) | The action to apply. | [optional] [enum: 0, 1, 2, 3] |
+| **formId** | **Integer** (int32) | The PDF form the action applies to. This is the value the operation reads, rather than the identifier in its  route, and the two are to be sent the same. | [required] [example: `1`] |
+| **action** | [**FormFillingManageAction**](#model-formfillingmanageaction) | The action to apply. | [optional] [enum: `0`, `1`, `2`, `3`] |
 
 
 ### Model MentionMessageWrapper
@@ -12220,8 +12220,8 @@ The mention notification to send: what to say, whom to tell and where in the doc
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **actionLink** | [**ActionLinkConfig**](#model-actionlinkconfig) | The place in the document the notification link should open at, as the editor reports it when the mention is  made. Left out, the link opens the file at its beginning. | [optional] |
-| **emails** | **List** | The addresses to notify. Only an address that belongs to a portal account receives a mail; an unknown address  is skipped, and the answer then carries the access list of the file so that the client can invite its owner. | [optional] [example: [user1@example.com, user2@example.com]] [nullable] |
-| **message** | **String** | The note shown next to the link in the mail. Only its first 200 characters are sent, and a value longer than  the field allows is refused. | [optional] [example: Please take a look at the second paragraph] [minLength: 0] [maxLength: 255] [nullable] |
+| **emails** | **List** | The addresses to notify. Only an address that belongs to a portal account receives a mail; an unknown address  is skipped, and the answer then carries the access list of the file so that the client can invite its owner. | [optional] [example: `[user1@example.com, user2@example.com]`] [nullable] |
+| **message** | **String** | The note shown next to the link in the mail. Only its first 200 characters are sent, and a value longer than  the field allows is refused. | [optional] [example: `Please take a look at the second paragraph`] [minLength: 0] [maxLength: 255] [nullable] |
 
 
 ### Model MentionWrapper
@@ -12230,11 +12230,11 @@ A user the editor may offer: to be mentioned in a comment, or to be picked when 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **user** | [**UserInfo**](#model-userinfo) | The account itself, in the shape the people listings use. | [optional] |
-| **email** | **String** (email) | Where a mention notification for this user is delivered. | [optional] [example: user@example.com] [nullable] |
-| **id** | **String** | The account id as text, the same value the account object carries; it is what identifies the user in a sharing  request built from this list. | [optional] [example: user_0001] [nullable] |
-| **image** | **String** | An absolute address of the medium-sized avatar. A generated default avatar is reported when the user never  uploaded one, so the field is never empty. | [optional] [example: https://portal.example.com/avatar/user_0001.png] [nullable] |
-| **hasAccess** | **Boolean** | Not filled in by the operations that return this list: it always comes back false. Whether a user can already  open the document has to be read from the sharing settings of the file. | [optional] [example: true] |
-| **name** | **String** | The name to display, assembled the way the portal is configured to show names. | [optional] [example: John Doe] [nullable] |
+| **email** | **String** (email) | Where a mention notification for this user is delivered. | [optional] [example: `user@example.com`] [nullable] |
+| **id** | **String** | The account id as text, the same value the account object carries; it is what identifies the user in a sharing  request built from this list. | [optional] [example: `user_0001`] [nullable] |
+| **image** | **String** | An absolute address of the medium-sized avatar. A generated default avatar is reported when the user never  uploaded one, so the field is never empty. | [optional] [example: `https://portal.example.com/avatar/user_0001.png`] [nullable] |
+| **hasAccess** | **Boolean** | Not filled in by the operations that return this list: it always comes back false. Whether a user can already  open the document has to be read from the sharing settings of the file. | [optional] [example: `true`] |
+| **name** | **String** | The name to display, assembled the way the portal is configured to show names. | [optional] [example: `John Doe`] [nullable] |
 
 
 ### Model MentionWrapperArrayWrapper
@@ -12618,15 +12618,15 @@ The descriptor of a portal module: what it is called, where it starts and how it
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **id** | **UUID** (uuid) | The identifier of the module. It is the same in every portal and in every language, so use it rather than the  title to tell modules apart. | [optional] [example: e67be73d-f9ae-4ce1-8fec-1880cb518cb4] |
-| **appName** | **String** | The short system name of the module, the one that appears in its addresses and in the portal configuration.  Unlike the title it is not translated. | [optional] [example: files] [nullable] |
-| **title** | **String** | The display name of the module, already translated for the calling account, so it changes with the language  and must not be compared against a fixed string. | [optional] [example: Documents] [nullable] |
-| **link** | **String** | The address of the start page of the module, to be opened in a browser rather than called as an API. | [optional] [example: https://example.com] [nullable] |
-| **iconUrl** | **String** | The address of the small icon of the module, meant for a menu entry. | [optional] [example: https://example.com/icon.svg] [nullable] |
-| **imageUrl** | **String** | The address of the large image of the module, meant for a tile or a start screen. | [optional] [example: https://example.com/image.png] [nullable] |
-| **helpUrl** | **String** | The address of the help section of the module. It is empty when the portal publishes no help for it. | [optional] [example: https://example.com/help] [nullable] |
-| **description** | **String** | The one-line description of the module shown next to its title, translated for the calling account. | [optional] [example: File management] [nullable] |
-| **isPrimary** | **Boolean** | Whether the portal opens this module first when no other destination is given. | [optional] [example: true] |
+| **id** | **UUID** (uuid) | The identifier of the module. It is the same in every portal and in every language, so use it rather than the  title to tell modules apart. | [optional] [example: `e67be73d-f9ae-4ce1-8fec-1880cb518cb4`] |
+| **appName** | **String** | The short system name of the module, the one that appears in its addresses and in the portal configuration.  Unlike the title it is not translated. | [optional] [example: `files`] [nullable] |
+| **title** | **String** | The display name of the module, already translated for the calling account, so it changes with the language  and must not be compared against a fixed string. | [optional] [example: `Documents`] [nullable] |
+| **link** | **String** | The address of the start page of the module, to be opened in a browser rather than called as an API. | [optional] [example: `https://example.com`] [nullable] |
+| **iconUrl** | **String** | The address of the small icon of the module, meant for a menu entry. | [optional] [example: `https://example.com/icon.svg`] [nullable] |
+| **imageUrl** | **String** | The address of the large image of the module, meant for a tile or a start screen. | [optional] [example: `https://example.com/image.png`] [nullable] |
+| **helpUrl** | **String** | The address of the help section of the module. It is empty when the portal publishes no help for it. | [optional] [example: `https://example.com/help`] [nullable] |
+| **description** | **String** | The one-line description of the module shown next to its title, translated for the calling account. | [optional] [example: `File management`] [nullable] |
+| **isPrimary** | **Boolean** | Whether the portal opens this module first when no other destination is given. | [optional] [example: `true`] |
 
 
 ### Model ModuleWrapper
@@ -12646,8 +12646,8 @@ The logo cover information, with the cover data in every available size.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **id** | **String** | The logo cover ID. | [required] [example: default_cover] [nullable] |
-| **data** | **Map** | The logo cover data. | [required] [example: \{small=base64..., medium=base64..., large=base64...\}] |
+| **id** | **String** | The logo cover ID. | [required] [example: `default_cover`] [nullable] |
+| **data** | **Map** | The logo cover data. | [required] [example: `{small=base64..., medium=base64..., large=base64...}`] |
 
 
 ### Model NewItemsDtoFileEntryBaseDto
@@ -12697,14 +12697,14 @@ The OAuth 2.0 token issued by a third-party provider.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **access\_token** | **String** | The token sent to the provider with every request made on behalf of the account. | [optional] [example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...] [nullable] |
-| **refresh\_token** | **String** | The token used to obtain a new access token when the current one expires. A provider that issues no refresh  token leaves it empty, and the account then has to be connected again to keep working. | [optional] [example: def50200a1b2c3d4e5f6...] [nullable] |
-| **expires\_in** | **Long** (int64) | How long the access token stays usable, in seconds counted from `timestamp`. Zero means the provider did not  say, and the token is then treated as expired. | [optional] [example: 3600] |
-| **client\_id** | **String** | The OAuth 2.0 client ID of the application the token was issued to. | [optional] [example: my-client-id] [nullable] |
-| **client\_secret** | **String** | The client secret of the application the token was issued to, needed when the token is refreshed. | [optional] [example: my-client-secret] [nullable] |
-| **redirect\_uri** | **URI** (uri) | The redirect URL the authorization code behind this token was obtained with; providers require the same value  again when the token is refreshed. | [optional] [example: https://app.example.com/callback] [nullable] |
-| **timestamp** | **Date** (date-time) | When the token was issued, in UTC. This is the point `expires_in` is counted from. | [optional] [example: 2026-01-01T00:00:00Z] |
-| **isExpired** | **Boolean** | Whether the access token can no longer be used and has to be refreshed. It is also true when the provider did  not say how long the token lives. | [optional] [example: false] |
+| **access\_token** | **String** | The token sent to the provider with every request made on behalf of the account. | [optional] [example: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...`] [nullable] |
+| **refresh\_token** | **String** | The token used to obtain a new access token when the current one expires. A provider that issues no refresh  token leaves it empty, and the account then has to be connected again to keep working. | [optional] [example: `def50200a1b2c3d4e5f6...`] [nullable] |
+| **expires\_in** | **Long** (int64) | How long the access token stays usable, in seconds counted from `timestamp`. Zero means the provider did not  say, and the token is then treated as expired. | [optional] [example: `3600`] |
+| **client\_id** | **String** | The OAuth 2.0 client ID of the application the token was issued to. | [optional] [example: `my-client-id`] [nullable] |
+| **client\_secret** | **String** | The client secret of the application the token was issued to, needed when the token is refreshed. | [optional] [example: `my-client-secret`] [nullable] |
+| **redirect\_uri** | **URI** (uri) | The redirect URL the authorization code behind this token was obtained with; providers require the same value  again when the token is refreshed. | [optional] [example: `https://app.example.com/callback`] [nullable] |
+| **timestamp** | **Date** (date-time) | When the token was issued, in UTC. This is the point `expires_in` is counted from. | [optional] [example: `2026-01-01T00:00:00Z`] |
+| **isExpired** | **Boolean** | Whether the access token can no longer be used and has to be refreshed. It is also true when the provider did  not say how long the token lives. | [optional] [example: `false`] |
 
 
 ### Model ObjectArrayWrapper
@@ -12732,8 +12732,8 @@ The sorting parameters.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **is\_asc** | **Boolean** | Specifies if the order is ascending. | [optional] [example: true] |
-| **property** | [**SortedByType**](#model-sortedbytype) | The parameters by which the files will be sorted. | [optional] [enum: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] |
+| **is\_asc** | **Boolean** | Specifies if the order is ascending. | [optional] [example: `true`] |
+| **property** | [**SortedByType**](#model-sortedbytype) | The parameters by which the files will be sorted. | [optional] [enum: `0`, `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`] |
 
 
 ### Model OrderRequestDto
@@ -12741,7 +12741,7 @@ The position an entry is to take inside its folder.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **order** | **Integer** (int32) | The position the entry is to take, counting from 1. The entry that held it, and everything after it, is  shifted to make room. A dotted path such as 1.2.3 is accepted as well, of which only the last segment is  read. | [optional] [example: 1] [min: 1] [max: 2147483647] |
+| **order** | **Integer** (int32) | The position the entry is to take, counting from 1. The entry that held it, and everything after it, is  shifted to make room. A dotted path such as 1.2.3 is accepted as well, of which only the last segment is  read. | [optional] [example: `1`] [min: 1] [max: 2147483647] |
 
 
 ### Model OrdersItemRequestDtoInteger
@@ -12749,9 +12749,9 @@ One entry to move to a given position inside its folder.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **entryId** | **Integer** (int32) | The file or folder to move. | [required] [example: 1] |
-| **entryType** | [**FileEntryType**](#model-fileentrytype) | Which of the two the identifier names, because a file and a folder may carry the same number. | [required] [enum: 1, 2] |
-| **order** | **Integer** (int32) | The position the entry is to take, counting from 1. The entry that held it, and everything after it, is  shifted to make room. A dotted path such as 1.2.3 is accepted as well, of which only the last segment is  read. | [required] [example: 1] [min: 1] [max: 2147483647] |
+| **entryId** | **Integer** (int32) | The file or folder to move. | [required] [example: `1`] |
+| **entryType** | [**FileEntryType**](#model-fileentrytype) | Which of the two the identifier names, because a file and a folder may carry the same number. | [required] [enum: `1`, `2`] |
+| **order** | **Integer** (int32) | The position the entry is to take, counting from 1. The entry that held it, and everything after it, is  shifted to make room. A dotted path such as 1.2.3 is accepted as well, of which only the last segment is  read. | [required] [example: `1`] [min: 1] [max: 2147483647] |
 
 
 ### Model OrdersRequestDtoInteger
@@ -12759,7 +12759,7 @@ The request that moves several files and folders to given positions.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **items** | [**List**](#model-ordersitemrequestdtointeger) | The entries to move, applied one after another in the order they are sent, so each of them shifts the  neighbours the ones before it left behind. | [required] [example: [\{entryId=1, entryType=2, order=1\}, \{entryId=4, entryType=1, order=2\}]] [nullable] |
+| **items** | [**List**](#model-ordersitemrequestdtointeger) | The entries to move, applied one after another in the order they are sent, so each of them shifts the  neighbours the ones before it left behind. | [required] [example: `[{entryId=1, entryType=2, order=1}, {entryId=4, entryType=1, order=2}]`] [nullable] |
 
 
 ### Model Paragraph
@@ -12767,8 +12767,8 @@ The paragraph parameters.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **align** | **Integer** (int32) | The paragraph align. | [optional] [example: 2] |
-| **runs** | [**List**](#model-run) | The list of text runs from the paragraph. | [optional] [example: [\{fill=[124, 124, 124], text=CONFIDENTIAL, fontSize=26\}]] [nullable] |
+| **align** | **Integer** (int32) | The paragraph align. | [optional] [example: `2`] |
+| **runs** | [**List**](#model-run) | The list of text runs from the paragraph. | [optional] [example: `[{fill=[124, 124, 124], text=CONFIDENTIAL, fontSize=26}]`] [nullable] |
 
 
 ### Model PermissionsConfig
@@ -12776,16 +12776,16 @@ The permissions configuration parameters.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **comment** | **Boolean** | Defines if the document can be commented or not. | [optional] [example: true] |
-| **chat** | **Boolean** | Defines if the chat functionality is enabled in the document or not. | [optional] [example: true] |
-| **download** | **Boolean** | Defines if the document can be downloaded or only viewed or edited online. | [optional] [example: true] |
-| **edit** | **Boolean** | Defines if the document can be edited or only viewed. | [optional] [example: true] |
-| **fillForms** | **Boolean** | Defines if the forms can be filled. | [optional] [example: true] |
-| **modifyFilter** | **Boolean** | Defines if the filter can be applied globally (true) affecting all the other users,  or locally (false), i.e. for the current user only. | [optional] [example: true] |
-| **protect** | **Boolean** | Defines if the Protection tab on the toolbar and the Protect button in the left menu are displayedor hidden. | [optional] [example: true] |
-| **print** | **Boolean** | Defines if the document can be printed or not. | [optional] [example: true] |
-| **review** | **Boolean** | Defines if the document can be reviewed or not. | [optional] [example: true] |
-| **copy** | **Boolean** | Defines if the content can be copied to the clipboard or not. | [optional] [example: true] |
+| **comment** | **Boolean** | Defines if the document can be commented or not. | [optional] [example: `true`] |
+| **chat** | **Boolean** | Defines if the chat functionality is enabled in the document or not. | [optional] [example: `true`] |
+| **download** | **Boolean** | Defines if the document can be downloaded or only viewed or edited online. | [optional] [example: `true`] |
+| **edit** | **Boolean** | Defines if the document can be edited or only viewed. | [optional] [example: `true`] |
+| **fillForms** | **Boolean** | Defines if the forms can be filled. | [optional] [example: `true`] |
+| **modifyFilter** | **Boolean** | Defines if the filter can be applied globally (true) affecting all the other users,  or locally (false), i.e. for the current user only. | [optional] [example: `true`] |
+| **protect** | **Boolean** | Defines if the Protection tab on the toolbar and the Protect button in the left menu are displayedor hidden. | [optional] [example: `true`] |
+| **print** | **Boolean** | Defines if the document can be printed or not. | [optional] [example: `true`] |
+| **review** | **Boolean** | Defines if the document can be reviewed or not. | [optional] [example: `true`] |
+| **copy** | **Boolean** | Defines if the content can be copied to the clipboard or not. | [optional] [example: `true`] |
 
 
 ### Model PluginsConfig
@@ -12793,7 +12793,7 @@ Which editor add-ons the portal connects. It currently connects none.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **pluginsData** | **List** | The array of absolute URLs to the plugin configuration files. | [optional] [example: [https://portal.example.com/ThirdParty/plugin/easybib/config.json, https://portal.example.com/ThirdParty/plugin/wordpress/config.json]] [nullable] |
+| **pluginsData** | **List** | The array of absolute URLs to the plugin configuration files. | [optional] [example: `[https://portal.example.com/ThirdParty/plugin/easybib/config.json, https://portal.example.com/ThirdParty/plugin/wordpress/config.json]`] [nullable] |
 
 
 ### Model ProblemDetail
@@ -12827,13 +12827,13 @@ One storage service this portal can connect, with the values a connection form n
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **name** | **String** | The display name of the service, and the only thing that tells the WebDAV presets apart: `kDrive`, `Yandex`,  `WebDav`, `Nextcloud` and `ownCloud` all report the same key. | [optional] [example: Nextcloud] [nullable] |
-| **key** | **String** | The value to send as `providerKey` when an account of this service is connected. | [optional] [example: WebDav] [nullable] |
-| **connected** | **Boolean** | Whether the service can be used on this portal: it is enabled in the configuration and, for an OAuth service,  its application is registered. It says nothing about whether an account of it is connected. | [optional] [example: true] |
-| **oauth** | **Boolean** | Whether an account of this service is connected with an OAuth 2.0 authorization code in `token`; when false,  it is connected with `login` and `password`. | [optional] [example: true] |
-| **redirectUrl** | **String** | The redirect URL this portal is registered with at the service, to build the consent screen URL from. It comes  back as null for the services that do not use OAuth. | [optional] [example: https://example.com/thirdparty] [nullable] |
-| **requiredConnectionUrl** | **Boolean** | Whether an account of this service cannot be connected without `url`, which is the case for the WebDAV servers  whose address is not known in advance. The presets with a fixed address and the OAuth services do not need it. | [optional] [example: false] |
-| **clientId** | **String** | The OAuth 2.0 client ID this portal is registered with at the service, to build the consent screen URL from.  It comes back as null for the services that do not use OAuth. | [optional] [example: l1s2h3d4f5g6h7j8k9l0] [nullable] |
+| **name** | **String** | The display name of the service, and the only thing that tells the WebDAV presets apart: `kDrive`, `Yandex`,  `WebDav`, `Nextcloud` and `ownCloud` all report the same key. | [optional] [example: `Nextcloud`] [nullable] |
+| **key** | **String** | The value to send as `providerKey` when an account of this service is connected. | [optional] [example: `WebDav`] [nullable] |
+| **connected** | **Boolean** | Whether the service can be used on this portal: it is enabled in the configuration and, for an OAuth service,  its application is registered. It says nothing about whether an account of it is connected. | [optional] [example: `true`] |
+| **oauth** | **Boolean** | Whether an account of this service is connected with an OAuth 2.0 authorization code in `token`; when false,  it is connected with `login` and `password`. | [optional] [example: `true`] |
+| **redirectUrl** | **String** | The redirect URL this portal is registered with at the service, to build the consent screen URL from. It comes  back as null for the services that do not use OAuth. | [optional] [example: `https://example.com/thirdparty`] [nullable] |
+| **requiredConnectionUrl** | **Boolean** | Whether an account of this service cannot be connected without `url`, which is the case for the WebDAV servers  whose address is not known in advance. The presets with a fixed address and the OAuth services do not need it. | [optional] [example: `false`] |
+| **clientId** | **String** | The OAuth 2.0 client ID this portal is registered with at the service, to build the consent screen URL from.  It comes back as null for the services that do not use OAuth. | [optional] [example: `l1s2h3d4f5g6h7j8k9l0`] [nullable] |
 
 
 ### Model ProviderFilter
@@ -12875,9 +12875,9 @@ One entry of the recent-documents list the editor offers.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **folder** | **String** | The folder shown next to the entry, as a readable name rather than an id. | [optional] [example: My documents] [nullable] |
-| **title** | **String** | The name shown for the entry. | [optional] [example: Report 2026.docx] [nullable] |
-| **url** | **URI** (uri) | Where the entry opens. | [optional] [example: https://portal.example.com/doceditor?fileid=512] [nullable] |
+| **folder** | **String** | The folder shown next to the entry, as a readable name rather than an id. | [optional] [example: `My documents`] [nullable] |
+| **title** | **String** | The name shown for the entry. | [optional] [example: `Report 2026.docx`] [nullable] |
+| **url** | **URI** (uri) | Where the entry opens. | [optional] [example: `https://portal.example.com/doceditor?fileid=512`] [nullable] |
 
 
 ### Model ReviewConfig
@@ -12885,7 +12885,7 @@ How tracked changes are displayed when the document opens.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **reviewDisplay** | **String** | How the editors render tracked changes at first: with the markup, in a simplified markup, as the final text,  or as the original text. A session that may not write opens on the final text. | [optional] [example: original] [nullable] |
+| **reviewDisplay** | **String** | How the editors render tracked changes at first: with the markup, in a simplified markup, as the final text,  or as the original text. A session that may not write opens on the final text. | [optional] [example: `original`] [nullable] |
 
 
 ### Model RoomDataLifetimeDto
@@ -12893,10 +12893,10 @@ The rule by which the files of a room are removed once they have been lying in i
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **deletePermanently** | **Boolean** | Decides what happens to a file that has grown too old: it is erased outright, or it is moved to the trash of  the account that created the room, from where it can still be brought back. | [optional] [example: false] |
-| **period** | [**RoomDataLifetimePeriod**](#model-roomdatalifetimeperiod) | The unit the age is counted in. Months and years are counted as calendar ones, so the same number of them  covers a different number of days depending on when the clean-up runs. | [optional] [enum: 0, 1, 2] |
-| **value** | **Integer** (int32) | How many periods a file may stay in the room, counted from the moment it was last changed rather than from the  moment the rule was set. Files that are already older than this are removed by the next clean-up. | [optional] [example: 12] [min: 1] [max: 999] [nullable] |
-| **enabled** | **Boolean** | Switches the rule on and off. Switching it off erases the rule instead of keeping it aside, so afterwards the  room reports no rule at all and the other three values have to be sent again to bring it back. | [optional] [example: true] [nullable] |
+| **deletePermanently** | **Boolean** | Decides what happens to a file that has grown too old: it is erased outright, or it is moved to the trash of  the account that created the room, from where it can still be brought back. | [optional] [example: `false`] |
+| **period** | [**RoomDataLifetimePeriod**](#model-roomdatalifetimeperiod) | The unit the age is counted in. Months and years are counted as calendar ones, so the same number of them  covers a different number of days depending on when the clean-up runs. | [optional] [enum: `0`, `1`, `2`] |
+| **value** | **Integer** (int32) | How many periods a file may stay in the room, counted from the moment it was last changed rather than from the  moment the rule was set. Files that are already older than this are removed by the next clean-up. | [optional] [example: `12`] [min: 1] [max: 999] [nullable] |
+| **enabled** | **Boolean** | Switches the rule on and off. Switching it off erases the rule instead of keeping it aside, so afterwards the  room reports no rule at all and the other three values have to be sent again to bring it back. | [optional] [example: `true`] [nullable] |
 
 
 ### Model RoomDataLifetimePeriod
@@ -12913,10 +12913,10 @@ The progress of the job that creates a room out of a room template.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **roomId** | **Integer** (int32) | The room the job is creating. It is meaningful once the room exists, which is guaranteed only after  `isCompleted` turns true and `error` stays empty; until then it carries no usable id. | [required] [example: 456] |
-| **progress** | **Double** (double) | How far the job has got. The value climbs while the contents of the template are being copied into the new  room and reaches its maximum at the very end. | [required] [example: 50.0] |
-| **error** | **String** | Why the job stopped. It is empty while the job runs and after a successful one, and a filled value means that  no room was created, so the request has to be repeated rather than waited out. | [required] [example: Room creation failed] [nullable] |
-| **isCompleted** | **Boolean** | Whether the job has ended. It is set both after a successful creation and after a failure, so it is the flag  to poll for, while `error` is what separates the two outcomes. | [required] [example: false] |
+| **roomId** | **Integer** (int32) | The room the job is creating. It is meaningful once the room exists, which is guaranteed only after  `isCompleted` turns true and `error` stays empty; until then it carries no usable id. | [required] [example: `456`] |
+| **progress** | **Double** (double) | How far the job has got. The value climbs while the contents of the template are being copied into the new  room and reaches its maximum at the very end. | [required] [example: `50.0`] |
+| **error** | **String** | Why the job stopped. It is empty while the job runs and after a successful one, and a filled value means that  no room was created, so the request has to be repeated rather than waited out. | [required] [example: `Room creation failed`] [nullable] |
+| **isCompleted** | **Boolean** | Whether the job has ended. It is set both after a successful creation and after a failure, so it is the flag  to poll for, while `error` is what separates the two outcomes. | [required] [example: `false`] |
 
 
 ### Model RoomFromTemplateStatusWrapper
@@ -12948,12 +12948,12 @@ A personal collection of rooms: the name and icon it was given, the account that
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **id** | **Integer** (int32) | The identifier of the group, which addresses it in every other group operation and is kept for as long as the  group exists. | [optional] [example: 42] |
-| **name** | **String** | The name its owner gave the group, stored trimmed of surrounding spaces. Names are not unique, so two groups  of the same account can be told apart only by their identifier. | [optional] [example: Client projects] [nullable] |
+| **id** | **Integer** (int32) | The identifier of the group, which addresses it in every other group operation and is kept for as long as the  group exists. | [optional] [example: `42`] |
+| **name** | **String** | The name its owner gave the group, stored trimmed of surrounding spaces. Names are not unique, so two groups  of the same account can be told apart only by their identifier. | [optional] [example: `Client projects`] [nullable] |
 | **icon** | [**MultiSizeLogoCover**](#model-multisizelogocover) | The built-in cover chosen for the group, carrying the cover identifier and its rendering in each available  size. Null when the group has no icon, either because it was never given one or because the icon was cleared  by setting it to an empty value. | [optional] |
-| **userId** | **UUID** (uuid) | The account that created the group and the only one able to read, change or delete it; for any other member of  the portal the group does not exist. | [optional] [example: 9a1b2c3d-4e5f-6071-8293-a4b5c6d7e8f9] |
-| **rooms** | [**List**](#model-fileentrybasedto) | The rooms the group gathers, those stored in the portal first and those on connected third-party accounts  after them. Null when the group was asked for without its members, and an empty array when the group holds no  room the caller can still see. A room moved to the archive is left out until it is taken out of the archive. | [optional] [example: [\{title=Client onboarding, fileEntryType=1\}]] [nullable] |
-| **totalRooms** | **Integer** (int32) | How many rooms the group shows: the same rooms `rooms` lists, so archived ones are not counted either. It is  filled even when the rooms themselves were not asked for, which makes it the cheap way to tell an empty group  from a populated one. | [optional] [example: 2] |
+| **userId** | **UUID** (uuid) | The account that created the group and the only one able to read, change or delete it; for any other member of  the portal the group does not exist. | [optional] [example: `9a1b2c3d-4e5f-6071-8293-a4b5c6d7e8f9`] |
+| **rooms** | [**List**](#model-fileentrybasedto) | The rooms the group gathers, those stored in the portal first and those on connected third-party accounts  after them. Null when the group was asked for without its members, and an empty array when the group holds no  room the caller can still see. A room moved to the archive is left out until it is taken out of the archive. | [optional] [example: `[{title=Client onboarding, fileEntryType=1}]`] [nullable] |
+| **totalRooms** | **Integer** (int32) | How many rooms the group shows: the same rooms `rooms` lists, so archived ones are not counted either. It is  filled even when the rooms themselves were not asked for, which makes it the cheap way to tell an empty group  from a populated one. | [optional] [example: `2`] |
 
 
 ### Model RoomGroupRequestDto
@@ -12961,9 +12961,9 @@ The name, the icon and the rooms of a room group to create.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **name** | **String** | The name to show the group under. Surrounding spaces are trimmed before it is stored, a name that is blank  once trimmed is refused, and the name does not have to differ from the names of the caller's other groups. | [required] [example: Client projects] [minLength: 0] [maxLength: 128] |
-| **icon** | **String** | The icon of the group, given as the identifier of one of the built-in covers listed by  `GET api/2.0/files/rooms/covers`. An uploaded image cannot be used, and any value that is not one of those  identifiers is refused. | [required] [example: star] [minLength: 0] [maxLength: 50] |
-| **rooms** | [**List**](#model-duplicaterequestdtofileids) | The rooms to gather in the group, each given as a number for a room stored in the portal or as a string for a  room on a connected third-party account. Every identifier has to name a room the caller can read; repeats are  collapsed, and an element of any other shape - a decimal number, a number sent as a string, null - is refused. | [required] [example: [12, 15, folder-123-abc]] |
+| **name** | **String** | The name to show the group under. Surrounding spaces are trimmed before it is stored, a name that is blank  once trimmed is refused, and the name does not have to differ from the names of the caller's other groups. | [required] [example: `Client projects`] [minLength: 0] [maxLength: 128] |
+| **icon** | **String** | The icon of the group, given as the identifier of one of the built-in covers listed by  `GET api/2.0/files/rooms/covers`. An uploaded image cannot be used, and any value that is not one of those  identifiers is refused. | [required] [example: `star`] [minLength: 0] [maxLength: 50] |
+| **rooms** | [**List**](#model-duplicaterequestdtofileids) | The rooms to gather in the group, each given as a number for a room stored in the portal or as a string for a  room on a connected third-party account. Every identifier has to name a room the caller can read; repeats are  collapsed, and an element of any other shape - a decimal number, a number sent as a string, null - is refused. | [required] [example: `[12, 15, folder-123-abc]`] |
 
 
 ### Model RoomGroupWrapper
@@ -12985,7 +12985,7 @@ One membership change in a room: an account or an email address, and the access 
 |------------ | ------------- | ------------- | -------------|
 | **email** | **String** (email) | The address of somebody who has no portal account yet. An invitation is sent to it and an account is created  once it is accepted, so this is the field to use instead of an account identifier when the person is new to  the portal. | [optional] [maxLength: 255] |
 | **id** | **UUID** (uuid) | The account or the group the entry is about, taken from the portal people and group listings. Leave it out and  give an email address instead to invite somebody who has no account yet. | [optional] |
-| **access** | [**FileShare**](#model-fileshare) | What the subject may do in the room. The value 0 removes the subject from the room, and the levels on offer  depend on the kind of room. | [optional] [enum: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] |
+| **access** | [**FileShare**](#model-fileshare) | What the subject may do in the room. The value 0 removes the subject from the room, and the levels on offer  depend on the kind of room. | [optional] [enum: `0`, `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`] |
 
 
 ### Model RoomInvitationRequest
@@ -12993,11 +12993,11 @@ One batch of membership changes for a room.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **invitations** | [**List**](#model-roominvitation) | Who is added, changed or removed, one entry per subject. The same subject named twice keeps the level of the  last entry, and an empty list is accepted and changes nothing. | [optional] [example: [\{id=e9a7b4c1-2d3f-4a56-8b90-1c2d3e4f5a6b, access=10\}]] [nullable] |
-| **notify** | **Boolean** | Whether the subjects that gained access are told about it by email. With it off the change is silent, which is  the usual choice when membership is synchronised from another system. | [optional] [example: true] |
-| **message** | **String** | The line added to the invitation email. It is used only while the notification is on, and it reaches nobody  whose access was removed. | [optional] [example: Please review the contract by Friday] [nullable] |
-| **culture** | **String** | The language of the invitation email, as a portal culture name such as en-US. Leaving it out sends each  message in the language of its recipient. | [optional] [example: en-US] [nullable] |
-| **force** | **Boolean** | Whether a member who still holds a role in an unfinished form is removed anyway. With it off such a removal is  refused and reported through the error of the answer, so the form can be reassigned first. | [optional] [example: false] |
+| **invitations** | [**List**](#model-roominvitation) | Who is added, changed or removed, one entry per subject. The same subject named twice keeps the level of the  last entry, and an empty list is accepted and changes nothing. | [optional] [example: `[{id=e9a7b4c1-2d3f-4a56-8b90-1c2d3e4f5a6b, access=10}]`] [nullable] |
+| **notify** | **Boolean** | Whether the subjects that gained access are told about it by email. With it off the change is silent, which is  the usual choice when membership is synchronised from another system. | [optional] [example: `true`] |
+| **message** | **String** | The line added to the invitation email. It is used only while the notification is on, and it reaches nobody  whose access was removed. | [optional] [example: `Please review the contract by Friday`] [nullable] |
+| **culture** | **String** | The language of the invitation email, as a portal culture name such as en-US. Leaving it out sends each  message in the language of its recipient. | [optional] [example: `en-US`] [nullable] |
+| **force** | **Boolean** | Whether a member who still holds a role in an unfinished form is removed anyway. With it off such a removal is  refused and reported through the error of the answer, so the form can be reassigned first. | [optional] [example: `false`] |
 
 
 ### Model RoomLinkRequest
@@ -13005,16 +13005,16 @@ The link of a room to create, change or revoke.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **linkId** | **UUID** (uuid) | Which link to change, taken from `GET api/2.0/files/rooms/{id}/links`. Leaving it out creates a link, and an  identifier the room does not know creates a link carrying that identifier. | [optional] [example: b3f1c8de-5a64-4d1e-9f27-6c0a8d5b7e41] |
-| **access** | [**FileShare**](#model-fileshare) | What whoever opens the link may do in the room. The value 0 revokes the link instead of changing it, and the  levels a room accepts depend on its kind. | [optional] [enum: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] |
+| **linkId** | **UUID** (uuid) | Which link to change, taken from `GET api/2.0/files/rooms/{id}/links`. Leaving it out creates a link, and an  identifier the room does not know creates a link carrying that identifier. | [optional] [example: `b3f1c8de-5a64-4d1e-9f27-6c0a8d5b7e41`] |
+| **access** | [**FileShare**](#model-fileshare) | What whoever opens the link may do in the room. The value 0 revokes the link instead of changing it, and the  levels a room accepts depend on its kind. | [optional] [enum: `0`, `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`] |
 | **expirationDate** | [**ApiDateTime**](#model-apidatetime) | When the link stops working, written with the offset of the portal time zone. A date already past is dropped  silently for an external link and refused for an invitation link, and a date further ahead than the portal  allows is refused as well; leaving it out means the link does not expire. | [optional] |
-| **internal** | **Boolean** | Whether the external link works only for people already signed in to the portal. With it off the link opens  the room for anyone who has the address, subject to the password. | [optional] [example: false] |
-| **title** | **String** | The name the link is shown under in the room. An empty value is accepted and the portal names the link itself,  so the answer is what tells the caller the name in use. | [optional] [example: Read-only access for auditors] [minLength: 0] [maxLength: 255] [nullable] |
-| **linkType** | [**LinkType**](#model-linktype) | Which kind of link to create: an invitation link makes whoever opens it a member of the room, while an  external link opens the room without an account. It is fixed when the link is created and is ignored on later  changes. | [optional] [enum: 0, 1] |
-| **password** | **String** | The password an external link asks for before it opens the room. An empty value leaves the link open to anyone  who has the address, and the password is never returned when links are listed. | [optional] [example: S3cret-Phrase] [minLength: 0] [maxLength: 255] [nullable] |
-| **denyDownload** | **Boolean** | Whether people arriving through the link are stopped from downloading and printing what they open. They can  still read the documents in the editor. | [optional] [example: false] |
-| **maxUseCount** | **Integer** (int32) | How many people an invitation link may still let in before it stops working. A value below the number of  people who already used it is refused, and leaving it out puts no ceiling on the link. | [optional] [example: 25] [min: 1] [max: 1000] [nullable] |
-| **currentUseCount** | **Integer** (int32) | How many people have already joined through this invitation link. The value is kept by the portal: it is  reported back when links are listed and anything sent here is ignored. | [optional] [example: 0] |
+| **internal** | **Boolean** | Whether the external link works only for people already signed in to the portal. With it off the link opens  the room for anyone who has the address, subject to the password. | [optional] [example: `false`] |
+| **title** | **String** | The name the link is shown under in the room. An empty value is accepted and the portal names the link itself,  so the answer is what tells the caller the name in use. | [optional] [example: `Read-only access for auditors`] [minLength: 0] [maxLength: 255] [nullable] |
+| **linkType** | [**LinkType**](#model-linktype) | Which kind of link to create: an invitation link makes whoever opens it a member of the room, while an  external link opens the room without an account. It is fixed when the link is created and is ignored on later  changes. | [optional] [enum: `0`, `1`] |
+| **password** | **String** | The password an external link asks for before it opens the room. An empty value leaves the link open to anyone  who has the address, and the password is never returned when links are listed. | [optional] [example: `S3cret-Phrase`] [minLength: 0] [maxLength: 255] [nullable] |
+| **denyDownload** | **Boolean** | Whether people arriving through the link are stopped from downloading and printing what they open. They can  still read the documents in the editor. | [optional] [example: `false`] |
+| **maxUseCount** | **Integer** (int32) | How many people an invitation link may still let in before it stops working. A value below the number of  people who already used it is refused, and leaving it out puts no ceiling on the link. | [optional] [example: `25`] [min: 1] [max: 1000] [nullable] |
+| **currentUseCount** | **Integer** (int32) | How many people have already joined through this invitation link. The value is kept by the portal: it is  reported back when links are listed and anything sent here is ignored. | [optional] [example: `0`] |
 
 
 ### Model RoomNewItemsDto
@@ -13040,9 +13040,9 @@ The outcome of a change of the room membership.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **members** | [**List**](#model-filesharedto) | The access entries of the subjects named in the request, read back after the change was applied. A subject the  caller may not see is missing from it, so comparing this list with the request is the way to learn who was  skipped; it is null when nothing was applied at all. | [optional] [example: [\{access=10, isOwner=false, subjectType=0\}]] [nullable] |
-| **warning** | **String** | The reason the first subject that could not be handled was skipped, in the language of the request, while the  rest of the list was still applied. Null when every named subject went through. The text is meant to be shown  to a person, not matched against. | [optional] [example: The maximum number of links is 10] [nullable] |
-| **error** | [**RoomSecurityError**](#model-roomsecurityerror) | Reports the one case in which nothing at all was changed: a member being removed still holds a role in a form  of the room, and the request did not ask to remove them anyway. Repeat the call with `force` to remove them  together with the role. | [optional] [enum: 0, 1] |
+| **members** | [**List**](#model-filesharedto) | The access entries of the subjects named in the request, read back after the change was applied. A subject the  caller may not see is missing from it, so comparing this list with the request is the way to learn who was  skipped; it is null when nothing was applied at all. | [optional] [example: `[{access=10, isOwner=false, subjectType=0}]`] [nullable] |
+| **warning** | **String** | The reason the first subject that could not be handled was skipped, in the language of the request, while the  rest of the list was still applied. Null when every named subject went through. The text is meant to be shown  to a person, not matched against. | [optional] [example: `The maximum number of links is 10`] [nullable] |
+| **error** | [**RoomSecurityError**](#model-roomsecurityerror) | Reports the one case in which nothing at all was changed: a member being removed still holds a role in a form  of the room, and the request did not ask to remove them anyway. Repeat the call with `force` to remove them  together with the role. | [optional] [enum: `0`, `1`] |
 
 
 ### Model RoomSecurityError
@@ -13070,17 +13070,17 @@ The parameters of a room template built from an existing room.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **roomId** | **Integer** (int32) | The identifier of the room the template is built from. Take it from the room listing of  `GET api/2.0/files/rooms`; a folder identifier is not accepted. | [required] [example: 1234] |
-| **title** | **String** | The title the template is saved under in the Templates section. Characters that a folder name cannot contain  are replaced with an underscore on save, and two templates may share a title. | [required] [example: Sales agreement room] [minLength: 0] [maxLength: 400] |
+| **roomId** | **Integer** (int32) | The identifier of the room the template is built from. Take it from the room listing of  `GET api/2.0/files/rooms`; a folder identifier is not accepted. | [required] [example: `1234`] |
+| **title** | **String** | The title the template is saved under in the Templates section. Characters that a folder name cannot contain  are replaced with an underscore on save, and two templates may share a title. | [required] [example: `Sales agreement room`] [minLength: 0] [maxLength: 400] |
 | **logo** | [**LogoRequest**](#model-logorequest) | A picture of the caller's own for the template, cropped out of an image already placed in the temporary  storage. | [optional] |
-| **copyLogo** | **Boolean** | Whether the template takes over the picture already set on the source room. When false the template gets no  picture from that room. | [optional] [example: true] |
-| **share** | **List** | The email addresses of the portal members who are granted read access to the finished template. | [optional] [example: [user1@example.com, user2@example.com]] [nullable] |
-| **groups** | **List** (uuid) | The identifiers of the portal groups whose members are granted read access to the finished template. | [optional] [example: [9924256a-739c-462b-af15-e652a3b1b6eb]] [nullable] |
-| **public** | **Boolean** | Whether the finished template is shared with everyone allowed to create rooms. When false it stays reachable  only for the recipients named for it. | [optional] [example: true] |
-| **tags** | **List** | The labels attached to the template and shown next to it in listings. | [optional] [example: [Contracts, Sales]] [nullable] |
-| **color** | **String** | The accent colour of the generated cover, written as six hexadecimal digits with no leading hash sign. When it  is left empty a colour is picked at random. | [optional] [example: FF5733] [minLength: 0] [maxLength: 6] [nullable] |
-| **cover** | **String** | The identifier of a built-in cover picture, as listed by `GET api/2.0/files/rooms/covers`. When it is left  empty the template gets no cover. | [optional] [example: bookmark] [minLength: 0] [maxLength: 50] [nullable] |
-| **quota** | **Long** (int64) | The storage limit assigned to the template, in bytes. When it is not set the template keeps the limit of the  source room. | [optional] [example: 10485760] [nullable] |
+| **copyLogo** | **Boolean** | Whether the template takes over the picture already set on the source room. When false the template gets no  picture from that room. | [optional] [example: `true`] |
+| **share** | **List** | The email addresses of the portal members who are granted read access to the finished template. | [optional] [example: `[user1@example.com, user2@example.com]`] [nullable] |
+| **groups** | **List** (uuid) | The identifiers of the portal groups whose members are granted read access to the finished template. | [optional] [example: `[9924256a-739c-462b-af15-e652a3b1b6eb]`] [nullable] |
+| **public** | **Boolean** | Whether the finished template is shared with everyone allowed to create rooms. When false it stays reachable  only for the recipients named for it. | [optional] [example: `true`] |
+| **tags** | **List** | The labels attached to the template and shown next to it in listings. | [optional] [example: `[Contracts, Sales]`] [nullable] |
+| **color** | **String** | The accent colour of the generated cover, written as six hexadecimal digits with no leading hash sign. When it  is left empty a colour is picked at random. | [optional] [example: `FF5733`] [minLength: 0] [maxLength: 6] [nullable] |
+| **cover** | **String** | The identifier of a built-in cover picture, as listed by `GET api/2.0/files/rooms/covers`. When it is left  empty the template gets no cover. | [optional] [example: `bookmark`] [minLength: 0] [maxLength: 50] [nullable] |
+| **quota** | **Long** (int64) | The storage limit assigned to the template, in bytes. When it is not set the template keeps the limit of the  source room. | [optional] [example: `10485760`] [nullable] |
 
 
 ### Model RoomTemplateStatusDto
@@ -13088,10 +13088,10 @@ The progress of the job that builds a room template out of an existing room.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **templateId** | **Integer** (int32) | The template the job is building. It is meaningful once the job has created the template folder, and the  template can be opened with the room operations only after `isCompleted` turns true. | [required] [example: 123] |
-| **progress** | **Double** (double) | How far the job has got. The value climbs while the contents of the room are being copied and reaches its  maximum at the very end, so it is an indication of life rather than a reliable estimate of the time left. | [required] [example: 75.5] |
-| **error** | **String** | Why the job stopped. It is empty while the job runs and after a successful one; when it is filled the  half-built template has already been removed, so nothing has to be cleaned up by the caller. | [optional] [example: Template creation failed] [nullable] |
-| **isCompleted** | **Boolean** | Whether the job has ended. It is set both after a successful build and after a failure, so `error` is what  tells the two apart, and the record keeps answering with the same values until another job is started. | [required] [example: false] |
+| **templateId** | **Integer** (int32) | The template the job is building. It is meaningful once the job has created the template folder, and the  template can be opened with the room operations only after `isCompleted` turns true. | [required] [example: `123`] |
+| **progress** | **Double** (double) | How far the job has got. The value climbs while the contents of the room are being copied and reaches its  maximum at the very end, so it is an indication of life rather than a reliable estimate of the time left. | [required] [example: `75.5`] |
+| **error** | **String** | Why the job stopped. It is empty while the job runs and after a successful one; when it is filled the  half-built template has already been removed, so nothing has to be cleaned up by the caller. | [optional] [example: `Template creation failed`] [nullable] |
+| **isCompleted** | **Boolean** | Whether the job has ended. It is set both after a successful build and after a failure, so `error` is what  tells the two apart, and the record keeps answering with the same values until another job is started. | [required] [example: `false`] |
 
 
 ### Model RoomTemplateStatusWrapper
@@ -13123,9 +13123,9 @@ The text run parameters.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **fill** | **List** (int32) | The fill color of the text run in RGB format. | [optional] [example: [124, 124, 124]] [nullable] |
-| **text** | **String** | The run text. | [optional] [example: CONFIDENTIAL] [nullable] |
-| **font-size** | **String** | The font size of the text run in points. | [optional] [example: 26] [nullable] |
+| **fill** | **List** (int32) | The fill color of the text run in RGB format. | [optional] [example: `[124, 124, 124]`] [nullable] |
+| **text** | **String** | The run text. | [optional] [example: `CONFIDENTIAL`] [nullable] |
+| **font-size** | **String** | The font size of the text run in points. | [optional] [example: `26`] [nullable] |
 
 
 ### Model STRINGArrayWrapper
@@ -13145,8 +13145,8 @@ The place and the name the PDF copy of a file is stored under.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **folderId** | **Integer** (int32) | The folder the PDF is created in; the caller has to be allowed to create files there. | [required] [example: 1] |
-| **title** | **String** | The name of the PDF, without an extension - `.pdf` is appended. Left empty, the name of the source file is  reused with its extension replaced. | [required] [example: My Document] [nullable] |
+| **folderId** | **Integer** (int32) | The folder the PDF is created in; the caller has to be allowed to create files there. | [required] [example: `1`] |
+| **title** | **String** | The name of the PDF, without an extension - `.pdf` is appended. Left empty, the name of the source file is  reused with its extension replaced. | [required] [example: `My Document`] [nullable] |
 
 
 ### Model SaveFormRoleMappingDtoInteger
@@ -13154,8 +13154,8 @@ The people who are to fill in the roles of a PDF form.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **formId** | **Integer** (int32) | The PDF form the roles belong to. This is the value the operation reads, rather than the identifier in its  route, and the two are to be sent the same. | [required] [example: 1] |
-| **roles** | [**List**](#model-formrole) | The roles with the account taking each of them and the sequence number that decides the turn: the same number  means the roles may be filled in parallel, different ones make a queue. The whole set is replaced on every  call, and an empty set resets the filling. | [required] [example: [\{roleName=Approver, userId=00000000-0000-0000-0000-000000000000\}]] [nullable] |
+| **formId** | **Integer** (int32) | The PDF form the roles belong to. This is the value the operation reads, rather than the identifier in its  route, and the two are to be sent the same. | [required] [example: `1`] |
+| **roles** | [**List**](#model-formrole) | The roles with the account taking each of them and the sequence number that decides the turn: the same number  means the roles may be filled in parallel, different ones make a queue. The whole set is replaced on every  call, and an empty set resets the filling. | [required] [example: `[{roleName=Approver, userId=00000000-0000-0000-0000-000000000000}]`] [nullable] |
 
 
 ### Model SearchArea
@@ -13179,11 +13179,11 @@ The entries whose sharing rights are being changed, and the rights to apply to t
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **folderIds** | [**List**](#model-duplicaterequestdtofileids) | The folders and rooms whose rights are being changed, identified as a listing operation returns them - a  number on the portal, a string on a connected third-party account. | [optional] [example: [1, 2, 3]] [nullable] |
-| **fileIds** | [**List**](#model-duplicaterequestdtofileids) | The files whose rights are being changed, identified as a listing operation returns them - a number on the  portal, a string on a connected third-party account. | [optional] [example: [7, 8]] [nullable] |
-| **share** | [**List**](#model-fileshareparams) | One record per account or group whose rights are being set, each naming the subject and the level it gets on  all of the listed entries; a level of `None` takes the access away. An empty collection makes the call change  nothing. | [optional] [example: [\{access=2, shareTo=9924256a-739c-462b-af15-e652a3b1b6eb\}]] [nullable] |
-| **notify** | **Boolean** | Set to true to have every account named in `share` emailed about the access it just received; false changes  the rights without telling anyone. | [optional] [example: true] |
-| **sharingMessage** | **String** | The text put into that email, ignored while `notify` is false. Markup is stripped before sending, so only the  plain text of the value survives. | [optional] [example: You have been granted access to the file] [minLength: 0] [maxLength: 255] [nullable] |
+| **folderIds** | [**List**](#model-duplicaterequestdtofileids) | The folders and rooms whose rights are being changed, identified as a listing operation returns them - a  number on the portal, a string on a connected third-party account. | [optional] [example: `[1, 2, 3]`] [nullable] |
+| **fileIds** | [**List**](#model-duplicaterequestdtofileids) | The files whose rights are being changed, identified as a listing operation returns them - a number on the  portal, a string on a connected third-party account. | [optional] [example: `[7, 8]`] [nullable] |
+| **share** | [**List**](#model-fileshareparams) | One record per account or group whose rights are being set, each naming the subject and the level it gets on  all of the listed entries; a level of `None` takes the access away. An empty collection makes the call change  nothing. | [optional] [example: `[{access=2, shareTo=9924256a-739c-462b-af15-e652a3b1b6eb}]`] [nullable] |
+| **notify** | **Boolean** | Set to true to have every account named in `share` emailed about the access it just received; false changes  the rights without telling anyone. | [optional] [example: `true`] |
+| **sharingMessage** | **String** | The text put into that email, ignored while `notify` is false. Markup is stripped before sending, so only the  plain text of the value survives. | [optional] [example: `You have been granted access to the file`] [minLength: 0] [maxLength: 255] [nullable] |
 
 
 ### Model SecurityInfoSimpleRequestDto
@@ -13191,9 +13191,9 @@ The rights to apply to a single file or folder, and how to announce them.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **share** | [**List**](#model-fileshareparams) | One record per account or group whose rights are being set, each naming the subject and the level it gets; a  level of `None` takes the access away. An empty collection makes the call change nothing. | [optional] [example: [\{access=2, shareTo=9924256a-739c-462b-af15-e652a3b1b6eb\}]] [nullable] |
-| **notify** | **Boolean** | Set to true to have every account named in `share` emailed about the access it just received; false changes  the rights without telling anyone. | [optional] [example: true] |
-| **sharingMessage** | **String** | The text put into that email, ignored while `notify` is false. Markup is stripped before sending, so only the  plain text of the value survives. | [optional] [example: You have been granted access to the file] [minLength: 0] [maxLength: 255] [nullable] |
+| **share** | [**List**](#model-fileshareparams) | One record per account or group whose rights are being set, each naming the subject and the level it gets; a  level of `None` takes the access away. An empty collection makes the call change nothing. | [optional] [example: `[{access=2, shareTo=9924256a-739c-462b-af15-e652a3b1b6eb}]`] [nullable] |
+| **notify** | **Boolean** | Set to true to have every account named in `share` emailed about the access it just received; false changes  the rights without telling anyone. | [optional] [example: `true`] |
+| **sharingMessage** | **String** | The text put into that email, ignored while `notify` is false. Markup is stripped before sending, so only the  plain text of the value survives. | [optional] [example: `You have been granted access to the file`] [minLength: 0] [maxLength: 255] [nullable] |
 
 
 ### Model SessionRequest
@@ -13201,12 +13201,12 @@ The file a chunked upload session is opened for, and how a clash with an existin
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **fileName** | **String** | The name to store the file under, extension included. Characters a title cannot hold are replaced and the name  is truncated, so the stored title can differ from the one sent. | [required] [example: My Document.docx] [nullable] |
-| **fileSize** | **Long** (int64) | The exact number of bytes that will be sent. The size is reserved when the session opens and compared with the  parts as they arrive; below the portal chunk size the session takes the whole payload in one part, and above  the portal limit for chunked uploads it is refused. | [optional] [example: 10485760] |
-| **relativePath** | **String** | A slash-separated chain of folder titles under the target folder to store the file in; folders in the chain  that do not exist yet are created. Leave it empty to store the file in the folder from the path itself. | [optional] [example: subfolder/documents] [nullable] |
+| **fileName** | **String** | The name to store the file under, extension included. Characters a title cannot hold are replaced and the name  is truncated, so the stored title can differ from the one sent. | [required] [example: `My Document.docx`] [nullable] |
+| **fileSize** | **Long** (int64) | The exact number of bytes that will be sent. The size is reserved when the session opens and compared with the  parts as they arrive; below the portal chunk size the session takes the whole payload in one part, and above  the portal limit for chunked uploads it is refused. | [optional] [example: `10485760`] |
+| **relativePath** | **String** | A slash-separated chain of folder titles under the target folder to store the file in; folders in the chain  that do not exist yet are created. Leave it empty to store the file in the folder from the path itself. | [optional] [example: `subfolder/documents`] [nullable] |
 | **createOn** | [**ApiDateTime**](#model-apidatetime) | The creation time to stamp on a newly created file instead of the moment the upload finishes. It is ignored  when the upload lands on a file that already exists. | [optional] |
-| **encrypted** | **Boolean** | Marks the stored file as client-side encrypted, which is how content uploaded into a private room is kept;  with false the bytes are stored as they arrive. | [optional] [example: false] |
-| **createNewIfExist** | **Boolean** | Settles the clash when the folder already holds a file with this name: true stores the upload beside it under  a name with a numeric suffix, false takes the existing file over and adds the content to it as a new version. | [optional] [example: true] |
+| **encrypted** | **Boolean** | Marks the stored file as client-side encrypted, which is how content uploaded into a private room is kept;  with false the bytes are stored as they arrive. | [optional] [example: `false`] |
+| **createNewIfExist** | **Boolean** | Settles the clash when the folder already holds a file with this name: true stores the upload beside it under  a name with a numeric suffix, false takes the existing file over and adds the content to it as a new version. | [optional] [example: `true`] |
 
 
 ### Model SetPublicDto
@@ -13214,8 +13214,8 @@ The public access to set on a room template.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **id** | **Integer** (int32) | The identifier of the room template. Take it from `templateId` of `GET api/2.0/files/roomtemplate/status`, or  from the folder list of `GET api/2.0/files/rooms` called with `searchArea` set to 4; an identifier of an  ordinary room is not accepted. | [required] [example: 1234] [min: 1] [max: 2147483647] |
-| **public** | **Boolean** | Whether the Everyone group keeps read access to the template. True shares it with every member allowed to  create rooms; false leaves it reachable only for its owner. | [optional] [example: true] |
+| **id** | **Integer** (int32) | The identifier of the room template. Take it from `templateId` of `GET api/2.0/files/roomtemplate/status`, or  from the folder list of `GET api/2.0/files/rooms` called with `searchArea` set to 4; an identifier of an  ordinary room is not accepted. | [required] [example: `1234`] [min: 1] [max: 2147483647] |
+| **public** | **Boolean** | Whether the Everyone group keeps read access to the template. True shares it with every member allowed to  create rooms; false leaves it reachable only for its owner. | [optional] [example: `true`] |
 
 
 ### Model SettingsRequestDto
@@ -13223,7 +13223,7 @@ The body of a file settings switch: a single flag carrying the state to store.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **set** | **Boolean** | The state to store for the setting the operation addresses: true switches it on, false switches it off. The  flag carries no meaning of its own - what is switched, who is allowed to switch it, and whether the value  belongs to the calling account or to the whole portal are stated by the operation that binds this body. The  answer repeats the value the portal read back afterwards, which is not always the one that was sent. | [optional] [example: true] |
+| **set** | **Boolean** | The state to store for the setting the operation addresses: true switches it on, false switches it off. The  flag carries no meaning of its own - what is switched, who is allowed to switch it, and whether the value  belongs to the calling account or to the whole portal are stated by the operation that binds this body. The  answer repeats the value the portal read back afterwards, which is not always the one that was sent. | [optional] [example: `true`] |
 
 
 ### Model ShareFilterType
@@ -13246,8 +13246,8 @@ A pixel size measured on the image itself.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **height** | **Integer** (int32) | The height of the image in pixels, read from the stored file rather than from any display setting. | [optional] [example: 1080] |
-| **width** | **Integer** (int32) | The width of the image in pixels, read from the stored file rather than from any display setting. | [optional] [example: 1920] |
+| **height** | **Integer** (int32) | The height of the image in pixels, read from the stored file rather than from any display setting. | [optional] [example: `1080`] |
+| **width** | **Integer** (int32) | The width of the image in pixels, read from the stored file rather than from any display setting. | [optional] [example: `1920`] |
 
 
 ### Model SortOrder
@@ -13282,7 +13282,7 @@ The body of an editing session request.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **editingAlone** | **Boolean** | Claims the file for this caller alone: the session is opened without asking the document service to track  co-editing, and the call is refused when anybody else already has the file open. Left off, an ordinary  co-editing session is opened and others may join it. | [optional] [example: false] |
+| **editingAlone** | **Boolean** | Claims the file for this caller alone: the session is opened without asking the document service to track  co-editing, and the call is refused when anybody else already has the file open. Left off, an ordinary  co-editing session is opened and others may join it. | [optional] [example: `false`] |
 
 
 ### Model StartFillingForm
@@ -13290,7 +13290,7 @@ The button the editor shows to begin filling out a form.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **text** | **String** | The caption to put on the button, already translated into the language of the caller. | [optional] [example: Start filling] [nullable] |
+| **text** | **String** | The caption to put on the button, already translated into the language of the caller. | [optional] [example: `Start filling`] [nullable] |
 
 
 ### Model StartFillingMode
@@ -13352,8 +13352,8 @@ The Complete & Submit button settings.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **visible** | **Boolean** | Specifies whether the Complete  & Submit button will be displayed or hidden on the top toolbar. | [optional] [example: true] |
-| **resultMessage** | **String** | A message displayed after forms are submitted. | [optional] [example: Form submitted successfully] [nullable] |
+| **visible** | **Boolean** | Specifies whether the Complete  & Submit button will be displayed or hidden on the top toolbar. | [optional] [example: `true`] |
+| **resultMessage** | **String** | A message displayed after forms are submitted. | [optional] [example: `Form submitted successfully`] [nullable] |
 
 
 ### Model TemplatesConfig
@@ -13361,9 +13361,9 @@ One creation template offered in the editor. The portal no longer offers any, so
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **image** | **String** | The absolute URL to the image for template. | [optional] [example: https://portal.example.com/templates/template1.png] [nullable] |
-| **title** | **String** | The template title that will be displayed in the Create New... menu option. | [optional] [example: Blank Document] [nullable] |
-| **url** | **URI** (uri) | The absolute URL to the document where it will be created and available after creation. | [optional] [example: https://portal.example.com/editor/new?template=blank] [nullable] |
+| **image** | **String** | The absolute URL to the image for template. | [optional] [example: `https://portal.example.com/templates/template1.png`] [nullable] |
+| **title** | **String** | The template title that will be displayed in the Create New... menu option. | [optional] [example: `Blank Document`] [nullable] |
+| **url** | **URI** (uri) | The absolute URL to the document where it will be created and available after creation. | [optional] [example: `https://portal.example.com/editor/new?template=blank`] [nullable] |
 
 
 ### Model TemplatesRequestDto
@@ -13371,7 +13371,7 @@ The files to put on the personal template list of the calling account.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **fileIds** | **List** (int32) | The files to put on the template list, by id, as reported by a folder listing such as  `GET api/2.0/files/{folderId}`. Only a file stored in the portal itself can become a template, which is why an  id here is always numeric. | [optional] [example: [1, 2, 3]] [nullable] |
+| **fileIds** | **List** (int32) | The files to put on the template list, by id, as reported by a folder listing such as  `GET api/2.0/files/{folderId}`. Only a file stored in the portal itself can become a template, which is why an  id here is always numeric. | [optional] [example: `[1, 2, 3]`] [nullable] |
 
 
 ### Model ThirdPartyBackupRequestDto
@@ -13379,12 +13379,12 @@ The credentials and the title of the third-party storage account the portal writ
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **url** | **String** | The address of the storage server to connect to. It is needed by the WebDAV presets whose server is not known  in advance (`WebDav`, `Nextcloud`, `ownCloud`), where it points at the WebDAV endpoint of that server, and by  `SharePoint`; the presets with a fixed address and the OAuth services ignore it. | [optional] [example: https://cloud.example.com/remote.php/dav/files/admin/] [nullable] |
-| **login** | **String** | The account name at the storage service, used by the services that authenticate by login and password. A login  sent without a password is rejected as an invalid request. | [optional] [example: admin] [nullable] |
-| **password** | **String** | The password, or the application password, for `login` at the storage service. Either this or `token` has to  be sent, and the credentials are verified against the service before the account is saved. | [optional] [example: p@ssw0rd!] [nullable] |
-| **token** | **String** | The OAuth 2.0 authorization code from the consent screen of `Box`, `DropboxV2`, `GoogleDrive` or `OneDrive` -  not an access token: the portal exchanges the code for its own token and keeps that. The client ID and  redirect URL the consent screen URL is built from come from `GET api/2.0/files/thirdparty/capabilities`. | [optional] [example: 4/0AY0e-g5Tn8vQrM2kZs7xB1pLd9] [nullable] |
-| **customerTitle** | **String** | The name the backup account is shown under in the portal. Characters that a folder title cannot hold are  replaced and the value is truncated; on the first connection a title that comes out of that empty is refused. | [optional] [example: Backup storage] [nullable] |
-| **providerKey** | **String** | The storage service to connect, as the `key` of `GET api/2.0/files/thirdparty/providers`; the value is matched  case-insensitively. `Nextcloud` and `ownCloud` are presets over WebDAV and are stored and reported back as  `WebDav`. | [optional] [example: Nextcloud] [nullable] |
+| **url** | **String** | The address of the storage server to connect to. It is needed by the WebDAV presets whose server is not known  in advance (`WebDav`, `Nextcloud`, `ownCloud`), where it points at the WebDAV endpoint of that server, and by  `SharePoint`; the presets with a fixed address and the OAuth services ignore it. | [optional] [example: `https://cloud.example.com/remote.php/dav/files/admin/`] [nullable] |
+| **login** | **String** | The account name at the storage service, used by the services that authenticate by login and password. A login  sent without a password is rejected as an invalid request. | [optional] [example: `admin`] [nullable] |
+| **password** | **String** | The password, or the application password, for `login` at the storage service. Either this or `token` has to  be sent, and the credentials are verified against the service before the account is saved. | [optional] [example: `p@ssw0rd!`] [nullable] |
+| **token** | **String** | The OAuth 2.0 authorization code from the consent screen of `Box`, `DropboxV2`, `GoogleDrive` or `OneDrive` -  not an access token: the portal exchanges the code for its own token and keeps that. The client ID and  redirect URL the consent screen URL is built from come from `GET api/2.0/files/thirdparty/capabilities`. | [optional] [example: `4/0AY0e-g5Tn8vQrM2kZs7xB1pLd9`] [nullable] |
+| **customerTitle** | **String** | The name the backup account is shown under in the portal. Characters that a folder title cannot hold are  replaced and the value is truncated; on the first connection a title that comes out of that empty is refused. | [optional] [example: `Backup storage`] [nullable] |
+| **providerKey** | **String** | The storage service to connect, as the `key` of `GET api/2.0/files/thirdparty/providers`; the value is matched  case-insensitively. `Nextcloud` and `ownCloud` are presets over WebDAV and are stored and reported back as  `WebDav`. | [optional] [example: `Nextcloud`] [nullable] |
 
 
 ### Model ThirdPartyParams
@@ -13393,11 +13393,11 @@ A third-party storage account connected to the portal.
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **auth\_data** | [**AuthData**](#model-authdata) | The stored credentials of the account. They are not filled in here: the portal does not give back credentials  once an account is saved. | [optional] |
-| **corporate** | **Boolean** | Whether the account is attached to the legacy Common section, which is the case only for accounts inherited  from an older portal. | [optional] [example: false] |
-| **roomsStorage** | **Boolean** | Whether the account is attached to the Rooms section, room templates and the archive counted in. This is where  `POST api/2.0/files/thirdparty` puts every account it connects. | [optional] [example: true] |
-| **customer\_title** | **String** | The name the account is shown under in the portal, as it was saved when the account was connected. | [optional] [example: Nextcloud storage] [nullable] |
-| **provider\_id** | **Integer** (int32) | The account ID to send to `DELETE api/2.0/files/thirdparty/{providerId}`, or as `providerId` to  re-authenticate the account. | [optional] [example: 12] [nullable] |
-| **provider\_key** | **String** | The storage service behind the account. `WebDav` stands for every WebDAV preset, so it does not tell which of  them was chosen when the account was connected. | [optional] [example: WebDav] [nullable] |
+| **corporate** | **Boolean** | Whether the account is attached to the legacy Common section, which is the case only for accounts inherited  from an older portal. | [optional] [example: `false`] |
+| **roomsStorage** | **Boolean** | Whether the account is attached to the Rooms section, room templates and the archive counted in. This is where  `POST api/2.0/files/thirdparty` puts every account it connects. | [optional] [example: `true`] |
+| **customer\_title** | **String** | The name the account is shown under in the portal, as it was saved when the account was connected. | [optional] [example: `Nextcloud storage`] [nullable] |
+| **provider\_id** | **Integer** (int32) | The account ID to send to `DELETE api/2.0/files/thirdparty/{providerId}`, or as `providerId` to  re-authenticate the account. | [optional] [example: `12`] [nullable] |
+| **provider\_key** | **String** | The storage service behind the account. `WebDav` stands for every WebDAV preset, so it does not tell which of  them was chosen when the account was connected. | [optional] [example: `WebDav`] [nullable] |
 
 
 ### Model ThirdPartyParamsArrayWrapper
@@ -13417,13 +13417,13 @@ The credentials and the title of a third-party storage account to connect or to 
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **url** | **String** | The address of the storage server to connect to. It is needed by the WebDAV presets whose server is not known  in advance (`WebDav`, `Nextcloud`, `ownCloud`), where it points at the WebDAV endpoint of that server, and by  `SharePoint`; the presets with a fixed address and the OAuth services ignore it. | [optional] [example: https://cloud.example.com/remote.php/dav/files/admin/] [nullable] |
-| **login** | **String** | The account name at the storage service, used by the services that authenticate by login and password. A login  sent without a password is rejected as an invalid request. | [optional] [example: admin] [nullable] |
-| **password** | **String** | The password, or the application password, for `login` at the storage service. Either this or `token` has to  be sent, and the credentials are verified against the service before the account is saved. | [optional] [example: p@ssw0rd!] [nullable] |
-| **token** | **String** | The OAuth 2.0 authorization code from the consent screen of `Box`, `DropboxV2`, `GoogleDrive` or `OneDrive` -  not an access token: the portal exchanges the code for its own token and keeps that. The client ID and  redirect URL the consent screen URL is built from come from `GET api/2.0/files/thirdparty/capabilities`. | [optional] [example: 4/0AY0e-g5Tn8vQrM2kZs7xB1pLd9] [nullable] |
-| **customerTitle** | **String** | The name the connected account is shown under in the portal. Characters that a folder title cannot hold are  replaced and the value is truncated, and a title that comes out of that empty is refused. | [required] [example: Nextcloud storage] [nullable] |
-| **providerKey** | **String** | The storage service to connect, as the `key` of `GET api/2.0/files/thirdparty/providers`; the value is matched  case-insensitively. `Nextcloud` and `ownCloud` are presets over WebDAV and are stored and reported back as  `WebDav`. | [required] [example: Nextcloud] [nullable] |
-| **providerId** | **Integer** (int32) | The account to re-authenticate instead of connecting a new one, as `providerId` of  `GET api/2.0/files/thirdparty`; both a number and its decimal string form are accepted. For an account  attached to the Rooms section only the credentials are applied, and its title and server address are kept. | [optional] [example: 12] [nullable] |
+| **url** | **String** | The address of the storage server to connect to. It is needed by the WebDAV presets whose server is not known  in advance (`WebDav`, `Nextcloud`, `ownCloud`), where it points at the WebDAV endpoint of that server, and by  `SharePoint`; the presets with a fixed address and the OAuth services ignore it. | [optional] [example: `https://cloud.example.com/remote.php/dav/files/admin/`] [nullable] |
+| **login** | **String** | The account name at the storage service, used by the services that authenticate by login and password. A login  sent without a password is rejected as an invalid request. | [optional] [example: `admin`] [nullable] |
+| **password** | **String** | The password, or the application password, for `login` at the storage service. Either this or `token` has to  be sent, and the credentials are verified against the service before the account is saved. | [optional] [example: `p@ssw0rd!`] [nullable] |
+| **token** | **String** | The OAuth 2.0 authorization code from the consent screen of `Box`, `DropboxV2`, `GoogleDrive` or `OneDrive` -  not an access token: the portal exchanges the code for its own token and keeps that. The client ID and  redirect URL the consent screen URL is built from come from `GET api/2.0/files/thirdparty/capabilities`. | [optional] [example: `4/0AY0e-g5Tn8vQrM2kZs7xB1pLd9`] [nullable] |
+| **customerTitle** | **String** | The name the connected account is shown under in the portal. Characters that a folder title cannot hold are  replaced and the value is truncated, and a title that comes out of that empty is refused. | [required] [example: `Nextcloud storage`] [nullable] |
+| **providerKey** | **String** | The storage service to connect, as the `key` of `GET api/2.0/files/thirdparty/providers`; the value is matched  case-insensitively. `Nextcloud` and `ownCloud` are presets over WebDAV and are stored and reported back as  `WebDav`. | [required] [example: `Nextcloud`] [nullable] |
+| **providerId** | **Integer** (int32) | The account to re-authenticate instead of connecting a new one, as `providerId` of  `GET api/2.0/files/thirdparty`; both a number and its decimal string form are accepted. For an account  attached to the Rooms section only the credentials are applied, and its title and server address are kept. | [optional] [example: `12`] [nullable] |
 
 
 ### Model Thumbnail
@@ -13442,8 +13442,8 @@ The comment to store on one version of a file.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **version** | **Integer** (int32) | The version the comment belongs to, as reported by `GET api/2.0/files/file/{fileId}/edit/history`. A version  that does not exist is rejected as an invalid request. | [required] [example: 1] [min: 1] [max: 2147483647] |
-| **comment** | **String** | The note that explains what changed in that version, as the version history shows it. An empty text clears the  note, and a longer one is cut rather than refused, so read the stored text from the answer. | [optional] [example: This is a comment] [minLength: 0] [maxLength: 255] [nullable] |
+| **version** | **Integer** (int32) | The version the comment belongs to, as reported by `GET api/2.0/files/file/{fileId}/edit/history`. A version  that does not exist is rejected as an invalid request. | [required] [example: `1`] [min: 1] [max: 2147483647] |
+| **comment** | **String** | The note that explains what changed in that version, as the version history shows it. An empty text clears the  note, and a longer one is cut rather than refused, so read the stored text from the answer. | [optional] [example: `This is a comment`] [minLength: 0] [maxLength: 255] [nullable] |
 
 
 ### Model UpdateFile
@@ -13451,8 +13451,8 @@ The changes to make to a file: a new title, an earlier version to restore, or bo
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **title** | **String** | The new title of the file, without an extension - the stored extension is kept whatever the title says, so a  rename cannot change the format. Left empty, the file keeps its name. | [optional] [example: My Document] [minLength: 0] [maxLength: 165] [nullable] |
-| **lastVersion** | **Integer** (int32) | The version to restore on top of the history, as reported by `GET api/2.0/files/file/{fileId}/history`; 0 or  less leaves the versions untouched. | [optional] [example: 1] |
+| **title** | **String** | The new title of the file, without an extension - the stored extension is kept whatever the title says, so a  rename cannot change the format. Left empty, the file keeps its name. | [optional] [example: `My Document`] [minLength: 0] [maxLength: 165] [nullable] |
+| **lastVersion** | **Integer** (int32) | The version to restore on top of the history, as reported by `GET api/2.0/files/file/{fileId}/history`; 0 or  less leaves the versions untouched. | [optional] [example: `1`] |
 
 
 ### Model UpdateRoomGroupRequest
@@ -13460,9 +13460,9 @@ The changes to apply to a room group: a new name, rooms to attach and rooms to d
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **roomsToAdd** | [**List**](#model-duplicaterequestdtofileids) | The rooms to attach to the group, each given as a number for a room stored in the portal or as a string for a  room on a connected third-party account. Every identifier has to name a room the caller can read; repeats and  rooms the group already holds are collapsed rather than refused. | [optional] [example: [12, 15]] [nullable] |
-| **roomsToRemove** | [**List**](#model-duplicaterequestdtofileids) | The rooms to detach from the group, in the same two forms. Detaching leaves the room and its content  untouched, and a room the group already holds can be detached even when the caller has lost access to it in  the meantime. | [optional] [example: [7]] [nullable] |
-| **groupName** | **String** | The new name of the group, trimmed of surrounding spaces before it is stored. Leaving the member out keeps the  current name, and a name that is blank once trimmed is refused. | [optional] [example: Client projects] [minLength: 0] [maxLength: 128] [nullable] |
+| **roomsToAdd** | [**List**](#model-duplicaterequestdtofileids) | The rooms to attach to the group, each given as a number for a room stored in the portal or as a string for a  room on a connected third-party account. Every identifier has to name a room the caller can read; repeats and  rooms the group already holds are collapsed rather than refused. | [optional] [example: `[12, 15]`] [nullable] |
+| **roomsToRemove** | [**List**](#model-duplicaterequestdtofileids) | The rooms to detach from the group, in the same two forms. Detaching leaves the room and its content  untouched, and a room the group already holds can be detached even when the caller has lost access to it in  the meantime. | [optional] [example: `[7]`] [nullable] |
+| **groupName** | **String** | The new name of the group, trimmed of surrounding spaces before it is stored. Leaving the member out keeps the  current name, and a name that is blank once trimmed is refused. | [optional] [example: `Client projects`] [minLength: 0] [maxLength: 128] [nullable] |
 
 
 ### Model UpdateRoomRequest
@@ -13470,19 +13470,19 @@ The fields of a room that a partial update changes.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **title** | **String** | The new name of the room. It is trimmed and sanitised the way a room title is at creation, and a blank or  missing value leaves the current name alone rather than clearing it. | [optional] [example: Project Alpha] [minLength: 0] [maxLength: 170] [nullable] |
-| **quota** | **Long** (int64) | The new storage limit of the room, in bytes. A value of -1 leaves the room with no limit of its own, any other  negative value puts it back on the portal default, and a positive one is accepted only while the per-room  quota feature is on. | [optional] [example: 1073741824] [nullable] |
-| **indexing** | **Boolean** | Whether the room keeps a manual order of its contents. With it on every file and folder carries a position  that listings follow and that `PUT api/2.0/files/rooms/{id}/reorder` compacts; with it off the contents are  ordered by the sorting of the request. Turning it on renumbers the existing contents at once. | [optional] [example: true] [nullable] |
-| **denyDownload** | **Boolean** | Whether members without editing rights are stopped from downloading and printing the contents of the room.  They can still open the documents in the editor. | [optional] [example: true] [nullable] |
+| **title** | **String** | The new name of the room. It is trimmed and sanitised the way a room title is at creation, and a blank or  missing value leaves the current name alone rather than clearing it. | [optional] [example: `Project Alpha`] [minLength: 0] [maxLength: 170] [nullable] |
+| **quota** | **Long** (int64) | The new storage limit of the room, in bytes. A value of -1 leaves the room with no limit of its own, any other  negative value puts it back on the portal default, and a positive one is accepted only while the per-room  quota feature is on. | [optional] [example: `1073741824`] [nullable] |
+| **indexing** | **Boolean** | Whether the room keeps a manual order of its contents. With it on every file and folder carries a position  that listings follow and that `PUT api/2.0/files/rooms/{id}/reorder` compacts; with it off the contents are  ordered by the sorting of the request. Turning it on renumbers the existing contents at once. | [optional] [example: `true`] [nullable] |
+| **denyDownload** | **Boolean** | Whether members without editing rights are stopped from downloading and printing the contents of the room.  They can still open the documents in the editor. | [optional] [example: `true`] [nullable] |
 | **lifetime** | [**RoomDataLifetimeDto**](#model-roomdatalifetimedto) | How long files may stay in the room before they are deleted automatically. The countdown starts when the  setting is saved, and leaving the field out keeps the files forever. Sending it with the switch off stops the  automatic deletion. | [optional] |
 | **watermark** | [**WatermarkRequestDto**](#model-watermarkrequestdto) | The watermark drawn over documents opened in the room. Leaving the field out adds no watermark, and sending it  with the switch turned off removes the one the room has. | [optional] |
 | **logo** | [**LogoRequest**](#model-logorequest) | The picture to use as the room logo, named by the path that `POST api/2.0/files/logos` returned for an image  uploaded beforehand, plus the crop to take from it. Leaving the field out keeps the room on its cover and  colour. | [optional] |
-| **tags** | **List** | The labels the room is to carry from now on. The list replaces the whole tag set rather than adding to it, an  empty list clears it, and names the portal catalogue does not hold yet are added to it. | [optional] [example: [Finance, 2026]] [nullable] |
-| **color** | **String** | The background colour the room is drawn with while it has no logo, as six hexadecimal digits with no leading  number sign. An empty value restores the default colour of the room type. | [optional] [example: FF5733] [pattern: /^[0-9a-fA-F]\{6\}$/] [nullable] |
-| **cover** | **String** | The picture drawn on the room while it has no logo, named by an identifier from  `GET api/2.0/files/rooms/covers`. Any other value is rejected, and an empty value leaves the room without a  cover. | [optional] [example: bookmark] [minLength: 0] [maxLength: 50] [nullable] |
+| **tags** | **List** | The labels the room is to carry from now on. The list replaces the whole tag set rather than adding to it, an  empty list clears it, and names the portal catalogue does not hold yet are added to it. | [optional] [example: `[Finance, 2026]`] [nullable] |
+| **color** | **String** | The background colour the room is drawn with while it has no logo, as six hexadecimal digits with no leading  number sign. An empty value restores the default colour of the room type. | [optional] [example: `FF5733`] [pattern: `/^[0-9a-fA-F]{6}$/`] [nullable] |
+| **cover** | **String** | The picture drawn on the room while it has no logo, named by an identifier from  `GET api/2.0/files/rooms/covers`. Any other value is rejected, and an empty value leaves the room without a  cover. | [optional] [example: `bookmark`] [minLength: 0] [maxLength: 50] [nullable] |
 | **chatSettings** | [**ChatSettings**](#model-chatsettings) | The model and the prompt an AI room answers with. It belongs to AI rooms only and is rejected for a room of  any other kind. | [optional] |
-| **sendFormToExternalDB** | **Boolean** | For a form filling room, whether the data of every completed submission is also pushed to the external  database configured for the portal. It is what `POST api/2.0/files/rooms/{id}/externaldbsync` re-runs for the  forms already collected. | [optional] [example: false] [nullable] |
-| **saveFormAsXLSX** | **Boolean** | For a form filling room, whether the collected submissions are also gathered into a spreadsheet stored next to  the completed forms. With it off the submissions are kept only as the filled documents themselves. | [optional] [example: false] [nullable] |
+| **sendFormToExternalDB** | **Boolean** | For a form filling room, whether the data of every completed submission is also pushed to the external  database configured for the portal. It is what `POST api/2.0/files/rooms/{id}/externaldbsync` re-runs for the  forms already collected. | [optional] [example: `false`] [nullable] |
+| **saveFormAsXLSX** | **Boolean** | For a form filling room, whether the collected submissions are also gathered into a spreadsheet stored next to  the completed forms. With it off the submissions are kept only as the filled documents themselves. | [optional] [example: `false`] [nullable] |
 
 
 ### Model UpdateRoomsQuotaRequestDtoInteger
@@ -13490,8 +13490,8 @@ The rooms whose storage limit is to be changed, and the limit to give them.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **roomIds** | [**List**](#model-duplicaterequestdtofileids) | The rooms to change, named by the identifiers that `GET api/2.0/files/rooms` reports. Only whole numbers are  processed, so identifiers of rooms kept in a connected third-party account are skipped without an error. | [optional] [example: [1, 2, 3]] [nullable] |
-| **quota** | **Long** (int64) | The storage each of the listed rooms may take, in bytes. It has to stay inside the portal own limit, and the  per-room quota feature has to be on, otherwise nothing is changed. | [optional] [example: 10737418240] |
+| **roomIds** | [**List**](#model-duplicaterequestdtofileids) | The rooms to change, named by the identifiers that `GET api/2.0/files/rooms` reports. Only whole numbers are  processed, so identifiers of rooms kept in a connected third-party account are skipped without an error. | [optional] [example: `[1, 2, 3]`] [nullable] |
+| **quota** | **Long** (int64) | The storage each of the listed rooms may take, in bytes. It has to stay inside the portal own limit, and the  per-room quota feature has to be on, otherwise nothing is changed. | [optional] [example: `10737418240`] |
 
 
 ### Model UpdateRoomsRoomIdsRequestDtoInteger
@@ -13499,7 +13499,7 @@ The rooms that are to go back to the default storage limit of the portal.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **roomIds** | [**List**](#model-duplicaterequestdtofileids) | The rooms to reset, named by the identifiers that `GET api/2.0/files/rooms` reports. Only whole numbers are  processed, so identifiers of rooms kept in a connected third-party account are skipped without an error. | [optional] [example: [1, 2, 3]] [nullable] |
+| **roomIds** | [**List**](#model-duplicaterequestdtofileids) | The rooms to reset, named by the identifiers that `GET api/2.0/files/rooms` reports. Only whole numbers are  processed, so identifiers of rooms kept in a connected third-party account are skipped without an error. | [optional] [example: `[1, 2, 3]`] [nullable] |
 
 
 ### Model UpdateTagRequestDto
@@ -13507,8 +13507,8 @@ The parameters for renaming a custom room tag in the portal catalog.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **oldName** | **String** | The name of the tag to rename, matched against the catalog exactly as it is stored rather than searched for.  Read the stored spelling from `GET api/2.0/files/tags`. | [required] [example: Confidential] [minLength: 0] [maxLength: 255] [nullable] |
-| **newName** | **String** | The name to store instead. It has to be free: names are unique across the portal, so a name another tag  already carries is refused, and merging two tags this way is not possible. | [required] [example: Restricted] [minLength: 0] [maxLength: 255] [nullable] |
+| **oldName** | **String** | The name of the tag to rename, matched against the catalog exactly as it is stored rather than searched for.  Read the stored spelling from `GET api/2.0/files/tags`. | [required] [example: `Confidential`] [minLength: 0] [maxLength: 255] [nullable] |
+| **newName** | **String** | The name to store instead. It has to be free: names are unique across the portal, so a name another tag  already carries is refused, and merging two tags this way is not possible. | [required] [example: `Restricted`] [minLength: 0] [maxLength: 255] [nullable] |
 
 
 ### Model UploadResultDto
@@ -13516,7 +13516,7 @@ The outcome of storing an image in temporary storage before it is used as a room
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **success** | **Boolean** | True when the image was stored and its path is in the data field. A rejected image is reported with an error  response rather than with a false here, so this field is true in every answer that carries a body. | [optional] [example: true] |
+| **success** | **Boolean** | True when the image was stored and its path is in the data field. A rejected image is reported with an error  response rather than with a false here, so this field is true in every answer that carries a body. | [optional] [example: `true`] |
 | **data** | **oas_any_type_not_mapped** |  | [optional] [nullable] |
 | **message** | **String** | Left empty by this operation: nothing is reported here, and a refused image comes back as an error response  instead. | [optional] [nullable] |
 
@@ -13538,12 +13538,12 @@ How far a chunked upload has got, and the file it produced once the last byte ha
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **id** | **Integer** (int32) | The file the parts are being written into. An upload that took over a file of the same title carries it from  the start, while an upload that creates a new file has nothing to name yet and reports 0 until the answer that  sets `uploaded` to true. | [optional] [example: 1234] |
-| **folderId** | **Integer** (int32) | The folder receiving the file. It is the folder the upload was reserved against, or the sub-folder created for  it when the reservation declared a relative path. | [optional] [example: 10] |
-| **version** | **Integer** (int32) | The revision the content is being written as: 1 for a file that did not exist, the next number when the upload  took over a file of the same title, and the unchanged current number for an upload opened over an existing  file, which replaces its content in place. | [optional] [example: 1] |
-| **title** | **String** | The title the file is stored under, after characters a title cannot hold were replaced and, where a second  copy was asked for, a numeric suffix was added - so it can differ from the name that was sent. | [optional] [example: Quarterly report.docx] [nullable] |
-| **providerKey** | **String** | The third-party service holding the destination, such as `GoogleDrive` or `OneDrive`, and null for a folder  stored on the portal itself. | [optional] [example: GoogleDrive] [nullable] |
-| **uploaded** | **Boolean** | False while bytes are still missing, when the answer only reports progress; true in the answer that reports  the stored file, which is also the answer that arrives with 201. | [optional] [example: false] |
+| **id** | **Integer** (int32) | The file the parts are being written into. An upload that took over a file of the same title carries it from  the start, while an upload that creates a new file has nothing to name yet and reports 0 until the answer that  sets `uploaded` to true. | [optional] [example: `1234`] |
+| **folderId** | **Integer** (int32) | The folder receiving the file. It is the folder the upload was reserved against, or the sub-folder created for  it when the reservation declared a relative path. | [optional] [example: `10`] |
+| **version** | **Integer** (int32) | The revision the content is being written as: 1 for a file that did not exist, the next number when the upload  took over a file of the same title, and the unchanged current number for an upload opened over an existing  file, which replaces its content in place. | [optional] [example: `1`] |
+| **title** | **String** | The title the file is stored under, after characters a title cannot hold were replaced and, where a second  copy was asked for, a numeric suffix was added - so it can differ from the name that was sent. | [optional] [example: `Quarterly report.docx`] [nullable] |
+| **providerKey** | **String** | The third-party service holding the destination, such as `GoogleDrive` or `OneDrive`, and null for a folder  stored on the portal itself. | [optional] [example: `GoogleDrive`] [nullable] |
+| **uploaded** | **Boolean** | False while bytes are still missing, when the answer only reports progress; true in the answer that reports  the stored file, which is also the answer that arrives with 201. | [optional] [example: `false`] |
 | **file** | [**FileDtoInteger**](#model-filedtointeger) | The file as it stands. It is filled in both answers, but while `uploaded` is false it describes a file that  has not been written yet, so its identifier, size and links are only worth reading once that flag turns true. | [optional] |
 
 
@@ -13564,11 +13564,11 @@ The account the editors attribute the changes of this session to.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **id** | **String** | The account the changes are recorded under. Two sessions carrying the same value are taken by the editors for  the same person. | [optional] [example: 9924256b-447c-4f19-9dbd-8ad8c39e8ff5] [nullable] |
-| **name** | **String** | The name shown next to the changes and in the list of participants. | [optional] [example: John Doe] [nullable] |
-| **image** | **String** | An absolute address of the avatar shown for this participant. | [optional] [example: https://portal.example.com/storage/userphotos/9924256b_medium.png] [nullable] |
-| **roles** | **List** | The filling roles this participant holds in the form being filled out. It is set only for a form in a virtual  data room, where the role decides which fields open for them. | [optional] [example: [Manager]] [nullable] |
-| **customerId** | **String** | Identifies the paying customer this participant belongs to, on deployments where the editors are licensed per  customer. | [optional] [example: cust_001] [nullable] |
+| **id** | **String** | The account the changes are recorded under. Two sessions carrying the same value are taken by the editors for  the same person. | [optional] [example: `9924256b-447c-4f19-9dbd-8ad8c39e8ff5`] [nullable] |
+| **name** | **String** | The name shown next to the changes and in the list of participants. | [optional] [example: `John Doe`] [nullable] |
+| **image** | **String** | An absolute address of the avatar shown for this participant. | [optional] [example: `https://portal.example.com/storage/userphotos/9924256b_medium.png`] [nullable] |
+| **roles** | **List** | The filling roles this participant holds in the form being filled out. It is set only for a form in a virtual  data room, where the role decides which fields open for them. | [optional] [example: `[Manager]`] [nullable] |
+| **customerId** | **String** | Identifies the paying customer this participant belongs to, on deployments where the editors are licensed per  customer. | [optional] [example: `cust_001`] [nullable] |
 
 
 ### Model UserInfo
@@ -13576,37 +13576,37 @@ The user information.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **id** | **UUID** (uuid) | The user ID. | [optional] [example: 00000000-0000-0000-0000-000000000000] |
-| **firstName** | **String** | The user's first name. | [optional] [example: John] [nullable] |
-| **lastName** | **String** | The user's last name. | [optional] [example: Doe] [nullable] |
-| **userName** | **String** | The user username. | [optional] [example: johndoe] [nullable] |
-| **birthDate** | **Date** (date-time) | The user birthday. | [optional] [example: 1990-01-01T00:00:00Z] [nullable] |
-| **sex** | **Boolean** | The user sex (male or female). | [optional] [example: true] [nullable] |
-| **status** | [**EmployeeStatus**](#model-employeestatus) | The user status. | [optional] [enum: 1, 2, 4, 5, 7] |
-| **activationStatus** | [**EmployeeActivationStatus**](#model-employeeactivationstatus) | The user activation status. | [optional] [enum: 0, 1, 2, 4] |
-| **terminatedDate** | **Date** (date-time) | The date and time when the user account was terminated. | [optional] [example: 2025-12-31T23:59:59Z] [nullable] |
-| **title** | **String** | The user title. | [optional] [example: Manager] [nullable] |
-| **workFromDate** | **Date** (date-time) | The user registration date. | [optional] [example: 2020-01-15T00:00:00Z] [nullable] |
-| **email** | **String** (email) | The user email address. | [optional] [example: john.doe@example.com] [nullable] |
-| **contacts** | **String** | The list of user contacts in the string format. | [optional] [example: skype:johndoe\|telegram:@johndoe] [nullable] |
-| **contactsList** | **List** | The list of user contacts. | [optional] [example: [skype:johndoe, telegram:@johndoe]] [nullable] |
-| **location** | **String** | The user location. | [optional] [example: New York, USA] [nullable] |
-| **notes** | **String** | The user notes. | [optional] [example: Additional information about the user] [nullable] |
-| **removed** | **Boolean** | Specifies if the user account was removed or not. | [optional] [example: false] |
-| **lastModified** | **Date** (date-time) | The date and time when the user account was last modified. | [optional] [example: 2025-02-08T10:30:00Z] |
-| **tenantId** | **Integer** (int32) | The tenant ID. | [optional] [example: 1] |
-| **isActive** | **Boolean** | Specifies if the user is active or not. | [optional] [example: true] |
-| **cultureName** | **String** | The user culture code. | [optional] [example: en-US] [nullable] |
-| **mobilePhone** | **String** | The user mobile phone. | [optional] [example: +1234567890] [nullable] |
-| **mobilePhoneActivationStatus** | [**MobilePhoneActivationStatus**](#model-mobilephoneactivationstatus) | The user mobile phone activation status. | [optional] [enum: 0, 1] |
-| **sid** | **String** | The LDAP user identifier. | [optional] [example: S-1-5-21-3623811015-3361044348-30300820-1013] [nullable] |
-| **ldapQouta** | **Long** (int64) | The LDAP user quota attribute. | [optional] [example: 1073741824] |
-| **ssoNameId** | **String** | The SSO SAML user identifier. | [optional] [example: johndoe@example.com] [nullable] |
-| **ssoSessionId** | **String** | The SSO SAML user session identifier. | [optional] [example: _1a2b3c4d5e6f7g8h9i0j] [nullable] |
-| **createDate** | **Date** (date-time) | The date and time when the user account was created. | [optional] [example: 2020-01-15T00:00:00Z] |
-| **createdBy** | **UUID** (uuid) | The ID of the user who created the current user account. | [optional] [example: 00000000-0000-0000-0000-000000000000] [nullable] |
-| **spam** | **Boolean** | Specifies if tips, updates and offers are allowed to be sent to the user or not. | [optional] [example: false] [nullable] |
-| **checkActivation** | **Boolean** | Indicates whether the activation status of the employee or recipient is unchecked or inactive.  Depending on the context, this property evaluates the activation or eligibility status accordingly. | [optional] [example: false] |
+| **id** | **UUID** (uuid) | The user ID. | [optional] [example: `00000000-0000-0000-0000-000000000000`] |
+| **firstName** | **String** | The user's first name. | [optional] [example: `John`] [nullable] |
+| **lastName** | **String** | The user's last name. | [optional] [example: `Doe`] [nullable] |
+| **userName** | **String** | The user username. | [optional] [example: `johndoe`] [nullable] |
+| **birthDate** | **Date** (date-time) | The user birthday. | [optional] [example: `1990-01-01T00:00:00Z`] [nullable] |
+| **sex** | **Boolean** | The user sex (male or female). | [optional] [example: `true`] [nullable] |
+| **status** | [**EmployeeStatus**](#model-employeestatus) | The user status. | [optional] [enum: `1`, `2`, `4`, `5`, `7`] |
+| **activationStatus** | [**EmployeeActivationStatus**](#model-employeeactivationstatus) | The user activation status. | [optional] [enum: `0`, `1`, `2`, `4`] |
+| **terminatedDate** | **Date** (date-time) | The date and time when the user account was terminated. | [optional] [example: `2025-12-31T23:59:59Z`] [nullable] |
+| **title** | **String** | The user title. | [optional] [example: `Manager`] [nullable] |
+| **workFromDate** | **Date** (date-time) | The user registration date. | [optional] [example: `2020-01-15T00:00:00Z`] [nullable] |
+| **email** | **String** (email) | The user email address. | [optional] [example: `john.doe@example.com`] [nullable] |
+| **contacts** | **String** | The list of user contacts in the string format. | [optional] [example: `skype:johndoe\|telegram:@johndoe`] [nullable] |
+| **contactsList** | **List** | The list of user contacts. | [optional] [example: `[skype:johndoe, telegram:@johndoe]`] [nullable] |
+| **location** | **String** | The user location. | [optional] [example: `New York, USA`] [nullable] |
+| **notes** | **String** | The user notes. | [optional] [example: `Additional information about the user`] [nullable] |
+| **removed** | **Boolean** | Specifies if the user account was removed or not. | [optional] [example: `false`] |
+| **lastModified** | **Date** (date-time) | The date and time when the user account was last modified. | [optional] [example: `2025-02-08T10:30:00Z`] |
+| **tenantId** | **Integer** (int32) | The tenant ID. | [optional] [example: `1`] |
+| **isActive** | **Boolean** | Specifies if the user is active or not. | [optional] [example: `true`] |
+| **cultureName** | **String** | The user culture code. | [optional] [example: `en-US`] [nullable] |
+| **mobilePhone** | **String** | The user mobile phone. | [optional] [example: `+1234567890`] [nullable] |
+| **mobilePhoneActivationStatus** | [**MobilePhoneActivationStatus**](#model-mobilephoneactivationstatus) | The user mobile phone activation status. | [optional] [enum: `0`, `1`] |
+| **sid** | **String** | The LDAP user identifier. | [optional] [example: `S-1-5-21-3623811015-3361044348-30300820-1013`] [nullable] |
+| **ldapQouta** | **Long** (int64) | The LDAP user quota attribute. | [optional] [example: `1073741824`] |
+| **ssoNameId** | **String** | The SSO SAML user identifier. | [optional] [example: `johndoe@example.com`] [nullable] |
+| **ssoSessionId** | **String** | The SSO SAML user session identifier. | [optional] [example: `_1a2b3c4d5e6f7g8h9i0j`] [nullable] |
+| **createDate** | **Date** (date-time) | The date and time when the user account was created. | [optional] [example: `2020-01-15T00:00:00Z`] |
+| **createdBy** | **UUID** (uuid) | The ID of the user who created the current user account. | [optional] [example: `00000000-0000-0000-0000-000000000000`] [nullable] |
+| **spam** | **Boolean** | Specifies if tips, updates and offers are allowed to be sent to the user or not. | [optional] [example: `false`] [nullable] |
+| **checkActivation** | **Boolean** | Indicates whether the activation status of the employee or recipient is unchecked or inactive.  Depending on the context, this property evaluates the activation or eligibility status accordingly. | [optional] [example: `false`] |
 
 
 ### Model UserInvitation
@@ -13614,8 +13614,8 @@ Which pending room invitations are to be sent again.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **usersIds** | **List** (uuid) | The accounts to write to, taken from `GET api/2.0/files/rooms/{id}/share`. Anyone who has already joined, is  not in the room, or is invisible to the caller is skipped without an error, and the field is ignored once  every pending invitation is being resent. | [optional] [example: [e9a7b4c1-2d3f-4a56-8b90-1c2d3e4f5a6b]] [nullable] |
-| **resendAll** | **Boolean** | Whether every invitation of the room that is still waiting is sent again. With it on the list of accounts is  ignored, and with it off an empty list means that nothing is sent at all. | [optional] [example: false] |
+| **usersIds** | **List** (uuid) | The accounts to write to, taken from `GET api/2.0/files/rooms/{id}/share`. Anyone who has already joined, is  not in the room, or is invisible to the caller is skipped without an error, and the field is ignored once  every pending invitation is being resent. | [optional] [example: `[e9a7b4c1-2d3f-4a56-8b90-1c2d3e4f5a6b]`] [nullable] |
+| **resendAll** | **Boolean** | Whether every invitation of the room that is still waiting is sent again. With it on the list of accounts is  ignored, and with it off an empty list means that nothing is sent at all. | [optional] [example: `false`] |
 
 
 ### Model VectorizationStatus
@@ -13643,13 +13643,13 @@ The watermark drawn over the documents of a room while they are viewed and print
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **additions** | [**WatermarkAdditions**](#model-watermarkadditions) | Which details of the reader and of the room are stamped alongside the text. The values combine, so a number  that is not a member on its own is the sum of several of them, and 0 means that only the text is stamped. | [required] [enum: 1, 2, 4, 8, 16] |
-| **text** | **String** | The fixed line drawn over the document, printed before the details selected alongside it. Empty when the room  stamps an image instead. | [optional] [example: Confidential] [nullable] |
-| **rotate** | **Integer** (int32) | How far the stamp is turned, in degrees, with negative values turning it anticlockwise and 0 drawing it  horizontally. | [required] [example: -45] |
-| **imageScale** | **Integer** (int32) | How large the image is drawn, as a percentage of its own size. It is 0 for a text watermark, where nothing is  scaled. | [required] [example: 100] |
-| **imageUrl** | **String** | The address the stamped picture is served from, inside the storage of the room. Empty for a text watermark. | [optional] [example: https://portal.example.com/storage/watermark_a1b2c3.png] [nullable] |
-| **imageHeight** | **Double** (double) | The height the picture is drawn with, in pixels, kept together with the width so that the proportions survive.  It is 0 for a text watermark. | [required] [example: 100.0] |
-| **imageWidth** | **Double** (double) | The width the picture is drawn with, in pixels, kept together with the height so that the proportions survive.  It is 0 for a text watermark. | [required] [example: 200.0] |
+| **additions** | [**WatermarkAdditions**](#model-watermarkadditions) | Which details of the reader and of the room are stamped alongside the text. The values combine, so a number  that is not a member on its own is the sum of several of them, and 0 means that only the text is stamped. | [required] [enum: `1`, `2`, `4`, `8`, `16`] |
+| **text** | **String** | The fixed line drawn over the document, printed before the details selected alongside it. Empty when the room  stamps an image instead. | [optional] [example: `Confidential`] [nullable] |
+| **rotate** | **Integer** (int32) | How far the stamp is turned, in degrees, with negative values turning it anticlockwise and 0 drawing it  horizontally. | [required] [example: `-45`] |
+| **imageScale** | **Integer** (int32) | How large the image is drawn, as a percentage of its own size. It is 0 for a text watermark, where nothing is  scaled. | [required] [example: `100`] |
+| **imageUrl** | **String** | The address the stamped picture is served from, inside the storage of the room. Empty for a text watermark. | [optional] [example: `https://portal.example.com/storage/watermark_a1b2c3.png`] [nullable] |
+| **imageHeight** | **Double** (double) | The height the picture is drawn with, in pixels, kept together with the width so that the proportions survive.  It is 0 for a text watermark. | [required] [example: `100.0`] |
+| **imageWidth** | **Double** (double) | The width the picture is drawn with, in pixels, kept together with the height so that the proportions survive.  It is 0 for a text watermark. | [required] [example: `200.0`] |
 
 
 ### Model WatermarkOnDraw
@@ -13657,13 +13657,13 @@ The document watermark parameters.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **width** | **Double** (double) | Defines the watermark width measured in millimeters. | [optional] [example: 150] |
-| **height** | **Double** (double) | Defines the watermark height measured in millimeters. | [optional] [example: 100] |
-| **margins** | **List** (int32) | Defines the watermark margins measured in millimeters. | [optional] [example: [10, 10, 10, 10]] [nullable] |
-| **fill** | **String** | Defines the watermark fill color. | [optional] [example: #FF0000] [nullable] |
-| **rotate** | **Integer** (int32) | Defines the watermark rotation angle. | [optional] [example: 45] |
-| **transparent** | **Double** (double) | Defines the watermark transparency percentage. | [optional] [example: 0.4] |
-| **paragraphs** | [**List**](#model-paragraph) | The list of paragraphs of the watermark. | [optional] [example: [\{align=2, runs=[\{fill=[124, 124, 124], text=CONFIDENTIAL, fontSize=26\}]\}]] [nullable] |
+| **width** | **Double** (double) | Defines the watermark width measured in millimeters. | [optional] [example: `150`] |
+| **height** | **Double** (double) | Defines the watermark height measured in millimeters. | [optional] [example: `100`] |
+| **margins** | **List** (int32) | Defines the watermark margins measured in millimeters. | [optional] [example: `[10, 10, 10, 10]`] [nullable] |
+| **fill** | **String** | Defines the watermark fill color. | [optional] [example: `#FF0000`] [nullable] |
+| **rotate** | **Integer** (int32) | Defines the watermark rotation angle. | [optional] [example: `45`] |
+| **transparent** | **Double** (double) | Defines the watermark transparency percentage. | [optional] [example: `0.4`] |
+| **paragraphs** | [**List**](#model-paragraph) | The list of paragraphs of the watermark. | [optional] [example: `[{align=2, runs=[{fill=[124, 124, 124], text=CONFIDENTIAL, fontSize=26}]}]`] [nullable] |
 
 
 ### Model WatermarkRequestDto
@@ -13671,14 +13671,14 @@ The watermark drawn over the documents of a room.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **enabled** | **Boolean** | Whether the room draws a watermark at all. Sending the object with this turned off removes the watermark the  room has, and the rest of the fields are then irrelevant. | [optional] [example: true] [nullable] |
-| **additions** | [**WatermarkAdditions**](#model-watermarkadditions) | Which details of the reader and of the room are stamped into the watermark alongside the text. The values  combine, so several of them can be added together to stamp more than one. | [optional] [enum: 1, 2, 4, 8, 16] |
-| **text** | **String** | The fixed line drawn over the document, shown before the details selected alongside it. It is the whole  watermark when no details are added. | [optional] [example: Confidential] [minLength: 0] [maxLength: 255] [nullable] |
-| **rotate** | **Integer** (int32) | How far the watermark is turned, in degrees, with negative values turning it anticlockwise. Zero draws it  horizontally across the page. | [optional] [example: -45] |
-| **imageScale** | **Integer** (int32) | How large the watermark image is drawn, as a percentage of its own size. It applies to the image form of the  watermark only. | [optional] [example: 100] |
-| **imageUrl** | **String** | The picture to use instead of a text watermark, named by the path that `POST api/2.0/files/logos` returned for  an image uploaded beforehand. The portal copies it into the room when the setting is saved. | [optional] [example: /temp/watermark_a1b2c3.png] [nullable] |
-| **imageHeight** | **Double** (double) | The height the watermark image is drawn with, in pixels, used together with the width to keep its proportions. | [optional] [example: 100.0] |
-| **imageWidth** | **Double** (double) | The width the watermark image is drawn with, in pixels, used together with the height to keep its proportions. | [optional] [example: 200.0] |
+| **enabled** | **Boolean** | Whether the room draws a watermark at all. Sending the object with this turned off removes the watermark the  room has, and the rest of the fields are then irrelevant. | [optional] [example: `true`] [nullable] |
+| **additions** | [**WatermarkAdditions**](#model-watermarkadditions) | Which details of the reader and of the room are stamped into the watermark alongside the text. The values  combine, so several of them can be added together to stamp more than one. | [optional] [enum: `1`, `2`, `4`, `8`, `16`] |
+| **text** | **String** | The fixed line drawn over the document, shown before the details selected alongside it. It is the whole  watermark when no details are added. | [optional] [example: `Confidential`] [minLength: 0] [maxLength: 255] [nullable] |
+| **rotate** | **Integer** (int32) | How far the watermark is turned, in degrees, with negative values turning it anticlockwise. Zero draws it  horizontally across the page. | [optional] [example: `-45`] |
+| **imageScale** | **Integer** (int32) | How large the watermark image is drawn, as a percentage of its own size. It applies to the image form of the  watermark only. | [optional] [example: `100`] |
+| **imageUrl** | **String** | The picture to use instead of a text watermark, named by the path that `POST api/2.0/files/logos` returned for  an image uploaded beforehand. The portal copies it into the room when the setting is saved. | [optional] [example: `/temp/watermark_a1b2c3.png`] [nullable] |
+| **imageHeight** | **Double** (double) | The height the watermark image is drawn with, in pixels, used together with the width to keep its proportions. | [optional] [example: `100.0`] |
+| **imageWidth** | **Double** (double) | The width the watermark image is drawn with, in pixels, used together with the height to keep its proportions. | [optional] [example: `200.0`] |
 
 
 ### Model XlsxReportResponseDto
@@ -13688,7 +13688,7 @@ The answer to a report generation request: the queued task, the form whose answe
 |------------ | ------------- | ------------- | -------------|
 | **form** | [**FileDtoInteger**](#model-filedtointeger) | The original form the answers are collected from. It is not the produced spreadsheet - that one arrives with  the task, once the task reports completion. | [optional] |
 | **task** | [**DocumentBuilderTaskDto**](#model-documentbuildertaskdto) | The queued generation. Poll it with `GET api/2.0/files/file/{fileId}/xlsx` until it reports completion, and  take the produced file from it then. | [optional] |
-| **isNewFile** | **Boolean** | True when this run creates the report file, false when an existing report is rewritten in place, which means  it keeps its id and the links already shared for it. | [optional] [example: true] |
+| **isNewFile** | **Boolean** | True when this run creates the report file, false when an existing report is rewritten in place, which means  it keeps its id and the links already shared for it. | [optional] [example: `true`] |
 
 
 ### Model XlsxReportResponseWrapper

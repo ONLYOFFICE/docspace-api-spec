@@ -14,7 +14,7 @@ Returns the current state of the user type change queued for the user with the I
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **userid** | path | **UUID** (uuid) | The ID of the user the operation applies to, taken from the route. For a progress operation it has to be the  same ID that was passed when the job was started. | [required] [example: 00000000-0000-0000-0000-000000000000] |
+| **userid** | path | **UUID** (uuid) | The ID of the user the operation applies to, taken from the route. For a progress operation it has to be the  same ID that was passed when the job was started. | [required] [example: `00000000-0000-0000-0000-000000000000`] |
 
 ## Responses
 

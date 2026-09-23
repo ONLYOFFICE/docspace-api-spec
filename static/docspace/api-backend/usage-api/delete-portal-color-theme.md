@@ -14,7 +14,7 @@ Removes a custom color theme from the portal by its ID. Requires Owner or DocSpa
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | query | **Integer** (int32) | The theme to remove, by theme ID. An ID belonging to a built-in theme leaves the list untouched, and so does  one that is already gone - neither is reported as an error. Removing the theme currently in use moves the  portal to the remaining theme with the lowest ID. | [required] [example: 1] |
+| **id** | query | **Integer** (int32) | The theme to remove, by theme ID. An ID belonging to a built-in theme leaves the list untouched, and so does  one that is already gone - neither is reported as an error. Removing the theme currently in use moves the  portal to the remaining theme with the lowest ID. | [required] [example: `1`] |
 
 ## Responses
 

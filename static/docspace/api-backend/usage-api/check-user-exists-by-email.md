@@ -14,9 +14,9 @@ Reports whether an email address already belongs to a portal profile, and in wha
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **email** | query | **String** (email) | The user email address. | [optional] [example: john.doe@example.com] [minLength: 0] [maxLength: 255] |
-| **encemail** | query | **String** | The user encrypted email address. | [optional] [example: encrypted_email_string] |
-| **culture** | query | **String** | Culture | [optional] [example: en-US] |
+| **email** | query | **String** (email) | The user email address. | [optional] [example: `john.doe@example.com`] [minLength: 0] [maxLength: 255] |
+| **encemail** | query | **String** | The user encrypted email address. | [optional] [example: `encrypted_email_string`] |
+| **culture** | query | **String** | Culture | [optional] [example: `en-US`] |
 
 ## Responses
 

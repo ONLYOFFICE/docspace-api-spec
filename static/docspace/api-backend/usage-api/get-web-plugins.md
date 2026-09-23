@@ -14,7 +14,7 @@ Lists the web plugins available in the current portal: the plugins installed for
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **enabled** | query | **Boolean** | Which plugins are kept: `true` the ones switched on, `false` the ones switched off. Omitting it lists every  installed plugin whatever its state. | [optional] [example: true] |
+| **enabled** | query | **Boolean** | Which plugins are kept: `true` the ones switched on, `false` the ones switched off. Omitting it lists every  installed plugin whatever its state. | [optional] [example: `true`] |
 
 ## Responses
 

@@ -14,7 +14,7 @@ Returns one saved prompt by its ID. The ID is required and is read from the quer
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | query | **String** | The saved prompt identifier. | [required] [example: 33333333-3333-3333-3333-333333333333] |
+| **id** | query | **String** | The saved prompt identifier. | [required] [example: `33333333-3333-3333-3333-333333333333`] |
 
 ## Responses
 

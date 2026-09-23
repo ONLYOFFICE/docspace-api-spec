@@ -14,7 +14,7 @@ Deletes an AI agent room. The ID has to be the room's integer identifier, and th
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **String** | The agent identifier. | [required] [example: 1234] |
+| **id** | path | **String** | The agent identifier. | [required] [example: `1234`] |
 | **aiAgentsDelete\_request** | body | [**aiAgentsDelete_request**](../aichat.md#model-aiagentsdelete-request-body) |  | [required] |
 
 ## Responses

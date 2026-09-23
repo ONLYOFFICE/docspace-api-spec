@@ -14,7 +14,7 @@ Returns one wallet service by name, for a client that already knows which servic
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **service** | query | **TenantWalletService** | The service to look up, given by its catalogue name. A service this installation does not sell answers 404,  and the whole catalogue is `GET api/2.0/portal/payment/walletservices`. | [required] [example: Storage] [enum: -18, -16, -15, -14, -13, -12, -11] |
+| **service** | query | **TenantWalletService** | The service to look up, given by its catalogue name. A service this installation does not sell answers 404,  and the whole catalogue is `GET api/2.0/portal/payment/walletservices`. | [required] [example: `Storage`] [enum: `-18`, `-16`, `-15`, `-14`, `-13`, `-12`, `-11`] |
 
 ## Responses
 

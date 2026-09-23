@@ -14,7 +14,7 @@ Removes the avatar of a profile, so that the profile falls back to the default p
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **userid** | path | **String** | The profile whose avatar the operation addresses, taken from the route. Either the ID of the account or its  user name is accepted. Reading a photo works for any account the caller may see, while deleting one only  works for the calling account itself. | [required] [example: 00000000-0000-0000-0000-000000000000] |
+| **userid** | path | **String** | The profile whose avatar the operation addresses, taken from the route. Either the ID of the account or its  user name is accepted. Reading a photo works for any account the caller may see, while deleting one only  works for the calling account itself. | [required] [example: `00000000-0000-0000-0000-000000000000`] |
 
 ## Responses
 

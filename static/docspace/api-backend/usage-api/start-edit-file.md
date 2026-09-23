@@ -14,7 +14,7 @@ Opens an editing session on the file and answers with the document key that iden
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **Integer** (int32) | The file to open the editing session on. The caller needs edit access to it. | [required] [example: 1] |
+| **fileId** | path | **Integer** (int32) | The file to open the editing session on. The caller needs edit access to it. | [required] [example: `1`] |
 | **StartEdit** | body | [**StartEdit**](../files.md#model-startedit) | The session options. The body is required even when it only carries the default, so send an empty object to  open an ordinary co-editing session. | [required] |
 
 ## Responses

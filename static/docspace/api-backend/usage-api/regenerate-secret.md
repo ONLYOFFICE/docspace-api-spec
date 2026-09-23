@@ -14,7 +14,7 @@ Issues a new secret for the client and returns it. The previous secret stops wor
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **clientId** | path | **String** | ID of the client to regenerate secret for | [required] [example: 6c7cf17b-1bd3-47d5-94c6-be2d3570e168] [minLength: 1] |
+| **clientId** | path | **String** | ID of the client to regenerate secret for | [required] [example: `6c7cf17b-1bd3-47d5-94c6-be2d3570e168`] [minLength: 1] |
 
 ## Responses
 

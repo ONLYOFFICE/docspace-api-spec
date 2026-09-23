@@ -14,7 +14,7 @@ Sets the avatar of a profile from an image the portal downloads itself from the 
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **userid** | path | **String** | The profile whose avatar is replaced, taken from the route. Either the ID of the account or its user name is  accepted, and it has to be the calling account, because a profile photo can only be changed by its owner. | [required] [example: 00000000-0000-0000-0000-000000000000] |
+| **userid** | path | **String** | The profile whose avatar is replaced, taken from the route. Either the ID of the account or its user name is  accepted, and it has to be the calling account, because a profile photo can only be changed by its owner. | [required] [example: `00000000-0000-0000-0000-000000000000`] |
 | **UpdatePhotoMemberRequest** | body | [**UpdatePhotoMemberRequest**](../people.md#model-updatephotomemberrequest) | The address of the image to use as the new avatar. | [required] |
 
 ## Responses

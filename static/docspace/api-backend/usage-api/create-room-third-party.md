@@ -14,7 +14,7 @@ Turns a folder of a connected third-party storage account into a room of the `Ro
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **String** | The identifier of the folder in the connected third-party storage that becomes the room, or receives it as a  subfolder. Folder identifiers of a connected account are strings and are returned by the folder listings of  that account. | [required] [example: box-12-\|280143035119] |
+| **id** | path | **String** | The identifier of the folder in the connected third-party storage that becomes the room, or receives it as a  subfolder. Folder identifiers of a connected account are strings and are returned by the folder listings of  that account. | [required] [example: `box-12-\|280143035119`] |
 | **CreateThirdPartyRoom** | body | [**CreateThirdPartyRoom**](../files.md#model-createthirdpartyroom) | The settings of the room to be created out of the folder. | [required] |
 
 ## Responses

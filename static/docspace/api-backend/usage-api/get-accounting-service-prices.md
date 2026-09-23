@@ -14,8 +14,8 @@ Returns the portal's automatic wallet top-up settings: whether it is switched on
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **serviceName** | path | **String** | The service whose price list is read, named the way the billing catalogue names it, such as `ai-tools` or  `backup`. Take the value from the `serviceName` field of `GET api/2.0/portal/payment/walletservices`; a name  the accounting service does not price yields an empty list rather than an error. | [required] [example: ai-tools] [minLength: 0] [maxLength: 255] |
-| **active** | query | **Boolean** | Whether the answer is narrowed to the prices in force at the moment of the call. Leaving it false also  returns the retired and the not yet started ones, which is what pricing a movement recorded in the past  needs. | [optional] [example: false] |
+| **serviceName** | path | **String** | The service whose price list is read, named the way the billing catalogue names it, such as `ai-tools` or  `backup`. Take the value from the `serviceName` field of `GET api/2.0/portal/payment/walletservices`; a name  the accounting service does not price yields an empty list rather than an error. | [required] [example: `ai-tools`] [minLength: 0] [maxLength: 255] |
+| **active** | query | **Boolean** | Whether the answer is narrowed to the prices in force at the moment of the call. Leaving it false also  returns the retired and the not yet started ones, which is what pricing a movement recorded in the past  needs. | [optional] [example: `false`] |
 
 ## Responses
 

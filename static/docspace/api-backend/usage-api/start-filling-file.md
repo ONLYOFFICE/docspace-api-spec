@@ -14,7 +14,7 @@ Marks a PDF form in a form-filling room as open for filling out and answers with
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **Integer** (int32) | The PDF form to open for filling. It has to be the form as it lies in the form-filling room itself, not a copy  kept elsewhere and not a submitted result. | [required] [example: 1] |
+| **fileId** | path | **Integer** (int32) | The PDF form to open for filling. It has to be the form as it lies in the form-filling room itself, not a copy  kept elsewhere and not a submitted result. | [required] [example: `1`] |
 
 ## Responses
 

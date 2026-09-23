@@ -14,7 +14,7 @@ Builds a link that lets another member of the portal take over the caller's gues
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **userid** | path | **UUID** (uuid) | The ID of the guest to be handed over, taken from the route. The account has to exist, has to be a guest, and  has to be one the caller can see. | [required] [example: 00000000-0000-0000-0000-000000000000] |
+| **userid** | path | **UUID** (uuid) | The ID of the guest to be handed over, taken from the route. The account has to exist, has to be a guest, and  has to be one the caller can see. | [required] [example: `00000000-0000-0000-0000-000000000000`] |
 
 ## Responses
 

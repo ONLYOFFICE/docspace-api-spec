@@ -14,8 +14,8 @@ Moves every member of one group into another group, emptying the first one.  The
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fromId** | path | **UUID** (uuid) | The ID of the group the members are taken from. It is emptied but not deleted, and it has to be a group that  has not been deleted already. | [required] [example: 00000000-0000-0000-0000-000000000000] |
-| **toId** | path | **UUID** (uuid) | The ID of the group the members are moved into. It is the group the answer describes, and it has to be a  group that has not been deleted already. | [required] [example: 11111111-1111-1111-1111-111111111111] |
+| **fromId** | path | **UUID** (uuid) | The ID of the group the members are taken from. It is emptied but not deleted, and it has to be a group that  has not been deleted already. | [required] [example: `00000000-0000-0000-0000-000000000000`] |
+| **toId** | path | **UUID** (uuid) | The ID of the group the members are moved into. It is the group the answer describes, and it has to be a  group that has not been deleted already. | [required] [example: `11111111-1111-1111-1111-111111111111`] |
 
 ## Responses
 

@@ -14,8 +14,8 @@ Retrieves a paginated list of user consents: the clients the calling user has au
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **limit** | query | **Integer** (int32) | How many entries to return, between 1 and 50. It has no default and has to be sent on every call. | [required] [example: 30] [min: 1] [max: 50] |
-| **last\_modified\_on** | query | **Date** (date-time) | Date of the last retrieved consent | [optional] [example: 2024-04-04T12:00:00Z] |
+| **limit** | query | **Integer** (int32) | How many entries to return, between 1 and 50. It has no default and has to be sent on every call. | [required] [example: `30`] [min: 1] [max: 50] |
+| **last\_modified\_on** | query | **Date** (date-time) | Date of the last retrieved consent | [optional] [example: `2024-04-04T12:00:00Z`] |
 
 ## Responses
 

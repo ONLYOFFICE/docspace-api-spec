@@ -14,7 +14,7 @@ Adds, changes and removes room members in one batch, and returns the resulting a
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The room whose membership changes, named by the identifier that `GET api/2.0/files/rooms` reports for it. | [required] [example: 1] |
+| **id** | path | **Integer** (int32) | The room whose membership changes, named by the identifier that `GET api/2.0/files/rooms` reports for it. | [required] [example: `1`] |
 | **RoomInvitationRequest** | body | [**RoomInvitationRequest**](../files.md#model-roominvitationrequest) | The membership changes to apply, together with how the people concerned are notified. | [required] |
 
 ## Responses

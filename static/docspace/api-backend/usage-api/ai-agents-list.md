@@ -14,17 +14,17 @@ Lists the portal's AI agent rooms. The query is forwarded unchanged to the DocSp
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **subjectId** | query | **String** | Show only the agent rooms this user takes part in. | [optional] [example: 00000000-0000-0000-0000-000000000000] |
-| **subjectOwnerId** | query | **String** | Show only the agent rooms owned by this user. | [optional] [example: 00000000-0000-0000-0000-000000000000] |
-| **excludeSubject** | query | **Boolean** | Invert the user filter: leave out what `subjectId` selects instead of keeping it. | [optional] [example: false] |
-| **tags** | query | **String** | Show only the agent rooms carrying these tags, comma-separated. | [optional] [example: ai,assistant] |
-| **withoutTags** | query | **Boolean** | Show only the agent rooms that carry no tags at all. | [optional] [example: false] |
-| **quotaFilter** | query | **Integer** | Filter by quota kind: 0 for all, 1 for the default quota, 2 for a custom one. | [optional] [example: 0] |
-| **filterValue** | query | **String** | Show only the agent rooms whose title matches this text. | [optional] [example: assistant] |
-| **sortBy** | query | **String** | Field to sort by, for example `DateAndTime`. | [optional] [example: DateAndTime] |
-| **sortOrder** | query | **String** | Sort direction, `ascending` or `descending`. | [optional] [example: descending] |
-| **startIndex** | query | **Integer** | Index of the first entry to return; 0 starts at the beginning. | [optional] [example: 0] |
-| **count** | query | **Integer** | How many entries to return. The internal service applies its own default. | [optional] [example: 25] |
+| **subjectId** | query | **String** | Show only the agent rooms this user takes part in. | [optional] [example: `00000000-0000-0000-0000-000000000000`] |
+| **subjectOwnerId** | query | **String** | Show only the agent rooms owned by this user. | [optional] [example: `00000000-0000-0000-0000-000000000000`] |
+| **excludeSubject** | query | **Boolean** | Invert the user filter: leave out what `subjectId` selects instead of keeping it. | [optional] [example: `false`] |
+| **tags** | query | **String** | Show only the agent rooms carrying these tags, comma-separated. | [optional] [example: `ai,assistant`] |
+| **withoutTags** | query | **Boolean** | Show only the agent rooms that carry no tags at all. | [optional] [example: `false`] |
+| **quotaFilter** | query | **Integer** | Filter by quota kind: 0 for all, 1 for the default quota, 2 for a custom one. | [optional] [example: `0`] |
+| **filterValue** | query | **String** | Show only the agent rooms whose title matches this text. | [optional] [example: `assistant`] |
+| **sortBy** | query | **String** | Field to sort by, for example `DateAndTime`. | [optional] [example: `DateAndTime`] |
+| **sortOrder** | query | **String** | Sort direction, `ascending` or `descending`. | [optional] [example: `descending`] |
+| **startIndex** | query | **Integer** | Index of the first entry to return; 0 starts at the beginning. | [optional] [example: `0`] |
+| **count** | query | **Integer** | How many entries to return. The internal service applies its own default. | [optional] [example: `25`] |
 
 ## Responses
 

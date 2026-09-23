@@ -14,7 +14,7 @@ Turns the Custom Filter editing mode of a spreadsheet on or off and answers with
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **Integer** (int32) | The spreadsheet whose Custom Filter mode is switched. | [required] [example: 1] |
+| **fileId** | path | **Integer** (int32) | The spreadsheet whose Custom Filter mode is switched. | [required] [example: `1`] |
 | **CustomFilterParameters** | body | [**CustomFilterParameters**](../files.md#model-customfilterparameters) | The Custom Filter state to reach. | [required] |
 
 ## Responses

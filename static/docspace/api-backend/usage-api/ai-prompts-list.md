@@ -14,7 +14,7 @@ Lists the caller's saved prompts, newest first. `folderId` scopes the answer to 
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **folderId** | query | **String** | The prompt folder identifier. Omit to list the prompts that sit outside any folder. | [optional] [example: 44444444-4444-4444-4444-444444444444] |
+| **folderId** | query | **String** | The prompt folder identifier. Omit to list the prompts that sit outside any folder. | [optional] [example: `44444444-4444-4444-4444-444444444444`] |
 
 ## Responses
 

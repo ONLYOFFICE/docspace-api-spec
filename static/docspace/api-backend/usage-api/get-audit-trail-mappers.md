@@ -14,8 +14,8 @@ Returns the audit vocabulary as the tree it really is: every product, the module
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **productType** | query | **ProductType** | The product to keep, spelled as `GET api/2.0/security/audit/types` lists it under `productTypes`. Omitting  it keeps every product; a value no product matches yields an empty list rather than an error. | [optional] [example: Documents] [enum: 2, 3, 7, 8] |
-| **moduleType** | query | **LocationType** | The module to keep inside the products that survive `productType`, spelled as  `GET api/2.0/security/audit/types` lists it under `moduleTypes`. Omitting it keeps every module of those  products. | [optional] [example: Files] [enum: 0, 1, 2, 3, 27, 29, 30, 31] |
+| **productType** | query | **ProductType** | The product to keep, spelled as `GET api/2.0/security/audit/types` lists it under `productTypes`. Omitting  it keeps every product; a value no product matches yields an empty list rather than an error. | [optional] [example: `Documents`] [enum: `2`, `3`, `7`, `8`] |
+| **moduleType** | query | **LocationType** | The module to keep inside the products that survive `productType`, spelled as  `GET api/2.0/security/audit/types` lists it under `moduleTypes`. Omitting it keeps every module of those  products. | [optional] [example: `Files`] [enum: `0`, `1`, `2`, `3`, `27`, `29`, `30`, `31`] |
 
 ## Responses
 

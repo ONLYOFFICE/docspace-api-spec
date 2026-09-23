@@ -14,7 +14,7 @@ Queues the conversion of a file into the portal's own editable format and answer
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **Integer** (int32) | The file to convert. | [required] [example: 1] |
+| **fileId** | path | **Integer** (int32) | The file to convert. | [required] [example: `1`] |
 | **CheckConversionRequestDtoInteger** | body | [**CheckConversionRequestDtoInteger**](../files.md#model-checkconversionrequestdtointeger) | The parameters of the conversion. The whole body may be omitted, in which case the defaults of the portal  apply. | [optional] |
 
 ## Responses

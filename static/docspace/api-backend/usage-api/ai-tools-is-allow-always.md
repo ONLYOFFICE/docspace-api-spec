@@ -14,9 +14,9 @@ Tells whether one named tool runs without an approval pause in the scope. Both `
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **serverType** | query | **String** | The MCP server type the tool belongs to. | [required] [example: docspace] |
-| **toolName** | query | **String** | The tool name. | [required] [example: docspace_get_folder] |
-| **entityId** | query | **String** | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | [optional] [example: 1234] |
+| **serverType** | query | **String** | The MCP server type the tool belongs to. | [required] [example: `docspace`] |
+| **toolName** | query | **String** | The tool name. | [required] [example: `docspace_get_folder`] |
+| **entityId** | query | **String** | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | [optional] [example: `1234`] |
 
 ## Responses
 

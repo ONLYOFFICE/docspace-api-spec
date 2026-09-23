@@ -14,10 +14,10 @@ Reads the messages of one thread, oldest first, with the same string-encoded JSO
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **threadId** | query | **String** | The chat thread identifier. | [required] [example: 11111111-1111-1111-1111-111111111111] |
-| **count** | query | **Integer** | The maximum number of items to return in one page. | [optional] [example: 20] |
-| **cursor** | query | **String** | The keyset pagination cursor: the JSON-encoded sort key of the last item already received. Omit for the first page. | [optional] [example: \{"id":"11111111-1111-1111-1111-111111111111","lastEditDate":1767225600000\}] |
-| **direction** | query | **String** | The order the message page is read in. Only desc turns the read around and pages back from the newest message; omit for the forward read. | [optional] [example: desc] |
+| **threadId** | query | **String** | The chat thread identifier. | [required] [example: `11111111-1111-1111-1111-111111111111`] |
+| **count** | query | **Integer** | The maximum number of items to return in one page. | [optional] [example: `20`] |
+| **cursor** | query | **String** | The keyset pagination cursor: the JSON-encoded sort key of the last item already received. Omit for the first page. | [optional] [example: `{"id":"11111111-1111-1111-1111-111111111111","lastEditDate":1767225600000}`] |
+| **direction** | query | **String** | The order the message page is read in. Only desc turns the read around and pages back from the newest message; omit for the forward read. | [optional] [example: `desc`] |
 
 ## Responses
 

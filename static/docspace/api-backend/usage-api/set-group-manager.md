@@ -14,7 +14,7 @@ Makes an account the manager of a group, replacing whoever managed it before.  T
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **UUID** (uuid) | The ID of the group whose manager is set, taken from the route. It has to be a group that has not been  deleted, otherwise the operation answers 404. | [required] [example: 00000000-0000-0000-0000-000000000000] |
+| **id** | path | **UUID** (uuid) | The ID of the group whose manager is set, taken from the route. It has to be a group that has not been  deleted, otherwise the operation answers 404. | [required] [example: `00000000-0000-0000-0000-000000000000`] |
 | **SetManagerRequest** | body | [**SetManagerRequest**](../people.md#model-setmanagerrequest) | The account to make the manager of the group. | [required] |
 
 ## Responses

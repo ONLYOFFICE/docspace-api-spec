@@ -14,7 +14,7 @@ Removes one encryption key pair from the calling user's own key set and answers 
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **UUID** (uuid) | The pair to delete, taken from the `id` of an entry of `GET api/2.0/privacyroom/keys`. Only the caller's own  pairs can be named here. | [required] [example: 9924256B-447C-4F19-9dbd-8ad8c39e8ff5] |
+| **id** | path | **UUID** (uuid) | The pair to delete, taken from the `id` of an entry of `GET api/2.0/privacyroom/keys`. Only the caller's own  pairs can be named here. | [required] [example: `9924256B-447C-4F19-9dbd-8ad8c39e8ff5`] |
 
 ## Responses
 

@@ -14,7 +14,7 @@ Reports where this portal expects ONLYOFFICE Docs to be: the public Document Ser
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **version** | query | **Boolean** | Whether the running Document Server is asked for its editor version so that `version` can report it. Left off,  the portal answers from its own settings without contacting the Document Server and `version` comes back  empty. | [optional] [example: true] |
+| **version** | query | **Boolean** | Whether the running Document Server is asked for its editor version so that `version` can report it. Left off,  the portal answers from its own settings without contacting the Document Server and `version` comes back  empty. | [optional] [example: `true`] |
 
 ## Responses
 

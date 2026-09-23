@@ -14,7 +14,7 @@ Returns one message by its ID, wherever it sits, without needing the thread it b
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **messageId** | query | **String** | The globally unique chat message identifier. | [required] [example: 22222222-2222-2222-2222-222222222222] |
+| **messageId** | query | **String** | The globally unique chat message identifier. | [required] [example: `22222222-2222-2222-2222-222222222222`] |
 
 ## Responses
 

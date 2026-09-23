@@ -14,7 +14,7 @@ Returns the current portal's general configuration: branding, culture, feature f
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **withpassword** | query | **Boolean** | Whether the answer also carries the salt, iteration count and hash size a client needs to hash a password  before sending it to the authentication operations. They are included for an anonymous caller anyway; for a  signed-in one they are left out unless this is set. | [optional] [example: true] |
+| **withpassword** | query | **Boolean** | Whether the answer also carries the salt, iteration count and hash size a client needs to hash a password  before sending it to the authentication operations. They are included for an anonymous caller anyway; for a  signed-in one they are left out unless this is set. | [optional] [example: `true`] |
 
 ## Responses
 

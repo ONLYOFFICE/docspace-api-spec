@@ -14,7 +14,7 @@ Emails the people named in `emails` that they were mentioned in a file, with a l
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **Integer** (int32) | The file the mention was made in. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string. | [required] [example: 10] |
+| **fileId** | path | **Integer** (int32) | The file the mention was made in. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string. | [required] [example: `10`] |
 | **MentionMessageWrapper** | body | [**MentionMessageWrapper**](../files.md#model-mentionmessagewrapper) | The notification to send. | [optional] |
 
 ## Responses

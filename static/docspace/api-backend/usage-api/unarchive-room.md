@@ -14,7 +14,7 @@ Queues a background job that moves one room from the Archive section back to the
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The room to move, named by the identifier that `GET api/2.0/files/rooms` reports for it. | [required] [example: 1] |
+| **id** | path | **Integer** (int32) | The room to move, named by the identifier that `GET api/2.0/files/rooms` reports for it. | [required] [example: `1`] |
 | **ArchiveRoomRequest** | body | [**ArchiveRoomRequest**](../files.md#model-archiveroomrequest) | The body of the request. It carries only the lifetime of the job record, so an empty object is a normal  request. | [optional] |
 
 ## Responses

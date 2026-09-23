@@ -14,7 +14,7 @@ Creates, updates or deletes one sharing link of a room and returns it. `linkType
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The room the link belongs to, named by the identifier that `GET api/2.0/files/rooms` reports for it. | [required] [example: 1] |
+| **id** | path | **Integer** (int32) | The room the link belongs to, named by the identifier that `GET api/2.0/files/rooms` reports for it. | [required] [example: `1`] |
 | **RoomLinkRequest** | body | [**RoomLinkRequest**](../files.md#model-roomlinkrequest) | The link to create, change or revoke. | [required] |
 
 ## Responses

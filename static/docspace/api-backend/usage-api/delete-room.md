@@ -14,7 +14,7 @@ Queues a background job that deletes one room with everything inside it, and ret
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The room to delete, named by the identifier that `GET api/2.0/files/rooms` reports for it. | [required] [example: 10] |
+| **id** | path | **Integer** (int32) | The room to delete, named by the identifier that `GET api/2.0/files/rooms` reports for it. | [required] [example: `10`] |
 | **DeleteRoomRequest** | body | [**DeleteRoomRequest**](../files.md#model-deleteroomrequest) | The body of the request. It is required even though the deletion does not depend on what it holds. | [required] |
 
 ## Responses

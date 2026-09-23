@@ -14,9 +14,9 @@ Queues the deletion of one file and answers with the caller's file operations, t
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **Integer** (int32) | The file to delete. | [required] [example: 1] |
+| **fileId** | path | **Integer** (int32) | The file to delete. | [required] [example: `1`] |
 | **Delete** | body | [**Delete**](../files.md#model-delete) | When and how the file is deleted. | [required] |
-| **ReturnSingleOperation** | query | **Boolean** | Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list. | [optional] [example: false] |
+| **ReturnSingleOperation** | query | **Boolean** | Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list. | [optional] [example: `false`] |
 
 ## Responses
 

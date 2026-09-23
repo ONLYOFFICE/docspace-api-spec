@@ -14,7 +14,7 @@ Puts a folder at a given position among the entries of its parent and answers wi
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **folderId** | path | **Integer** (int32) | The folder to move. | [required] [example: 1] |
+| **folderId** | path | **Integer** (int32) | The folder to move. | [required] [example: `1`] |
 | **OrderRequestDto** | body | [**OrderRequestDto**](../files.md#model-orderrequestdto) | The position the folder is to take. | [optional] |
 
 ## Responses

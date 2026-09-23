@@ -14,12 +14,12 @@ Builds everything an editor client needs to open the file: the document descript
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **Integer** (int32) | The file the editor configuration is built for. Take the id from a folder listing such as  `GET api/2.0/files/{folderId}`. | [required] [example: 1] |
-| **version** | query | **Integer** (int32) | Which entry of the file history to open, numbered the way the file versions are. Left out, the current  revision is opened; naming a version requires access to the history of the file. | [optional] [example: 1] |
-| **view** | query | **Boolean** | Asks for a read-only configuration. Left off, the configuration is built for editing as far as the caller's  rights and the room the file lies in allow. | [optional] [example: false] |
-| **editorType** | query | **EditorType** | Which editor layout the configuration is built for: the full desktop interface, the reduced mobile one, or the  embedded viewer meant to be framed inside another page. | [optional] [example: 1] [enum: 0, 1, 2] |
-| **edit** | query | **Boolean** | Asks for editing rather than viewing. On a form in a form-filling room this also records that the form is  being edited; the room may still turn the request into viewing or into filling. | [optional] [example: false] |
-| **fill** | query | **Boolean** | Asks for a PDF form to open for filling out rather than for editing. It has no effect on a file that is not a  form. | [optional] [example: false] |
+| **fileId** | path | **Integer** (int32) | The file the editor configuration is built for. Take the id from a folder listing such as  `GET api/2.0/files/{folderId}`. | [required] [example: `1`] |
+| **version** | query | **Integer** (int32) | Which entry of the file history to open, numbered the way the file versions are. Left out, the current  revision is opened; naming a version requires access to the history of the file. | [optional] [example: `1`] |
+| **view** | query | **Boolean** | Asks for a read-only configuration. Left off, the configuration is built for editing as far as the caller's  rights and the room the file lies in allow. | [optional] [example: `false`] |
+| **editorType** | query | **EditorType** | Which editor layout the configuration is built for: the full desktop interface, the reduced mobile one, or the  embedded viewer meant to be framed inside another page. | [optional] [example: `1`] [enum: `0`, `1`, `2`] |
+| **edit** | query | **Boolean** | Asks for editing rather than viewing. On a form in a form-filling room this also records that the form is  being edited; the room may still turn the request into viewing or into filling. | [optional] [example: `false`] |
+| **fill** | query | **Boolean** | Asks for a PDF form to open for filling out rather than for editing. It has no effect on a file that is not a  form. | [optional] [example: `false`] |
 
 ## Responses
 

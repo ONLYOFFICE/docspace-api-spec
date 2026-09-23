@@ -14,7 +14,7 @@ Queues the deletion of one folder together with everything inside it, and answer
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **folderId** | path | **Integer** (int32) | The folder to delete, together with everything it holds. | [required] [example: 10] |
+| **folderId** | path | **Integer** (int32) | The folder to delete, together with everything it holds. | [required] [example: `10`] |
 | **DeleteFolder** | body | [**DeleteFolder**](../files.md#model-deletefolder) | How the deletion is to be carried out. | [required] |
 
 ## Responses

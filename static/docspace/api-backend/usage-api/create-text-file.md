@@ -14,7 +14,7 @@ Creates a text file in the folder named in the route out of the text passed as t
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **folderId** | path | **Integer** (int32) | The folder the file is created in. | [required] [example: 1] |
+| **folderId** | path | **Integer** (int32) | The folder the file is created in. | [required] [example: `1`] |
 | **CreateTextOrHtmlFile** | body | [**CreateTextOrHtmlFile**](../files.md#model-createtextorhtmlfile) | The title, the content and the collision behaviour of the new file. | [required] |
 
 ## Responses

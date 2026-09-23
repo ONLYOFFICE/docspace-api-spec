@@ -282,7 +282,7 @@ Returns one portal application by its identifier - one of the feature modules th
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **String** | The application to read, by the identifier `GET api/2.0/apps` reports - one of the feature modules the portal  can turn on, such as `ai-room` or `docs-cloud`. An identifier not declared in the installation configuration  answers 404, which is also how a caller learns that an application does not exist here. | [required] [example: ai-room] |
+| **id** | path | **String** | The application to read, by the identifier `GET api/2.0/apps` reports - one of the feature modules the portal  can turn on, such as `ai-room` or `docs-cloud`. An identifier not declared in the installation configuration  answers 404, which is also how a caller learns that an application does not exist here. | [required] [example: `ai-room`] |
 
 #### Responses
 
@@ -361,7 +361,7 @@ Returns only the settings document of one portal application, such as `ai-rooms`
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **String** | The application to read, by the identifier `GET api/2.0/apps` reports - one of the feature modules the portal  can turn on, such as `ai-room` or `docs-cloud`. An identifier not declared in the installation configuration  answers 404, which is also how a caller learns that an application does not exist here. | [required] [example: ai-room] |
+| **id** | path | **String** | The application to read, by the identifier `GET api/2.0/apps` reports - one of the feature modules the portal  can turn on, such as `ai-room` or `docs-cloud`. An identifier not declared in the installation configuration  answers 404, which is also how a caller learns that an application does not exist here. | [required] [example: `ai-room`] |
 
 #### Responses
 
@@ -403,7 +403,7 @@ Turns one portal application on or off for the current portal, and notifies the 
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **String** | The application to switch, by the identifier `GET api/2.0/apps` reports. It has to be an application declared  in the installation configuration; an unknown identifier answers 404 rather than creating anything. | [required] [example: ai-room] |
+| **id** | path | **String** | The application to switch, by the identifier `GET api/2.0/apps` reports. It has to be an application declared  in the installation configuration; an unknown identifier answers 404 rather than creating anything. | [required] [example: `ai-room`] |
 | **SetAppEnabledBody** | body | [**SetAppEnabledBody**](#model-setappenabledbody) | The new state of the application. Only the enabled flag travels here; the settings document is changed  through `PUT api/2.0/apps/{id}/settings`. | [required] |
 
 #### Responses
@@ -447,7 +447,7 @@ Stores the application-specific settings document of one portal application for 
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **String** | The application whose configuration is stored, by the identifier `GET api/2.0/apps` reports. An identifier  not declared in the installation configuration answers 404. | [required] [example: ai-room] |
+| **id** | path | **String** | The application whose configuration is stored, by the identifier `GET api/2.0/apps` reports. An identifier  not declared in the installation configuration answers 404. | [required] [example: `ai-room`] |
 | **SetAppSettingsBody** | body | [**SetAppSettingsBody**](#model-setappsettingsbody) | The configuration to store for this portal, replacing whatever was stored before. | [required] |
 
 #### Responses
@@ -1092,7 +1092,7 @@ Queues a pass that reads the backup already uploaded for this portal with the mi
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **migratorName** | path | **String** | The migrator that knows the format of the uploaded backup. It has to be one of the names  `GET api/2.0/migration/list` reports for this installation, spelled exactly as listed. | [required] [example: GoogleWorkspace] |
+| **migratorName** | path | **String** | The migrator that knows the format of the uploaded backup. It has to be one of the names  `GET api/2.0/migration/list` reports for this installation, spelled exactly as listed. | [required] [example: `GoogleWorkspace`] |
 
 #### Responses
 
@@ -1351,8 +1351,8 @@ Returns the portal's automatic wallet top-up settings: whether it is switched on
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **serviceName** | path | **String** | The service whose price list is read, named the way the billing catalogue names it, such as `ai-tools` or  `backup`. Take the value from the `serviceName` field of `GET api/2.0/portal/payment/walletservices`; a name  the accounting service does not price yields an empty list rather than an error. | [required] [example: ai-tools] [minLength: 0] [maxLength: 255] |
-| **active** | query | **Boolean** | Whether the answer is narrowed to the prices in force at the moment of the call. Leaving it false also  returns the retired and the not yet started ones, which is what pricing a movement recorded in the past  needs. | [optional] [example: false] |
+| **serviceName** | path | **String** | The service whose price list is read, named the way the billing catalogue names it, such as `ai-tools` or  `backup`. Take the value from the `serviceName` field of `GET api/2.0/portal/payment/walletservices`; a name  the accounting service does not price yields an empty list rather than an error. | [required] [example: `ai-tools`] [minLength: 0] [maxLength: 255] |
+| **active** | query | **Boolean** | Whether the answer is narrowed to the prices in force at the moment of the call. Leaving it false also  returns the retired and the not yet started ones, which is what pricing a movement recorded in the past  needs. | [optional] [example: `false`] |
 
 #### Responses
 
@@ -1470,8 +1470,8 @@ Hands back the hosted page on which a payment method is attached to the portal's
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **BackUrl** | query | **URI** (uri) | The absolute address the setup page sends the user back to when attaching a payment method is abandoned. It  has to be a well-formed URL and must be reachable by that user rather than by the portal. | [required] [example: https://example.com/payment/back] [minLength: 0] [maxLength: 255] |
-| **SuccessUrl** | query | **URI** (uri) | The absolute address the setup page sends the user to once the payment provider has stored the payment  method. Reaching it means a method is now on file, which `GET api/2.0/portal/payment/customerinfo` confirms;  nothing has been charged. | [required] [example: https://example.com/payment/success] [minLength: 0] [maxLength: 255] |
+| **BackUrl** | query | **URI** (uri) | The absolute address the setup page sends the user back to when attaching a payment method is abandoned. It  has to be a well-formed URL and must be reachable by that user rather than by the portal. | [required] [example: `https://example.com/payment/back`] [minLength: 0] [maxLength: 255] |
+| **SuccessUrl** | query | **URI** (uri) | The absolute address the setup page sends the user to once the payment provider has stored the payment  method. Reaching it means a method is now on file, which `GET api/2.0/portal/payment/customerinfo` confirms;  nothing has been charged. | [required] [example: `https://example.com/payment/success`] [minLength: 0] [maxLength: 255] |
 
 #### Responses
 
@@ -1513,7 +1513,7 @@ Returns the money the portal has in its wallet as the accounting service holds i
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **refresh** | query | **Boolean** | Whether the answer is fetched from the billing service instead of the portal cache. The cached copy is what a  start-up needs and costs nothing; asking for a fresh one makes a remote call, so use it right after a  purchase or a top-up and not on every read. | [optional] [example: true] |
+| **refresh** | query | **Boolean** | Whether the answer is fetched from the billing service instead of the portal cache. The cached copy is what a  start-up needs and costs nothing; asking for a fresh one makes a remote call, so use it right after a  purchase or a top-up and not on every read. | [optional] [example: `true`] |
 
 #### Responses
 
@@ -1555,7 +1555,7 @@ Returns the billing customer behind the portal: the e-mail its billing account i
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **refresh** | query | **Boolean** | Whether the answer is fetched from the billing service instead of the portal cache. The cached copy is what a  start-up needs and costs nothing; asking for a fresh one makes a remote call, so use it right after a  purchase or a top-up and not on every read. | [optional] [example: true] |
+| **refresh** | query | **Boolean** | Whether the answer is fetched from the billing service instead of the portal cache. The cached copy is what a  start-up needs and costs nothing; asking for a fresh one makes a remote call, so use it right after a  purchase or a top-up and not on every read. | [optional] [example: `true`] |
 
 #### Responses
 
@@ -1597,8 +1597,8 @@ Returns what the portal spent from its wallet added up per calendar month, so a 
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **startDate** | query | **Date** (date-time) | The beginning of the reported period, inclusive. The months are cut in the portal time zone rather than in  UTC, so spending at the turn of a month falls where the portal sees it; defaults to the portal creation date. | [optional] [example: 2025-01-01T00:00:00Z] |
-| **endDate** | query | **Date** (date-time) | The end of the reported period, inclusive. Cut in the portal time zone in the same way as `startDate`, and  defaults to the moment the call is made. | [optional] [example: 2025-12-31T23:59:59Z] |
+| **startDate** | query | **Date** (date-time) | The beginning of the reported period, inclusive. The months are cut in the portal time zone rather than in  UTC, so spending at the turn of a month falls where the portal sees it; defaults to the portal creation date. | [optional] [example: `2025-01-01T00:00:00Z`] |
+| **endDate** | query | **Date** (date-time) | The end of the reported period, inclusive. Cut in the portal time zone in the same way as `startDate`, and  defaults to the moment the call is made. | [optional] [example: `2025-12-31T23:59:59Z`] |
 
 #### Responses
 
@@ -1679,18 +1679,18 @@ Lists the money movements on the portal's wallet - top-ups, the charges of the w
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **offset** | query | **Integer** (int32) | The number of movements to skip before the first one returned, for walking through a long history page by  page. Counted after the filters and the ordering are applied, and starts at 0 when omitted. | [optional] [example: 0] |
-| **limit** | query | **Integer** (int32) | The maximum number of movements returned in one page. Defaults to 25 when omitted; the answer echoes the  window back next to `totalQuantity`, `totalPage` and `currentPage`, so the next `offset` can be computed  without counting the items. | [optional] [example: 25] |
-| **ServiceName** | query | **List** | The wallet services whose movements are kept, named the way the billing catalogue names them - `backup`,  `ai-tools`, `ai-search`, `disk-storage`, `docscloud`. Take the values from the `serviceName` field of  `GET api/2.0/portal/payment/walletservices`; the match ignores case, a name this installation does not sell  fails the call with 404, and an omitted list keeps every service. A bare string is accepted in place of an  array for backward compatibility. | [optional] [example: [backup]] |
-| **StartDate** | query | **Date** (date-time) | The beginning of the reported period, inclusive. Read in the portal time zone rather than in UTC, so a  movement at the edge of the period falls where the portal sees it; defaults to the portal creation date. | [optional] [example: 2024-01-01T00:00:00Z] |
-| **EndDate** | query | **Date** (date-time) | The end of the reported period, inclusive. Read in the portal time zone rather than in UTC, and defaults to  the moment the call is made. | [optional] [example: 2024-01-31T23:59:59Z] |
-| **ParticipantName** | query | **String** | The participant whose movements are kept - the account the accounting service records as the cause of a  movement. A movement caused by a portal user carries that user ID here, and one caused by the portal itself  carries the customer name; surrounding whitespace is trimmed, and an omitted value keeps every participant. | [optional] [example: My Own Corporation] |
-| **Credit** | query | **Boolean** | Whether movements that add money to the wallet - top-ups, refunds and corrections in the portal's favour -  are kept. Both directions are reported when neither this nor `debit` is given. | [optional] [example: true] |
-| **Debit** | query | **Boolean** | Whether movements that take money out of the wallet - the charges of the wallet services - are kept. Both  directions are reported when neither this nor `credit` is given. | [optional] [example: false] |
-| **Type** | query | **OperationType** | The kind of movement to keep, which says what caused the money to move rather than how it ended. Every kind  is reported when it is omitted. | [optional] [example: ServicePayment] [enum: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19] |
-| **Status** | query | **OperationStatus** | The outcome to keep. A movement that is still being settled is reported as pending and may change later,  while the other outcomes are final; every outcome is reported when this is omitted. | [optional] [example: Completed] [enum: 0, 1, 2, 3] |
-| **OrderBy** | query | **String** | The name of the field the movements are sorted by, spelled as the accounting service names it, such as  `StartDate` or `ServiceName`. Surrounding whitespace is trimmed, and the accounting service applies its own  ordering when this is omitted. | [optional] [example: StartDate] |
-| **OrderType** | query | **OperationOrderType** | The direction the field named in `orderBy` is sorted in. Newest or largest first is what the accounting  service does by default, so leaving this out sorts the same way as asking for descending explicitly. | [optional] [example: Descending] [enum: 0, 1] |
+| **offset** | query | **Integer** (int32) | The number of movements to skip before the first one returned, for walking through a long history page by  page. Counted after the filters and the ordering are applied, and starts at 0 when omitted. | [optional] [example: `0`] |
+| **limit** | query | **Integer** (int32) | The maximum number of movements returned in one page. Defaults to 25 when omitted; the answer echoes the  window back next to `totalQuantity`, `totalPage` and `currentPage`, so the next `offset` can be computed  without counting the items. | [optional] [example: `25`] |
+| **ServiceName** | query | **List** | The wallet services whose movements are kept, named the way the billing catalogue names them - `backup`,  `ai-tools`, `ai-search`, `disk-storage`, `docscloud`. Take the values from the `serviceName` field of  `GET api/2.0/portal/payment/walletservices`; the match ignores case, a name this installation does not sell  fails the call with 404, and an omitted list keeps every service. A bare string is accepted in place of an  array for backward compatibility. | [optional] [example: `[backup]`] |
+| **StartDate** | query | **Date** (date-time) | The beginning of the reported period, inclusive. Read in the portal time zone rather than in UTC, so a  movement at the edge of the period falls where the portal sees it; defaults to the portal creation date. | [optional] [example: `2024-01-01T00:00:00Z`] |
+| **EndDate** | query | **Date** (date-time) | The end of the reported period, inclusive. Read in the portal time zone rather than in UTC, and defaults to  the moment the call is made. | [optional] [example: `2024-01-31T23:59:59Z`] |
+| **ParticipantName** | query | **String** | The participant whose movements are kept - the account the accounting service records as the cause of a  movement. A movement caused by a portal user carries that user ID here, and one caused by the portal itself  carries the customer name; surrounding whitespace is trimmed, and an omitted value keeps every participant. | [optional] [example: `My Own Corporation`] |
+| **Credit** | query | **Boolean** | Whether movements that add money to the wallet - top-ups, refunds and corrections in the portal's favour -  are kept. Both directions are reported when neither this nor `debit` is given. | [optional] [example: `true`] |
+| **Debit** | query | **Boolean** | Whether movements that take money out of the wallet - the charges of the wallet services - are kept. Both  directions are reported when neither this nor `credit` is given. | [optional] [example: `false`] |
+| **Type** | query | **OperationType** | The kind of movement to keep, which says what caused the money to move rather than how it ended. Every kind  is reported when it is omitted. | [optional] [example: `ServicePayment`] [enum: `0`, `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `13`, `14`, `15`, `16`, `17`, `18`, `19`] |
+| **Status** | query | **OperationStatus** | The outcome to keep. A movement that is still being settled is reported as pending and may change later,  while the other outcomes are final; every outcome is reported when this is omitted. | [optional] [example: `Completed`] [enum: `0`, `1`, `2`, `3`] |
+| **OrderBy** | query | **String** | The name of the field the movements are sorted by, spelled as the accounting service names it, such as  `StartDate` or `ServiceName`. Surrounding whitespace is trimmed, and the accounting service applies its own  ordering when this is omitted. | [optional] [example: `StartDate`] |
+| **OrderType** | query | **OperationOrderType** | The direction the field named in `orderBy` is sorted in. Newest or largest first is what the accounting  service does by default, so leaving this out sorts the same way as asking for descending explicitly. | [optional] [example: `Descending`] [enum: `0`, `1`] |
 
 #### Responses
 
@@ -1772,16 +1772,16 @@ Returns how much of each wallet service the portal consumed and what that cost, 
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **ServiceName** | query | **List** | The wallet services whose consumption is added up, named the way the billing catalogue names them -  `backup`, `ai-tools`, `ai-search`, `disk-storage`, `docscloud`. Take the values from the `serviceName` field  of `GET api/2.0/portal/payment/walletservices`; the match ignores case, a name this installation does not  sell fails the call with 404, and an omitted list covers every service. | [optional] [example: [backup]] |
-| **ParticipantName** | query | **String** | The participant whose consumption is added up - the account the accounting service records as the consumer.  Consumption caused by a portal user carries that user ID here; surrounding whitespace is trimmed, and an  omitted value covers every participant. | [optional] [example: My Own Corporation] |
-| **Status** | query | **OperationStatus** | The outcome to keep. Consumption that is still being settled is reported as pending and may change later,  while the other outcomes are final; every outcome is counted when this is omitted. | [optional] [example: Completed] [enum: 0, 1, 2, 3] |
-| **StartDate** | query | **Date** (date-time) | The beginning of the reported period, inclusive. Read in the portal time zone rather than in UTC, and  defaults to the portal creation date. | [optional] [example: 2025-01-01T00:00:00Z] |
-| **EndDate** | query | **Date** (date-time) | The end of the reported period, inclusive. Read in the portal time zone rather than in UTC, and defaults to  the moment the call is made. | [optional] [example: 2025-12-31T23:59:59Z] |
-| **Metadata** | query | **Map** | The usage annotations a wallet service records alongside its consumption, as the key and value pairs that  must all match for a record to be counted. The keys are chosen by the service that writes them, so read them  off the `metadata` of the records already returned rather than guessing; an omitted map counts every record. | [optional] [example: \{"key1":"value1","key2":"value2"\}] |
-| **offset** | query | **Integer** (int32) | The number of per-service totals to skip before the first one returned. Counted after the filters and the  ordering are applied, and starts at 0 when omitted. | [optional] [example: 0] |
-| **limit** | query | **Integer** (int32) | The maximum number of per-service totals returned in one page. Defaults to 25 when omitted; the answer echoes  the window back with its paging information, so the next `offset` can be computed without counting the items. | [optional] [example: 25] |
-| **OrderBy** | query | **String** | The name of the field the per-service totals are sorted by, spelled as the accounting service names it, such  as `ServiceName` or `StartDate`. Surrounding whitespace is trimmed, and the accounting service applies its  own ordering when this is omitted. | [optional] [example: ServiceName] |
-| **OrderType** | query | **OperationOrderType** | The direction the field named in `orderBy` is sorted in. Newest or largest first is what the accounting  service does by default, so leaving this out sorts the same way as asking for descending explicitly. | [optional] [example: Descending] [enum: 0, 1] |
+| **ServiceName** | query | **List** | The wallet services whose consumption is added up, named the way the billing catalogue names them -  `backup`, `ai-tools`, `ai-search`, `disk-storage`, `docscloud`. Take the values from the `serviceName` field  of `GET api/2.0/portal/payment/walletservices`; the match ignores case, a name this installation does not  sell fails the call with 404, and an omitted list covers every service. | [optional] [example: `[backup]`] |
+| **ParticipantName** | query | **String** | The participant whose consumption is added up - the account the accounting service records as the consumer.  Consumption caused by a portal user carries that user ID here; surrounding whitespace is trimmed, and an  omitted value covers every participant. | [optional] [example: `My Own Corporation`] |
+| **Status** | query | **OperationStatus** | The outcome to keep. Consumption that is still being settled is reported as pending and may change later,  while the other outcomes are final; every outcome is counted when this is omitted. | [optional] [example: `Completed`] [enum: `0`, `1`, `2`, `3`] |
+| **StartDate** | query | **Date** (date-time) | The beginning of the reported period, inclusive. Read in the portal time zone rather than in UTC, and  defaults to the portal creation date. | [optional] [example: `2025-01-01T00:00:00Z`] |
+| **EndDate** | query | **Date** (date-time) | The end of the reported period, inclusive. Read in the portal time zone rather than in UTC, and defaults to  the moment the call is made. | [optional] [example: `2025-12-31T23:59:59Z`] |
+| **Metadata** | query | **Map** | The usage annotations a wallet service records alongside its consumption, as the key and value pairs that  must all match for a record to be counted. The keys are chosen by the service that writes them, so read them  off the `metadata` of the records already returned rather than guessing; an omitted map counts every record. | [optional] [example: `{"key1":"value1","key2":"value2"}`] |
+| **offset** | query | **Integer** (int32) | The number of per-service totals to skip before the first one returned. Counted after the filters and the  ordering are applied, and starts at 0 when omitted. | [optional] [example: `0`] |
+| **limit** | query | **Integer** (int32) | The maximum number of per-service totals returned in one page. Defaults to 25 when omitted; the answer echoes  the window back with its paging information, so the next `offset` can be computed without counting the items. | [optional] [example: `25`] |
+| **OrderBy** | query | **String** | The name of the field the per-service totals are sorted by, spelled as the accounting service names it, such  as `ServiceName` or `StartDate`. Surrounding whitespace is trimmed, and the accounting service applies its  own ordering when this is omitted. | [optional] [example: `ServiceName`] |
+| **OrderType** | query | **OperationOrderType** | The direction the field named in `orderBy` is sorted in. Newest or largest first is what the accounting  service does by default, so leaving this out sorts the same way as asking for descending explicitly. | [optional] [example: `Descending`] [enum: `0`, `1`] |
 
 #### Responses
 
@@ -1863,7 +1863,7 @@ Hands back the address of the portal page on which the billing account is manage
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **backUrl** | query | **URI** (uri) | The absolute address the billing account page should offer as its way back. It is appended to the returned  portal-relative address as a query parameter rather than followed here, and omitting it yields the bare  address of the page. | [optional] [example: https://example.com] [minLength: 0] [maxLength: 255] |
+| **backUrl** | query | **URI** (uri) | The absolute address the billing account page should offer as its way back. It is appended to the returned  portal-relative address as a query parameter rather than followed here, and omitting it yields the bare  address of the page. | [optional] [example: `https://example.com`] [minLength: 0] [maxLength: 255] |
 
 #### Responses
 
@@ -1943,8 +1943,8 @@ Lists the quotas the portal can be put on - the paid plans and the wallet servic
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **wallet** | query | **Boolean** | Which side of the catalogue is listed: `true` keeps the services paid out of the portal wallet, `false` keeps  the subscription plans, and omitting it keeps both. | [optional] [example: true] |
-| **additional** | query | **Boolean** | Which layer of the catalogue is listed: `true` keeps the add-ons that extend a plan, `false` keeps the plans  themselves, and omitting it keeps both. | [optional] [example: true] |
+| **wallet** | query | **Boolean** | Which side of the catalogue is listed: `true` keeps the services paid out of the portal wallet, `false` keeps  the subscription plans, and omitting it keeps both. | [optional] [example: `true`] |
+| **additional** | query | **Boolean** | Which layer of the catalogue is listed: `true` keeps the add-ons that extend a plan, `false` keeps the plans  themselves, and omitting it keeps both. | [optional] [example: `true`] |
 
 #### Responses
 
@@ -2066,7 +2066,7 @@ Returns the quota the portal is on right now - its paid plan or the free one - w
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **refresh** | query | **Boolean** | Whether the answer is fetched from the billing service instead of the portal cache. The cached copy is what a  start-up needs and costs nothing; asking for a fresh one makes a remote call, so use it right after a  purchase or a top-up and not on every read. | [optional] [example: true] |
+| **refresh** | query | **Boolean** | Whether the answer is fetched from the billing service instead of the portal cache. The cached copy is what a  start-up needs and costs nothing; asking for a fresh one makes a remote call, so use it right after a  purchase or a top-up and not on every read. | [optional] [example: `true`] |
 
 #### Responses
 
@@ -2263,7 +2263,7 @@ Returns one wallet service by name, for a client that already knows which servic
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **service** | query | **TenantWalletService** | The service to look up, given by its catalogue name. A service this installation does not sell answers 404,  and the whole catalogue is `GET api/2.0/portal/payment/walletservices`. | [required] [example: Storage] [enum: -18, -16, -15, -14, -13, -12, -11] |
+| **service** | query | **TenantWalletService** | The service to look up, given by its catalogue name. A service this installation does not sell answers 404,  and the whole catalogue is `GET api/2.0/portal/payment/walletservices`. | [required] [example: `Storage`] [enum: `-18`, `-16`, `-15`, `-14`, `-13`, `-12`, `-11`] |
 
 #### Responses
 
@@ -2803,7 +2803,7 @@ Returns the tariff this portal runs on: its state, the end of the current period
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **refresh** | query | **Boolean** | Whether the tariff is re-read from the billing system instead of the portal cache. The remote read is slower,  so ask for it right after a payment and leave it off for ordinary page loads. | [optional] [example: true] |
+| **refresh** | query | **Boolean** | Whether the tariff is re-read from the billing system instead of the portal cache. The remote read is slower,  so ask for it right after a payment and leave it off for ordinary page loads. | [optional] [example: `true`] |
 
 #### Responses
 
@@ -2919,7 +2919,7 @@ Lists what this portal will be charged next for the quotas of its current tariff
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **refresh** | query | **Boolean** | Whether the tariff is re-read from the billing system instead of the portal cache. The remote read is slower,  so ask for it right after a payment and leave it off for ordinary page loads. | [optional] [example: true] |
+| **refresh** | query | **Boolean** | Whether the tariff is re-read from the billing system instead of the portal cache. The remote read is slower,  so ask for it right after a payment and leave it off for ordinary page loads. | [optional] [example: `true`] |
 
 #### Responses
 
@@ -3074,7 +3074,7 @@ Turns a portal-relative path into the absolute URL a client can open, filling in
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **virtualPath** | query | **String** | The path to resolve. It is taken as it is: an omitted or empty value yields the portal root, a value starting  with `/` is appended to that root, a value starting with `~/` is resolved against the virtual root, and one  that already begins with `http://`, `https://` or `mailto:` is handed back unchanged. Nothing checks that the  path exists or that the caller may open it. | [optional] [example: /portal/documents] |
+| **virtualPath** | query | **String** | The path to resolve. It is taken as it is: an omitted or empty value yields the portal root, a value starting  with `/` is appended to that root, a value starting with `~/` is resolved against the virtual root, and one  that already begins with `http://`, `https://` or `mailto:` is handed back unchanged. Nothing checks that the  path exists or that the caller may open it. | [optional] [example: `/portal/documents`] |
 
 #### Responses
 
@@ -3310,7 +3310,7 @@ Deprecated - use `POST api/2.0/portal/users/invitationlink` and the neighbouring
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **employeeType** | path | **EmployeeType** | The role whoever follows the link joins with. Only `DocSpaceAdmin`, `RoomAdmin` and `User` have a link; any  other role is refused. The portal keeps at most one link per role, so this value alone identifies it. | [required] [example: 1] [enum: All, RoomAdmin, Guest, DocSpaceAdmin, User] |
+| **employeeType** | path | **EmployeeType** | The role whoever follows the link joins with. Only `DocSpaceAdmin`, `RoomAdmin` and `User` have a link; any  other role is refused. The portal keeps at most one link per role, so this value alone identifies it. | [required] [example: `1`] [enum: `All`, `RoomAdmin`, `Guest`, `DocSpaceAdmin`, `User`] |
 
 #### Responses
 
@@ -3351,7 +3351,7 @@ Returns the portal's invitation link for one role - the URL to share, how long i
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **employeeType** | path | **EmployeeType** | The role whoever follows the link joins with. Only `DocSpaceAdmin`, `RoomAdmin` and `User` have a link; any  other role is refused. The portal keeps at most one link per role, so this value alone identifies it. | [required] [example: 1] [enum: All, RoomAdmin, Guest, DocSpaceAdmin, User] |
+| **employeeType** | path | **EmployeeType** | The role whoever follows the link joins with. Only `DocSpaceAdmin`, `RoomAdmin` and `User` have a link; any  other role is refused. The portal keeps at most one link per role, so this value alone identifies it. | [required] [example: `1`] [enum: `All`, `RoomAdmin`, `Guest`, `DocSpaceAdmin`, `User`] |
 
 #### Responses
 
@@ -3429,7 +3429,7 @@ Returns one user of this portal, addressed by ID, in the shape the portal stores
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **userID** | path | **UUID** (uuid) | The portal account the operation acts on, by user ID as `GET api/2.0/people` reports it. An ID belonging to  no account of this portal and an ID of an internal system account are both answered as not found. | [required] [example: 00000000-0000-0000-0000-000000000000] |
+| **userID** | path | **UUID** (uuid) | The portal account the operation acts on, by user ID as `GET api/2.0/people` reports it. An ID belonging to  no account of this portal and an ID of an internal system account are both answered as not found. | [required] [example: `00000000-0000-0000-0000-000000000000`] |
 
 #### Responses
 
@@ -3508,8 +3508,8 @@ Sends the welcome letter that follows the registration of a new portal to the ac
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **Userid** | query | **UUID** (uuid) | The account the welcome letter is addressed to, by portal user ID. The key in `key` has to have been issued  for this same account, so the pair is what authorises the call. | [required] [example: 00000000-0000-0000-0000-000000000000] |
-| **Key** | query | **String** | The confirmation key from the sign-in link the portal issued for that account, which stands in for a token  here. It is accepted for one hour after it was created; a wrong, foreign or expired key answers 403 and sends  nothing. | [required] [example: birthday] |
+| **Userid** | query | **UUID** (uuid) | The account the welcome letter is addressed to, by portal user ID. The key in `key` has to have been issued  for this same account, so the pair is what authorises the call. | [required] [example: `00000000-0000-0000-0000-000000000000`] |
+| **Key** | query | **String** | The confirmation key from the sign-in link the portal issued for that account, which stands in for a token  here. It is accepted for one hour after it was created; a wrong, foreign or expired key answers 403 and sends  nothing. | [required] [example: `birthday`] |
 
 #### Responses
 
@@ -3673,7 +3673,7 @@ Closes one active connection: the sign-in behind `loginEventId` is marked inacti
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **loginEventId** | path | **Integer** (int32) | The sign-in to act on, by login event ID. Take it from the `id` of an item of  `GET api/2.0/security/activeconnections`, which also marks the connection the caller is using, so a client  can avoid picking its own. | [required] [example: 12345] |
+| **loginEventId** | path | **Integer** (int32) | The sign-in to act on, by login event ID. Take it from the `id` of an item of  `GET api/2.0/security/activeconnections`, which also marks the connection the caller is using, so a client  can avoid picking its own. | [required] [example: `12345`] |
 
 #### Responses
 
@@ -3752,7 +3752,7 @@ Closes every active connection of one portal user: the connections are marked in
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **userId** | path | **UUID** (uuid) | The portal account the operation acts on, by user ID as `GET api/2.0/people` reports it. Acting on an account  other than the caller's own generally needs administrator rights. | [required] [example: 00000000-0000-0000-0000-000000000000] |
+| **userId** | path | **UUID** (uuid) | The portal account the operation acts on, by user ID as `GET api/2.0/people` reports it. Acting on an account  other than the caller's own generally needs administrator rights. | [required] [example: `00000000-0000-0000-0000-000000000000`] |
 
 #### Responses
 
@@ -3833,7 +3833,7 @@ Queues a report of the portal's audit trail and returns the state of the backgro
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **format** | query | **AuditReportFormat** | The format the report file is written in. The workbook format is the default and is the only one that leaves  the finished file addressable by ID: a report asked for as CSV comes back with an empty `resultFileId`, so it  can only be reached through `resultFileName` and `resultFileUrl`. | [optional] [example: Xlsx] [enum: 0, 1] |
+| **format** | query | **AuditReportFormat** | The format the report file is written in. The workbook format is the default and is the only one that leaves  the finished file addressable by ID: a report asked for as CSV comes back with an empty `resultFileId`, so it  can only be reached through `resultFileName` and `resultFileUrl`. | [optional] [example: `Xlsx`] [enum: `0`, `1`] |
 
 #### Responses
 
@@ -3876,16 +3876,16 @@ Returns the portal's audit events that match the filters in the query - by the u
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **userId** | query | **UUID** (uuid) | The user who performed the action, given by portal user ID. Leave it at the empty GUID to keep the events of  every user. | [optional] [example: 00000000-0000-0000-0000-000000000001] |
-| **moduleType** | query | **LocationType** | The module the recorded action belongs to, spelled as `GET api/2.0/security/audit/types` lists it under  `moduleTypes`. `GET api/2.0/security/audit/mappers` shows which module records which action. The default  value keeps every module. | [optional] [example: Files] [enum: 0, 1, 2, 3, 27, 29, 30, 31] |
-| **actionType** | query | **ActionType** | The kind of change the action made, spelled as `GET api/2.0/security/audit/types` lists it under  `actionTypes`. The default value keeps every kind. | [optional] [example: Create] [enum: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19] |
-| **action** | query | **MessageAction** | The exact action recorded, spelled as the `messageAction` of `GET api/2.0/security/audit/mappers`. Naming  one narrows the answer to that single action and overrides `moduleType` and `actionType`, which stop  narrowing anything once it is set. | [optional] [example: FileCreated] [enum: 1000, 1001, 1002, 1003, 1004, 1005, 1006, 1007, 1008, 1009, 1010, 1011, 1012, 1013, 1014, 1015, 1016, 1017, 1018, 1019, 1020, 1021, 1022, 1023, 1024, 1025, 1026, 1027, 1028, 1029, 4000, 4001, 4002, 4003, 4004, 4005, 4006, 4007, 4008, 4009, 4010, 4011, 4012, 4013, 4014, 4015, 4016, 4017, 4018, 4019, 4020, 4021, 4022, 4023, 4024, 4025, 4026, 4027, 4028, 4029, 4030, 4031, 4032, 4033, 4034, 4035, 4036, 4037, 5000, 5001, 5002, 5003, 5004, 5005, 5006, 5007, 5008, 5009, 5010, 5011, 5012, 5013, 5014, 5015, 5016, 5017, 5018, 5019, 5020, 5021, 5022, 5023, 5024, 5025, 5026, 5027, 5028, 5029, 5030, 5031, 5032, 5033, 5034, 5035, 5036, 5037, 5038, 5039, 5040, 5041, 5042, 5043, 5044, 5045, 5046, 5047, 5048, 5049, 5050, 5053, 5054, 5055, 5056, 5057, 5058, 5059, 5060, 5061, 5062, 5063, 5064, 5065, 5066, 5068, 5069, 5070, 5071, 5072, 5073, 5074, 5075, 5076, 5077, 5078, 5079, 5080, 5081, 5082, 5083, 5084, 5085, 5086, 5087, 5088, 5089, 5090, 5091, 5092, 5093, 5094, 5095, 5096, 5097, 5098, 5099, 5100, 5101, 5102, 5103, 5104, 5105, 5106, 5107, 5108, 5109, 5110, 5111, 5112, 5113, 5114, 5115, 5116, 5117, 5118, 5119, 5120, 5121, 5122, 5123, 5124, 5125, 5126, 5127, 5128, 5129, 5130, 5131, 5132, 5133, 5150, 5151, 5152, 5153, 5154, 5155, 5156, 5157, 5158, 5159, 5160, 5161, 5162, 5163, 5201, 5202, 5203, 5204, 5205, 5206, 5207, 5501, 5502, 5503, 6000, 6001, 6002, 6003, 6004, 6005, 6006, 6007, 6008, 6009, 6010, 6011, 6012, 6013, 6014, 6015, 6016, 6017, 6018, 6019, 6020, 6021, 6022, 6023, 6024, 6025, 6026, 6027, 6028, 6029, 6030, 6031, 6032, 6033, 6034, 6035, 6036, 6037, 6038, 6039, 6040, 6041, 6042, 6043, 6044, 6045, 6046, 6047, 6048, 6049, 6050, 6051, 6052, 6053, 6054, 6055, 6056, 6057, 6058, 6059, 6060, 6061, 6062, 6063, 6064, 6065, 6066, 6067, 6068, 6069, 6070, 6071, 6072, 6073, 6074, 6075, 6076, 6077, 6078, 6079, 6080, 6081, 6082, 6083, 6084, 6085, 6086, 6087, 6088, 6089, 6090, 6091, 6092, 6093, 6094, 6095, 6096, 6097, 6098, 6099, 6100, 6101, 6102, 6103, 6104, 6105, 6106, 6107, 6108, 6109, 7000, 7001, 7002, 7003, 7004, 7005, 9901, 9902, 9903, 9904, 9905, 9906, 9907, 9908, 9909, -1] |
-| **entryType** | query | **EntryType** | The kind of object the action was performed on, spelled as `GET api/2.0/security/audit/types` lists it under  `entryTypes`. Pair it with `target` to filter by object without pinning a single action. | [optional] [example: File] [enum: 0, 1, 2, 23, 24, 25, 26, 27] |
-| **target** | query | **String** | The object the action was performed on, as the audit trail recorded it - a file name, a user account, a room  title. It is matched in full and exactly as stored, so it narrows the answer only when `action` or  `entryType` is set as well. | [optional] [example: document.docx] |
-| **from** | query | **Date** (date-time) | The earliest moment an event may have been recorded at, read as a UTC instant. The `date` of the events that  come back is in the portal time zone instead, so the two do not line up on a portal that is not on UTC. | [optional] [example: 2024-01-01T00:00:00Z] |
-| **to** | query | **Date** (date-time) | The latest moment an event may have been recorded at, read as a UTC instant in the same way as `from`. | [optional] [example: 2024-01-31T23:59:59Z] |
-| **count** | query | **Integer** (int32) | How many events one page may hold. The maximum is also the default, so a client that wants shorter pages has  to ask for them; a full page means there may be further matches beyond it. | [optional] [example: 100] [min: 1] [max: 100] |
-| **startIndex** | query | **Integer** (int32) | How many matching events to skip before the page begins, counting from the newest. Advance it by `count` to  walk backwards through the trail. | [optional] [example: 0] |
+| **userId** | query | **UUID** (uuid) | The user who performed the action, given by portal user ID. Leave it at the empty GUID to keep the events of  every user. | [optional] [example: `00000000-0000-0000-0000-000000000001`] |
+| **moduleType** | query | **LocationType** | The module the recorded action belongs to, spelled as `GET api/2.0/security/audit/types` lists it under  `moduleTypes`. `GET api/2.0/security/audit/mappers` shows which module records which action. The default  value keeps every module. | [optional] [example: `Files`] [enum: `0`, `1`, `2`, `3`, `27`, `29`, `30`, `31`] |
+| **actionType** | query | **ActionType** | The kind of change the action made, spelled as `GET api/2.0/security/audit/types` lists it under  `actionTypes`. The default value keeps every kind. | [optional] [example: `Create`] [enum: `0`, `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `13`, `14`, `15`, `16`, `17`, `18`, `19`] |
+| **action** | query | **MessageAction** | The exact action recorded, spelled as the `messageAction` of `GET api/2.0/security/audit/mappers`. Naming  one narrows the answer to that single action and overrides `moduleType` and `actionType`, which stop  narrowing anything once it is set. | [optional] [example: `FileCreated`] [enum: `1000`, `1001`, `1002`, `1003`, `1004`, `1005`, `1006`, `1007`, `1008`, `1009`, `1010`, `1011`, `1012`, `1013`, `1014`, `1015`, `1016`, `1017`, `1018`, `1019`, `1020`, `1021`, `1022`, `1023`, `1024`, `1025`, `1026`, `1027`, `1028`, `1029`, `4000`, `4001`, `4002`, `4003`, `4004`, `4005`, `4006`, `4007`, `4008`, `4009`, `4010`, `4011`, `4012`, `4013`, `4014`, `4015`, `4016`, `4017`, `4018`, `4019`, `4020`, `4021`, `4022`, `4023`, `4024`, `4025`, `4026`, `4027`, `4028`, `4029`, `4030`, `4031`, `4032`, `4033`, `4034`, `4035`, `4036`, `4037`, `5000`, `5001`, `5002`, `5003`, `5004`, `5005`, `5006`, `5007`, `5008`, `5009`, `5010`, `5011`, `5012`, `5013`, `5014`, `5015`, `5016`, `5017`, `5018`, `5019`, `5020`, `5021`, `5022`, `5023`, `5024`, `5025`, `5026`, `5027`, `5028`, `5029`, `5030`, `5031`, `5032`, `5033`, `5034`, `5035`, `5036`, `5037`, `5038`, `5039`, `5040`, `5041`, `5042`, `5043`, `5044`, `5045`, `5046`, `5047`, `5048`, `5049`, `5050`, `5053`, `5054`, `5055`, `5056`, `5057`, `5058`, `5059`, `5060`, `5061`, `5062`, `5063`, `5064`, `5065`, `5066`, `5068`, `5069`, `5070`, `5071`, `5072`, `5073`, `5074`, `5075`, `5076`, `5077`, `5078`, `5079`, `5080`, `5081`, `5082`, `5083`, `5084`, `5085`, `5086`, `5087`, `5088`, `5089`, `5090`, `5091`, `5092`, `5093`, `5094`, `5095`, `5096`, `5097`, `5098`, `5099`, `5100`, `5101`, `5102`, `5103`, `5104`, `5105`, `5106`, `5107`, `5108`, `5109`, `5110`, `5111`, `5112`, `5113`, `5114`, `5115`, `5116`, `5117`, `5118`, `5119`, `5120`, `5121`, `5122`, `5123`, `5124`, `5125`, `5126`, `5127`, `5128`, `5129`, `5130`, `5131`, `5132`, `5133`, `5150`, `5151`, `5152`, `5153`, `5154`, `5155`, `5156`, `5157`, `5158`, `5159`, `5160`, `5161`, `5162`, `5163`, `5201`, `5202`, `5203`, `5204`, `5205`, `5206`, `5207`, `5501`, `5502`, `5503`, `6000`, `6001`, `6002`, `6003`, `6004`, `6005`, `6006`, `6007`, `6008`, `6009`, `6010`, `6011`, `6012`, `6013`, `6014`, `6015`, `6016`, `6017`, `6018`, `6019`, `6020`, `6021`, `6022`, `6023`, `6024`, `6025`, `6026`, `6027`, `6028`, `6029`, `6030`, `6031`, `6032`, `6033`, `6034`, `6035`, `6036`, `6037`, `6038`, `6039`, `6040`, `6041`, `6042`, `6043`, `6044`, `6045`, `6046`, `6047`, `6048`, `6049`, `6050`, `6051`, `6052`, `6053`, `6054`, `6055`, `6056`, `6057`, `6058`, `6059`, `6060`, `6061`, `6062`, `6063`, `6064`, `6065`, `6066`, `6067`, `6068`, `6069`, `6070`, `6071`, `6072`, `6073`, `6074`, `6075`, `6076`, `6077`, `6078`, `6079`, `6080`, `6081`, `6082`, `6083`, `6084`, `6085`, `6086`, `6087`, `6088`, `6089`, `6090`, `6091`, `6092`, `6093`, `6094`, `6095`, `6096`, `6097`, `6098`, `6099`, `6100`, `6101`, `6102`, `6103`, `6104`, `6105`, `6106`, `6107`, `6108`, `6109`, `7000`, `7001`, `7002`, `7003`, `7004`, `7005`, `9901`, `9902`, `9903`, `9904`, `9905`, `9906`, `9907`, `9908`, `9909`, `-1`] |
+| **entryType** | query | **EntryType** | The kind of object the action was performed on, spelled as `GET api/2.0/security/audit/types` lists it under  `entryTypes`. Pair it with `target` to filter by object without pinning a single action. | [optional] [example: `File`] [enum: `0`, `1`, `2`, `23`, `24`, `25`, `26`, `27`] |
+| **target** | query | **String** | The object the action was performed on, as the audit trail recorded it - a file name, a user account, a room  title. It is matched in full and exactly as stored, so it narrows the answer only when `action` or  `entryType` is set as well. | [optional] [example: `document.docx`] |
+| **from** | query | **Date** (date-time) | The earliest moment an event may have been recorded at, read as a UTC instant. The `date` of the events that  come back is in the portal time zone instead, so the two do not line up on a portal that is not on UTC. | [optional] [example: `2024-01-01T00:00:00Z`] |
+| **to** | query | **Date** (date-time) | The latest moment an event may have been recorded at, read as a UTC instant in the same way as `from`. | [optional] [example: `2024-01-31T23:59:59Z`] |
+| **count** | query | **Integer** (int32) | How many events one page may hold. The maximum is also the default, so a client that wants shorter pages has  to ask for them; a full page means there may be further matches beyond it. | [optional] [example: `100`] [min: 1] [max: 100] |
+| **startIndex** | query | **Integer** (int32) | How many matching events to skip before the page begins, counting from the newest. Advance it by `count` to  walk backwards through the trail. | [optional] [example: `0`] |
 
 #### Responses
 
@@ -3967,8 +3967,8 @@ Returns the audit vocabulary as the tree it really is: every product, the module
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **productType** | query | **ProductType** | The product to keep, spelled as `GET api/2.0/security/audit/types` lists it under `productTypes`. Omitting  it keeps every product; a value no product matches yields an empty list rather than an error. | [optional] [example: Documents] [enum: 2, 3, 7, 8] |
-| **moduleType** | query | **LocationType** | The module to keep inside the products that survive `productType`, spelled as  `GET api/2.0/security/audit/types` lists it under `moduleTypes`. Omitting it keeps every module of those  products. | [optional] [example: Files] [enum: 0, 1, 2, 3, 27, 29, 30, 31] |
+| **productType** | query | **ProductType** | The product to keep, spelled as `GET api/2.0/security/audit/types` lists it under `productTypes`. Omitting  it keeps every product; a value no product matches yields an empty list rather than an error. | [optional] [example: `Documents`] [enum: `2`, `3`, `7`, `8`] |
+| **moduleType** | query | **LocationType** | The module to keep inside the products that survive `productType`, spelled as  `GET api/2.0/security/audit/types` lists it under `moduleTypes`. Omitting it keeps every module of those  products. | [optional] [example: `Files`] [enum: `0`, `1`, `2`, `3`, `27`, `29`, `30`, `31`] |
 
 #### Responses
 
@@ -4417,7 +4417,7 @@ Queues a report of the portal's login history and returns the state of the backg
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **format** | query | **AuditReportFormat** | The format the report file is written in. The workbook format is the default and is the only one that leaves  the finished file addressable by ID: a report asked for as CSV comes back with an empty `resultFileId`, so it  can only be reached through `resultFileName` and `resultFileUrl`. | [optional] [example: Xlsx] [enum: 0, 1] |
+| **format** | query | **AuditReportFormat** | The format the report file is written in. The workbook format is the default and is the only one that leaves  the finished file addressable by ID: a report asked for as CSV comes back with an empty `resultFileId`, so it  can only be reached through `resultFileName` and `resultFileUrl`. | [optional] [example: `Xlsx`] [enum: `0`, `1`] |
 
 #### Responses
 
@@ -4499,12 +4499,12 @@ Returns the portal's login events that match the filters in the query - by user,
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **userId** | query | **UUID** (uuid) | The user whose sign-in attempts are kept, given by portal user ID. Leave it at the empty GUID to keep the  events of every user. | [optional] [example: 00000000-0000-0000-0000-000000000000] |
-| **action** | query | **MessageAction** | The sign-in action recorded, spelled as `GET api/2.0/security/audit/types` lists it under `actions` - a  successful login, a failed one, a logout. The default value keeps every action. | [optional] [example: FileCreated] [enum: 1000, 1001, 1002, 1003, 1004, 1005, 1006, 1007, 1008, 1009, 1010, 1011, 1012, 1013, 1014, 1015, 1016, 1017, 1018, 1019, 1020, 1021, 1022, 1023, 1024, 1025, 1026, 1027, 1028, 1029, 4000, 4001, 4002, 4003, 4004, 4005, 4006, 4007, 4008, 4009, 4010, 4011, 4012, 4013, 4014, 4015, 4016, 4017, 4018, 4019, 4020, 4021, 4022, 4023, 4024, 4025, 4026, 4027, 4028, 4029, 4030, 4031, 4032, 4033, 4034, 4035, 4036, 4037, 5000, 5001, 5002, 5003, 5004, 5005, 5006, 5007, 5008, 5009, 5010, 5011, 5012, 5013, 5014, 5015, 5016, 5017, 5018, 5019, 5020, 5021, 5022, 5023, 5024, 5025, 5026, 5027, 5028, 5029, 5030, 5031, 5032, 5033, 5034, 5035, 5036, 5037, 5038, 5039, 5040, 5041, 5042, 5043, 5044, 5045, 5046, 5047, 5048, 5049, 5050, 5053, 5054, 5055, 5056, 5057, 5058, 5059, 5060, 5061, 5062, 5063, 5064, 5065, 5066, 5068, 5069, 5070, 5071, 5072, 5073, 5074, 5075, 5076, 5077, 5078, 5079, 5080, 5081, 5082, 5083, 5084, 5085, 5086, 5087, 5088, 5089, 5090, 5091, 5092, 5093, 5094, 5095, 5096, 5097, 5098, 5099, 5100, 5101, 5102, 5103, 5104, 5105, 5106, 5107, 5108, 5109, 5110, 5111, 5112, 5113, 5114, 5115, 5116, 5117, 5118, 5119, 5120, 5121, 5122, 5123, 5124, 5125, 5126, 5127, 5128, 5129, 5130, 5131, 5132, 5133, 5150, 5151, 5152, 5153, 5154, 5155, 5156, 5157, 5158, 5159, 5160, 5161, 5162, 5163, 5201, 5202, 5203, 5204, 5205, 5206, 5207, 5501, 5502, 5503, 6000, 6001, 6002, 6003, 6004, 6005, 6006, 6007, 6008, 6009, 6010, 6011, 6012, 6013, 6014, 6015, 6016, 6017, 6018, 6019, 6020, 6021, 6022, 6023, 6024, 6025, 6026, 6027, 6028, 6029, 6030, 6031, 6032, 6033, 6034, 6035, 6036, 6037, 6038, 6039, 6040, 6041, 6042, 6043, 6044, 6045, 6046, 6047, 6048, 6049, 6050, 6051, 6052, 6053, 6054, 6055, 6056, 6057, 6058, 6059, 6060, 6061, 6062, 6063, 6064, 6065, 6066, 6067, 6068, 6069, 6070, 6071, 6072, 6073, 6074, 6075, 6076, 6077, 6078, 6079, 6080, 6081, 6082, 6083, 6084, 6085, 6086, 6087, 6088, 6089, 6090, 6091, 6092, 6093, 6094, 6095, 6096, 6097, 6098, 6099, 6100, 6101, 6102, 6103, 6104, 6105, 6106, 6107, 6108, 6109, 7000, 7001, 7002, 7003, 7004, 7005, 9901, 9902, 9903, 9904, 9905, 9906, 9907, 9908, 9909, -1] |
-| **from** | query | **Date** (date-time) | The earliest moment an event may have been recorded at, read as a UTC instant. The `date` of the events that  come back is in the portal time zone instead, so the two do not line up on a portal that is not on UTC. | [optional] [example: 2024-01-15T10:30:00Z] |
-| **to** | query | **Date** (date-time) | The latest moment an event may have been recorded at, read as a UTC instant in the same way as `from`. | [optional] [example: 2024-01-15T10:30:00Z] |
-| **count** | query | **Integer** (int32) | How many events one page may hold. The maximum is also the default, so a client that wants shorter pages has  to ask for them. | [optional] [example: 1] [min: 1] [max: 100] |
-| **startIndex** | query | **Integer** (int32) | How many events to skip before the page begins, counting from the newest. It is applied to the log before  the filters, so a page can hold fewer events than `count` while older matches still exist. | [optional] [example: 1] |
+| **userId** | query | **UUID** (uuid) | The user whose sign-in attempts are kept, given by portal user ID. Leave it at the empty GUID to keep the  events of every user. | [optional] [example: `00000000-0000-0000-0000-000000000000`] |
+| **action** | query | **MessageAction** | The sign-in action recorded, spelled as `GET api/2.0/security/audit/types` lists it under `actions` - a  successful login, a failed one, a logout. The default value keeps every action. | [optional] [example: `FileCreated`] [enum: `1000`, `1001`, `1002`, `1003`, `1004`, `1005`, `1006`, `1007`, `1008`, `1009`, `1010`, `1011`, `1012`, `1013`, `1014`, `1015`, `1016`, `1017`, `1018`, `1019`, `1020`, `1021`, `1022`, `1023`, `1024`, `1025`, `1026`, `1027`, `1028`, `1029`, `4000`, `4001`, `4002`, `4003`, `4004`, `4005`, `4006`, `4007`, `4008`, `4009`, `4010`, `4011`, `4012`, `4013`, `4014`, `4015`, `4016`, `4017`, `4018`, `4019`, `4020`, `4021`, `4022`, `4023`, `4024`, `4025`, `4026`, `4027`, `4028`, `4029`, `4030`, `4031`, `4032`, `4033`, `4034`, `4035`, `4036`, `4037`, `5000`, `5001`, `5002`, `5003`, `5004`, `5005`, `5006`, `5007`, `5008`, `5009`, `5010`, `5011`, `5012`, `5013`, `5014`, `5015`, `5016`, `5017`, `5018`, `5019`, `5020`, `5021`, `5022`, `5023`, `5024`, `5025`, `5026`, `5027`, `5028`, `5029`, `5030`, `5031`, `5032`, `5033`, `5034`, `5035`, `5036`, `5037`, `5038`, `5039`, `5040`, `5041`, `5042`, `5043`, `5044`, `5045`, `5046`, `5047`, `5048`, `5049`, `5050`, `5053`, `5054`, `5055`, `5056`, `5057`, `5058`, `5059`, `5060`, `5061`, `5062`, `5063`, `5064`, `5065`, `5066`, `5068`, `5069`, `5070`, `5071`, `5072`, `5073`, `5074`, `5075`, `5076`, `5077`, `5078`, `5079`, `5080`, `5081`, `5082`, `5083`, `5084`, `5085`, `5086`, `5087`, `5088`, `5089`, `5090`, `5091`, `5092`, `5093`, `5094`, `5095`, `5096`, `5097`, `5098`, `5099`, `5100`, `5101`, `5102`, `5103`, `5104`, `5105`, `5106`, `5107`, `5108`, `5109`, `5110`, `5111`, `5112`, `5113`, `5114`, `5115`, `5116`, `5117`, `5118`, `5119`, `5120`, `5121`, `5122`, `5123`, `5124`, `5125`, `5126`, `5127`, `5128`, `5129`, `5130`, `5131`, `5132`, `5133`, `5150`, `5151`, `5152`, `5153`, `5154`, `5155`, `5156`, `5157`, `5158`, `5159`, `5160`, `5161`, `5162`, `5163`, `5201`, `5202`, `5203`, `5204`, `5205`, `5206`, `5207`, `5501`, `5502`, `5503`, `6000`, `6001`, `6002`, `6003`, `6004`, `6005`, `6006`, `6007`, `6008`, `6009`, `6010`, `6011`, `6012`, `6013`, `6014`, `6015`, `6016`, `6017`, `6018`, `6019`, `6020`, `6021`, `6022`, `6023`, `6024`, `6025`, `6026`, `6027`, `6028`, `6029`, `6030`, `6031`, `6032`, `6033`, `6034`, `6035`, `6036`, `6037`, `6038`, `6039`, `6040`, `6041`, `6042`, `6043`, `6044`, `6045`, `6046`, `6047`, `6048`, `6049`, `6050`, `6051`, `6052`, `6053`, `6054`, `6055`, `6056`, `6057`, `6058`, `6059`, `6060`, `6061`, `6062`, `6063`, `6064`, `6065`, `6066`, `6067`, `6068`, `6069`, `6070`, `6071`, `6072`, `6073`, `6074`, `6075`, `6076`, `6077`, `6078`, `6079`, `6080`, `6081`, `6082`, `6083`, `6084`, `6085`, `6086`, `6087`, `6088`, `6089`, `6090`, `6091`, `6092`, `6093`, `6094`, `6095`, `6096`, `6097`, `6098`, `6099`, `6100`, `6101`, `6102`, `6103`, `6104`, `6105`, `6106`, `6107`, `6108`, `6109`, `7000`, `7001`, `7002`, `7003`, `7004`, `7005`, `9901`, `9902`, `9903`, `9904`, `9905`, `9906`, `9907`, `9908`, `9909`, `-1`] |
+| **from** | query | **Date** (date-time) | The earliest moment an event may have been recorded at, read as a UTC instant. The `date` of the events that  come back is in the portal time zone instead, so the two do not line up on a portal that is not on UTC. | [optional] [example: `2024-01-15T10:30:00Z`] |
+| **to** | query | **Date** (date-time) | The latest moment an event may have been recorded at, read as a UTC instant in the same way as `from`. | [optional] [example: `2024-01-15T10:30:00Z`] |
+| **count** | query | **Integer** (int32) | How many events one page may hold. The maximum is also the default, so a client that wants shorter pages has  to ask for them. | [optional] [example: `1`] [min: 1] [max: 100] |
+| **startIndex** | query | **Integer** (int32) | How many events to skip before the page begins, counting from the newest. It is applied to the log before  the filters, so a page can hold fewer events than `count` while older matches still exist. | [optional] [example: `1`] |
 
 #### Responses
 
@@ -5183,7 +5183,7 @@ Removes a custom color theme from the portal by its ID. Requires Owner or DocSpa
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | query | **Integer** (int32) | The theme to remove, by theme ID. An ID belonging to a built-in theme leaves the list untouched, and so does  one that is already gone - neither is reported as an error. Removing the theme currently in use moves the  portal to the remaining theme with the lowest ID. | [required] [example: 1] |
+| **id** | query | **Integer** (int32) | The theme to remove, by theme ID. An ID belonging to a built-in theme leaves the list untouched, and so does  one that is already gone - neither is reported as an error. Removing the theme currently in use moves the  portal to the remaining theme with the lowest ID. | [required] [example: `1`] |
 
 #### Responses
 
@@ -5407,7 +5407,7 @@ Returns the current portal's general configuration: branding, culture, feature f
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **withpassword** | query | **Boolean** | Whether the answer also carries the salt, iteration count and hash size a client needs to hash a password  before sending it to the authentication operations. They are included for an anonymous caller anyway; for a  signed-in one they are left out unless this is set. | [optional] [example: true] |
+| **withpassword** | query | **Boolean** | Whether the answer also carries the salt, iteration count and hash size a client needs to hash a password  before sending it to the authentication operations. They are included for an anonymous caller anyway; for a  signed-in one they are left out unless this is set. | [optional] [example: `true`] |
 
 #### Responses
 
@@ -6085,7 +6085,7 @@ Returns the DocsCloud tenant of the current portal: the DocsCloud server assigne
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **refresh** | query | **Boolean** | Pass `true` to skip the cached copy and request the tenant from DocsCloud again, replacing the cached one; with the default `false` the answer may be up to an hour old, or up to a minute old while the portal has no tenant. | [optional] [default to false] |
+| **refresh** | query | **Boolean** | Pass `true` to skip the cached copy and request the tenant from DocsCloud again, replacing the cached one; with the default `false` the answer may be up to an hour old, or up to a minute old while the portal has no tenant. | [optional] [default to `false`] |
 
 #### Responses
 
@@ -6127,7 +6127,7 @@ Returns the configuration of the DocsCloud tenant of the current portal: its nam
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **refresh** | query | **Boolean** | Pass `true` to skip the cached copy and request the configuration from DocsCloud again, replacing the cached one; with the default `false` the answer may be up to an hour old. | [optional] [default to false] |
+| **refresh** | query | **Boolean** | Pass `true` to skip the cached copy and request the configuration from DocsCloud again, replacing the cached one; with the default `false` the answer may be up to an hour old. | [optional] [default to `false`] |
 
 #### Responses
 
@@ -6169,7 +6169,7 @@ Returns the DocsCloud license of the current portal, the DocsCloud server servin
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **refresh** | query | **Boolean** | Pass `true` to skip the cached copy and request the license, server and usage information from DocsCloud again, replacing the cached one; with the default `false` the answer may be up to a minute old. | [optional] [default to false] |
+| **refresh** | query | **Boolean** | Pass `true` to skip the cached copy and request the license, server and usage information from DocsCloud again, replacing the cached one; with the default `false` the answer may be up to a minute old. | [optional] [default to `false`] |
 
 #### Responses
 
@@ -6211,7 +6211,7 @@ Returns the DocsCloud user quota of the current portal: the users who currently 
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **refresh** | query | **Boolean** | Pass `true` to skip the cached copy and request the user quota from DocsCloud again, replacing the cached one; with the default `false` the answer may be up to a minute old. | [optional] [default to false] |
+| **refresh** | query | **Boolean** | Pass `true` to skip the cached copy and request the user quota from DocsCloud again, replacing the cached one; with the default `false` the answer may be up to a minute old. | [optional] [default to `false`] |
 
 #### Responses
 
@@ -6291,7 +6291,7 @@ Returns the DocsCloud usage of the current portal: the number of users who have 
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **refresh** | query | **Boolean** | Pass `true` to skip the cached copy and request the usage statistics from DocsCloud again, replacing the cached one; with the default `false` the answer may be up to a minute old. | [optional] [default to false] |
+| **refresh** | query | **Boolean** | Pass `true` to skip the cached copy and request the usage statistics from DocsCloud again, replacing the cached one; with the default `false` the answer may be up to a minute old. | [optional] [default to `false`] |
 
 #### Responses
 
@@ -7369,7 +7369,7 @@ Reports whether one kind of notification is switched on for the calling user, ta
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **type** | path | **NotificationType** | The kind of notification being asked about. A value outside the defined set fails the call rather than  falling back to a default. | [required] [example: 0] [enum: 0, 1, 2, 3] |
+| **type** | path | **NotificationType** | The kind of notification being asked about. A value outside the defined set fails the call rather than  falling back to a default. | [required] [example: `0`] [enum: `0`, `1`, `2`, `3`] |
 
 #### Responses
 
@@ -7970,8 +7970,8 @@ Reports whether the current portal still uses the built-in wordmark or one that 
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **IsDark** | query | **Boolean** | Which theme the answer is filled in for: `true` fills the dark image only, `false` the light one only.  Omitting it fills both, leaving the dark one empty for the slots that have no separate dark image. | [optional] [example: true] |
-| **IsDefault** | query | **Boolean** | Whether the installation-wide default branding is addressed instead of this portal own. Writing the default  branding is only allowed on a self-hosted installation; elsewhere it is refused with 403. | [optional] [example: true] |
+| **IsDark** | query | **Boolean** | Which theme the answer is filled in for: `true` fills the dark image only, `false` the light one only.  Omitting it fills both, leaving the dark one empty for the slots that have no separate dark image. | [optional] [example: `true`] |
+| **IsDefault** | query | **Boolean** | Whether the installation-wide default branding is addressed instead of this portal own. Writing the default  branding is only allowed on a self-hosted installation; elsewhere it is refused with 403. | [optional] [example: `true`] |
 
 #### Responses
 
@@ -8012,8 +8012,8 @@ Reports, slot by slot, whether the current portal still shows the built-in image
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **IsDark** | query | **Boolean** | Which theme the answer is filled in for: `true` fills the dark image only, `false` the light one only.  Omitting it fills both, leaving the dark one empty for the slots that have no separate dark image. | [optional] [example: true] |
-| **IsDefault** | query | **Boolean** | Whether the installation-wide default branding is addressed instead of this portal own. Writing the default  branding is only allowed on a self-hosted installation; elsewhere it is refused with 403. | [optional] [example: true] |
+| **IsDark** | query | **Boolean** | Which theme the answer is filled in for: `true` fills the dark image only, `false` the light one only.  Omitting it fills both, leaving the dark one empty for the slots that have no separate dark image. | [optional] [example: `true`] |
+| **IsDefault** | query | **Boolean** | Whether the installation-wide default branding is addressed instead of this portal own. Writing the default  branding is only allowed on a self-hosted installation; elsewhere it is refused with 403. | [optional] [example: `true`] |
 
 #### Responses
 
@@ -8091,8 +8091,8 @@ Returns the wordmark the current portal prints next to or instead of a logo imag
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **IsDark** | query | **Boolean** | Which theme the answer is filled in for: `true` fills the dark image only, `false` the light one only.  Omitting it fills both, leaving the dark one empty for the slots that have no separate dark image. | [optional] [example: true] |
-| **IsDefault** | query | **Boolean** | Whether the installation-wide default branding is addressed instead of this portal own. Writing the default  branding is only allowed on a self-hosted installation; elsewhere it is refused with 403. | [optional] [example: true] |
+| **IsDark** | query | **Boolean** | Which theme the answer is filled in for: `true` fills the dark image only, `false` the light one only.  Omitting it fills both, leaving the dark one empty for the slots that have no separate dark image. | [optional] [example: `true`] |
+| **IsDefault** | query | **Boolean** | Whether the installation-wide default branding is addressed instead of this portal own. Writing the default  branding is only allowed on a self-hosted installation; elsewhere it is refused with 403. | [optional] [example: `true`] |
 
 #### Responses
 
@@ -8133,8 +8133,8 @@ Lists the branding logo slots of the current portal together with the image URLs
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **IsDark** | query | **Boolean** | Which theme the answer is filled in for: `true` fills the dark image only, `false` the light one only.  Omitting it fills both, leaving the dark one empty for the slots that have no separate dark image. | [optional] [example: true] |
-| **IsDefault** | query | **Boolean** | Whether the installation-wide default branding is addressed instead of this portal own. Writing the default  branding is only allowed on a self-hosted installation; elsewhere it is refused with 403. | [optional] [example: true] |
+| **IsDark** | query | **Boolean** | Which theme the answer is filled in for: `true` fills the dark image only, `false` the light one only.  Omitting it fills both, leaving the dark one empty for the slots that have no separate dark image. | [optional] [example: `true`] |
+| **IsDefault** | query | **Boolean** | Whether the installation-wide default branding is addressed instead of this portal own. Writing the default  branding is only allowed on a self-hosted installation; elsewhere it is refused with 403. | [optional] [example: `true`] |
 
 #### Responses
 
@@ -8174,8 +8174,8 @@ Clears the wordmark stored for the current portal, so the built-in `ONLYOFFICE` 
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **IsDark** | query | **Boolean** | Which theme the answer is filled in for: `true` fills the dark image only, `false` the light one only.  Omitting it fills both, leaving the dark one empty for the slots that have no separate dark image. | [optional] [example: true] |
-| **IsDefault** | query | **Boolean** | Whether the installation-wide default branding is addressed instead of this portal own. Writing the default  branding is only allowed on a self-hosted installation; elsewhere it is refused with 403. | [optional] [example: true] |
+| **IsDark** | query | **Boolean** | Which theme the answer is filled in for: `true` fills the dark image only, `false` the light one only.  Omitting it fills both, leaving the dark one empty for the slots that have no separate dark image. | [optional] [example: `true`] |
+| **IsDefault** | query | **Boolean** | Whether the installation-wide default branding is addressed instead of this portal own. Writing the default  branding is only allowed on a self-hosted installation; elsewhere it is refused with 403. | [optional] [example: `true`] |
 
 #### Responses
 
@@ -8217,8 +8217,8 @@ Drops every logo uploaded for the current portal and brings back the built-in im
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **IsDark** | query | **Boolean** | Which theme the answer is filled in for: `true` fills the dark image only, `false` the light one only.  Omitting it fills both, leaving the dark one empty for the slots that have no separate dark image. | [optional] [example: true] |
-| **IsDefault** | query | **Boolean** | Whether the installation-wide default branding is addressed instead of this portal own. Writing the default  branding is only allowed on a self-hosted installation; elsewhere it is refused with 403. | [optional] [example: true] |
+| **IsDark** | query | **Boolean** | Which theme the answer is filled in for: `true` fills the dark image only, `false` the light one only.  Omitting it fills both, leaving the dark one empty for the slots that have no separate dark image. | [optional] [example: `true`] |
+| **IsDefault** | query | **Boolean** | Whether the installation-wide default branding is addressed instead of this portal own. Writing the default  branding is only allowed on a self-hosted installation; elsewhere it is refused with 403. | [optional] [example: `true`] |
 
 #### Responses
 
@@ -8344,8 +8344,8 @@ Sets the wordmark that the portal prints next to or instead of a logo image, on 
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **IsDark** | query | **Boolean** | Which theme the answer is filled in for: `true` fills the dark image only, `false` the light one only.  Omitting it fills both, leaving the dark one empty for the slots that have no separate dark image. | [optional] [example: true] |
-| **IsDefault** | query | **Boolean** | Whether the installation-wide default branding is addressed instead of this portal own. Writing the default  branding is only allowed on a self-hosted installation; elsewhere it is refused with 403. | [optional] [example: true] |
+| **IsDark** | query | **Boolean** | Which theme the answer is filled in for: `true` fills the dark image only, `false` the light one only.  Omitting it fills both, leaving the dark one empty for the slots that have no separate dark image. | [optional] [example: `true`] |
+| **IsDefault** | query | **Boolean** | Whether the installation-wide default branding is addressed instead of this portal own. Writing the default  branding is only allowed on a self-hosted installation; elsewhere it is refused with 403. | [optional] [example: `true`] |
 | **WhiteLabelRequestsDto** | body | [**WhiteLabelRequestsDto**](#model-whitelabelrequestsdto) |  | [optional] |
 
 #### Responses
@@ -8388,8 +8388,8 @@ Replaces the branding images of the current portal with the ones sent in the req
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **IsDark** | query | **Boolean** | Which theme the answer is filled in for: `true` fills the dark image only, `false` the light one only.  Omitting it fills both, leaving the dark one empty for the slots that have no separate dark image. | [optional] [example: true] |
-| **IsDefault** | query | **Boolean** | Whether the installation-wide default branding is addressed instead of this portal own. Writing the default  branding is only allowed on a self-hosted installation; elsewhere it is refused with 403. | [optional] [example: true] |
+| **IsDark** | query | **Boolean** | Which theme the answer is filled in for: `true` fills the dark image only, `false` the light one only.  Omitting it fills both, leaving the dark one empty for the slots that have no separate dark image. | [optional] [example: `true`] |
+| **IsDefault** | query | **Boolean** | Whether the installation-wide default branding is addressed instead of this portal own. Writing the default  branding is only allowed on a self-hosted installation; elsewhere it is refused with 403. | [optional] [example: `true`] |
 | **WhiteLabelRequestsDto** | body | [**WhiteLabelRequestsDto**](#model-whitelabelrequestsdto) |  | [optional] |
 
 #### Responses
@@ -8432,8 +8432,8 @@ Replaces the branding images of the current portal with the files sent as `multi
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **IsDark** | query | **Boolean** | Which theme the answer is filled in for: `true` fills the dark image only, `false` the light one only.  Omitting it fills both, leaving the dark one empty for the slots that have no separate dark image. | [optional] [example: true] |
-| **IsDefault** | query | **Boolean** | Whether the installation-wide default branding is addressed instead of this portal own. Writing the default  branding is only allowed on a self-hosted installation; elsewhere it is refused with 403. | [optional] [example: true] |
+| **IsDark** | query | **Boolean** | Which theme the answer is filled in for: `true` fills the dark image only, `false` the light one only.  Omitting it fills both, leaving the dark one empty for the slots that have no separate dark image. | [optional] [example: `true`] |
+| **IsDefault** | query | **Boolean** | Whether the installation-wide default branding is addressed instead of this portal own. Writing the default  branding is only allowed on a self-hosted installation; elsewhere it is refused with 403. | [optional] [example: `true`] |
 
 #### Responses
 
@@ -8705,8 +8705,8 @@ Reports whether one user administers one portal module, as the identifiers asked
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **productid** | query | **UUID** (uuid) | The module being asked about, by module GUID. The all-zero GUID asks about the portal itself rather than a  single module. | [required] [example: 00000000-0000-0000-0000-000000000000] |
-| **userid** | query | **UUID** (uuid) | The account being asked about, by portal user ID. An ID that names no account is answered as a plain negative  rather than a failure, so a negative answer does not prove the account exists. | [required] [example: 00000000-0000-0000-0000-000000000000] |
+| **productid** | query | **UUID** (uuid) | The module being asked about, by module GUID. The all-zero GUID asks about the portal itself rather than a  single module. | [required] [example: `00000000-0000-0000-0000-000000000000`] |
+| **userid** | query | **UUID** (uuid) | The account being asked about, by portal user ID. An ID that names no account is answered as a plain negative  rather than a failure, so a negative answer does not prove the account exists. | [required] [example: `00000000-0000-0000-0000-000000000000`] |
 
 #### Responses
 
@@ -8784,7 +8784,7 @@ Lists the users who administer the portal module identified by `productid` in th
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **productid** | path | **UUID** (uuid) | The module the operation acts on, by module GUID. The all-zero GUID stands for the portal itself rather than  for a single module, and a GUID that names no module group is answered with an empty result instead of a  failure. | [required] [example: 00000000-0000-0000-0000-000000000000] |
+| **productid** | path | **UUID** (uuid) | The module the operation acts on, by module GUID. The all-zero GUID stands for the portal itself rather than  for a single module, and a GUID that names no module group is answered with an empty result instead of a  failure. | [required] [example: `00000000-0000-0000-0000-000000000000`] |
 
 #### Responses
 
@@ -8825,7 +8825,7 @@ Answers whether the module with the given identifier is available to the calling
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **UUID** (uuid) | The identifier of the object the operation acts on, as the listing operation of that kind of object reports  it. It has to match the shape the route declares - a GUID where the route is typed as one - since a value of  another shape does not match the route at all and is answered as not found. | [required] [example: 1] |
+| **id** | path | **UUID** (uuid) | The identifier of the object the operation acts on, as the listing operation of that kind of object reports  it. It has to match the shape the route declares - a GUID where the route is typed as one - since a value of  another shape does not match the route at all and is answered as not found. | [required] [example: `1`] |
 
 #### Responses
 
@@ -8866,7 +8866,7 @@ Reports how access to the portal's own modules is configured: for every module i
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **ids** | query | **List** | The modules to report on, each given as a GUID and sent as a repeated query value. An entry that is not a  GUID fails the whole request as invalid. Leaving the list out asks about every module registered in the  portal, which on a DocSpace installation is none, so the answer is then empty rather than complete. | [optional] [example: ["00000000-0000-0000-0000-000000000000"]] |
+| **ids** | query | **List** | The modules to report on, each given as a GUID and sent as a repeated query value. An entry that is not a  GUID fails the whole request as invalid. Leaving the list out asks about every module registered in the  portal, which on a DocSpace installation is none, so the answer is then empty rather than complete. | [optional] [example: `["00000000-0000-0000-0000-000000000000"]`] |
 
 #### Responses
 
@@ -9077,7 +9077,7 @@ Returns the storage space used by one portal module, broken down per data catego
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **UUID** (uuid) | The identifier of the object the operation acts on, as the listing operation of that kind of object reports  it. It has to match the shape the route declares - a GUID where the route is typed as one - since a value of  another shape does not match the route at all and is answered as not found. | [required] [example: 1] |
+| **id** | path | **UUID** (uuid) | The identifier of the object the operation acts on, as the listing operation of that kind of object reports  it. It has to match the shape the route declares - a GUID where the route is typed as one - since a value of  another shape does not match the route at all and is answered as not found. | [required] [example: `1`] |
 
 #### Responses
 
@@ -9120,7 +9120,7 @@ Returns the storages that can hold portal backups, with the one the saved backup
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **Dump** | query | **Boolean** | Whether the schedule of the whole server is read instead of the one of the current portal. It only changes  which schedule marks an entry as `current`; the list of storages itself is the same either way, and the flag  makes sense only on a self-hosted installation. | [optional] [example: true] |
+| **Dump** | query | **Boolean** | Whether the schedule of the whole server is read instead of the one of the current portal. It only changes  which schedule marks an entry as `current`; the list of storages itself is the same either way, and the flag  makes sense only on a self-hosted installation. | [optional] [example: `true`] |
 
 #### Responses
 
@@ -10106,16 +10106,16 @@ Returns the delivery records of the portal webhooks, one record per attempt, car
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **deliveryFrom** | query | **Date** (date-time) | The earliest delivery moment a record may carry. Records of attempts still on their way have no delivery  moment yet and fall outside any bound set here. | [optional] [example: 2024-01-15T10:30:00Z] |
-| **deliveryTo** | query | **Date** (date-time) | The latest delivery moment a record may carry. All the filters combine with AND, so it narrows whatever the  other ones already kept. | [optional] [example: 2024-01-15T10:30:00Z] |
-| **hookUri** | query | **String** | The subscription target address, matched in full rather than as a prefix. Filtering by `configId` is the  reliable way to pick one subscription, since several may share an address. | [optional] [example: https://example.com/webhook] |
-| **configId** | query | **Integer** (int32) | The subscription whose deliveries are kept, by the `id` that `GET api/2.0/settings/webhook` reports. | [optional] [example: 1] |
-| **eventId** | query | **Integer** (int32) | A single delivery record, by its own identifier. It narrows the answer to that one record, which is how a  client follows up a retry it queued earlier. | [optional] [example: 1] |
-| **groupStatus** | query | **WebhookGroupStatus** | The classes of answered status to keep, as a bitmask; 0 keeps every record whatever the target answered. | [optional] [example: NotSent] [enum: 0, 1, 2, 4, 8, 16] |
-| **userId** | query | **UUID** (uuid) | The member whose subscriptions the records belong to, by portal user ID - who created the subscription, not  who caused the event. For a caller who is not a DocSpace administrator it is overwritten with the caller own  ID, so such a caller never sees another member deliveries whatever is sent here. | [optional] [example: \{\}] |
-| **trigger** | query | **WebhookTrigger** | The single event kind to keep; 0 keeps every kind. It names one trigger rather than a mask of several, unlike  the `triggers` a subscription is created with. | [optional] [example: 0] [enum: 0, 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536, 131072, 262144, 524288, 1048576, 2097152, 4194304, 8388608, 16777216, 33554432, 67108864, 134217728, 268435456, 536870912, 1073741824] |
-| **count** | query | **Integer** (int32) | How many records one page may hold. The maximum is also the default, so a client that wants shorter pages has  to ask for them; the number of records matching the filter comes back as `total` beside the page. | [optional] [example: 1] [min: 1] [max: 100] |
-| **startIndex** | query | **Integer** (int32) | How many matching records to skip before the page begins, counting from the newest. Advance it by `count` to  walk back through the log. | [optional] [example: 1] |
+| **deliveryFrom** | query | **Date** (date-time) | The earliest delivery moment a record may carry. Records of attempts still on their way have no delivery  moment yet and fall outside any bound set here. | [optional] [example: `2024-01-15T10:30:00Z`] |
+| **deliveryTo** | query | **Date** (date-time) | The latest delivery moment a record may carry. All the filters combine with AND, so it narrows whatever the  other ones already kept. | [optional] [example: `2024-01-15T10:30:00Z`] |
+| **hookUri** | query | **String** | The subscription target address, matched in full rather than as a prefix. Filtering by `configId` is the  reliable way to pick one subscription, since several may share an address. | [optional] [example: `https://example.com/webhook`] |
+| **configId** | query | **Integer** (int32) | The subscription whose deliveries are kept, by the `id` that `GET api/2.0/settings/webhook` reports. | [optional] [example: `1`] |
+| **eventId** | query | **Integer** (int32) | A single delivery record, by its own identifier. It narrows the answer to that one record, which is how a  client follows up a retry it queued earlier. | [optional] [example: `1`] |
+| **groupStatus** | query | **WebhookGroupStatus** | The classes of answered status to keep, as a bitmask; 0 keeps every record whatever the target answered. | [optional] [example: `NotSent`] [enum: `0`, `1`, `2`, `4`, `8`, `16`] |
+| **userId** | query | **UUID** (uuid) | The member whose subscriptions the records belong to, by portal user ID - who created the subscription, not  who caused the event. For a caller who is not a DocSpace administrator it is overwritten with the caller own  ID, so such a caller never sees another member deliveries whatever is sent here. | [optional] [example: `{}`] |
+| **trigger** | query | **WebhookTrigger** | The single event kind to keep; 0 keeps every kind. It names one trigger rather than a mask of several, unlike  the `triggers` a subscription is created with. | [optional] [example: `0`] [enum: `0`, `1`, `2`, `4`, `8`, `16`, `32`, `64`, `128`, `256`, `512`, `1024`, `2048`, `4096`, `8192`, `16384`, `32768`, `65536`, `131072`, `262144`, `524288`, `1048576`, `2097152`, `4194304`, `8388608`, `16777216`, `33554432`, `67108864`, `134217728`, `268435456`, `536870912`, `1073741824`] |
+| **count** | query | **Integer** (int32) | How many records one page may hold. The maximum is also the default, so a client that wants shorter pages has  to ask for them; the number of records matching the filter comes back as `total` beside the page. | [optional] [example: `1`] [min: 1] [max: 100] |
+| **startIndex** | query | **Integer** (int32) | How many matching records to skip before the page begins, counting from the newest. Advance it by `count` to  walk back through the log. | [optional] [example: `1`] |
 
 #### Responses
 
@@ -10157,7 +10157,7 @@ Removes one webhook subscription from the current portal for good, addressed by 
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The identifier of the object the operation acts on, as the listing operation of that kind of object reports  it. It has to match the shape the route declares - a GUID where the route is typed as one - since a value of  another shape does not match the route at all and is answered as not found. | [required] [example: 1] |
+| **id** | path | **Integer** (int32) | The identifier of the object the operation acts on, as the listing operation of that kind of object reports  it. It has to match the shape the route declares - a GUID where the route is typed as one - since a value of  another shape does not match the route at all and is answered as not found. | [required] [example: `1`] |
 
 #### Responses
 
@@ -10200,7 +10200,7 @@ Sends one past webhook delivery again. The `id` in the path is that of a deliver
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The identifier of the object the operation acts on, as the listing operation of that kind of object reports  it. It has to match the shape the route declares - a GUID where the route is typed as one - since a value of  another shape does not match the route at all and is answered as not found. | [required] [example: 1] |
+| **id** | path | **Integer** (int32) | The identifier of the object the operation acts on, as the listing operation of that kind of object reports  it. It has to match the shape the route declares - a GUID where the route is typed as one - since a value of  another shape does not match the route at all and is answered as not found. | [required] [example: `1`] |
 
 #### Responses
 
@@ -10330,7 +10330,7 @@ Installs a web plugin into the current portal from an uploaded package, and swit
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **system** | query | **Boolean** | Whether the plugin is installed for every portal of the installation rather than only this one. It is  accepted on a self-hosted installation alone and refused with 403 elsewhere; an installation-wide plugin also  hides a portal plugin that carries the same name. | [optional] [example: false] |
+| **system** | query | **Boolean** | Whether the plugin is installed for every portal of the installation rather than only this one. It is  accepted on a self-hosted installation alone and refused with 403 elsewhere; an installation-wide plugin also  hides a portal plugin that carries the same name. | [optional] [example: `false`] |
 
 #### Responses
 
@@ -10372,7 +10372,7 @@ Removes a web plugin from the current portal and deletes the files of its packag
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **name** | path | **String** | The plugin to act on, by the manifest name `GET api/2.0/settings/webplugins` publishes as `name`, matched  without regard to case. It is neither the localized display name nor the JavaScript object name in  `pluginName`; a name that is not installed answers 404. | [required] [example: example-plugin] |
+| **name** | path | **String** | The plugin to act on, by the manifest name `GET api/2.0/settings/webplugins` publishes as `name`, matched  without regard to case. It is neither the localized display name nor the JavaScript object name in  `pluginName`; a name that is not installed answers 404. | [required] [example: `example-plugin`] |
 
 #### Responses
 
@@ -10414,7 +10414,7 @@ Returns one web plugin of the current portal by its manifest name, looked up ove
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **name** | path | **String** | The plugin to act on, by the manifest name `GET api/2.0/settings/webplugins` publishes as `name`, matched  without regard to case. It is neither the localized display name nor the JavaScript object name in  `pluginName`; a name that is not installed answers 404. | [required] [example: example-plugin] |
+| **name** | path | **String** | The plugin to act on, by the manifest name `GET api/2.0/settings/webplugins` publishes as `name`, matched  without regard to case. It is neither the localized display name nor the JavaScript object name in  `pluginName`; a name that is not installed answers 404. | [required] [example: `example-plugin`] |
 
 #### Responses
 
@@ -10456,7 +10456,7 @@ Lists the web plugins available in the current portal: the plugins installed for
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **enabled** | query | **Boolean** | Which plugins are kept: `true` the ones switched on, `false` the ones switched off. Omitting it lists every  installed plugin whatever its state. | [optional] [example: true] |
+| **enabled** | query | **Boolean** | Which plugins are kept: `true` the ones switched on, `false` the ones switched off. Omitting it lists every  installed plugin whatever its state. | [optional] [example: `true`] |
 
 #### Responses
 
@@ -10498,7 +10498,7 @@ Switches a web plugin of the current portal on or off and stores the settings st
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **name** | path | **String** | The plugin to change, by the manifest name `GET api/2.0/settings/webplugins` publishes as `name`, matched  without regard to case. It is neither the localized display name nor the JavaScript object name in  `pluginName`, so it cannot be read off the interface; a name that is not installed answers 404. | [required] [example: example-plugin] |
+| **name** | path | **String** | The plugin to change, by the manifest name `GET api/2.0/settings/webplugins` publishes as `name`, matched  without regard to case. It is neither the localized display name nor the JavaScript object name in  `pluginName`, so it cannot be read off the interface; a name that is not installed answers 404. | [required] [example: `example-plugin`] |
 | **WebPluginRequests** | body | [**WebPluginRequests**](#model-webpluginrequests) | The whole state the plugin is to have afterwards. It replaces what was stored instead of merging into it, so  both the enabled flag and the settings have to be sent every time. | [required] |
 
 #### Responses
@@ -10543,7 +10543,7 @@ Builds and returns, as a string, the OAuth 2.0 consent URL of one external provi
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **provider** | path | **LoginProvider** | The provider whose consent screen is wanted. Only Google, Dropbox, Docusign, Box, OneDrive, Wordpress and  Github produce a URL; any other provider is answered with 200 and no URL rather than an error. The provider  credentials have to be saved with `POST api/2.0/settings/authservice` first, or the URL comes back without a  client identifier and the provider refuses it. | [required] [enum: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14] |
+| **provider** | path | **LoginProvider** | The provider whose consent screen is wanted. Only Google, Dropbox, Docusign, Box, OneDrive, Wordpress and  Github produce a URL; any other provider is answered with 200 and no URL rather than an error. The provider  credentials have to be saved with `POST api/2.0/settings/authservice` first, or the URL comes back without a  client identifier and the provider refuses it. | [required] [enum: `0`, `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `13`, `14`] |
 
 #### Responses
 
@@ -10605,8 +10605,8 @@ The connections the calling user currently has open, and which of them the reque
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **loginEvent** | **Integer** (int32) | The `id` of the item in `items` that the current request is authenticated by. It is `0` when the request  carried a token in the `Authorization` header instead of the portal cookie, and in that case none of the  items is the current connection. | [required] [example: 1] |
-| **items** | [**List**](#model-activeconnectionsitemdto) | One item per sign-in of the caller that is still active, ordered newest sign-in first, with the connection  the request itself uses moved to the front. Sign-ins older than a year are left out, and a caller with no  stored connection gets a single item describing the current request rather than an empty list. | [optional] [example: [\{id=1234, ip=192.0.2.1\}]] [nullable] |
+| **loginEvent** | **Integer** (int32) | The `id` of the item in `items` that the current request is authenticated by. It is `0` when the request  carried a token in the `Authorization` header instead of the portal cookie, and in that case none of the  items is the current connection. | [required] [example: `1`] |
+| **items** | [**List**](#model-activeconnectionsitemdto) | One item per sign-in of the caller that is still active, ordered newest sign-in first, with the connection  the request itself uses moved to the front. Sign-ins older than a year are left out, and a caller with no  stored connection gets a single item describing the current request rather than an empty list. | [optional] [example: `[{id=1234, ip=192.0.2.1}]`] [nullable] |
 
 
 ### Model ActiveConnectionsItemDto
@@ -10614,17 +10614,17 @@ One open connection of a user: where the sign-in behind it came from, and the ID
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **id** | **Integer** (int32) | The ID of the sign-in this connection was opened by. Pass it as `loginEventId` to  `PUT api/2.0/security/activeconnections/logout/{loginEventId}` to end this one connection; the item whose  value equals `loginEvent` is the connection the current request uses. | [required] [example: 1] |
-| **tenantId** | **Integer** (int32) | The portal the sign-in was made on. The operation never crosses portals, so it is the current one on every  item. | [required] [example: 1] |
-| **userId** | **UUID** (uuid) | The user the connection belongs to, which is the calling user on every item - the operation cannot report  anyone else's connections. | [required] [example: 00000000-0000-0000-0000-000000000000] |
-| **mobile** | **Boolean** | Whether the sign-in came from a mobile client. No mobile marker is stored with a connection, so the value  is `false` on every item and tells a caller nothing about the device. | [optional] [example: true] |
-| **ip** | **String** | The IP address the sign-in came from, with the port stripped off. On the item that matches `loginEvent` it  is taken from the address the current request arrives from instead of the one stored at sign-in. | [optional] [example: 192.0.2.1] [nullable] |
-| **country** | **String** | The English name of the country the IP address is located in. It is empty when the address cannot be  located, which is the normal outcome for private and loopback addresses. | [optional] [example: United States] [nullable] |
-| **city** | **String** | The city the IP address is located in, empty under the same conditions as `country`. | [optional] [example: New York] [nullable] |
-| **browser** | **String** | The browser and its version as parsed from the user agent of the sign-in, empty when the client sent no  recognisable one. It is refreshed from the current request on the item that matches `loginEvent`. | [optional] [example: Chrome 120.0] [nullable] |
-| **platform** | **String** | The operating system as parsed from the user agent of the sign-in, refreshed and left empty under the same  conditions as `browser`. | [optional] [example: Windows] [nullable] |
+| **id** | **Integer** (int32) | The ID of the sign-in this connection was opened by. Pass it as `loginEventId` to  `PUT api/2.0/security/activeconnections/logout/{loginEventId}` to end this one connection; the item whose  value equals `loginEvent` is the connection the current request uses. | [required] [example: `1`] |
+| **tenantId** | **Integer** (int32) | The portal the sign-in was made on. The operation never crosses portals, so it is the current one on every  item. | [required] [example: `1`] |
+| **userId** | **UUID** (uuid) | The user the connection belongs to, which is the calling user on every item - the operation cannot report  anyone else's connections. | [required] [example: `00000000-0000-0000-0000-000000000000`] |
+| **mobile** | **Boolean** | Whether the sign-in came from a mobile client. No mobile marker is stored with a connection, so the value  is `false` on every item and tells a caller nothing about the device. | [optional] [example: `true`] |
+| **ip** | **String** | The IP address the sign-in came from, with the port stripped off. On the item that matches `loginEvent` it  is taken from the address the current request arrives from instead of the one stored at sign-in. | [optional] [example: `192.0.2.1`] [nullable] |
+| **country** | **String** | The English name of the country the IP address is located in. It is empty when the address cannot be  located, which is the normal outcome for private and loopback addresses. | [optional] [example: `United States`] [nullable] |
+| **city** | **String** | The city the IP address is located in, empty under the same conditions as `country`. | [optional] [example: `New York`] [nullable] |
+| **browser** | **String** | The browser and its version as parsed from the user agent of the sign-in, empty when the client sent no  recognisable one. It is refreshed from the current request on the item that matches `loginEvent`. | [optional] [example: `Chrome 120.0`] [nullable] |
+| **platform** | **String** | The operating system as parsed from the user agent of the sign-in, refreshed and left empty under the same  conditions as `browser`. | [optional] [example: `Windows`] [nullable] |
 | **date** | [**ApiDateTime**](#model-apidatetime) | When the sign-in happened, in the portal time zone rather than in UTC. | [optional] |
-| **page** | **String** | Where in the portal the sign-in was made from: the referrer of the request that created it, or that  request's own path when it carried no referrer. Long values are cut off at 512 characters. | [optional] [example: /rooms/shared] [nullable] |
+| **page** | **String** | Where in the portal the sign-in was made from: the referrer of the request that created it, or that  request's own path when it carried no referrer. Long values are cut off at 512 characters. | [optional] [example: `/rooms/shared`] [nullable] |
 
 
 ### Model ActiveConnectionsWrapper
@@ -10656,12 +10656,12 @@ One wallet service the portal is running right now, with the allowance it grants
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **service** | **String** | The stable key of the service, which is what `POST api/2.0/portal/payment/servicestate` takes to switch  it off again. | [optional] [example: disk-storage] [nullable] |
-| **serviceUnit** | **String** | What `limit` and `used` count, in the portal language - gigabytes, editor seats, credits. | [optional] [example: GB] [nullable] |
-| **subscription** | **Boolean** | Whether the service is billed as a standing subscription rather than per unit consumed. Only a  subscription can carry `limit` and `used`. | [optional] [example: true] |
-| **title** | **String** | The service name in the portal language, for printing rather than matching. | [optional] [example: Additional disk storage] [nullable] |
-| **limit** | **Integer** (int32) | How much of the service the portal is entitled to. It is empty for a service whose consumption is not  counted this way, which is not the same as a service without a limit. | [optional] [example: 500] [nullable] |
-| **used** | **Integer** (int32) | How much of that allowance is in use - the editors currently active for the cloud editors, the units  already consumed for disk storage. Empty under the same conditions as `limit`. | [optional] [example: 320] [nullable] |
+| **service** | **String** | The stable key of the service, which is what `POST api/2.0/portal/payment/servicestate` takes to switch  it off again. | [optional] [example: `disk-storage`] [nullable] |
+| **serviceUnit** | **String** | What `limit` and `used` count, in the portal language - gigabytes, editor seats, credits. | [optional] [example: `GB`] [nullable] |
+| **subscription** | **Boolean** | Whether the service is billed as a standing subscription rather than per unit consumed. Only a  subscription can carry `limit` and `used`. | [optional] [example: `true`] |
+| **title** | **String** | The service name in the portal language, for printing rather than matching. | [optional] [example: `Additional disk storage`] [nullable] |
+| **limit** | **Integer** (int32) | How much of the service the portal is entitled to. It is empty for a service whose consumption is not  counted this way, which is not the same as a service without a limit. | [optional] [example: `500`] [nullable] |
+| **used** | **Integer** (int32) | How much of that allowance is in use - the editors currently active for the cloud editors, the units  already consumed for disk storage. Empty under the same conditions as `limit`. | [optional] [example: `320`] [nullable] |
 
 
 ### Model AdditionalWhiteLabelSettings
@@ -10669,13 +10669,13 @@ The additional white label settings.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **startDocsEnabled** | **Boolean** | Specifies if the sample documents are displayed or hidden. | [optional] [example: true] |
-| **helpCenterEnabled** | **Boolean** | Specifies if the Help Center link is available or not. | [optional] [example: true] |
-| **feedbackAndSupportEnabled** | **Boolean** | Specifies if the Feedback & Support link is available or not. | [optional] [example: true] |
-| **userForumEnabled** | **Boolean** | Specifies if the user forum is available or not. | [optional] [example: true] |
-| **videoGuidesEnabled** | **Boolean** | Specifies if the Video Guides link is available or not. | [optional] [example: true] |
-| **licenseAgreementsEnabled** | **Boolean** | Specifies if the License Agreements link is available or not. | [optional] [example: true] |
-| **lastModified** | **Date** (date-time) | The timestamp indicating when the settings were last modified. | [optional] [example: 1990-01-01T00:00:00Z] |
+| **startDocsEnabled** | **Boolean** | Specifies if the sample documents are displayed or hidden. | [optional] [example: `true`] |
+| **helpCenterEnabled** | **Boolean** | Specifies if the Help Center link is available or not. | [optional] [example: `true`] |
+| **feedbackAndSupportEnabled** | **Boolean** | Specifies if the Feedback & Support link is available or not. | [optional] [example: `true`] |
+| **userForumEnabled** | **Boolean** | Specifies if the user forum is available or not. | [optional] [example: `true`] |
+| **videoGuidesEnabled** | **Boolean** | Specifies if the Video Guides link is available or not. | [optional] [example: `true`] |
+| **licenseAgreementsEnabled** | **Boolean** | Specifies if the License Agreements link is available or not. | [optional] [example: `true`] |
+| **lastModified** | **Date** (date-time) | The timestamp indicating when the settings were last modified. | [optional] [example: `1990-01-01T00:00:00Z`] |
 
 
 ### Model AdditionalWhiteLabelSettingsDto
@@ -10683,13 +10683,13 @@ Which of the ONLYOFFICE help and community entries the interface may offer, inst
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **startDocsEnabled** | **Boolean** | Whether the sample documents that ONLYOFFICE ships may be placed in a new user's Documents. Unlike the link  flags below it depends on nothing that has to be configured, so its built-in value is always `true`. | [required] [example: true] |
-| **helpCenterEnabled** | **Boolean** | Whether the interface may offer the Help Center entry. It is `false` both when the entry was switched off  for the installation and when the installation configures no Help Center address at all; the addresses  themselves are not part of this answer and arrive in `externalResources` of `GET api/2.0/settings`. | [required] [example: true] |
-| **feedbackAndSupportEnabled** | **Boolean** | Whether the interface may offer the Feedback and Support entry, `false` for the same two reasons as  `helpCenterEnabled`. | [required] [example: true] |
-| **userForumEnabled** | **Boolean** | Whether the interface may offer the user forum entry, `false` for the same two reasons as  `helpCenterEnabled`. | [required] [example: true] |
-| **videoGuidesEnabled** | **Boolean** | Whether the interface may offer the Video Guides entry, `false` for the same two reasons as  `helpCenterEnabled`. | [required] [example: true] |
-| **licenseAgreementsEnabled** | **Boolean** | Whether the interface may offer the License Agreements entry, `false` for the same two reasons as  `helpCenterEnabled`. | [required] [example: true] |
-| **isDefault** | **Boolean** | Whether all six flags still hold the values the installation starts out with. It turns `false` as soon as  one of them is saved differently and `true` again after `DELETE api/2.0/settings/rebranding/additional`.  Because a link flag starts out off when no address is configured for it, `true` does not mean every entry  is on. | [required] [example: false] |
+| **startDocsEnabled** | **Boolean** | Whether the sample documents that ONLYOFFICE ships may be placed in a new user's Documents. Unlike the link  flags below it depends on nothing that has to be configured, so its built-in value is always `true`. | [required] [example: `true`] |
+| **helpCenterEnabled** | **Boolean** | Whether the interface may offer the Help Center entry. It is `false` both when the entry was switched off  for the installation and when the installation configures no Help Center address at all; the addresses  themselves are not part of this answer and arrive in `externalResources` of `GET api/2.0/settings`. | [required] [example: `true`] |
+| **feedbackAndSupportEnabled** | **Boolean** | Whether the interface may offer the Feedback and Support entry, `false` for the same two reasons as  `helpCenterEnabled`. | [required] [example: `true`] |
+| **userForumEnabled** | **Boolean** | Whether the interface may offer the user forum entry, `false` for the same two reasons as  `helpCenterEnabled`. | [required] [example: `true`] |
+| **videoGuidesEnabled** | **Boolean** | Whether the interface may offer the Video Guides entry, `false` for the same two reasons as  `helpCenterEnabled`. | [required] [example: `true`] |
+| **licenseAgreementsEnabled** | **Boolean** | Whether the interface may offer the License Agreements entry, `false` for the same two reasons as  `helpCenterEnabled`. | [required] [example: `true`] |
+| **isDefault** | **Boolean** | Whether all six flags still hold the values the installation starts out with. It turns `false` as soon as  one of them is saved differently and `true` again after `DELETE api/2.0/settings/rebranding/additional`.  Because a link flag starts out off when no address is configured for it, `true` does not mean every entry  is on. | [required] [example: `false`] |
 
 
 ### Model AdditionalWhiteLabelSettingsDtoWrapper
@@ -10729,8 +10729,8 @@ Who is invited to join the portal, and in which language the invitation is writt
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **email** | **String** (email) | The address the join link is sent to. It has to be a well-formed ASCII address rather than an  internationalized one, must not already belong to a member of the portal, and, where the portal trusts named  domains only, has to end with one of them; any of these faults is refused with 400. | [required] [example: admin@example.com] [minLength: 0] [maxLength: 255] [nullable] |
-| **culture** | **String** | The language the letter is written in, as a culture name such as `en-US`. A culture the installation does not  have falls back to the portal language rather than failing the call. | [optional] [example: en-US] [nullable] |
+| **email** | **String** (email) | The address the join link is sent to. It has to be a well-formed ASCII address rather than an  internationalized one, must not already belong to a member of the portal, and, where the portal trusts named  domains only, has to end with one of them; any of these faults is refused with 400. | [required] [example: `admin@example.com`] [minLength: 0] [maxLength: 255] [nullable] |
+| **culture** | **String** | The language the letter is written in, as a culture name such as `en-US`. A culture the installation does not  have falls back to the portal language rather than failing the call. | [optional] [example: `en-US`] [nullable] |
 
 
 ### Model AdminMessageSettingsRequestsDto
@@ -10738,11 +10738,11 @@ The message sent to the portal administrators, with the CAPTCHA proof that a per
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **message** | **String** | What the sender wants to tell the portal administrators. Markup is stripped before the letter is written, so  a body that carries nothing but markup counts as empty and is refused with 400. | [required] [example: Hello, this is a test message from the administrator.] [minLength: 0] [maxLength: 255] [nullable] |
-| **email** | **String** (email) | The address the sender can be answered at, which the letter is signed with. It has to be a well-formed email  address. | [required] [example: user@example.com] [minLength: 0] [maxLength: 255] [nullable] |
-| **culture** | **String** | The language the letter is written in, as a culture name such as `en-US`. A culture the installation does not  have falls back to the portal language rather than failing the call. | [optional] [example: en-US] [nullable] |
-| **recaptchaType** | [**RecaptchaType**](#model-recaptchatype) | Which CAPTCHA service the proof in `recaptchaResponse` came from. It has to match the service the  installation is configured with, which `GET api/2.0/capabilities` reports; the default value means the  installation is left to decide. | [optional] [enum: 0, 1, 2, 3] |
-| **recaptchaResponse** | **String** | The token the CAPTCHA widget produced in the browser, passed on unchanged for the portal to verify with the  CAPTCHA service. It is single-use and short-lived, so it cannot be reused for a second message. | [optional] [example: 03AGdBq24PBCbwiDRaS...] [nullable] |
+| **message** | **String** | What the sender wants to tell the portal administrators. Markup is stripped before the letter is written, so  a body that carries nothing but markup counts as empty and is refused with 400. | [required] [example: `Hello, this is a test message from the administrator.`] [minLength: 0] [maxLength: 255] [nullable] |
+| **email** | **String** (email) | The address the sender can be answered at, which the letter is signed with. It has to be a well-formed email  address. | [required] [example: `user@example.com`] [minLength: 0] [maxLength: 255] [nullable] |
+| **culture** | **String** | The language the letter is written in, as a culture name such as `en-US`. A culture the installation does not  have falls back to the portal language rather than failing the call. | [optional] [example: `en-US`] [nullable] |
+| **recaptchaType** | [**RecaptchaType**](#model-recaptchatype) | Which CAPTCHA service the proof in `recaptchaResponse` came from. It has to match the service the  installation is configured with, which `GET api/2.0/capabilities` reports; the default value means the  installation is left to decide. | [optional] [enum: `0`, `1`, `2`, `3`] |
+| **recaptchaResponse** | **String** | The token the CAPTCHA widget produced in the browser, passed on unchanged for the portal to verify with the  CAPTCHA service. It is single-use and short-lived, so it cannot be reused for a second message. | [optional] [example: `03AGdBq24PBCbwiDRaS...`] [nullable] |
 
 
 ### Model AiChatPriceDto
@@ -10750,8 +10750,8 @@ What a chat model charges, split by the direction the tokens flow in.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **prompt** | **Double** (double) | The cost of one million tokens sent to the model, which includes the conversation history resent with  every turn and not just the newest message. | [optional] [example: 5.0] |
-| **completion** | **Double** (double) | The cost of one million tokens the model writes back. It is normally the dearer of the two directions. | [optional] [example: 15.0] |
+| **prompt** | **Double** (double) | The cost of one million tokens sent to the model, which includes the conversation history resent with  every turn and not just the newest message. | [optional] [example: `5.0`] |
+| **completion** | **Double** (double) | The cost of one million tokens the model writes back. It is normally the dearer of the two directions. | [optional] [example: `15.0`] |
 
 
 ### Model AiEmbeddingPriceDto
@@ -10759,7 +10759,7 @@ What an embedding model charges, which has one direction only.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **prompt** | **Double** (double) | The cost of one million tokens turned into vectors. Embedding produces no completion, so this single  figure is the whole price. | [optional] [example: 0.13] |
+| **prompt** | **Double** (double) | The cost of one million tokens turned into vectors. Embedding produces no completion, so this single  figure is the whole price. | [optional] [example: `0.13`] |
 
 
 ### Model AiEntryPricingDtoAiChatPriceDto
@@ -10767,12 +10767,12 @@ One AI model or service on the price list: how to name it, who provides it, and 
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **id** | **String** | The model identifier to send to the AI operations. It is the value to branch on, while `alias` is for display  only. | [required] [example: gpt-4o] [nullable] |
-| **alias** | **String** | The model name as the vendor writes it, meant to be shown to a person rather than matched on. | [required] [example: GPT-4o] [nullable] |
-| **provider** | **String** | Who runs the model. Two entries can share a provider, and one provider's models can be priced quite  differently, so the price always belongs to the entry and never to the provider. | [required] [example: openai] [nullable] |
-| **image** | **String** | The absolute URL of the provider's icon, for rendering next to the entry. | [required] [example: https://cdn.example.com/providers/openai.png] [nullable] |
+| **id** | **String** | The model identifier to send to the AI operations. It is the value to branch on, while `alias` is for display  only. | [required] [example: `gpt-4o`] [nullable] |
+| **alias** | **String** | The model name as the vendor writes it, meant to be shown to a person rather than matched on. | [required] [example: `GPT-4o`] [nullable] |
+| **provider** | **String** | Who runs the model. Two entries can share a provider, and one provider's models can be priced quite  differently, so the price always belongs to the entry and never to the provider. | [required] [example: `openai`] [nullable] |
+| **image** | **String** | The absolute URL of the provider's icon, for rendering next to the entry. | [required] [example: `https://cdn.example.com/providers/openai.png`] [nullable] |
 | **price** | [**AiChatPriceDto**](#model-aichatpricedto) | What the entry costs, in the currency the answer names. Amounts per token are normalised per million  tokens, so they are not the price of a single call. | [required] |
-| **link** | **String** | The provider's own page for the model, for a person to read the model's terms. It is empty when the  provider publishes none. | [required] [example: https://openai.com/pricing] [nullable] |
+| **link** | **String** | The provider's own page for the model, for a person to read the model's terms. It is empty when the  provider publishes none. | [required] [example: `https://openai.com/pricing`] [nullable] |
 
 
 ### Model AiEntryPricingDtoAiEmbeddingPriceDto
@@ -10780,12 +10780,12 @@ One AI model or service on the price list: how to name it, who provides it, and 
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **id** | **String** | The model identifier to send to the AI operations. It is the value to branch on, while `alias` is for display  only. | [required] [example: gpt-4o] [nullable] |
-| **alias** | **String** | The model name as the vendor writes it, meant to be shown to a person rather than matched on. | [required] [example: GPT-4o] [nullable] |
-| **provider** | **String** | Who runs the model. Two entries can share a provider, and one provider's models can be priced quite  differently, so the price always belongs to the entry and never to the provider. | [required] [example: openai] [nullable] |
-| **image** | **String** | The absolute URL of the provider's icon, for rendering next to the entry. | [required] [example: https://cdn.example.com/providers/openai.png] [nullable] |
+| **id** | **String** | The model identifier to send to the AI operations. It is the value to branch on, while `alias` is for display  only. | [required] [example: `gpt-4o`] [nullable] |
+| **alias** | **String** | The model name as the vendor writes it, meant to be shown to a person rather than matched on. | [required] [example: `GPT-4o`] [nullable] |
+| **provider** | **String** | Who runs the model. Two entries can share a provider, and one provider's models can be priced quite  differently, so the price always belongs to the entry and never to the provider. | [required] [example: `openai`] [nullable] |
+| **image** | **String** | The absolute URL of the provider's icon, for rendering next to the entry. | [required] [example: `https://cdn.example.com/providers/openai.png`] [nullable] |
 | **price** | [**AiEmbeddingPriceDto**](#model-aiembeddingpricedto) | What the entry costs, in the currency the answer names. Amounts per token are normalised per million  tokens, so they are not the price of a single call. | [required] |
-| **link** | **String** | The provider's own page for the model, for a person to read the model's terms. It is empty when the  provider publishes none. | [required] [example: https://openai.com/pricing] [nullable] |
+| **link** | **String** | The provider's own page for the model, for a person to read the model's terms. It is empty when the  provider publishes none. | [required] [example: `https://openai.com/pricing`] [nullable] |
 
 
 ### Model AiEntryPricingDtoAiImagePriceDto
@@ -10793,12 +10793,12 @@ One AI model or service on the price list: how to name it, who provides it, and 
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **id** | **String** | The model identifier to send to the AI operations. It is the value to branch on, while `alias` is for display  only. | [required] [example: gpt-4o] [nullable] |
-| **alias** | **String** | The model name as the vendor writes it, meant to be shown to a person rather than matched on. | [required] [example: GPT-4o] [nullable] |
-| **provider** | **String** | Who runs the model. Two entries can share a provider, and one provider's models can be priced quite  differently, so the price always belongs to the entry and never to the provider. | [required] [example: openai] [nullable] |
-| **image** | **String** | The absolute URL of the provider's icon, for rendering next to the entry. | [required] [example: https://cdn.example.com/providers/openai.png] [nullable] |
+| **id** | **String** | The model identifier to send to the AI operations. It is the value to branch on, while `alias` is for display  only. | [required] [example: `gpt-4o`] [nullable] |
+| **alias** | **String** | The model name as the vendor writes it, meant to be shown to a person rather than matched on. | [required] [example: `GPT-4o`] [nullable] |
+| **provider** | **String** | Who runs the model. Two entries can share a provider, and one provider's models can be priced quite  differently, so the price always belongs to the entry and never to the provider. | [required] [example: `openai`] [nullable] |
+| **image** | **String** | The absolute URL of the provider's icon, for rendering next to the entry. | [required] [example: `https://cdn.example.com/providers/openai.png`] [nullable] |
 | **price** | [**AiImagePriceDto**](#model-aiimagepricedto) | What the entry costs, in the currency the answer names. Amounts per token are normalised per million  tokens, so they are not the price of a single call. | [required] |
-| **link** | **String** | The provider's own page for the model, for a person to read the model's terms. It is empty when the  provider publishes none. | [required] [example: https://openai.com/pricing] [nullable] |
+| **link** | **String** | The provider's own page for the model, for a person to read the model's terms. It is empty when the  provider publishes none. | [required] [example: `https://openai.com/pricing`] [nullable] |
 
 
 ### Model AiEntryPricingDtoDecimal
@@ -10806,12 +10806,12 @@ One AI model or service on the price list: how to name it, who provides it, and 
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **id** | **String** | The model identifier to send to the AI operations. It is the value to branch on, while `alias` is for display  only. | [required] [example: gpt-4o] [nullable] |
-| **alias** | **String** | The model name as the vendor writes it, meant to be shown to a person rather than matched on. | [required] [example: GPT-4o] [nullable] |
-| **provider** | **String** | Who runs the model. Two entries can share a provider, and one provider's models can be priced quite  differently, so the price always belongs to the entry and never to the provider. | [required] [example: openai] [nullable] |
-| **image** | **String** | The absolute URL of the provider's icon, for rendering next to the entry. | [required] [example: https://cdn.example.com/providers/openai.png] [nullable] |
-| **price** | **Double** (double) | What the entry costs, in the currency the answer names. Amounts per token are normalised per million  tokens, so they are not the price of a single call. | [required] [example: \{prompt=5.0, completion=15.0\}] |
-| **link** | **String** | The provider's own page for the model, for a person to read the model's terms. It is empty when the  provider publishes none. | [required] [example: https://openai.com/pricing] [nullable] |
+| **id** | **String** | The model identifier to send to the AI operations. It is the value to branch on, while `alias` is for display  only. | [required] [example: `gpt-4o`] [nullable] |
+| **alias** | **String** | The model name as the vendor writes it, meant to be shown to a person rather than matched on. | [required] [example: `GPT-4o`] [nullable] |
+| **provider** | **String** | Who runs the model. Two entries can share a provider, and one provider's models can be priced quite  differently, so the price always belongs to the entry and never to the provider. | [required] [example: `openai`] [nullable] |
+| **image** | **String** | The absolute URL of the provider's icon, for rendering next to the entry. | [required] [example: `https://cdn.example.com/providers/openai.png`] [nullable] |
+| **price** | **Double** (double) | What the entry costs, in the currency the answer names. Amounts per token are normalised per million  tokens, so they are not the price of a single call. | [required] [example: `{prompt=5.0, completion=15.0}`] |
+| **link** | **String** | The provider's own page for the model, for a person to read the model's terms. It is empty when the  provider publishes none. | [required] [example: `https://openai.com/pricing`] [nullable] |
 
 
 ### Model AiImagePriceDto
@@ -10819,9 +10819,9 @@ What an image model charges: the tokens of the request and the images that come 
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **prompt** | **Double** (double) | The cost of one million tokens sent to the image model, which is the prompt describing the picture. | [optional] [example: 8.0] |
-| **completion** | **Double** (double) | The cost of one million tokens the image model writes back alongside the picture. | [optional] [example: 15.0] |
-| **image** | **Double** (double) | The cost of one produced image, charged on top of the token amounts above. | [optional] [example: 30.0] |
+| **prompt** | **Double** (double) | The cost of one million tokens sent to the image model, which is the prompt describing the picture. | [optional] [example: `8.0`] |
+| **completion** | **Double** (double) | The cost of one million tokens the image model writes back alongside the picture. | [optional] [example: `15.0`] |
+| **image** | **Double** (double) | The cost of one produced image, charged on top of the token amounts above. | [optional] [example: `30.0`] |
 
 
 ### Model AiPricesDto
@@ -10829,10 +10829,10 @@ What the AI features cost out of the portal wallet, grouped by the kind of model
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **chat** | [**List**](#model-aientrypricingdtoaichatpricedto) | The chat models on offer, each priced per million prompt and completion tokens. A model listed here is one  the installation can bill for, not necessarily one this portal may use -  `GET api/2.0/portal/payment/ai-model/restrictions` says which are allowed. | [required] [example: [\{id=gpt-4o, alias=GPT-4o, provider=openai, image=https://cdn.example.com/providers/openai.png, price=\{prompt=5.0, completion=15.0\}\}]] [nullable] |
-| **embedding** | [**List**](#model-aientrypricingdtoaiembeddingpricedto) | The embedding models on offer, priced per million tokens of input; an embedding model has no completion  side, so its price object carries `prompt` alone. | [required] [example: [\{id=text-embedding-3-large, alias=Text Embedding 3 Large, provider=openai, image=https://cdn.example.com/providers/openai.png, price=\{prompt=0.13\}\}]] [nullable] |
-| **image** | [**List**](#model-aientrypricingdtoaiimagepricedto) | The image models on offer, priced per million prompt and completion tokens plus a price for each image  produced. | [required] [example: [\{id=gpt-5.4-image-2, alias=GPT 5.4 Image 2, provider=OpenRouter, image=https://cdn.example.com/providers/openai.png, price=\{prompt=8.0, completion=15.0, image=30.0\}\}]] [nullable] |
-| **webSearch** | [**List**](#model-aientrypricingdtodecimal) | The web search providers on offer. Their `price` is a bare number - the cost of one search - rather than  an object, because there are no tokens to distinguish. | [required] [example: [\{id=web-search, alias=Web Search, provider=tavily, image=https://cdn.example.com/providers/tavily.png, price=0.01\}]] [nullable] |
+| **chat** | [**List**](#model-aientrypricingdtoaichatpricedto) | The chat models on offer, each priced per million prompt and completion tokens. A model listed here is one  the installation can bill for, not necessarily one this portal may use -  `GET api/2.0/portal/payment/ai-model/restrictions` says which are allowed. | [required] [example: `[{id=gpt-4o, alias=GPT-4o, provider=openai, image=https://cdn.example.com/providers/openai.png, price={prompt=5.0, completion=15.0}}]`] [nullable] |
+| **embedding** | [**List**](#model-aientrypricingdtoaiembeddingpricedto) | The embedding models on offer, priced per million tokens of input; an embedding model has no completion  side, so its price object carries `prompt` alone. | [required] [example: `[{id=text-embedding-3-large, alias=Text Embedding 3 Large, provider=openai, image=https://cdn.example.com/providers/openai.png, price={prompt=0.13}}]`] [nullable] |
+| **image** | [**List**](#model-aientrypricingdtoaiimagepricedto) | The image models on offer, priced per million prompt and completion tokens plus a price for each image  produced. | [required] [example: `[{id=gpt-5.4-image-2, alias=GPT 5.4 Image 2, provider=OpenRouter, image=https://cdn.example.com/providers/openai.png, price={prompt=8.0, completion=15.0, image=30.0}}]`] [nullable] |
+| **webSearch** | [**List**](#model-aientrypricingdtodecimal) | The web search providers on offer. Their `price` is a bare number - the cost of one search - rather than  an object, because there are no tokens to distinguish. | [required] [example: `[{id=web-search, alias=Web Search, provider=tavily, image=https://cdn.example.com/providers/tavily.png, price=0.01}]`] [nullable] |
 | **currency** | [**CurrencyInfo**](#model-currencyinfo) | The currency every price above is expressed in, with its ISO code and symbol. One answer never mixes  currencies, so this is the only place to read it. | [required] |
 
 
@@ -10865,12 +10865,12 @@ An Amazon S3 region.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **systemName** | **String** | The region code to send as the region value when configuring an Amazon S3 storage or backup target. It is  the one field of this object that is an argument elsewhere; a code the server does not list here cannot be  reached, so pick one from this list rather than typing it. | [optional] [example: eu-west-1] [nullable] |
-| **displayName** | **String** | The region name as Amazon writes it, in English regardless of the portal language, for showing in a  picker next to `systemName`. | [optional] [example: Europe (Ireland)] [nullable] |
-| **partitionName** | **String** | The Amazon partition the region sits in - the ordinary commercial cloud, the Chinese one, or a government  one. Regions of different partitions are not reachable with the same credentials. | [optional] [example: aws] [nullable] |
-| **partitionDnsSuffix** | **String** | The domain the partition's service host names end in, which differs from partition to partition. | [optional] [example: amazonaws.com] [nullable] |
-| **partitionRegionRegex** | **String** | The pattern every region code of this partition matches, for validating a code before sending it. | [optional] [example: ^(us\|eu\|ap\|sa\|ca\|me\|af\|il\|mx)\-\w+\-\d+$] [nullable] |
-| **hostnameTemplate** | **String** | How a service host name of the partition is assembled, with `{service}`, `{region}` and `{dnsSuffix}` to  be filled in. It is reference material - the portal builds its own endpoints from `systemName`. | [optional] [example: \{service\}.\{region\}.\{dnsSuffix\}] [nullable] |
+| **systemName** | **String** | The region code to send as the region value when configuring an Amazon S3 storage or backup target. It is  the one field of this object that is an argument elsewhere; a code the server does not list here cannot be  reached, so pick one from this list rather than typing it. | [optional] [example: `eu-west-1`] [nullable] |
+| **displayName** | **String** | The region name as Amazon writes it, in English regardless of the portal language, for showing in a  picker next to `systemName`. | [optional] [example: `Europe (Ireland)`] [nullable] |
+| **partitionName** | **String** | The Amazon partition the region sits in - the ordinary commercial cloud, the Chinese one, or a government  one. Regions of different partitions are not reachable with the same credentials. | [optional] [example: `aws`] [nullable] |
+| **partitionDnsSuffix** | **String** | The domain the partition's service host names end in, which differs from partition to partition. | [optional] [example: `amazonaws.com`] [nullable] |
+| **partitionRegionRegex** | **String** | The pattern every region code of this partition matches, for validating a code before sending it. | [optional] [example: `^(us\|eu\|ap\|sa\|ca\|me\|af\|il\|mx)\-\w+\-\d+$`] [nullable] |
+| **hostnameTemplate** | **String** | How a service host name of the partition is assembled, with `{service}`, `{region}` and `{dnsSuffix}` to  be filled in. It is reference material - the portal builds its own endpoints from `systemName`. | [optional] [example: `{service}.{region}.{dnsSuffix}`] [nullable] |
 
 
 ### Model ApiDateTime
@@ -10878,8 +10878,8 @@ The API date and time parameters.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **utcTime** | **Date** (date-time) | The time in UTC format. | [optional] [example: 2018-01-01T00:00:00.0000000Z] |
-| **timeZoneOffset** | **String** (date-span) | The time zone offset. | [optional] [example: 00:00:00] |
+| **utcTime** | **Date** (date-time) | The time in UTC format. | [optional] [example: `2018-01-01T00:00:00.0000000Z`] |
+| **timeZoneOffset** | **String** (date-span) | The time zone offset. | [optional] [example: `00:00:00`] |
 
 
 ### Model AppArrayWrapper
@@ -10899,8 +10899,8 @@ One feature module of the portal: whether it is switched on here, and the settin
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **id** | **String** | The application's stable key, declared in the installation configuration - `ai-rooms`, `docs-cloud` and  the like. It is what every other operation of this group addresses an application by, and a client maps it  to a title and an icon of its own; the portal ships no display name for it. | [optional] [example: ai-rooms] [nullable] |
-| **enabled** | **Boolean** | Whether the application is switched on for this portal. It is the portal's own flag where one has been  saved, and the default the installation configuration gives the application otherwise. | [optional] [example: true] |
+| **id** | **String** | The application's stable key, declared in the installation configuration - `ai-rooms`, `docs-cloud` and  the like. It is what every other operation of this group addresses an application by, and a client maps it  to a title and an icon of its own; the portal ships no display name for it. | [optional] [example: `ai-rooms`] [nullable] |
+| **enabled** | **Boolean** | Whether the application is switched on for this portal. It is the portal's own flag where one has been  saved, and the default the installation configuration gives the application otherwise. | [optional] [example: `true`] |
 | **settings** | [**AppDto_settings**](#model-appdtosettings) |  | [optional] |
 
 
@@ -10937,24 +10937,24 @@ One entry of the portal audit trail: who changed what, from where, and where it 
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **id** | **Integer** (int32) | The ID of the recorded entry. Nothing accepts it as an argument - no operation fetches a single audit event  - so it serves only to tell two otherwise identical entries apart. | [optional] [example: 1] |
+| **id** | **Integer** (int32) | The ID of the recorded entry. Nothing accepts it as an argument - no operation fetches a single audit event  - so it serves only to tell two otherwise identical entries apart. | [optional] [example: `1`] |
 | **date** | [**ApiDateTime**](#model-apidatetime) | When the action happened, in the portal time zone. The `from` and `to` filters are read as UTC instants, so  the two do not line up on a portal that is not on UTC. | [optional] |
-| **user** | **String** | The display name of the user who acted, taken from the account as it stands now rather than as it stood  when the entry was written. A localised placeholder stands in when there is no account to read: a portal  background job, an anonymous guest, or a user who has since been deleted. | [optional] [example: John Doe] [nullable] |
-| **userId** | **UUID** (uuid) | The ID of the user who acted, which is what the `userId` filter of this operation matches on. It stays  readable after the account is deleted, which is when `user` falls back to a placeholder. | [optional] [example: 00000000-0000-0000-0000-000000000001] |
-| **action** | **String** | The whole event as a readable sentence in the portal language, with the names of the objects involved  substituted into it. On the two `audit/.../last` operations each substituted value is cut to 50 characters;  the filtered operations substitute them in full. It is empty when the build has no wording for the action. | [optional] [example: User logged in] [nullable] |
-| **actionId** | [**MessageAction**](#model-messageaction) | The action itself, as the `action` filter of this operation spells it and as  `GET api/2.0/security/audit/mappers` lists it under `messageAction`. Use this rather than parsing `action`,  which is prose and changes with the portal language. | [optional] [enum: 1000, 1001, 1002, 1003, 1004, 1005, 1006, 1007, 1008, 1009, 1010, 1011, 1012, 1013, 1014, 1015, 1016, 1017, 1018, 1019, 1020, 1021, 1022, 1023, 1024, 1025, 1026, 1027, 1028, 1029, 4000, 4001, 4002, 4003, 4004, 4005, 4006, 4007, 4008, 4009, 4010, 4011, 4012, 4013, 4014, 4015, 4016, 4017, 4018, 4019, 4020, 4021, 4022, 4023, 4024, 4025, 4026, 4027, 4028, 4029, 4030, 4031, 4032, 4033, 4034, 4035, 4036, 4037, 5000, 5001, 5002, 5003, 5004, 5005, 5006, 5007, 5008, 5009, 5010, 5011, 5012, 5013, 5014, 5015, 5016, 5017, 5018, 5019, 5020, 5021, 5022, 5023, 5024, 5025, 5026, 5027, 5028, 5029, 5030, 5031, 5032, 5033, 5034, 5035, 5036, 5037, 5038, 5039, 5040, 5041, 5042, 5043, 5044, 5045, 5046, 5047, 5048, 5049, 5050, 5053, 5054, 5055, 5056, 5057, 5058, 5059, 5060, 5061, 5062, 5063, 5064, 5065, 5066, 5068, 5069, 5070, 5071, 5072, 5073, 5074, 5075, 5076, 5077, 5078, 5079, 5080, 5081, 5082, 5083, 5084, 5085, 5086, 5087, 5088, 5089, 5090, 5091, 5092, 5093, 5094, 5095, 5096, 5097, 5098, 5099, 5100, 5101, 5102, 5103, 5104, 5105, 5106, 5107, 5108, 5109, 5110, 5111, 5112, 5113, 5114, 5115, 5116, 5117, 5118, 5119, 5120, 5121, 5122, 5123, 5124, 5125, 5126, 5127, 5128, 5129, 5130, 5131, 5132, 5133, 5150, 5151, 5152, 5153, 5154, 5155, 5156, 5157, 5158, 5159, 5160, 5161, 5162, 5163, 5201, 5202, 5203, 5204, 5205, 5206, 5207, 5501, 5502, 5503, 6000, 6001, 6002, 6003, 6004, 6005, 6006, 6007, 6008, 6009, 6010, 6011, 6012, 6013, 6014, 6015, 6016, 6017, 6018, 6019, 6020, 6021, 6022, 6023, 6024, 6025, 6026, 6027, 6028, 6029, 6030, 6031, 6032, 6033, 6034, 6035, 6036, 6037, 6038, 6039, 6040, 6041, 6042, 6043, 6044, 6045, 6046, 6047, 6048, 6049, 6050, 6051, 6052, 6053, 6054, 6055, 6056, 6057, 6058, 6059, 6060, 6061, 6062, 6063, 6064, 6065, 6066, 6067, 6068, 6069, 6070, 6071, 6072, 6073, 6074, 6075, 6076, 6077, 6078, 6079, 6080, 6081, 6082, 6083, 6084, 6085, 6086, 6087, 6088, 6089, 6090, 6091, 6092, 6093, 6094, 6095, 6096, 6097, 6098, 6099, 6100, 6101, 6102, 6103, 6104, 6105, 6106, 6107, 6108, 6109, 7000, 7001, 7002, 7003, 7004, 7005, 9901, 9902, 9903, 9904, 9905, 9906, 9907, 9908, 9909, -1] |
-| **ip** | **String** | The IP address the request came from, with the port stripped off. It is empty for an action a portal  background job performed, which has no request behind it. | [optional] [example: 192.0.2.1] [nullable] |
-| **country** | **String** | The English name of the country the IP address is located in, empty when the address cannot be located -  the normal outcome for private and loopback addresses. | [optional] [example: United States] [nullable] |
-| **city** | **String** | The city the IP address is located in, empty under the same conditions as `country`. | [optional] [example: New York] [nullable] |
-| **browser** | **String** | The browser and its version as parsed from the user agent of the request, empty when the client sent none  that could be parsed or when no request was involved. | [optional] [example: Chrome 120.0] [nullable] |
-| **platform** | **String** | The operating system as parsed from the same user agent, empty under the same conditions as `browser`. | [optional] [example: Windows] [nullable] |
-| **page** | **String** | Where in the portal the action was made from: the referrer of the request, or that request's own path when  it carried no referrer. Long values are cut off at 512 characters. | [optional] [example: /rooms/shared] [nullable] |
-| **actionType** | [**ActionType**](#model-actiontype) | The kind of change the action stands for, as the `actionType` filter of this operation spells it. It is  derived from `actionId`, not stored per entry, so it is the same on every entry of one action. | [optional] [enum: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19] |
-| **product** | [**ProductType**](#model-producttype) | The product the action belongs to. It cannot be filtered on here; the tree that groups actions by product  is `GET api/2.0/security/audit/mappers`. | [optional] [enum: 2, 3, 7, 8] |
-| **location** | [**LocationType**](#model-locationtype) | The location inside that product, as the `moduleType` filter of this operation spells it. It is also  derived from `actionId` rather than stored per entry. | [optional] [enum: 0, 1, 2, 3, 27, 29, 30, 31] |
-| **target** | **List** | The objects the action was applied to, as the trail recorded them - a title, an account, an ID - one string  each. It is empty for an action that targets nothing, such as a settings change, and the `target` filter of  this operation matches one of these values in full. | [optional] [example: [item1, item2]] [nullable] |
-| **entries** | [**List**](#model-entrytype) | The kinds of object the action applies to, holding at most two entries and none at all for an action that  targets nothing. Only the first of them can be filtered on, through `entryType`. | [optional] [example: [File, Folder]] [nullable] |
-| **context** | **String** | Where the action took place, spelled out in the portal language rather than as a code: for a Documents  event the room or the root folder it happened in, and for anything else the name of the module. Nothing  filters on it. | [optional] [example: Security settings updated] [nullable] |
+| **user** | **String** | The display name of the user who acted, taken from the account as it stands now rather than as it stood  when the entry was written. A localised placeholder stands in when there is no account to read: a portal  background job, an anonymous guest, or a user who has since been deleted. | [optional] [example: `John Doe`] [nullable] |
+| **userId** | **UUID** (uuid) | The ID of the user who acted, which is what the `userId` filter of this operation matches on. It stays  readable after the account is deleted, which is when `user` falls back to a placeholder. | [optional] [example: `00000000-0000-0000-0000-000000000001`] |
+| **action** | **String** | The whole event as a readable sentence in the portal language, with the names of the objects involved  substituted into it. On the two `audit/.../last` operations each substituted value is cut to 50 characters;  the filtered operations substitute them in full. It is empty when the build has no wording for the action. | [optional] [example: `User logged in`] [nullable] |
+| **actionId** | [**MessageAction**](#model-messageaction) | The action itself, as the `action` filter of this operation spells it and as  `GET api/2.0/security/audit/mappers` lists it under `messageAction`. Use this rather than parsing `action`,  which is prose and changes with the portal language. | [optional] [enum: `1000`, `1001`, `1002`, `1003`, `1004`, `1005`, `1006`, `1007`, `1008`, `1009`, `1010`, `1011`, `1012`, `1013`, `1014`, `1015`, `1016`, `1017`, `1018`, `1019`, `1020`, `1021`, `1022`, `1023`, `1024`, `1025`, `1026`, `1027`, `1028`, `1029`, `4000`, `4001`, `4002`, `4003`, `4004`, `4005`, `4006`, `4007`, `4008`, `4009`, `4010`, `4011`, `4012`, `4013`, `4014`, `4015`, `4016`, `4017`, `4018`, `4019`, `4020`, `4021`, `4022`, `4023`, `4024`, `4025`, `4026`, `4027`, `4028`, `4029`, `4030`, `4031`, `4032`, `4033`, `4034`, `4035`, `4036`, `4037`, `5000`, `5001`, `5002`, `5003`, `5004`, `5005`, `5006`, `5007`, `5008`, `5009`, `5010`, `5011`, `5012`, `5013`, `5014`, `5015`, `5016`, `5017`, `5018`, `5019`, `5020`, `5021`, `5022`, `5023`, `5024`, `5025`, `5026`, `5027`, `5028`, `5029`, `5030`, `5031`, `5032`, `5033`, `5034`, `5035`, `5036`, `5037`, `5038`, `5039`, `5040`, `5041`, `5042`, `5043`, `5044`, `5045`, `5046`, `5047`, `5048`, `5049`, `5050`, `5053`, `5054`, `5055`, `5056`, `5057`, `5058`, `5059`, `5060`, `5061`, `5062`, `5063`, `5064`, `5065`, `5066`, `5068`, `5069`, `5070`, `5071`, `5072`, `5073`, `5074`, `5075`, `5076`, `5077`, `5078`, `5079`, `5080`, `5081`, `5082`, `5083`, `5084`, `5085`, `5086`, `5087`, `5088`, `5089`, `5090`, `5091`, `5092`, `5093`, `5094`, `5095`, `5096`, `5097`, `5098`, `5099`, `5100`, `5101`, `5102`, `5103`, `5104`, `5105`, `5106`, `5107`, `5108`, `5109`, `5110`, `5111`, `5112`, `5113`, `5114`, `5115`, `5116`, `5117`, `5118`, `5119`, `5120`, `5121`, `5122`, `5123`, `5124`, `5125`, `5126`, `5127`, `5128`, `5129`, `5130`, `5131`, `5132`, `5133`, `5150`, `5151`, `5152`, `5153`, `5154`, `5155`, `5156`, `5157`, `5158`, `5159`, `5160`, `5161`, `5162`, `5163`, `5201`, `5202`, `5203`, `5204`, `5205`, `5206`, `5207`, `5501`, `5502`, `5503`, `6000`, `6001`, `6002`, `6003`, `6004`, `6005`, `6006`, `6007`, `6008`, `6009`, `6010`, `6011`, `6012`, `6013`, `6014`, `6015`, `6016`, `6017`, `6018`, `6019`, `6020`, `6021`, `6022`, `6023`, `6024`, `6025`, `6026`, `6027`, `6028`, `6029`, `6030`, `6031`, `6032`, `6033`, `6034`, `6035`, `6036`, `6037`, `6038`, `6039`, `6040`, `6041`, `6042`, `6043`, `6044`, `6045`, `6046`, `6047`, `6048`, `6049`, `6050`, `6051`, `6052`, `6053`, `6054`, `6055`, `6056`, `6057`, `6058`, `6059`, `6060`, `6061`, `6062`, `6063`, `6064`, `6065`, `6066`, `6067`, `6068`, `6069`, `6070`, `6071`, `6072`, `6073`, `6074`, `6075`, `6076`, `6077`, `6078`, `6079`, `6080`, `6081`, `6082`, `6083`, `6084`, `6085`, `6086`, `6087`, `6088`, `6089`, `6090`, `6091`, `6092`, `6093`, `6094`, `6095`, `6096`, `6097`, `6098`, `6099`, `6100`, `6101`, `6102`, `6103`, `6104`, `6105`, `6106`, `6107`, `6108`, `6109`, `7000`, `7001`, `7002`, `7003`, `7004`, `7005`, `9901`, `9902`, `9903`, `9904`, `9905`, `9906`, `9907`, `9908`, `9909`, `-1`] |
+| **ip** | **String** | The IP address the request came from, with the port stripped off. It is empty for an action a portal  background job performed, which has no request behind it. | [optional] [example: `192.0.2.1`] [nullable] |
+| **country** | **String** | The English name of the country the IP address is located in, empty when the address cannot be located -  the normal outcome for private and loopback addresses. | [optional] [example: `United States`] [nullable] |
+| **city** | **String** | The city the IP address is located in, empty under the same conditions as `country`. | [optional] [example: `New York`] [nullable] |
+| **browser** | **String** | The browser and its version as parsed from the user agent of the request, empty when the client sent none  that could be parsed or when no request was involved. | [optional] [example: `Chrome 120.0`] [nullable] |
+| **platform** | **String** | The operating system as parsed from the same user agent, empty under the same conditions as `browser`. | [optional] [example: `Windows`] [nullable] |
+| **page** | **String** | Where in the portal the action was made from: the referrer of the request, or that request's own path when  it carried no referrer. Long values are cut off at 512 characters. | [optional] [example: `/rooms/shared`] [nullable] |
+| **actionType** | [**ActionType**](#model-actiontype) | The kind of change the action stands for, as the `actionType` filter of this operation spells it. It is  derived from `actionId`, not stored per entry, so it is the same on every entry of one action. | [optional] [enum: `0`, `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `13`, `14`, `15`, `16`, `17`, `18`, `19`] |
+| **product** | [**ProductType**](#model-producttype) | The product the action belongs to. It cannot be filtered on here; the tree that groups actions by product  is `GET api/2.0/security/audit/mappers`. | [optional] [enum: `2`, `3`, `7`, `8`] |
+| **location** | [**LocationType**](#model-locationtype) | The location inside that product, as the `moduleType` filter of this operation spells it. It is also  derived from `actionId` rather than stored per entry. | [optional] [enum: `0`, `1`, `2`, `3`, `27`, `29`, `30`, `31`] |
+| **target** | **List** | The objects the action was applied to, as the trail recorded them - a title, an account, an ID - one string  each. It is empty for an action that targets nothing, such as a settings change, and the `target` filter of  this operation matches one of these values in full. | [optional] [example: `[item1, item2]`] [nullable] |
+| **entries** | [**List**](#model-entrytype) | The kinds of object the action applies to, holding at most two entries and none at all for an action that  targets nothing. Only the first of them can be filtered on, through `entryType`. | [optional] [example: `[File, Folder]`] [nullable] |
+| **context** | **String** | Where the action took place, spelled out in the portal language rather than as a code: for a Documents  event the room or the root folder it happened in, and for anything else the name of the module. Nothing  filters on it. | [optional] [example: `Security settings updated`] [nullable] |
 
 
 ### Model AuditReportFormat
@@ -10970,9 +10970,9 @@ One audit trail action, with the kind of change it stands for and the kind of ob
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **messageAction** | **String** | The action name to send as the `action` filter of `GET api/2.0/security/audit/events/filter`, and the value  that comes back as `actionId` on an event. | [optional] [example: FileCreated] [nullable] |
-| **actionType** | **String** | The kind of change the action makes, accepted by the `actionType` filter of the same operation. | [optional] [example: Create] [nullable] |
-| **entity** | **String** | The kind of object the action applies to, accepted by the `entryType` filter. It is `None` for an action  that targets no object, such as a settings change, and an action with a second object type reports only the  first one here. | [optional] [example: File] [nullable] |
+| **messageAction** | **String** | The action name to send as the `action` filter of `GET api/2.0/security/audit/events/filter`, and the value  that comes back as `actionId` on an event. | [optional] [example: `FileCreated`] [nullable] |
+| **actionType** | **String** | The kind of change the action makes, accepted by the `actionType` filter of the same operation. | [optional] [example: `Create`] [nullable] |
+| **entity** | **String** | The kind of object the action applies to, accepted by the `entryType` filter. It is `None` for an action  that targets no object, such as a settings change, and an action with a second object type reports only the  first one here. | [optional] [example: `File`] [nullable] |
 
 
 ### Model AuditTrailModuleMapperDto
@@ -10980,7 +10980,7 @@ The audit trail actions of one module.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **moduleType** | **String** | The location inside the product, as the `moduleType` filter of `GET api/2.0/security/audit/events/filter`  spells it. | [optional] [example: Files] [nullable] |
+| **moduleType** | **String** | The location inside the product, as the `moduleType` filter of `GET api/2.0/security/audit/events/filter`  spells it. | [optional] [example: `Files`] [nullable] |
 | **actions** | [**List**](#model-audittrailactionmapperdto) | Every action this module can record. Each action appears under exactly one module, so this tree is where a  caller learns which module a given action belongs to. | [optional] [nullable] |
 
 
@@ -11001,7 +11001,7 @@ The audit trail actions of one product, grouped by module.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **productType** | **String** | The product this branch of the tree belongs to, as the `productType` filter of this operation spells it and  as `GET api/2.0/security/audit/types` lists it under `productTypes`. | [optional] [example: Documents] [nullable] |
+| **productType** | **String** | The product this branch of the tree belongs to, as the `productType` filter of this operation spells it and  as `GET api/2.0/security/audit/types` lists it under `productTypes`. | [optional] [example: `Documents`] [nullable] |
 | **modules** | [**List**](#model-audittrailmodulemapperdto) | The locations inside the product. It is empty when `moduleType` was passed and this product has no module  of that name, which is why a product can come back with nothing under it. | [optional] [nullable] |
 
 
@@ -11010,11 +11010,11 @@ The vocabularies the audit and login-history filters accept, one array of names 
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **actions** | **List** | Every action name the build can record, spelled as the `action` filter of  `GET api/2.0/security/audit/events/filter` and `GET api/2.0/security/audit/login/filter` expects it. It is  the whole vocabulary, not the actions this portal has recorded, and only a handful of the names are the  sign-in actions the login filter accepts. | [optional] [example: [FileCreated]] [nullable] |
-| **actionTypes** | **List** | The kinds of change an action can stand for, spelled as the `actionType` filter of  `GET api/2.0/security/audit/events/filter` expects it. | [optional] [example: [Create]] [nullable] |
-| **productTypes** | **List** | The products an action can belong to, spelled as the `productType` filter of  `GET api/2.0/security/audit/mappers` expects it. The audit trail itself cannot be filtered by product. | [optional] [example: [Documents]] [nullable] |
-| **moduleTypes** | **List** | The locations inside those products, spelled as the `moduleType` filter of  `GET api/2.0/security/audit/events/filter` and `GET api/2.0/security/audit/mappers` expects it. | [optional] [example: [Files]] [nullable] |
-| **entryTypes** | **List** | The kinds of object an action can be applied to, spelled as the `entryType` filter of  `GET api/2.0/security/audit/events/filter` expects it. | [optional] [example: [File]] [nullable] |
+| **actions** | **List** | Every action name the build can record, spelled as the `action` filter of  `GET api/2.0/security/audit/events/filter` and `GET api/2.0/security/audit/login/filter` expects it. It is  the whole vocabulary, not the actions this portal has recorded, and only a handful of the names are the  sign-in actions the login filter accepts. | [optional] [example: `[FileCreated]`] [nullable] |
+| **actionTypes** | **List** | The kinds of change an action can stand for, spelled as the `actionType` filter of  `GET api/2.0/security/audit/events/filter` expects it. | [optional] [example: `[Create]`] [nullable] |
+| **productTypes** | **List** | The products an action can belong to, spelled as the `productType` filter of  `GET api/2.0/security/audit/mappers` expects it. The audit trail itself cannot be filtered by product. | [optional] [example: `[Documents]`] [nullable] |
+| **moduleTypes** | **List** | The locations inside those products, spelled as the `moduleType` filter of  `GET api/2.0/security/audit/events/filter` and `GET api/2.0/security/audit/mappers` expects it. | [optional] [example: `[Files]`] [nullable] |
+| **entryTypes** | **List** | The kinds of object an action can be applied to, spelled as the `entryType` filter of  `GET api/2.0/security/audit/events/filter` expects it. | [optional] [example: `[File]`] [nullable] |
 
 
 ### Model AuditTrailTypesWrapper
@@ -11034,9 +11034,9 @@ The authorization key parameters.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **name** | **String** | The authorization key name. | [required] [example: Auth-Key] [nullable] |
-| **value** | **String** | The authorization key value. | [required] [example: abc123xyz456] [minLength: 0] [maxLength: 4000] [nullable] |
-| **title** | **String** | The authorization key title. | [optional] [example: API key] [nullable] |
+| **name** | **String** | The authorization key name. | [required] [example: `Auth-Key`] [nullable] |
+| **value** | **String** | The authorization key value. | [required] [example: `abc123xyz456`] [minLength: 0] [maxLength: 4000] [nullable] |
+| **title** | **String** | The authorization key title. | [optional] [example: `API key`] [nullable] |
 | **type** | **String** | The field type: text, password, select, toggle. | [optional] [nullable] |
 | **options** | **List** | The list of options for select type fields. | [optional] [nullable] |
 | **dependsOn** | **String** | The name of another key this field depends on for visibility. | [optional] [nullable] |
@@ -11048,18 +11048,18 @@ The credentials a sign-in is attempted with: a portal password, a confirmation k
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **userName** | **String** | The account signing in, given as its email address or its portal user name. It is required for a password  sign-in and ignored when the credentials are a confirmation key or a third-party account. | [optional] [example: user@example.com] [nullable] |
-| **password** | **String** | The password in the clear. Send either this or `passwordHash`, never both; hashing it in the client with the  parameters from `GET api/2.0/settings?withpassword=true` and sending `passwordHash` instead keeps the plain  password off the wire. | [optional] [example: SecurePassword123!] [nullable] |
-| **passwordHash** | **String** | The password already hashed in the client. It has to be produced with the `salt`, iteration count and hash  size that `GET api/2.0/settings?withpassword=true` publishes, or the portal cannot recognise it; a value sent  here takes the place of `password`. | [optional] [example: 5f4dcc3b5aa765d61d8327deb882cf99] [nullable] |
-| **provider** | **String** | The third-party identity provider the account is being signed in through, by its internal key such as  `google` or `linkedin`. Sending it switches the call to a third-party sign-in, which needs `accessToken` or  `serializedProfile` and is only allowed on a self-hosted installation or a tariff that includes third-party  sign-in. | [optional] [example: google] [nullable] |
-| **accessToken** | **String** | The access token the provider named in `provider` issued for the account, passed on unchanged for the portal  to verify with that provider. The portal then matches the address it gets back against its own accounts, so a  valid token for an address unknown here is answered as no such user. | [optional] [example: ya29.a0AfH6SMBx...] [nullable] |
-| **serializedProfile** | **String** | The third-party profile already fetched and serialised by the caller, as an alternative to `accessToken` for  a provider whose profile the client holds. It identifies the account by the address it carries. | [optional] [example: \{"name":"John Doe","email":"john@example.com"\}] [nullable] |
-| **codeOAuth** | **String** | The OAuth authorization code obtained from the provider, for a flow that has not been exchanged for an access  token yet. It is recorded with the sign-in rather than replacing `accessToken`. | [optional] [example: 4/0AY0e-g7...] [nullable] |
-| **session** | **Boolean** | Whether the issued token is tied to the browser session. When it is, the answer carries no `expires` and the  token dies with the session; otherwise it lives for the portal session lifetime. | [optional] [example: true] |
+| **userName** | **String** | The account signing in, given as its email address or its portal user name. It is required for a password  sign-in and ignored when the credentials are a confirmation key or a third-party account. | [optional] [example: `user@example.com`] [nullable] |
+| **password** | **String** | The password in the clear. Send either this or `passwordHash`, never both; hashing it in the client with the  parameters from `GET api/2.0/settings?withpassword=true` and sending `passwordHash` instead keeps the plain  password off the wire. | [optional] [example: `SecurePassword123!`] [nullable] |
+| **passwordHash** | **String** | The password already hashed in the client. It has to be produced with the `salt`, iteration count and hash  size that `GET api/2.0/settings?withpassword=true` publishes, or the portal cannot recognise it; a value sent  here takes the place of `password`. | [optional] [example: `5f4dcc3b5aa765d61d8327deb882cf99`] [nullable] |
+| **provider** | **String** | The third-party identity provider the account is being signed in through, by its internal key such as  `google` or `linkedin`. Sending it switches the call to a third-party sign-in, which needs `accessToken` or  `serializedProfile` and is only allowed on a self-hosted installation or a tariff that includes third-party  sign-in. | [optional] [example: `google`] [nullable] |
+| **accessToken** | **String** | The access token the provider named in `provider` issued for the account, passed on unchanged for the portal  to verify with that provider. The portal then matches the address it gets back against its own accounts, so a  valid token for an address unknown here is answered as no such user. | [optional] [example: `ya29.a0AfH6SMBx...`] [nullable] |
+| **serializedProfile** | **String** | The third-party profile already fetched and serialised by the caller, as an alternative to `accessToken` for  a provider whose profile the client holds. It identifies the account by the address it carries. | [optional] [example: `{"name":"John Doe","email":"john@example.com"}`] [nullable] |
+| **codeOAuth** | **String** | The OAuth authorization code obtained from the provider, for a flow that has not been exchanged for an access  token yet. It is recorded with the sign-in rather than replacing `accessToken`. | [optional] [example: `4/0AY0e-g7...`] [nullable] |
+| **session** | **Boolean** | Whether the issued token is tied to the browser session. When it is, the answer carries no `expires` and the  token dies with the session; otherwise it lives for the portal session lifetime. | [optional] [example: `true`] |
 | **confirmData** | [**ConfirmData**](#model-confirmdata) | The confirmation link data, as a third way to identify the account beside a password and a third-party  account. Send it when the sign-in comes from a link the portal mailed, in which case `userName` and the  password fields are not read. | [optional] |
-| **recaptchaType** | [**RecaptchaType**](#model-recaptchatype) | Which CAPTCHA service the proof in `recaptchaResponse` came from. It has to match the service the  installation is configured with, which `GET api/2.0/settings` publishes together with the site key. | [optional] [enum: 0, 1, 2, 3] |
-| **recaptchaResponse** | **String** | The token the CAPTCHA widget produced in the browser, passed on unchanged for the portal to verify. It is  only demanded once repeated failures have made the portal ask for a challenge, and it is single-use, so a  retry needs a freshly solved one. | [optional] [example: 03AGdBq25...] [nullable] |
-| **culture** | **String** | The language the sign-in messages and any letter that follows are written in, as a culture name such as  `en-US`. A culture the installation does not have falls back to the portal language. | [optional] [example: en-US] [nullable] |
+| **recaptchaType** | [**RecaptchaType**](#model-recaptchatype) | Which CAPTCHA service the proof in `recaptchaResponse` came from. It has to match the service the  installation is configured with, which `GET api/2.0/settings` publishes together with the site key. | [optional] [enum: `0`, `1`, `2`, `3`] |
+| **recaptchaResponse** | **String** | The token the CAPTCHA widget produced in the browser, passed on unchanged for the portal to verify. It is  only demanded once repeated failures have made the portal ask for a challenge, and it is single-use, so a  retry needs a freshly solved one. | [optional] [example: `03AGdBq25...`] [nullable] |
+| **culture** | **String** | The language the sign-in messages and any letter that follows are written in, as a culture name such as  `en-US`. A culture the installation does not have falls back to the portal language. | [optional] [example: `en-US`] [nullable] |
 
 
 ### Model AuthServiceRequestsArrayWrapper
@@ -11079,13 +11079,13 @@ One third-party authorization or storage provider and the keys the portal connec
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **name** | **String** | The provider being configured, by its internal key such as `google` or `box`. Take it from the `name` of  `GET api/2.0/settings/authservice`; it is the only field that selects the provider, and a key this  installation does not know is refused the same way a provider that forbids changes is. | [optional] [example: google] [nullable] |
-| **title** | **String** | The provider name as it is shown in the interface. It is filled in by the portal when the providers are  listed and is ignored when keys are saved. | [optional] [example: Google] [nullable] |
-| **description** | **String** | A sentence about what connecting the provider gives the portal, shown next to it in the interface. It is  filled in by the portal and ignored when keys are saved. | [optional] [example: Google OAuth authentication] [nullable] |
-| **instruction** | **String** | The steps an administrator has to take on the provider side to obtain the keys, shown in the interface. It is  filled in by the portal and ignored when keys are saved. | [optional] [example: Configure your Google OAuth credentials] [nullable] |
-| **canSet** | **Boolean** | Whether this provider accepts keys through the API at all. A provider whose keys are fixed by the  installation reports `false`, and saving keys for it is refused; the field is reported by the portal and  ignored on the way in. | [optional] [example: true] |
-| **paid** | **Boolean** | Whether the provider is a paid option. A paid one can only be connected while the portal plan includes  third-party storage or the installation is licensed as self-hosted; the field is reported by the portal and  ignored on the way in. | [optional] [example: false] |
-| **props** | [**List**](#model-authkey) | The credentials the portal authenticates to the provider with, as the name and value pairs the provider  defines. Send the whole set the provider expects: leaving every value empty disconnects it, and a set that  fails the provider validation is cleared rather than stored half-applied. The listing operation reports the  values last saved, and a provider that forbids changes reports none at all. | [optional] [example: [\{name=key, value=value\}]] [nullable] |
+| **name** | **String** | The provider being configured, by its internal key such as `google` or `box`. Take it from the `name` of  `GET api/2.0/settings/authservice`; it is the only field that selects the provider, and a key this  installation does not know is refused the same way a provider that forbids changes is. | [optional] [example: `google`] [nullable] |
+| **title** | **String** | The provider name as it is shown in the interface. It is filled in by the portal when the providers are  listed and is ignored when keys are saved. | [optional] [example: `Google`] [nullable] |
+| **description** | **String** | A sentence about what connecting the provider gives the portal, shown next to it in the interface. It is  filled in by the portal and ignored when keys are saved. | [optional] [example: `Google OAuth authentication`] [nullable] |
+| **instruction** | **String** | The steps an administrator has to take on the provider side to obtain the keys, shown in the interface. It is  filled in by the portal and ignored when keys are saved. | [optional] [example: `Configure your Google OAuth credentials`] [nullable] |
+| **canSet** | **Boolean** | Whether this provider accepts keys through the API at all. A provider whose keys are fixed by the  installation reports `false`, and saving keys for it is refused; the field is reported by the portal and  ignored on the way in. | [optional] [example: `true`] |
+| **paid** | **Boolean** | Whether the provider is a paid option. A paid one can only be connected while the portal plan includes  third-party storage or the installation is licensed as self-hosted; the field is reported by the portal and  ignored on the way in. | [optional] [example: `false`] |
+| **props** | [**List**](#model-authkey) | The credentials the portal authenticates to the provider with, as the name and value pairs the provider  defines. Send the whole set the provider expects: leaving every value empty disconnects it, and a set that  fails the provider validation is cleared rather than stored half-applied. The listing operation reports the  values last saved, and a provider that forbids changes reports none at all. | [optional] [example: `[{name=key, value=value}]`] [nullable] |
 
 
 ### Model AuthWithCodeRequestsDto
@@ -11102,7 +11102,7 @@ The same credentials as an ordinary sign-in, plus the one-time code that complet
 | **codeOAuth** | **String** | The OAuth authorization code obtained from the provider, for a flow that has not been exchanged for an access  token yet. It is recorded with the sign-in rather than replacing `accessToken`. | [optional] |
 | **session** | **Boolean** | Whether the issued token is tied to the browser session. When it is, the answer carries no `expires` and the  token dies with the session; otherwise it lives for the portal session lifetime. | [optional] |
 | **confirmData** | [**ConfirmData**](#model-confirmdata) | The confirmation link data, as a third way to identify the account beside a password and a third-party  account. Send it when the sign-in comes from a link the portal mailed, in which case `userName` and the  password fields are not read. | [optional] |
-| **recaptchaType** | [**RecaptchaType**](#model-recaptchatype) | Which CAPTCHA service the proof in `recaptchaResponse` came from. It has to match the service the  installation is configured with, which `GET api/2.0/settings` publishes together with the site key. | [optional] [enum: 0, 1, 2, 3] |
+| **recaptchaType** | [**RecaptchaType**](#model-recaptchatype) | Which CAPTCHA service the proof in `recaptchaResponse` came from. It has to match the service the  installation is configured with, which `GET api/2.0/settings` publishes together with the site key. | [optional] [enum: `0`, `1`, `2`, `3`] |
 | **recaptchaResponse** | **String** | The token the CAPTCHA widget produced in the browser, passed on unchanged for the portal to verify. It is  only demanded once repeated failures have made the portal ask for a challenge, and it is single-use, so a  retry needs a freshly solved one. | [optional] |
 | **culture** | **String** | The language the sign-in messages and any letter that follows are written in, as a culture name such as  `en-US`. A culture the installation does not have falls back to the portal language. | [optional] |
 | **code** | **String** | The one-time code from the SMS the portal sent or from the authenticator app, whichever second factor the  portal has enabled for this user. It is single-use and expires; a wrong, empty or expired value fails the  sign-in and counts against the brute-force limit. | [optional] [nullable] |
@@ -11113,13 +11113,13 @@ The outcome of a sign-in attempt: either the authentication token, or the second
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **token** | **String** | The token to put in the `Authorization` header of later calls. It is empty whenever a second factor is  still outstanding, which is what `sms` or `tfa` then says; the same token is also set as a portal cookie by  the call that issued it, so a browser client does not have to carry it itself. | [optional] [example: abcde12345] [nullable] |
-| **expires** | **Date** (date-time) | When the token stops being accepted. It stays at its zero value when `session=true` tied the token to the  browser session instead of to a fixed moment. On the two operations that only send an SMS it carries a  different meaning: there is no token, and this is the moment the code that was just sent expires. | [optional] [example: 2024-01-15T10:30:00Z] |
-| **sms** | **Boolean** | Whether an SMS code is the second factor in play. Next to an empty `token` it means the code has to be sent  to `POST api/2.0/authentication/{code}` before a token is issued; next to a filled `token` it means the  code just accepted was an SMS one. | [optional] [example: true] |
-| **phoneNoise** | **String** | The stored phone number with its middle digits masked, filled in only while `sms` is set and a number is  already activated for the user. It is there to be shown to the person signing in, not to be sent back. | [optional] [example: +1***1234] [nullable] |
-| **tfa** | **Boolean** | Whether an authenticator app is the second factor in play, with the same two readings as `sms`. | [optional] [example: true] |
-| **tfaKey** | **String** | The secret to enrol in an authenticator app, in the manual-entry form. It is filled in only while `tfa` is  set and the app has not been connected yet, which is the one moment the secret is handed out; once the app  is connected it stays empty. `GET api/2.0/settings/tfaapp/setup` returns the same secret with a QR code. | [optional] [example: JBSWY3DPEHPK3PXP] [nullable] |
-| **confirmUrl** | **URI** (uri) | The confirmation link the client has to open to get past the second factor. It points at phone activation  while no number is activated, at authenticator-app activation while the app is not connected, and at the  plain code prompt once either is in place. It is empty in an answer that already carries a token. | [optional] [example: https://example.com/confirm?token=abc123] [nullable] |
+| **token** | **String** | The token to put in the `Authorization` header of later calls. It is empty whenever a second factor is  still outstanding, which is what `sms` or `tfa` then says; the same token is also set as a portal cookie by  the call that issued it, so a browser client does not have to carry it itself. | [optional] [example: `abcde12345`] [nullable] |
+| **expires** | **Date** (date-time) | When the token stops being accepted. It stays at its zero value when `session=true` tied the token to the  browser session instead of to a fixed moment. On the two operations that only send an SMS it carries a  different meaning: there is no token, and this is the moment the code that was just sent expires. | [optional] [example: `2024-01-15T10:30:00Z`] |
+| **sms** | **Boolean** | Whether an SMS code is the second factor in play. Next to an empty `token` it means the code has to be sent  to `POST api/2.0/authentication/{code}` before a token is issued; next to a filled `token` it means the  code just accepted was an SMS one. | [optional] [example: `true`] |
+| **phoneNoise** | **String** | The stored phone number with its middle digits masked, filled in only while `sms` is set and a number is  already activated for the user. It is there to be shown to the person signing in, not to be sent back. | [optional] [example: `+1***1234`] [nullable] |
+| **tfa** | **Boolean** | Whether an authenticator app is the second factor in play, with the same two readings as `sms`. | [optional] [example: `true`] |
+| **tfaKey** | **String** | The secret to enrol in an authenticator app, in the manual-entry form. It is filled in only while `tfa` is  set and the app has not been connected yet, which is the one moment the secret is handed out; once the app  is connected it stays empty. `GET api/2.0/settings/tfaapp/setup` returns the same secret with a QR code. | [optional] [example: `JBSWY3DPEHPK3PXP`] [nullable] |
+| **confirmUrl** | **URI** (uri) | The confirmation link the client has to open to get past the second factor. It points at phone activation  while no number is activated, at authenticator-app activation while the app is not connected, and at the  plain code prompt once either is in place. It is empty in an answer that already carries a token. | [optional] [example: `https://example.com/confirm?token=abc123`] [nullable] |
 
 
 ### Model AuthenticationTokenWrapper
@@ -11139,11 +11139,11 @@ Represents a balance with an account number and a list of sub-accounts.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **accountNumber** | **Integer** (int32) | The account number. | [optional] [example: 12345] |
-| **subAccountNumber** | **Integer** (int32) | The sub-account number. | [optional] [example: 12345] |
-| **accountName** | **String** | The account name. | [optional] [example: account name] [nullable] |
-| **accountCurrency** | **String** | The account currency. | [optional] [example: "USD"] [nullable] |
-| **subAccounts** | [**List**](#model-subaccount) | A list of sub-accounts. | [optional] [example: [\{currency=USD, amount=1500.75\}]] [nullable] |
+| **accountNumber** | **Integer** (int32) | The account number. | [optional] [example: `12345`] |
+| **subAccountNumber** | **Integer** (int32) | The sub-account number. | [optional] [example: `12345`] |
+| **accountName** | **String** | The account name. | [optional] [example: `account name`] [nullable] |
+| **accountCurrency** | **String** | The account currency. | [optional] [example: `"USD"`] [nullable] |
+| **subAccounts** | [**List**](#model-subaccount) | A list of sub-accounts. | [optional] [example: `[{currency=USD, amount=1500.75}]`] [nullable] |
 | **lastCredit** | [**TransactionInfo**](#model-transactioninfo) | The most recent credit transaction applied to the account. | [optional] |
 
 
@@ -11176,13 +11176,13 @@ The sign-in methods this portal offers, as a login client needs them before anyo
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **ldapEnabled** | **Boolean** | Whether members may sign in with their directory credentials. It is `false` both when LDAP sign-in is  switched off and when the pricing plan or the installation does not include it, and also when the settings  could not be read at all - a `false` here means the method is not offered, never that it is unknown. | [required] [example: false] |
-| **ldapDomain** | **String** | The directory domain members authenticate against, to be shown next to the login field. It is empty  whenever `ldapEnabled` is `false`, and also while the portal has not completed a directory synchronisation. | [optional] [example: example.com] [nullable] |
-| **providers** | **List** | The keys of the external identity providers to offer, ordered for the country the caller's IP address  resolves to and reduced to those this installation has credentials for. Pass one of them as `provider` to  `POST api/2.0/authentication`. An empty list means external sign-in is not on offer. | [required] [example: [google, facebook, microsoft]] [nullable] |
-| **ssoLabel** | **String** | The caption for the single sign-on button in the portal language, empty whenever `ssoUrl` is. | [required] [example: Enterprise SSO] [nullable] |
-| **oauthEnabled** | **Boolean** | Whether external identity providers may be used on this portal at all. While it is `false`, `providers` is  empty because the list is not even assembled. | [required] [example: true] |
-| **ssoUrl** | **URI** (uri) | The address to send the browser to for SAML single sign-on. It is empty when single sign-on is not on  offer, which is the one thing to test - there is no separate flag for it. | [required] [example: https://sso.example.com/login] [nullable] |
-| **identityServerEnabled** | **Boolean** | Whether the installation exposes its built-in identity server, which is what the portal's own OAuth  applications authenticate against. It concerns third-party applications signing in to the portal, not  portal members signing in to an external provider - that is `providers`. | [required] [example: false] |
+| **ldapEnabled** | **Boolean** | Whether members may sign in with their directory credentials. It is `false` both when LDAP sign-in is  switched off and when the pricing plan or the installation does not include it, and also when the settings  could not be read at all - a `false` here means the method is not offered, never that it is unknown. | [required] [example: `false`] |
+| **ldapDomain** | **String** | The directory domain members authenticate against, to be shown next to the login field. It is empty  whenever `ldapEnabled` is `false`, and also while the portal has not completed a directory synchronisation. | [optional] [example: `example.com`] [nullable] |
+| **providers** | **List** | The keys of the external identity providers to offer, ordered for the country the caller's IP address  resolves to and reduced to those this installation has credentials for. Pass one of them as `provider` to  `POST api/2.0/authentication`. An empty list means external sign-in is not on offer. | [required] [example: `[google, facebook, microsoft]`] [nullable] |
+| **ssoLabel** | **String** | The caption for the single sign-on button in the portal language, empty whenever `ssoUrl` is. | [required] [example: `Enterprise SSO`] [nullable] |
+| **oauthEnabled** | **Boolean** | Whether external identity providers may be used on this portal at all. While it is `false`, `providers` is  empty because the list is not even assembled. | [required] [example: `true`] |
+| **ssoUrl** | **URI** (uri) | The address to send the browser to for SAML single sign-on. It is empty when single sign-on is not on  offer, which is the one thing to test - there is no separate flag for it. | [required] [example: `https://sso.example.com/login`] [nullable] |
+| **identityServerEnabled** | **Boolean** | Whether the installation exposes its built-in identity server, which is what the portal's own OAuth  applications authenticate against. It concerns third-party applications signing in to the portal, not  portal members signing in to an external provider - that is `providers`. | [required] [example: `false`] |
 
 
 ### Model CapabilitiesWrapper
@@ -11202,9 +11202,9 @@ The CDN storage settings.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **module** | **String** | The storage name. | [optional] [example: LocalStorage] [nullable] |
-| **props** | **Map** | The storage properties. | [optional] [example: \{region=eu-central-1, bucket=tenant-files\}] |
-| **lastModified** | **Date** (date-time) | The date and time when the storage settings were last modified. | [optional] [example: 2025-01-01T12:00:00Z] |
+| **module** | **String** | The storage name. | [optional] [example: `LocalStorage`] [nullable] |
+| **props** | **Map** | The storage properties. | [optional] [example: `{region=eu-central-1, bucket=tenant-files}`] |
+| **lastModified** | **Date** (date-time) | The date and time when the storage settings were last modified. | [optional] [example: `2025-01-01T12:00:00Z`] |
 
 
 ### Model CdnStorageSettingsWrapper
@@ -11224,8 +11224,8 @@ Which wallet service is switched, and which way.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **service** | [**TenantWalletService**](#model-tenantwalletservice) | The service being switched, given by its catalogue name. Switching it on only makes it available to the  portal; its units are still bought with `PUT api/2.0/portal/payment/updatewallet`. | [optional] [enum: -18, -16, -15, -14, -13, -12, -11] |
-| **enabled** | **Boolean** | Which way the service is switched: `true` makes it available to the portal, `false` withdraws it. Setting the  state the service already has changes nothing. | [optional] [example: true] |
+| **service** | [**TenantWalletService**](#model-tenantwalletservice) | The service being switched, given by its catalogue name. Switching it on only makes it available to the  portal; its units are still bought with `PUT api/2.0/portal/payment/updatewallet`. | [optional] [enum: `-18`, `-16`, `-15`, `-14`, `-13`, `-12`, `-11`] |
+| **enabled** | **Boolean** | Which way the service is switched: `true` makes it available to the portal, `false` withdraws it. Setting the  state the service already has changes nothing. | [optional] [example: `true`] |
 
 
 ### Model CompanyWhiteLabelSettings
@@ -11233,14 +11233,14 @@ The company white label settings.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **companyName** | **String** | The company name. | [optional] [example: ONLYOFFICE] [minLength: 0] [maxLength: 255] [nullable] |
-| **site** | **URI** (uri) | The company site. | [optional] [example: https://www.onlyoffice.com] [minLength: 0] [maxLength: 255] [nullable] |
-| **email** | **String** (email) | The company email address. | [optional] [example: support@onlyoffice.com] [minLength: 0] [maxLength: 255] [nullable] |
-| **address** | **String** | The company address. | [optional] [example: Lubanas st. 125a-25] [minLength: 0] [maxLength: 255] [nullable] |
-| **phone** | **String** (tel) | The company phone number. | [optional] [example: +7 843 2271372] [minLength: 0] [maxLength: 255] [nullable] |
-| **IsLicensor** | **Boolean** | Specifies if a company is a licensor or not. | [optional] [example: true] |
-| **hideAbout** | **Boolean** | Specifies if the About page is visible or not | [optional] [example: false] |
-| **lastModified** | **Date** (date-time) | The timestamp indicating when the settings were last modified. | [optional] [example: 1990-01-01T00:00:00Z] |
+| **companyName** | **String** | The company name. | [optional] [example: `ONLYOFFICE`] [minLength: 0] [maxLength: 255] [nullable] |
+| **site** | **URI** (uri) | The company site. | [optional] [example: `https://www.onlyoffice.com`] [minLength: 0] [maxLength: 255] [nullable] |
+| **email** | **String** (email) | The company email address. | [optional] [example: `support@onlyoffice.com`] [minLength: 0] [maxLength: 255] [nullable] |
+| **address** | **String** | The company address. | [optional] [example: `Lubanas st. 125a-25`] [minLength: 0] [maxLength: 255] [nullable] |
+| **phone** | **String** (tel) | The company phone number. | [optional] [example: `+7 843 2271372`] [minLength: 0] [maxLength: 255] [nullable] |
+| **IsLicensor** | **Boolean** | Specifies if a company is a licensor or not. | [optional] [example: `true`] |
+| **hideAbout** | **Boolean** | Specifies if the About page is visible or not | [optional] [example: `false`] |
+| **lastModified** | **Date** (date-time) | The timestamp indicating when the settings were last modified. | [optional] [example: `1990-01-01T00:00:00Z`] |
 
 
 ### Model CompanyWhiteLabelSettingsArrayWrapper
@@ -11260,14 +11260,14 @@ The vendor details the About page and the notification letters print, shared by 
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **companyName** | **String** | The vendor name the About page shows and the letters sign off with. Until details are saved it holds  whatever the installation ships as its built-in vendor, and it is empty on an installation that ships none. | [required] [example: My Own Corporation] [nullable] |
-| **site** | **String** | The address the vendor name links to, as an absolute URL with its scheme. Empty under the same conditions  as `companyName`. | [required] [example: https://www.example.com] [nullable] |
-| **email** | **String** (email) | The mailbox the About page offers for reaching the vendor. It is not the portal's own support address, and  it is empty under the same conditions as `companyName`. | [required] [example: contact@example.com] [nullable] |
-| **address** | **String** | The postal address of the vendor as one free-form line, in the shape it was saved in - no structure is  imposed on it. | [required] [example: 123 Business St, New York, NY 10001] [nullable] |
-| **phone** | **String** | The telephone number of the vendor in the shape it was saved in, with no dialling format enforced. | [required] [example: +1-800-555-0123] [nullable] |
-| **isLicensor** | **Boolean** | Whether these details are those of the licensor of the product itself rather than of a reseller. Saving  through `POST api/2.0/settings/rebranding/company` always clears it, so only details that came with the  installation can report `true`. | [required] [example: false] |
-| **hideAbout** | **Boolean** | Whether the About page is hidden from the interface. A plan that does not include branding cannot switch it  on: the value is stored as `false` in that case, so it can come back different from what was saved. | [required] [example: false] |
-| **isDefault** | **Boolean** | Whether every field above still matches the installation's built-in vendor details. It turns `false` as  soon as one of them is saved differently and `true` again after  `DELETE api/2.0/settings/rebranding/company`. | [required] [example: true] |
+| **companyName** | **String** | The vendor name the About page shows and the letters sign off with. Until details are saved it holds  whatever the installation ships as its built-in vendor, and it is empty on an installation that ships none. | [required] [example: `My Own Corporation`] [nullable] |
+| **site** | **String** | The address the vendor name links to, as an absolute URL with its scheme. Empty under the same conditions  as `companyName`. | [required] [example: `https://www.example.com`] [nullable] |
+| **email** | **String** (email) | The mailbox the About page offers for reaching the vendor. It is not the portal's own support address, and  it is empty under the same conditions as `companyName`. | [required] [example: `contact@example.com`] [nullable] |
+| **address** | **String** | The postal address of the vendor as one free-form line, in the shape it was saved in - no structure is  imposed on it. | [required] [example: `123 Business St, New York, NY 10001`] [nullable] |
+| **phone** | **String** | The telephone number of the vendor in the shape it was saved in, with no dialling format enforced. | [required] [example: `+1-800-555-0123`] [nullable] |
+| **isLicensor** | **Boolean** | Whether these details are those of the licensor of the product itself rather than of a reseller. Saving  through `POST api/2.0/settings/rebranding/company` always clears it, so only details that came with the  installation can report `true`. | [required] [example: `false`] |
+| **hideAbout** | **Boolean** | Whether the About page is hidden from the interface. A plan that does not include branding cannot switch it  on: the value is stored as `false` in that case, so it can come back different from what was saved. | [required] [example: `false`] |
+| **isDefault** | **Boolean** | Whether every field above still matches the installation's built-in vendor details. It turns `false` as  soon as one of them is saved differently and `true` again after  `DELETE api/2.0/settings/rebranding/company`. | [required] [example: `true`] |
 
 
 ### Model CompanyWhiteLabelSettingsDtoWrapper
@@ -11307,9 +11307,9 @@ The confirmation link a sign-in is authorised with, in place of a password.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **email** | **String** (email) | The address the confirmation link was issued for. It has to be the same address the key was signed with, and  a value that is not an email address fails the request with 400. | [optional] [example: user@example.com] [nullable] |
-| **first** | **Boolean** | Whether the link is being followed for the first time, taken from the `first` parameter of the confirmation  URL. It is part of what the key was signed over, so passing a different value invalidates the key rather than  changing behaviour. | [optional] [example: true] [nullable] |
-| **key** | **String** | The `key` parameter of the confirmation URL, copied verbatim. It is bound to the address and to the moment it  was issued, so it stops being accepted once the portal email key lifetime has passed. | [optional] [example: abc123def456] [nullable] |
+| **email** | **String** (email) | The address the confirmation link was issued for. It has to be the same address the key was signed with, and  a value that is not an email address fails the request with 400. | [optional] [example: `user@example.com`] [nullable] |
+| **first** | **Boolean** | Whether the link is being followed for the first time, taken from the `first` parameter of the confirmation  URL. It is part of what the key was signed over, so passing a different value invalidates the key rather than  changing behaviour. | [optional] [example: `true`] [nullable] |
+| **key** | **String** | The `key` parameter of the confirmation URL, copied verbatim. It is bound to the address and to the moment it  was issued, so it stops being accepted once the portal email key lifetime has passed. | [optional] [example: `abc123def456`] [nullable] |
 
 
 ### Model ConfirmDto
@@ -11317,11 +11317,11 @@ Whether a confirmation link may still be used, and what it leads to when it invi
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **result** | [**ValidationResult**](#model-validationresult) | The outcome of the check. Only `Ok` means the action behind the link may be carried out: `Invalid` and  `Expired` fault the key itself, while `UserExisted`, `UserExcluded`, `TariffLimit` and `QuotaFailed` mean  the key is sound but the invitation behind it cannot be accepted as it stands. | [required] [enum: 0, 1, 2, 3, 4, 5, 6] |
-| **roomId** | **String** | The room the invitation leads into - a numeric folder ID for a room of the portal, a provider-specific  string for a third-party one. It is empty for an invitation to the portal as a whole, for a room that has  been removed or that the invited account may not see, and whenever `result` is neither `Ok` nor  `UserExisted`. | [optional] [example: 1] [nullable] |
-| **title** | **String** | The title of that room, present exactly when `roomId` is and meant to be shown on the confirmation page. | [optional] [example: Conference Room] [nullable] |
-| **email** | **String** | The address the link was issued for, echoed back only when `result` is `Ok` so that a sign-up form can be  prefilled with it. Every other outcome leaves it empty, `UserExisted` included. | [optional] [example: user@example.com] [nullable] |
-| **isAgent** | **Boolean** | Whether the room behind the link is an AI room rather than an ordinary one, which decides where the invited  person is taken. It is `false` whenever `roomId` is empty. | [optional] [example: true] |
+| **result** | [**ValidationResult**](#model-validationresult) | The outcome of the check. Only `Ok` means the action behind the link may be carried out: `Invalid` and  `Expired` fault the key itself, while `UserExisted`, `UserExcluded`, `TariffLimit` and `QuotaFailed` mean  the key is sound but the invitation behind it cannot be accepted as it stands. | [required] [enum: `0`, `1`, `2`, `3`, `4`, `5`, `6`] |
+| **roomId** | **String** | The room the invitation leads into - a numeric folder ID for a room of the portal, a provider-specific  string for a third-party one. It is empty for an invitation to the portal as a whole, for a room that has  been removed or that the invited account may not see, and whenever `result` is neither `Ok` nor  `UserExisted`. | [optional] [example: `1`] [nullable] |
+| **title** | **String** | The title of that room, present exactly when `roomId` is and meant to be shown on the confirmation page. | [optional] [example: `Conference Room`] [nullable] |
+| **email** | **String** | The address the link was issued for, echoed back only when `result` is `Ok` so that a sign-up form can be  prefilled with it. Every other outcome leaves it empty, `UserExisted` included. | [optional] [example: `user@example.com`] [nullable] |
+| **isAgent** | **Boolean** | Whether the room behind the link is an AI room rather than an ordinary one, which decides where the invited  person is taken. It is `false` whenever `roomId` is empty. | [optional] [example: `true`] |
 
 
 ### Model ConfirmType
@@ -11387,8 +11387,8 @@ How long an authentication session of the portal stays valid, and whether that l
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **lifeTime** | **Integer** (int32) | How long, in minutes, a session issued from now on remains valid. It is `1440` on a portal that has never  stored a limit, and that stored number is reported whether or not `enabled` puts it to use. | [required] [example: 1440] |
-| **enabled** | **Boolean** | Whether the stored lifetime is applied at all. While it is `false` the number above is ignored and an  issued session is honoured for a year. | [required] [example: true] |
+| **lifeTime** | **Integer** (int32) | How long, in minutes, a session issued from now on remains valid. It is `1440` on a portal that has never  stored a limit, and that stored number is reported whether or not `enabled` puts it to use. | [required] [example: `1440`] |
+| **enabled** | **Boolean** | Whether the stored lifetime is applied at all. While it is `false` the number above is ignored and an  issued session is honoured for a year. | [required] [example: `true`] |
 
 
 ### Model CookieSettingsRequestsDto
@@ -11396,8 +11396,8 @@ How long an authentication session of the portal stays valid, and whether that l
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **lifeTime** | **Integer** (int32) | How long, in minutes, a session issued from now on remains valid. A value above 9999 is clamped to 9999  rather than refused, and 0 or less clears the number, which together with `enabled` leaves sessions that  never expire on their own. Any positive value invalidates every session issued before this call, the  caller's included, so the client has to keep the fresh cookie the response carries. | [optional] [example: 525600] |
-| **enabled** | **Boolean** | Whether the stored lifetime is applied at all. While it is false the number is ignored and an issued session  is honoured for a year; while it is true the connections behind expired sessions are dropped as well. | [optional] [example: true] |
+| **lifeTime** | **Integer** (int32) | How long, in minutes, a session issued from now on remains valid. A value above 9999 is clamped to 9999  rather than refused, and 0 or less clears the number, which together with `enabled` leaves sessions that  never expire on their own. Any positive value invalidates every session issued before this call, the  caller's included, so the client has to keep the fresh cookie the response carries. | [optional] [example: `525600`] |
+| **enabled** | **Boolean** | Whether the stored lifetime is applied at all. While it is false the number is ignored and an issued session  is honoured for a year; while it is true the connections behind expired sessions are dropped as well. | [optional] [example: `true`] |
 
 
 ### Model CookieSettingsWrapper
@@ -11417,13 +11417,13 @@ The target a webhook subscription calls, the events it listens for, and the secr
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **name** | **String** | The label the subscription is listed under. It is for the administrator reading the list and is never sent to  the target; it does not have to be unique. | [required] [example: Production Webhook] [minLength: 0] [maxLength: 50] |
-| **uri** | **String** | The address the portal posts the event payload to. It has to be an absolute `http` or `https` address outside  the installation own network, and it is probed before anything is stored: it must answer a HEAD request with  a success code, and a redirect does not count as one. | [required] [example: https://example.com/webhook] [minLength: 1] |
-| **secretKey** | **String** | The shared secret the payload signature is computed with, so the receiver can tell a genuine call from a  forged one. It has to satisfy the portal password rules published by  `GET api/2.0/settings/security/password`, and it is never echoed back by any operation. On an update an empty  value keeps the secret already stored. | [optional] [example: my-secret-key-123] [minLength: 0] [maxLength: 50] [nullable] |
-| **enabled** | **Boolean** | Whether the subscription delivers at all. While it is off the matching events are dropped rather than queued,  so nothing from that period arrives once it is switched on again. | [optional] [example: true] |
-| **ssl** | **Boolean** | Whether the target certificate is verified. Setting it demands an `https` target with a valid certificate;  leaving it off delivers without checking the certificate at all. | [optional] [example: true] |
-| **triggers** | [**WebhookTrigger**](#model-webhooktrigger) | The events the subscription listens for, as a bitmask combining the flags; 0 subscribes to all of them. Take  the flags the caller role is allowed to use from `GET api/2.0/settings/webhook/triggers`, since a flag beyond  that set is refused with 400. A subscription still only fires for events its creator may see. | [optional] [enum: 0, 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536, 131072, 262144, 524288, 1048576, 2097152, 4194304, 8388608, 16777216, 33554432, 67108864, 134217728, 268435456, 536870912, 1073741824] |
-| **targetId** | **String** | The single entity the subscription is narrowed to, by its identifier - a room or a file, for instance.  Leaving it out delivers events about every entity the subscribed triggers cover. | [optional] [example: 00000000-0000-0000-0000-000000000001] [minLength: 0] [maxLength: 255] [nullable] |
+| **name** | **String** | The label the subscription is listed under. It is for the administrator reading the list and is never sent to  the target; it does not have to be unique. | [required] [example: `Production Webhook`] [minLength: 0] [maxLength: 50] |
+| **uri** | **String** | The address the portal posts the event payload to. It has to be an absolute `http` or `https` address outside  the installation own network, and it is probed before anything is stored: it must answer a HEAD request with  a success code, and a redirect does not count as one. | [required] [example: `https://example.com/webhook`] [minLength: 1] |
+| **secretKey** | **String** | The shared secret the payload signature is computed with, so the receiver can tell a genuine call from a  forged one. It has to satisfy the portal password rules published by  `GET api/2.0/settings/security/password`, and it is never echoed back by any operation. On an update an empty  value keeps the secret already stored. | [optional] [example: `my-secret-key-123`] [minLength: 0] [maxLength: 50] [nullable] |
+| **enabled** | **Boolean** | Whether the subscription delivers at all. While it is off the matching events are dropped rather than queued,  so nothing from that period arrives once it is switched on again. | [optional] [example: `true`] |
+| **ssl** | **Boolean** | Whether the target certificate is verified. Setting it demands an `https` target with a valid certificate;  leaving it off delivers without checking the certificate at all. | [optional] [example: `true`] |
+| **triggers** | [**WebhookTrigger**](#model-webhooktrigger) | The events the subscription listens for, as a bitmask combining the flags; 0 subscribes to all of them. Take  the flags the caller role is allowed to use from `GET api/2.0/settings/webhook/triggers`, since a flag beyond  that set is refused with 400. A subscription still only fires for events its creator may see. | [optional] [enum: `0`, `1`, `2`, `4`, `8`, `16`, `32`, `64`, `128`, `256`, `512`, `1024`, `2048`, `4096`, `8192`, `16384`, `32768`, `65536`, `131072`, `262144`, `524288`, `1048576`, `2097152`, `4194304`, `8388608`, `16777216`, `33554432`, `67108864`, `134217728`, `268435456`, `536870912`, `1073741824`] |
+| **targetId** | **String** | The single entity the subscription is narrowed to, by its identifier - a room or a file, for instance.  Leaving it out delivers events about every entity the subscribed triggers cover. | [optional] [example: `00000000-0000-0000-0000-000000000001`] [minLength: 0] [maxLength: 255] [nullable] |
 
 
 ### Model CspDto
@@ -11431,8 +11431,8 @@ The Content Security Policy of the portal: the domains an administrator allowed,
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **domains** | **List** | The external hosts an administrator has allowed, each in the form it was saved in - a bare host, a host  with a scheme, or a wildcard such as `*.example.com`. An empty list means nobody has added one, not that  the portal serves no policy. | [required] [example: [https://example.com, https://cdn.example.com]] [nullable] |
-| **header** | **String** | The complete policy value the portal sends to browsers, assembled from `domains` together with the  portal's own sources and the integrations it has switched on. It is therefore wider than `domains` alone,  and is filled in even while that list is empty. | [required] [example: default-src 'self'; script-src 'self' https://example.com] [nullable] |
+| **domains** | **List** | The external hosts an administrator has allowed, each in the form it was saved in - a bare host, a host  with a scheme, or a wildcard such as `*.example.com`. An empty list means nobody has added one, not that  the portal serves no policy. | [required] [example: `[https://example.com, https://cdn.example.com]`] [nullable] |
+| **header** | **String** | The complete policy value the portal sends to browsers, assembled from `domains` together with the  portal's own sources and the integrations it has switched on. It is therefore wider than `domains` alone,  and is filled in even while that list is empty. | [required] [example: `default-src 'self'; script-src 'self' https://example.com`] [nullable] |
 
 
 ### Model CspRequestsDto
@@ -11440,7 +11440,7 @@ The external sources the portal Content Security Policy is to trust.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **domains** | **List** | The domains the policy trusts, as the complete list that is to hold afterwards rather than a list of  additions: send the domains already trusted together with the new one to add one, leave one out to withdraw  it, and send an empty list to fall back to the portal built-in policy. An entry may be a bare host, a host  with a scheme, or a wildcard host such as `*.example.com`; it has to form a valid absolute address and may  contain ASCII characters only. Every entry becomes an allowed source for scripts, styles, images, fonts,  frames, media and connections at once - the directives cannot be set apart here. | [optional] [example: [example.com, trusted-site.com]] [nullable] |
+| **domains** | **List** | The domains the policy trusts, as the complete list that is to hold afterwards rather than a list of  additions: send the domains already trusted together with the new one to add one, leave one out to withdraw  it, and send an empty list to fall back to the portal built-in policy. An entry may be a bare host, a host  with a scheme, or a wildcard host such as `*.example.com`; it has to form a valid absolute address and may  contain ASCII characters only. Every entry becomes an allowed source for scripts, styles, images, fonts,  frames, media and connections at once - the directives cannot be set apart here. | [optional] [example: `[example.com, trusted-site.com]`] [nullable] |
 
 
 ### Model CspWrapper
@@ -11460,8 +11460,8 @@ The external resource parameters.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **domain** | **String** | The external resource domain. | [optional] [example: example.com] [nullable] |
-| **entries** | **Map** | The external resource entries. | [optional] [example: \{welcomeMessage=Welcome, logoutButton=Log out\}] |
+| **domain** | **String** | The external resource domain. | [optional] [example: `example.com`] [nullable] |
+| **entries** | **Map** | The external resource entries. | [optional] [example: `{welcomeMessage=Welcome, logoutButton=Log out}`] |
 
 
 ### Model CultureSpecificExternalResources
@@ -11497,9 +11497,9 @@ One currency the portal's subscription prices can be quoted in, with the region 
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **isoCountryCode** | **String** | The two-letter ISO code of the country the currency is that of, which is the region the price list was  picked for rather than the country of the caller. | [optional] [example: US] [nullable] |
-| **isoCurrencySymbol** | **String** | The three-letter ISO 4217 code of the currency. On the first item of the answer it is the currency the  amounts from `GET api/2.0/portal/payment/prices` are expressed in. | [optional] [example: USD] [nullable] |
-| **currencyNativeName** | **String** | The currency name in the language of its own region - not in the portal language, and not a symbol. | [optional] [example: US Dollar] [nullable] |
+| **isoCountryCode** | **String** | The two-letter ISO code of the country the currency is that of, which is the region the price list was  picked for rather than the country of the caller. | [optional] [example: `US`] [nullable] |
+| **isoCurrencySymbol** | **String** | The three-letter ISO 4217 code of the currency. On the first item of the answer it is the currency the  amounts from `GET api/2.0/portal/payment/prices` are expressed in. | [optional] [example: `USD`] [nullable] |
+| **currencyNativeName** | **String** | The currency name in the language of its own region - not in the portal language, and not a symbol. | [optional] [example: `US Dollar`] [nullable] |
 
 
 ### Model CurrencyAmount
@@ -11516,7 +11516,7 @@ The currency an amount is expressed in.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **currency** | **String** | The three-character ISO 4217 currency symbol. | [optional] [example: "USD"] [nullable] |
+| **currency** | **String** | The three-character ISO 4217 currency symbol. | [optional] [example: `"USD"`] [nullable] |
 
 
 ### Model CurrencyInfo
@@ -11524,8 +11524,8 @@ The currency the AI prices are quoted in.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **code** | **String** | The ISO 4217 code of the currency the prices are quoted in. | [required] [example: USD] [nullable] |
-| **symbol** | **String** | The display symbol of the currency. | [required] [example: $] [nullable] |
+| **code** | **String** | The ISO 4217 code of the currency the prices are quoted in. | [required] [example: `USD`] [nullable] |
+| **symbol** | **String** | The display symbol of the currency. | [required] [example: `$`] [nullable] |
 
 
 ### Model CurrentLicenseInfo
@@ -11533,8 +11533,8 @@ The two facts about the subscription in force that a payment page needs.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **trial** | **Boolean** | Whether the portal is on a trial rather than a paid subscription. A trial expires at `dueDate` and is not  extended by paying - a plan has to be bought instead. | [required] [example: false] |
-| **dueDate** | **Date** (date-time) | The day the subscription runs out, with the time of day cut off. The largest value a date can hold means  it never runs out, which is how a free or unlimited plan is expressed. | [required] [example: 2025-06-15T10:30:00.0000000Z] |
+| **trial** | **Boolean** | Whether the portal is on a trial rather than a paid subscription. A trial expires at `dueDate` and is not  extended by paying - a plan has to be bought instead. | [required] [example: `false`] |
+| **dueDate** | **Date** (date-time) | The day the subscription runs out, with the time of day cut off. The largest value a date can hold means  it never runs out, which is how a free or unlimited plan is expressed. | [required] [example: `2025-06-15T10:30:00.0000000Z`] |
 
 
 ### Model CustomColorThemesSettingsColorItem
@@ -11542,8 +11542,8 @@ The custom color theme color parameters.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **accent** | **String** | The accent color. | [optional] [example: #4781D1] [nullable] |
-| **buttons** | **String** | The button color. | [optional] [example: #5299E0] [nullable] |
+| **accent** | **String** | The accent color. | [optional] [example: `#4781D1`] [nullable] |
+| **buttons** | **String** | The button color. | [optional] [example: `#5299E0`] [nullable] |
 
 
 ### Model CustomColorThemesSettingsDto
@@ -11551,9 +11551,9 @@ The colour themes the portal offers, which of them is applied, and how many the 
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **themes** | [**List**](#model-customcolorthemessettingsitem) | Every theme the portal can apply, ordered by ID, with the built-in ones first because they were created  first. It is never empty - the built-in themes cannot be deleted - and a custom theme is one whose ID is  higher than the built-in ones. | [optional] [example: [\{id=1, name=Custom Theme\}]] [nullable] |
-| **selected** | **Integer** (int32) | The ID of the theme in `themes` that is currently applied to the whole portal. Deleting the applied theme  moves it to the lowest remaining ID, so it can change without anyone having chosen a new one. | [optional] [example: 1] |
-| **limit** | **Integer** (int32) | How many entries `themes` may hold in total, built-in ones included; `0` means the plan caps nothing. Once  the cap is reached `PUT api/2.0/settings/colortheme` drops a new theme silently instead of failing, so  compare this with the length of `themes` to tell whether a save took effect. | [optional] [example: 1] |
+| **themes** | [**List**](#model-customcolorthemessettingsitem) | Every theme the portal can apply, ordered by ID, with the built-in ones first because they were created  first. It is never empty - the built-in themes cannot be deleted - and a custom theme is one whose ID is  higher than the built-in ones. | [optional] [example: `[{id=1, name=Custom Theme}]`] [nullable] |
+| **selected** | **Integer** (int32) | The ID of the theme in `themes` that is currently applied to the whole portal. Deleting the applied theme  moves it to the lowest remaining ID, so it can change without anyone having chosen a new one. | [optional] [example: `1`] |
+| **limit** | **Integer** (int32) | How many entries `themes` may hold in total, built-in ones included; `0` means the plan caps nothing. Once  the cap is reached `PUT api/2.0/settings/colortheme` drops a new theme silently instead of failing, so  compare this with the length of `themes` to tell whether a save took effect. | [optional] [example: `1`] |
 
 
 ### Model CustomColorThemesSettingsItem
@@ -11561,8 +11561,8 @@ The custom color theme settings.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **id** | **Integer** (int32) | The custom color theme ID. | [optional] [example: 1] |
-| **name** | **String** | The custom color theme name. | [optional] [example: blue] [nullable] |
+| **id** | **Integer** (int32) | The custom color theme ID. | [optional] [example: `1`] |
+| **name** | **String** | The custom color theme name. | [optional] [example: `blue`] [nullable] |
 | **main** | [**CustomColorThemesSettingsColorItem**](#model-customcolorthemessettingscoloritem) | The custom color theme main colors. | [optional] |
 | **text** | [**CustomColorThemesSettingsColorItem**](#model-customcolorthemessettingscoloritem) | The custom color theme text colors. | [optional] |
 
@@ -11573,7 +11573,7 @@ The custom colour theme being saved, the theme being selected, or both.
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **theme** | [**CustomColorThemesSettingsItem**](#model-customcolorthemessettingsitem) | The theme to store, with its accent and button colours for the interface and for the text on it. An `id` that  matches a stored custom theme replaces it, an unknown `id` appends a new one, and an `id` belonging to a  built-in theme is treated as a request for a new custom theme rather than overwriting the built-in one. Once  the plan limit on custom themes is reached a new theme is silently not added, so compare the returned themes  against `limit` instead of assuming it was saved. Leave it out to change only the selection. | [optional] |
-| **selected** | **Integer** (int32) | The theme the whole portal switches to, by theme ID. An ID matching no stored theme is ignored rather than  refused, and leaving it out keeps the selection as it is. | [optional] [example: 1] [nullable] |
+| **selected** | **Integer** (int32) | The theme the whole portal switches to, by theme ID. An ID matching no stored theme is ignored rather than  refused, and leaving it out keeps the selection as it is. | [optional] [example: `1`] [nullable] |
 
 
 ### Model CustomColorThemesSettingsWrapper
@@ -11593,11 +11593,11 @@ The billing customer behind the portal, and which portal member pays for it.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **portalId** | **String** | The portal's identifier in the billing system, which is what support and invoices refer to. It is not the  portal alias. | [optional] [example: portal-001] [nullable] |
-| **paymentMethodStatus** | [**PaymentMethodStatus**](#model-paymentmethodstatus) | Whether a payment method is stored for the account and usable. Without one the portal can hold a wallet  balance but cannot be charged automatically. | [optional] [enum: 0, 1, 2] |
-| **paymentMethodType** | **String** | The customer's payment method type. | [optional] [example: card] [nullable] |
-| **isDelayedPaymentMethod** | **Boolean** | Indicates whether the customer's payment method is delayed, i.e. the money reaches the wallet only after  the transfer settles rather than immediately. | [optional] [example: false] |
-| **email** | **String** | The address the billing account is registered to, lower-cased. It need not belong to a portal member,  which is exactly when `payer` stays empty. | [optional] [example: user@example.com] [nullable] |
+| **portalId** | **String** | The portal's identifier in the billing system, which is what support and invoices refer to. It is not the  portal alias. | [optional] [example: `portal-001`] [nullable] |
+| **paymentMethodStatus** | [**PaymentMethodStatus**](#model-paymentmethodstatus) | Whether a payment method is stored for the account and usable. Without one the portal can hold a wallet  balance but cannot be charged automatically. | [optional] [enum: `0`, `1`, `2`] |
+| **paymentMethodType** | **String** | The customer's payment method type. | [optional] [example: `card`] [nullable] |
+| **isDelayedPaymentMethod** | **Boolean** | Indicates whether the customer's payment method is delayed, i.e. the money reaches the wallet only after  the transfer settles rather than immediately. | [optional] [example: `false`] |
+| **email** | **String** | The address the billing account is registered to, lower-cased. It need not belong to a portal member,  which is exactly when `payer` stays empty. | [optional] [example: `user@example.com`] [nullable] |
 | **payer** | [**EmployeeDto**](#model-employeedto) | The portal member whose account is behind the billing address. It is empty when `email` matches no member  of this portal, and while it is empty every operation of this group that only the payer may call is out  of reach for everybody. | [optional] |
 
 
@@ -11630,11 +11630,11 @@ What the portal spent from its wallet in one calendar month, added up across eve
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **year** | **Integer** (int32) | The year the month belongs to. Months are cut in the portal time zone, so a movement at the edge of a  month falls where the portal sees it and not where UTC does. | [optional] [example: 2025] |
-| **month** | **Integer** (int32) | The month itself, January being 1. Only months that had spending appear at all, so a gap in the list is a  month with nothing in it rather than missing data. | [optional] [example: 1] |
-| **currency** | **String** | The currency `totalAmount` is expressed in, as a three-letter ISO 4217 code - the accounting currency of  the wallet. | [optional] [example: USD] [nullable] |
-| **totalAmount** | **Double** (double) | What the month came to across every service, as a positive amount spent rather than a signed balance. | [optional] [example: 199.98] |
-| **operationCount** | **Integer** (int32) | How many separate movements that total was added up from, for a client that wants to show the weight  behind a figure. The movements themselves are in `GET api/2.0/portal/payment/customer/operations`. | [optional] [example: 3] |
+| **year** | **Integer** (int32) | The year the month belongs to. Months are cut in the portal time zone, so a movement at the edge of a  month falls where the portal sees it and not where UTC does. | [optional] [example: `2025`] |
+| **month** | **Integer** (int32) | The month itself, January being 1. Only months that had spending appear at all, so a gap in the list is a  month with nothing in it rather than missing data. | [optional] [example: `1`] |
+| **currency** | **String** | The currency `totalAmount` is expressed in, as a three-letter ISO 4217 code - the accounting currency of  the wallet. | [optional] [example: `USD`] [nullable] |
+| **totalAmount** | **Double** (double) | What the month came to across every service, as a positive amount spent rather than a signed balance. | [optional] [example: `199.98`] |
+| **operationCount** | **Integer** (int32) | How many separate movements that total was added up from, for a client that wants to show the weight  behind a figure. The movements themselves are in `GET api/2.0/portal/payment/customer/operations`. | [optional] [example: `3`] |
 
 
 ### Model CustomerMonthlyUsageReportRequestDto
@@ -11642,8 +11642,8 @@ The period covered by the monthly wallet spending report.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **startDate** | **Date** (date-time) | The beginning of the reported period, inclusive. The months are cut in the portal time zone rather than in  UTC, so spending at the turn of a month falls where the portal sees it; defaults to the portal creation date. | [optional] [example: 2025-01-01T00:00:00Z] [nullable] |
-| **endDate** | **Date** (date-time) | The end of the reported period, inclusive. Cut in the portal time zone in the same way as `startDate`, and  defaults to the moment the call is made. | [optional] [example: 2025-12-31T23:59:59Z] [nullable] |
+| **startDate** | **Date** (date-time) | The beginning of the reported period, inclusive. The months are cut in the portal time zone rather than in  UTC, so spending at the turn of a month falls where the portal sees it; defaults to the portal creation date. | [optional] [example: `2025-01-01T00:00:00Z`] [nullable] |
+| **endDate** | **Date** (date-time) | The end of the reported period, inclusive. Cut in the portal time zone in the same way as `startDate`, and  defaults to the moment the call is made. | [optional] [example: `2025-12-31T23:59:59Z`] [nullable] |
 
 
 ### Model CustomerOperationsReportRequestDto
@@ -11651,16 +11651,16 @@ The filters that select which wallet movements are reported: the services, the p
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **serviceName** | **List** | The wallet services whose movements are kept, named the way the billing catalogue names them - `backup`,  `ai-tools`, `ai-search`, `disk-storage`, `docscloud`. Take the values from the `serviceName` field of  `GET api/2.0/portal/payment/walletservices`; the match ignores case, a name this installation does not sell  fails the call with 404, and an omitted list keeps every service. A bare string is accepted in place of an  array for backward compatibility. | [optional] [example: [backup]] [nullable] |
-| **startDate** | **Date** (date-time) | The beginning of the reported period, inclusive. Read in the portal time zone rather than in UTC, so a  movement at the edge of the period falls where the portal sees it; defaults to the portal creation date. | [optional] [example: 2024-01-01T00:00:00Z] [nullable] |
-| **endDate** | **Date** (date-time) | The end of the reported period, inclusive. Read in the portal time zone rather than in UTC, and defaults to  the moment the call is made. | [optional] [example: 2024-01-31T23:59:59Z] [nullable] |
-| **participantName** | **String** | The participant whose movements are kept - the account the accounting service records as the cause of a  movement. A movement caused by a portal user carries that user ID here, and one caused by the portal itself  carries the customer name; surrounding whitespace is trimmed, and an omitted value keeps every participant. | [optional] [example: My Own Corporation] [nullable] |
-| **credit** | **Boolean** | Whether movements that add money to the wallet - top-ups, refunds and corrections in the portal's favour -  are kept. Both directions are reported when neither this nor `debit` is given. | [optional] [example: true] [nullable] |
-| **debit** | **Boolean** | Whether movements that take money out of the wallet - the charges of the wallet services - are kept. Both  directions are reported when neither this nor `credit` is given. | [optional] [example: false] [nullable] |
-| **type** | [**OperationType**](#model-operationtype) | The kind of movement to keep, which says what caused the money to move rather than how it ended. Every kind  is reported when it is omitted. | [optional] [enum: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19] |
-| **status** | [**OperationStatus**](#model-operationstatus) | The outcome to keep. A movement that is still being settled is reported as pending and may change later,  while the other outcomes are final; every outcome is reported when this is omitted. | [optional] [enum: 0, 1, 2, 3] |
-| **orderBy** | **String** | The name of the field the movements are sorted by, spelled as the accounting service names it, such as  `StartDate` or `ServiceName`. Surrounding whitespace is trimmed, and the accounting service applies its own  ordering when this is omitted. | [optional] [example: StartDate] [nullable] |
-| **orderType** | [**OperationOrderType**](#model-operationordertype) | The direction the field named in `orderBy` is sorted in. Newest or largest first is what the accounting  service does by default, so leaving this out sorts the same way as asking for descending explicitly. | [optional] [enum: 0, 1] |
+| **serviceName** | **List** | The wallet services whose movements are kept, named the way the billing catalogue names them - `backup`,  `ai-tools`, `ai-search`, `disk-storage`, `docscloud`. Take the values from the `serviceName` field of  `GET api/2.0/portal/payment/walletservices`; the match ignores case, a name this installation does not sell  fails the call with 404, and an omitted list keeps every service. A bare string is accepted in place of an  array for backward compatibility. | [optional] [example: `[backup]`] [nullable] |
+| **startDate** | **Date** (date-time) | The beginning of the reported period, inclusive. Read in the portal time zone rather than in UTC, so a  movement at the edge of the period falls where the portal sees it; defaults to the portal creation date. | [optional] [example: `2024-01-01T00:00:00Z`] [nullable] |
+| **endDate** | **Date** (date-time) | The end of the reported period, inclusive. Read in the portal time zone rather than in UTC, and defaults to  the moment the call is made. | [optional] [example: `2024-01-31T23:59:59Z`] [nullable] |
+| **participantName** | **String** | The participant whose movements are kept - the account the accounting service records as the cause of a  movement. A movement caused by a portal user carries that user ID here, and one caused by the portal itself  carries the customer name; surrounding whitespace is trimmed, and an omitted value keeps every participant. | [optional] [example: `My Own Corporation`] [nullable] |
+| **credit** | **Boolean** | Whether movements that add money to the wallet - top-ups, refunds and corrections in the portal's favour -  are kept. Both directions are reported when neither this nor `debit` is given. | [optional] [example: `true`] [nullable] |
+| **debit** | **Boolean** | Whether movements that take money out of the wallet - the charges of the wallet services - are kept. Both  directions are reported when neither this nor `credit` is given. | [optional] [example: `false`] [nullable] |
+| **type** | [**OperationType**](#model-operationtype) | The kind of movement to keep, which says what caused the money to move rather than how it ended. Every kind  is reported when it is omitted. | [optional] [enum: `0`, `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `13`, `14`, `15`, `16`, `17`, `18`, `19`] |
+| **status** | [**OperationStatus**](#model-operationstatus) | The outcome to keep. A movement that is still being settled is reported as pending and may change later,  while the other outcomes are final; every outcome is reported when this is omitted. | [optional] [enum: `0`, `1`, `2`, `3`] |
+| **orderBy** | **String** | The name of the field the movements are sorted by, spelled as the accounting service names it, such as  `StartDate` or `ServiceName`. Surrounding whitespace is trimmed, and the accounting service applies its own  ordering when this is omitted. | [optional] [example: `StartDate`] [nullable] |
+| **orderType** | [**OperationOrderType**](#model-operationordertype) | The direction the field named in `orderBy` is sorted in. Newest or largest first is what the accounting  service does by default, so leaving this out sorts the same way as asking for descending explicitly. | [optional] [enum: `0`, `1`] |
 
 
 ### Model CustomerServiceUsageDto
@@ -11668,15 +11668,15 @@ What one wallet service was consumed and cost over the requested period, added u
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **service** | **String** | The stable key of the service, which is what the `serviceName` filter of this operation matches on and  what `GET api/2.0/portal/payment/walletservice` looks a service up by. | [optional] [example: disk-storage] [nullable] |
-| **title** | **String** | The service name in the portal language, for printing rather than matching. | [optional] [example: Additional disk storage] [nullable] |
-| **serviceUnit** | **String** | What `totalQuantity` counts, in the portal language. AI consumption is reported in tokens here rather  than in the AI credits the service is sold in, so it does not line up with the price list. | [optional] [example: GB] [nullable] |
-| **currency** | **String** | The currency `totalAmount` and `price` are expressed in, as a three-letter ISO 4217 code. | [optional] [example: USD] [nullable] |
-| **totalQuantity** | **Integer** (int32) | How many units of the service were consumed over the period, in the unit named by `serviceUnit`. | [optional] [example: 100] |
-| **totalAmount** | **Double** (double) | What that consumption cost over the period. It is what was actually charged, so it can differ from  `price` times `totalQuantity` when the price changed inside the period. | [optional] [example: 49.99] |
-| **operationCount** | **Integer** (int32) | How many separate charges the total was added up from. The charges themselves are in  `GET api/2.0/portal/payment/customer/operations`. | [optional] [example: 2] |
-| **price** | **Double** (double) | What one unit of the service costs today, not what it cost during the period. It is `0` when the service  is no longer on the installation's price list. | [optional] [example: 0.14] |
-| **subscription** | **Boolean** | Whether the service is billed as a standing subscription rather than per unit consumed. It is derived  from today's price list, so it describes the service as it is sold now. | [optional] [example: true] |
+| **service** | **String** | The stable key of the service, which is what the `serviceName` filter of this operation matches on and  what `GET api/2.0/portal/payment/walletservice` looks a service up by. | [optional] [example: `disk-storage`] [nullable] |
+| **title** | **String** | The service name in the portal language, for printing rather than matching. | [optional] [example: `Additional disk storage`] [nullable] |
+| **serviceUnit** | **String** | What `totalQuantity` counts, in the portal language. AI consumption is reported in tokens here rather  than in the AI credits the service is sold in, so it does not line up with the price list. | [optional] [example: `GB`] [nullable] |
+| **currency** | **String** | The currency `totalAmount` and `price` are expressed in, as a three-letter ISO 4217 code. | [optional] [example: `USD`] [nullable] |
+| **totalQuantity** | **Integer** (int32) | How many units of the service were consumed over the period, in the unit named by `serviceUnit`. | [optional] [example: `100`] |
+| **totalAmount** | **Double** (double) | What that consumption cost over the period. It is what was actually charged, so it can differ from  `price` times `totalQuantity` when the price changed inside the period. | [optional] [example: `49.99`] |
+| **operationCount** | **Integer** (int32) | How many separate charges the total was added up from. The charges themselves are in  `GET api/2.0/portal/payment/customer/operations`. | [optional] [example: `2`] |
+| **price** | **Double** (double) | What one unit of the service costs today, not what it cost during the period. It is `0` when the service  is no longer on the installation's price list. | [optional] [example: `0.14`] |
+| **subscription** | **Boolean** | Whether the service is billed as a standing subscription rather than per unit consumed. It is derived  from today's price list, so it describes the service as it is sold now. | [optional] [example: `true`] |
 
 
 ### Model CustomerServiceUsageReportDto
@@ -11684,12 +11684,12 @@ One page of the per-service consumption totals, with the paging figures needed t
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **collection** | [**List**](#model-customerserviceusagedto) | The services on this page, one entry per service rather than per charge. It is empty for a period in  which nothing was consumed as well as for a page past the end of the report. | [optional] [example: [\{service=backup, totalAmount=49.99\}]] [nullable] |
-| **offset** | **Integer** (int32) | How many entries were skipped before this page, echoed from the request. | [optional] [example: 0] |
-| **limit** | **Integer** (int32) | How many entries one page may hold, echoed from the request; it is 25 unless another value was asked for. | [optional] [example: 25] |
-| **totalQuantity** | **Long** (int64) | How many services match the filters in total, across every page - services, not charges. | [optional] [example: 1] |
-| **totalPage** | **Integer** (int32) | How many pages those entries come to at the current `limit`. | [optional] [example: 1] |
-| **currentPage** | **Integer** (int32) | Which of those pages this one is, as the billing service numbers them. Page through by advancing `offset`  rather than this value, which nothing accepts as an argument. | [optional] [example: 1] |
+| **collection** | [**List**](#model-customerserviceusagedto) | The services on this page, one entry per service rather than per charge. It is empty for a period in  which nothing was consumed as well as for a page past the end of the report. | [optional] [example: `[{service=backup, totalAmount=49.99}]`] [nullable] |
+| **offset** | **Integer** (int32) | How many entries were skipped before this page, echoed from the request. | [optional] [example: `0`] |
+| **limit** | **Integer** (int32) | How many entries one page may hold, echoed from the request; it is 25 unless another value was asked for. | [optional] [example: `25`] |
+| **totalQuantity** | **Long** (int64) | How many services match the filters in total, across every page - services, not charges. | [optional] [example: `1`] |
+| **totalPage** | **Integer** (int32) | How many pages those entries come to at the current `limit`. | [optional] [example: `1`] |
+| **currentPage** | **Integer** (int32) | Which of those pages this one is, as the billing service numbers them. Page through by advancing `offset`  rather than this value, which nothing accepts as an argument. | [optional] [example: `1`] |
 
 
 ### Model CustomerServiceUsageReportRequestDto
@@ -11697,14 +11697,14 @@ The filters that select which wallet service consumption is reported: the servic
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **serviceName** | **List** | The wallet services whose consumption is reported, named the way the billing catalogue names them -  `backup`, `ai-tools`, `ai-search`, `disk-storage`, `docscloud`. Take the values from the `serviceName` field  of `GET api/2.0/portal/payment/walletservices`; the match ignores case, a name this installation does not  sell fails the call with 404, and an omitted list reports every service. A bare string is accepted in place  of an array for backward compatibility. | [optional] [example: [backup]] [nullable] |
-| **startDate** | **Date** (date-time) | The beginning of the reported period, inclusive. Read in the portal time zone rather than in UTC, and  defaults to the portal creation date. | [optional] [example: 2024-01-01T00:00:00Z] [nullable] |
-| **endDate** | **Date** (date-time) | The end of the reported period, inclusive. Read in the portal time zone rather than in UTC, and defaults to  the moment the call is made. | [optional] [example: 2024-01-31T23:59:59Z] [nullable] |
-| **participantName** | **String** | The participant whose consumption is reported - the account the accounting service records as the consumer.  Consumption caused by a portal user carries that user ID here; surrounding whitespace is trimmed, and an  omitted value reports every participant. | [optional] [example: My Own Corporation] [nullable] |
-| **status** | [**OperationStatus**](#model-operationstatus) | The outcome to keep. Consumption that is still being settled is reported as pending and may change later,  while the other outcomes are final; every outcome is reported when this is omitted. | [optional] [enum: 0, 1, 2, 3] |
-| **metadata** | **Map** | The usage annotations a wallet service records alongside its consumption, as the key and value pairs that  must all match for a record to be reported. The keys are chosen by the service that writes them, so read  them off the `metadata` of the records returned by `GET api/2.0/portal/payment/customer/usage` rather than  guessing; an omitted map reports every record. | [optional] [example: \{key1=value1, key2=value2\}] |
-| **orderBy** | **String** | The name of the field the per-service totals are sorted by, spelled as the accounting service names it, such  as `ServiceName` or `StartDate`. Surrounding whitespace is trimmed, and the accounting service applies its  own ordering when this is omitted. | [optional] [example: ServiceName] [nullable] |
-| **orderType** | [**OperationOrderType**](#model-operationordertype) | The direction the field named in `orderBy` is sorted in. Newest or largest first is what the accounting  service does by default, so leaving this out sorts the same way as asking for descending explicitly. | [optional] [enum: 0, 1] |
+| **serviceName** | **List** | The wallet services whose consumption is reported, named the way the billing catalogue names them -  `backup`, `ai-tools`, `ai-search`, `disk-storage`, `docscloud`. Take the values from the `serviceName` field  of `GET api/2.0/portal/payment/walletservices`; the match ignores case, a name this installation does not  sell fails the call with 404, and an omitted list reports every service. A bare string is accepted in place  of an array for backward compatibility. | [optional] [example: `[backup]`] [nullable] |
+| **startDate** | **Date** (date-time) | The beginning of the reported period, inclusive. Read in the portal time zone rather than in UTC, and  defaults to the portal creation date. | [optional] [example: `2024-01-01T00:00:00Z`] [nullable] |
+| **endDate** | **Date** (date-time) | The end of the reported period, inclusive. Read in the portal time zone rather than in UTC, and defaults to  the moment the call is made. | [optional] [example: `2024-01-31T23:59:59Z`] [nullable] |
+| **participantName** | **String** | The participant whose consumption is reported - the account the accounting service records as the consumer.  Consumption caused by a portal user carries that user ID here; surrounding whitespace is trimmed, and an  omitted value reports every participant. | [optional] [example: `My Own Corporation`] [nullable] |
+| **status** | [**OperationStatus**](#model-operationstatus) | The outcome to keep. Consumption that is still being settled is reported as pending and may change later,  while the other outcomes are final; every outcome is reported when this is omitted. | [optional] [enum: `0`, `1`, `2`, `3`] |
+| **metadata** | **Map** | The usage annotations a wallet service records alongside its consumption, as the key and value pairs that  must all match for a record to be reported. The keys are chosen by the service that writes them, so read  them off the `metadata` of the records returned by `GET api/2.0/portal/payment/customer/usage` rather than  guessing; an omitted map reports every record. | [optional] [example: `{key1=value1, key2=value2}`] |
+| **orderBy** | **String** | The name of the field the per-service totals are sorted by, spelled as the accounting service names it, such  as `ServiceName` or `StartDate`. Surrounding whitespace is trimmed, and the accounting service applies its  own ordering when this is omitted. | [optional] [example: `ServiceName`] [nullable] |
+| **orderType** | [**OperationOrderType**](#model-operationordertype) | The direction the field named in `orderBy` is sorted in. Newest or largest first is what the accounting  service does by default, so leaving this out sorts the same way as asking for descending explicitly. | [optional] [enum: `0`, `1`] |
 
 
 ### Model CustomerServiceUsageReportWrapper
@@ -11724,26 +11724,26 @@ The database tenant parameters.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **id** | **Integer** (int32) | The tenant ID. | [optional] [example: 1] |
-| **name** | **String** | The tenant name. | [optional] [example: Tenant] [maxLength: 255] [nullable] |
-| **alias** | **String** | The tenant alias. | [optional] [example: tenant] [maxLength: 100] [nullable] |
-| **mappedDomain** | **String** | Mapped domain | [optional] [example: tenant.example.com] [maxLength: 100] [nullable] |
-| **version** | **Integer** (int32) | The tenant version. | [optional] [example: 5] |
-| **version\_Changed** | **Date** (date-time) | The Version_changed field. | [optional] [example: 2025-01-01T10:00:00Z] [nullable] |
-| **versionChanged** | **Date** (date-time) | The date and time when the version was changed. | [optional] [example: 2025-01-01T10:00:00Z] |
-| **language** | **String** | The tenant language. | [optional] [example: en-US] [maxLength: 10] [nullable] |
-| **timeZone** | **String** | The tenant time zone. | [optional] [example: UTC] [maxLength: 50] [nullable] |
-| **trustedDomainsRaw** | **String** | The tenant trusted domains raw. | [optional] [example: tenant.exapmle.com, example.com] [maxLength: 1024] [nullable] |
-| **trustedDomainsEnabled** | [**TenantTrustedDomainsType**](#model-tenanttrusteddomainstype) | The type of the tenant trusted domains. | [optional] [enum: 0, 1, 2] |
-| **status** | [**TenantStatus**](#model-tenantstatus) | The tenant status. | [optional] [enum: 0, 1, 2, 3, 4, 5, 6] |
-| **statusChanged** | **Date** (date-time) | The date and time when the tenant status was changed. | [optional] [example: 2025-01-01T12:00:00Z] [nullable] |
-| **statusChangedHack** | **Date** (date-time) | The hacked date and time when the tenant status was changed. | [optional] [example: 2025-01-01T12:00:00Z] |
-| **creationDateTime** | **Date** (date-time) | The tenant creation date. | [optional] [example: 2025-01-01T12:00:00Z] |
-| **ownerId** | **UUID** (uuid) | The tenant owner ID. | [optional] [example: 00000000-0000-0000-0000-000000000000] [nullable] |
-| **paymentId** | **String** | The tenant payment ID. | [optional] [example: pay_1234567890] [maxLength: 38] [nullable] |
-| **industry** | [**TenantIndustry**](#model-tenantindustry) | The tenant industry. | [optional] [enum: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16] |
-| **lastModified** | **Date** (date-time) | The date and time when the tenant was last modified. | [optional] [example: 2025-02-01T08:30:00Z] |
-| **calls** | **Boolean** | Specifies if the calls are available for the current tenant or not. | [optional] [example: true] |
+| **id** | **Integer** (int32) | The tenant ID. | [optional] [example: `1`] |
+| **name** | **String** | The tenant name. | [optional] [example: `Tenant`] [maxLength: 255] [nullable] |
+| **alias** | **String** | The tenant alias. | [optional] [example: `tenant`] [maxLength: 100] [nullable] |
+| **mappedDomain** | **String** | Mapped domain | [optional] [example: `tenant.example.com`] [maxLength: 100] [nullable] |
+| **version** | **Integer** (int32) | The tenant version. | [optional] [example: `5`] |
+| **version\_Changed** | **Date** (date-time) | The Version_changed field. | [optional] [example: `2025-01-01T10:00:00Z`] [nullable] |
+| **versionChanged** | **Date** (date-time) | The date and time when the version was changed. | [optional] [example: `2025-01-01T10:00:00Z`] |
+| **language** | **String** | The tenant language. | [optional] [example: `en-US`] [maxLength: 10] [nullable] |
+| **timeZone** | **String** | The tenant time zone. | [optional] [example: `UTC`] [maxLength: 50] [nullable] |
+| **trustedDomainsRaw** | **String** | The tenant trusted domains raw. | [optional] [example: `tenant.exapmle.com, example.com`] [maxLength: 1024] [nullable] |
+| **trustedDomainsEnabled** | [**TenantTrustedDomainsType**](#model-tenanttrusteddomainstype) | The type of the tenant trusted domains. | [optional] [enum: `0`, `1`, `2`] |
+| **status** | [**TenantStatus**](#model-tenantstatus) | The tenant status. | [optional] [enum: `0`, `1`, `2`, `3`, `4`, `5`, `6`] |
+| **statusChanged** | **Date** (date-time) | The date and time when the tenant status was changed. | [optional] [example: `2025-01-01T12:00:00Z`] [nullable] |
+| **statusChangedHack** | **Date** (date-time) | The hacked date and time when the tenant status was changed. | [optional] [example: `2025-01-01T12:00:00Z`] |
+| **creationDateTime** | **Date** (date-time) | The tenant creation date. | [optional] [example: `2025-01-01T12:00:00Z`] |
+| **ownerId** | **UUID** (uuid) | The tenant owner ID. | [optional] [example: `00000000-0000-0000-0000-000000000000`] [nullable] |
+| **paymentId** | **String** | The tenant payment ID. | [optional] [example: `pay_1234567890`] [maxLength: 38] [nullable] |
+| **industry** | [**TenantIndustry**](#model-tenantindustry) | The tenant industry. | [optional] [enum: `0`, `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `13`, `14`, `15`, `16`] |
+| **lastModified** | **Date** (date-time) | The date and time when the tenant was last modified. | [optional] [example: `2025-02-01T08:30:00Z`] |
+| **calls** | **Boolean** | Specifies if the calls are available for the current tenant or not. | [optional] [example: `true`] |
 | **partner** | [**DbTenantPartner**](#model-dbtenantpartner) | The database tenant partner parameters. | [optional] |
 
 
@@ -11752,10 +11752,10 @@ The database tenant partner parameters.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **tenantId** | **Integer** (int32) | The tenant ID. | [optional] [example: 1] |
-| **partnerId** | **String** | The partner ID. | [optional] [example: partner_123] [maxLength: 36] [nullable] |
-| **affiliateId** | **String** | The affiliate ID. | [optional] [example: artifact_123] [maxLength: 50] [nullable] |
-| **campaign** | **String** | The tenant partner campaign. | [optional] [example: campaigh] [maxLength: 50] [nullable] |
+| **tenantId** | **Integer** (int32) | The tenant ID. | [optional] [example: `1`] |
+| **partnerId** | **String** | The partner ID. | [optional] [example: `partner_123`] [maxLength: 36] [nullable] |
+| **affiliateId** | **String** | The affiliate ID. | [optional] [example: `artifact_123`] [maxLength: 50] [nullable] |
+| **campaign** | **String** | The tenant partner campaign. | [optional] [example: `campaigh`] [maxLength: 50] [nullable] |
 
 
 ### Model DeepLinkConfigurationRequestsDto
@@ -11771,9 +11771,9 @@ What a mobile client needs to hand a portal link to the installed application in
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **androidPackageName** | **String** | The package name to look for on Android, and to build a store link from when the application is missing.  All three fields are empty strings on an installation that ships no mobile application, which is the  signal to keep opening links in the browser. | [required] [example: com.example.docspace] [nullable] |
-| **url** | **String** | The address the client redirects a portal link through so that the application can claim it. It is the  installation's own deep-link host, not a link to any particular document. | [required] [example: https://example.com/deeplink] [nullable] |
-| **iosPackageId** | **String** | The bundle identifier to look for on iOS, used the same way as `androidPackageName`. | [required] [example: com.example.docspace] [nullable] |
+| **androidPackageName** | **String** | The package name to look for on Android, and to build a store link from when the application is missing.  All three fields are empty strings on an installation that ships no mobile application, which is the  signal to keep opening links in the browser. | [required] [example: `com.example.docspace`] [nullable] |
+| **url** | **String** | The address the client redirects a portal link through so that the application can claim it. It is the  installation's own deep-link host, not a link to any particular document. | [required] [example: `https://example.com/deeplink`] [nullable] |
+| **iosPackageId** | **String** | The bundle identifier to look for on iOS, used the same way as `androidPackageName`. | [required] [example: `com.example.docspace`] [nullable] |
 
 
 ### Model DeepLinkHandlingMode
@@ -11790,7 +11790,7 @@ The section the calling user's account opens into after signing in.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **defaultFolderType** | [**FolderType**](#model-foldertype) | The section to land on. Only the folder types the client offers as a landing page are accepted - the rooms  list, My documents, shared with me, favorites, recent, forms and the AI agents folder - and anything else is  refused. My documents is refused for a guest as well, since a guest has no personal storage. | [required] [enum: 0, 1, 2, 3, 5, 6, 8, 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36] |
+| **defaultFolderType** | [**FolderType**](#model-foldertype) | The section to land on. Only the folder types the client offers as a landing page are accepted - the rooms  list, My documents, shared with me, favorites, recent, forms and the AI agents folder - and anything else is  refused. My documents is refused for a guest as well, since a guest has no personal storage. | [required] [enum: `0`, `1`, `2`, `3`, `5`, `6`, `8`, `10`, `11`, `12`, `13`, `14`, `15`, `16`, `19`, `20`, `21`, `22`, `25`, `26`, `27`, `28`, `29`, `30`, `31`, `32`, `33`, `34`, `35`, `36`] |
 
 
 ### Model DiscountCategory
@@ -11798,10 +11798,10 @@ Represents a discount category applied to the price.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **id** | **Integer** (int32) | The discount category unique identifier. | [optional] [example: 12345] |
-| **valueDiscount** | **Double** (double) | The discount value. | [optional] [example: 10.5] |
-| **description** | **String** | The discount category description. | [optional] [example: Annual subscription discount] [nullable] |
-| **created** | **Date** (date-time) | The date and time when the discount category was created. | [optional] [example: 2024-01-15T10:30:00Z] |
+| **id** | **Integer** (int32) | The discount category unique identifier. | [optional] [example: `12345`] |
+| **valueDiscount** | **Double** (double) | The discount value. | [optional] [example: `10.5`] |
+| **description** | **String** | The discount category description. | [optional] [example: `Annual subscription discount`] [nullable] |
+| **created** | **Date** (date-time) | The date and time when the discount category was created. | [optional] [example: `2024-01-15T10:30:00Z`] |
 
 
 ### Model DistributedTaskStatus
@@ -11820,8 +11820,8 @@ The custom domain the portal answers on, and whether that mapping is in force.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **dnsName** | **String** | The domain the portal is to be reachable under, as a bare hostname without a scheme. It must not collide with  the reserved base domain of the installation, and a name that fails validation is refused without disturbing  the mapping in force. It is read only while `enable` is true. | [optional] [example: example.com] [nullable] |
-| **enable** | **Boolean** | Whether the custom domain is put in force. Setting it false clears the mapping and ignores `dnsName`; setting  it true also stops the previous domain from answering and rewrites any Content Security Policy entry that  named it. | [optional] [example: true] |
+| **dnsName** | **String** | The domain the portal is to be reachable under, as a bare hostname without a scheme. It must not collide with  the reserved base domain of the installation, and a name that fails validation is refused without disturbing  the mapping in force. It is read only while `enable` is true. | [optional] [example: `example.com`] [nullable] |
+| **enable** | **Boolean** | Whether the custom domain is put in force. Setting it false clears the mapping and ignores `dnsName`; setting  it true also stops the previous domain from answering and rewrites any Content Security Policy entry that  named it. | [optional] [example: `true`] |
 
 
 ### Model DocsCloudConfig
@@ -11829,7 +11829,7 @@ Represents the configuration of a DocsCloud tenant.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **tenantName** | **String** | The tenant name. | [optional] [example: My Portal] [minLength: 0] [maxLength: 255] [nullable] |
+| **tenantName** | **String** | The tenant name. | [optional] [example: `My Portal`] [minLength: 0] [maxLength: 255] [nullable] |
 | **security** | [**DocsCloudSecurityConfig**](#model-docscloudsecurityconfig) | The security configuration. | [optional] |
 | **server** | [**DocsCloudServerConfig**](#model-docscloudserverconfig) | The server configuration. | [optional] |
 | **wopi** | [**DocsCloudWopiConfig**](#model-docscloudwopiconfig) | The WOPI configuration. | [optional] |
@@ -11853,7 +11853,7 @@ The request parameters for switching the DocsCloud subscription to DocsCloudDevP
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **quantity** | **Integer** (int32) | The number of users to subscribe to DocsCloudDevPack for. It must be at least the number of users of  the currently purchased DocsCloud subscription, and at least the DocsCloudDevPack minimum configured  for the installation, which is 10 users by default; a smaller value is rejected with 400. | [optional] [example: 10] [min: 1] [max: 2147483647] |
+| **quantity** | **Integer** (int32) | The number of users to subscribe to DocsCloudDevPack for. It must be at least the number of users of  the currently purchased DocsCloud subscription, and at least the DocsCloudDevPack minimum configured  for the installation, which is 10 users by default; a smaller value is rejected with 400. | [optional] [example: `10`] [min: 1] [max: 2147483647] |
 
 
 ### Model DocsCloudIpFilterConfig
@@ -11861,7 +11861,7 @@ Represents the IP filter configuration of a DocsCloud tenant.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **rules** | [**List**](#model-docscloudipfilterrule) | The IP filter rules. | [optional] [example: [\{address=127.0.0.1, allowed=true\}]] [nullable] |
+| **rules** | [**List**](#model-docscloudipfilterrule) | The IP filter rules. | [optional] [example: `[{address=127.0.0.1, allowed=true}]`] [nullable] |
 
 
 ### Model DocsCloudIpFilterRule
@@ -11869,8 +11869,8 @@ Represents the IP filter rule of a DocsCloud tenant.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **address** | **String** | The IP address. | [optional] [example: 127.0.0.1] [minLength: 0] [maxLength: 255] [nullable] |
-| **allowed** | **Boolean** | Whether the IP address is allowed. | [optional] [example: true] |
+| **address** | **String** | The IP address. | [optional] [example: `127.0.0.1`] [minLength: 0] [maxLength: 255] [nullable] |
+| **allowed** | **Boolean** | Whether the IP address is allowed. | [optional] [example: `true`] |
 
 
 ### Model DocsCloudLicenseInfo
@@ -11878,9 +11878,9 @@ Represents the license information of a DocsCloud tenant.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **valid** | **Date** (date-time) | The date and time until which the license is valid. | [optional] [example: 2024-01-15T10:30:00Z] |
-| **trial** | **Boolean** | Whether the license is a trial. | [optional] [example: false] |
-| **buildDate** | **Date** (date-time) | The license build date. | [optional] [example: 2024-01-15T10:30:00Z] |
+| **valid** | **Date** (date-time) | The date and time until which the license is valid. | [optional] [example: `2024-01-15T10:30:00Z`] |
+| **trial** | **Boolean** | Whether the license is a trial. | [optional] [example: `false`] |
+| **buildDate** | **Date** (date-time) | The license build date. | [optional] [example: `2024-01-15T10:30:00Z`] |
 
 
 ### Model DocsCloudPayment
@@ -11888,14 +11888,14 @@ Represents the payment information of a DocsCloud tenant.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **cartId** | **String** | The cart ID. | [optional] [example: CartId] [nullable] |
-| **productId** | **Integer** (int32) | The product ID. | [optional] [example: 12345] |
-| **status** | **Integer** (int32) | The payment status. | [optional] [example: 1] |
-| **intervalUnit** | **Integer** (int32) | The interval unit. | [optional] [example: 1] |
-| **isYear** | **Boolean** | Whether the payment interval is yearly. | [optional] [example: false] |
-| **isPrepaid** | **Boolean** | Whether the payment is prepaid. | [optional] [example: false] |
-| **quantity** | **Integer** (int32) | The quantity. | [optional] [example: 10] |
-| **currency** | **String** | The three-character ISO 4217 currency symbol of the payment. | [optional] [example: USD] [nullable] |
+| **cartId** | **String** | The cart ID. | [optional] [example: `CartId`] [nullable] |
+| **productId** | **Integer** (int32) | The product ID. | [optional] [example: `12345`] |
+| **status** | **Integer** (int32) | The payment status. | [optional] [example: `1`] |
+| **intervalUnit** | **Integer** (int32) | The interval unit. | [optional] [example: `1`] |
+| **isYear** | **Boolean** | Whether the payment interval is yearly. | [optional] [example: `false`] |
+| **isPrepaid** | **Boolean** | Whether the payment is prepaid. | [optional] [example: `false`] |
+| **quantity** | **Integer** (int32) | The quantity. | [optional] [example: `10`] |
+| **currency** | **String** | The three-character ISO 4217 currency symbol of the payment. | [optional] [example: `USD`] [nullable] |
 
 
 ### Model DocsCloudQuota
@@ -11903,8 +11903,8 @@ Represents the current user quota of a DocsCloud tenant.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **users** | [**List**](#model-docscloudquotauser) | The editor users. | [optional] [example: [\{userid=00000000-0000-0000-0000-000000000000, expire=2024-01-15T10:30:00Z\}]] [nullable] |
-| **usersView** | [**List**](#model-docscloudquotauser) | The viewer users. | [optional] [example: [\{userid=00000000-0000-0000-0000-000000000000, expire=2024-01-15T10:30:00Z\}]] [nullable] |
+| **users** | [**List**](#model-docscloudquotauser) | The editor users. | [optional] [example: `[{userid=00000000-0000-0000-0000-000000000000, expire=2024-01-15T10:30:00Z}]`] [nullable] |
+| **usersView** | [**List**](#model-docscloudquotauser) | The viewer users. | [optional] [example: `[{userid=00000000-0000-0000-0000-000000000000, expire=2024-01-15T10:30:00Z}]`] [nullable] |
 
 
 ### Model DocsCloudQuotaUser
@@ -11912,8 +11912,8 @@ Represents a single user entry of a DocsCloud quota.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **userId** | **String** | The user ID. | [optional] [example: 00000000-0000-0000-0000-000000000000] [nullable] |
-| **expire** | **String** | The expiration date of the user. | [optional] [example: 2024-01-15T10:30:00Z] [nullable] |
+| **userId** | **String** | The user ID. | [optional] [example: `00000000-0000-0000-0000-000000000000`] [nullable] |
+| **expire** | **String** | The expiration date of the user. | [optional] [example: `2024-01-15T10:30:00Z`] [nullable] |
 
 
 ### Model DocsCloudQuotaWrapper
@@ -11933,8 +11933,8 @@ Represents the security configuration of a DocsCloud tenant.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **secret** | **String** | The security secret. | [optional] [example: abc123] [minLength: 0] [maxLength: 255] [nullable] |
-| **header** | **String** | The security header name. | [optional] [example: Authorization] [minLength: 0] [maxLength: 255] [nullable] |
+| **secret** | **String** | The security secret. | [optional] [example: `abc123`] [minLength: 0] [maxLength: 255] [nullable] |
+| **header** | **String** | The security header name. | [optional] [example: `Authorization`] [minLength: 0] [maxLength: 255] [nullable] |
 
 
 ### Model DocsCloudServerConfig
@@ -11942,8 +11942,8 @@ Represents the server configuration of a DocsCloud tenant.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **isAnonymousSupport** | **Boolean** | Whether anonymous access is supported. | [optional] [example: false] |
-| **fileSizeLimit** | **Long** (int64) | The maximum file size in bytes. | [optional] [example: 104857600] [min: 0] [max: 209715200] |
+| **isAnonymousSupport** | **Boolean** | Whether anonymous access is supported. | [optional] [example: `false`] |
+| **fileSizeLimit** | **Long** (int64) | The maximum file size in bytes. | [optional] [example: `104857600`] [min: 0] [max: 209715200] |
 
 
 ### Model DocsCloudServerInfo
@@ -11951,9 +11951,9 @@ Represents the DocsCloud server information.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **version** | **String** | The server version. | [optional] [example: 8.0.0] [nullable] |
-| **packageType** | **String** | The server package type (Open Source, Enterprise Edition or Developer Edition). | [optional] [example: Enterprise Edition] [nullable] |
-| **date** | **Date** (date-time) | The server build date. | [optional] [example: 2024-01-15T10:30:00Z] |
+| **version** | **String** | The server version. | [optional] [example: `8.0.0`] [nullable] |
+| **packageType** | **String** | The server package type (Open Source, Enterprise Edition or Developer Edition). | [optional] [example: `Enterprise Edition`] [nullable] |
+| **date** | **Date** (date-time) | The server build date. | [optional] [example: `2024-01-15T10:30:00Z`] |
 
 
 ### Model DocsCloudStats
@@ -11961,7 +11961,7 @@ Represents the usage statistics of a DocsCloud tenant for the current period.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **periodDay** | **Integer** (int32) | The length of the statistics period in days. | [optional] [example: 30] |
+| **periodDay** | **Integer** (int32) | The length of the statistics period in days. | [optional] [example: `30`] |
 | **editor** | [**DocsCloudUserStats**](#model-docsclouduserstats) | The statistics for editor users. | [optional] |
 | **viewer** | [**DocsCloudUserStats**](#model-docsclouduserstats) | The statistics for viewer users. | [optional] |
 
@@ -11971,16 +11971,16 @@ Represents a DocsCloud tenant of a portal.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **dedicatedResourceExId** | **Integer** (int32) | The external ID of the dedicated resource the tenant is hosted on. | [optional] [example: 12345] |
-| **alias** | **String** | The tenant alias. | [optional] [example: my-portal] [nullable] |
-| **name** | **String** | The tenant name. | [optional] [example: My Portal] [nullable] |
-| **modifiedDate** | **Date** (date-time) | The date and time when the tenant was last modified. | [optional] [example: 2024-01-15T10:30:00Z] |
-| **customerId** | **String** | The customer ID. | [optional] [example: CustomerId] [nullable] |
-| **customerName** | **String** | The customer name. | [optional] [example: CustomerName] [nullable] |
-| **endDate** | **Date** (date-time) | The date and time when the tenant subscription ends. | [optional] [example: 2024-01-15T10:30:00Z] |
-| **resourceType** | **Integer** (int32) | The resource type. | [optional] [example: 1] |
-| **isActive** | **Boolean** | Whether the tenant is active (the end date is in the future). | [optional] [example: false] |
-| **address** | **String** | The tenant address. | [optional] [example: https://my-portal.onlyoffice.com] [nullable] |
+| **dedicatedResourceExId** | **Integer** (int32) | The external ID of the dedicated resource the tenant is hosted on. | [optional] [example: `12345`] |
+| **alias** | **String** | The tenant alias. | [optional] [example: `my-portal`] [nullable] |
+| **name** | **String** | The tenant name. | [optional] [example: `My Portal`] [nullable] |
+| **modifiedDate** | **Date** (date-time) | The date and time when the tenant was last modified. | [optional] [example: `2024-01-15T10:30:00Z`] |
+| **customerId** | **String** | The customer ID. | [optional] [example: `CustomerId`] [nullable] |
+| **customerName** | **String** | The customer name. | [optional] [example: `CustomerName`] [nullable] |
+| **endDate** | **Date** (date-time) | The date and time when the tenant subscription ends. | [optional] [example: `2024-01-15T10:30:00Z`] |
+| **resourceType** | **Integer** (int32) | The resource type. | [optional] [example: `1`] |
+| **isActive** | **Boolean** | Whether the tenant is active (the end date is in the future). | [optional] [example: `false`] |
+| **address** | **String** | The tenant address. | [optional] [example: `https://my-portal.onlyoffice.com`] [nullable] |
 | **payment** | [**DocsCloudPayment**](#model-docscloudpayment) | The tenant payment information. | [optional] |
 
 
@@ -12024,8 +12024,8 @@ Represents the usage statistics of a DocsCloud tenant.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **since** | **Date** (date-time) | The date and time the usage statistics are counted from. | [optional] [example: 2024-01-15T10:30:00Z] |
-| **activeCount** | **Integer** (int32) | The number of active users. | [optional] [example: 10] |
+| **since** | **Date** (date-time) | The date and time the usage statistics are counted from. | [optional] [example: `2024-01-15T10:30:00Z`] |
+| **activeCount** | **Integer** (int32) | The number of active users. | [optional] [example: `10`] |
 
 
 ### Model DocsCloudUsageWrapper
@@ -12045,11 +12045,11 @@ Represents the usage statistics of a single DocsCloud user category (editor or v
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **active** | **Integer** (int32) | The number of active users. | [optional] [example: 10] |
-| **internal** | **Integer** (int32) | The number of internal users. | [optional] [example: 8] |
-| **external** | **Integer** (int32) | The number of external users. | [optional] [example: 2] |
-| **remaining** | **Integer** (int32) | The number of remaining users before the limit is reached. | [optional] [example: 90] |
-| **criticalRemaining** | **Boolean** | Whether the number of remaining users is critically low. | [optional] [example: false] |
+| **active** | **Integer** (int32) | The number of active users. | [optional] [example: `10`] |
+| **internal** | **Integer** (int32) | The number of internal users. | [optional] [example: `8`] |
+| **external** | **Integer** (int32) | The number of external users. | [optional] [example: `2`] |
+| **remaining** | **Integer** (int32) | The number of remaining users before the limit is reached. | [optional] [example: `90`] |
+| **criticalRemaining** | **Boolean** | Whether the number of remaining users is critically low. | [optional] [example: `false`] |
 
 
 ### Model DocsCloudUsersLimit
@@ -12057,8 +12057,8 @@ Represents the user limits of a DocsCloud license.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **edit** | **Integer** (int32) | The maximum number of users who can edit documents. | [optional] [example: 100] |
-| **view** | **Integer** (int32) | The maximum number of users who can view documents. | [optional] [example: 100] |
+| **edit** | **Integer** (int32) | The maximum number of users who can edit documents. | [optional] [example: `100`] |
+| **view** | **Integer** (int32) | The maximum number of users who can view documents. | [optional] [example: `100`] |
 
 
 ### Model DocsCloudWopiConfig
@@ -12066,7 +12066,7 @@ Represents the WOPI configuration of a DocsCloud tenant.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **enable** | **Boolean** | Whether WOPI is enabled. | [optional] [example: false] |
+| **enable** | **Boolean** | Whether WOPI is enabled. | [optional] [example: `false`] |
 
 
 ### Model DocumentBuilderTaskDto
@@ -12074,14 +12074,14 @@ The state of a background document building task: how far it has got, how it end
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **id** | **String** | The identifier of the task. It is derived from the portal, the account and the kind of report, so starting the  same report again while it runs returns this same value, which is how a resumed poll is told from a newly  queued build. | [required] [example: DocumentBuilderTask_1_c2b0e3a4-1f6c-4c2e-9c4f-3a5d8b7e1c22] [nullable] |
-| **error** | **String** | The message of the failure that stopped the build. It is filled in only for a task that ended in the failed  state, and stays empty while the task runs and after it succeeds. | [required] [example: The document service is unavailable] [nullable] |
-| **percentage** | **Integer** (int32) | How far the build has got, from 0 to 100. It advances in a few coarse steps rather than smoothly, so it is a  progress hint and not a measure of the time left; wait on the completion flag instead. | [required] [example: 60] |
-| **isCompleted** | **Boolean** | True once the task has stopped for any reason, a failure and a cancellation included. It is the field to poll  on, and the status tells those outcomes apart. | [required] [example: false] |
-| **status** | [**DistributedTaskStatus**](#model-distributedtaskstatus) | How the task ended, or that it has not started yet. Read it together with the completion flag: a stopped task  can be a finished build, a cancelled one or a failure, and only this field separates them. | [required] [enum: 0, 1, 2, 3, 4] |
+| **id** | **String** | The identifier of the task. It is derived from the portal, the account and the kind of report, so starting the  same report again while it runs returns this same value, which is how a resumed poll is told from a newly  queued build. | [required] [example: `DocumentBuilderTask_1_c2b0e3a4-1f6c-4c2e-9c4f-3a5d8b7e1c22`] [nullable] |
+| **error** | **String** | The message of the failure that stopped the build. It is filled in only for a task that ended in the failed  state, and stays empty while the task runs and after it succeeds. | [required] [example: `The document service is unavailable`] [nullable] |
+| **percentage** | **Integer** (int32) | How far the build has got, from 0 to 100. It advances in a few coarse steps rather than smoothly, so it is a  progress hint and not a measure of the time left; wait on the completion flag instead. | [required] [example: `60`] |
+| **isCompleted** | **Boolean** | True once the task has stopped for any reason, a failure and a cancellation included. It is the field to poll  on, and the status tells those outcomes apart. | [required] [example: `false`] |
+| **status** | [**DistributedTaskStatus**](#model-distributedtaskstatus) | How the task ended, or that it has not started yet. Read it together with the completion flag: a stopped task  can be a finished build, a cancelled one or a failure, and only this field separates them. | [required] [enum: `0`, `1`, `2`, `3`, `4`] |
 | **resultFileId** | **oas_any_type_not_mapped** |  | [required] [nullable] |
-| **resultFileName** | **String** | The name the produced file was saved with, extension included. The name is built from the subject of the  report and is not unique: a second build adds another file instead of replacing the first. | [required] [example: usage_report.xlsx] [nullable] |
-| **resultFileUrl** | **String** | The address of the produced file in the document editor, relative to the portal root, so prefix it with the  portal address to open it. It stays empty until the build succeeds. | [required] [example: /doceditor?fileid=1234] [nullable] |
+| **resultFileName** | **String** | The name the produced file was saved with, extension included. The name is built from the subject of the  report and is not unique: a second build adds another file instead of replacing the first. | [required] [example: `usage_report.xlsx`] [nullable] |
+| **resultFileUrl** | **String** | The address of the produced file in the document editor, relative to the portal root, so prefix it with the  portal address to open it. It stays empty until the build succeeds. | [required] [example: `/doceditor?fileid=1234`] [nullable] |
 
 
 ### Model DocumentBuilderTaskWrapper
@@ -12125,8 +12125,8 @@ The email activation settings.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **show** | **Boolean** | Specifies whether the email activation settings are shown or hidden. | [optional] [example: true] |
-| **lastModified** | **Date** (date-time) | The timestamp indicating when the settings were last modified. | [optional] [example: 1990-01-01T00:00:00Z] |
+| **show** | **Boolean** | Specifies whether the email activation settings are shown or hidden. | [optional] [example: `true`] |
+| **lastModified** | **Date** (date-time) | The timestamp indicating when the settings were last modified. | [optional] [example: `1990-01-01T00:00:00Z`] |
 
 
 ### Model EmailActivationSettingsWrapper
@@ -12146,14 +12146,14 @@ The confirmation email parameters.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **key** | **String** | The email validation key. | [optional] [example: abcdef123456] [nullable] |
-| **emplType** | [**EmployeeType**](#model-employeetype) | The user type. | [optional] [enum: All, RoomAdmin, Guest, DocSpaceAdmin, User] |
-| **email** | **String** (email) | The email address. | [optional] [example: user@example.com] [nullable] |
-| **encEmail** | **String** | The encrypted email address. | [optional] [example: user%40example.com] [nullable] |
-| **uiD** | **UUID** (uuid) | The user ID. | [optional] [example: 00000000-0000-0000-0000-000000000000] [nullable] |
-| **type** | [**ConfirmType**](#model-confirmtype) | The confirmation email type. | [optional] [enum: EmpInvite, LinkInvite, PortalSuspend, PortalContinue, PortalRemove, DnsChange, PortalOwnerChange, Activation, EmailChange, EmailActivation, PasswordChange, ProfileRemove, PhoneActivation, PhoneAuth, Auth, TfaActivation, TfaAuth, Wizard, GuestShareLink] |
-| **first** | **String** | Specifies whether it is the first time account access or not. | [optional] [example: false] [nullable] |
-| **roomId** | **String** | The room ID. | [optional] [example: 1] [nullable] |
+| **key** | **String** | The email validation key. | [optional] [example: `abcdef123456`] [nullable] |
+| **emplType** | [**EmployeeType**](#model-employeetype) | The user type. | [optional] [enum: `All`, `RoomAdmin`, `Guest`, `DocSpaceAdmin`, `User`] |
+| **email** | **String** (email) | The email address. | [optional] [example: `user@example.com`] [nullable] |
+| **encEmail** | **String** | The encrypted email address. | [optional] [example: `user%40example.com`] [nullable] |
+| **uiD** | **UUID** (uuid) | The user ID. | [optional] [example: `00000000-0000-0000-0000-000000000000`] [nullable] |
+| **type** | [**ConfirmType**](#model-confirmtype) | The confirmation email type. | [optional] [enum: `EmpInvite`, `LinkInvite`, `PortalSuspend`, `PortalContinue`, `PortalRemove`, `DnsChange`, `PortalOwnerChange`, `Activation`, `EmailChange`, `EmailActivation`, `PasswordChange`, `ProfileRemove`, `PhoneActivation`, `PhoneAuth`, `Auth`, `TfaActivation`, `TfaAuth`, `Wizard`, `GuestShareLink`] |
+| **first** | **String** | Specifies whether it is the first time account access or not. | [optional] [example: `false`] [nullable] |
+| **roomId** | **String** | The room ID. | [optional] [example: `1`] [nullable] |
 
 
 ### Model EmployeeActivationStatus
@@ -12183,16 +12183,16 @@ The user parameters.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **id** | **UUID** (uuid) | The user ID. | [optional] [example: 00000000-0000-0000-0000-000000000000] |
-| **displayName** | **String** | The HTML-encoded user's display name formatted according to the default format for the current culture. | [optional] [example: Mike Zanyatski] [nullable] |
-| **avatar** | **String** | The user avatar. | [optional] [example: https://example.com/avatar.jpg] [nullable] |
-| **avatarOriginal** | **String** | The user original size avatar. | [optional] [example: https://example.com/avatar_original.jpg] [nullable] |
-| **avatarMax** | **String** | The user maximum size avatar. | [optional] [example: https://example.com/avatar_max.jpg] [nullable] |
-| **avatarMedium** | **String** | The user medium size avatar. | [optional] [example: https://example.com/avatar_medium.jpg] [nullable] |
-| **avatarSmall** | **String** | The user small size avatar. | [optional] [example: https://example.com/avatar_small.jpg] [nullable] |
-| **profileUrl** | **String** | The user profile URL. | [optional] [example: https://example.com/profile/user123] [nullable] |
-| **hasAvatar** | **Boolean** | Specifies if the user has an avatar or not. | [optional] [example: true] |
-| **isAnonim** | **Boolean** | Specifies if the user is anonymous or not. | [optional] [example: false] |
+| **id** | **UUID** (uuid) | The user ID. | [optional] [example: `00000000-0000-0000-0000-000000000000`] |
+| **displayName** | **String** | The HTML-encoded user's display name formatted according to the default format for the current culture. | [optional] [example: `Mike Zanyatski`] [nullable] |
+| **avatar** | **String** | The user avatar. | [optional] [example: `https://example.com/avatar.jpg`] [nullable] |
+| **avatarOriginal** | **String** | The user original size avatar. | [optional] [example: `https://example.com/avatar_original.jpg`] [nullable] |
+| **avatarMax** | **String** | The user maximum size avatar. | [optional] [example: `https://example.com/avatar_max.jpg`] [nullable] |
+| **avatarMedium** | **String** | The user medium size avatar. | [optional] [example: `https://example.com/avatar_medium.jpg`] [nullable] |
+| **avatarSmall** | **String** | The user small size avatar. | [optional] [example: `https://example.com/avatar_small.jpg`] [nullable] |
+| **profileUrl** | **String** | The user profile URL. | [optional] [example: `https://example.com/profile/user123`] [nullable] |
+| **hasAvatar** | **Boolean** | Specifies if the user has an avatar or not. | [optional] [example: `true`] |
+| **isAnonim** | **Boolean** | Specifies if the user is anonymous or not. | [optional] [example: `false`] |
 
 
 ### Model EmployeeStatus
@@ -12234,8 +12234,8 @@ One portal module the calling user may open.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **id** | **String** | The module's product class name, HTML-escaped. It is a display-oriented identifier and not the GUID the  access-settings operations work with, so it must not be passed to `GET api/2.0/settings/security/{id}`. | [optional] [example: ASC.Web.Files.Configuration.FilesSpaceUsageStatManager] [nullable] |
-| **title** | **String** | The module name in the portal language, HTML-escaped and ready to be rendered as text. | [optional] [example: Documents] [nullable] |
+| **id** | **String** | The module's product class name, HTML-escaped. It is a display-oriented identifier and not the GUID the  access-settings operations work with, so it must not be passed to `GET api/2.0/settings/security/{id}`. | [optional] [example: `ASC.Web.Files.Configuration.FilesSpaceUsageStatManager`] [nullable] |
+| **title** | **String** | The module name in the portal language, HTML-escaped and ready to be rendered as text. | [optional] [example: `Documents`] [nullable] |
 
 
 ### Model EncryprtionStatus
@@ -12253,9 +12253,9 @@ The encryption settings.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **password** | **String** | The encryption password. | [optional] [example: password] [nullable] |
-| **status** | [**EncryprtionStatus**](#model-encryprtionstatus) | The encryption status. | [optional] [enum: 0, 1, 2, 3] |
-| **notifyUsers** | **Boolean** | Specifies if the users will be notified about the encryption operation or not. | [optional] [example: true] |
+| **password** | **String** | The encryption password. | [optional] [example: `password`] [nullable] |
+| **status** | [**EncryprtionStatus**](#model-encryprtionstatus) | The encryption status. | [optional] [enum: `0`, `1`, `2`, `3`] |
+| **notifyUsers** | **Boolean** | Specifies if the users will be notified about the encryption operation or not. | [optional] [example: `true`] |
 
 
 ### Model EncryptionSettingsWrapper
@@ -12310,15 +12310,15 @@ The connection parameters of an external database.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **databaseType** | **String** | The engine of the external database. | [optional] [example: mysql] [nullable] |
-| **databaseTypeEnum** | [**ExternalDatabaseType**](#model-externaldatabasetype) | The engine of an external database. | [optional] [enum: 0, 1] |
-| **dbHost** | **String** | The host name or the IP address of the database server. | [optional] [example: localhost] [nullable] |
-| **dbPort** | **Integer** (int32) | The port the database server listens on. | [optional] [example: 3306] |
-| **dbName** | **String** | The name of the database to connect to. | [optional] [example: docspace] [nullable] |
-| **dbUser** | **String** | The user name to connect with. | [optional] [example: root] [nullable] |
-| **dbPassword** | **String** | The password to connect with. | [optional] [example: my-secret-password] [nullable] |
-| **dbSsl** | **Boolean** | Specifies whether the connection to the database is secured with SSL. | [optional] [example: false] |
-| **sqliteFilePath** | **String** | The path to the database file, used by the SQLite engine only. | [optional] [example: /var/lib/docspace/external.db] [nullable] |
+| **databaseType** | **String** | The engine of the external database. | [optional] [example: `mysql`] [nullable] |
+| **databaseTypeEnum** | [**ExternalDatabaseType**](#model-externaldatabasetype) | The engine of an external database. | [optional] [enum: `0`, `1`] |
+| **dbHost** | **String** | The host name or the IP address of the database server. | [optional] [example: `localhost`] [nullable] |
+| **dbPort** | **Integer** (int32) | The port the database server listens on. | [optional] [example: `3306`] |
+| **dbName** | **String** | The name of the database to connect to. | [optional] [example: `docspace`] [nullable] |
+| **dbUser** | **String** | The user name to connect with. | [optional] [example: `root`] [nullable] |
+| **dbPassword** | **String** | The password to connect with. | [optional] [example: `my-secret-password`] [nullable] |
+| **dbSsl** | **Boolean** | Specifies whether the connection to the database is secured with SSL. | [optional] [example: `false`] |
+| **sqliteFilePath** | **String** | The path to the database file, used by the SQLite engine only. | [optional] [example: `/var/lib/docspace/external.db`] [nullable] |
 
 
 ### Model ExternalDatabaseType
@@ -12335,7 +12335,7 @@ How much of one quota feature the portal has already consumed.
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **value** | **oas_any_type_not_mapped** |  | [required] [nullable] |
-| **title** | **String** | The same figure as a sentence in the portal language, ready to print. It is empty when this build ships no  wording for the feature. | [optional] [example: 50 GB used] [nullable] |
+| **title** | **String** | The same figure as a sentence in the portal language, ready to print. It is empty when this build ships no  wording for the feature. | [optional] [example: `50 GB used`] [nullable] |
 
 
 ### Model FieldError
@@ -12343,9 +12343,9 @@ Field specific validation error
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **field** | **String** | The name of the field that failed validation | [optional] [example: policy_url] |
-| **code** | **String** | Error code for localization purposes | [optional] [example: InvalidPolicyUrl] |
-| **message** | **String** | Human readable error message | [optional] [example: policy url is expected to be passed as url] |
+| **field** | **String** | The name of the field that failed validation | [optional] [example: `policy_url`] |
+| **code** | **String** | Error code for localization purposes | [optional] [example: `InvalidPolicyUrl`] |
+| **message** | **String** | Human readable error message | [optional] [example: `policy url is expected to be passed as url`] |
 
 
 ### Model FinishDto
@@ -12353,7 +12353,7 @@ Whether the finished import mails the imported people their activation links bef
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **isSendWelcomeEmail** | **Boolean** | Whether every imported account that has not been activated yet is mailed its activation link. Setting it  requires the finished job to still be in the queue, so the import must not have been cleared first; the  letters go out again on each call, and already active accounts are skipped either way. Setting it false ends  the import quietly and leaves inviting those people for later. | [required] [example: true] |
+| **isSendWelcomeEmail** | **Boolean** | Whether every imported account that has not been activated yet is mailed its activation link. Setting it  requires the finished job to still be in the queue, so the import must not have been cleared first; the  letters go out again on each call, and already active accounts are skipped either way. Setting it false ends  the import quietly and leaves inviting those people for later. | [required] [example: `true`] |
 
 
 ### Model FireBaseUser
@@ -12361,12 +12361,12 @@ The Firebase user parameters.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **id** | **Integer** (int32) | The Firebase user ID. | [optional] [example: 1] |
-| **userId** | **UUID** (uuid) | The user ID. | [optional] [example: 00000000-0000-0000-0000-000000000000] |
-| **tenantId** | **Integer** (int32) | The tenant ID. | [optional] [example: 1] |
-| **firebaseDeviceToken** | **String** | The Firebase device token. | [optional] [example: token123] [maxLength: 255] [nullable] |
-| **application** | **String** | The Firebase application. | [optional] [example: web] [maxLength: 20] [nullable] |
-| **isSubscribed** | **Boolean** | Specifies if the user is subscribed to the push notifications or not. | [optional] [example: true] [nullable] |
+| **id** | **Integer** (int32) | The Firebase user ID. | [optional] [example: `1`] |
+| **userId** | **UUID** (uuid) | The user ID. | [optional] [example: `00000000-0000-0000-0000-000000000000`] |
+| **tenantId** | **Integer** (int32) | The tenant ID. | [optional] [example: `1`] |
+| **firebaseDeviceToken** | **String** | The Firebase device token. | [optional] [example: `token123`] [maxLength: 255] [nullable] |
+| **application** | **String** | The Firebase application. | [optional] [example: `web`] [maxLength: 20] [nullable] |
+| **isSubscribed** | **Boolean** | Specifies if the user is subscribed to the push notifications or not. | [optional] [example: `true`] [nullable] |
 | **tenant** | [**DbTenant**](#model-dbtenant) | The database tenant parameters. | [optional] |
 
 
@@ -12387,14 +12387,14 @@ The Firebase project a client initialises its SDK with to receive push notificat
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **apiKey** | **String** | The web API key of the project. Every field of this object is an empty string on an installation that  configures no Firebase project, and an empty `projectId` is the cheapest thing to test for before  initialising an SDK. None of these values is a secret - they are meant to be embedded in a client. | [required] [example: AIzaSyDxK9L3j4H8mN2pQ5rS6tU7vW8xY9zA1bC] [nullable] |
-| **authDomain** | **String** | The host the Firebase SDK performs its own authentication against. | [required] [example: myapp-12345.firebaseapp.com] [nullable] |
-| **projectId** | **String** | The identifier of the Firebase project itself, which ties all the other fields together. | [required] [example: myapp-12345] [nullable] |
-| **storageBucket** | **String** | The Cloud Storage bucket of the project. The portal does not store portal files there; it is part of the  SDK configuration. | [required] [example: myapp-12345.appspot.com] [nullable] |
-| **messagingSenderId** | **String** | The sender ID that push messages of this project arrive under, which a client checks an incoming message  against. | [required] [example: 123456789012] [nullable] |
-| **appId** | **String** | The identifier of the Firebase application registration this client is to use. | [required] [example: 1:123456789012:web:a1b2c3d4e5f6g7h8] [nullable] |
-| **measurementId** | **String** | The Google Analytics measurement ID of the project, empty when the project reports no analytics. | [required] [example: G-ABCD123456] [nullable] |
-| **databaseURL** | **String** | The Realtime Database endpoint of the project, empty when the project has no such database. | [required] [example: https://myapp-12345.firebaseio.com] [nullable] |
+| **apiKey** | **String** | The web API key of the project. Every field of this object is an empty string on an installation that  configures no Firebase project, and an empty `projectId` is the cheapest thing to test for before  initialising an SDK. None of these values is a secret - they are meant to be embedded in a client. | [required] [example: `AIzaSyDxK9L3j4H8mN2pQ5rS6tU7vW8xY9zA1bC`] [nullable] |
+| **authDomain** | **String** | The host the Firebase SDK performs its own authentication against. | [required] [example: `myapp-12345.firebaseapp.com`] [nullable] |
+| **projectId** | **String** | The identifier of the Firebase project itself, which ties all the other fields together. | [required] [example: `myapp-12345`] [nullable] |
+| **storageBucket** | **String** | The Cloud Storage bucket of the project. The portal does not store portal files there; it is part of the  SDK configuration. | [required] [example: `myapp-12345.appspot.com`] [nullable] |
+| **messagingSenderId** | **String** | The sender ID that push messages of this project arrive under, which a client checks an incoming message  against. | [required] [example: `123456789012`] [nullable] |
+| **appId** | **String** | The identifier of the Firebase application registration this client is to use. | [required] [example: `1:123456789012:web:a1b2c3d4e5f6g7h8`] [nullable] |
+| **measurementId** | **String** | The Google Analytics measurement ID of the project, empty when the project reports no analytics. | [required] [example: `G-ABCD123456`] [nullable] |
+| **databaseURL** | **String** | The Realtime Database endpoint of the project, empty when the project has no such database. | [required] [example: `https://myapp-12345.firebaseio.com`] [nullable] |
 
 
 ### Model FirebaseRequestsDto
@@ -12402,8 +12402,8 @@ Which mobile device receives the Documents push notifications, and whether it is
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **firebaseDeviceToken** | **String** | The registration token Firebase issued to the mobile client for this device, obtained on the device itself.  It is kept as an opaque string of up to 255 characters and is never verified here; it identifies the device  and is matched but never changed, and a token belonging to another member or another portal matches nothing. | [optional] [example: dGhpc2lzYXRva2Vu...] [nullable] |
-| **isSubscribed** | **Boolean** | Whether the device is to receive the room activity messages - an invitation, a role change, an archived room,  a new document. On a first registration it is stored as given; on a registration that already exists it is  ignored, because registering does not update, and the subscription is changed with  `PUT api/2.0/settings/push/docsubscribe` instead. | [optional] [example: true] |
+| **firebaseDeviceToken** | **String** | The registration token Firebase issued to the mobile client for this device, obtained on the device itself.  It is kept as an opaque string of up to 255 characters and is never verified here; it identifies the device  and is matched but never changed, and a token belonging to another member or another portal matches nothing. | [optional] [example: `dGhpc2lzYXRva2Vu...`] [nullable] |
+| **isSubscribed** | **Boolean** | Whether the device is to receive the room activity messages - an invitation, a role change, an archived room,  a new document. On a first registration it is stored as given; on a registration that already exists it is  ignored, because registering does not update, and the subscription is changed with  `PUT api/2.0/settings/push/docsubscribe` instead. | [optional] [example: `true`] |
 
 
 ### Model FolderType
@@ -12447,13 +12447,13 @@ Where the ready-made form templates are served from, for browsing them and for s
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **path** | **String** | The path under `domain` that the gallery's own listing API is reached at. It is joined to `domain` by the  client; the portal only relays the values from its configuration. | [required] [example: /forms/templates] [nullable] |
-| **domain** | **String** | The address of the gallery service, which is a service of the vendor rather than part of the portal. Every  field of this object is empty on an installation that configures no gallery, and a client should then not  offer the gallery at all. | [required] [example: https://forms.example.com] [nullable] |
-| **ext** | **String** | The file extension to ask the gallery for, which decides which rendition of a template is downloaded when  several are published. | [required] [example: .docxf] [nullable] |
-| **uploadPath** | **String** | The path used for submitting a form of one's own to the gallery, the counterpart of `path` for the upload  side. The four `upload` fields are empty when the installation allows browsing but not submitting. | [required] [example: /forms/upload] [nullable] |
-| **uploadDomain** | **String** | The address the submission is sent to, which may differ from `domain`. | [required] [example: https://upload.forms.example.com] [nullable] |
-| **uploadExt** | **String** | The file extension a submitted form has to carry. | [required] [example: .docxf] [nullable] |
-| **uploadDashboard** | **String** | The page a person is sent to in order to follow up on a submission, joined to `uploadDomain` the same way  as `uploadPath`. | [required] [example: /dashboard/forms] [nullable] |
+| **path** | **String** | The path under `domain` that the gallery's own listing API is reached at. It is joined to `domain` by the  client; the portal only relays the values from its configuration. | [required] [example: `/forms/templates`] [nullable] |
+| **domain** | **String** | The address of the gallery service, which is a service of the vendor rather than part of the portal. Every  field of this object is empty on an installation that configures no gallery, and a client should then not  offer the gallery at all. | [required] [example: `https://forms.example.com`] [nullable] |
+| **ext** | **String** | The file extension to ask the gallery for, which decides which rendition of a template is downloaded when  several are published. | [required] [example: `.docxf`] [nullable] |
+| **uploadPath** | **String** | The path used for submitting a form of one's own to the gallery, the counterpart of `path` for the upload  side. The four `upload` fields are empty when the installation allows browsing but not submitting. | [required] [example: `/forms/upload`] [nullable] |
+| **uploadDomain** | **String** | The address the submission is sent to, which may differ from `domain`. | [required] [example: `https://upload.forms.example.com`] [nullable] |
+| **uploadExt** | **String** | The file extension a submitted form has to carry. | [required] [example: `.docxf`] [nullable] |
+| **uploadDashboard** | **String** | The page a person is sent to in order to follow up on a submission, joined to `uploadDomain` the same way  as `uploadPath`. | [required] [example: `/dashboard/forms`] [nullable] |
 
 
 ### Model GreetingSettingsRequestsDto
@@ -12461,7 +12461,7 @@ The greeting caption the portal shows its users.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **title** | **String** | The caption to store, which is kept as the portal name. An empty value clears the greeting and returns the  portal to the built-in default caption. On a cloud portal with a free or trial plan the text is also matched  against the character rule configured for the installation and a text that breaks it is refused, while a paid  cloud plan and a self-hosted installation apply no such check. | [required] [example: Welcome to Our Portal] [minLength: 0] [maxLength: 255] [nullable] |
+| **title** | **String** | The caption to store, which is kept as the portal name. An empty value clears the greeting and returns the  portal to the built-in default caption. On a cloud portal with a free or trial plan the text is also matched  against the character rule configured for the installation and a text that breaks it is refused, while a paid  cloud plan and a self-hosted installation apply no such check. | [required] [example: `Welcome to Our Portal`] [minLength: 0] [maxLength: 255] [nullable] |
 
 
 ### Model GroupSummaryDto
@@ -12469,10 +12469,10 @@ The group summary parameters.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **id** | **UUID** (uuid) | The group ID. | [required] [example: 00000000-0000-0000-0000-000000000000] |
-| **name** | **String** | The group name. | [required] [example: Group Name] [nullable] |
-| **manager** | **String** | The group manager. | [optional] [example: Jake.Zazhitski] [nullable] |
-| **isSystem** | **Boolean** | Indicates whether the group is a system group. | [optional] [example: false] [nullable] |
+| **id** | **UUID** (uuid) | The group ID. | [required] [example: `00000000-0000-0000-0000-000000000000`] |
+| **name** | **String** | The group name. | [required] [example: `Group Name`] [nullable] |
+| **manager** | **String** | The group manager. | [optional] [example: `Jake.Zazhitski`] [nullable] |
+| **isSystem** | **Boolean** | Indicates whether the group is a system group. | [optional] [example: `false`] [nullable] |
 
 
 ### Model IPRestriction
@@ -12503,8 +12503,8 @@ The IP restriction settings.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **enable** | **Boolean** | Specifies if the IP restrictions are enabled or not. | [optional] [example: true] |
-| **lastModified** | **Date** (date-time) | The date and time when the settings were last modified. | [optional] [example: 2024-01-01T00:00:00Z] |
+| **enable** | **Boolean** | Specifies if the IP restrictions are enabled or not. | [optional] [example: `true`] |
+| **lastModified** | **Date** (date-time) | The date and time when the settings were last modified. | [optional] [example: `2024-01-01T00:00:00Z`] |
 
 
 ### Model IPRestrictionsSettingsWrapper
@@ -12524,7 +12524,7 @@ The parameters of an importable API entity.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **shouldImport** | **Boolean** | Specifies whether the API entity should be imported. | [optional] [example: true] |
+| **shouldImport** | **Boolean** | Specifies whether the API entity should be imported. | [optional] [example: `true`] |
 
 
 ### Model Int64Wrapper
@@ -12544,9 +12544,9 @@ The role a new invitation link grants, and the limits placed on it.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **employeeType** | [**EmployeeType**](#model-employeetype) | The role whoever follows the link joins with. Only `DocSpaceAdmin`, `RoomAdmin` and `User` are accepted, and  the role cannot be changed afterwards - delete the link and create one for the other role instead. | [required] [enum: All, RoomAdmin, Guest, DocSpaceAdmin, User] |
-| **expiration** | **Date** (date-time) | When the link stops letting anyone in, read in the portal time zone. It has to lie in the future; leaving it  out creates a link with no deadline at all. | [optional] [example: 2025-06-15T10:30:00.0000000Z] [nullable] |
-| **maxUseCount** | **Integer** (int32) | How many accounts may join through the link in total. Leaving it out creates a link with no use limit; the  uses spent so far are reported as `currentUseCount`. | [optional] [example: 1] [min: 1] [max: 1000] [nullable] |
+| **employeeType** | [**EmployeeType**](#model-employeetype) | The role whoever follows the link joins with. Only `DocSpaceAdmin`, `RoomAdmin` and `User` are accepted, and  the role cannot be changed afterwards - delete the link and create one for the other role instead. | [required] [enum: `All`, `RoomAdmin`, `Guest`, `DocSpaceAdmin`, `User`] |
+| **expiration** | **Date** (date-time) | When the link stops letting anyone in, read in the portal time zone. It has to lie in the future; leaving it  out creates a link with no deadline at all. | [optional] [example: `2025-06-15T10:30:00.0000000Z`] [nullable] |
+| **maxUseCount** | **Integer** (int32) | How many accounts may join through the link in total. Leaving it out creates a link with no use limit; the  uses spent so far are reported as `currentUseCount`. | [optional] [example: `1`] [min: 1] [max: 1000] [nullable] |
 
 
 ### Model InvitationLinkDeleteRequestDto
@@ -12554,7 +12554,7 @@ Which invitation link is withdrawn.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **id** | **UUID** (uuid) | The link to delete, by the `id` that creating or reading it returned. A link recreated for the same role  afterwards gets a new id, a new URL and a use count starting from zero. | [required] [example: 00000000-0000-0000-0000-000000000000] |
+| **id** | **UUID** (uuid) | The link to delete, by the `id` that creating or reading it returned. A link recreated for the same role  afterwards gets a new id, a new URL and a use count starting from zero. | [required] [example: `00000000-0000-0000-0000-000000000000`] |
 
 
 ### Model InvitationLinkDto
@@ -12562,13 +12562,13 @@ The portal's standing invitation link for one role: what it grants, how long it 
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **id** | **UUID** (uuid) | The identifier to address the link by in `PUT api/2.0/portal/users/invitationlink` and  `DELETE api/2.0/portal/users/invitationlink`. It survives a change of deadline or use limit, so it is  worth storing rather than re-reading. | [optional] [example: 00000000-0000-0000-0000-000000000000] |
-| **employeeType** | [**EmployeeType**](#model-employeetype) | The role an account gets by joining through this link. A portal keeps at most one link per role, and the  role of an existing link cannot be changed - the link has to be deleted and created again. | [required] [enum: All, RoomAdmin, Guest, DocSpaceAdmin, User] |
+| **id** | **UUID** (uuid) | The identifier to address the link by in `PUT api/2.0/portal/users/invitationlink` and  `DELETE api/2.0/portal/users/invitationlink`. It survives a change of deadline or use limit, so it is  worth storing rather than re-reading. | [optional] [example: `00000000-0000-0000-0000-000000000000`] |
+| **employeeType** | [**EmployeeType**](#model-employeetype) | The role an account gets by joining through this link. A portal keeps at most one link per role, and the  role of an existing link cannot be changed - the link has to be deleted and created again. | [required] [enum: `All`, `RoomAdmin`, `Guest`, `DocSpaceAdmin`, `User`] |
 | **expiration** | [**ApiDateTime**](#model-apidatetime) | When the link stops working, in the portal time zone. It is empty for a link that never expires, which is  what omitting the deadline on create or update leaves behind. | [optional] |
-| **isExpired** | **Boolean** | Whether that deadline has already passed. A link without a deadline always reports `false`, and an expired  link is still returned rather than treated as gone - it can be revived by moving `expiration`. | [optional] [example: true] |
-| **maxUseCount** | **Integer** (int32) | How many accounts may join through the link in total. It is empty for a link with no use limit, and an  update may not lower it below `currentUseCount`. | [optional] [example: 1] [nullable] |
-| **currentUseCount** | **Integer** (int32) | How many accounts have already joined through the link. It only ever grows, and reaching `maxUseCount`  retires the link as surely as a passed deadline. | [optional] [example: 1] |
-| **url** | **String** | The shortened address to hand to the people being invited. It is signed for the account that read it, so  two administrators are given two different URLs for one and the same link and both of them work; the `id`  above, not this string, is what identifies the link. | [optional] [example: https://example.com] [nullable] |
+| **isExpired** | **Boolean** | Whether that deadline has already passed. A link without a deadline always reports `false`, and an expired  link is still returned rather than treated as gone - it can be revived by moving `expiration`. | [optional] [example: `true`] |
+| **maxUseCount** | **Integer** (int32) | How many accounts may join through the link in total. It is empty for a link with no use limit, and an  update may not lower it below `currentUseCount`. | [optional] [example: `1`] [nullable] |
+| **currentUseCount** | **Integer** (int32) | How many accounts have already joined through the link. It only ever grows, and reaching `maxUseCount`  retires the link as surely as a passed deadline. | [optional] [example: `1`] |
+| **url** | **String** | The shortened address to hand to the people being invited. It is signed for the account that read it, so  two administrators are given two different URLs for one and the same link and both of them work; the `id`  above, not this string, is what identifies the link. | [optional] [example: `https://example.com`] [nullable] |
 
 
 ### Model InvitationLinkUpdateRequestDto
@@ -12576,9 +12576,9 @@ The invitation link being changed, with the deadline and use limit it is to have
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **id** | **UUID** (uuid) | The link to change, by the `id` that creating or reading it returned. The role behind that id cannot be  changed here. | [required] [example: 00000000-0000-0000-0000-000000000000] |
-| **expiration** | **Date** (date-time) | The new deadline, read in the portal time zone. The body is applied as a whole, so leaving it out clears the  deadline rather than keeping the current one; a moment in the past is refused. | [optional] [example: 2024-01-15T10:30:00Z] [nullable] |
-| **maxUseCount** | **Integer** (int32) | The new total number of accounts that may join through the link. It may not be lower than the uses already  spent, which the link reports as `currentUseCount`, and leaving it out removes the limit rather than keeping  the current one. | [optional] [example: 1] [min: 1] [max: 1000] [nullable] |
+| **id** | **UUID** (uuid) | The link to change, by the `id` that creating or reading it returned. The role behind that id cannot be  changed here. | [required] [example: `00000000-0000-0000-0000-000000000000`] |
+| **expiration** | **Date** (date-time) | The new deadline, read in the portal time zone. The body is applied as a whole, so leaving it out clears the  deadline rather than keeping the current one; a moment in the past is refused. | [optional] [example: `2024-01-15T10:30:00Z`] [nullable] |
+| **maxUseCount** | **Integer** (int32) | The new total number of accounts that may join through the link. It may not be lower than the uses already  spent, which the link reports as `currentUseCount`, and leaving it out removes the limit rather than keeping  the current one. | [optional] [example: `1`] [min: 1] [max: 1000] [nullable] |
 
 
 ### Model InvitationLinkWrapper
@@ -12598,8 +12598,8 @@ The IP restiction base parameters.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **ip** | **String** | The IP address. | [required] [example: 192.0.2.1] [nullable] |
-| **forAdmin** | **Boolean** | Specifies if the IP address is for administrator users only or not. | [optional] [example: false] |
+| **ip** | **String** | The IP address. | [required] [example: `192.0.2.1`] [nullable] |
+| **forAdmin** | **Boolean** | Specifies if the IP address is for administrator users only or not. | [optional] [example: `false`] |
 
 
 ### Model IpRestrictionsDto
@@ -12607,8 +12607,8 @@ The addresses allowed to reach the portal, and whether the restriction is enforc
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **ipRestrictions** | [**List**](#model-iprestrictionbase) | The allowed addresses, each entry pairing a single IPv4 or IPv6 address with the flag that limits it to  administrators. This is the whole list that is to hold afterwards: entries not repeated here are deleted.  Ranges written as `from-to` and CIDR blocks are refused with 400, even though the portal matches such forms  when they are already stored. Enforcement spares only the portal owner and the installation own networks, so  a list without the caller address locks the remaining administrators out. | [required] [example: [\{ip=192.0.2.1, forAdmin=false\}]] [nullable] |
-| **enable** | **Boolean** | Whether the list is enforced. Leaving it out follows the list - on when addresses are sent, off when the list  is empty - and sending `true` with an empty list is refused with 400, since that would admit nobody. | [optional] [example: true] [nullable] |
+| **ipRestrictions** | [**List**](#model-iprestrictionbase) | The allowed addresses, each entry pairing a single IPv4 or IPv6 address with the flag that limits it to  administrators. This is the whole list that is to hold afterwards: entries not repeated here are deleted.  Ranges written as `from-to` and CIDR blocks are refused with 400, even though the portal matches such forms  when they are already stored. Enforcement spares only the portal owner and the installation own networks, so  a list without the caller address locks the remaining administrators out. | [required] [example: `[{ip=192.0.2.1, forAdmin=false}]`] [nullable] |
+| **enable** | **Boolean** | Whether the list is enforced. Leaving it out follows the list - on when addresses are sent, off when the list  is empty - and sending `true` with an empty list is refused with 400, since that would admit nobody. | [optional] [example: `true`] [nullable] |
 
 
 ### Model IpRestrictionsWrapper
@@ -12640,8 +12640,8 @@ Whether one branding slot still holds the built-in image or wordmark.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **name** | **String** | The stable name of the slot, matching the `name` of the same slot in  `GET api/2.0/settings/whitelabel/logos` - `LightSmall`, `LoginPage`, `Favicon`, `DocsEditor` and the rest,  plus `Notification`, which that list leaves out. The wordmark check reports the fixed name `logotext`  instead of a slot. | [required] [example: LightSmall] [nullable] |
-| **default** | **Boolean** | Whether the slot has never been written for this portal, in which case the built-in image is what gets  rendered. It turns `false` once an image has been stored, for either the light or the dark theme, and back  to `true` after the matching restore operation. For `logotext` it stays `true` when the built-in wordmark  itself is saved, because saving that value counts as clearing the setting. | [required] [example: true] |
+| **name** | **String** | The stable name of the slot, matching the `name` of the same slot in  `GET api/2.0/settings/whitelabel/logos` - `LightSmall`, `LoginPage`, `Favicon`, `DocsEditor` and the rest,  plus `Notification`, which that list leaves out. The wordmark check reports the fixed name `logotext`  instead of a slot. | [required] [example: `LightSmall`] [nullable] |
+| **default** | **Boolean** | Whether the slot has never been written for this portal, in which case the built-in image is what gets  rendered. It turns `false` once an image has been stored, for either the light or the dark theme, and back  to `true` after the matching restore operation. For `logotext` it stays `true` when the built-in wordmark  itself is saved, because saving that value counts as clearing the setting. | [required] [example: `true`] |
 
 
 ### Model IsDefaultWhiteLabelLogosWrapper
@@ -12714,19 +12714,19 @@ One entry of the portal login history: a sign-in, a sign-out or a failed attempt
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **id** | **Integer** (int32) | The ID of the recorded sign-in. When the entry is a successful sign-in that is still open, this is also  the value `GET api/2.0/security/activeconnections` reports as the connection's `id`. | [optional] [example: 1] |
+| **id** | **Integer** (int32) | The ID of the recorded sign-in. When the entry is a successful sign-in that is still open, this is also  the value `GET api/2.0/security/activeconnections` reports as the connection's `id`. | [optional] [example: `1`] |
 | **date** | [**ApiDateTime**](#model-apidatetime) | When the attempt was made, in the portal time zone. The `from` and `to` filters are read as UTC instants,  so the two do not line up on a portal that is not on UTC. | [optional] |
-| **user** | **String** | The display name of the account the attempt was made against, taken from the account as it stands now  rather than as it stood at the time. A localised placeholder stands in when there is no account to read,  which is the usual case for a failed attempt on an address nobody owns. | [optional] [example: John Doe] [nullable] |
-| **userId** | **UUID** (uuid) | The ID of that account, which is what the `userId` filter of this operation matches on. It is the empty  GUID when the attempt could not be tied to an account. | [optional] [example: 00000000-0000-0000-0000-000000000001] |
-| **login** | **String** | The login string as it was typed - normally the email address. It is the only field that survives a failed  attempt against an unknown account, which makes it the one to read when `user` is a placeholder. | [optional] [example: user@example.com] [nullable] |
-| **action** | **String** | The event as a readable sentence in the portal language. On `GET api/2.0/security/audit/login/last` each  substituted value is cut to 50 characters; the filtered operation substitutes them in full. | [optional] [example: User logged in] [nullable] |
-| **actionId** | [**MessageAction**](#model-messageaction) | What happened, as the `action` filter of this operation spells it: a successful sign-in, a failed one, a  sign-out. Use this rather than parsing `action`, which is prose and changes with the portal language. | [optional] [enum: 1000, 1001, 1002, 1003, 1004, 1005, 1006, 1007, 1008, 1009, 1010, 1011, 1012, 1013, 1014, 1015, 1016, 1017, 1018, 1019, 1020, 1021, 1022, 1023, 1024, 1025, 1026, 1027, 1028, 1029, 4000, 4001, 4002, 4003, 4004, 4005, 4006, 4007, 4008, 4009, 4010, 4011, 4012, 4013, 4014, 4015, 4016, 4017, 4018, 4019, 4020, 4021, 4022, 4023, 4024, 4025, 4026, 4027, 4028, 4029, 4030, 4031, 4032, 4033, 4034, 4035, 4036, 4037, 5000, 5001, 5002, 5003, 5004, 5005, 5006, 5007, 5008, 5009, 5010, 5011, 5012, 5013, 5014, 5015, 5016, 5017, 5018, 5019, 5020, 5021, 5022, 5023, 5024, 5025, 5026, 5027, 5028, 5029, 5030, 5031, 5032, 5033, 5034, 5035, 5036, 5037, 5038, 5039, 5040, 5041, 5042, 5043, 5044, 5045, 5046, 5047, 5048, 5049, 5050, 5053, 5054, 5055, 5056, 5057, 5058, 5059, 5060, 5061, 5062, 5063, 5064, 5065, 5066, 5068, 5069, 5070, 5071, 5072, 5073, 5074, 5075, 5076, 5077, 5078, 5079, 5080, 5081, 5082, 5083, 5084, 5085, 5086, 5087, 5088, 5089, 5090, 5091, 5092, 5093, 5094, 5095, 5096, 5097, 5098, 5099, 5100, 5101, 5102, 5103, 5104, 5105, 5106, 5107, 5108, 5109, 5110, 5111, 5112, 5113, 5114, 5115, 5116, 5117, 5118, 5119, 5120, 5121, 5122, 5123, 5124, 5125, 5126, 5127, 5128, 5129, 5130, 5131, 5132, 5133, 5150, 5151, 5152, 5153, 5154, 5155, 5156, 5157, 5158, 5159, 5160, 5161, 5162, 5163, 5201, 5202, 5203, 5204, 5205, 5206, 5207, 5501, 5502, 5503, 6000, 6001, 6002, 6003, 6004, 6005, 6006, 6007, 6008, 6009, 6010, 6011, 6012, 6013, 6014, 6015, 6016, 6017, 6018, 6019, 6020, 6021, 6022, 6023, 6024, 6025, 6026, 6027, 6028, 6029, 6030, 6031, 6032, 6033, 6034, 6035, 6036, 6037, 6038, 6039, 6040, 6041, 6042, 6043, 6044, 6045, 6046, 6047, 6048, 6049, 6050, 6051, 6052, 6053, 6054, 6055, 6056, 6057, 6058, 6059, 6060, 6061, 6062, 6063, 6064, 6065, 6066, 6067, 6068, 6069, 6070, 6071, 6072, 6073, 6074, 6075, 6076, 6077, 6078, 6079, 6080, 6081, 6082, 6083, 6084, 6085, 6086, 6087, 6088, 6089, 6090, 6091, 6092, 6093, 6094, 6095, 6096, 6097, 6098, 6099, 6100, 6101, 6102, 6103, 6104, 6105, 6106, 6107, 6108, 6109, 7000, 7001, 7002, 7003, 7004, 7005, 9901, 9902, 9903, 9904, 9905, 9906, 9907, 9908, 9909, -1] |
-| **ip** | **String** | The IP address the attempt came from, with the port stripped off. | [optional] [example: 192.0.2.1] [nullable] |
-| **country** | **String** | The English name of the country the IP address is located in, empty when the address cannot be located -  the normal outcome for private and loopback addresses. | [optional] [example: United States] [nullable] |
-| **city** | **String** | The city the IP address is located in, empty under the same conditions as `country`. | [optional] [example: New York] [nullable] |
-| **browser** | **String** | The browser and its version as parsed from the user agent of the attempt, empty when the client sent none  that could be parsed. | [optional] [example: Chrome 120.0] [nullable] |
-| **platform** | **String** | The operating system as parsed from the same user agent, empty under the same conditions as `browser`. | [optional] [example: Windows] [nullable] |
-| **page** | **String** | Where in the portal the attempt was made from: the referrer of the request, or that request's own path  when it carried no referrer. Long values are cut off at 512 characters. | [optional] [example: /login] [nullable] |
+| **user** | **String** | The display name of the account the attempt was made against, taken from the account as it stands now  rather than as it stood at the time. A localised placeholder stands in when there is no account to read,  which is the usual case for a failed attempt on an address nobody owns. | [optional] [example: `John Doe`] [nullable] |
+| **userId** | **UUID** (uuid) | The ID of that account, which is what the `userId` filter of this operation matches on. It is the empty  GUID when the attempt could not be tied to an account. | [optional] [example: `00000000-0000-0000-0000-000000000001`] |
+| **login** | **String** | The login string as it was typed - normally the email address. It is the only field that survives a failed  attempt against an unknown account, which makes it the one to read when `user` is a placeholder. | [optional] [example: `user@example.com`] [nullable] |
+| **action** | **String** | The event as a readable sentence in the portal language. On `GET api/2.0/security/audit/login/last` each  substituted value is cut to 50 characters; the filtered operation substitutes them in full. | [optional] [example: `User logged in`] [nullable] |
+| **actionId** | [**MessageAction**](#model-messageaction) | What happened, as the `action` filter of this operation spells it: a successful sign-in, a failed one, a  sign-out. Use this rather than parsing `action`, which is prose and changes with the portal language. | [optional] [enum: `1000`, `1001`, `1002`, `1003`, `1004`, `1005`, `1006`, `1007`, `1008`, `1009`, `1010`, `1011`, `1012`, `1013`, `1014`, `1015`, `1016`, `1017`, `1018`, `1019`, `1020`, `1021`, `1022`, `1023`, `1024`, `1025`, `1026`, `1027`, `1028`, `1029`, `4000`, `4001`, `4002`, `4003`, `4004`, `4005`, `4006`, `4007`, `4008`, `4009`, `4010`, `4011`, `4012`, `4013`, `4014`, `4015`, `4016`, `4017`, `4018`, `4019`, `4020`, `4021`, `4022`, `4023`, `4024`, `4025`, `4026`, `4027`, `4028`, `4029`, `4030`, `4031`, `4032`, `4033`, `4034`, `4035`, `4036`, `4037`, `5000`, `5001`, `5002`, `5003`, `5004`, `5005`, `5006`, `5007`, `5008`, `5009`, `5010`, `5011`, `5012`, `5013`, `5014`, `5015`, `5016`, `5017`, `5018`, `5019`, `5020`, `5021`, `5022`, `5023`, `5024`, `5025`, `5026`, `5027`, `5028`, `5029`, `5030`, `5031`, `5032`, `5033`, `5034`, `5035`, `5036`, `5037`, `5038`, `5039`, `5040`, `5041`, `5042`, `5043`, `5044`, `5045`, `5046`, `5047`, `5048`, `5049`, `5050`, `5053`, `5054`, `5055`, `5056`, `5057`, `5058`, `5059`, `5060`, `5061`, `5062`, `5063`, `5064`, `5065`, `5066`, `5068`, `5069`, `5070`, `5071`, `5072`, `5073`, `5074`, `5075`, `5076`, `5077`, `5078`, `5079`, `5080`, `5081`, `5082`, `5083`, `5084`, `5085`, `5086`, `5087`, `5088`, `5089`, `5090`, `5091`, `5092`, `5093`, `5094`, `5095`, `5096`, `5097`, `5098`, `5099`, `5100`, `5101`, `5102`, `5103`, `5104`, `5105`, `5106`, `5107`, `5108`, `5109`, `5110`, `5111`, `5112`, `5113`, `5114`, `5115`, `5116`, `5117`, `5118`, `5119`, `5120`, `5121`, `5122`, `5123`, `5124`, `5125`, `5126`, `5127`, `5128`, `5129`, `5130`, `5131`, `5132`, `5133`, `5150`, `5151`, `5152`, `5153`, `5154`, `5155`, `5156`, `5157`, `5158`, `5159`, `5160`, `5161`, `5162`, `5163`, `5201`, `5202`, `5203`, `5204`, `5205`, `5206`, `5207`, `5501`, `5502`, `5503`, `6000`, `6001`, `6002`, `6003`, `6004`, `6005`, `6006`, `6007`, `6008`, `6009`, `6010`, `6011`, `6012`, `6013`, `6014`, `6015`, `6016`, `6017`, `6018`, `6019`, `6020`, `6021`, `6022`, `6023`, `6024`, `6025`, `6026`, `6027`, `6028`, `6029`, `6030`, `6031`, `6032`, `6033`, `6034`, `6035`, `6036`, `6037`, `6038`, `6039`, `6040`, `6041`, `6042`, `6043`, `6044`, `6045`, `6046`, `6047`, `6048`, `6049`, `6050`, `6051`, `6052`, `6053`, `6054`, `6055`, `6056`, `6057`, `6058`, `6059`, `6060`, `6061`, `6062`, `6063`, `6064`, `6065`, `6066`, `6067`, `6068`, `6069`, `6070`, `6071`, `6072`, `6073`, `6074`, `6075`, `6076`, `6077`, `6078`, `6079`, `6080`, `6081`, `6082`, `6083`, `6084`, `6085`, `6086`, `6087`, `6088`, `6089`, `6090`, `6091`, `6092`, `6093`, `6094`, `6095`, `6096`, `6097`, `6098`, `6099`, `6100`, `6101`, `6102`, `6103`, `6104`, `6105`, `6106`, `6107`, `6108`, `6109`, `7000`, `7001`, `7002`, `7003`, `7004`, `7005`, `9901`, `9902`, `9903`, `9904`, `9905`, `9906`, `9907`, `9908`, `9909`, `-1`] |
+| **ip** | **String** | The IP address the attempt came from, with the port stripped off. | [optional] [example: `192.0.2.1`] [nullable] |
+| **country** | **String** | The English name of the country the IP address is located in, empty when the address cannot be located -  the normal outcome for private and loopback addresses. | [optional] [example: `United States`] [nullable] |
+| **city** | **String** | The city the IP address is located in, empty under the same conditions as `country`. | [optional] [example: `New York`] [nullable] |
+| **browser** | **String** | The browser and its version as parsed from the user agent of the attempt, empty when the client sent none  that could be parsed. | [optional] [example: `Chrome 120.0`] [nullable] |
+| **platform** | **String** | The operating system as parsed from the same user agent, empty under the same conditions as `browser`. | [optional] [example: `Windows`] [nullable] |
+| **page** | **String** | Where in the portal the attempt was made from: the referrer of the request, or that request's own path  when it carried no referrer. Long values are cut off at 512 characters. | [optional] [example: `/login`] [nullable] |
 
 
 ### Model LoginProvider
@@ -12755,10 +12755,10 @@ The brute-force protection of the sign-in form: how many failures, over how long
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **attemptCount** | **Integer** (int32) | How many failed attempts inside one window are tolerated before the offender is blocked. Attempts are  counted per user name and client address together, so one member being blocked leaves the rest of the  portal signing in normally. | [required] [example: 5] |
-| **blockTime** | **Integer** (int32) | How long, in seconds, a blocked user name and address pair stays refused. While the block lasts the  sign-in is refused even once the password is correct. | [required] [example: 15] |
-| **checkPeriod** | **Integer** (int32) | The length, in seconds, of the rolling window the failures are counted over. It is not a request timeout: a  wider window makes the same `attemptCount` stricter, because failures further apart still add up. | [required] [example: 60] |
-| **isDefault** | **Boolean** | Whether the three numbers above still match the ones the installation ships with. It turns `false` as soon  as any of them is saved differently, and `true` again after  `DELETE api/2.0/settings/security/loginsettings`. | [required] [example: false] |
+| **attemptCount** | **Integer** (int32) | How many failed attempts inside one window are tolerated before the offender is blocked. Attempts are  counted per user name and client address together, so one member being blocked leaves the rest of the  portal signing in normally. | [required] [example: `5`] |
+| **blockTime** | **Integer** (int32) | How long, in seconds, a blocked user name and address pair stays refused. While the block lasts the  sign-in is refused even once the password is correct. | [required] [example: `15`] |
+| **checkPeriod** | **Integer** (int32) | The length, in seconds, of the rolling window the failures are counted over. It is not a request timeout: a  wider window makes the same `attemptCount` stricter, because failures further apart still add up. | [required] [example: `60`] |
+| **isDefault** | **Boolean** | Whether the three numbers above still match the ones the installation ships with. It turns `false` as soon  as any of them is saved differently, and `true` again after  `DELETE api/2.0/settings/security/loginsettings`. | [required] [example: `false`] |
 
 
 ### Model LoginSettingsRequestDto
@@ -12766,9 +12766,9 @@ The brute-force protection of the sign-in form: how many failures, over how long
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **attemptCount** | **Integer** (int32) | How many failed sign-in attempts inside one window are tolerated before the offender is blocked. Attempts are  counted per user name and client address together, so one member being blocked leaves the rest of the portal  signing in normally. | [optional] [example: 1] [min: 1] [max: 9999] |
-| **blockTime** | **Integer** (int32) | How long, in seconds, a blocked user name and address pair stays refused. While the block lasts the sign-in  is refused even when the password is finally correct. | [optional] [example: 1] [min: 1] [max: 9999] |
-| **checkPeriod** | **Integer** (int32) | The length, in seconds, of the rolling window the failed attempts are counted over. A wider window makes the  same `attemptCount` stricter, because failures further apart still add up. | [optional] [example: 1] [min: 1] [max: 9999] |
+| **attemptCount** | **Integer** (int32) | How many failed sign-in attempts inside one window are tolerated before the offender is blocked. Attempts are  counted per user name and client address together, so one member being blocked leaves the rest of the portal  signing in normally. | [optional] [example: `1`] [min: 1] [max: 9999] |
+| **blockTime** | **Integer** (int32) | How long, in seconds, a blocked user name and address pair stays refused. While the block lasts the sign-in  is refused even when the password is finally correct. | [optional] [example: `1`] [min: 1] [max: 9999] |
+| **checkPeriod** | **Integer** (int32) | The length, in seconds, of the rolling window the failed attempts are counted over. A wider window makes the  same `attemptCount` stricter, because failures further apart still add up. | [optional] [example: `1`] [min: 1] [max: 9999] |
 
 
 ### Model LoginSettingsWrapper
@@ -12788,8 +12788,8 @@ The two theme variants of one branding logo.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **light** | **String** | The image used on a light background, either as a `data:image/png;base64,...` payload - `png`, `jpg` and  `svg` are accepted - or as the name of a file already put in the temporary store. | [optional] [example: data:image/png;base64,iVBORw0KGgoAAAANS...] [nullable] |
-| **dark** | **String** | The image used on a dark background, in the same two forms as `light`. It is only stored for the slots that  have a dark variant and is ignored for the favicon and the editor logos. | [optional] [example: data:image/png;base64,iVBORw0KGgoAAAANS...] [nullable] |
+| **light** | **String** | The image used on a light background, either as a `data:image/png;base64,...` payload - `png`, `jpg` and  `svg` are accepted - or as the name of a file already put in the temporary store. | [optional] [example: `data:image/png;base64,iVBORw0KGgoAAAANS...`] [nullable] |
+| **dark** | **String** | The image used on a dark background, in the same two forms as `light`. It is only stored for the slots that  have a dark variant and is ignored for the favicon and the editor logos. | [optional] [example: `data:image/png;base64,iVBORw0KGgoAAAANS...`] [nullable] |
 
 
 ### Model MailDomainSettingsRequestsDto
@@ -12797,9 +12797,9 @@ Which email domains the portal treats as already verified, and how their users j
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **type** | [**TenantTrustedDomainsType**](#model-tenanttrusteddomainstype) | How trusted domains are decided: no domain is trusted, every domain is, or only the ones listed in `domains`.  Only the custom mode reads `domains`; under the other two the list is ignored rather than refused. | [required] [enum: 0, 1, 2] |
-| **domains** | **List** | The trusted domains, as bare hostnames such as `example.com` without a scheme or an `@`. This is the whole  list that is to hold afterwards and not a list of additions. Each entry is lowercased before it is stored,  and one entry that is not a valid hostname - or an empty list in the custom mode - fails the whole call  without saving anything. | [required] [example: [example.com, company.com]] [nullable] |
-| **inviteUsersAsVisitors** | **Boolean** | What a user joining through a trusted domain becomes: `true` admits them as a guest, `false` as a full  member. It applies to joins made from now on and does not change anybody who has already joined. | [required] [example: false] |
+| **type** | [**TenantTrustedDomainsType**](#model-tenanttrusteddomainstype) | How trusted domains are decided: no domain is trusted, every domain is, or only the ones listed in `domains`.  Only the custom mode reads `domains`; under the other two the list is ignored rather than refused. | [required] [enum: `0`, `1`, `2`] |
+| **domains** | **List** | The trusted domains, as bare hostnames such as `example.com` without a scheme or an `@`. This is the whole  list that is to hold afterwards and not a list of additions. Each entry is lowercased before it is stored,  and one entry that is not a valid hostname - or an empty list in the custom mode - fails the whole call  without saving anything. | [required] [example: `[example.com, company.com]`] [nullable] |
+| **inviteUsersAsVisitors** | **Boolean** | What a user joining through a trusted domain becomes: `true` admits them as a guest, `false` as a full  member. It applies to joins made from now on and does not change anybody who has already joined. | [required] [example: `false`] |
 
 
 ### Model MessageAction
@@ -13163,9 +13163,9 @@ The parameters of the migrating files.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **foldersCount** | **Integer** (int32) | The number of folders. | [optional] [example: 12] |
-| **filesCount** | **Integer** (int32) | The number of files. | [optional] [example: 48] |
-| **bytesTotal** | **Long** (int64) | The total number of bytes. | [optional] [example: 104857600] |
+| **foldersCount** | **Integer** (int32) | The number of folders. | [optional] [example: `12`] |
+| **filesCount** | **Integer** (int32) | The number of files. | [optional] [example: `48`] |
+| **bytesTotal** | **Long** (int64) | The total number of bytes. | [optional] [example: `104857600`] |
 
 
 ### Model MigratingApiGroup
@@ -13190,7 +13190,7 @@ The migrating user parameters.
 | **displayName** | **String** | The user display name. | [optional] [nullable] |
 | **firstName** | **String** | The user first name. | [optional] [nullable] |
 | **lastName** | **String** | The user last name. | [optional] [nullable] |
-| **userType** | [**EmployeeType**](#model-employeetype) | The user type. | [optional] [enum: All, RoomAdmin, Guest, DocSpaceAdmin, User] |
+| **userType** | [**EmployeeType**](#model-employeetype) | The user type. | [optional] [enum: `All`, `RoomAdmin`, `Guest`, `DocSpaceAdmin`, `User`] |
 | **migratingFiles** | [**MigratingApiFiles**](#model-migratingapifiles) | The user's migrating files. | [optional] |
 
 
@@ -13199,23 +13199,23 @@ The migration API information.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **migratorName** | **String** | The migrator name. | [optional] [example: Nextcloud] [nullable] |
-| **operation** | **String** | The migration operation. | [optional] [example: parse] [nullable] |
-| **failedArchives** | **List** | The list of failed archives. | [optional] [example: [archive1.zip, archive2.zip]] [nullable] |
-| **users** | [**List**](#model-migratingapiuser) | The list of migrating users. | [optional] [example: [\{id=9924256B-447C-4F19-9dbd-8ad8c39e8ff5, email=user@example.com, shouldImport=true\}]] [nullable] |
-| **withoutEmailUsers** | [**List**](#model-migratingapiuser) | The list of migrating users without email. | [optional] [example: [\{id=9924256B-447C-4F19-9dbd-8ad8c39e8ff5, shouldImport=false\}]] [nullable] |
-| **existUsers** | [**List**](#model-migratingapiuser) | The list of existing migrating users. | [optional] [example: [\{id=9924256B-447C-4F19-9dbd-8ad8c39e8ff5, email=existing@example.com, shouldImport=true\}]] [nullable] |
-| **groups** | [**List**](#model-migratingapigroup) | The list of migrating groups. | [optional] [example: [\{id=1, name=Group1, shouldImport=true\}]] [nullable] |
-| **importPersonalFiles** | **Boolean** | Specifies whether to import personal files or not. | [optional] [example: true] |
-| **importSharedFiles** | **Boolean** | Specifies whether to import shared files or not. | [optional] [example: true] |
-| **importSharedFolders** | **Boolean** | Specifies whether to import shared folders or not. | [optional] [example: true] |
-| **importCommonFiles** | **Boolean** | Specifies whether to import common files or not. | [optional] [example: true] |
-| **importProjectFiles** | **Boolean** | Specifies whether to import project files or not. | [optional] [example: false] |
-| **importGroups** | **Boolean** | Specifies whether to import groups or not. | [optional] [example: true] |
-| **successedUsers** | **Integer** (int32) | The number of successfully migrated users. | [optional] [example: 50] |
-| **failedUsers** | **Integer** (int32) | The number of unsuccessfully migrated users. | [optional] [example: 2] |
-| **files** | **List** | The list of migrated files. | [optional] [example: [document.docx, spreadsheet.xlsx]] [nullable] |
-| **errors** | **List** | The list of migration errors. | [optional] [example: [User not found, File access denied]] [nullable] |
+| **migratorName** | **String** | The migrator name. | [optional] [example: `Nextcloud`] [nullable] |
+| **operation** | **String** | The migration operation. | [optional] [example: `parse`] [nullable] |
+| **failedArchives** | **List** | The list of failed archives. | [optional] [example: `[archive1.zip, archive2.zip]`] [nullable] |
+| **users** | [**List**](#model-migratingapiuser) | The list of migrating users. | [optional] [example: `[{id=9924256B-447C-4F19-9dbd-8ad8c39e8ff5, email=user@example.com, shouldImport=true}]`] [nullable] |
+| **withoutEmailUsers** | [**List**](#model-migratingapiuser) | The list of migrating users without email. | [optional] [example: `[{id=9924256B-447C-4F19-9dbd-8ad8c39e8ff5, shouldImport=false}]`] [nullable] |
+| **existUsers** | [**List**](#model-migratingapiuser) | The list of existing migrating users. | [optional] [example: `[{id=9924256B-447C-4F19-9dbd-8ad8c39e8ff5, email=existing@example.com, shouldImport=true}]`] [nullable] |
+| **groups** | [**List**](#model-migratingapigroup) | The list of migrating groups. | [optional] [example: `[{id=1, name=Group1, shouldImport=true}]`] [nullable] |
+| **importPersonalFiles** | **Boolean** | Specifies whether to import personal files or not. | [optional] [example: `true`] |
+| **importSharedFiles** | **Boolean** | Specifies whether to import shared files or not. | [optional] [example: `true`] |
+| **importSharedFolders** | **Boolean** | Specifies whether to import shared folders or not. | [optional] [example: `true`] |
+| **importCommonFiles** | **Boolean** | Specifies whether to import common files or not. | [optional] [example: `true`] |
+| **importProjectFiles** | **Boolean** | Specifies whether to import project files or not. | [optional] [example: `false`] |
+| **importGroups** | **Boolean** | Specifies whether to import groups or not. | [optional] [example: `true`] |
+| **successedUsers** | **Integer** (int32) | The number of successfully migrated users. | [optional] [example: `50`] |
+| **failedUsers** | **Integer** (int32) | The number of unsuccessfully migrated users. | [optional] [example: `2`] |
+| **files** | **List** | The list of migrated files. | [optional] [example: `[document.docx, spreadsheet.xlsx]`] [nullable] |
+| **errors** | **List** | The list of migration errors. | [optional] [example: `[User not found, File access denied]`] [nullable] |
 
 
 ### Model MigrationStatusDto
@@ -13223,10 +13223,10 @@ How far the parse or the import queued for this portal has got, and what it prod
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **progress** | **Double** (double) | The share of the job that is done, from 0 to 100. It advances unevenly, since the stages differ in  length, so poll `isCompleted` rather than waiting for this to reach 100. | [optional] [example: 99.99] |
-| **error** | **String** | The message that ended the job, in the portal language. It stays empty while nothing has gone wrong, so  once `isCompleted` is `true` this field is what tells success from failure. | [optional] [example: Connection failed] [nullable] |
+| **progress** | **Double** (double) | The share of the job that is done, from 0 to 100. It advances unevenly, since the stages differ in  length, so poll `isCompleted` rather than waiting for this to reach 100. | [optional] [example: `99.99`] |
+| **error** | **String** | The message that ended the job, in the portal language. It stays empty while nothing has gone wrong, so  once `isCompleted` is `true` this field is what tells success from failure. | [optional] [example: `Connection failed`] [nullable] |
 | **parseResult** | [**MigrationApiInfo**](#model-migrationapiinfo) | What the migrator has read so far. After a parse pass it holds the users, the groups and the archives it  could not read, which is the body to edit and post to `POST api/2.0/migration/migrate`; during an import it  also carries the accounts that were created and the ones that failed. Its own `operation` field, `parse`  or `migration`, is what tells the two stages apart. | [optional] |
-| **isCompleted** | **Boolean** | Whether the job has stopped, successfully or not. It is the field to poll on; the whole body comes back  empty instead when the portal has no job at all, which is not an error. | [optional] [example: true] |
+| **isCompleted** | **Boolean** | Whether the job has stopped, successfully or not. It is the field to poll on; the whole body comes back  empty instead when the portal has no job at all, which is not an error. | [optional] [example: `true`] |
 
 
 ### Model MigrationStatusWrapper
@@ -13254,7 +13254,7 @@ The phone number a user going through phone activation registers for SMS codes.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **mobilePhone** | **String** | The number the SMS codes are sent to, in international form with the leading `+` and no spaces. It is stored  as not yet activated and only becomes the confirmed number once a code sent to it is accepted; an already  activated number is not replaced this way and has to be erased first. | [optional] [example: +1234567890] [nullable] |
+| **mobilePhone** | **String** | The number the SMS codes are sent to, in international form with the leading `+` and no spaces. It is stored  as not yet activated and only becomes the confirmed number once a code sent to it is accepted; an already  activated number is not replaced this way and has to be erased first. | [optional] [example: `+1234567890`] [nullable] |
 
 
 ### Model NotificationChannelDto
@@ -13262,8 +13262,8 @@ One delivery channel of the installation, with the state it is in for this porta
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **name** | **String** | The internal name of the channel as the notification service knows it - `email.sender` for letters,  `telegram.sender` for Telegram messages. It is a key to match on, not a label to print. | [required] [example: email.sender] [nullable] |
-| **isEnabled** | **Boolean** | Whether the channel can deliver for this portal. Letters are enabled whenever the channel is listed at  all, while Telegram is enabled only while the portal has a bot name and token stored. It says nothing  about the caller, who also has to connect their own Telegram account through  `GET api/2.0/settings/telegram/link`. | [required] [example: true] |
+| **name** | **String** | The internal name of the channel as the notification service knows it - `email.sender` for letters,  `telegram.sender` for Telegram messages. It is a key to match on, not a label to print. | [required] [example: `email.sender`] [nullable] |
+| **isEnabled** | **Boolean** | Whether the channel can deliver for this portal. Letters are enabled whenever the channel is listed at  all, while Telegram is enabled only while the portal has a bot name and token stored. It says nothing  about the caller, who also has to connect their own Telegram account through  `GET api/2.0/settings/telegram/link`. | [required] [example: `true`] |
 
 
 ### Model NotificationChannelStatusDto
@@ -13271,7 +13271,7 @@ The ways this installation can deliver a notification, and whether each of them 
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **channels** | [**List**](#model-notificationchanneldto) | The channels the running installation is configured with. A channel appears only when the notification  service names a sender for it, so the list can be shorter than the channels this build implements, and an  empty list means the configuration names none of them. | [optional] [example: [\{name=email.sender, isEnabled=true\}]] [nullable] |
+| **channels** | [**List**](#model-notificationchanneldto) | The channels the running installation is configured with. A channel appears only when the notification  service names a sender for it, so the list can be shorter than the channels this build implements, and an  empty list means the configuration names none of them. | [optional] [example: `[{name=email.sender, isEnabled=true}]`] [nullable] |
 
 
 ### Model NotificationChannelStatusWrapper
@@ -13291,8 +13291,8 @@ Whether one kind of notification is switched on for the calling user.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **type** | [**NotificationType**](#model-notificationtype) | Which kind of notification the flag belongs to, echoed from the request. It is published as a number:  badges, room activity, the daily feed, and the tips. | [optional] [enum: 0, 1, 2, 3] |
-| **isEnabled** | **Boolean** | Whether the caller receives that kind of notification. It describes the caller's own account and nobody  else's; a fresh account has the badges on and the other three off, because those are subscriptions that  only `POST api/2.0/settings/notification` creates. | [optional] [example: true] |
+| **type** | [**NotificationType**](#model-notificationtype) | Which kind of notification the flag belongs to, echoed from the request. It is published as a number:  badges, room activity, the daily feed, and the tips. | [optional] [enum: `0`, `1`, `2`, `3`] |
+| **isEnabled** | **Boolean** | Whether the caller receives that kind of notification. It describes the caller's own account and nobody  else's; a fresh account has the badges on and the other three off, because those are subscriptions that  only `POST api/2.0/settings/notification` creates. | [optional] [example: `true`] |
 
 
 ### Model NotificationSettingsRequestsDto
@@ -13300,8 +13300,8 @@ Which kind of notification the calling user switches, and which way.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **type** | [**NotificationType**](#model-notificationtype) | The kind of notification being switched. A value outside the defined set is echoed back while nothing is  stored, so confirm the result with `GET api/2.0/settings/notification/{type}` rather than trusting the  answer. | [required] [enum: 0, 1, 2, 3] |
-| **isEnabled** | **Boolean** | Whether that kind reaches the calling account. It applies to the caller own account alone and to every room  at once; a single room is silenced with `POST api/2.0/settings/notification/rooms` instead. | [optional] [example: true] |
+| **type** | [**NotificationType**](#model-notificationtype) | The kind of notification being switched. A value outside the defined set is echoed back while nothing is  stored, so confirm the result with `GET api/2.0/settings/notification/{type}` rather than trusting the  answer. | [required] [enum: `0`, `1`, `2`, `3`] |
+| **isEnabled** | **Boolean** | Whether that kind reaches the calling account. It applies to the caller own account alone and to every room  at once; a single room is silenced with `POST api/2.0/settings/notification/rooms` instead. | [optional] [example: `true`] |
 
 
 ### Model NotificationSettingsWrapper
@@ -13332,20 +13332,20 @@ One movement on the portal wallet: what it was for, who caused it, and how much 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **date** | [**ApiDateTime**](#model-apidatetime) | When the movement was booked, in the portal time zone - the same zone the `startDate` and `endDate`  filters are read in, so the two do line up here. | [optional] |
-| **service** | **String** | The wallet service the movement belongs to, by its stable key. It is what the `serviceName` filter  matches on, and it is empty for a movement that belongs to no service, such as a top-up. | [optional] [example: disk-storage] [nullable] |
-| **description** | **String** | A one-line summary of the movement in the portal language, already composed from the service and the  quantity - meant to be printed as it is rather than parsed. | [optional] [example: Storage quota increase] [nullable] |
-| **details** | **String** | The longer explanation of the same movement, where the service recorded one. It is empty for a movement  that has nothing to add to `description`. | [optional] [example: Increased storage from 50GB to 100GB] [nullable] |
-| **serviceUnit** | **String** | What `quantity` counts for this service, in the portal language. AI consumption is reported in tokens  here rather than in the AI credits the service is sold in. | [optional] [example: GB] [nullable] |
-| **quantity** | **Integer** (int32) | How many units the movement covers, in the unit named by `serviceUnit`. It is `0` for a movement that  moves money without consuming a service. | [optional] [example: 1] |
-| **currency** | **String** | The currency `credit` and `debit` are expressed in, as a three-letter ISO 4217 code. It is the accounting  currency of the wallet, which need not be the currency the subscription is priced in. | [optional] [example: USD] [nullable] |
-| **credit** | **Double** (double) | The amount that went into the wallet. It is `0` on a movement that only took money out, so the pair of  `credit` and `debit` is what shows which way the money went; the `credit` and `debit` filters of the  operation select the two directions by exactly this. | [optional] [example: 99.99] |
-| **debit** | **Double** (double) | The amount that was taken out of the wallet, `0` on a movement that put money in. | [optional] [example: 99.99] |
-| **participantName** | **String** | Who caused the movement, as the billing service records them - an internal name, which is what the  `participantName` filter matches on. Show `participantDisplayName` instead. | [optional] [example: john.doe@example.com] [nullable] |
-| **participantDisplayName** | **String** | The same person as their portal display name. It falls back to `participantName` when the name belongs to  no portal account, so it is never empty while `participantName` is filled. | [optional] [example: John Doe] [nullable] |
-| **sourceType** | **String** | What kind of thing an AI operation was run on - an agent, a file, a folder, a room or a form. It is empty  on any movement that is not an AI charge. | [optional] [example: Agent] [nullable] |
-| **sourceTitle** | **String** | The title that thing had when the operation ran, kept as recorded, so it does not follow a later rename.  Empty under the same conditions as `sourceType`. | [optional] [example: My AI Agent] [nullable] |
-| **sourceId** | **String** | The identifier of that thing, to look it up in the module it belongs to. Empty under the same conditions  as `sourceType`. | [optional] [example: 123] [nullable] |
-| **type** | [**OperationType**](#model-operationtype) | What kind of movement this is - a payment, a charge, a refund, a correction. It is what the `type` filter  matches on, and `Unknown` covers a movement the billing service reported under a kind this build does not  recognise. | [optional] [enum: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19] |
+| **service** | **String** | The wallet service the movement belongs to, by its stable key. It is what the `serviceName` filter  matches on, and it is empty for a movement that belongs to no service, such as a top-up. | [optional] [example: `disk-storage`] [nullable] |
+| **description** | **String** | A one-line summary of the movement in the portal language, already composed from the service and the  quantity - meant to be printed as it is rather than parsed. | [optional] [example: `Storage quota increase`] [nullable] |
+| **details** | **String** | The longer explanation of the same movement, where the service recorded one. It is empty for a movement  that has nothing to add to `description`. | [optional] [example: `Increased storage from 50GB to 100GB`] [nullable] |
+| **serviceUnit** | **String** | What `quantity` counts for this service, in the portal language. AI consumption is reported in tokens  here rather than in the AI credits the service is sold in. | [optional] [example: `GB`] [nullable] |
+| **quantity** | **Integer** (int32) | How many units the movement covers, in the unit named by `serviceUnit`. It is `0` for a movement that  moves money without consuming a service. | [optional] [example: `1`] |
+| **currency** | **String** | The currency `credit` and `debit` are expressed in, as a three-letter ISO 4217 code. It is the accounting  currency of the wallet, which need not be the currency the subscription is priced in. | [optional] [example: `USD`] [nullable] |
+| **credit** | **Double** (double) | The amount that went into the wallet. It is `0` on a movement that only took money out, so the pair of  `credit` and `debit` is what shows which way the money went; the `credit` and `debit` filters of the  operation select the two directions by exactly this. | [optional] [example: `99.99`] |
+| **debit** | **Double** (double) | The amount that was taken out of the wallet, `0` on a movement that put money in. | [optional] [example: `99.99`] |
+| **participantName** | **String** | Who caused the movement, as the billing service records them - an internal name, which is what the  `participantName` filter matches on. Show `participantDisplayName` instead. | [optional] [example: `john.doe@example.com`] [nullable] |
+| **participantDisplayName** | **String** | The same person as their portal display name. It falls back to `participantName` when the name belongs to  no portal account, so it is never empty while `participantName` is filled. | [optional] [example: `John Doe`] [nullable] |
+| **sourceType** | **String** | What kind of thing an AI operation was run on - an agent, a file, a folder, a room or a form. It is empty  on any movement that is not an AI charge. | [optional] [example: `Agent`] [nullable] |
+| **sourceTitle** | **String** | The title that thing had when the operation ran, kept as recorded, so it does not follow a later rename.  Empty under the same conditions as `sourceType`. | [optional] [example: `My AI Agent`] [nullable] |
+| **sourceId** | **String** | The identifier of that thing, to look it up in the module it belongs to. Empty under the same conditions  as `sourceType`. | [optional] [example: `123`] [nullable] |
+| **type** | [**OperationType**](#model-operationtype) | What kind of movement this is - a payment, a charge, a refund, a correction. It is what the `type` filter  matches on, and `Unknown` covers a movement the billing service reported under a kind this build does not  recognise. | [optional] [enum: `0`, `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `13`, `14`, `15`, `16`, `17`, `18`, `19`] |
 
 
 ### Model OperationOrderType
@@ -13397,8 +13397,8 @@ The outcome of asking for the portal-ownership transfer letter to be sent.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **status** | **Integer** (int32) | Whether the letter was sent: `1` that it was, `0` that the request was turned down. A refusal comes back  with HTTP 200, so this field and not the status code is what says whether anything happened - the request  is turned down when the caller is not the portal owner and when the named member is unknown or inactive. | [optional] [example: 1] |
-| **message** | **String** | The outcome spelled out in the portal language. On success it names the address the letter went to, and it  carries an HTML `mailto:` anchor rather than plain text, so it has to be rendered as markup or stripped;  on a refusal it is the localised reason. | [optional] [example: Ownership transferred successfully] [nullable] |
+| **status** | **Integer** (int32) | Whether the letter was sent: `1` that it was, `0` that the request was turned down. A refusal comes back  with HTTP 200, so this field and not the status code is what says whether anything happened - the request  is turned down when the caller is not the portal owner and when the named member is unknown or inactive. | [optional] [example: `1`] |
+| **message** | **String** | The outcome spelled out in the portal language. On success it names the address the letter went to, and it  carries an HTML `mailto:` anchor rather than plain text, so it has to be rendered as markup or stripped;  on a refusal it is the localised reason. | [optional] [example: `Ownership transferred successfully`] [nullable] |
 
 
 ### Model OwnerChangeInstructionsWrapper
@@ -13418,7 +13418,7 @@ The portal member named as the new owner of the portal.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **ownerId** | **UUID** (uuid) | The member who is to become the portal owner, by user ID. They have to be an active member of this portal and  not a guest; a member who is not a DocSpace administrator yet is promoted to one as part of the transfer, so  the portal needs a paid seat for them. | [required] [example: 00000000-0000-0000-0000-000000000001] |
+| **ownerId** | **UUID** (uuid) | The member who is to become the portal owner, by user ID. They have to be an active member of this portal and  not a guest; a member who is not a DocSpace administrator yet is promoted to one as part of the transfer, so  the portal needs a paid seat for them. | [required] [example: `00000000-0000-0000-0000-000000000001`] |
 
 
 ### Model PasswordHasher
@@ -13426,9 +13426,9 @@ The password hash parameters.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **size** | **Integer** (int32) | The password hash size. | [optional] [example: 32] |
-| **iterations** | **Integer** (int32) | The number of iterations to generate the ppassword hash. | [optional] [example: 1000] |
-| **salt** | **String** | The salt to generate the ppassword hash. | [optional] [example: random_salt_value] [nullable] |
+| **size** | **Integer** (int32) | The password hash size. | [optional] [example: `32`] |
+| **iterations** | **Integer** (int32) | The number of iterations to generate the ppassword hash. | [optional] [example: `1000`] |
+| **salt** | **String** | The salt to generate the ppassword hash. | [optional] [example: `random_salt_value`] [nullable] |
 
 
 ### Model PasswordSettingsDto
@@ -13436,14 +13436,14 @@ The password policy of the portal, with the expressions a client can check a pas
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **minLength** | **Integer** (int32) | The shortest password the portal accepts, 8 characters on a portal nobody has configured. Whatever the  policy says, a password longer than 30 characters is refused as well, and that ceiling is not reported  here. | [required] [example: 8] |
-| **upperCase** | **Boolean** | Whether at least one uppercase letter is demanded. While it is `false` an uppercase letter is still  allowed - the flag adds a requirement rather than permission. | [required] [example: true] |
-| **digits** | **Boolean** | Whether at least one digit is demanded, read the same way as `upperCase`. | [required] [example: true] |
-| **specSymbols** | **Boolean** | Whether at least one special symbol is demanded, read the same way as `upperCase`. Which symbols count is  spelled out by `specSymbolsRegexStr`. | [required] [example: false] |
-| **allowedCharactersRegexStr** | **String** | The expression the whole password has to match, which is what defines the alphabet the portal accepts at  all. It comes from the installation's configuration rather than from the portal policy, so it is the same  for every portal of an installation and unaffected by the flags above. | [required] [example: ^[a-zA-Z0-9!@#$%^&*()]+$] [nullable] |
-| **digitsRegexStr** | **String** | The look-ahead expression that tests the digit requirement, meant to be applied only while `digits` is  `true`. It is always filled in, so its presence is not itself a requirement. | [required] [example: (?=.*\\d)] [nullable] |
-| **upperCaseRegexStr** | **String** | The look-ahead expression that tests the uppercase requirement, to be applied while `upperCase` is `true`. | [required] [example: (?=.*[A-Z])] [nullable] |
-| **specSymbolsRegexStr** | **String** | The look-ahead expression that tests the special-symbol requirement, to be applied while `specSymbols` is  `true`. It also enumerates the symbols the portal treats as special. | [required] [example: (?=.*[!@#$%^&*()])] [nullable] |
+| **minLength** | **Integer** (int32) | The shortest password the portal accepts, 8 characters on a portal nobody has configured. Whatever the  policy says, a password longer than 30 characters is refused as well, and that ceiling is not reported  here. | [required] [example: `8`] |
+| **upperCase** | **Boolean** | Whether at least one uppercase letter is demanded. While it is `false` an uppercase letter is still  allowed - the flag adds a requirement rather than permission. | [required] [example: `true`] |
+| **digits** | **Boolean** | Whether at least one digit is demanded, read the same way as `upperCase`. | [required] [example: `true`] |
+| **specSymbols** | **Boolean** | Whether at least one special symbol is demanded, read the same way as `upperCase`. Which symbols count is  spelled out by `specSymbolsRegexStr`. | [required] [example: `false`] |
+| **allowedCharactersRegexStr** | **String** | The expression the whole password has to match, which is what defines the alphabet the portal accepts at  all. It comes from the installation's configuration rather than from the portal policy, so it is the same  for every portal of an installation and unaffected by the flags above. | [required] [example: `^[a-zA-Z0-9!@#$%^&*()]+$`] [nullable] |
+| **digitsRegexStr** | **String** | The look-ahead expression that tests the digit requirement, meant to be applied only while `digits` is  `true`. It is always filled in, so its presence is not itself a requirement. | [required] [example: `(?=.*\\d)`] [nullable] |
+| **upperCaseRegexStr** | **String** | The look-ahead expression that tests the uppercase requirement, to be applied while `upperCase` is `true`. | [required] [example: `(?=.*[A-Z])`] [nullable] |
+| **specSymbolsRegexStr** | **String** | The look-ahead expression that tests the special-symbol requirement, to be applied while `specSymbols` is  `true`. It also enumerates the symbols the portal treats as special. | [required] [example: `(?=.*[!@#$%^&*()])`] [nullable] |
 
 
 ### Model PasswordSettingsRequestsDto
@@ -13451,10 +13451,10 @@ The four values that make up the portal password policy, replaced together.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **minLength** | **Integer** (int32) | The shortest password the portal will accept. It has to sit between the floor the installation is configured  with, 8 characters unless it was changed, and the ceiling of 30; a value outside that is refused with 400. | [required] [example: 8] |
-| **upperCase** | **Boolean** | Whether a password must contain at least one uppercase letter. There is no partial update on this body, so  leaving the flag out stores it as `false` and drops the requirement. | [optional] [example: true] |
-| **digits** | **Boolean** | Whether a password must contain at least one digit. Leaving the flag out stores it as `false` and drops the  requirement. | [optional] [example: true] |
-| **specSymbols** | **Boolean** | Whether a password must contain at least one special symbol. Leaving the flag out stores it as `false` and  drops the requirement. | [optional] [example: true] |
+| **minLength** | **Integer** (int32) | The shortest password the portal will accept. It has to sit between the floor the installation is configured  with, 8 characters unless it was changed, and the ceiling of 30; a value outside that is refused with 400. | [required] [example: `8`] |
+| **upperCase** | **Boolean** | Whether a password must contain at least one uppercase letter. There is no partial update on this body, so  leaving the flag out stores it as `false` and drops the requirement. | [optional] [example: `true`] |
+| **digits** | **Boolean** | Whether a password must contain at least one digit. Leaving the flag out stores it as `false` and drops the  requirement. | [optional] [example: `true`] |
+| **specSymbols** | **Boolean** | Whether a password must contain at least one special symbol. Leaving the flag out stores it as `false` and  drops the requirement. | [optional] [example: `true`] |
 
 
 ### Model PasswordSettingsWrapper
@@ -13474,10 +13474,10 @@ The parameters of the calculated payment amount.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **operationId** | **Long** (int64) | The operation unique identifier. | [optional] [example: 123456789] |
-| **amount** | **Double** (double) | The calculated payment amount. | [optional] [example: 10.0] |
-| **currency** | **String** | The three-character ISO 4217 currency symbol used for the payment calculation. | [optional] [example: USD] [nullable] |
-| **quantity** | **Integer** (int32) | The quantity associated with the payment calculation. | [optional] [example: 1] |
+| **operationId** | **Long** (int64) | The operation unique identifier. | [optional] [example: `123456789`] |
+| **amount** | **Double** (double) | The calculated payment amount. | [optional] [example: `10.0`] |
+| **currency** | **String** | The three-character ISO 4217 currency symbol used for the payment calculation. | [optional] [example: `USD`] [nullable] |
+| **quantity** | **Integer** (int32) | The quantity associated with the payment calculation. | [optional] [example: `1`] |
 
 
 ### Model PaymentCalculationWrapper
@@ -13506,12 +13506,12 @@ Where to buy or extend the portal's subscription, and what the subscription in f
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **salesEmail** | **String** | The vendor mailbox to write to about buying, extending or changing the subscription, picked for the portal  language. It is not the portal's own support address. | [required] [example: sales@example.com] [nullable] |
-| **feedbackAndSupportUrl** | **String** | Not populated: nothing fills this field in, so it always comes back empty. The help and support addresses  live in `externalResources` of `GET api/2.0/settings` instead. | [optional] [example: https://example.com] [nullable] |
-| **buyUrl** | **String** | The vendor page for buying or extending the subscription, chosen for the licence kind the installation was  built for and for the portal language. It is a page for a person to open, not an API to call. | [required] [example: https://example.com/buy] [nullable] |
-| **standalone** | **Boolean** | Whether this is a server installation someone administers themselves rather than a portal in the cloud,  which decides whether payment means uploading a licence file or a subscription in the vendor's store. | [required] [example: false] |
+| **salesEmail** | **String** | The vendor mailbox to write to about buying, extending or changing the subscription, picked for the portal  language. It is not the portal's own support address. | [required] [example: `sales@example.com`] [nullable] |
+| **feedbackAndSupportUrl** | **String** | Not populated: nothing fills this field in, so it always comes back empty. The help and support addresses  live in `externalResources` of `GET api/2.0/settings` instead. | [optional] [example: `https://example.com`] [nullable] |
+| **buyUrl** | **String** | The vendor page for buying or extending the subscription, chosen for the licence kind the installation was  built for and for the portal language. It is a page for a person to open, not an API to call. | [required] [example: `https://example.com/buy`] [nullable] |
+| **standalone** | **Boolean** | Whether this is a server installation someone administers themselves rather than a portal in the cloud,  which decides whether payment means uploading a licence file or a subscription in the vendor's store. | [required] [example: `false`] |
 | **currentLicense** | [**CurrentLicenseInfo**](#model-currentlicenseinfo) | The subscription in force, reduced to the two facts a payment page needs. | [required] |
-| **max** | **Integer** (int32) | The largest quantity of a paid item - members, storage - that may be bought in one go, `999` unless the  installation configures another cap. It bounds a single purchase, not the total a portal may hold. | [required] [example: 999] |
+| **max** | **Integer** (int32) | The largest quantity of a paid item - members, storage - that may be bought in one go, `999` unless the  installation configures another cap. It bounds a single purchase, not the total a portal may hold. | [required] [example: `999`] |
 
 
 ### Model PaymentSettingsWrapper
@@ -13531,9 +13531,9 @@ The plan being bought and the two pages the hosted checkout returns the buyer to
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **backUrl** | **URI** (uri) | The absolute address the hosted checkout page sends the buyer back to when the purchase is abandoned. It has  to be a well-formed URL and is carried into the checkout page as it is given, so it must be reachable by the  buyer rather than by the portal. | [required] [example: https://example.com/payment/back] [minLength: 0] [maxLength: 255] |
-| **successUrl** | **URI** (uri) | The absolute address the hosted checkout page sends the buyer to once the payment provider accepts the  purchase. Reaching it says the provider took the money, not that the portal has already been switched to the  new plan, so a client that lands here reads the plan back rather than assuming it. | [required] [example: https://example.com/payment/success] [minLength: 0] [maxLength: 255] |
-| **quantity** | **Map** (int32) | The plan being bought, as a single pair of the plan name and the number of units of it. The key is the `name`  of a monthly, non-wallet quota from `GET api/2.0/portal/payment/quotas`, and the value is how many  administrators the plan is to cover, which has to be greater than zero. Exactly one pair is accepted; yearly  and wallet products are refused with 400, and wallet services are bought through  `PUT api/2.0/portal/payment/updatewallet` instead. | [required] [example: \{admin=1\}] |
+| **backUrl** | **URI** (uri) | The absolute address the hosted checkout page sends the buyer back to when the purchase is abandoned. It has  to be a well-formed URL and is carried into the checkout page as it is given, so it must be reachable by the  buyer rather than by the portal. | [required] [example: `https://example.com/payment/back`] [minLength: 0] [maxLength: 255] |
+| **successUrl** | **URI** (uri) | The absolute address the hosted checkout page sends the buyer to once the payment provider accepts the  purchase. Reaching it says the provider took the money, not that the portal has already been switched to the  new plan, so a client that lands here reads the plan back rather than assuming it. | [required] [example: `https://example.com/payment/success`] [minLength: 0] [maxLength: 255] |
+| **quantity** | **Map** (int32) | The plan being bought, as a single pair of the plan name and the number of units of it. The key is the `name`  of a monthly, non-wallet quota from `GET api/2.0/portal/payment/quotas`, and the value is how many  administrators the plan is to cover, which has to be greater than zero. Exactly one pair is accepted; yearly  and wallet products are refused with 400, and wallet services are bought through  `PUT api/2.0/portal/payment/updatewallet` instead. | [required] [example: `{admin=1}`] |
 
 
 ### Model PluginsDto
@@ -13541,9 +13541,9 @@ What the installation allows to be done with web plugins.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **enabled** | **Boolean** | Whether web plugins run on this portal at all. While it is `false` the operations under  `api/2.0/settings/webplugins` are of no use, whatever the other two flags say. All three are `false`  unless the installation switched plugins on in its configuration. | [optional] [example: true] |
-| **upload** | **Boolean** | Whether an administrator may add a plugin of their own through  `POST api/2.0/settings/webplugins`. While it is `false` only the plugins that ship with the installation  are available. | [optional] [example: true] |
-| **delete** | **Boolean** | Whether an added plugin may be removed again through `DELETE api/2.0/settings/webplugins/{name}`. The  plugins that ship with the installation cannot be removed regardless of this flag. | [optional] [example: true] |
+| **enabled** | **Boolean** | Whether web plugins run on this portal at all. While it is `false` the operations under  `api/2.0/settings/webplugins` are of no use, whatever the other two flags say. All three are `false`  unless the installation switched plugins on in its configuration. | [optional] [example: `true`] |
+| **upload** | **Boolean** | Whether an administrator may add a plugin of their own through  `POST api/2.0/settings/webplugins`. While it is `false` only the plugins that ship with the installation  are available. | [optional] [example: `true`] |
+| **delete** | **Boolean** | Whether an added plugin may be removed again through `DELETE api/2.0/settings/webplugins/{name}`. The  plugins that ship with the installation cannot be removed regardless of this flag. | [optional] [example: `true`] |
 
 
 ### Model PriceDto
@@ -13551,9 +13551,9 @@ What a quota costs, and the currency that amount is in.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **value** | **Double** (double) | The amount for one billing period, per unit for a quota sold by the unit. It is empty for a quota that is  not sold for money - the free, trial and non-profit ones - and for a quota this installation has no price  list entry for. | [optional] [example: 99.99] [nullable] |
-| **currencySymbol** | **String** | The symbol to print in front of `value`, such as `$`. It is chosen for the currency, not for the portal  language, so it is not a localised format. | [optional] [example: $] [nullable] |
-| **isoCurrencySymbol** | **String** | The currency as a three-letter ISO 4217 code, which is the value to compare on when `currencySymbol` is  ambiguous between currencies that share a sign. | [optional] [example: USD] [nullable] |
+| **value** | **Double** (double) | The amount for one billing period, per unit for a quota sold by the unit. It is empty for a quota that is  not sold for money - the free, trial and non-profit ones - and for a quota this installation has no price  list entry for. | [optional] [example: `99.99`] [nullable] |
+| **currencySymbol** | **String** | The symbol to print in front of `value`, such as `$`. It is chosen for the currency, not for the portal  language, so it is not a localised format. | [optional] [example: `$`] [nullable] |
+| **isoCurrencySymbol** | **String** | The currency as a three-letter ISO 4217 code, which is the value to compare on when `currencySymbol` is  ambiguous between currencies that share a sign. | [optional] [example: `USD`] [nullable] |
 
 
 ### Model PriceStatus
@@ -13597,9 +13597,9 @@ Whether one user administers one portal module, echoing back the pair that was a
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **productId** | **UUID** (uuid) | The module the verdict is about, echoed from the request. The all-zero GUID stands for the portal as a  whole rather than for any single module. | [required] [example: 00000000-0000-0000-0000-000000000000] |
-| **userId** | **UUID** (uuid) | The user the verdict is about, echoed from the request unchanged - it is not checked for existing. | [required] [example: 00000000-0000-0000-0000-000000000000] |
-| **administrator** | **Boolean** | Whether that user administers that module. It is `true` for a DocSpace administrator whatever the module,  since the portal-wide role covers every one of them. A `false` can also mean the identifiers name no user  or no module at all, so it is not proof that the user exists, and it says nothing about whether the module  is enabled for the portal - `GET api/2.0/settings/security/{id}` reports that. | [required] [example: true] |
+| **productId** | **UUID** (uuid) | The module the verdict is about, echoed from the request. The all-zero GUID stands for the portal as a  whole rather than for any single module. | [required] [example: `00000000-0000-0000-0000-000000000000`] |
+| **userId** | **UUID** (uuid) | The user the verdict is about, echoed from the request unchanged - it is not checked for existing. | [required] [example: `00000000-0000-0000-0000-000000000000`] |
+| **administrator** | **Boolean** | Whether that user administers that module. It is `true` for a DocSpace administrator whatever the module,  since the portal-wide role covers every one of them. A `false` can also mean the identifiers name no user  or no module at all, so it is not proof that the user exists, and it says nothing about whether the module  is enabled for the portal - `GET api/2.0/settings/security/{id}` reports that. | [required] [example: `true`] |
 
 
 ### Model ProductAdministratorWrapper
@@ -13639,7 +13639,7 @@ The new size of the portal subscription.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **quantity** | **Map** (int32) | The plan and the number of units it is to cover, as a single pair. While the portal is on a priced plan the  key has to be the `name` of that same plan, which `GET api/2.0/portal/payment/quota` reports, because the  subscription is resized rather than swapped; the value is the total the subscription is to have afterwards,  not the difference. Exactly one pair is accepted, and a value that is already in effect is refused with 400. | [required] [example: \{admin=1\}] |
+| **quantity** | **Map** (int32) | The plan and the number of units it is to cover, as a single pair. While the portal is on a priced plan the  key has to be the `name` of that same plan, which `GET api/2.0/portal/payment/quota` reports, because the  subscription is resized rather than swapped; the value is the total the subscription is to have afterwards,  not the difference. Exactly one pair is accepted, and a value that is already in effect is refused with 400. | [required] [example: `{admin=1}`] |
 
 
 ### Model QuotaArrayWrapper
@@ -13659,18 +13659,18 @@ A quota - a plan, an add-on or a wallet service - with its price, the features i
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **id** | **Integer** (int32) | The identifier of the quota, which is what the tariff reports as a quota `id` and what a purchase names.  A negative value belongs to a built-in quota rather than one on the price list. | [required] [example: 1] |
-| **title** | **String** | The quota name in the portal language, for printing rather than matching. It is empty when this build  ships no wording for the quota, which is normal for a quota that is not on the public price list. | [optional] [example: Basic Plan] [nullable] |
+| **id** | **Integer** (int32) | The identifier of the quota, which is what the tariff reports as a quota `id` and what a purchase names.  A negative value belongs to a built-in quota rather than one on the price list. | [required] [example: `1`] |
+| **title** | **String** | The quota name in the portal language, for printing rather than matching. It is empty when this build  ships no wording for the quota, which is normal for a quota that is not on the public price list. | [optional] [example: `Basic Plan`] [nullable] |
 | **price** | [**PriceDto**](#model-pricedto) | What the quota costs, in the currency resolved for the request. Its `value` is empty for a quota that is  not sold for money, which is what `free`, `trial` and `nonProfit` describe. | [required] |
-| **nonProfit** | **Boolean** | Whether this is the non-profit quota, which is granted rather than bought. A portal on it cannot buy any  other plan, so a catalogue asked for plans returns this one alone. | [required] [example: false] |
-| **free** | **Boolean** | Whether this is the free quota a portal falls back to when nothing is paid for. It has no end date and  the tightest limits of any quota. | [required] [example: true] |
-| **trial** | **Boolean** | Whether this is the trial quota, which grants the paid limits for a while and then expires. A trial is not  extended by paying - a plan has to be bought instead. | [required] [example: false] |
-| **features** | [**List**](#model-tenantquotafeaturedto) | The features the quota switches on, each with the limit it grants and, on the quota the portal is  actually on, how much of that limit is already used. A feature that is absent is off, so the list is the  whole truth about what the quota includes. | [required] [example: [\{id=00000000-0000-0000-0000-000000000001, title=Premium Storage\}]] [nullable] |
+| **nonProfit** | **Boolean** | Whether this is the non-profit quota, which is granted rather than bought. A portal on it cannot buy any  other plan, so a catalogue asked for plans returns this one alone. | [required] [example: `false`] |
+| **free** | **Boolean** | Whether this is the free quota a portal falls back to when nothing is paid for. It has no end date and  the tightest limits of any quota. | [required] [example: `true`] |
+| **trial** | **Boolean** | Whether this is the trial quota, which grants the paid limits for a while and then expires. A trial is not  extended by paying - a plan has to be bought instead. | [required] [example: `false`] |
+| **features** | [**List**](#model-tenantquotafeaturedto) | The features the quota switches on, each with the limit it grants and, on the quota the portal is  actually on, how much of that limit is already used. A feature that is absent is off, so the list is the  whole truth about what the quota includes. | [required] [example: `[{id=00000000-0000-0000-0000-000000000001, title=Premium Storage}]`] [nullable] |
 | **usersQuota** | [**TenantEntityQuotaSettings**](#model-tenantentityquotasettings) | The per-member storage allowance an administrator has set on top of the quota, and whether it is applied  at all. It describes the live portal rather than this quota, so every entry of a catalogue listing repeats  the same values, and it is empty unless the portal is a server installation or its plan includes  statistics. | [optional] |
 | **roomsQuota** | [**TenantEntityQuotaSettings**](#model-tenantentityquotasettings) | The same kind of per-room storage override, filled in and read the same way as `usersQuota`. | [optional] |
 | **aiAgentsQuota** | [**TenantEntityQuotaSettings**](#model-tenantentityquotasettings) | The same kind of per-agent storage override for AI agents, filled in and read the same way as  `usersQuota`. | [optional] |
 | **tenantCustomQuota** | [**TenantQuotaSettings**](#model-tenantquotasettings) | The storage allowance an administrator has set for the portal as a whole, which caps it below what the  quota grants. Filled in under the same conditions as `usersQuota`. | [optional] |
-| **dueDate** | **Date** (date-time) | When the quota runs out, in UTC. It is empty on a quota from the catalogue, which has no date until it is  bought, and on a quota that never expires. | [optional] [example: 2024-01-15T10:30:00Z] [nullable] |
+| **dueDate** | **Date** (date-time) | When the quota runs out, in UTC. It is empty on a quota from the catalogue, which has no date until it is  bought, and on a quota that never expires. | [optional] [example: `2024-01-15T10:30:00Z`] [nullable] |
 
 
 ### Model QuotaSettingsRequestsDto
@@ -13678,7 +13678,7 @@ The default storage limit given to newly created users, rooms or AI agents, and 
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **enableQuota** | **Boolean** | Whether the limit is enforced at all. While it is false the size is ignored and nothing created afterwards  carries a limit; objects that already have one keep it either way. | [optional] [example: true] |
+| **enableQuota** | **Boolean** | Whether the limit is enforced at all. While it is false the size is ignored and nothing created afterwards  carries a limit; objects that already have one keep it either way. | [optional] [example: `true`] |
 | **defaultQuota** | [**QuotaSettingsRequestsDto_defaultQuota**](#model-quotasettingsrequestsdtodefaultquota) |  | [required] |
 
 
@@ -13730,12 +13730,12 @@ One page of the portal wallet's money movements, with the paging figures needed 
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **collection** | [**List**](#model-operationdto) | The movements on this page - top-ups, charges, refunds and corrections alike, newest first. It is empty  for a page past the end of the report as well as for a period in which nothing happened. | [optional] [example: [\{service=disk-storage, debit=14.0\}]] [nullable] |
-| **offset** | **Integer** (int32) | How many movements were skipped before this page, echoed from the request so a client need not remember  what it asked for. | [optional] [example: 0] |
-| **limit** | **Integer** (int32) | How many movements one page may hold, echoed from the request; it is 25 unless another value was asked  for. A full page is not proof that more exist - compare `currentPage` with `totalPage`. | [optional] [example: 25] |
-| **totalQuantity** | **Long** (int64) | How many movements match the filters in total, across every page. | [optional] [example: 137] |
-| **totalPage** | **Integer** (int32) | How many pages those movements come to at the current `limit`. | [optional] [example: 6] |
-| **currentPage** | **Integer** (int32) | Which of those pages this one is, as the billing service numbers them. Page through by advancing `offset`  rather than this value, which nothing accepts as an argument. | [optional] [example: 1] |
+| **collection** | [**List**](#model-operationdto) | The movements on this page - top-ups, charges, refunds and corrections alike, newest first. It is empty  for a page past the end of the report as well as for a period in which nothing happened. | [optional] [example: `[{service=disk-storage, debit=14.0}]`] [nullable] |
+| **offset** | **Integer** (int32) | How many movements were skipped before this page, echoed from the request so a client need not remember  what it asked for. | [optional] [example: `0`] |
+| **limit** | **Integer** (int32) | How many movements one page may hold, echoed from the request; it is 25 unless another value was asked  for. A full page is not proof that more exist - compare `currentPage` with `totalPage`. | [optional] [example: `25`] |
+| **totalQuantity** | **Long** (int64) | How many movements match the filters in total, across every page. | [optional] [example: `137`] |
+| **totalPage** | **Integer** (int32) | How many pages those movements come to at the current `limit`. | [optional] [example: `6`] |
+| **currentPage** | **Integer** (int32) | Which of those pages this one is, as the billing service numbers them. Page through by advancing `offset`  rather than this value, which nothing accepts as an argument. | [optional] [example: `1`] |
 
 
 ### Model ReportWrapper
@@ -13755,7 +13755,7 @@ The AI models the portal is not allowed to use.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **models** | **List** | The identifiers of the models the portal is not allowed to use. | [required] [example: [gpt-4o, claude-3-opus]] [nullable] |
+| **models** | **List** | The identifiers of the models the portal is not allowed to use. | [required] [example: `[gpt-4o, claude-3-opus]`] [nullable] |
 
 
 ### Model RestrictedModelsResponseWrapper
@@ -13775,7 +13775,7 @@ The rooms the calling user has silenced.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **disabledRooms** | **List** | The identifiers of the silenced rooms, in the order they were added, and belonging to the caller's own  account alone. They are kept as opaque values, so a numeric identifier of a portal room and a string  identifier of a room on a connected third-party account both appear here, and an identifier stays on the  list after its room is deleted. An empty list means nothing is silenced. | [optional] [example: [1, 2, 3]] [nullable] |
+| **disabledRooms** | **List** | The identifiers of the silenced rooms, in the order they were added, and belonging to the caller's own  account alone. They are kept as opaque values, so a numeric identifier of a portal room and a string  identifier of a room on a connected third-party account both appear here, and an identifier stays on the  list after its room is deleted. An empty list means nothing is silenced. | [optional] [example: `[1, 2, 3]`] [nullable] |
 
 
 ### Model RoomsNotificationSettingsWrapper
@@ -13796,7 +13796,7 @@ Which single room the calling user silences, and which way.
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **roomsId** | **oas_any_type_not_mapped** |  | [optional] [nullable] |
-| **mute** | **Boolean** | Which way the room goes: `true` adds it to the caller silenced list, `false` takes it off again. While a room  is silenced its activity is left out of the hourly and daily digests, the letters it would send at once are  not sent, and its new-item counters are hidden. | [optional] [example: true] |
+| **mute** | **Boolean** | Which way the room goes: `true` adds it to the caller silenced list, `false` takes it off again. While a room  is silenced its activity is left out of the hourly and daily digests, the letters it would send at once are  not sent, and its new-item counters are hidden. | [optional] [example: `true`] |
 
 
 ### Model STRINGArrayWrapper
@@ -13816,9 +13816,9 @@ Who is writing to the ONLYOFFICE sales team, and what about.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **userName** | **String** | The name the sales team should address the reply to. It is sent as written and is not matched against any  portal account; an empty value fails the request with 400. | [required] [example: John Doe] [minLength: 1] [maxLength: 255] |
-| **email** | **String** | The address the answer is sent to. It has to be a well-formed email address and need not be the caller portal  address; an empty or malformed value fails the request with 400. | [required] [example: user@example.com] [minLength: 1] [maxLength: 64] |
-| **message** | **String** | What is being asked of the sales team - a quote, an invoice, or a plan that cannot be bought online. An empty  value fails the request with 400. | [required] [example: I would like to inquire about pricing] [minLength: 1] [maxLength: 255] |
+| **userName** | **String** | The name the sales team should address the reply to. It is sent as written and is not matched against any  portal account; an empty value fails the request with 400. | [required] [example: `John Doe`] [minLength: 1] [maxLength: 255] |
+| **email** | **String** | The address the answer is sent to. It has to be a well-formed email address and need not be the caller portal  address; an empty or malformed value fails the request with 400. | [required] [example: `user@example.com`] [minLength: 1] [maxLength: 64] |
+| **message** | **String** | What is being asked of the sales team - a quote, an invoice, or a plan that cannot be bought online. An empty  value fails the request with 400. | [required] [example: `I would like to inquire about pricing`] [minLength: 1] [maxLength: 255] |
 
 
 ### Model SecurityArrayWrapper
@@ -13838,11 +13838,11 @@ How access to one portal module is configured: whether it is restricted, and who
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **webItemId** | **String** | The module this entry is about, echoed from the identifier that was asked about. When several identifiers  are asked about at once, entries come back one per identifier and in the order they were sent, so they can  also be matched by position. | [optional] [example: 00000000-0000-0000-0000-000000000000] [nullable] |
-| **users** | [**List**](#model-employeedto) | The individual members the rule was stored for. Members the caller is not allowed to see are left out, so  the same module can come back with different lists for different callers and an empty list does not prove  that nobody was granted access. | [optional] [example: [\{displayName=John Doe\}]] [nullable] |
-| **groups** | [**List**](#model-groupsummarydto) | The groups the rule was stored for, listed in full - unlike `users`, nothing is filtered out of it. | [optional] [example: [\{id=00000000-0000-0000-0000-000000000000, name=Administrators\}]] [nullable] |
-| **enabled** | **Boolean** | Whether access to the module is restricted to the subjects listed here. It is `false` for a module nobody  has ever configured, in which case the two lists say nothing about who may open it. | [optional] [example: true] |
-| **isSubItem** | **Boolean** | Whether the module hangs under another one rather than standing on its own. A sub-module is never returned  by `GET api/2.0/settings/security/modules`, which lists top-level modules only. | [optional] [example: true] |
+| **webItemId** | **String** | The module this entry is about, echoed from the identifier that was asked about. When several identifiers  are asked about at once, entries come back one per identifier and in the order they were sent, so they can  also be matched by position. | [optional] [example: `00000000-0000-0000-0000-000000000000`] [nullable] |
+| **users** | [**List**](#model-employeedto) | The individual members the rule was stored for. Members the caller is not allowed to see are left out, so  the same module can come back with different lists for different callers and an empty list does not prove  that nobody was granted access. | [optional] [example: `[{displayName=John Doe}]`] [nullable] |
+| **groups** | [**List**](#model-groupsummarydto) | The groups the rule was stored for, listed in full - unlike `users`, nothing is filtered out of it. | [optional] [example: `[{id=00000000-0000-0000-0000-000000000000, name=Administrators}]`] [nullable] |
+| **enabled** | **Boolean** | Whether access to the module is restricted to the subjects listed here. It is `false` for a module nobody  has ever configured, in which case the two lists say nothing about who may open it. | [optional] [example: `true`] |
+| **isSubItem** | **Boolean** | Whether the module hangs under another one rather than standing on its own. A sub-module is never returned  by `GET api/2.0/settings/security/modules`, which lists top-level modules only. | [optional] [example: `true`] |
 
 
 ### Model SecurityRequestsDto
@@ -13850,9 +13850,9 @@ Which member is granted or denied the administrator role of which portal module.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **productId** | **UUID** (uuid) | The module the role applies to, given by its GUID. The all-zero GUID stands for the portal itself and grants  or revokes the DocSpace administrator role, which covers every module at once; a GUID that names no module  group is stored without effect rather than refused. | [required] [example: 00000000-0000-0000-0000-000000000000] |
-| **userId** | **UUID** (uuid) | The portal member the role is given to or taken from, by user ID. The member has to exist already - nobody is  created here - and promoting a guest or a plain member turns them into a paid one. | [required] [example: 00000000-0000-0000-0000-000000000000] |
-| **administrator** | **Boolean** | Which way the role goes: `true` adds the member to the module administrator group, `false` removes them from  it. Taking away the portal-wide role also drops the member from every product group. | [optional] [example: true] |
+| **productId** | **UUID** (uuid) | The module the role applies to, given by its GUID. The all-zero GUID stands for the portal itself and grants  or revokes the DocSpace administrator role, which covers every module at once; a GUID that names no module  group is stored without effect rather than refused. | [required] [example: `00000000-0000-0000-0000-000000000000`] |
+| **userId** | **UUID** (uuid) | The portal member the role is given to or taken from, by user ID. The member has to exist already - nobody is  created here - and promoting a guest or a plain member turns them into a paid one. | [required] [example: `00000000-0000-0000-0000-000000000000`] |
+| **administrator** | **Boolean** | Which way the role goes: `true` adds the member to the module administrator group, `false` removes them from  it. Taking away the portal-wide role also drops the member from every product group. | [optional] [example: `true`] |
 
 
 ### Model ServicePriceInfo
@@ -13860,18 +13860,18 @@ Represents a price of the service.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **id** | **Integer** (int32) | The price unique identifier. | [optional] [example: 12345] |
-| **accountNumber** | **Integer** (int32) | The account number. | [optional] [example: 1010] |
-| **serviceId** | **Integer** (int32) | The service ID. | [optional] [example: 12345] |
-| **timeUnit** | [**PriceTimeUnit**](#model-pricetimeunit) | The time unit the price is bound to. | [optional] [enum: 0, 1, 2, 3, 4, 5, 6] |
-| **costPrice** | **Double** (double) | The cost price. | [optional] [example: 1500.75] |
-| **extraCharge** | **Double** (double) | The extra charge added to the cost price. | [optional] [example: 1500.75] |
-| **servicePrice** | **Double** (double) | The resulting service price. | [optional] [example: 1500.75] |
-| **quota** | **Double** (double) | The quota the price is set for. | [optional] [example: 100] [nullable] |
+| **id** | **Integer** (int32) | The price unique identifier. | [optional] [example: `12345`] |
+| **accountNumber** | **Integer** (int32) | The account number. | [optional] [example: `1010`] |
+| **serviceId** | **Integer** (int32) | The service ID. | [optional] [example: `12345`] |
+| **timeUnit** | [**PriceTimeUnit**](#model-pricetimeunit) | The time unit the price is bound to. | [optional] [enum: `0`, `1`, `2`, `3`, `4`, `5`, `6`] |
+| **costPrice** | **Double** (double) | The cost price. | [optional] [example: `1500.75`] |
+| **extraCharge** | **Double** (double) | The extra charge added to the cost price. | [optional] [example: `1500.75`] |
+| **servicePrice** | **Double** (double) | The resulting service price. | [optional] [example: `1500.75`] |
+| **quota** | **Double** (double) | The quota the price is set for. | [optional] [example: `100`] [nullable] |
 | **timeBound** | [**TimeBound**](#model-timebound) | The period the price is effective in. | [optional] |
-| **status** | [**PriceStatus**](#model-pricestatus) | The price status. | [optional] [enum: 0, 1, 2] |
-| **created** | **Date** (date-time) | The date and time when the price was created. | [optional] [example: 2024-01-15T10:30:00Z] |
-| **discountCategoryId** | **Integer** (int32) | The discount category ID. | [optional] [example: 12345] [nullable] |
+| **status** | [**PriceStatus**](#model-pricestatus) | The price status. | [optional] [enum: `0`, `1`, `2`] |
+| **created** | **Date** (date-time) | The date and time when the price was created. | [optional] [example: `2024-01-15T10:30:00Z`] |
+| **discountCategoryId** | **Integer** (int32) | The discount category ID. | [optional] [example: `12345`] [nullable] |
 | **discountCategory** | [**DiscountCategory**](#model-discountcategory) | The discount category. | [optional] |
 
 
@@ -13892,7 +13892,7 @@ Whether a portal application is switched on.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **enabled** | **Boolean** | Whether the application is available in this portal. Switching it off leaves its settings document stored, so  switching it back on restores the configuration it had; connected clients are told of the new state without a  reload. | [optional] [example: true] |
+| **enabled** | **Boolean** | Whether the application is available in this portal. Switching it off leaves its settings document stored, so  switching it back on restores the configuration it had; connected clients are told of the new state without a  reload. | [optional] [example: `true`] |
 
 
 ### Model SetAppSettingsBody
@@ -13912,7 +13912,7 @@ The complete set of AI chat models that are to be barred on the portal.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **models** | **Set** | The identifiers of the models no user of the portal may pick, taken from  `GET api/2.0/portal/payment/ai-prices`. This is the whole set that is to hold afterwards and not a list of  additions: send the models already barred together with the new one to add a restriction, leave one out to  lift it, and send an empty set to lift them all. | [required] [example: [model1, model2]] |
+| **models** | **Set** | The identifiers of the models no user of the portal may pick, taken from  `GET api/2.0/portal/payment/ai-prices`. This is the whole set that is to hold afterwards and not a list of  additions: send the models already barred together with the new one to add a restriction, leave one out to  lift it, and send an empty set to lift them all. | [required] [example: `[model1, model2]`] |
 
 
 ### Model SettingsDto
@@ -13920,52 +13920,52 @@ The general configuration of the current portal, as the client shell needs it be
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **timezone** | **String** | The portal time zone as an IANA identifier, which is the zone every date this API returns in portal time  is expressed in. Filled in for a signed-in caller only. | [optional] [example: UTC] [nullable] |
-| **trustedDomains** | **List** | The mail domains a new member may register or be invited from without confirming the address. It is filled  in for a signed-in caller, and for an anonymous one only while `enabledJoin` is `true`; it is empty  whenever `trustedDomainsType` is not `Custom`. | [optional] [example: [mydomain.com, mydomain1.com]] [nullable] |
-| **trustedDomainsType** | [**TenantTrustedDomainsType**](#model-tenanttrusteddomainstype) | How the mail domains above are applied: no domain trusted, every domain trusted, or only the listed ones.  Filled in under the same conditions as `trustedDomains`. | [optional] [enum: 0, 1, 2] |
-| **culture** | **String** | The default language of the portal as a culture name, which is what unauthenticated pages are rendered in.  A signed-in member may have a language of their own, and that one is not reported here. | [required] [example: en-US] [nullable] |
-| **utcOffset** | **String** (date-span) | The portal's offset from UTC as a time span, positive east of UTC. Filled in for a signed-in caller only,  and taken at the moment of the call, so it already reflects daylight saving time. | [optional] [example: -08:30:00] |
-| **utcHoursOffset** | **Double** (double) | The same offset in hours, fractional for a zone that is not on a whole hour. It is there so a client does  not have to parse `utcOffset`. | [optional] [example: -8.5] |
-| **greetingSettings** | **String** | The portal title shown on the login page and in letters. It falls back to the product name in the portal  language while the portal has been given no title of its own. | [optional] [example: Web Office Applications] [nullable] |
-| **ownerId** | **UUID** (uuid) | The portal owner, the one account that cannot be removed or demoted. Filled in for a signed-in caller  only, and the empty GUID for an anonymous one. | [optional] [example: 00000000-0000-0000-0000-000000000000] |
-| **nameSchemaId** | **String** | The naming scheme the portal uses for its own vocabulary - what a member, a group or a room is called in  the interface. `GET api/2.0/settings/customschemas/{id}` spells that vocabulary out. Filled in for a  signed-in caller only. | [optional] [example: default] [nullable] |
-| **enabledJoin** | **Boolean** | Whether someone who is not invited may still register, which is the case when the portal trusts every mail  domain or a list of them. It is computed for an anonymous caller only and left out entirely for a  signed-in one, so a missing value is not a `false`. | [optional] [example: true] [nullable] |
-| **enableAdmMess** | **Boolean** | Whether the login page may offer the form for writing to the portal administrators. It is also `true`  while the portal's payment has lapsed, whatever the setting says, so it can be set on a portal where an  administrator switched the form off. | [optional] [example: true] [nullable] |
-| **thirdpartyEnable** | **Boolean** | Whether the login page may offer sign-in through an external identity provider. It is computed for an  anonymous caller only; `GET api/2.0/capabilities` reports the same thing with the list of providers. | [optional] [example: true] [nullable] |
-| **docSpace** | **Boolean** | Always `true` in this product. It exists so a client that also talks to older ONLYOFFICE portals can tell  them apart, and is not a feature switch. | [optional] [example: true] |
-| **standalone** | **Boolean** | Whether this is a server installation someone administers themselves rather than a portal in the cloud.  Several fields below and a number of operations behave differently in the two, so a client that has to  branch on the deployment reads it here. | [optional] [example: true] |
-| **isAmi** | **Boolean** | Whether the installation runs from an Amazon machine image, which is a server installation that can read  its own instance metadata. It is `false` on every cloud portal. | [optional] [example: true] |
-| **baseDomain** | **String** | The domain new portals of this installation are created under, which is what a portal name is checked  against and appended to. It is empty on an installation that serves a single portal on a fixed address. | [required] [example: example.com] [nullable] |
-| **wizardToken** | **String** | The token that authorizes the first-run setup wizard. It is handed out to anonymous callers only, and only  while the wizard has not been completed; once it has, the field stays empty for good. | [optional] [example: dGhpc2lzYXRva2Vu...] [nullable] |
+| **timezone** | **String** | The portal time zone as an IANA identifier, which is the zone every date this API returns in portal time  is expressed in. Filled in for a signed-in caller only. | [optional] [example: `UTC`] [nullable] |
+| **trustedDomains** | **List** | The mail domains a new member may register or be invited from without confirming the address. It is filled  in for a signed-in caller, and for an anonymous one only while `enabledJoin` is `true`; it is empty  whenever `trustedDomainsType` is not `Custom`. | [optional] [example: `[mydomain.com, mydomain1.com]`] [nullable] |
+| **trustedDomainsType** | [**TenantTrustedDomainsType**](#model-tenanttrusteddomainstype) | How the mail domains above are applied: no domain trusted, every domain trusted, or only the listed ones.  Filled in under the same conditions as `trustedDomains`. | [optional] [enum: `0`, `1`, `2`] |
+| **culture** | **String** | The default language of the portal as a culture name, which is what unauthenticated pages are rendered in.  A signed-in member may have a language of their own, and that one is not reported here. | [required] [example: `en-US`] [nullable] |
+| **utcOffset** | **String** (date-span) | The portal's offset from UTC as a time span, positive east of UTC. Filled in for a signed-in caller only,  and taken at the moment of the call, so it already reflects daylight saving time. | [optional] [example: `-08:30:00`] |
+| **utcHoursOffset** | **Double** (double) | The same offset in hours, fractional for a zone that is not on a whole hour. It is there so a client does  not have to parse `utcOffset`. | [optional] [example: `-8.5`] |
+| **greetingSettings** | **String** | The portal title shown on the login page and in letters. It falls back to the product name in the portal  language while the portal has been given no title of its own. | [optional] [example: `Web Office Applications`] [nullable] |
+| **ownerId** | **UUID** (uuid) | The portal owner, the one account that cannot be removed or demoted. Filled in for a signed-in caller  only, and the empty GUID for an anonymous one. | [optional] [example: `00000000-0000-0000-0000-000000000000`] |
+| **nameSchemaId** | **String** | The naming scheme the portal uses for its own vocabulary - what a member, a group or a room is called in  the interface. `GET api/2.0/settings/customschemas/{id}` spells that vocabulary out. Filled in for a  signed-in caller only. | [optional] [example: `default`] [nullable] |
+| **enabledJoin** | **Boolean** | Whether someone who is not invited may still register, which is the case when the portal trusts every mail  domain or a list of them. It is computed for an anonymous caller only and left out entirely for a  signed-in one, so a missing value is not a `false`. | [optional] [example: `true`] [nullable] |
+| **enableAdmMess** | **Boolean** | Whether the login page may offer the form for writing to the portal administrators. It is also `true`  while the portal's payment has lapsed, whatever the setting says, so it can be set on a portal where an  administrator switched the form off. | [optional] [example: `true`] [nullable] |
+| **thirdpartyEnable** | **Boolean** | Whether the login page may offer sign-in through an external identity provider. It is computed for an  anonymous caller only; `GET api/2.0/capabilities` reports the same thing with the list of providers. | [optional] [example: `true`] [nullable] |
+| **docSpace** | **Boolean** | Always `true` in this product. It exists so a client that also talks to older ONLYOFFICE portals can tell  them apart, and is not a feature switch. | [optional] [example: `true`] |
+| **standalone** | **Boolean** | Whether this is a server installation someone administers themselves rather than a portal in the cloud.  Several fields below and a number of operations behave differently in the two, so a client that has to  branch on the deployment reads it here. | [optional] [example: `true`] |
+| **isAmi** | **Boolean** | Whether the installation runs from an Amazon machine image, which is a server installation that can read  its own instance metadata. It is `false` on every cloud portal. | [optional] [example: `true`] |
+| **baseDomain** | **String** | The domain new portals of this installation are created under, which is what a portal name is checked  against and appended to. It is empty on an installation that serves a single portal on a fixed address. | [required] [example: `example.com`] [nullable] |
+| **wizardToken** | **String** | The token that authorizes the first-run setup wizard. It is handed out to anonymous callers only, and only  while the wizard has not been completed; once it has, the field stays empty for good. | [optional] [example: `dGhpc2lzYXRva2Vu...`] [nullable] |
 | **passwordHash** | [**PasswordHasher**](#model-passwordhasher) | The parameters for hashing a password in the client before it is sent - the salt, the iteration count and  the hash size. It is filled in for an anonymous caller and, for a signed-in one, only when  `withPassword=true` is asked for. Hash with exactly these parameters and send the result as  `passwordHash`, since the portal cannot reproduce the hash from a different set. | [optional] |
 | **firebase** | [**FirebaseDto**](#model-firebasedto) | The Firebase project a mobile or web client sends push registrations to. Filled in for a signed-in caller  only, and its own fields are empty strings on an installation that configures no Firebase project. | [optional] |
-| **version** | **String** | The product version of the portal, empty when the installation does not publish one. It is the version of  the server, not of this API, whose own version is fixed at 2.0. | [optional] [example: 12.5.0] [nullable] |
-| **recaptchaType** | [**RecaptchaType**](#model-recaptchatype) | Which CAPTCHA the login form has to render, decided by the installation's configuration. Computed for an  anonymous caller only. | [optional] [enum: 0, 1, 2, 3] |
-| **recaptchaPublicKey** | **String** | The site key for the CAPTCHA named by `recaptchaType`, safe to embed in a page. It is empty when the  installation configures no CAPTCHA, in which case the login form asks for none. | [optional] [example: abc123def456] [nullable] |
-| **debugInfo** | **Boolean** | Whether the client may collect and send diagnostic information. Filled in for a signed-in caller only, and  `false` unless the installation switched it on. | [optional] [example: true] |
-| **socketUrl** | **String** | The address of the socket service that pushes live updates to a client. It is filled in for a signed-in  caller and for an anonymous one who arrives with an external sharing link, and is empty when the  installation runs no socket service - a client then has to poll. | [optional] [example: https://example.com] [nullable] |
-| **tenantStatus** | [**TenantStatus**](#model-tenantstatus) | The lifecycle state of the portal. Anything other than active means most operations are refused for the  moment, because the portal is being transferred, restored, encrypted or removed. | [optional] [enum: 0, 1, 2, 3, 4, 5, 6] |
-| **tenantAlias** | **String** | The portal's own name within the installation, which together with `baseDomain` forms the address it is  reached at. `PUT api/2.0/portal/portalrename` changes it. | [optional] [example: mycompany] [nullable] |
-| **displayAbout** | **Boolean** | Whether the interface may show the About page. A cloud portal always may; a server installation may unless  its plan includes branding and the vendor details hide the page. | [optional] [example: true] |
+| **version** | **String** | The product version of the portal, empty when the installation does not publish one. It is the version of  the server, not of this API, whose own version is fixed at 2.0. | [optional] [example: `12.5.0`] [nullable] |
+| **recaptchaType** | [**RecaptchaType**](#model-recaptchatype) | Which CAPTCHA the login form has to render, decided by the installation's configuration. Computed for an  anonymous caller only. | [optional] [enum: `0`, `1`, `2`, `3`] |
+| **recaptchaPublicKey** | **String** | The site key for the CAPTCHA named by `recaptchaType`, safe to embed in a page. It is empty when the  installation configures no CAPTCHA, in which case the login form asks for none. | [optional] [example: `abc123def456`] [nullable] |
+| **debugInfo** | **Boolean** | Whether the client may collect and send diagnostic information. Filled in for a signed-in caller only, and  `false` unless the installation switched it on. | [optional] [example: `true`] |
+| **socketUrl** | **String** | The address of the socket service that pushes live updates to a client. It is filled in for a signed-in  caller and for an anonymous one who arrives with an external sharing link, and is empty when the  installation runs no socket service - a client then has to poll. | [optional] [example: `https://example.com`] [nullable] |
+| **tenantStatus** | [**TenantStatus**](#model-tenantstatus) | The lifecycle state of the portal. Anything other than active means most operations are refused for the  moment, because the portal is being transferred, restored, encrypted or removed. | [optional] [enum: `0`, `1`, `2`, `3`, `4`, `5`, `6`] |
+| **tenantAlias** | **String** | The portal's own name within the installation, which together with `baseDomain` forms the address it is  reached at. `PUT api/2.0/portal/portalrename` changes it. | [optional] [example: `mycompany`] [nullable] |
+| **displayAbout** | **Boolean** | Whether the interface may show the About page. A cloud portal always may; a server installation may unless  its plan includes branding and the vendor details hide the page. | [optional] [example: `true`] |
 | **domainValidator** | [**TenantDomainValidator**](#model-tenantdomainvalidator) | The rules a portal name is checked against - its length limits and the pattern it has to match - so a  client can validate a rename before sending it. Filled in for a signed-in caller only. | [optional] |
-| **zendeskKey** | **String** | The key that lets the client open the vendor's support chat, empty when the installation configures none.  Filled in for a signed-in caller only. | [optional] [example: abc123def456] [nullable] |
-| **tagManagerId** | **String** | The Google Tag Manager container the client should load, empty when the installation configures none.  Filled in for a signed-in caller only. | [optional] [example: GTM-XXXXXX] [nullable] |
-| **cookieSettingsEnabled** | **Boolean** | Whether the portal limits how long an authentication session stays valid. The limit itself is read with  `GET api/2.0/settings/cookiesettings`; while this is `false` a session is honoured for a year. | [required] [example: true] |
-| **limitedAccessSpace** | **Boolean** | Whether the space-management section is restricted to the portal owner. Filled in for a signed-in caller  only. | [optional] [example: true] |
-| **limitedAccessDevToolsForUsers** | **Boolean** | Whether the Developer Tools section is hidden from members who are not administrators. Filled in for a  signed-in caller only. | [optional] [example: true] |
-| **displayBanners** | **Boolean** | Whether the interface may show the vendor's promotional banners. A cloud portal always reports `true`; on  a server installation it follows the banner setting. Filled in for a signed-in caller only. | [optional] [example: true] |
-| **aiEnabled** | **Boolean** | Whether the AI features - chat, agents and vectorisation - may be used on this portal. While it is  `false` the AI Agents folder is hidden and the AI operations are refused. Filled in for a signed-in caller  only. | [optional] [example: true] |
-| **walletLowBalance** | **Boolean** | Whether the portal wallet has already dropped below its low-balance threshold, so a client can warn about  AI operations being cut off. It is reported to DocSpace administrators only and left empty for everyone  else, which is not the same as a healthy balance. | [optional] [example: false] [nullable] |
-| **userNameRegex** | **String** | The pattern a member's first and last name has to match, so a client can validate a name before sending  it. It is a .NET regular expression and is applied to each name part separately. | [optional] [example: ^[a-zA-Z0-9_]\{3,20\}$] [nullable] |
-| **invitationLimit** | **Integer** (int32) | How many invitations the portal may still send in the current window. Filled in for a signed-in caller  only, and set to the maximum value of a 32-bit integer on an installation that limits nothing. | [optional] [example: 10] [nullable] |
+| **zendeskKey** | **String** | The key that lets the client open the vendor's support chat, empty when the installation configures none.  Filled in for a signed-in caller only. | [optional] [example: `abc123def456`] [nullable] |
+| **tagManagerId** | **String** | The Google Tag Manager container the client should load, empty when the installation configures none.  Filled in for a signed-in caller only. | [optional] [example: `GTM-XXXXXX`] [nullable] |
+| **cookieSettingsEnabled** | **Boolean** | Whether the portal limits how long an authentication session stays valid. The limit itself is read with  `GET api/2.0/settings/cookiesettings`; while this is `false` a session is honoured for a year. | [required] [example: `true`] |
+| **limitedAccessSpace** | **Boolean** | Whether the space-management section is restricted to the portal owner. Filled in for a signed-in caller  only. | [optional] [example: `true`] |
+| **limitedAccessDevToolsForUsers** | **Boolean** | Whether the Developer Tools section is hidden from members who are not administrators. Filled in for a  signed-in caller only. | [optional] [example: `true`] |
+| **displayBanners** | **Boolean** | Whether the interface may show the vendor's promotional banners. A cloud portal always reports `true`; on  a server installation it follows the banner setting. Filled in for a signed-in caller only. | [optional] [example: `true`] |
+| **aiEnabled** | **Boolean** | Whether the AI features - chat, agents and vectorisation - may be used on this portal. While it is  `false` the AI Agents folder is hidden and the AI operations are refused. Filled in for a signed-in caller  only. | [optional] [example: `true`] |
+| **walletLowBalance** | **Boolean** | Whether the portal wallet has already dropped below its low-balance threshold, so a client can warn about  AI operations being cut off. It is reported to DocSpace administrators only and left empty for everyone  else, which is not the same as a healthy balance. | [optional] [example: `false`] [nullable] |
+| **userNameRegex** | **String** | The pattern a member's first and last name has to match, so a client can validate a name before sending  it. It is a .NET regular expression and is applied to each name part separately. | [optional] [example: `^[a-zA-Z0-9_]{3,20}$`] [nullable] |
+| **invitationLimit** | **Integer** (int32) | How many invitations the portal may still send in the current window. Filled in for a signed-in caller  only, and set to the maximum value of a 32-bit integer on an installation that limits nothing. | [optional] [example: `10`] [nullable] |
 | **plugins** | [**PluginsDto**](#model-pluginsdto) | What the installation allows to be done with web plugins. Filled in for a signed-in caller only, with all  three flags `false` unless the installation switched plugins on. | [optional] |
 | **deepLink** | [**DeepLinkDto**](#model-deeplinkdto) | What a mobile client needs to hand a document link over to the installed application instead of opening it  in the browser. Its fields are empty strings when the installation configures no application. | [required] |
 | **formGallery** | [**FormGalleryDto**](#model-formgallerydto) | Where the ready-made form templates are served from and which extension they carry. Filled in for a  signed-in caller only. | [optional] |
-| **maxImageUploadSize** | **Long** (int64) | The largest image the portal accepts as a logo or an avatar, in bytes. Filled in for a signed-in caller  only, and a larger upload is refused rather than resized. | [optional] [example: 10485760] |
-| **logoText** | **String** | The wordmark to print next to the portal logo. It falls back to the built-in one while the portal has  stored no text of its own, so it is never empty. | [optional] [example: Company Name] [nullable] |
+| **maxImageUploadSize** | **Long** (int64) | The largest image the portal accepts as a logo or an avatar, in bytes. Filled in for a signed-in caller  only, and a larger upload is refused rather than resized. | [optional] [example: `10485760`] |
+| **logoText** | **String** | The wordmark to print next to the portal logo. It falls back to the built-in one while the portal has  stored no text of its own, so it is never empty. | [optional] [example: `Company Name`] [nullable] |
 | **externalResources** | [**CultureSpecificExternalResources**](#model-culturespecificexternalresources) | The addresses of the vendor's help, support, forum and video resources, already picked for the portal  language. An entry is missing when the installation configures no address for it or the resource is  switched off, which `GET api/2.0/settings/rebranding/additional` reports flag by flag. | [optional] |
-| **defaultFolderType** | [**FolderType**](#model-foldertype) | The section the client should open after sign-in, which is the caller's own preference rather than a  portal-wide one. Filled in for a signed-in caller only. | [optional] [enum: 0, 1, 2, 3, 5, 6, 8, 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36] |
-| **externalDbEnabled** | **Boolean** | Whether the installation has an external database wired up for form results, without which the operations  that write form results there are refused. Filled in for a signed-in caller only. | [optional] [example: true] |
+| **defaultFolderType** | [**FolderType**](#model-foldertype) | The section the client should open after sign-in, which is the caller's own preference rather than a  portal-wide one. Filled in for a signed-in caller only. | [optional] [enum: `0`, `1`, `2`, `3`, `5`, `6`, `8`, `10`, `11`, `12`, `13`, `14`, `15`, `16`, `19`, `20`, `21`, `22`, `25`, `26`, `27`, `28`, `29`, `30`, `31`, `32`, `33`, `34`, `35`, `36`] |
+| **externalDbEnabled** | **Boolean** | Whether the installation has an external database wired up for form results, without which the operations  that write form results there are refused. Filled in for a signed-in caller only. | [optional] [example: `true`] |
 
 
 ### Model SettingsWrapper
@@ -13985,11 +13985,11 @@ The state of the background job that sends the portal SMTP test message.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **completed** | **Boolean** | Whether the job has finished. This is the field to poll; the first answer that reports it true also discards  the job, so read `error` out of that same answer rather than calling again. | [optional] [example: true] |
-| **id** | **String** | The identifier of the queued job. A portal only ever has one test job at a time, so it names the run rather  than selecting among several. | [optional] [example: smtp-op-123] [nullable] |
-| **error** | **String** | Why the test failed. It stays empty while the job runs and also once the relay has accepted the message, so  an empty value on a finished job is what success looks like; an unreachable relay is reported here after a  30-second connection timeout rather than as a failed request. | [optional] [example: SMTP connection failed.] [nullable] |
-| **status** | **String** | The step the job has reached, in words - `Connect to host` or `Send test message`, for instance. It is meant  to be shown to a person and is not a fixed set of values to branch on. | [optional] [example: Completed] [nullable] |
-| **percents** | **Integer** (int32) | How far the job has got, as a percentage climbing to 100. Reaching 100 says the job ran to the end, not that  the message was accepted - that is what an empty `error` says. | [optional] [example: 1] |
+| **completed** | **Boolean** | Whether the job has finished. This is the field to poll; the first answer that reports it true also discards  the job, so read `error` out of that same answer rather than calling again. | [optional] [example: `true`] |
+| **id** | **String** | The identifier of the queued job. A portal only ever has one test job at a time, so it names the run rather  than selecting among several. | [optional] [example: `smtp-op-123`] [nullable] |
+| **error** | **String** | Why the test failed. It stays empty while the job runs and also once the relay has accepted the message, so  an empty value on a finished job is what success looks like; an unreachable relay is reported here after a  30-second connection timeout rather than as a failed request. | [optional] [example: `SMTP connection failed.`] [nullable] |
+| **status** | **String** | The step the job has reached, in words - `Connect to host` or `Send test message`, for instance. It is meant  to be shown to a person and is not a fixed set of values to branch on. | [optional] [example: `Completed`] [nullable] |
+| **percents** | **Integer** (int32) | How far the job has got, as a percentage climbing to 100. Reaching 100 says the job ran to the end, not that  the message was accepted - that is what an empty `error` says. | [optional] [example: `1`] |
 
 
 ### Model SmtpOperationStatusRequestsWrapper
@@ -14009,16 +14009,16 @@ The mail server the portal sends its letters through.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **host** | **String** | The host name or address of the mail server. On a cloud portal that has saved no relay of its own every  field of this object comes back empty, because the installation's own server is not disclosed - only  `isDefaultSettings` is set there. | [optional] [example: mail.example.com] [minLength: 0] [maxLength: 255] [nullable] |
-| **port** | **Integer** (int32) | The port the mail server is reached on - conventionally 25 or 587 without encryption from the start, 465  with it. It is empty when no port was stored, in which case the portal falls back to its own default. | [optional] [example: 25] [min: 1] [max: 65535] [nullable] |
-| **senderAddress** | **String** | The address the letters are sent from, which appears in the From header and is what a reply goes to. | [optional] [example: notify@example.com] [minLength: 0] [maxLength: 255] [nullable] |
-| **senderDisplayName** | **String** | The name shown beside that address in a recipient's mailbox. | [optional] [example: Postman] [minLength: 0] [maxLength: 255] [nullable] |
-| **credentialsUserName** | **String** | The account the portal signs in to the mail server as, meaningful only while `enableAuth` is `true`. | [optional] [example: notify@example.com] [minLength: 0] [maxLength: 255] [nullable] |
+| **host** | **String** | The host name or address of the mail server. On a cloud portal that has saved no relay of its own every  field of this object comes back empty, because the installation's own server is not disclosed - only  `isDefaultSettings` is set there. | [optional] [example: `mail.example.com`] [minLength: 0] [maxLength: 255] [nullable] |
+| **port** | **Integer** (int32) | The port the mail server is reached on - conventionally 25 or 587 without encryption from the start, 465  with it. It is empty when no port was stored, in which case the portal falls back to its own default. | [optional] [example: `25`] [min: 1] [max: 65535] [nullable] |
+| **senderAddress** | **String** | The address the letters are sent from, which appears in the From header and is what a reply goes to. | [optional] [example: `notify@example.com`] [minLength: 0] [maxLength: 255] [nullable] |
+| **senderDisplayName** | **String** | The name shown beside that address in a recipient's mailbox. | [optional] [example: `Postman`] [minLength: 0] [maxLength: 255] [nullable] |
+| **credentialsUserName** | **String** | The account the portal signs in to the mail server as, meaningful only while `enableAuth` is `true`. | [optional] [example: `notify@example.com`] [minLength: 0] [maxLength: 255] [nullable] |
 | **credentialsUserPassword** | **String** | Always empty here: the stored password is never returned, so a client that sends these settings back has  to supply it again rather than echoing what it read. | [optional] [nullable] |
-| **enableSSL** | **Boolean** | Whether the connection to the mail server is encrypted. | [optional] [example: true] |
-| **enableAuth** | **Boolean** | Whether the portal signs in to the mail server at all. While it is `false` the credentials above are  ignored and the server is expected to accept mail unauthenticated. | [optional] [example: true] |
-| **useNtlm** | **Boolean** | Always `false` here: the flag is accepted when settings are saved but is not stored, so it never comes  back set and says nothing about how the portal authenticates. | [optional] [example: false] |
-| **isDefaultSettings** | **Boolean** | Whether the portal is still on the mail configuration of the installation rather than on a relay of its  own. `DELETE api/2.0/smtpsettings/smtp` puts it back to `true`, and while it is `true` on a cloud portal  the fields above are blank rather than showing the installation's server. | [optional] [example: true] |
+| **enableSSL** | **Boolean** | Whether the connection to the mail server is encrypted. | [optional] [example: `true`] |
+| **enableAuth** | **Boolean** | Whether the portal signs in to the mail server at all. While it is `false` the credentials above are  ignored and the server is expected to accept mail unauthenticated. | [optional] [example: `true`] |
+| **useNtlm** | **Boolean** | Always `false` here: the flag is accepted when settings are saved but is not stored, so it never comes  back set and says nothing about how the portal authenticates. | [optional] [example: `false`] |
+| **isDefaultSettings** | **Boolean** | Whether the portal is still on the mail configuration of the installation rather than on a relay of its  own. `DELETE api/2.0/smtpsettings/smtp` puts it back to `true`, and while it is `true` on a cloud portal  the fields above are blank rather than showing the installation's server. | [optional] [example: `true`] |
 
 
 ### Model SmtpSettingsWrapper
@@ -14038,7 +14038,7 @@ Where a client connects for the portal's live updates.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **url** | **String** | The base address of the Socket.IO hub that pushes file changes, presence and quota alerts, always with a  trailing slash. It is empty when the installation runs no hub, and a client must then fall back to  polling rather than guessing an address. The value comes from the installation's configuration and cannot  be changed through this API. | [optional] [example: https://example.com/socket.io/] [nullable] |
+| **url** | **String** | The base address of the Socket.IO hub that pushes file changes, presence and quota alerts, always with a  trailing slash. It is empty when the installation runs no hub, and a client must then fall back to  polling rather than guessing an address. The value comes from the installation's configuration and cannot  be changed through this API. | [optional] [example: `https://example.com/socket.io/`] [nullable] |
 
 
 ### Model SocketSettingsWrapper
@@ -14058,8 +14058,8 @@ The SAML bindings the SSO settings accept.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **saml20HttpPost** | **String** | The SAML 2.0 HTTP POST binding, which carries the request in a self-submitting form. It is what the  built-in configuration uses and the one to pick when requests are signed, since it has no length limit. | [optional] [example: urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST] [nullable] |
-| **saml20HttpRedirect** | **String** | The SAML 2.0 HTTP redirect binding, which carries the request in the query string and is therefore bound  by the length a URL may have. | [optional] [example: urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect] [nullable] |
+| **saml20HttpPost** | **String** | The SAML 2.0 HTTP POST binding, which carries the request in a self-submitting form. It is what the  built-in configuration uses and the one to pick when requests are signed, since it has no length limit. | [optional] [example: `urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST`] [nullable] |
+| **saml20HttpRedirect** | **String** | The SAML 2.0 HTTP redirect binding, which carries the request in the query string and is therefore bound  by the length a URL may have. | [optional] [example: `urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect`] [nullable] |
 
 
 ### Model SsoCertificate
@@ -14067,13 +14067,13 @@ The SSO certificate parameters.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **selfSigned** | **Boolean** | Specifies if a certificate is self-signed or not. | [optional] [example: false] |
-| **crt** | **String** | The CRT certificate file. | [optional] [example: crt file] [nullable] |
-| **key** | **String** | The certificate key. | [optional] [example: key] [nullable] |
-| **action** | **String** | The certificate action. | [optional] [example: validate] [nullable] |
-| **domainName** | **String** | The certificate domain name. | [optional] [example: example.com] [nullable] |
-| **startDate** | **Date** (date-time) | The certificate start date. | [optional] [example: 2024-01-01T00:00:00Z] |
-| **expiredDate** | **Date** (date-time) | The certificate expiration date. | [optional] [example: 2024-01-01T00:00:00Z] |
+| **selfSigned** | **Boolean** | Specifies if a certificate is self-signed or not. | [optional] [example: `false`] |
+| **crt** | **String** | The CRT certificate file. | [optional] [example: `crt file`] [nullable] |
+| **key** | **String** | The certificate key. | [optional] [example: `key`] [nullable] |
+| **action** | **String** | The certificate action. | [optional] [example: `validate`] [nullable] |
+| **domainName** | **String** | The certificate domain name. | [optional] [example: `example.com`] [nullable] |
+| **startDate** | **Date** (date-time) | The certificate start date. | [optional] [example: `2024-01-01T00:00:00Z`] |
+| **expiredDate** | **Date** (date-time) | The certificate expiration date. | [optional] [example: `2024-01-01T00:00:00Z`] |
 
 
 ### Model SsoEncryptAlgorithmTypeDto
@@ -14081,9 +14081,9 @@ The encryption algorithms the SSO settings accept.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **aes128** | **String** | The AES-128-CBC encryption algorithm, which the built-in configuration uses. | [optional] [example: http://www.w3.org/2001/04/xmlenc#aes128-cbc] [nullable] |
-| **aes256** | **String** | The AES-256-CBC encryption algorithm, the strongest of the three. | [optional] [example: http://www.w3.org/2001/04/xmlenc#aes256-cbc] [nullable] |
-| **triDec** | **String** | The Triple DES CBC encryption algorithm, kept for identity providers that support nothing newer. | [optional] [example: http://www.w3.org/2001/04/xmlenc#tripledes-cbc] [nullable] |
+| **aes128** | **String** | The AES-128-CBC encryption algorithm, which the built-in configuration uses. | [optional] [example: `http://www.w3.org/2001/04/xmlenc#aes128-cbc`] [nullable] |
+| **aes256** | **String** | The AES-256-CBC encryption algorithm, the strongest of the three. | [optional] [example: `http://www.w3.org/2001/04/xmlenc#aes256-cbc`] [nullable] |
+| **triDec** | **String** | The Triple DES CBC encryption algorithm, kept for identity providers that support nothing newer. | [optional] [example: `http://www.w3.org/2001/04/xmlenc#tripledes-cbc`] [nullable] |
 
 
 ### Model SsoFieldMapping
@@ -14091,12 +14091,12 @@ The SSO field mapping.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **firstName** | **String** | The first name. | [optional] [example: givenName] [nullable] |
-| **lastName** | **String** | The last name. | [optional] [example: sn] [nullable] |
-| **email** | **String** (email) | The email address. | [optional] [example: sn@example.com] [nullable] |
-| **title** | **String** | The title. | [optional] [example: SN] [nullable] |
-| **location** | **String** | The location. | [optional] [example: Location] [nullable] |
-| **phone** | **String** | The phone number. | [optional] [example: +14155552671] [nullable] |
+| **firstName** | **String** | The first name. | [optional] [example: `givenName`] [nullable] |
+| **lastName** | **String** | The last name. | [optional] [example: `sn`] [nullable] |
+| **email** | **String** (email) | The email address. | [optional] [example: `sn@example.com`] [nullable] |
+| **title** | **String** | The title. | [optional] [example: `SN`] [nullable] |
+| **location** | **String** | The location. | [optional] [example: `Location`] [nullable] |
+| **phone** | **String** | The phone number. | [optional] [example: `+14155552671`] [nullable] |
 
 
 ### Model SsoIdpCertificateActionTypeDto
@@ -14104,9 +14104,9 @@ What the identity provider's certificate may be used for, as the `action` of an 
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **verification** | **String** | The certificate verifies the signatures on what the provider sends, and nothing else - the counterpart of  the service provider's signing action. | [optional] [example: verification] [nullable] |
-| **decrypt** | **String** | The certificate is used to decrypt what the provider sends, but verifies no signature. | [optional] [example: decrypt] [nullable] |
-| **verificationAndDecrypt** | **String** | The certificate does both, which is what a single provider certificate has to be set to. | [optional] [example: verification and decrypt] [nullable] |
+| **verification** | **String** | The certificate verifies the signatures on what the provider sends, and nothing else - the counterpart of  the service provider's signing action. | [optional] [example: `verification`] [nullable] |
+| **decrypt** | **String** | The certificate is used to decrypt what the provider sends, but verifies no signature. | [optional] [example: `decrypt`] [nullable] |
+| **verificationAndDecrypt** | **String** | The certificate does both, which is what a single provider certificate has to be set to. | [optional] [example: `verification and decrypt`] [nullable] |
 
 
 ### Model SsoIdpCertificateAdvanced
@@ -14114,12 +14114,12 @@ The IdP advanced certificate parameters.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **verifyAlgorithm** | **String** | The certificate verification algorithm. | [optional] [example: rsa-sha256] [nullable] |
-| **verifyAuthResponsesSign** | **Boolean** | Specifies if the signatures of the SAML authentication responses sent to SP will be verified or not. | [optional] [example: true] |
-| **verifyLogoutRequestsSign** | **Boolean** | Specifies if the signatures of the SAML logout requests sent to SP will be verified or not. | [optional] [example: true] |
-| **verifyLogoutResponsesSign** | **Boolean** | Specifies if the signatures of the SAML logout responses sent to SP will be verified or not. | [optional] [example: true] |
-| **decryptAlgorithm** | **String** | The certificate decryption algorithm. | [optional] [example: aes256-cbc] [nullable] |
-| **decryptAssertions** | **Boolean** | Specifies if the assertions will be decrypted or not. | [optional] [example: true] |
+| **verifyAlgorithm** | **String** | The certificate verification algorithm. | [optional] [example: `rsa-sha256`] [nullable] |
+| **verifyAuthResponsesSign** | **Boolean** | Specifies if the signatures of the SAML authentication responses sent to SP will be verified or not. | [optional] [example: `true`] |
+| **verifyLogoutRequestsSign** | **Boolean** | Specifies if the signatures of the SAML logout requests sent to SP will be verified or not. | [optional] [example: `true`] |
+| **verifyLogoutResponsesSign** | **Boolean** | Specifies if the signatures of the SAML logout responses sent to SP will be verified or not. | [optional] [example: `true`] |
+| **decryptAlgorithm** | **String** | The certificate decryption algorithm. | [optional] [example: `aes256-cbc`] [nullable] |
+| **decryptAssertions** | **Boolean** | Specifies if the assertions will be decrypted or not. | [optional] [example: `true`] |
 
 
 ### Model SsoIdpSettings
@@ -14127,12 +14127,12 @@ The SSO IdP settings.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **entityId** | **String** | The entity ID. | [optional] [example: https://idp.company.com/saml] [nullable] |
-| **ssoUrl** | **String** | The SSO URL. | [optional] [example: https://idp.example.com/sso] [nullable] |
-| **ssoBinding** | **String** | The SSO binding. | [optional] [example: urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect] [nullable] |
-| **sloUrl** | **String** | The SLO URL. | [optional] [example: https://idp.example.com/slo] [nullable] |
-| **sloBinding** | **String** | The SLO binding. | [optional] [example: urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect] [nullable] |
-| **nameIdFormat** | **String** | The name ID format. | [optional] [example: urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress] [nullable] |
+| **entityId** | **String** | The entity ID. | [optional] [example: `https://idp.company.com/saml`] [nullable] |
+| **ssoUrl** | **String** | The SSO URL. | [optional] [example: `https://idp.example.com/sso`] [nullable] |
+| **ssoBinding** | **String** | The SSO binding. | [optional] [example: `urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect`] [nullable] |
+| **sloUrl** | **String** | The SLO URL. | [optional] [example: `https://idp.example.com/slo`] [nullable] |
+| **sloBinding** | **String** | The SLO binding. | [optional] [example: `urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect`] [nullable] |
+| **nameIdFormat** | **String** | The name ID format. | [optional] [example: `urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress`] [nullable] |
 
 
 ### Model SsoNameIdFormatTypeDto
@@ -14140,16 +14140,16 @@ The SAML name ID formats the SSO settings accept.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **saml11Unspecified** | **String** | The SAML 1.1 unspecified name ID format. | [optional] [example: urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified] [nullable] |
-| **saml11EmailAddress** | **String** | The SAML 1.1 email address name ID format. | [optional] [example: urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress] [nullable] |
-| **saml20Entity** | **String** | The SAML 2.0 entity name ID format. | [optional] [example: urn:oasis:names:tc:SAML:2.0:nameid-format:entity] [nullable] |
-| **saml20Transient** | **String** | The SAML 2.0 transient name ID format, whose identifier differs from one session to the next. It is what  the built-in configuration uses. | [optional] [example: urn:oasis:names:tc:SAML:2.0:nameid-format:transient] [nullable] |
-| **saml20Persistent** | **String** | The SAML 2.0 persistent name ID format, whose identifier stays the same for one person across sessions. | [optional] [example: urn:oasis:names:tc:SAML:2.0:nameid-format:persistent] [nullable] |
-| **saml20Encrypted** | **String** | The SAML 2.0 encrypted name ID format. | [optional] [example: urn:oasis:names:tc:SAML:2.0:nameid-format:encrypted] [nullable] |
-| **saml20Unspecified** | **String** | The SAML 2.0 unspecified name ID format. | [optional] [example: urn:oasis:names:tc:SAML:2.0:nameid-format:unspecified] [nullable] |
-| **saml11X509SubjectName** | **String** | The SAML 1.1 X.509 subject name name ID format. | [optional] [example: urn:oasis:names:tc:SAML:1.1:nameid-format:X509SubjectName] [nullable] |
-| **saml11WindowsDomainQualifiedName** | **String** | The SAML 1.1 Windows domain qualified name name ID format. | [optional] [example: urn:oasis:names:tc:SAML:1.1:nameid-format:WindowsDomainQualifiedName] [nullable] |
-| **saml20Kerberos** | **String** | The SAML 2.0 Kerberos name ID format. | [optional] [example: urn:oasis:names:tc:SAML:2.0:nameid-format:kerberos] [nullable] |
+| **saml11Unspecified** | **String** | The SAML 1.1 unspecified name ID format. | [optional] [example: `urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified`] [nullable] |
+| **saml11EmailAddress** | **String** | The SAML 1.1 email address name ID format. | [optional] [example: `urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress`] [nullable] |
+| **saml20Entity** | **String** | The SAML 2.0 entity name ID format. | [optional] [example: `urn:oasis:names:tc:SAML:2.0:nameid-format:entity`] [nullable] |
+| **saml20Transient** | **String** | The SAML 2.0 transient name ID format, whose identifier differs from one session to the next. It is what  the built-in configuration uses. | [optional] [example: `urn:oasis:names:tc:SAML:2.0:nameid-format:transient`] [nullable] |
+| **saml20Persistent** | **String** | The SAML 2.0 persistent name ID format, whose identifier stays the same for one person across sessions. | [optional] [example: `urn:oasis:names:tc:SAML:2.0:nameid-format:persistent`] [nullable] |
+| **saml20Encrypted** | **String** | The SAML 2.0 encrypted name ID format. | [optional] [example: `urn:oasis:names:tc:SAML:2.0:nameid-format:encrypted`] [nullable] |
+| **saml20Unspecified** | **String** | The SAML 2.0 unspecified name ID format. | [optional] [example: `urn:oasis:names:tc:SAML:2.0:nameid-format:unspecified`] [nullable] |
+| **saml11X509SubjectName** | **String** | The SAML 1.1 X.509 subject name name ID format. | [optional] [example: `urn:oasis:names:tc:SAML:1.1:nameid-format:X509SubjectName`] [nullable] |
+| **saml11WindowsDomainQualifiedName** | **String** | The SAML 1.1 Windows domain qualified name name ID format. | [optional] [example: `urn:oasis:names:tc:SAML:1.1:nameid-format:WindowsDomainQualifiedName`] [nullable] |
+| **saml20Kerberos** | **String** | The SAML 2.0 Kerberos name ID format. | [optional] [example: `urn:oasis:names:tc:SAML:2.0:nameid-format:kerberos`] [nullable] |
 
 
 ### Model SsoSettingsRequestsDto
@@ -14157,7 +14157,7 @@ The whole SAML Single Sign-On configuration of the portal, carried as a serialis
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **serializeSettings** | **String** | The configuration object serialised to a JSON string, not a nested object. It is the complete configuration  rather than a patch - fields left out are stored empty - so start from `GET api/2.0/settings/ssov2` or  `GET api/2.0/settings/ssov2/default` and send back a changed copy. The identity provider entity ID and  sign-in URL are required, the sign-in and sign-out URLs have to be absolute `http` or `https` addresses, and  the attribute mapping has to name the first name, last name and email fields; the values each SAML field  accepts are listed by `GET api/2.0/settings/ssov2/constants`. An empty string, or a string that carries no  configuration object, is refused with 400. | [required] [example: \{"enableSso":true,"idpSettings":\{"entityId":"https://idp.example.com"\}\}] [nullable] |
+| **serializeSettings** | **String** | The configuration object serialised to a JSON string, not a nested object. It is the complete configuration  rather than a patch - fields left out are stored empty - so start from `GET api/2.0/settings/ssov2` or  `GET api/2.0/settings/ssov2/default` and send back a changed copy. The identity provider entity ID and  sign-in URL are required, the sign-in and sign-out URLs have to be absolute `http` or `https` addresses, and  the attribute mapping has to name the first name, last name and email fields; the values each SAML field  accepts are listed by `GET api/2.0/settings/ssov2/constants`. An empty string, or a string that carries no  configuration object, is refused with 400. | [required] [example: `{"enableSso":true,"idpSettings":{"entityId":"https://idp.example.com"}}`] [nullable] |
 
 
 ### Model SsoSettingsV2
@@ -14165,18 +14165,18 @@ The SSO portal settings.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **lastModified** | **Date** (date-time) | The timestamp indicating when the settings were last modified. | [optional] [example: 1990-01-01T00:00:00Z] |
-| **enableSso** | **Boolean** | Specifies if the SSO settings are enabled or not. | [optional] [example: false] [nullable] |
+| **lastModified** | **Date** (date-time) | The timestamp indicating when the settings were last modified. | [optional] [example: `1990-01-01T00:00:00Z`] |
+| **enableSso** | **Boolean** | Specifies if the SSO settings are enabled or not. | [optional] [example: `false`] [nullable] |
 | **idpSettings** | [**SsoIdpSettings**](#model-ssoidpsettings) | The SSO IdP settings. | [optional] |
-| **idpCertificates** | [**List**](#model-ssocertificate) | The list of the IdP certificates. | [optional] [example: [\{crt=base64-cert-data, key=base64-key-data\}]] [nullable] |
+| **idpCertificates** | [**List**](#model-ssocertificate) | The list of the IdP certificates. | [optional] [example: `[{crt=base64-cert-data, key=base64-key-data}]`] [nullable] |
 | **idpCertificateAdvanced** | [**SsoIdpCertificateAdvanced**](#model-ssoidpcertificateadvanced) | The IdP advanced certificate. | [optional] |
-| **spLoginLabel** | **String** | The SP login label. | [optional] [example: Single Sign-on] [nullable] |
-| **spCertificates** | [**List**](#model-ssocertificate) | The list of the SP certificates. | [optional] [example: [\{crt=base64-cert-data, key=base64-key-data\}]] [nullable] |
+| **spLoginLabel** | **String** | The SP login label. | [optional] [example: `Single Sign-on`] [nullable] |
+| **spCertificates** | [**List**](#model-ssocertificate) | The list of the SP certificates. | [optional] [example: `[{crt=base64-cert-data, key=base64-key-data}]`] [nullable] |
 | **spCertificateAdvanced** | [**SsoSpCertificateAdvanced**](#model-ssospcertificateadvanced) | The SP advanced certificate. | [optional] |
 | **fieldMapping** | [**SsoFieldMapping**](#model-ssofieldmapping) | The SSO field mapping. | [optional] |
-| **hideAuthPage** | **Boolean** | Specifies if the authentication page will be hidden or not. | [optional] [example: false] |
-| **usersType** | **Integer** (int32) | The user type. | [optional] [example: 1] |
-| **disableEmailVerification** | **Boolean** | Specifies if the email verification is disabled or not. | [optional] [example: false] |
+| **hideAuthPage** | **Boolean** | Specifies if the authentication page will be hidden or not. | [optional] [example: `false`] |
+| **usersType** | **Integer** (int32) | The user type. | [optional] [example: `1`] |
+| **disableEmailVerification** | **Boolean** | Specifies if the email verification is disabled or not. | [optional] [example: `false`] |
 
 
 ### Model SsoSettingsV2ConstantsDto
@@ -14221,9 +14221,9 @@ The signing algorithms the SSO settings accept.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **rsaSha1** | **String** | The RSA-SHA1 signing algorithm, which the built-in configuration uses. SHA-1 is the weakest of the three  and some identity providers no longer accept it. | [optional] [example: http://www.w3.org/2000/09/xmldsig#rsa-sha1] [nullable] |
-| **rsaSha256** | **String** | The RSA-SHA256 signing algorithm. | [optional] [example: http://www.w3.org/2001/04/xmldsig-more#rsa-sha256] [nullable] |
-| **rsaSha512** | **String** | The RSA-SHA512 signing algorithm. | [optional] [example: http://www.w3.org/2001/04/xmldsig-more#rsa-sha512] [nullable] |
+| **rsaSha1** | **String** | The RSA-SHA1 signing algorithm, which the built-in configuration uses. SHA-1 is the weakest of the three  and some identity providers no longer accept it. | [optional] [example: `http://www.w3.org/2000/09/xmldsig#rsa-sha1`] [nullable] |
+| **rsaSha256** | **String** | The RSA-SHA256 signing algorithm. | [optional] [example: `http://www.w3.org/2001/04/xmldsig-more#rsa-sha256`] [nullable] |
+| **rsaSha512** | **String** | The RSA-SHA512 signing algorithm. | [optional] [example: `http://www.w3.org/2001/04/xmldsig-more#rsa-sha512`] [nullable] |
 
 
 ### Model SsoSpCertificateActionTypeDto
@@ -14231,9 +14231,9 @@ What the portal's own key pair may be used for, as the `action` of a service pro
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **signing** | **String** | The key pair signs the requests the portal sends and nothing else. | [optional] [example: signing] [nullable] |
-| **encrypt** | **String** | The key pair encrypts what the portal sends and decrypts what comes back, but signs nothing. | [optional] [example: encrypt] [nullable] |
-| **signingAndEncrypt** | **String** | The key pair does both, which is what one pair configured on its own has to be set to. | [optional] [example: signing and encrypt] [nullable] |
+| **signing** | **String** | The key pair signs the requests the portal sends and nothing else. | [optional] [example: `signing`] [nullable] |
+| **encrypt** | **String** | The key pair encrypts what the portal sends and decrypts what comes back, but signs nothing. | [optional] [example: `encrypt`] [nullable] |
+| **signingAndEncrypt** | **String** | The key pair does both, which is what one pair configured on its own has to be set to. | [optional] [example: `signing and encrypt`] [nullable] |
 
 
 ### Model SsoSpCertificateAdvanced
@@ -14241,13 +14241,13 @@ The SP advanced certificate parameters.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **signingAlgorithm** | **String** | The certificate signing algorithm. | [optional] [example: rsa-sha256] [nullable] |
-| **signAuthRequests** | **Boolean** | Specifies if SP will sign the SAML authentication requests sent to IdP or not. | [optional] [example: true] |
-| **signLogoutRequests** | **Boolean** | Specifies if SP will sign the SAML logout requests sent to IdP or not. | [optional] [example: true] |
-| **signLogoutResponses** | **Boolean** | Specifies if SP will sign the SAML logout responses sent to IdP or not. | [optional] [example: true] |
-| **encryptAlgorithm** | **String** | The certificate encryption algorithm. | [optional] [example: aes256-cbc] [nullable] |
-| **decryptAlgorithm** | **String** | The certificate decryption algorithm. | [optional] [example: aes256-cbc] [nullable] |
-| **encryptAssertions** | **Boolean** | Specifies if the assertions will be encrypted or not. | [optional] [example: true] |
+| **signingAlgorithm** | **String** | The certificate signing algorithm. | [optional] [example: `rsa-sha256`] [nullable] |
+| **signAuthRequests** | **Boolean** | Specifies if SP will sign the SAML authentication requests sent to IdP or not. | [optional] [example: `true`] |
+| **signLogoutRequests** | **Boolean** | Specifies if SP will sign the SAML logout requests sent to IdP or not. | [optional] [example: `true`] |
+| **signLogoutResponses** | **Boolean** | Specifies if SP will sign the SAML logout responses sent to IdP or not. | [optional] [example: `true`] |
+| **encryptAlgorithm** | **String** | The certificate encryption algorithm. | [optional] [example: `aes256-cbc`] [nullable] |
+| **decryptAlgorithm** | **String** | The certificate decryption algorithm. | [optional] [example: `aes256-cbc`] [nullable] |
+| **encryptAssertions** | **Boolean** | Specifies if the assertions will be encrypted or not. | [optional] [example: `true`] |
 
 
 ### Model StorageArrayWrapper
@@ -14267,11 +14267,11 @@ One third-party storage provider the portal data can be kept in, with the keys i
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **id** | **String** | The provider's key, which is what `PUT api/2.0/settings/storage` and its CDN and backup counterparts take  as the storage to switch to. The built-in local storage has no entry of its own: a listing in which  nothing is `current` means the data sits locally. | [required] [example: s3] [nullable] |
-| **title** | **String** | The provider name in the portal language, falling back to `id` when this build ships no wording for it. | [required] [example: Amazon AWS S3] [nullable] |
-| **properties** | [**List**](#model-authkey) | The settings the provider expects, each with its key, its localised label and the value the server  currently holds. For the entry marked `current` the values come from the portal's saved storage settings  and for the others from the installation configuration, so a setting nobody has configured comes back with  an empty value rather than being left out. | [optional] [example: [\{name=acesskey, value=AKIAIOSFODNN7EXAMPLE, title=Access key\}]] [nullable] |
-| **current** | **Boolean** | Whether the portal is using this provider right now. At most one entry of a listing has it set. | [required] [example: true] |
-| **isSet** | **Boolean** | Whether the provider's keys are already filled in on the server, so it could be switched to without  sending credentials. It says nothing about whether the credentials still work. | [required] [example: true] |
+| **id** | **String** | The provider's key, which is what `PUT api/2.0/settings/storage` and its CDN and backup counterparts take  as the storage to switch to. The built-in local storage has no entry of its own: a listing in which  nothing is `current` means the data sits locally. | [required] [example: `s3`] [nullable] |
+| **title** | **String** | The provider name in the portal language, falling back to `id` when this build ships no wording for it. | [required] [example: `Amazon AWS S3`] [nullable] |
+| **properties** | [**List**](#model-authkey) | The settings the provider expects, each with its key, its localised label and the value the server  currently holds. For the entry marked `current` the values come from the portal's saved storage settings  and for the others from the installation configuration, so a setting nobody has configured comes back with  an empty value rather than being left out. | [optional] [example: `[{name=acesskey, value=AKIAIOSFODNN7EXAMPLE, title=Access key}]`] [nullable] |
+| **current** | **Boolean** | Whether the portal is using this provider right now. At most one entry of a listing has it set. | [required] [example: `true`] |
+| **isSet** | **Boolean** | Whether the provider's keys are already filled in on the server, so it could be switched to without  sending credentials. It says nothing about whether the credentials still work. | [required] [example: `true`] |
 
 
 ### Model StorageEncryptionRequestsDto
@@ -14279,7 +14279,7 @@ Whether the users are warned before the portals go down for the storage encrypti
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **notifyUsers** | **Boolean** | Whether every user of every portal on the server is mailed before the encryption or decryption pass starts.  The pass runs either way; the flag only decides whether people are told that their portal is about to become  unavailable. | [optional] [example: true] |
+| **notifyUsers** | **Boolean** | Whether every user of every portal on the server is mailed before the encryption or decryption pass starts.  The pass runs either way; the flag only decides whether people are told that their portal is about to become  unavailable. | [optional] [example: `true`] |
 
 
 ### Model StorageRequestsDto
@@ -14287,8 +14287,8 @@ Which storage provider the portal is pointed at, and the credentials it needs.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **module** | **String** | The storage provider to switch to, by the identifier the matching listing operation reports - `default` for  the built-in local storage. The provider has to be available on the server, which that listing reports as  `isSet`, otherwise the request is refused with 400; sending the module already in use changes nothing. | [required] [example: default] [nullable] |
-| **props** | [**List**](#model-itemkeyvaluepairstringstring) | The credentials the provider expects, as the name and value pairs it defines - a bucket, a region and an  access key for an Amazon S3 storage, for instance. Read the expected names from the entry of that provider in  the listing operation; they differ per provider, so there is no fixed set. | [optional] [example: [item1, item2]] [nullable] |
+| **module** | **String** | The storage provider to switch to, by the identifier the matching listing operation reports - `default` for  the built-in local storage. The provider has to be available on the server, which that listing reports as  `isSet`, otherwise the request is refused with 400; sending the module already in use changes nothing. | [required] [example: `default`] [nullable] |
+| **props** | [**List**](#model-itemkeyvaluepairstringstring) | The credentials the provider expects, as the name and value pairs it defines - a bucket, a region and an  access key for an Amazon S3 storage, for instance. Read the expected names from the entry of that provider in  the listing operation; they differ per provider, so there is no fixed set. | [optional] [example: `[item1, item2]`] [nullable] |
 
 
 ### Model StorageSettings
@@ -14296,9 +14296,9 @@ The storage settings.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **module** | **String** | The storage name. | [optional] [example: LocalStorage] [nullable] |
-| **props** | **Map** | The storage properties. | [optional] [example: \{region=eu-central-1, bucket=tenant-files\}] |
-| **lastModified** | **Date** (date-time) | The date and time when the storage settings were last modified. | [optional] [example: 2025-01-01T12:00:00Z] |
+| **module** | **String** | The storage name. | [optional] [example: `LocalStorage`] [nullable] |
+| **props** | **Map** | The storage properties. | [optional] [example: `{region=eu-central-1, bucket=tenant-files}`] |
+| **lastModified** | **Date** (date-time) | The date and time when the storage settings were last modified. | [optional] [example: `2025-01-01T12:00:00Z`] |
 
 
 ### Model StorageSettingsWrapper
@@ -14330,8 +14330,8 @@ The settings that define the folder opened by default after sign-in.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **defaultFolderType** | [**FolderType**](#model-foldertype) | Specifies the type of the default folder associated with the settings. | [optional] [enum: 0, 1, 2, 3, 5, 6, 8, 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36] |
-| **lastModified** | **Date** (date-time) | The timestamp indicating when the settings were last modified. | [optional] [example: 1990-01-01T00:00:00Z] |
+| **defaultFolderType** | [**FolderType**](#model-foldertype) | Specifies the type of the default folder associated with the settings. | [optional] [enum: `0`, `1`, `2`, `3`, `5`, `6`, `8`, `10`, `11`, `12`, `13`, `14`, `15`, `16`, `19`, `20`, `21`, `22`, `25`, `26`, `27`, `28`, `29`, `30`, `31`, `32`, `33`, `34`, `35`, `36`] |
+| **lastModified** | **Date** (date-time) | The timestamp indicating when the settings were last modified. | [optional] [example: `1990-01-01T00:00:00Z`] |
 
 
 ### Model StudioDefaultPageSettingsWrapper
@@ -14351,8 +14351,8 @@ Represents a sub-account with a specific currency and balance.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **currency** | **String** | The three-character ISO 4217 currency symbol. | [optional] [example: "USD"] [nullable] |
-| **amount** | **Double** (double) | The amount in the specified currency. | [optional] [example: 1500.75] |
+| **currency** | **String** | The three-character ISO 4217 currency symbol. | [optional] [example: `"USD"`] [nullable] |
+| **amount** | **Double** (double) | The amount in the specified currency. | [optional] [example: `1500.75`] |
 
 
 ### Model SubscriptionBalanceInfo
@@ -14360,15 +14360,15 @@ The information about the current subscription and its unused balance.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **totalCost** | **Double** (double) | The total cost of the current billing period (the sum across all subscription items). | [optional] [example: 120.0] |
-| **currency** | **String** | The three-character ISO 4217 currency symbol of the subscription. | [optional] [example: USD] [nullable] |
-| **periodStart** | **Date** (date-time) | The start of the current billing period. | [optional] [example: 2026-06-01T00:00:00Z] |
-| **periodEnd** | **Date** (date-time) | The end of the current billing period. | [optional] [example: 2026-07-01T00:00:00Z] |
-| **periodUsedUntil** | **Date** (date-time) | The boundary of the used part of the period (the moment of the request). | [optional] [example: 2026-06-23T14:35:00Z] |
-| **daysElapsed** | **Integer** (int32) | The number of days elapsed since the start of the period (inclusive). | [optional] [example: 23] |
-| **remainingBalance** | **Double** (double) | The unused balance of the subscription, in the subscription currency. | [optional] [example: 87.74] |
-| **remainingBalanceInWalletCurrency** | **Double** (double) | The unused balance of the subscription, converted to the wallet currency. | [optional] [example: 87.74] |
-| **walletCurrency** | **String** | The three-character ISO 4217 currency symbol of the wallet. | [optional] [example: USD] [nullable] |
+| **totalCost** | **Double** (double) | The total cost of the current billing period (the sum across all subscription items). | [optional] [example: `120.0`] |
+| **currency** | **String** | The three-character ISO 4217 currency symbol of the subscription. | [optional] [example: `USD`] [nullable] |
+| **periodStart** | **Date** (date-time) | The start of the current billing period. | [optional] [example: `2026-06-01T00:00:00Z`] |
+| **periodEnd** | **Date** (date-time) | The end of the current billing period. | [optional] [example: `2026-07-01T00:00:00Z`] |
+| **periodUsedUntil** | **Date** (date-time) | The boundary of the used part of the period (the moment of the request). | [optional] [example: `2026-06-23T14:35:00Z`] |
+| **daysElapsed** | **Integer** (int32) | The number of days elapsed since the start of the period (inclusive). | [optional] [example: `23`] |
+| **remainingBalance** | **Double** (double) | The unused balance of the subscription, in the subscription currency. | [optional] [example: `87.74`] |
+| **remainingBalanceInWalletCurrency** | **Double** (double) | The unused balance of the subscription, converted to the wallet currency. | [optional] [example: `87.74`] |
+| **walletCurrency** | **String** | The three-character ISO 4217 currency symbol of the wallet. | [optional] [example: `USD`] [nullable] |
 
 
 ### Model SubscriptionBalanceInfoWrapper
@@ -14388,16 +14388,16 @@ The subscription this portal runs on: its state, the end of the current period, 
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **openSource** | **Boolean** | Whether the installation runs the open-source build, which has no paid plan at all. This flag and the two  below describe the build rather than the subscription, and all three are left empty for a caller without  the portal-settings right. | [optional] [example: false] [nullable] |
-| **enterprise** | **Boolean** | Whether the installation runs on an Enterprise licence file, which is what makes the licence operations  under `api/2.0/settings/license` usable. | [optional] [example: true] [nullable] |
-| **developer** | **Boolean** | Whether the installation runs on a Developer licence, an Enterprise licence meant for embedding rather  than for production use. | [optional] [example: false] [nullable] |
-| **id** | **Integer** (int32) | The identifier of the subscription record itself, for quoting when a charge has to be traced. It is filled  in for a caller with the portal-settings right only, and nothing accepts it as an argument. | [optional] [example: 1] |
-| **state** | [**TariffState**](#model-tariffstate) | How the subscription stands: on trial, paid, inside the grace period that follows the due date, or unpaid.  It is the one field every caller gets, whatever their role, so a client can warn about payment without  needing administrator rights. | [optional] [enum: 0, 1, 2, 3] |
+| **openSource** | **Boolean** | Whether the installation runs the open-source build, which has no paid plan at all. This flag and the two  below describe the build rather than the subscription, and all three are left empty for a caller without  the portal-settings right. | [optional] [example: `false`] [nullable] |
+| **enterprise** | **Boolean** | Whether the installation runs on an Enterprise licence file, which is what makes the licence operations  under `api/2.0/settings/license` usable. | [optional] [example: `true`] [nullable] |
+| **developer** | **Boolean** | Whether the installation runs on a Developer licence, an Enterprise licence meant for embedding rather  than for production use. | [optional] [example: `false`] [nullable] |
+| **id** | **Integer** (int32) | The identifier of the subscription record itself, for quoting when a charge has to be traced. It is filled  in for a caller with the portal-settings right only, and nothing accepts it as an argument. | [optional] [example: `1`] |
+| **state** | [**TariffState**](#model-tariffstate) | How the subscription stands: on trial, paid, inside the grace period that follows the due date, or unpaid.  It is the one field every caller gets, whatever their role, so a client can warn about payment without  needing administrator rights. | [optional] [enum: `0`, `1`, `2`, `3`] |
 | **dueDate** | [**ApiDateTime**](#model-apidatetime) | When the current period ends, in the portal time zone. It is filled in for a room or DocSpace  administrator only, and set to the largest value a date can hold for a subscription that never ends. | [optional] |
 | **delayDueDate** | [**ApiDateTime**](#model-apidatetime) | When the grace period after `dueDate` runs out and the portal is cut off, in the portal time zone. Filled  in under the same conditions as `dueDate`, and equal to it when the plan grants no grace period. | [optional] |
 | **licenseDate** | [**ApiDateTime**](#model-apidatetime) | When the licence file behind the subscription was issued, in the portal time zone. It is meaningful on a  server installation and filled in for a caller with the portal-settings right only. | [optional] |
-| **customerId** | **String** | The account in the billing system the subscription is charged to, empty for a portal that has never been  billed. Filled in for a caller with the portal-settings right only. | [optional] [example: 00000000-0000-0000-0000-000000000001] [nullable] |
-| **quotas** | [**List**](#model-tariffquotadto) | The quotas the subscription is made of - the plan itself and its add-ons - with the overdue ones listed  alongside the current ones, so an entry here is not proof that it is still being paid for; read each  entry's own `state` for that. Filled in for a caller with the portal-settings right only. | [optional] [example: [\{id=1, quantity=500\}]] [nullable] |
+| **customerId** | **String** | The account in the billing system the subscription is charged to, empty for a portal that has never been  billed. Filled in for a caller with the portal-settings right only. | [optional] [example: `00000000-0000-0000-0000-000000000001`] [nullable] |
+| **quotas** | [**List**](#model-tariffquotadto) | The quotas the subscription is made of - the plan itself and its add-ons - with the overdue ones listed  alongside the current ones, so an entry here is not proof that it is still being paid for; read each  entry's own `state` for that. Filled in for a caller with the portal-settings right only. | [optional] [example: `[{id=1, quantity=500}]`] [nullable] |
 
 
 ### Model TariffQuotaDto
@@ -14405,14 +14405,14 @@ One quota the subscription is made of - the plan itself or an add-on - with its 
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **id** | **Integer** (int32) | The quota this entry stands for. `GET api/2.0/portal/payment/quotas` describes the quota behind the ID,  including what its `quantity` counts; a negative ID belongs to a built-in quota rather than a purchased  one. | [optional] [example: -11] |
-| **quantity** | **Integer** (int32) | How much of the quota the portal holds, in whatever the quota itself is measured in - seats for a plan,  gigabytes for storage. It is `1` for a quota that is simply on or off. | [optional] [example: 500] |
-| **wallet** | **Boolean** | Whether the quota is paid for out of the portal wallet as it is consumed, rather than being part of the  subscription charged per period. | [optional] [example: true] |
-| **additional** | **Boolean** | Whether this is an add-on bought on top of the plan rather than the plan itself. Exactly one entry of  `quotas` is the plan, and the rest are add-ons. | [optional] [example: true] |
+| **id** | **Integer** (int32) | The quota this entry stands for. `GET api/2.0/portal/payment/quotas` describes the quota behind the ID,  including what its `quantity` counts; a negative ID belongs to a built-in quota rather than a purchased  one. | [optional] [example: `-11`] |
+| **quantity** | **Integer** (int32) | How much of the quota the portal holds, in whatever the quota itself is measured in - seats for a plan,  gigabytes for storage. It is `1` for a quota that is simply on or off. | [optional] [example: `500`] |
+| **wallet** | **Boolean** | Whether the quota is paid for out of the portal wallet as it is consumed, rather than being part of the  subscription charged per period. | [optional] [example: `true`] |
+| **additional** | **Boolean** | Whether this is an add-on bought on top of the plan rather than the plan itself. Exactly one entry of  `quotas` is the plan, and the rest are add-ons. | [optional] [example: `true`] |
 | **dueDate** | [**ApiDateTime**](#model-apidatetime) | When this quota runs out, in the portal time zone. An add-on can end earlier or later than the  subscription; a quota with no deadline of its own reports the subscription's `dueDate` instead of an empty  value. | [optional] |
-| **nextQuantity** | **Integer** (int32) | The quantity the next period is going to be charged for, when a change has been scheduled. It is empty  while `quantity` simply carries over. | [optional] [example: 100] [nullable] |
-| **nextQuota** | **Integer** (int32) | The quota this one is scheduled to be replaced by at the start of the next period, empty when no such  switch is planned. `GET api/2.0/portal/tariff/upcoming` already reports the charge for the replacement. | [optional] [example: 2] [nullable] |
-| **state** | [**QuotaState**](#model-quotastate) | Whether the quota is still running or its deadline has passed. It is empty for a quota that has no  deadline of its own, which means it lasts as long as the subscription does. | [optional] [enum: 0, 1] |
+| **nextQuantity** | **Integer** (int32) | The quantity the next period is going to be charged for, when a change has been scheduled. It is empty  while `quantity` simply carries over. | [optional] [example: `100`] [nullable] |
+| **nextQuota** | **Integer** (int32) | The quota this one is scheduled to be replaced by at the start of the next period, empty when no such  switch is planned. `GET api/2.0/portal/tariff/upcoming` already reports the charge for the replacement. | [optional] [example: `2`] [nullable] |
+| **state** | [**QuotaState**](#model-quotastate) | Whether the quota is still running or its deadline has passed. It is empty for a quota that has no  deadline of its own, which means it lasts as long as the subscription does. | [optional] [enum: `0`, `1`] |
 
 
 ### Model TariffState
@@ -14442,8 +14442,8 @@ Whether the calling user's account is linked to the portal's Telegram bot.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **status** | [**RegStatus**](#model-regstatus) | Where the caller's own account stands: not linked, linked, or a registration link issued and the portal  still waiting for it to be opened in Telegram. The waiting state ends on its own when the link expires,  so it is worth polling rather than treating as final. | [required] [enum: 0, 1, 2] |
-| **username** | **String** | The Telegram handle the account is linked to, without the leading `@`. It is filled in only while the  account is linked and comes back empty in the other two states. | [optional] [example: john_doe] [nullable] |
+| **status** | [**RegStatus**](#model-regstatus) | Where the caller's own account stands: not linked, linked, or a registration link issued and the portal  still waiting for it to be opened in Telegram. The waiting state ends on its own when the link expires,  so it is worth polling rather than treating as final. | [required] [enum: `0`, `1`, `2`] |
+| **username** | **String** | The Telegram handle the account is linked to, without the leading `@`. It is filled in only while the  account is linked and comes back empty in the other two states. | [optional] [example: `john_doe`] [nullable] |
 
 
 ### Model TelegramStatusWrapper
@@ -14463,8 +14463,8 @@ The tenant-level settings for enabling or disabling all AI functionality in DocS
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **enabled** | **Boolean** | Specifies whether AI functionality is enabled for the tenant.  When set to `false`, all AI features (chat, agents, vectorization) are disabled tenant-wide. | [optional] [example: true] |
-| **lastModified** | **Date** (date-time) | The timestamp indicating when the settings were last modified. | [optional] [example: 1990-01-01T00:00:00Z] |
+| **enabled** | **Boolean** | Specifies whether AI functionality is enabled for the tenant.  When set to `false`, all AI features (chat, agents, vectorization) are disabled tenant-wide. | [optional] [example: `true`] |
+| **lastModified** | **Date** (date-time) | The timestamp indicating when the settings were last modified. | [optional] [example: `1990-01-01T00:00:00Z`] |
 
 
 ### Model TenantAiAccessSettingsDto
@@ -14472,7 +14472,7 @@ Whether AI functionality is available on the portal.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **enabled** | **Boolean** | Whether AI is available on the portal at all - chat, agents and vectorization together. Switching it off  hides the AI Agents folder and makes every AI endpoint unreachable for all members at once, not only for the  caller, and the change is pushed to connected clients rather than waiting for their next request. | [optional] [example: false] |
+| **enabled** | **Boolean** | Whether AI is available on the portal at all - chat, agents and vectorization together. Switching it off  hides the AI Agents folder and makes every AI endpoint unreachable for all members at once, not only for the  caller, and the change is pushed to connected clients rather than waiting for their next request. | [optional] [example: `false`] |
 
 
 ### Model TenantAiAccessSettingsWrapper
@@ -14515,9 +14515,9 @@ The tenant audit settings parameters.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **loginHistoryLifeTime** | **Integer** (int32) | The login history lifetime. | [optional] [example: 180] |
-| **auditTrailLifeTime** | **Integer** (int32) | The audit trail lifetime. | [optional] [example: 180] |
-| **lastModified** | **Date** (date-time) | The timestamp indicating when the settings were last modified. | [optional] [example: 1990-01-01T00:00:00Z] |
+| **loginHistoryLifeTime** | **Integer** (int32) | The login history lifetime. | [optional] [example: `180`] |
+| **auditTrailLifeTime** | **Integer** (int32) | The audit trail lifetime. | [optional] [example: `180`] |
+| **lastModified** | **Date** (date-time) | The timestamp indicating when the settings were last modified. | [optional] [example: `1990-01-01T00:00:00Z`] |
 
 
 ### Model TenantAuditSettingsResponseWrapper
@@ -14545,8 +14545,8 @@ The visibility settings of the promotional banners.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **hidden** | **Boolean** | The banners visibility flag. | [optional] [example: false] |
-| **lastModified** | **Date** (date-time) | The timestamp indicating when the settings were last modified. | [optional] [example: 1990-01-01T00:00:00Z] |
+| **hidden** | **Boolean** | The banners visibility flag. | [optional] [example: `false`] |
+| **lastModified** | **Date** (date-time) | The timestamp indicating when the settings were last modified. | [optional] [example: `1990-01-01T00:00:00Z`] |
 
 
 ### Model TenantBannerSettingsDto
@@ -14554,7 +14554,7 @@ Whether the portal promotional banners are hidden.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **hidden** | **Boolean** | Whether the promotional banners are hidden from every user of the portal. The flag is only honoured on a  self-hosted installation; a SaaS portal keeps showing the banners whatever is stored here. | [optional] [example: true] |
+| **hidden** | **Boolean** | Whether the promotional banners are hidden from every user of the portal. The flag is only honoured on a  self-hosted installation; a SaaS portal keeps showing the banners whatever is stored here. | [optional] [example: `true`] |
 
 
 ### Model TenantBannerSettingsWrapper
@@ -14574,8 +14574,8 @@ The deep link settings.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **handlingMode** | [**DeepLinkHandlingMode**](#model-deeplinkhandlingmode) | The deep link handling mode. | [optional] [enum: 0, 1, 2] |
-| **lastModified** | **Date** (date-time) | The timestamp indicating when the settings were last modified. | [optional] [example: 1990-01-01T00:00:00Z] |
+| **handlingMode** | [**DeepLinkHandlingMode**](#model-deeplinkhandlingmode) | The deep link handling mode. | [optional] [enum: `0`, `1`, `2`] |
+| **lastModified** | **Date** (date-time) | The timestamp indicating when the settings were last modified. | [optional] [example: `1990-01-01T00:00:00Z`] |
 
 
 ### Model TenantDeepLinkSettingsWrapper
@@ -14595,8 +14595,8 @@ The Developer Tools access settings.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **limitedAccessForUsers** | **Boolean** | Specifies if the Developer Tools access are limited for users or not. | [optional] [example: false] |
-| **lastModified** | **Date** (date-time) | The timestamp indicating when the settings were last modified. | [optional] [example: 1990-01-01T00:00:00Z] |
+| **limitedAccessForUsers** | **Boolean** | Specifies if the Developer Tools access are limited for users or not. | [optional] [example: `false`] |
+| **lastModified** | **Date** (date-time) | The timestamp indicating when the settings were last modified. | [optional] [example: `1990-01-01T00:00:00Z`] |
 
 
 ### Model TenantDevToolsAccessSettingsDto
@@ -14604,7 +14604,7 @@ Whether the `User` role is barred from the portal developer tools.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **limitedAccessForUsers** | **Boolean** | Whether members holding the `User` role are barred from the developer tools - API keys, OAuth applications  and webhooks. Room administrators and DocSpace administrators keep their access either way. | [optional] [example: false] |
+| **limitedAccessForUsers** | **Boolean** | Whether members holding the `User` role are barred from the developer tools - API keys, OAuth applications  and webhooks. Room administrators and DocSpace administrators keep their access either way. | [optional] [example: `false`] |
 
 
 ### Model TenantDevToolsAccessSettingsWrapper
@@ -14624,9 +14624,9 @@ The domain validator.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **regex** | **String** | The regex string to validate a domain. | [optional] [example: ^[a-z0-9]([a-z0-9-])\{1,61\}[a-z0-9]$] [nullable] |
-| **minLength** | **Integer** (int32) | The minimum length of the valid domain. | [optional] [example: 6] |
-| **maxLength** | **Integer** (int32) | The maximum length of the valid domain. | [optional] [example: 63] |
+| **regex** | **String** | The regex string to validate a domain. | [optional] [example: `^[a-z0-9]([a-z0-9-]){1,61}[a-z0-9]$`] [nullable] |
+| **minLength** | **Integer** (int32) | The minimum length of the valid domain. | [optional] [example: `6`] |
+| **maxLength** | **Integer** (int32) | The maximum length of the valid domain. | [optional] [example: `63`] |
 
 
 ### Model TenantDto
@@ -14634,30 +14634,30 @@ The record of one portal: its name, owner, language, time zone and lifecycle sta
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **affiliateId** | **String** | The partner the portal was signed up through, empty for a portal that came in directly. It is bookkeeping  for the vendor and has no bearing on what the portal may do. | [optional] [example: AFF12345] [nullable] |
-| **tenantAlias** | **String** | The portal's own name within the installation, which together with the installation's base domain forms  the address it is reached at. A caller without the portal-settings right gets `tenantId` alone, so an  empty value here is the sign that the rest of this object was withheld rather than unset. | [optional] [example: my-company] [nullable] |
-| **calls** | **Boolean** | Whether telephony is switched on for the portal. It is carried over from portal registration and stays  `false` on a DocSpace portal, where the feature does not exist. | [optional] [example: true] |
-| **campaign** | **String** | The marketing campaign the portal was signed up under, empty for a portal that came in outside one. Like  `affiliateId`, it is bookkeeping only. | [optional] [example: WINTER2024] [nullable] |
-| **creationDateTime** | **Date** (date-time) | When the portal was created, in UTC rather than in the portal time zone. | [optional] [example: 2024-01-15T10:30:00Z] |
-| **hostedRegion** | **String** | The data-centre region written on the portal record itself, as opposed to `region`, which is looked up  from the hosting service. It is empty on a server installation. | [optional] [example: EU] [nullable] |
-| **tenantId** | **Integer** (int32) | The numeric identifier of the portal inside the installation. It is the one field every caller gets,  whatever their rights. | [optional] [example: 1] |
-| **industry** | [**TenantIndustry**](#model-tenantindustry) | The line of business chosen when the portal was created. It only steers what the vendor suggests and  restricts nothing. | [optional] [enum: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16] |
-| **language** | **String** | The default language of the portal as a culture name, the same value `GET api/2.0/settings` reports as  `culture`. A member may have a language of their own, which this does not reflect. | [optional] [example: en-US] [nullable] |
-| **lastModified** | **Date** (date-time) | When any field of this record last changed, in UTC. It does not move when portal settings outside this  record are changed. | [optional] [example: 2024-02-10T14:20:00Z] |
-| **mappedDomain** | **String** | The custom domain the portal answers on in addition to its own address, empty when none has been set up. | [optional] [example: mycompany.example.com] [nullable] |
-| **name** | **String** | The portal title as shown to people, which is what `GET api/2.0/settings` returns as  `greetingSettings`. It is free text, unlike `tenantAlias`, and empty until someone sets it. | [optional] [example: My Company] [nullable] |
-| **ownerId** | **UUID** (uuid) | The portal owner, the one account that cannot be removed or demoted.  `PUT api/2.0/settings/owner` hands the role over. | [optional] [example: 00000000-0000-0000-0000-000000000001] |
-| **paymentId** | **String** | The portal's identifier in the billing system, empty for a portal that has never been billed. The  subscription itself is read with `GET api/2.0/portal/tariff`. | [optional] [example: PAY123456789] [nullable] |
-| **spam** | **Boolean** | Whether the owner agreed to receive the vendor's newsletter. Despite the name it does not mark the portal  as a spammer and affects nothing but marketing mail. | [optional] [example: false] |
-| **status** | [**TenantStatus**](#model-tenantstatus) | The lifecycle state of the portal. Anything other than active means most operations are refused for the  moment, because the portal is being transferred, restored, encrypted or removed. | [optional] [enum: 0, 1, 2, 3, 4, 5, 6] |
-| **statusChangeDate** | **Date** (date-time) | When `status` last changed, in UTC. For a portal pending removal it is the moment the countdown to  deletion started. | [optional] [example: 2024-01-15T10:30:00Z] |
-| **timeZone** | **String** | The portal time zone, which is the zone the dates this API calls portal time are expressed in. It may be  stored as a Windows identifier here, while `GET api/2.0/settings` always reports the IANA form. | [optional] [example: America/New_York] [nullable] |
-| **trustedDomains** | **List** | The mail domains a new member may register or be invited from without confirming the address. It is empty  whenever `trustedDomainsType` is not `Custom`. | [optional] [example: [example.com, trusted.com]] [nullable] |
-| **trustedDomainsRaw** | **String** | The same domains as the single stored string they are kept in, separated by commas. Read  `trustedDomains` instead; this one exists because it is what the record holds. | [optional] [example: example.com,trusted.com] [nullable] |
-| **trustedDomainsType** | [**TenantTrustedDomainsType**](#model-tenanttrusteddomainstype) | How the mail domains are applied: no domain trusted, every domain trusted, or only the listed ones. Only  the last of the three makes `trustedDomains` meaningful. | [optional] [enum: 0, 1, 2] |
-| **version** | **Integer** (int32) | The identifier of the portal version the installation pins this portal to, which is an internal number  and not the product version string that `GET api/2.0/settings` reports as `version`. | [optional] [example: 2] |
-| **versionChanged** | **Date** (date-time) | When `version` last changed, in UTC. It stays at its zero value on a portal whose version has never been  switched. | [optional] [example: 2024-02-01T09:00:00Z] |
-| **region** | **String** | The data-centre region the portal is actually served from, looked up from the hosting service. It is  empty on a server installation and also whenever the installation's portal cache is switched off, so an  empty value does not mean the portal has no region - `hostedRegion` is the value from the record itself. | [optional] [example: us-east-1] [nullable] |
+| **affiliateId** | **String** | The partner the portal was signed up through, empty for a portal that came in directly. It is bookkeeping  for the vendor and has no bearing on what the portal may do. | [optional] [example: `AFF12345`] [nullable] |
+| **tenantAlias** | **String** | The portal's own name within the installation, which together with the installation's base domain forms  the address it is reached at. A caller without the portal-settings right gets `tenantId` alone, so an  empty value here is the sign that the rest of this object was withheld rather than unset. | [optional] [example: `my-company`] [nullable] |
+| **calls** | **Boolean** | Whether telephony is switched on for the portal. It is carried over from portal registration and stays  `false` on a DocSpace portal, where the feature does not exist. | [optional] [example: `true`] |
+| **campaign** | **String** | The marketing campaign the portal was signed up under, empty for a portal that came in outside one. Like  `affiliateId`, it is bookkeeping only. | [optional] [example: `WINTER2024`] [nullable] |
+| **creationDateTime** | **Date** (date-time) | When the portal was created, in UTC rather than in the portal time zone. | [optional] [example: `2024-01-15T10:30:00Z`] |
+| **hostedRegion** | **String** | The data-centre region written on the portal record itself, as opposed to `region`, which is looked up  from the hosting service. It is empty on a server installation. | [optional] [example: `EU`] [nullable] |
+| **tenantId** | **Integer** (int32) | The numeric identifier of the portal inside the installation. It is the one field every caller gets,  whatever their rights. | [optional] [example: `1`] |
+| **industry** | [**TenantIndustry**](#model-tenantindustry) | The line of business chosen when the portal was created. It only steers what the vendor suggests and  restricts nothing. | [optional] [enum: `0`, `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `13`, `14`, `15`, `16`] |
+| **language** | **String** | The default language of the portal as a culture name, the same value `GET api/2.0/settings` reports as  `culture`. A member may have a language of their own, which this does not reflect. | [optional] [example: `en-US`] [nullable] |
+| **lastModified** | **Date** (date-time) | When any field of this record last changed, in UTC. It does not move when portal settings outside this  record are changed. | [optional] [example: `2024-02-10T14:20:00Z`] |
+| **mappedDomain** | **String** | The custom domain the portal answers on in addition to its own address, empty when none has been set up. | [optional] [example: `mycompany.example.com`] [nullable] |
+| **name** | **String** | The portal title as shown to people, which is what `GET api/2.0/settings` returns as  `greetingSettings`. It is free text, unlike `tenantAlias`, and empty until someone sets it. | [optional] [example: `My Company`] [nullable] |
+| **ownerId** | **UUID** (uuid) | The portal owner, the one account that cannot be removed or demoted.  `PUT api/2.0/settings/owner` hands the role over. | [optional] [example: `00000000-0000-0000-0000-000000000001`] |
+| **paymentId** | **String** | The portal's identifier in the billing system, empty for a portal that has never been billed. The  subscription itself is read with `GET api/2.0/portal/tariff`. | [optional] [example: `PAY123456789`] [nullable] |
+| **spam** | **Boolean** | Whether the owner agreed to receive the vendor's newsletter. Despite the name it does not mark the portal  as a spammer and affects nothing but marketing mail. | [optional] [example: `false`] |
+| **status** | [**TenantStatus**](#model-tenantstatus) | The lifecycle state of the portal. Anything other than active means most operations are refused for the  moment, because the portal is being transferred, restored, encrypted or removed. | [optional] [enum: `0`, `1`, `2`, `3`, `4`, `5`, `6`] |
+| **statusChangeDate** | **Date** (date-time) | When `status` last changed, in UTC. For a portal pending removal it is the moment the countdown to  deletion started. | [optional] [example: `2024-01-15T10:30:00Z`] |
+| **timeZone** | **String** | The portal time zone, which is the zone the dates this API calls portal time are expressed in. It may be  stored as a Windows identifier here, while `GET api/2.0/settings` always reports the IANA form. | [optional] [example: `America/New_York`] [nullable] |
+| **trustedDomains** | **List** | The mail domains a new member may register or be invited from without confirming the address. It is empty  whenever `trustedDomainsType` is not `Custom`. | [optional] [example: `[example.com, trusted.com]`] [nullable] |
+| **trustedDomainsRaw** | **String** | The same domains as the single stored string they are kept in, separated by commas. Read  `trustedDomains` instead; this one exists because it is what the record holds. | [optional] [example: `example.com,trusted.com`] [nullable] |
+| **trustedDomainsType** | [**TenantTrustedDomainsType**](#model-tenanttrusteddomainstype) | How the mail domains are applied: no domain trusted, every domain trusted, or only the listed ones. Only  the last of the three makes `trustedDomains` meaningful. | [optional] [enum: `0`, `1`, `2`] |
+| **version** | **Integer** (int32) | The identifier of the portal version the installation pins this portal to, which is an internal number  and not the product version string that `GET api/2.0/settings` reports as `version`. | [optional] [example: `2`] |
+| **versionChanged** | **Date** (date-time) | When `version` last changed, in UTC. It stays at its zero value on a portal whose version has never been  switched. | [optional] [example: `2024-02-01T09:00:00Z`] |
+| **region** | **String** | The data-centre region the portal is actually served from, looked up from the hosting service. It is  empty on a server installation and also whenever the installation's portal cache is switched off, so an  empty value does not mean the portal has no region - `hostedRegion` is the value from the record itself. | [optional] [example: `us-east-1`] [nullable] |
 
 
 ### Model TenantEntityQuotaSettings
@@ -14665,9 +14665,9 @@ The tenant entity quota settings.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **enableQuota** | **Boolean** | Specifies if the quota is enabled for the tenant entity or not. | [optional] [example: true] |
-| **defaultQuota** | **Long** (int64) | The default quota of the tenant entity. | [optional] [example: 1000] |
-| **lastRecalculateDate** | **Date** (date-time) | The date of the last quota recalculation. | [optional] [example: 2024-01-01T00:00:00Z] [nullable] |
+| **enableQuota** | **Boolean** | Specifies if the quota is enabled for the tenant entity or not. | [optional] [example: `true`] |
+| **defaultQuota** | **Long** (int64) | The default quota of the tenant entity. | [optional] [example: `1000`] |
+| **lastRecalculateDate** | **Date** (date-time) | The date of the last quota recalculation. | [optional] [example: `2024-01-01T00:00:00Z`] [nullable] |
 
 
 ### Model TenantIndustry
@@ -14698,52 +14698,52 @@ The current tenant quota.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **tenantId** | **Integer** (int32) | The tenant ID. | [optional] [example: 1] |
-| **name** | **String** | The tenant name. | [optional] [example: Default] [nullable] |
-| **price** | **Double** (double) | The tenant price. | [optional] [example: 10.0] |
-| **priceCurrencySymbol** | **String** | The tenant price currency symbol. | [optional] [example: $] [nullable] |
-| **priceISOCurrencySymbol** | **String** | The tenant price three-character ISO 4217 currency symbol. | [optional] [example: USD] [nullable] |
-| **productId** | **String** | The tenant product ID. | [optional] [example: 64] [nullable] |
-| **serviceName** | **String** | The service name. | [optional] [example: backup] [nullable] |
-| **serviceGroup** | **String** | The service group. | [optional] [example: services] [nullable] |
-| **visible** | **Boolean** | Specifies if the tenant quota is visible or not. | [optional] [example: true] |
-| **wallet** | **Boolean** | Specifies if the tenant quota applies to the wallet or not | [optional] [example: true] |
-| **additional** | **Boolean** | Specifies if the tenant quota is primary or additional. | [optional] [example: false] |
-| **dueDate** | **Date** (date-time) | The quota due date. | [optional] [example: 2021-01-01T00:00:00] [nullable] |
-| **features** | **String** | The tenant quota features. | [optional] [example: audit,ldap,sso] [nullable] |
-| **maxFileSize** | **Long** (int64) | The tenant maximum file size. | [optional] [example: 25000000] |
-| **maxTotalSize** | **Long** (int64) | The tenant maximum total size. | [optional] [example: 25000000000] |
-| **countUser** | **Integer** (int32) | The number of portal users. | [optional] [example: 100] |
-| **countRoomAdmin** | **Integer** (int32) | The number of portal room administrators. | [optional] [example: 10] |
-| **usersInRoom** | **Integer** (int32) | The number of room users. | [optional] [example: 50] |
-| **countRoom** | **Integer** (int32) | The number of rooms. | [optional] [example: 500] |
-| **nonProfit** | **Boolean** | Specifies if the tenant quota is nonprofit or not. | [optional] [example: false] |
-| **trial** | **Boolean** | Specifies if the tenant quota is trial or not. | [optional] [example: false] |
-| **free** | **Boolean** | Specifies if the tenant quota is free or not. | [optional] [example: false] |
-| **update** | **Boolean** | Specifies if the tenant quota is updated or not. | [optional] [example: false] |
-| **audit** | **Boolean** | Specifies if the audit trail is available or not. | [optional] [example: true] |
-| **docsEdition** | **Boolean** | Specifies if ONLYOFFICE Docs is included in the tenant quota or not. | [optional] [example: true] |
-| **ldap** | **Boolean** | Specifies if the LDAP settings are available or not. | [optional] [example: true] |
-| **sso** | **Boolean** | Specifies if the SSO settings are available or not. | [optional] [example: true] |
-| **statistic** | **Boolean** | Specifies if the statistics settings are available or not. | [optional] [example: true] |
-| **branding** | **Boolean** | Specifies if the branding settings are available or not. | [optional] [example: true] |
-| **customization** | **Boolean** | Specifies if the customization settings are available or not. | [optional] [example: true] |
-| **lifetime** | **Boolean** | Specifies if the license has the lifetime settings or not. | [optional] [example: false] |
-| **automationApi** | **Boolean** | Specifies if the Automation API is available or not. | [optional] [example: true] |
-| **custom** | **Boolean** | Specifies if the custom domain URL is available or not. | [optional] [example: false] |
-| **restore** | **Boolean** | Specifies if the restore is enabled or not. | [optional] [example: true] |
-| **oauth** | **Boolean** | Specifies if Oauth is available or not. | [optional] [example: true] |
-| **contentSearch** | **Boolean** | Specifies if the content search is available or not. | [optional] [example: true] |
-| **thirdParty** | **Boolean** | Specifies if the third-party accounts linking is available or not. | [optional] [example: true] |
-| **year** | **Boolean** | Specifies if the tenant quota is yearly subscription or not. | [optional] [example: true] |
-| **countFreeBackup** | **Integer** (int32) | The number of free backups within a month. | [optional] [example: 1] |
-| **backup** | **Boolean** | Specifies if the backup enabled as a wallet service or not. | [optional] [example: true] |
-| **countAIAgent** | **Integer** (int32) | The number of AI agents. | [optional] [example: 5] |
-| **aiTools** | **Boolean** | Specifies if the AI tools enabled as a wallet service or not. | [optional] [example: true] |
-| **aiSearch** | **Boolean** | Specifies if the AI search enabled as a wallet service or not. | [optional] [example: true] |
-| **docsCloud** | **Integer** (int32) | The number of DocsCloud users. | [optional] [example: true] |
-| **docsCloudDevPack** | **Boolean** | Specifies if the DocsCloudDevPack enabled or not. | [optional] [example: true] |
-| **docsCloudTrial** | **Boolean** | Specifies if the DocsCloudTrial enabled or not. | [optional] [example: true] |
+| **tenantId** | **Integer** (int32) | The tenant ID. | [optional] [example: `1`] |
+| **name** | **String** | The tenant name. | [optional] [example: `Default`] [nullable] |
+| **price** | **Double** (double) | The tenant price. | [optional] [example: `10.0`] |
+| **priceCurrencySymbol** | **String** | The tenant price currency symbol. | [optional] [example: `$`] [nullable] |
+| **priceISOCurrencySymbol** | **String** | The tenant price three-character ISO 4217 currency symbol. | [optional] [example: `USD`] [nullable] |
+| **productId** | **String** | The tenant product ID. | [optional] [example: `64`] [nullable] |
+| **serviceName** | **String** | The service name. | [optional] [example: `backup`] [nullable] |
+| **serviceGroup** | **String** | The service group. | [optional] [example: `services`] [nullable] |
+| **visible** | **Boolean** | Specifies if the tenant quota is visible or not. | [optional] [example: `true`] |
+| **wallet** | **Boolean** | Specifies if the tenant quota applies to the wallet or not | [optional] [example: `true`] |
+| **additional** | **Boolean** | Specifies if the tenant quota is primary or additional. | [optional] [example: `false`] |
+| **dueDate** | **Date** (date-time) | The quota due date. | [optional] [example: `2021-01-01T00:00:00`] [nullable] |
+| **features** | **String** | The tenant quota features. | [optional] [example: `audit,ldap,sso`] [nullable] |
+| **maxFileSize** | **Long** (int64) | The tenant maximum file size. | [optional] [example: `25000000`] |
+| **maxTotalSize** | **Long** (int64) | The tenant maximum total size. | [optional] [example: `25000000000`] |
+| **countUser** | **Integer** (int32) | The number of portal users. | [optional] [example: `100`] |
+| **countRoomAdmin** | **Integer** (int32) | The number of portal room administrators. | [optional] [example: `10`] |
+| **usersInRoom** | **Integer** (int32) | The number of room users. | [optional] [example: `50`] |
+| **countRoom** | **Integer** (int32) | The number of rooms. | [optional] [example: `500`] |
+| **nonProfit** | **Boolean** | Specifies if the tenant quota is nonprofit or not. | [optional] [example: `false`] |
+| **trial** | **Boolean** | Specifies if the tenant quota is trial or not. | [optional] [example: `false`] |
+| **free** | **Boolean** | Specifies if the tenant quota is free or not. | [optional] [example: `false`] |
+| **update** | **Boolean** | Specifies if the tenant quota is updated or not. | [optional] [example: `false`] |
+| **audit** | **Boolean** | Specifies if the audit trail is available or not. | [optional] [example: `true`] |
+| **docsEdition** | **Boolean** | Specifies if ONLYOFFICE Docs is included in the tenant quota or not. | [optional] [example: `true`] |
+| **ldap** | **Boolean** | Specifies if the LDAP settings are available or not. | [optional] [example: `true`] |
+| **sso** | **Boolean** | Specifies if the SSO settings are available or not. | [optional] [example: `true`] |
+| **statistic** | **Boolean** | Specifies if the statistics settings are available or not. | [optional] [example: `true`] |
+| **branding** | **Boolean** | Specifies if the branding settings are available or not. | [optional] [example: `true`] |
+| **customization** | **Boolean** | Specifies if the customization settings are available or not. | [optional] [example: `true`] |
+| **lifetime** | **Boolean** | Specifies if the license has the lifetime settings or not. | [optional] [example: `false`] |
+| **automationApi** | **Boolean** | Specifies if the Automation API is available or not. | [optional] [example: `true`] |
+| **custom** | **Boolean** | Specifies if the custom domain URL is available or not. | [optional] [example: `false`] |
+| **restore** | **Boolean** | Specifies if the restore is enabled or not. | [optional] [example: `true`] |
+| **oauth** | **Boolean** | Specifies if Oauth is available or not. | [optional] [example: `true`] |
+| **contentSearch** | **Boolean** | Specifies if the content search is available or not. | [optional] [example: `true`] |
+| **thirdParty** | **Boolean** | Specifies if the third-party accounts linking is available or not. | [optional] [example: `true`] |
+| **year** | **Boolean** | Specifies if the tenant quota is yearly subscription or not. | [optional] [example: `true`] |
+| **countFreeBackup** | **Integer** (int32) | The number of free backups within a month. | [optional] [example: `1`] |
+| **backup** | **Boolean** | Specifies if the backup enabled as a wallet service or not. | [optional] [example: `true`] |
+| **countAIAgent** | **Integer** (int32) | The number of AI agents. | [optional] [example: `5`] |
+| **aiTools** | **Boolean** | Specifies if the AI tools enabled as a wallet service or not. | [optional] [example: `true`] |
+| **aiSearch** | **Boolean** | Specifies if the AI search enabled as a wallet service or not. | [optional] [example: `true`] |
+| **docsCloud** | **Integer** (int32) | The number of DocsCloud users. | [optional] [example: `true`] |
+| **docsCloudDevPack** | **Boolean** | Specifies if the DocsCloudDevPack enabled or not. | [optional] [example: `true`] |
+| **docsCloudTrial** | **Boolean** | Specifies if the DocsCloudTrial enabled or not. | [optional] [example: `true`] |
 
 
 ### Model TenantQuotaFeatureDto
@@ -14751,13 +14751,13 @@ One feature a quota switches on, with the limit it grants and how much of that l
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **id** | **String** | The stable key of the feature - `total_size`, `manager`, `room`, `backup` and so on. It is the value to  branch on, since `title` is prose in the portal language. | [optional] [example: total_size] [nullable] |
-| **title** | **String** | The feature described in the portal language, with its limit already substituted into the sentence, so it  can be printed as it is. It is empty when this build ships no wording for the feature. | [optional] [example: Premium Storage] [nullable] |
-| **image** | **String** | The feature's icon as SVG markup to render inline - not a URL to fetch. It is filled in only when the  quota comes from the catalogue, and left empty on the quota the portal is actually on, on a feature that  this quota switches off, and on a feature that ships no icon. | [optional] [example: &lt;svg viewBox="0 0 24 24">&lt;path d="..."/>&lt;/svg>] [nullable] |
+| **id** | **String** | The stable key of the feature - `total_size`, `manager`, `room`, `backup` and so on. It is the value to  branch on, since `title` is prose in the portal language. | [optional] [example: `total_size`] [nullable] |
+| **title** | **String** | The feature described in the portal language, with its limit already substituted into the sentence, so it  can be printed as it is. It is empty when this build ships no wording for the feature. | [optional] [example: `Premium Storage`] [nullable] |
+| **image** | **String** | The feature's icon as SVG markup to render inline - not a URL to fetch. It is filled in only when the  quota comes from the catalogue, and left empty on the quota the portal is actually on, on a feature that  this quota switches off, and on a feature that ships no icon. | [optional] [example: `<svg viewBox="0 0 24 24"><path d="..."/></svg>`] [nullable] |
 | **value** | **oas_any_type_not_mapped** |  | [optional] [nullable] |
-| **type** | **String** | How to read `value` and `used`: `size` for bytes, `count` for a number of things, `flag` for a feature  that is merely on or off. | [optional] [example: size] [nullable] |
+| **type** | **String** | How to read `value` and `used`: `size` for bytes, `count` for a number of things, `flag` for a feature  that is merely on or off. | [optional] [example: `size`] [nullable] |
 | **used** | [**FeatureUsedDto**](#model-featureuseddto) | How much of the limit is already used. It is present only on the quota the portal is actually on, and  only for a feature whose consumption is counted; a guest is shown none of these figures and a plain member  only the one for total size, so an absent value can mean the caller may not see it rather than that  nothing is used. | [optional] |
-| **priceTitle** | **String** | What the feature is charged as, in the portal language - for instance the per-unit price of an add-on. It  is filled in only for a feature that costs money on top of the plan. | [optional] [example: $9.99/month] [nullable] |
+| **priceTitle** | **String** | What the feature is charged as, in the portal language - for instance the per-unit price of an add-on. It  is filled in only for a feature that costs money on top of the plan. | [optional] [example: `$9.99/month`] [nullable] |
 
 
 ### Model TenantQuotaSettings
@@ -14765,10 +14765,10 @@ The tenant quota settings.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **enableQuota** | **Boolean** | Specifies if the tenant quota is enabled or not. | [optional] [example: true] |
-| **quota** | **Long** (int64) | The tenant quota. | [optional] [example: 10737418240] |
-| **lastRecalculateDate** | **Date** (date-time) | The date of the last tenant quota recalculation. | [optional] [example: 1990-01-01T00:00:00Z] [nullable] |
-| **lastModified** | **Date** (date-time) | The timestamp indicating when the settings were last modified. | [optional] [example: 1990-01-01T00:00:00Z] |
+| **enableQuota** | **Boolean** | Specifies if the tenant quota is enabled or not. | [optional] [example: `true`] |
+| **quota** | **Long** (int64) | The tenant quota. | [optional] [example: `10737418240`] |
+| **lastRecalculateDate** | **Date** (date-time) | The date of the last tenant quota recalculation. | [optional] [example: `1990-01-01T00:00:00Z`] [nullable] |
+| **lastModified** | **Date** (date-time) | The timestamp indicating when the settings were last modified. | [optional] [example: `1990-01-01T00:00:00Z`] |
 
 
 ### Model TenantQuotaSettingsRequestsDto
@@ -14776,8 +14776,8 @@ The storage limit set on one tenant of a self-hosted installation.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **tenantId** | **Integer** (int32) | The tenant the limit applies to, by tenant ID. Only a self-hosted installation has more than one, which is  why the operation is refused on SaaS. | [required] [example: 1] |
-| **quota** | **Long** (int64) | The limit in bytes. A negative value is not a smaller limit but the absence of one: it removes whatever limit  the tenant had. The value is a ceiling on stored data and says nothing about how much of it is already used. | [optional] [example: 1048576] |
+| **tenantId** | **Integer** (int32) | The tenant the limit applies to, by tenant ID. Only a self-hosted installation has more than one, which is  why the operation is refused on SaaS. | [required] [example: `1`] |
+| **quota** | **Long** (int64) | The limit in bytes. A negative value is not a smaller limit but the absence of one: it removes whatever limit  the tenant had. The value is a ceiling on stored data and says nothing about how much of it is already used. | [optional] [example: `1048576`] |
 
 
 ### Model TenantQuotaSettingsWrapper
@@ -14854,8 +14854,8 @@ Whether the portal currently lets anyone be invited into it, member and guest ke
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **allowInvitingMembers** | **Boolean** | Whether new members may be invited through the Contacts section. Switching it off stops new invitations  from being created; links already handed out keep working and members already invited stay. | [required] [example: true] |
-| **allowInvitingGuests** | **Boolean** | Whether every member, and not only an administrator, may invite an outside guest into a room. It is  independent of `allowInvitingMembers`, and switching it off has the same forward-only effect. | [required] [example: false] |
+| **allowInvitingMembers** | **Boolean** | Whether new members may be invited through the Contacts section. Switching it off stops new invitations  from being created; links already handed out keep working and members already invited stay. | [required] [example: `true`] |
+| **allowInvitingGuests** | **Boolean** | Whether every member, and not only an administrator, may invite an outside guest into a room. It is  independent of `allowInvitingMembers`, and switching it off has the same forward-only effect. | [required] [example: `false`] |
 
 
 ### Model TenantUserInvitationSettingsRequestDto
@@ -14863,8 +14863,8 @@ Whether the portal still lets its members invite new members and new guests.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **allowInvitingMembers** | **Boolean** | Whether new DocSpace members may be invited through the Contacts section. Switching it off only stops new  invitations being created; links already issued keep working and members already invited stay. | [optional] [example: true] |
-| **allowInvitingGuests** | **Boolean** | Whether every DocSpace member, and not only an administrator, may invite external guests into rooms.  Switching it off leaves the guests already invited in place. | [optional] [example: false] |
+| **allowInvitingMembers** | **Boolean** | Whether new DocSpace members may be invited through the Contacts section. Switching it off only stops new  invitations being created; links already issued keep working and members already invited stay. | [optional] [example: `true`] |
+| **allowInvitingGuests** | **Boolean** | Whether every DocSpace member, and not only an administrator, may invite external guests into rooms.  Switching it off leaves the guests already invited in place. | [optional] [example: `false`] |
 
 
 ### Model TenantUserInvitationSettingsWrapper
@@ -14920,8 +14920,8 @@ The wallet services settings.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **enabledServices** | **List** | The list of the enabled wallet services. | [optional] [example: [-11, -12]] [enum: -18, -16, -15, -14, -13, -12, -11] [nullable] |
-| **lastModified** | **Date** (date-time) | The date and time when the wallet services settings were last modified. | [optional] [example: 1990-01-01T00:00:00Z] |
+| **enabledServices** | **List** | The list of the enabled wallet services. | [optional] [example: `[-11, -12]`] [enum: `-18`, `-16`, `-15`, `-14`, `-13`, `-12`, `-11`] [nullable] |
+| **lastModified** | **Date** (date-time) | The date and time when the wallet services settings were last modified. | [optional] [example: `1990-01-01T00:00:00Z`] |
 
 
 ### Model TenantWalletServiceSettingsWrapper
@@ -14941,13 +14941,13 @@ The tenant wallet settings.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **enabled** | **Boolean** | Specifies whether automatic top-up for the tenant wallet is enabled. | [optional] [example: true] |
-| **minBalance** | **Integer** (int32) | The minimum wallet balance at which automatic top-up will be triggered. Must be between 5 and 1000. | [optional] [example: 10] [min: 5] [max: 1000] |
-| **upToBalance** | **Integer** (int32) | The maximum wallet balance at which automatic top-up will be triggered. Must be between 6 and 5000. | [optional] [example: 100] [min: 6] [max: 5000] |
-| **currency** | **String** | The three-character ISO 4217 currency symbol. | [optional] [example: USD] [nullable] |
-| **lowBalanceThreshold** | **Integer** (int32) | The wallet balance below which a low-balance notification is sent. Set internally, not user-configurable. | [optional] [example: 1] |
-| **lowBalanceNotified** | **Boolean** | Specifies whether a low-balance notification has already been sent for the current dip below ASC.Core.Tenants.TenantWalletSettings.LowBalanceThreshold. | [optional] [example: false] |
-| **lastModified** | **Date** (date-time) | The date and time when the tenant wallet settings were last modified. | [optional] [example: 1990-01-01T00:00:00Z] |
+| **enabled** | **Boolean** | Specifies whether automatic top-up for the tenant wallet is enabled. | [optional] [example: `true`] |
+| **minBalance** | **Integer** (int32) | The minimum wallet balance at which automatic top-up will be triggered. Must be between 5 and 1000. | [optional] [example: `10`] [min: 5] [max: 1000] |
+| **upToBalance** | **Integer** (int32) | The maximum wallet balance at which automatic top-up will be triggered. Must be between 6 and 5000. | [optional] [example: `100`] [min: 6] [max: 5000] |
+| **currency** | **String** | The three-character ISO 4217 currency symbol. | [optional] [example: `USD`] [nullable] |
+| **lowBalanceThreshold** | **Integer** (int32) | The wallet balance below which a low-balance notification is sent. Set internally, not user-configurable. | [optional] [example: `1`] |
+| **lowBalanceNotified** | **Boolean** | Specifies whether a low-balance notification has already been sent for the current dip below ASC.Core.Tenants.TenantWalletSettings.LowBalanceThreshold. | [optional] [example: `false`] |
+| **lastModified** | **Date** (date-time) | The date and time when the tenant wallet settings were last modified. | [optional] [example: `1990-01-01T00:00:00Z`] |
 
 
 ### Model TenantWalletSettingsResponseWrapper
@@ -14999,8 +14999,8 @@ One backup code of the caller's authenticator credential.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **isUsed** | **Boolean** | Whether the code has already been spent. A spent code is kept in the list but is no longer accepted, so  count the entries where this is `false` to know how many fallbacks remain. | [optional] [example: true] |
-| **code** | **String** | The code itself, in the form it is typed at sign-in - six characters with the default configuration. It is  stored encrypted and decrypted for this answer, so this is the one place a caller can read it. | [optional] [example: 123456] [nullable] |
+| **isUsed** | **Boolean** | Whether the code has already been spent. A spent code is kept in the list but is no longer accepted, so  count the entries where this is `false` to know how many fallbacks remain. | [optional] [example: `true`] |
+| **code** | **String** | The code itself, in the form it is typed at sign-in - six characters with the default configuration. It is  stored encrypted and decrypted for this answer, so this is the one place a caller can read it. | [optional] [example: `123456`] [nullable] |
 
 
 ### Model TfaConfirmDataDto
@@ -15008,9 +15008,9 @@ The confirmation link the caller has to follow to pass the two-factor step, and 
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **url** | **String** | The link to open. Its `type` shows which step it is: phone activation or phone authorization for the SMS  method, and authenticator activation or re-verification for the application method. The whole body is empty  when the portal requires no second factor of the caller. | [optional] [example: https://example.com/confirm?type=TfaAuth&key=abc123] [nullable] |
-| **cookieName** | **String** | The name of the confirmation cookie the link is validated against. It is filled in only for the  authenticator-application method; the SMS method returns `url` alone. | [optional] [example: asc_confirm_key_TfaAuth] [nullable] |
-| **cookieValue** | **String** | The value of that cookie. The call already set it on the response, so it is repeated here only for a client  that does not keep cookies of its own; it is filled in under the same condition as `cookieName`, and a  later call to this operation replaces it. | [optional] [example: 1234567890.abcdef] [nullable] |
+| **url** | **String** | The link to open. Its `type` shows which step it is: phone activation or phone authorization for the SMS  method, and authenticator activation or re-verification for the application method. The whole body is empty  when the portal requires no second factor of the caller. | [optional] [example: `https://example.com/confirm?type=TfaAuth&key=abc123`] [nullable] |
+| **cookieName** | **String** | The name of the confirmation cookie the link is validated against. It is filled in only for the  authenticator-application method; the SMS method returns `url` alone. | [optional] [example: `asc_confirm_key_TfaAuth`] [nullable] |
+| **cookieValue** | **String** | The value of that cookie. The call already set it on the response, so it is repeated here only for a client  that does not keep cookies of its own; it is filled in under the same condition as `cookieName`, and a  later call to this operation replaces it. | [optional] [example: `1234567890.abcdef`] [nullable] |
 
 
 ### Model TfaConfirmDataWrapper
@@ -15030,11 +15030,11 @@ The portal two-factor policy: which method is in force, who must pass it, and fr
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **type** | [**TfaRequestsDtoType**](#model-tfarequestsdtotype) | The second factor the portal demands. The two methods are mutually exclusive, so switching one on switches  the other off, and any value outside the defined set is read as switching TFA off rather than refused. | [optional] [enum: 0, 1, 2] |
-| **id** | **UUID** (uuid) | The account the request concerns, by portal user ID. Naming the portal owner is refused unless it is the  caller's own account. Where an operation detaches an authenticator application, the empty GUID and the  caller's own ID both mean the caller. | [optional] [example: 00000000-0000-0000-0000-000000000000] |
-| **trustedIps** | **List** | The list of IP addresses that bypass TFA verification. Each entry is a single address, an inclusive  from-to range or a CIDR block. This is the whole list that is to hold afterwards, so send the addresses  already trusted along with a new one; an entry that cannot be parsed fails the call with 400, and accounts  named as mandatory still have to pass the challenge even from a trusted address. | [optional] [example: [192.0.2.1, 198.51.100.1-198.51.100.20, 203.0.113.0/24]] [nullable] |
-| **mandatoryUsers** | **List** (uuid) | The accounts that must pass the challenge whatever their address, by portal user ID. This is the whole list  that is to hold afterwards - leaving it out clears it rather than keeping it - and naming the portal owner is  refused unless the caller is the owner. | [optional] [example: [00000000-0000-0000-0000-000000000000]] [nullable] |
-| **mandatoryGroups** | **List** (uuid) | The groups whose members must pass the challenge whatever their address, by group ID. This is the whole list  that is to hold afterwards - leaving it out clears it rather than keeping it. | [optional] [example: [00000000-0000-0000-0000-000000000000]] [nullable] |
+| **type** | [**TfaRequestsDtoType**](#model-tfarequestsdtotype) | The second factor the portal demands. The two methods are mutually exclusive, so switching one on switches  the other off, and any value outside the defined set is read as switching TFA off rather than refused. | [optional] [enum: `0`, `1`, `2`] |
+| **id** | **UUID** (uuid) | The account the request concerns, by portal user ID. Naming the portal owner is refused unless it is the  caller's own account. Where an operation detaches an authenticator application, the empty GUID and the  caller's own ID both mean the caller. | [optional] [example: `00000000-0000-0000-0000-000000000000`] |
+| **trustedIps** | **List** | The list of IP addresses that bypass TFA verification. Each entry is a single address, an inclusive  from-to range or a CIDR block. This is the whole list that is to hold afterwards, so send the addresses  already trusted along with a new one; an entry that cannot be parsed fails the call with 400, and accounts  named as mandatory still have to pass the challenge even from a trusted address. | [optional] [example: `[192.0.2.1, 198.51.100.1-198.51.100.20, 203.0.113.0/24]`] [nullable] |
+| **mandatoryUsers** | **List** (uuid) | The accounts that must pass the challenge whatever their address, by portal user ID. This is the whole list  that is to hold afterwards - leaving it out clears it rather than keeping it - and naming the portal owner is  refused unless the caller is the owner. | [optional] [example: `[00000000-0000-0000-0000-000000000000]`] [nullable] |
+| **mandatoryGroups** | **List** (uuid) | The groups whose members must pass the challenge whatever their address, by group ID. This is the whole list  that is to hold afterwards - leaving it out clears it rather than keeping it. | [optional] [example: `[00000000-0000-0000-0000-000000000000]`] [nullable] |
 
 
 ### Model TfaRequestsDtoType
@@ -15063,13 +15063,13 @@ One two-factor authentication method the portal offers, with the portal-wide sta
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **id** | **String** | Which method this entry describes: `sms` for a code sent by text message, `app` for a code from an  authenticator application. It is the value `PUT api/2.0/settings/tfaapp` takes as its `type`, and no other  value ever appears here. | [required] [example: app] [nullable] |
-| **title** | **String** | The label for the method in the portal language, meant for a button or a radio option. It is not stable  enough to branch on - match `id` for that. | [required] [example: Authenticator app] [nullable] |
-| **enabled** | **Boolean** | Whether this method is the portal's current policy. At most one entry can have it set, and none has it  while the portal challenges nobody. It says nothing about the caller's own account, which may be exempt  through `trustedIps` or forced through `mandatoryUsers`. | [required] [example: true] |
-| **available** | **Boolean** | Whether the method could be switched on at all. For `sms` it is `false` until the installation has a  working SMS provider, so a method can be offered here and still be impossible to enable; for `app` it is  always `true`. | [required] [example: true] |
-| **trustedIps** | **List** | The addresses that skip the challenge, each either a single address, a `from-to` pair or a CIDR range. It  is empty when no address is exempt, which means every account is challenged. | [optional] [example: [192.0.2.0/24]] [nullable] |
-| **mandatoryUsers** | **List** (uuid) | The accounts that are challenged even from a trusted address, by user ID. Empty means the exemption in  `trustedIps` holds for everyone. | [optional] [example: [00000000-0000-0000-0000-000000000000]] [nullable] |
-| **mandatoryGroups** | **List** (uuid) | The groups whose members are challenged even from a trusted address, by group ID, with the same reading of  an empty list as `mandatoryUsers`. | [optional] [example: [00000000-0000-0000-0000-000000000000]] [nullable] |
+| **id** | **String** | Which method this entry describes: `sms` for a code sent by text message, `app` for a code from an  authenticator application. It is the value `PUT api/2.0/settings/tfaapp` takes as its `type`, and no other  value ever appears here. | [required] [example: `app`] [nullable] |
+| **title** | **String** | The label for the method in the portal language, meant for a button or a radio option. It is not stable  enough to branch on - match `id` for that. | [required] [example: `Authenticator app`] [nullable] |
+| **enabled** | **Boolean** | Whether this method is the portal's current policy. At most one entry can have it set, and none has it  while the portal challenges nobody. It says nothing about the caller's own account, which may be exempt  through `trustedIps` or forced through `mandatoryUsers`. | [required] [example: `true`] |
+| **available** | **Boolean** | Whether the method could be switched on at all. For `sms` it is `false` until the installation has a  working SMS provider, so a method can be offered here and still be impossible to enable; for `app` it is  always `true`. | [required] [example: `true`] |
+| **trustedIps** | **List** | The addresses that skip the challenge, each either a single address, a `from-to` pair or a CIDR range. It  is empty when no address is exempt, which means every account is challenged. | [optional] [example: `[192.0.2.0/24]`] [nullable] |
+| **mandatoryUsers** | **List** (uuid) | The accounts that are challenged even from a trusted address, by user ID. Empty means the exemption in  `trustedIps` holds for everyone. | [optional] [example: `[00000000-0000-0000-0000-000000000000]`] [nullable] |
+| **mandatoryGroups** | **List** (uuid) | The groups whose members are challenged even from a trusted address, by group ID, with the same reading of  an empty list as `mandatoryUsers`. | [optional] [example: `[00000000-0000-0000-0000-000000000000]`] [nullable] |
 
 
 ### Model TfaSetupCodeDto
@@ -15077,9 +15077,9 @@ The secret to enrol in an authenticator application, in both of the forms an app
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **account** | **String** | The label the authenticator application will list the credential under, which is the caller's own email  address. It identifies the entry to a person, and no application checks it. | [optional] [example: john.doe@onlyoffice.com] [nullable] |
-| **manualEntryKey** | **String** | The secret in the base32 form that is typed into an application by hand. It describes the very same  credential as `qrCodeSetupImageUrl`, and repeating the call hands back the same value for the account until  the credential is reset. | [optional] [example: JBSWY3DPEHPK3PXP] [nullable] |
-| **qrCodeSetupImageUrl** | **String** | The same secret as a scannable image, given as a `data:image/png;base64,` URL that can be rendered  directly - it is not a link to fetch. | [optional] [example: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAAAAAA6fptVAAAACklEQVR4nGMAAgAABAABiCEmiQAAAABJRU5ErkJggg==] [nullable] |
+| **account** | **String** | The label the authenticator application will list the credential under, which is the caller's own email  address. It identifies the entry to a person, and no application checks it. | [optional] [example: `john.doe@onlyoffice.com`] [nullable] |
+| **manualEntryKey** | **String** | The secret in the base32 form that is typed into an application by hand. It describes the very same  credential as `qrCodeSetupImageUrl`, and repeating the call hands back the same value for the account until  the credential is reset. | [optional] [example: `JBSWY3DPEHPK3PXP`] [nullable] |
+| **qrCodeSetupImageUrl** | **String** | The same secret as a scannable image, given as a `data:image/png;base64,` URL that can be rendered  directly - it is not a link to fetch. | [optional] [example: `data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAAAAAA6fptVAAAACklEQVR4nGMAAgAABAABiCEmiQAAAABJRU5ErkJggg==`] [nullable] |
 
 
 ### Model TfaSetupCodeWrapper
@@ -15099,8 +15099,8 @@ The one-time code that completes a pending two-factor step, and how long the res
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **code** | **String** | The code to check - either one from the authenticator application or one of the account's unused backup  codes, which is spent by the check. A wrong code is refused with 400 and counts against the portal login  attempt limit. | [required] [example: 123456] [nullable] |
-| **session** | **Boolean** | Whether the sign-in that follows is tied to the browser session. When it is, the session ends with the  browser rather than lasting for the portal session lifetime. | [optional] [example: true] |
+| **code** | **String** | The code to check - either one from the authenticator application or one of the account's unused backup  codes, which is spent by the check. A wrong code is refused with 400 and counts against the portal login  attempt limit. | [required] [example: `123456`] [nullable] |
+| **session** | **Boolean** | Whether the sign-in that follows is tied to the browser session. When it is, the session ends with the  browser rather than lasting for the portal session lifetime. | [optional] [example: `true`] |
 
 
 ### Model TimeBound
@@ -15108,8 +15108,8 @@ Represents the period the price is effective in.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **startDate** | **Date** (date-time) | The date and time when the period starts. | [optional] [example: 2024-01-15T10:30:00Z] |
-| **endDate** | **Date** (date-time) | The date and time when the period ends. | [optional] [example: 2024-01-15T10:30:00Z] [nullable] |
+| **startDate** | **Date** (date-time) | The date and time when the period starts. | [optional] [example: `2024-01-15T10:30:00Z`] |
+| **endDate** | **Date** (date-time) | The date and time when the period ends. | [optional] [example: `2024-01-15T10:30:00Z`] [nullable] |
 
 
 ### Model TimezonesRequestsArrayWrapper
@@ -15129,8 +15129,8 @@ One time zone the host offers, as its identifier and the label to show for it.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **id** | **String** | The IANA identifier of the time zone. This is the value the portal time zone is set to, so pass it on  unchanged to `PUT api/2.0/settings/timeandlanguage`. | [required] [example: America/New_York] [nullable] |
-| **displayName** | **String** | The label to show for the zone, carrying its UTC offset as it stood when the list was built. The offset is a  snapshot rather than a rule, so a zone observing daylight saving reads differently at other times of the  year; sort and match on `id` instead. | [required] [example: (UTC-05:00) Eastern Time (US and Canada)] [nullable] |
+| **id** | **String** | The IANA identifier of the time zone. This is the value the portal time zone is set to, so pass it on  unchanged to `PUT api/2.0/settings/timeandlanguage`. | [required] [example: `America/New_York`] [nullable] |
+| **displayName** | **String** | The label to show for the zone, carrying its UTC offset as it stood when the list was built. The offset is a  snapshot rather than a rule, so a zone observing daylight saving reads differently at other times of the  year; sort and match on `id` instead. | [required] [example: `(UTC-05:00) Eastern Time (US and Canada)`] [nullable] |
 
 
 ### Model TopUpDepositRequestDto
@@ -15138,8 +15138,8 @@ How much money is charged to the payment method on file and added to the portal 
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **amount** | **Integer** (int32) | The sum to charge, as a whole number of units of `currency` - 10 means ten dollars and not ten cents. The  bounds are what one call may move, not what the wallet may hold, so a larger top-up is made of several calls. | [optional] [example: 1] [min: 1] [max: 999999] |
-| **currency** | **String** | The currency the charge is made in, as an ISO 4217 code in upper case. It has to be one of the accounting  currencies this installation supports, which `GET api/2.0/portal/payment/accounting/currencies` lists; any  other code is refused with 400. The money lands on the wallet sub-account of that currency, so topping up in  a second currency does not add to the first one. | [optional] [example: USD] [minLength: 0] [maxLength: 3] [nullable] |
+| **amount** | **Integer** (int32) | The sum to charge, as a whole number of units of `currency` - 10 means ten dollars and not ten cents. The  bounds are what one call may move, not what the wallet may hold, so a larger top-up is made of several calls. | [optional] [example: `1`] [min: 1] [max: 999999] |
+| **currency** | **String** | The currency the charge is made in, as an ISO 4217 code in upper case. It has to be one of the accounting  currencies this installation supports, which `GET api/2.0/portal/payment/accounting/currencies` lists; any  other code is refused with 400. The money lands on the wallet sub-account of that currency, so topping up in  a second currency does not add to the first one. | [optional] [example: `USD`] [minLength: 0] [maxLength: 3] [nullable] |
 
 
 ### Model TransactionInfo
@@ -15157,7 +15157,7 @@ Whether the sign-in page offers the form for writing to the portal administrator
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **turnOn** | **Boolean** | Whether the form is offered. Switching it off hides the form for everybody and makes the operation that  submits it refuse new messages; letters already sent are untouched. | [optional] [example: true] |
+| **turnOn** | **Boolean** | Whether the form is offered. Switching it off hides the form for everybody and makes the operation that  submits it refuse new messages; letters already sent are untouched. | [optional] [example: `true`] |
 
 
 ### Model UnknownNullableWrapper
@@ -15189,15 +15189,15 @@ One charge the portal is going to be billed for at the start of the next period.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **id** | **Integer** (int32) | The quota that is going to be charged. When a switch to another quota is scheduled, this is the quota  being switched to, so it can differ from what `GET api/2.0/portal/tariff` reports for today. | [optional] [example: -11] |
-| **name** | **String** | The quota's stable key, which is the same identifier the wallet operations use for a service. | [optional] [example: storage] [nullable] |
-| **title** | **String** | The quota name in the portal language, meant to be printed on an invoice preview. | [optional] [example: Business plan] [nullable] |
-| **unitOfMeasure** | **String** | What `quantity` counts, in the portal language - seats, administrators, gigabytes. It is empty for a quota  that is simply on or off. | [optional] [example: admins] [nullable] |
-| **quantity** | **Integer** (int32) | How much is going to be charged for, which is the quantity scheduled for the next period when one has been  scheduled and today's quantity otherwise. | [optional] [example: 100] |
-| **wallet** | **Boolean** | Whether the charge is paid out of the portal wallet rather than from the subscription. | [optional] [example: true] |
+| **id** | **Integer** (int32) | The quota that is going to be charged. When a switch to another quota is scheduled, this is the quota  being switched to, so it can differ from what `GET api/2.0/portal/tariff` reports for today. | [optional] [example: `-11`] |
+| **name** | **String** | The quota's stable key, which is the same identifier the wallet operations use for a service. | [optional] [example: `storage`] [nullable] |
+| **title** | **String** | The quota name in the portal language, meant to be printed on an invoice preview. | [optional] [example: `Business plan`] [nullable] |
+| **unitOfMeasure** | **String** | What `quantity` counts, in the portal language - seats, administrators, gigabytes. It is empty for a quota  that is simply on or off. | [optional] [example: `admins`] [nullable] |
+| **quantity** | **Integer** (int32) | How much is going to be charged for, which is the quantity scheduled for the next period when one has been  scheduled and today's quantity otherwise. | [optional] [example: `100`] |
+| **wallet** | **Boolean** | Whether the charge is paid out of the portal wallet rather than from the subscription. | [optional] [example: `true`] |
 | **dueDate** | [**ApiDateTime**](#model-apidatetime) | When the charge falls due, in the portal time zone. | [optional] |
-| **amount** | **Double** (double) | What the charge comes to: the unit price of the quota multiplied by `quantity`. Taxes are not part of it,  and a quota with no price of its own is not listed at all rather than listed with a zero. | [optional] [example: 14] |
-| **currency** | **String** | The currency `amount` is expressed in, as a three-letter ISO 4217 code. It follows the portal's billing  account, so every entry of one answer carries the same code. | [optional] [example: USD] [nullable] |
+| **amount** | **Double** (double) | What the charge comes to: the unit price of the quota multiplied by `quantity`. Taxes are not part of it,  and a quota with no price of its own is not listed at all rather than listed with a zero. | [optional] [example: `14`] |
+| **currency** | **String** | The currency `amount` is expressed in, as a three-letter ISO 4217 code. It follows the portal's billing  account, so every entry of one answer carries the same code. | [optional] [example: `USD`] [nullable] |
 
 
 ### Model UpdateWebhooksConfigRequestsDto
@@ -15210,7 +15210,7 @@ The webhook subscription being changed, with the parameters it is to have afterw
 | **secretKey** | **String** | The shared secret the payload signature is computed with, so the receiver can tell a genuine call from a  forged one. It has to satisfy the portal password rules published by  `GET api/2.0/settings/security/password`, and it is never echoed back by any operation. On an update an empty  value keeps the secret already stored. | [optional] [minLength: 0] [maxLength: 50] |
 | **enabled** | **Boolean** | Whether the subscription delivers at all. While it is off the matching events are dropped rather than queued,  so nothing from that period arrives once it is switched on again. | [optional] |
 | **ssl** | **Boolean** | Whether the target certificate is verified. Setting it demands an `https` target with a valid certificate;  leaving it off delivers without checking the certificate at all. | [optional] |
-| **triggers** | [**WebhookTrigger**](#model-webhooktrigger) | The events the subscription listens for, as a bitmask combining the flags; 0 subscribes to all of them. Take  the flags the caller role is allowed to use from `GET api/2.0/settings/webhook/triggers`, since a flag beyond  that set is refused with 400. A subscription still only fires for events its creator may see. | [optional] [enum: 0, 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536, 131072, 262144, 524288, 1048576, 2097152, 4194304, 8388608, 16777216, 33554432, 67108864, 134217728, 268435456, 536870912, 1073741824] |
+| **triggers** | [**WebhookTrigger**](#model-webhooktrigger) | The events the subscription listens for, as a bitmask combining the flags; 0 subscribes to all of them. Take  the flags the caller role is allowed to use from `GET api/2.0/settings/webhook/triggers`, since a flag beyond  that set is refused with 400. A subscription still only fires for events its creator may see. | [optional] [enum: `0`, `1`, `2`, `4`, `8`, `16`, `32`, `64`, `128`, `256`, `512`, `1024`, `2048`, `4096`, `8192`, `16384`, `32768`, `65536`, `131072`, `262144`, `524288`, `1048576`, `2097152`, `4194304`, `8388608`, `16777216`, `33554432`, `67108864`, `134217728`, `268435456`, `536870912`, `1073741824`] |
 | **targetId** | **String** | The single entity the subscription is narrowed to, by its identifier - a room or a file, for instance.  Leaving it out delivers events about every entity the subscribed triggers cover. | [optional] [minLength: 0] [maxLength: 255] |
 | **id** | **Integer** (int32) | The subscription to act on, by the `id` that `GET api/2.0/settings/webhook` reports. It travels in the body  rather than in the path, and an id that exists in no portal subscription answers 404. | [required] |
 
@@ -15232,11 +15232,11 @@ The storage one category of a portal module occupies, in the form a statistics p
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **name** | **String** | The category name in the portal language, HTML-escaped and ready to be rendered as text. What a category  stands for depends on the module asked about - for the Documents module it is a room type. | [optional] [example: Collaboration rooms] [nullable] |
-| **icon** | **String** | The path of the icon to render beside the name, relative to the portal address. It is empty for a category  that ships no icon. | [optional] [example: /images/icons/rooms.svg] [nullable] |
-| **disabled** | **Boolean** | Whether the category is switched off for this portal. A disabled category still reports the space it  occupies, so it is worth showing greyed out rather than dropping. | [optional] [example: true] |
-| **size** | **String** | The occupied space already formatted for display, with its unit and in the portal language - `0 Byte` for  an empty category. It is not a byte count and must not be parsed; the raw numbers live in the quota  reported by `GET api/2.0/portal/quota`. | [optional] [example: 1.5 GB] [nullable] |
-| **url** | **String** | The portal page that lists the contents of this category, relative to the portal address, so a statistics  page can link through to it. It is empty for a category with no page of its own. | [optional] [example: /rooms/shared] [nullable] |
+| **name** | **String** | The category name in the portal language, HTML-escaped and ready to be rendered as text. What a category  stands for depends on the module asked about - for the Documents module it is a room type. | [optional] [example: `Collaboration rooms`] [nullable] |
+| **icon** | **String** | The path of the icon to render beside the name, relative to the portal address. It is empty for a category  that ships no icon. | [optional] [example: `/images/icons/rooms.svg`] [nullable] |
+| **disabled** | **Boolean** | Whether the category is switched off for this portal. A disabled category still reports the space it  occupies, so it is worth showing greyed out rather than dropping. | [optional] [example: `true`] |
+| **size** | **String** | The occupied space already formatted for display, with its unit and in the portal language - `0 Byte` for  an empty category. It is not a byte count and must not be parsed; the raw numbers live in the quota  reported by `GET api/2.0/portal/quota`. | [optional] [example: `1.5 GB`] [nullable] |
+| **url** | **String** | The portal page that lists the contents of this category, relative to the portal address, so a statistics  page can link through to it. It is empty for a category with no page of its own. | [optional] [example: `/rooms/shared`] [nullable] |
 
 
 ### Model UserInfo
@@ -15244,37 +15244,37 @@ The user information.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **id** | **UUID** (uuid) | The user ID. | [optional] [example: 00000000-0000-0000-0000-000000000000] |
-| **firstName** | **String** | The user's first name. | [optional] [example: John] [nullable] |
-| **lastName** | **String** | The user's last name. | [optional] [example: Doe] [nullable] |
-| **userName** | **String** | The user username. | [optional] [example: johndoe] [nullable] |
-| **birthDate** | **Date** (date-time) | The user birthday. | [optional] [example: 1990-01-01T00:00:00Z] [nullable] |
-| **sex** | **Boolean** | The user sex (male or female). | [optional] [example: true] [nullable] |
-| **status** | [**EmployeeStatus**](#model-employeestatus) | The user status. | [optional] [enum: 1, 2, 4, 5, 7] |
-| **activationStatus** | [**EmployeeActivationStatus**](#model-employeeactivationstatus) | The user activation status. | [optional] [enum: 0, 1, 2, 4] |
-| **terminatedDate** | **Date** (date-time) | The date and time when the user account was terminated. | [optional] [example: 2025-12-31T23:59:59Z] [nullable] |
-| **title** | **String** | The user title. | [optional] [example: Manager] [nullable] |
-| **workFromDate** | **Date** (date-time) | The user registration date. | [optional] [example: 2020-01-15T00:00:00Z] [nullable] |
-| **email** | **String** (email) | The user email address. | [optional] [example: john.doe@example.com] [nullable] |
-| **contacts** | **String** | The list of user contacts in the string format. | [optional] [example: skype:johndoe\|telegram:@johndoe] [nullable] |
-| **contactsList** | **List** | The list of user contacts. | [optional] [example: [skype:johndoe, telegram:@johndoe]] [nullable] |
-| **location** | **String** | The user location. | [optional] [example: New York, USA] [nullable] |
-| **notes** | **String** | The user notes. | [optional] [example: Additional information about the user] [nullable] |
-| **removed** | **Boolean** | Specifies if the user account was removed or not. | [optional] [example: false] |
-| **lastModified** | **Date** (date-time) | The date and time when the user account was last modified. | [optional] [example: 2025-02-08T10:30:00Z] |
-| **tenantId** | **Integer** (int32) | The tenant ID. | [optional] [example: 1] |
-| **isActive** | **Boolean** | Specifies if the user is active or not. | [optional] [example: true] |
-| **cultureName** | **String** | The user culture code. | [optional] [example: en-US] [nullable] |
-| **mobilePhone** | **String** | The user mobile phone. | [optional] [example: +1234567890] [nullable] |
-| **mobilePhoneActivationStatus** | [**MobilePhoneActivationStatus**](#model-mobilephoneactivationstatus) | The user mobile phone activation status. | [optional] [enum: 0, 1] |
-| **sid** | **String** | The LDAP user identifier. | [optional] [example: S-1-5-21-3623811015-3361044348-30300820-1013] [nullable] |
-| **ldapQouta** | **Long** (int64) | The LDAP user quota attribute. | [optional] [example: 1073741824] |
-| **ssoNameId** | **String** | The SSO SAML user identifier. | [optional] [example: johndoe@example.com] [nullable] |
-| **ssoSessionId** | **String** | The SSO SAML user session identifier. | [optional] [example: _1a2b3c4d5e6f7g8h9i0j] [nullable] |
-| **createDate** | **Date** (date-time) | The date and time when the user account was created. | [optional] [example: 2020-01-15T00:00:00Z] |
-| **createdBy** | **UUID** (uuid) | The ID of the user who created the current user account. | [optional] [example: 00000000-0000-0000-0000-000000000000] [nullable] |
-| **spam** | **Boolean** | Specifies if tips, updates and offers are allowed to be sent to the user or not. | [optional] [example: false] [nullable] |
-| **checkActivation** | **Boolean** | Indicates whether the activation status of the employee or recipient is unchecked or inactive.  Depending on the context, this property evaluates the activation or eligibility status accordingly. | [optional] [example: false] |
+| **id** | **UUID** (uuid) | The user ID. | [optional] [example: `00000000-0000-0000-0000-000000000000`] |
+| **firstName** | **String** | The user's first name. | [optional] [example: `John`] [nullable] |
+| **lastName** | **String** | The user's last name. | [optional] [example: `Doe`] [nullable] |
+| **userName** | **String** | The user username. | [optional] [example: `johndoe`] [nullable] |
+| **birthDate** | **Date** (date-time) | The user birthday. | [optional] [example: `1990-01-01T00:00:00Z`] [nullable] |
+| **sex** | **Boolean** | The user sex (male or female). | [optional] [example: `true`] [nullable] |
+| **status** | [**EmployeeStatus**](#model-employeestatus) | The user status. | [optional] [enum: `1`, `2`, `4`, `5`, `7`] |
+| **activationStatus** | [**EmployeeActivationStatus**](#model-employeeactivationstatus) | The user activation status. | [optional] [enum: `0`, `1`, `2`, `4`] |
+| **terminatedDate** | **Date** (date-time) | The date and time when the user account was terminated. | [optional] [example: `2025-12-31T23:59:59Z`] [nullable] |
+| **title** | **String** | The user title. | [optional] [example: `Manager`] [nullable] |
+| **workFromDate** | **Date** (date-time) | The user registration date. | [optional] [example: `2020-01-15T00:00:00Z`] [nullable] |
+| **email** | **String** (email) | The user email address. | [optional] [example: `john.doe@example.com`] [nullable] |
+| **contacts** | **String** | The list of user contacts in the string format. | [optional] [example: `skype:johndoe\|telegram:@johndoe`] [nullable] |
+| **contactsList** | **List** | The list of user contacts. | [optional] [example: `[skype:johndoe, telegram:@johndoe]`] [nullable] |
+| **location** | **String** | The user location. | [optional] [example: `New York, USA`] [nullable] |
+| **notes** | **String** | The user notes. | [optional] [example: `Additional information about the user`] [nullable] |
+| **removed** | **Boolean** | Specifies if the user account was removed or not. | [optional] [example: `false`] |
+| **lastModified** | **Date** (date-time) | The date and time when the user account was last modified. | [optional] [example: `2025-02-08T10:30:00Z`] |
+| **tenantId** | **Integer** (int32) | The tenant ID. | [optional] [example: `1`] |
+| **isActive** | **Boolean** | Specifies if the user is active or not. | [optional] [example: `true`] |
+| **cultureName** | **String** | The user culture code. | [optional] [example: `en-US`] [nullable] |
+| **mobilePhone** | **String** | The user mobile phone. | [optional] [example: `+1234567890`] [nullable] |
+| **mobilePhoneActivationStatus** | [**MobilePhoneActivationStatus**](#model-mobilephoneactivationstatus) | The user mobile phone activation status. | [optional] [enum: `0`, `1`] |
+| **sid** | **String** | The LDAP user identifier. | [optional] [example: `S-1-5-21-3623811015-3361044348-30300820-1013`] [nullable] |
+| **ldapQouta** | **Long** (int64) | The LDAP user quota attribute. | [optional] [example: `1073741824`] |
+| **ssoNameId** | **String** | The SSO SAML user identifier. | [optional] [example: `johndoe@example.com`] [nullable] |
+| **ssoSessionId** | **String** | The SSO SAML user session identifier. | [optional] [example: `_1a2b3c4d5e6f7g8h9i0j`] [nullable] |
+| **createDate** | **Date** (date-time) | The date and time when the user account was created. | [optional] [example: `2020-01-15T00:00:00Z`] |
+| **createdBy** | **UUID** (uuid) | The ID of the user who created the current user account. | [optional] [example: `00000000-0000-0000-0000-000000000000`] [nullable] |
+| **spam** | **Boolean** | Specifies if tips, updates and offers are allowed to be sent to the user or not. | [optional] [example: `false`] [nullable] |
+| **checkActivation** | **Boolean** | Indicates whether the activation status of the employee or recipient is unchecked or inactive.  Depending on the context, this property evaluates the activation or eligibility status accordingly. | [optional] [example: `false`] |
 
 
 ### Model UserInfoWrapper
@@ -15307,8 +15307,8 @@ The wallet service being bought or scheduled, and the way its quantity is applie
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **quantity** | **Map** (int32) | The wallet service and the number of units of it, as a single pair. The key is the `serviceName` of a service  from `GET api/2.0/portal/payment/walletservices`, and the value is read according to  `productQuantityType`: the units to add, or the total the service is to have in the next period. Minimum  quantities apply per service - disk storage starts at 100 units, the DocsCloud developer pack at 10, and the  administrators may not be fewer than the portal already has. Exactly one pair is accepted, and a null or zero  value cancels a change scheduled earlier rather than buying nothing. | [required] [example: \{admin=1\}] |
-| **productQuantityType** | [**ProductQuantityType**](#model-productquantitytype) | How the number in `quantity` is applied. `Add` buys the units straight away and charges them to the portal  wallet, while `Set` charges nothing now and records the quantity the service is to have from the next period.  Only these two are accepted here; `Sub` and `Renew` are refused with 400. | [optional] [enum: 0, 1, 2, 3] |
+| **quantity** | **Map** (int32) | The wallet service and the number of units of it, as a single pair. The key is the `serviceName` of a service  from `GET api/2.0/portal/payment/walletservices`, and the value is read according to  `productQuantityType`: the units to add, or the total the service is to have in the next period. Minimum  quantities apply per service - disk storage starts at 100 units, the DocsCloud developer pack at 10, and the  administrators may not be fewer than the portal already has. Exactly one pair is accepted, and a null or zero  value cancels a change scheduled earlier rather than buying nothing. | [required] [example: `{admin=1}`] |
+| **productQuantityType** | [**ProductQuantityType**](#model-productquantitytype) | How the number in `quantity` is applied. `Add` buys the units straight away and charges them to the portal  wallet, while `Set` charges nothing now and records the quantity the service is to have from the next period.  Only these two are accepted here; `Sub` and `Renew` are refused with 400. | [optional] [enum: `0`, `1`, `2`, `3`] |
 
 
 ### Model WalletServiceArrayWrapper
@@ -15361,9 +15361,9 @@ The access rule stored for one portal module: whether it may be opened, and by w
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **id** | **String** | The module the rule applies to, given as a GUID. A value that is not a GUID fails the request as invalid. | [required] [example: 00000000-0000-0000-0000-000000000000] [nullable] |
-| **enabled** | **Boolean** | Whether the module may be opened. It decides the outcome only while `subjects` names somebody: an empty  `subjects` array is stored as access for everyone whatever this flag says. | [optional] [example: true] |
-| **subjects** | **List** (uuid) | The users and groups the rule is stored for, given by their IDs. This is the whole allow-list that is to hold  afterwards and not a list of additions - what was stored before is dropped. Leaving it out applies `enabled`  to everyone and skips the audit trail entry, while sending it empty stores access for everyone. | [optional] [example: [00000000-0000-0000-0000-000000000000]] [nullable] |
+| **id** | **String** | The module the rule applies to, given as a GUID. A value that is not a GUID fails the request as invalid. | [required] [example: `00000000-0000-0000-0000-000000000000`] [nullable] |
+| **enabled** | **Boolean** | Whether the module may be opened. It decides the outcome only while `subjects` names somebody: an empty  `subjects` array is stored as access for everyone whatever this flag says. | [optional] [example: `true`] |
+| **subjects** | **List** (uuid) | The users and groups the rule is stored for, given by their IDs. This is the whole allow-list that is to hold  afterwards and not a list of additions - what was stored before is dropped. Leaving it out applies `enabled`  to everyone and skips the audit trail entry, while sending it empty stores access for everyone. | [optional] [example: `[00000000-0000-0000-0000-000000000000]`] [nullable] |
 
 
 ### Model WebItemsSecurityRequestsDto
@@ -15371,7 +15371,7 @@ The modules switched on or off together, one entry per module.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **items** | [**List**](#model-itemkeyvaluepairstringboolean) | The modules to switch, each entry pairing a module GUID as its `key` with the new enabled flag as its  `value`. A key that is not a GUID fails the whole request as invalid, and a module listed twice is applied  once, from its first entry. No allow-list travels here: switching a product module on restores the users and  groups it was last restricted to, and everything else is stored as a plain allow or deny for everyone. | [optional] [example: [\{key=00000000-0000-0000-0000-000000000000, value=true\}]] [nullable] |
+| **items** | [**List**](#model-itemkeyvaluepairstringboolean) | The modules to switch, each entry pairing a module GUID as its `key` with the new enabled flag as its  `value`. A key that is not a GUID fails the whole request as invalid, and a module listed twice is applied  once, from its first entry. No allow-list travels here: switching a product module on restores the users and  groups it was last restricted to, and everything else is stored as a plain allow or deny for everyone. | [optional] [example: `[{key=00000000-0000-0000-0000-000000000000, value=true}]`] [nullable] |
 
 
 ### Model WebPluginArrayWrapper
@@ -15391,26 +15391,26 @@ One web plugin available to the portal: its manifest, where to load it from, and
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **name** | **String** | The plugin's manifest name, which is what every other operation of this group addresses it by and what  makes it unique within the portal - an installation-wide plugin wins the name over a portal one. | [required] [example: Example Plugin] [nullable] |
-| **version** | **String** | The plugin's own version from its manifest. The portal does not compare it against anything; it is there  for a person to read. | [required] [example: 1.0.0] [nullable] |
-| **minDocSpaceVersion** | **String** | The oldest portal version the plugin declares it works with. It is a claim from the manifest and is not  enforced, so a plugin can be loaded on an older portal and simply misbehave; compare it with the `version`  of `GET api/2.0/settings`. | [optional] [example: 12.0.0] [nullable] |
-| **description** | **String** | The plugin's description from its manifest, in the language the manifest was written in. The translations  of it are in `descriptionLocale`. | [required] [example: A plugin that provides additional functionality] [nullable] |
-| **license** | **String** | The licence the plugin is published under, as its manifest states it. Nothing checks it. | [required] [example: MIT] [nullable] |
-| **author** | **String** | Who wrote the plugin, as its manifest states it - not the portal member who uploaded it, who is  `createBy`. | [required] [example: ONLYOFFICE] [nullable] |
-| **homePage** | **String** | The plugin's own page, for a person to read more about it. It is empty when the manifest names none. | [required] [example: https://example.com] [nullable] |
-| **pluginName** | **String** | The global the plugin registers itself under in the browser once its script has run, which is how a  client reaches it. It is distinct from `name`, the identifier the portal uses. | [required] [example: examplePlugin] [nullable] |
-| **scopes** | **String** | Which parts of the interface the plugin hooks into, as one comma-separated string rather than a list. | [required] [example: Files,Rooms] [nullable] |
-| **image** | **String** | The plugin's icon exactly as its manifest declares it, which is normally a file name inside the plugin's  own package rather than an absolute address - resolve it against the directory `url` points into. | [required] [example: icon.svg] [nullable] |
+| **name** | **String** | The plugin's manifest name, which is what every other operation of this group addresses it by and what  makes it unique within the portal - an installation-wide plugin wins the name over a portal one. | [required] [example: `Example Plugin`] [nullable] |
+| **version** | **String** | The plugin's own version from its manifest. The portal does not compare it against anything; it is there  for a person to read. | [required] [example: `1.0.0`] [nullable] |
+| **minDocSpaceVersion** | **String** | The oldest portal version the plugin declares it works with. It is a claim from the manifest and is not  enforced, so a plugin can be loaded on an older portal and simply misbehave; compare it with the `version`  of `GET api/2.0/settings`. | [optional] [example: `12.0.0`] [nullable] |
+| **description** | **String** | The plugin's description from its manifest, in the language the manifest was written in. The translations  of it are in `descriptionLocale`. | [required] [example: `A plugin that provides additional functionality`] [nullable] |
+| **license** | **String** | The licence the plugin is published under, as its manifest states it. Nothing checks it. | [required] [example: `MIT`] [nullable] |
+| **author** | **String** | Who wrote the plugin, as its manifest states it - not the portal member who uploaded it, who is  `createBy`. | [required] [example: `ONLYOFFICE`] [nullable] |
+| **homePage** | **String** | The plugin's own page, for a person to read more about it. It is empty when the manifest names none. | [required] [example: `https://example.com`] [nullable] |
+| **pluginName** | **String** | The global the plugin registers itself under in the browser once its script has run, which is how a  client reaches it. It is distinct from `name`, the identifier the portal uses. | [required] [example: `examplePlugin`] [nullable] |
+| **scopes** | **String** | Which parts of the interface the plugin hooks into, as one comma-separated string rather than a list. | [required] [example: `Files,Rooms`] [nullable] |
+| **image** | **String** | The plugin's icon exactly as its manifest declares it, which is normally a file name inside the plugin's  own package rather than an absolute address - resolve it against the directory `url` points into. | [required] [example: `icon.svg`] [nullable] |
 | **createBy** | [**EmployeeDto**](#model-employeedto) | The portal member who uploaded the plugin. For a plugin that ships with the installation it is an empty  profile, since no member put it there. | [required] |
-| **createOn** | **Date** (date-time) | When the plugin was uploaded. It stays at its zero value for a plugin that ships with the installation. | [required] [example: 2024-01-15T10:30:00Z] |
-| **enabled** | **Boolean** | Whether the portal loads the plugin. It is the state this portal stored, so an installation-wide plugin  can be on for one portal and off for another. | [required] [example: true] |
-| **system** | **Boolean** | Whether the plugin ships with the installation rather than having been uploaded here. A system plugin  cannot be deleted through `DELETE api/2.0/settings/webplugins/{name}`, only switched off. | [required] [example: false] |
-| **url** | **String** | The address of the plugin's script, which a client loads to run it. It ends in a `hash` query taken from  `version`, so the address changes whenever the plugin is updated and an old one may be cached. | [required] [example: https://example.com/plugin.js] [nullable] |
-| **cssUrl** | **String** | The absolute address of the plugin's stylesheet, empty for a plugin that ships none. | [required] [example: https://example.com/plugin.css] [nullable] |
-| **settings** | **String** | The settings string the portal keeps for the plugin, stored and returned verbatim - only the plugin knows  its shape. It is empty until `PUT api/2.0/settings/webplugins/{name}` saves one. | [required] [example: \{"theme":"dark"\}] [nullable] |
-| **nameLocale** | **Map** | The plugin's name translated, keyed by culture name. A culture that is missing falls back to `name`, and  the whole map is empty for a plugin that ships no translations. | [optional] [example: \{en-US=Example plugin, de-DE=Beispiel-Plugin\}] |
-| **descriptionLocale** | **Map** | The plugin's description translated, keyed the same way as `nameLocale` and falling back to  `description`. | [optional] [example: \{en-US=Adds extra actions, de-DE=Fugt Aktionen hinzu\}] |
-| **runtime** | **String** | How the script at `url` is to be loaded - as an ES module or as a classic script. It is empty for a  plugin whose manifest does not say, which a client treats as a classic script. | [optional] [example: module] [nullable] |
+| **createOn** | **Date** (date-time) | When the plugin was uploaded. It stays at its zero value for a plugin that ships with the installation. | [required] [example: `2024-01-15T10:30:00Z`] |
+| **enabled** | **Boolean** | Whether the portal loads the plugin. It is the state this portal stored, so an installation-wide plugin  can be on for one portal and off for another. | [required] [example: `true`] |
+| **system** | **Boolean** | Whether the plugin ships with the installation rather than having been uploaded here. A system plugin  cannot be deleted through `DELETE api/2.0/settings/webplugins/{name}`, only switched off. | [required] [example: `false`] |
+| **url** | **String** | The address of the plugin's script, which a client loads to run it. It ends in a `hash` query taken from  `version`, so the address changes whenever the plugin is updated and an old one may be cached. | [required] [example: `https://example.com/plugin.js`] [nullable] |
+| **cssUrl** | **String** | The absolute address of the plugin's stylesheet, empty for a plugin that ships none. | [required] [example: `https://example.com/plugin.css`] [nullable] |
+| **settings** | **String** | The settings string the portal keeps for the plugin, stored and returned verbatim - only the plugin knows  its shape. It is empty until `PUT api/2.0/settings/webplugins/{name}` saves one. | [required] [example: `{"theme":"dark"}`] [nullable] |
+| **nameLocale** | **Map** | The plugin's name translated, keyed by culture name. A culture that is missing falls back to `name`, and  the whole map is empty for a plugin that ships no translations. | [optional] [example: `{en-US=Example plugin, de-DE=Beispiel-Plugin}`] |
+| **descriptionLocale** | **Map** | The plugin's description translated, keyed the same way as `nameLocale` and falling back to  `description`. | [optional] [example: `{en-US=Adds extra actions, de-DE=Fugt Aktionen hinzu}`] |
+| **runtime** | **String** | How the script at `url` is to be loaded - as an ES module or as a classic script. It is empty for a  plugin whose manifest does not say, which a client treats as a classic script. | [optional] [example: `module`] [nullable] |
 
 
 ### Model WebPluginRequests
@@ -15418,8 +15418,8 @@ The state the portal keeps for an installed web plugin: whether it runs, and its
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **enabled** | **Boolean** | Whether the plugin runs in this portal. Switching it on adds the domains its manifest declares to the portal  Content Security Policy and switching it off takes them away again; connected clients are told of the new  state without a reload. | [optional] [example: true] |
-| **settings** | **String** | The configuration the plugin reads at run time, as a JSON document serialised into a string. Its shape is  defined by the plugin and not by the portal, which stores it encrypted for this portal alone. It replaces  whatever was stored rather than merging into it, so send `{}` when there is nothing to keep. | [required] [example: \{"theme":"dark","autoSave":true\}] [minLength: 0] [maxLength: 255] [nullable] |
+| **enabled** | **Boolean** | Whether the plugin runs in this portal. Switching it on adds the domains its manifest declares to the portal  Content Security Policy and switching it off takes them away again; connected clients are told of the new  state without a reload. | [optional] [example: `true`] |
+| **settings** | **String** | The configuration the plugin reads at run time, as a JSON document serialised into a string. Its shape is  defined by the plugin and not by the portal, which stores it encrypted for this portal alone. It replaces  whatever was stored rather than merging into it, so send `{}` when there is nothing to keep. | [required] [example: `{"theme":"dark","autoSave":true}`] [minLength: 0] [maxLength: 255] [nullable] |
 
 
 ### Model WebPluginWrapper
@@ -15451,7 +15451,7 @@ Which past webhook deliveries are sent again.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **ids** | **List** (int32) | The delivery records to send again, by the identifiers `GET api/2.0/settings/webhooks/log` reports. An  identifier that exists nowhere, and one belonging to another member subscription when the caller is not a  DocSpace administrator, is skipped in silence rather than failing the call, so compare the number of records  that come back against the number sent. An empty list is accepted and queues nothing. | [optional] [example: [1, 2, 3]] [nullable] |
+| **ids** | **List** (int32) | The delivery records to send again, by the identifiers `GET api/2.0/settings/webhooks/log` reports. An  identifier that exists nowhere, and one belonging to another member subscription when the caller is not a  DocSpace administrator, is skipped in silence rather than failing the call, so compare the number of records  that come back against the number sent. An empty list is accepted and queues nothing. | [optional] [example: `[1, 2, 3]`] [nullable] |
 
 
 ### Model WebhookTrigger
@@ -15509,9 +15509,9 @@ One event a webhook can listen to, with the bit that selects it and whether the 
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **name** | **String** | The event name exactly as it appears in a delivered payload, so a receiver can match on it. The entry  named `*` is not an event but the catch-all. | [optional] [example: file.created] [nullable] |
-| **id** | **Long** (int64) | The bit that stands for this event in the `triggers` bitmask of a subscription. Add the bits of the wanted  events together; the catch-all entry has the value `0` and is used on its own rather than added to  anything. | [optional] [example: 128] |
-| **available** | **Boolean** | Whether the caller's own role may subscribe to this event - a plain member cannot subscribe to user, group  or room creation, where a room administrator can. An unavailable event is listed all the same, and sending  its bit to `POST api/2.0/settings/webhook` is refused as an invalid request. | [optional] [example: true] |
+| **name** | **String** | The event name exactly as it appears in a delivered payload, so a receiver can match on it. The entry  named `*` is not an event but the catch-all. | [optional] [example: `file.created`] [nullable] |
+| **id** | **Long** (int64) | The bit that stands for this event in the `triggers` bitmask of a subscription. Add the bits of the wanted  events together; the catch-all entry has the value `0` and is used on its own rather than added to  anything. | [optional] [example: `128`] |
+| **available** | **Boolean** | Whether the caller's own role may subscribe to this event - a plain member cannot subscribe to user, group  or room creation, where a room administrator can. An unavailable event is listed all the same, and sending  its bit to `POST api/2.0/settings/webhook` is refused as an invalid request. | [optional] [example: `true`] |
 
 
 ### Model WebhooksConfigDto
@@ -15519,20 +15519,20 @@ One webhook subscription of the portal: where deliveries go, which events they c
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **id** | **Integer** (int32) | The identifier of the subscription, which is what `PUT api/2.0/settings/webhook`,  `DELETE api/2.0/settings/webhook/{id}` and the `configId` filter of the delivery log address it by. | [required] [example: 1] |
-| **name** | **String** | The label the subscription was given, free text with no meaning to the portal. | [optional] [example: Room activity] [nullable] |
-| **uri** | **String** | The address every delivery is posted to. The signing secret that lets the receiver verify a delivery is  never part of this answer, so it has to be kept from the moment the subscription was created. | [optional] [example: https://example.com/hooks/docspace] [nullable] |
-| **enabled** | **Boolean** | Whether the subscription is delivering. While it is `false` events are dropped rather than queued, so  nothing arrives late after it is switched back on. | [optional] [example: true] |
-| **ssl** | **Boolean** | Whether the certificate of `uri` is verified before a delivery. While it is `false` a self-signed  certificate is accepted as well. | [optional] [example: true] |
-| **triggers** | [**WebhookTrigger**](#model-webhooktrigger) | The events the subscription covers, as the bits of `GET api/2.0/settings/webhook/triggers` added  together. `0` is the catch-all and means every event, not none. | [optional] [enum: 0, 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536, 131072, 262144, 524288, 1048576, 2097152, 4194304, 8388608, 16777216, 33554432, 67108864, 134217728, 268435456, 536870912, 1073741824] |
-| **targetId** | **String** | The single room or file the subscription is narrowed to, empty for a subscription that covers the whole  portal. It is kept as an opaque value, so both a numeric and a third-party identifier can appear. | [optional] [example: 00000000-0000-0000-0000-000000000001] [nullable] |
+| **id** | **Integer** (int32) | The identifier of the subscription, which is what `PUT api/2.0/settings/webhook`,  `DELETE api/2.0/settings/webhook/{id}` and the `configId` filter of the delivery log address it by. | [required] [example: `1`] |
+| **name** | **String** | The label the subscription was given, free text with no meaning to the portal. | [optional] [example: `Room activity`] [nullable] |
+| **uri** | **String** | The address every delivery is posted to. The signing secret that lets the receiver verify a delivery is  never part of this answer, so it has to be kept from the moment the subscription was created. | [optional] [example: `https://example.com/hooks/docspace`] [nullable] |
+| **enabled** | **Boolean** | Whether the subscription is delivering. While it is `false` events are dropped rather than queued, so  nothing arrives late after it is switched back on. | [optional] [example: `true`] |
+| **ssl** | **Boolean** | Whether the certificate of `uri` is verified before a delivery. While it is `false` a self-signed  certificate is accepted as well. | [optional] [example: `true`] |
+| **triggers** | [**WebhookTrigger**](#model-webhooktrigger) | The events the subscription covers, as the bits of `GET api/2.0/settings/webhook/triggers` added  together. `0` is the catch-all and means every event, not none. | [optional] [enum: `0`, `1`, `2`, `4`, `8`, `16`, `32`, `64`, `128`, `256`, `512`, `1024`, `2048`, `4096`, `8192`, `16384`, `32768`, `65536`, `131072`, `262144`, `524288`, `1048576`, `2097152`, `4194304`, `8388608`, `16777216`, `33554432`, `67108864`, `134217728`, `268435456`, `536870912`, `1073741824`] |
+| **targetId** | **String** | The single room or file the subscription is narrowed to, empty for a subscription that covers the whole  portal. It is kept as an opaque value, so both a numeric and a third-party identifier can appear. | [optional] [example: `00000000-0000-0000-0000-000000000001`] [nullable] |
 | **createdBy** | [**EmployeeDto**](#model-employeedto) | The member who created the subscription, which is also who a non-administrator is limited to seeing. It is  empty for a subscription created by a portal background job. | [optional] |
-| **createdOn** | **Date** (date-time) | When the subscription was created, in the portal time zone. | [optional] [example: 2024-01-15T10:30:00Z] [nullable] |
+| **createdOn** | **Date** (date-time) | When the subscription was created, in the portal time zone. | [optional] [example: `2024-01-15T10:30:00Z`] [nullable] |
 | **modifiedBy** | [**EmployeeDto**](#model-employeedto) | The member who last changed the subscription, empty while nobody has changed it since it was created. | [optional] |
-| **modifiedOn** | **Date** (date-time) | When it was last changed, in the portal time zone, and empty under the same condition as `modifiedBy`. | [optional] [example: 2024-01-15T10:30:00Z] [nullable] |
-| **lastFailureOn** | **Date** (date-time) | When a delivery last failed, in the portal time zone. It is empty for a subscription that has never  failed, and it is not cleared by a later success - compare it with `lastSuccessOn` to see which came last. | [optional] [example: 2024-01-15T10:30:00Z] [nullable] |
-| **lastFailureContent** | **String** | What the target answered on that failure, truncated, for diagnosing without opening the delivery log. It  is empty when the failure produced no body at all, a timeout for instance. | [optional] [example: 502 Bad Gateway] [nullable] |
-| **lastSuccessOn** | **Date** (date-time) | When a delivery last succeeded, in the portal time zone, empty for a subscription that has never  delivered. Both this and `lastFailureOn` being empty means nothing has been attempted yet. | [optional] [example: 2024-01-15T10:30:00Z] [nullable] |
+| **modifiedOn** | **Date** (date-time) | When it was last changed, in the portal time zone, and empty under the same condition as `modifiedBy`. | [optional] [example: `2024-01-15T10:30:00Z`] [nullable] |
+| **lastFailureOn** | **Date** (date-time) | When a delivery last failed, in the portal time zone. It is empty for a subscription that has never  failed, and it is not cleared by a later success - compare it with `lastSuccessOn` to see which came last. | [optional] [example: `2024-01-15T10:30:00Z`] [nullable] |
+| **lastFailureContent** | **String** | What the target answered on that failure, truncated, for diagnosing without opening the delivery log. It  is empty when the failure produced no body at all, a timeout for instance. | [optional] [example: `502 Bad Gateway`] [nullable] |
+| **lastSuccessOn** | **Date** (date-time) | When a delivery last succeeded, in the portal time zone, empty for a subscription that has never  delivered. Both this and `lastFailureOn` being empty means nothing has been attempted yet. | [optional] [example: `2024-01-15T10:30:00Z`] [nullable] |
 
 
 ### Model WebhooksConfigWithStatusArrayWrapper
@@ -15553,7 +15553,7 @@ A webhook subscription together with how its last delivery ended.
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **configs** | [**WebhooksConfigDto**](#model-webhooksconfigdto) | The subscription itself. Despite the plural name it is one subscription, not a list. | [optional] |
-| **status** | **Integer** (int32) | The HTTP status code the target answered on the last attempt. `0` means nothing has been delivered yet,  which is not the same as a failure. | [optional] [example: 200] |
+| **status** | **Integer** (int32) | The HTTP status code the target answered on the last attempt. `0` means nothing has been delivered yet,  which is not the same as a failure. | [optional] [example: `200`] |
 
 
 ### Model WebhooksConfigWrapper
@@ -15585,18 +15585,18 @@ One delivery attempt of a webhook: what was sent where, and what came back.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **id** | **Integer** (int32) | The identifier of this attempt, which is what the `eventId` filter of  `GET api/2.0/settings/webhooks/log` picks one record by and what  `PUT api/2.0/settings/webhook/{id}/retry` re-sends. A retry produces a new record with a new identifier  and leaves this one as it is. | [required] [example: 1] |
-| **configName** | **String** | The name of the subscription the attempt belongs to. It is the name as it stands now, so it follows a  later rename of the subscription rather than recording what it was called at the time. | [optional] [example: Room activity] [nullable] |
-| **trigger** | [**WebhookTrigger**](#model-webhooktrigger) | The event that caused the attempt, as a single bit rather than a mask - a delivery is always for one  event, even though a subscription covers several. | [optional] [enum: 0, 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536, 131072, 262144, 524288, 1048576, 2097152, 4194304, 8388608, 16777216, 33554432, 67108864, 134217728, 268435456, 536870912, 1073741824] |
-| **creationTime** | **Date** (date-time) | When the attempt was queued, as a UTC instant - unlike the dates of the subscription itself, which come  in the portal time zone. Records come back newest first by this moment. | [optional] [example: 2024-01-15T10:30:00Z] |
-| **method** | **String** | The HTTP method the delivery was sent with, which is `POST` for every webhook the portal sends. | [optional] [example: POST] [nullable] |
-| **route** | **String** | The address the delivery was sent to, which is the subscription's URL as it stood at the time - so an  older record can name an address the subscription no longer uses. | [optional] [example: https://example.com/hooks/docspace] [nullable] |
-| **requestHeaders** | **String** | The headers the portal sent, serialised as one string, including the signature header a receiver verifies  the payload with. | [optional] [example: \{"x-docspace-signature":"9f86d081884c7d65"\}] [nullable] |
-| **requestPayload** | **String** | The body the portal sent, which is the event payload as JSON text. It is stored as it was sent, so it  still describes the entity as it looked at the time of the event. | [optional] [example: \{"id":42,"title":"report.docx"\}] [nullable] |
-| **responseHeaders** | **String** | The headers the target answered with, serialised the same way as `requestHeaders`. It is empty while the  attempt is still on its way and on an attempt that never reached the target. | [optional] [example: \{"content-type":"application/json"\}] [nullable] |
-| **responsePayload** | **String** | The body the target answered with, truncated for storage. Empty under the same conditions as  `responseHeaders`, and also for a target that answers with no body at all. | [optional] [example: \{"ok":true\}] [nullable] |
-| **status** | **Integer** (int32) | The HTTP status code the target answered. It is `0` while the attempt is still on its way and on one that  never reached the target, so `0` is not a failure code - it is the absence of an answer. | [optional] [example: 200] |
-| **delivery** | **Date** (date-time) | When the answer came back, as a UTC instant like `creationTime`. It is empty while the attempt is still on  its way, which together with `status` is how a pending record is told from a finished one. | [optional] [example: 2024-01-15T10:30:00Z] [nullable] |
+| **id** | **Integer** (int32) | The identifier of this attempt, which is what the `eventId` filter of  `GET api/2.0/settings/webhooks/log` picks one record by and what  `PUT api/2.0/settings/webhook/{id}/retry` re-sends. A retry produces a new record with a new identifier  and leaves this one as it is. | [required] [example: `1`] |
+| **configName** | **String** | The name of the subscription the attempt belongs to. It is the name as it stands now, so it follows a  later rename of the subscription rather than recording what it was called at the time. | [optional] [example: `Room activity`] [nullable] |
+| **trigger** | [**WebhookTrigger**](#model-webhooktrigger) | The event that caused the attempt, as a single bit rather than a mask - a delivery is always for one  event, even though a subscription covers several. | [optional] [enum: `0`, `1`, `2`, `4`, `8`, `16`, `32`, `64`, `128`, `256`, `512`, `1024`, `2048`, `4096`, `8192`, `16384`, `32768`, `65536`, `131072`, `262144`, `524288`, `1048576`, `2097152`, `4194304`, `8388608`, `16777216`, `33554432`, `67108864`, `134217728`, `268435456`, `536870912`, `1073741824`] |
+| **creationTime** | **Date** (date-time) | When the attempt was queued, as a UTC instant - unlike the dates of the subscription itself, which come  in the portal time zone. Records come back newest first by this moment. | [optional] [example: `2024-01-15T10:30:00Z`] |
+| **method** | **String** | The HTTP method the delivery was sent with, which is `POST` for every webhook the portal sends. | [optional] [example: `POST`] [nullable] |
+| **route** | **String** | The address the delivery was sent to, which is the subscription's URL as it stood at the time - so an  older record can name an address the subscription no longer uses. | [optional] [example: `https://example.com/hooks/docspace`] [nullable] |
+| **requestHeaders** | **String** | The headers the portal sent, serialised as one string, including the signature header a receiver verifies  the payload with. | [optional] [example: `{"x-docspace-signature":"9f86d081884c7d65"}`] [nullable] |
+| **requestPayload** | **String** | The body the portal sent, which is the event payload as JSON text. It is stored as it was sent, so it  still describes the entity as it looked at the time of the event. | [optional] [example: `{"id":42,"title":"report.docx"}`] [nullable] |
+| **responseHeaders** | **String** | The headers the target answered with, serialised the same way as `requestHeaders`. It is empty while the  attempt is still on its way and on an attempt that never reached the target. | [optional] [example: `{"content-type":"application/json"}`] [nullable] |
+| **responsePayload** | **String** | The body the target answered with, truncated for storage. Empty under the same conditions as  `responseHeaders`, and also for a target that answers with no body at all. | [optional] [example: `{"ok":true}`] [nullable] |
+| **status** | **Integer** (int32) | The HTTP status code the target answered. It is `0` while the attempt is still on its way and on one that  never reached the target, so `0` is not a failure code - it is the absence of an answer. | [optional] [example: `200`] |
+| **delivery** | **Date** (date-time) | When the answer came back, as a UTC instant like `creationTime`. It is empty while the attempt is still on  its way, which together with `status` is how a pending record is told from a finished one. | [optional] [example: `2024-01-15T10:30:00Z`] [nullable] |
 
 
 ### Model WebhooksLogWrapper
@@ -15628,8 +15628,8 @@ One branding logo slot of the portal: the size it is drawn at, and where its ima
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **type** | [**WhiteLabelLogoType**](#model-whitelabellogotype) | Which branding slot this entry describes. `Notification` is part of the type but never appears here: that  logo is derived from the login-page one and used only in letters. | [optional] [enum: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16] |
-| **name** | **String** | The stable name of the same slot, which is what `GET api/2.0/settings/whitelabel/logos/isdefault` keys its  entries by. It is a name to match on, not a file name. | [optional] [example: LightSmall] [nullable] |
+| **type** | [**WhiteLabelLogoType**](#model-whitelabellogotype) | Which branding slot this entry describes. `Notification` is part of the type but never appears here: that  logo is derived from the login-page one and used only in letters. | [optional] [enum: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `13`, `14`, `15`, `16`] |
+| **name** | **String** | The stable name of the same slot, which is what `GET api/2.0/settings/whitelabel/logos/isdefault` keys its  entries by. It is a name to match on, not a file name. | [optional] [example: `LightSmall`] [nullable] |
 | **size** | [**WhiteLabelItemSizeDto**](#model-whitelabelitemsizedto) | The pixel box the slot is drawn in. Only `width` and `height` carry information here; the resize flags and  offsets alongside them are left at their defaults and say nothing about how an uploaded image is treated. | [optional] |
 | **path** | [**WhiteLabelItemPathDto**](#model-whitelabelitempathdto) | The absolute URLs to render the slot from, one per theme. | [optional] |
 
@@ -15639,8 +15639,8 @@ The image URLs of one logo slot, per interface theme.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **light** | **String** | The absolute URL of the image to render on a light background. It is filled in unless the request asked  for the dark theme alone with `isDark=true`, in which case only `dark` comes back. | [optional] [example: /images/logo-light.png] [nullable] |
-| **dark** | **String** | The absolute URL of the image to render on a dark background. When both themes are asked for it comes back  empty for a slot that has no separate dark image, meaning the light one is to be used for both; when  `isDark=false` was passed it is left out entirely. | [optional] [example: /images/logo-dark.png] [nullable] |
+| **light** | **String** | The absolute URL of the image to render on a light background. It is filled in unless the request asked  for the dark theme alone with `isDark=true`, in which case only `dark` comes back. | [optional] [example: `/images/logo-light.png`] [nullable] |
+| **dark** | **String** | The absolute URL of the image to render on a dark background. When both themes are asked for it comes back  empty for a slot that has no separate dark image, meaning the light one is to be used for both; when  `isDark=false` was passed it is left out entirely. | [optional] [example: `/images/logo-dark.png`] [nullable] |
 
 
 ### Model WhiteLabelItemSizeDto
@@ -15648,17 +15648,17 @@ The pixel box a logo slot is drawn in, in the shape the imaging library reports 
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **aspectRatio** | **Boolean** | Whether the numbers are to be read as an aspect ratio rather than as pixels. Always `false` on the sizes  this API reports. | [optional] [example: false] |
-| **fillArea** | **Boolean** | Whether an image would be scaled to cover the box rather than to fit inside it. Always `false` here. | [optional] [example: false] |
-| **greater** | **Boolean** | Whether scaling would apply only to an image larger than the box. Always `false` here. | [optional] [example: false] |
-| **height** | **Integer** (int32) | The height of the box in pixels - one of the two fields of this object that carry information. | [optional] [example: 48] |
-| **ignoreAspectRatio** | **Boolean** | Whether scaling would be allowed to distort the image. Always `false` here. | [optional] [example: false] |
-| **isPercentage** | **Boolean** | Whether `width` and `height` are to be read as percentages. Always `false` here, so both are pixels. | [optional] [example: false] |
-| **less** | **Boolean** | Whether scaling would apply only to an image smaller than the box. Always `false` here. | [optional] [example: false] |
-| **limitPixels** | **Boolean** | Whether the box is to be read as a total pixel-area budget instead of as two dimensions. Always `false`  here. | [optional] [example: false] |
-| **width** | **Integer** (int32) | The width of the box in pixels - the other field of this object that carries information. | [optional] [example: 422] |
-| **x** | **Integer** (int32) | The horizontal offset of the box from the origin. Always `0` here. | [optional] [example: 0] |
-| **y** | **Integer** (int32) | The vertical offset of the box from the origin. Always `0` here. | [optional] [example: 0] |
+| **aspectRatio** | **Boolean** | Whether the numbers are to be read as an aspect ratio rather than as pixels. Always `false` on the sizes  this API reports. | [optional] [example: `false`] |
+| **fillArea** | **Boolean** | Whether an image would be scaled to cover the box rather than to fit inside it. Always `false` here. | [optional] [example: `false`] |
+| **greater** | **Boolean** | Whether scaling would apply only to an image larger than the box. Always `false` here. | [optional] [example: `false`] |
+| **height** | **Integer** (int32) | The height of the box in pixels - one of the two fields of this object that carry information. | [optional] [example: `48`] |
+| **ignoreAspectRatio** | **Boolean** | Whether scaling would be allowed to distort the image. Always `false` here. | [optional] [example: `false`] |
+| **isPercentage** | **Boolean** | Whether `width` and `height` are to be read as percentages. Always `false` here, so both are pixels. | [optional] [example: `false`] |
+| **less** | **Boolean** | Whether scaling would apply only to an image smaller than the box. Always `false` here. | [optional] [example: `false`] |
+| **limitPixels** | **Boolean** | Whether the box is to be read as a total pixel-area budget instead of as two dimensions. Always `false`  here. | [optional] [example: `false`] |
+| **width** | **Integer** (int32) | The width of the box in pixels - the other field of this object that carries information. | [optional] [example: `422`] |
+| **x** | **Integer** (int32) | The horizontal offset of the box from the origin. Always `0` here. | [optional] [example: `0`] |
+| **y** | **Integer** (int32) | The vertical offset of the box from the origin. Always `0` here. | [optional] [example: `0`] |
 
 
 ### Model WhiteLabelLogoType
@@ -15688,8 +15688,8 @@ The branding a portal is given: the wordmark, the logo images, or both.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **logoText** | **String** | The wordmark printed next to or instead of a logo image, on the login page, in the editors and in  notification letters. An empty or blank value, and the built-in `ONLYOFFICE` itself, clear the setting rather  than store it. The text is not rendered into the logo images, which carry their own wordmark. | [optional] [example: Company Name] [minLength: 0] [maxLength: 40] [nullable] |
-| **logo** | [**List**](#model-itemkeyvaluepairstringlogorequestsdto) | The logo images to store, each entry naming a logo slot in its `key` - the numeric `type` published by  `GET api/2.0/settings/whitelabel/logos` - and carrying the two theme images in its value. A slot left out of  the list keeps the image it has, so this is a partial update rather than a replacement of the whole branding.  Saving the login-page slot also rebuilds the notification logo from it. | [optional] [example: [item1, item2]] [nullable] |
+| **logoText** | **String** | The wordmark printed next to or instead of a logo image, on the login page, in the editors and in  notification letters. An empty or blank value, and the built-in `ONLYOFFICE` itself, clear the setting rather  than store it. The text is not rendered into the logo images, which carry their own wordmark. | [optional] [example: `Company Name`] [minLength: 0] [maxLength: 40] [nullable] |
+| **logo** | [**List**](#model-itemkeyvaluepairstringlogorequestsdto) | The logo images to store, each entry naming a logo slot in its `key` - the numeric `type` published by  `GET api/2.0/settings/whitelabel/logos` - and carrying the two theme images in its value. A slot left out of  the list keeps the image it has, so this is a partial update rather than a replacement of the whole branding.  Saving the login-page slot also rebuilds the notification logo from it. | [optional] [example: `[item1, item2]`] [nullable] |
 
 
 ### Model WizardRequestsDto
@@ -15697,12 +15697,12 @@ What the initial setup wizard needs to finish a new portal: the owner credential
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **email** | **String** (email) | The address the portal owner account is created with, which is also the address every administrative letter  goes to afterwards. It has to be a well-formed email address; a malformed one leaves the wizard unfinished. | [required] [example: user@example.com] [nullable] |
-| **passwordHash** | **String** | The owner password, already hashed in the client rather than sent in the clear. Hash it with the `salt`,  iteration count and hash size that `GET api/2.0/settings?withpassword=true` publishes, so the portal can  recognise it later; an empty value leaves the wizard unfinished. | [required] [example: 2DYmIoA/aYKEksFocEf6uw==] [nullable] |
-| **lng** | **String** | The portal interface language, as a culture name such as `en-US`. It has to be one of the cultures enabled  for the installation, and an unknown one leaves the shipped default in place instead of failing the wizard. | [optional] [example: en-US] [nullable] |
-| **timeZone** | **String** | The time zone every portal date is rendered in, as an IANA identifier such as `Europe/Riga`. A value that  matches nothing falls back to UTC rather than failing the wizard. | [optional] [example: UTC] [nullable] |
-| **amiId** | **String** | The identifier of the Amazon Machine Image the portal was launched from, for an installation started from an  AWS image. It is recorded for the installation record only and changes nothing about the portal; leave it out  anywhere else. | [optional] [example: 00000000-0000-0000-0000-000000000001] [nullable] |
-| **subscribeFromSite** | **Boolean** | Whether the owner agrees to receive product news at the address in `email`. It is a mailing consent and has  no bearing on the portal notifications, which are subscribed separately. | [optional] [example: true] |
+| **email** | **String** (email) | The address the portal owner account is created with, which is also the address every administrative letter  goes to afterwards. It has to be a well-formed email address; a malformed one leaves the wizard unfinished. | [required] [example: `user@example.com`] [nullable] |
+| **passwordHash** | **String** | The owner password, already hashed in the client rather than sent in the clear. Hash it with the `salt`,  iteration count and hash size that `GET api/2.0/settings?withpassword=true` publishes, so the portal can  recognise it later; an empty value leaves the wizard unfinished. | [required] [example: `2DYmIoA/aYKEksFocEf6uw==`] [nullable] |
+| **lng** | **String** | The portal interface language, as a culture name such as `en-US`. It has to be one of the cultures enabled  for the installation, and an unknown one leaves the shipped default in place instead of failing the wizard. | [optional] [example: `en-US`] [nullable] |
+| **timeZone** | **String** | The time zone every portal date is rendered in, as an IANA identifier such as `Europe/Riga`. A value that  matches nothing falls back to UTC rather than failing the wizard. | [optional] [example: `UTC`] [nullable] |
+| **amiId** | **String** | The identifier of the Amazon Machine Image the portal was launched from, for an installation started from an  AWS image. It is recorded for the installation record only and changes nothing about the portal; leave it out  anywhere else. | [optional] [example: `00000000-0000-0000-0000-000000000001`] [nullable] |
+| **subscribeFromSite** | **Boolean** | Whether the owner agrees to receive product news at the address in `email`. It is a mailing consent and has  no bearing on the portal notifications, which are subscribed separately. | [optional] [example: `true`] |
 
 
 ### Model WizardSettings
@@ -15710,8 +15710,8 @@ The Wizard settings.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **completed** | **Boolean** | Specifies if the Wizard settings are completed or not | [optional] [example: true] |
-| **lastModified** | **Date** (date-time) | The timestamp indicating when the settings were last modified. | [optional] [example: 1990-01-01T00:00:00Z] |
+| **completed** | **Boolean** | Specifies if the Wizard settings are completed or not | [optional] [example: `true`] |
+| **lastModified** | **Date** (date-time) | The timestamp indicating when the settings were last modified. | [optional] [example: `1990-01-01T00:00:00Z`] |
 
 
 ### Model WizardSettingsWrapper

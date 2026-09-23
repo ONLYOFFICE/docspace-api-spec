@@ -14,7 +14,7 @@ Answers with the primary external link of a folder or a room, creating it on the
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The folder or room the link belongs to. | [required] [example: 1] |
+| **id** | path | **Integer** (int32) | The folder or room the link belongs to. | [required] [example: `1`] |
 | **FolderLinkRequest** | body | [**FolderLinkRequest**](../files.md#model-folderlinkrequest) | The link and the way it is to be shaped. | [required] |
 
 ## Responses

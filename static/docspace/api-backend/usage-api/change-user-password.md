@@ -14,7 +14,7 @@ Sets a new password on an account, which is the step that completes a password c
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **userid** | path | **UUID** (uuid) | The ID of the account whose password is set, taken from the route. It has to match the account the  confirmation token was issued for, and the account has to be active. | [required] [example: 00000000-0000-0000-0000-000000000000] |
+| **userid** | path | **UUID** (uuid) | The ID of the account whose password is set, taken from the route. It has to match the account the  confirmation token was issued for, and the account has to be active. | [required] [example: `00000000-0000-0000-0000-000000000000`] |
 | **ChangePasswordRequest** | body | [**ChangePasswordRequest**](../people.md#model-changepasswordrequest) | The new password, sent either in plain text or already hashed. Exactly one of the two fields is needed. | [required] |
 
 ## Responses

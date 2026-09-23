@@ -14,7 +14,7 @@ Reports whether one kind of notification is switched on for the calling user, ta
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **type** | path | **NotificationType** | The kind of notification being asked about. A value outside the defined set fails the call rather than  falling back to a default. | [required] [example: 0] [enum: 0, 1, 2, 3] |
+| **type** | path | **NotificationType** | The kind of notification being asked about. A value outside the defined set fails the call rather than  falling back to a default. | [required] [example: `0`] [enum: `0`, `1`, `2`, `3`] |
 
 ## Responses
 

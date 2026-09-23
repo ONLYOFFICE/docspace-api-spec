@@ -14,7 +14,7 @@ Replaces the comment stored on one version of a file - the note that explains wh
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **Integer** (int32) | The file whose version comment is replaced. | [required] [example: 1] |
+| **fileId** | path | **Integer** (int32) | The file whose version comment is replaced. | [required] [example: `1`] |
 | **UpdateComment** | body | [**UpdateComment**](../files.md#model-updatecomment) | The version and the comment to store on it. | [required] |
 
 ## Responses

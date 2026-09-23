@@ -14,7 +14,7 @@ Searches the active accounts of the portal by a term passed in the query string,
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **query** | query | **String** | The term to look for. Only accounts with the `Active` status are searched, and this is the only parameter the  operation reads. | [optional] [example: John] |
+| **query** | query | **String** | The term to look for. Only accounts with the `Active` status are searched, and this is the only parameter the  operation reads. | [optional] [example: `John`] |
 
 ## Responses
 

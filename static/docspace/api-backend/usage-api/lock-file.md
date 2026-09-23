@@ -14,7 +14,7 @@ Locks a file so that nobody else can change it, or releases that lock, and answe
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **fileId** | path | **Integer** (int32) | The file to lock or unlock. | [required] [example: 1] |
+| **fileId** | path | **Integer** (int32) | The file to lock or unlock. | [required] [example: `1`] |
 | **LockFileParameters** | body | [**LockFileParameters**](../files.md#model-lockfileparameters) | The lock state to reach. | [required] |
 
 ## Responses

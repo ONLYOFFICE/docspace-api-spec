@@ -14,7 +14,7 @@ Changes the name and the manager of a group and adds or removes members, in one 
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **UUID** (uuid) | The ID of the group to update, taken from the route. It has to be a group that has not been deleted,  otherwise the operation answers 404. | [required] [example: 00000000-0000-0000-0000-000000000000] |
+| **id** | path | **UUID** (uuid) | The ID of the group to update, taken from the route. It has to be a group that has not been deleted,  otherwise the operation answers 404. | [required] [example: `00000000-0000-0000-0000-000000000000`] |
 | **UpdateGroupRequest** | body | [**UpdateGroupRequest**](../people.md#model-updategrouprequest) | The fields to change. Every field is optional and the ones that are left out keep their current values, so an  empty object changes nothing. | [required] |
 
 ## Responses

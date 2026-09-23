@@ -14,11 +14,11 @@ Returns one page of the access list of a room: the owner first, then the manager
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The room whose access list is read, named by the identifier that `GET api/2.0/files/rooms` reports for it. | [required] [example: 1] |
-| **filterType** | query | **ShareFilterType** | What kind of access entries to list. The default covers accounts and groups and leaves the sharing links of  the room out; those are read with `GET api/2.0/files/rooms/{id}/links`. | [optional] [example: 0] [enum: 0, 1, 2, 4, 8, 15, 16, 32] |
-| **count** | query | **Integer** (int32) | How many entries to return in one answer. The total number of matching entries comes back in the response  headers, so it is what tells the caller whether another page is needed. | [optional] [example: 25] [min: 1] [max: 100] |
-| **startIndex** | query | **Integer** (int32) | How many matching entries to skip before the page starts. Together with the page size it walks the list, which  is ordered by role and then by name and is therefore stable between calls. | [optional] [example: 0] |
-| **filterValue** | query | **String** | Keeps only the entries whose displayed name contains this text. An invitation that has not been accepted yet  is listed under the email address it was sent to, so that is what has to be searched for. | [optional] [example: Smith] |
+| **id** | path | **Integer** (int32) | The room whose access list is read, named by the identifier that `GET api/2.0/files/rooms` reports for it. | [required] [example: `1`] |
+| **filterType** | query | **ShareFilterType** | What kind of access entries to list. The default covers accounts and groups and leaves the sharing links of  the room out; those are read with `GET api/2.0/files/rooms/{id}/links`. | [optional] [example: `0`] [enum: `0`, `1`, `2`, `4`, `8`, `15`, `16`, `32`] |
+| **count** | query | **Integer** (int32) | How many entries to return in one answer. The total number of matching entries comes back in the response  headers, so it is what tells the caller whether another page is needed. | [optional] [example: `25`] [min: 1] [max: 100] |
+| **startIndex** | query | **Integer** (int32) | How many matching entries to skip before the page starts. Together with the page size it walks the list, which  is ordered by role and then by name and is therefore stable between calls. | [optional] [example: `0`] |
+| **filterValue** | query | **String** | Keeps only the entries whose displayed name contains this text. An invitation that has not been accepted yet  is listed under the email address it was sent to, so that is what has to be searched for. | [optional] [example: `Smith`] |
 
 ## Responses
 

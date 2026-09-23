@@ -14,7 +14,7 @@ Converts a file into a PDF, stores that PDF as a new file in the folder named in
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The file to convert; it is left untouched. | [required] [example: 1] |
+| **id** | path | **Integer** (int32) | The file to convert; it is left untouched. | [required] [example: `1`] |
 | **SaveAsPdfInteger** | body | [**SaveAsPdfInteger**](../files.md#model-saveaspdfinteger) | The destination folder and the name of the PDF. | [required] |
 
 ## Responses

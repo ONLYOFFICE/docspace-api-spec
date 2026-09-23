@@ -14,7 +14,7 @@ Creates an external link to a folder or a room, or changes or revokes an existin
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The folder or room the link belongs to. | [required] [example: 1] |
+| **id** | path | **Integer** (int32) | The folder or room the link belongs to. | [required] [example: `1`] |
 | **FolderLinkRequest** | body | [**FolderLinkRequest**](../files.md#model-folderlinkrequest) | The link and the way it is to be shaped. | [required] |
 
 ## Responses

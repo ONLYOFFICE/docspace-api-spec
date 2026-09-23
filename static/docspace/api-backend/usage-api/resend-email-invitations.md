@@ -14,7 +14,7 @@ Sends the room invitation email again to members who were invited but have not j
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **id** | path | **Integer** (int32) | The room whose invitations are resent, named by the identifier that `GET api/2.0/files/rooms` reports for it. | [required] [example: 1] |
+| **id** | path | **Integer** (int32) | The room whose invitations are resent, named by the identifier that `GET api/2.0/files/rooms` reports for it. | [required] [example: `1`] |
 | **UserInvitation** | body | [**UserInvitation**](../files.md#model-userinvitation) | Which pending invitations to send again. | [required] |
 
 ## Responses
