@@ -66,7 +66,7 @@ All URIs are relative to *https://yourportal.onlyoffice.com*, where the host is 
 
 | Method | HTTP request | Description |
 |------------ | ------------- | -------------|
-| [**aiExportTextToDocx**](export/ai-export-text-to-docx.md) | **POST** /api/2.0/ai/text-to-docx | Start markdown → docx export |
+| [**aiExportTextToDocx**](export/ai-export-text-to-docx.md) | **POST** /api/2.0/ai/text-to-docx | Start markdown export |
 
 ## OpenAI passthrough
 

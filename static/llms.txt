@@ -1019,7 +1019,7 @@ The types the endpoints take and return.
 
 #### export
 
-- [Start markdown → docx export](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai/export/ai-export-text-to-docx.md): POST /api/2.0/ai/text-to-docx
+- [Start markdown export](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai/export/ai-export-text-to-docx.md): POST /api/2.0/ai/text-to-docx
 
 #### openai-passthrough
 
