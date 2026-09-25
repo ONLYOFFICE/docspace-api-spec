@@ -30320,6 +30320,12 @@ paths:
             examples:
               - true
             type: boolean
+        - name: searchArea
+          in: query
+          description: 'The section to list the groups of: Active for Rooms and Forms for Forms. Active when omitted.'
+          schema:
+            $ref: '#/components/schemas/SearchArea'
+          example: Active
       responses:
         "200":
           description: The room groups of the calling account
@@ -78743,6 +78749,18 @@ components:
 
             the portal the group does not exist.
           format: uuid
+        searchArea:
+          description: >-
+            The section the group belongs to, which categorizes it within the application's structure. This property determines
+
+            which area of the interface the group is associated with and affects how its rooms are filtered and displayed.
+
+            Common values include Active for standard rooms, Forms for form-based rooms, Archive for archived content, and
+
+            Templates for template rooms. The search area ensures that when retrieving a group, only rooms that belong to
+
+            the specified section are included in the results, maintaining proper organizational boundaries within the system.
+          $ref: '#/components/schemas/SearchArea'
         rooms:
           examples:
             - - title: Client onboarding
@@ -78826,6 +78844,9 @@ components:
             room on a connected third-party account. Every identifier has to name a room the caller can read; repeats are
 
             collapsed, and an element of any other shape - a decimal number, a number sent as a string, null - is refused.
+        searchArea:
+          description: 'The section the group belongs to: Active for Rooms and Forms for Forms. Active when omitted.'
+          $ref: '#/components/schemas/SearchArea'
       description: The name, the icon and the rooms of a room group to create.
     RoomGroupWrapper:
       type: object
@@ -79482,22 +79503,8 @@ components:
             call, and an empty set resets the filling.
       description: The people who are to fill in the roles of a PDF form.
     SearchArea:
-      description: '[0 - Active, 1 - Archive, 2 - Any, 3 - Recent by links, 4 - Template, 5 - Knowledge, 6 - Result storage, 7 - AiAgents, 8 - Forms, 9 - Form templates]'
+      description: '[Active - Active, Archive - Archive, Any - Any, RecentByLinks - Recent by links, Templates - Template, Knowledge - Knowledge, ResultStorage - Result storage, AiAgents - AiAgents, Forms - Forms, FormTemplates - Form templates]'
       enum:
-        - 0
-        - 1
-        - 2
-        - 3
-        - 4
-        - 5
-        - 6
-        - 7
-        - 8
-        - 9
-      type: integer
-      examples:
-        - 0
-      x-enum-varnames:
         - Active
         - Archive
         - Any
@@ -79508,6 +79515,9 @@ components:
         - AiAgents
         - Forms
         - FormTemplates
+      type: string
+      examples:
+        - Active
     SecurityInfoRequestDto:
       type: object
       properties:
