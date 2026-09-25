@@ -875,7 +875,7 @@ paths:
       parameters:
         - name: actionType
           in: query
-          description: The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision.
+          description: The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision, FormAnalysis.
           required: true
           schema:
             type: string
@@ -932,7 +932,7 @@ paths:
       parameters:
         - name: actionType
           in: query
-          description: The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision.
+          description: The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision, FormAnalysis.
           required: true
           schema:
             type: string
@@ -1156,7 +1156,7 @@ paths:
       parameters:
         - name: actionType
           in: query
-          description: The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision.
+          description: The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision, FormAnalysis.
           required: true
           schema:
             type: string
@@ -1717,6 +1717,50 @@ paths:
                 - messageId
                 - threadId
               additionalProperties: false
+  /api/2.0/ai/attachments/suggested-questions:
+    post:
+      tags:
+        - AI / Attachments
+      operationId: aiAttachmentsGetSuggestedQuestions
+      summary: Get suggested questions
+      responses:
+        "200":
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AiSuccessResponse'
+        "401":
+          description: Missing `asc_auth_key` cookie or `Authorization` header.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AiErrorResponse'
+        "403":
+          description: AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AiErrorResponse'
+        "413":
+          description: The request body is larger than 100 KB, the JSON parser's limit on this route.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AiErrorResponse'
+        "500":
+          description: Unhandled failure. The reason is logged server-side and never echoed back.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AiErrorResponse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
   /api/2.0/ai/preferences/get-deep-mode:
     get:
       tags:
@@ -4799,6 +4843,12 @@ paths:
                 anyOf:
                   - $ref: '#/components/schemas/AiWebSearchConfig'
                   - type: "null"
+        "400":
+          description: '`entityId` is not a string.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AiErrorResponse'
         "401":
           description: Missing `asc_auth_key` cookie or `Authorization` header.
           content:
@@ -4846,6 +4896,12 @@ paths:
             application/json:
               schema:
                 type: boolean
+        "400":
+          description: '`entityId` is not a string.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AiErrorResponse'
         "401":
           description: Missing `asc_auth_key` cookie or `Authorization` header.
           content:
@@ -4901,7 +4957,7 @@ paths:
                         type: string
                     additionalProperties: false
         "400":
-          description: The provider URL is missing, malformed, or points at a private network address.
+          description: The configuration is missing or malformed, or the provider URL points at a private network address.
           content:
             application/json:
               schema:
@@ -4951,7 +5007,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/AiWebSearchMutationResult'
         "400":
-          description: The provider URL is missing, malformed, or points at a private network address.
+          description: The configuration is missing or malformed, or the provider URL points at a private network address.
           content:
             application/json:
               schema:
@@ -5015,7 +5071,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/AiSuccessResponse'
         "400":
-          description: The provider URL is missing, malformed, or points at a private network address.
+          description: The configuration is missing or malformed, or the provider URL points at a private network address.
           content:
             application/json:
               schema:
@@ -5114,11 +5170,11 @@ paths:
       tags:
         - AI / Export
       operationId: aiExportTextToDocx
-      summary: Start markdown → docx export
-      description: 'Queues a markdown-to-docx export and answers 202 as soon as the job is accepted, without waiting for it. `title`, `content` and `folderId` are all required, and a `content` of only whitespace counts as missing even though it is not empty. The conversion runs in the AI worker, which saves the .docx into the target folder - an agent room resolves to its own result-storage subfolder - so there is nothing to poll here: completion arrives as the ordinary folder-modified socket event. This route accepts a body of up to 15 MB rather than the 100 KB the rest of the API allows, because a whole thread transcript is sent in one request.'
+      summary: Start markdown export
+      description: 'Queues a markdown export and answers 202 as soon as the job is accepted, without waiting for it. `title`, `content` and `folderId` are all required, and a `content` of only whitespace counts as missing even though it is not empty. `format` is optional and selects the output - `Docx` (the default), `Pdf`, or `Md`, which stores the markdown verbatim instead of converting it. The conversion runs in the AI worker, which saves the .docx into the target folder - an agent room resolves to its own result-storage subfolder - so there is nothing to poll here: completion arrives as the ordinary folder-modified socket event. This route accepts a body of up to 15 MB rather than the 100 KB the rest of the API allows, because a whole thread transcript is sent in one request.'
       responses:
         "202":
-          description: Confirms the export was queued. The .docx arrives in the target folder later, announced by a folder-modified socket event.
+          description: Confirms the export was queued. The file arrives in the target folder later, announced by a folder-modified socket event.
           content:
             application/json:
               schema:
@@ -5131,7 +5187,7 @@ paths:
                 additionalProperties: false
                 description: Accepted-for-processing acknowledgement (conversion is asynchronous).
         "400":
-          description: '`title`, `content` or `folderId` is missing.'
+          description: '`title`, `content` or `folderId` is missing, or `format` is not one of `Docx`, `Pdf`, `Md`.'
           content:
             application/json:
               schema:
@@ -10049,7 +10105,7 @@ paths:
         required: true
       responses:
         "200":
-          description: The created file
+          description: 'The file created in the folder: its id and the title the portal actually stored, whose extension may differ from the requested one; `thumbnailStatus` says whether the preview is already built'
           headers:
             X-RateLimit-Limit:
               $ref: '#/components/headers/X-RateLimit-Limit'
@@ -10113,7 +10169,7 @@ paths:
               type: string
         responses:
           "200":
-            description: The created file
+            description: 'The file created in the folder: its id and the title the portal actually stored, whose extension may differ from the requested one; `thumbnailStatus` says whether the preview is already built'
             headers:
               X-RateLimit-Limit:
                 $ref: '#/components/headers/X-RateLimit-Limit'
@@ -12801,7 +12857,7 @@ paths:
               $ref: '#/components/schemas/CreateFileJsonElement'
       responses:
         "200":
-          description: The created file
+          description: 'The file created in My documents: its id and the title the portal actually stored, whose extension may differ from the requested one; `thumbnailStatus` says whether the preview is already built'
           headers:
             X-RateLimit-Limit:
               $ref: '#/components/headers/X-RateLimit-Limit'
@@ -14935,7 +14991,7 @@ paths:
             format: int32
       responses:
         "200":
-          description: The folder
+          description: The folder itself - its title, its parent, the moments it was created and changed, the access the caller has to it, how many items in it are new for them, and the room settings when the folder is a room; nothing about the items it holds
           headers:
             X-RateLimit-Limit:
               $ref: '#/components/headers/X-RateLimit-Limit'
@@ -14989,7 +15045,7 @@ paths:
               type: string
         responses:
           "200":
-            description: The folder
+            description: The folder itself - its title, its parent, the moments it was created and changed, the access the caller has to it, how many items in it are new for them, and the room settings when the folder is a room; nothing about the items it holds
             headers:
               X-RateLimit-Limit:
                 $ref: '#/components/headers/X-RateLimit-Limit'
@@ -15404,11 +15460,11 @@ paths:
                 - RoomTemplates
                 - AiRoom
                 - Knowledge
-                - ResultStorage
+                - ChatOutputs
                 - AiAgents
                 - DefaultTemplates
                 - Forms
-              description: '[0 - Default, 1 - Coomon, 2 - Bunch, 3 - Trash, 5 - User, 6 - Share, 8 - Projects, 10 - Favourites, 11 - Recent, 12 - Templates, 13 - Privacy, 14 - Virtual rooms, 15 - Filling forms room, 16 - Editing room, 19 - Custom room, 20 - Archive, 21 - Thirdparty backup, 22 - Public room, 25 - Ready form folder, 26 - In process form folder, 27 - Form filling folder done, 28 - Form filling folder in progress, 29 - Virtual Data Room, 30 - Room templates folder, 31 - AI Room, 32 - Knowledge, 33 - Result storage, 34 - AI Agents, 35 - Default Templates, 36 - Forms]'
+              description: '[0 - Default, 1 - Coomon, 2 - Bunch, 3 - Trash, 5 - User, 6 - Share, 8 - Projects, 10 - Favourites, 11 - Recent, 12 - Templates, 13 - Privacy, 14 - Virtual rooms, 15 - Filling forms room, 16 - Editing room, 19 - Custom room, 20 - Archive, 21 - Thirdparty backup, 22 - Public room, 25 - Ready form folder, 26 - In process form folder, 27 - Form filling folder done, 28 - Form filling folder in progress, 29 - Virtual Data Room, 30 - Room templates folder, 31 - AI Room, 32 - Knowledge, 33 - Chat outputs, 34 - AI Agents, 35 - Default Templates, 36 - Forms]'
         - name: excludeSubject
           in: query
           description: >-
@@ -17557,7 +17613,7 @@ paths:
                 style: form
       responses:
         "200":
-          description: The stored file
+          description: The stored file with its id and the title it was actually saved under; a `version` above 1 means the content was added to a file that already carried this name instead of creating a new one
           headers:
             X-RateLimit-Limit:
               $ref: '#/components/headers/X-RateLimit-Limit'
@@ -17628,7 +17684,7 @@ paths:
               type: string
         responses:
           "200":
-            description: The stored file
+            description: The stored file with its id and the title it was actually saved under; a `version` above 1 means the content was added to a file that already carried this name instead of creating a new one
             headers:
               X-RateLimit-Limit:
                 $ref: '#/components/headers/X-RateLimit-Limit'
@@ -18933,11 +18989,11 @@ paths:
                 - RoomTemplates
                 - AiRoom
                 - Knowledge
-                - ResultStorage
+                - ChatOutputs
                 - AiAgents
                 - DefaultTemplates
                 - Forms
-              description: '[0 - Default, 1 - Coomon, 2 - Bunch, 3 - Trash, 5 - User, 6 - Share, 8 - Projects, 10 - Favourites, 11 - Recent, 12 - Templates, 13 - Privacy, 14 - Virtual rooms, 15 - Filling forms room, 16 - Editing room, 19 - Custom room, 20 - Archive, 21 - Thirdparty backup, 22 - Public room, 25 - Ready form folder, 26 - In process form folder, 27 - Form filling folder done, 28 - Form filling folder in progress, 29 - Virtual Data Room, 30 - Room templates folder, 31 - AI Room, 32 - Knowledge, 33 - Result storage, 34 - AI Agents, 35 - Default Templates, 36 - Forms]'
+              description: '[0 - Default, 1 - Coomon, 2 - Bunch, 3 - Trash, 5 - User, 6 - Share, 8 - Projects, 10 - Favourites, 11 - Recent, 12 - Templates, 13 - Privacy, 14 - Virtual rooms, 15 - Filling forms room, 16 - Editing room, 19 - Custom room, 20 - Archive, 21 - Thirdparty backup, 22 - Public room, 25 - Ready form folder, 26 - In process form folder, 27 - Form filling folder done, 28 - Form filling folder in progress, 29 - Virtual Data Room, 30 - Room templates folder, 31 - AI Room, 32 - Knowledge, 33 - Chat outputs, 34 - AI Agents, 35 - Default Templates, 36 - Forms]'
       responses:
         "200":
           description: The delete operations of the caller, the one just queued included
@@ -25766,7 +25822,7 @@ paths:
               $ref: '#/components/schemas/RoomTemplateDto'
       responses:
         "200":
-          description: Status
+          description: 'The state of the template creation just queued: `isCompleted` is still false, so the job has to be polled for its result'
           headers:
             X-RateLimit-Limit:
               $ref: '#/components/headers/X-RateLimit-Limit'
@@ -25844,7 +25900,7 @@ paths:
       operationId: getRoomTemplateCreatingStatus
       responses:
         "200":
-          description: Status
+          description: The state of the caller's latest template creation, or an empty body when this account has started none
           headers:
             X-RateLimit-Limit:
               $ref: '#/components/headers/X-RateLimit-Limit'
@@ -25933,7 +25989,7 @@ paths:
             format: int32
       responses:
         "200":
-          description: Ok
+          description: True when the template is shared with everyone, false when only its owner and the accounts it was shared with can reach it
           headers:
             X-RateLimit-Limit:
               $ref: '#/components/headers/X-RateLimit-Limit'
@@ -26019,7 +26075,7 @@ paths:
               $ref: '#/components/schemas/SetPublicDto'
       responses:
         "200":
-          description: Ok
+          description: The recipient list of the template has been rewritten to match the requested access; nothing is returned
           headers:
             X-RateLimit-Limit:
               $ref: '#/components/headers/X-RateLimit-Limit'
@@ -30575,7 +30631,7 @@ paths:
             type: boolean
       responses:
         "200":
-          description: OK
+          description: The room group no longer exists; the body is empty and the rooms it gathered are left as they were
           headers:
             X-RateLimit-Limit:
               $ref: '#/components/headers/X-RateLimit-Limit'
@@ -42057,7 +42113,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UnknownNullableWrapper'
+                $ref: '#/components/schemas/JsonValueWrapper'
         "404":
           description: No application with this identifier is configured on this installation
         "401":
@@ -43703,7 +43759,7 @@ paths:
       description: >-
         Buys more units of a wallet service - extra administrators, disk storage, backup, AI tools, AI search or
 
-        DocsCloud - or writes down the quantity that service will have after the next renewal, depending on
+        Docs Connect - or writes down the quantity that service will have after the next renewal, depending on
 
         `productQuantityType`. With `Add` (1) the units are bought at once and paid out of the portal wallet, so the
 
@@ -43717,11 +43773,11 @@ paths:
 
         to be paid, otherwise the answer is 402. Minimum quantities apply - disk storage starts at 100 units, the
 
-        DocsCloud developer pack at 10, and the administrators may not be fewer than the portal already has - and in
+        Docs Connect Dev Pack at 10, and the administrators may not be fewer than the portal already has - and in
 
-        the `Add` form they are checked only while the portal does not hold that service yet. Asking for the DocsCloud
+        the `Add` form they are checked only while the portal does not hold that service yet. Asking for the Docs Connect
 
-        plan in the `Set` form while the developer pack is active schedules the reversion to it at the next period,
+        plan in the `Set` form while Docs Connect Dev Pack is active schedules the reversion to it at the next period,
 
         while the upgrade in the other direction is not done here at all: use
 
@@ -44476,7 +44532,7 @@ paths:
       description: >-
         Lists every service the portal may pay for out of its wallet - extra administrators, disk storage, backup, AI
 
-        tools, AI search and DocsCloud - with the price of a unit, the unit it is sold in and whether the portal has
+        tools, AI search and Docs Connect - with the price of a unit, the unit it is sold in and whether the portal has
 
         it switched on. Nothing has to be called first, the caller needs the permission to edit the portal settings,
 
@@ -45769,7 +45825,7 @@ paths:
       description: >-
         Lists the wallet services the portal is running right now: the add-ons its plan pays for that are in the
 
-        active state, plus the ones an administrator switched on by hand in the wallet service settings; the DocsCloud
+        active state, plus the ones an administrator switched on by hand in the wallet service settings; the Docs Connect
 
         trial is listed as well, although it is not paid from the wallet. Only a DocSpace administrator may call it,
 
@@ -45779,7 +45835,7 @@ paths:
 
         it grants and how much of it is used where that number is known - the editor seats and the editors currently
 
-        active for DocsCloud, the purchased units and the units already consumed for disk storage. A service listed
+        active for Docs Connect, the purchased units and the units already consumed for disk storage. A service listed
 
         with no limit is one whose usage is not counted this way, not one without a limit. The catalogue of what could
 
@@ -47828,7 +47884,7 @@ paths:
       operationId: sendSuspendInstructions
       responses:
         "200":
-          description: OK
+          description: The deactivation letter has been handed to the mail service and the request is recorded in the audit trail; the portal itself is still active and the response carries no content
           headers:
             X-RateLimit-Limit:
               description: 'Rate limit: 5 requests per 15 minutes per user/IP.'
@@ -47924,7 +47980,7 @@ paths:
       operationId: suspendPortal
       responses:
         "200":
-          description: OK
+          description: The portal is now suspended, its users can no longer work in it and its content is kept; the response carries no content
           headers:
             X-RateLimit-Limit:
               $ref: '#/components/headers/X-RateLimit-Limit'
@@ -47994,7 +48050,7 @@ paths:
       operationId: sendDeleteInstructions
       responses:
         "200":
-          description: OK
+          description: The removal letter has been handed to the mail service; nothing about the portal has changed yet and the response carries no content
           headers:
             X-RateLimit-Limit:
               description: 'Rate limit: 5 requests per 15 minutes per user/IP.'
@@ -48162,7 +48218,7 @@ paths:
       operationId: continuePortal
       responses:
         "200":
-          description: OK
+          description: The portal is active again and its users can sign in; the response carries no content
           headers:
             X-RateLimit-Limit:
               $ref: '#/components/headers/X-RateLimit-Limit'
@@ -48842,7 +48898,7 @@ paths:
       operationId: markGiftMessageAsRead
       responses:
         "200":
-          description: OK
+          description: The gift message is marked as read for the calling user; the same answer is returned when saving the flag failed, because the error is only written to the portal log. The response carries no content
           headers:
             X-RateLimit-Limit:
               $ref: '#/components/headers/X-RateLimit-Limit'
@@ -53739,15 +53795,15 @@ paths:
     post:
       tags:
         - Settings / DocsCloud
-      summary: Start the DocsCloud trial
+      summary: Start the Docs Connect trial
       description: >-
-        Activates the free DocsCloud trial subscription for the current portal, and, once a DocsCloud server is
+        Activates the free Docs Connect trial subscription for the current portal, and, once a Docs Connect server is
 
         assigned to the portal, allows the address of that server in the Content Security Policy settings.
 
         The portal tariff must be in the trial or paid state (not delayed and not unpaid), and the portal must not
 
-        already hold a DocsCloud trial, DocsCloud or DocsCloudDevPack subscription: the quotas of the current
+        already hold a Docs Connect trial, Docs Connect or Docs Connect Dev Pack subscription: the quotas of the current
 
         tariff are listed by `GET api/2.0/portal/tariff`. The caller must be a portal administrator allowed to edit
 
@@ -53759,7 +53815,7 @@ paths:
 
         (for example, when this portal has already used its trial), in which case nothing is changed. It never buys
 
-        a paid plan: an existing paid DocsCloud subscription is moved to DocsCloudDevPack by
+        a paid plan: an existing paid Docs Connect subscription is moved to Docs Connect Dev Pack by
 
         `POST api/2.0/settings/docscloud/switchtodevpack` instead.
       operationId: startDocsCloudTrial
@@ -53778,13 +53834,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/BooleanWrapper'
         "400":
-          description: The portal already has a DocsCloud trial, DocsCloud or DocsCloudDevPack subscription
+          description: The portal already has a Docs Connect trial, Docs Connect or Docs Connect Dev Pack subscription
         "402":
           description: The portal tariff is delayed or not paid, so the trial cannot be started
         "403":
           description: The caller is not allowed to edit the portal settings, or the billing service is not configured
         "404":
-          description: The DocsCloud trial quota is not available on this installation
+          description: The Docs Connect trial quota is not available on this installation
         "401":
           description: Unauthorized
           content:
@@ -53823,15 +53879,15 @@ paths:
     post:
       tags:
         - Settings / DocsCloud
-      summary: Switch DocsCloud to DocsCloudDevPack
+      summary: Switch Docs Connect to Docs Connect Dev Pack
       description: >-
-        Upgrades the paid DocsCloud subscription of the current portal to DocsCloudDevPack for the requested
+        Upgrades the paid Docs Connect subscription of the current portal to Docs Connect Dev Pack for the requested
 
-        number of users, charging the price difference to the portal wallet and moving the DocsCloud license
+        number of users, charging the price difference to the portal wallet and moving the Docs Connect license
 
-        to the new product. The portal must hold an active DocsCloud subscription, must not already hold a
+        to the new product. The portal must hold an active Docs Connect subscription, must not already hold a
 
-        DocsCloudDevPack one, and its tariff must not be delayed or unpaid: the quotas and the state of the
+        Docs Connect Dev Pack one, and its tariff must not be delayed or unpaid: the quotas and the state of the
 
         current tariff are listed by `GET api/2.0/portal/tariff`, and the amount that will be charged is
 
@@ -53845,26 +53901,26 @@ paths:
 
         `true` when the subscription has been switched, and `false` when the billing service declines or
 
-        fails to perform the switch, in which case nothing is charged and the portal stays on DocsCloud.
+        fails to perform the switch, in which case nothing is charged and the portal stays on Docs Connect.
 
-        Only the DocsCloud to DocsCloudDevPack direction is supported: to change the number of users of a
+        Only the Docs Connect to Docs Connect Dev Pack direction is supported: to change the number of users of a
 
-        subscription the portal already has, or to schedule a reversion from DocsCloudDevPack back to
+        subscription the portal already has, or to schedule a reversion from Docs Connect Dev Pack back to
 
-        DocsCloud at the next billing period, use `PUT api/2.0/portal/payment/updatewallet` instead.
+        Docs Connect at the next billing period, use `PUT api/2.0/portal/payment/updatewallet` instead.
       operationId: switchToDevPack
       requestBody:
         content:
           application/json:
             schema:
               description: >-
-                The request parameters for switching the DocsCloud subscription to DocsCloudDevPack, or for calculating
+                The request parameters for switching the Docs Connect subscription to Docs Connect Dev Pack, or for calculating
 
                 the cost of that switch.
               $ref: '#/components/schemas/DocsCloudDevPackRequestDto'
       responses:
         "200":
-          description: 'Boolean value: true if the subscription is switched to DocsCloudDevPack, false if the billing service declines it'
+          description: 'Boolean value: true if the subscription is switched to Docs Connect Dev Pack, false if the billing service declines it'
           headers:
             X-RateLimit-Limit:
               $ref: '#/components/headers/X-RateLimit-Limit'
@@ -53877,13 +53933,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/BooleanWrapper'
         "400":
-          description: The quantity is below the allowed minimum, the portal has no active DocsCloud subscription, or it already has a DocsCloudDevPack subscription
+          description: The quantity is below the allowed minimum, the portal has no active Docs Connect subscription, or it already has a Docs Connect Dev Pack subscription
         "402":
           description: The portal tariff is delayed or not paid, so the subscription cannot be switched
         "403":
           description: The caller is not a DocSpace administrator, or the billing service is not configured
         "404":
-          description: The portal is not registered as a billing customer, or the DocsCloud and DocsCloudDevPack wallet products are not configured on this installation
+          description: The portal is not registered as a billing customer, or the Docs Connect and Docs Connect Dev Pack wallet products are not configured on this installation
         "401":
           description: Unauthorized
           content:
@@ -53922,15 +53978,15 @@ paths:
     post:
       tags:
         - Settings / DocsCloud
-      summary: Calculate the DocsCloudDevPack switch cost
+      summary: Calculate the Docs Connect Dev Pack switch cost
       description: >-
-        Prices the upgrade of the paid DocsCloud subscription of the current portal to DocsCloudDevPack for
+        Prices the upgrade of the paid Docs Connect subscription of the current portal to Docs Connect Dev Pack for
 
         the requested number of users, without changing the subscription or charging anything. It applies the
 
-        same preconditions as the switch itself: the portal must hold an active DocsCloud subscription, must
+        same preconditions as the switch itself: the portal must hold an active Docs Connect subscription, must
 
-        not already hold a DocsCloudDevPack one, and its tariff must not be delayed or unpaid; the quotas and
+        not already hold a Docs Connect Dev Pack one, and its tariff must not be delayed or unpaid; the quotas and
 
         the state of the current tariff are listed by `GET api/2.0/portal/tariff`. The caller must be a
 
@@ -53955,13 +54011,13 @@ paths:
           application/json:
             schema:
               description: >-
-                The request parameters for switching the DocsCloud subscription to DocsCloudDevPack, or for calculating
+                The request parameters for switching the Docs Connect subscription to Docs Connect Dev Pack, or for calculating
 
                 the cost of that switch.
               $ref: '#/components/schemas/DocsCloudDevPackRequestDto'
       responses:
         "200":
-          description: The cost of switching to DocsCloudDevPack for the requested quantity, or an empty result if the billing service could not price it
+          description: The cost of switching to Docs Connect Dev Pack for the requested quantity, or an empty result if the billing service could not price it
           headers:
             X-RateLimit-Limit:
               $ref: '#/components/headers/X-RateLimit-Limit'
@@ -53974,13 +54030,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaymentCalculationWrapper'
         "400":
-          description: The quantity is below the allowed minimum, the portal has no active DocsCloud subscription, or it already has a DocsCloudDevPack subscription
+          description: The quantity is below the allowed minimum, the portal has no active Docs Connect subscription, or it already has a Docs Connect Dev Pack subscription
         "402":
           description: The portal tariff is delayed or not paid, so the switch cannot be priced
         "403":
           description: The caller is not a DocSpace administrator, or the billing service is not configured
         "404":
-          description: The portal is not registered as a billing customer, or the DocsCloud and DocsCloudDevPack wallet products are not configured on this installation
+          description: The portal is not registered as a billing customer, or the Docs Connect and Docs Connect Dev Pack wallet products are not configured on this installation
         "401":
           description: Unauthorized
           content:
@@ -54019,29 +54075,29 @@ paths:
     get:
       tags:
         - Settings / DocsCloud
-      summary: Get the DocsCloud tenant
+      summary: Get the Docs Connect tenant
       description: >-
-        Returns the DocsCloud tenant of the current portal: the DocsCloud server assigned to the portal, with its
+        Returns the Docs Connect tenant of the current portal: the Docs Connect server assigned to the portal, with its
 
         address, the date the tenant subscription ends and the payment the tenant was created for. A tenant exists
 
-        only after a DocsCloud subscription has been granted, by `POST api/2.0/settings/docscloud/trial` or by a
+        only after a Docs Connect subscription has been granted, by `POST api/2.0/settings/docscloud/trial` or by a
 
-        DocsCloud purchase, and only on an installation where the DocsCloud service is configured. The caller must
+        Docs Connect purchase, and only on an installation where the Docs Connect service is configured. The caller must
 
         be a portal administrator allowed to edit the portal settings. The call is read-only and idempotent, and it
 
         is served from a cache that keeps the tenant for an hour and the absence of a tenant for a minute, so pass
 
-        `refresh=true` right after a subscription change to read the current state from DocsCloud instead. In the
+        `refresh=true` right after a subscription change to read the current state from Docs Connect instead. In the
 
         result, `address` is the absolute URL of the assigned server, `isActive` tells whether `endDate` is still in
 
-        the future, and the dates are in UTC. An empty result means the portal has no DocsCloud tenant yet, which is
+        the future, and the dates are in UTC. An empty result means the portal has no Docs Connect tenant yet, which is
 
         the normal state before a subscription and not an error, so this is the operation to call to find out whether
 
-        DocsCloud is activated at all. The license and server details, the editing settings, the user quota and the
+        Docs Connect is activated at all. The license and server details, the editing settings, the user quota and the
 
         usage statistics are not part of it: they live in `GET api/2.0/settings/docscloud/tenant/info`,
 
@@ -54052,13 +54108,13 @@ paths:
       parameters:
         - name: refresh
           in: query
-          description: Pass `true` to skip the cached copy and request the tenant from DocsCloud again, replacing the cached one; with the default `false` the answer may be up to an hour old, or up to a minute old while the portal has no tenant.
+          description: Pass `true` to skip the cached copy and request the tenant from Docs Connect again, replacing the cached one; with the default `false` the answer may be up to an hour old, or up to a minute old while the portal has no tenant.
           schema:
             type: boolean
             default: false
       responses:
         "200":
-          description: The DocsCloud tenant of the portal, or an empty result if no DocsCloud tenant is assigned to it
+          description: The Docs Connect tenant of the portal, or an empty result if no Docs Connect tenant is assigned to it
           headers:
             X-RateLimit-Limit:
               $ref: '#/components/headers/X-RateLimit-Limit'
@@ -54116,25 +54172,25 @@ paths:
     get:
       tags:
         - Settings / DocsCloud
-      summary: Get the DocsCloud tenant information
+      summary: Get the Docs Connect tenant information
       description: >-
-        Returns the DocsCloud license of the current portal, the DocsCloud server serving it, the user limits of
+        Returns the Docs Connect license of the current portal, the Docs Connect server serving it, the user limits of
 
         that license and the editor and viewer usage counted against them for the current period. The portal must
 
-        have an activated DocsCloud tenant, granted by `POST api/2.0/settings/docscloud/trial` or by a DocsCloud
+        have an activated Docs Connect tenant, granted by `POST api/2.0/settings/docscloud/trial` or by a Docs Connect
 
         purchase: an empty result from `GET api/2.0/settings/docscloud/tenant` means there is none and this call
 
         fails with 400. The caller must be a portal administrator allowed to edit the portal settings, on an
 
-        installation where the DocsCloud service is configured. The call is read-only, idempotent and cached for a
+        installation where the Docs Connect service is configured. The call is read-only, idempotent and cached for a
 
-        minute, so pass `refresh=true` right after a subscription change to read the current state from DocsCloud.
+        minute, so pass `refresh=true` right after a subscription change to read the current state from Docs Connect.
 
         In the result, `license.valid` is when the license expires and `license.trial` is reported as `false` once
 
-        the portal holds a paid DocsCloud or DocsCloudDevPack subscription, even when the license itself still says
+        the portal holds a paid Docs Connect or Docs Connect Dev Pack subscription, even when the license itself still says
 
         trial; `usersLimit` caps the editors and the viewers allowed, `stats` counts the active, internal, external
 
@@ -54149,13 +54205,13 @@ paths:
       parameters:
         - name: refresh
           in: query
-          description: Pass `true` to skip the cached copy and request the license, server and usage information from DocsCloud again, replacing the cached one; with the default `false` the answer may be up to a minute old.
+          description: Pass `true` to skip the cached copy and request the license, server and usage information from Docs Connect again, replacing the cached one; with the default `false` the answer may be up to a minute old.
           schema:
             type: boolean
             default: false
       responses:
         "200":
-          description: The DocsCloud license and server information of the portal, with the user limits of the license and the usage statistics for the current period
+          description: The Docs Connect license and server information of the portal, with the user limits of the license and the usage statistics for the current period
           headers:
             X-RateLimit-Limit:
               $ref: '#/components/headers/X-RateLimit-Limit'
@@ -54168,7 +54224,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/DocsCloudTenantInfoWrapper'
         "400":
-          description: The portal has no activated DocsCloud tenant, so there is no license information to return
+          description: The portal has no activated Docs Connect tenant, so there is no license information to return
         "403":
           description: The caller is not allowed to edit the portal settings
         "401":
@@ -54209,21 +54265,21 @@ paths:
     get:
       tags:
         - Settings / DocsCloud
-      summary: Get the DocsCloud tenant configuration
+      summary: Get the Docs Connect tenant configuration
       description: >-
-        Returns the configuration of the DocsCloud tenant of the current portal: its name, the security secret and
+        Returns the configuration of the Docs Connect tenant of the current portal: its name, the security secret and
 
         header name, the file size limit and anonymous access switch of the server, the WOPI switch and the IP filter
 
-        rules. The portal must have an activated DocsCloud tenant, granted by `POST api/2.0/settings/docscloud/trial`
+        rules. The portal must have an activated Docs Connect tenant, granted by `POST api/2.0/settings/docscloud/trial`
 
-        or by a DocsCloud purchase: an empty result from `GET api/2.0/settings/docscloud/tenant` means there is none
+        or by a Docs Connect purchase: an empty result from `GET api/2.0/settings/docscloud/tenant` means there is none
 
         and this call fails with 400. The caller must be a portal administrator allowed to edit the portal settings,
 
-        on an installation where the DocsCloud service is configured. The call is read-only, idempotent and cached for
+        on an installation where the Docs Connect service is configured. The call is read-only, idempotent and cached for
 
-        an hour, so pass `refresh=true` to read the current state from DocsCloud; the same values are changed by
+        an hour, so pass `refresh=true` to read the current state from Docs Connect; the same values are changed by
 
         `PUT api/2.0/settings/docscloud/tenant/config`, which drops the cached copy itself, so no refresh is needed
 
@@ -54240,13 +54296,13 @@ paths:
       parameters:
         - name: refresh
           in: query
-          description: Pass `true` to skip the cached copy and request the configuration from DocsCloud again, replacing the cached one; with the default `false` the answer may be up to an hour old.
+          description: Pass `true` to skip the cached copy and request the configuration from Docs Connect again, replacing the cached one; with the default `false` the answer may be up to an hour old.
           schema:
             type: boolean
             default: false
       responses:
         "200":
-          description: The configuration of the DocsCloud tenant of the portal, with its security, server, WOPI and IP filter settings
+          description: The configuration of the Docs Connect tenant of the portal, with its security, server, WOPI and IP filter settings
           headers:
             X-RateLimit-Limit:
               $ref: '#/components/headers/X-RateLimit-Limit'
@@ -54259,7 +54315,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/DocsCloudConfigWrapper'
         "400":
-          description: The portal has no activated DocsCloud tenant, so there is no configuration to return
+          description: The portal has no activated Docs Connect tenant, so there is no configuration to return
         "403":
           description: The caller is not allowed to edit the portal settings
         "401":
@@ -54299,25 +54355,25 @@ paths:
     put:
       tags:
         - Settings / DocsCloud
-      summary: Update the DocsCloud tenant configuration
+      summary: Update the Docs Connect tenant configuration
       description: >-
-        Replaces the configuration of the DocsCloud tenant of the current portal: its name, the security secret and
+        Replaces the configuration of the Docs Connect tenant of the current portal: its name, the security secret and
 
         header name, the file size limit and anonymous access switch of the server, the WOPI switch and the IP filter
 
-        rules; it returns the configuration as DocsCloud stored it. The portal must have an activated DocsCloud tenant,
+        rules; it returns the configuration as Docs Connect stored it. The portal must have an activated Docs Connect tenant,
 
-        granted by `POST api/2.0/settings/docscloud/trial` or by a DocsCloud purchase: an empty result from
+        granted by `POST api/2.0/settings/docscloud/trial` or by a Docs Connect purchase: an empty result from
 
         `GET api/2.0/settings/docscloud/tenant` means there is none and this call fails with 400. Read the current
 
         values with `GET api/2.0/settings/docscloud/tenant/config` first and send back whole sections: the sections
 
-        left out of the request are not sent to DocsCloud at all, while a section that is present is sent with all of
+        left out of the request are not sent to Docs Connect at all, while a section that is present is sent with all of
 
         its fields, so a field left unset inside it goes out as `0`, `false` or empty. The caller must be a portal
 
-        administrator allowed to edit the portal settings, on an installation where the DocsCloud service is
+        administrator allowed to edit the portal settings, on an installation where the Docs Connect service is
 
         configured. The call is mutating,
 
@@ -54329,17 +54385,17 @@ paths:
 
         at 209715200 bytes (200 MB); a value outside those bounds is rejected with 400 before anything reaches
 
-        DocsCloud. It changes these settings only, never the subscription, the user quota or the license.
+        Docs Connect. It changes these settings only, never the subscription, the user quota or the license.
       operationId: updateTenantConfig
       requestBody:
         content:
           application/json:
             schema:
-              description: Represents the configuration of a DocsCloud tenant.
+              description: Represents the configuration of a Docs Connect tenant.
               $ref: '#/components/schemas/DocsCloudConfig'
       responses:
         "200":
-          description: The configuration of the DocsCloud tenant as DocsCloud stored it after the update
+          description: The configuration of the Docs Connect tenant as Docs Connect stored it after the update
           headers:
             X-RateLimit-Limit:
               $ref: '#/components/headers/X-RateLimit-Limit'
@@ -54352,7 +54408,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/DocsCloudConfigWrapper'
         "400":
-          description: A text field is longer than 255 characters, the file size limit is outside 0-209715200 bytes, or the portal has no activated DocsCloud tenant
+          description: A text field is longer than 255 characters, the file size limit is outside 0-209715200 bytes, or the portal has no activated Docs Connect tenant
         "403":
           description: The caller is not allowed to edit the portal settings
         "401":
@@ -54393,25 +54449,25 @@ paths:
     get:
       tags:
         - Settings / DocsCloud
-      summary: Get the DocsCloud tenant quota
+      summary: Get the Docs Connect tenant quota
       description: >-
-        Returns the DocsCloud user quota of the current portal: the users who currently count as DocsCloud editors and
+        Returns the Docs Connect user quota of the current portal: the users who currently count as Docs Connect editors and
 
-        the users who count as viewers, each with the identifier DocsCloud knows them by and the date their quota entry
+        the users who count as viewers, each with the identifier Docs Connect knows them by and the date their quota entry
 
-        expires. The portal must have an activated DocsCloud tenant, granted by `POST api/2.0/settings/docscloud/trial`
+        expires. The portal must have an activated Docs Connect tenant, granted by `POST api/2.0/settings/docscloud/trial`
 
-        or by a DocsCloud purchase: an empty result from `GET api/2.0/settings/docscloud/tenant` means there is none
+        or by a Docs Connect purchase: an empty result from `GET api/2.0/settings/docscloud/tenant` means there is none
 
         and this call fails with 400. The caller must be a portal administrator allowed to edit the portal settings,
 
-        on an installation where the DocsCloud service is configured. The call is read-only, idempotent and cached for
+        on an installation where the Docs Connect service is configured. The call is read-only, idempotent and cached for
 
-        a minute, so pass `refresh=true` to read the current state from DocsCloud. In the result, `users` holds the
+        a minute, so pass `refresh=true` to read the current state from Docs Connect. In the result, `users` holds the
 
         editor entries and `usersView` the viewer entries, both unordered; `userId` is the DocSpace user ID for a
 
-        portal member and an identifier of DocsCloud's own for anyone else; `expire` is the date and time the entry
+        portal member and an identifier of Docs Connect's own for anyone else; `expire` is the date and time the entry
 
         expires, as a UTC string; and empty lists mean no user has been counted yet. It lists the users themselves,
 
@@ -54426,13 +54482,13 @@ paths:
       parameters:
         - name: refresh
           in: query
-          description: Pass `true` to skip the cached copy and request the user quota from DocsCloud again, replacing the cached one; with the default `false` the answer may be up to a minute old.
+          description: Pass `true` to skip the cached copy and request the user quota from Docs Connect again, replacing the cached one; with the default `false` the answer may be up to a minute old.
           schema:
             type: boolean
             default: false
       responses:
         "200":
-          description: The editor and viewer users of the DocsCloud tenant of the portal, with the expiration date of each entry
+          description: The editor and viewer users of the Docs Connect tenant of the portal, with the expiration date of each entry
           headers:
             X-RateLimit-Limit:
               $ref: '#/components/headers/X-RateLimit-Limit'
@@ -54445,7 +54501,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/DocsCloudQuotaWrapper'
         "400":
-          description: The portal has no activated DocsCloud tenant, so there is no user quota to return
+          description: The portal has no activated Docs Connect tenant, so there is no user quota to return
         "403":
           description: The caller is not allowed to edit the portal settings
         "401":
@@ -54486,9 +54542,9 @@ paths:
     post:
       tags:
         - Settings / DocsCloud
-      summary: Start the DocsCloud quota report
+      summary: Start the Docs Connect quota report
       description: >-
-        Queues a background job that renders the current DocsCloud user quota of the portal into an xlsx file and
+        Queues a background job that renders the current Docs Connect user quota of the portal into an xlsx file and
 
         saves that file in the My documents folder of the calling user; the report lists the editor and the viewer
 
@@ -54502,7 +54558,7 @@ paths:
 
         job that is still running. The caller must be a portal administrator allowed to edit the portal settings. The
 
-        portal should have an activated DocsCloud tenant: this call does not check that, and without a tenant the job
+        portal should have an activated Docs Connect tenant: this call does not check that, and without a tenant the job
 
         itself fails and reports the reason in the `error` of the status response. One report per caller runs at a
 
@@ -54569,9 +54625,9 @@ paths:
     get:
       tags:
         - Settings / DocsCloud
-      summary: Get the DocsCloud quota report status
+      summary: Get the Docs Connect quota report status
       description: >-
-        Returns the state of the DocsCloud user quota report that the current user started with
+        Returns the state of the Docs Connect user quota report that the current user started with
 
         `POST api/2.0/settings/docscloud/tenant/quota/report`, so that the caller can follow the generation and pick
 
@@ -54599,7 +54655,7 @@ paths:
       operationId: getTenantQuotaReport
       responses:
         "200":
-          description: The state of the DocsCloud quota report job of the caller, or an empty result if there is no such job
+          description: The state of the Docs Connect quota report job of the caller, or an empty result if there is no such job
           headers:
             X-RateLimit-Limit:
               $ref: '#/components/headers/X-RateLimit-Limit'
@@ -54650,9 +54706,9 @@ paths:
     delete:
       tags:
         - Settings / DocsCloud
-      summary: Terminate the DocsCloud quota report
+      summary: Terminate the Docs Connect quota report
       description: >-
-        Cancels the DocsCloud user quota report that the current user started with
+        Cancels the Docs Connect user quota report that the current user started with
 
         `POST api/2.0/settings/docscloud/tenant/quota/report` and removes its job, so that a new report can be started
 
@@ -54720,21 +54776,21 @@ paths:
     get:
       tags:
         - Settings / DocsCloud
-      summary: Get the DocsCloud tenant usage
+      summary: Get the Docs Connect tenant usage
       description: >-
-        Returns the DocsCloud usage of the current portal: the number of users who have been active in DocsCloud in
+        Returns the Docs Connect usage of the current portal: the number of users who have been active in Docs Connect in
 
-        the current period, and the moment that period is counted from. The portal must have an activated DocsCloud
+        the current period, and the moment that period is counted from. The portal must have an activated Docs Connect
 
-        tenant, granted by `POST api/2.0/settings/docscloud/trial` or by a DocsCloud purchase: an empty result from
+        tenant, granted by `POST api/2.0/settings/docscloud/trial` or by a Docs Connect purchase: an empty result from
 
         `GET api/2.0/settings/docscloud/tenant` means there is none and this call fails with 400. The caller must be a
 
-        portal administrator allowed to edit the portal settings, on an installation where the DocsCloud service is
+        portal administrator allowed to edit the portal settings, on an installation where the Docs Connect service is
 
         configured. The call is read-only, idempotent and cached for a minute, so pass `refresh=true` to read the
 
-        current state from DocsCloud. In the result, `activeCount` counts the users seen since `since`, which is in
+        current state from Docs Connect. In the result, `activeCount` counts the users seen since `since`, which is in
 
         UTC, and it is one total for the whole tenant, with no split by role and no limit to compare it against. For
 
@@ -54745,13 +54801,13 @@ paths:
       parameters:
         - name: refresh
           in: query
-          description: Pass `true` to skip the cached copy and request the usage statistics from DocsCloud again, replacing the cached one; with the default `false` the answer may be up to a minute old.
+          description: Pass `true` to skip the cached copy and request the usage statistics from Docs Connect again, replacing the cached one; with the default `false` the answer may be up to a minute old.
           schema:
             type: boolean
             default: false
       responses:
         "200":
-          description: The number of active DocsCloud users of the portal and the date the count starts from
+          description: The number of active Docs Connect users of the portal and the date the count starts from
           headers:
             X-RateLimit-Limit:
               $ref: '#/components/headers/X-RateLimit-Limit'
@@ -54764,7 +54820,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/DocsCloudUsageWrapper'
         "400":
-          description: The portal has no activated DocsCloud tenant, so there is no usage information to return
+          description: The portal has no activated Docs Connect tenant, so there is no usage information to return
         "403":
           description: The caller is not allowed to edit the portal settings
         "401":
@@ -63675,6 +63731,7 @@ components:
         - ImageGeneration
         - OCR
         - Vision
+        - FormAnalysis
       description: The AI action a request or an assignment applies to. Each action has its own assignment slot; `Default` is the profile used when an action's own slot is empty.
     AiThreadMessageLike:
       type: object
@@ -65367,7 +65424,7 @@ components:
             and the way it answers. Empty when the room was left on the behaviour the portal provides by default.
       description: The chat configuration of an AI room.
     AiFolderType:
-      description: '[0 - Default, 1 - Coomon, 2 - Bunch, 3 - Trash, 5 - User, 6 - Share, 8 - Projects, 10 - Favourites, 11 - Recent, 12 - Templates, 13 - Privacy, 14 - Virtual rooms, 15 - Filling forms room, 16 - Editing room, 19 - Custom room, 20 - Archive, 21 - Thirdparty backup, 22 - Public room, 25 - Ready form folder, 26 - In process form folder, 27 - Form filling folder done, 28 - Form filling folder in progress, 29 - Virtual Data Room, 30 - Room templates folder, 31 - AI Room, 32 - Knowledge, 33 - Result storage, 34 - AI Agents, 35 - Default Templates, 36 - Forms]'
+      description: '[0 - Default, 1 - Coomon, 2 - Bunch, 3 - Trash, 5 - User, 6 - Share, 8 - Projects, 10 - Favourites, 11 - Recent, 12 - Templates, 13 - Privacy, 14 - Virtual rooms, 15 - Filling forms room, 16 - Editing room, 19 - Custom room, 20 - Archive, 21 - Thirdparty backup, 22 - Public room, 25 - Ready form folder, 26 - In process form folder, 27 - Form filling folder done, 28 - Form filling folder in progress, 29 - Virtual Data Room, 30 - Room templates folder, 31 - AI Room, 32 - Knowledge, 33 - Chat outputs, 34 - AI Agents, 35 - Default Templates, 36 - Forms]'
       enum:
         - 0
         - 1
@@ -65429,7 +65486,7 @@ components:
         - RoomTemplates
         - AiRoom
         - Knowledge
-        - ResultStorage
+        - ChatOutputs
         - AiAgents
         - DefaultTemplates
         - Forms
@@ -72301,10 +72358,7 @@ components:
               type:
                 - "null"
                 - boolean
-              description: >-
-                Whether the PDF is a fillable form rather than a plain document. When the stored classification does not say,
-
-                the portal opens the file to find out, so the answer is reliable for a PDF and null for anything else.
+              description: Whether the file is a PDF, and so offered as a fillable form. It is null for any other file type.
             customFilterEnabled:
               examples:
                 - false
@@ -75598,7 +75652,7 @@ components:
             out; a folder has one primary link at a time.
       description: The external link of a folder, as it is to be created or rewritten.
     FolderType:
-      description: '[0 - Default, 1 - Coomon, 2 - Bunch, 3 - Trash, 5 - User, 6 - Share, 8 - Projects, 10 - Favourites, 11 - Recent, 12 - Templates, 13 - Privacy, 14 - Virtual rooms, 15 - Filling forms room, 16 - Editing room, 19 - Custom room, 20 - Archive, 21 - Thirdparty backup, 22 - Public room, 25 - Ready form folder, 26 - In process form folder, 27 - Form filling folder done, 28 - Form filling folder in progress, 29 - Virtual Data Room, 30 - Room templates folder, 31 - AI Room, 32 - Knowledge, 33 - Result storage, 34 - AI Agents, 35 - Default Templates, 36 - Forms]'
+      description: '[0 - Default, 1 - Coomon, 2 - Bunch, 3 - Trash, 5 - User, 6 - Share, 8 - Projects, 10 - Favourites, 11 - Recent, 12 - Templates, 13 - Privacy, 14 - Virtual rooms, 15 - Filling forms room, 16 - Editing room, 19 - Custom room, 20 - Archive, 21 - Thirdparty backup, 22 - Public room, 25 - Ready form folder, 26 - In process form folder, 27 - Form filling folder done, 28 - Form filling folder in progress, 29 - Virtual Data Room, 30 - Room templates folder, 31 - AI Room, 32 - Knowledge, 33 - Chat outputs, 34 - AI Agents, 35 - Default Templates, 36 - Forms]'
       enum:
         - 0
         - 1
@@ -75660,7 +75714,7 @@ components:
         - RoomTemplates
         - AiRoom
         - Knowledge
-        - ResultStorage
+        - ChatOutputs
         - AiAgents
         - DefaultTemplates
         - Forms
@@ -80675,10 +80729,7 @@ components:
               type:
                 - "null"
                 - boolean
-              description: >-
-                Whether the PDF is a fillable form rather than a plain document. When the stored classification does not say,
-
-                the portal opens the file to find out, so the answer is reliable for a PDF and null for anything else.
+              description: Whether the file is a PDF, and so offered as a fillable form. It is null for any other file type.
             customFilterEnabled:
               examples:
                 - false
@@ -86045,6 +86096,39 @@ components:
           type: number
           description: The cost of one million tokens the model writes back. It is normally the dearer of the two directions.
           format: double
+        promptCacheRead:
+          examples:
+            - 0.2
+          type:
+            - "null"
+            - number
+          description: >-
+            The cost of one million prompt tokens served from the prompt cache. It is absent when the model does not
+
+            support prompt caching.
+          format: double
+        promptCacheWrite:
+          examples:
+            - 2.5
+          type:
+            - "null"
+            - number
+          description: >-
+            The cost of one million prompt tokens written to the prompt cache with the default lifetime. It is absent
+
+            when the model does not support prompt caching.
+          format: double
+        promptCacheWrite1H:
+          examples:
+            - 4
+          type:
+            - "null"
+            - number
+          description: >-
+            The cost of one million prompt tokens written to the prompt cache with a one-hour lifetime. It is absent
+
+            when the model offers no such option.
+          format: double
       description: What a chat model charges, split by the direction the tokens flow in.
     AiEmbeddingPriceDto:
       type: object
@@ -86605,14 +86689,6 @@ components:
           examples:
             - theme: dark
               language: en
-          type: "null"
-          oneOf:
-            - examples:
-                - 1234
-              type: integer
-            - examples:
-                - some text
-              type: string
           description: >-
             The settings document saved for this portal, stored and returned verbatim - the portal never looks inside
 
@@ -88489,6 +88565,9 @@ components:
     CultureSpecificExternalResources:
       type: object
       properties:
+        adminPanel:
+          description: The link to the administration panel. It is returned only to the full administrators of a licensed (Enterprise) server (standalone) portal.
+          $ref: '#/components/schemas/CultureSpecificExternalResource'
         api:
           description: The link to the product API.
           $ref: '#/components/schemas/CultureSpecificExternalResource'
@@ -89680,7 +89759,7 @@ components:
         ipFilter:
           description: The IP filter configuration.
           $ref: '#/components/schemas/DocsCloudIpFilterConfig'
-      description: Represents the configuration of a DocsCloud tenant.
+      description: Represents the configuration of a Docs Connect tenant.
     DocsCloudConfigWrapper:
       type: object
       properties:
@@ -89722,14 +89801,14 @@ components:
           minimum: 1
           type: integer
           description: >-
-            The number of users to subscribe to DocsCloudDevPack for. It must be at least the number of users of
+            The number of users to subscribe to Docs Connect Dev Pack for. It must be at least the number of users of
 
-            the currently purchased DocsCloud subscription, and at least the DocsCloudDevPack minimum configured
+            the currently purchased Docs Connect subscription, and at least the Docs Connect Dev Pack minimum configured
 
             for the installation, which is 10 users by default; a smaller value is rejected with 400.
           format: int32
       description: >-
-        The request parameters for switching the DocsCloud subscription to DocsCloudDevPack, or for calculating
+        The request parameters for switching the Docs Connect subscription to Docs Connect Dev Pack, or for calculating
 
         the cost of that switch.
     DocsCloudIpFilterConfig:
@@ -89743,10 +89822,10 @@ components:
             - "null"
             - array
           items:
-            description: Represents the IP filter rule of a DocsCloud tenant.
+            description: Represents the IP filter rule of a Docs Connect tenant.
             $ref: '#/components/schemas/DocsCloudIpFilterRule'
           description: The IP filter rules.
-      description: Represents the IP filter configuration of a DocsCloud tenant.
+      description: Represents the IP filter configuration of a Docs Connect tenant.
     DocsCloudIpFilterRule:
       type: object
       properties:
@@ -89764,7 +89843,7 @@ components:
             - true
           type: boolean
           description: Whether the IP address is allowed.
-      description: Represents the IP filter rule of a DocsCloud tenant.
+      description: Represents the IP filter rule of a Docs Connect tenant.
     DocsCloudLicenseInfo:
       type: object
       properties:
@@ -89785,7 +89864,7 @@ components:
           type: string
           description: The license build date.
           format: date-time
-      description: Represents the license information of a DocsCloud tenant.
+      description: Represents the license information of a Docs Connect tenant.
     DocsCloudPayment:
       type: object
       properties:
@@ -89837,7 +89916,7 @@ components:
             - "null"
             - string
           description: The three-character ISO 4217 currency symbol of the payment.
-      description: Represents the payment information of a DocsCloud tenant.
+      description: Represents the payment information of a Docs Connect tenant.
     DocsCloudQuota:
       type: object
       properties:
@@ -89849,7 +89928,7 @@ components:
             - "null"
             - array
           items:
-            description: Represents a single user entry of a DocsCloud quota.
+            description: Represents a single user entry of a Docs Connect quota.
             $ref: '#/components/schemas/DocsCloudQuotaUser'
           description: The editor users.
         usersView:
@@ -89860,10 +89939,10 @@ components:
             - "null"
             - array
           items:
-            description: Represents a single user entry of a DocsCloud quota.
+            description: Represents a single user entry of a Docs Connect quota.
             $ref: '#/components/schemas/DocsCloudQuotaUser'
           description: The viewer users.
-      description: Represents the current user quota of a DocsCloud tenant.
+      description: Represents the current user quota of a Docs Connect tenant.
     DocsCloudQuotaUser:
       type: object
       properties:
@@ -89881,7 +89960,7 @@ components:
             - "null"
             - string
           description: The expiration date of the user.
-      description: Represents a single user entry of a DocsCloud quota.
+      description: Represents a single user entry of a Docs Connect quota.
     DocsCloudQuotaWrapper:
       type: object
       properties:
@@ -89934,7 +90013,7 @@ components:
             - "null"
             - string
           description: The security header name.
-      description: Represents the security configuration of a DocsCloud tenant.
+      description: Represents the security configuration of a Docs Connect tenant.
     DocsCloudServerConfig:
       type: object
       properties:
@@ -89951,7 +90030,7 @@ components:
           type: integer
           description: The maximum file size in bytes.
           format: int64
-      description: Represents the server configuration of a DocsCloud tenant.
+      description: Represents the server configuration of a Docs Connect tenant.
     DocsCloudServerInfo:
       type: object
       properties:
@@ -89975,7 +90054,7 @@ components:
           type: string
           description: The server build date.
           format: date-time
-      description: Represents the DocsCloud server information.
+      description: Represents the Docs Connect server information.
     DocsCloudStats:
       type: object
       properties:
@@ -89991,7 +90070,7 @@ components:
         viewer:
           description: The statistics for viewer users.
           $ref: '#/components/schemas/DocsCloudUserStats'
-      description: Represents the usage statistics of a DocsCloud tenant for the current period.
+      description: Represents the usage statistics of a Docs Connect tenant for the current period.
     DocsCloudTenant:
       type: object
       properties:
@@ -90062,7 +90141,7 @@ components:
         payment:
           description: The tenant payment information.
           $ref: '#/components/schemas/DocsCloudPayment'
-      description: Represents a DocsCloud tenant of a portal.
+      description: Represents a Docs Connect tenant of a portal.
     DocsCloudTenantInfo:
       type: object
       properties:
@@ -90070,7 +90149,7 @@ components:
           description: The license information.
           $ref: '#/components/schemas/DocsCloudLicenseInfo'
         server:
-          description: The DocsCloud server information.
+          description: The Docs Connect server information.
           $ref: '#/components/schemas/DocsCloudServerInfo'
         usersLimit:
           description: The user limits of the license.
@@ -90078,7 +90157,7 @@ components:
         stats:
           description: The usage statistics for the current period.
           $ref: '#/components/schemas/DocsCloudStats'
-      description: Represents the license and server information of a DocsCloud tenant, with usage statistics for the current period.
+      description: Represents the license and server information of a Docs Connect tenant, with usage statistics for the current period.
     DocsCloudTenantInfoWrapper:
       type: object
       properties:
@@ -90156,7 +90235,7 @@ components:
           type: integer
           description: The number of active users.
           format: int32
-      description: Represents the usage statistics of a DocsCloud tenant.
+      description: Represents the usage statistics of a Docs Connect tenant.
     DocsCloudUsageWrapper:
       type: object
       properties:
@@ -90220,7 +90299,7 @@ components:
             - false
           type: boolean
           description: Whether the number of remaining users is critically low.
-      description: Represents the usage statistics of a single DocsCloud user category (editor or viewer).
+      description: Represents the usage statistics of a single Docs Connect user category (editor or viewer).
     DocsCloudUsersLimit:
       type: object
       properties:
@@ -90236,7 +90315,7 @@ components:
           type: integer
           description: The maximum number of users who can view documents.
           format: int32
-      description: Represents the user limits of a DocsCloud license.
+      description: Represents the user limits of a Docs Connect license.
     DocsCloudWopiConfig:
       type: object
       properties:
@@ -90245,7 +90324,7 @@ components:
             - false
           type: boolean
           description: Whether WOPI is enabled.
-      description: Represents the WOPI configuration of a DocsCloud tenant.
+      description: Represents the WOPI configuration of a Docs Connect tenant.
     DoubleNullableWrapper:
       type: object
       properties:
@@ -91543,6 +91622,36 @@ components:
         One entry of a keyed collection, carried as an explicit pair of `key` and `value` fields instead of as a member
 
         of a JSON object, so that the key is not restricted to a string and the entries keep the order they are sent in.
+    JsonValueWrapper:
+      type: object
+      properties:
+        response:
+          description: The JSON value returned by the operation, or null when there is none.
+        count:
+          type: integer
+          description: The total number of items in the response
+          format: int32
+        links:
+          type: array
+          items:
+            type: object
+            properties:
+              href:
+                type: string
+                description: URL of the link
+              action:
+                type: string
+                description: Action associated with the link
+          description: List of links related to the response
+        status:
+          type: integer
+          description: HTTP status code of the response
+          format: int32
+        statusCode:
+          type: integer
+          description: HTTP status code of the response (duplicate of status)
+          format: int32
+      description: The successful API response containing an arbitrary JSON value.
     LocationType:
       description: '[0 - None, 1 - Files, 2 - Folders, 3 - Documents settings, 27 - Rooms, 29 - Settings, 30 - Contacts, 31 - Agents]'
       enum:
@@ -94079,13 +94188,6 @@ components:
         settings:
           examples:
             - {}
-          oneOf:
-            - examples:
-                - 1234
-              type: integer
-            - examples:
-                - some text
-              type: string
           description: >-
             The configuration the application reads, as any valid JSON value. Its shape is defined by the application and
 
@@ -97024,18 +97126,18 @@ components:
           examples:
             - true
           type: integer
-          description: The number of DocsCloud users.
+          description: The number of Docs Connect users.
           format: int32
         docsCloudDevPack:
           examples:
             - true
           type: boolean
-          description: Specifies if the DocsCloudDevPack enabled or not.
+          description: Specifies if the Docs Connect Dev Pack enabled or not.
         docsCloudTrial:
           examples:
             - true
           type: boolean
-          description: Specifies if the DocsCloudTrial enabled or not.
+          description: Specifies if the Docs Connect trial enabled or not.
       description: The current tenant quota.
     TenantQuotaFeatureDto:
       type: object
@@ -98186,37 +98288,6 @@ components:
 
             submits it refuse new messages; letters already sent are untouched.
       description: Whether the sign-in page offers the form for writing to the portal administrators.
-    UnknownNullableWrapper:
-      type: object
-      properties:
-        response:
-          type: "null"
-          description: The response payload.
-        count:
-          type: integer
-          description: The total number of items in the response
-          format: int32
-        links:
-          type: array
-          items:
-            type: object
-            properties:
-              href:
-                type: string
-                description: URL of the link
-              action:
-                type: string
-                description: Action associated with the link
-          description: List of links related to the response
-        status:
-          type: integer
-          description: HTTP status code of the response
-          format: int32
-        statusCode:
-          type: integer
-          description: HTTP status code of the response (duplicate of status)
-          format: int32
-      description: The successful API response.
     UpcomingPaymentArrayWrapper:
       type: object
       properties:
@@ -98505,7 +98576,7 @@ components:
 
             `productQuantityType`: the units to add, or the total the service is to have in the next period. Minimum
 
-            quantities apply per service - disk storage starts at 100 units, the DocsCloud developer pack at 10, and the
+            quantities apply per service - disk storage starts at 100 units, the Docs Connect Dev Pack at 10, and the
 
             administrators may not be fewer than the portal already has. Exactly one pair is accepted, and a null or zero
 
