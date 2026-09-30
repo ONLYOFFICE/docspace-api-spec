@@ -1,6 +1,6 @@
 # getReferenceData
 
-> FileReferenceWrapper getReferenceData(GetReferenceDataDtoInteger)
+> FileReferenceWrapper getReferenceData(GetReferenceDataDto)
 
 `POST /api/2.0/files/file/referencedata`
 
@@ -12,7 +12,7 @@ Resolves a reference that a formula in one spreadsheet makes to another document
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **GetReferenceDataDtoInteger** | body | [**GetReferenceDataDtoInteger**](../../models/get-reference-data-dto-integer.md) |  | [optional] |
+| **GetReferenceDataDto** | body | [**GetReferenceDataDto**](../../models/get-reference-data-dto.md) |  | [optional] |
 
 ## Responses
 

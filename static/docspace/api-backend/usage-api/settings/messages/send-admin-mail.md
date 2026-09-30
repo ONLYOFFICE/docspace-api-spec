@@ -31,7 +31,7 @@ Sends a message from someone who cannot get into the portal to its administrator
 
 ## Authorization
 
-[cookieAuth](../settings.md#cookieauth), [bearerAuth](../settings.md#bearerauth)
+[Basic](../settings.md#basic), [OAuth2](../settings.md#oauth2) (scopes: read, write), [ApiKeyBearer](../settings.md#apikeybearer), [asc_auth_key](../settings.md#asc_auth_key), [Bearer](../settings.md#bearer), [OpenId](../settings.md#openid)
 
 ## HTTP request headers
 

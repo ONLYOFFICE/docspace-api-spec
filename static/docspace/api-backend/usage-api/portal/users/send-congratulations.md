@@ -33,7 +33,7 @@ null (empty response body)
 
 ## Authorization
 
-[cookieAuth](../portal.md#cookieauth), [bearerAuth](../portal.md#bearerauth)
+[Basic](../portal.md#basic), [OAuth2](../portal.md#oauth2) (scopes: read, write), [ApiKeyBearer](../portal.md#apikeybearer), [asc_auth_key](../portal.md#asc_auth_key), [Bearer](../portal.md#bearer), [OpenId](../portal.md#openid)
 
 ## HTTP request headers
 

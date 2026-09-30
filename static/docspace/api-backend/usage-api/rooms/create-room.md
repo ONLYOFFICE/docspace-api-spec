@@ -1,6 +1,6 @@
 # createRoom
 
-> FolderIntegerWrapper createRoom(CreateRoomRequestDto)
+> FolderWrapper createRoom(CreateRoomRequestDto)
 
 `POST /api/2.0/files/rooms`
 
@@ -18,7 +18,7 @@ Creates a room in the portal Rooms section and returns it. `roomType` decides wh
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The created room with its id, type, settings, logo and tags | [**FolderIntegerWrapper**](../models/folder-integer-wrapper.md) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The created room with its id, type, settings, logo and tags | [**FolderWrapper**](../models/folder-wrapper.md) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../models/error-api-response.md) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../models/error-api-response.md) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../models/error-api-response.md) | - |
@@ -28,7 +28,7 @@ Creates a room in the portal Rooms section and returns it. `roomType` decides wh
 
 ## Return type
 
-[**FolderIntegerWrapper**](../models/folder-integer-wrapper.md)
+[**FolderWrapper**](../models/folder-wrapper.md)
 
 ## Authorization
 

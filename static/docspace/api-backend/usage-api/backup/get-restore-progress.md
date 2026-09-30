@@ -31,7 +31,7 @@ Reports the state of the restoring job, and is the operation to poll after  `POS
 
 ## Authorization
 
-[cookieAuth](backup.md#cookieauth), [bearerAuth](backup.md#bearerauth)
+[Basic](backup.md#basic), [OAuth2](backup.md#oauth2) (scopes: read, write), [ApiKeyBearer](backup.md#apikeybearer), [asc_auth_key](backup.md#asc_auth_key), [Bearer](backup.md#bearer), [OpenId](backup.md#openid)
 
 ## HTTP request headers
 

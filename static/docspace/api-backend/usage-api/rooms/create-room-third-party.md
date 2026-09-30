@@ -1,6 +1,6 @@
 # createRoomThirdParty
 
-> FolderStringWrapper createRoomThirdParty(id, CreateThirdPartyRoom)
+> ThirdPartyFolderWrapper createRoomThirdParty(id, CreateThirdPartyRoom)
 
 `POST /api/2.0/files/rooms/thirdparty/{id}`
 
@@ -19,7 +19,7 @@ Turns a folder of a connected third-party storage account into a room of the `Ro
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The room created out of the third-party folder, with string identifiers | [**FolderStringWrapper**](../models/folder-string-wrapper.md) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The room created out of the third-party folder, with string identifiers | [**ThirdPartyFolderWrapper**](../models/third-party-folder-wrapper.md) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../models/error-api-response.md) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../models/error-api-response.md) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../models/error-api-response.md) | - |
@@ -29,7 +29,7 @@ Turns a folder of a connected third-party storage account into a room of the `Ro
 
 ## Return type
 
-[**FolderStringWrapper**](../models/folder-string-wrapper.md)
+[**ThirdPartyFolderWrapper**](../models/third-party-folder-wrapper.md)
 
 ## Authorization
 

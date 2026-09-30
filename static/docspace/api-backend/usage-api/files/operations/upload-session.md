@@ -1,6 +1,6 @@
 # uploadSession
 
-> UploadSessionResponseIntegerWrapper uploadSession(folderId, sessionId, File)
+> UploadSessionResponseWrapper uploadSession(folderId, sessionId, File)
 
 `POST /api/2.0/files/{folderId}/session/{sessionId}`
 
@@ -20,7 +20,7 @@ Sends the next part of a file into the session opened for it, as the multipart `
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The progress of the session, or the stored file once the last part has arrived | [**UploadSessionResponseIntegerWrapper**](../../models/upload-session-response-integer-wrapper.md) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The progress of the session, or the stored file once the last part has arrived | [**UploadSessionResponseWrapper**](../../models/upload-session-response-wrapper.md) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../../models/error-api-response.md) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../../models/error-api-response.md) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../../models/error-api-response.md) | - |
@@ -30,7 +30,17 @@ Sends the next part of a file into the session opened for it, as the multipart `
 
 ## Return type
 
-[**UploadSessionResponseIntegerWrapper**](../../models/upload-session-response-integer-wrapper.md)
+[**UploadSessionResponseWrapper**](../../models/upload-session-response-wrapper.md)
+
+## Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **folderId** | path | **String** | The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id. | [required] [example: `sbox-42`] |
+
+Return type: [**ThirdPartyUploadSessionResponseWrapper**](../../models/third-party-upload-session-response-wrapper.md)
 
 ## Authorization
 

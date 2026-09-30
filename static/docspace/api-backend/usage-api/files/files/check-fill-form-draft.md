@@ -31,9 +31,18 @@ Resolves the editor address the caller must open to fill out the given PDF form,
 
 [**StringWrapper**](../../models/string-wrapper.md)
 
+## Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **fileId** | path | **String** | The identifier of the PDF form to open, as it is returned by a room listing such as  &#x60;GET api/2.0/files/\{folderId\}&#x60;. The identifier of an already created draft is accepted here as well. | [required] [example: `sbox-42-L1JlcG9ydC5kb2N4`] |
+
+
 ## Authorization
 
-[cookieAuth](../files.md#cookieauth), [bearerAuth](../files.md#bearerauth)
+[Basic](../files.md#basic), [OAuth2](../files.md#oauth2) (scopes: read, write), [ApiKeyBearer](../files.md#apikeybearer), [asc_auth_key](../files.md#asc_auth_key), [Bearer](../files.md#bearer), [OpenId](../files.md#openid)
 
 ## HTTP request headers
 

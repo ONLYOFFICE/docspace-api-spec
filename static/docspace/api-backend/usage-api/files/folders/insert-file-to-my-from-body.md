@@ -1,6 +1,6 @@
 # insertFileToMyFromBody
 
-> FileIntegerWrapper insertFileToMyFromBody(File, Title, CreateNewIfExist, KeepConvertStatus, Stream.CanRead, Stream.CanWrite, Stream.CanSeek, Stream.CanTimeout, Stream.Length, Stream.Position, Stream.ReadTimeout, Stream.WriteTimeout)
+> FileWrapper insertFileToMyFromBody(File, Title, CreateNewIfExist, KeepConvertStatus, Stream.CanRead, Stream.CanWrite, Stream.CanSeek, Stream.CanTimeout, Stream.Length, Stream.Position, Stream.ReadTimeout, Stream.WriteTimeout)
 
 `POST /api/2.0/files/@my/insert`
 
@@ -29,7 +29,7 @@ Stores one file in the caller's own My documents section, the personal storage e
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The stored file, with the identifier, version and title it was saved under | [**FileIntegerWrapper**](../../models/file-integer-wrapper.md) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The stored file, with the identifier, version and title it was saved under | [**FileWrapper**](../../models/file-wrapper.md) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | Creating a file in the personal section is not allowed for this account | - | - |
 | **404** | The caller has no personal section, so there is nothing to store the file in | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../../models/error-api-response.md) | - |
@@ -41,7 +41,7 @@ Stores one file in the caller's own My documents section, the personal storage e
 
 ## Return type
 
-[**FileIntegerWrapper**](../../models/file-integer-wrapper.md)
+[**FileWrapper**](../../models/file-wrapper.md)
 
 ## Authorization
 

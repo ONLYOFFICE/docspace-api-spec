@@ -36,6 +36,15 @@ Returns the groups that can be given access to the file with the ID given in the
 
 [**GroupArrayWrapper**](../../models/group-array-wrapper.md)
 
+## Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **id** | path | **String** | The ID of the room, folder or file whose access the search is run against, taken from the route. It is an  integer for an entry stored in DocSpace and a provider-specific string for an entry in a connected  third-party storage. | [required] [example: `sbox-42-L1JlcG9ydC5kb2N4`] |
+
+
 ## Authorization
 
 [Basic](../group.md#basic), [OAuth2](../group.md#oauth2) (scopes: read, write), [ApiKeyBearer](../group.md#apikeybearer), [asc_auth_key](../group.md#asc_auth_key), [Bearer](../group.md#bearer), [OpenId](../group.md#openid)

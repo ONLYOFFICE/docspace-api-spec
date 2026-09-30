@@ -1,6 +1,6 @@
 # aiAgentsResetQuota
 
-> AiFolderIntegerArrayWrapper aiAgentsResetQuota(aiAgentsResetQuota\_request)
+> AiFolderArrayWrapper aiAgentsResetQuota(aiAgentsResetQuota\_request)
 
 `PUT /api/2.0/ai/agents/resetquota`
 
@@ -18,7 +18,7 @@ Returns the listed AI agent rooms to the portal's default storage quota, forward
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The updated agent rooms, one entry each. | [**AiFolderIntegerArrayWrapper**](../../models/ai-folder-integer-array-wrapper.md) | - |
+| **200** | The updated agent rooms, one entry each. | [**AiFolderArrayWrapper**](../../models/ai-folder-array-wrapper.md) | - |
 | **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](../../models/ai-error-response.md) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](../../models/ai-error-response.md) | - |
 | **413** | The request body is larger than 100 KB, the JSON parser's limit on this route. | [**AiErrorResponse**](../../models/ai-error-response.md) | - |
@@ -26,7 +26,7 @@ Returns the listed AI agent rooms to the portal's default storage quota, forward
 
 ## Return type
 
-[**AiFolderIntegerArrayWrapper**](../../models/ai-folder-integer-array-wrapper.md)
+[**AiFolderArrayWrapper**](../../models/ai-folder-array-wrapper.md)
 
 ## Authorization
 

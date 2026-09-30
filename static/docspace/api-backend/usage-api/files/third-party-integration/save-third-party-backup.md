@@ -1,6 +1,6 @@
 # saveThirdPartyBackup
 
-> FolderStringWrapper saveThirdPartyBackup(ThirdPartyBackupRequestDto)
+> ThirdPartyFolderWrapper saveThirdPartyBackup(ThirdPartyBackupRequestDto)
 
 `POST /api/2.0/files/thirdparty/backup`
 
@@ -18,7 +18,7 @@ Connects the third-party storage account the portal writes its backups to, and r
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The root folder of the backup storage account | [**FolderStringWrapper**](../../models/folder-string-wrapper.md) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The root folder of the backup storage account | [**ThirdPartyFolderWrapper**](../../models/third-party-folder-wrapper.md) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../../models/error-api-response.md) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../../models/error-api-response.md) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../../models/error-api-response.md) | - |
@@ -28,7 +28,7 @@ Connects the third-party storage account the portal writes its backups to, and r
 
 ## Return type
 
-[**FolderStringWrapper**](../../models/folder-string-wrapper.md)
+[**ThirdPartyFolderWrapper**](../../models/third-party-folder-wrapper.md)
 
 ## Authorization
 

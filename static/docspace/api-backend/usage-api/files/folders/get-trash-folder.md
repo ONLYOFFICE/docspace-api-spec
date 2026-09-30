@@ -1,6 +1,6 @@
 # getTrashFolder
 
-> FolderContentIntegerWrapper getTrashFolder(userIdOrGroupId, filterType, applyFilterOption, count, startIndex, sortBy, sortOrder, filterValue)
+> FolderContentWrapper getTrashFolder(userIdOrGroupId, filterType, applyFilterOption, count, startIndex, sortBy, sortOrder, filterValue)
 
 `GET /api/2.0/files/@trash`
 
@@ -25,7 +25,7 @@ Returns the caller's Trash section: the files and folders this account has delet
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The Trash section with one page of the entries the caller deleted | [**FolderContentIntegerWrapper**](../../models/folder-content-integer-wrapper.md) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The Trash section with one page of the entries the caller deleted | [**FolderContentWrapper**](../../models/folder-content-wrapper.md) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | The caller is not allowed to read the Trash section | - | - |
 | **404** | This account has no Trash section | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../../models/error-api-response.md) | - |
@@ -37,7 +37,7 @@ Returns the caller's Trash section: the files and folders this account has delet
 
 ## Return type
 
-[**FolderContentIntegerWrapper**](../../models/folder-content-integer-wrapper.md)
+[**FolderContentWrapper**](../../models/folder-content-wrapper.md)
 
 ## Authorization
 

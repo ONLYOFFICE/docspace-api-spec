@@ -1,6 +1,6 @@
 # createUploadSessionInFolder
 
-> ChunkedUploadSessionResponseIntegerWrapper createUploadSessionInFolder(folderId, SessionRequest)
+> ChunkedUploadSessionResponseResponseWrapper createUploadSessionInFolder(folderId, SessionRequest)
 
 `POST /api/2.0/files/{folderId}/session`
 
@@ -19,7 +19,7 @@ Opens a chunked upload session for a file in the folder named by the path and re
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The created upload session | [**ChunkedUploadSessionResponseIntegerWrapper**](../../models/chunked-upload-session-response-integer-wrapper.md) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The created upload session | [**ChunkedUploadSessionResponseResponseWrapper**](../../models/chunked-upload-session-response-response-wrapper.md) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../../models/error-api-response.md) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../../models/error-api-response.md) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../../models/error-api-response.md) | - |
@@ -29,7 +29,17 @@ Opens a chunked upload session for a file in the folder named by the path and re
 
 ## Return type
 
-[**ChunkedUploadSessionResponseIntegerWrapper**](../../models/chunked-upload-session-response-integer-wrapper.md)
+[**ChunkedUploadSessionResponseResponseWrapper**](../../models/chunked-upload-session-response-response-wrapper.md)
+
+## Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **folderId** | path | **String** | The folder that receives the file; take the id from a listing such as &#x60;GET api/2.0/files/@root&#x60;. A room or an  ordinary folder inside one is accepted, a section root is not. | [required] [example: `sbox-42`] |
+
+Return type: [**ThirdPartyChunkedUploadSessionResponseResponseWrapper**](../../models/third-party-chunked-upload-session-response-response-wrapper.md)
 
 ## Authorization
 

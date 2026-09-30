@@ -51,6 +51,7 @@ All URIs are relative to *https://yourportal.onlyoffice.com*, where the host is 
 | [**aiAttachmentsDeleteMany**](attachments/ai-attachments-delete-many.md) | **DELETE** /api/2.0/ai/attachments/delete-many | Delete many |
 | [**aiAttachmentsGet**](attachments/ai-attachments-get.md) | **POST** /api/2.0/ai/attachments/get | Get one attachment |
 | [**aiAttachmentsGetMany**](attachments/ai-attachments-get-many.md) | **POST** /api/2.0/ai/attachments/get-many | Get many |
+| [**aiAttachmentsGetSuggestedQuestions**](attachments/ai-attachments-get-suggested-questions.md) | **POST** /api/2.0/ai/attachments/suggested-questions | Get suggested questions |
 | [**aiAttachmentsLinkToMessage**](attachments/ai-attachments-link-to-message.md) | **POST** /api/2.0/ai/attachments/link-to-message | Link to message |
 | [**aiAttachmentsSaveFile**](attachments/ai-attachments-save-file.md) | **POST** /api/2.0/ai/attachments/save-file | Save file |
 | [**aiAttachmentsSaveFilesMany**](attachments/ai-attachments-save-files-many.md) | **POST** /api/2.0/ai/attachments/save-files-many | Save files many |

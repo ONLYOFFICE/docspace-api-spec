@@ -32,6 +32,15 @@ Returns what the caller needs in order to decrypt one file of an end-to-end encr
 
 [**FileEncryptionInfoWrapper**](../../models/file-encryption-info-wrapper.md)
 
+## Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **fileId** | path | **String** | The file whose encryption keys are read. Only a file in an end-to-end encrypted              private room has any. | [required] [example: `sbox-42-L1JlcG9ydC5kb2N4`] |
+
+
 ## Authorization
 
 [Basic](../files.md#basic), [OAuth2](../files.md#oauth2) (scopes: read, write), [ApiKeyBearer](../files.md#apikeybearer), [asc_auth_key](../files.md#asc_auth_key), [Bearer](../files.md#bearer), [OpenId](../files.md#openid)

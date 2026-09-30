@@ -1,6 +1,6 @@
 # getRecentFolder
 
-> FolderContentIntegerWrapper getRecentFolder(userIdOrGroupId, filterType, excludeSubject, applyFilterOption, searchArea, extension, count, startIndex, sortBy, sortOrder, filterValue)
+> FolderContentWrapper getRecentFolder(userIdOrGroupId, filterType, excludeSubject, applyFilterOption, searchArea, extension, count, startIndex, sortBy, sortOrder, filterValue)
 
 `GET /api/2.0/files/recent`
 
@@ -16,7 +16,7 @@ Returns the Recent section: the files the calling account has opened lately. The
 | **filterType** | query | **FilterType** | Narrows the listing to a single kind of file, such as documents, spreadsheets or images. Omit it to list every  kind the history holds. | [optional] [example: `1`] [enum: `0`, `1`, `2`, `3`, `4`, `5`, `7`, `8`, `9`, `10`, `11`, `12`, `13`, `14`, `17`, `20`, `22`, `23`, `24`, `25`, `26`] |
 | **excludeSubject** | query | **Boolean** | Inverts `userIdOrGroupId`: with `true` the files of that member or group are the ones left out of the listing  instead of the only ones kept. | [optional] [example: `false`] |
 | **applyFilterOption** | query | **ApplyFilterOption** | Chooses which half of a listing `filterType` and `filterValue` are applied to. The Recent section holds  files only, so the value does not change what comes back. | [optional] [example: `1`] [enum: `0`, `1`, `2`] |
-| **searchArea** | query | **SearchArea** | The area a listing is taken from. The Recent section is assembled from the caller's own open history rather  than from an area, so the value does not change which files are returned. | [optional] [example: `1`] [enum: `0`, `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`] |
+| **searchArea** | query | **SearchArea** | The area a listing is taken from. The Recent section is assembled from the caller's own open history rather  than from an area, so the value does not change which files are returned. | [optional] [example: `1`] [enum: `Active`, `Archive`, `Any`, `RecentByLinks`, `Templates`, `Knowledge`, `ResultStorage`, `AiAgents`, `Forms`, `FormTemplates`] |
 | **extension** | query | **List** | The file extensions the listing is limited to, matched against the end of the file name. The leading dot is  optional, and the parameter is repeated once per extension. | [optional] [example: `.docx`] |
 | **count** | query | **Integer** (int32) | The size of one page of section content. Pair it with `startIndex` to walk the listing, and compare the two  with `total` in the response to see when the last page has been read. | [optional] [example: `25`] [min: 1] [max: 100] |
 | **startIndex** | query | **Integer** (int32) | The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page. | [optional] [example: `0`] |
@@ -28,7 +28,7 @@ Returns the Recent section: the files the calling account has opened lately. The
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The Recent section with one page of the files the caller opened lately | [**FolderContentIntegerWrapper**](../../models/folder-content-integer-wrapper.md) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The Recent section with one page of the files the caller opened lately | [**FolderContentWrapper**](../../models/folder-content-wrapper.md) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | The caller is not allowed to read the Recent section | - | - |
 | **404** | The Recent section could not be resolved for this account | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../../models/error-api-response.md) | - |
@@ -40,7 +40,7 @@ Returns the Recent section: the files the calling account has opened lately. The
 
 ## Return type
 
-[**FolderContentIntegerWrapper**](../../models/folder-content-integer-wrapper.md)
+[**FolderContentWrapper**](../../models/folder-content-wrapper.md)
 
 ## Authorization
 

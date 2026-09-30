@@ -1,6 +1,6 @@
 # saveFormRoleMapping
 
-> saveFormRoleMapping(fileId, SaveFormRoleMappingDtoInteger)
+> saveFormRoleMapping(fileId, SaveFormRoleMappingDto)
 
 `POST /api/2.0/files/file/{fileId}/formrolemapping`
 
@@ -13,7 +13,7 @@ Assigns the roles of a PDF form to the people who are to fill them in, and start
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
 | **fileId** | path | **String** | The form the role mapping belongs to. Send the same value as the `formId` of the request body, which is the one the handler reads. | [required] |
-| **SaveFormRoleMappingDtoInteger** | body | [**SaveFormRoleMappingDtoInteger**](../../models/save-form-role-mapping-dto-integer.md) |  | [optional] |
+| **SaveFormRoleMappingDto** | body | [**SaveFormRoleMappingDto**](../../models/save-form-role-mapping-dto.md) |  | [optional] |
 
 ## Responses
 

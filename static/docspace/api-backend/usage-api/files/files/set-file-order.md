@@ -1,6 +1,6 @@
 # setFileOrder
 
-> FileIntegerWrapper setFileOrder(fileId, OrderRequestDto)
+> FileWrapper setFileOrder(fileId, OrderRequestDto)
 
 `PUT /api/2.0/files/{fileId}/order`
 
@@ -19,7 +19,7 @@ Puts a file at a given position inside its folder and answers with the file, its
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The file with the position it now holds | [**FileIntegerWrapper**](../../models/file-integer-wrapper.md) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The file with the position it now holds | [**FileWrapper**](../../models/file-wrapper.md) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | The caller may not reorder this file | - | - |
 | **404** | The file does not exist | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../../models/error-api-response.md) | - |
@@ -31,7 +31,17 @@ Puts a file at a given position inside its folder and answers with the file, its
 
 ## Return type
 
-[**FileIntegerWrapper**](../../models/file-integer-wrapper.md)
+[**FileWrapper**](../../models/file-wrapper.md)
+
+## Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **fileId** | path | **String** | The file to move. | [required] [example: `sbox-42-L1JlcG9ydC5kb2N4`] |
+
+Return type: [**ThirdPartyFileWrapper**](../../models/third-party-file-wrapper.md)
 
 ## Authorization
 

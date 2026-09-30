@@ -32,7 +32,7 @@ Queues a background job that packs the requested files and folders into a single
 
 ## Authorization
 
-[cookieAuth](../files.md#cookieauth), [bearerAuth](../files.md#bearerauth)
+[Basic](../files.md#basic), [OAuth2](../files.md#oauth2) (scopes: read, write), [ApiKeyBearer](../files.md#apikeybearer), [asc_auth_key](../files.md#asc_auth_key), [Bearer](../files.md#bearer), [OpenId](../files.md#openid)
 
 ## HTTP request headers
 

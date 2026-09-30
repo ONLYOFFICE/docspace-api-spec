@@ -32,7 +32,7 @@ Checks the key of a confirmation link that the portal sent by email and reports 
 
 ## Authorization
 
-[cookieAuth](authentication.md#cookieauth), [bearerAuth](authentication.md#bearerauth)
+[Basic](authentication.md#basic), [OAuth2](authentication.md#oauth2) (scopes: read, write), [ApiKeyBearer](authentication.md#apikeybearer), [asc_auth_key](authentication.md#asc_auth_key), [Bearer](authentication.md#bearer), [OpenId](authentication.md#openid)
 
 ## HTTP request headers
 

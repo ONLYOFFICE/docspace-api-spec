@@ -1,6 +1,6 @@
 # getMyFolder
 
-> FolderContentIntegerWrapper getMyFolder(userIdOrGroupId, filterType, applyFilterOption, count, startIndex, sortBy, sortOrder, filterValue)
+> FolderContentWrapper getMyFolder(userIdOrGroupId, filterType, applyFilterOption, count, startIndex, sortBy, sortOrder, filterValue)
 
 `GET /api/2.0/files/@my`
 
@@ -25,7 +25,7 @@ Returns the contents of the caller's My documents section, the personal storage 
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The My documents section with one page of its contents | [**FolderContentIntegerWrapper**](../../models/folder-content-integer-wrapper.md) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The My documents section with one page of its contents | [**FolderContentWrapper**](../../models/folder-content-wrapper.md) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | The caller is not allowed to read the My documents section | - | - |
 | **404** | This account has no personal section | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../../models/error-api-response.md) | - |
@@ -37,7 +37,7 @@ Returns the contents of the caller's My documents section, the personal storage 
 
 ## Return type
 
-[**FolderContentIntegerWrapper**](../../models/folder-content-integer-wrapper.md)
+[**FolderContentWrapper**](../../models/folder-content-wrapper.md)
 
 ## Authorization
 

@@ -1,6 +1,6 @@
 # getFavoritesFolder
 
-> FolderContentIntegerWrapper getFavoritesFolder(userIdOrGroupId, filterType, count, startIndex, sortBy, sortOrder, filterValue)
+> FolderContentWrapper getFavoritesFolder(userIdOrGroupId, filterType, count, startIndex, sortBy, sortOrder, filterValue)
 
 `GET /api/2.0/files/@favorites`
 
@@ -24,7 +24,7 @@ Returns the caller's own Favorites section: the files and folders this account h
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The Favorites section with one page of the entries the caller marked as favorite | [**FolderContentIntegerWrapper**](../../models/folder-content-integer-wrapper.md) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The Favorites section with one page of the entries the caller marked as favorite | [**FolderContentWrapper**](../../models/folder-content-wrapper.md) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | The caller is not allowed to read the Favorites section | - | - |
 | **404** | The Favorites section could not be resolved for this account | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../../models/error-api-response.md) | - |
@@ -36,7 +36,7 @@ Returns the caller's own Favorites section: the files and folders this account h
 
 ## Return type
 
-[**FolderContentIntegerWrapper**](../../models/folder-content-integer-wrapper.md)
+[**FolderContentWrapper**](../../models/folder-content-wrapper.md)
 
 ## Authorization
 

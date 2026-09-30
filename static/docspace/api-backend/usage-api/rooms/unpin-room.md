@@ -1,6 +1,6 @@
 # unpinRoom
 
-> FolderIntegerWrapper unpinRoom(id)
+> FolderWrapper unpinRoom(id)
 
 `PUT /api/2.0/files/rooms/{id}/unpin`
 
@@ -18,7 +18,7 @@ Removes a room from the pinned group of the calling account and returns the room
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The room with its pinned flag cleared for the caller | [**FolderIntegerWrapper**](../models/folder-integer-wrapper.md) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The room with its pinned flag cleared for the caller | [**FolderWrapper**](../models/folder-wrapper.md) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../models/error-api-response.md) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../models/error-api-response.md) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../models/error-api-response.md) | - |
@@ -28,7 +28,17 @@ Removes a room from the pinned group of the calling account and returns the room
 
 ## Return type
 
-[**FolderIntegerWrapper**](../models/folder-integer-wrapper.md)
+[**FolderWrapper**](../models/folder-wrapper.md)
+
+## Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **id** | path | **String** | The room to act on, named by the identifier that &#x60;GET api/2.0/files/rooms&#x60; reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. | [required] [example: `sbox-42`] |
+
+Return type: [**ThirdPartyFolderWrapper**](../models/third-party-folder-wrapper.md)
 
 ## Authorization
 

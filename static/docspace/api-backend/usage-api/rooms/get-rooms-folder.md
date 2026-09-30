@@ -1,6 +1,6 @@
 # getRoomsFolder
 
-> FolderContentIntegerWrapper getRoomsFolder(type, subjectId, subjectOwnerId, searchArea, withoutTags, tags, excludeSubject, provider, quotaFilter, storageFilter, privacyFilter, count, startIndex, sortBy, sortOrder, filterValue, groupId)
+> FolderContentWrapper getRoomsFolder(type, subjectId, subjectOwnerId, searchArea, withoutTags, tags, excludeSubject, provider, quotaFilter, storageFilter, privacyFilter, count, startIndex, sortBy, sortOrder, filterValue, groupId)
 
 `GET /api/2.0/files/rooms`
 
@@ -15,7 +15,7 @@ Lists the rooms of one section of the portal: the active rooms by default, or th
 | **type** | query | [**List**](../models/room-type.md) | Keeps only the rooms of the listed kinds. Repeat the parameter to pass more than one value; they are combined  with OR, and omitting it returns the rooms of every kind. | [optional] [example: `1`] |
 | **subjectId** | query | **UUID** (uuid) | Keeps only the rooms this account or group has access to, which is how the rooms of one member are listed. The  identifier comes from the portal people and group listings, and the exclude flag turns the filter into its  opposite. | [optional] [example: `9a1b2c3d-4e5f-6071-8293-a4b5c6d7e8f9`] |
 | **subjectOwnerId** | query | **UUID** (uuid) | Keeps only the rooms created by this account, regardless of who else was invited to them. The identifier comes  from the portal people listing, and the exclude flag turns the filter into its opposite. | [optional] [example: `9a1b2c3d-4e5f-6071-8293-a4b5c6d7e8f9`] |
-| **searchArea** | query | **SearchArea** | The section to list. Every section is a separate root and a room belongs to exactly one of them at a time, so  archiving a room moves it out of the active section. The default is the active section, which leaves the  form-filling rooms to their own value. | [optional] [example: `1`] [enum: `0`, `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`] |
+| **searchArea** | query | **SearchArea** | The section to list. Every section is a separate root and a room belongs to exactly one of them at a time, so  archiving a room moves it out of the active section. The default is the active section, which leaves the  form-filling rooms to their own value. | [optional] [example: `1`] [enum: `Active`, `Archive`, `Any`, `RecentByLinks`, `Templates`, `Knowledge`, `ResultStorage`, `AiAgents`, `Forms`, `FormTemplates`] |
 | **withoutTags** | query | **Boolean** | When true, keeps only the rooms that carry no tag at all, which is the complement of the tag filter. When  false or omitted, tags play no part in the selection. | [optional] [example: `false`] |
 | **tags** | query | **String** | A JSON array of tag names serialized into a single query value, for example [Important,Legal]. A room  matches when it carries any one of them. Take the names from `GET api/2.0/files/tags`; a name that is not in  the catalog simply matches nothing. | [optional] [example: `["Important"]`] |
 | **excludeSubject** | query | **Boolean** | Inverts the two subject filters: when true, the rooms of the named account are the ones left out of the answer  instead of the only ones kept. It does nothing on its own. | [optional] [example: `false`] |
@@ -34,7 +34,7 @@ Lists the rooms of one section of the portal: the active rooms by default, or th
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The rooms of the selected section with the paging counters | [**FolderContentIntegerWrapper**](../models/folder-content-integer-wrapper.md) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The rooms of the selected section with the paging counters | [**FolderContentWrapper**](../models/folder-content-wrapper.md) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | The caller cannot read the selected section | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../models/error-api-response.md) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../models/error-api-response.md) | `Retry-After` |
@@ -45,7 +45,7 @@ Lists the rooms of one section of the portal: the active rooms by default, or th
 
 ## Return type
 
-[**FolderContentIntegerWrapper**](../models/folder-content-integer-wrapper.md)
+[**FolderContentWrapper**](../models/folder-content-wrapper.md)
 
 ## Authorization
 

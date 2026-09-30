@@ -1,6 +1,6 @@
 # renameFolder
 
-> FolderIntegerWrapper renameFolder(folderId, CreateFolder)
+> FolderWrapper renameFolder(folderId, CreateFolder)
 
 `PUT /api/2.0/files/folder/{folderId}`
 
@@ -19,7 +19,7 @@ Gives a folder a new title and answers with the folder as it now stands. The tit
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The folder with its new title | [**FolderIntegerWrapper**](../../models/folder-integer-wrapper.md) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The folder with its new title | [**FolderWrapper**](../../models/folder-wrapper.md) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | The caller may not rename this folder | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../../models/error-api-response.md) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../../models/error-api-response.md) | `Retry-After` |
@@ -30,7 +30,17 @@ Gives a folder a new title and answers with the folder as it now stands. The tit
 
 ## Return type
 
-[**FolderIntegerWrapper**](../../models/folder-integer-wrapper.md)
+[**FolderWrapper**](../../models/folder-wrapper.md)
+
+## Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **folderId** | path | **String** | The folder the request is addressed to: when a folder is created it is the parent that receives the new  folder, and when a folder is renamed it is the folder that gets the new title. | [required] [example: `sbox-42`] |
+
+Return type: [**ThirdPartyFolderWrapper**](../../models/third-party-folder-wrapper.md)
 
 ## Authorization
 

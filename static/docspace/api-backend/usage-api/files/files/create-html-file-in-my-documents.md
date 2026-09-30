@@ -1,6 +1,6 @@
 # createHtmlFileInMyDocuments
 
-> FileIntegerWrapper createHtmlFileInMyDocuments(CreateTextOrHtmlFile)
+> FileWrapper createHtmlFileInMyDocuments(CreateTextOrHtmlFile)
 
 `POST /api/2.0/files/@my/html`
 
@@ -18,7 +18,7 @@ Creates an HTML file in the caller's own My documents section out of the markup 
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The created or updated HTML file | [**FileIntegerWrapper**](../../models/file-integer-wrapper.md) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The created or updated HTML file | [**FileWrapper**](../../models/file-wrapper.md) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | The caller may not create a file in this section | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../../models/error-api-response.md) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../../models/error-api-response.md) | `Retry-After` |
@@ -29,7 +29,7 @@ Creates an HTML file in the caller's own My documents section out of the markup 
 
 ## Return type
 
-[**FileIntegerWrapper**](../../models/file-integer-wrapper.md)
+[**FileWrapper**](../../models/file-wrapper.md)
 
 ## Authorization
 

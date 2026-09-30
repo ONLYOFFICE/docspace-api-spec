@@ -1,6 +1,6 @@
 # uploadFileToMy
 
-> FileIntegerArrayWrapper uploadFileToMy(createNewIfExist, storeOriginalFile, keepConvertStatus, File)
+> FileArrayWrapper uploadFileToMy(createNewIfExist, storeOriginalFile, keepConvertStatus, File)
 
 `POST /api/2.0/files/@my/upload`
 
@@ -21,7 +21,7 @@ Uploads one file into the caller's own My documents section and returns it insid
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | An array holding the single uploaded file | [**FileIntegerArrayWrapper**](../../models/file-integer-array-wrapper.md) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | An array holding the single uploaded file | [**FileArrayWrapper**](../../models/file-array-wrapper.md) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | Uploading a file to the personal section is not allowed for this account | - | - |
 | **404** | The caller has no personal section, so there is nothing to store the file in | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../../models/error-api-response.md) | - |
@@ -33,7 +33,7 @@ Uploads one file into the caller's own My documents section and returns it insid
 
 ## Return type
 
-[**FileIntegerArrayWrapper**](../../models/file-integer-array-wrapper.md)
+[**FileArrayWrapper**](../../models/file-array-wrapper.md)
 
 ## Authorization
 

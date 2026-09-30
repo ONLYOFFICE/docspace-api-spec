@@ -27,7 +27,7 @@ This endpoint does not need any parameter.
 
 ## Authorization
 
-[cookieAuth](../security.md#cookieauth), [bearerAuth](../security.md#bearerauth)
+[Basic](../security.md#basic), [OAuth2](../security.md#oauth2) (scopes: read, write), [ApiKeyBearer](../security.md#apikeybearer), [asc_auth_key](../security.md#asc_auth_key), [Bearer](../security.md#bearer), [OpenId](../security.md#openid)
 
 ## HTTP request headers
 

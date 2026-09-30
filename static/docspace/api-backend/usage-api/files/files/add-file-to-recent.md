@@ -1,6 +1,6 @@
 # addFileToRecent
 
-> FileIntegerWrapper addFileToRecent(fileId)
+> FileWrapper addFileToRecent(fileId)
 
 `POST /api/2.0/files/file/{fileId}/recent`
 
@@ -18,7 +18,7 @@ Stamps the file as just used by the calling account and puts it at the top of th
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The file as it stands after the entry was recorded | [**FileIntegerWrapper**](../../models/file-integer-wrapper.md) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The file as it stands after the entry was recorded | [**FileWrapper**](../../models/file-wrapper.md) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | The calling account cannot read this file | - | - |
 | **404** | No file answers to this identifier | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../../models/error-api-response.md) | - |
@@ -30,7 +30,17 @@ Stamps the file as just used by the calling account and puts it at the top of th
 
 ## Return type
 
-[**FileIntegerWrapper**](../../models/file-integer-wrapper.md)
+[**FileWrapper**](../../models/file-wrapper.md)
+
+## Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **fileId** | path | **String** | The file the operation addresses. Take the identifier from a listing such as &#x60;GET api/2.0/files/\{folderId\}&#x60;: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | [required] [example: `sbox-42-L1JlcG9ydC5kb2N4`] |
+
+Return type: [**ThirdPartyFileWrapper**](../../models/third-party-file-wrapper.md)
 
 ## Authorization
 

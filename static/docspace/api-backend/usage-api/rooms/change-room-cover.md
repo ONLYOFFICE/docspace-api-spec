@@ -1,6 +1,6 @@
 # changeRoomCover
 
-> FolderIntegerWrapper changeRoomCover(id, CoverRequestDto)
+> FolderWrapper changeRoomCover(id, CoverRequestDto)
 
 `POST /api/2.0/files/rooms/{id}/cover`
 
@@ -19,7 +19,7 @@ Sets the cover picture and the background colour a room is shown with, and retur
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The room as it is after the cover change | [**FolderIntegerWrapper**](../models/folder-integer-wrapper.md) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The room as it is after the cover change | [**FolderWrapper**](../models/folder-wrapper.md) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | The caller may not edit this room, or the room is archived | - | - |
 | **404** | No room with this ID is visible to the caller | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../models/error-api-response.md) | - |
@@ -31,7 +31,17 @@ Sets the cover picture and the background colour a room is shown with, and retur
 
 ## Return type
 
-[**FolderIntegerWrapper**](../models/folder-integer-wrapper.md)
+[**FolderWrapper**](../models/folder-wrapper.md)
+
+## Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **id** | path | **String** | The room to change, named by the identifier that &#x60;GET api/2.0/files/rooms&#x60; reports for it. | [required] [example: `sbox-42`] |
+
+Return type: [**ThirdPartyFolderWrapper**](../models/third-party-folder-wrapper.md)
 
 ## Authorization
 

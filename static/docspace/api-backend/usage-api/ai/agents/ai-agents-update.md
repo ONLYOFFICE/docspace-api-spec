@@ -1,6 +1,6 @@
 # aiAgentsUpdate
 
-> AiFolderIntegerWrapper aiAgentsUpdate(id, aiAgentsUpdate\_request)
+> AiFolderWrapper aiAgentsUpdate(id, aiAgentsUpdate\_request)
 
 `PUT /api/2.0/ai/agents/{id}`
 
@@ -19,7 +19,7 @@ Changes an AI agent room - its title, tags or standing instruction - and optiona
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The updated agent room. | [**AiFolderIntegerWrapper**](../../models/ai-folder-integer-wrapper.md) | - |
+| **200** | The updated agent room. | [**AiFolderWrapper**](../../models/ai-folder-wrapper.md) | - |
 | **400** | The agent ID is not a positive integer, or `profileId` is not a UUID, names no existing profile, or names one that does not support chat. | [**AiErrorResponse**](../../models/ai-error-response.md) | - |
 | **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](../../models/ai-error-response.md) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](../../models/ai-error-response.md) | - |
@@ -28,7 +28,7 @@ Changes an AI agent room - its title, tags or standing instruction - and optiona
 
 ## Return type
 
-[**AiFolderIntegerWrapper**](../../models/ai-folder-integer-wrapper.md)
+[**AiFolderWrapper**](../../models/ai-folder-wrapper.md)
 
 ## Authorization
 

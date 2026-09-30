@@ -1,6 +1,6 @@
 # createTextFileInMyDocuments
 
-> FileIntegerWrapper createTextFileInMyDocuments(CreateTextOrHtmlFile)
+> FileWrapper createTextFileInMyDocuments(CreateTextOrHtmlFile)
 
 `POST /api/2.0/files/@my/text`
 
@@ -18,7 +18,7 @@ Creates a text file in the caller's own My documents section out of the text pas
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The created or updated text file | [**FileIntegerWrapper**](../../models/file-integer-wrapper.md) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The created or updated text file | [**FileWrapper**](../../models/file-wrapper.md) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../../models/error-api-response.md) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../../models/error-api-response.md) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../../models/error-api-response.md) | - |
@@ -28,7 +28,7 @@ Creates a text file in the caller's own My documents section out of the text pas
 
 ## Return type
 
-[**FileIntegerWrapper**](../../models/file-integer-wrapper.md)
+[**FileWrapper**](../../models/file-wrapper.md)
 
 ## Authorization
 

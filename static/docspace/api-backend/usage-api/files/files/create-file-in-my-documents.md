@@ -1,6 +1,6 @@
 # createFileInMyDocuments
 
-> FileIntegerWrapper createFileInMyDocuments(CreateFileJsonElement)
+> FileWrapper createFileInMyDocuments(CreateFileJsonElement)
 
 `POST /api/2.0/files/@my/file`
 
@@ -18,7 +18,7 @@ Creates a file in the caller's own My documents section and answers with the sto
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The created file | [**FileIntegerWrapper**](../../models/file-integer-wrapper.md) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The file created in My documents: its id and the title the portal actually stored, whose extension may differ from the requested one; `thumbnailStatus` says whether the preview is already built | [**FileWrapper**](../../models/file-wrapper.md) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **401** | Unauthorized | [**ErrorApiResponse**](../../models/error-api-response.md) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../../models/error-api-response.md) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../../models/error-api-response.md) | - |
@@ -28,7 +28,7 @@ Creates a file in the caller's own My documents section and answers with the sto
 
 ## Return type
 
-[**FileIntegerWrapper**](../../models/file-integer-wrapper.md)
+[**FileWrapper**](../../models/file-wrapper.md)
 
 ## Authorization
 

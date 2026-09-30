@@ -31,6 +31,15 @@ Creates an external link to a file, or changes or revokes an existing one, and a
 
 [**FileShareWrapper**](../../models/file-share-wrapper.md)
 
+## Third-party storage
+
+For a file or folder in a connected third-party storage the identifier is a string such as `sbox-42`, and the call differs in these parts only:
+
+|Name | In | Type | Description | Notes |
+|------------- | ------------- | ------------- | ------------- | -------------|
+| **id** | path | **String** | The file the link points at. | [required] [example: `sbox-42-L1JlcG9ydC5kb2N4`] |
+
+
 ## Authorization
 
 [Basic](../files.md#basic), [OAuth2](../files.md#oauth2) (scopes: read, write), [ApiKeyBearer](../files.md#apikeybearer), [asc_auth_key](../files.md#asc_auth_key), [Bearer](../files.md#bearer), [OpenId](../files.md#openid)

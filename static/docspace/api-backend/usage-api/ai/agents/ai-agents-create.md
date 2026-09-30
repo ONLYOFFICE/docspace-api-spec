@@ -1,6 +1,6 @@
 # aiAgentsCreate
 
-> AiFolderIntegerWrapper aiAgentsCreate(aiAgentsCreate\_request)
+> AiFolderWrapper aiAgentsCreate(aiAgentsCreate\_request)
 
 `POST /api/2.0/ai/agents`
 
@@ -18,7 +18,7 @@ Creates an AI agent room and binds a model to it, in that order. `profileId` is 
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The created agent room, with the model already bound to it. | [**AiFolderIntegerWrapper**](../../models/ai-folder-integer-wrapper.md) | - |
+| **200** | The created agent room, with the model already bound to it. | [**AiFolderWrapper**](../../models/ai-folder-wrapper.md) | - |
 | **400** | `profileId` is missing, is not a UUID, names no existing profile, or names one that does not support chat; or `prompt` is missing. | [**AiErrorResponse**](../../models/ai-error-response.md) | - |
 | **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](../../models/ai-error-response.md) | - |
 | **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. | [**AiErrorResponse**](../../models/ai-error-response.md) | - |
@@ -27,7 +27,7 @@ Creates an AI agent room and binds a model to it, in that order. `profileId` is 
 
 ## Return type
 
-[**AiFolderIntegerWrapper**](../../models/ai-folder-integer-wrapper.md)
+[**AiFolderWrapper**](../../models/ai-folder-wrapper.md)
 
 ## Authorization
 
