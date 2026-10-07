@@ -20,6 +20,7 @@ Lists the folders that sit directly inside the folder named in the path, ordered
 |------------- | ------------- | ------------- | -------------|
 | **200** | The direct subfolders of the folder, ordered by title | [**FileEntryBaseArrayWrapper**](../../models/file-entry-base-array-wrapper.md) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | The caller may not read this folder | - | - |
+| **404** | The folder does not exist | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../../models/error-api-response.md) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../../models/error-api-response.md) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../../models/error-api-response.md) | - |

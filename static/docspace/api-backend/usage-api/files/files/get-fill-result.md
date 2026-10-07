@@ -19,9 +19,10 @@ Answers with the outcome of one completed form-filling session: the filled copy 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | The result of the completed form-filling session | [**FillingFormResultWrapper**](../../models/filling-form-result-wrapper.md) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **400** | The `fillingSessionId` is missing or empty | - | - |
+| **404** | No completed form-filling session with this identifier is remembered | - | - |
+| **500** | The original form of the filled copy has been deleted | - | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../../models/error-api-response.md) | `Retry-After` |
-| **500** | Internal Server Error. | [**ErrorApiResponse**](../../models/error-api-response.md) | - |
-| **400** | Bad Request. | [**ErrorApiResponse**](../../models/error-api-response.md) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 

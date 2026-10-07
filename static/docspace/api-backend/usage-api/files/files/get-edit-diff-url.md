@@ -20,6 +20,8 @@ Answers with everything an editor needs in order to show what changed in one ver
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | The addresses and keys the editor needs to show the changes | [**EditHistoryDataWrapper**](../../models/edit-history-data-wrapper.md) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **403** | The caller may not read the history of the file, as with an anonymous caller, read-only or commenting access, or a file in a third-party storage | - | - |
+| **404** | The file id, or the requested version of it, resolves to nothing | - | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../../models/error-api-response.md) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../../models/error-api-response.md) | - |
 | **400** | Bad Request. | [**ErrorApiResponse**](../../models/error-api-response.md) | - |

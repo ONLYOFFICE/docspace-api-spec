@@ -1,6 +1,6 @@
 # getRestoreProgress
 
-> BackupProgressWrapper getRestoreProgress(Dump)
+> BackupProgressWrapper getRestoreProgress(dump)
 
 `GET /api/2.0/backup/getrestoreprogress`
 
@@ -12,7 +12,7 @@ Reports the state of the restoring job, and is the operation to poll after  `POS
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **Dump** | query | **Boolean** | Which restoring job to look for, read as three states rather than as a flag: leave it out for  whichever job concerns this portal, including a server-wide one, send false for the job of this  portal alone, and send true for the server-wide job. On a portal that is not a standalone  installation the value is forced to false. | [optional] [example: `false`] |
+| **dump** | query | **Boolean** | Which restoring job to look for, read as three states rather than as a flag: leave it out for  whichever job concerns this portal, including a server-wide one, send false for the job of this  portal alone, and send true for the server-wide job. On a portal that is not a standalone  installation the value is forced to false. | [optional] [example: `false`] |
 
 ## Responses
 

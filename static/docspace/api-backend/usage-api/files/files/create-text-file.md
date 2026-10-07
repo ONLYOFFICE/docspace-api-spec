@@ -1,6 +1,6 @@
 # createTextFile
 
-> FileWrapper createTextFile(folderId, CreateTextOrHtmlFile)
+> FileWrapper createTextFile(folderId, CreateTextOrHtmlFileRequest)
 
 `POST /api/2.0/files/{folderId}/text`
 
@@ -13,17 +13,20 @@ Creates a text file in the folder named in the route out of the text passed as t
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
 | **folderId** | path | **Integer** (int32) | The folder the file is created in. | [required] [example: `1`] |
-| **CreateTextOrHtmlFile** | body | [**CreateTextOrHtmlFile**](../../models/create-text-or-html-file.md) | The title, the content and the collision behaviour of the new file. | [required] |
+| **CreateTextOrHtmlFileRequest** | body | [**CreateTextOrHtmlFileRequest**](../../models/create-text-or-html-file-request.md) | The title, the content and the collision behaviour of the new file. | [required] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | The created or updated text file | [**FileWrapper**](../../models/file-wrapper.md) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **400** | The request body cannot be read or has no `title` or `content`, or the title is empty, blank or longer than 165 characters | - | - |
+| **402** | The content exceeds the maximum upload size, or the file does not fit into the storage quota of the portal, the room or the user | - | - |
+| **403** | The caller may not create files in this folder, or the folder is a section where files cannot be created | - | - |
+| **404** | The folder does not exist | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../../models/error-api-response.md) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../../models/error-api-response.md) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../../models/error-api-response.md) | - |
-| **400** | Bad Request. | [**ErrorApiResponse**](../../models/error-api-response.md) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 

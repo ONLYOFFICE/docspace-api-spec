@@ -20,6 +20,8 @@ Reports how far the conversion of a file has got, as a list that holds one entry
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | The conversion entry of the file, or an empty list when the portal has none | [**ConversationResultArrayWrapper**](../../models/conversation-result-array-wrapper.md) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **403** | The caller cannot read the file, or, with `start=true`, may not convert it | - | - |
+| **404** | The file id is neither a number nor the id of a file in a known third-party storage | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../../models/error-api-response.md) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../../models/error-api-response.md) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../../models/error-api-response.md) | - |

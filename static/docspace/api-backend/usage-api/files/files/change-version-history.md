@@ -1,6 +1,6 @@
 # changeVersionHistory
 
-> FileArrayWrapper changeVersionHistory(fileId, ChangeHistory)
+> FileArrayWrapper changeVersionHistory(fileId, ChangeHistoryRequest)
 
 `PUT /api/2.0/files/file/{fileId}/history`
 
@@ -13,18 +13,20 @@ Closes or reopens a revision group in the version history of a file and answers 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
 | **fileId** | path | **Integer** (int32) | The file whose version history is changed. | [required] [example: `1`] |
-| **ChangeHistory** | body | [**ChangeHistory**](../../models/change-history.md) | The change to make to the revision group. | [required] |
+| **ChangeHistoryRequest** | body | [**ChangeHistoryRequest**](../../models/change-history-request.md) | The change to make to the revision group. | [required] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | The versions of the file after the change | [**FileArrayWrapper**](../../models/file-array-wrapper.md) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **400** | The request body cannot be read or has no `version` | - | - |
+| **402** | Completing the current version needs more space than the room or user storage quota leaves | - | - |
 | **403** | The caller may not change the version history of the file | - | - |
+| **404** | The file id, or the requested version of it, resolves to nothing | - | - |
+| **500** | The file is locked by somebody else, or, when the current version is completed, the file is encrypted, another update of it is in progress, or storing the new version fails | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../../models/error-api-response.md) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../../models/error-api-response.md) | `Retry-After` |
-| **500** | Internal Server Error. | [**ErrorApiResponse**](../../models/error-api-response.md) | - |
-| **400** | Bad Request. | [**ErrorApiResponse**](../../models/error-api-response.md) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 

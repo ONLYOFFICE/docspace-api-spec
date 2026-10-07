@@ -1,6 +1,6 @@
 # getSharedUsers
 
-> MentionWrapperArrayWrapper getSharedUsers(fileId)
+> MentionArrayWrapper getSharedUsers(fileId)
 
 `GET /api/2.0/files/file/{fileId}/sharedusers`
 
@@ -18,7 +18,9 @@ Lists the portal members who can read the file, which is what an editor client o
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The portal members who can read the file, ordered by display name | [**MentionWrapperArrayWrapper**](../../models/mention-wrapper-array-wrapper.md) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The portal members who can read the file, ordered by display name | [**MentionArrayWrapper**](../../models/mention-array-wrapper.md) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **403** | The caller cannot read the file | - | - |
+| **404** | The file id resolves to nothing | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../../models/error-api-response.md) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../../models/error-api-response.md) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../../models/error-api-response.md) | - |
@@ -28,7 +30,7 @@ Lists the portal members who can read the file, which is what an editor client o
 
 ## Return type
 
-[**MentionWrapperArrayWrapper**](../../models/mention-wrapper-array-wrapper.md)
+[**MentionArrayWrapper**](../../models/mention-array-wrapper.md)
 
 ## Third-party storage
 

@@ -1,6 +1,6 @@
 # getRoomsFolder
 
-> FolderContentWrapper getRoomsFolder(type, subjectId, subjectOwnerId, searchArea, withoutTags, tags, excludeSubject, provider, quotaFilter, storageFilter, privacyFilter, count, startIndex, sortBy, sortOrder, filterValue, groupId)
+> FolderContentWrapper getRoomsFolder(type, subjectId, subjectOwnerId, searchArea, withoutTags, tags, excludeSubject, provider, quotaFilter, storageFilter, privacyFilter, withAiFolder, count, startIndex, sortBy, sortOrder, filterValue, groupId, metadataTemplateId, metadataFilters)
 
 `GET /api/2.0/files/rooms`
 
@@ -23,23 +23,26 @@ Lists the rooms of one section of the portal: the active rooms by default, or th
 | **quotaFilter** | query | **QuotaFilter** | Splits the rooms by whether a storage quota was set on the room itself or it follows the portal default, which  is how rooms with a custom limit are found. | [optional] [example: `1`] [enum: `0`, `1`, `2`] |
 | **storageFilter** | query | **StorageFilter** | Splits the rooms by where their content is stored, in the portal itself or in a connected third-party account.  It is the coarse form of the provider filter. | [optional] [example: `1`] [enum: `0`, `1`, `2`] |
 | **privacyFilter** | query | **RoomPrivacyFilter** | Splits the rooms by whether they are private, that is encrypted rooms whose content the portal cannot read.  Omitting it returns both kinds. | [optional] [example: `1`] [enum: `0`, `1`, `2`] |
+| **withAiFolder** | query | **Boolean** | Keeps only the rooms that hold a .ai folder in their root. The content of that folder is read with  `GET api/2.0/files/rooms/{id}/ai`. Omitting it returns rooms with and without the folder. | [optional] [example: `true`] |
 | **count** | query | **Integer** (int32) | How many rooms one page may carry. Ask for the next page by raising the start index by the number of rooms  already received. | [optional] [example: `25`] [min: 1] [max: 100] |
 | **startIndex** | query | **Integer** (int32) | How many matching rooms to skip before the page begins. Page through the answer until the skip plus the rooms  received reaches the total it reports. | [optional] [example: `0`] |
 | **sortBy** | query | **String** | The field to order the rooms by, named as in the file listings: `AZ` for the title, `DateAndTime` for the last  change, `DateAndTimeCreation`, `Author`, `Size`, `Type`, `RoomType`, `Tags`, `UsedSpace`, `LastOpened`. The  name is matched ignoring case, an unknown one is rejected rather than ignored, and the accepted one also  becomes this account's stored order. | [optional] [example: `DateAndTime`] |
 | **sortOrder** | query | **SortOrder** | The direction of the order chosen by the sort field. It has no effect when no sort field is given and the  stored order of the account is used. | [optional] [example: `1`] [enum: `0`, `1`] |
 | **filterValue** | query | **String** | Keeps only the rooms whose title contains this text, ignoring case. It is a substring match over the title  alone: room content and tags are not searched. | [optional] [example: `Sales`] |
 | **groupId** | query | **Integer** (int32) | Keeps only the rooms that belong to this room group. The identifier comes from `GET api/2.0/files/group`; the  groups of portal members are a different concept and their identifiers do not match here. | [optional] [example: `1`] |
+| **metadataTemplateId** | query | **Integer** (int32) | The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to. | [optional] [example: `1`] |
+| **metadataFilters** | query | **String** | The URL-encoded JSON array of the metadata filter conditions,  e.g. [\{fieldId:1,op:eq,value:ACME\},\{fieldId:2,op:range,from:2026-01-01,to:2026-06-30\},\{fieldId:3,op:in,optionIds:[...]\}].  The range bounds are inclusive; a date-only bound covers the whole day, so to:2026-06-30 includes the values stored on 30 June.  A custom field is addressed by its name instead of the fieldId: \{name:Client,op:eq,value:ACME\}.  The same filter is taken as a typed request body by POST api/2.0/files/rooms/search. | [optional] [example: `[{"fieldId":1,"op":"eq","value":"ACME"}]`] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | The rooms of the selected section with the paging counters | [**FolderContentWrapper**](../models/folder-content-wrapper.md) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **400** | A parameter has the wrong type, the `count` is outside its allowed range, the `startIndex` is negative, or `tags` is not a JSON array of strings | - | - |
 | **403** | The caller cannot read the selected section | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../models/error-api-response.md) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../models/error-api-response.md) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../models/error-api-response.md) | - |
-| **400** | Bad Request. | [**ErrorApiResponse**](../models/error-api-response.md) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 

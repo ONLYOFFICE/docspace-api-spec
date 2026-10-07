@@ -1,6 +1,6 @@
 # deleteFile
 
-> FileOperationArrayWrapper deleteFile(fileId, Delete, ReturnSingleOperation)
+> FileOperationArrayWrapper deleteFile(fileId, DeleteFileRequest, returnSingleOperation)
 
 `DELETE /api/2.0/files/file/{fileId}`
 
@@ -13,14 +13,16 @@ Queues the deletion of one file and answers with the caller's file operations, t
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
 | **fileId** | path | **Integer** (int32) | The file to delete. | [required] [example: `1`] |
-| **Delete** | body | [**Delete**](../../models/delete.md) | When and how the file is deleted. | [required] |
-| **ReturnSingleOperation** | query | **Boolean** | Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list. | [optional] [example: `false`] |
+| **DeleteFileRequest** | body | [**DeleteFileRequest**](../../models/delete-file-request.md) | When and how the file is deleted. | [required] |
+| **returnSingleOperation** | query | **Boolean** | Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list. | [optional] [example: `false`] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | The file operations of the caller, including the deletion just queued | [**FileOperationArrayWrapper**](../../models/file-operation-array-wrapper.md) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **403** | The caller may not delete the file, or the file is locked by somebody else or open in an editing session | - | - |
+| **404** | The file id resolves to nothing | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../../models/error-api-response.md) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../../models/error-api-response.md) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../../models/error-api-response.md) | - |

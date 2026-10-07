@@ -24,9 +24,11 @@ Builds everything an editor client needs to open the file: the document descript
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | The editor configuration for the requested file and mode | [**ConfigurationWrapper**](../../models/configuration-wrapper.md) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **403** | The caller cannot read the file, or asked for a past version without access to the file history | - | - |
+| **403** | The caller cannot read the file, asked for a past version without access to the file history, or the file is in Trash | - | - |
+| **404** | The file id, or the requested version of it, resolves to nothing | - | - |
+| **415** | The file is in a format the editors can neither edit nor open for viewing | - | - |
+| **500** | The file lies in a third-party storage that cannot deliver it | - | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../../models/error-api-response.md) | `Retry-After` |
-| **500** | Internal Server Error. | [**ErrorApiResponse**](../../models/error-api-response.md) | - |
 | **400** | Bad Request. | [**ErrorApiResponse**](../../models/error-api-response.md) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |

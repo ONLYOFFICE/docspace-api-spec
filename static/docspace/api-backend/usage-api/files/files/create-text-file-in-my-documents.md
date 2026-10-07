@@ -1,6 +1,6 @@
 # createTextFileInMyDocuments
 
-> FileWrapper createTextFileInMyDocuments(CreateTextOrHtmlFile)
+> FileWrapper createTextFileInMyDocuments(CreateTextOrHtmlFileRequest)
 
 `POST /api/2.0/files/@my/text`
 
@@ -12,17 +12,20 @@ Creates a text file in the caller's own My documents section out of the text pas
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **CreateTextOrHtmlFile** | body | [**CreateTextOrHtmlFile**](../../models/create-text-or-html-file.md) |  | [optional] |
+| **CreateTextOrHtmlFileRequest** | body | [**CreateTextOrHtmlFileRequest**](../../models/create-text-or-html-file-request.md) |  | [optional] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | The created or updated text file | [**FileWrapper**](../../models/file-wrapper.md) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **400** | The request body cannot be read or has no `title` or `content`, or the title is empty, blank or longer than 165 characters | - | - |
+| **402** | The content exceeds the maximum upload size, or the file does not fit into the storage quota of the portal, the room or the user | - | - |
+| **403** | The caller may not create a file in this section | - | - |
+| **404** | The caller is a guest, who has no My documents | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../../models/error-api-response.md) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../../models/error-api-response.md) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../../models/error-api-response.md) | - |
-| **400** | Bad Request. | [**ErrorApiResponse**](../../models/error-api-response.md) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 

@@ -20,7 +20,7 @@ Issues the file keys that let the named people open one file of an end-to-end en
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | The file keys were stored | - | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **403** | The caller may not issue keys for this file, or the file is not in a private room | - | - |
+| **403** | The file does not exist, the caller may not issue keys for it, the file is not in a private room, or a recipient has no read access to it | - | - |
 | **404** | The file does not exist | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../../models/error-api-response.md) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../../models/error-api-response.md) | `Retry-After` |

@@ -20,6 +20,8 @@ Cancels a chunked upload opened with `POST api/2.0/files/{folderId}/session` and
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | The session and the parts received so far have been discarded | - | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **403** | The session was opened by another account | - | - |
+| **404** | No open session with the specified ID: it never existed, was finalized or aborted, or has expired | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../../models/error-api-response.md) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../../models/error-api-response.md) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../../models/error-api-response.md) | - |

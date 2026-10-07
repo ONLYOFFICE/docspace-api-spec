@@ -22,9 +22,11 @@ Brings an earlier version of a file back and answers with the editing revisions 
 |------------- | ------------- | ------------- | -------------|
 | **200** | The editing revisions of the file after the restore | [**EditHistoryArrayWrapper**](../../models/edit-history-array-wrapper.md) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **400** | The version is missing or is already the current one | - | - |
-| **403** | The caller may not change the version history of the file | - | - |
+| **402** | The restored content does not fit into the storage quota | - | - |
+| **403** | The caller may not change the version history of the file, or, with `url`, may not edit the file or the file is locked by somebody else or being edited | - | - |
+| **404** | Without `url`, the file id or the requested version resolves to nothing | - | - |
+| **500** | The file is locked by somebody else or being edited, another restore of it is in progress, or storing the new version fails; with `url`, also when the file or the version does not exist or the address cannot be fetched | - | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../../models/error-api-response.md) | `Retry-After` |
-| **500** | Internal Server Error. | [**ErrorApiResponse**](../../models/error-api-response.md) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 

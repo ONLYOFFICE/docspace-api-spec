@@ -1,6 +1,6 @@
 # getProtectedFileUsers
 
-> MentionWrapperArrayWrapper getProtectedFileUsers(fileId)
+> MentionArrayWrapper getProtectedFileUsers(fileId)
 
 `GET /api/2.0/files/file/{fileId}/protectusers`
 
@@ -18,7 +18,8 @@ Lists the users the file is shared with, which is what a client offers when the 
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The users the file is shared with, ordered by display name | [**MentionWrapperArrayWrapper**](../../models/mention-wrapper-array-wrapper.md) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **200** | The users the file is shared with, ordered by display name | [**MentionArrayWrapper**](../../models/mention-array-wrapper.md) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **403** | The caller is a guest, or the file id resolves to nothing | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../../models/error-api-response.md) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../../models/error-api-response.md) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../../models/error-api-response.md) | - |
@@ -28,7 +29,7 @@ Lists the users the file is shared with, which is what a client offers when the 
 
 ## Return type
 
-[**MentionWrapperArrayWrapper**](../../models/mention-wrapper-array-wrapper.md)
+[**MentionArrayWrapper**](../../models/mention-array-wrapper.md)
 
 ## Third-party storage
 

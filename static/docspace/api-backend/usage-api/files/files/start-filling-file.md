@@ -20,6 +20,7 @@ Marks a PDF form in a form-filling room as open for filling out and answers with
 |------------- | ------------- | ------------- | -------------|
 | **200** | The form file, with the filling properties now stored on it | [**FileWrapper**](../../models/file-wrapper.md) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | The caller holds only form-filling access on the room, or no access to it at all | - | - |
+| **404** | The file id resolves to nothing | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../../models/error-api-response.md) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../../models/error-api-response.md) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../../models/error-api-response.md) | - |

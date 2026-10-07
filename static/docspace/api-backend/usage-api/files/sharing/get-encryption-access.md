@@ -20,6 +20,8 @@ Answers with the encryption keys that open one file kept in a private room: one 
 |------------- | ------------- | ------------- | -------------|
 | **200** | The keys of the members who can open the file, the private half only for the caller | [**EncryptionKeyArrayWrapper**](../../models/encryption-key-array-wrapper.md) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **403** | The caller may not read the file | - | - |
+| **404** | The file does not exist | - | - |
+| **415** | The file lies neither in a private room nor in the encrypted section | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../../models/error-api-response.md) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../../models/error-api-response.md) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../../models/error-api-response.md) | - |

@@ -1,6 +1,6 @@
 # authenticateMe
 
-> AuthenticationTokenWrapper authenticateMe(AuthRequestsDto)
+> AuthenticationTokenWrapper authenticateMe(AuthRequestDto)
 
 `POST /api/2.0/authentication`
 
@@ -12,7 +12,7 @@ Signs a user in to the current portal and either issues the authentication token
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **AuthRequestsDto** | body | [**AuthRequestsDto**](../models/auth-requests-dto.md) |  | [optional] |
+| **AuthRequestDto** | body | [**AuthRequestDto**](../models/auth-request-dto.md) |  | [optional] |
 
 ## Responses
 

@@ -19,7 +19,7 @@ Returns the roles of a PDF form together with the state each of them is in, whic
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | The roles of the form with the state of each | [**FormRoleArrayWrapper**](../../models/form-role-array-wrapper.md) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **403** | The caller has no read access to the form | - | - |
+| **403** | The caller has no read access to the form, or the file is not a PDF | - | - |
 | **404** | No file with this identifier exists | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../../models/error-api-response.md) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../../models/error-api-response.md) | `Retry-After` |

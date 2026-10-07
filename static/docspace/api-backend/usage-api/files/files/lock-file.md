@@ -1,6 +1,6 @@
 # lockFile
 
-> FileWrapper lockFile(fileId, LockFileParameters)
+> FileWrapper lockFile(fileId, LockFileRequest)
 
 `PUT /api/2.0/files/file/{fileId}/lock`
 
@@ -13,13 +13,15 @@ Locks a file so that nobody else can change it, or releases that lock, and answe
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
 | **fileId** | path | **Integer** (int32) | The file to lock or unlock. | [required] [example: `1`] |
-| **LockFileParameters** | body | [**LockFileParameters**](../../models/lock-file-parameters.md) | The lock state to reach. | [required] |
+| **LockFileRequest** | body | [**LockFileRequest**](../../models/lock-file-request.md) | The lock state to reach. | [required] |
 
 ## Responses
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | The file with its lock state as it now stands | [**FileWrapper**](../../models/file-wrapper.md) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **403** | The caller may not lock or unlock the file | - | - |
+| **404** | The file id resolves to nothing | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../../models/error-api-response.md) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../../models/error-api-response.md) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../../models/error-api-response.md) | - |

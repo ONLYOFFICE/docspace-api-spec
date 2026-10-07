@@ -20,10 +20,12 @@ Assembles the parts received so far into the file the session was opened for and
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | The assembled file and the identifiers of the closed session | [**UploadSessionResponseWrapper**](../../models/upload-session-response-wrapper.md) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **400** | The parts received so far do not add up to the size the session was opened for | - | - |
+| **402** | Storing the file would exceed a storage quota or size limit | - | - |
+| **404** | No open session with the specified ID: it never existed, was finalized or aborted, or has expired | - | - |
+| **500** | A file that is not a PDF is stored in a form-filling room | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../../models/error-api-response.md) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../../models/error-api-response.md) | `Retry-After` |
-| **500** | Internal Server Error. | [**ErrorApiResponse**](../../models/error-api-response.md) | - |
-| **400** | Bad Request. | [**ErrorApiResponse**](../../models/error-api-response.md) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 

@@ -20,7 +20,7 @@ Returns what the caller needs in order to decrypt one file of an end-to-end encr
 |------------- | ------------- | ------------- | -------------|
 | **200** | The key pairs of the caller and the file keys issued to them | [**FileEncryptionInfoWrapper**](../../models/file-encryption-info-wrapper.md) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **400** | The file cannot carry encryption keys | - | - |
-| **403** | The caller has no read access to the file | - | - |
+| **403** | The file does not exist, or the caller has no read access to it | - | - |
 | **404** | The file does not exist | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../../models/error-api-response.md) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../../models/error-api-response.md) | `Retry-After` |
