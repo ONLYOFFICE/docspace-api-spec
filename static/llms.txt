@@ -12,6 +12,7 @@ One page per section, listing its endpoints. Each endpoint has a page of its own
 - [ONLYOFFICE DocSpace Authentication API](https://api.onlyoffice.com/docspace/api-backend/usage-api/authentication/authentication.md)
 - [ONLYOFFICE DocSpace Backup API](https://api.onlyoffice.com/docspace/api-backend/usage-api/backup/backup.md)
 - [ONLYOFFICE DocSpace Capabilities API](https://api.onlyoffice.com/docspace/api-backend/usage-api/capabilities/capabilities.md)
+- [Docs](https://api.onlyoffice.com/docspace/api-backend/usage-api/docs/docs.md)
 - [ONLYOFFICE DocSpace Files API](https://api.onlyoffice.com/docspace/api-backend/usage-api/files/files.md)
 - [ONLYOFFICE DocSpace Group API](https://api.onlyoffice.com/docspace/api-backend/usage-api/group/group.md)
 - [ONLYOFFICE DocSpace Migration API](https://api.onlyoffice.com/docspace/api-backend/usage-api/migration/migration.md)
@@ -79,6 +80,7 @@ The types the endpoints take and return.
 - [AiChatPriceDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-chat-price-dto.md)
 - [AiChatSettingsDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-chat-settings-dto.md)
 - [AiChatToolPermissionMode](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-chat-tool-permission-mode.md)
+- [AiChatToolPrefsScope](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-chat-tool-prefs-scope.md)
 - [AiConfigDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-config-dto.md)
 - [AiCreateProfileInput](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-create-profile-input.md)
 - [AiCreatePromptInput](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-create-prompt-input.md)
@@ -91,6 +93,7 @@ The types the endpoints take and return.
 - [AiEntryPricingDtoAiEmbeddingPriceDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-entry-pricing-dto-ai-embedding-price-dto.md)
 - [AiEntryPricingDtoAiImagePriceDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-entry-pricing-dto-ai-image-price-dto.md)
 - [AiEntryPricingDtoDecimal](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-entry-pricing-dto-decimal.md)
+- [AiErrorCode](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-error-code.md)
 - [AiErrorData](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-error-data.md)
 - [AiErrorResponse](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-error-response.md)
 - [AiExportTextToDocxRequest](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-export-text-to-docx-request.md)
@@ -120,6 +123,7 @@ The types the endpoints take and return.
 - [AiLogoCoverDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-logo-cover-dto.md)
 - [AiLogoDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-logo-dto.md)
 - [AiMCPItem](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-mcp-item.md)
+- [AiMetadataMatchDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-metadata-match-dto.md)
 - [AiModel](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-model.md)
 - [AiNewItemsAgentNewItemsArrayWrapper](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-new-items-agent-new-items-array-wrapper.md)
 - [AiNewItemsDtoAgentNewItemsDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-new-items-dto-agent-new-items-dto.md)
@@ -304,6 +308,14 @@ The types the endpoints take and return.
 - [Contact](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/contact.md)
 - [ConversationResultArrayWrapper](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/conversation-result-array-wrapper.md)
 - [ConversationResultDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/conversation-result-dto.md)
+- [ConvertDocumentLayoutRequest](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/convert-document-layout-request.md)
+- [ConvertDocumentRendererRequest](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/convert-document-renderer-request.md)
+- [ConvertFileRequestDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/convert-file-request-dto.md)
+- [ConvertPdfRequest](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/convert-pdf-request.md)
+- [ConvertSpreadsheetLayoutRequest](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/convert-spreadsheet-layout-request.md)
+- [ConvertSpreadsheetMarginsRequest](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/convert-spreadsheet-margins-request.md)
+- [ConvertSpreadsheetPageSizeRequest](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/convert-spreadsheet-page-size-request.md)
+- [ConvertThumbnailRequest](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/convert-thumbnail-request.md)
 - [CookieSettingsDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/cookie-settings-dto.md)
 - [CookieSettingsRequestDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/cookie-settings-request-dto.md)
 - [CookieSettingsWrapper](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/cookie-settings-wrapper.md)
@@ -643,6 +655,7 @@ The types the endpoints take and return.
 - [MetadataFieldType](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/metadata-field-type.md)
 - [MetadataFieldWrapper](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/metadata-field-wrapper.md)
 - [MetadataFilterConditionRequest](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/metadata-filter-condition-request.md)
+- [MetadataMatchDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/metadata-match-dto.md)
 - [MetadataOperationDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/metadata-operation-dto.md)
 - [MetadataOperationWrapper](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/metadata-operation-wrapper.md)
 - [MetadataTemplateArrayWrapper](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/metadata-template-array-wrapper.md)
@@ -757,6 +770,9 @@ The types the endpoints take and return.
 - [RoomsNotificationSettingsDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/rooms-notification-settings-dto.md)
 - [RoomsNotificationSettingsWrapper](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/rooms-notification-settings-wrapper.md)
 - [RoomsNotificationsSettingsRequestDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/rooms-notifications-settings-request-dto.md)
+- [RunBuilderScriptOutputRequest](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/run-builder-script-output-request.md)
+- [RunBuilderScriptRequestDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/run-builder-script-request-dto.md)
+- [RunBuilderScriptRequestDto.argument](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/run-builder-script-request-dto-argument.md)
 - [SalesRequestDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/sales-request-dto.md)
 - [SaveAdditionalResourcesRequest](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/save-additional-resources-request.md)
 - [SaveAsPdfRequest](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/save-as-pdf-request.md)
@@ -934,6 +950,7 @@ The types the endpoints take and return.
 - [UpdateClientRequest](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/update-client-request.md)
 - [UpdateCommentRequest](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/update-comment-request.md)
 - [UpdateFileRequest](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/update-file-request.md)
+- [UpdateFolderMetadataTemplateRequest](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/update-folder-metadata-template-request.md)
 - [UpdateGroupRequest](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/update-group-request.md)
 - [UpdateMemberCultureRequest](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/update-member-culture-request.md)
 - [UpdateMemberRequestDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/update-member-request-dto.md)
@@ -1009,6 +1026,9 @@ The types the endpoints take and return.
 - [aiExportTextToDocx 202 response](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-export-text-to-docx-202-response.md)
 - [aiOpenaiChatCompletions 403 response](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-openai-chat-completions-403-response.md)
 - [aiOpenaiChatCompletions 403 response.error](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-openai-chat-completions-403-response-error.md)
+- [aiOpenaiImagesGenerations 403 response](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-openai-images-generations-403-response.md)
+- [aiOpenaiImagesGenerations 403 response.error](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-openai-images-generations-403-response-error.md)
+- [aiProfilesCreate 400 response](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-profiles-create-400-response.md)
 - [aiProfilesGetById 200 response](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-profiles-get-by-id-200-response.md)
 - [aiProfilesListProviderModels 400 response](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-profiles-list-provider-models-400-response.md)
 - [aiProfilesListProviderModels 400 response.anyOf](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-profiles-list-provider-models-400-response-any-of.md)
@@ -1018,6 +1038,7 @@ The types the endpoints take and return.
 - [aiThreadsRegenerateTitle 200 response](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-threads-regenerate-title-200-response.md)
 - [aiToolsListSystemTools 200 response](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-tools-list-system-tools-200-response.md)
 - [aiVectorizationStartTask 200 response](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-vectorization-start-task-200-response.md)
+- [aiWebSearchConfigure 400 response](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-web-search-configure-400-response.md)
 - [checkMoveOrCopyBatchItems.destFolderId.parameter](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/check-move-or-copy-batch-items-dest-folder-id-parameter.md)
 - [checkMoveOrCopyBatchItems.folderIds.parameter item](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/check-move-or-copy-batch-items-folder-ids-parameter-item.md)
 - [exchangeToken 200 response](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/exchange-token-200-response.md)
@@ -1235,6 +1256,11 @@ The types the endpoints take and return.
 
 - [Get portal capabilities](https://api.onlyoffice.com/docspace/api-backend/usage-api/capabilities/get-portal-capabilities.md): GET /api/2.0/capabilities
 
+### Docs
+
+- [Convert a file](https://api.onlyoffice.com/docspace/api-backend/usage-api/docs/convert-file.md): POST /api/2.0/docs/converter
+- [Run a document builder script](https://api.onlyoffice.com/docspace/api-backend/usage-api/docs/run-builder-script.md): POST /api/2.0/docs/builder
+
 ### ONLYOFFICE DocSpace Files API
 
 #### files
@@ -1347,6 +1373,7 @@ The types the endpoints take and return.
 - [Unassign a template from a file](https://api.onlyoffice.com/docspace/api-backend/usage-api/files/metadata/unassign-file-template.md): DELETE /api/2.0/files/metadata/file/{fileId}/templates/{templateId}
 - [Unassign a template from a folder](https://api.onlyoffice.com/docspace/api-backend/usage-api/files/metadata/unassign-folder-template.md): DELETE /api/2.0/files/metadata/folder/{folderId}/templates/{templateId}
 - [Update a metadata field](https://api.onlyoffice.com/docspace/api-backend/usage-api/files/metadata/update-field.md): PUT /api/2.0/files/metadata/templates/{templateId}/fields/{fieldId}
+- [Update a template assignment on a folder](https://api.onlyoffice.com/docspace/api-backend/usage-api/files/metadata/update-folder-template.md): PUT /api/2.0/files/metadata/folder/{folderId}/templates/{templateId}
 - [Update a metadata template](https://api.onlyoffice.com/docspace/api-backend/usage-api/files/metadata/update-template.md): PUT /api/2.0/files/metadata/templates/{templateId}
 
 #### operations
@@ -1674,6 +1701,7 @@ The types the endpoints take and return.
 - [Send removal instructions](https://api.onlyoffice.com/docspace/api-backend/usage-api/portal/settings/send-delete-instructions.md): POST /api/2.0/portal/delete
 - [Send suspension instructions](https://api.onlyoffice.com/docspace/api-backend/usage-api/portal/settings/send-suspend-instructions.md): POST /api/2.0/portal/suspend
 - [Deactivate a portal](https://api.onlyoffice.com/docspace/api-backend/usage-api/portal/settings/suspend-portal.md): PUT /api/2.0/portal/suspend
+- [Unblock a portal](https://api.onlyoffice.com/docspace/api-backend/usage-api/portal/settings/unblock-portal.md): PUT /api/2.0/portal/unblock
 
 #### users
 
@@ -2024,6 +2052,7 @@ The types the endpoints take and return.
 - [Delete a web plugin](https://api.onlyoffice.com/docspace/api-backend/usage-api/settings/webplugins/delete-web-plugin.md): DELETE /api/2.0/settings/webplugins/{name}
 - [Get a web plugin by name](https://api.onlyoffice.com/docspace/api-backend/usage-api/settings/webplugins/get-web-plugin.md): GET /api/2.0/settings/webplugins/{name}
 - [Get web plugins](https://api.onlyoffice.com/docspace/api-backend/usage-api/settings/webplugins/get-web-plugins.md): GET /api/2.0/settings/webplugins
+- [Refresh a web plugin](https://api.onlyoffice.com/docspace/api-backend/usage-api/settings/webplugins/refresh-web-plugin.md): PUT /api/2.0/settings/webplugins/{name}/refresh
 - [Update a web plugin](https://api.onlyoffice.com/docspace/api-backend/usage-api/settings/webplugins/update-web-plugin.md): PUT /api/2.0/settings/webplugins/{name}
 
 ### ONLYOFFICE DocSpace ThirdParty API

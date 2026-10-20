@@ -264,6 +264,7 @@ All URIs are relative to *https://yourportal.onlyoffice.com*, where the host is 
 | [**deleteWebPlugin**](webplugins/delete-web-plugin.md) | **DELETE** /api/2.0/settings/webplugins/\{name\} | Delete a web plugin |
 | [**getWebPlugin**](webplugins/get-web-plugin.md) | **GET** /api/2.0/settings/webplugins/\{name\} | Get a web plugin by name |
 | [**getWebPlugins**](webplugins/get-web-plugins.md) | **GET** /api/2.0/settings/webplugins | Get web plugins |
+| [**refreshWebPlugin**](webplugins/refresh-web-plugin.md) | **PUT** /api/2.0/settings/webplugins/\{name\}/refresh | Refresh a web plugin |
 | [**updateWebPlugin**](webplugins/update-web-plugin.md) | **PUT** /api/2.0/settings/webplugins/\{name\} | Update a web plugin |
 
 ## Authorization

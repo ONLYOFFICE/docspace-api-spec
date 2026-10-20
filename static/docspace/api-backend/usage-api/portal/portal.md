@@ -76,6 +76,7 @@ All URIs are relative to *https://yourportal.onlyoffice.com*, where the host is 
 | [**sendDeleteInstructions**](settings/send-delete-instructions.md) | **POST** /api/2.0/portal/delete | Send removal instructions |
 | [**sendSuspendInstructions**](settings/send-suspend-instructions.md) | **POST** /api/2.0/portal/suspend | Send suspension instructions |
 | [**suspendPortal**](settings/suspend-portal.md) | **PUT** /api/2.0/portal/suspend | Deactivate a portal |
+| [**unblockPortal**](settings/unblock-portal.md) | **PUT** /api/2.0/portal/unblock | Unblock a portal |
 
 ## Users
 
