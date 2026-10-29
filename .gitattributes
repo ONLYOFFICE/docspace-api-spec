@@ -1,0 +1,3 @@
+# The bundle is generated, and the generator writes LF on every platform. Spelled out here so
+# that a clone configured otherwise cannot commit the same documents back with CRLF.
+* text=auto eol=lf
