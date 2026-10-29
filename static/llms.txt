@@ -1,28 +1,28 @@
-# ONLYOFFICE DocSpace API
+# ONLYOFFICE Apps API
 
-> The ONLYOFFICE DocSpace HTTP API. Every page of the reference is available as Markdown at its own address, with `.md` appended.
+> The ONLYOFFICE Apps HTTP API. Every page of the reference is available as Markdown at its own address, with `.md` appended.
 
 ## Sections
 
 One page per section, listing its endpoints. Each endpoint has a page of its own, and every type they exchange has one too.
 
-- [ONLYOFFICE DocSpace AI API](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai/ai.md)
-- [ONLYOFFICE DocSpace API keys](https://api.onlyoffice.com/docspace/api-backend/usage-api/api-keys/api-keys.md)
-- [ONLYOFFICE DocSpace Apps API](https://api.onlyoffice.com/docspace/api-backend/usage-api/apps/apps.md)
-- [ONLYOFFICE DocSpace Authentication API](https://api.onlyoffice.com/docspace/api-backend/usage-api/authentication/authentication.md)
-- [ONLYOFFICE DocSpace Backup API](https://api.onlyoffice.com/docspace/api-backend/usage-api/backup/backup.md)
-- [ONLYOFFICE DocSpace Capabilities API](https://api.onlyoffice.com/docspace/api-backend/usage-api/capabilities/capabilities.md)
+- [ONLYOFFICE Apps AI API](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai/ai.md)
+- [ONLYOFFICE Apps API keys](https://api.onlyoffice.com/docspace/api-backend/usage-api/api-keys/api-keys.md)
+- [ONLYOFFICE Apps API](https://api.onlyoffice.com/docspace/api-backend/usage-api/apps/apps.md)
+- [ONLYOFFICE Apps Authentication API](https://api.onlyoffice.com/docspace/api-backend/usage-api/authentication/authentication.md)
+- [ONLYOFFICE Apps Backup API](https://api.onlyoffice.com/docspace/api-backend/usage-api/backup/backup.md)
+- [ONLYOFFICE Apps Capabilities API](https://api.onlyoffice.com/docspace/api-backend/usage-api/capabilities/capabilities.md)
 - [Docs](https://api.onlyoffice.com/docspace/api-backend/usage-api/docs/docs.md)
-- [ONLYOFFICE DocSpace Files API](https://api.onlyoffice.com/docspace/api-backend/usage-api/files/files.md)
-- [ONLYOFFICE DocSpace Group API](https://api.onlyoffice.com/docspace/api-backend/usage-api/group/group.md)
-- [ONLYOFFICE DocSpace Migration API](https://api.onlyoffice.com/docspace/api-backend/usage-api/migration/migration.md)
-- [ONLYOFFICE DocSpace OAuth 2.0 API](https://api.onlyoffice.com/docspace/api-backend/usage-api/oauth-2-0/oauth-2-0.md)
-- [ONLYOFFICE DocSpace People API](https://api.onlyoffice.com/docspace/api-backend/usage-api/people/people.md)
-- [ONLYOFFICE DocSpace Portal API](https://api.onlyoffice.com/docspace/api-backend/usage-api/portal/portal.md)
-- [ONLYOFFICE DocSpace Rooms API](https://api.onlyoffice.com/docspace/api-backend/usage-api/rooms/rooms.md)
-- [ONLYOFFICE DocSpace Security API](https://api.onlyoffice.com/docspace/api-backend/usage-api/security/security.md)
-- [ONLYOFFICE DocSpace Settings API](https://api.onlyoffice.com/docspace/api-backend/usage-api/settings/settings.md)
-- [ONLYOFFICE DocSpace ThirdParty API](https://api.onlyoffice.com/docspace/api-backend/usage-api/thirdparty/thirdparty.md)
+- [ONLYOFFICE Apps Files API](https://api.onlyoffice.com/docspace/api-backend/usage-api/files/files.md)
+- [ONLYOFFICE Apps Group API](https://api.onlyoffice.com/docspace/api-backend/usage-api/group/group.md)
+- [ONLYOFFICE Apps Migration API](https://api.onlyoffice.com/docspace/api-backend/usage-api/migration/migration.md)
+- [ONLYOFFICE Apps OAuth 2.0 API](https://api.onlyoffice.com/docspace/api-backend/usage-api/oauth-2-0/oauth-2-0.md)
+- [ONLYOFFICE Apps People API](https://api.onlyoffice.com/docspace/api-backend/usage-api/people/people.md)
+- [ONLYOFFICE Apps Portal API](https://api.onlyoffice.com/docspace/api-backend/usage-api/portal/portal.md)
+- [ONLYOFFICE Apps Rooms API](https://api.onlyoffice.com/docspace/api-backend/usage-api/rooms/rooms.md)
+- [ONLYOFFICE Apps Security API](https://api.onlyoffice.com/docspace/api-backend/usage-api/security/security.md)
+- [ONLYOFFICE Apps Settings API](https://api.onlyoffice.com/docspace/api-backend/usage-api/settings/settings.md)
+- [ONLYOFFICE Apps ThirdParty API](https://api.onlyoffice.com/docspace/api-backend/usage-api/thirdparty/thirdparty.md)
 
 ## Models
 
@@ -89,6 +89,11 @@ The types the endpoints take and return.
 - [AiEmbeddingPriceDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-embedding-price-dto.md)
 - [AiEmbeddingProviderType](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-embedding-provider-type.md)
 - [AiEmployeeDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-employee-dto.md)
+- [AiEntryMetadata](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-entry-metadata.md)
+- [AiEntryMetadataField](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-entry-metadata-field.md)
+- [AiEntryMetadataField.options item](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-entry-metadata-field-options-item.md)
+- [AiEntryMetadata.customFields item](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-entry-metadata-custom-fields-item.md)
+- [AiEntryMetadata.templates item](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-entry-metadata-templates-item.md)
 - [AiEntryPricingDtoAiChatPriceDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-entry-pricing-dto-ai-chat-price-dto.md)
 - [AiEntryPricingDtoAiEmbeddingPriceDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-entry-pricing-dto-ai-embedding-price-dto.md)
 - [AiEntryPricingDtoAiImagePriceDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-entry-pricing-dto-ai-image-price-dto.md)
@@ -123,7 +128,11 @@ The types the endpoints take and return.
 - [AiLogoCoverDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-logo-cover-dto.md)
 - [AiLogoDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-logo-dto.md)
 - [AiMCPItem](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-mcp-item.md)
+- [AiMetaFillRequest](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-meta-fill-request.md)
+- [AiMetaGenerateRequest](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-meta-generate-request.md)
+- [AiMetaGenerateRequest.id](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-meta-generate-request-id.md)
 - [AiMetadataMatchDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-metadata-match-dto.md)
+- [AiMetadataValue](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-metadata-value.md)
 - [AiModel](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-model.md)
 - [AiNewItemsAgentNewItemsArrayWrapper](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-new-items-agent-new-items-array-wrapper.md)
 - [AiNewItemsDtoAgentNewItemsDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-new-items-dto-agent-new-items-dto.md)
@@ -333,6 +342,7 @@ The types the endpoints take and return.
 - [CreateMetadataTemplateRequestDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/create-metadata-template-request-dto.md)
 - [CreateRoomFromTemplateDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/create-room-from-template-dto.md)
 - [CreateRoomRequestDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/create-room-request-dto.md)
+- [CreateServiceLimitRequestDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/create-service-limit-request-dto.md)
 - [CreateTagRequestDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/create-tag-request-dto.md)
 - [CreateTextOrHtmlFileRequest](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/create-text-or-html-file-request.md)
 - [CreateThirdPartyRoomRequest](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/create-third-party-room-request.md)
@@ -388,6 +398,9 @@ The types the endpoints take and return.
 - [DeleteFolderRequest](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/delete-folder-request.md)
 - [DeleteRoomRequest](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/delete-room-request.md)
 - [DeleteVersionBatchRequestDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/delete-version-batch-request-dto.md)
+- [DepositDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/deposit-dto.md)
+- [DepositReportDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/deposit-report-dto.md)
+- [DepositReportWrapper](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/deposit-report-wrapper.md)
 - [DiscountCategoryDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/discount-category-dto.md)
 - [DisplayRequestDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/display-request-dto.md)
 - [DistributedTaskStatus](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/distributed-task-status.md)
@@ -788,6 +801,15 @@ The types the endpoints take and return.
 - [SecurityInfoRequestDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/security-info-request-dto.md)
 - [SecurityInfoSimpleRequestDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/security-info-simple-request-dto.md)
 - [SecurityRequestDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/security-request-dto.md)
+- [SendModuleEventRequest](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/send-module-event-request.md)
+- [ServiceLimitDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/service-limit-dto.md)
+- [ServiceLimitOrderBy](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/service-limit-order-by.md)
+- [ServiceLimitPeriod](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/service-limit-period.md)
+- [ServiceLimitReportDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/service-limit-report-dto.md)
+- [ServiceLimitReportWrapper](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/service-limit-report-wrapper.md)
+- [ServiceLimitScope](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/service-limit-scope.md)
+- [ServiceLimitUsageDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/service-limit-usage-dto.md)
+- [ServiceLimitWrapper](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/service-limit-wrapper.md)
 - [ServicePriceArrayWrapper](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/service-price-array-wrapper.md)
 - [ServicePriceDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/service-price-dto.md)
 - [SessionRequest](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/session-request.md)
@@ -797,6 +819,7 @@ The types the endpoints take and return.
 - [SetCustomFields](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/set-custom-fields.md)
 - [SetManagerRequest](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/set-manager-request.md)
 - [SetMetadataValues](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/set-metadata-values.md)
+- [SetParticipantServiceLimitsRequestDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/set-participant-service-limits-request-dto.md)
 - [SetPublicDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/set-public-dto.md)
 - [SetRestrictedAiModelsRequestDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/set-restricted-ai-models-request-dto.md)
 - [SetWalletTopUpSettingsRequest](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/set-wallet-top-up-settings-request.md)
@@ -964,6 +987,7 @@ The types the endpoints take and return.
 - [UpdateRoomRequest](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/update-room-request.md)
 - [UpdateRoomsQuotaRequestDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/update-rooms-quota-request-dto.md)
 - [UpdateRoomsRoomIdsRequestDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/update-rooms-room-ids-request-dto.md)
+- [UpdateServiceLimitRequestDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/update-service-limit-request-dto.md)
 - [UpdateTagRequestDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/update-tag-request-dto.md)
 - [UpdateWebhooksConfigRequestDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/update-webhooks-config-request-dto.md)
 - [UploadResultDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/upload-result-dto.md)
@@ -977,6 +1001,7 @@ The types the endpoints take and return.
 - [UserExistsResponseWrapper](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/user-exists-response-wrapper.md)
 - [UserInvitation](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/user-invitation.md)
 - [UserInvitationRequestDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/user-invitation-request-dto.md)
+- [UserServiceLimitDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/user-service-limit-dto.md)
 - [ValidationResult](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/validation-result.md)
 - [VectorizationStatus](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/vectorization-status.md)
 - [WalletQuantityRequestDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/wallet-quantity-request-dto.md)
@@ -1024,6 +1049,16 @@ The types the endpoints take and return.
 - [aiEditorToolsList 200 response](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-editor-tools-list-200-response.md)
 - [aiEditorToolsList 200 response.tools item](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-editor-tools-list-200-response-tools-item.md)
 - [aiExportTextToDocx 202 response](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-export-text-to-docx-202-response.md)
+- [aiMetaFill 200 response](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-meta-fill-200-response.md)
+- [aiMetaFill 200 response.filled item](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-meta-fill-200-response-filled-item.md)
+- [aiMetaFill 200 response.filled.inner.value](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-meta-fill-200-response-filled-inner-value.md)
+- [aiMetaFill 200 response.sources item](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-meta-fill-200-response-sources-item.md)
+- [aiMetaFill 200 response.unresolved item](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-meta-fill-200-response-unresolved-item.md)
+- [aiMetaGenerate 200 response](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-meta-generate-200-response.md)
+- [aiMetaGenerate 200 response.fields item](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-meta-generate-200-response-fields-item.md)
+- [aiMetaGenerate 200 response.skipped item](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-meta-generate-200-response-skipped-item.md)
+- [aiMetaGenerate 200 response.sources item](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-meta-generate-200-response-sources-item.md)
+- [aiMetaGenerate 402 response](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-meta-generate-402-response.md)
 - [aiOpenaiChatCompletions 403 response](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-openai-chat-completions-403-response.md)
 - [aiOpenaiChatCompletions 403 response.error](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-openai-chat-completions-403-response-error.md)
 - [aiOpenaiImagesGenerations 403 response](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-openai-images-generations-403-response.md)
@@ -1047,7 +1082,7 @@ The types the endpoints take and return.
 
 ## Endpoints
 
-### ONLYOFFICE DocSpace AI API
+### ONLYOFFICE Apps AI API
 
 #### ai
 
@@ -1106,6 +1141,11 @@ The types the endpoints take and return.
 #### export
 
 - [Start markdown export](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai/export/ai-export-text-to-docx.md): POST /api/2.0/ai/text-to-docx
+
+#### metadata
+
+- [Fill metadata values](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai/metadata/ai-meta-fill.md): POST /api/2.0/ai/meta/fill
+- [Generate metadata fields](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai/metadata/ai-meta-generate.md): POST /api/2.0/ai/meta/generate
 
 #### openai-passthrough
 
@@ -1208,7 +1248,7 @@ The types the endpoints take and return.
 - [Set active config](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai/web-search/ai-web-search-set-active-config.md): PUT /api/2.0/ai/web-search/set-active-config
 - [Test a web-search provider](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai/web-search/ai-web-search-test-connection.md): POST /api/2.0/ai/web-search/test-connection
 
-### ONLYOFFICE DocSpace API keys
+### ONLYOFFICE Apps API keys
 
 - [Create a user API key](https://api.onlyoffice.com/docspace/api-backend/usage-api/api-keys/create-api-key.md): POST /api/2.0/keys
 - [Delete an API key](https://api.onlyoffice.com/docspace/api-backend/usage-api/api-keys/delete-api-key.md): DELETE /api/2.0/keys/{keyId}
@@ -1217,7 +1257,7 @@ The types the endpoints take and return.
 - [Get the API keys](https://api.onlyoffice.com/docspace/api-backend/usage-api/api-keys/get-api-keys.md): GET /api/2.0/keys
 - [Update an API key](https://api.onlyoffice.com/docspace/api-backend/usage-api/api-keys/update-api-key.md): PUT /api/2.0/keys/{keyId}
 
-### ONLYOFFICE DocSpace Apps API
+### ONLYOFFICE Apps API
 
 - [Get an app](https://api.onlyoffice.com/docspace/api-backend/usage-api/apps/get.md): GET /api/2.0/apps/{id}
 - [Get all apps](https://api.onlyoffice.com/docspace/api-backend/usage-api/apps/get-all.md): GET /api/2.0/apps
@@ -1225,7 +1265,7 @@ The types the endpoints take and return.
 - [Enable or disable an app](https://api.onlyoffice.com/docspace/api-backend/usage-api/apps/set-enabled.md): PUT /api/2.0/apps/{id}/enabled
 - [Save app settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/apps/set-settings.md): PUT /api/2.0/apps/{id}/settings
 
-### ONLYOFFICE DocSpace Authentication API
+### ONLYOFFICE Apps Authentication API
 
 - [Authenticate a user](https://api.onlyoffice.com/docspace/api-backend/usage-api/authentication/authenticate-me.md): POST /api/2.0/authentication
 - [Authenticate a user by code](https://api.onlyoffice.com/docspace/api-backend/usage-api/authentication/authenticate-me-from-body-with-code.md): POST /api/2.0/authentication/{code}
@@ -1235,7 +1275,7 @@ The types the endpoints take and return.
 - [Set a mobile phone](https://api.onlyoffice.com/docspace/api-backend/usage-api/authentication/save-mobile-phone.md): POST /api/2.0/authentication/setphone
 - [Send SMS code](https://api.onlyoffice.com/docspace/api-backend/usage-api/authentication/send-sms-code.md): POST /api/2.0/authentication/sendsms
 
-### ONLYOFFICE DocSpace Backup API
+### ONLYOFFICE Apps Backup API
 
 - [Cancel the running backup](https://api.onlyoffice.com/docspace/api-backend/usage-api/backup/cancel-backup.md): POST /api/2.0/backup/cancelbackup
 - [Create the backup schedule](https://api.onlyoffice.com/docspace/api-backend/usage-api/backup/create-backup-schedule.md): POST /api/2.0/backup/createbackupschedule
@@ -1252,7 +1292,7 @@ The types the endpoints take and return.
 - [Start the backup](https://api.onlyoffice.com/docspace/api-backend/usage-api/backup/start-backup.md): POST /api/2.0/backup/startbackup
 - [Start the restoring process](https://api.onlyoffice.com/docspace/api-backend/usage-api/backup/start-backup-restore.md): POST /api/2.0/backup/startrestore
 
-### ONLYOFFICE DocSpace Capabilities API
+### ONLYOFFICE Apps Capabilities API
 
 - [Get portal capabilities](https://api.onlyoffice.com/docspace/api-backend/usage-api/capabilities/get-portal-capabilities.md): GET /api/2.0/capabilities
 
@@ -1261,7 +1301,7 @@ The types the endpoints take and return.
 - [Convert a file](https://api.onlyoffice.com/docspace/api-backend/usage-api/docs/convert-file.md): POST /api/2.0/docs/converter
 - [Run a document builder script](https://api.onlyoffice.com/docspace/api-backend/usage-api/docs/run-builder-script.md): POST /api/2.0/docs/builder
 
-### ONLYOFFICE DocSpace Files API
+### ONLYOFFICE Apps Files API
 
 #### files
 
@@ -1470,7 +1510,7 @@ The types the endpoints take and return.
 - [Connect a third-party account](https://api.onlyoffice.com/docspace/api-backend/usage-api/files/third-party-integration/save-third-party.md): POST /api/2.0/files/thirdparty
 - [Connect the third-party backup storage](https://api.onlyoffice.com/docspace/api-backend/usage-api/files/third-party-integration/save-third-party-backup.md): POST /api/2.0/files/thirdparty/backup
 
-### ONLYOFFICE DocSpace Group API
+### ONLYOFFICE Apps Group API
 
 - [Add a new group](https://api.onlyoffice.com/docspace/api-backend/usage-api/group/add-group.md): POST /api/2.0/group
 - [Add group members](https://api.onlyoffice.com/docspace/api-backend/usage-api/group/add-members-to.md): PUT /api/2.0/group/{id}/members
@@ -1490,7 +1530,7 @@ The types the endpoints take and return.
 - [Search groups for a folder](https://api.onlyoffice.com/docspace/api-backend/usage-api/group/search/get-groups-with-folders-shared.md): GET /api/2.0/group/folder/{id}
 - [Search groups for a room](https://api.onlyoffice.com/docspace/api-backend/usage-api/group/search/get-groups-with-rooms-shared.md): GET /api/2.0/group/room/{id}
 
-### ONLYOFFICE DocSpace Migration API
+### ONLYOFFICE Apps Migration API
 
 - [Cancel migration](https://api.onlyoffice.com/docspace/api-backend/usage-api/migration/cancel-migration.md): POST /api/2.0/migration/cancel
 - [Clear migration](https://api.onlyoffice.com/docspace/api-backend/usage-api/migration/clear-migration.md): POST /api/2.0/migration/clear
@@ -1501,7 +1541,7 @@ The types the endpoints take and return.
 - [Start migration](https://api.onlyoffice.com/docspace/api-backend/usage-api/migration/start-migration.md): POST /api/2.0/migration/migrate
 - [Parse migration archive](https://api.onlyoffice.com/docspace/api-backend/usage-api/migration/upload-and-initialize-migration.md): POST /api/2.0/migration/init/{migratorName}
 
-### ONLYOFFICE DocSpace OAuth 2.0 API
+### ONLYOFFICE Apps OAuth 2.0 API
 
 #### authorization
 
@@ -1537,7 +1577,7 @@ The types the endpoints take and return.
 
 - [List available OAuth2 scopes](https://api.onlyoffice.com/docspace/api-backend/usage-api/oauth-2-0/scope-management/get-scopes.md): GET /api/2.0/oauth2/scopes
 
-### ONLYOFFICE DocSpace People API
+### ONLYOFFICE Apps People API
 
 #### email
 
@@ -1636,11 +1676,15 @@ The types the endpoints take and return.
 - [Terminate updating user type](https://api.onlyoffice.com/docspace/api-backend/usage-api/people/user-type/terminate-user-type-update.md): PUT /api/2.0/people/type/terminate
 - [Change a user type](https://api.onlyoffice.com/docspace/api-backend/usage-api/people/user-type/update-user-type.md): PUT /api/2.0/people/type/{type}
 
-### ONLYOFFICE DocSpace Portal API
+### ONLYOFFICE Apps Portal API
 
 #### guests
 
 - [Get a guest sharing link](https://api.onlyoffice.com/docspace/api-backend/usage-api/portal/guests/get-guest-sharing-link.md): GET /api/2.0/people/guests/{userId}/share
+
+#### module-events
+
+- [Send a module event](https://api.onlyoffice.com/docspace/api-backend/usage-api/portal/module-events/send-module-event.md): POST /api/2.0/portal/moduleevents
 
 #### payment
 
@@ -1649,11 +1693,15 @@ The types the endpoints take and return.
 - [Start the monthly usage report](https://api.onlyoffice.com/docspace/api-backend/usage-api/portal/payment/create-customer-monthly-usage-report.md): POST /api/2.0/portal/payment/customer/usage/monthly/report
 - [Start the operations report](https://api.onlyoffice.com/docspace/api-backend/usage-api/portal/payment/create-customer-operations-report.md): POST /api/2.0/portal/payment/customer/operationsreport
 - [Start the service usage report](https://api.onlyoffice.com/docspace/api-backend/usage-api/portal/payment/create-customer-service-usage-report.md): POST /api/2.0/portal/payment/customer/usage/report
+- [Create a service limit](https://api.onlyoffice.com/docspace/api-backend/usage-api/portal/payment/create-service-limit.md): POST /api/2.0/portal/payment/servicelimit
+- [Delete a service limit](https://api.onlyoffice.com/docspace/api-backend/usage-api/portal/payment/delete-service-limit.md): DELETE /api/2.0/portal/payment/servicelimit/{id}
+- [Disable the user service limits](https://api.onlyoffice.com/docspace/api-backend/usage-api/portal/payment/disable-participant-service-limits.md): PUT /api/2.0/portal/payment/servicelimit/participants/disable
 - [Get the service prices from the accounting service](https://api.onlyoffice.com/docspace/api-backend/usage-api/portal/payment/get-accounting-service-prices.md): GET /api/2.0/portal/payment/accounting/prices/{serviceName}
 - [Get the active wallet services](https://api.onlyoffice.com/docspace/api-backend/usage-api/portal/payment/get-active-services.md): GET /api/2.0/portal/payment/activeservices
 - [Get AI model prices](https://api.onlyoffice.com/docspace/api-backend/usage-api/portal/payment/get-ai-prices.md): GET /api/2.0/portal/payment/ai-prices
 - [Get the checkout setup page URL](https://api.onlyoffice.com/docspace/api-backend/usage-api/portal/payment/get-checkout-setup-url.md): GET /api/2.0/portal/payment/checkoutsetupurl
 - [Get the customer balance](https://api.onlyoffice.com/docspace/api-backend/usage-api/portal/payment/get-customer-balance.md): GET /api/2.0/portal/payment/customer/balance
+- [Get the wallet top-ups](https://api.onlyoffice.com/docspace/api-backend/usage-api/portal/payment/get-customer-deposits.md): GET /api/2.0/portal/payment/customer/deposits
 - [Get the customer information](https://api.onlyoffice.com/docspace/api-backend/usage-api/portal/payment/get-customer-info.md): GET /api/2.0/portal/payment/customerinfo
 - [Get the customer monthly usage](https://api.onlyoffice.com/docspace/api-backend/usage-api/portal/payment/get-customer-monthly-usage.md): GET /api/2.0/portal/payment/customer/usage/monthly
 - [Get the monthly usage report status](https://api.onlyoffice.com/docspace/api-backend/usage-api/portal/payment/get-customer-monthly-usage-report.md): GET /api/2.0/portal/payment/customer/usage/monthly/report
@@ -1661,6 +1709,9 @@ The types the endpoints take and return.
 - [Get the operations report status](https://api.onlyoffice.com/docspace/api-backend/usage-api/portal/payment/get-customer-operations-report.md): GET /api/2.0/portal/payment/customer/operationsreport
 - [Get the customer service usage](https://api.onlyoffice.com/docspace/api-backend/usage-api/portal/payment/get-customer-service-usage.md): GET /api/2.0/portal/payment/customer/usage
 - [Get the service usage report status](https://api.onlyoffice.com/docspace/api-backend/usage-api/portal/payment/get-customer-service-usage-report.md): GET /api/2.0/portal/payment/customer/usage/report
+- [Get the top-up invoice](https://api.onlyoffice.com/docspace/api-backend/usage-api/portal/payment/get-deposit-invoice.md): GET /api/2.0/portal/payment/customer/deposits/{id}/invoice
+- [Get the global service limit](https://api.onlyoffice.com/docspace/api-backend/usage-api/portal/payment/get-global-service-limit.md): GET /api/2.0/portal/payment/servicelimit/global
+- [Get the user service limits](https://api.onlyoffice.com/docspace/api-backend/usage-api/portal/payment/get-participant-service-limits.md): GET /api/2.0/portal/payment/servicelimit/participants
 - [Get the billing account page](https://api.onlyoffice.com/docspace/api-backend/usage-api/portal/payment/get-payment-account.md): GET /api/2.0/portal/payment/account
 - [Get the billing currencies](https://api.onlyoffice.com/docspace/api-backend/usage-api/portal/payment/get-payment-currencies.md): GET /api/2.0/portal/payment/currencies
 - [Get the purchasable quotas](https://api.onlyoffice.com/docspace/api-backend/usage-api/portal/payment/get-payment-quotas.md): GET /api/2.0/portal/payment/quotas
@@ -1668,13 +1719,16 @@ The types the endpoints take and return.
 - [Get the product prices](https://api.onlyoffice.com/docspace/api-backend/usage-api/portal/payment/get-portal-prices.md): GET /api/2.0/portal/payment/prices
 - [Get the current plan and limits](https://api.onlyoffice.com/docspace/api-backend/usage-api/portal/payment/get-quota-payment-information.md): GET /api/2.0/portal/payment/quota
 - [Get restricted AI models](https://api.onlyoffice.com/docspace/api-backend/usage-api/portal/payment/get-restricted-ai-models.md): GET /api/2.0/portal/payment/ai-model/restrictions
+- [Get a service limit](https://api.onlyoffice.com/docspace/api-backend/usage-api/portal/payment/get-service-limit.md): GET /api/2.0/portal/payment/servicelimit/{id}
 - [Get the subscription balance information](https://api.onlyoffice.com/docspace/api-backend/usage-api/portal/payment/get-subscription-balance-info.md): GET /api/2.0/portal/payment/subscription/balance
 - [Get the wallet service settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/portal/payment/get-tenant-wallet-service-settings.md): GET /api/2.0/portal/payment/servicessettings
 - [Get the auto top-up settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/portal/payment/get-tenant-wallet-settings.md): GET /api/2.0/portal/payment/topupsettings
+- [Get the portal service limit](https://api.onlyoffice.com/docspace/api-backend/usage-api/portal/payment/get-total-service-limit.md): GET /api/2.0/portal/payment/servicelimit/total
 - [Get a wallet service](https://api.onlyoffice.com/docspace/api-backend/usage-api/portal/payment/get-wallet-service.md): GET /api/2.0/portal/payment/walletservice
 - [Get wallet services](https://api.onlyoffice.com/docspace/api-backend/usage-api/portal/payment/get-wallet-services.md): GET /api/2.0/portal/payment/walletservices
 - [Move the subscription to the wallet](https://api.onlyoffice.com/docspace/api-backend/usage-api/portal/payment/move-subscription-to-wallet.md): POST /api/2.0/portal/payment/subscription/movetowallet
 - [Contact the sales team](https://api.onlyoffice.com/docspace/api-backend/usage-api/portal/payment/send-payment-request.md): POST /api/2.0/portal/payment/request
+- [Set the user service limits](https://api.onlyoffice.com/docspace/api-backend/usage-api/portal/payment/set-participant-service-limits.md): PUT /api/2.0/portal/payment/servicelimit/participants
 - [Set restricted AI models](https://api.onlyoffice.com/docspace/api-backend/usage-api/portal/payment/set-restricted-ai-models.md): PUT /api/2.0/portal/payment/ai-model/restrictions
 - [Set the auto top-up settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/portal/payment/set-tenant-wallet-settings.md): POST /api/2.0/portal/payment/topupsettings
 - [Terminate the monthly usage report](https://api.onlyoffice.com/docspace/api-backend/usage-api/portal/payment/terminate-customer-monthly-usage-report.md): DELETE /api/2.0/portal/payment/customer/usage/monthly/report
@@ -1682,6 +1736,7 @@ The types the endpoints take and return.
 - [Terminate the service usage report](https://api.onlyoffice.com/docspace/api-backend/usage-api/portal/payment/terminate-customer-service-usage-report.md): DELETE /api/2.0/portal/payment/customer/usage/report
 - [Top up the wallet](https://api.onlyoffice.com/docspace/api-backend/usage-api/portal/payment/top-up-deposit.md): POST /api/2.0/portal/payment/deposit
 - [Change the subscription quantity](https://api.onlyoffice.com/docspace/api-backend/usage-api/portal/payment/update-payment.md): PUT /api/2.0/portal/payment/update
+- [Update a service limit](https://api.onlyoffice.com/docspace/api-backend/usage-api/portal/payment/update-service-limit.md): PUT /api/2.0/portal/payment/servicelimit
 - [Change a wallet service quantity](https://api.onlyoffice.com/docspace/api-backend/usage-api/portal/payment/update-wallet-payment.md): PUT /api/2.0/portal/payment/updatewallet
 
 #### quota
@@ -1715,7 +1770,7 @@ The types the endpoints take and return.
 - [Send congratulations](https://api.onlyoffice.com/docspace/api-backend/usage-api/portal/users/send-congratulations.md): POST /api/2.0/portal/sendcongratulations
 - [Update an invitation link](https://api.onlyoffice.com/docspace/api-backend/usage-api/portal/users/update-invitation-link.md): PUT /api/2.0/portal/users/invitationlink
 
-### ONLYOFFICE DocSpace Rooms API
+### ONLYOFFICE Apps Rooms API
 
 - [Attach tags to a room](https://api.onlyoffice.com/docspace/api-backend/usage-api/rooms/add-room-tags.md): PUT /api/2.0/files/rooms/{id}/tags
 - [Archive a room](https://api.onlyoffice.com/docspace/api-backend/usage-api/rooms/archive-room.md): PUT /api/2.0/files/rooms/{id}/archive
@@ -1779,7 +1834,7 @@ The types the endpoints take and return.
 - [Rotate an encryption key](https://api.onlyoffice.com/docspace/api-backend/usage-api/rooms/privacy-room/replace-key.md): PUT /api/2.0/privacyroom/keys
 - [Create an encryption key](https://api.onlyoffice.com/docspace/api-backend/usage-api/rooms/privacy-room/set-keys.md): POST /api/2.0/privacyroom/keys
 
-### ONLYOFFICE DocSpace Security API
+### ONLYOFFICE Apps Security API
 
 #### access-to-devtools
 
@@ -1839,7 +1894,7 @@ The types the endpoints take and return.
 - [Save SMTP settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/security/smtp-settings/save-smtp-settings.md): POST /api/2.0/smtpsettings/smtp
 - [Test SMTP settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/security/smtp-settings/test-smtp-settings.md): GET /api/2.0/smtpsettings/smtp/test
 
-### ONLYOFFICE DocSpace Settings API
+### ONLYOFFICE Apps Settings API
 
 #### access-to-devtools
 
@@ -2055,6 +2110,67 @@ The types the endpoints take and return.
 - [Refresh a web plugin](https://api.onlyoffice.com/docspace/api-backend/usage-api/settings/webplugins/refresh-web-plugin.md): PUT /api/2.0/settings/webplugins/{name}/refresh
 - [Update a web plugin](https://api.onlyoffice.com/docspace/api-backend/usage-api/settings/webplugins/update-web-plugin.md): PUT /api/2.0/settings/webplugins/{name}
 
-### ONLYOFFICE DocSpace ThirdParty API
+### ONLYOFFICE Apps ThirdParty API
 
 - [Get provider consent URL](https://api.onlyoffice.com/docspace/api-backend/usage-api/thirdparty/get-third-party-code.md): GET /api/2.0/thirdparty/{provider}
+
+## Webhooks
+
+The deliveries DocSpace sends to a subscription's URL, one page per trigger, with the operations that raise it: [ONLYOFFICE Apps Webhooks](https://api.onlyoffice.com/docspace/api-backend/webhooks/webhooks.md).
+
+### user
+
+- [user.created](https://api.onlyoffice.com/docspace/api-backend/webhooks/user/user-created.md): UserDelivery
+- [user.invited](https://api.onlyoffice.com/docspace/api-backend/webhooks/user/user-invited.md): UserDelivery
+- [user.updated](https://api.onlyoffice.com/docspace/api-backend/webhooks/user/user-updated.md): UserDelivery
+- [user.deleted](https://api.onlyoffice.com/docspace/api-backend/webhooks/user/user-deleted.md): UserDelivery
+
+### group
+
+- [group.created](https://api.onlyoffice.com/docspace/api-backend/webhooks/group/group-created.md): GroupDelivery
+- [group.updated](https://api.onlyoffice.com/docspace/api-backend/webhooks/group/group-updated.md): GroupDelivery
+- [group.deleted](https://api.onlyoffice.com/docspace/api-backend/webhooks/group/group-deleted.md): GroupDelivery
+
+### file
+
+- [file.created](https://api.onlyoffice.com/docspace/api-backend/webhooks/file/file-created.md): FileDelivery
+- [file.uploaded](https://api.onlyoffice.com/docspace/api-backend/webhooks/file/file-uploaded.md): FileDelivery
+- [file.updated](https://api.onlyoffice.com/docspace/api-backend/webhooks/file/file-updated.md): FileDelivery
+- [file.trashed](https://api.onlyoffice.com/docspace/api-backend/webhooks/file/file-trashed.md): FileDelivery
+- [file.deleted](https://api.onlyoffice.com/docspace/api-backend/webhooks/file/file-deleted.md): FileDelivery
+- [file.restored](https://api.onlyoffice.com/docspace/api-backend/webhooks/file/file-restored.md): FileDelivery
+- [file.copied](https://api.onlyoffice.com/docspace/api-backend/webhooks/file/file-copied.md): FileDelivery
+- [file.moved](https://api.onlyoffice.com/docspace/api-backend/webhooks/file/file-moved.md): FileDelivery
+- [file.downloaded](https://api.onlyoffice.com/docspace/api-backend/webhooks/file/file-downloaded.md): FileDelivery
+
+### folder
+
+- [folder.created](https://api.onlyoffice.com/docspace/api-backend/webhooks/folder/folder-created.md): FolderDelivery
+- [folder.updated](https://api.onlyoffice.com/docspace/api-backend/webhooks/folder/folder-updated.md): FolderDelivery
+- [folder.trashed](https://api.onlyoffice.com/docspace/api-backend/webhooks/folder/folder-trashed.md): FolderDelivery
+- [folder.deleted](https://api.onlyoffice.com/docspace/api-backend/webhooks/folder/folder-deleted.md): FolderDelivery
+- [folder.restored](https://api.onlyoffice.com/docspace/api-backend/webhooks/folder/folder-restored.md): FolderDelivery
+- [folder.copied](https://api.onlyoffice.com/docspace/api-backend/webhooks/folder/folder-copied.md): FolderDelivery
+- [folder.moved](https://api.onlyoffice.com/docspace/api-backend/webhooks/folder/folder-moved.md): FolderDelivery
+- [folder.downloaded](https://api.onlyoffice.com/docspace/api-backend/webhooks/folder/folder-downloaded.md): FolderDelivery
+
+### room
+
+- [room.created](https://api.onlyoffice.com/docspace/api-backend/webhooks/room/room-created.md): RoomDelivery
+- [room.updated](https://api.onlyoffice.com/docspace/api-backend/webhooks/room/room-updated.md): RoomDelivery
+- [room.archived](https://api.onlyoffice.com/docspace/api-backend/webhooks/room/room-archived.md): RoomDelivery
+- [room.deleted](https://api.onlyoffice.com/docspace/api-backend/webhooks/room/room-deleted.md): RoomDelivery
+- [room.restored](https://api.onlyoffice.com/docspace/api-backend/webhooks/room/room-restored.md): RoomDelivery
+- [room.copied](https://api.onlyoffice.com/docspace/api-backend/webhooks/room/room-copied.md): RoomDelivery
+
+### form
+
+- [form.submit](https://api.onlyoffice.com/docspace/api-backend/webhooks/form/form-submit.md): FormSubmitDelivery
+- [form.filled.out](https://api.onlyoffice.com/docspace/api-backend/webhooks/form/form-filled-out.md): FileDelivery
+- [form.stopped](https://api.onlyoffice.com/docspace/api-backend/webhooks/form/form-stopped.md): FileDelivery
+
+### agent
+
+- [agent.created](https://api.onlyoffice.com/docspace/api-backend/webhooks/agent/agent-created.md): RoomDelivery
+- [agent.updated](https://api.onlyoffice.com/docspace/api-backend/webhooks/agent/agent-updated.md): RoomDelivery
+- [agent.deleted](https://api.onlyoffice.com/docspace/api-backend/webhooks/agent/agent-deleted.md): RoomDelivery

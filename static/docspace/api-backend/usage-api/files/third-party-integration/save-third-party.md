@@ -6,7 +6,7 @@
 
 Connect a third-party account
 
-Connects an account at a third-party storage service to the portal, or re-authenticates one that is already  connected, and returns the folder that now stands for its root. Send `providerId` to update an existing  account and omit it to connect a new one; the accepted `providerKey` values come from  `GET api/2.0/files/thirdparty/providers`. The credentials to send depend on the service: the OAuth services  take `token`, which is the authorization code from their consent screen and not an access token, while the  WebDAV family and SharePoint take `login` with `password`, plus `url` where the server address is not fixed.  Credentials are verified against the service before anything is stored, so a wrong password is refused and  nothing is saved. The caller needs the rights to create rooms, and the portal-wide third-party switch has to  be on, otherwise the call is refused. A new account is attached to the Rooms section and becomes available as  room storage for `POST api/2.0/files/rooms/thirdparty/{id}`. Connecting twice with the same title creates two  separate accounts.
+Connects an account at a third-party storage service as room storage, or, with `providerId`, re-authenticates an  account the caller connected earlier, and returns the folder that stands for the account's root. Take  `providerKey` from `GET api/2.0/files/thirdparty/providers` and send `url` wherever it reports  `requiredConnectionUrl`; OAuth services take `token`, the authorization code from their consent screen, the  others `login` and `password`. The caller needs the right to create rooms, and the portal-wide third-party switch  has to be on. Credentials are checked before anything is stored; a call without `providerId` always adds a new  account, and a re-authenticated room account keeps its server address. The new account is used by  `POST api/2.0/files/rooms/thirdparty/{id}`; backup storage is connected by `POST api/2.0/files/thirdparty/backup`.
 
 ## Parameters
 
@@ -19,7 +19,7 @@ Connects an account at a third-party storage service to the portal, or re-authen
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | The root folder of the connected account | [**ThirdPartyFolderWrapper**](../../models/third-party-folder-wrapper.md) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **400** | The request body cannot be read or has no `customerTitle` or `providerKey`, `providerId` is neither a number nor a numeric string, or, for a new account, `providerKey` names no known storage service or the `token` or `password` the service needs is missing | - | - |
+| **400** | The request body cannot be read or has no `customerTitle` or `providerKey`, `providerId` is neither a number nor a numeric string, or, for a new account, `providerKey` names no known storage service, the `token` or `password` the service needs is missing, or `url` is missing or is not an HTTP address for a service that needs it | - | - |
 | **403** | The caller cannot create rooms, the portal-wide third-party switch is off or no storage service is enabled, the title of a new account is empty once invalid characters are removed, the service rejects the credentials, or `providerId` names an account connected by another member | - | - |
 | **404** | `providerId` names no third-party account on the portal | - | - |
 | **500** | The storage service cannot be reached or fails while the credentials are checked | - | - |

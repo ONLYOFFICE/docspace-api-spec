@@ -1,9 +1,9 @@
-# ONLYOFFICE DocSpace AI API
+# ONLYOFFICE Apps AI API
 
 The browsable version of this reference, with a request builder and code samples, is published at
 [https://api.onlyoffice.com/docspace/api-backend/usage-api/](https://api.onlyoffice.com/docspace/api-backend/usage-api/).
 
-All URIs are relative to *https://yourportal.onlyoffice.com*, where the host is the address of your DocSpace instance.
+All URIs are relative to *https://yourportal.onlyoffice.com*, where the host is the address of your Apps instance.
 
 ## AI
 
@@ -76,6 +76,13 @@ All URIs are relative to *https://yourportal.onlyoffice.com*, where the host is 
 | Method | HTTP request | Description |
 |------------ | ------------- | -------------|
 | [**aiExportTextToDocx**](export/ai-export-text-to-docx.md) | **POST** /api/2.0/ai/text-to-docx | Start markdown export |
+
+## Metadata
+
+| Method | HTTP request | Description |
+|------------ | ------------- | -------------|
+| [**aiMetaFill**](metadata/ai-meta-fill.md) | **POST** /api/2.0/ai/meta/fill | Fill metadata values |
+| [**aiMetaGenerate**](metadata/ai-meta-generate.md) | **POST** /api/2.0/ai/meta/generate | Generate metadata fields |
 
 ## OpenAI passthrough
 
