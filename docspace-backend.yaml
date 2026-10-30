@@ -72184,6 +72184,11 @@ components:
 
             folder here.
           $ref: '#/components/schemas/AiFileEntryType'
+        entryKind:
+          examples:
+            - file
+          type: string
+          description: 'Which concrete type the object is: `file`, `thirdPartyFile`, `folder`, `thirdPartyFolder`. It is what tells the types apart in a list that mixes several of them; a response limited by `fields` may leave it out.'
       description: >-
         What every file and folder in an answer has in common; the concrete shape is a file or a folder, told apart by the
 
@@ -80195,10 +80200,22 @@ components:
 
             folder here.
           $ref: '#/components/schemas/FileEntryType'
+        entryKind:
+          examples:
+            - file
+          type: string
+          description: 'Which concrete type the object is: `file`, `thirdPartyFile`, `folder`, `thirdPartyFolder`. It is what tells the types apart in a list that mixes several of them; a response limited by `fields` may leave it out.'
       description: >-
         What every file and folder in an answer has in common; the concrete shape is a file or a folder, told apart by the
 
         entry type.
+      discriminator:
+        propertyName: entryKind
+        mapping:
+          file: '#/components/schemas/FileDto'
+          thirdPartyFile: '#/components/schemas/ThirdPartyFileDto'
+          folder: '#/components/schemas/FolderDto'
+          thirdPartyFolder: '#/components/schemas/ThirdPartyFolderDto'
       x-derived: true
       x-derived-types:
         - FileDto
