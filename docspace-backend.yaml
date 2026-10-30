@@ -23135,20 +23135,14 @@ paths:
             addresses a folder on a connected third-party account, and both kinds may be sent in one list.
           schema:
             examples:
-              - - 1
-                - 2
-                - 3
+              - - "1"
+                - "2"
+                - "3"
             type:
               - "null"
               - array
             items:
-              anyOf:
-                - examples:
-                    - 1234
-                  type: integer
-                - examples:
-                    - some text
-                  type: string
+              type: string
             description: >-
               The folders to move or copy, by id. A number addresses a folder stored in the portal itself, a string
 
@@ -23161,20 +23155,14 @@ paths:
             file on a connected third-party account, and both kinds may be sent in one list.
           schema:
             examples:
-              - - 1
-                - 2
-                - 3
+              - - "1"
+                - "2"
+                - "3"
             type:
               - "null"
               - array
             items:
-              anyOf:
-                - examples:
-                    - 1234
-                  type: integer
-                - examples:
-                    - some text
-                  type: string
+              type: string
             description: >-
               The files to move or copy, by id. A number addresses a file stored in the portal itself, a string addresses a
 
@@ -23189,14 +23177,8 @@ paths:
             caller has to be allowed to create items in it, and the id of a room addresses the root of that room.
           schema:
             examples:
-              - 1
-            oneOf:
-              - examples:
-                  - 1234
-                type: integer
-              - examples:
-                  - some text
-                type: string
+              - "1"
+            type: string
             description: >-
               The folder the items go to, by id — a number for a folder stored in the portal itself, a string for a folder
 
@@ -23468,20 +23450,14 @@ paths:
             addresses a folder on a connected third-party account, and both kinds may be sent in one list.
           schema:
             examples:
-              - - 1
-                - 2
-                - 3
+              - - "1"
+                - "2"
+                - "3"
             type:
               - "null"
               - array
             items:
-              anyOf:
-                - examples:
-                    - 1234
-                  type: integer
-                - examples:
-                    - some text
-                  type: string
+              type: string
             description: >-
               The folders to move or copy, by id. A number addresses a folder stored in the portal itself, a string
 
@@ -23494,20 +23470,14 @@ paths:
             file on a connected third-party account, and both kinds may be sent in one list.
           schema:
             examples:
-              - - 1
-                - 2
-                - 3
+              - - "1"
+                - "2"
+                - "3"
             type:
               - "null"
               - array
             items:
-              anyOf:
-                - examples:
-                    - 1234
-                  type: integer
-                - examples:
-                    - some text
-                  type: string
+              type: string
             description: >-
               The files to move or copy, by id. A number addresses a file stored in the portal itself, a string addresses a
 
@@ -23522,14 +23492,8 @@ paths:
             caller has to be allowed to create items in it, and the id of a room addresses the root of that room.
           schema:
             examples:
-              - 1
-            oneOf:
-              - examples:
-                  - 1234
-                type: integer
-              - examples:
-                  - some text
-                type: string
+              - "1"
+            type: string
             description: >-
               The folder the items go to, by id — a number for a folder stored in the portal itself, a string for a folder
 

@@ -1074,8 +1074,6 @@ The types the endpoints take and return.
 - [aiToolsListSystemTools 200 response](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-tools-list-system-tools-200-response.md)
 - [aiVectorizationStartTask 200 response](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-vectorization-start-task-200-response.md)
 - [aiWebSearchConfigure 400 response](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-web-search-configure-400-response.md)
-- [checkMoveOrCopyBatchItems.destFolderId.parameter](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/check-move-or-copy-batch-items-dest-folder-id-parameter.md)
-- [checkMoveOrCopyBatchItems.folderIds.parameter item](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/check-move-or-copy-batch-items-folder-ids-parameter-item.md)
 - [exchangeToken 200 response](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/exchange-token-200-response.md)
 - [getPortalPrices 200 response](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/get-portal-prices-200-response.md)
 - [getPortalPrices 200 response.links item](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/get-portal-prices-200-response-links-item.md)
