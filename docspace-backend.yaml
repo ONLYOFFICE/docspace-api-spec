@@ -48827,8 +48827,12 @@ paths:
                     description: The response payload.
                   count:
                     type: integer
-                    description: The total number of items in the response
+                    description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
                     format: int32
+                  total:
+                    type: integer
+                    description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+                    format: int64
                   links:
                     type: array
                     items:
@@ -70852,8 +70856,12 @@ components:
           $ref: '#/components/schemas/AiUserSettingsDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -70908,8 +70916,12 @@ components:
           $ref: '#/components/schemas/AiVectorizationSettingsDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -70966,8 +70978,12 @@ components:
           $ref: '#/components/schemas/AiSettingsDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -71042,8 +71058,12 @@ components:
           description: The list of FolderDto objects returned by the operation.
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -72318,8 +72338,12 @@ components:
           $ref: '#/components/schemas/AiFileOperationDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -72508,8 +72532,12 @@ components:
           description: The list of NewItemsDtoAgentNewItemsDto objects returned by the operation.
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -72587,8 +72615,12 @@ components:
           $ref: '#/components/schemas/AiFolderDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -72618,8 +72650,12 @@ components:
           $ref: '#/components/schemas/AiFolderContentDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -73560,8 +73596,12 @@ components:
           description: The list of BackupHistoryRecordDto objects returned by the operation.
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -73758,8 +73798,12 @@ components:
           $ref: '#/components/schemas/BackupProgressDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -73803,8 +73847,12 @@ components:
           $ref: '#/components/schemas/BackupServiceStateDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -73869,8 +73917,12 @@ components:
           $ref: '#/components/schemas/BackupsCountResultDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -73900,8 +73952,12 @@ components:
           description: The boolean value returned by the operation.
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -74053,8 +74109,12 @@ components:
           description: The int32 value returned by the operation.
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -74165,8 +74225,12 @@ components:
           $ref: '#/components/schemas/ScheduleDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -74326,8 +74390,12 @@ components:
           description: The list of AceShortDto objects returned by the operation.
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -74490,8 +74558,12 @@ components:
           description: The response payload.
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -74575,8 +74647,12 @@ components:
           $ref: '#/components/schemas/AutoCleanUpDataDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -75016,8 +75092,12 @@ components:
           $ref: '#/components/schemas/CheckDestFolderDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -75277,8 +75357,12 @@ components:
           $ref: '#/components/schemas/ChunkedUploadSessionResultDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -75308,8 +75392,12 @@ components:
           $ref: '#/components/schemas/ChunkedUploadSessionDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -75509,8 +75597,12 @@ components:
           $ref: '#/components/schemas/ConfigurationDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -75560,8 +75652,12 @@ components:
           description: The list of ConversationResultDto objects returned by the operation.
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -76054,8 +76150,12 @@ components:
           description: The list of CoversResultDto objects returned by the operation.
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -76703,8 +76803,12 @@ components:
           description: The list of CustomFieldValueDto objects returned by the operation.
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -77055,8 +77159,12 @@ components:
           $ref: '#/components/schemas/DefaultTemplateSettingsDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -77371,8 +77479,12 @@ components:
           $ref: '#/components/schemas/DocServiceUrlDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -77487,8 +77599,12 @@ components:
           $ref: '#/components/schemas/DocumentBuilderTaskDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -77819,8 +77935,12 @@ components:
           description: The list of EditHistoryDto objects returned by the operation.
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -77983,8 +78103,12 @@ components:
           $ref: '#/components/schemas/EditHistoryDataDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -78695,8 +78819,12 @@ components:
           description: The list of EncryptionKeyDto objects returned by the operation.
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -78899,8 +79027,12 @@ components:
           $ref: '#/components/schemas/EntryMetadataDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -79102,8 +79234,12 @@ components:
           $ref: '#/components/schemas/ExternalDbSyncTaskDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -79292,8 +79428,12 @@ components:
           $ref: '#/components/schemas/ExternalShareDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -79422,8 +79562,12 @@ components:
           $ref: '#/components/schemas/ExternalSharingSettingsDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -79472,8 +79616,12 @@ components:
           description: The list of FileDto objects returned by the operation.
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -79920,8 +80068,12 @@ components:
           $ref: '#/components/schemas/FileEncryptionInfoDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -79953,8 +80105,12 @@ components:
           description: The list of FileEntryDto objects returned by the operation.
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -79986,8 +80142,12 @@ components:
           description: The list of FileEntryBaseDto objects returned by the operation.
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -80230,8 +80390,12 @@ components:
           $ref: '#/components/schemas/FileEntryBaseDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -80741,8 +80905,12 @@ components:
           $ref: '#/components/schemas/FileLinkDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -80774,8 +80942,12 @@ components:
           description: The list of FileOperationDto objects returned by the operation.
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -80959,8 +81131,12 @@ components:
           $ref: '#/components/schemas/FileOperationDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -81101,8 +81277,12 @@ components:
           $ref: '#/components/schemas/FileReferenceDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -81165,8 +81345,12 @@ components:
           description: The list of FileShareDto objects returned by the operation.
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -81439,8 +81623,12 @@ components:
           description: The list of FileShare objects returned by the operation.
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -81470,8 +81658,12 @@ components:
           $ref: '#/components/schemas/FileShareDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -81555,8 +81747,12 @@ components:
           $ref: '#/components/schemas/FileDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -82249,8 +82445,12 @@ components:
           $ref: '#/components/schemas/FilesSettingsDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -82350,8 +82550,12 @@ components:
           $ref: '#/components/schemas/FilesStatisticsResultDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -82431,8 +82635,12 @@ components:
           $ref: '#/components/schemas/FillingFormResultDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -82513,8 +82721,12 @@ components:
           description: The list of FolderDto objects returned by the operation.
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -82546,8 +82758,12 @@ components:
           description: The list of FolderContentDto objects returned by the operation.
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -82674,8 +82890,12 @@ components:
           $ref: '#/components/schemas/FolderContentDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -83219,8 +83439,12 @@ components:
           $ref: '#/components/schemas/FolderDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -83349,8 +83573,12 @@ components:
           description: The list of FormRoleDto objects returned by the operation.
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -83548,8 +83776,12 @@ components:
           $ref: '#/components/schemas/FormSubmissionsDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -83581,8 +83813,12 @@ components:
           description: The list of FormsItemDto objects returned by the operation.
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -83792,8 +84028,12 @@ components:
           description: The list of GroupMemberSecurityDto objects returned by the operation.
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -83954,8 +84194,12 @@ components:
           description: The list of HistoryDto objects returned by the operation.
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -84083,8 +84327,12 @@ components:
           $ref: '#/components/schemas/ICompress'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -84231,8 +84479,12 @@ components:
           $ref: '#/components/schemas/ItemKeyValuePairBooleanString'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -84472,8 +84724,12 @@ components:
           description: The list of MentionDto objects returned by the operation.
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -85481,8 +85737,12 @@ components:
           $ref: '#/components/schemas/MetadataFieldDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -85679,8 +85939,12 @@ components:
           $ref: '#/components/schemas/MetadataOperationDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -85712,8 +85976,12 @@ components:
           description: The list of MetadataTemplateDto objects returned by the operation.
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -85800,8 +86068,12 @@ components:
           $ref: '#/components/schemas/MetadataTemplateDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -86003,8 +86275,12 @@ components:
           $ref: '#/components/schemas/Module'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -86120,8 +86396,12 @@ components:
           description: The list of NewItemsDtoFileEntryBaseDto objects returned by the operation.
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -86153,8 +86433,12 @@ components:
           description: The list of NewItemsDtoRoomNewItemsDto objects returned by the operation.
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -86186,8 +86470,12 @@ components:
           description: The response payload.
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -86583,8 +86871,12 @@ components:
           description: The list of ProviderDto objects returned by the operation.
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -86887,8 +87179,12 @@ components:
           $ref: '#/components/schemas/RoomFromTemplateStatusDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -86920,8 +87216,12 @@ components:
           description: The list of RoomGroupDto objects returned by the operation.
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -87089,8 +87389,12 @@ components:
           $ref: '#/components/schemas/RoomGroupDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -87387,8 +87691,12 @@ components:
           $ref: '#/components/schemas/RoomSecurityDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -87575,8 +87883,12 @@ components:
           $ref: '#/components/schemas/RoomTemplateStatusDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -88299,8 +88611,12 @@ components:
           description: The response payload.
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -88330,8 +88646,12 @@ components:
           description: The string value returned by the operation.
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -88446,8 +88766,12 @@ components:
           description: The list of ThirdPartyAccountDto objects returned by the operation.
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -88748,8 +89072,12 @@ components:
           $ref: '#/components/schemas/ThirdPartyChunkedUploadSessionResultDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -88779,8 +89107,12 @@ components:
           $ref: '#/components/schemas/ThirdPartyChunkedUploadSessionDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -88946,8 +89278,12 @@ components:
           $ref: '#/components/schemas/ThirdPartyConfigurationDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -89020,8 +89356,12 @@ components:
           description: The list of ThirdPartyFileDto objects returned by the operation.
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -89723,8 +90063,12 @@ components:
           $ref: '#/components/schemas/ThirdPartyFileDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -89756,8 +90100,12 @@ components:
           description: The list of ThirdPartyFolderDto objects returned by the operation.
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -89884,8 +90232,12 @@ components:
           $ref: '#/components/schemas/ThirdPartyFolderContentDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -90185,8 +90537,12 @@ components:
           $ref: '#/components/schemas/ThirdPartyFolderDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -90399,8 +90755,12 @@ components:
           $ref: '#/components/schemas/ThirdPartyUploadSessionResponseDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -90882,8 +91242,12 @@ components:
           $ref: '#/components/schemas/UploadResultDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -90982,8 +91346,12 @@ components:
           $ref: '#/components/schemas/UploadSessionResponseDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -91471,8 +91839,12 @@ components:
           $ref: '#/components/schemas/XlsxReportResponseDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -92004,8 +92376,12 @@ components:
           description: The list of AccountEntryDto objects returned by the operation.
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -92048,8 +92424,12 @@ components:
           description: The list of AccountInfoDto objects returned by the operation.
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -92144,8 +92524,12 @@ components:
           description: The list of ApiKeyResponseDto objects returned by the operation.
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -92269,8 +92653,12 @@ components:
           $ref: '#/components/schemas/ApiKeyResponseDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -92421,8 +92809,12 @@ components:
           $ref: '#/components/schemas/DarkThemeSettingsDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -92488,8 +92880,12 @@ components:
           description: The list of EmployeeDto objects returned by the operation.
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -92521,8 +92917,12 @@ components:
           description: The list of EmployeeFullDto objects returned by the operation.
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -92552,8 +92952,12 @@ components:
           $ref: '#/components/schemas/EmployeeFullDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -92594,8 +92998,12 @@ components:
           $ref: '#/components/schemas/EmployeeDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -92659,8 +93067,12 @@ components:
           $ref: '#/components/schemas/FileUploadResultDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -92692,8 +93104,12 @@ components:
           description: The list of GroupDto objects returned by the operation.
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -92840,8 +93256,12 @@ components:
           description: The list of GroupSummaryDto objects returned by the operation.
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -92871,8 +93291,12 @@ components:
           $ref: '#/components/schemas/GroupDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -93348,8 +93772,12 @@ components:
           $ref: '#/components/schemas/TaskProgressResponseDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -93443,8 +93871,12 @@ components:
           $ref: '#/components/schemas/ThumbnailsDataDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -93538,8 +93970,12 @@ components:
           $ref: '#/components/schemas/TokenDiagnosticsDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -93902,8 +94338,12 @@ components:
           $ref: '#/components/schemas/UserExistsResponseDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -94130,8 +94570,12 @@ components:
           $ref: '#/components/schemas/ActiveConnectionsDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -94163,8 +94607,12 @@ components:
           description: The list of ActiveServiceDto objects returned by the operation.
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -94318,8 +94766,12 @@ components:
           $ref: '#/components/schemas/AdditionalResourcesDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -94430,8 +94882,12 @@ components:
           $ref: '#/components/schemas/AdditionalWhiteLabelSettingsDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -95000,8 +95456,12 @@ components:
           $ref: '#/components/schemas/AiPricesDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -95033,8 +95493,12 @@ components:
           description: The list of AmazonS3RegionDto objects returned by the operation.
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -95126,8 +95590,12 @@ components:
           description: The list of AppDto objects returned by the operation.
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -95191,8 +95659,12 @@ components:
           $ref: '#/components/schemas/AppDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -95224,8 +95696,12 @@ components:
           description: The list of AuditEventDto objects returned by the operation.
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -95491,8 +95967,12 @@ components:
           description: The list of AuditTrailProductDto objects returned by the operation.
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -95615,8 +96095,12 @@ components:
           $ref: '#/components/schemas/AuditTrailTypesDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -95898,8 +96382,12 @@ components:
           description: The list of AuthServiceDto objects returned by the operation.
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -96091,8 +96579,12 @@ components:
           $ref: '#/components/schemas/AuthenticationTokenDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -96166,8 +96658,12 @@ components:
           $ref: '#/components/schemas/BalanceDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -96280,8 +96776,12 @@ components:
           $ref: '#/components/schemas/CapabilitiesDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -96515,8 +97015,12 @@ components:
           $ref: '#/components/schemas/CompanyWhiteLabelSettingsDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -96662,8 +97166,12 @@ components:
           $ref: '#/components/schemas/ConfirmDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -96709,8 +97217,12 @@ components:
           $ref: '#/components/schemas/ConnectionTestResultDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -96789,8 +97301,12 @@ components:
           $ref: '#/components/schemas/CookieSettingsDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -97018,8 +97534,12 @@ components:
           $ref: '#/components/schemas/CspDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -97051,8 +97571,12 @@ components:
           description: The list of CurrenciesDto objects returned by the operation.
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -97250,8 +97774,12 @@ components:
           $ref: '#/components/schemas/CustomColorThemesSettingsDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -97338,8 +97866,12 @@ components:
           $ref: '#/components/schemas/CustomerInfoDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -97371,8 +97903,12 @@ components:
           description: The list of CustomerMonthlyUsageDto objects returned by the operation.
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -97816,8 +98352,12 @@ components:
           $ref: '#/components/schemas/CustomerServiceUsageReportDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -98059,8 +98599,12 @@ components:
           $ref: '#/components/schemas/DepositReportDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -98195,8 +98739,12 @@ components:
           $ref: '#/components/schemas/DocsCloudConfigDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -98429,8 +98977,12 @@ components:
           $ref: '#/components/schemas/DocsCloudQuotaDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -98665,8 +99217,12 @@ components:
           $ref: '#/components/schemas/DocsCloudTenantInfoDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -98696,8 +99252,12 @@ components:
           $ref: '#/components/schemas/DocsCloudTenantDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -98743,8 +99303,12 @@ components:
           $ref: '#/components/schemas/DocsCloudUsageDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -98866,8 +99430,12 @@ components:
           description: The double value returned by the operation.
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -98897,8 +99465,12 @@ components:
           description: The double value returned by the operation.
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -98958,8 +99530,12 @@ components:
           $ref: '#/components/schemas/EmailActivationSettingsDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -98991,8 +99567,12 @@ components:
           description: The list of EnabledModuleDto objects returned by the operation.
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -99062,8 +99642,12 @@ components:
           $ref: '#/components/schemas/EncryptionSettingsDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -99143,8 +99727,12 @@ components:
           $ref: '#/components/schemas/EntityQuotaSettingsDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -99409,8 +99997,12 @@ components:
           $ref: '#/components/schemas/FirebaseDeviceDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -99657,8 +100249,12 @@ components:
           description: The int64 value returned by the operation.
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -99852,8 +100448,12 @@ components:
           $ref: '#/components/schemas/InvitationLinkDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -99885,8 +100485,12 @@ components:
           description: The list of IpRestrictionDto objects returned by the operation.
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -100015,8 +100619,12 @@ components:
           $ref: '#/components/schemas/IpRestrictionsSettingsDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -100046,8 +100654,12 @@ components:
           $ref: '#/components/schemas/IpRestrictionsDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -100079,8 +100691,12 @@ components:
           description: The list of IsDefaultWhiteLabelLogosDto objects returned by the operation.
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -100143,8 +100759,12 @@ components:
           $ref: '#/components/schemas/IsDefaultWhiteLabelLogosDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -100250,8 +100870,12 @@ components:
           description: The JSON value returned by the operation, or null when there is none.
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -100283,8 +100907,12 @@ components:
           description: The list of LicensorDetailsDto objects returned by the operation.
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -100408,8 +101036,12 @@ components:
           $ref: '#/components/schemas/LicensorDetailsDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -100464,8 +101096,12 @@ components:
           description: The list of LoginEventDto objects returned by the operation.
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -100739,8 +101375,12 @@ components:
           $ref: '#/components/schemas/LoginSettingsDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -101111,8 +101751,12 @@ components:
           $ref: '#/components/schemas/MigrationStatusDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -101207,8 +101851,12 @@ components:
           $ref: '#/components/schemas/NotificationChannelStatusDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -101280,8 +101928,12 @@ components:
           $ref: '#/components/schemas/NotificationSettingsDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -101640,8 +102292,12 @@ components:
           $ref: '#/components/schemas/OwnerChangeInstructionsDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -101834,8 +102490,12 @@ components:
           $ref: '#/components/schemas/PasswordSettingsDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -101894,8 +102554,12 @@ components:
           $ref: '#/components/schemas/PaymentCalculationDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -101998,8 +102662,12 @@ components:
           $ref: '#/components/schemas/PaymentSettingsDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -102114,8 +102782,12 @@ components:
           $ref: '#/components/schemas/PortalUserDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -102253,8 +102925,12 @@ components:
           $ref: '#/components/schemas/ProductAdministratorDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -102339,8 +103015,12 @@ components:
           description: The list of QuotaDto objects returned by the operation.
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -102521,8 +103201,12 @@ components:
           $ref: '#/components/schemas/QuotaDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -102622,8 +103306,12 @@ components:
           $ref: '#/components/schemas/ReportDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -102669,8 +103357,12 @@ components:
           $ref: '#/components/schemas/RestrictedAiModelsDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -102722,8 +103414,12 @@ components:
           $ref: '#/components/schemas/RoomsNotificationSettingsDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -102983,8 +103679,12 @@ components:
           description: The list of SecurityDto objects returned by the operation.
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -103357,8 +104057,12 @@ components:
           $ref: '#/components/schemas/ServiceLimitReportDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -103443,8 +104147,12 @@ components:
           $ref: '#/components/schemas/ServiceLimitDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -103476,8 +104184,12 @@ components:
           description: The list of ServicePriceDto objects returned by the operation.
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -104184,8 +104896,12 @@ components:
           $ref: '#/components/schemas/SettingsDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -104268,8 +104984,12 @@ components:
           $ref: '#/components/schemas/SmtpOperationStatusDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -104398,8 +105118,12 @@ components:
           $ref: '#/components/schemas/SmtpSettingsDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -104447,8 +105171,12 @@ components:
           $ref: '#/components/schemas/SocketSettingsDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -104870,8 +105598,12 @@ components:
           $ref: '#/components/schemas/SsoSettingsConstantsDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -105001,8 +105733,12 @@ components:
           $ref: '#/components/schemas/SsoSettingsDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -105138,8 +105874,12 @@ components:
           description: The list of StorageDto objects returned by the operation.
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -105309,8 +106049,12 @@ components:
           $ref: '#/components/schemas/StorageSettingsDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -105353,8 +106097,12 @@ components:
           $ref: '#/components/schemas/StudioDefaultPageSettingsDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -105461,8 +106209,12 @@ components:
           $ref: '#/components/schemas/SubscriptionBalanceDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -105692,8 +106444,12 @@ components:
           $ref: '#/components/schemas/TariffDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -105747,8 +106503,12 @@ components:
           $ref: '#/components/schemas/TelegramStatusDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -105810,8 +106570,12 @@ components:
           $ref: '#/components/schemas/TenantAiAccessSettingsDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -105870,8 +106634,12 @@ components:
           $ref: '#/components/schemas/TenantAuditSettingsDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -105928,8 +106696,12 @@ components:
           $ref: '#/components/schemas/TenantBannerSettingsDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -105972,8 +106744,12 @@ components:
           $ref: '#/components/schemas/TenantDeepLinkSettingsDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -106030,8 +106806,12 @@ components:
           $ref: '#/components/schemas/TenantDevToolsAccessSettingsDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -106711,8 +107491,12 @@ components:
           $ref: '#/components/schemas/TenantQuotaSettingsDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -106742,8 +107526,12 @@ components:
           $ref: '#/components/schemas/TenantQuotaDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -106852,8 +107640,12 @@ components:
           $ref: '#/components/schemas/TenantUserInvitationSettingsDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -106943,8 +107735,12 @@ components:
           $ref: '#/components/schemas/TenantWalletServiceSettingsDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -107035,8 +107831,12 @@ components:
           $ref: '#/components/schemas/TenantWalletSettingsDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -107066,8 +107866,12 @@ components:
           $ref: '#/components/schemas/TenantDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -107099,8 +107903,12 @@ components:
           description: The list of TfaAppCodeDto objects returned by the operation.
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -107190,8 +107998,12 @@ components:
           $ref: '#/components/schemas/TfaConfirmDataDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -107290,8 +108102,12 @@ components:
           description: The list of TfaSettingsDto objects returned by the operation.
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -107449,8 +108265,12 @@ components:
           $ref: '#/components/schemas/TfaSetupCodeDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -107539,8 +108359,12 @@ components:
           description: The list of TimezoneDto objects returned by the operation.
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -107667,8 +108491,12 @@ components:
           description: The list of UpcomingPaymentDto objects returned by the operation.
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -107837,8 +108665,12 @@ components:
           description: The list of UsageSpaceStatItemDto objects returned by the operation.
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -107982,8 +108814,12 @@ components:
           description: The list of WalletServiceDto objects returned by the operation.
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -108045,8 +108881,12 @@ components:
           $ref: '#/components/schemas/WalletServiceDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -108139,8 +108979,12 @@ components:
           description: The list of WebPluginDto objects returned by the operation.
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -108409,8 +109253,12 @@ components:
           $ref: '#/components/schemas/WebPluginDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -108557,8 +109405,12 @@ components:
           description: The list of WebhookTriggerDto objects returned by the operation.
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -108750,8 +109602,12 @@ components:
           description: The list of WebhooksConfigWithStatusDto objects returned by the operation.
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -108797,8 +109653,12 @@ components:
           $ref: '#/components/schemas/WebhooksConfigDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -108830,8 +109690,12 @@ components:
           description: The list of WebhooksLogDto objects returned by the operation.
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -109052,8 +109916,12 @@ components:
           $ref: '#/components/schemas/WebhooksLogDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -109085,8 +109953,12 @@ components:
           description: The list of WhiteLabelItemDto objects returned by the operation.
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
@@ -109403,8 +110275,12 @@ components:
           $ref: '#/components/schemas/WizardSettingsDto'
         count:
           type: integer
-          description: The total number of items in the response
+          description: 'How many items this response carries: the length of the page for a list, 1 for a single object'
           format: int32
+        total:
+          type: integer
+          description: How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+          format: int64
         links:
           type: array
           items:
