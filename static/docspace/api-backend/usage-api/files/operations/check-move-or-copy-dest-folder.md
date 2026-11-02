@@ -6,7 +6,7 @@
 
 Check the destination folder
 
-Reports whether the destination folder accepts the listed files, before a move or a copy is started. Only  `fileIds` and `destFolderId` are read from the request: `result` says whether all of the files are accepted,  only some of them or none, and `files` names the ones that are. The check is about what the destination allows  to be stored in it rather than about name clashes — everywhere except a form-filling room every file is  accepted, while a form-filling room accepts only PDF forms, so a text document offered to one comes back as  none accepted. The caller needs create access to the destination, so a room the caller cannot write to and an  archived room are refused with 403, a destination that does not exist is answered as missing, and a request  without `destFolderId` is rejected as an invalid request. Folder ids and the copying options of the request  play no part here. The call changes nothing; for same-named entries at the destination use  `GET api/2.0/files/fileops/move`.
+Reports whether the destination folder accepts the listed files, before a move or a copy is started. Only  `fileIds` and `destFolderId` are read from the request: `result` says whether all of the files are accepted,  only some of them or none, and `files` names the ones that are. The check is about what the destination allows  to be stored in it rather than about name clashes — everywhere except a form-filling room every file is  accepted, while a form-filling room accepts only PDF forms, so a text document offered to one comes back as  none accepted. A file listed twice is counted once, as the operation moves it once. The caller needs create  access to the destination, so a room the caller cannot write to and an archived room are refused with 403, as  are the Rooms, Forms and AI agents section roots, which hold rooms only; a destination that does not exist is  answered as missing, and a request without `destFolderId` is rejected as an invalid request. Folder ids and  the copying options of the request play no part here. The call changes nothing; for same-named entries at the  destination use  `GET api/2.0/files/fileops/move`.
 
 ## Parameters
 
@@ -27,7 +27,7 @@ Reports whether the destination folder accepts the listed files, before a move o
 |------------- | ------------- | ------------- | -------------|
 | **200** | Whether the destination accepts all of the listed files, some of them or none, and which ones it accepts | [**CheckDestFolderWrapper**](../../models/check-dest-folder-wrapper.md) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **400** | `destFolderId` is not given | - | - |
-| **403** | The caller cannot create items in the destination folder | - | - |
+| **403** | The caller cannot create items in the destination folder, or the destination is the Rooms, Forms or AI agents section root, which holds rooms only | - | - |
 | **404** | The destination folder does not exist | - | - |
 | **500** | A listed file is on a third-party account and the destination accepts it, or a listed file does not exist while the destination is a form-filling room | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../../models/error-api-response.md) | - |

@@ -21,12 +21,12 @@ Sends the next part of a file into the session opened for it, as the multipart `
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | The progress of the session, or the stored file once the last part has arrived | [**UploadSessionResponseWrapper**](../../models/upload-session-response-wrapper.md) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
+| **400** | The request has no `File` part | - | - |
 | **402** | The part is larger than `chunkUploadSize`, or storing the file would exceed a storage quota or size limit | - | - |
 | **404** | No open session with the specified ID: it never existed, was finalized or aborted, or has expired | - | - |
-| **500** | The request has no `File` part, or a file that is not a PDF is stored in a form-filling room | - | - |
+| **500** | A file that is not a PDF is stored in a form-filling room | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../../models/error-api-response.md) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../../models/error-api-response.md) | `Retry-After` |
-| **400** | Bad Request. | [**ErrorApiResponse**](../../models/error-api-response.md) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 

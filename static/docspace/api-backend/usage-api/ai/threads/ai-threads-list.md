@@ -12,7 +12,7 @@ Lists the threads of a scope, most recently edited first, and searches their tit
 
 |Name | In | Type | Description | Notes |
 |------------- | ------------- | ------------- | ------------- | -------------|
-| **entityId** | query | **String** | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | [optional] [example: `1234`] |
+| **entityId** | query | **String** | The DocSpace folder the request names. For a chat it is the AI project the chat runs in, and is omitted outside a project; the settings operations accept it for the room the client is in, which has to be one the caller can open, but their data is kept per user and portal, not per room. | [optional] [example: `1234`] |
 | **count** | query | **Integer** | The maximum number of items to return in one page. | [optional] [example: `20`] |
 | **cursor** | query | **String** | The keyset pagination cursor: the JSON-encoded sort key of the last item already received. Omit for the first page. | [optional] [example: `{"id":"11111111-1111-1111-1111-111111111111","lastEditDate":1767225600000}`] |
 | **query** | query | **String** | The full-text query the thread list is filtered by. | [optional] [example: `contract`] |

@@ -33,3 +33,7 @@ Possible values:
 - `35` - Default Templates (`DefaultTemplates`)
 - `36` - Forms (`Forms`)
 - `37` - Ai (`Ai`)
+- `38` - Instructions room (`InstructionsRoom`)
+- `39` - Knowledge room (`KnowledgeRoom`)
+- `40` - AI project room (`AiProjectRoom`)
+- `41` - AI rooms (`AiHub`)

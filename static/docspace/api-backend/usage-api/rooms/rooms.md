@@ -25,7 +25,7 @@ All URIs are relative to *https://yourportal.onlyoffice.com*, where the host is 
 | [**getExternalDbSyncStatus**](get-external-db-sync-status.md) | **GET** /api/2.0/files/rooms/\{id\}/externaldbsync | Get external DB sync status |
 | [**getNewRoomItems**](get-new-room-items.md) | **GET** /api/2.0/files/rooms/\{id\}/news | Get new items in a room |
 | [**getPublicSettings**](get-public-settings.md) | **GET** /api/2.0/files/roomtemplate/\{id\}/public | Get room template public access |
-| [**getRoomAiFolder**](get-room-ai-folder.md) | **GET** /api/2.0/files/rooms/\{id\}/ai | Get the .ai folder of a room |
+| [**getRoomAiFolder**](get-room-ai-folder.md) | **GET** /api/2.0/files/rooms/\{id\}/ai | Get the skills folder of an Instructions room |
 | [**getRoomCovers**](get-room-covers.md) | **GET** /api/2.0/files/rooms/covers | Get room cover gallery |
 | [**getRoomCreatingStatus**](get-room-creating-status.md) | **GET** /api/2.0/files/rooms/fromtemplate/status | Get the room creation progress |
 | [**getRoomIndexExport**](get-room-index-export.md) | **GET** /api/2.0/files/rooms/indexexport | Get the room index export |
@@ -53,6 +53,18 @@ All URIs are relative to *https://yourportal.onlyoffice.com*, where the host is 
 | [**updateRoom**](update-room.md) | **PUT** /api/2.0/files/rooms/\{id\} | Update a room |
 | [**updateRoomTag**](update-room-tag.md) | **PUT** /api/2.0/files/tags | Rename a room tag |
 | [**uploadRoomLogo**](upload-room-logo.md) | **POST** /api/2.0/files/logos | Upload a room logo image |
+
+## AI
+
+| Method | HTTP request | Description |
+|------------ | ------------- | -------------|
+| [**getProjectModel**](ai/get-project-model.md) | **GET** /api/2.0/files/rooms/\{id\}/model | Get the AI project model |
+| [**getProjectSources**](ai/get-project-sources.md) | **GET** /api/2.0/files/rooms/\{id\}/sources | Get the AI project sources |
+| [**getRoomSkills**](ai/get-room-skills.md) | **GET** /api/2.0/files/rooms/\{id\}/skills | Get the skills of an AI room |
+| [**getRoomsSkills**](ai/get-rooms-skills.md) | **GET** /api/2.0/files/rooms/skills | Get the skills of Instructions rooms |
+| [**linkProjectSources**](ai/link-project-sources.md) | **POST** /api/2.0/files/rooms/\{id\}/sources | Link sources to an AI project |
+| [**setProjectModel**](ai/set-project-model.md) | **PUT** /api/2.0/files/rooms/\{id\}/model | Set the AI project model |
+| [**unlinkProjectSources**](ai/unlink-project-sources.md) | **DELETE** /api/2.0/files/rooms/\{id\}/sources | Unlink sources from an AI project |
 
 ## Groups
 

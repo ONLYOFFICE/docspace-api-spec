@@ -12,3 +12,4 @@ Possible values:
 - `AiAgents` - AiAgents
 - `Forms` - Forms
 - `FormTemplates` - Form templates
+- `AiHub` - AiHub

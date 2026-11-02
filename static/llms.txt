@@ -55,14 +55,6 @@ The types the endpoints take and return.
 - [AiActionArgs](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-action-args.md)
 - [AiActionArgs.prompt](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-action-args-prompt.md)
 - [AiActionType](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-action-type.md)
-- [AiAgentNewItemsDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-agent-new-items-dto.md)
-- [AiAgentsCreateRequest](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-agents-create-request.md)
-- [AiAgentsDeleteRequest](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-agents-delete-request.md)
-- [AiAgentsResetQuotaRequest](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-agents-reset-quota-request.md)
-- [AiAgentsUpdateQuotaRequest](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-agents-update-quota-request.md)
-- [AiAgentsUpdateQuotaRequest.roomIds item](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-agents-update-quota-request-room-ids-item.md)
-- [AiAgentsUpdateRequest](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-agents-update-request.md)
-- [AiApiDateTime](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-api-date-time.md)
 - [AiApproveToolCallRequest](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-approve-tool-call-request.md)
 - [AiAssignmentMutationResult](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-assignment-mutation-result.md)
 - [AiAssignmentsAssignRequest](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-assignments-assign-request.md)
@@ -78,17 +70,14 @@ The types the endpoints take and return.
 - [AiBulkAssignmentResult.errors item](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-bulk-assignment-result-errors-item.md)
 - [AiChatEvent](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-chat-event.md)
 - [AiChatPriceDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-chat-price-dto.md)
-- [AiChatSettingsDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-chat-settings-dto.md)
 - [AiChatToolPermissionMode](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-chat-tool-permission-mode.md)
 - [AiChatToolPrefsScope](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-chat-tool-prefs-scope.md)
 - [AiConfigDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-config-dto.md)
 - [AiCreateProfileInput](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-create-profile-input.md)
 - [AiCreatePromptInput](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-create-prompt-input.md)
-- [AiDistributedTaskStatus](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-distributed-task-status.md)
 - [AiEditorToolsCallRequest](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-editor-tools-call-request.md)
 - [AiEmbeddingPriceDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-embedding-price-dto.md)
 - [AiEmbeddingProviderType](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-embedding-provider-type.md)
-- [AiEmployeeDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-employee-dto.md)
 - [AiEntryMetadata](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-entry-metadata.md)
 - [AiEntryMetadataField](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-entry-metadata-field.md)
 - [AiEntryMetadataField.options item](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-entry-metadata-field-options-item.md)
@@ -103,39 +92,18 @@ The types the endpoints take and return.
 - [AiErrorResponse](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-error-response.md)
 - [AiExportTextToDocxRequest](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-export-text-to-docx-request.md)
 - [AiExportTextToDocxRequest.folderId](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-export-text-to-docx-request-folder-id.md)
-- [AiFileEntryBaseDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-file-entry-base-dto.md)
-- [AiFileEntryDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-file-entry-dto.md)
-- [AiFileEntryDto.availableShareRights](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-file-entry-dto-available-share-rights.md)
-- [AiFileEntryDto.security](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-file-entry-dto-security.md)
-- [AiFileEntryDto.shareSettings](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-file-entry-dto-share-settings.md)
-- [AiFileEntryType](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-file-entry-type.md)
-- [AiFileOperationDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-file-operation-dto.md)
-- [AiFileOperationType](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-file-operation-type.md)
-- [AiFileOperationWrapper](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-file-operation-wrapper.md)
-- [AiFileShare](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-file-share.md)
-- [AiFolderArrayWrapper](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-folder-array-wrapper.md)
-- [AiFolderContentDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-folder-content-dto.md)
-- [AiFolderContentWrapper](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-folder-content-wrapper.md)
-- [AiFolderDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-folder-dto.md)
 - [AiFolderMutationResult](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-folder-mutation-result.md)
-- [AiFolderType](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-folder-type.md)
-- [AiFolderWrapper](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-folder-wrapper.md)
 - [AiImagePriceDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-image-price-dto.md)
 - [AiImportError](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-import-error.md)
 - [AiImportMode](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-import-mode.md)
 - [AiImportResult](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-import-result.md)
 - [AiImportResult.imported](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-import-result-imported.md)
-- [AiLogoCoverDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-logo-cover-dto.md)
-- [AiLogoDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-logo-dto.md)
 - [AiMCPItem](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-mcp-item.md)
 - [AiMetaFillRequest](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-meta-fill-request.md)
 - [AiMetaGenerateRequest](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-meta-generate-request.md)
 - [AiMetaGenerateRequest.id](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-meta-generate-request-id.md)
-- [AiMetadataMatchDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-metadata-match-dto.md)
 - [AiMetadataValue](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-metadata-value.md)
 - [AiModel](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-model.md)
-- [AiNewItemsAgentNewItemsArrayWrapper](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-new-items-agent-new-items-array-wrapper.md)
-- [AiNewItemsDtoAgentNewItemsDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-new-items-dto-agent-new-items-dto.md)
 - [AiOpenAIChatCompletionChunk](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-open-ai-chat-completion-chunk.md)
 - [AiOpenAIChoiceDelta](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-open-ai-choice-delta.md)
 - [AiOpenAIChunkChoice](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-open-ai-chunk-choice.md)
@@ -155,6 +123,11 @@ The types the endpoints take and return.
 - [AiProfile](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-profile.md)
 - [AiProfileMutationResult](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-profile-mutation-result.md)
 - [AiProfilesListProviderModelsRequest](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-profiles-list-provider-models-request.md)
+- [AiProjectModelDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-project-model-dto.md)
+- [AiProjectModelWrapper](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-project-model-wrapper.md)
+- [AiProjectSourceDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-project-source-dto.md)
+- [AiProjectSourcesDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-project-sources-dto.md)
+- [AiProjectSourcesWrapper](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-project-sources-wrapper.md)
 - [AiPrompt](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-prompt.md)
 - [AiPromptBundle](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-prompt-bundle.md)
 - [AiPromptFolder](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-prompt-folder.md)
@@ -172,14 +145,15 @@ The types the endpoints take and return.
 - [AiReasoningSupport](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-reasoning-support.md)
 - [AiRegenerateStreamRequest](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-regenerate-stream-request.md)
 - [AiResolvedAssignment](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-resolved-assignment.md)
-- [AiRoomDataLifetimeDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-room-data-lifetime-dto.md)
-- [AiRoomDataLifetimePeriod](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-room-data-lifetime-period.md)
-- [AiRoomType](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-room-type.md)
 - [AiSendCustomRequest](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-send-custom-request.md)
 - [AiSendRequest](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-send-request.md)
 - [AiSendStreamBody](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-send-stream-body.md)
 - [AiSettingsDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-settings-dto.md)
 - [AiSettingsWrapper](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-settings-wrapper.md)
+- [AiSkillDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-skill-dto.md)
+- [AiSkillsDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-skills-dto.md)
+- [AiSkillsRoomDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-skills-room-dto.md)
+- [AiSkillsWrapper](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-skills-wrapper.md)
 - [AiSuccessResponse](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-success-response.md)
 - [AiThread](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-thread.md)
 - [AiThreadMessageLike](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-thread-message-like.md)
@@ -211,8 +185,6 @@ The types the endpoints take and return.
 - [AiVectorizationSettingsDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-vectorization-settings-dto.md)
 - [AiVectorizationSettingsWrapper](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-vectorization-settings-wrapper.md)
 - [AiVectorizationStartTaskRequest](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-vectorization-start-task-request.md)
-- [AiWatermarkAdditions](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-watermark-additions.md)
-- [AiWatermarkDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-watermark-dto.md)
 - [AiWebSearchConfig](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-web-search-config.md)
 - [AiWebSearchConfigureRequest](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-web-search-configure-request.md)
 - [AiWebSearchMutationResult](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-web-search-mutation-result.md)
@@ -524,6 +496,9 @@ The types the endpoints take and return.
 - [FileEntryBaseDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/file-entry-base-dto.md)
 - [FileEntryBaseWrapper](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/file-entry-base-wrapper.md)
 - [FileEntryDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/file-entry-dto.md)
+- [FileEntryDto.availableShareRights](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/file-entry-dto-available-share-rights.md)
+- [FileEntryDto.security](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/file-entry-dto-security.md)
+- [FileEntryDto.shareSettings](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/file-entry-dto-share-settings.md)
 - [FileEntryType](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/file-entry-type.md)
 - [FileKeysDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/file-keys-dto.md)
 - [FileLinkDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/file-link-dto.md)
@@ -638,6 +613,7 @@ The types the endpoints take and return.
 - [LicensorDetailsDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/licensor-details-dto.md)
 - [LicensorDetailsWrapper](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/licensor-details-wrapper.md)
 - [LinkAccountRequestDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/link-account-request-dto.md)
+- [LinkAiProjectSourcesRequest](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/link-ai-project-sources-request.md)
 - [LinkType](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/link-type.md)
 - [LocationType](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/location-type.md)
 - [LockFileRequest](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/lock-file-request.md)
@@ -967,8 +943,10 @@ The types the endpoints take and return.
 - [TopUpDepositRequestDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/top-up-deposit-request-dto.md)
 - [TransactionInfoDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/transaction-info-dto.md)
 - [TurnOnAdminMessageSettingsRequestDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/turn-on-admin-message-settings-request-dto.md)
+- [UnlinkAiProjectSourcesRequest](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/unlink-ai-project-sources-request.md)
 - [UpcomingPaymentArrayWrapper](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/upcoming-payment-array-wrapper.md)
 - [UpcomingPaymentDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/upcoming-payment-dto.md)
+- [UpdateAiProjectModelRequest](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/update-ai-project-model-request.md)
 - [UpdateApiKeyRequest](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/update-api-key-request.md)
 - [UpdateClientRequest](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/update-client-request.md)
 - [UpdateCommentRequest](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/update-comment-request.md)
@@ -1043,8 +1021,6 @@ The types the endpoints take and return.
 - [WizardSettingsWrapper](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/wizard-settings-wrapper.md)
 - [XlsxReportResponseDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/xlsx-report-response-dto.md)
 - [XlsxReportResponseWrapper](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/xlsx-report-response-wrapper.md)
-- [aiAgentsGet 200 response](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-agents-get-200-response.md)
-- [aiAgentsGet 200 response.response](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-agents-get-200-response-response.md)
 - [aiEditorToolsCall 200 response](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-editor-tools-call-200-response.md)
 - [aiEditorToolsList 200 response](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-editor-tools-list-200-response.md)
 - [aiEditorToolsList 200 response.tools item](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-editor-tools-list-200-response-tools-item.md)
@@ -1092,17 +1068,6 @@ The types the endpoints take and return.
 - [Send with stream](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai/ai/ai-send-with-stream.md): POST /api/2.0/ai/ai/send-with-stream
 - [Stream a chat in OpenAI format](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai/ai/ai-send-with-stream-open-ai.md): POST /api/2.0/ai/ai/send-with-stream-openai
 
-#### agents
-
-- [Create an agent](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai/agents/ai-agents-create.md): POST /api/2.0/ai/agents
-- [Delete an agent](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai/agents/ai-agents-delete.md): DELETE /api/2.0/ai/agents/{id}
-- [Get an agent](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai/agents/ai-agents-get.md): GET /api/2.0/ai/agents/{id}
-- [List agents](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai/agents/ai-agents-list.md): GET /api/2.0/ai/agents
-- [List agent news items](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai/agents/ai-agents-news.md): GET /api/2.0/ai/agents/news
-- [Reset agents' quota](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai/agents/ai-agents-reset-quota.md): PUT /api/2.0/ai/agents/resetquota
-- [Update an agent](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai/agents/ai-agents-update.md): PUT /api/2.0/ai/agents/{id}
-- [Update agents' quota](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai/agents/ai-agents-update-quota.md): PUT /api/2.0/ai/agents/agentquota
-
 #### assignments
 
 - [Bind a profile to an action](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai/assignments/ai-assignments-assign.md): PUT /api/2.0/ai/assignments/assign
@@ -1128,6 +1093,7 @@ The types the endpoints take and return.
 #### context
 
 - [Get context folders](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai/context/ai-context-get-context-folders.md): GET /api/2.0/ai/context/get-context-folders
+- [Get knowledge folders](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai/context/ai-context-get-knowledge-folders.md): GET /api/2.0/ai/context/get-knowledge-folders
 - [Get room skill](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai/context/ai-context-get-room-skill.md): GET /api/2.0/ai/context/get-room-skill
 - [Get room skills](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai/context/ai-context-get-room-skills.md): GET /api/2.0/ai/context/get-room-skills
 
@@ -1786,7 +1752,7 @@ The types the endpoints take and return.
 - [Get external DB sync status](https://api.onlyoffice.com/docspace/api-backend/usage-api/rooms/get-external-db-sync-status.md): GET /api/2.0/files/rooms/{id}/externaldbsync
 - [Get new items in a room](https://api.onlyoffice.com/docspace/api-backend/usage-api/rooms/get-new-room-items.md): GET /api/2.0/files/rooms/{id}/news
 - [Get room template public access](https://api.onlyoffice.com/docspace/api-backend/usage-api/rooms/get-public-settings.md): GET /api/2.0/files/roomtemplate/{id}/public
-- [Get the .ai folder of a room](https://api.onlyoffice.com/docspace/api-backend/usage-api/rooms/get-room-ai-folder.md): GET /api/2.0/files/rooms/{id}/ai
+- [Get the skills folder of an Instructions room](https://api.onlyoffice.com/docspace/api-backend/usage-api/rooms/get-room-ai-folder.md): GET /api/2.0/files/rooms/{id}/ai
 - [Get room cover gallery](https://api.onlyoffice.com/docspace/api-backend/usage-api/rooms/get-room-covers.md): GET /api/2.0/files/rooms/covers
 - [Get the room creation progress](https://api.onlyoffice.com/docspace/api-backend/usage-api/rooms/get-room-creating-status.md): GET /api/2.0/files/rooms/fromtemplate/status
 - [Get the room index export](https://api.onlyoffice.com/docspace/api-backend/usage-api/rooms/get-room-index-export.md): GET /api/2.0/files/rooms/indexexport
@@ -1814,6 +1780,16 @@ The types the endpoints take and return.
 - [Update a room](https://api.onlyoffice.com/docspace/api-backend/usage-api/rooms/update-room.md): PUT /api/2.0/files/rooms/{id}
 - [Rename a room tag](https://api.onlyoffice.com/docspace/api-backend/usage-api/rooms/update-room-tag.md): PUT /api/2.0/files/tags
 - [Upload a room logo image](https://api.onlyoffice.com/docspace/api-backend/usage-api/rooms/upload-room-logo.md): POST /api/2.0/files/logos
+
+#### ai
+
+- [Get the AI project model](https://api.onlyoffice.com/docspace/api-backend/usage-api/rooms/ai/get-project-model.md): GET /api/2.0/files/rooms/{id}/model
+- [Get the AI project sources](https://api.onlyoffice.com/docspace/api-backend/usage-api/rooms/ai/get-project-sources.md): GET /api/2.0/files/rooms/{id}/sources
+- [Get the skills of an AI room](https://api.onlyoffice.com/docspace/api-backend/usage-api/rooms/ai/get-room-skills.md): GET /api/2.0/files/rooms/{id}/skills
+- [Get the skills of Instructions rooms](https://api.onlyoffice.com/docspace/api-backend/usage-api/rooms/ai/get-rooms-skills.md): GET /api/2.0/files/rooms/skills
+- [Link sources to an AI project](https://api.onlyoffice.com/docspace/api-backend/usage-api/rooms/ai/link-project-sources.md): POST /api/2.0/files/rooms/{id}/sources
+- [Set the AI project model](https://api.onlyoffice.com/docspace/api-backend/usage-api/rooms/ai/set-project-model.md): PUT /api/2.0/files/rooms/{id}/model
+- [Unlink sources from an AI project](https://api.onlyoffice.com/docspace/api-backend/usage-api/rooms/ai/unlink-project-sources.md): DELETE /api/2.0/files/rooms/{id}/sources
 
 #### groups
 

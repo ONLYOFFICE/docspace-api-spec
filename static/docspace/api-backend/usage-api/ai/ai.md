@@ -17,19 +17,6 @@ All URIs are relative to *https://yourportal.onlyoffice.com*, where the host is 
 | [**aiSendWithStream**](ai/ai-send-with-stream.md) | **POST** /api/2.0/ai/ai/send-with-stream | Send with stream |
 | [**aiSendWithStreamOpenAI**](ai/ai-send-with-stream-open-ai.md) | **POST** /api/2.0/ai/ai/send-with-stream-openai | Stream a chat in OpenAI format |
 
-## Agents
-
-| Method | HTTP request | Description |
-|------------ | ------------- | -------------|
-| [**aiAgentsCreate**](agents/ai-agents-create.md) | **POST** /api/2.0/ai/agents | Create an agent |
-| [**aiAgentsDelete**](agents/ai-agents-delete.md) | **DELETE** /api/2.0/ai/agents/\{id\} | Delete an agent |
-| [**aiAgentsGet**](agents/ai-agents-get.md) | **GET** /api/2.0/ai/agents/\{id\} | Get an agent |
-| [**aiAgentsList**](agents/ai-agents-list.md) | **GET** /api/2.0/ai/agents | List agents |
-| [**aiAgentsNews**](agents/ai-agents-news.md) | **GET** /api/2.0/ai/agents/news | List agent news items |
-| [**aiAgentsResetQuota**](agents/ai-agents-reset-quota.md) | **PUT** /api/2.0/ai/agents/resetquota | Reset agents' quota |
-| [**aiAgentsUpdate**](agents/ai-agents-update.md) | **PUT** /api/2.0/ai/agents/\{id\} | Update an agent |
-| [**aiAgentsUpdateQuota**](agents/ai-agents-update-quota.md) | **PUT** /api/2.0/ai/agents/agentquota | Update agents' quota |
-
 ## Assignments
 
 | Method | HTTP request | Description |
@@ -61,6 +48,7 @@ All URIs are relative to *https://yourportal.onlyoffice.com*, where the host is 
 | Method | HTTP request | Description |
 |------------ | ------------- | -------------|
 | [**aiContextGetContextFolders**](context/ai-context-get-context-folders.md) | **GET** /api/2.0/ai/context/get-context-folders | Get context folders |
+| [**aiContextGetKnowledgeFolders**](context/ai-context-get-knowledge-folders.md) | **GET** /api/2.0/ai/context/get-knowledge-folders | Get knowledge folders |
 | [**aiContextGetRoomSkill**](context/ai-context-get-room-skill.md) | **GET** /api/2.0/ai/context/get-room-skill | Get room skill |
 | [**aiContextGetRoomSkills**](context/ai-context-get-room-skills.md) | **GET** /api/2.0/ai/context/get-room-skills | Get room skills |
 
