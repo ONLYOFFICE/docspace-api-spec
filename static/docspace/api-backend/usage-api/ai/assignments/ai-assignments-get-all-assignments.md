@@ -1,6 +1,6 @@
 # aiAssignmentsGetAllAssignments
 
-> Map aiAssignmentsGetAllAssignments(entityId, expand)
+> aiAssignmentsGetAllAssignments_200_response aiAssignmentsGetAllAssignments(entityId, expand)
 
 `GET /api/2.0/ai/assignments/get-all-assignments`
 
@@ -19,7 +19,7 @@ Returns every action-to-profile binding of a scope as one map, which is what a s
 
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
-| **200** | The scope's bindings as a map of action type to profile ID, or with `expand=profile` the envelope of the assigned profiles and the catalogue's counts. An action with no binding is absent. | **Map** | - |
+| **200** | The scope's bindings as a map of action type to profile ID, or with `expand=profile` the envelope of the assigned profiles and the catalogue's counts. An action with no binding is absent. | [**aiAssignmentsGetAllAssignments_200_response**](../../models/ai-assignments-get-all-assignments-200-response.md) | - |
 | **401** | Missing `asc_auth_key` cookie or `Authorization` header. | [**AiErrorResponse**](../../models/ai-error-response.md) | - |
 | **403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. | [**AiErrorResponse**](../../models/ai-error-response.md) | - |
 | **404** | The referenced object does not exist: an unknown or deleted room named by `entityId`, or an object the caller cannot read - for those the two cases are deliberately indistinguishable. | [**AiErrorResponse**](../../models/ai-error-response.md) | - |
@@ -27,7 +27,7 @@ Returns every action-to-profile binding of a scope as one map, which is what a s
 
 ## Return type
 
-**Map**
+[**aiAssignmentsGetAllAssignments_200_response**](../../models/ai-assignments-get-all-assignments-200-response.md)
 
 ## Authorization
 
