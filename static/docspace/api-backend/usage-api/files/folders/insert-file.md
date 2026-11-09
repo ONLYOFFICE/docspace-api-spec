@@ -32,12 +32,12 @@ Stores a file in the folder named by the path in a single request, taking its na
 |------------- | ------------- | ------------- | -------------|
 | **200** | The stored file with its id and the title it was actually saved under; a `version` above 1 means the content was added to a file that already carried this name instead of creating a new one | [**FileWrapper**](../../models/file-wrapper.md) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **402** | The file exceeds the single-request upload limit, or storing it would exceed a storage quota or size limit | - | - |
-| **403** | The caller cannot add content to this folder | - | - |
+| **403** | The caller cannot add content to this folder, or a file that is not a PDF is stored in a form-filling room | - | - |
 | **404** | No folder with the specified ID | - | - |
 | **415** | The installation restricts uploadable formats and the file extension is not among them | - | - |
-| **500** | A file that is not a PDF is stored in a form-filling room | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../../models/error-api-response.md) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../../models/error-api-response.md) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](../../models/error-api-response.md) | - |
 | **400** | Bad Request. | [**ErrorApiResponse**](../../models/error-api-response.md) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |

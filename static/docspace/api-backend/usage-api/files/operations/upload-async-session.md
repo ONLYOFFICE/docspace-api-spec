@@ -24,10 +24,11 @@ Stores one part of a file under the number given in `chunkNumber`, which is what
 | **200** | The session with its progress after the part was stored | [**ChunkedUploadSessionWrapper**](../../models/chunked-upload-session-wrapper.md) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **400** | The request has no `File` part, or `chunkNumber` is 0 or negative | - | - |
 | **402** | The part is larger than `chunkUploadSize`, or a session below that size would exceed a storage quota or size limit when storing the file | - | - |
-| **404** | No open session with the specified ID: it never existed, was finalized or aborted, or has expired | - | - |
-| **500** | A session below `chunkUploadSize` stores a file that is not a PDF in a form-filling room | - | - |
+| **403** | A session below `chunkUploadSize` stores a file that is not a PDF in a form-filling room | - | - |
+| **404** | No open session with the specified ID in this folder: it never existed, was finalized or aborted, has expired, or belongs to another folder | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../../models/error-api-response.md) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../../models/error-api-response.md) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](../../models/error-api-response.md) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 

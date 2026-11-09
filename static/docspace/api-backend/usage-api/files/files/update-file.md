@@ -23,9 +23,9 @@ Renames a file, restores one of its versions, or both at once, and answers with 
 | **400** | The title is longer than 165 characters, or `lastVersion` is the current version | - | - |
 | **401** | An anonymous caller has no external link | - | - |
 | **402** | Restoring `lastVersion` needs more space than the room or user storage quota leaves | - | - |
-| **403** | The caller may not read or rename the file or change its version | - | - |
+| **403** | The caller may not read or rename the file or change its version, or the file is locked by somebody else | - | - |
 | **404** | The file id, or `lastVersion` of it, resolves to nothing, or the file is a PDF form in a form-filling room whose filling has not started and the caller may only fill forms there | - | - |
-| **500** | The file is locked by somebody else, a third-party file is renamed while it is being edited, or restoring `lastVersion` fails because the file is being edited, another update of it is in progress or the new version cannot be stored | - | - |
+| **500** | A third-party file is renamed while it is being edited, or restoring `lastVersion` fails because the file is being edited, another update of it is in progress or the new version cannot be stored | - | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../../models/error-api-response.md) | `Retry-After` |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |

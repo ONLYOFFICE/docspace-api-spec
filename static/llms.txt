@@ -69,6 +69,10 @@ The types the endpoints take and return.
 - [AiBuiltinProviderType](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-builtin-provider-type.md)
 - [AiBulkAssignmentResult](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-bulk-assignment-result.md)
 - [AiBulkAssignmentResult.errors item](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-bulk-assignment-result-errors-item.md)
+- [AiByokKey](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-byok-key.md)
+- [AiByokKeyInput](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-byok-key-input.md)
+- [AiByokModel](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-byok-model.md)
+- [AiByokProvider](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-byok-provider.md)
 - [AiChatErrorPayload](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-chat-error-payload.md)
 - [AiChatEvent](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-chat-event.md)
 - [AiChatPriceDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-chat-price-dto.md)
@@ -160,6 +164,8 @@ The types the endpoints take and return.
 - [AiSettingsWrapper](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-settings-wrapper.md)
 - [AiSkillDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-skill-dto.md)
 - [AiSkillsDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-skills-dto.md)
+- [AiSkillsGenerateRequest](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-skills-generate-request.md)
+- [AiSkillsGenerateRequest.destId](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-skills-generate-request-dest-id.md)
 - [AiSkillsRoomDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-skills-room-dto.md)
 - [AiSkillsWrapper](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-skills-wrapper.md)
 - [AiSuccessResponse](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-success-response.md)
@@ -515,6 +521,8 @@ The types the endpoints take and return.
 - [FileEntryDto.shareSettings](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/file-entry-dto-share-settings.md)
 - [FileEntryType](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/file-entry-type.md)
 - [FileKeysDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/file-keys-dto.md)
+- [FileKeysWrittenDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/file-keys-written-dto.md)
+- [FileKeysWrittenWrapper](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/file-keys-written-wrapper.md)
 - [FileLinkDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/file-link-dto.md)
 - [FileLinkRequest](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/file-link-request.md)
 - [FileLinkWrapper](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/file-link-wrapper.md)
@@ -760,6 +768,8 @@ The types the endpoints take and return.
 - [RoomInvitation](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/room-invitation.md)
 - [RoomInvitationRequest](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/room-invitation-request.md)
 - [RoomLinkRequest](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/room-link-request.md)
+- [RoomMissingFileKeysArrayWrapper](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/room-missing-file-keys-array-wrapper.md)
+- [RoomMissingFileKeysDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/room-missing-file-keys-dto.md)
 - [RoomNewItemsDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/room-new-items-dto.md)
 - [RoomPrivacyFilter](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/room-privacy-filter.md)
 - [RoomSecurityDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/room-security-dto.md)
@@ -1060,6 +1070,7 @@ The types the endpoints take and return.
 - [aiProfilesListProviderModels 400 response.anyOf](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-profiles-list-provider-models-400-response-any-of.md)
 - [aiProfilesTestConnection 200 response](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-profiles-test-connection-200-response.md)
 - [aiProfilesTestConnection 200 response.anyOf](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-profiles-test-connection-200-response-any-of.md)
+- [aiSkillsGenerate 200 response](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-skills-generate-200-response.md)
 - [aiThreadsAppendUserMessage 200 response](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-threads-append-user-message-200-response.md)
 - [aiThreadsRegenerateTitle 200 response](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-threads-regenerate-title-200-response.md)
 - [aiToolsListSystemTools 200 response](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-tools-list-system-tools-200-response.md)
@@ -1104,6 +1115,13 @@ The types the endpoints take and return.
 - [Link to message](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai/attachments/ai-attachments-link-to-message.md): POST /api/2.0/ai/attachments/link-to-message
 - [Save file](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai/attachments/ai-attachments-save-file.md): POST /api/2.0/ai/attachments/save-file
 - [Save files many](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai/attachments/ai-attachments-save-files-many.md): POST /api/2.0/ai/attachments/save-files-many
+
+#### byok
+
+- [Delete a BYOK key](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai/byok/ai-byok-keys-delete.md): DELETE /api/2.0/ai/byok/{id}
+- [List BYOK keys](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai/byok/ai-byok-keys-list.md): GET /api/2.0/ai/byok
+- [Set a BYOK key](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai/byok/ai-byok-keys-set.md): PUT /api/2.0/ai/byok/{id}
+- [List BYOK providers](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai/byok/ai-byok-providers.md): GET /api/2.0/ai/byok/providers
 
 #### context
 
@@ -1178,6 +1196,10 @@ The types the endpoints take and return.
 - [Set the tool permission mode](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai/settings/ai-settings-set-tool-mode.md): PUT /api/2.0/ai/config/tool-mode
 - [Update user AI settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai/settings/ai-settings-set-user.md): PUT /api/2.0/ai/config/user
 - [Update vectorization settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai/settings/ai-settings-set-vectorization.md): PUT /api/2.0/ai/config/vectorization
+
+#### skills
+
+- [Generate a skill](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai/skills/ai-skills-generate.md): POST /api/2.0/ai/skills/generate
 
 #### threads
 
@@ -1358,6 +1380,7 @@ The types the endpoints take and return.
 - [Get the Forms section](https://api.onlyoffice.com/docspace/api-backend/usage-api/files/folders/get-forms-folder.md): GET /api/2.0/files/@forms
 - [Get the My documents section](https://api.onlyoffice.com/docspace/api-backend/usage-api/files/folders/get-my-folder.md): GET /api/2.0/files/@my
 - [Get new folder items](https://api.onlyoffice.com/docspace/api-backend/usage-api/files/folders/get-new-folder-items.md): GET /api/2.0/files/{folderId}/news
+- [Get the private rooms section](https://api.onlyoffice.com/docspace/api-backend/usage-api/files/folders/get-private-rooms-folder.md): GET /api/2.0/files/@private
 - [Get the Recent section](https://api.onlyoffice.com/docspace/api-backend/usage-api/files/folders/get-recent-folder.md): GET /api/2.0/files/recent
 - [Get the folder history report generation status](https://api.onlyoffice.com/docspace/api-backend/usage-api/files/folders/get-report-folder-history.md): GET /api/2.0/files/folder/{folderId}/log/report
 - [Get filtered sections](https://api.onlyoffice.com/docspace/api-backend/usage-api/files/folders/get-root-folders.md): GET /api/2.0/files/@root
@@ -1818,6 +1841,8 @@ The types the endpoints take and return.
 #### privacy-room
 
 - [Delete an encryption key](https://api.onlyoffice.com/docspace/api-backend/usage-api/rooms/privacy-room/delete-keys.md): DELETE /api/2.0/privacyroom/keys/{id}
+- [Get public keys of room invitees](https://api.onlyoffice.com/docspace/api-backend/usage-api/rooms/privacy-room/get-room-candidate-keys.md): GET /api/2.0/privacyroom/{roomId}/access/candidates
+- [Get missing file keys of a room](https://api.onlyoffice.com/docspace/api-backend/usage-api/rooms/privacy-room/get-room-missing-file-keys.md): GET /api/2.0/privacyroom/{roomId}/access/missing
 - [Get own encryption keys](https://api.onlyoffice.com/docspace/api-backend/usage-api/rooms/privacy-room/get-user-keys.md): GET /api/2.0/privacyroom/keys
 - [Get private room access keys](https://api.onlyoffice.com/docspace/api-backend/usage-api/rooms/privacy-room/get-user-keys-for-room.md): GET /api/2.0/privacyroom/{roomId}/access
 - [Rotate an encryption key](https://api.onlyoffice.com/docspace/api-backend/usage-api/rooms/privacy-room/replace-key.md): PUT /api/2.0/privacyroom/keys

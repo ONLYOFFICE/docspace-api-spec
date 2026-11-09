@@ -37,3 +37,4 @@ Possible values:
 - `39` - Knowledge room (`KnowledgeRoom`)
 - `40` - AI project room (`AiProjectRoom`)
 - `41` - AI rooms (`AiHub`)
+- `42` - Private rooms (`PrivateRooms`)

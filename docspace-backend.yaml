@@ -37,6 +37,9 @@ tags:
   - name: AI / Attachments
     description: Message file and image attachments.
     x-displayName: Attachments
+  - name: AI / BYOK
+    description: The portal's own provider keys that override built-in models.
+    x-displayName: BYOK
   - name: AI / Context
     description: Instructions rooms connected to the chat as context with their skills, and the Knowledge rooms the chat may search.
     x-displayName: Context
@@ -313,6 +316,7 @@ x-tagGroups:
       - AI / AI
       - AI / Assignments
       - AI / Attachments
+      - AI / BYOK
       - AI / Context
       - AI / Editor tools
       - AI / Export
@@ -6692,6 +6696,170 @@ paths:
       security:
         - cookieAuth: []
         - bearerAuth: []
+  /api/2.0/ai/byok:
+    get:
+      tags:
+        - AI / BYOK
+      operationId: aiByokKeysList
+      summary: List BYOK keys
+      responses:
+        "200":
+          description: Success.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AiByokKey'
+        "401":
+          description: Missing `asc_auth_key` cookie or `Authorization` header.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AiErrorResponse'
+        "403":
+          description: AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AiErrorResponse'
+        "500":
+          description: Unhandled failure. The reason is logged server-side and never echoed back.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AiErrorResponse'
+      security:
+        - cookieAuth: []
+        - bearerAuth: []
+  /api/2.0/ai/byok/providers:
+    get:
+      tags:
+        - AI / BYOK
+      operationId: aiByokProviders
+      summary: List BYOK providers
+      responses:
+        "200":
+          description: Success.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AiByokProvider'
+        "401":
+          description: Missing `asc_auth_key` cookie or `Authorization` header.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AiErrorResponse'
+        "403":
+          description: AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AiErrorResponse'
+        "500":
+          description: Unhandled failure. The reason is logged server-side and never echoed back.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AiErrorResponse'
+      security:
+        - cookieAuth: []
+        - bearerAuth: []
+  /api/2.0/ai/byok/{id}:
+    put:
+      tags:
+        - AI / BYOK
+      operationId: aiByokKeysSet
+      summary: Set a BYOK key
+      responses:
+        "200":
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AiByokKey'
+        "401":
+          description: Missing `asc_auth_key` cookie or `Authorization` header.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AiErrorResponse'
+        "403":
+          description: AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AiErrorResponse'
+        "413":
+          description: The request body is larger than 100 KB, the JSON parser's limit on this route.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AiErrorResponse'
+        "500":
+          description: Unhandled failure. The reason is logged server-side and never echoed back.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AiErrorResponse'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AiByokKeyInput'
+        x-codegen-request-body-name: AiByokKeyInput
+      security:
+        - cookieAuth: []
+        - bearerAuth: []
+    delete:
+      tags:
+        - AI / BYOK
+      operationId: aiByokKeysDelete
+      summary: Delete a BYOK key
+      responses:
+        "200":
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AiSuccessResponse'
+        "401":
+          description: Missing `asc_auth_key` cookie or `Authorization` header.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AiErrorResponse'
+        "403":
+          description: AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AiErrorResponse'
+        "500":
+          description: Unhandled failure. The reason is logged server-side and never echoed back.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AiErrorResponse'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      security:
+        - cookieAuth: []
+        - bearerAuth: []
   /api/2.0/ai/openai/{profileId}/v1/chat/completions:
     post:
       tags:
@@ -9301,7 +9469,7 @@ paths:
         "415":
           description: The file is in a format the editors can neither edit nor open for viewing
         "500":
-          description: The file lies in a third-party storage that cannot deliver it, or, with `editingAlone=true`, the file is locked by somebody else or lies in Trash
+          description: The file lies in a third-party storage that cannot deliver it, or, with `editingAlone=true`, the file lies in Trash
         "429":
           description: Too Many Requests.
           headers:
@@ -9355,7 +9523,9 @@ paths:
 
         be a PDF whose parent folder is a form-filling room; anything else is answered unchanged and nothing is
 
-        stored. Access follows room membership rather than portal role: a member holding only form-filling access on
+        stored. Whatever the file, a caller who cannot read it is refused with 403. Inside a form-filling room access
+
+        follows room membership rather than portal role: a member holding only form-filling access on
 
         the room may not start filling, and a caller with no access to the room at all is refused with 403 unless they
 
@@ -9393,7 +9563,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/FileWrapper'
         "403":
-          description: The caller holds only form-filling access on the room, or no access to it at all
+          description: The caller cannot read the file, or holds only form-filling access on the room, or no access to it at all
         "404":
           description: The file id resolves to nothing
         "401":
@@ -9551,11 +9721,11 @@ paths:
         "401":
           description: An anonymous caller has no external link, or refreshes the session through a link that does not grant editing
         "403":
-          description: The document key does not match the revision being edited, or the caller has none of the editing rights on the file
+          description: The document key does not match the revision being edited, the caller has none of the editing rights on the file, or the session is refreshed while the file is locked by somebody else
         "404":
           description: The file id resolves to nothing
         "500":
-          description: The session is refreshed while the file is locked by somebody else or lies in Trash
+          description: The session is refreshed while the file lies in Trash
         "429":
           description: Too Many Requests.
           headers:
@@ -10463,11 +10633,11 @@ paths:
         "402":
           description: Completing the current version needs more space than the room or user storage quota leaves
         "403":
-          description: The caller may not change the version history of the file
+          description: The caller may not change the version history of the file, or the file is locked by somebody else
         "404":
           description: The file id, or the requested version of it, resolves to nothing
         "500":
-          description: The file is locked by somebody else, or, when the current version is completed, the file is encrypted, another update of it is in progress, or storing the new version fails
+          description: When the current version is completed, the file is encrypted, another update of it is in progress, or storing the new version fails
         "401":
           description: Unauthorized
           content:
@@ -11043,7 +11213,7 @@ paths:
         "402":
           description: The new file does not fit into the storage quota of the portal, the room or the user
         "403":
-          description: The caller may not create files in the folder, the folder does not exist or is a section where files cannot be created, the template does not exist or cannot be read, or the form gallery has no file of the title's format
+          description: The caller may not create files in the folder, the folder does not exist or is a section where files cannot be created, the template does not exist or cannot be read, the form gallery has no file of the title's format, or the file is not a PDF and the folder lies in a form-filling room
         "404":
           description: The folder id or `templateId` is a string that is not the id of an item in a known third-party storage
         "500":
@@ -11168,7 +11338,7 @@ paths:
         "402":
           description: The content exceeds the maximum upload size, or the file does not fit into the storage quota of the portal, the room or the user
         "403":
-          description: The caller may not create files in this folder, or the folder is a section where files cannot be created
+          description: The caller may not create files in this folder, the folder is a section where files cannot be created, or the folder lies in a form-filling room, which takes PDF files only
         "404":
           description: The folder does not exist
         "401":
@@ -11298,7 +11468,7 @@ paths:
         "402":
           description: The content exceeds the maximum upload size, or the file does not fit into the storage quota of the portal, the room or the user
         "403":
-          description: The caller may not create files in this folder, or the folder is a section where files cannot be created
+          description: The caller may not create files in this folder, the folder is a section where files cannot be created, or the folder lies in a form-filling room, which takes PDF files only
         "404":
           description: The folder does not exist
         "401":
@@ -11686,11 +11856,11 @@ paths:
         "402":
           description: Restoring `lastVersion` needs more space than the room or user storage quota leaves
         "403":
-          description: The caller may not read or rename the file or change its version
+          description: The caller may not read or rename the file or change its version, or the file is locked by somebody else
         "404":
           description: The file id, or `lastVersion` of it, resolves to nothing, or the file is a PDF form in a form-filling room whose filling has not started and the caller may only fill forms there
         "500":
-          description: The file is locked by somebody else, a third-party file is renamed while it is being edited, or restoring `lastVersion` fails because the file is being edited, another update of it is in progress or the new version cannot be stored
+          description: A third-party file is renamed while it is being edited, or restoring `lastVersion` fails because the file is being edited, another update of it is in progress or the new version cannot be stored
         "429":
           description: Too Many Requests.
           headers:
@@ -12379,11 +12549,11 @@ paths:
         "402":
           description: The restored content does not fit into the storage quota
         "403":
-          description: The caller may not change the version history of the file, or, with `url`, may not edit the file or the file is locked by somebody else or being edited
+          description: The caller may not change the version history of the file, the file is locked by somebody else, or, with `url`, may not edit the file or the file is being edited
         "404":
           description: Without `url`, the file id or the requested version resolves to nothing
         "500":
-          description: The file is locked by somebody else or being edited, another restore of it is in progress, or storing the new version fails; with `url`, also when the file or the version does not exist or the address cannot be fetched
+          description: The file is being edited, another restore of it is in progress, or storing the new version fails; with `url`, also when the file or the version does not exist or the address cannot be fetched
         "429":
           description: Too Many Requests.
           headers:
@@ -12441,9 +12611,11 @@ paths:
 
         was asked for, and a form in a form-filling room is answered with the link of the room instead. The caller
 
-        needs the right to share the file and is otherwise refused with 403; a link that was deliberately revoked is
+        needs the right to share the file and is otherwise refused with 403. A primary link that was revoked is
 
-        not recreated but answered with 404. Read the address from `sharedTo.shareLink`.
+        created anew by this call, with a new identifier, while `GET api/2.0/files/file/{id}/link` keeps answering
+
+        such a link with 404. Read the address from `sharedTo.shareLink`.
       operationId: createFilePrimaryExternalLink
       parameters:
         - name: id
@@ -12482,7 +12654,7 @@ paths:
         "403":
           description: The caller may not share the file, the access level is not available for links to this file, the link limit is reached, or the admin restricts external links to public rooms
         "404":
-          description: The file does not exist, or its primary link was revoked
+          description: The file does not exist
         "401":
           description: Unauthorized
           content:
@@ -17494,9 +17666,13 @@ paths:
 
         folder belongs to, which its manager and a portal administrator acting as room manager have, and a member with
 
-        content-creator or read access is refused with 403; an unknown folder is answered with 404. Read the address
+        content-creator or read access is refused with 403; an unknown folder is answered with 404. A primary link
 
-        from `sharedTo.shareLink`.
+        that was revoked is created anew by this call, with a new identifier, while
+
+        `GET api/2.0/files/folder/{id}/link` keeps answering such a link with 404. Read the address from
+
+        `sharedTo.shareLink`.
       operationId: createFolderPrimaryExternalLink
       parameters:
         - name: id
@@ -17535,7 +17711,7 @@ paths:
         "403":
           description: The caller may not manage the links of this folder, the access level is not available for links to this folder, the link limit is reached, or the admin restricts external links to public rooms
         "404":
-          description: The folder does not exist, or its primary link was revoked
+          description: The folder does not exist
         "401":
           description: Unauthorized
           content:
@@ -19392,13 +19568,11 @@ paths:
         "402":
           description: The file exceeds the single-request upload limit, or storing it would exceed a storage quota or size limit
         "403":
-          description: The caller cannot add content to this folder
+          description: The caller cannot add content to this folder, or a file that is not a PDF is stored in a form-filling room
         "404":
           description: No folder with the specified ID
         "415":
           description: The installation restricts uploadable formats and the file extension is not among them
-        "500":
-          description: A file that is not a PDF is stored in a form-filling room
         "401":
           description: Unauthorized
           content:
@@ -19410,6 +19584,12 @@ paths:
           headers:
             Retry-After:
               $ref: '#/components/headers/Retry-After'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorApiResponse'
+        "500":
+          description: Internal Server Error.
           content:
             application/json:
               schema:
@@ -19579,13 +19759,11 @@ paths:
         "402":
           description: The file exceeds the single-request upload limit, or storing it would exceed a storage quota or size limit
         "403":
-          description: The caller cannot add content to this folder
+          description: The caller cannot add content to this folder, or a file that is not a PDF is stored in a form-filling room
         "404":
           description: No folder with the specified ID
         "415":
           description: The installation restricts uploadable formats and the file extension is not among them
-        "500":
-          description: A file that is not a PDF is stored in a form-filling room
         "401":
           description: Unauthorized
           content:
@@ -19597,6 +19775,12 @@ paths:
           headers:
             Retry-After:
               $ref: '#/components/headers/Retry-After'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorApiResponse'
+        "500":
+          description: Internal Server Error.
           content:
             application/json:
               schema:
@@ -24414,10 +24598,10 @@ paths:
           description: The request has no `File` part
         "402":
           description: The part is larger than `chunkUploadSize`, or storing the file would exceed a storage quota or size limit
+        "403":
+          description: A file that is not a PDF is stored in a form-filling room
         "404":
           description: 'No open session with the specified ID in this folder: it never existed, was finalized or aborted, has expired, or belongs to another folder'
-        "500":
-          description: A file that is not a PDF is stored in a form-filling room
         "401":
           description: Unauthorized
           content:
@@ -24429,6 +24613,12 @@ paths:
           headers:
             Retry-After:
               $ref: '#/components/headers/Retry-After'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorApiResponse'
+        "500":
+          description: Internal Server Error.
           content:
             application/json:
               schema:
@@ -24571,10 +24761,10 @@ paths:
           description: The request has no `File` part, or `chunkNumber` is 0 or negative
         "402":
           description: The part is larger than `chunkUploadSize`, or a session below that size would exceed a storage quota or size limit when storing the file
+        "403":
+          description: A session below `chunkUploadSize` stores a file that is not a PDF in a form-filling room
         "404":
           description: 'No open session with the specified ID in this folder: it never existed, was finalized or aborted, has expired, or belongs to another folder'
-        "500":
-          description: A session below `chunkUploadSize` stores a file that is not a PDF in a form-filling room
         "401":
           description: Unauthorized
           content:
@@ -24586,6 +24776,12 @@ paths:
           headers:
             Retry-After:
               $ref: '#/components/headers/Retry-After'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorApiResponse'
+        "500":
+          description: Internal Server Error.
           content:
             application/json:
               schema:
@@ -24701,10 +24897,10 @@ paths:
           description: The parts received so far do not add up to the size the session was opened for
         "402":
           description: Storing the file would exceed a storage quota or size limit
+        "403":
+          description: A file that is not a PDF is stored in a form-filling room
         "404":
           description: 'No open session with the specified ID in this folder: it never existed, was finalized or aborted, has expired, or belongs to another folder'
-        "500":
-          description: A file that is not a PDF is stored in a form-filling room
         "401":
           description: Unauthorized
           content:
@@ -24716,6 +24912,12 @@ paths:
           headers:
             Retry-After:
               $ref: '#/components/headers/Retry-After'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorApiResponse'
+        "500":
+          description: Internal Server Error.
           content:
             application/json:
               schema:
@@ -27930,23 +28132,23 @@ paths:
 
         rights those subjects hold afterwards. Every element of `share` names a subject and the level it is to get,
 
-        and the level that denies everything takes the access away instead; an empty `share` changes nothing and is
+        and the level that denies everything removes the access; an empty `share` changes nothing and is
 
-        answered with an empty list. A subject the caller is not allowed to share with, such as a guest who belongs to
+        answered with an empty list. A subject the caller is not allowed to share with is dropped without an error, so
 
-        another member, is dropped without an error, so compare the answer with what was sent. With `notify` set, each
+        compare the answer with what was sent. With `notify` set, each account named is emailed about the access it
 
-        account named is emailed about the access it received and `sharingMessage` is put into that mail with its
+        received and `sharingMessage` is put into that mail with its markup stripped, while a message longer than the
 
-        markup stripped, while a message longer than the field allows is rejected as an invalid request. The caller
+        field allows is rejected as an invalid request; an account already mailed about the same access to this file a
 
-        has to be allowed to change the sharing of the file, which its creator, the manager of the room it lies in and
+        short while ago is not mailed again, even with a new message. The caller has to be allowed to change the
 
-        a portal administrator acting as room manager are; anyone else, a guest and a member with read access
+        sharing of the file, which its creator, the manager of the room it lies in and a portal administrator acting
 
-        included, is refused. The call is mutating and safe to repeat. For several files and folders in one request
+        as room manager are; anyone else is refused. The call is mutating and safe to repeat. For several files and
 
-        use `PUT api/2.0/files/share`.
+        folders in one request use `PUT api/2.0/files/share`.
       operationId: setFileSecurityInfo
       parameters:
         - name: id
@@ -28179,19 +28381,21 @@ paths:
 
         and the level that denies everything takes the access away instead; an empty `share` changes nothing and is
 
-        answered with an empty list. A subject the caller is not allowed to share with, such as a guest who belongs to
+        answered with an empty list. A subject the caller is not allowed to share with is dropped without an error.
 
-        another member, is dropped without an error. With `notify` set, each account named is emailed about the access
+        With `notify` set, each account named is emailed about the access it received and `sharingMessage` is put into
 
-        it received and `sharingMessage` is put into that mail with its markup stripped, while a message longer than
+        that mail with its markup stripped, while a message longer than the field allows is rejected as an invalid
 
-        the field allows is rejected as an invalid request. The caller has to be allowed to change the sharing of the
+        request; an account already mailed about the same access to this folder a short while ago is not mailed again,
 
-        folder, which the manager of the room it belongs to and a portal administrator acting as room manager are;
+        even with a new message. The caller has to be allowed to change the sharing of the folder, which the manager
 
-        anyone else, a guest and a member with read access included, is refused. The call is mutating and safe to
+        of the room it belongs to and a portal administrator acting as room manager are; anyone else is refused. The
 
-        repeat. For a room use `PUT api/2.0/files/rooms/{id}/share`, which invites people by email as well.
+        call is mutating and safe to repeat. For a room use `PUT api/2.0/files/rooms/{id}/share`, which invites
+
+        people by email as well.
       operationId: setFolderSecurityInfo
       parameters:
         - name: id
@@ -31745,17 +31949,19 @@ paths:
 
         An entry without an access level is ignored, the same subject listed twice keeps the last level, and an empty
 
-        list is accepted and changes nothing. The caller must be a manager of the room, so an invitation sent by a
+        list changes nothing. The caller must be a manager of the room, and an account that is a
 
-        user or a guest is refused, and an account that is a portal user or a guest cannot be made a room manager.
+        portal user or a guest cannot be made a room manager.
 
         Inviting by email also needs the portal to allow guest invitations. A subject the caller is not allowed to see
 
-        is dropped without an error, which is why the answer has to be compared with the request. Removing a member
+        is dropped without an error, so compare the answer with the request. Removing a member who still holds a form
 
-        who still holds a form role is refused through `error` unless `force` is set. `notify` sends the invitation
+        role is refused through `error` unless `force` is set. `notify` sends the invitation email with the optional
 
-        email with the optional `message`.
+        `message`; a person who got the same invitation to this room, or was told about the same access in it, a short
+
+        while ago is not mailed again, even with a new message.
       operationId: setRoomSecurity
       parameters:
         - name: id
@@ -33205,9 +33411,9 @@ paths:
 
         archived room is refused, a room template is answered as missing, and a malformed account id is rejected as an
 
-        invalid request. The call is rate limited, so a client that loops over members should send one batch instead.
+        invalid request. A member who got the invitation to this room a short while ago is not mailed again, and the
 
-        The response carries no body.
+        link in that letter stays valid. The response carries no body.
       operationId: resendEmailInvitations
       parameters:
         - name: id
@@ -33229,34 +33435,14 @@ paths:
         required: true
       responses:
         "200":
-          description: The invitations that were still pending have been sent again
+          description: The request is accepted; the pending members it covers are mailed again, except those who already got this invitation within the repeat period
           headers:
             X-RateLimit-Limit:
-              description: 'Rate limit: 5 requests per 15 minutes per user/IP.'
-              schema:
-                examples:
-                  - 5
-                maximum: 5
-                minimum: 0
-                type: integer
-                format: int32
+              $ref: '#/components/headers/X-RateLimit-Limit'
             X-RateLimit-Remaining:
-              description: Requests remaining in the current 15-minute window.
-              schema:
-                examples:
-                  - 1
-                maximum: 5
-                minimum: 0
-                type: integer
-                format: int32
+              $ref: '#/components/headers/X-RateLimit-Remaining'
             X-RateLimit-Reset:
-              description: Unix timestamp (seconds) when the current 15-minute window resets.
-              schema:
-                examples:
-                  - 1750000000
-                minimum: 0
-                type: integer
-                format: int64
+              $ref: '#/components/headers/X-RateLimit-Reset'
         "400":
           description: The request body cannot be read, or a third-party identifier refers to a storage account that is not connected
         "403":
@@ -33275,14 +33461,7 @@ paths:
           description: Too Many Requests.
           headers:
             Retry-After:
-              description: Seconds to wait before retrying (5 req / 15 min limit per user/IP).
-              schema:
-                examples:
-                  - 30
-                maximum: 900
-                minimum: 0
-                type: integer
-                format: int32
+              $ref: '#/components/headers/Retry-After'
           content:
             application/json:
               schema:
@@ -39834,7 +40013,9 @@ paths:
 
         marked as not activated, every session of it is ended, and activation instructions are sent to the new
 
-        address - and passing the address the account already has is then rejected with 400.
+        address - and passing the address the account already has is then rejected with 400. Changing it back to an
+
+        address that got activation instructions a moment ago sends no new letter, and the link of that letter works.
 
         A caller who is not an administrator may only address their own account, nobody but the owner may change the
 
@@ -41305,37 +41486,27 @@ paths:
         - People / Profiles
       summary: Invite users
       description: >-
-        Invites people to the portal by email, creating a pending profile for each address and mailing it an
+        Invites people to the portal by email, creating a pending profile for each address and mailing it an invitation
 
-        invitation link.
+        link. The caller has to be a room admin or a DocSpace admin and the portal has to allow inviting members; only a
 
-        The caller has to be a room admin or a DocSpace admin - a member or a guest is rejected - the portal has to
+        DocSpace admin invites a room admin, only the owner a DocSpace admin, and `Guest` is not accepted. An address
 
-        allow inviting members, and inviting a room admin additionally requires DocSpace admin rights while inviting
+        that already has a profile is not mailed: the account is only related to the caller and raised to a higher type
 
-        another DocSpace admin requires the portal owner; a `Guest` type is not accepted here at all.
+        when asked, while a disabled account rejects the call with 400. Nothing is sent when the invitations need more
 
-        An address that already belongs to a profile is not mailed again: the existing account is only related to the
+        paid seats than the tariff has left, or for a malformed or punycode address (400); otherwise the addresses are
 
-        caller, and its type is raised when the invitation asks for a higher one, while a disabled account rejects
+        applied one by one, so a failure partway leaves earlier invitations sent. The answer lists every pending profile
 
-        the whole call with 400.
+        the caller may see, not only this call's. Inviting an address again shortly after its invitation went out -
 
-        The whole call is rejected before anything is sent when the invitations would need more paid seats than the
+        after its pending profile was deleted - sends no second letter, and the link already sent still opens. Repeated
 
-        tariff has left, and a malformed or punycode address is rejected with 400, so the list is validated as a
+        calls are throttled. Use `PUT api/2.0/people/invite` to resend the invitation, and `POST api/2.0/people` to
 
-        batch but applied one address at a time - a failure partway through leaves the earlier invitations sent.
-
-        The answer is not the result of this call: it lists every profile of the portal that is still pending and
-
-        that the caller may see, so previously invited people appear in it as well.
-
-        Repeated calls are throttled.
-
-        Use `PUT api/2.0/people/invite` to send the invitation email again, and `POST api/2.0/people` to create a
-
-        profile without mailing anybody.
+        create a profile without mailing anybody.
 
 
         Raises the `user.invited` webhook for every address that does not belong to a profile yet.
@@ -41400,19 +41571,21 @@ paths:
 
         reached, and a member or a guest may then list nothing but their own ID.
 
-        Which email goes out depends on the state of each account: a pending invitation gets a fresh invitation link,
+        A pending invitation gets a fresh invitation link, while an account that has not confirmed its address gets
 
-        while an account that exists but has not confirmed its address gets activation instructions instead.
+        activation instructions instead.
 
-        Accounts that are already active or that are disabled are skipped, and so are the pending accounts the caller
+        Active and disabled accounts are skipped without an error, and so are the pending accounts the caller has no
 
-        has no right to invite, without an error.
+        right to invite.
 
         The answer lists only the targeted accounts the caller is allowed to see, so it can be shorter than the
 
         request and is not a delivery report.
 
-        Repeated calls are throttled, and each call issues new links that make the previously sent ones useless.
+        An account that got this letter a short while ago is not mailed again, and the link it already has stays
+
+        valid, so repeating the call is safe but delivers nothing new.
 
         To invite an address that has no profile yet, use `POST api/2.0/people/invite`.
       operationId: resendUserInvites
@@ -41427,31 +41600,11 @@ paths:
           description: The targeted accounts the caller is allowed to see
           headers:
             X-RateLimit-Limit:
-              description: 'Rate limit: 5 requests per 15 minutes per user/IP.'
-              schema:
-                examples:
-                  - 5
-                maximum: 5
-                minimum: 0
-                type: integer
-                format: int32
+              $ref: '#/components/headers/X-RateLimit-Limit'
             X-RateLimit-Remaining:
-              description: Requests remaining in the current 15-minute window.
-              schema:
-                examples:
-                  - 1
-                maximum: 5
-                minimum: 0
-                type: integer
-                format: int32
+              $ref: '#/components/headers/X-RateLimit-Remaining'
             X-RateLimit-Reset:
-              description: Unix timestamp (seconds) when the current 15-minute window resets.
-              schema:
-                examples:
-                  - 1750000000
-                minimum: 0
-                type: integer
-                format: int64
+              $ref: '#/components/headers/X-RateLimit-Reset'
           content:
             application/json:
               schema:
@@ -41470,14 +41623,7 @@ paths:
           description: Too Many Requests.
           headers:
             Retry-After:
-              description: Seconds to wait before retrying (5 req / 15 min limit per user/IP).
-              schema:
-                examples:
-                  - 30
-                maximum: 900
-                minimum: 0
-                type: integer
-                format: int32
+              $ref: '#/components/headers/Retry-After'
           content:
             application/json:
               schema:
@@ -45833,38 +45979,18 @@ paths:
 
         in bold HTML markup, so strip the markup before showing it outside a web page.
 
-        Repeated calls are throttled, and each one sends a new link.
+        A repeat shortly after the letter went out sends no second letter, and the link already sent stays valid.
       operationId: sendInstructionsToDelete
       responses:
         "200":
           description: The message stating which address the confirmation link was sent to
           headers:
             X-RateLimit-Limit:
-              description: 'Rate limit: 5 requests per 15 minutes per user/IP.'
-              schema:
-                examples:
-                  - 5
-                maximum: 5
-                minimum: 0
-                type: integer
-                format: int32
+              $ref: '#/components/headers/X-RateLimit-Limit'
             X-RateLimit-Remaining:
-              description: Requests remaining in the current 15-minute window.
-              schema:
-                examples:
-                  - 1
-                maximum: 5
-                minimum: 0
-                type: integer
-                format: int32
+              $ref: '#/components/headers/X-RateLimit-Remaining'
             X-RateLimit-Reset:
-              description: Unix timestamp (seconds) when the current 15-minute window resets.
-              schema:
-                examples:
-                  - 1750000000
-                minimum: 0
-                type: integer
-                format: int64
+              $ref: '#/components/headers/X-RateLimit-Reset'
           content:
             application/json:
               schema:
@@ -45881,14 +46007,7 @@ paths:
           description: Too Many Requests.
           headers:
             Retry-After:
-              description: Seconds to wait before retrying (5 req / 15 min limit per user/IP).
-              schema:
-                examples:
-                  - 30
-                maximum: 900
-                minimum: 0
-                type: integer
-                format: int32
+              $ref: '#/components/headers/Retry-After'
           content:
             application/json:
               schema:
@@ -46620,31 +46739,31 @@ paths:
         - People / User type
       summary: Change a user type
       description: >-
-        Changes the type of the existing portal users listed in `userIds` to the type given in the route, in one call.
+        Changes the type of the existing portal users listed in `userIds` to the type given in the route.
 
         The caller needs the permission to add and remove users of the requested type, cannot change their own type or
 
-        the type of the portal owner, and cannot use this operation at all while being a guest; changing somebody to
+        the type of the portal owner, and must not be a guest; changing somebody to `Guest` also needs the portal to
 
-        `Guest` additionally requires the portal to allow inviting guests.
+        allow inviting guests.
 
         Every listed account has to be visible to the caller and must not be disabled.
 
-        The change is applied immediately: each converted user gets a notification email, and the accounts are
+        The change is applied immediately: each converted user gets a notification email, unless one about the same
 
-        processed one by one, so a rejection in the middle leaves the users before it
+        type reached them a short while ago, and the accounts are processed one by one, so a rejection in the middle
 
-        already converted - re-read them before retrying.
+        leaves the users before it already converted - re-read them before retrying.
 
-        The answer streams the converted users with their detailed information, in the order they were processed.
+        The answer streams the converted users in detail, in the order they were processed.
 
         Converting somebody to a paid type takes a paid seat, so the operation answers 402 when the tariff or the
 
         paid-user quota does not allow one more.
 
-        This operation only moves the type and leaves the rooms and the shared files of the account where they are -
+        This operation only moves the type and leaves the rooms and shared files of the account in place; to hand them
 
-        to hand them over to another admin in the same step, use `POST api/2.0/people/type` instead.
+        over to another admin as well, use `POST api/2.0/people/type`.
 
 
         Raises the `user.updated` webhook for every converted user, one by one: a rejection in the middle leaves the webhooks of the users before it sent.
@@ -47984,6 +48103,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AuthenticationTokenWrapper'
+        "405":
+          description: SMS two-factor is switched on for the user but the portal cannot send SMS codes, for example because its plan does not include them; the number is stored and no code is sent
         "401":
           description: Unauthorized
           content:
@@ -48036,7 +48157,9 @@ paths:
 
         operation to resend the code after that call answered with `sms`; the user needs SMS two-factor enabled and a
 
-        phone number already stored, which `POST api/2.0/authentication/setphone` registers. Open to unauthenticated
+        phone number already stored, which `POST api/2.0/authentication/setphone` registers, and valid credentials of
+
+        a user who signs in without SMS codes are refused with 405. Open to unauthenticated
 
         callers, mutating and not idempotent: every call sends a message, is counted in the portal's SMS usage and
 
@@ -48076,6 +48199,8 @@ paths:
           description: The user is disabled, or too many failed attempts have blocked further sign-ins for these credentials
         "404":
           description: No user of this portal matches the credentials in the request body
+        "405":
+          description: SMS two-factor is not available on the portal or not required for this user, so there is no code to send
         "429":
           description: The portal rate limiter rejected the call - retry after the interval in the `Retry-After` header
           headers:
@@ -50571,9 +50696,13 @@ paths:
 
         `POST api/2.0/portal/payment/deposit`; the movements behind a change are listed by
 
-        `GET api/2.0/portal/payment/customer/operations`. Pass `refresh=true` to re-read it from the accounting
+        `GET api/2.0/portal/payment/customer/operations`. Every read asks the accounting service, so the amount is
 
-        service rather than the cache - right after a top-up the cached figure is still the old one.
+        current, right after a top-up as well. Only a failed read is remembered: for ten minutes after the accounting
+
+        service could not be reached, or did not know the portal, the answer is an empty result without asking it
+
+        again - pass `refresh=true` to ask at once.
       operationId: getCustomerBalance
       parameters:
         - name: refresh
@@ -50652,7 +50781,7 @@ paths:
       description: >-
         Lists the money movements on the portal's wallet - top-ups, the charges of the wallet services, refunds and
 
-        corrections - one page at a time, which is what a billing history is built from. Only a DocSpace administrator
+        corrections - one page at a time, as a billing history. Only a DocSpace administrator
 
         may read it, a portal with no billing customer answers with an empty result, and the call is read-only. Every
 
@@ -50662,15 +50791,19 @@ paths:
 
         on a name this installation does not sell, `participantName`, `type` and `status` narrow to who caused a
 
-        movement and how it ended, and `credit` and `debit` include or exclude the two directions. `offset` and
+        movement and how it ended, and `credit` and `debit` include or exclude the two directions. AI consumption paid
 
-        `limit` page through the result and default to 0 and 25, `orderBy` and `orderType` sort it, and the answer
+        with the portal's own provider keys is filed under `ai-tools-byok` and `ai-search-byok`, which `serviceName`
 
-        repeats them next to `totalQuantity`, `totalPage` and `currentPage` so a client can page without counting. The
+        accepts; such a movement reads like its AI service with `byok` set. `offset` and `limit` page through the
 
-        same data as a downloadable file is `POST api/2.0/portal/payment/customer/operationsreport`, and the figures
+        result and default to 0 and 25, `orderBy` and `orderType` sort it, and the answer repeats them next to
 
-        added up per service are `GET api/2.0/portal/payment/customer/usage`.
+        `totalQuantity`, `totalPage` and `currentPage`. The same data as a downloadable file is
+
+        `POST api/2.0/portal/payment/customer/operationsreport`, and the figures added up per service are
+
+        `GET api/2.0/portal/payment/customer/usage`.
       operationId: getCustomerOperations
       parameters:
         - name: offset
@@ -51219,11 +51352,17 @@ paths:
 
         `orderBy` and `orderType` page and sort the result. Amounts come with the unit the service is sold in, except
 
-        AI tools, whose consumption is reported in tokens rather than in AI credits. The individual charges behind
+        AI tools, whose consumption is reported in tokens rather than in AI credits. AI consumption paid with the
 
-        these totals are `GET api/2.0/portal/payment/customer/operations`, and the same figures as a downloadable file
+        portal's own provider keys is a total of its own, `ai-tools-byok` or `ai-search-byok`, titled like its AI
 
-        are `POST api/2.0/portal/payment/customer/usage/report`.
+        service and flagged by `byok`; `serviceName` accepts these names, and `mergeByok=true` folds them into their AI
+
+        services. The individual charges behind these totals are
+
+        `GET api/2.0/portal/payment/customer/operations`, and the same figures as a downloadable file are
+
+        `POST api/2.0/portal/payment/customer/usage/report`.
       operationId: getCustomerServiceUsage
       parameters:
         - name: serviceName
@@ -51346,6 +51485,16 @@ paths:
           schema:
             $ref: '#/components/schemas/OperationOrderType'
           example: Descending
+        - name: mergeByok
+          in: query
+          description: >-
+            Whether the AI consumption paid with the portal's own provider keys - `ai-tools-byok`, `ai-search-byok` - is
+
+            added into the total of its AI service instead of being a total of its own.
+          schema:
+            examples:
+              - true
+            type: boolean
       responses:
         "200":
           description: The usage and cost per wallet service with its paging information, or an empty result when the portal has no billing customer
@@ -51494,7 +51643,9 @@ paths:
 
         directions and the ordering - and an empty body reports everything from the portal creation date to now; a
 
-        service name this installation does not sell fails with 404. Poll
+        service name this installation does not sell fails with 404, and the own-key AI services `ai-tools-byok` and
+
+        `ai-search-byok` are marked BYOK in the file. Poll
 
         `GET api/2.0/portal/payment/customer/operationsreport` until `isCompleted` is true, then take the file from
 
@@ -51727,23 +51878,23 @@ paths:
 
         not ready when the response arrives. The portal needs a billing customer and the caller has to be a DocSpace
 
-        administrator. The body takes the same filters as `GET api/2.0/portal/payment/customer/usage` - the service
+        administrator. The body takes the filters of `GET api/2.0/portal/payment/customer/usage` except `mergeByok` -
 
-        names, the date range, the participant, the operation status, the usage metadata and the ordering - and an
+        the service names, the date range, the participant, the operation status, the usage metadata and the ordering
 
-        empty body reports every service from the portal creation date to now; a service name this installation does
+        - and an empty body reports every service from the portal creation date to now; a service name this
 
-        not sell fails with 404. Poll `GET api/2.0/portal/payment/customer/usage/report` until `isCompleted` is true,
+        installation does not sell fails with 404, and `ai-tools-byok` and `ai-search-byok` stay totals of their own,
 
-        then take the file from `resultFileUrl` or open `resultFileId`: the finished file is saved into the caller's
+        marked BYOK. Poll `GET api/2.0/portal/payment/customer/usage/report` until `isCompleted` is true, then take the
 
-        own My documents section, where it counts against the portal storage like any other file. One service usage
+        file from `resultFileUrl` or open `resultFileId`: the finished file is saved into the caller's own My documents
 
-        report per user is tracked at a time - a call made while the previous one is still running answers with that
+        section, where it counts against the portal storage like any other file. One service usage report per user is
 
-        task - and `DELETE api/2.0/portal/payment/customer/usage/report` stops it. It is a different report from the
+        tracked at a time - a call made while the previous one is still running answers with that task - and
 
-        operations one and does not interfere with it: per-movement history is
+        `DELETE api/2.0/portal/payment/customer/usage/report` stops it. Per-movement history is the separate
 
         `POST api/2.0/portal/payment/customer/operationsreport`.
       operationId: createCustomerServiceUsageReport
@@ -54197,48 +54348,28 @@ paths:
 
         deactivated - the call is refused when every other space has limited access. The letter always goes to the
 
-        owner's own address, and the operation keeps working while the portal's payment has lapsed. It is mutating
+        owner's own address, and the operation keeps working while the portal's payment has lapsed. A repeat shortly
 
-        only in that it sends a message, and it is rate-limited to five requests per fifteen minutes per user and path
+        after the letter went out does nothing - no new links, no second letter, no audit record - while the links of
 
-        by default, answering 429 above that. Nothing is returned in the body, so a client cannot tell from the answer
+        the first letter stay valid. Nothing is returned in the body. The first link in the letter authorizes
 
-        whether the mail was delivered. The first link in the letter authorizes `PUT api/2.0/portal/suspend`, which
+        `PUT api/2.0/portal/suspend`, which suspends the portal, and the second one authorizes
 
-        suspends the portal, and the second one authorizes `PUT api/2.0/portal/continue`, which makes it active again.
+        `PUT api/2.0/portal/continue`, which makes it active again. To remove the portal instead of pausing it, use
 
-        To remove the portal instead of pausing it, use `POST api/2.0/portal/delete`.
+        `POST api/2.0/portal/delete`.
       operationId: sendSuspendInstructions
       responses:
         "200":
-          description: The deactivation letter has been handed to the mail service and the request is recorded in the audit trail; the portal itself is still active and the response carries no content
+          description: 'The request is accepted: the deactivation letter is queued and the request recorded in the audit trail, unless the same letter already went out within the repeat period; the portal itself is still active and the response carries no content'
           headers:
             X-RateLimit-Limit:
-              description: 'Rate limit: 5 requests per 15 minutes per user/IP.'
-              schema:
-                examples:
-                  - 5
-                maximum: 5
-                minimum: 0
-                type: integer
-                format: int32
+              $ref: '#/components/headers/X-RateLimit-Limit'
             X-RateLimit-Remaining:
-              description: Requests remaining in the current 15-minute window.
-              schema:
-                examples:
-                  - 1
-                maximum: 5
-                minimum: 0
-                type: integer
-                format: int32
+              $ref: '#/components/headers/X-RateLimit-Remaining'
             X-RateLimit-Reset:
-              description: Unix timestamp (seconds) when the current 15-minute window resets.
-              schema:
-                examples:
-                  - 1750000000
-                minimum: 0
-                type: integer
-                format: int64
+              $ref: '#/components/headers/X-RateLimit-Reset'
         "403":
           description: The caller is not the portal owner or has no portal-settings right
         "500":
@@ -54253,14 +54384,7 @@ paths:
           description: Too Many Requests.
           headers:
             Retry-After:
-              description: Seconds to wait before retrying (5 req / 15 min limit per user/IP).
-              schema:
-                examples:
-                  - 30
-                maximum: 900
-                minimum: 0
-                type: integer
-                format: int32
+              $ref: '#/components/headers/Retry-After'
           content:
             application/json:
               schema:
@@ -54361,46 +54485,26 @@ paths:
 
         subscription that will stop renewing when the portal is on a paid plan. The operation keeps working while the
 
-        portal's payment has lapsed, is mutating only in that it sends a message, and is rate-limited to five requests
+        portal's payment has lapsed. A repeat shortly after the letter went out does nothing - no new link, no second
 
-        per fifteen minutes per user and path by default, answering 429 above that. Nothing is returned in the body.
+        letter - while the link of the first letter stays valid. Nothing is returned in the body. The link in the letter
 
-        The link in the letter authorizes `DELETE api/2.0/portal/delete`, which deletes the portal with all of its
+        authorizes `DELETE api/2.0/portal/delete`, which deletes the portal with all of its rooms, files and accounts
 
-        rooms, files and accounts and cannot be undone. To pause the portal instead of deleting it, send the
+        and cannot be undone. To pause the portal instead of deleting it, send the
 
         deactivation letter with `POST api/2.0/portal/suspend`.
       operationId: sendDeleteInstructions
       responses:
         "200":
-          description: The removal letter has been handed to the mail service; nothing about the portal has changed yet and the response carries no content
+          description: The request is accepted, and the removal letter is queued unless one already went out within the repeat period; nothing about the portal has changed yet and the response carries no content
           headers:
             X-RateLimit-Limit:
-              description: 'Rate limit: 5 requests per 15 minutes per user/IP.'
-              schema:
-                examples:
-                  - 5
-                maximum: 5
-                minimum: 0
-                type: integer
-                format: int32
+              $ref: '#/components/headers/X-RateLimit-Limit'
             X-RateLimit-Remaining:
-              description: Requests remaining in the current 15-minute window.
-              schema:
-                examples:
-                  - 1
-                maximum: 5
-                minimum: 0
-                type: integer
-                format: int32
+              $ref: '#/components/headers/X-RateLimit-Remaining'
             X-RateLimit-Reset:
-              description: Unix timestamp (seconds) when the current 15-minute window resets.
-              schema:
-                examples:
-                  - 1750000000
-                minimum: 0
-                type: integer
-                format: int64
+              $ref: '#/components/headers/X-RateLimit-Reset'
         "403":
           description: The caller is not the portal owner or has no portal-settings right
         "500":
@@ -54415,14 +54519,7 @@ paths:
           description: Too Many Requests.
           headers:
             Retry-After:
-              description: Seconds to wait before retrying (5 req / 15 min limit per user/IP).
-              schema:
-                examples:
-                  - 30
-                maximum: 900
-                minimum: 0
-                type: integer
-                format: int32
+              $ref: '#/components/headers/Retry-After'
           content:
             application/json:
               schema:
@@ -54531,7 +54628,9 @@ paths:
 
         the portal again means asking for a fresh letter with `POST api/2.0/portal/suspend`, because each link is
 
-        issued for one operation. This operation cannot bring back a removed portal: the deletion behind
+        issued for one operation; asked shortly after the previous letter, it sends none, and the deactivation link of
+
+        that letter still works. This operation cannot bring back a removed portal: the deletion behind
 
         `DELETE api/2.0/portal/delete` is final, and a removed portal has to be restored from a backup instead.
       operationId: continuePortal
@@ -60326,7 +60425,11 @@ paths:
 
         It returns `true` when the trial has been granted, and `false` when the billing service declines it
 
-        (for example, when this portal has already used its trial), in which case nothing is changed. It never buys
+        (for example, when this portal has already used its trial), in which case nothing is changed - or when its
+
+        answer could not be read, in which case the trial may have been granted: read `GET api/2.0/portal/tariff`
+
+        before asking again. It never buys
 
         a paid plan: an existing paid Docs Connect subscription is moved to Docs Connect Dev Pack by
 
@@ -60334,7 +60437,7 @@ paths:
       operationId: startDocsCloudTrial
       responses:
         "200":
-          description: 'Boolean value: true if the trial subscription is activated, false if the billing service declines it'
+          description: 'Boolean value: true if the trial subscription is activated, false if the billing service declines it or its answer could not be read'
           headers:
             X-RateLimit-Limit:
               $ref: '#/components/headers/X-RateLimit-Limit'
@@ -66482,9 +66585,9 @@ paths:
 
         ID and sign-in URL are required, the sign-in and sign-out URLs have to be absolute http or https addresses,
 
-        and the attribute mapping has to name the fields for first name, last name and email; otherwise nothing is
+        and the attribute mapping has to name the fields for first name, last name and email; otherwise the request
 
-        saved. The caller has to be allowed to edit portal settings (portal owner or DocSpace admin), and the portal
+        is refused with 400 and nothing is saved. The caller has to be allowed to edit portal settings (portal owner or DocSpace admin), and the portal
 
         plan has to include Single Sign-On. Some values are normalised on the way in: a `usersType` other than 1 (room
 
@@ -66517,13 +66620,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/SsoSettingsWrapper'
         "400":
-          description: The serialized settings are empty or do not contain an SSO configuration object
+          description: The serialized settings are empty, not valid JSON, have a value of the wrong type or do not contain an SSO configuration object, the `idpSettings` object is missing or its entity ID is empty, the SSO URL is missing or the SSO or SLO URL is not an absolute HTTP or HTTPS address, or the `fieldMapping` object is missing or its first name, last name or email attribute is empty
         "402":
           description: The portal is a cloud one, and its pricing plan has no single sign-on option or the SSO section is not enabled for it
         "403":
           description: The caller has no portal-settings right
         "500":
-          description: The serialized settings are not valid JSON, have a value of the wrong type or lack the `idpSettings` or `fieldMapping` object, the IdP entity ID is empty, the SSO URL is missing or the SSO or SLO URL is not an absolute HTTP or HTTPS address, or the first name, last name or email attribute mapping is empty
+          description: The settings cannot be stored
         "401":
           description: Unauthorized
           content:
@@ -71506,6 +71609,73 @@ components:
         - provider
       additionalProperties: false
       description: AI model metadata. Describes a single model available from a provider.
+    AiByokKey:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Model revision id the key is set for, used in the path when replacing or deleting it.
+        name:
+          type: string
+          description: Model display name; absent when the model is no longer in the gateway catalogue.
+        provider:
+          type: string
+          description: BYOK provider id the key belongs to, e.g. `anthropic`.
+        image:
+          type: string
+          description: SVG markup of the logo of the model's owner.
+      required:
+        - id
+        - provider
+      additionalProperties: false
+    AiByokProvider:
+      type: object
+      properties:
+        id:
+          type: string
+          description: BYOK provider id, passed as `provider` when setting a BYOK key.
+        name:
+          type: string
+          description: Provider display name.
+        image:
+          type: string
+          description: SVG markup of the logo of the provider's models' owner.
+        models:
+          type: array
+          items:
+            $ref: '#/components/schemas/AiByokModel'
+          description: Models that can be called through this provider with the portal's own key.
+      required:
+        - id
+        - name
+        - models
+      additionalProperties: false
+    AiByokModel:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Model id, used in the path when setting its BYOK key.
+        name:
+          type: string
+          description: Model display name.
+      required:
+        - id
+        - name
+      additionalProperties: false
+    AiByokKeyInput:
+      type: object
+      properties:
+        provider:
+          type: string
+          description: BYOK provider id from the model's `byok_providers`, e.g. `anthropic`.
+        key:
+          type: string
+          description: Provider API key.
+      required:
+        - provider
+        - key
+      additionalProperties: false
     AiCreatePromptInput:
       type: object
       properties:
@@ -84642,7 +84812,7 @@ components:
             the field allows is refused.
       description: 'The mention notification to send: what to say, whom to tell and where in the document the mention sits.'
     MessageAction:
-      description: '[1000 - Login success, 1001 - Login success via social account, 1002 - Login fail invalid combination, 1003 - Login fail social account not found, 1004 - Login fail disabled profile, 1005 - Login fail, 1006 - Logout, 1007 - Login success via sms, 1008 - Login fail via sms, 1009 - Login fail ip security, 1010 - Login success via api, 1011 - Login success via social app, 1012 - Login success via api sms, 1013 - Login fail via api, 1014 - Login fail via api sms, 1015 - Login success via SSO, 1016 - Session started, 1017 - Session completed, 1018 - Login fail via SSO, 1019 - Login success via api social account, 1020 - Login fail via api social account, 1021 - Login succes via tfa app, 1022 - Login fail via Tfa app, 1023 - Login fail brute force, 1024 - Login success via api tfa, 1025 - Login fail via api tfa, 1026 - Login fail recaptcha, 1027 - Authorization link activated, 1028 - Login success via OAuth 2.0, 1029 - Login success via login and password, 4000 - User created, 4001 - Guest created, 4002 - User created via invite, 4003 - Guest created via invite, 4004 - User activated, 4005 - Guest activated, 4006 - User updated, 4007 - User updated language, 4008 - User added avatar, 4009 - User deleted avatar, 4010 - User updated avatar thumbnails, 4011 - User linked social account, 4012 - User unlinked social account, 4013 - User sent activation instructions, 4014 - User sent email change instructions, 4015 - User sent password change instructions, 4016 - User sent delete instructions, 4017 - User updated password, 4018 - User deleted, 4019 - Users updated type, 4020 - Users updated status, 4021 - Users sent activation instructions, 4022 - Users deleted, 4023 - Sent invite instructions, 4024 - User imported, 4025 - Guest imported, 4026 - Group created, 4027 - Group updated, 4028 - Group deleted, 4029 - User updated mobile number, 4030 - User data reassigns, 4031 - User data removing, 4032 - User connected tfa app, 4033 - User disconnected tfa app, 4034 - User logout active connections, 4035 - User logout active connection, 4036 - User logout active connections for user, 4037 - Send join invite, 5000 - File created, 5001 - File renamed, 5002 - File updated, 5003 - File created version, 5004 - File deleted version, 5005 - File updated revision comment, 5006 - File locked, 5007 - File unlocked, 5008 - File updated access, 5009 - File downloaded, 5010 - File downloaded as, 5011 - File uploaded, 5012 - File imported, 5013 - File copied, 5014 - File copied with overwriting, 5015 - File moved, 5016 - File moved with overwriting, 5017 - File moved to trash, 5018 - File deleted, 5019 - Folder created, 5020 - Folder renamed, 5021 - Folder updated access, 5022 - Folder copied, 5023 - Folder copied with overwriting, 5024 - Folder moved, 5025 - Folder moved with overwriting, 5026 - Folder moved to trash, 5027 - Folder deleted, 5028 - ThirdParty created, 5029 - ThirdParty updated, 5030 - ThirdParty deleted, 5031 - Documents ThirdParty settings updated, 5032 - Documents overwriting settings updated, 5033 - Documents uploading formats settings updated, 5034 - User file updated, 5035 - File converted, 5036 - File send access link, 5037 - Document service location setting, 5038 - Authorization keys setting, 5039 - Full text search setting, 5040 - Start transfer setting, 5041 - Backup started, 5042 - License key uploaded, 5043 - File change owner, 5044 - File restore version, 5045 - Document send to sign, 5046 - Document sign complete, 5047 - User updated email, 5048 - Documents store forcesave, 5049 - Documents forcesave, 5050 - Start storage encryption, 5053 - Start storage decryption, 5054 - File opened for change, 5055 - File marked as favorite, 5056 - File removed from favorite, 5057 - Folder downloaded, 5058 - File removed from list, 5059 - Folder removed from list, 5060 - File external link access updated, 5061 - Trash emptied, 5062 - File revision downloaded, 5063 - File marked as read, 5064 - File readed, 5065 - Folder marked as read, 5066 - Folder updated access for, 5068 - File updated access for, 5069 - Documents external share settings updated, 5070 - Room created, 5071 - Room renamed, 5072 - Room archived, 5073 - Room unarchived, 5074 - Room deleted, 5075 - Room update access for user, 5076 - Tag created, 5077 - Tags deleted, 5078 - Added room tags, 5079 - Deleted room tags, 5080 - Room logo created, 5081 - Room logo deleted, 5082 - Room invitation link updated, 5083 - Documents keep new file name settings updated, 5084 - Room remove user, 5085 - Room create user, 5086 - Room invitation link created, 5087 - Room invitation link deleted, 5088 - Room external link created, 5089 - Room external link updated, 5090 - Room external link deleted, 5091 - File external link created, 5092 - File external link updated, 5093 - File external link deleted, 5094 - Room group added, 5095 - Room update access for group, 5096 - Room group remove, 5097 - Room external link revoked, 5098 - Room external link renamed, 5099 - File uploaded with overwriting, 5100 - Room copied, 5101 - Documents display file extension updated, 5102 - Room color changed, 5103 - Room cover changed, 5104 - Room indexing changed, 5105 - Room deny download changed, 5106 - Room index export saved, 5107 - Folder index changed, 5108 - Folder index reordered, 5109 - Room deny download enabled, 5110 - Room deny download disabled, 5111 - File index changed, 5112 - Room watermark set, 5113 - Room watermark disabled, 5114 - Room index export saved, 5115 - Room indexing disabled, 5116 - Room life time set, 5117 - Room life time disabled, 5118 - Room invite resend, 5119 - File version deleted, 5120 - File custom filter enabled, 5121 - File custom filter disabled, 5122 - Folder external link created, 5123 - Folder external link updated, 5124 - Folder external link deleted, 5125 - Backup completed, 5126 - Backup failed, 5127 - Scheduled backup started, 5128 - Scheduled backup completed, 5129 - Scheduled backup failed, 5130 - Scheduled backup deleted, 5131 - Backup cancelled, 5132 - Restore started, 5133 - Restore cancelled, 5150 - Form started to fill, 5151 - Form partially filled, 5152 - Form completely filled, 5153 - Form stopped, 5154 - AI agent created, 5155 - AI agent renamed, 5156 - AI agent deleted, 5157 - MCP server added to AI agent, 5158 - MCP server deleted from AI agent, 5159 - Room change owner, 5160 - Documents default templates settings updated, 5161 - Private room encryption key created, 5162 - Private room encryption key updated, 5163 - Private room encryption key deleted, 5201 - File saved, user quota exceeded, 5202 - File not saved due to user quota exceeded, 5203 - File saved, room quota exceeded, 5204 - File not saved due to room quota exceeded, 5205 - File saved, tenant quota exceeded, 5206 - File not saved due to tenant quota exceeded, 5207 - Documents show quick actions updated, 5208 - File opened by a document builder script, 5300 - Metadata template created, 5301 - Metadata template updated, 5302 - Metadata template deleted, 5303 - Metadata field created, 5304 - Metadata field updated, 5305 - Metadata field deleted, 5306 - Metadata template assigned, 5307 - Metadata template unassigned, 5308 - Metadata values updated, 5309 - Metadata cascade assignment started, 5501 - Ldap enabled, 5502 - Ldap disabled, 5503 - LDAP synchronization completed, 6000 - Language settings updated, 6001 - Time zone settings updated, 6002 - Dns settings updated, 6003 - Trusted mail domain settings updated, 6004 - Password strength settings updated, 6005 - Two factor authentication settings updated, 6006 - Administrator message settings updated, 6007 - Default start page settings updated, 6008 - Products list updated, 6009 - Administrator added, 6010 - Administrator opened full access, 6011 - Administrator deleted, 6012 - Users opened product access, 6013 - Groups opened product access, 6014 - Product access opened, 6015 - Product access restricted, 6016 - Product added administrator, 6017 - Product deleted administrator, 6018 - Greeting settings updated, 6019 - Team template changed, 6020 - Color theme changed, 6021 - Owner sent change owner instructions, 6022 - Owner updated, 6023 - Owner sent portal deactivation instructions, 6024 - Owner sent portal delete instructions, 6025 - Portal deactivated, 6026 - Portal deleted, 6027 - Login history report downloaded, 6028 - Audit trail report downloaded, 6029 - SSO enabled, 6030 - SSO disabled, 6031 - Portal access settings updated, 6032 - Cookie settings updated, 6033 - Mail service settings updated, 6034 - Custom navigation settings updated, 6035 - Audit settings updated, 6036 - Two factor authentication disabled, 6037 - Two factor authentication enabled by sms, 6038 - Two factor authentication enabled by tfa app, 6039 - Portal renamed, 6040 - Quota per room changed, 6041 - Quota per room disabled, 6042 - Quota per user changed, 6043 - Quota per user disabled, 6044 - Quota per portal changed, 6045 - Quota per portal disabled, 6046 - Form submit, 6047 - Form opened for filling, 6048 - Custom quota per room default, 6049 - Custom quota per room changed, 6050 - Custom quota per room disabled, 6051 - Custom quota per user default, 6052 - Custom quota per user changed, 6053 - Custom quota per user disabled, 6054 - DevTools access settings changed, 6055 - Webhook created, 6056 - Webhook updated, 6057 - Webhook deleted, 6058 - Created api key, 6059 - Update api key, 6060 - Deleted User api key, 6061 - Customer wallet topped up, 6062 - Customer operation performed, 6063 - Customer operations report downloaded, 6064 - Customer wallet top up settings updated, 6065 - Customer subscription updated, 6066 - Promotional banners visibility settings changed, 6067 - Customer wallet services settings updated, 6068 - Quota per AI agent changed, 6069 - Quota per AI agent disabled, 6070 - Custom quota per AI agent default, 6071 - Custom quota per AI agent changed, 6072 - Custom quota per AI agent disabled, 6073 - AI provider created, 6074 - AI provider updated, 6075 - AI provider deleted, 6076 - MCP server created, 6077 - MCP server updated, 6078 - MCP server enabled, 6079 - MCP server disabled, 6080 - MCP server deleted, 6081 - WebSearch settings configured, 6082 - WebSearch settings reset, 6083 - Vectorization settings configured, 6084 - Vectorization settings reset, 6085 - Webplugin uploaded, 6086 - Webplugin updated, 6087 - Webplugin deleted, 6088 - Whitelabel settings logo text updated, 6089 - Whitelabel settings logos updated, 6090 - Whitelabel company settings updated, 6091 - Whitelabel additional settings updated, 6092 - Whitelabel mail settings updated, 6093 - Invitation settings updated, 6094 - IP restrictions settings updated, 6095 - Login settings updated, 6096 - AI default provider set, 6097 - AI access enabled, 6098 - AI access disabled, 6099 - User AI settings updated, 6100 - Subscription balance moved to wallet, 6101 - Docs Cloud config updated, 6102 - Docs Cloud quota report downloaded, 6103 - AI model profile created, 6104 - AI model profile updated, 6105 - AI model profile deleted, 6106 - AI model profile assigned to action, 6107 - AI model profile unassigned from action, 6108 - AI model profile assigned to AI agent action, 6109 - MCP server of AI agent updated, 6110 - Portal blocked, 6111 - Portal unblocked, 6112 - Service spending limit created, 6113 - Service spending limit updated, 6114 - Personal service spending limits set, 6115 - Personal service spending limits disabled, 6116 - Service spending limit deleted, 6117 - Webhook delivery retried, 6119 - App enabled, 6120 - App disabled, 6121 - Rooms linked to AI project, 6122 - Rooms unlinked from AI project, 6123 - AI project model changed, 7000 - Contact admin mail sent, 7001 - Room invite link used, 7002 - User created and added to room, 7003 - Guest created and added to room, 7004 - Contact sales mail sent, 7005 - Suspicious login detected, 9901 - Create client, 9902 - Update client, 9903 - Regenerate secret, 9904 - Delete client, 9905 - Change client activation, 9906 - Change client visibility, 9907 - Revoke user client, 9908 - Generate authorization code token, 9909 - Generate personal access token, -1 - None]'
+      description: '[1000 - Login success, 1001 - Login success via social account, 1002 - Login fail invalid combination, 1003 - Login fail social account not found, 1004 - Login fail disabled profile, 1005 - Login fail, 1006 - Logout, 1007 - Login success via sms, 1008 - Login fail via sms, 1009 - Login fail ip security, 1010 - Login success via api, 1011 - Login success via social app, 1012 - Login success via api sms, 1013 - Login fail via api, 1014 - Login fail via api sms, 1015 - Login success via SSO, 1016 - Session started, 1017 - Session completed, 1018 - Login fail via SSO, 1019 - Login success via api social account, 1020 - Login fail via api social account, 1021 - Login succes via tfa app, 1022 - Login fail via Tfa app, 1023 - Login fail brute force, 1024 - Login success via api tfa, 1025 - Login fail via api tfa, 1026 - Login fail recaptcha, 1027 - Authorization link activated, 1028 - Login success via OAuth 2.0, 1029 - Login success via login and password, 4000 - User created, 4001 - Guest created, 4002 - User created via invite, 4003 - Guest created via invite, 4004 - User activated, 4005 - Guest activated, 4006 - User updated, 4007 - User updated language, 4008 - User added avatar, 4009 - User deleted avatar, 4010 - User updated avatar thumbnails, 4011 - User linked social account, 4012 - User unlinked social account, 4013 - User sent activation instructions, 4014 - User sent email change instructions, 4015 - User sent password change instructions, 4016 - User sent delete instructions, 4017 - User updated password, 4018 - User deleted, 4019 - Users updated type, 4020 - Users updated status, 4021 - Users sent activation instructions, 4022 - Users deleted, 4023 - Sent invite instructions, 4024 - User imported, 4025 - Guest imported, 4026 - Group created, 4027 - Group updated, 4028 - Group deleted, 4029 - User updated mobile number, 4030 - User data reassigns, 4031 - User data removing, 4032 - User connected tfa app, 4033 - User disconnected tfa app, 4034 - User logout active connections, 4035 - User logout active connection, 4036 - User logout active connections for user, 4037 - Send join invite, 5000 - File created, 5001 - File renamed, 5002 - File updated, 5003 - File created version, 5004 - File deleted version, 5005 - File updated revision comment, 5006 - File locked, 5007 - File unlocked, 5008 - File updated access, 5009 - File downloaded, 5010 - File downloaded as, 5011 - File uploaded, 5012 - File imported, 5013 - File copied, 5014 - File copied with overwriting, 5015 - File moved, 5016 - File moved with overwriting, 5017 - File moved to trash, 5018 - File deleted, 5019 - Folder created, 5020 - Folder renamed, 5021 - Folder updated access, 5022 - Folder copied, 5023 - Folder copied with overwriting, 5024 - Folder moved, 5025 - Folder moved with overwriting, 5026 - Folder moved to trash, 5027 - Folder deleted, 5028 - ThirdParty created, 5029 - ThirdParty updated, 5030 - ThirdParty deleted, 5031 - Documents ThirdParty settings updated, 5032 - Documents overwriting settings updated, 5033 - Documents uploading formats settings updated, 5034 - User file updated, 5035 - File converted, 5036 - File send access link, 5037 - Document service location setting, 5038 - Authorization keys setting, 5039 - Full text search setting, 5040 - Start transfer setting, 5041 - Backup started, 5042 - License key uploaded, 5043 - File change owner, 5044 - File restore version, 5045 - Document send to sign, 5046 - Document sign complete, 5047 - User updated email, 5048 - Documents store forcesave, 5049 - Documents forcesave, 5050 - Start storage encryption, 5053 - Start storage decryption, 5054 - File opened for change, 5055 - File marked as favorite, 5056 - File removed from favorite, 5057 - Folder downloaded, 5058 - File removed from list, 5059 - Folder removed from list, 5060 - File external link access updated, 5061 - Trash emptied, 5062 - File revision downloaded, 5063 - File marked as read, 5064 - File readed, 5065 - Folder marked as read, 5066 - Folder updated access for, 5068 - File updated access for, 5069 - Documents external share settings updated, 5070 - Room created, 5071 - Room renamed, 5072 - Room archived, 5073 - Room unarchived, 5074 - Room deleted, 5075 - Room update access for user, 5076 - Tag created, 5077 - Tags deleted, 5078 - Added room tags, 5079 - Deleted room tags, 5080 - Room logo created, 5081 - Room logo deleted, 5082 - Room invitation link updated, 5083 - Documents keep new file name settings updated, 5084 - Room remove user, 5085 - Room create user, 5086 - Room invitation link created, 5087 - Room invitation link deleted, 5088 - Room external link created, 5089 - Room external link updated, 5090 - Room external link deleted, 5091 - File external link created, 5092 - File external link updated, 5093 - File external link deleted, 5094 - Room group added, 5095 - Room update access for group, 5096 - Room group remove, 5097 - Room external link revoked, 5098 - Room external link renamed, 5099 - File uploaded with overwriting, 5100 - Room copied, 5101 - Documents display file extension updated, 5102 - Room color changed, 5103 - Room cover changed, 5104 - Room indexing changed, 5105 - Room deny download changed, 5106 - Room index export saved, 5107 - Folder index changed, 5108 - Folder index reordered, 5109 - Room deny download enabled, 5110 - Room deny download disabled, 5111 - File index changed, 5112 - Room watermark set, 5113 - Room watermark disabled, 5114 - Room index export saved, 5115 - Room indexing disabled, 5116 - Room life time set, 5117 - Room life time disabled, 5118 - Room invite resend, 5119 - File version deleted, 5120 - File custom filter enabled, 5121 - File custom filter disabled, 5122 - Folder external link created, 5123 - Folder external link updated, 5124 - Folder external link deleted, 5125 - Backup completed, 5126 - Backup failed, 5127 - Scheduled backup started, 5128 - Scheduled backup completed, 5129 - Scheduled backup failed, 5130 - Scheduled backup deleted, 5131 - Backup cancelled, 5132 - Restore started, 5133 - Restore cancelled, 5150 - Form started to fill, 5151 - Form partially filled, 5152 - Form completely filled, 5153 - Form stopped, 5154 - AI agent created, 5155 - AI agent renamed, 5156 - AI agent deleted, 5157 - MCP server added to AI agent, 5158 - MCP server deleted from AI agent, 5159 - Room change owner, 5160 - Documents default templates settings updated, 5161 - Private room encryption key created, 5162 - Private room encryption key updated, 5163 - Private room encryption key deleted, 5201 - File saved, user quota exceeded, 5202 - File not saved due to user quota exceeded, 5203 - File saved, room quota exceeded, 5204 - File not saved due to room quota exceeded, 5205 - File saved, tenant quota exceeded, 5206 - File not saved due to tenant quota exceeded, 5207 - Documents show quick actions updated, 5208 - File opened by a document builder script, 5300 - Metadata template created, 5301 - Metadata template updated, 5302 - Metadata template deleted, 5303 - Metadata field created, 5304 - Metadata field updated, 5305 - Metadata field deleted, 5306 - Metadata template assigned, 5307 - Metadata template unassigned, 5308 - Metadata values updated, 5309 - Metadata cascade assignment started, 5501 - Ldap enabled, 5502 - Ldap disabled, 5503 - LDAP synchronization completed, 6000 - Language settings updated, 6001 - Time zone settings updated, 6002 - Dns settings updated, 6003 - Trusted mail domain settings updated, 6004 - Password strength settings updated, 6005 - Two factor authentication settings updated, 6006 - Administrator message settings updated, 6007 - Default start page settings updated, 6008 - Products list updated, 6009 - Administrator added, 6010 - Administrator opened full access, 6011 - Administrator deleted, 6012 - Users opened product access, 6013 - Groups opened product access, 6014 - Product access opened, 6015 - Product access restricted, 6016 - Product added administrator, 6017 - Product deleted administrator, 6018 - Greeting settings updated, 6019 - Team template changed, 6020 - Color theme changed, 6021 - Owner sent change owner instructions, 6022 - Owner updated, 6023 - Owner sent portal deactivation instructions, 6024 - Owner sent portal delete instructions, 6025 - Portal deactivated, 6026 - Portal deleted, 6027 - Login history report downloaded, 6028 - Audit trail report downloaded, 6029 - SSO enabled, 6030 - SSO disabled, 6031 - Portal access settings updated, 6032 - Cookie settings updated, 6033 - Mail service settings updated, 6034 - Custom navigation settings updated, 6035 - Audit settings updated, 6036 - Two factor authentication disabled, 6037 - Two factor authentication enabled by sms, 6038 - Two factor authentication enabled by tfa app, 6039 - Portal renamed, 6040 - Quota per room changed, 6041 - Quota per room disabled, 6042 - Quota per user changed, 6043 - Quota per user disabled, 6044 - Quota per portal changed, 6045 - Quota per portal disabled, 6046 - Form submit, 6047 - Form opened for filling, 6048 - Custom quota per room default, 6049 - Custom quota per room changed, 6050 - Custom quota per room disabled, 6051 - Custom quota per user default, 6052 - Custom quota per user changed, 6053 - Custom quota per user disabled, 6054 - DevTools access settings changed, 6055 - Webhook created, 6056 - Webhook updated, 6057 - Webhook deleted, 6058 - Created api key, 6059 - Update api key, 6060 - Deleted User api key, 6061 - Customer wallet topped up, 6062 - Customer operation performed, 6063 - Customer operations report downloaded, 6064 - Customer wallet top up settings updated, 6065 - Customer subscription updated, 6066 - Promotional banners visibility settings changed, 6067 - Customer wallet services settings updated, 6068 - Quota per AI agent changed, 6069 - Quota per AI agent disabled, 6070 - Custom quota per AI agent default, 6071 - Custom quota per AI agent changed, 6072 - Custom quota per AI agent disabled, 6073 - AI provider created, 6074 - AI provider updated, 6075 - AI provider deleted, 6076 - MCP server created, 6077 - MCP server updated, 6078 - MCP server enabled, 6079 - MCP server disabled, 6080 - MCP server deleted, 6081 - WebSearch settings configured, 6082 - WebSearch settings reset, 6083 - Vectorization settings configured, 6084 - Vectorization settings reset, 6085 - Webplugin uploaded, 6086 - Webplugin updated, 6087 - Webplugin deleted, 6088 - Whitelabel settings logo text updated, 6089 - Whitelabel settings logos updated, 6090 - Whitelabel company settings updated, 6091 - Whitelabel additional settings updated, 6092 - Whitelabel mail settings updated, 6093 - Invitation settings updated, 6094 - IP restrictions settings updated, 6095 - Login settings updated, 6096 - AI default provider set, 6097 - AI access enabled, 6098 - AI access disabled, 6099 - User AI settings updated, 6100 - Subscription balance moved to wallet, 6101 - Docs Cloud config updated, 6102 - Docs Cloud quota report downloaded, 6103 - AI model profile created, 6104 - AI model profile updated, 6105 - AI model profile deleted, 6106 - AI model profile assigned to action, 6107 - AI model profile unassigned from action, 6108 - AI model profile assigned to AI agent action, 6109 - MCP server of AI agent updated, 6110 - Portal blocked, 6111 - Portal unblocked, 6112 - Service spending limit created, 6113 - Service spending limit updated, 6114 - Personal service spending limits set, 6115 - Personal service spending limits disabled, 6116 - Service spending limit deleted, 6117 - Webhook delivery retried, 6119 - App enabled, 6120 - App disabled, 6121 - Rooms linked to AI project, 6122 - Rooms unlinked from AI project, 6123 - AI project model changed, 6124 - AI model BYOK key set, 6125 - AI model BYOK key deleted, 7000 - Contact admin mail sent, 7001 - Room invite link used, 7002 - User created and added to room, 7003 - Guest created and added to room, 7004 - Contact sales mail sent, 7005 - Suspicious login detected, 9901 - Create client, 9902 - Update client, 9903 - Regenerate secret, 9904 - Delete client, 9905 - Change client activation, 9906 - Change client visibility, 9907 - Revoke user client, 9908 - Generate authorization code token, 9909 - Generate personal access token, -1 - None]'
       enum:
         - 1000
         - 1001
@@ -85003,6 +85173,8 @@ components:
         - 6121
         - 6122
         - 6123
+        - 6124
+        - 6125
         - 7000
         - 7001
         - 7002
@@ -85382,6 +85554,8 @@ components:
         - RoomsLinkedToAiProject
         - RoomsUnlinkedFromAiProject
         - AiProjectProfileAssigned
+        - AiByokKeySet
+        - AiByokKeyDeleted
         - ContactAdminMailSent
         - RoomInviteLinkUsed
         - UserCreatedAndAddedToRoom
@@ -95048,9 +95222,11 @@ components:
             - "null"
             - string
           description: >-
-            Who runs the model. Two entries can share a provider, and one provider's models can be priced quite
+            Who runs the model: the built-in provider, or the vendor the portal's own key belongs to when `byok` is
 
-            differently, so the price always belongs to the entry and never to the provider.
+            true. Two entries can share a provider, and one provider's models can be priced quite differently, so
+
+            the price always belongs to the entry and never to the provider.
         image:
           examples:
             - https://cdn.example.com/providers/openai.png
@@ -95062,8 +95238,18 @@ components:
           description: >-
             What the entry costs, in the currency the answer names. Amounts per token are normalised per million
 
-            tokens, so they are not the price of a single call.
+            tokens, so they are not the price of a single call. When `byok` is true it is the vendor's own price, which
+
+            the portal pays to the vendor directly.
           $ref: '#/components/schemas/AiChatPriceDto'
+        byok:
+          examples:
+            - false
+          type: boolean
+          description: >-
+            Whether this portal calls the model with its own provider key (BYOK) instead of the built-in one; when
+
+            true, `provider`, `price` and `link` describe the vendor of that key.
         link:
           examples:
             - https://openai.com/pricing
@@ -95071,9 +95257,9 @@ components:
             - "null"
             - string
           description: >-
-            The provider's own page for the model, for a person to read the model's terms. It is empty when the
+            The provider's own page for the model, for a person to read the model's terms; for a BYOK entry, the
 
-            provider publishes none.
+            vendor's pricing page. It is empty when the provider publishes none.
       description: 'One AI model or service on the price list: how to name it, who provides it, and what it costs.'
     AiEntryPricingDtoAiEmbeddingPriceDto:
       required:
@@ -95109,9 +95295,11 @@ components:
             - "null"
             - string
           description: >-
-            Who runs the model. Two entries can share a provider, and one provider's models can be priced quite
+            Who runs the model: the built-in provider, or the vendor the portal's own key belongs to when `byok` is
 
-            differently, so the price always belongs to the entry and never to the provider.
+            true. Two entries can share a provider, and one provider's models can be priced quite differently, so
+
+            the price always belongs to the entry and never to the provider.
         image:
           examples:
             - https://cdn.example.com/providers/openai.png
@@ -95123,8 +95311,18 @@ components:
           description: >-
             What the entry costs, in the currency the answer names. Amounts per token are normalised per million
 
-            tokens, so they are not the price of a single call.
+            tokens, so they are not the price of a single call. When `byok` is true it is the vendor's own price, which
+
+            the portal pays to the vendor directly.
           $ref: '#/components/schemas/AiEmbeddingPriceDto'
+        byok:
+          examples:
+            - false
+          type: boolean
+          description: >-
+            Whether this portal calls the model with its own provider key (BYOK) instead of the built-in one; when
+
+            true, `provider`, `price` and `link` describe the vendor of that key.
         link:
           examples:
             - https://openai.com/pricing
@@ -95132,9 +95330,9 @@ components:
             - "null"
             - string
           description: >-
-            The provider's own page for the model, for a person to read the model's terms. It is empty when the
+            The provider's own page for the model, for a person to read the model's terms; for a BYOK entry, the
 
-            provider publishes none.
+            vendor's pricing page. It is empty when the provider publishes none.
       description: 'One AI model or service on the price list: how to name it, who provides it, and what it costs.'
     AiEntryPricingDtoAiImagePriceDto:
       required:
@@ -95170,9 +95368,11 @@ components:
             - "null"
             - string
           description: >-
-            Who runs the model. Two entries can share a provider, and one provider's models can be priced quite
+            Who runs the model: the built-in provider, or the vendor the portal's own key belongs to when `byok` is
 
-            differently, so the price always belongs to the entry and never to the provider.
+            true. Two entries can share a provider, and one provider's models can be priced quite differently, so
+
+            the price always belongs to the entry and never to the provider.
         image:
           examples:
             - https://cdn.example.com/providers/openai.png
@@ -95184,8 +95384,18 @@ components:
           description: >-
             What the entry costs, in the currency the answer names. Amounts per token are normalised per million
 
-            tokens, so they are not the price of a single call.
+            tokens, so they are not the price of a single call. When `byok` is true it is the vendor's own price, which
+
+            the portal pays to the vendor directly.
           $ref: '#/components/schemas/AiImagePriceDto'
+        byok:
+          examples:
+            - false
+          type: boolean
+          description: >-
+            Whether this portal calls the model with its own provider key (BYOK) instead of the built-in one; when
+
+            true, `provider`, `price` and `link` describe the vendor of that key.
         link:
           examples:
             - https://openai.com/pricing
@@ -95193,9 +95403,9 @@ components:
             - "null"
             - string
           description: >-
-            The provider's own page for the model, for a person to read the model's terms. It is empty when the
+            The provider's own page for the model, for a person to read the model's terms; for a BYOK entry, the
 
-            provider publishes none.
+            vendor's pricing page. It is empty when the provider publishes none.
       description: 'One AI model or service on the price list: how to name it, who provides it, and what it costs.'
     AiEntryPricingDtoDecimal:
       required:
@@ -95231,9 +95441,11 @@ components:
             - "null"
             - string
           description: >-
-            Who runs the model. Two entries can share a provider, and one provider's models can be priced quite
+            Who runs the model: the built-in provider, or the vendor the portal's own key belongs to when `byok` is
 
-            differently, so the price always belongs to the entry and never to the provider.
+            true. Two entries can share a provider, and one provider's models can be priced quite differently, so
+
+            the price always belongs to the entry and never to the provider.
         image:
           examples:
             - https://cdn.example.com/providers/openai.png
@@ -95249,8 +95461,18 @@ components:
           description: >-
             What the entry costs, in the currency the answer names. Amounts per token are normalised per million
 
-            tokens, so they are not the price of a single call.
+            tokens, so they are not the price of a single call. When `byok` is true it is the vendor's own price, which
+
+            the portal pays to the vendor directly.
           format: double
+        byok:
+          examples:
+            - false
+          type: boolean
+          description: >-
+            Whether this portal calls the model with its own provider key (BYOK) instead of the built-in one; when
+
+            true, `provider`, `price` and `link` describe the vendor of that key.
         link:
           examples:
             - https://openai.com/pricing
@@ -95258,9 +95480,9 @@ components:
             - "null"
             - string
           description: >-
-            The provider's own page for the model, for a person to read the model's terms. It is empty when the
+            The provider's own page for the model, for a person to read the model's terms; for a BYOK entry, the
 
-            provider publishes none.
+            vendor's pricing page. It is empty when the provider publishes none.
       description: 'One AI model or service on the price list: how to name it, who provides it, and what it costs.'
     AiImagePriceDto:
       type: object
@@ -95323,6 +95545,7 @@ components:
                 price:
                   prompt: 5
                   completion: 15
+                byok: false
           type:
             - "null"
             - array
@@ -95343,6 +95566,7 @@ components:
                 image: https://cdn.example.com/providers/openai.png
                 price:
                   prompt: 0.13
+                byok: false
           type:
             - "null"
             - array
@@ -95363,6 +95587,7 @@ components:
                   prompt: 8
                   completion: 15
                   image: 30
+                byok: false
           type:
             - "null"
             - array
@@ -95380,6 +95605,7 @@ components:
                 provider: tavily
                 image: https://cdn.example.com/providers/tavily.png
                 price: 0.01
+                byok: false
           type:
             - "null"
             - array
@@ -98141,6 +98367,14 @@ components:
             Whether the service is billed as a standing subscription rather than per unit consumed. It is derived
 
             from today's price list, so it describes the service as it is sold now.
+        byok:
+          examples:
+            - false
+          type: boolean
+          description: >-
+            Whether the total is AI consumption paid with the portal's own provider keys rather than from the wallet. It
+
+            is `false` on a total into which that consumption was merged, which mixes the two.
       description: What one wallet service was consumed and cost over the requested period, added up rather than listed.
     CustomerServiceUsageReportDto:
       type: object
@@ -102009,6 +102243,18 @@ components:
           type: number
           description: The amount that was taken out of the wallet, `0` on a movement that put money in.
           format: double
+        byok:
+          examples:
+            - true
+          type: boolean
+          description: Whether the AI operation ran on the portal's own provider key.
+        provider:
+          examples:
+            - anthropic
+          type:
+            - "null"
+            - string
+          description: The AI provider that ran the operation; `null` when it was not recorded.
         cost:
           examples:
             - 0.007

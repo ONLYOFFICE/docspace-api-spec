@@ -82,6 +82,8 @@ All URIs are relative to *https://yourportal.onlyoffice.com*, where the host is 
 | Method | HTTP request | Description |
 |------------ | ------------- | -------------|
 | [**deleteKeys**](privacy-room/delete-keys.md) | **DELETE** /api/2.0/privacyroom/keys/\{id\} | Delete an encryption key |
+| [**getRoomCandidateKeys**](privacy-room/get-room-candidate-keys.md) | **GET** /api/2.0/privacyroom/\{roomId\}/access/candidates | Get public keys of room invitees |
+| [**getRoomMissingFileKeys**](privacy-room/get-room-missing-file-keys.md) | **GET** /api/2.0/privacyroom/\{roomId\}/access/missing | Get missing file keys of a room |
 | [**getUserKeys**](privacy-room/get-user-keys.md) | **GET** /api/2.0/privacyroom/keys | Get own encryption keys |
 | [**getUserKeysForRoom**](privacy-room/get-user-keys-for-room.md) | **GET** /api/2.0/privacyroom/\{roomId\}/access | Get private room access keys |
 | [**replaceKey**](privacy-room/replace-key.md) | **PUT** /api/2.0/privacyroom/keys | Rotate an encryption key |

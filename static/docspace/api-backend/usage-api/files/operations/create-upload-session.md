@@ -20,9 +20,9 @@ Deprecated in favour of `POST api/2.0/files/{folderId}/session`, which opens the
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | The created session, wrapped in the success envelope | [**ChunkedUploadSessionResultWrapper**](../../models/chunked-upload-session-result-wrapper.md) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **400** | The request body cannot be read, has no `fileName`, or `fileSize` is negative | - | - |
+| **400** | The request body cannot be read, has no `fileName`, `fileSize` is negative, or the name of a file in a private room is not a lowercase UUID with an optional lowercase extension | - | - |
 | **402** | The declared `fileSize` exceeds the portal limit for chunked uploads or the size allowed in a knowledge folder | - | - |
-| **403** | The caller cannot add content to the target folder, the folder is a section root, or a knowledge folder does not accept this format | - | - |
+| **403** | The caller cannot add content to the target folder, the folder is a section root, or a knowledge folder does not accept this format, or the file going into a private room is not marked `encrypted` | - | - |
 | **404** | No folder with the specified ID | - | - |
 | **415** | The installation restricts uploadable formats and the file extension is not among them | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../../models/error-api-response.md) | - |

@@ -43,6 +43,15 @@ All URIs are relative to *https://yourportal.onlyoffice.com*, where the host is 
 | [**aiAttachmentsSaveFile**](attachments/ai-attachments-save-file.md) | **POST** /api/2.0/ai/attachments/save-file | Save file |
 | [**aiAttachmentsSaveFilesMany**](attachments/ai-attachments-save-files-many.md) | **POST** /api/2.0/ai/attachments/save-files-many | Save files many |
 
+## BYOK
+
+| Method | HTTP request | Description |
+|------------ | ------------- | -------------|
+| [**aiByokKeysDelete**](byok/ai-byok-keys-delete.md) | **DELETE** /api/2.0/ai/byok/\{id\} | Delete a BYOK key |
+| [**aiByokKeysList**](byok/ai-byok-keys-list.md) | **GET** /api/2.0/ai/byok | List BYOK keys |
+| [**aiByokKeysSet**](byok/ai-byok-keys-set.md) | **PUT** /api/2.0/ai/byok/\{id\} | Set a BYOK key |
+| [**aiByokProviders**](byok/ai-byok-providers.md) | **GET** /api/2.0/ai/byok/providers | List BYOK providers |
+
 ## Context
 
 | Method | HTTP request | Description |
@@ -134,6 +143,12 @@ All URIs are relative to *https://yourportal.onlyoffice.com*, where the host is 
 | [**aiSettingsSetToolMode**](settings/ai-settings-set-tool-mode.md) | **PUT** /api/2.0/ai/config/tool-mode | Set the tool permission mode |
 | [**aiSettingsSetUser**](settings/ai-settings-set-user.md) | **PUT** /api/2.0/ai/config/user | Update user AI settings |
 | [**aiSettingsSetVectorization**](settings/ai-settings-set-vectorization.md) | **PUT** /api/2.0/ai/config/vectorization | Update vectorization settings |
+
+## Skills
+
+| Method | HTTP request | Description |
+|------------ | ------------- | -------------|
+| [**aiSkillsGenerate**](skills/ai-skills-generate.md) | **POST** /api/2.0/ai/skills/generate | Generate a skill |
 
 ## Threads
 

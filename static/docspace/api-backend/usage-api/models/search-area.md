@@ -13,3 +13,4 @@ Possible values:
 - `Forms` - Forms
 - `FormTemplates` - Form templates
 - `AiHub` - AiHub
+- `PrivateRooms` - Private rooms

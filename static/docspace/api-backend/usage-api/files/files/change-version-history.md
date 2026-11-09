@@ -22,9 +22,9 @@ Closes or reopens a revision group in the version history of a file and answers 
 | **200** | The versions of the file after the change | [**FileArrayWrapper**](../../models/file-array-wrapper.md) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **400** | The request body cannot be read or has no `version` | - | - |
 | **402** | Completing the current version needs more space than the room or user storage quota leaves | - | - |
-| **403** | The caller may not change the version history of the file | - | - |
+| **403** | The caller may not change the version history of the file, or the file is locked by somebody else | - | - |
 | **404** | The file id, or the requested version of it, resolves to nothing | - | - |
-| **500** | The file is locked by somebody else, or, when the current version is completed, the file is encrypted, another update of it is in progress, or storing the new version fails | - | - |
+| **500** | When the current version is completed, the file is encrypted, another update of it is in progress, or storing the new version fails | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../../models/error-api-response.md) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../../models/error-api-response.md) | `Retry-After` |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |

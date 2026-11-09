@@ -22,7 +22,7 @@ Creates a file in the folder named in the route and answers with the stored file
 | **200** | The file created in the folder: its id and the title the portal actually stored, whose extension may differ from the requested one; `thumbnailStatus` says whether the preview is already built | [**FileWrapper**](../../models/file-wrapper.md) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
 | **400** | The request body cannot be read or has no `title`, or the title is empty or longer than 165 characters | - | - |
 | **402** | The new file does not fit into the storage quota of the portal, the room or the user | - | - |
-| **403** | The caller may not create files in the folder, the folder does not exist or is a section where files cannot be created, the template does not exist or cannot be read, or the form gallery has no file of the title's format | - | - |
+| **403** | The caller may not create files in the folder, the folder does not exist or is a section where files cannot be created, the template does not exist or cannot be read, the form gallery has no file of the title's format, or the file is not a PDF and the folder lies in a form-filling room | - | - |
 | **404** | The folder id or `templateId` is a string that is not the id of an item in a known third-party storage | - | - |
 | **500** | `templateId` is a fraction, a number outside the 32-bit range or a numeric string, the form gallery does not know `formId` or cannot be reached, or the folder id is 0 and the caller is a guest without My documents | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../../models/error-api-response.md) | - |

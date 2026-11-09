@@ -24,7 +24,7 @@ Opens an editing session on the file and answers with the document key that iden
 | **403** | The caller cannot edit the file, the file is locked or in Trash, somebody is already editing it and the session was claimed alone, or the document service did not accept the tracking request | - | - |
 | **404** | The file id resolves to nothing | - | - |
 | **415** | The file is in a format the editors can neither edit nor open for viewing | - | - |
-| **500** | The file lies in a third-party storage that cannot deliver it, or, with `editingAlone=true`, the file is locked by somebody else or lies in Trash | - | - |
+| **500** | The file lies in a third-party storage that cannot deliver it, or, with `editingAlone=true`, the file lies in Trash | - | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../../models/error-api-response.md) | `Retry-After` |
 | **400** | Bad Request. | [**ErrorApiResponse**](../../models/error-api-response.md) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |

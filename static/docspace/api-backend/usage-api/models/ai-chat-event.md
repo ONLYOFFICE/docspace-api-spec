@@ -3,7 +3,7 @@ One event of a chat stream, told apart by `type`: `message-start`, `message-delt
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **type** | **String** | Emitted once per `sendWithStream` call, immediately after the user message has been persisted by storage and before the assistant stream starts. Carries the storage-assigned `id` and `createdAt`. The UI uses it to render the user bubble — no client-side optimistic placeholder is needed, which keeps the runtime tree free of phantom nodes from index-fallback ids. | [required] [example: `message-delta`] [enum: `user-message-stored`, `message-start`, `message-delta`, `message-end`, `message-incomplete`, `tool-call-pending`, `thread-title`] |
+| **type** | **String** | Emitted once per `sendWithStream` call, immediately after the user message has been persisted by storage and before the assistant stream starts. Carries the storage-assigned `id` and `createdAt`. The UI uses it to render the user bubble — no client-side optimistic placeholder is needed, which keeps the runtime tree free of phantom nodes from index-fallback ids. | [required] [example: `message-delta`] [enum: `user-message-stored`, `message-start`, `message-delta`, `message-end`, `message-incomplete`, `tool-call-pending`, `thread-title`, `context-compacted`] |
 | **message** | [**AiThreadMessageLike**](ai-thread-message-like.md) | The message the event is about, in the state it has reached. | [optional] |
 | **messageId** | **String** | The storage identifier of that message. | [optional] [example: `22222222-2222-2222-2222-222222222222`] |
 | **idx** | **BigDecimal** | The zero-based position of the pending tool call within the message. | [optional] |
