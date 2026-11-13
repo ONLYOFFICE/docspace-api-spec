@@ -8,8 +8,8 @@ Sent on the `form.stopped` event. The body is a FileDelivery, whose `payload` is
 
 Raised by these REST API operations:
 
-- [`PUT api/2.0/files/file/{fileId}/manageformfilling`](../../usage-api/files/files/manage-form-filling.md) (Perform form filling action), when `action` is `Stop`, and for `Edit` in a form-filling room where filling had started
-- [`GET api/2.0/files/file/{fileId}/openedit`](../../usage-api/files/files/open-edit-file.md) (Get the editor configuration), when a PDF form whose filling had started in a form-filling room is opened with `edit` true
+- [`PUT api/2.0/files/file/{fileId}/manageformfilling`](../../usage-api/files/files/manage-form-filling.md) (Perform form filling action), for every `Stop`, even a repeated one, and for `Edit` that ends a started filling
+- [`GET api/2.0/files/file/{fileId}/openedit`](../../usage-api/files/files/open-edit-file.md) (Get the editor configuration), when `edit` true stops the filling of a form in a form-filling room
 
 ## Request headers
 

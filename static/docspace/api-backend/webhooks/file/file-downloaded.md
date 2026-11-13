@@ -8,7 +8,7 @@ Sent on the `file.downloaded` event. The body is a FileDelivery, whose `payload`
 
 Raised by these REST API operations:
 
-- [`PUT api/2.0/files/fileops/bulkdownload`](../../usage-api/files/operations/bulk-download.md) (Bulk download), for every listed file, once the queued operation packs it; the files inside listed folders raise none
+- [`PUT api/2.0/files/fileops/bulkdownload`](../../usage-api/files/operations/bulk-download.md) (Bulk download), for each listed file when the job packs it, not for the files inside listed folders
 
 Also raised by a download through the file's `viewUrl`, once per download.
 

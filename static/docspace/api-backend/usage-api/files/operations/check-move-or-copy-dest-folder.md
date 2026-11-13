@@ -6,7 +6,7 @@
 
 Check the destination folder
 
-Reports whether the destination folder accepts the listed files, before a move or a copy is started. Only  `fileIds` and `destFolderId` are read from the request: `result` says whether all of the files are accepted,  only some of them or none, and `files` names the ones that are. The check is about what the destination allows  to be stored in it rather than about name clashes — everywhere except a form-filling room every file is  accepted, while a form-filling room accepts only PDF forms, so a text document offered to one comes back as  none accepted. A file listed twice is counted once, as the operation moves it once. The caller needs create  access to the destination, so a room the caller cannot write to and an archived room are refused with 403, as  are the Rooms, Forms and AI agents section roots, which hold rooms only; a destination that does not exist is  answered as missing, and a request without `destFolderId` is rejected as an invalid request. Folder ids and  the copying options of the request play no part here. The call changes nothing; for same-named entries at the  destination use  `GET api/2.0/files/fileops/move`.
+Returns whether the destination folder accepts the listed files before a move or a copy. The call reads only  `fileIds` and `destFolderId` from the request. A form-filling room accepts only PDF forms. Every other folder  accepts every file. A file listed twice counts once. Requires the right to create content in the destination.  Other callers get 403. The call also returns 403 for an archived room and for the Rooms, Forms, and AI agents  section roots. The call is read-only. It does not look for name clashes. To find them, use  `GET api/2.0/files/fileops/move`. If the destination does not exist, the call returns 404. Without  `destFolderId`, the call returns 400.
 
 ## Parameters
 
@@ -29,9 +29,9 @@ Reports whether the destination folder accepts the listed files, before a move o
 | **400** | `destFolderId` is not given | - | - |
 | **403** | The caller cannot create items in the destination folder, or the destination is the Rooms, Forms or AI agents section root, which holds rooms only | - | - |
 | **404** | The destination folder does not exist | - | - |
-| **500** | A listed file is on a third-party account and the destination accepts it, or a listed file does not exist while the destination is a form-filling room | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../../models/error-api-response.md) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../../models/error-api-response.md) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](../../models/error-api-response.md) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 

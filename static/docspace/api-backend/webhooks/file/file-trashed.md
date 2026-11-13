@@ -9,7 +9,7 @@ Sent on the `file.trashed` event. The body is a FileDelivery, whose `payload` is
 Raised by these REST API operations:
 
 - [`DELETE api/2.0/files/file/{fileId}`](../../usage-api/files/files/delete-file.md) (Delete a file), once the queued operation moves the file to the trash
-- [`PUT api/2.0/files/fileops/delete`](../../usage-api/files/operations/delete-batch-items.md) (Delete files and folders), for every listed file the queued operation moves to the trash; the files inside listed folders raise none
+- [`PUT api/2.0/files/fileops/delete`](../../usage-api/files/operations/delete-batch-items.md) (Delete files and folders), for every listed file moved to the trash, not for the files inside listed folders
 
 Also raised by the clean-up of a room with a file lifetime, for every expired file it moves to the trash.
 

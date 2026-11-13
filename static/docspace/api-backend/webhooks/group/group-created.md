@@ -8,7 +8,7 @@ Sent on the `group.created` event. The body is a GroupDelivery, whose `payload` 
 
 Raised by these REST API operations:
 
-- [`POST api/2.0/group`](../../usage-api/group/add-group.md) (Add a new group), once for the new group. The `user.*` payloads of its manager and members are not re-sent
+- [`POST api/2.0/group`](../../usage-api/group/add-group.md) (Add a new group), once for the new group, without `user.*` webhooks for its members
 
 ## Request headers
 

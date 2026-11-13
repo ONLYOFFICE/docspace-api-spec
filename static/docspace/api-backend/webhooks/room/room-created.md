@@ -8,11 +8,11 @@ Sent on the `room.created` event. The body is a RoomDelivery, whose `payload` is
 
 Raised by these REST API operations:
 
-- [`POST api/2.0/files/rooms`](../../usage-api/rooms/create-room.md) (Create a room), unless `roomType` is `AiRoom`
+- [`POST api/2.0/files/rooms`](../../usage-api/rooms/create-room.md) (Create a room), when `roomType` is not `AiRoom`
 - [`POST api/2.0/files/rooms/fromtemplate`](../../usage-api/rooms/create-room-from-template.md) (Create a room from the template), once the queued operation builds the room
-- [`POST api/2.0/files/rooms/thirdparty/{id}`](../../usage-api/rooms/create-room-third-party.md) (Create a third-party room), unless `roomType` is `AiRoom`
+- [`POST api/2.0/files/rooms/thirdparty/{id}`](../../usage-api/rooms/create-room-third-party.md) (Create a third-party room), when `roomType` is not `AiRoom`
 - [`POST api/2.0/files/roomtemplate`](../../usage-api/rooms/create-room-template.md) (Create a room template), for the new template, once the queued operation builds it
-- [`POST api/2.0/migration/migrate`](../../usage-api/migration/start-migration.md) (Start migration), for every room the queued import creates
+- [`POST api/2.0/migration/migrate`](../../usage-api/migration/start-migration.md) (Start migration), for every room the queued import creates, but no webhooks for imported users, groups, and files
 
 ## Request headers
 

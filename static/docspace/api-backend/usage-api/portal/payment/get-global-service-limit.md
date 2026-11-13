@@ -6,7 +6,7 @@
 
 Get the global service limit
 
-Returns the spending limit on the AI services for every user - the same ceiling applied to each user separately,  for any user without a personal limit in force. Only a DocSpace administrator may read it, an installation  without a billing service answers 403, and the call is read-only. It comes without spending, since that is  counted per user: read it for each user from `GET api/2.0/portal/payment/servicelimit/participants`; `periodEnd`  still says when the current period ends for everyone. When no  such limit has been set, or it was deleted, the answer is 200 with a null `response`; create the limit with  `POST api/2.0/portal/payment/servicelimit` and the scope `Global`. A switched-off limit is still returned, with  `enabled` false. A portal with no billing customer answers 404.
+Returns the spending limit on the AI services for every user. It applies to each user separately, if the user  has no personal limit in force. Requires a DocSpace admin. Other callers get 403. The call also returns 403 if  the installation has no billing service. The call is read-only. The answer has no spending, since each user has  their own. To read the spending of each user, use `GET api/2.0/portal/payment/servicelimit/participants`. The  `periodEnd` field shows when the current period ends for everyone, and is null for a lifetime limit. If the  limit is not set or was deleted, the call returns 200 with a null `response`. To create it, use `POST  api/2.0/portal/payment/servicelimit` with the scope `Global`. A turned-off limit is returned with `enabled`  false. If the portal has no billing customer, the call returns 404.
 
 ## Parameters
 This endpoint does not need any parameter.

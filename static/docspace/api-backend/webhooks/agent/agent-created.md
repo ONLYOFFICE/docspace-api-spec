@@ -9,7 +9,9 @@ Sent on the `agent.created` event. The body is a RoomDelivery, whose `payload` i
 Raised by these REST API operations:
 
 - [`POST api/2.0/files/rooms`](../../usage-api/rooms/create-room.md) (Create a room), instead when `roomType` is `AiRoom`, which creates an AI agent in the Rooms section
+- [`POST api/2.0/files/rooms/fromtemplate`](../../usage-api/rooms/create-room-from-template.md) (Create a room from the template), instead for a room built from an AI agent template
 - [`POST api/2.0/files/rooms/thirdparty/{id}`](../../usage-api/rooms/create-room-third-party.md) (Create a third-party room), instead when `roomType` is `AiRoom`
+- [`POST api/2.0/files/roomtemplate`](../../usage-api/rooms/create-room-template.md) (Create a room template), instead for an AI agent template
 - `POST internal/ai/agents` (Create an ai agent)
 
 ## Request headers

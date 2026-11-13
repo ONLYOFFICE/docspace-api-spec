@@ -11,9 +11,9 @@ Raised by these REST API operations:
 - [`PUT api/2.0/files/folder/{folderId}`](../../usage-api/files/folders/rename-folder.md) (Rename a folder), when the title changes
 - [`PUT api/2.0/files/folder/{folderId}/order`](../../usage-api/files/folders/set-folder-order.md) (Set folder order), when the order changes
 - [`PUT api/2.0/files/order`](../../usage-api/files/files/set-files-order.md) (Set order of files), for every folder in the list whose order changes
-- [`PUT api/2.0/files/rooms/resetquota`](../../usage-api/files/quota/reset-room-quota.md) (Reset the room quota limit), instead for a listed ID that is a folder rather than a room, which the operation does not refuse
-- [`PUT api/2.0/files/rooms/roomquota`](../../usage-api/files/quota/update-rooms-quota.md) (Change the room quota limit), instead for a listed ID that is a folder rather than a room, which the operation does not refuse
-- [`PUT api/2.0/files/rooms/{id}`](../../usage-api/rooms/update-room.md) (Update a room), instead when the ID is a folder inside a room rather than the room itself, which a manager of that room may pass and the operation does not refuse
+- [`PUT api/2.0/files/rooms/resetquota`](../../usage-api/files/quota/reset-room-quota.md) (Reset the room quota limit), instead for a listed ID that is a folder, not a room
+- [`PUT api/2.0/files/rooms/roomquota`](../../usage-api/files/quota/update-rooms-quota.md) (Change the room quota limit), instead for a listed ID that is a folder, not a room
+- [`PUT api/2.0/files/rooms/{id}`](../../usage-api/rooms/update-room.md) (Update a room), instead when the ID is a folder inside the room, not the room itself
 - `PUT internal/ai/agents/agentquota` (Change the AI agent quota limit), instead for a listed ID that is a folder rather than a room, which the operation does not refuse
 - `PUT internal/ai/agents/resetquota` (Reset the AI agents quota limit), instead for a listed ID that is a folder rather than a room, which the operation does not refuse
 

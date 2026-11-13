@@ -8,7 +8,7 @@ Sent on the `user.invited` event. The body is a UserDelivery, whose `payload` is
 
 Raised by these REST API operations:
 
-- [`POST api/2.0/people/invite`](../../usage-api/people/profiles/invite-users.md) (Invite users), for every address that does not belong to a profile yet
+- [`POST api/2.0/people/invite`](../../usage-api/people/profiles/invite-users.md) (Invite users), for every address without an account, not for an existing account whose type it raises
 
 ## Request headers
 

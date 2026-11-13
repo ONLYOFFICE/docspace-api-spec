@@ -6,7 +6,7 @@
 
 Get the skills folder of an Instructions room
 
-Returns one page of the root contents of an Instructions room, whose Markdown files are the skills of the AI  chat, in the same shape as `GET api/2.0/files/{folderId}` returns for any other folder. The rooms that provide  skills are listed with `GET api/2.0/files/rooms?withAiFolder=true` (or `type=10`). Any member who can read the  room may call it; somebody who cannot is refused, and a room that does not exist or is not an Instructions room  is answered as not found.
+Returns one page of the root folder of an Instructions room. Its Markdown files are the skills of the AI chat.  The response has the same shape as `GET api/2.0/files/{folderId}`. Requires read access to the room. Other  callers get 403. The call is read-only. To find Instructions rooms, use the `withAiFolder` filter of  `GET api/2.0/files/rooms`. The call returns 404 if the room does not exist or is not an Instructions room. It  returns 400 if `count` is out of range or `startIndex` is negative.
 
 ## Parameters
 

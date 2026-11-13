@@ -6,7 +6,7 @@
 
 Get a service limit
 
-Returns one spending limit on the AI services of the portal by its ID - the limit of the portal as a whole, the  one for every user, or a personal one. Only a DocSpace administrator may read it, an installation without a  billing service answers 403, and the call is read-only. The limit comes back with its scope, thresholds, their  currency and unit, the period and whether it is in force, but without its spending: that comes with  `GET api/2.0/portal/payment/servicelimit/total` for the portal and with  `GET api/2.0/portal/payment/servicelimit/participants` for each user. A portal with no billing customer, and an  ID that does not exist, belongs to another portal or is not a limit on the AI services, answer 404.
+Returns one spending limit on the AI services of the portal by its ID. A limit applies to the portal as a  whole, to every user, or to one user. Requires a DocSpace admin. Other callers get 403. The call also returns  403 if the installation has no billing service. The call is read-only. The answer has the scope, thresholds,  period, and state of the limit, but no spending. To read the spending of the portal, use  `GET api/2.0/portal/payment/servicelimit/total`. To read the spending of each user, use  `GET api/2.0/portal/payment/servicelimit/participants`. The call returns 404 if the portal has no billing  customer or no AI service limit with this ID. If `id` is zero or negative, the call returns 400.
 
 ## Parameters
 

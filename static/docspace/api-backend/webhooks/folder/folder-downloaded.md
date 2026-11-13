@@ -8,7 +8,7 @@ Sent on the `folder.downloaded` event. The body is a FolderDelivery, whose `payl
 
 Raised by these REST API operations:
 
-- [`PUT api/2.0/files/fileops/bulkdownload`](../../usage-api/files/operations/bulk-download.md) (Bulk download), for every listed folder, rooms included, once the queued operation starts packing it; the folders inside it raise none
+- [`PUT api/2.0/files/fileops/bulkdownload`](../../usage-api/files/operations/bulk-download.md) (Bulk download), for each listed folder or room when the job packs it, not for the folders inside
 
 ## Request headers
 

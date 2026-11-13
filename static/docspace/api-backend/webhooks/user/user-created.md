@@ -8,8 +8,8 @@ Sent on the `user.created` event. The body is a UserDelivery, whose `payload` is
 
 Raised by these REST API operations:
 
-- [`POST api/2.0/people`](../../usage-api/people/profiles/add-member.md) (Add a user), once the avatar named in `files`, if any, is saved: when that download fails, the profile exists but the webhook is not sent
-- [`POST api/2.0/people/thirdparty/signup`](../../usage-api/people/third-party-accounts/signup-third-party-account.md) (Sign up with a provider), when the third-party account is not linked to a profile yet and a new profile is created
+- [`POST api/2.0/people`](../../usage-api/people/profiles/add-member.md) (Add a user), after the portal saves the avatar from `files`, if any, but not if the download fails
+- [`POST api/2.0/people/thirdparty/signup`](../../usage-api/people/third-party-accounts/signup-third-party-account.md) (Sign up with a provider), only when the call creates a new account
 
 ## Request headers
 

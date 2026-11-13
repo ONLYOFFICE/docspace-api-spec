@@ -8,15 +8,16 @@ Sent on the `user.updated` event. The body is a UserDelivery, whose `payload` is
 
 Raised by these REST API operations:
 
-- [`DELETE api/2.0/people/@self`](../../usage-api/people/profiles/delete-profile.md) (Close my own profile), rather than `user.deleted`: the profile is only disabled
-- [`PUT api/2.0/people/activationstatus/{activationStatus}`](../../usage-api/people/user-status/update-user-activation-status.md) (Set my activation status)
-- [`PUT api/2.0/people/status/{status}`](../../usage-api/people/user-status/update-user-status.md) (Change a user status), for every listed account, whether or not its status changes
-- [`POST api/2.0/people/type`](../../usage-api/people/user-type/start-user-type-update.md) (Start updating user type), once the queued type change finishes successfully, not when it is cancelled or fails
-- [`PUT api/2.0/people/type/{type}`](../../usage-api/people/user-type/update-user-type.md) (Change a user type), for every converted user, one by one: a rejection in the middle leaves the webhooks of the users before it sent
-- [`PUT api/2.0/people/{userId}`](../../usage-api/people/profiles/update-member.md) (Update a user), when the call changes the profile; on another member's profile only `disable` and `isUser` change anything
+- [`DELETE api/2.0/people/@self`](../../usage-api/people/profiles/delete-profile.md) (Close my own profile), and not `user.deleted`
+- [`PUT api/2.0/people/activationstatus/{activationStatus}`](../../usage-api/people/user-status/update-user-activation-status.md) (Set my activation status), for the caller's account, even when the status does not change
+- [`PUT api/2.0/people/status/{status}`](../../usage-api/people/user-status/update-user-status.md) (Change a user status), for every listed account, changed or not, and for none after a 402
+- [`POST api/2.0/people/type`](../../usage-api/people/user-type/start-user-type-update.md) (Start updating user type), once the queued type change succeeds, not when it is cancelled or fails
+- [`PUT api/2.0/people/type/{type}`](../../usage-api/people/user-type/update-user-type.md) (Change a user type), for every changed account, one by one
+- [`PUT api/2.0/people/{userId}`](../../usage-api/people/profiles/update-member.md) (Update a user), on every call for the caller's own account, even one that changes nothing
+- [`PUT api/2.0/people/{userId}`](../../usage-api/people/profiles/update-member.md) (Update a user), for another account when `disable` is sent or `isUser` changes the type
 - [`PUT api/2.0/people/{userId}/culture`](../../usage-api/people/profiles/update-member-culture.md) (Update a user culture), even when the culture does not change
 - [`POST api/2.0/people/{userId}/photo`](../../usage-api/people/photos/upload-member-photo.md) (Upload a user photo), only when `autosave` is true and the image is saved to the profile
-- [`PUT api/2.0/people/{userId}/photo`](../../usage-api/people/photos/update-member-photo.md) (Update a user photo)
+- [`PUT api/2.0/people/{userId}/photo`](../../usage-api/people/photos/update-member-photo.md) (Update a user photo), on every call, even when `files` is the current avatar
 - [`DELETE api/2.0/people/{userId}/photo`](../../usage-api/people/photos/delete-member-photo.md) (Delete a user photo), even when the profile had no avatar
 
 Not raised when the groups of a user are changed through the group API - [`PUT api/2.0/group/{id}`](../../usage-api/group/update-group.md), `POST`, `PUT` and [`DELETE api/2.0/group/{id}/members`](../../usage-api/group/remove-members-from.md), [`PUT api/2.0/group/{fromId}/members/{toId}`](../../usage-api/group/move-members-to.md) and [`PUT api/2.0/group/{id}/manager`](../../usage-api/group/set-group-manager.md): those raise `group.updated` of each group concerned instead, and the `groups` of the user's payload are read again from the next `user.*` event. A change of the `department` list through [`PUT api/2.0/people/{userId}`](../../usage-api/people/profiles/update-member.md) is the other way round: it arrives as `user.updated` of that user, and the groups it adds the user to or removes them from raise no `group.updated`; `department` given on creating a profile arrives within its `user.created` only.

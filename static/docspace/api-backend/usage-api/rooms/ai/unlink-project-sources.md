@@ -6,7 +6,7 @@
 
 Unlink sources from an AI project
 
-Unlinks Instructions and Knowledge rooms from an AI project; project members lose the access the link gave them. The caller must manage the project, rights on the rooms are not checked; the rooms themselves are not changed.
+Unlinks Instructions and Knowledge rooms from an AI project.  Project members then lose the read access that the link gave them.  The rooms themselves do not change.  Requires the right to manage the project. Other callers get 403, even a manager of the listed rooms.  The call does not check rights on the rooms.  The call changes data and ignores IDs that are not linked to the project.  So you can repeat it with the same body.  The call returns 400 if `roomIds` is empty or too long.  If the ID is not an AI project, the call returns 404.  It also returns 403 if AI features are turned off on the portal.  To see the linked rooms, use `GET api/2.0/files/rooms/{id}/sources`.
 
 ## Parameters
 

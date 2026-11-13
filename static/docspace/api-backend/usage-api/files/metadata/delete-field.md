@@ -6,7 +6,7 @@
 
 Delete a metadata field
 
-Deletes a metadata field from its template together with every value written for it on any file, folder or room of  the portal. Only a DocSpace admin can change templates. The deletion is irreversible: the affected entries lose the  value at once, their search documents are rebuilt and the clients viewing them are told to refresh. The template and  its other fields stay as they are. The last field of a template cannot be deleted, a template always keeps at least  one: to get rid of it, delete the template with `DELETE api/2.0/files/metadata/templates/{templateId}`; such a  request is answered with 400 and the field stays. A field that does not exist, or that belongs to another template  than the one in the route, is answered with 404.
+Deletes a metadata field with its values on all files, folders, and rooms. Requires a DocSpace admin. Other callers  get 403. The deletion cannot be undone. The template and its other fields stay. A template always keeps at least  one field. If this is the last field, the call returns 400 and deletes nothing. To delete the whole template, use  `DELETE api/2.0/files/metadata/templates/{templateId}`. If the template has no field with this ID, the call  returns 404. So a repeated call also returns 404.
 
 ## Parameters
 

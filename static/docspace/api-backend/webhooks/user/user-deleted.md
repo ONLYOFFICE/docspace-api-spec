@@ -8,8 +8,8 @@ Sent on the `user.deleted` event. The body is a UserDelivery, whose `payload` is
 
 Raised by these REST API operations:
 
-- [`PUT api/2.0/people/delete`](../../usage-api/people/profiles/remove-users.md) (Delete users), for every account it deletes; an account the caller may not delete is skipped without one
-- [`POST api/2.0/people/reassign/start`](../../usage-api/people/user-data/start-reassign.md) (Start the data reassignment), for the source account when `deleteProfile` is true, once the reassignment finishes successfully
+- [`PUT api/2.0/people/delete`](../../usage-api/people/profiles/remove-users.md) (Delete users), for every account it deletes, not for a skipped one
+- [`POST api/2.0/people/reassign/start`](../../usage-api/people/user-data/start-reassign.md) (Start the data reassignment), when `deleteProfile` is true and the job succeeds
 - [`DELETE api/2.0/people/{userId}`](../../usage-api/people/profiles/delete-member.md) (Delete a user)
 
 ## Request headers

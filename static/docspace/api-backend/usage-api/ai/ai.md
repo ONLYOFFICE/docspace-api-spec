@@ -137,9 +137,11 @@ All URIs are relative to *https://yourportal.onlyoffice.com*, where the host is 
 | Method | HTTP request | Description |
 |------------ | ------------- | -------------|
 | [**aiSettingsGet**](settings/ai-settings-get.md) | **GET** /api/2.0/ai/config | Get AI settings |
+| [**aiSettingsGetDocumentAgent**](settings/ai-settings-get-document-agent.md) | **GET** /api/2.0/ai/document-agent/settings | Get the document agent settings |
 | [**aiSettingsGetToolMode**](settings/ai-settings-get-tool-mode.md) | **GET** /api/2.0/ai/config/tool-mode | Get the tool permission mode |
 | [**aiSettingsGetUser**](settings/ai-settings-get-user.md) | **GET** /api/2.0/ai/config/user | Get user AI settings |
 | [**aiSettingsGetVectorization**](settings/ai-settings-get-vectorization.md) | **GET** /api/2.0/ai/config/vectorization | Get vectorization settings |
+| [**aiSettingsSetDocumentAgent**](settings/ai-settings-set-document-agent.md) | **PUT** /api/2.0/ai/document-agent/settings | Set the document agent settings |
 | [**aiSettingsSetToolMode**](settings/ai-settings-set-tool-mode.md) | **PUT** /api/2.0/ai/config/tool-mode | Set the tool permission mode |
 | [**aiSettingsSetUser**](settings/ai-settings-set-user.md) | **PUT** /api/2.0/ai/config/user | Update user AI settings |
 | [**aiSettingsSetVectorization**](settings/ai-settings-set-vectorization.md) | **PUT** /api/2.0/ai/config/vectorization | Update vectorization settings |
@@ -148,6 +150,7 @@ All URIs are relative to *https://yourportal.onlyoffice.com*, where the host is 
 
 | Method | HTTP request | Description |
 |------------ | ------------- | -------------|
+| [**aiSkillsCreate**](skills/ai-skills-create.md) | **POST** /api/2.0/ai/skills/create | Create a skill from the template |
 | [**aiSkillsGenerate**](skills/ai-skills-generate.md) | **POST** /api/2.0/ai/skills/generate | Generate a skill |
 
 ## Threads

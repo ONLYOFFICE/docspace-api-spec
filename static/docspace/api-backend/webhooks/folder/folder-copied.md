@@ -8,8 +8,9 @@ Sent on the `folder.copied` event. The body is a FolderDelivery, whose `payload`
 
 Raised by these REST API operations:
 
-- [`PUT api/2.0/files/fileops/copy`](../../usage-api/files/operations/copy-batch-items.md) (Copy files and folders), for every copied folder, the folders inside it included
+- [`PUT api/2.0/files/fileops/copy`](../../usage-api/files/operations/copy-batch-items.md) (Copy files and folders), for every copied folder, and for its subfolders only within one storage
 - [`PUT api/2.0/files/fileops/duplicate`](../../usage-api/files/operations/duplicate-batch-items.md) (Duplicate files and folders), for every duplicated folder, the folders inside it included
+- [`PUT api/2.0/files/fileops/move`](../../usage-api/files/operations/move-batch-items.md) (Move files and folders), instead for a listed folder merged into an existing one
 
 ## Request headers
 

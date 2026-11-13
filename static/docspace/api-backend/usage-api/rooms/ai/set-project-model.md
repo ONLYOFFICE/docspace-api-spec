@@ -6,7 +6,7 @@
 
 Set the AI project model
 
-Selects the AI model that answers in the chat of an AI project, replacing the previous choice, and returns the model now selected. Take `profileId` from the profiles that `GET api/2.0/ai/profiles/list` returns. The caller must be able to edit the project; reading it is not enough. The change applies to every member of the project, is recorded in the audit trail and notifies the project's open clients. Repeating the call with the same profile changes nothing. A model can only be replaced by another one: there is no operation that clears the selection and returns the project to the portal-wide model. The profile must exist on the portal and be able to chat; a profile known to serve only other kinds of tasks, such as image generation, is refused with 400.
+Selects the AI model that answers in the chat of an AI project.  The new choice replaces the previous one for every project member.  Requires the right to manage the project. Other callers get 403, including members with read access only.  The call changes data, and you can repeat it with the same body.  No call clears the selection and returns the project to the portal-wide model.  The call returns 400 for an invalid body or an unknown `profileId`.  It also returns 400 if the profile serves only other tasks, such as image generation.  If the ID is not an AI project, the call returns 404.  AI features turned off on the portal also return 403.
 
 ## Parameters
 

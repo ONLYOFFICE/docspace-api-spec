@@ -8,7 +8,7 @@ Sent on the `group.deleted` event. The body is a GroupDelivery, whose `payload` 
 
 Raised by these REST API operations:
 
-- [`DELETE api/2.0/group/{id}`](../../usage-api/group/delete-group.md) (Delete a group), once for the deleted group. The `user.*` payloads of its former members are not re-sent
+- [`DELETE api/2.0/group/{id}`](../../usage-api/group/delete-group.md) (Delete a group), once for the deleted group, without `user.*` webhooks for its former members
 
 ## Request headers
 

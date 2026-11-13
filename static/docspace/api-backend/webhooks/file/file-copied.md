@@ -8,8 +8,8 @@ Sent on the `file.copied` event. The body is a FileDelivery, whose `payload` is 
 
 Raised by these REST API operations:
 
-- [`PUT api/2.0/files/fileops/copy`](../../usage-api/files/operations/copy-batch-items.md) (Copy files and folders), for every copied file, the files inside copied folders included, once the queued operation processes it
-- [`PUT api/2.0/files/fileops/duplicate`](../../usage-api/files/operations/duplicate-batch-items.md) (Duplicate files and folders), for every duplicated file, the files inside duplicated folders and rooms included, once the queued operation processes it
+- [`PUT api/2.0/files/fileops/copy`](../../usage-api/files/operations/copy-batch-items.md) (Copy files and folders), for every copied file, and for files inside copied folders only within one storage
+- [`PUT api/2.0/files/fileops/duplicate`](../../usage-api/files/operations/duplicate-batch-items.md) (Duplicate files and folders), for every duplicated file, including the files inside duplicated folders and rooms
 
 ## Request headers
 

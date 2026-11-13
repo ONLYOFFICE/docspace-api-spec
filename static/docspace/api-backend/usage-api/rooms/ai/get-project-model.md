@@ -6,7 +6,7 @@
 
 Get the AI project model
 
-Returns the AI model selected for the chat of an AI project, as the ID of an AI model profile. Any project member with read access may call it. The call is read-only. The result holds only the project's own choice: `profileId` is null when nobody has selected a model for the project yet, or when the selected profile has been removed from the portal since. In both cases the portal-wide model is used instead, which this operation does not return. To change the model, use `PUT api/2.0/files/rooms/{id}/model`.
+Returns the AI model selected for the chat of an AI project, as the ID of an AI model profile.  Requires read access to the project. Other callers get 403.  The call is read-only and returns only the project's own choice.  If `profileId` is null, the chat uses the portal-wide model, which this call does not return.  If the ID is not an AI project, the call returns 404.  It also returns 403 if AI features are turned off on the portal.  To change the model, use `PUT api/2.0/files/rooms/{id}/model`.
 
 ## Parameters
 

@@ -6,7 +6,7 @@
 
 Get the skills of an AI room
 
-Returns the skills of an Instructions room, or of the Instructions rooms linked to an AI project.
+Returns the skills of an Instructions room, or of the Instructions rooms linked to an AI project.  Requires read access to the room or the project. Other callers get 403.  The call is read-only.  For a project, it lists the linked Instructions rooms but no Knowledge rooms.  It sorts the rooms by title, then by ID.  It sorts the skills of a room by file name, then by `id`.  The call lists a room without skills with an empty `skills` list.  A project without linked Instructions rooms gives an empty `rooms` list.  An unknown ID or another kind of room, such as a Knowledge room, returns 404.  It also returns 403 if AI features are turned off on the portal.  To get the skills of several Instructions rooms, use `GET api/2.0/files/rooms/skills`.
 
 ## Parameters
 

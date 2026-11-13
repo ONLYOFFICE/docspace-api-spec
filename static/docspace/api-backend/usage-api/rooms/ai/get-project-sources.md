@@ -6,7 +6,7 @@
 
 Get the AI project sources
 
-Returns the Instructions and Knowledge rooms linked to an AI project as its sources.
+Returns the Instructions and Knowledge rooms linked to an AI project as its sources.  Requires read access to the project. Other callers get 403.  The call is read-only and returns the two kinds of rooms in separate lists.  Both lists are empty when nothing is linked.  If the ID is not an AI project, the call returns 404.  It also returns 403 if AI features are turned off on the portal.  To link rooms, use `POST api/2.0/files/rooms/{id}/sources`.  To unlink them, use `DELETE api/2.0/files/rooms/{id}/sources`.
 
 ## Parameters
 

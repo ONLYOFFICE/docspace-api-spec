@@ -8,12 +8,13 @@ Sent on the `group.updated` event. The body is a GroupDelivery, whose `payload` 
 
 Raised by these REST API operations:
 
-- [`PUT api/2.0/group/{fromId}/members/{toId}`](../../usage-api/group/move-members-to.md) (Move group members), once for the source group when it had members, and once for the destination group when its members or manager actually change; not at all when both IDs name the same group. The moved members' `user.*` payloads are not re-sent
-- [`PUT api/2.0/group/{id}`](../../usage-api/group/update-group.md) (Update a group), only when the name, the manager or the members actually change, not for a call that repeats the current values. The `user.*` payloads of the added and removed members and of the manager are not re-sent
-- [`PUT api/2.0/group/{id}/manager`](../../usage-api/group/set-group-manager.md) (Set a group manager), only when the manager or the members actually change, not when the account already manages the group or cannot be a group member. The `user.*` payloads of the new and the previous manager are not re-sent
-- [`POST api/2.0/group/{id}/members`](../../usage-api/group/set-members-to.md) (Replace group members), only when the members or the manager of the group actually change, not when the list names the current members again. The added and removed members' `user.*` payloads are not re-sent
-- [`PUT api/2.0/group/{id}/members`](../../usage-api/group/add-members-to.md) (Add group members), only when at least one listed account is actually added, not for an empty list or for accounts that are already members or cannot be members. The added members' `user.*` payloads are not re-sent
-- [`DELETE api/2.0/group/{id}/members`](../../usage-api/group/remove-members-from.md) (Remove group members), only when at least one listed account is actually a member and is removed, not for an empty list or a list of non-members. The removed members' `user.*` payloads are not re-sent
+- [`PUT api/2.0/group/{fromId}/members/{toId}`](../../usage-api/group/move-members-to.md) (Move group members), for the source group if the two IDs differ and the source has enabled members
+- [`PUT api/2.0/group/{fromId}/members/{toId}`](../../usage-api/group/move-members-to.md) (Move group members), for the destination group only when its members change, without `user.*` webhooks
+- [`PUT api/2.0/group/{id}`](../../usage-api/group/update-group.md) (Update a group), only when the name, the manager, or the members change, without `user.*` webhooks
+- [`PUT api/2.0/group/{id}/manager`](../../usage-api/group/set-group-manager.md) (Set a group manager), only when the manager or the members change, without `user.*` webhooks for them
+- [`POST api/2.0/group/{id}/members`](../../usage-api/group/set-members-to.md) (Replace group members), only when the members or the manager change, without `user.*` webhooks for them
+- [`PUT api/2.0/group/{id}/members`](../../usage-api/group/add-members-to.md) (Add group members), only when the call adds an account, without `user.*` webhooks for it
+- [`DELETE api/2.0/group/{id}/members`](../../usage-api/group/remove-members-from.md) (Remove group members), only when the call removes a member, without `user.*` webhooks for it
 
 ## Request headers
 

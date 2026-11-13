@@ -8,12 +8,12 @@ Sent on the `file.updated` event. The body is a FileDelivery, whose `payload` is
 
 Raised by these REST API operations:
 
-- [`POST api/2.0/docs/builder`](../../usage-api/docs/run-builder-script.md) (Run a document builder script), for each file the queued script saves: `file.created` for a new file, `file.updated` for an existing one
+- [`POST api/2.0/docs/builder`](../../usage-api/docs/run-builder-script.md) (Run a document builder script), for each existing file the queued script replaces
 - [`PUT api/2.0/files/file/{fileId}`](../../usage-api/files/files/update-file.md) (Update a file), for a rename that takes effect, and again for a switch to `lastVersion`
 - [`PUT api/2.0/files/file/{fileId}/comment`](../../usage-api/files/operations/update-file-comment.md) (Update a comment)
-- [`PUT api/2.0/files/file/{fileId}/lock`](../../usage-api/files/files/lock-file.md) (Lock a file), on every successful call, even one that changes nothing; with `lockFile=false` on a file of the portal storage it is raised twice, once for the unlocking note appended to the version comment and once for the unlock itself
+- [`PUT api/2.0/files/file/{fileId}/lock`](../../usage-api/files/files/lock-file.md) (Lock a file), on every call, even one that changes nothing, and twice for an unlock in portal storage
 - [`POST api/2.0/files/file/{fileId}/restoreversion`](../../usage-api/files/files/restore-file-version.md) (Restore a file version)
-- [`PUT api/2.0/files/file/{fileId}/saveediting`](../../usage-api/files/files/save-editing-file-from-form.md) (Save edited file content)
+- [`PUT api/2.0/files/file/{fileId}/saveediting`](../../usage-api/files/files/save-editing-file-from-form.md) (Save edited file content), for the saved file, also for a renamed copy in third-party storage, never `file.created`
 - [`PUT api/2.0/files/fileops/deleteversion`](../../usage-api/files/operations/delete-file-versions.md) (Delete file versions), once for every removed version
 - [`PUT api/2.0/files/order`](../../usage-api/files/files/set-files-order.md) (Set order of files), for every file in the list whose order changes
 - [`POST api/2.0/files/owner`](../../usage-api/files/sharing/change-file-owner.md) (Change the room or file owner), for every file whose owner changes

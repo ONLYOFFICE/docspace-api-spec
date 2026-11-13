@@ -163,6 +163,8 @@ The types the endpoints take and return.
 - [AiSettingsDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-settings-dto.md)
 - [AiSettingsWrapper](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-settings-wrapper.md)
 - [AiSkillDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-skill-dto.md)
+- [AiSkillsCreateRequest](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-skills-create-request.md)
+- [AiSkillsCreateRequest.destId](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-skills-create-request-dest-id.md)
 - [AiSkillsDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-skills-dto.md)
 - [AiSkillsGenerateRequest](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-skills-generate-request.md)
 - [AiSkillsGenerateRequest.destId](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-skills-generate-request-dest-id.md)
@@ -569,6 +571,7 @@ The types the endpoints take and return.
 - [FolderMetadataSearch](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/folder-metadata-search.md)
 - [FolderType](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/folder-type.md)
 - [FolderWrapper](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/folder-wrapper.md)
+- [FormFieldKeyChangeRequest](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/form-field-key-change-request.md)
 - [FormFillingManageAction](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/form-filling-manage-action.md)
 - [FormFillingStatus](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/form-filling-status.md)
 - [FormGalleryDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/form-gallery-dto.md)
@@ -817,6 +820,7 @@ The types the endpoints take and return.
 - [SetAppSettingsRequest](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/set-app-settings-request.md)
 - [SetAuditLifetimeSettingsRequest](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/set-audit-lifetime-settings-request.md)
 - [SetCustomFields](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/set-custom-fields.md)
+- [SetFormFieldChangesRequest](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/set-form-field-changes-request.md)
 - [SetManagerRequest](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/set-manager-request.md)
 - [SetMetadataValues](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/set-metadata-values.md)
 - [SetParticipantServiceLimitsRequestDto](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/set-participant-service-limits-request-dto.md)
@@ -1070,6 +1074,7 @@ The types the endpoints take and return.
 - [aiProfilesListProviderModels 400 response.anyOf](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-profiles-list-provider-models-400-response-any-of.md)
 - [aiProfilesTestConnection 200 response](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-profiles-test-connection-200-response.md)
 - [aiProfilesTestConnection 200 response.anyOf](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-profiles-test-connection-200-response-any-of.md)
+- [aiSkillsCreate 200 response](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-skills-create-200-response.md)
 - [aiSkillsGenerate 200 response](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-skills-generate-200-response.md)
 - [aiThreadsAppendUserMessage 200 response](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-threads-append-user-message-200-response.md)
 - [aiThreadsRegenerateTitle 200 response](https://api.onlyoffice.com/docspace/api-backend/usage-api/models/ai-threads-regenerate-title-200-response.md)
@@ -1190,15 +1195,18 @@ The types the endpoints take and return.
 #### settings
 
 - [Get AI settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai/settings/ai-settings-get.md): GET /api/2.0/ai/config
+- [Get the document agent settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai/settings/ai-settings-get-document-agent.md): GET /api/2.0/ai/document-agent/settings
 - [Get the tool permission mode](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai/settings/ai-settings-get-tool-mode.md): GET /api/2.0/ai/config/tool-mode
 - [Get user AI settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai/settings/ai-settings-get-user.md): GET /api/2.0/ai/config/user
 - [Get vectorization settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai/settings/ai-settings-get-vectorization.md): GET /api/2.0/ai/config/vectorization
+- [Set the document agent settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai/settings/ai-settings-set-document-agent.md): PUT /api/2.0/ai/document-agent/settings
 - [Set the tool permission mode](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai/settings/ai-settings-set-tool-mode.md): PUT /api/2.0/ai/config/tool-mode
 - [Update user AI settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai/settings/ai-settings-set-user.md): PUT /api/2.0/ai/config/user
 - [Update vectorization settings](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai/settings/ai-settings-set-vectorization.md): PUT /api/2.0/ai/config/vectorization
 
 #### skills
 
+- [Create a skill from the template](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai/skills/ai-skills-create.md): POST /api/2.0/ai/skills/create
 - [Generate a skill](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai/skills/ai-skills-generate.md): POST /api/2.0/ai/skills/generate
 
 #### threads
@@ -1353,6 +1361,7 @@ The types the endpoints take and return.
 - [Set a file external link](https://api.onlyoffice.com/docspace/api-backend/usage-api/files/files/set-file-external-link.md): PUT /api/2.0/files/file/{id}/links
 - [Set file order](https://api.onlyoffice.com/docspace/api-backend/usage-api/files/files/set-file-order.md): PUT /api/2.0/files/{fileId}/order
 - [Set order of files](https://api.onlyoffice.com/docspace/api-backend/usage-api/files/files/set-files-order.md): PUT /api/2.0/files/order
+- [Report renamed form fields](https://api.onlyoffice.com/docspace/api-backend/usage-api/files/files/set-form-field-changes.md): PUT /api/2.0/files/file/{fileId}/fieldchanges
 - [Open an editing session](https://api.onlyoffice.com/docspace/api-backend/usage-api/files/files/start-edit-file.md): POST /api/2.0/files/file/{fileId}/startedit
 - [Start filling a form](https://api.onlyoffice.com/docspace/api-backend/usage-api/files/files/start-filling-file.md): PUT /api/2.0/files/file/{fileId}/startfilling
 - [Set the file favorite status](https://api.onlyoffice.com/docspace/api-backend/usage-api/files/files/toggle-file-favorite.md): GET /api/2.0/files/favorites/{fileId}

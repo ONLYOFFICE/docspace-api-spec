@@ -9,12 +9,12 @@ Sent on the `folder.created` event. The body is a FolderDelivery, whose `payload
 Raised by these REST API operations:
 
 - [`POST api/2.0/files/folder/{folderId}`](../../usage-api/files/folders/create-folder.md) (Create a folder)
-- [`POST api/2.0/migration/migrate`](../../usage-api/migration/start-migration.md) (Start migration), for every folder the queued import creates, including the one in the personal section of each imported user that receives that user's files
-- [`PUT api/2.0/people/delete`](../../usage-api/people/profiles/remove-users.md) (Delete users), for every deleted account that shared files or folders from its personal section, once the queued data deletion creates the folder in the caller's personal section that takes them over
-- [`POST api/2.0/people/delete/personal/start`](../../usage-api/people/user-data/start-delete-personal-folder.md) (Delete the personal folder), once the queued job creates the folder that takes over the files and folders the caller shared from the personal folder, in the personal section of the member who last changed that folder or of the portal owner; not when the caller shared none
-- [`POST api/2.0/people/reassign/start`](../../usage-api/people/user-data/start-reassign.md) (Start the data reassignment), once the queued reassignment creates the folder in the recipient's personal section that takes over the files and folders the source account shared from its own; not when it shared none
-- [`POST api/2.0/people/remove/start`](../../usage-api/people/user-data/start-remove.md) (Start the data deletion), once the queued data deletion creates the folder in the caller's personal section that takes over the files and folders the account shared from its own; not when it shared none
-- [`DELETE api/2.0/people/{userId}`](../../usage-api/people/profiles/delete-member.md) (Delete a user), once the queued data deletion creates the folder in the caller's personal section that takes over the files and folders the account shared from its own; not when it shared none
+- [`POST api/2.0/migration/migrate`](../../usage-api/migration/start-migration.md) (Start migration), for every folder the queued import creates, including one per imported user for their files
+- [`PUT api/2.0/people/delete`](../../usage-api/people/profiles/remove-users.md) (Delete users), for every deleted account that shared files, once the job creates a folder for them
+- [`POST api/2.0/people/delete/personal/start`](../../usage-api/people/user-data/start-delete-personal-folder.md) (Delete the personal folder), when the job moves shared files of the caller to a new folder of another member
+- [`POST api/2.0/people/reassign/start`](../../usage-api/people/user-data/start-reassign.md) (Start the data reassignment), when the job creates a folder for shared files, but not `room.updated` for moved rooms
+- [`POST api/2.0/people/remove/start`](../../usage-api/people/user-data/start-remove.md) (Start the data deletion), when the job moves shared files to a new folder of the caller, but no `user.deleted`
+- [`DELETE api/2.0/people/{userId}`](../../usage-api/people/profiles/delete-member.md) (Delete a user), once the data deletion job creates a folder for the files that the account shared
 
 Also raised by the automatic clean-up of a guest's personal folder left unchanged for 30 days, once for the folder it creates in the personal section of the member who takes over the files and folders the guest shared from it.
 

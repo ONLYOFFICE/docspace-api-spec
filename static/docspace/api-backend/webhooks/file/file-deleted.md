@@ -8,9 +8,10 @@ Sent on the `file.deleted` event. The body is a FileDelivery, whose `payload` is
 
 Raised by these REST API operations:
 
-- [`DELETE api/2.0/files/file/{fileId}`](../../usage-api/files/files/delete-file.md) (Delete a file), instead when the file is deleted at once: `immediately` is true, or the file is already in the trash or in a third-party storage
-- [`PUT api/2.0/files/fileops/delete`](../../usage-api/files/operations/delete-batch-items.md) (Delete files and folders), instead for a listed file that is deleted at once: `immediately` is true, or the file is already in the trash or in a third-party storage
-- [`PUT api/2.0/files/fileops/emptytrash`](../../usage-api/files/operations/empty-trash.md) (Empty the "Trash" folder), for every file lying directly in the trash; the files inside trashed folders raise none
+- [`DELETE api/2.0/files/file/{fileId}`](../../usage-api/files/files/delete-file.md) (Delete a file), instead when the file is deleted for good, not moved to the trash
+- [`PUT api/2.0/files/fileops/delete`](../../usage-api/files/operations/delete-batch-items.md) (Delete files and folders), instead for a listed file deleted for good, not moved to the trash
+- [`PUT api/2.0/files/fileops/deleteversion`](../../usage-api/files/operations/delete-file-versions.md) (Delete file versions), instead when `versions` is empty, which deletes the whole file for good
+- [`PUT api/2.0/files/fileops/emptytrash`](../../usage-api/files/operations/empty-trash.md) (Empty the "Trash" folder), for each file directly in the trash, not for the files inside trashed folders
 
 Also raised by the automatic clean-up of the trash, and the clean-up of a room with a file lifetime set to delete permanently, for every file they delete.
 

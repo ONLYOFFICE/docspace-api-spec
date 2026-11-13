@@ -6,7 +6,7 @@
 
 Get a folder by ID
 
-Returns one page of the contents of a folder - its subfolders in `folders`, its files in `files`, the folder  itself in `current` and the chain of parents in `pathParts` - and is the operation a client browses the file  tree with. `filterType`, `filterValue`, `extension`, `userIdOrGroupId`, `sharedBy` and `folderType` narrow  what is listed, `applyFilterOption` decides whether those filters bite on the files, on the folders or on  both, and `withSubFolders`, which is on unless it is switched off, lets a narrowed request descend through the  whole subtree instead of the top level alone. `filterValue` is matched against titles and against indexed  document content, and indexing is asynchronous, so a file uploaded a moment ago can be missing from a search  for a short while. `count` and `startIndex` page through the result while `total` counts everything that  matches, and `sortBy` with `sortOrder` both order the page and are saved as the default order of the account.  Reading a room or an ordinary folder clears its new-item marks for the caller. A caller who may not read the  folder is answered with 403, and a folder that does not exist with 404.
+Returns one page of the contents of a folder. The response has the subfolders in `folders`, the files in  `files`, and the folder itself in `current`. The chain of parent folders is in `pathParts`. Requires read  access to the folder. Other callers get 403. Without signing in, a caller needs an external link to the  folder. The call changes data of the caller only. It clears the new-item marks of the folder. It also saves a  valid `sortBy` and `sortOrder` as the default order of the account. You can repeat it. With a filter, the  call searches the whole subtree by default. The text filter also searches indexed document content. Indexing  runs in the background, so a new file can be missing from the results at first. Use `count` and `startIndex`  to page through the result. The `total` field counts all matching entries. To filter by metadata with a typed  body, use `POST api/2.0/files/{folderId}/search`. The call returns 400 for a wrong parameter type, a `count`  out of range, or a negative `startIndex`. An invalid metadata filter also returns 400. It also returns 400 if `roomId` is not a  number but the folder ID is. It also returns 403 for a folder in the trash. If the folder does not exist, the  call returns 404. For an anonymous caller, it returns 403 instead.
 
 ## Parameters
 
@@ -43,8 +43,8 @@ Returns one page of the contents of a folder - its subfolders in `folders`, its 
 | **400** | A parameter has the wrong type, the `count` is outside its allowed range, the `startIndex` is negative, or the `roomId` is not a number while the folder id is one | - | - |
 | **403** | The caller may not read this folder, the folder lies inside Trash, or an anonymous caller asks for a folder that does not exist | - | - |
 | **404** | The folder does not exist | - | - |
-| **500** | The folder lies in a third-party storage that cannot deliver it | - | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../../models/error-api-response.md) | `Retry-After` |
+| **500** | Internal Server Error. | [**ErrorApiResponse**](../../models/error-api-response.md) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 

@@ -8,8 +8,8 @@ Sent on the `folder.trashed` event. The body is a FolderDelivery, whose `payload
 
 Raised by these REST API operations:
 
-- [`PUT api/2.0/files/fileops/delete`](../../usage-api/files/operations/delete-batch-items.md) (Delete files and folders), for every listed folder moved to the trash; the folders inside it raise none
-- [`DELETE api/2.0/files/folder/{folderId}`](../../usage-api/files/folders/delete-folder.md) (Delete a folder), once the queued operation moves the folder to the trash; the folders inside it raise none
+- [`PUT api/2.0/files/fileops/delete`](../../usage-api/files/operations/delete-batch-items.md) (Delete files and folders), for every listed folder moved to the trash, not for the folders inside it
+- [`DELETE api/2.0/files/folder/{folderId}`](../../usage-api/files/folders/delete-folder.md) (Delete a folder), for the folder only, when the queued job moves it to the trash
 
 ## Request headers
 

@@ -6,7 +6,7 @@
 
 Get the skills of Instructions rooms
 
-Returns the skills of several Instructions rooms. Rooms the caller cannot read are left out.
+Returns the skills of several Instructions rooms.  Any signed-in user can call it.  The call is read-only.  It returns only the Instructions rooms that the caller can read.  It leaves out unknown IDs and other kinds of rooms without an error.  Each room appears once, even if its ID repeats.  A room without skills has an empty `skills` list.  The call returns 400 if `roomIds` is empty or has more than 20 items.  It returns 403 if AI features are turned off on the portal.  To get the skills of one room or of an AI project, use `GET api/2.0/files/rooms/{id}/skills`.
 
 ## Parameters
 

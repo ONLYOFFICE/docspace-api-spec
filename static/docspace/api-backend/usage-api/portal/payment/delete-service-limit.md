@@ -6,7 +6,7 @@
 
 Delete a service limit
 
-Removes one spending limit on the AI services completely - the limit of the portal as a whole, the one for  every user, or a personal one - so it no longer restricts anyone. The portal needs a billing customer, and the  caller needs the permission to edit the portal settings as well as DocSpace administrator rights. The call is  destructive and cannot be undone: unlike switching a limit off with `PUT api/2.0/portal/payment/servicelimit`,  which keeps its settings, a deleted limit is gone, and a new one has to be created with  `POST api/2.0/portal/payment/servicelimit`. Deleting a personal limit lets the limit for every user apply to  that user. It is written to the portal audit trail. An ID that does not exist, belongs to another portal or is  not a limit on the AI services answers 404, which is also what a repeated deletion of the same limit gets.
+Deletes one spending limit on the AI services. This can be the limit of the portal, the limit for every user,  or a personal limit. If the portal has no billing customer, the call returns 404. Requires a DocSpace admin.  Other callers get 403. The call also returns 403 if the installation has no billing service. The call cannot  be undone. To keep the settings of a limit, turn it off with `PUT api/2.0/portal/payment/servicelimit`  instead. To get a deleted limit back, create a new one with `POST api/2.0/portal/payment/servicelimit`. After  a personal limit is deleted, the limit for every user applies to that user. The call returns 404 if the portal  has no AI service limit with this ID. A repeated call returns 404. The response has no body. If `id` is zero  or negative, the call returns 400.
 
 ## Parameters
 

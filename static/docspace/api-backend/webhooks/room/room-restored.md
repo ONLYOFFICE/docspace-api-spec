@@ -9,7 +9,7 @@ Sent on the `room.restored` event. The body is a RoomDelivery, whose `payload` i
 Raised by these REST API operations:
 
 - [`PUT api/2.0/files/fileops/move`](../../usage-api/files/operations/move-batch-items.md) (Move files and folders), for every listed room moved out of the archive
-- [`PUT api/2.0/files/rooms/{id}/unarchive`](../../usage-api/rooms/unarchive-room.md) (Unarchive a room), once the queued operation moves the room out of the archive, for an AI agent as well
+- [`PUT api/2.0/files/rooms/{id}/unarchive`](../../usage-api/rooms/unarchive-room.md) (Unarchive a room), once the queued operation moves the room out of the archive, for AI agents too
 
 ## Request headers
 

@@ -6,7 +6,7 @@
 
 Get the portal service limit
 
-Returns the spending limit on the AI services for the portal as a whole - the ceiling the spending of every user  counts towards - together with what was spent against it in the current period and what is left. Only a  DocSpace administrator may read it, an installation without a billing service answers 403, and the call is  read-only. The limit is checked in addition to the limits  of the users, so a user can be stopped by it before reaching their own. The spending includes the expected cost  of AI operations still in progress. When no such limit has been set, or it was deleted, the answer is 200 with a  null `response`; create the limit with `POST api/2.0/portal/payment/servicelimit` and the scope `Total`. A  switched-off limit is still returned, with `enabled` false. A portal with no billing customer answers 404.
+Returns the spending limit on the AI services for the portal as a whole. The spending of all users counts  towards this limit. The answer also has the spending in the current period and what is left. What is left  already subtracts the expected cost of AI operations that still run. Requires a DocSpace admin. Other callers  get 403. The call also returns 403 if the installation has no billing service. The call is read-only. The AI  services check this limit together with the limits of the users. So a user can reach it before their own limit.  If the limit is not set or was deleted, the call returns 200 with a null `response`. To create it, use `POST  api/2.0/portal/payment/servicelimit` with the scope `Total`. A turned-off limit is returned with `enabled`  false. If the portal has no billing customer, the call returns 404.
 
 ## Parameters
 This endpoint does not need any parameter.

@@ -6,7 +6,7 @@
 
 Get the top-up invoice
 
-Hands back the address of the page on which the billing provider shows the invoice for one top-up of the  portal's wallet, so a client can open or download it. The top-up is named by the `id` that  `GET api/2.0/portal/payment/customer/deposits` returns, and only one listed there with `hasInvoice` true has an  invoice to show. Any DocSpace administrator may read it, not only the payer, and the call changes nothing. The address is absolute and points to the billing provider rather than to the portal;  it is asked for anew on every call, so request it when the user is about to open the invoice instead of  storing it. A top-up this portal does not have, one without an invoice, or a portal that is not a billing  customer answers 404, and an `id` that is not a number fails with 400. An installation without a billing  service answers 403, and 402 means the billing or the accounting service rejected the request or did not  answer, which a later retry may get past.
+Returns the address of the invoice page for one top-up of the portal wallet. The address is absolute and leads  to the billing provider. A top-up has an invoice only if `hasInvoice` is true. Requires a DocSpace admin.  Other callers get 403. The call also returns 403 if the installation has no billing service. The caller does  not have to be the payer. The call is read-only. Do not store the address. Request it right before the user  opens the invoice. The call returns 404 for an unknown top-up, a top-up without an invoice, or no billing  customer. If the billing or accounting service rejects the request or does not answer, the call returns 402. A  later retry may succeed.
 
 ## Parameters
 
@@ -19,13 +19,13 @@ Hands back the address of the page on which the billing provider shows the invoi
 | Status code | Description | Type | Response headers |
 |------------- | ------------- | ------------- | -------------|
 | **200** | The absolute address of the hosted invoice page for the top-up | [**StringWrapper**](../../models/string-wrapper.md) | `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` |
-| **400** | `id` is not a number | - | - |
 | **402** | The billing or the accounting service rejected the request for the top-up or its invoice link, or did not answer | - | - |
 | **403** | The caller is not a DocSpace administrator, or the portal has no billing service configured | - | - |
 | **404** | The portal has no billing customer, no top-up with this ID, or the top-up has no invoice | - | - |
 | **401** | Unauthorized | [**ErrorApiResponse**](../../models/error-api-response.md) | - |
 | **429** | Too Many Requests. | [**ErrorApiResponse**](../../models/error-api-response.md) | `Retry-After` |
 | **500** | Internal Server Error. | [**ErrorApiResponse**](../../models/error-api-response.md) | - |
+| **400** | Bad Request. | [**ErrorApiResponse**](../../models/error-api-response.md) | - |
 | **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 | **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. | - | - |
 

@@ -6,7 +6,7 @@
 
 Abort an upload session
 
-Cancels a chunked upload opened with `POST api/2.0/files/{folderId}/session` and discards the parts already  received, so nothing of it reaches the folder. Only the account that opened the session may cancel it, and the  folder in the path has to be the one it was opened against. The call is destructive and is not safe to repeat, because the record is gone  afterwards: a second attempt, a session already closed by  `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize` and a session that expired after twelve hours of  silence all fail rather than answer as missing. Finalizing removes the session too, so there is nothing left  to abort once the file exists. The answer carries no body. An upload that is simply abandoned needs no call at  all, since the session and its buffered parts are dropped when it expires.
+Deletes a chunked upload session and the parts it has received. The file does not appear in the folder. Only  the account that opened the session can delete it. Other callers get 403. The call cannot be undone, and a  repeated call returns 404. The call returns 404 if the session does not exist, is finalized, has expired, or  was opened for another folder. The response has no body. A session expires 12 hours after it opens or gets its  last part. So an abandoned upload needs no call.
 
 ## Parameters
 

@@ -6,7 +6,7 @@
 
 Link sources to an AI project
 
-Links Instructions and Knowledge rooms to an AI project as its sources, which gives every project member read access to them. The caller must manage the project and each listed room; rooms that are already linked are skipped.
+Links Instructions and Knowledge rooms to an AI project as its sources.  Every project member then gets read access to these rooms.  A member with a higher role in a room keeps that role.  Requires the right to manage the project. Other callers get 403, including members with read access only.  Each listed room must be an Instructions or Knowledge room that the caller also manages.  If any room fails this check, the call returns 400 and links nothing.  The call changes data and skips rooms that are already linked.  So you can repeat it with the same body.  It returns 400 if `roomIds` is empty or too long.  It also returns 400 if the project would hold more than 20 rooms of one kind.  If the ID is not an AI project, the call returns 404.  AI features turned off on the portal also return 403.  To see the linked rooms, use `GET api/2.0/files/rooms/{id}/sources`.
 
 ## Parameters
 

@@ -8,13 +8,13 @@ Sent on the `file.uploaded` event. The body is a FileDelivery, whose `payload` i
 
 Raised by these REST API operations:
 
-- [`POST api/2.0/files/@my/insert`](../../usage-api/files/folders/insert-file-to-my-from-body.md) (Insert a file into My documents), whether the upload creates a new file or is saved as a new version of an existing file
-- [`POST api/2.0/files/@my/upload`](../../usage-api/files/folders/upload-file-to-my.md) (Upload a file to My documents), whether the upload creates a new file or is saved as a new version of an existing file
+- [`POST api/2.0/files/@my/insert`](../../usage-api/files/folders/insert-file-to-my-from-body.md) (Insert a file into My documents), for a new file and for a new version of an existing file
+- [`POST api/2.0/files/@my/upload`](../../usage-api/files/folders/upload-file-to-my.md) (Upload a file to My documents), for a new file and for a new version of an existing file
 - [`POST api/2.0/files/file/{fileId}/copyas`](../../usage-api/files/files/copy-file-as.md) (Copy a file), as well when the copy is converted to another format
-- [`POST api/2.0/files/{folderId}/insert`](../../usage-api/files/folders/insert-file.md) (Insert a file), whether the upload creates a new file or is saved as a new version of an existing file
+- [`POST api/2.0/files/{folderId}/insert`](../../usage-api/files/folders/insert-file.md) (Insert a file), for a new file and for a new version of an existing file
 - [`POST api/2.0/files/{folderId}/session/{sessionId}`](../../usage-api/files/operations/upload-session.md) (Upload the next chunk), on the request that completes the upload, without `file.created`
 - [`PUT api/2.0/files/{folderId}/session/{sessionId}/finalize`](../../usage-api/files/operations/finalize-session.md) (Finalize an upload session), without `file.created`
-- [`POST api/2.0/files/{folderId}/upload`](../../usage-api/files/folders/upload-file.md) (Upload a file), whether the upload creates a new file or is saved as a new version of an existing file
+- [`POST api/2.0/files/{folderId}/upload`](../../usage-api/files/folders/upload-file.md) (Upload a file), for a new file and for a new version of an existing file
 
 Also raised by an upload of the parts to the `location` link that creating an upload session returns, once the last part arrives or that link finalizes the session.
 

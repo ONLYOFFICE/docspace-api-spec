@@ -8,7 +8,7 @@ Sent on the `folder.moved` event. The body is a FolderDelivery, whose `payload` 
 
 Raised by these REST API operations:
 
-- [`PUT api/2.0/files/fileops/move`](../../usage-api/files/operations/move-batch-items.md) (Move files and folders), for every listed folder; the folders inside it raise none unless it is merged into a folder of the same name
+- [`PUT api/2.0/files/fileops/move`](../../usage-api/files/operations/move-batch-items.md) (Move files and folders), for each listed folder, and for subfolders of a merged folder
 
 ## Request headers
 

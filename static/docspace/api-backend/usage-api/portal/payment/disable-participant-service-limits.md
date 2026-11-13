@@ -6,7 +6,7 @@
 
 Disable the user service limits
 
-Switches off every personal spending limit on the AI services in one call, so each user falls back to the limit  for every user, if one is set. The limit of the portal as a whole and the one for every user stay as they are.  The portal needs a billing customer, and the caller needs the permission to edit the portal settings as well as  DocSpace administrator rights. The switched-off limits stop restricting their users at once and are kept, so  each can be switched back on with `PUT api/2.0/portal/payment/servicelimit`. The call is mutating and  idempotent - repeating it switches off nothing more - and it is written to the portal audit trail. The answer is  the number of personal limits that were switched off, zero when none was in force. To switch off the limit of a  single user, use `PUT api/2.0/portal/payment/servicelimit` with `enabled` set to false.
+Turns off every personal spending limit on the AI services. Each user then falls back to the limit for every  user, if it is set. The limit of the portal and the limit for every user do not change. If the portal has no  billing customer, the call returns 404. Requires a DocSpace admin. Other callers get 403. The call also  returns 403 if the installation has no billing service. The turned-off limits stop restricting their users  immediately. The portal keeps them, so you can turn each one back on with  `PUT api/2.0/portal/payment/servicelimit`. The call changes data, and a repeated call turns off nothing more.  The call returns the number of limits that it turned off, or 0 if none was in force. To turn off the limit of  one user, use `PUT api/2.0/portal/payment/servicelimit` with `enabled` set to false.
 
 ## Parameters
 This endpoint does not need any parameter.
